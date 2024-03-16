@@ -1,0 +1,39 @@
+.Info-Building-list
+{
+    list-style-type: none;
+    align-items: center;
+    flex-wrap: wrap;
+    width: 100%;
+    justify-content: space-between;
+    margin: 20px 10px;
+}
+
+.Building-img
+{
+    height: 4vmin;
+    pointer-events: none;
+}
+
+.imageWrapper {
+    position: relative;
+}
+.imageWrapper .cornerLink {
+    opacity: 0;
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    padding: 2px 0px;
+    color: #ffffff;
+    background: #000000;
+    text-decoration: none;
+    text-align: center;
+    -webkit-transition: opacity 500ms;
+    -moz-transition: opacity 500ms;
+    -o-transition: opacity 500ms;
+    transition: opacity 500ms;
+
+}
+.imageWrapper:hover .cornerLink {
+    opacity: 0.8;
+}

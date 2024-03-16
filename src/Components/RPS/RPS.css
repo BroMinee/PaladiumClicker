@@ -1,0 +1,11 @@
+.RPS
+{
+    font-size: calc(10px + 2vmin);
+    color: white;
+}
+
+.RPSValue
+{
+    font-size: calc(10px + 2vmin);
+    color: orange;
+}

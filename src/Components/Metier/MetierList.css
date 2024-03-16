@@ -1,0 +1,19 @@
+.ul-metier
+{
+
+}
+.Info-Metier-list
+{
+    list-style-type: none;
+    align-items: center;
+    flex-wrap: wrap;
+    width: 100%;
+    justify-content: space-between;
+    margin: 10px 10px;
+}
+
+.Metier-img
+{
+    height: 20vmin;
+    pointer-events: none;
+}

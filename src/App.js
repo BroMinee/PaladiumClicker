@@ -1,26 +1,47 @@
-import logo from './logo.svg';
 import './App.css';
-import Building from "./Components/Building/Building";
+import BuildingList from "./Components/Building/BuildingList";
+import MetierList from "./Components/Metier/MetierList";
+import RPS from "./Components/RPS/RPS";
+import {useEffect, useState} from "react";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
 
-        <img src={process.env.PUBLIC_URL + "/" + "coin.png"} className="App-logo" alt="logo" />
-          <ul id={"list-batiment"}>
-              <Building buildingName={"Building1"} imgPath={"/ImgBuilding/1.png"}/>
-              <Building buildingName={"Building2"} imgPath={"/ImgBuilding/2.png"}/>
-              <Building buildingName={"Building3"} imgPath={"/ImgBuilding/3.png"}/>
-              <Building buildingName={"Building4"} imgPath={"/ImgBuilding/4.png"}/>
-              <Building buildingName={"Building5"} imgPath={"/ImgBuilding/5.png"}/>
-              <Building buildingName={"Building6"} imgPath={"/ImgBuilding/6.png"}/>
-              <Building buildingName={"Building7"} imgPath={"/ImgBuilding/7.png"}/>
+const App = () => {
 
-          </ul>
-      </header>
-    </div>
-  );
+    const [rps, setRPS] = useState(1)
+    const [estimatedRPS, setEstimatedRPS] = useState(3)
+
+    return (
+        <div className="App">
+            <header className="App-header">
+                Welcome To PalaClicker
+            </header>
+            <body className="Body">
+            <br/>
+            <img src={process.env.PUBLIC_URL + "/" + "coin.png"} className="App-logo" alt="logo"/>
+            <RPS RPS={rps} estimatedRPS={estimatedRPS}/>
+            <h1>Metier</h1>
+            <MetierList/>
+            <h1>Building</h1>
+            <BuildingList/>
+            <h1>Upgrade</h1>
+            <BuildingList/>
+            <h2>Click</h2>
+            <BuildingList/>
+            <h2>Global</h2>
+            <BuildingList/>
+            <h2>Terrain</h2>
+            <BuildingList/>
+            <h2>Building</h2>
+            <BuildingList/>
+            <h2>Many</h2>
+            <BuildingList/>
+            <h2>Posterior</h2>
+            <BuildingList/>
+            <h2>Category</h2>
+            <BuildingList/>
+            </body>
+        </div>
+    );
 }
 
 export default App;
