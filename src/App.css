@@ -31,6 +31,19 @@ body, ul, li {
     color: #61dafb;
 }
 
+.Owned {
+    background: #61dafb;
+}
+
+.NotOwned {
+    background: #ff0000;
+}
+
+.fit-all-width
+{
+    width:100%;
+}
+
 @keyframes App-logo-spin {
     from {
         transform: rotate(0deg);
@@ -51,4 +64,31 @@ body, ul, li {
     padding-bottom: 19px;
     overflow: auto;
     text-align: center;
+    list-style-type: none;
+}
+
+.imageWrapper {
+    position: relative;
+}
+
+.imageWrapper .cornerLink {
+    opacity: 0;
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    offset: 0px;
+    padding: 2px 0px;
+    color: #ffffff;
+    background: #000000;
+    text-decoration: none;
+    text-align: center;
+    -webkit-transition: opacity 500ms;
+    -moz-transition: opacity 500ms;
+    -o-transition: opacity 500ms;
+    transition: opacity 500ms;
+
+}
+.imageWrapper:hover .cornerLink {
+    opacity: 0.8;
 }

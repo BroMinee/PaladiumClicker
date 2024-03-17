@@ -1,4 +1,4 @@
-.Info-Building-list
+.Info-CPS-list
 {
     list-style-type: none;
     align-items: center;
@@ -9,7 +9,7 @@
     white-space: nowrap;
 }
 
-.Building-img
+.CPS-img
 {
     height: 8vmin;
     pointer-events: none;
