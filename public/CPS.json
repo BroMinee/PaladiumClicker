@@ -1,0 +1,127 @@
+[
+  {
+    "name": "Pastèque Clic",
+    "CPS": 2,
+    "own": "False"
+  },
+  {
+    "name": "Carrote Clic",
+    "CPS": 4,
+    "own": "False"
+  },
+  {
+    "name": "Patate Clic",
+    "CPS": 8,
+    "own": "False"
+  },
+  {
+    "name": "Pain Clic",
+    "CPS": 16,
+    "own": "False"
+  },
+  {
+    "name": "Lait Clic",
+    "CPS": 32,
+    "own": "False"
+  },
+  {
+    "name": "Choco Clic",
+    "CPS": 64,
+    "own": "False"
+  },
+  {
+    "name": "Bonbon Clic",
+    "CPS": 128,
+    "own": "False"
+  },
+  {
+    "name": "Cookie Clic",
+    "CPS": 256,
+    "own": "False"
+  },
+  {
+    "name": "Glace Clic",
+    "CPS": 512,
+    "own": "False"
+  },
+  {
+    "name": -1,
+    "CPS": -1,
+    "own": "False"
+  },
+  {
+    "name": -1,
+    "CPS": -1,
+    "own": "False"
+  },
+  {
+    "name": -1,
+    "CPS": -1,
+    "own": "False"
+  },
+  {
+    "name": -1,
+    "CPS": -1,
+    "own": "False"
+  },
+  {
+    "name": -1,
+    "CPS": -1,
+    "own": "False"
+  },
+  {
+    "name": -1,
+    "CPS": -1,
+    "own": "False"
+  },
+  {
+    "name": -1,
+    "CPS": -1,
+    "own": "False"
+  },
+  {
+    "name": -1,
+    "CPS": -1,
+    "own": "False"
+  },
+  {
+    "name": -1,
+    "CPS": -1,
+    "own": "False"
+  },
+  {
+    "name": -1,
+    "CPS": -1,
+    "own": "False"
+  },
+  {
+    "name": -1,
+    "CPS": -1,
+    "own": "False"
+  },
+  {
+    "name": -1,
+    "CPS": -1,
+    "own": "False"
+  },
+  {
+    "name": -1,
+    "CPS": -1,
+    "own": "False"
+  },
+  {
+    "name": -1,
+    "CPS": -1,
+    "own": "False"
+  },
+  {
+    "name": -1,
+    "CPS": -1,
+    "own": "False"
+  },
+  {
+    "name": -1,
+    "CPS": -1,
+    "own": "False"
+  }
+]
