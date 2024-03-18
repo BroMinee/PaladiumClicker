@@ -30,7 +30,7 @@ const ClickList = () => {
         if (price === -1)
             return "/unknown.png";
         else
-            return "/CPSIcon/" + (index + 1) + ".png";
+            return "/CPSIcon/" +index + ".png";
     }
 
     return (

@@ -27,17 +27,19 @@ const GlobalList = () => {
 
 
     function getImgPath(index, price) {
+        console.log(price)
+        console.log(index)
         if (price === -1)
             return "/unknown.png";
         else
-            return "/GlobalIcon/" + (index + 1) + ".png";
+            return "/GlobalIcon/" + index  + ".png";
     }
 
     return (
         <ul className={"ul-horizontal"}>
             {
                 clickList && clickList.map((building, index) => (
-                    <CPS buildingName={building["name"]} imgPath={getImgPath(index, building["name"])} ownParams={building["own"]} unique_id_react={index}/>
+                    <Global buildingName={building["name"]} imgPath={getImgPath(index, building["name"])} ownParams={building["own"]} unique_id_react={index}/>
                 ))
             }
         </ul>
@@ -45,7 +47,7 @@ const GlobalList = () => {
 }
 
 
-const CPS = ({buildingName, imgPath, ownParams, unique_id_react}) => {
+const Global = ({buildingName, imgPath, ownParams, unique_id_react}) => {
 
     const [own, setOwn] = useState(ownParams);
 

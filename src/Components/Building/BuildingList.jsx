@@ -29,7 +29,7 @@ const BuildingList = () => {
         if (price === -1)
             return "/unknown.png";
         else
-            return "/BuildingIcon/" + (index + 1) + ".png";
+            return "/BuildingIcon/" + index + ".png";
     }
 
 
@@ -85,6 +85,8 @@ const Building = ({buildingName, imgPath, baseProductionLevel0, priceLevel0, upg
 
     function enforceMinMax(el) {
         if (el.target.value !== "") {
+            el.target.value = Math.floor(el.target.value)
+
             if (parseInt(el.target.value) < parseInt(el.target.min)) {
                 el.target.value = el.target.min;
             }
@@ -124,7 +126,8 @@ const Building = ({buildingName, imgPath, baseProductionLevel0, priceLevel0, upg
                 <li>Lvl: {level}</li>
                 <li>RPS : {printPricePretty(currentProduction.toFixed(2))}</li>
                 <li>{printPricePretty(price)}$</li>
-                <input type="number" min="0" step="1" max="99" placeholder="0" onKeyUp={enforceMinMax} onChange={enforceMinMax}/>
+                <input type="number" min="0" step="1" max="99" placeholder="0" onKeyUp={enforceMinMax}
+                       onChange={enforceMinMax}/>
             </ul>
         </li>
     );

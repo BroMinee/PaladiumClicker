@@ -1,6 +1,5 @@
 .App {
     text-align: center;
-    background-color: #282c34;
 }
 body, ul, li {
     margin:0;
@@ -32,7 +31,7 @@ body, ul, li {
 }
 
 .Owned {
-    background: #61dafb;
+    background: #265eef;
 }
 
 .NotOwned {
@@ -77,8 +76,6 @@ body, ul, li {
     bottom: 0px;
     left: 0px;
     right: 0px;
-    offset: 0px;
-    padding: 2px 0px;
     color: #ffffff;
     background: #000000;
     text-decoration: none;
@@ -86,9 +83,11 @@ body, ul, li {
     -webkit-transition: opacity 500ms;
     -moz-transition: opacity 500ms;
     -o-transition: opacity 500ms;
-    transition: opacity 500ms;
+    transition: transform 300ms ease-out, opacity 150ms;
 
 }
+
 .imageWrapper:hover .cornerLink {
     opacity: 0.8;
+    transform: translateY(100%);
 }

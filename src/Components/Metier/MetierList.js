@@ -15,13 +15,21 @@ const MetierList = () => {
 const Metier = ({metierName, imgPath}) => {
     const [level, setLevel] = useState(1)
 
-    const buy = () => {
-        if (level === 100) {
-            console.log("You have reached the maximum level for this job!")
-            return
+    function enforceMinMax(el) {
+        if (el.target.value !== "") {
+            el.target.value = Math.floor(el.target.value)
+
+            if (parseInt(el.target.value) < parseInt(el.target.min)) {
+                el.target.value = el.target.min;
+            }
+            if (parseInt(el.target.value) > parseInt(el.target.max)) {
+                el.target.value = el.target.max;
+            }
+            setLevel(el.target.value)
+            return true;
         }
-        setLevel(level + 1)
     }
+
 
     return (
         <ul className={"Info-Metier-list"}>
@@ -30,7 +38,8 @@ const Metier = ({metierName, imgPath}) => {
                 <div className="cornerLink">{metierName}</div>
             </div>
             <li>Level: {level}</li>
-            <button onClick={buy}>Buy</button>
+            <input type="number" min="0" step="1" max="99" placeholder="0" onKeyUp={enforceMinMax}
+                   onChange={enforceMinMax}/>
         </ul>
     );
 }
