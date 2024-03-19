@@ -12,6 +12,7 @@ import PosteriorList from "./Components/PosteriorList/PosteriorList";
 import CategoryList from "./Components/CategoryList/CategoryList";
 import fetchDataOnPublicURL from "./FetchData";
 import axios from "axios";
+import ImportExport from "./Components/ImportExport/ImportExport";
 
 const App = () => {
 
@@ -74,12 +75,13 @@ const App = () => {
                 <img src={process.env.PUBLIC_URL + "/" + "coin.png"} className="App-logo" alt="logo"/>
                 <RPS RPS={rps} estimatedRPS={estimatedRPS}/>
                 <h1>Metier</h1>
+                <ImportExport playerInfo={playerInfo} setPlayerInfo={setPlayerInfo}/>
                 <MetierList playerInfo={playerInfo} setPlayerInfo={setPlayerInfo}/>
                 <h1>Building</h1>
                 <BuildingList playerInfo={playerInfo} setPlayerInfo={setPlayerInfo} setRPS={setRPS}/>
 
                 <h2>Click</h2>
-                <ClickList/>
+                <ClickList playerInfo={playerInfo} setPlayerInfo={setPlayerInfo}/>
 
                 <h1>Global</h1>
                 <GlobalList playerInfo={playerInfo} setPlayerInfo={setPlayerInfo}/>

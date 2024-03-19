@@ -1,11 +1,5 @@
-import React, {useEffect} from "react";
-import {useState} from "react";
+import React from "react";
 import "./BuildingList.css";
-
-import {v4 as uuid} from 'uuid';
-
-
-import axios, {all} from 'axios';
 
 
 const BuildingList = ({playerInfo, setPlayerInfo, setRPS}) => {
@@ -77,7 +71,7 @@ const Building = ({playerInfo, setPlayerInfo, building, imgPath, unique_id_react
                 <li>RPS
                     : {printPricePretty(scaleCurrentProduction(playerInfo, index, building["own"]).toFixed(2))}</li>
                 <li>{printPricePretty(ComputePrice(building["price"], building["own"]))}$</li>
-                <input type="number" min="0" step="1" max="99" placeholder="0" onKeyUp={enforceMinMax}
+                <input type="number" min="0" step="1" max="99" placeholder={playerInfo["building"][index]["own"]} onKeyUp={enforceMinMax}
                        onChange={enforceMinMax}/>
             </ul>
         </li>

@@ -1,43 +1,23 @@
-import React, {useEffect} from "react";
-import {useState} from "react";
+import React from "react";
 import "./ClickList.css";
 
-import { v4 as uuid } from 'uuid';
 
-
-import axios from 'axios';
-
-
-const ClickList = () => {
-
-    const [clickList, setClickList] = useState([]);
-
-    const fetchCPSData = async () => {
-        const result = await axios(
-            process.env.PUBLIC_URL + '/CPS.json',
-        );
-
-        setClickList(result.data);
-    }
-
-    useEffect(() => {
-        fetchCPSData();
-    }, []);
-
+const ClickList = ({playerInfo, setPlayerInfo}) => {
 
 
     function getImgPath(index, price) {
         if (price === -1)
             return "/unknown.png";
         else
-            return "/CPSIcon/" +index + ".png";
+            return "/CPSIcon/" + index + ".png";
     }
 
     return (
         <ul className={"ul-horizontal"}>
             {
-                clickList && clickList.map((building, index) => (
-                    <CPS buildingName={building["name"]} imgPath={getImgPath(index, building["name"])} ownParams={building["own"]} unique_id_react={index}/>
+                playerInfo["CPS"] && playerInfo["CPS"].map((cur_cps, index) => (
+                    <CPS playerInfo={playerInfo} setPlayerInfo={setPlayerInfo} buildingName={cur_cps["name"]}
+                         imgPath={getImgPath(index, cur_cps["name"])} index={index}/>
                 ))
             }
         </ul>
@@ -45,14 +25,17 @@ const ClickList = () => {
 }
 
 
-const CPS = ({buildingName, imgPath, ownParams, unique_id_react}) => {
+const CPS = ({playerInfo, setPlayerInfo, buildingName, imgPath, index}) => {
 
-    const [own, setOwn] = useState(ownParams);
+    function setOwn() {
+        playerInfo["CPS"][index]["own"] = !playerInfo["CPS"][index]["own"];
+        setPlayerInfo({...playerInfo})
+    }
 
 
     return (
-        <li key={unique_id_react} onClick={() => setOwn(!own)} className={"fit-all-width"}>
-            <ul className={"Info-CPS-list " + (own === true ? "Owned" : "NotOwned")} >
+        <li key={index} onClick={setOwn} className={"fit-all-width"}>
+            <ul className={"Info-CPS-list " + (playerInfo["CPS"][index]["own"] === true ? "Owned" : "NotOwned")}>
                 <div className="imageWrapper">
                     <img src={process.env.PUBLIC_URL + "/" + imgPath} alt="image" className={"CPS-img"}></img>
                     <div className="cornerLink">{buildingName}</div>
