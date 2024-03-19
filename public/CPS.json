@@ -2,126 +2,126 @@
   {
     "name": "Pastèque Clic",
     "CPS": 2,
-    "own": "False"
+    "own": false
   },
   {
     "name": "Carrote Clic",
     "CPS": 4,
-    "own": "False"
+    "own": false
   },
   {
     "name": "Patate Clic",
     "CPS": 8,
-    "own": "False"
+    "own": false
   },
   {
     "name": "Pain Clic",
     "CPS": 16,
-    "own": "False"
+    "own": false
   },
   {
     "name": "Lait Clic",
     "CPS": 32,
-    "own": "False"
+    "own": false
   },
   {
     "name": "Choco Clic",
     "CPS": 64,
-    "own": "False"
+    "own": false
   },
   {
     "name": "Bonbon Clic",
     "CPS": 128,
-    "own": "False"
+    "own": false
   },
   {
     "name": "Cookie Clic",
     "CPS": 256,
-    "own": "False"
+    "own": false
   },
   {
     "name": "Glace Clic",
     "CPS": 512,
-    "own": "False"
+    "own": false
   },
   {
     "name": -1,
     "CPS": -1,
-    "own": "False"
+    "own": false
   },
   {
     "name": -1,
     "CPS": -1,
-    "own": "False"
+    "own": false
   },
   {
     "name": -1,
     "CPS": -1,
-    "own": "False"
+    "own": false
   },
   {
     "name": -1,
     "CPS": -1,
-    "own": "False"
+    "own": false
   },
   {
     "name": -1,
     "CPS": -1,
-    "own": "False"
+    "own": false
   },
   {
     "name": -1,
     "CPS": -1,
-    "own": "False"
+    "own": false
   },
   {
     "name": -1,
     "CPS": -1,
-    "own": "False"
+    "own": false
   },
   {
     "name": -1,
     "CPS": -1,
-    "own": "False"
+    "own": false
   },
   {
     "name": -1,
     "CPS": -1,
-    "own": "False"
+    "own": false
   },
   {
     "name": -1,
     "CPS": -1,
-    "own": "False"
+    "own": false
   },
   {
     "name": -1,
     "CPS": -1,
-    "own": "False"
+    "own": false
   },
   {
     "name": -1,
     "CPS": -1,
-    "own": "False"
+    "own": false
   },
   {
     "name": -1,
     "CPS": -1,
-    "own": "False"
+    "own": false
   },
   {
     "name": -1,
     "CPS": -1,
-    "own": "False"
+    "own": false
   },
   {
     "name": -1,
     "CPS": -1,
-    "own": "False"
+    "own": false
   },
   {
     "name": -1,
     "CPS": -1,
-    "own": "False"
+    "own": false
   }
 ]

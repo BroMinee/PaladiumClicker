@@ -2,51 +2,51 @@
   {
     "name": "Namu Ecolier",
     "pourcentage": 10,
-    "own": "False"
+    "own": false
   },
   {
     "name": "Namu Contructeur",
     "pourcentage": 10,
-    "own": "False"
+    "own": false
   },
   {
     "name": -1,
     "pourcentage": -1,
-    "own": "False"
+    "own": false
   },
   {
     "name": -1,
     "pourcentage": -1,
-    "own": "False"
+    "own": false
   },
   {
     "name": -1,
     "pourcentage": -1,
-    "own": "False"
+    "own": false
   },
   {
     "name": -1,
     "pourcentage": -1,
-    "own": "False"
+    "own": false
   },
   {
     "name": -1,
     "pourcentage": -1,
-    "own": "False"
+    "own": false
   },
   {
     "name": -1,
     "pourcentage": -1,
-    "own": "False"
+    "own": false
   },
   {
     "name": -1,
     "pourcentage": -1,
-    "own": "False"
+    "own": false
   },
   {
     "name": -1,
     "pourcentage": -1,
-    "own": "False"
+    "own": false
   }
 ]

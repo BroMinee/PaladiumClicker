@@ -3,18 +3,18 @@ import {useState} from "react";
 
 import "./MetierList.css"
 
-const MetierList = () => {
+const MetierList = ({playerInfo, setPlayerInfo}) => {
     return <ul className={"ul-horizontal ul-metier"}>
-        <Metier metierName={"Miner"} imgPath={"/JobsIcon/miner.png"}/>
-        <Metier metierName={"Farmer"} imgPath={"/JobsIcon/farmer.png"}/>
-        <Metier metierName={"Hunter"} imgPath={"/JobsIcon/hunter.png"}/>
-        <Metier metierName={"Alchimiste"} imgPath={"/JobsIcon/alchimiste.png"}/>
+        {
+            playerInfo["metier"].map((metier, index) => {
+                return <Metier metierName={metier["name"]} imgPath={metier["name"] + ".png"} playerInfo={playerInfo}
+                               setPlayerInfo={setPlayerInfo} level={metier["level"]}/>
+            })
+        }
     </ul>
 }
 
-const Metier = ({metierName, imgPath}) => {
-    const [level, setLevel] = useState(1)
-
+const Metier = ({metierName, imgPath, playerInfo, setPlayerInfo, level}) => {
     function enforceMinMax(el) {
         if (el.target.value !== "") {
             el.target.value = Math.floor(el.target.value)
@@ -25,7 +25,9 @@ const Metier = ({metierName, imgPath}) => {
             if (parseInt(el.target.value) > parseInt(el.target.max)) {
                 el.target.value = el.target.max;
             }
-            setLevel(el.target.value)
+            playerInfo["metier"].find((metier) => metier["name"] === metierName)["level"] = parseInt(el.target.value)
+            setPlayerInfo({...playerInfo})
+
             return true;
         }
     }
@@ -34,11 +36,11 @@ const Metier = ({metierName, imgPath}) => {
     return (
         <ul className={"Info-Metier-list"}>
             <div className="imageWrapper">
-                <img src={process.env.PUBLIC_URL + "/" + imgPath} alt="image" className={"Metier-img"}></img>
-                <div className="cornerLink">{metierName}</div>
+                <img src={process.env.PUBLIC_URL + "/JobsIcon/" + imgPath} alt="image" className={"Metier-img"}></img>
+                <div className="cornerLink">{metierName.charAt(0).toUpperCase() + metierName.slice(1)}</div>
             </div>
             <li>Level: {level}</li>
-            <input type="number" min="0" step="1" max="99" placeholder="0" onKeyUp={enforceMinMax}
+            <input type="number" min="1" step="1" max="100" placeholder={level} onKeyUp={enforceMinMax}
                    onChange={enforceMinMax}/>
         </ul>
     );

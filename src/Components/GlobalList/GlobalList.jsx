@@ -8,27 +8,8 @@ import { v4 as uuid } from 'uuid';
 import axios from 'axios';
 
 
-const GlobalList = () => {
-
-    const [clickList, setClickList] = useState([]);
-
-    const fetchCPSData = async () => {
-        const result = await axios(
-            process.env.PUBLIC_URL + '/global_upgrade.json',
-        );
-
-        setClickList(result.data);
-    }
-
-    useEffect(() => {
-        fetchCPSData();
-    }, []);
-
-
-
+const GlobalList = ({playerInfo, setPlayerInfo}) => {
     function getImgPath(index, price) {
-        console.log(price)
-        console.log(index)
         if (price === -1)
             return "/unknown.png";
         else
@@ -38,8 +19,8 @@ const GlobalList = () => {
     return (
         <ul className={"ul-horizontal"}>
             {
-                clickList && clickList.map((building, index) => (
-                    <Global buildingName={building["name"]} imgPath={getImgPath(index, building["name"])} ownParams={building["own"]} unique_id_react={index}/>
+                playerInfo["global_upgrade"] && playerInfo["global_upgrade"].map((global, index) => (
+                    <Global playerInfo={playerInfo} setPlayerInfo={setPlayerInfo} globalName={global["name"]} imgPath={getImgPath(index, global["name"])} index={index}/>
                 ))
             }
         </ul>
@@ -47,17 +28,19 @@ const GlobalList = () => {
 }
 
 
-const Global = ({buildingName, imgPath, ownParams, unique_id_react}) => {
+const Global = ({playerInfo, setPlayerInfo,globalName, imgPath, index}) => {
 
-    const [own, setOwn] = useState(ownParams);
-
-
+    function setOwn()
+    {
+        playerInfo["global_upgrade"][index]["own"] = !playerInfo["global_upgrade"][index]["own"];
+        setPlayerInfo({...playerInfo})
+    }
     return (
-        <li key={unique_id_react} onClick={() => setOwn(!own)} className={"fit-all-width"}>
-            <ul className={"Info-Global-list " + (own === true ? "Owned" : "NotOwned")} >
+        <li key={index} onClick={setOwn} className={"fit-all-width"}>
+            <ul className={"Info-Global-list " + (playerInfo["global_upgrade"][index]["own"] === true ? "Owned" : "NotOwned")} >
                 <div className="imageWrapper">
                     <img src={process.env.PUBLIC_URL + "/" + imgPath} alt="image" className={"Global-img"}></img>
-                    <div className="cornerLink">{buildingName}</div>
+                    <div className="cornerLink">{globalName}</div>
                 </div>
             </ul>
         </li>

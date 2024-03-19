@@ -8,26 +8,8 @@ import {v4 as uuid} from 'uuid';
 import axios from 'axios';
 
 
-const BuildingUpgradeList = () => {
-
-    const [clickList, setClickList] = useState([]);
-
-    const fetchCPSData = async () => {
-        const result = await axios(
-            process.env.PUBLIC_URL + '/building_upgrade.json',
-        );
-
-        setClickList(result.data);
-    }
-
-    useEffect(() => {
-        fetchCPSData();
-    }, []);
-
-
+const BuildingUpgradeList = ({playerInfo, setPlayerInfo}) => {
     function getImgPath(index, price) {
-        console.log(price)
-        console.log(index)
         if (price === -1)
             return "/unknown.png";
         else if (index <= 15)
@@ -38,9 +20,9 @@ const BuildingUpgradeList = () => {
     return (
         <ul className={"ul-horizontal"}>
             {
-                clickList && clickList.map((building, index) => (
-                    <BuildingUpgrade buildingName={building["name"]} imgPath={getImgPath(index, building["name"])}
-                                     ownParams={building["own"]} activeOn={building["index"]} unique_id_react={index}/>
+                playerInfo && playerInfo["building_upgrade"] && playerInfo["building_upgrade"].map((building_upgrade, index) => (
+                    <BuildingUpgrade playerInfo={playerInfo} setPlayerInfo={setPlayerInfo} buildingName={building_upgrade["name"]} imgPath={getImgPath(index, building_upgrade["name"])}
+                                     activeOn={building_upgrade["index"]} index={index}/>
                 ))
 
             }
@@ -49,16 +31,18 @@ const BuildingUpgradeList = () => {
 }
 
 
-const BuildingUpgrade = ({buildingName, imgPath, ownParams, unique_id_react, activeOn}) => {
+const BuildingUpgrade = ({playerInfo, setPlayerInfo, buildingName, imgPath, index}) => {
 
-    const [own, setOwn] = useState(ownParams);
-
+    function setOwn() {
+        playerInfo["building_upgrade"][index]["own"] = !playerInfo["building_upgrade"][index]["own"];
+        setPlayerInfo({...playerInfo})
+    }
 
     return (
-        <li key={unique_id_react} onClick={() => setOwn(!own)} className={"fit-all-width"}>
-            <ul className={"Info-Global-list " + (own === true ? "Owned" : "NotOwned")}>
+        <li key={index} onClick={setOwn} className={"fit-all-width"}>
+            <ul className={"Info-BuildingUpgrade-list " + (playerInfo["building_upgrade"][index]["own"] === true ? "Owned" : "NotOwned")}>
                 <div className="imageWrapper">
-                    <img src={process.env.PUBLIC_URL + "/" + imgPath} alt="image" className={"Global-img"}></img>
+                    <img src={process.env.PUBLIC_URL + "/" + imgPath} alt="image" className={"BuildingUpgrade-img"}></img>
                     <div className="cornerLink">{buildingName}</div>
                 </div>
             </ul>

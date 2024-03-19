@@ -1,0 +1,254 @@
+[
+  {
+    "name": "Mine abandonee",
+    "index": 0,
+    "price": 1250,
+    "base_production": "0,100000000",
+    "own": 0
+  },
+  {
+    "name": "Caverne aux gros cailloux",
+    "index": 1,
+    "price": 3500,
+    "base_production": "0,180000000",
+    "own": 0
+  },
+  {
+    "name": "Mine des nains",
+    "index": 2,
+    "price": 6000,
+    "base_production": "0,323777403",
+    "own": 0
+  },
+  {
+    "name": "Jardin de mamie",
+    "index": 3,
+    "price": 12500,
+    "base_production": "0,585158718",
+    "own": 0
+  },
+  {
+    "name": "Cabane de socière",
+    "index": 4,
+    "price": 27500,
+    "base_production": "1,050779290",
+    "own": 0
+  },
+  {
+    "name": "Ruche bourdonante",
+    "index": 5,
+    "price": 67500,
+    "base_production": "1,892189220",
+    "own": 0
+  },
+  {
+    "name": "Forêt enneigée",
+    "index": 6,
+    "price": 125000,
+    "base_production": "3,403403400",
+    "own": 0
+  },
+  {
+    "name": "Banquise gelée",
+    "index": 7,
+    "price": 315000,
+    "base_production": "6,122188140",
+    "own": 0
+  },
+  {
+    "name": "Port de pirate",
+    "index": 8,
+    "price": 650000,
+    "base_production": "10,725925900",
+    "own": 0
+  },
+  {
+    "name": "Île volcanique",
+    "index": 9,
+    "price": 1575000,
+    "base_production": "19,833138200",
+    "own": 0
+  },
+  {
+    "name": "Dunes caniculaires",
+    "index": 10,
+    "price": 3150000,
+    "base_production": "35,708285600",
+    "own": 0
+  },
+  {
+    "name": "Forêt mystique",
+    "index": 11,
+    "price": 6000000,
+    "base_production": "64,270000000",
+    "own": 0
+  },
+  {
+    "name": "Jungle luxuriante",
+    "index": 12,
+    "price": 11500000,
+    "base_production": "123,940000000",
+    "own": 0
+  },
+  {
+    "name": "Temple oublié",
+    "index": 13,
+    "price": 25750000,
+    "base_production": "208,231884000",
+    "own": 0
+  },
+  {
+    "name": "Crypte millénaire",
+    "index": 14,
+    "price": 55000000,
+    "base_production": "374,816053000",
+    "own": 0
+  },
+  {
+    "name": "Gouffre sans fond",
+    "index": 15,
+    "price": 95000000,
+    "base_production": "674,782609000",
+    "own": 0
+  },
+  {
+    "name": "Mine autonome",
+    "index": 16,
+    "price": 185000000,
+    "base_production": "1214,381270000",
+    "own": 0
+  },
+  {
+    "name": "Ferme à golem",
+    "index": 17,
+    "price": 385000000,
+    "base_production": "2185,952380000",
+    "own": 0
+  },
+  {
+    "name": "Grotte radioactive",
+    "index": 18,
+    "price": 750000000,
+    "base_production": "3934,624500000",
+    "own": 0
+  },
+  {
+    "name": "Laboratoire biologique",
+    "index": 19,
+    "price": 1350000000,
+    "base_production": "7082,291670000",
+    "own": 0
+  },
+  {
+    "name": "Sous-marin thermonucléaire",
+    "index": 20,
+    "price": 2550000000,
+    "base_production": "12748,333300000",
+    "own": 0
+  },
+  {
+    "name": "Fosse du Kraken",
+    "index": 21,
+    "price": 5950000000,
+    "base_production": "22946,793500000",
+    "own": 0
+  },
+  {
+    "name": "Faille énigmatique",
+    "index": 22,
+    "price": 9500000000,
+    "base_production": "41304,285700000",
+    "own": 0
+  },
+  {
+    "name": "Terres corrompues",
+    "index": 23,
+    "price": 18500000000,
+    "base_production": "74347,663000000",
+    "own": 0
+  },
+  {
+    "name": "Bug dans la matrice",
+    "index": 24,
+    "price": 34500000000,
+    "base_production": "133825,833000000",
+    "own": 0
+  },
+  {
+    "name": "Ordinateur quantique",
+    "index": 25,
+    "price": 75000000000,
+    "base_production": "240886,667000000",
+    "own": 0
+  },
+  {
+    "name": "Accélerateur à particules",
+    "index": 26,
+    "price": 125000000000,
+    "base_production": "433595,833000000",
+    "own": 0
+  },
+  {
+    "name": "Machine à voyager dans le temps",
+    "index": 27,
+    "price": 235000000000,
+    "base_production": "7474930,140000000",
+    "own": 0
+  },
+  {
+    "name": "Caverne préhistorique",
+    "index": 28,
+    "price": "455000000000",
+    "base_production": "1404850,000000000",
+    "own": 0
+  },
+  {
+    "name": -1,
+    "index": 29,
+    "price": -1,
+    "base_production": "-1,000000000",
+    "own": 0
+  },
+  {
+    "name": -1,
+    "index": 30,
+    "price": -1,
+    "base_production": "-1,000000000",
+    "own": 0
+  },
+  {
+    "name": -1,
+    "index": 31,
+    "price": -1,
+    "base_production": "-1,000000000",
+    "own": 0
+  },
+  {
+    "name": -1,
+    "index": 32,
+    "price": -1,
+    "base_production": "-1,000000000",
+    "own": 0
+  },
+  {
+    "name": -1,
+    "index": 33,
+    "price": -1,
+    "base_production": "-1,000000000",
+    "own": 0
+  },
+  {
+    "name": -1,
+    "index": 34,
+    "price": -1,
+    "base_production": "-1,000000000",
+    "own": 0
+  },
+  {
+    "name": -1,
+    "index": 35,
+    "price": -1,
+    "base_production": "-1,000000000",
+    "own": 0
+  }
+]

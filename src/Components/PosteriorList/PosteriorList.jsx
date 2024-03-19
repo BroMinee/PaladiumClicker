@@ -8,27 +8,8 @@ import { v4 as uuid } from 'uuid';
 import axios from 'axios';
 
 
-const PosteriorList = () => {
-
-    const [clickList, setClickList] = useState([]);
-
-    const fetchCPSData = async () => {
-        const result = await axios(
-            process.env.PUBLIC_URL + '/posterior_upgrade.json',
-        );
-
-        setClickList(result.data);
-    }
-
-    useEffect(() => {
-        fetchCPSData();
-    }, []);
-
-
-
+const PosteriorList = ({playerInfo, setPlayerInfo}) => {
     function getImgPath(index, price) {
-        console.log(price)
-        console.log(index)
         if (price === -1)
             return "/unknown.png";
         else
@@ -38,8 +19,8 @@ const PosteriorList = () => {
     return (
         <ul className={"ul-horizontal"}>
             {
-                clickList && clickList.map((building, index) => (
-                    <Posterior buildingName={building["name"]} imgPath={getImgPath(index, building["name"])} ownParams={building["own"]} unique_id_react={index}/>
+                playerInfo && playerInfo["posterior_upgrade"] && playerInfo["posterior_upgrade"].map((posterior, index) => (
+                    <Posterior playerInfo={playerInfo} setPlayerInfo={setPlayerInfo} buildingName={posterior["name"]} imgPath={getImgPath(index, posterior["name"])} ownParams={posterior["own"]} index={index}/>
                 ))
             }
         </ul>
@@ -47,14 +28,17 @@ const PosteriorList = () => {
 }
 
 
-const Posterior = ({buildingName, imgPath, ownParams, unique_id_react}) => {
+const Posterior = ({playerInfo, setPlayerInfo, buildingName, imgPath, index}) => {
 
-    const [own, setOwn] = useState(ownParams);
-
+    function setOwn()
+    {
+        playerInfo["posterior_upgrade"][index]["own"] = !playerInfo["posterior_upgrade"][index]["own"];
+        setPlayerInfo({...playerInfo})
+    }
 
     return (
-        <li key={unique_id_react} onClick={() => setOwn(!own)} className={"fit-all-width"}>
-            <ul className={"Info-Posterior-list " + (own === true ? "Owned" : "NotOwned")} >
+        <li key={index} onClick={setOwn} className={"fit-all-width"}>
+            <ul className={"Info-Posterior-list " + (playerInfo["posterior_upgrade"][index]["own"] === true ? "Owned" : "NotOwned")} >
                 <div className="imageWrapper">
                     <img src={process.env.PUBLIC_URL + "/" + imgPath} alt="image" className={"Posterior-img"}></img>
                     <div className="cornerLink">{buildingName}</div>

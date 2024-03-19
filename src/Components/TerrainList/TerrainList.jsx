@@ -1,34 +1,11 @@
 import React, {useEffect} from "react";
-import {useState} from "react";
 import "./TerrainList.css";
 
-import { v4 as uuid } from 'uuid';
 
 
-import axios from 'axios';
-
-
-const TerrainList = () => {
-
-    const [clickList, setClickList] = useState([]);
-
-    const fetchCPSData = async () => {
-        const result = await axios(
-            process.env.PUBLIC_URL + '/terrain_upgrade.json',
-        );
-
-        setClickList(result.data);
-    }
-
-    useEffect(() => {
-        fetchCPSData();
-    }, []);
-
-
+const TerrainList = ({playerInfo, setPlayerInfo}) => {
 
     function getImgPath(index, price) {
-        console.log(price)
-        console.log(index)
         if (price === -1)
             return "/unknown.png";
         else
@@ -38,8 +15,8 @@ const TerrainList = () => {
     return (
         <ul className={"ul-horizontal"}>
             {
-                clickList && clickList.map((building, index) => (
-                    <Terrain buildingName={building["name"]} imgPath={getImgPath(index, building["name"])} ownParams={building["own"]} unique_id_react={index}/>
+                playerInfo["terrain_upgrade"] && playerInfo["terrain_upgrade"].map((terrain, index) => (
+                    <Terrain playerInfo={playerInfo} setPlayerInfo={setPlayerInfo} buildingName={terrain["name"]} imgPath={getImgPath(index, terrain["name"])} index={index}/>
                 ))
             }
         </ul>
@@ -47,16 +24,18 @@ const TerrainList = () => {
 }
 
 
-const Terrain = ({buildingName, imgPath, ownParams, unique_id_react}) => {
-
-    const [own, setOwn] = useState(ownParams);
-
+const Terrain = ({playerInfo, setPlayerInfo, buildingName, imgPath, index}) => {
+    function setOwn()
+    {
+        playerInfo["terrain_upgrade"][index]["own"] = !playerInfo["terrain_upgrade"][index]["own"];
+        setPlayerInfo({...playerInfo})
+    }
 
     return (
-        <li key={unique_id_react} onClick={() => setOwn(!own)} className={"fit-all-width"}>
-            <ul className={"Info-Global-list " + (own === true ? "Owned" : "NotOwned")} >
+        <li key={index} onClick={setOwn} className={"fit-all-width"}>
+            <ul className={"Info-Terrain-list " + (playerInfo["terrain_upgrade"][index]["own"] === true ? "Owned" : "NotOwned")} >
                 <div className="imageWrapper">
-                    <img src={process.env.PUBLIC_URL + "/" + imgPath} alt="image" className={"Global-img"}></img>
+                    <img src={process.env.PUBLIC_URL + "/" + imgPath} alt="image" className={"Terrain-img"}></img>
                     <div className="cornerLink">{buildingName}</div>
                 </div>
             </ul>

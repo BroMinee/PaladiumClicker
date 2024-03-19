@@ -8,27 +8,8 @@ import { v4 as uuid } from 'uuid';
 import axios from 'axios';
 
 
-const CategoryList = () => {
-
-    const [clickList, setClickList] = useState([]);
-
-    const fetchCPSData = async () => {
-        const result = await axios(
-            process.env.PUBLIC_URL + '/category_upgrade.json',
-        );
-
-        setClickList(result.data);
-    }
-
-    useEffect(() => {
-        fetchCPSData();
-    }, []);
-
-
-
+const CategoryList = ({playerInfo, setPlayerInfo}) => {
     function getImgPath(index, price) {
-        console.log(price)
-        console.log(index)
         if (price === -1)
             return "/unknown.png";
         else
@@ -38,8 +19,8 @@ const CategoryList = () => {
     return (
         <ul className={"ul-horizontal"}>
             {
-                clickList && clickList.map((building, index) => (
-                    <Category buildingName={building["name"]} imgPath={getImgPath(index, building["name"])} ownParams={building["own"]} unique_id_react={index}/>
+                playerInfo["category_upgrade"] && playerInfo["category_upgrade"].map((building, index) => (
+                    <Category playerInfo={playerInfo} setPlayerInfo={setPlayerInfo} buildingName={building["name"]} imgPath={getImgPath(index, building["name"])} index={index}/>
                 ))
             }
         </ul>
@@ -47,14 +28,18 @@ const CategoryList = () => {
 }
 
 
-const Category = ({buildingName, imgPath, ownParams, unique_id_react}) => {
+const Category = ({playerInfo, setPlayerInfo, buildingName, imgPath, index}) => {
 
-    const [own, setOwn] = useState(ownParams);
+    function setOwn()
+    {
+        playerInfo["category_upgrade"][index]["own"] = !playerInfo["category_upgrade"][index]["own"];
+        setPlayerInfo({...playerInfo})
+    }
 
 
     return (
-        <li key={unique_id_react} onClick={() => setOwn(!own)} className={"fit-all-width"}>
-            <ul className={"Info-Category-list " + (own === true ? "Owned" : "NotOwned")} >
+        <li key={index} onClick={setOwn} className={"fit-all-width"}>
+            <ul className={"Info-Category-list " + (playerInfo["category_upgrade"][index]["own"] === true ? "Owned" : "NotOwned")} >
                 <div className="imageWrapper">
                     <img src={process.env.PUBLIC_URL + "/" + imgPath} alt="image" className={"Category-img"}></img>
                     <div className="cornerLink">{buildingName}</div>

@@ -1,4 +1,4 @@
-.Info-Global-list
+.Info-Many-list
 {
     list-style-type: none;
     align-items: center;
@@ -9,7 +9,7 @@
     white-space: nowrap;
 }
 
-.Global-img
+.Many-img
 {
     height: 8vmin;
     pointer-events: none;

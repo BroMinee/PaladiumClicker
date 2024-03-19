@@ -1,0 +1,18 @@
+[
+  {
+    "name": "mineur",
+    "level": 1
+  },
+  {
+    "name": "farmer",
+    "level": 1
+  },
+  {
+    "name": "hunter",
+    "level": 1
+  },
+  {
+    "name": "alchimiste",
+    "level": 1
+  }
+]
