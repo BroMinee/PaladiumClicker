@@ -2,6 +2,8 @@
 {
     display: flex;
     justify-content: space-evenly;
+    z-index: 2;
+    position: relative;
 }
 .RPS
 {
@@ -12,12 +14,11 @@
 .RPSValue
 {
     margin-right: 10px;
-
     font-size: calc(10px + 2vmin);
     color: orange;
 }
 
 .Building-To-Buy-img
 {
-    height: 4vmin;
+    width: 10vmin;
 }

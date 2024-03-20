@@ -83,7 +83,7 @@ const ImportExport = ({playerInfo, setPlayerInfo}) => {
 
 
     return <div>
-        <div className={"RPS"}>
+        <div className={"ImportExport"}>
             <button onClick={loadFile}>Importer les données</button>
             <button onClick={exportData}>Exporter les données</button>
         </div>

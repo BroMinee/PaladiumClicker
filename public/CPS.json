@@ -2,126 +2,151 @@
   {
     "name": "Pastèque Clic",
     "CPS": 2,
-    "own": false
+    "own": false,
+    "index": 0
   },
   {
     "name": "Carrote Clic",
     "CPS": 4,
-    "own": false
+    "own": false,
+    "index": 1
   },
   {
     "name": "Patate Clic",
     "CPS": 8,
-    "own": false
+    "own": false,
+    "index": 2
   },
   {
     "name": "Pain Clic",
     "CPS": 16,
-    "own": false
+    "own": false,
+    "index": 3
   },
   {
     "name": "Lait Clic",
     "CPS": 32,
-    "own": false
+    "own": false,
+    "index": 4
   },
   {
     "name": "Choco Clic",
     "CPS": 64,
-    "own": false
+    "own": false,
+    "index": 5
   },
   {
     "name": "Bonbon Clic",
     "CPS": 128,
-    "own": false
+    "own": false,
+    "index": 6
   },
   {
     "name": "Cookie Clic",
     "CPS": 256,
-    "own": false
+    "own": false,
+    "index": 7
   },
   {
     "name": "Glace Clic",
     "CPS": 512,
-    "own": false
+    "own": false,
+    "index": 8
   },
   {
     "name": -1,
     "CPS": -1,
-    "own": false
+    "own": false,
+    "index": 9
   },
   {
     "name": -1,
     "CPS": -1,
-    "own": false
+    "own": false,
+    "index": 10
   },
   {
     "name": -1,
     "CPS": -1,
-    "own": false
+    "own": false,
+    "index": 11
   },
   {
     "name": -1,
     "CPS": -1,
-    "own": false
+    "own": false,
+    "index": 12
   },
   {
     "name": -1,
     "CPS": -1,
-    "own": false
+    "own": false,
+    "index": 13
   },
   {
     "name": -1,
     "CPS": -1,
-    "own": false
+    "own": false,
+    "index": 14
   },
   {
     "name": -1,
     "CPS": -1,
-    "own": false
+    "own": false,
+    "index": 15
   },
   {
     "name": -1,
     "CPS": -1,
-    "own": false
+    "own": false,
+    "index": 16
   },
   {
     "name": -1,
     "CPS": -1,
-    "own": false
+    "own": false,
+    "index": 17
   },
   {
     "name": -1,
     "CPS": -1,
-    "own": false
+    "own": false,
+    "index": 18
   },
   {
     "name": -1,
     "CPS": -1,
-    "own": false
+    "own": false,
+    "index": 19
   },
   {
     "name": -1,
     "CPS": -1,
-    "own": false
+    "own": false,
+    "index": 20
   },
   {
     "name": -1,
     "CPS": -1,
-    "own": false
+    "own": false,
+    "index": 21
   },
   {
     "name": -1,
     "CPS": -1,
-    "own": false
+    "own": false,
+    "index": 22
   },
   {
     "name": -1,
     "CPS": -1,
-    "own": false
+    "own": false,
+    "index": 23
   },
   {
     "name": -1,
     "CPS": -1,
-    "own": false
+    "own": false,
+    "index": 24
   }
 ]

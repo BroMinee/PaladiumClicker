@@ -66,46 +66,53 @@ const App = () => {
 
     return (
         Object.keys(playerInfo).length === 0 ? <div>Loading</div> :
-            <div className="App" style={{"background-image": `url(${process.env.PUBLIC_URL}/background.png)`}}>
-                <header className="App-header">
-                    <h3 style={{marginBottom: "0px"}}>
-                        Bienvenue sur l'optimiseur du PalaClicker
-                    </h3>
-                    Made by BroMine__
-                </header>
-                <br/>
-                <RPS RPS={rps} estimatedRPS={estimatedRPS} playerInfo={playerInfo} setEstimatedRPS={setEstimatedRPS}/>
+            <div>
+                <div id="container" className="container">
+                </div>
+                <div className="App" style={{"background-image": `url(${process.env.PUBLIC_URL}/background.png)`}}>
+                    <header className="App-header">
+                        <h3 style={{marginBottom: "0px", zIndex: 1, position: "relative"}}>
+                            Bienvenue sur l'optimiseur du PalaClicker
+                        </h3>
+                        Made by BroMine__
+                    </header>
+                    <br/>
 
-                <ImportExport playerInfo={playerInfo} setPlayerInfo={setPlayerInfo}/>
-                <h1>Métier</h1>
+                    <RPS RPS={rps} estimatedRPS={estimatedRPS} playerInfo={playerInfo} setPlayerInfo={setPlayerInfo}
+                         setEstimatedRPS={setEstimatedRPS}/>
+                    <br/>
+                    <ImportExport playerInfo={playerInfo} setPlayerInfo={setPlayerInfo}/>
+                    <h1>Métier</h1>
 
-                <MetierList playerInfo={playerInfo} setPlayerInfo={setPlayerInfo}/>
-                <h1>Bâtiments</h1>
-                <BuildingList playerInfo={playerInfo} setPlayerInfo={setPlayerInfo} setRPS={setRPS}/>
+                    <MetierList playerInfo={playerInfo} setPlayerInfo={setPlayerInfo}/>
+                    <h1>Bâtiments</h1>
+                    <BuildingList playerInfo={playerInfo} setPlayerInfo={setPlayerInfo} setRPS={setRPS}/>
 
-                <h1>Clic</h1>
-                <ClickList playerInfo={playerInfo} setPlayerInfo={setPlayerInfo}/>
+                    <h1>Clic</h1>
+                    <ClickList playerInfo={playerInfo} setPlayerInfo={setPlayerInfo}/>
 
-                <h1>Global</h1>
-                <GlobalList playerInfo={playerInfo} setPlayerInfo={setPlayerInfo}/>
+                    <h1>Global</h1>
+                    <GlobalList playerInfo={playerInfo} setPlayerInfo={setPlayerInfo}/>
 
-                <h1>Terrain</h1>
-                <TerrainList playerInfo={playerInfo} setPlayerInfo={setPlayerInfo}/>
+                    <h1>Terrain</h1>
+                    <TerrainList playerInfo={playerInfo} setPlayerInfo={setPlayerInfo}/>
 
-                <h1>Amélioration des bâtiments</h1>
-                <BuildingUpgradeList playerInfo={playerInfo} setPlayerInfo={setPlayerInfo}/>
+                    <h1>Amélioration des bâtiments</h1>
+                    <BuildingUpgradeList playerInfo={playerInfo} setPlayerInfo={setPlayerInfo}/>
 
-                <h1>Many</h1>
-                <ManyList playerInfo={playerInfo} setPlayerInfo={setPlayerInfo}/>
+                    <h1>Many</h1>
+                    <ManyList playerInfo={playerInfo} setPlayerInfo={setPlayerInfo}/>
 
-                <h1>Postérieur</h1>
-                <PosteriorList playerInfo={playerInfo} setPlayerInfo={setPlayerInfo}/>
+                    <h1>Postérieur</h1>
+                    <PosteriorList playerInfo={playerInfo} setPlayerInfo={setPlayerInfo}/>
 
-                <h1>Catégorie</h1>
-                <CategoryList playerInfo={playerInfo} setPlayerInfo={setPlayerInfo}/>
+                    <h1>Catégorie</h1>
+                    <CategoryList playerInfo={playerInfo} setPlayerInfo={setPlayerInfo}/>
+                </div>
             </div>
     )
         ;
 }
+
 
 export default App;
