@@ -17,7 +17,6 @@ const App = () => {
 
     const [rps, setRPS] = useState(1)
     const [estimatedRPS, setEstimatedRPS] = useState(3)
-    const [upgradeToBuy, setUpgradeToBuy] = useState({})
 
 
     const [playerInfo, setPlayerInfo] = useState({})
@@ -75,8 +74,8 @@ const App = () => {
                     Made by BroMine__
                 </header>
                 <br/>
-                <RPS RPS={rps} estimatedRPS={estimatedRPS} playerInfo={playerInfo} upgradeToBuy={upgradeToBuy}
-                     setUpgradeToBuy={setUpgradeToBuy}/>
+                <RPS RPS={rps} estimatedRPS={estimatedRPS} playerInfo={playerInfo} setEstimatedRPS={setEstimatedRPS}/>
+
                 <ImportExport playerInfo={playerInfo} setPlayerInfo={setPlayerInfo}/>
                 <h1>Métier</h1>
 

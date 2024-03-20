@@ -3,13 +3,13 @@ import React from "react";
 import "./RPS.css"
 import {ComputePrice, computeRPS} from "../Building/BuildingList.jsx";
 
-const RPS = ({RPS, estimatedRPS, playerInfo, upgradeToBuy, setUpgradeToBuy}) => {
+const RPS = ({RPS, estimatedRPS, playerInfo, setEstimatedRPS}) => {
     function printPricePretty(price) {
         return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
     }
 
 
-    const indexToBuy = findBestBuildingUpgrade(structuredClone(playerInfo));
+    const indexToBuy = findBestBuildingUpgrade(structuredClone(playerInfo), setEstimatedRPS);
 
     return <div className={"RPS-father"}>
         <div className={"RPS"}>
@@ -37,7 +37,7 @@ const RPS = ({RPS, estimatedRPS, playerInfo, upgradeToBuy, setUpgradeToBuy}) => 
             Production estimée après achat:
             <div style={{display: "flex", flexDirection: "row", justifyContent: "center"}}>
                 <div
-                    className={"RPSValue"}>{printPricePretty(estimatedRPS.toFixed(2))} ({estimatedRPS > RPS ? "+" : ""}{(((estimatedRPS - RPS) / (RPS) * 100)).toFixed(0)}%)
+                    className={"RPSValue"}>{printPricePretty(estimatedRPS.toFixed(2))} ({estimatedRPS > RPS ? "+" : ""}{(((estimatedRPS - RPS) / (RPS) * 100)).toFixed(5)}%)
 
                 </div>
                 <img src={process.env.PUBLIC_URL + "/" + "coin.png"} className="App-logo" alt="logo"/>
@@ -48,7 +48,8 @@ const RPS = ({RPS, estimatedRPS, playerInfo, upgradeToBuy, setUpgradeToBuy}) => 
 
 }
 
-function findBestBuildingUpgrade(playerInfo) {
+function findBestBuildingUpgrade(playerInfo, setEstimatedRPS)
+{
     let buildingOwned = playerInfo["building"].filter((building) => building["own"] > 0).length;
     if (buildingOwned !== playerInfo["building"].length) {
         buildingOwned += 1;
@@ -68,6 +69,11 @@ function findBestBuildingUpgrade(playerInfo) {
             bestBuildingIndex = index;
         }
     }
+
+    const copy = structuredClone(playerInfo)
+    copy["building"][bestBuildingIndex]["own"] += 1;
+
+    setEstimatedRPS(computeRPS(copy));
 
     return bestBuildingIndex;
 }
