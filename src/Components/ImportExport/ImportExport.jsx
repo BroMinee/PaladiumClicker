@@ -25,12 +25,52 @@ const ImportExport = ({playerInfo, setPlayerInfo}) => {
                 const content = readerEvent.target.result;
                 try {
                     let json = JSON.parse(content);
-                    json["building"].forEach((building, index) => {
-                        json["building"][index]["price"] = playerInfo["building"][index]["price"];
-                        json["building"][index]["base_production"] = playerInfo["building"][index]["base_production"];
+
+                    // Metier
+                    playerInfo["metier"].forEach((metier, index) => {
+                        playerInfo["metier"][index]["level"] = json["metier"][index]["level"];
                     })
-                    console.log("JSON", json);
-                    setPlayerInfo(json);
+
+                    // Building
+                    playerInfo["building"].forEach((building, index) => {
+                        playerInfo["building"][index]["own"] = json["building"][index]["own"];
+                    })
+
+                    // Global
+                    playerInfo["global_upgrade"].forEach((global, index) => {
+                        playerInfo["global_upgrade"][index]["own"] = json["global_upgrade"][index]["own"];
+                    })
+
+
+                    // Terrain
+                    playerInfo["terrain_upgrade"].forEach((terrain, index) => {
+                        playerInfo["terrain_upgrade"][index]["own"] = json["terrain_upgrade"][index]["own"];
+                    })
+
+                    // building_upgrade
+                    playerInfo["building_upgrade"].forEach((building, index) => {
+                        playerInfo["building_upgrade"][index]["own"] = json["building_upgrade"][index]["own"];
+                    })
+
+
+                    // many_upgrade
+                    playerInfo["many_upgrade"].forEach((many, index) => {
+                        playerInfo["many_upgrade"][index]["own"] = json["many_upgrade"][index]["own"];
+                    })
+
+
+                    // posterior_upgrade
+                    playerInfo["posterior_upgrade"].forEach((posterior, index) => {
+                        playerInfo["posterior_upgrade"][index]["own"] = json["posterior_upgrade"][index]["own"];
+                    })
+
+                    // category_upgrade
+                    playerInfo["category_upgrade"].forEach((category, index) => {
+                        playerInfo["category_upgrade"][index]["own"] = json["category_upgrade"][index]["own"];
+                    })
+
+
+                    setPlayerInfo({...playerInfo});
                 }
                 catch (e) {
                     alert("Invalid file");
@@ -44,8 +84,8 @@ const ImportExport = ({playerInfo, setPlayerInfo}) => {
 
     return <div>
         <div className={"RPS"}>
-            <button onClick={loadFile}>Import Data</button>
-            <button onClick={exportData}>Export Data</button>
+            <button onClick={loadFile}>Importer les données</button>
+            <button onClick={exportData}>Exporter les données</button>
         </div>
     </div>
 }

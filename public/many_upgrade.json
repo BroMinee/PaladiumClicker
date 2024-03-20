@@ -1,81 +1,81 @@
 [
   {
-    "Many upgrade": "Production nombreuse - Mine abandonnée",
+    "name": "Production nombreuse - Mine abandonnée",
     "active_index": 0,
     "own": false
   },
   {
-    "Many upgrade": "Production nombreuse - Caverne aux gros cailloux",
+    "name": "Production nombreuse - Caverne aux gros cailloux",
     "active_index": 1,
     "own": "False"
   },
   {
-    "Many upgrade": "Production nombreuse - Mine des nains",
+    "name": "Production nombreuse - Mine des nains",
     "active_index": 2,
     "own": "False"
   },
   {
-    "Many upgrade": "Production nombreuse - Jardin de mamie",
+    "name": "Production nombreuse - Jardin de mamie",
     "active_index": 3,
     "own": "False"
   },
   {
-    "Many upgrade": "Production nombreuse - Cabane de sorcière",
+    "name": "Production nombreuse - Cabane de sorcière",
     "active_index": 4,
     "own": "False"
   },
   {
-    "Many upgrade": "Production nombreuse - Ruche bourdonnante",
+    "name": "Production nombreuse - Ruche bourdonnante",
     "active_index": 5,
     "own": "False"
   },
   {
-    "Many upgrade": "Production nombreuse - Forêt enneigée",
+    "name": "Production nombreuse - Forêt enneigée",
     "active_index": 6,
     "own": "False"
   },
   {
-    "Many upgrade": "Production nombreuse - Banquise gelée",
+    "name": "Production nombreuse - Banquise gelée",
     "active_index": 7,
     "own": "False"
   },
   {
-    "Many upgrade": "Production nombreuse - Port de pirate",
+    "name": "Production nombreuse - Port de pirate",
     "active_index": 8,
     "own": "False"
   },
   {
-    "Many upgrade": "Production nombreuse - île volcanique",
+    "name": "Production nombreuse - île volcanique",
     "active_index": 9,
     "own": "False"
   },
   {
-    "Many upgrade": "Production nombreuse - Dunes caniculaires",
+    "name": "Production nombreuse - Dunes caniculaires",
     "active_index": 10,
     "own": "False"
   },
   {
-    "Many upgrade": "Production nombreuse - Forêt mystiquie",
+    "name": "Production nombreuse - Forêt mystiquie",
     "active_index": 11,
     "own": "False"
   },
   {
-    "Many upgrade": -1,
+    "name": -1,
     "active_index": -1,
     "own": "False"
   },
   {
-    "Many upgrade": -1,
+    "name": -1,
     "active_index": -1,
     "own": "False"
   },
   {
-    "Many upgrade": -1,
+    "name": -1,
     "active_index": -1,
     "own": "False"
   },
   {
-    "Many upgrade": -1,
+    "name": -1,
     "active_index": -1,
     "own": "False"
   }

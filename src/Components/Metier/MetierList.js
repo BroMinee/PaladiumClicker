@@ -40,7 +40,7 @@ const Metier = ({metierName, imgPath, playerInfo, setPlayerInfo, level}) => {
                 <div className="cornerLink">{metierName.charAt(0).toUpperCase() + metierName.slice(1)}</div>
             </div>
             <li>Level: {level}</li>
-            <input type="number" min="1" step="1" max="100" placeholder={level} onKeyUp={enforceMinMax}
+            <input type="number" min="1" step="1" max="100" value={level} onKeyUp={enforceMinMax}
                    onChange={enforceMinMax}/>
         </ul>
     );

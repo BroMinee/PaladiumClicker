@@ -11,13 +11,13 @@ import ManyList from "./Components/ManyList/ManyList";
 import PosteriorList from "./Components/PosteriorList/PosteriorList";
 import CategoryList from "./Components/CategoryList/CategoryList";
 import fetchDataOnPublicURL from "./FetchData";
-import axios from "axios";
 import ImportExport from "./Components/ImportExport/ImportExport";
 
 const App = () => {
 
     const [rps, setRPS] = useState(1)
     const [estimatedRPS, setEstimatedRPS] = useState(3)
+    const [upgradeToBuy, setUpgradeToBuy] = useState({})
 
 
     const [playerInfo, setPlayerInfo] = useState({})
@@ -69,36 +69,40 @@ const App = () => {
         Object.keys(playerInfo).length === 0 ? <div>Loading</div> :
             <div className="App" style={{"background-image": `url(${process.env.PUBLIC_URL}/background.png)`}}>
                 <header className="App-header">
-                    Welcome To PalaClicker
+                    <h3 style={{marginBottom: "0px"}}>
+                        Bienvenue sur l'optimiseur du PalaClicker
+                    </h3>
+                    Made by BroMine__
                 </header>
                 <br/>
-                <img src={process.env.PUBLIC_URL + "/" + "coin.png"} className="App-logo" alt="logo"/>
-                <RPS RPS={rps} estimatedRPS={estimatedRPS}/>
-                <h1>Metier</h1>
+                <RPS RPS={rps} estimatedRPS={estimatedRPS} playerInfo={playerInfo} upgradeToBuy={upgradeToBuy}
+                     setUpgradeToBuy={setUpgradeToBuy}/>
                 <ImportExport playerInfo={playerInfo} setPlayerInfo={setPlayerInfo}/>
+                <h1>Métier</h1>
+
                 <MetierList playerInfo={playerInfo} setPlayerInfo={setPlayerInfo}/>
-                <h1>Building</h1>
+                <h1>Bâtiments</h1>
                 <BuildingList playerInfo={playerInfo} setPlayerInfo={setPlayerInfo} setRPS={setRPS}/>
 
-                <h2>Click</h2>
+                <h1>Clic</h1>
                 <ClickList playerInfo={playerInfo} setPlayerInfo={setPlayerInfo}/>
 
                 <h1>Global</h1>
                 <GlobalList playerInfo={playerInfo} setPlayerInfo={setPlayerInfo}/>
 
-                <h2>Terrain</h2>
+                <h1>Terrain</h1>
                 <TerrainList playerInfo={playerInfo} setPlayerInfo={setPlayerInfo}/>
 
-                <h2>Building</h2>
+                <h1>Amélioration des bâtiments</h1>
                 <BuildingUpgradeList playerInfo={playerInfo} setPlayerInfo={setPlayerInfo}/>
 
-                <h2>Many</h2>
+                <h1>Many</h1>
                 <ManyList playerInfo={playerInfo} setPlayerInfo={setPlayerInfo}/>
 
-                <h2>Posterior</h2>
+                <h1>Postérieur</h1>
                 <PosteriorList playerInfo={playerInfo} setPlayerInfo={setPlayerInfo}/>
 
-                <h2>Category</h2>
+                <h1>Catégorie</h1>
                 <CategoryList playerInfo={playerInfo} setPlayerInfo={setPlayerInfo}/>
             </div>
     )

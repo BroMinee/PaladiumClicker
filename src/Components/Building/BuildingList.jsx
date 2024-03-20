@@ -12,14 +12,7 @@ const BuildingList = ({playerInfo, setPlayerInfo, setRPS}) => {
     }
 
 
-    let rps = 0;
-    playerInfo["building"].forEach((building, index) => {
-            if (building["own"] !== 0) {
-                rps += scaleCurrentProduction(playerInfo, index, building["own"]);
-            }
-        }
-    )
-    setRPS(rps);
+    setRPS(computeRPS(playerInfo))
 
     return (
         <ul className={"ul-horizontal"} key={this}>
@@ -71,14 +64,14 @@ const Building = ({playerInfo, setPlayerInfo, building, imgPath, unique_id_react
                 <li>RPS
                     : {printPricePretty(scaleCurrentProduction(playerInfo, index, building["own"]).toFixed(2))}</li>
                 <li>{printPricePretty(ComputePrice(building["price"], building["own"]))}$</li>
-                <input type="number" min="0" step="1" max="99" placeholder={playerInfo["building"][index]["own"]} onKeyUp={enforceMinMax}
+                <input type="number" min="0" step="1" max="99" value={playerInfo["building"][index]["own"]} onKeyUp={enforceMinMax}
                        onChange={enforceMinMax}/>
             </ul>
         </li>
     );
 }
 
-function ComputePrice(priceLevel0, level) {
+export function ComputePrice(priceLevel0, level) {
     return Math.round(priceLevel0 * Math.pow(1.100000023841858, level))
 }
 
@@ -143,36 +136,28 @@ function getPourcentageBonus(playerInfo, buildingIndex) {
         return 0;
     }
 
-    console.log(playerInfo)
     let pourcentageBonus = 1;
     // Bonus Global
 
     pourcentageBonus += getBonusFromGlobal()
-    console.log(`Bonus after Global from ${playerInfo["building"][buildingIndex]["name"]} : ${pourcentageBonus}`)
 
     // Bonus Terrain
     pourcentageBonus += getBonusFromTerrain()
-    console.log(`Bonus after Terrain from ${playerInfo["building"][buildingIndex]["name"]} : ${pourcentageBonus}`)
 
     // Bonus Building
     pourcentageBonus += getBonusFromBuild()
-    console.log(`Bonus after Build from ${playerInfo["building"][buildingIndex]["name"]} : ${pourcentageBonus}`)
 
 
     // Bonus Many
     pourcentageBonus += getBonusFromMany()
-    console.log(`Bonus after Many from ${playerInfo["building"][buildingIndex]["name"]} : ${pourcentageBonus}`)
 
     // Bonus Posterior
     pourcentageBonus += getBonusFromPosterior()
-    console.log(`Bonus after Posterior from ${playerInfo["building"][buildingIndex]["name"]} : ${pourcentageBonus}`)
 
     // Bonus Category
     pourcentageBonus += getBonusFromCategory()
-    console.log(`Bonus after Category from ${playerInfo["building"][buildingIndex]["name"]} : ${pourcentageBonus}`)
 
 
-    console.log(`Bonus from ${playerInfo["building"][buildingIndex]["name"]} : ${pourcentageBonus}`)
 
     return pourcentageBonus;
 
@@ -180,8 +165,6 @@ function getPourcentageBonus(playerInfo, buildingIndex) {
 
 
 function scaleBaseProduction(playerInfo, buildingIndex) {
-    console.log(`${playerInfo["building"][buildingIndex]["name"]}`)
-    console.warn("TODO upgrade") // TODO
     const baseProduction = convertToFloat(playerInfo["building"][buildingIndex]["base_production"])
     const pourcentageBonus = getPourcentageBonus(playerInfo, buildingIndex)
     return (baseProduction * pourcentageBonus);
@@ -190,7 +173,6 @@ function scaleBaseProduction(playerInfo, buildingIndex) {
 function scaleCurrentProduction(playerInfo, buildingIndex, level) {
     if (level === 0 || level === -1)
         return 0;
-    console.log(playerInfo)
     const newBaseProduction = scaleBaseProduction(playerInfo, buildingIndex)
     return newBaseProduction * level;
 }
@@ -205,5 +187,16 @@ function convertToFloat(str) {
     return -1
 }
 
+export function computeRPS(playerInfo)
+{
+    let rps = 0;
+    playerInfo["building"].forEach((building, index) => {
+            if (building["own"] !== 0) {
+                rps += scaleCurrentProduction(playerInfo, index, building["own"]);
+            }
+        }
+    )
+    return rps;
+}
 
 export default BuildingList;

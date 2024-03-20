@@ -7,7 +7,7 @@ body, ul, li {
 }
 
 .App-logo {
-    height: 10vmin;
+    height: 4vmin;
     pointer-events: none;
 }
 
@@ -32,9 +32,13 @@ body, ul, li {
 
 .Owned {
     background: #265eef;
+    border-radius: 10px;
+    border-color: #ffffff;
 }
 
 .NotOwned {
+    border-radius: 10px;
+    border-color: #265eef;
     background: #ef3926;
 }
 
@@ -64,6 +68,7 @@ body, ul, li {
     overflow: auto;
     text-align: center;
     list-style-type: none;
+    column-gap: 10px;
 }
 
 .imageWrapper {
