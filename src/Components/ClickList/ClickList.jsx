@@ -69,7 +69,6 @@ function createFallingImage() {
     image.style.left = randomX + 'px';
 
     setTimeout(() => {
-        console.log("SetInterval")
         image.remove()
     }, 3000);
 }

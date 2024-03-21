@@ -61,9 +61,10 @@ const RPS = ({RPS, estimatedRPS, playerInfo, setPlayerInfo, setEstimatedRPS}) =>
 function findBestBuildingUpgrade(playerInfo, setEstimatedRPS, bestIndex, setBestIndex)
 {
     let buildingOwned = playerInfo["building"].filter((building) => building["own"] > 0).length;
-    if (buildingOwned !== playerInfo["building"].length) {
+    if (buildingOwned !== playerInfo["building"].length && playerInfo["building"][buildingOwned]["name"] !== -1) {
         buildingOwned += 1;
     }
+    console.log(buildingOwned);
     const currentRPS = computeRPS(playerInfo);
     let bestRpsAfterUpgrade = 0;
     let bestBuildingIndex = -1;

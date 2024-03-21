@@ -7,7 +7,7 @@ const MetierList = ({playerInfo, setPlayerInfo}) => {
     return <ul className={"ul-horizontal ul-metier"}>
         {
             playerInfo["metier"].map((metier, index) => {
-                return <Metier metierName={metier["name"]} imgPath={metier["name"] + ".png"} playerInfo={playerInfo}
+                return <Metier metierName={metier["name"]} imgPath={metier["name"] + ".webp"} playerInfo={playerInfo}
                                setPlayerInfo={setPlayerInfo} level={metier["level"]}/>
             })
         }
