@@ -55,18 +55,18 @@
     "own": "False"
   },
   {
-    "name": "Production nombreuse - Forêt mystiquie",
+    "name": "Production nombreuse - Forêt mystique",
     "active_index": 11,
     "own": "False"
   },
   {
-    "name": -1,
-    "active_index": -1,
+    "name": "Production nombreuse - Jungle luxuriante",
+    "active_index": 12,
     "own": "False"
   },
   {
-    "name": -1,
-    "active_index": -1,
+    "name": "Production nombreuse - Temple oublié",
+    "active_index": 13,
     "own": "False"
   },
   {

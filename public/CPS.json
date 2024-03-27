@@ -54,14 +54,14 @@
     "index": 8
   },
   {
-    "name": -1,
-    "CPS": -1,
+    "name": "Souple Clic",
+    "CPS": 1024,
     "own": false,
     "index": 9
   },
   {
-    "name": -1,
-    "CPS": -1,
+    "name": "Poisson Clic",
+    "CPS": 2048,
     "own": false,
     "index": 10
   },
