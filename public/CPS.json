@@ -66,8 +66,8 @@
     "index": 10
   },
   {
-    "name": -1,
-    "CPS": -1,
+    "name": "Poulet Clic",
+    "CPS": 4096,
     "own": false,
     "index": 11
   },
