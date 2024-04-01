@@ -210,10 +210,10 @@
     "own": 0
   },
   {
-    "name": -1,
+    "name": "clicker.building.Atlantis",
     "index": 30,
-    "price": -1,
-    "base_production": "-1,000000000",
+    "price": 1550000000000,
+    "base_production": "4551712,500000000",
     "own": 0
   },
   {
@@ -233,20 +233,6 @@
   {
     "name": -1,
     "index": 33,
-    "price": -1,
-    "base_production": "-1,000000000",
-    "own": 0
-  },
-  {
-    "name": -1,
-    "index": 34,
-    "price": -1,
-    "base_production": "-1,000000000",
-    "own": 0
-  },
-  {
-    "name": -1,
-    "index": 35,
     "price": -1,
     "base_production": "-1,000000000",
     "own": 0
