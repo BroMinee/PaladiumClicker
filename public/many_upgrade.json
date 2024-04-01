@@ -7,76 +7,76 @@
   {
     "name": "Production nombreuse - Caverne aux gros cailloux",
     "active_index": 1,
-    "own": "False"
+    "own": false
   },
   {
     "name": "Production nombreuse - Mine des nains",
     "active_index": 2,
-    "own": "False"
+    "own": false
   },
   {
     "name": "Production nombreuse - Jardin de mamie",
     "active_index": 3,
-    "own": "False"
+    "own": false
   },
   {
     "name": "Production nombreuse - Cabane de sorcière",
     "active_index": 4,
-    "own": "False"
+    "own": false
   },
   {
     "name": "Production nombreuse - Ruche bourdonnante",
     "active_index": 5,
-    "own": "False"
+    "own": false
   },
   {
     "name": "Production nombreuse - Forêt enneigée",
     "active_index": 6,
-    "own": "False"
+    "own": false
   },
   {
     "name": "Production nombreuse - Banquise gelée",
     "active_index": 7,
-    "own": "False"
+    "own": false
   },
   {
     "name": "Production nombreuse - Port de pirate",
     "active_index": 8,
-    "own": "False"
+    "own": false
   },
   {
     "name": "Production nombreuse - île volcanique",
     "active_index": 9,
-    "own": "False"
+    "own": false
   },
   {
     "name": "Production nombreuse - Dunes caniculaires",
     "active_index": 10,
-    "own": "False"
+    "own": false
   },
   {
     "name": "Production nombreuse - Forêt mystique",
     "active_index": 11,
-    "own": "False"
+    "own": false
   },
   {
     "name": "Production nombreuse - Jungle luxuriante",
     "active_index": 12,
-    "own": "False"
+    "own": false
   },
   {
     "name": "Production nombreuse - Temple oublié",
     "active_index": 13,
-    "own": "False"
+    "own": false
   },
   {
     "name": "Production nombreuse - Crypte millénaire",
     "active_index": 14,
-    "own": "False"
+    "own": false
   },
   {
     "name": "Production nombreuse - Gouffre sans fond",
     "active_index": 15,
-    "own": "False"
+    "own": false
   }
 ]

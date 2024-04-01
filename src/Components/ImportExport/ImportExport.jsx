@@ -69,6 +69,11 @@ const ImportExport = ({playerInfo, setPlayerInfo}) => {
                         playerInfo["category_upgrade"][index]["own"] = json["category_upgrade"][index]["own"];
                     })
 
+                    // CPS
+                    playerInfo["CPS"].forEach((category, index) => {
+                        playerInfo["CPS"][index]["own"] = json["CPS"][index]["own"];
+                    })
+
 
                     setPlayerInfo({...playerInfo});
                 }

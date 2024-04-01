@@ -51,13 +51,14 @@ const CPS = ({playerInfo, setPlayerInfo, buildingName, imgPath, index}) => {
 
 function UpgradeLocalStorage(value)
 {
-
     localStorage.setItem("CPS", JSON.stringify(value));
 }
 function createFallingImage() {
     const container = document.getElementById('container');
     const image = document.createElement('img');
     // Get local storage variable "CPS"
+    if(localStorage.getItem("CPS") === null)
+        localStorage.setItem("CPS", JSON.stringify(-1));
     const playerInfo = JSON.parse(localStorage.getItem("CPS"));
 
     image.src = `${process.env.PUBLIC_URL}/CPSIcon/${playerInfo}.png`;

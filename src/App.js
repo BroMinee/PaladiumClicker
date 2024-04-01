@@ -54,14 +54,48 @@ const App = () => {
             })
 
             setPlayerInfo(newPlayerInfo)
+            localStorage.setItem("cacheInfo", JSON.stringify({"playerInfo": newPlayerInfo, "timestamp": new Date().getTime()}));
+
         }
 
         if (Object.keys(playerInfo).length === 0) {
-            fetchAllData()
+            const cacheInfo = localStorage.getItem("cacheInfo");
+            if(cacheInfo === null || cacheInfo === ""){
+                console.log("No cache")
+                fetchAllData()
+            }
+            else
+            {
+                try {
+                    const jsonCacheInfo = JSON.parse(cacheInfo);
+                    if(jsonCacheInfo["timestamp"] < new Date("03 April 2024")){
+                        throw new Error("Cache too old")
+                    }
+                }
+                catch (e) {
+                    console.log(e.message)
+                    fetchAllData()
+                    return
+                }
+
+                console.log("Using cache")
+                console.log(cacheInfo)
+                console.log(JSON.parse(cacheInfo)["playerInfo"])
+                console.log(JSON.parse(cacheInfo)["timestamp"])
+                setPlayerInfo(JSON.parse(cacheInfo)["playerInfo"])
+            }
+
         }
 
 
     }, []);
+
+    useEffect(() => {
+        if(Object.keys(playerInfo).length === 0)
+
+            return
+        localStorage.setItem("cacheInfo", JSON.stringify({"playerInfo": playerInfo, "timestamp": new Date().getTime()}));
+    }, [playerInfo]);
 
 
     return (
