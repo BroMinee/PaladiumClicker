@@ -68,7 +68,7 @@ const App = () => {
             {
                 try {
                     const jsonCacheInfo = JSON.parse(cacheInfo);
-                    if(jsonCacheInfo["timestamp"] < new Date("03 April 2024")){
+                    if(jsonCacheInfo["timestamp"] < new Date("02 April 2024")){
                         throw new Error("Cache too old")
                     }
                 }
