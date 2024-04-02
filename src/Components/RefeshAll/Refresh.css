@@ -1,4 +1,14 @@
 .ImportExport {
     z-index: 1;
     position: relative;
+    column-gap: 40px;
+    display: flex;
+    justify-content: center;
+    padding-left: 6px;
+}
+
+.RED
+{
+    background-color: red;
+    color: white;
 }

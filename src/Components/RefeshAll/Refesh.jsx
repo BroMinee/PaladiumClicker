@@ -134,8 +134,8 @@ const Refesh = ({playerInfo, setPlayerInfo}) => {
 
     return <div>
         <div className={"ImportExport"}>
-            <button onClick={refesh}>Réinitialiser</button>
             <button onClick={loadFile}>Importer les données</button>
+            <button onClick={refesh} className={"RED"}>Réinitialiser</button>
             <button onClick={exportData}>Exporter les données</button>
         </div>
     </div>

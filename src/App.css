@@ -61,6 +61,10 @@ body, ul, li {
 {
     color: white;
 }
+.BroMine
+{
+    color: #FF5C00;
+}
 
 .ul-horizontal {
     z-index: 1;
@@ -85,7 +89,6 @@ body, ul, li {
     bottom: 0px;
     left: 0px;
     right: 0px;
-    color: #ffffff;
     background: #000000;
     text-decoration: none;
     text-align: center;
@@ -95,6 +98,8 @@ body, ul, li {
     transition: transform 300ms ease-out, opacity 150ms;
     margin-top: -25px;
     margin-bottom: 25px;
+
+    color: #FF5C00;
 
 }
 
@@ -149,4 +154,19 @@ body, ul, li {
     padding: 25px;
     background: white;
     transform: translate(-50%, -50%)
+}
+
+
+button
+{
+    background-color: #FF5C00;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
 }

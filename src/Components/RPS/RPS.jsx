@@ -22,7 +22,7 @@ const RPS = ({RPS, estimatedRPS, playerInfo, setPlayerInfo, setEstimatedRPS}) =>
 
     return <div className={"RPS-father"}>
         <div className={"RPS"}>
-            Production actuelle par seconde:
+            Production actuelle par seconde
             <div style={{display: "flex", flexDirection: "row", justifyContent: "center"}}>
                 <div className={"RPSValue"}>
                     {printPricePretty(RPS.toFixed(2))}
@@ -32,19 +32,19 @@ const RPS = ({RPS, estimatedRPS, playerInfo, setPlayerInfo, setEstimatedRPS}) =>
             </div>
         </div>
         <div className={"RPS"}>
-            Prochain achat optimal:
+            Prochain achat optimal
             <div>
                 <div className={"imageWrapper"}>
                     <img src={process.env.PUBLIC_URL + "/BuildingIcon/" + `${indexToBuy}.png`} alt="image"
                          className={"Building-To-Buy-img"}></img>
                     <div className="cornerLink">{playerInfo["building"][indexToBuy]["name"]}</div>
-                    <button className={"buyButton"} onClick={buyUpgrade}>Acheter</button>
+                    <button className={"buyButton"} onClick={buyUpgrade} style={{marginTop: "10px"}}>Acheter</button>
                 </div>
             </div>
 
         </div>
         <div className={"RPS"}>
-            Production estimée après achat:
+            Production estimée après achat
             <div style={{display: "flex", flexDirection: "row", justifyContent: "center"}}>
                 <div
                     className={"RPSValue"}>{printPricePretty(estimatedRPS.toFixed(2))} ({estimatedRPS > RPS ? "+" : ""}{(((estimatedRPS - RPS) / (RPS) * 100)).toFixed(5)}%)

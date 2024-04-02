@@ -189,12 +189,26 @@ const App = () => {
 
                 <div className="App" style={{"background-image": `url(${process.env.PUBLIC_URL}/background.png)`}}>
                     <header className="App-header">
-                        <h3 style={{marginBottom: "0px", zIndex: 1, position: "relative"}}>
-                            Bienvenue sur l'optimiseur du PalaClicker
-                        </h3>
-                        Made by BroMine__
-                        <div onClick={() => {document.getElementById("modal2").style.display = "block"}} style={{cursor: "pointer"}}>Voir l'évolution
-                            du top 10</div>
+                        <div style={{flexDirection: "row", display: "flex"}}>
+                            <h3 style={{marginBottom: "0px", zIndex: 1, position: "relative"}}>
+                                Bienvenue sur l'optimiseur du&nbsp;
+                            </h3>
+                            <h3 style={{marginBottom: "0px", zIndex: 1, position: "relative"}} className={"BroMine"}>
+                                PalaClicker
+                            </h3>
+
+                        </div>
+                        <div style={{flexDirection: "row", display: "flex"}}>
+                            <div>
+                                Made by&nbsp;
+                            </div>
+                            <div className={"BroMine"}> BroMine__</div>
+                        </div>
+                        <div onClick={() => {
+                            document.getElementById("modal2").style.display = "block"
+                        }} style={{cursor: "pointer"}}>Voir l'évolution
+                            du top 10
+                        </div>
                         <div onClick={() => alert("Not yet implemented")} style={{cursor: "pointer"}}>Comment utiliser
                             l'outil
                         </div>
