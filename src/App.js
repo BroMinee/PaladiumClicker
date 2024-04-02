@@ -12,12 +12,13 @@ import PosteriorList from "./Components/PosteriorList/PosteriorList";
 import CategoryList from "./Components/CategoryList/CategoryList";
 import fetchDataOnPublicURL from "./FetchData";
 import ImportExport from "./Components/ImportExport/ImportExport";
+import News from "./Components/News/News";
 
+let cacheHasBeenReset = false;
 const App = () => {
 
     const [rps, setRPS] = useState(1)
     const [estimatedRPS, setEstimatedRPS] = useState(3)
-
 
     const [playerInfo, setPlayerInfo] = useState({})
 
@@ -54,47 +55,37 @@ const App = () => {
             })
 
             setPlayerInfo(newPlayerInfo)
-            localStorage.setItem("cacheInfo", JSON.stringify({"playerInfo": newPlayerInfo, "timestamp": new Date().getTime()}));
+            localStorage.setItem("cacheInfo", JSON.stringify({
+                "playerInfo": newPlayerInfo,
+                "timestamp": new Date().getTime()
+            }));
 
         }
 
         if (Object.keys(playerInfo).length === 0) {
-            const cacheInfo = localStorage.getItem("cacheInfo");
-            if(cacheInfo === null || cacheInfo === ""){
+            if(!isCacheValid()) {
+                cacheHasBeenReset = true
                 console.log("No cache")
                 fetchAllData()
             }
             else
             {
-                try {
-                    const jsonCacheInfo = JSON.parse(cacheInfo);
-                    if(jsonCacheInfo["timestamp"] < new Date("02 April 2024")){
-                        throw new Error("Cache too old")
-                    }
-                }
-                catch (e) {
-                    console.log(e.message)
-                    fetchAllData()
-                    return
-                }
-
                 console.log("Using cache")
-                console.log(cacheInfo)
-                console.log(JSON.parse(cacheInfo)["playerInfo"])
-                console.log(JSON.parse(cacheInfo)["timestamp"])
-                setPlayerInfo(JSON.parse(cacheInfo)["playerInfo"])
+                setPlayerInfo(JSON.parse(localStorage.getItem("cacheInfo"))["playerInfo"])
             }
-
         }
 
 
     }, []);
 
     useEffect(() => {
-        if(Object.keys(playerInfo).length === 0)
+        if (Object.keys(playerInfo).length === 0)
 
             return
-        localStorage.setItem("cacheInfo", JSON.stringify({"playerInfo": playerInfo, "timestamp": new Date().getTime()}));
+        localStorage.setItem("cacheInfo", JSON.stringify({
+            "playerInfo": playerInfo,
+            "timestamp": new Date().getTime()
+        }));
     }, [playerInfo]);
 
 
@@ -103,14 +94,25 @@ const App = () => {
             <div>
                 <div id="container" className="container">
                 </div>
+                <News cacheHasBeenReset={cacheHasBeenReset}/>
+
                 <div className="App" style={{"background-image": `url(${process.env.PUBLIC_URL}/background.png)`}}>
                     <header className="App-header">
                         <h3 style={{marginBottom: "0px", zIndex: 1, position: "relative"}}>
                             Bienvenue sur l'optimiseur du PalaClicker
                         </h3>
                         Made by BroMine__
+                        <div onClick={() => alert("Not yet implemented")} style={{cursor: "pointer"}}>Voir l'evolution du top 10</div>
+                        <div onClick={() => alert("Not yet implemented")} style={{cursor: "pointer"}}>Comment utiliser
+                            l'outil
+                        </div>
+                        <div onClick={() => {
+                            document.getElementById("modal").style.display = "block";
+                        }} style={{cursor: "pointer"}}>Voir les nouvelles fonctionnalitées
+                        </div>
                     </header>
                     <br/>
+
 
                     <RPS RPS={rps} estimatedRPS={estimatedRPS} playerInfo={playerInfo} setPlayerInfo={setPlayerInfo}
                          setEstimatedRPS={setEstimatedRPS}/>
@@ -147,6 +149,24 @@ const App = () => {
     )
         ;
 }
+
+export function isCacheValid()
+{
+    const cacheInfo = localStorage.getItem("cacheInfo");
+    if (cacheInfo === null || cacheInfo === "") {
+        return false
+    }
+    try {
+        const jsonCacheInfo = JSON.parse(cacheInfo);
+        if (jsonCacheInfo["timestamp"] < new Date("02 April 2024")) {
+            return false
+        }
+    } catch (e) {
+        return false
+    }
+    return true
+}
+
 
 
 export default App;

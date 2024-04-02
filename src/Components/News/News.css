@@ -1,0 +1,30 @@
+.modal {
+    display: block;
+    position: relative;
+    z-index: 3;
+}
+.modal-back {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+.modal-container {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    padding: 25px;
+    transform: translate(-50%, -50%);
+    border: #61dafb solid 3px;
+    border-radius: 10px;
+}
+
+.RedCrossIcon
+{
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+    color: red;
+}

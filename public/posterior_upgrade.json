@@ -3,66 +3,66 @@
     "name": "Production postérieure - Caverne aux gros cailloux",
     "previous_index": 0,
     "active_index": 1,
-    "own": "False"
+    "own": false
   },
   {
     "name": "Production postérieure - Mine des nains",
     "previous_index": 1,
     "active_index": 2,
-    "own": "False"
+    "own": false
   },
   {
     "name": "Production postérieure - Cabane de sorcière",
     "previous_index": 3,
     "active_index": 4,
-    "own": "False"
+    "own": false
   },
   {
     "name": "Production postérieure - Ruche bourdonnante",
     "previous_index": 4,
     "active_index": 5,
-    "own": "False"
+    "own": false
   },
   {
     "name": "Production postérieure - Banquise gelée",
     "previous_index": 6,
     "active_index": 7,
-    "own": "False"
+    "own": false
   },
   {
     "name": "Production postérieure - île volcanique",
     "previous_index": 8,
     "active_index": 9,
-    "own": "False"
+    "own": false
   },
   {
     "name": "Production postérieure - Dunes caniculaires",
     "previous_index": 9,
     "active_index": 10,
-    "own": "False"
+    "own": false
   },
   {
     "name": "Production postérieure - Jungle luxuriante",
     "previous_index": 11,
     "active_index": 12,
-    "own": "False"
+    "own": false
   },
   {
     "name": "Production postérieure - Temple oublié",
     "previous_index": 12,
     "active_index": 13,
-    "own": "False"
+    "own": false
   },
   {
     "name": "Production postérieure - Crypte millénaire",
     "previous_index": 13,
     "active_index": 14,
-    "own": "False"
+    "own": false
   },
   {
-    "name": -1,
-    "previous_index": -1,
-    "active_index": -1,
-    "own": "False"
+    "name": "Production postérieure - Gouffre sans fond",
+    "previous_index": 15,
+    "active_index": 14,
+    "own": false
   }
 ]
