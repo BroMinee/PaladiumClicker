@@ -13,6 +13,7 @@ import CategoryList from "./Components/CategoryList/CategoryList";
 import fetchDataOnPublicURL from "./FetchData";
 import Refesh from "./Components/RefeshAll/Refesh";
 import News from "./Components/News/News";
+import Graph from "./Components/Graph/Graph";
 
 let cacheHasBeenReset = false;
 const App = () => {
@@ -184,6 +185,7 @@ const App = () => {
                 <div id="container" className="container">
                 </div>
                 <News cacheHasBeenReset={cacheHasBeenReset}/>
+                <Graph/>
 
                 <div className="App" style={{"background-image": `url(${process.env.PUBLIC_URL}/background.png)`}}>
                     <header className="App-header">
@@ -191,7 +193,7 @@ const App = () => {
                             Bienvenue sur l'optimiseur du PalaClicker
                         </h3>
                         Made by BroMine__
-                        <div onClick={() => alert("Not yet implemented")} style={{cursor: "pointer"}}>Voir l'evolution
+                        <div onClick={() => {document.getElementById("modal2").style.display = "block"}} style={{cursor: "pointer"}}>Voir l'évolution
                             du top 10</div>
                         <div onClick={() => alert("Not yet implemented")} style={{cursor: "pointer"}}>Comment utiliser
                             l'outil
@@ -260,7 +262,7 @@ export function isCacheDateValid() {
     }
     try {
         const jsonCacheInfo = JSON.parse(cacheInfo);
-        if (jsonCacheInfo["timestamp"] < new Date("02 April 2024 20:41 UTC+2")) {
+        if (jsonCacheInfo["timestamp"] < new Date("02 April 2024 20:45 UTC+2")) {
             return false
         }
     } catch (e) {
