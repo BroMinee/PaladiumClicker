@@ -19,7 +19,6 @@ const News = ({cacheHasBeenReset}) => {
                 return data
             });
             setNews(news);
-            console.log(news)
 
 
         }
