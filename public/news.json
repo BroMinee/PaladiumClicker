@@ -1,4 +1,14 @@
-[{
+[
+  {
+    "date": "03-04-2024",
+    "events": [
+      "Ajout du bâtiment 'clicker.building.Great_Ancients_Pantheon'",
+      "Amélioration du système de cache : les données sont conservées après modification de la base de données",
+      "Ajout d'un bouton pour réinitialiser les buildings (clear le cache)"
+
+    ]
+  },
+  {
   "date": "02-04-2024",
   "events": [
     "Ajout d'un système de cache permettant de ne pas devoir reconfigurer le système à chaque recharge de la page",

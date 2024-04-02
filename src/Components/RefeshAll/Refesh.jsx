@@ -1,8 +1,9 @@
 import React from "react";
 
-import "./ImportExport.css"
+import "./Refresh.css"
+import fetchDataOnPublicURL from "../../FetchData";
 
-const ImportExport = ({playerInfo, setPlayerInfo}) => {
+const Refesh = ({playerInfo, setPlayerInfo}) => {
     function exportData() {
         const data = JSON.stringify(playerInfo);
         const blob = new Blob([data], {type: 'text/plain'});
@@ -86,9 +87,54 @@ const ImportExport = ({playerInfo, setPlayerInfo}) => {
         input.click();
     }
 
+    function refesh() {
+        //window.location.reload();
+
+
+        const fetchAllData = async () => {
+            var newPlayerInfo = {}
+            await fetchDataOnPublicURL("/metier.json").then((data) => {
+                newPlayerInfo["metier"] = data
+            })
+            await fetchDataOnPublicURL("/building.json").then((data) => {
+                newPlayerInfo["building"] = data
+            })
+            await fetchDataOnPublicURL("/building_upgrade.json").then((data) => {
+                newPlayerInfo["building_upgrade"] = data
+            })
+            await fetchDataOnPublicURL("/category_upgrade.json").then((data) => {
+                newPlayerInfo["category_upgrade"] = data
+            })
+            await fetchDataOnPublicURL("/CPS.json").then((data) => {
+                newPlayerInfo["CPS"] = data
+            })
+            await fetchDataOnPublicURL("/global_upgrade.json").then((data) => {
+                newPlayerInfo["global_upgrade"] = data
+            })
+            await fetchDataOnPublicURL("/many_upgrade.json").then((data) => {
+                newPlayerInfo["many_upgrade"] = data
+            })
+            await fetchDataOnPublicURL("/posterior_upgrade.json").then((data) => {
+                newPlayerInfo["posterior_upgrade"] = data
+            })
+            await fetchDataOnPublicURL("/terrain_upgrade.json").then((data) => {
+                newPlayerInfo["terrain_upgrade"] = data
+            })
+
+            setPlayerInfo(newPlayerInfo)
+            localStorage.setItem("cacheInfo", JSON.stringify({
+                "playerInfo": newPlayerInfo,
+                "timestamp": new Date().getTime()
+            }));
+
+        }
+        fetchAllData();
+    }
+
 
     return <div>
         <div className={"ImportExport"}>
+            <button onClick={refesh}>Réinitialiser</button>
             <button onClick={loadFile}>Importer les données</button>
             <button onClick={exportData}>Exporter les données</button>
         </div>
@@ -96,4 +142,4 @@ const ImportExport = ({playerInfo, setPlayerInfo}) => {
 }
 
 
-export default ImportExport;
+export default Refesh;

@@ -11,7 +11,7 @@ import ManyList from "./Components/ManyList/ManyList";
 import PosteriorList from "./Components/PosteriorList/PosteriorList";
 import CategoryList from "./Components/CategoryList/CategoryList";
 import fetchDataOnPublicURL from "./FetchData";
-import ImportExport from "./Components/ImportExport/ImportExport";
+import Refesh from "./Components/RefeshAll/Refesh";
 import News from "./Components/News/News";
 
 let cacheHasBeenReset = false;
@@ -61,15 +61,104 @@ const App = () => {
             }));
 
         }
+        const fetchAllDataButKeepOwn = async () => {
+            var newPlayerInfo = {}
+            await fetchDataOnPublicURL("/metier.json").then((data) => {
+                newPlayerInfo["metier"] = data
+            })
+            await fetchDataOnPublicURL("/building.json").then((data) => {
+                newPlayerInfo["building"] = data
+            })
+            await fetchDataOnPublicURL("/building_upgrade.json").then((data) => {
+                newPlayerInfo["building_upgrade"] = data
+            })
+            await fetchDataOnPublicURL("/category_upgrade.json").then((data) => {
+                newPlayerInfo["category_upgrade"] = data
+            })
+            await fetchDataOnPublicURL("/CPS.json").then((data) => {
+                newPlayerInfo["CPS"] = data
+            })
+            await fetchDataOnPublicURL("/global_upgrade.json").then((data) => {
+                newPlayerInfo["global_upgrade"] = data
+            })
+            await fetchDataOnPublicURL("/many_upgrade.json").then((data) => {
+                newPlayerInfo["many_upgrade"] = data
+            })
+            await fetchDataOnPublicURL("/posterior_upgrade.json").then((data) => {
+                newPlayerInfo["posterior_upgrade"] = data
+            })
+            await fetchDataOnPublicURL("/terrain_upgrade.json").then((data) => {
+                newPlayerInfo["terrain_upgrade"] = data
+            })
+
+            const cachePlayerInfo = JSON.parse(localStorage.getItem("cacheInfo"))["playerInfo"]
+            console.log("Keeping own")
+            newPlayerInfo["metier"].forEach((metier, index) => {
+                newPlayerInfo["metier"][index]["level"] = cachePlayerInfo["metier"][index]["level"];
+            })
+
+            // Building
+            newPlayerInfo["building"].forEach((building, index) => {
+                newPlayerInfo["building"][index]["own"] = cachePlayerInfo["building"][index]["own"];
+            })
+
+            // Global
+            newPlayerInfo["global_upgrade"].forEach((global, index) => {
+                newPlayerInfo["global_upgrade"][index]["own"] = cachePlayerInfo["global_upgrade"][index]["own"];
+            })
+
+
+            // Terrain
+            newPlayerInfo["terrain_upgrade"].forEach((terrain, index) => {
+                newPlayerInfo["terrain_upgrade"][index]["own"] = cachePlayerInfo["terrain_upgrade"][index]["own"];
+            })
+
+            // building_upgrade
+            newPlayerInfo["building_upgrade"].forEach((building, index) => {
+                newPlayerInfo["building_upgrade"][index]["own"] = cachePlayerInfo["building_upgrade"][index]["own"];
+            })
+
+
+            // many_upgrade
+            newPlayerInfo["many_upgrade"].forEach((many, index) => {
+                newPlayerInfo["many_upgrade"][index]["own"] = cachePlayerInfo["many_upgrade"][index]["own"];
+            })
+
+
+            // posterior_upgrade
+            newPlayerInfo["posterior_upgrade"].forEach((posterior, index) => {
+                newPlayerInfo["posterior_upgrade"][index]["own"] = cachePlayerInfo["posterior_upgrade"][index]["own"];
+            })
+
+            // category_upgrade
+            newPlayerInfo["category_upgrade"].forEach((category, index) => {
+                newPlayerInfo["category_upgrade"][index]["own"] = cachePlayerInfo["category_upgrade"][index]["own"];
+            })
+
+            // CPS
+            newPlayerInfo["CPS"].forEach((category, index) => {
+                newPlayerInfo["CPS"][index]["own"] = cachePlayerInfo["CPS"][index]["own"];
+            })
+
+
+            setPlayerInfo(newPlayerInfo)
+            localStorage.setItem("cacheInfo", JSON.stringify({
+                "playerInfo": newPlayerInfo,
+                "timestamp": new Date().getTime()
+            }));
+
+        }
 
         if (Object.keys(playerInfo).length === 0) {
-            if(!isCacheValid()) {
+            if (!isCacheValid()) {
                 cacheHasBeenReset = true
                 console.log("No cache")
                 fetchAllData()
-            }
-            else
-            {
+            } else if (!isCacheDateValid()) {
+                cacheHasBeenReset = true
+                console.log("Cache is outdated")
+                fetchAllDataButKeepOwn()
+            } else {
                 console.log("Using cache")
                 setPlayerInfo(JSON.parse(localStorage.getItem("cacheInfo"))["playerInfo"])
             }
@@ -102,7 +191,8 @@ const App = () => {
                             Bienvenue sur l'optimiseur du PalaClicker
                         </h3>
                         Made by BroMine__
-                        <div onClick={() => alert("Not yet implemented")} style={{cursor: "pointer"}}>Voir l'evolution du top 10</div>
+                        <div onClick={() => alert("Not yet implemented")} style={{cursor: "pointer"}}>Voir l'evolution
+                            du top 10</div>
                         <div onClick={() => alert("Not yet implemented")} style={{cursor: "pointer"}}>Comment utiliser
                             l'outil
                         </div>
@@ -117,7 +207,7 @@ const App = () => {
                     <RPS RPS={rps} estimatedRPS={estimatedRPS} playerInfo={playerInfo} setPlayerInfo={setPlayerInfo}
                          setEstimatedRPS={setEstimatedRPS}/>
                     <br/>
-                    <ImportExport playerInfo={playerInfo} setPlayerInfo={setPlayerInfo}/>
+                    <Refesh playerInfo={playerInfo} setPlayerInfo={setPlayerInfo}/>
                     <h1>Métier</h1>
 
                     <MetierList playerInfo={playerInfo} setPlayerInfo={setPlayerInfo}/>
@@ -150,15 +240,27 @@ const App = () => {
         ;
 }
 
-export function isCacheValid()
-{
+export function isCacheValid() {
+    const cacheInfo = localStorage.getItem("cacheInfo");
+    if (cacheInfo === null || cacheInfo === "") {
+        return false
+    }
+    try {
+        JSON.parse(cacheInfo);
+    } catch (e) {
+        return false
+    }
+    return true
+}
+
+export function isCacheDateValid() {
     const cacheInfo = localStorage.getItem("cacheInfo");
     if (cacheInfo === null || cacheInfo === "") {
         return false
     }
     try {
         const jsonCacheInfo = JSON.parse(cacheInfo);
-        if (jsonCacheInfo["timestamp"] < new Date("02 April 2024")) {
+        if (jsonCacheInfo["timestamp"] < new Date("03 April 2024")) {
             return false
         }
     } catch (e) {
@@ -166,7 +268,6 @@ export function isCacheValid()
     }
     return true
 }
-
 
 
 export default App;

@@ -217,10 +217,10 @@
     "own": 0
   },
   {
-    "name": -1,
+    "name": "clicker.building.Great_Ancients_Pantheon",
     "index": 31,
-    "price": -1,
-    "base_production": "-1,000000000",
+    "price": 2950000000000,
+    "base_production": "8193081,930000000",
     "own": 0
   },
   {
