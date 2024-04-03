@@ -14,6 +14,7 @@ import fetchDataOnPublicURL from "./FetchData";
 import Refesh from "./Components/RefeshAll/Refesh";
 import News from "./Components/News/News";
 import Graph from "./Components/Graph/Graph";
+import Tuto from "./Components/Tuto/Tuto";
 
 let cacheHasBeenReset = false;
 const App = () => {
@@ -186,6 +187,7 @@ const App = () => {
                 </div>
                 <News cacheHasBeenReset={cacheHasBeenReset}/>
                 <Graph/>
+                <Tuto/>
 
                 <div className="App" style={{"background-image": `url(${process.env.PUBLIC_URL}/background.png)`}}>
                     <header className="App-header">
@@ -206,10 +208,13 @@ const App = () => {
                         </div>
                         <div onClick={() => {
                             document.getElementById("modal2").style.display = "block"
-                        }} style={{cursor: "pointer"}}>Voir l'évolution
+                        }} style={{cursor: "pointer", paddingTop: "20px"}}>Voir l'évolution
                             du top 10
                         </div>
-                        <div onClick={() => alert("Not yet implemented")} style={{cursor: "pointer"}}>Comment utiliser
+                        <div onClick={() => {
+                            document.getElementById("modal3").style.display = "block"
+                        }
+                        } style={{cursor: "pointer"}}>Comment utiliser
                             l'outil
                         </div>
                         <div onClick={() => {

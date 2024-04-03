@@ -29,21 +29,22 @@ const News = ({cacheHasBeenReset}) => {
 
     return <div className="modal" id="modal" style={{display: cacheHasBeenReset ? "block" : "none"}}>
             <div className="modal-back"></div>
-            <div className="modal-container"
-                 style={{"background-image": `url(${process.env.PUBLIC_URL}/background.png)`}}>
-                <ImCross onClick={closeModal} className="RedCrossIcon" />
-                <h1>News depuis la dernière fois</h1>
-                {Object.keys(news).map((date, index) => {
-                    return <New date={news[date]["date"]} events={news[date]["events"]}/>
-                })}
-                <br/>
-                <h2>Pourquoi BroMine__ n'est plus top 1 clicker</h2>
-                <ReactAudioPlayer
-                    src={process.env.PUBLIC_URL + "/music.mp3"}
-                    controls
-                />
-            </div>
+        <div className="modal-container"
+             style={{"background-image": `url(${process.env.PUBLIC_URL}/background.png)`}}>
+            <ImCross onClick={closeModal} className="RedCrossIcon"/>
+            <h1>News depuis la dernière fois</h1>
+            {Object.keys(news).map((date, index) => {
+                return <New date={news[date]["date"]} events={news[date]["events"]}/>
+            })}
+            <br/>
+            <h2>Pourquoi BroMine__ n'est plus top 1 clicker</h2>
+            <ReactAudioPlayer
+                src={process.env.PUBLIC_URL + "/music.mp3"}
+                controls
+            />
+            <div style={{color: "gray"}}>Music générée avec suno.ai</div>
         </div>
+    </div>
 }
 
 const New = ({date, events}) => {
