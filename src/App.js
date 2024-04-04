@@ -15,6 +15,7 @@ import Refesh from "./Components/RefeshAll/Refesh";
 import News from "./Components/News/News";
 import Graph from "./Components/Graph/Graph";
 import Tuto from "./Components/Tuto/Tuto";
+import Popup from "./Components/Popup/Popup";
 
 let cacheHasBeenReset = false;
 const App = () => {
@@ -188,6 +189,7 @@ const App = () => {
                 <News cacheHasBeenReset={cacheHasBeenReset}/>
                 <Graph/>
                 <Tuto/>
+                <Popup/>
 
                 <div className="App" style={{"background-image": `url(${process.env.PUBLIC_URL}/background.png)`}}>
                     <header className="App-header">

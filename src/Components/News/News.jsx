@@ -42,7 +42,12 @@ const News = ({cacheHasBeenReset}) => {
                 src={process.env.PUBLIC_URL + "/music.mp3"}
                 controls
             />
-            <div style={{color: "gray"}}>Music générée avec suno.ai</div>
+            <br/>
+            <ReactAudioPlayer
+                src={process.env.PUBLIC_URL + "/music2.mp3"}
+                controls
+            />
+            <div style={{color: "gray"}}>Musiques générées avec suno.ai</div>
         </div>
     </div>
 }

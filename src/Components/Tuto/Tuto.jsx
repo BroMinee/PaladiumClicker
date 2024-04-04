@@ -62,7 +62,7 @@ const Tuto = () => {
                 src={process.env.PUBLIC_URL + "/Presentation_site.mp3"}
                 controls
             />
-            <div style={{color: "gray"}}>Music générée avec suno.ai</div>
+            <div style={{color: "gray"}}>Musique générée avec suno.ai</div>
         </div>
     </div>
 };
