@@ -1,5 +1,12 @@
 [
   {
+    "date": "05-04-2024 - 00h54",
+    "events": [
+      "Ajout des dernières données du classement du clicker et les données entre le 12/03 et 21/03.",
+      "Meilleur prise en charge des popups sur mobile"
+    ]
+  },
+  {
     "date": "02-04-2024 - 00h41",
     "events": [
       "Ajout d'un graphique pour le classement du clicker",
@@ -27,11 +34,5 @@
   "events": [
     "Correction de l'importation/exportation des données pour les ameliorations 'Many' et 'Posterior'"
   ]
-},
-  {
-    "date": "Avant le 31-03-2024",
-    "events": [
-      "A completer"
-    ]
-  }
+}
 ]

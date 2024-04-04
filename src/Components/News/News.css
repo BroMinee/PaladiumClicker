@@ -18,6 +18,9 @@
     transform: translate(-50%, -50%);
     border: #61dafb solid 3px;
     border-radius: 10px;
+    max-height: 80vh;
+    max-width: 80vw;
+    overflow: auto;
 }
 
 .RedCrossIcon

@@ -3,7 +3,6 @@ import "./News.css";
 import { ImCross } from "react-icons/im";
 import fetchDataOnPublicURL from "../../FetchData";
 import ReactAudioPlayer from "react-audio-player";
-import {isCacheValid} from "../../App";
 
 const News = ({cacheHasBeenReset}) => {
 
