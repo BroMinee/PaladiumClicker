@@ -224,15 +224,22 @@
     "own": 0
   },
   {
-    "name": -1,
+    "name": "clicker.building.Earth_center",
     "index": 32,
+    "price": 5500000000000,
+    "base_production": "14747546,800000000",
+    "own": 0
+  },
+  {
+    "name": -1,
+    "index": 33,
     "price": -1,
     "base_production": "-1,000000000",
     "own": 0
   },
   {
     "name": -1,
-    "index": 33,
+    "index": 34,
     "price": -1,
     "base_production": "-1,000000000",
     "own": 0
