@@ -57,6 +57,8 @@ function createFallingImage() {
     const container = document.getElementById('container');
     const image = document.createElement('img');
     // Get local storage variable "CPS"
+    if(container === null || image === null)
+        return;
     if(localStorage.getItem("CPS") === null)
         localStorage.setItem("CPS", JSON.stringify(-1));
     const playerInfo = JSON.parse(localStorage.getItem("CPS"));

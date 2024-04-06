@@ -102,7 +102,8 @@ const App = () => {
 
             // Building
             newPlayerInfo["building"].forEach((building, index) => {
-                newPlayerInfo["building"][index]["own"] = cachePlayerInfo["building"][index]["own"];
+                if(cachePlayerInfo["building"][index] !== undefined)
+                    newPlayerInfo["building"][index]["own"] = cachePlayerInfo["building"][index]["own"];
             })
 
             // Global
@@ -226,7 +227,6 @@ const App = () => {
                     </header>
                     <br/>
 
-
                     <RPS RPS={rps} estimatedRPS={estimatedRPS} playerInfo={playerInfo} setPlayerInfo={setPlayerInfo}
                          setEstimatedRPS={setEstimatedRPS}/>
                     <br/>
@@ -283,7 +283,7 @@ export function isCacheDateValid() {
     }
     try {
         const jsonCacheInfo = JSON.parse(cacheInfo);
-        if (jsonCacheInfo["timestamp"] < new Date("05 April 2024 15:27 UTC+2")) {
+        if (jsonCacheInfo["timestamp"] < new Date("06 April 2024 14:12 UTC+2")) {
             return false
         }
     } catch (e) {
