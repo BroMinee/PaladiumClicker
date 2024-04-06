@@ -86,7 +86,7 @@ const Graph = () => {
                             name: pseudoList[index]
                         }})
                     }
-                layout={{title: 'Top du Classement Clicker', autosize: true, width: width*0.8, height: height*0.8, xaxis: {title: 'Date'}, yaxis: {title: 'Valeur en Trillions'}}}
+                layout={{title: 'Classement Clicker', autosize: true, width: width*0.8, height: height*0.8, xaxis: {title: 'Date'}, yaxis: {title: 'Valeur en Trillions'}}}
             />
         </div>
     </div>
