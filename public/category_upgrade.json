@@ -11,7 +11,14 @@
       32
     ],
     "pourcentage": 10,
-    "own": false
+    "own": false,
+    "price": 7175,
+    "condition": [
+      {
+        "index": 2,
+        "own": 1
+      }
+    ]
   },
   {
     "name": "Seedplanter en Paladium",
@@ -22,7 +29,14 @@
       23
     ],
     "pourcentage": 10,
-    "own": false
+    "own": false,
+    "price": 1428750,
+    "condition": [
+      {
+        "index": 9,
+        "own": 1
+      }
+    ]
   },
   {
     "name": "Epée en Paladium",
@@ -35,7 +49,14 @@
       31
     ],
     "pourcentage": 10,
-    "own": false
+    "own": false,
+    "price": 31400000,
+    "condition": [
+      {
+        "index": 13,
+        "own": 1
+      }
+    ]
   },
   {
     "name": "Portail en Paladium",
@@ -47,7 +68,14 @@
       27
     ],
     "pourcentage": 10,
-    "own": false
+    "own": false,
+    "price": 198000,
+    "condition": [
+      {
+        "index": 11,
+        "own": 1
+      }
+    ]
   },
   {
     "name": "Technique de persuasion",
@@ -56,7 +84,14 @@
       8
     ],
     "pourcentage": 50,
-    "own": false
+    "own": false,
+    "price": 2948625,
+    "condition": [
+      {
+        "index": 8,
+        "own": 3
+      }
+    ]
   },
   {
     "name": "Manteau épais",
@@ -65,7 +100,14 @@
       7
     ],
     "pourcentage": 50,
-    "own": false
+    "own": false,
+    "price": 880000,
+    "condition": [
+      {
+        "index": 7,
+        "own": 3
+      }
+    ]
   },
   {
     "name": "Potion contre le mal de mer",
@@ -74,7 +116,14 @@
       8
     ],
     "pourcentage": 50,
-    "own": false
+    "own": false,
+    "price": 4342500,
+    "condition": [
+      {
+        "index": 8,
+        "own": 3
+      }
+    ]
   },
   {
     "name": "Lame de hache en Endium",
@@ -84,6 +133,13 @@
       12
     ],
     "pourcentage": 50,
-    "own": false
+    "own": false,
+    "price": 27562500,
+    "condition": [
+      {
+        "index": 11,
+        "own": 3
+      }
+    ]
   }
 ]

@@ -32,27 +32,53 @@ const ClickList = ({playerInfo, setPlayerInfo}) => {
 const CPS = ({playerInfo, setPlayerInfo, buildingName, imgPath, index}) => {
 
     function setOwn() {
+        if(playerInfo["CPS"][index]["name"] === -1)
+            return;
+
+
         playerInfo["CPS"][index]["own"] = !playerInfo["CPS"][index]["own"];
+        if(playerInfo["CPS"][index]["own"] === false) {
+            for(let i = index; i < playerInfo["CPS"].length; i++) {
+                playerInfo["CPS"][i]["own"] = false;
+            }
+        }
         setPlayerInfo({...playerInfo})
     }
 
+    let unlockable = true;
+    for (let i = 0; i < index; i++) {
+        if (playerInfo["CPS"][i]["own"] === false) {
+            unlockable = false;
+            break;
+        }
+    }
 
     return (
         <li key={index} onClick={setOwn} className={"fit-all-width"}>
-            <ul className={"Info-CPS-list " + (playerInfo["CPS"][index]["own"] === true ? "Owned" : "NotOwned")}>
+            <ul className={"Info-CPS-list " + (playerInfo["CPS"][index]["own"] === true ? "Owned" : "NotOwned") + " " + (unlockable ? "" : "Lock")}>
                 <div className="imageWrapper">
                     <img src={process.env.PUBLIC_URL + "/" + imgPath} alt="image" className={"CPS-img"}></img>
-                    <div className="cornerLink">{buildingName}</div>
+                    <div className="cornerLink">{buildingName}
+                        {
+                        unlockable === false && playerInfo["CPS"][index]["name"] !== -1 &&
+                            <div className="Red">Préconditions non remplies :</div>
+                        }
+                        {
+                            unlockable === false && playerInfo["CPS"][index]["name"] !== -1 &&
+                            <div className="Red">Achetez {playerInfo["CPS"][index - 1]["name"]}</div>
+                        }
+
+                    </div>
                 </div>
             </ul>
         </li>
     );
 }
 
-function UpgradeLocalStorage(value)
-{
+function UpgradeLocalStorage(value) {
     localStorage.setItem("CPS", JSON.stringify(value));
 }
+
 function createFallingImage() {
     const container = document.getElementById('container');
     const image = document.createElement('img');
@@ -78,6 +104,8 @@ function createFallingImage() {
 
 
 setInterval(createFallingImage, 1000);
-setTimeout(() => {setInterval(createFallingImage, 1000)}, 250);
+setTimeout(() => {
+    setInterval(createFallingImage, 1000)
+}, 250);
 
 export default ClickList;
