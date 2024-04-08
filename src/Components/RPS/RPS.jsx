@@ -102,7 +102,7 @@ const RPS = ({RPS, estimatedRPS, playerInfo, setPlayerInfo, setEstimatedRPS}) =>
         }
     }
 
-    console.log(`${indexToBuy} ${bestUpgradeIndex}`)
+    // console.log(`${indexToBuy} ${bestUpgradeIndex}`)
 
 
     return <div className={"RPS-father"}>
