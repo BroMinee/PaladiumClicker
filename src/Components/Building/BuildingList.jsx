@@ -32,6 +32,11 @@ const Building = ({playerInfo, setPlayerInfo, building, imgPath, unique_id_react
 
 
     function enforceMinMax(el) {
+        if(playerInfo["building"][index]["name"] === -1)
+            return;
+
+
+
         if (el.target.value !== "") {
             el.target.value = Math.floor(el.target.value)
 
@@ -189,7 +194,7 @@ function convertToFloat(str) {
 
 export function computeRPS(playerInfo)
 {
-    let rps = 0;
+    let rps = 0.5;
     playerInfo["building"].forEach((building, index) => {
             if (building["own"] !== 0) {
                 rps += scaleCurrentProduction(playerInfo, index, building["own"]);

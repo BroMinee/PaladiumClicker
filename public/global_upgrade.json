@@ -2,12 +2,30 @@
   {
     "name": "Namu Ecolier",
     "pourcentage": 10,
-    "own": false
+    "own": false,
+    "price": 1760000,
+    "condition": [
+      {
+        "coins": 17600000
+      },
+      {
+        "day": 10
+      }
+    ]
   },
   {
     "name": "Namu Contructeur",
     "pourcentage": 10,
-    "own": false
+    "own": false,
+    "price": 14000000,
+    "condition": [
+      {
+        "coins": 140000000
+      },
+      {
+        "day": 24
+      }
+    ]
   },
   {
     "name": -1,

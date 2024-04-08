@@ -2,81 +2,241 @@
   {
     "name": "Production nombreuse - Mine abandonnée",
     "active_index": 0,
-    "own": false
+    "own": false,
+    "price": 1250,
+    "condition": [
+      {
+        "day": 0
+      },
+      {
+        "index": 0,
+        "own": 2
+      }
+    ]
   },
   {
     "name": "Production nombreuse - Caverne aux gros cailloux",
     "active_index": 1,
-    "own": false
+    "own": false,
+    "price": 12000,
+    "condition": [
+      {
+        "day": 0
+      },
+      {
+        "index": 1,
+        "own": 2
+      }
+    ]
   },
   {
     "name": "Production nombreuse - Mine des nains",
     "active_index": 2,
-    "own": false
+    "own": false,
+    "price": 24000,
+    "condition": [
+      {
+        "day": 2
+      },
+      {
+        "index": 2,
+        "own": 2
+      }
+    ]
   },
   {
     "name": "Production nombreuse - Jardin de mamie",
     "active_index": 3,
-    "own": false
+    "own": false,
+    "price": 50000,
+    "condition": [
+      {
+        "day": 4
+      },
+      {
+        "index": 3,
+        "own": 2
+      }
+    ]
   },
   {
     "name": "Production nombreuse - Cabane de sorcière",
     "active_index": 4,
-    "own": false
+    "own": false,
+    "price": 110000,
+    "condition": [
+      {
+        "day": 7
+      },
+      {
+        "index": 4,
+        "own": 2
+      }
+    ]
   },
   {
     "name": "Production nombreuse - Ruche bourdonnante",
     "active_index": 5,
-    "own": false
+    "own": false,
+    "price": 270000,
+    "condition": [
+      {
+        "day": 10
+      },
+      {
+        "index": 5,
+        "own": 2
+      }
+    ]
   },
   {
     "name": "Production nombreuse - Forêt enneigée",
     "active_index": 6,
-    "own": false
+    "own": false,
+    "price": 500000,
+    "condition": [
+      {
+        "day": 13
+      },
+      {
+        "index": 6,
+        "own": 2
+      }
+    ]
   },
   {
     "name": "Production nombreuse - Banquise gelée",
     "active_index": 7,
-    "own": false
+    "own": false,
+    "price": 1260000,
+    "condition": [
+      {
+        "day": 15
+      },
+      {
+        "index": 7,
+        "own": 2
+      }
+    ]
   },
   {
     "name": "Production nombreuse - Port de pirate",
     "active_index": 8,
-    "own": false
+    "own": false,
+    "price": 2600000,
+    "condition": [
+      {
+        "day": 18
+      },
+      {
+        "index": 8,
+        "own": 2
+      }
+    ]
   },
   {
     "name": "Production nombreuse - île volcanique",
     "active_index": 9,
-    "own": false
+    "own": false,
+    "price": 6300000,
+    "condition": [
+      {
+        "day": 21
+      },
+      {
+        "index": 9,
+        "own": 2
+      }
+    ]
   },
   {
     "name": "Production nombreuse - Dunes caniculaires",
     "active_index": 10,
-    "own": false
+    "own": false,
+    "price": 12600000,
+    "condition": [
+      {
+        "day": 23
+      },
+      {
+        "index": 10,
+        "own": 2
+      }
+    ]
   },
   {
     "name": "Production nombreuse - Forêt mystique",
     "active_index": 11,
-    "own": false
+    "own": false,
+    "price": 24000000,
+    "condition": [
+      {
+        "day": 26
+      },
+      {
+        "index": 11,
+        "own": 2
+      }
+    ]
   },
   {
     "name": "Production nombreuse - Jungle luxuriante",
     "active_index": 12,
-    "own": false
+    "own": false,
+    "price": 46000000,
+    "condition": [
+      {
+        "day": 29
+      },
+      {
+        "index": 12,
+        "own": 2
+      }
+    ]
   },
   {
     "name": "Production nombreuse - Temple oublié",
     "active_index": 13,
-    "own": false
+    "own": false,
+    "price": 103000000,
+    "condition": [
+      {
+        "day": 33
+      },
+      {
+        "index": 13,
+        "own": 2
+      }
+    ]
   },
   {
     "name": "Production nombreuse - Crypte millénaire",
     "active_index": 14,
-    "own": false
+    "own": false,
+    "price": 220000000,
+    "condition": [
+      {
+        "day": 38
+      },
+      {
+        "index": 14,
+        "own": 2
+      }
+    ]
   },
   {
     "name": "Production nombreuse - Gouffre sans fond",
     "active_index": 15,
-    "own": false
+    "own": false,
+    "price": 380000000,
+    "condition": [
+      {
+        "day": 42
+      },
+      {
+        "index": 15,
+        "own": 2
+      }
+    ]
   }
 ]
