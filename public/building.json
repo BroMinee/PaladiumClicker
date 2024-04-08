@@ -231,10 +231,10 @@
     "own": 0
   },
   {
-    "name": -1,
+    "name": "clicker.building.Devil_lair",
     "index": 33,
-    "price": -1,
-    "base_production": "-1,000000000",
+    "price": 10500000000000,
+    "base_production": "26545584,200000000",
     "own": 0
   },
   {
