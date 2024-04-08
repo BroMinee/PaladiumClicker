@@ -209,20 +209,22 @@ const App = () => {
                             </div>
                             <div className={"BroMine"}> BroMine__</div>
                         </div>
-                        <div onClick={() => {
-                            document.getElementById("modal2").style.display = "block"
-                        }} style={{cursor: "pointer", paddingTop: "20px"}}>Voir l'évolution
-                            du top 10
-                        </div>
-                        <div onClick={() => {
-                            document.getElementById("modal3").style.display = "block"
-                        }
-                        } style={{cursor: "pointer"}}>Comment utiliser
-                            l'outil
-                        </div>
-                        <div onClick={() => {
-                            document.getElementById("modal").style.display = "block";
-                        }} style={{cursor: "pointer"}}>Voir les nouvelles fonctionnalitées
+                        <div style={{flexDirection: "row", display: "flex", paddingTop: "20px", columnGap: "10px"}}>
+                            <button onClick={() => {
+                                document.getElementById("modal3").style.display = "block"
+                            }
+                            } style={{cursor: "pointer"}}>Comment utiliser
+                                l'outil
+                            </button>
+                            <button onClick={() => {
+                                document.getElementById("modal").style.display = "block";
+                            }} style={{cursor: "pointer"}}>Voir les nouvelles fonctionnalitées
+                            </button>
+                            <button onClick={() => {
+                                document.getElementById("modal2").style.display = "block"
+                            }} style={{cursor: "pointer"}}>Voir l'évolution
+                                du top 10
+                            </button>
                         </div>
                     </header>
                     <br/>
