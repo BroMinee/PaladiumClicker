@@ -61,7 +61,10 @@ const RPS = ({RPS, estimatedRPS, playerInfo, setPlayerInfo, setEstimatedRPS}) =>
 
     const [bestRpsAfterUpgrade, bestUpgradeIndex, bestListName] = findBestUpgrade(structuredClone(playerInfo), setEstimatedRPS, bestIndex, setBestIndex);
     let imgSrc = process.env.PUBLIC_URL + "/BuildingIcon/" + `${indexToBuy}.png`;
-    let buildingName = playerInfo["building"][indexToBuy]["name"];
+    let buildingName = "null";
+    if(indexToBuy !== -1)
+        buildingName = playerInfo["building"][indexToBuy]["name"];
+
 
     if(bestRpsAfterUpgrade > bestRpsBuiding) {
         let copy = structuredClone(playerInfo);
@@ -99,6 +102,7 @@ const RPS = ({RPS, estimatedRPS, playerInfo, setPlayerInfo, setEstimatedRPS}) =>
         }
     }
 
+    console.log(`${indexToBuy} ${bestUpgradeIndex}`)
 
 
     return <div className={"RPS-father"}>
@@ -120,12 +124,24 @@ const RPS = ({RPS, estimatedRPS, playerInfo, setPlayerInfo, setEstimatedRPS}) =>
         <div className={"RPS"}>
             Prochain achat optimal
             <div>
+                { (bestUpgradeIndex !== -1 || indexToBuy !== -1) &&
                 <div className={"imageWrapper"}>
                     <img src={imgSrc} alt="image"
                          className={"Building-To-Buy-img"}></img>
                     <div className="cornerLink">{buildingName}</div>
                     <button className={"buyButton"} onClick={buyUpgrade} style={{marginTop: "10px"}}>Acheter</button>
                 </div>
+                }
+                { (bestUpgradeIndex === -1 && indexToBuy === -1) &&
+                    <div>
+                        <img src={process.env.PUBLIC_URL + "/arty_chocbar.webp"} alt="image"
+                             className={"Building-To-Buy-img"}></img>
+                        <div className="cornerLink">Bravo tu as tout acheté, va prendre une douche maintenant</div>
+                        <button className={"buyButton"} onClick={() => {
+                            localStorage.setItem("CPS", "-2")
+                        }} style={{marginTop: "10px"}}>Aller prendre une douche</button>
+                    </div>
+                }
             </div>
 
         </div>
@@ -166,10 +182,12 @@ function findBestBuildingUpgrade(playerInfo, setEstimatedRPS, bestIndex, setBest
     }
 
     const copy = structuredClone(playerInfo)
-    copy["building"][bestBuildingIndex]["own"] += 1;
+    if(bestBuildingIndex !== -1) {
+        copy["building"][bestBuildingIndex]["own"] += 1;
+    }
 
     setEstimatedRPS(computeRPS(copy));
-    if (bestIndex !== bestBuildingIndex)
+    if (bestIndex !== bestBuildingIndex && bestBuildingIndex !== -1)
         setBestIndex(bestBuildingIndex);
 
     return [bestBuildingIndex, bestRpsAfterUpgrade];
@@ -191,7 +209,7 @@ function findBestUpgrade(playerInfo, setEstimatedRPS, bestIndex, setBestIndex) {
     let posteriorUpgradeUnlockable = playerInfo["posterior_upgrade"].filter((building) => building["own"] === false && checkCondition(playerInfo, building["condition"])[0]);
 
 
-    let bestUpgradeIndex = 0;
+    let bestUpgradeIndex = -1;
     let bestListName = "building_upgrade";
     let bestRpsAfterUpgrade = 0;
 
