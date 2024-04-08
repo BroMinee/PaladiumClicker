@@ -1,5 +1,14 @@
 [
   {
+    "date": "08-04-2024 - 02h54",
+    "events": [
+      "Ajout des prix d'achat pour les améliorations",
+      "Nouvelle façon de calculer la prochaine amélioration : les améliorations sont maintenant prises en considération",
+      "Ajout des conditions pour débloquer les améliorations des bâtiments",
+      "Ajout des dernières données du classement clicker, j'ai oublié le 06/04 :("
+    ]
+  },
+  {
     "date": "05-04-2024 - 00h54",
     "events": [
       "Ajout des dernières données du classement du clicker et les données entre le 12/03 et 21/03.",
@@ -7,7 +16,7 @@
     ]
   },
   {
-    "date": "02-04-2024 - 00h41",
+    "date": "03-04-2024 - 00h41",
     "events": [
       "Ajout d'un graphique pour le classement du clicker",
       "Changement de la charte graphique"

@@ -190,7 +190,7 @@ const App = () => {
                 <News cacheHasBeenReset={cacheHasBeenReset}/>
                 <Graph/>
                 <Tuto/>
-                <Popup/>
+                {/*<Popup/>*/}
 
                 <div className="App" style={{"background-image": `url(${process.env.PUBLIC_URL}/background.png)`}}>
                     <header className="App-header">
@@ -283,7 +283,7 @@ export function isCacheDateValid() {
     }
     try {
         const jsonCacheInfo = JSON.parse(cacheInfo);
-        if (jsonCacheInfo["timestamp"] < new Date("06 April 2024 14:12 UTC+2")) {
+        if (jsonCacheInfo["timestamp"] < new Date("08 April 2024 03:10 UTC+2")) {
             return false
         }
     } catch (e) {

@@ -31,7 +31,7 @@ const News = ({cacheHasBeenReset}) => {
         <div className="modal-container"
              style={{"background-image": `url(${process.env.PUBLIC_URL}/background.png)`}}>
             <ImCross onClick={closeModal} className="RedCrossIcon"/>
-            <h1>News depuis la dernière fois</h1>
+            <h1 className={"BroMine"}>News depuis la dernière fois</h1>
             {Object.keys(news).map((date, index) => {
                 return <New date={news[date]["date"]} events={news[date]["events"]}/>
             })}
@@ -53,7 +53,7 @@ const News = ({cacheHasBeenReset}) => {
 
 const New = ({date, events}) => {
     return <div>
-        <h2>{date}</h2>
+        <h2 style={{"textDecoration": "underline"}}>{date}</h2>
         <ul>
             {events.map((event, index) => {
                 return <li key={index}>{event}</li>
