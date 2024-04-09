@@ -4,8 +4,7 @@
     column-gap: 40px;
     display: flex;
     justify-content: center;
-    /*padding-left: 6px;*/
-    margin-left: -23px;
+    padding-left: 6px;
 }
 
 .RED
