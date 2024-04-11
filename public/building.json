@@ -238,10 +238,10 @@
     "own": 0
   },
   {
-    "name": -1,
+    "name": "clicker.building.Eden_garden",
     "index": 34,
-    "price": -1,
-    "base_production": "-1,000000000",
+    "price": 19500000000000,
+    "base_production": "47782052,200000000",
     "own": 0
   }
 ]
