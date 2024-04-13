@@ -78,8 +78,8 @@
     "index": 12
   },
   {
-    "name": -1,
-    "CPS": -1,
+    "name": "Tarte Clic",
+    "CPS": 16384,
     "own": false,
     "index": 13
   },
