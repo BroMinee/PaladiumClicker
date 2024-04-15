@@ -1,9 +1,16 @@
 [
   {
+    "date": "15-04-2024 - 23h40",
+    "events": [
+      "Correction de la précondition du 'Portail en Paladium'",
+      "Ajout du classement des 2 derniers jours"
+    ]
+  },
+  {
     "date": "14-04-2024 - 01h26",
     "events": [
       "Ajout de 'Tarte Clic'",
-      "Ajout du classement sur les 3 derniers jours"
+      "Ajout du classement des 3 derniers jours"
     ]
   },
   {
