@@ -1,5 +1,13 @@
 [
   {
+    "date": "18-04-2024 - 00h41",
+    "events": [
+      "Ajout du classement des 2 derniers jours",
+      "Correction de quelques fautes d'orthographe",
+      "Changement de la description du site pour un meilleur rendu sur discord"
+    ]
+  },
+  {
     "date": "15-04-2024 - 23h40",
     "events": [
       "Correction de la précondition du 'Portail en Paladium'",
@@ -61,7 +69,7 @@
   ,{
   "date": "01-04-2024",
   "events": [
-    "Correction de l'importation/exportation des données pour les ameliorations 'Many' et 'Posterior'"
+    "Correction de l'importation/exportation des données pour les améliorations 'Many' et 'Posterior'"
   ]
 }
 ]
