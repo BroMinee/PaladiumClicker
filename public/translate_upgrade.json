@@ -1,0 +1,263 @@
+{
+  "big_rocks_cave_1": [
+    "building_upgrade", "1"
+  ],
+  "abandoned_mine_2": [
+    "building_upgrade", "16"
+  ],
+  "abandoned_mine_1": [
+    "building_upgrade", "0"
+  ],
+  "click_9": [
+    "CPS", "8"
+  ],
+  "grandma_garden_many": [
+    "many_upgrade", "3"
+  ],
+  "click_7": [
+    "CPS", "6"
+  ],
+  "click_8": [
+    "CPS", "7"
+  ],
+  "pirate_port_1": [
+    "building_upgrade", "8"
+  ],
+  "pirate_port_2": [
+    "building_upgrade", "24"
+  ],
+  "category_forest": [
+    "category_upgrade", "7"
+  ],
+  "frozen_iceberg_many": [
+    "many_upgrade", "7"
+  ],
+  "category_frozen": [
+    "category_upgrade", "5"
+  ],
+  "scorching_dunes_2": [
+    "building_upgrade", "10"
+  ],
+  "scorching_dunes_1": [
+    "building_upgrade", "26"
+  ],
+  "volcanic_island_posterior": [
+    "posterior_upgrade", "5"
+  ],
+  "big_rocks_cave_2": [
+    "building_upgrade", "17"
+  ],
+  "terrain_hunter": [
+    "terrain_upgrade", "2"
+  ],
+  "category_alchemist_1": [
+    "category_upgrade", "3"
+  ],
+  "global_2": [
+    "global_upgrade", "1"
+  ],
+  "category_on_water": [
+    "category_upgrade", "6"
+  ],
+  "global_1": [
+    "global_upgrade", "0"
+  ],
+  "mystical_forest_many": [
+    "many_upgrade", "11"
+  ],
+  "witch_cabin_2": [
+    "building_upgrade", "20"
+  ],
+  "witch_cabin_1": [
+    "building_upgrade", "4"
+  ],
+  "grandma_garden_1": [
+    "building_upgrade", "3"
+  ],
+  "grandma_garden_2": [
+    "building_upgrade", "19"
+  ],
+  "click_10": [
+    "CPS", "9"
+  ],
+  "big_rocks_cave_posterior": [
+    "posterior_upgrade", "0"
+  ],
+  "witch_cabin_posterior": [
+    "posterior_upgrade", "2"
+  ],
+  "lush_jungle_posterior": [
+    "posterior_upgrade", "7"
+  ],
+  "category_farmer_1": [
+    "category_upgrade", "1"
+  ],
+  "terrain_alchemist": [
+    "terrain_upgrade", "3"
+  ],
+  "dwarves_mine_posterior": [
+    "posterior_upgrade", "1"
+  ],
+  "big_rocks_cave_many": [
+    "many_upgrade", "1"
+  ],
+  "volcanic_island_2": [
+    "building_upgrade", "25"
+  ],
+  "buzzing_hive_1": [
+    "building_upgrade", "5"
+  ],
+  "buzzing_hive_2": [
+    "building_upgrade", "21"
+  ],
+  "lush_jungle_many": [
+    "many_upgrade", "12"
+  ],
+  "lush_jungle_1": [
+    "building_upgrade", "12"
+  ],
+  "category_humanoid": [
+    "category_upgrade", "4"
+  ],
+  "volcanic_island_many": [
+    "many_upgrade", "9"
+  ],
+  "frozen_iceberg_1": [
+    "building_upgrade", "7"
+  ],
+  "frozen_iceberg_2": [
+    "building_upgrade", "23"
+  ],
+  "scorching_dunes_many": [
+    "many_upgrade", "10"
+  ],
+  "dwarves_mine_many": [
+    "many_upgrade", "2"
+  ],
+  "dwarves_mine_1": [
+    "building_upgrade", "2"
+  ],
+  "frozen_iceberg_posterior": [
+    "posterior_upgrade", "4"
+  ],
+  "dwarves_mine_2": [
+    "building_upgrade", "18"
+  ],
+  "pirate_port_many": [
+    "many_upgrade", "8"
+  ],
+  "category_hunter_1": [
+    "category_upgrade", "2"
+  ],
+  "volcanic_island_1": [
+    "building_upgrade", "9"
+  ],
+  "category_miner_1": [
+    "category_upgrade", "0"
+  ],
+  "abandoned_mine_many": [
+    "many_upgrade", "0"
+  ],
+  "snowy_forest_2": [
+    "building_upgrade", "22"
+  ],
+  "snowy_forest_1": [
+    "building_upgrade", "6"
+  ],
+  "scorching_dunes_posterior": [
+    "posterior_upgrade", "6"
+  ],
+  "buzzing_hive_many": [
+    "many_upgrade", "5"
+  ],
+  "buzzing_hive_posterior": [
+    "posterior_upgrade", "3"
+  ],
+  "click_1": [
+    "CPS", "0"
+  ],
+  "terrain_miner": [
+    "terrain_upgrade", "0"
+  ],
+  "click_2": [
+    "CPS", "1"
+  ],
+  "click_5": [
+    "CPS", "4"
+  ],
+  "mystical_forest_1": [
+    "building_upgrade", "11"
+  ],
+  "click_6": [
+    "CPS", "5"
+  ],
+  "mystical_forest_2": [
+    "building_upgrade", "27"
+  ],
+  "click_3": [
+    "CPS", "2"
+  ],
+  "witch_cabin_many": [
+    "many_upgrade", "4"
+  ],
+  "click_4": [
+    "CPS", "3"
+  ],
+  "terrain_farmer": [
+    "terrain_upgrade", "1"
+  ],
+  "snowy_forest_many": [
+    "many_upgrade", "6"
+  ],
+  "lush_jungle_2": [
+    "building_upgrade", "28"
+  ],
+  "forgotten_temple_many": [
+    "many_upgrade", "13"
+  ],
+  "forgotten_temple_1": [
+    "building_upgrade", "13"
+  ],
+  "click_11": [
+    "CPS", "10"
+  ],
+  "forgotten_temple_posterior": [
+    "posterior_upgrade", "8"
+  ],
+  "forgotten_temple_2": [
+    "building_upgrade", "29"
+  ],
+  "millennial_crypt_many": [
+    "many_upgrade", "14"
+  ],
+  "millennial_crypt_1": [
+    "building_upgrade", "14"
+  ],
+  "millennial_crypt_posterior": [
+    "posterior_upgrade", "9"
+  ],
+  "millennial_crypt_2": [
+    "building_upgrade", "30"
+  ],
+  "click_12": [
+    "CPS", "11"
+  ],
+  "bottomless_pit_many": [
+    "many_upgrade", "15"
+  ],
+  "bottomless_pit_posterior": [
+    "posterior_upgrade", "10"
+  ],
+  "bottomless_pit_1": [
+    "building_upgrade", "15"
+  ],
+  "bottomless_pit_2": [
+    "building_upgrade", "31"
+  ],
+  "click_13": [
+    "CPS", "12"
+  ],
+  "click_14": [
+    "CPS", "13"
+  ]
+}

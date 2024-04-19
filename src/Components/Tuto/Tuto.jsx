@@ -18,8 +18,10 @@ const Tuto = () => {
 
             <ul>
                 Version textuelle:
-                <li>Renseigne tes niveaux de métier, tes bâtiments, tes améliorations </li>
+                <li>Entre ton pseudo pour charger tes niveaux de métier, tes bâtiments, tes améliorations.</li>
                 <li>Tout est sauvegardé dans le cache de ton navigateur pas besoin de l'exporter à chaque fois.</li>
+                <li>Reimport ton données de temps en temps pour ne pas être désynchronisé avec Paladium.</li>
+                <li>Les informations importées depuis Paladium ne sont pas en temps réelle ! Il est donc inutile de reimporter ses informations toutes les 5 minutes.</li>
                 <li>Le site te propose un historique quotidien du top 14.</li>
                 <li>Il est mis à jour régulièrement avec les nouvelles améliorations</li>
                 <li>Les patchnotes s'affichent automatiquement s'il y a eu un changement depuis la dernière fois</li>

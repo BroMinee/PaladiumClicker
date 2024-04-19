@@ -10,12 +10,11 @@ import BuildingUpgradeList from "./Components/BuildingUpgradeList/BuildingUpgrad
 import ManyList from "./Components/ManyList/ManyList";
 import PosteriorList from "./Components/PosteriorList/PosteriorList";
 import CategoryList from "./Components/CategoryList/CategoryList";
-import fetchDataOnPublicURL from "./FetchData";
+import fetchDataOnPublicURL, {fetchDataOnPaladiumAPI} from "./FetchData";
 import Refesh from "./Components/RefeshAll/Refesh";
 import News from "./Components/News/News";
 import Graph from "./Components/Graph/Graph";
 import Tuto from "./Components/Tuto/Tuto";
-import Popup from "./Components/Popup/Popup";
 
 let cacheHasBeenReset = false;
 const App = () => {
@@ -102,7 +101,7 @@ const App = () => {
 
             // Building
             newPlayerInfo["building"].forEach((building, index) => {
-                if(cachePlayerInfo["building"][index] !== undefined)
+                if (cachePlayerInfo["building"][index] !== undefined)
                     newPlayerInfo["building"][index]["own"] = cachePlayerInfo["building"][index]["own"];
             })
 
@@ -285,7 +284,7 @@ export function isCacheDateValid() {
     }
     try {
         const jsonCacheInfo = JSON.parse(cacheInfo);
-        if (jsonCacheInfo["timestamp"] < new Date("18 April 2024 00:49 UTC+2")) {
+        if (jsonCacheInfo["timestamp"] < new Date("19 April 2024 19:52 UTC+2")) {
             return false
         }
     } catch (e) {

@@ -203,42 +203,42 @@
     "own": 0
   },
   {
-    "name": "clicker.building.Extraterrestrial_pyramid",
+    "name": "Pyramide extraterrestre",
     "index": 29,
     "price": 885000000000,
     "base_production": "2528729,170000000",
     "own": 0
   },
   {
-    "name": "clicker.building.Atlantis",
+    "name": "Atlantis",
     "index": 30,
     "price": 1550000000000,
     "base_production": "4551712,500000000",
     "own": 0
   },
   {
-    "name": "clicker.building.Great_Ancients_Pantheon",
+    "name": "Panthéon des Grands Anciens",
     "index": 31,
     "price": 2950000000000,
     "base_production": "8193081,930000000",
     "own": 0
   },
   {
-    "name": "clicker.building.Earth_center",
+    "name": "Centre de la Terre",
     "index": 32,
     "price": 5500000000000,
     "base_production": "14747546,800000000",
     "own": 0
   },
   {
-    "name": "clicker.building.Devil_lair",
+    "name": "Repère du Diable",
     "index": 33,
     "price": 10500000000000,
     "base_production": "26545584,200000000",
     "own": 0
   },
   {
-    "name": "clicker.building.Eden_garden",
+    "name": "Jardin d'Eden",
     "index": 34,
     "price": 19500000000000,
     "base_production": "47782052,200000000",
