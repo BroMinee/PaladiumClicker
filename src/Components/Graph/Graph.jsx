@@ -18,6 +18,7 @@ const Graph = () => {
         })
 
 
+
         res = res.filter((data, index) => {
             if (data["Date"] === "") {
                 return false;
@@ -26,7 +27,7 @@ const Graph = () => {
         });
 
         res = res.map((data, index) => {
-            for(var key in data) {
+            for (var key in data) {
                 if (key === "Date") {
                     continue;
                 } else {
@@ -44,6 +45,7 @@ const Graph = () => {
         fetchAllData();
     }, []);
 
+
     let x = Object.keys(graphCSV).length === 0 ? [] : graphCSV.map((data) => {
         return data["Date"];
     });
@@ -51,16 +53,16 @@ const Graph = () => {
     let listY = []
 
     let pseudoList = []
-    for(var key in graphCSV[0]) {
+    for (var key in graphCSV[0]) {
         if (key === "Date") {
             continue;
         }
         pseudoList.push(key);
     }
 
-    for(var i = 0; i < pseudoList.length; i++) {
+    for (var i = 0; i < pseudoList.length; i++) {
         let valuePseudo = []
-        for(var j = 0; j < graphCSV.length; j++) {
+        for (var j = 0; j < graphCSV.length; j++) {
             valuePseudo.push(graphCSV[j][pseudoList[i]]);
         }
         listY.push(valuePseudo);
@@ -78,15 +80,25 @@ const Graph = () => {
             <Plot
                 data={
                     listY.map((data, index) => {
-                        return {
-                            x: x,
-                            y: data,
-                            type: 'scatter',
-                            mode: 'lines+markers',
-                            name: pseudoList[index]
-                        }})
-                    }
-                layout={{title: 'Classement Clicker', autosize: true, width: width*0.8, height: height*0.8, xaxis: {title: 'Date'}, yaxis: {title: 'Valeur en Trillions'}}}
+                            return {
+                                x: x,
+                                y: data,
+                                type: 'scatter',
+                                mode: 'lines+markers',
+                                visible: index < 10 ? "true" : "legendonly",
+                                name: `Top ${index+1} - ${pseudoList[index]}`
+                            }
+                        }
+                    )
+                }
+                layout={{
+                    title: 'Classement Clicker',
+                    autosize: true,
+                    width: width * 0.8,
+                    height: height * 0.8,
+                    xaxis: {title: 'Date'},
+                    yaxis: {title: 'Valeur en Trillions'}
+                }}
             />
         </div>
     </div>
@@ -109,4 +121,5 @@ function csvJSON(csv) {
     }
     return result;
 }
+
 export default Graph;
