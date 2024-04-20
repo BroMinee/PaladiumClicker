@@ -234,6 +234,7 @@ const App = () => {
                     <Refesh playerInfo={playerInfo} setPlayerInfo={setPlayerInfo}/>
                     <h1>Métier</h1>
 
+
                     <MetierList playerInfo={playerInfo} setPlayerInfo={setPlayerInfo}/>
                     <h1>Bâtiments</h1>
                     <BuildingList playerInfo={playerInfo} setPlayerInfo={setPlayerInfo} setRPS={setRPS}/>
@@ -284,7 +285,7 @@ export function isCacheDateValid() {
     }
     try {
         const jsonCacheInfo = JSON.parse(cacheInfo);
-        if (jsonCacheInfo["timestamp"] < new Date("20 April 2024 03:00 UTC+2")) {
+        if (jsonCacheInfo["timestamp"] < new Date("20 April 2024 05:02 UTC+2")) {
             return false
         }
     } catch (e) {

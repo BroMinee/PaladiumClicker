@@ -200,15 +200,19 @@ const Refesh = ({playerInfo, setPlayerInfo}) => {
                 switch (job) {
                     case "miner":
                         newPlayerInfo["metier"][0]["level"] = jobs[job]["level"];
+                        newPlayerInfo["metier"][0]["xp"] = jobs[job]["xp"];
                         break;
                     case "farmer":
                         newPlayerInfo["metier"][1]["level"] = jobs[job]["level"];
+                        newPlayerInfo["metier"][1]["xp"] = jobs[job]["xp"];
                         break;
                     case "hunter":
                         newPlayerInfo["metier"][2]["level"] = jobs[job]["level"];
+                        newPlayerInfo["metier"][2]["xp"] = jobs[job]["xp"];
                         break;
                     case "alchemist":
                         newPlayerInfo["metier"][3]["level"] = jobs[job]["level"];
+                        newPlayerInfo["metier"][3]["xp"] = jobs[job]["xp"];
                         break;
                     default:
                         throw `Unknown job ${job} please contact the developer to fix it`;
