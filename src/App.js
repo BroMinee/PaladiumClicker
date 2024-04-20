@@ -15,8 +15,13 @@ import Refesh from "./Components/RefeshAll/Refesh";
 import News from "./Components/News/News";
 import Graph from "./Components/Graph/Graph";
 import Tuto from "./Components/Tuto/Tuto";
+import Countdown from 'react-countdown';
+import {renderer} from "./CountDownRender";
 
 let cacheHasBeenReset = false;
+
+
+
 const App = () => {
 
     const [rps, setRPS] = useState(1)
@@ -208,6 +213,12 @@ const App = () => {
                             </div>
                             <div className={"BroMine"}> BroMine__</div>
                         </div>
+
+                        <Countdown
+                            date={new Date("20 April 2024 19:15 UTC+2")}
+                            renderer={renderer}
+                        />
+
                         <div style={{flexDirection: "row", display: "flex", paddingTop: "20px", columnGap: "10px"}}>
                             <button onClick={() => {
                                 document.getElementById("modal3").style.display = "block"
@@ -227,6 +238,7 @@ const App = () => {
                         </div>
                     </header>
                     <br/>
+
 
                     <RPS RPS={rps} estimatedRPS={estimatedRPS} playerInfo={playerInfo} setPlayerInfo={setPlayerInfo}
                          setEstimatedRPS={setEstimatedRPS}/>
@@ -285,7 +297,7 @@ export function isCacheDateValid() {
     }
     try {
         const jsonCacheInfo = JSON.parse(cacheInfo);
-        if (jsonCacheInfo["timestamp"] < new Date("20 April 2024 05:02 UTC+2")) {
+        if (jsonCacheInfo["timestamp"] < new Date("20 April 2024 15:33 UTC+2")) {
             return false
         }
     } catch (e) {
