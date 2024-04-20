@@ -22,6 +22,10 @@ export const renderer = ({hours, minutes, seconds, completed}) => {
         return <Completionist/>;
     } else {
         // Render a countdown
-        return <span>{print2digits(hours)}:{print2digits(minutes)}:{print2digits(seconds)}</span>
+        return <div>
+            <span>Compte à rebours : </span>
+            <br/>
+            <span>{print2digits(hours)}:{print2digits(minutes)}:{print2digits(seconds)}</span>
+        </div>
     }
 };
