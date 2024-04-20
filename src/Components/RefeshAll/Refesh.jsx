@@ -185,10 +185,14 @@ const Refesh = ({playerInfo, setPlayerInfo}) => {
 
             buildings.forEach((building) => {
                 const buildingIndex = translateBuildingName[building["name"]];
+                if (buildingIndex === undefined)
+                    throw `Unknown building name : '${building["name"]}', please contact the developer to fix it`;
                 newPlayerInfo["building"][buildingIndex]["own"] = building["quantity"];
             })
             upgrades.forEach((upgrade) => {
                 const pathToFollow = translateBuildingUpgradeName[upgrade];
+                if (pathToFollow === undefined)
+                    throw `Unknown upgrade name : '${upgrade}', please contact the developer to fix it`;
                 newPlayerInfo[pathToFollow[0]][pathToFollow[1]]["own"] = true;
             });
 
@@ -219,22 +223,20 @@ const Refesh = ({playerInfo, setPlayerInfo}) => {
                 setTimer(120)
             } else if (e.status === 404) {
                 document.getElementById("errorAPI").innerText = "Pseudo non trouvé, veuillez vérifier le pseudo";
-            } else if(e.stats === 500)
-            {
+            } else if (e.stats === 500) {
                 document.getElementById("errorAPI").innerText = "Erreur interne du serveur, veuillez réessayer plus tard";
                 setTimer(60 * 5);
-            }
-            else
+            } else {
                 document.getElementById("errorAPI").innerText = JSON.stringify(e);
+            }
         }
         document.getElementById("importer").innerText = "Importer";
     }
 
     return <div>
         <div className={"ImportExport"}>
-            <input id={"pseudoInput"} placeholder={"Entre ton pseudo"} onKeyUp={(e) =>
-            {
-                if(e.key === "Enter")
+            <input id={"pseudoInput"} placeholder={"Entre ton pseudo"} onKeyUp={(e) => {
+                if (e.key === "Enter")
                     document.getElementById("importer").click();
             }}></input>
             <button onClick={fetchBuildingInfoFromPseudo} id={"importer"}>Importer</button>

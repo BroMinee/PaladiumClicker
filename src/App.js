@@ -284,7 +284,7 @@ export function isCacheDateValid() {
     }
     try {
         const jsonCacheInfo = JSON.parse(cacheInfo);
-        if (jsonCacheInfo["timestamp"] < new Date("19 April 2024 19:59 UTC+2")) {
+        if (jsonCacheInfo["timestamp"] < new Date("20 April 2024 03:00 UTC+2")) {
             return false
         }
     } catch (e) {

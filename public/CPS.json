@@ -84,8 +84,8 @@
     "index": 13
   },
   {
-    "name": -1,
-    "CPS": -1,
+    "name": "Gâteau Clic",
+    "CPS": 32768,
     "own": false,
     "index": 14
   },
