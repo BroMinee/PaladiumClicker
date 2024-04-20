@@ -236,7 +236,6 @@ const Refesh = ({playerInfo, setPlayerInfo}) => {
         }
         document.getElementById("importer").innerText = "Importer";
     }
-
     return <div>
         <div className={"ImportExport"}>
             <input id={"pseudoInput"} placeholder={"Entre ton pseudo"} onKeyUp={(e) => {

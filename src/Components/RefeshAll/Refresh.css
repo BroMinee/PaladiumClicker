@@ -1,14 +1,27 @@
+@media (max-width: 450px) {
+    .ImportExport {
+        z-index: 1;
+        position: relative;
+        row-gap: 2vmin;
+        justify-content: center;
+        padding-right: 5vmin;
+        flex-direction: column;
+        display: inline-flex;
+    }
+}
+
 .ImportExport {
     z-index: 1;
     position: relative;
-    column-gap: 40px;
+    column-gap: 2vmin;
     display: flex;
     justify-content: center;
-    padding-right: 28px;
+    padding-right: 5vmin;
+
 }
 
-.RED
-{
+
+.RED {
     background-color: red;
     color: white;
 }
