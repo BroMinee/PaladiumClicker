@@ -47,6 +47,15 @@ const News = ({cacheHasBeenReset}) => {
                 controls
             />
             <div style={{color: "gray"}}>Musiques générées avec suno.ai</div>
+
+            <h2>BroMine__ le retour</h2>
+            <br/>
+            <ReactAudioPlayer
+                src={process.env.PUBLIC_URL + "/BroMine_is_back.mp3"}
+                controls
+                volume={0.15}
+            />
+            <div style={{color: "gray"}}>Musiques générées avec suno.ai</div>
         </div>
     </div>
 }
@@ -61,7 +70,6 @@ const New = ({date, events}) => {
         </ul>
     </div>;
 }
-
 
 
 export default News;

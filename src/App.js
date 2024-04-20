@@ -15,8 +15,6 @@ import Refesh from "./Components/RefeshAll/Refesh";
 import News from "./Components/News/News";
 import Graph from "./Components/Graph/Graph";
 import Tuto from "./Components/Tuto/Tuto";
-import Countdown from 'react-countdown';
-import {Completionist, renderer} from "./CountDownRender";
 
 let cacheHasBeenReset = false;
 
@@ -213,17 +211,6 @@ const App = () => {
                             </div>
                             <div className={"BroMine"}> BroMine__</div>
                         </div>
-
-                        {new Date() <= new Date("20 April 2024 19:15 UTC+2") ?
-                        <Countdown
-                            date={new Date("20 April 2024 19:15 UTC+2")}
-                            renderer={renderer}
-                            onComplete={() => {
-                                setTimeout(() => {
-                                    document.getElementById("audio-countdown").play();
-                                }, 1000)
-                            }}
-                        /> : Completionist()}
 
                         <div style={{flexDirection: "row", display: "flex", paddingTop: "20px", columnGap: "10px"}}>
                             <button onClick={() => {
