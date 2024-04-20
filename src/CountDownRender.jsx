@@ -1,11 +1,10 @@
 import ReactAudioPlayer from "react-audio-player";
 import React from 'react';
 
-const Completionist = () =>
-    <ReactAudioPlayer
+export const Completionist = () =>
+    <ReactAudioPlayer id={"audio-countdown"}
         src={process.env.PUBLIC_URL + "/BroMine_is_back.mp3"}
         controls
-        autoPlay={true}
         volume={0.15}
     />
 
