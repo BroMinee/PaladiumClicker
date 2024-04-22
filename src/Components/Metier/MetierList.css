@@ -7,8 +7,9 @@
     align-items: center;
     flex-wrap: wrap;
     width: 100%;
-    justify-content: space-between;
+    justify-content: center;
     margin: 10px 10px;
+    display: inherit;
 }
 
 .Metier-Cercle {
@@ -33,7 +34,7 @@
     transform: translate(-50%, -50%);
     width: 15vmin;
     height: 20vmin;
-    margin-top: -5px;
+    margin-top: -2vmin;
 }
 .progress {
     width: 100%;
@@ -60,4 +61,70 @@
     stroke: #FFFFFF;
     stroke-linejoin: round; /*Added this css*/
     stroke-dashoffset: 1080;
+}
+
+.Lvl-txt
+{
+    border: 1px solid transparent;
+    justify-content: space-between;
+    border-radius: 10px;
+    position: absolute;
+    margin-top: 15vmin;
+    /*margin-left: 17.5vmin;*/
+    z-index: 2;
+    width: fit-content;
+    /*padding-left: 2vmin;*/
+    /*padding-right: 2vmin;*/
+    padding-bottom: 0px;
+}
+
+.ArrowUpDown
+{
+    margin-left: -2vmin;
+    margin-top: 0.2vmin;
+    display:flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+/* First child reduce size */
+.ArrowUpDown > :first-child {
+    color:black;
+    font-size: 80%;
+    padding-right: 10px;
+}
+
+/* Second child */
+.ArrowUpDown > :last-child {
+    color:black;
+    font-size: 80%;
+    padding-right: 10px;
+}
+
+/* all children */
+.ArrowUpDown > *  :hover{
+    color: white;
+}
+
+.Lvl-inside-txt {
+    -moz-appearance: textfield;
+    background: transparent;
+    border: none;
+    padding-left: 15px;
+    padding-right: 0px;
+    width: 5vmin;
+    min-width: 6vmin;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+.Lvl-inside-txt
+{
+    text-align: center;
+    font-size: 3vmin;
+    font-weight: bold;
+    color: white;
 }
