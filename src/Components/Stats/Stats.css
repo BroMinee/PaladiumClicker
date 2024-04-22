@@ -1,0 +1,20 @@
+.ul-stat
+{
+    padding-top: 19px;
+    display: inline-flex;
+    padding-bottom: 0px;
+}
+
+.Stat-list
+{
+    list-style-type: none;
+    width: 100%;
+    margin: 20px 10px;
+    white-space: nowrap;
+}
+
+.Stat-img
+{
+    height: 8vmin;
+    pointer-events: none;
+}

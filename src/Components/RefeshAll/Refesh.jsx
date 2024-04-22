@@ -3,7 +3,7 @@ import React, {useEffect} from "react";
 import "./Refresh.css"
 import fetchDataOnPublicURL, {fetchDataOnPaladiumAPI} from "../../FetchData";
 
-const Refesh = ({playerInfo, setPlayerInfo}) => {
+const Refesh = ({playerInfo, setPlayerInfo, setUUID}) => {
     function exportData() {
         const data = JSON.stringify(playerInfo);
         const blob = new Blob([data], {type: 'text/plain'});
@@ -117,13 +117,18 @@ const Refesh = ({playerInfo, setPlayerInfo}) => {
                 newPlayerInfo["terrain_upgrade"] = data
             })
 
+            newPlayerInfo["production"] = 0;
+
             setPlayerInfo(newPlayerInfo)
             localStorage.setItem("cacheInfo", JSON.stringify({
                 "playerInfo": newPlayerInfo,
                 "timestamp": new Date().getTime()
             }));
-
         }
+        document.getElementById("errorAPI").innerText = "";
+        document.getElementById("pseudoInput").value = "";
+        document.getElementById("pseudoInput").placeholder = "Entre ton pseudo";
+
         fetchAllData();
     }
 
@@ -134,7 +139,7 @@ const Refesh = ({playerInfo, setPlayerInfo}) => {
         }
     }, []);
 
-    async function fetchBuildingInfoFromPseudo() {
+    async function fetchBuildingInfoFromPseudo(setUUID) {
         // if speudo contains space
         document.getElementById("importer").innerText = "Importation en cours...";
         const lockSend = parseInt(localStorage.getItem("lockSend"));
@@ -162,6 +167,7 @@ const Refesh = ({playerInfo, setPlayerInfo}) => {
             })
 
             const [uuid, jobs, clickerInfo] = await fetchDataOnPaladiumAPI(pseudo);
+            setUUID(uuid);
 
             const upgrades = clickerInfo["upgrades"];
             const buildings = clickerInfo["buildings"];
@@ -175,7 +181,9 @@ const Refesh = ({playerInfo, setPlayerInfo}) => {
 
             newPlayerInfo["metier"].forEach((metier, index) => {
                 newPlayerInfo["metier"][index]["level"] = 0;
+                newPlayerInfo["metier"][index]["xp"] = 0;
             });
+            newPlayerInfo["production"] = 0;
 
             ["building_upgrade", "category_upgrade", "CPS", "global_upgrade", "many_upgrade", "posterior_upgrade", "terrain_upgrade"].forEach((key) => {
                 newPlayerInfo[key].forEach((upgrade, index) => {
@@ -188,6 +196,7 @@ const Refesh = ({playerInfo, setPlayerInfo}) => {
                 if (buildingIndex === undefined)
                     throw `Unknown building name : '${building["name"]}', please contact the developer to fix it`;
                 newPlayerInfo["building"][buildingIndex]["own"] = building["quantity"];
+                newPlayerInfo["production"] += building["production"];
             })
             upgrades.forEach((upgrade) => {
                 const pathToFollow = translateBuildingUpgradeName[upgrade];
@@ -222,6 +231,11 @@ const Refesh = ({playerInfo, setPlayerInfo}) => {
             setPlayerInfo(newPlayerInfo)
             document.getElementById("errorAPI").innerText = "";
             document.getElementById("pseudoInput").value = "";
+            document.getElementById("pseudoInput").placeholder = pseudo;
+            if(pseudo.toLowerCase() == "mejou")
+            {
+                document.getElementById("errorAPI").innerText = "Attention un silverfish est apparu dans votre dos !";
+            }
         } catch (e) {
             if (e.status === 429) {
                 setTimer(120)
@@ -238,11 +252,11 @@ const Refesh = ({playerInfo, setPlayerInfo}) => {
     }
     return <div>
         <div className={"ImportExport"}>
-            <input id={"pseudoInput"} placeholder={"Entre ton pseudo"} onKeyUp={(e) => {
+            <input type="pseudo" id={"pseudoInput"} placeholder={"Entre ton pseudo"} onKeyUp={(e) => {
                 if (e.key === "Enter")
                     document.getElementById("importer").click();
             }}></input>
-            <button onClick={fetchBuildingInfoFromPseudo} id={"importer"}>Importer</button>
+            <button onClick={() => fetchBuildingInfoFromPseudo(setUUID)} id={"importer"}>Importer</button>
             <button onClick={refesh} className={"RED"}>Réinitialiser</button>
         </div>
         <text id={"errorAPI"}></text>

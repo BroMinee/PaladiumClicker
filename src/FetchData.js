@@ -23,6 +23,22 @@ const fetchUUIDOnPaladiumAPI = async (pseudo) => {
     return [response.data["uuid"], response.data["jobs"]]
 }
 
+export const fetchLeaderboardPosition = async (uuid) => {
+    const result = await axios(
+        `https://api.paladium-pvp.fr/ranking/position/clicker/${uuid}`,
+        {
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        }
+    ).then(response => response.data).catch(error => {
+        throw error.response;
+    })
+    if(result["ranked"] === false)
+        return "Unranked"
+    return result["position"]
+}
+
 export const fetchDataOnPaladiumAPI = async (pseudo) => {
     const [uuid, jobs] = await fetchUUIDOnPaladiumAPI(pseudo)
     const result = await axios(
@@ -35,6 +51,8 @@ export const fetchDataOnPaladiumAPI = async (pseudo) => {
     ).then(response => response.data).catch(error => {
         throw error.response;
     })
+    localStorage.setItem("uuid", uuid)
+    localStorage.setItem("pseudo", pseudo)
     return [uuid, jobs, result];
 }
 

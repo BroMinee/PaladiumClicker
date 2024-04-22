@@ -3,8 +3,8 @@ import React from "react";
 import "./RPS.css"
 import {ComputePrice, computeRPS} from "../Building/BuildingList.jsx";
 import {checkCondition} from "../../Misc";
+import {computeXBuildingAhead, Stat} from "../Stats/Stats";
 
-let history = [];
 const RPS = ({RPS, estimatedRPS, playerInfo, setPlayerInfo, setEstimatedRPS}) => {
     const [bestIndex, setBestIndex] = React.useState(-1);
 
@@ -12,109 +12,28 @@ const RPS = ({RPS, estimatedRPS, playerInfo, setPlayerInfo, setEstimatedRPS}) =>
         return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
     }
 
-    function buyUpgrade() {
-        if (bestIndex === -1) {
+    function buyUpgrade(bestListName, bestUpgradeIndex) {
+        if (bestUpgradeIndex === -1) {
             return;
         }
-        if(bestRpsAfterUpgrade > bestRpsBuiding) {
+        if (typeof playerInfo[bestListName][bestUpgradeIndex]["own"] === "boolean") {
             playerInfo[bestListName][bestUpgradeIndex]["own"] = true;
-
-        }
-        else // Buy building
-        {
-            playerInfo["building"][bestIndex]["own"] += 1;
+        } else {
+            playerInfo[bestListName][bestUpgradeIndex]["own"] += 1;
         }
         setPlayerInfo({...playerInfo});
     }
 
-    function computeTimeToBuyAll(playerInfoCpy, RPSCpy) {
-        if (playerInfoCpy["building"].filter((building) => building["own"] >= 1).length === 33) {
-            console.log(history);
-            setPlayerInfo({...playerInfoCpy});
-            return false;
-        }
-        let indexToBuy =
-        findBestBuildingUpgrade(structuredClone(playerInfoCpy), setEstimatedRPS, bestIndex, setBestIndex);
-        //playerInfoCpy["building"].filter((building) => building["own"] >= 1).length;
-
-            //findBestBuildingUpgrade(structuredClone(playerInfoCpy), setEstimatedRPS, bestIndex, setBestIndex);
-        const timeToBuyIt = (ComputePrice(playerInfoCpy["building"][indexToBuy]["price"], playerInfoCpy["building"][indexToBuy]["own"]) / RPSCpy);
-        const totalTime = history[history.length - 1] ? history[history.length - 1]["time"] : 0;
-
-        //console.log(`RPS=${RPS} timeToBuyIt=${timeToBuyIt} price=${(ComputePrice(playerInfo["building"][indexToBuy]["price"], playerInfo["building"][indexToBuy]["own"]))} totalTime=${totalTime}`)
-        history.push({
-            "time": totalTime + timeToBuyIt,
-            "building": playerInfoCpy["building"][indexToBuy]["name"],
-            "from": playerInfoCpy["building"][indexToBuy]["own"],
-            "to": playerInfoCpy["building"][indexToBuy]["own"] + 1,
-            "rps": RPSCpy
-        });
-        playerInfoCpy["building"][indexToBuy]["own"] += 1;
-        RPSCpy = computeRPS(playerInfoCpy);
-        if (computeTimeToBuyAll(playerInfoCpy, RPSCpy))
-            return true;
-        return false;
-    }
-
-
-    const [indexToBuy, bestRpsBuiding] = findBestBuildingUpgrade(structuredClone(playerInfo), setEstimatedRPS, bestIndex, setBestIndex);
-
-    const [bestRpsAfterUpgrade, bestUpgradeIndex, bestListName] = findBestUpgrade(structuredClone(playerInfo), setEstimatedRPS, bestIndex, setBestIndex);
-    let imgSrc = process.env.PUBLIC_URL + "/BuildingIcon/" + `${indexToBuy}.png`;
-    let buildingName = "null";
-    if(indexToBuy !== -1)
-        buildingName = playerInfo["building"][indexToBuy]["name"];
-
-
-    if(bestRpsAfterUpgrade > bestRpsBuiding) {
-        let copy = structuredClone(playerInfo);
-        copy[bestListName][bestUpgradeIndex]["own"] = true;
-        setEstimatedRPS(computeRPS(copy));
-        // console.log(`Upgrade is better than building : ${playerInfo[bestListName][bestUpgradeIndex]["name"]} ${bestRpsAfterUpgrade} ${bestRpsBuiding}`);
-        switch (bestListName) {
-            case "building_upgrade":
-                imgSrc = process.env.PUBLIC_URL + "/BuildingUpgradeIcon/" + (bestUpgradeIndex < 16 ? "0" : "1") + ".png";
-                buildingName = playerInfo["building_upgrade"][bestUpgradeIndex]["name"];
-                break;
-            case "category_upgrade":
-                imgSrc = process.env.PUBLIC_URL + "/CategoryIcon/" + bestUpgradeIndex + ".png";
-                buildingName = playerInfo["category_upgrade"][bestUpgradeIndex]["name"];
-                break;
-            case "global_upgrade":
-                imgSrc = process.env.PUBLIC_URL + "/GlobalIcon/" + bestUpgradeIndex + ".png";
-                buildingName = playerInfo["global_upgrade"][bestUpgradeIndex]["name"];
-                break;
-            case "many_upgrade":
-                imgSrc = process.env.PUBLIC_URL + "/ManyIcon/0.png";
-                buildingName = playerInfo["many_upgrade"][bestUpgradeIndex]["name"];
-                break;
-            case "terrain_upgrade":
-                imgSrc = process.env.PUBLIC_URL + "/TerrainIcon/" + bestUpgradeIndex + ".png";
-                buildingName = playerInfo["terrain_upgrade"][bestUpgradeIndex]["name"];
-                break;
-            case "posterior_upgrade":
-                imgSrc = process.env.PUBLIC_URL + "/PosteriorIcon/0.png";
-                buildingName = playerInfo["posterior_upgrade"][bestUpgradeIndex]["name"];
-                break;
-            default:
-                alert("Error in bestListName");
-
-        }
-    }
-
-    // console.log(`${indexToBuy} ${bestUpgradeIndex}`)
-
+    const buildingBuyPaths = computeXBuildingAhead(playerInfo, 1, RPS);
+    if (buildingBuyPaths.length !== 0)
+        setEstimatedRPS(buildingBuyPaths[0][5]);
 
     return <div className={"RPS-father"}>
-        {/*<button onClick={() => {*/}
-        {/*    computeTimeToBuyAll(structuredClone(playerInfo), structuredClone(RPS))*/}
-        {/*}}>all*/}
-        {/*</button>*/}
         <div className={"RPS"}>
             Production actuelle par seconde
             <div style={{display: "flex", flexDirection: "row", justifyContent: "center"}}>
                 <div className={"RPSValue"}>
-                    {printPricePretty(RPS.toFixed(2))}
+                    {'~ ' + printPricePretty(RPS.toFixed(2))}
                     {RPS < 0 ? <img src={process.env.PUBLIC_URL + "/" + "arty_chocbar.webp"} className="App-logo"
                                     alt="logo"/> : ""}
                 </div>
@@ -124,23 +43,25 @@ const RPS = ({RPS, estimatedRPS, playerInfo, setPlayerInfo, setEstimatedRPS}) =>
         <div className={"RPS"}>
             Prochain achat optimal
             <div>
-                { (bestUpgradeIndex !== -1 || indexToBuy !== -1) &&
-                <div className={"imageWrapper"}>
-                    <img src={imgSrc} alt="image"
-                         className={"Building-To-Buy-img"}></img>
-                    <div className="cornerLink">{buildingName}</div>
-                    <button className={"buyButton"} onClick={buyUpgrade} style={{marginTop: "10px"}}>Acheter</button>
-                </div>
+                {(buildingBuyPaths.length !== 0) &&
+                    <Stat playerInfo={playerInfo} buildingBuyPath={buildingBuyPaths} showProduction={false}/>
                 }
-                { (bestUpgradeIndex === -1 && indexToBuy === -1) &&
+                {(buildingBuyPaths.length === 0) &&
                     <div>
                         <img src={process.env.PUBLIC_URL + "/arty_chocbar.webp"} alt="image"
                              className={"Building-To-Buy-img"}></img>
                         <div className="cornerLink">Bravo tu as tout acheté, va prendre une douche maintenant</div>
                         <button className={"buyButton"} onClick={() => {
                             localStorage.setItem("CPS", "-2")
-                        }} style={{marginTop: "10px"}}>Aller prendre une douche</button>
+                        }} style={{marginTop: "10px"}}>Aller prendre une douche
+                        </button>
                     </div>
+                }
+                {(buildingBuyPaths.length !== 0) &&
+                    <button className={"buyButton"}
+                            onClick={() => buyUpgrade(buildingBuyPaths[0][0], buildingBuyPaths[0][1])}
+                            style={{marginTop: "10px"}}>Simuler l'achat
+                    </button>
                 }
             </div>
 
@@ -149,18 +70,17 @@ const RPS = ({RPS, estimatedRPS, playerInfo, setPlayerInfo, setEstimatedRPS}) =>
             Production estimée après achat
             <div style={{display: "flex", flexDirection: "row", justifyContent: "center"}}>
                 <div
-                    className={"RPSValue"}>{printPricePretty(estimatedRPS.toFixed(2))} ({estimatedRPS > RPS ? "+" : ""}{(((estimatedRPS - RPS) / (RPS) * 100)).toFixed(5)}%)
-
+                    className={"RPSValue"}>{'~ ' + printPricePretty(estimatedRPS.toFixed(2))} ({estimatedRPS > RPS ? "+" : ""}{(((estimatedRPS - RPS) / (RPS) * 100)).toFixed(5)}%)
                 </div>
                 <img src={process.env.PUBLIC_URL + "/" + "coin.png"} className="App-logo" alt="logo"/>
             </div>
-
         </div>
     </div>
 
 }
 
-function findBestBuildingUpgrade(playerInfo, setEstimatedRPS, bestIndex, setBestIndex) {
+
+export function computeBestBuildingUgrade(playerInfo) {
     let buildingOwned = playerInfo["building"].filter((building) => building["own"] > 0).length;
     if (buildingOwned !== playerInfo["building"].length && playerInfo["building"][buildingOwned]["name"] !== -1) {
         buildingOwned += 1;
@@ -180,20 +100,11 @@ function findBestBuildingUpgrade(playerInfo, setEstimatedRPS, bestIndex, setBest
             bestBuildingIndex = index;
         }
     }
-
-    const copy = structuredClone(playerInfo)
-    if(bestBuildingIndex !== -1) {
-        copy["building"][bestBuildingIndex]["own"] += 1;
-    }
-
-    setEstimatedRPS(computeRPS(copy));
-    if (bestIndex !== bestBuildingIndex && bestBuildingIndex !== -1)
-        setBestIndex(bestBuildingIndex);
-
     return [bestBuildingIndex, bestRpsAfterUpgrade];
 }
 
-function findBestUpgrade(playerInfo, setEstimatedRPS, bestIndex, setBestIndex) {
+
+export function findBestUpgrade(playerInfo) {
 
     // building_upgrade
     // category_upgrade

@@ -32,9 +32,8 @@ const Building = ({playerInfo, setPlayerInfo, building, imgPath, unique_id_react
 
 
     function enforceMinMax(el) {
-        if(playerInfo["building"][index]["name"] === -1)
+        if (playerInfo["building"][index]["name"] === -1)
             return;
-
 
 
         if (el.target.value !== "") {
@@ -69,7 +68,8 @@ const Building = ({playerInfo, setPlayerInfo, building, imgPath, unique_id_react
                 <li>RPS
                     : {printPricePretty(scaleCurrentProduction(playerInfo, index, building["own"]).toFixed(2))}</li>
                 <li>{printPricePretty(ComputePrice(building["price"], building["own"]))}$</li>
-                <input type="number" min="0" step="1" max="99" value={playerInfo["building"][index]["own"]} onKeyUp={enforceMinMax}
+                <input type="number" min="0" step="1" max="99" value={playerInfo["building"][index]["own"]}
+                       onKeyUp={enforceMinMax}
                        onChange={enforceMinMax}/>
             </ul>
         </li>
@@ -112,30 +112,28 @@ function getPourcentageBonus(playerInfo, buildingIndex) {
         return categoryPourcentage;
     }
 
-    function getBonusFromMany()
-    {
+    function getBonusFromMany() {
         const res = playerInfo["many_upgrade"].filter((many) => many["own"] === true && many["active_index"] === buildingIndex)
-        if(res.length > 1)
+        if (res.length > 1)
             alert(`Error in getBonusFromMany function : more than one bonus from many for ${playerInfo["building"][buildingIndex]["name"]}`)
         else if (res.length === 1)
             return playerInfo["building"][buildingIndex]["own"] * 0.01;
         return 0;
     }
 
-    function getBonusFromBuild()
-    {
+    function getBonusFromBuild() {
         const res = playerInfo["building_upgrade"].filter((building) => building["own"] === true && building["active_index"] === buildingIndex)
-        if(res.length > 2)
+        if (res.length > 2)
             alert(`Error in getBonusFromBuild function : more than one/two bonus from building for ${playerInfo["building"][buildingIndex]["name"]}`)
 
         return res.length;
     }
-    function getBonusFromPosterior()
-    {
+
+    function getBonusFromPosterior() {
         const res = playerInfo["posterior_upgrade"].filter((posterior) => posterior["own"] === true && posterior["active_index"] === buildingIndex)
-        if(res.length > 1)
+        if (res.length > 1)
             alert(`Error in getBonusFromPosterior function : more than one bonus from posterior for ${playerInfo["building"][buildingIndex]["name"]}`)
-        if(res.length === 1) {
+        if (res.length === 1) {
             return playerInfo["building"][res[0]["previous_index"]]["own"] * 0.01;
         }
         return 0;
@@ -161,7 +159,6 @@ function getPourcentageBonus(playerInfo, buildingIndex) {
 
     // Bonus Category
     pourcentageBonus += getBonusFromCategory()
-
 
 
     return pourcentageBonus;
@@ -192,8 +189,7 @@ function convertToFloat(str) {
     return -1
 }
 
-export function computeRPS(playerInfo)
-{
+export function computeRPS(playerInfo) {
     let rps = 0.5;
     playerInfo["building"].forEach((building, index) => {
             if (building["own"] !== 0) {

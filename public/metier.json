@@ -1,18 +1,22 @@
 [
   {
     "name": "mineur",
-    "level": 1
+    "level": 1,
+    "xp": 0
   },
   {
     "name": "farmer",
-    "level": 1
+    "level": 1,
+    "xp": 0
   },
   {
     "name": "hunter",
-    "level": 1
+    "level": 1,
+    "xp": 0
   },
   {
     "name": "alchimiste",
-    "level": 1
+    "level": 1,
+    "xp": 0
   }
 ]

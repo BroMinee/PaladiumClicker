@@ -25,3 +25,18 @@
     background-color: red;
     color: white;
 }
+
+
+
+#pseudoInput[type=pseudo]
+{
+    padding-left: 12px;
+}
+#pseudoInput
+{
+    background: white;
+    border: 3px solid #FF5C00;
+    border-radius: 5px;
+    color: #FF5C00;
+    font-weight: bold;
+}

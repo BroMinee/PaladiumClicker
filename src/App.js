@@ -15,9 +15,9 @@ import Refesh from "./Components/RefeshAll/Refesh";
 import News from "./Components/News/News";
 import Graph from "./Components/Graph/Graph";
 import Tuto from "./Components/Tuto/Tuto";
+import Stats from "./Components/Stats/Stats";
 
 let cacheHasBeenReset = false;
-
 
 
 const App = () => {
@@ -26,6 +26,8 @@ const App = () => {
     const [estimatedRPS, setEstimatedRPS] = useState(3)
 
     const [playerInfo, setPlayerInfo] = useState({})
+
+    const [UUID, setUUID] = useState("Pseudo inconnu");
 
 
     useEffect(() => {
@@ -58,6 +60,9 @@ const App = () => {
             await fetchDataOnPublicURL("/terrain_upgrade.json").then((data) => {
                 newPlayerInfo["terrain_upgrade"] = data
             })
+
+            newPlayerInfo["production"] = 0.5;
+
 
             setPlayerInfo(newPlayerInfo)
             localStorage.setItem("cacheInfo", JSON.stringify({
@@ -146,6 +151,8 @@ const App = () => {
                 newPlayerInfo["CPS"][index]["own"] = cachePlayerInfo["CPS"][index]["own"];
             })
 
+            newPlayerInfo["production"] = 0.5;
+
 
             setPlayerInfo(newPlayerInfo)
             localStorage.setItem("cacheInfo", JSON.stringify({
@@ -170,6 +177,9 @@ const App = () => {
             }
         }
 
+        const uuid = localStorage.getItem("uuid")
+        if(uuid !== null)
+            setUUID(uuid)
 
     }, []);
 
@@ -232,11 +242,15 @@ const App = () => {
                     </header>
                     <br/>
 
+                    <Refesh playerInfo={playerInfo} setPlayerInfo={setPlayerInfo} setUUID={setUUID}/>
+                    <br/>
 
                     <RPS RPS={rps} estimatedRPS={estimatedRPS} playerInfo={playerInfo} setPlayerInfo={setPlayerInfo}
                          setEstimatedRPS={setEstimatedRPS}/>
-                    <br/>
-                    <Refesh playerInfo={playerInfo} setPlayerInfo={setPlayerInfo}/>
+
+                    <h1>Statistiques</h1>
+                    <Stats playerInfo={playerInfo} setPlayerInfo={setPlayerInfo} rps={rps} UUID={UUID}/>
+
                     <h1>Métier</h1>
 
 
@@ -267,7 +281,6 @@ const App = () => {
                 </div>
             </div>
     )
-        ;
 }
 
 export function isCacheValid() {
@@ -290,7 +303,7 @@ export function isCacheDateValid() {
     }
     try {
         const jsonCacheInfo = JSON.parse(cacheInfo);
-        if (jsonCacheInfo["timestamp"] < new Date("20 April 2024 15:41 UTC+2")) {
+        if (jsonCacheInfo["timestamp"] < new Date("22 April 2024 19:06 UTC+2")) {
             return false
         }
     } catch (e) {

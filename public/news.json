@@ -1,5 +1,14 @@
 [
   {
+    "date": "22-04-2024 - 18h51",
+    "events": [
+      "Ajout de la section 'Statistiques'",
+      "Ajout de la date quand la prochaine amélioration sera disponible",
+      "Il est maintenant possible de voir les 20 prochaines améliorations",
+      "Optimisation du code"
+    ]
+  },
+  {
     "date": "19-04-2024 - 19h43",
     "events": [
       "Il est maintenant possible d'importer les informations directement de Paladium via un pseudo !",

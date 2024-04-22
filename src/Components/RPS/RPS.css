@@ -1,24 +1,22 @@
-.RPS-father
-{
+.RPS-father {
     display: flex;
     justify-content: space-evenly;
     z-index: 2;
     position: relative;
 }
-.RPS
-{
+
+.RPS {
     font-size: calc(10px + 2vmin);
     color: #FF5C00;
+    width: 100%;
 }
 
-.RPSValue
-{
+.RPSValue {
     margin-right: 10px;
     font-size: calc(10px + 2vmin);
     color: orange;
 }
 
-.Building-To-Buy-img
-{
+.Building-To-Buy-img {
     width: 10vmin;
 }

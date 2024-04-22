@@ -2,23 +2,26 @@ function checkIfKeyExists(obj, key) {
     return obj.hasOwnProperty(key);
 }
 
-function getAllCostSpend(playerInfo) {
-    // playerInfo is an object
+export function getTotalSpend(playerInfo) {
     let total = 0;
     for (const key in playerInfo) {
-        playerInfo[key].forEach(e => {
-            if (checkIfKeyExists(e, "price") && (e["own"] === true || e["own"] >= 1)) {
-                if (key === "building")
-                {
-                    for(let i = 0; i < e["own"]; i++)
-                        total += e["price"] * Math.pow(1.100000023841858, i);
+        if (key !== "production") {
+            playerInfo[key].forEach(e => {
+                if (checkIfKeyExists(e, "price") && (e["own"] === true || e["own"] >= 1)) {
+                    if (key === "building") {
+                        for (let i = 0; i < e["own"]; i++)
+                            total += e["price"] * Math.pow(1.100000023841858, i);
+                    } else
+                        total += e["price"];
                 }
-                else
-                    total += e["price"];
-            }
-        });
+            });
+        }
     }
-    return total;
+    return total
+}
+
+function getTotalProduction(playerInfo) {
+    return playerInfo["production"];
 }
 
 function getCoinsCondition(conditions) {
@@ -54,7 +57,7 @@ function getDayCondition(conditions) {
 export function checkCondition(playerInfo, conditions) {
     const coinsCondition = getCoinsCondition(conditions);
     const dayCondition = getDayCondition(conditions);
-    const totalCoins = getAllCostSpend(playerInfo);
+    const totalCoins = getTotalProduction(playerInfo);
     const buildingIndex = getBuildingIndexCondition(conditions);
     const buildingNeed = getBuildingCountCondition(conditions);
     const daySinceStart = 50;
@@ -69,4 +72,27 @@ export function printPricePretty(price) {
     if (price === undefined)
         return "-1";
     return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+}
+
+export function getPathImg(bestListName, bestUpgradeIndex) {
+    switch (bestListName) {
+        case "building":
+            return process.env.PUBLIC_URL + "/BuildingIcon/" + bestUpgradeIndex + ".png";
+        case "building_upgrade":
+            return process.env.PUBLIC_URL + "/BuildingUpgradeIcon/" + (bestUpgradeIndex < 16 ? "0" : "1") + ".png";
+        case "category_upgrade":
+            return process.env.PUBLIC_URL + "/CategoryIcon/" + bestUpgradeIndex + ".png";
+        case "global_upgrade":
+            return process.env.PUBLIC_URL + "/GlobalIcon/" + bestUpgradeIndex + ".png";
+        case "many_upgrade":
+            return process.env.PUBLIC_URL + "/ManyIcon/0.png";
+        case "terrain_upgrade":
+            return process.env.PUBLIC_URL + "/TerrainIcon/" + bestUpgradeIndex + ".png";
+        case "posterior_upgrade":
+            return process.env.PUBLIC_URL + "/PosteriorIcon/0.png";
+        default:
+            alert("Error in bestListName");
+            return process.env.PUBLIC_URL + "/BuildingUpgradeIcon/0.png";
+
+    }
 }
