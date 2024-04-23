@@ -92,7 +92,7 @@ const Graph = () => {
                     )
                 }
                 layout={{
-                    title: 'Classement Clicker',
+                    title: 'Classement Clicker - Graphique intéractif',
                     autosize: true,
                     width: width * 0.8,
                     height: height * 0.8,

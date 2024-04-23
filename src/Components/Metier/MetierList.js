@@ -185,7 +185,6 @@ const Metier = ({metierName, imgPath, playerInfo, setPlayerInfo, level}) => {
                     </svg>
                 </div>
 
-                <div className="cornerLink">{metierName.charAt(0).toUpperCase() + metierName.slice(1)}</div>
             </div>
             <div className={"Lvl-txt ul-horizontal"}
                  style={{backgroundColor: `rgb(${bgc[0]},${bgc[1]},${bgc[2]})`}}>

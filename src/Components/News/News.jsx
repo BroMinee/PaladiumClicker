@@ -1,10 +1,10 @@
 import React, {useEffect} from "react";
 import "./News.css";
-import { ImCross } from "react-icons/im";
+import {ImCross} from "react-icons/im";
 import fetchDataOnPublicURL from "../../FetchData";
 import ReactAudioPlayer from "react-audio-player";
 
-const News = ({cacheHasBeenReset}) => {
+const News = ({cacheHasBeenReset, index}) => {
 
     const [news, setNews] = React.useState({});
 
@@ -26,14 +26,14 @@ const News = ({cacheHasBeenReset}) => {
 
     }, []);
 
-    return <div className="modal" id="modal" style={{display: cacheHasBeenReset ? "block" : "none"}}>
-            <div className="modal-back"></div>
+    return <div className="modal" id="modal" key={index} style={{display: cacheHasBeenReset ? "block" : "none"}}>
+        <div className="modal-back"></div>
         <div className="modal-container"
              style={{"background-image": `url(${process.env.PUBLIC_URL}/background.png)`}}>
             <ImCross onClick={closeModal} className="RedCrossIcon"/>
             <h1 className={"BroMine"}>News depuis la dernière fois</h1>
             {Object.keys(news).map((date, index) => {
-                return <New date={news[date]["date"]} events={news[date]["events"]}/>
+                return <New date={news[date]["date"]} events={news[date]["events"]} index={index}/>
             })}
             <br/>
             <h2>Pourquoi BroMine__ n'est plus top 1 clicker</h2>
@@ -60,8 +60,8 @@ const News = ({cacheHasBeenReset}) => {
     </div>
 }
 
-const New = ({date, events}) => {
-    return <div>
+const New = ({date, events, index}) => {
+    return <div key={index} id={index}>
         <h2 style={{"textDecoration": "underline"}}>{date}</h2>
         <ul>
             {events.map((event, index) => {

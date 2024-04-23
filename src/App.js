@@ -17,10 +17,33 @@ import Graph from "./Components/Graph/Graph";
 import Tuto from "./Components/Tuto/Tuto";
 import Stats from "./Components/Stats/Stats";
 
+import {
+    BrowserRouter,
+    Routes,
+    Route,
+} from "react-router-dom";
+import PalaAnimation from "./pages/PalaAnimation/PalaAnimation";
+import Navbar from "./pages/PalaAnimation/NavBar";
+import About from "./pages/About/About";
+import Bugs from "./pages/Bugs/Bugs";
+
 let cacheHasBeenReset = false;
 
-
 const App = () => {
+    return (
+        <BrowserRouter>
+            <Navbar/>
+            <Routes>
+                <Route exact path="/PaladiumClicker" element={<OptiClicker/>}/>
+                <Route exact path="/PalaAnimation" element={<PalaAnimation/>}/>
+                <Route exact path="/About" element={<About/>}/>
+                <Route exact path="/Bugs" element={<Bugs/>}/>
+            </Routes>
+        </BrowserRouter>
+    )
+}
+
+const OptiClicker = () => {
 
     const [rps, setRPS] = useState(1)
     const [estimatedRPS, setEstimatedRPS] = useState(3)
@@ -178,7 +201,7 @@ const App = () => {
         }
 
         const uuid = localStorage.getItem("uuid")
-        if(uuid !== null)
+        if (uuid !== null)
             setUUID(uuid)
 
     }, []);
@@ -204,13 +227,14 @@ const App = () => {
                 <Tuto/>
                 {/*<Popup/>*/}
 
-                <div className="App" style={{"background-image": `url(${process.env.PUBLIC_URL}/background.png)`}}>
+                <div className="App" style={{backgroundImage: `url(${process.env.PUBLIC_URL}/background.png)`}}>
                     <header className="App-header">
                         <div style={{flexDirection: "row", display: "flex"}}>
                             <h3 style={{marginBottom: "0px", zIndex: 1, position: "relative"}}>
                                 Bienvenue sur l'optimiseur du&nbsp;
                             </h3>
-                            <h3 style={{marginBottom: "0px", zIndex: 1, position: "relative"}} className={"BroMine"}>
+                            <h3 style={{marginBottom: "0px", zIndex: 1, position: "relative"}}
+                                className={"BroMine"}>
                                 PalaClicker
                             </h3>
 
@@ -303,7 +327,7 @@ export function isCacheDateValid() {
     }
     try {
         const jsonCacheInfo = JSON.parse(cacheInfo);
-        if (jsonCacheInfo["timestamp"] < new Date("22 April 2024 19:06 UTC+2")) {
+        if (jsonCacheInfo["timestamp"] < new Date("24 April 2024 00:56 UTC+2")) {
             return false
         }
     } catch (e) {

@@ -116,7 +116,7 @@ const Stats = ({playerInfo, setPlayerInfo, rps, UUID}) => {
                     Coins dormants
                     <div style={{display: "flex", flexDirection: "row", justifyContent: "center"}}>
                         <div className={"RPSValue"}>
-                            {printPricePretty(Math.round(coinsDormants))}
+                            ~ {printPricePretty(Math.round(coinsDormants))}
                         </div>
                         <div>
                             <img src={process.env.PUBLIC_URL + "/" + "coin.png"} className="App-logo"

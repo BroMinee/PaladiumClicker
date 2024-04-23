@@ -1,0 +1,15 @@
+#user-answer
+{
+    width: 10vmin;
+    height: 10vmin;
+    min-width: 130vmin;
+    min-height: 10px;
+    font-size: 7vmin;
+    color: #ffffff;
+    font-weight: bold;
+    background: transparent;
+    border: none;
+    outline: none;
+    resize: none;
+    text-align: center;
+}
