@@ -13,3 +13,45 @@
     resize: none;
     text-align: center;
 }
+
+#old-response
+{
+    width: 10vmin;
+    min-width: 130vmin;
+    min-height: 10px;
+    max-height: 20vmin;
+    overflow-y: auto;
+
+    font-size: 5vmin;
+    color: #ffffff;
+    font-weight: bold;
+    background: transparent;
+    border: none;
+    outline: none;
+    resize: none;
+    text-align: center;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 10vmin;
+}
+
+.user-char
+{
+    margin: 0px 2px;
+}
+
+.string-response
+{
+    display:inline-flex;
+    column-gap: 10px;
+}
+
+.bottom-button
+{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding: 10px;
+    column-gap: 2vmin;
+}

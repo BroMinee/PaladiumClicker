@@ -63,16 +63,16 @@ const Navbar = () => {
         <>
             <Nav>
                 <NavMenu>
-                    <NavLink to="/PaladiumClicker" activeStyle>
+                    <NavLink to="/PaladiumClicker" activestyle="true">
                         PalaClicker Optimizer
                     </NavLink>
-                    <NavLink to="/PalaAnimation" activeStyle>
-                        PalaAnimation Training
+                    <NavLink to="/PalaAnimation" activestyle="true">
+                        PalaAnimation Trainer
                     </NavLink>
-                    <NavLink to="/About" activeStyle>
+                    <NavLink to="/About" activestyle="true">
                         About
                     </NavLink>
-                    <NavLink to="/Bugs" activeStyle>
+                    <NavLink to="/Bugs" activestyle="true">
                         Bugs
                     </NavLink>
                 </NavMenu>
