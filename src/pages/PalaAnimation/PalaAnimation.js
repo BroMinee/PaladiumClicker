@@ -11,7 +11,7 @@ const PalaAnimation = () => {
             <header className="App-header">
                 <div style={{flexDirection: "row", display: "flex"}}>
                     <h3 style={{marginBottom: "0px", zIndex: 1, position: "relative"}}>
-                        Bienvenue dans la zone d'entrairenement du&nbsp;
+                        Bienvenue dans la zone d'entraînement du&nbsp;
                     </h3>
                     <h3 style={{marginBottom: "0px", zIndex: 1, position: "relative"}}
                         className={"BroMine"}>
