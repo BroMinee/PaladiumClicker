@@ -9,7 +9,7 @@ const fetchDataOnPublicURL = async (file) => {
 }
 
 const fetchUUIDOnPaladiumAPI = async (pseudo) => {
-    const response = await axios.get(`https://api.paladium-pvp.fr/player/profile/${pseudo}`,
+    const response = await axios.get(`https://api.paladium-pvp.fr/v1/paladium/player/profile/${pseudo}`,
         {
             headers: {
                 'Content-Type': 'application/json',
@@ -25,7 +25,7 @@ const fetchUUIDOnPaladiumAPI = async (pseudo) => {
 
 export const fetchLeaderboardPosition = async (uuid) => {
     const result = await axios(
-        `https://api.paladium-pvp.fr/ranking/position/clicker/${uuid}`,
+        `https://api.paladium-pvp.fr/v1/paladium/ranking/position/clicker/${uuid}`,
         {
             headers: {
                 'Content-Type': 'application/json',
@@ -42,7 +42,7 @@ export const fetchLeaderboardPosition = async (uuid) => {
 export const fetchDataOnPaladiumAPI = async (pseudo) => {
     const [uuid, jobs] = await fetchUUIDOnPaladiumAPI(pseudo)
     const result = await axios(
-        `https://api.paladium-pvp.fr/player/profile/${uuid}/clicker`,
+        `https://api.paladium-pvp.fr/v1/paladium/player/profile/${uuid}/clicker`,
         {
             headers: {
                 'Content-Type': 'application/json',

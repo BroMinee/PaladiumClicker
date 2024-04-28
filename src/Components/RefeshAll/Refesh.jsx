@@ -4,6 +4,9 @@ import "./Refresh.css"
 import fetchDataOnPublicURL, {fetchDataOnPaladiumAPI} from "../../FetchData";
 
 const Refesh = ({playerInfo, setPlayerInfo, setUUID}) => {
+
+    const [errorInARow, setErrorInARow] = React.useState(0);
+
     function exportData() {
         const data = JSON.stringify(playerInfo);
         const blob = new Blob([data], {type: 'text/plain'});

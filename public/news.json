@@ -1,5 +1,11 @@
 [
   {
+    "date": "28-04-2024 - 21h43",
+    "events": [
+      "Correction du changement dans l'API de Paladium"
+    ]
+  },
+  {
     "date": "27-04-2024 - 15h15",
     "events": [
       "Ajout du 'Côtelette Clic'"
