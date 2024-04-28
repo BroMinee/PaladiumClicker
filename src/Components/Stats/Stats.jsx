@@ -32,7 +32,7 @@ function getBestUpgrade(copyPlayerInfo) {
 }
 
 export function computeXBuildingAhead(playerInfo, x, rps) {
-    // Path, index, own, price, timeToBuy (string), pathImg, newRps
+    // Path, index, own, timeToBuy (string), pathImg, newRps, price
 
     let copyRps = rps;
     let date = new Date();
@@ -40,20 +40,24 @@ export function computeXBuildingAhead(playerInfo, x, rps) {
     let currentCoins = Math.max(playerInfo["production"] - getTotalSpend(copy), 0);
     let BuildingBuyPaths = [];
     for (let i = 0; i < x; i++) {
-        const [path, index, own, pathImg] = getBestUpgrade(copy);
+        let [path, index, own, pathImg] = getBestUpgrade(copy);
 
         if(index !== -1)
         {
+            let price = copy[path][index]["price"];
             const [timeToBuy, newCoins] = computeTimeToBuy(copy[path][index]["price"], own, currentCoins, copyRps, date);
             currentCoins = Math.max(newCoins, 0)
             date = timeToBuy;
             if (typeof own === "boolean")
                 copy[path][index]["own"] = true;
             else
+                price = ComputePrice(copy[path][index]["price"], own);
                 copy[path][index]["own"] += 1;
+                own += 1;
+
             copyRps = computeRPS(copy);
 
-            BuildingBuyPaths.push([path, index, own, getDDHHMMSS(timeToBuy), pathImg, copyRps]);
+            BuildingBuyPaths.push([path, index, own, getDDHHMMSS(timeToBuy), pathImg, copyRps, price]);
         }
 
     }
@@ -80,7 +84,9 @@ const Stats = ({playerInfo, setPlayerInfo, rps, UUID}) => {
 
     const [check, setCheck] = useState(false);
     const [buildingBuyPaths, setBuildingBuyPaths] = useState([]);
-    const prochainAchatCount = 20;
+    let prochainAchatCount = 20;
+    if(localStorage.getItem("pseudo") === "PhYsAlI")
+        prochainAchatCount = 100*100;
 
     useEffect(() => {
         if (check === false)
@@ -204,6 +210,7 @@ function getDDHHMMSS(d) {
 export const Stat = ({playerInfo, buildingBuyPath, showProduction}) => {
 
     // List of list [path, index, own, timeToBuy, pathImg]
+    console.log(buildingBuyPath)
 
     return (
         <ul className={"ul-horizontal ul-stat"}>
@@ -215,10 +222,13 @@ export const Stat = ({playerInfo, buildingBuyPath, showProduction}) => {
                                 <img src={buildingPath[4]} alt="image"
                                      className={"Stat-img"}></img>
                                 <div
-                                    className="cornerLink">{playerInfo[buildingPath[0]][buildingPath[1]]["name"]}</div>
+                                    className="cornerLink">{playerInfo[buildingPath[0]][buildingPath[1]]["name"] + " - lvl " + buildingPath[2]}</div>
+                                <div className={"BroMine"}>Prix</div>
+                                <div style={{color: "white"}}>{printPricePretty(buildingPath[6].toFixed(0))} $
                                 <div className={"BroMine"}>Achetable le</div>
                                 <div style={{color: "white"}}>{buildingPath[3]}</div>
 
+                                </div>
                                 {showProduction &&
                                     <div>
                                         <div className={"BroMine"}>Production estimée</div>

@@ -1,5 +1,13 @@
 [
   {
+    "date": "29-04-2024 - 01h52",
+    "events": [
+      "Correction du changement dans l'API de Paladium (encore)",
+      "Ajout du prix et du niveau des améliorations à acheter",
+      "Ajout du classement du jour"
+    ]
+  },
+  {
     "date": "28-04-2024 - 21h43",
     "events": [
       "Correction du changement dans l'API de Paladium"

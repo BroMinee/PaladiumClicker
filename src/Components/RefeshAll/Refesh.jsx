@@ -131,6 +131,7 @@ const Refesh = ({playerInfo, setPlayerInfo, setUUID}) => {
         document.getElementById("errorAPI").innerText = "";
         document.getElementById("pseudoInput").value = "";
         document.getElementById("pseudoInput").placeholder = "Entre ton pseudo";
+        setErrorInARow(0);
 
         fetchAllData();
     }
@@ -141,6 +142,20 @@ const Refesh = ({playerInfo, setPlayerInfo, setUUID}) => {
             setTimer(lockSend)
         }
     }, []);
+
+    useEffect(() => {
+        if (errorInARow >= 2) {
+            document.getElementById("ApiDown").style.display = "block";
+            document.getElementById("errorAPI").innerHTML = "";
+        }
+        if (errorInARow === 4) {
+            setErrorInARow(0);
+        }
+        if (errorInARow === 0) {
+            document.getElementById("ApiDown").style.display = "none";
+        }
+
+    }, [errorInARow]);
 
     async function fetchBuildingInfoFromPseudo(setUUID) {
         // if speudo contains space
@@ -235,11 +250,11 @@ const Refesh = ({playerInfo, setPlayerInfo, setUUID}) => {
             document.getElementById("errorAPI").innerText = "";
             document.getElementById("pseudoInput").value = "";
             document.getElementById("pseudoInput").placeholder = pseudo;
-            if(pseudo.toLowerCase() == "mejou")
-            {
+            if (pseudo.toLowerCase() == "mejou") {
                 document.getElementById("errorAPI").innerText = "Attention un silverfish est apparu dans votre dos !";
             }
         } catch (e) {
+            setErrorInARow(errorInARow + 1);
             if (e.status === 429) {
                 setTimer(120)
             } else if (e.status === 404) {
@@ -248,11 +263,12 @@ const Refesh = ({playerInfo, setPlayerInfo, setUUID}) => {
                 document.getElementById("errorAPI").innerText = "Erreur interne du serveur, veuillez réessayer plus tard";
                 setTimer(60 * 5);
             } else {
-                document.getElementById("errorAPI").innerText = JSON.stringify(e);
+                document.getElementById("errorAPI").innerText = e["data"] !== undefined && e["data"]["message"] !== undefined ? JSON.stringify(e["data"]["message"]) : e;
             }
         }
         document.getElementById("importer").innerText = "Importer";
     }
+
     return <div>
         <div className={"ImportExport"}>
             <input type="pseudo" id={"pseudoInput"} placeholder={"Entre ton pseudo"} onKeyUp={(e) => {
@@ -263,6 +279,10 @@ const Refesh = ({playerInfo, setPlayerInfo, setUUID}) => {
             <button onClick={refesh} className={"RED"}>Réinitialiser</button>
         </div>
         <text id={"errorAPI"}></text>
+        <div id={"ApiDown"} style={{display: "none", fontSize: "20px"}}>
+            <div>L'API de pala est peut-être down:</div>
+            <a href="https://status.palaguidebot.fr/" target="_blank">Vérifier le status</a>
+        </div>
     </div>
 }
 
