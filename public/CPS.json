@@ -3,150 +3,372 @@
     "name": "Pastèque Clic",
     "CPS": 2,
     "own": false,
-    "index": 0
+    "index": 0,
+    "price": 10000,
+    "condition": [
+      {
+        "coins": 100000
+      }
+    ]
   },
   {
     "name": "Carrote Clic",
     "CPS": 4,
     "own": false,
-    "index": 1
+    "index": 1,
+    "price": 25000,
+    "condition": [
+      {
+        "coins": 250000
+      },
+      {
+        "day": 3
+      }
+    ]
   },
   {
     "name": "Patate Clic",
     "CPS": 8,
     "own": false,
-    "index": 2
+    "index": 2,
+    "price": 62500,
+    "condition": [
+      {
+        "coins": 625000
+      },
+      {
+        "day": 6
+      }
+    ]
   },
   {
     "name": "Pain Clic",
     "CPS": 16,
     "own": false,
-    "index": 3
+    "index": 3,
+    "price": 156250,
+    "condition": [
+      {
+        "coins": 1562500
+      },
+      {
+        "day": 8
+      }
+    ]
   },
   {
     "name": "Lait Clic",
     "CPS": 32,
     "own": false,
-    "index": 4
+    "index": 4,
+    "price": 390625,
+    "condition": [
+      {
+        "coins": 3906250
+      },
+      {
+        "day": 10
+      }
+    ]
   },
   {
     "name": "Choco Clic",
     "CPS": 64,
     "own": false,
-    "index": 5
+    "index": 5,
+    "price": 975000,
+    "condition": [
+      {
+        "coins": 9750000
+      },
+      {
+        "day": 13
+      }
+    ]
   },
   {
     "name": "Bonbon Clic",
     "CPS": 128,
     "own": false,
-    "index": 6
+    "index": 6,
+    "price": 2450000,
+    "condition": [
+      {
+        "coins": 24500000
+      },
+      {
+        "day": 17
+      }
+    ]
   },
   {
     "name": "Cookie Clic",
     "CPS": 256,
     "own": false,
-    "index": 7
+    "index": 7,
+    "price": 6000000,
+    "condition": [
+      {
+        "coins": 60000000
+      },
+      {
+        "day": 20
+      }
+    ]
   },
   {
     "name": "Glace Clic",
     "CPS": 512,
     "own": false,
-    "index": 8
+    "index": 8,
+    "price": 15250000,
+    "condition": [
+      {
+        "coins": 152500000
+      },
+      {
+        "day": 23
+      }
+    ]
   },
   {
     "name": "Souple Clic",
     "CPS": 1024,
     "own": false,
-    "index": 9
+    "index": 9,
+    "price": 38500000,
+    "condition": [
+      {
+        "coins": 385000000
+      },
+      {
+        "day": 29
+      }
+    ]
   },
   {
     "name": "Poisson Clic",
     "CPS": 2048,
     "own": false,
-    "index": 10
+    "index": 10,
+    "price": 95000000,
+    "condition": [
+      {
+        "coins": 950000000
+      },
+      {
+        "day": 34
+      }
+    ]
   },
   {
     "name": "Poulet Clic",
     "CPS": 4096,
     "own": false,
-    "index": 11
+    "index": 11,
+    "price": 235000000,
+    "condition": [
+      {
+        "coins": 2350000000
+      },
+      {
+        "day": 40
+      }
+    ]
   },
   {
     "name": "Jambon Clic",
     "CPS": 8192,
     "own": false,
-    "index": 12
+    "index": 12,
+    "price": 595000000,
+    "condition": [
+      {
+        "coins": 5950000000
+      },
+      {
+        "day": 45
+      }
+    ]
   },
   {
     "name": "Tarte Clic",
     "CPS": 16384,
     "own": false,
-    "index": 13
+    "index": 13,
+    "price": 1450000000,
+    "condition": [
+      {
+        "coins": 14500000000
+      },
+      {
+        "day": 53
+      }
+    ]
   },
   {
     "name": "Gâteau Clic",
     "CPS": 32768,
     "own": false,
-    "index": 14
+    "index": 14,
+    "price": 3750000000,
+    "condition": [
+      {
+        "coins": 37500000000
+      },
+      {
+        "day": 61
+      }
+    ]
   },
   {
     "name": "Côtelette Clic",
     "CPS": 65536,
     "own": false,
-    "index": 15
+    "index": 15,
+    "price": 9350000000,
+    "condition": [
+      {
+        "coins": 93500000000
+      },
+      {
+        "day": 68
+      }
+    ]
   },
   {
     "name": -1,
     "CPS": -1,
     "own": false,
-    "index": 16
+    "index": 16,
+    "price": 2337500000,
+    "condition": [
+      {
+        "coins": 23375000000
+      },
+      {
+        "day": 75
+      }
+    ]
   },
   {
     "name": -1,
     "CPS": -1,
     "own": false,
-    "index": 17
+    "index": 17,
+    "price": 5843750000,
+    "condition": [
+      {
+        "coins": 58437500000
+      },
+      {
+        "day": 82
+      }
+    ]
   },
   {
     "name": -1,
     "CPS": -1,
     "own": false,
-    "index": 18
+    "index": 18,
+    "price": 14609375000,
+    "condition": [
+      {
+        "coins": 146093750000
+      },
+      {
+        "day": 89
+      }
+    ]
   },
   {
     "name": -1,
     "CPS": -1,
     "own": false,
-    "index": 19
+    "index": 19,
+    "price": 36523437500,
+    "condition": [
+      {
+        "coins": 365234375000
+      },
+      {
+        "day": 96
+      }
+    ]
   },
   {
     "name": -1,
     "CPS": -1,
     "own": false,
-    "index": 20
+    "index": 20,
+    "price": 91308593750,
+    "condition": [
+      {
+        "coins": 913085937500
+      },
+      {
+        "day": 103
+      }
+    ]
   },
   {
     "name": -1,
     "CPS": -1,
     "own": false,
-    "index": 21
+    "index": 21,
+    "price": 228271484375,
+    "condition": [
+      {
+        "coins": 2282714843750
+      },
+      {
+        "day": 110
+      }
+    ]
   },
   {
     "name": -1,
     "CPS": -1,
     "own": false,
-    "index": 22
+    "index": 22,
+    "price": 570678710937,
+    "condition": [
+      {
+        "coins": 5706787109375
+      },
+      {
+        "day": 117
+      }
+    ]
   },
   {
     "name": -1,
     "CPS": -1,
     "own": false,
-    "index": 23
+    "index": 23,
+    "price": 1426696777343,
+    "condition": [
+      {
+        "coins": 14266967773438
+      },
+      {
+        "day": 124
+      }
+    ]
   },
   {
     "name": -1,
     "CPS": -1,
     "own": false,
-    "index": 24
+    "index": 24,
+    "price": 3566741943359,
+    "condition": [
+      {
+        "coins": 35667419433594
+      },
+      {
+        "day": 131
+      }
+    ]
   }
 ]

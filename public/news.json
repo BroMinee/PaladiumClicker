@@ -1,5 +1,11 @@
 [
   {
+    "date": "29-04-2024 - 19h09",
+    "events": [
+      "Ajout des préconditions pour les améliorations de clic"
+    ]
+  },
+  {
     "date": "29-04-2024 - 01h52",
     "events": [
       "Correction du changement dans l'API de Paladium (encore)",

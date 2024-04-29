@@ -1,5 +1,6 @@
 import React, {useEffect} from "react";
 import "./ClickList.css";
+import {checkCondition, printPricePretty} from "../../Misc";
 
 const ClickList = ({playerInfo, setPlayerInfo}) => {
 
@@ -45,13 +46,27 @@ const CPS = ({playerInfo, setPlayerInfo, buildingName, imgPath, index}) => {
         setPlayerInfo({...playerInfo})
     }
 
-    let unlockable = true;
-    for (let i = 0; i < index; i++) {
+    let [unlockable, coinsCondition, totalCoins, dayCondition, daySinceStart, buildingIndex, buildingNeed, buildingCount] = checkCondition(playerInfo, playerInfo["CPS"][index]["condition"]);
+    let texts = ["Précondition non remplie :"];
+    if(playerInfo["CPS"][index]["name"] === -1)
+        texts[0] = "Précondition non remplie (spéculation):";
+    for (let i = 1; i < index; i++) {
         if (playerInfo["CPS"][i]["own"] === false) {
+            texts.push(`Achetez ${playerInfo["CPS"][index - 1]["name"]}`)
             unlockable = false;
             break;
         }
     }
+    if(unlockable === false) {
+        if(dayCondition !== -1 && daySinceStart < dayCondition)
+            texts.push(`Début de saison depuis ${printPricePretty(dayCondition)} jours. Actuellement : ${printPricePretty(daySinceStart.toFixed(0))} jours`);
+        if(coinsCondition !== -1 && totalCoins < coinsCondition)
+            texts.push(`Collecter ${printPricePretty(coinsCondition)} coins`);
+        if(buildingIndex !== -1 && buildingCount < buildingNeed)
+            texts.push(`${buildingNeed - buildingCount} ${playerInfo["building"][buildingIndex]["name"]} manquant`);
+    }
+    if(texts.length !== 2)
+        texts[0] = "Préconditions non remplies :";
 
     return (
         <li key={index} onClick={setOwn} className={"fit-all-width"}>
@@ -60,12 +75,15 @@ const CPS = ({playerInfo, setPlayerInfo, buildingName, imgPath, index}) => {
                     <img src={process.env.PUBLIC_URL + "/" + imgPath} alt="image" className={"CPS-img"}></img>
                     <div className="cornerLink">{buildingName}
                         {
-                        unlockable === false && playerInfo["CPS"][index]["name"] !== -1 &&
-                            <div className="Red">Préconditions non remplies :</div>
+                        unlockable === false &&
+                            texts.map((text, index) => (
+                                <div key={index} className="Red">{text}</div>))
                         }
                         {
-                            unlockable === false && playerInfo["CPS"][index]["name"] !== -1 &&
-                            <div className="Red">Achetez {playerInfo["CPS"][index - 1]["name"]}</div>
+                            unlockable === true &&
+                            <div>
+                                {printPricePretty(playerInfo["CPS"][index]["price"])}$
+                            </div>
                         }
 
                     </div>

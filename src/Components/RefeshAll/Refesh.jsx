@@ -257,6 +257,12 @@ const Refesh = ({playerInfo, setPlayerInfo, setUUID}) => {
             setErrorInARow(errorInARow + 1);
             if (e.status === 429) {
                 setTimer(120)
+            } else if (e.status === 403) {
+                document.getElementById("errorAPI").innerText = "Ton profil n'est pas visible, c'est le cas si tu es Youtubeur ou Streamer\n";
+                const pseudo = document.getElementById("pseudoInput").value;
+                if (pseudo.toLowerCase() == "levraifuze") {
+                    document.getElementById("errorAPI").innerText += "Fuze il faut que tu afk 24/7 jusqu'au 21/05/2024 pour avoir le dernier bâtiment aller au boulot ! :)\nSinon je fais un sondage sur mon site pour définir ton gage";
+                }
             } else if (e.status === 404) {
                 document.getElementById("errorAPI").innerText = "Pseudo non trouvé, veuillez vérifier le pseudo";
             } else if (e.stats === 500) {
@@ -266,15 +272,18 @@ const Refesh = ({playerInfo, setPlayerInfo, setUUID}) => {
                 document.getElementById("errorAPI").innerText = e["data"] !== undefined && e["data"]["message"] !== undefined ? JSON.stringify(e["data"]["message"]) : e;
             }
         }
+
         document.getElementById("importer").innerText = "Importer";
     }
 
     return <div>
         <div className={"ImportExport"}>
-            <input type="pseudo" id={"pseudoInput"} placeholder={"Entre ton pseudo"} onKeyUp={(e) => {
-                if (e.key === "Enter")
-                    document.getElementById("importer").click();
-            }}></input>
+            <input type="pseudo" id={"pseudoInput"}
+                   placeholder={localStorage.getItem("pseudo") ? localStorage.getItem("pseudo") : "Entre ton pseudo"}
+                   onKeyUp={(e) => {
+                       if (e.key === "Enter")
+                           document.getElementById("importer").click();
+                   }}></input>
             <button onClick={() => fetchBuildingInfoFromPseudo(setUUID)} id={"importer"}>Importer</button>
             <button onClick={refesh} className={"RED"}>Réinitialiser</button>
         </div>

@@ -42,6 +42,7 @@ export function computeXBuildingAhead(playerInfo, x, rps) {
     for (let i = 0; i < x; i++) {
         let [path, index, own, pathImg] = getBestUpgrade(copy);
 
+
         if(index !== -1)
         {
             let price = copy[path][index]["price"];
@@ -210,7 +211,6 @@ function getDDHHMMSS(d) {
 export const Stat = ({playerInfo, buildingBuyPath, showProduction}) => {
 
     // List of list [path, index, own, timeToBuy, pathImg]
-    console.log(buildingBuyPath)
 
     return (
         <ul className={"ul-horizontal ul-stat"}>

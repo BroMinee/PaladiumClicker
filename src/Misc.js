@@ -1,3 +1,5 @@
+import {ComputePrice} from "./Components/Building/BuildingList";
+
 function checkIfKeyExists(obj, key) {
     return obj.hasOwnProperty(key);
 }
@@ -10,7 +12,7 @@ export function getTotalSpend(playerInfo) {
                 if (checkIfKeyExists(e, "price") && (e["own"] === true || e["own"] >= 1)) {
                     if (key === "building") {
                         for (let i = 0; i < e["own"]; i++)
-                            total += e["price"] * Math.pow(1.100000023841858, i);
+                            total += ComputePrice(e["price"], i);
                     } else
                         total += e["price"];
                 }
@@ -60,7 +62,7 @@ export function checkCondition(playerInfo, conditions) {
     const totalCoins = getTotalProduction(playerInfo);
     const buildingIndex = getBuildingIndexCondition(conditions);
     const buildingNeed = getBuildingCountCondition(conditions);
-    const daySinceStart = 50;
+    const daySinceStart = (new Date().getTime() - new Date("2024-02-19").getTime()) / (1000 * 60 * 60 * 24);
     const buildingCount = buildingIndex === -1 ? -1 : playerInfo["building"][buildingIndex]["own"];
 
     const unlockable = totalCoins >= coinsCondition && daySinceStart >= dayCondition && (buildingIndex === -1 ? true : playerInfo["building"][buildingIndex]["own"] >= buildingNeed); // TODO change day
