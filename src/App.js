@@ -26,6 +26,7 @@ import PalaAnimation from "./pages/PalaAnimation/PalaAnimation";
 import Navbar from "./pages/PalaAnimation/NavBar";
 import About from "./pages/About/About";
 import Bugs from "./pages/Bugs/Bugs";
+import Popup from "./Components/Popup/Popup";
 
 let cacheHasBeenReset = false;
 
@@ -225,7 +226,7 @@ const OptiClicker = () => {
                 <News cacheHasBeenReset={cacheHasBeenReset}/>
                 <Graph/>
                 <Tuto/>
-                {/*<Popup/>*/}
+                <Popup/>
 
                 <div className="App" style={{backgroundImage: `url(${process.env.PUBLIC_URL}/background.png)`}}>
                     <header className="App-header">
@@ -327,7 +328,7 @@ export function isCacheDateValid() {
     }
     try {
         const jsonCacheInfo = JSON.parse(cacheInfo);
-        if (jsonCacheInfo["timestamp"] < new Date("29 April 2024 19:41 UTC+2")) {
+        if (jsonCacheInfo["timestamp"] < new Date("01 May 2024 15:56 UTC+2")) {
             return false
         }
     } catch (e) {

@@ -261,7 +261,7 @@ const Refesh = ({playerInfo, setPlayerInfo, setUUID}) => {
                 document.getElementById("errorAPI").innerText = "Ton profil n'est pas visible, c'est le cas si tu es Youtubeur ou Streamer\n";
                 const pseudo = document.getElementById("pseudoInput").value;
                 if (pseudo.toLowerCase() == "levraifuze") {
-                    document.getElementById("errorAPI").innerText += "Fuze il faut que tu afk 24/7 jusqu'au 21/05/2024 pour avoir le dernier bâtiment aller au boulot ! :)\nSinon je fais un sondage sur mon site pour définir ton gage";
+                    document.getElementById("modal4").style.display = "block";
                 }
             } else if (e.status === 404) {
                 document.getElementById("errorAPI").innerText = "Pseudo non trouvé, veuillez vérifier le pseudo";

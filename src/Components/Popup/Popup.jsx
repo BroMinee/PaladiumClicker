@@ -8,20 +8,29 @@ const Popup = () => {
     }
 
 
-    return <div className="modal" id="modal4" style={{display: "block"}}>
+    return <div className="modal" id="modal4" style={{display: "none"}}>
         <div className="modal-back"></div>
         <div className="modal-container"
              style={{"background-image": `url(${process.env.PUBLIC_URL}/background.png)`}}>
             <ImCross onClick={closeModal} className="RedCrossIcon"/>
-            <h2>
-                Je suis à la recherche du prix de toutes les améliorations (pas les bâtiments), si vous avez des données, merci de me les envoyer sur discord (bromine__).
+            <h2 style={{color: "red"}}>
+                Ton profil n'est pas visible, c'est le cas si tu es Youtubeur ou Streamer
             </h2>
-            Voici la liste des améliorations que je recherche:<br/>
-            <a href={"https://docs.google.com/spreadsheets/d/1FWUrs8sPfmRavDGV49RdAZ15BpBj7Pn-2Ei3zVb6Cvs/edit?usp=sharing"} target={"_blank"}>Lien vers un google sheet</a>
+            <h2>
+                Fuze il faut que tu afk 24/7 jusqu'au 21/05/2024 pour avoir le dernier bâtiment, au boulot ! 🙂
+            </h2>
+            <h2>
+                Si tu veux discuter de comment j'ai fait ce site ajoute moi sur discord
+                <div style={{display: "flex"}}>
+                    <div className="BroMine"> bromine__</div>
+                    <div>&nbsp;(avec deux
+                        underscore)
+                    </div>
+                </div>
+            </h2>
         </div>
     </div>
 };
-
 
 
 export default Popup;

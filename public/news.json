@@ -1,5 +1,12 @@
 [
   {
+    "date": "01-05-2024 - 15h34",
+    "events": [
+      "Corretion de fautes de frappe",
+      "Ajout du classement du jour"
+    ]
+  },
+  {
     "date": "29-04-2024 - 19h09",
     "events": [
       "Ajout des préconditions pour les améliorations de clic"
