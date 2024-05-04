@@ -86,7 +86,7 @@ const Stats = ({playerInfo, setPlayerInfo, rps, UUID}) => {
     const [check, setCheck] = useState(false);
     const [buildingBuyPaths, setBuildingBuyPaths] = useState([]);
     let prochainAchatCount = 20;
-    if(localStorage.getItem("pseudo") === "PhYsAlI")
+    if(localStorage.getItem("pseudo") === "PhYsAlI" || localStorage.getItem("pseudo") === "HyPeR23_" )
         prochainAchatCount = 100*100;
 
     useEffect(() => {
