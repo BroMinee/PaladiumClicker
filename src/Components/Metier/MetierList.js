@@ -129,6 +129,9 @@ function getXpForLevel(level, currentXp) {
 
 const Metier = ({metierName, imgPath, playerInfo, setPlayerInfo, level}) => {
     function enforceMinMax(el) {
+        if(setPlayerInfo === undefined)
+            return
+
         if (el.target.value !== "") {
             el.target.value = Math.floor(el.target.value)
 
@@ -189,12 +192,15 @@ const Metier = ({metierName, imgPath, playerInfo, setPlayerInfo, level}) => {
             <div className={"Lvl-txt ul-horizontal"}
                  style={{backgroundColor: `rgb(${bgc[0]},${bgc[1]},${bgc[2]})`}}>
                 <div>
-                    <input className={"Lvl-inside-txt"} type="number" min="1" step="1" max="100" value={level} onKeyUp={enforceMinMax}
+                    <input className={"Lvl-inside-txt"} style={{padding: (setPlayerInfo === undefined ? "0 0" : "")}} type="number" min="1" step="1" max="100" value={level} onKeyUp={enforceMinMax}
                            onChange={enforceMinMax}/>
                 </div>
+                {setPlayerInfo === undefined ? "" :
                 <div className={"ArrowUpDown"}>
 
                     <div onClick={() => {
+                        if(setPlayerInfo === undefined)
+                            return
                         if(playerInfo["metier"].find((metier) => metier["name"] === metierName)["level"] === 100)
                             return
                         playerInfo["metier"].find((metier) => metier["name"] === metierName)["level"] += 1
@@ -205,6 +211,8 @@ const Metier = ({metierName, imgPath, playerInfo, setPlayerInfo, level}) => {
                     </div>
                     <div onClick={() =>
                     {
+                        if(setPlayerInfo === undefined)
+                            return
                         if(playerInfo["metier"].find((metier) => metier["name"] === metierName)["level"] === 1)
                             return
                         playerInfo["metier"].find((metier) => metier["name"] === metierName)["level"] -= 1
@@ -214,6 +222,7 @@ const Metier = ({metierName, imgPath, playerInfo, setPlayerInfo, level}) => {
                         <SlArrowDown/>
                     </div>
                 </div>
+                }
             </div>
         </ul>
     )

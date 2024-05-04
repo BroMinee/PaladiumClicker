@@ -237,17 +237,17 @@
     ]
   },
   {
-    "name": -1,
-    "CPS": -1,
+    "name": "Steak Clic",
+    "CPS": 131072,
     "own": false,
     "index": 16,
-    "price": 2337500000,
+    "price": 23500000000,
     "condition": [
       {
-        "coins": 23375000000
+        "coins": 235000000000
       },
       {
-        "day": 75
+        "day": 76
       }
     ]
   },

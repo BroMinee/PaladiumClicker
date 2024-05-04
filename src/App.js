@@ -22,19 +22,24 @@ import {
     Routes,
     Route,
 } from "react-router-dom";
+
 import PalaAnimation from "./pages/PalaAnimation/PalaAnimation";
-import Navbar from "./pages/PalaAnimation/NavBar";
+import Navbar from "./pages/NavBar";
+import Profil from "./pages/Profil/Profil";
 import About from "./pages/About/About";
 import Bugs from "./pages/Bugs/Bugs";
 import Popup from "./Components/Popup/Popup";
+import {VERSION} from "./Constant";
 
 let cacheHasBeenReset = false;
+
 
 const App = () => {
     return (
         <BrowserRouter>
             <Navbar/>
             <Routes>
+                <Route exact path="/Profil" element={<Profil/>}/>
                 <Route exact path="/PaladiumClicker" element={<OptiClicker/>}/>
                 <Route exact path="/PalaAnimation" element={<PalaAnimation/>}/>
                 <Route exact path="/About" element={<About/>}/>
@@ -52,7 +57,6 @@ const OptiClicker = () => {
     const [playerInfo, setPlayerInfo] = useState({})
 
     const [UUID, setUUID] = useState("Pseudo inconnu");
-
 
     useEffect(() => {
         const fetchAllData = async () => {
@@ -87,11 +91,20 @@ const OptiClicker = () => {
 
             newPlayerInfo["production"] = 0.5;
 
+            newPlayerInfo["faction"] = "";
+            newPlayerInfo["firstJoin"] = 0;
+            newPlayerInfo["money"] = 0;
+            newPlayerInfo["timePlayed"] =0;
+            newPlayerInfo["username"] = "Pseudo inconnu";
+            newPlayerInfo["uuid"] = 0;
+            newPlayerInfo["rank"] = "Rank inconnu";
+
+
 
             setPlayerInfo(newPlayerInfo)
             localStorage.setItem("cacheInfo", JSON.stringify({
                 "playerInfo": newPlayerInfo,
-                "timestamp": new Date().getTime()
+                "version": VERSION
             }));
 
         }
@@ -177,13 +190,11 @@ const OptiClicker = () => {
 
             newPlayerInfo["production"] = 0.5;
 
-
             setPlayerInfo(newPlayerInfo)
             localStorage.setItem("cacheInfo", JSON.stringify({
                 "playerInfo": newPlayerInfo,
-                "timestamp": new Date().getTime()
+                "version": VERSION
             }));
-
         }
 
         if (Object.keys(playerInfo).length === 0) {
@@ -213,7 +224,7 @@ const OptiClicker = () => {
             return
         localStorage.setItem("cacheInfo", JSON.stringify({
             "playerInfo": playerInfo,
-            "timestamp": new Date().getTime()
+            "version": VERSION
         }));
     }, [playerInfo]);
 
@@ -314,7 +325,9 @@ export function isCacheValid() {
         return false
     }
     try {
-        JSON.parse(cacheInfo);
+        const r = JSON.parse(cacheInfo);
+        if(r["version"] === undefined)
+            return false
     } catch (e) {
         return false
     }
@@ -328,7 +341,14 @@ export function isCacheDateValid() {
     }
     try {
         const jsonCacheInfo = JSON.parse(cacheInfo);
-        if (jsonCacheInfo["timestamp"] < new Date("01 May 2024 15:56 UTC+2")) {
+        if(jsonCacheInfo === undefined || jsonCacheInfo["version"] === undefined) {
+            if(VERSION === 1.0) {
+                localStorage.clear();
+                window.location.reload();
+            }
+            return false
+        }
+        if (jsonCacheInfo["version"] !== VERSION) {
             return false
         }
     } catch (e) {

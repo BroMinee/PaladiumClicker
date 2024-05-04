@@ -1,0 +1,28 @@
+.Profil
+{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.SkinViewer
+{
+    width: 100vmin;
+    height: 100vmin;
+    /* add rounded corners */
+    border-radius: 20px;
+    /* add shadow */
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.5);
+
+    /* add margin */
+    margin: 1rem;
+
+    /* add blur background */
+    /*background: rgba(255, 135, 0, 0.5);*/
+
+}
+
+.pseudoInputProfil
+{
+    font-size: 16px;
+}

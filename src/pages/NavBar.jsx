@@ -63,6 +63,9 @@ const Navbar = () => {
         <>
             <Nav>
                 <NavMenu>
+                    <NavLink to="/Profil" activestyle="true">
+                        Profil (Beta)
+                    </NavLink>
                     <NavLink to="/PaladiumClicker" activestyle="true">
                         PalaClicker Optimizer
                     </NavLink>

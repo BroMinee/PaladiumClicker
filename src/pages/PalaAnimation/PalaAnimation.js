@@ -6,7 +6,6 @@ import {question} from "plotly.js/src/fonts/ploticon";
 
 const PalaAnimation = () => {
     return (
-
         <div className="App" style={{backgroundImage: `url(${process.env.PUBLIC_URL}/background.png)`, height: "calc(100vh - 91.4px)"}}>
             <header className="App-header">
                 <div style={{flexDirection: "row", display: "flex"}}>

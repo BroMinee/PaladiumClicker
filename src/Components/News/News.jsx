@@ -4,6 +4,8 @@ import {ImCross} from "react-icons/im";
 import fetchDataOnPublicURL from "../../FetchData";
 import ReactAudioPlayer from "react-audio-player";
 
+
+
 const News = ({cacheHasBeenReset, index}) => {
 
     const [news, setNews] = React.useState({});

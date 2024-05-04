@@ -120,12 +120,11 @@ const Refesh = ({playerInfo, setPlayerInfo, setUUID}) => {
                 newPlayerInfo["terrain_upgrade"] = data
             })
 
-            newPlayerInfo["production"] = 0;
+            newPlayerInfo["production"] = 0.5;
 
             setPlayerInfo(newPlayerInfo)
             localStorage.setItem("cacheInfo", JSON.stringify({
                 "playerInfo": newPlayerInfo,
-                "timestamp": new Date().getTime()
             }));
         }
         document.getElementById("errorAPI").innerText = "";
@@ -184,7 +183,7 @@ const Refesh = ({playerInfo, setPlayerInfo, setUUID}) => {
                 return data;
             })
 
-            const [uuid, jobs, clickerInfo] = await fetchDataOnPaladiumAPI(pseudo);
+            const [uuid, profil, clickerInfo] = await fetchDataOnPaladiumAPI(pseudo);
             setUUID(uuid);
 
             const upgrades = clickerInfo["upgrades"];
@@ -201,7 +200,7 @@ const Refesh = ({playerInfo, setPlayerInfo, setUUID}) => {
                 newPlayerInfo["metier"][index]["level"] = 0;
                 newPlayerInfo["metier"][index]["xp"] = 0;
             });
-            newPlayerInfo["production"] = 0;
+            newPlayerInfo["production"] = 0.5;
 
             ["building_upgrade", "category_upgrade", "CPS", "global_upgrade", "many_upgrade", "posterior_upgrade", "terrain_upgrade"].forEach((key) => {
                 newPlayerInfo[key].forEach((upgrade, index) => {
@@ -222,6 +221,16 @@ const Refesh = ({playerInfo, setPlayerInfo, setUUID}) => {
                     throw `Unknown upgrade name : '${upgrade}', please contact the developer to fix it`;
                 newPlayerInfo[pathToFollow[0]][pathToFollow[1]]["own"] = true;
             });
+
+            const jobs = profil["jobs"];
+
+            newPlayerInfo["faction"] = profil["faction"] === "" ? "Wilderness" : profil["faction"];
+            newPlayerInfo["firstJoin"] = profil["firstJoin"];
+            newPlayerInfo["money"] = profil["money"];
+            newPlayerInfo["timePlayed"] = profil["timePlayed"];
+            newPlayerInfo["username"] = profil["username"];
+            newPlayerInfo["uuid"] = profil["uuid"];
+            newPlayerInfo["rank"] = profil["rank"];
 
             Object.keys(jobs).forEach((job) => {
                 switch (job) {
@@ -250,6 +259,8 @@ const Refesh = ({playerInfo, setPlayerInfo, setUUID}) => {
             document.getElementById("errorAPI").innerText = "";
             document.getElementById("pseudoInput").value = "";
             document.getElementById("pseudoInput").placeholder = pseudo;
+            setErrorInARow(0);
+
             if (pseudo.toLowerCase() == "mejou") {
                 document.getElementById("errorAPI").innerText = "Attention un silverfish est apparu dans votre dos !";
             }
@@ -279,7 +290,7 @@ const Refesh = ({playerInfo, setPlayerInfo, setUUID}) => {
     return <div>
         <div className={"ImportExport"}>
             <input type="pseudo" id={"pseudoInput"}
-                   placeholder={localStorage.getItem("pseudo") ? localStorage.getItem("pseudo") : "Entre ton pseudo"}
+                   placeholder={playerInfo["username"] ? playerInfo["username"] : "Entre ton pseudo"}
                    onKeyUp={(e) => {
                        if (e.key === "Enter")
                            document.getElementById("importer").click();
@@ -295,7 +306,7 @@ const Refesh = ({playerInfo, setPlayerInfo, setUUID}) => {
     </div>
 }
 
-function setTimer(howMuchTime) {
+export function setTimer(howMuchTime) {
     if (howMuchTime <= 0)
         return;
 

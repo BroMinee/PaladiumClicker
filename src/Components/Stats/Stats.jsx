@@ -22,7 +22,7 @@ function getBestUpgrade(copyPlayerInfo) {
     } else {
         index = indexToBuy;
         path = "building";
-        if(index === -1)
+        if (index === -1)
             own = 0;
         else
             own = copyPlayerInfo["building"][index]["own"];
@@ -43,8 +43,7 @@ export function computeXBuildingAhead(playerInfo, x, rps) {
         let [path, index, own, pathImg] = getBestUpgrade(copy);
 
 
-        if(index !== -1)
-        {
+        if (index !== -1) {
             let price = copy[path][index]["price"];
             const [timeToBuy, newCoins] = computeTimeToBuy(copy[path][index]["price"], own, currentCoins, copyRps, date);
             currentCoins = Math.max(newCoins, 0)
@@ -53,8 +52,8 @@ export function computeXBuildingAhead(playerInfo, x, rps) {
                 copy[path][index]["own"] = true;
             else
                 price = ComputePrice(copy[path][index]["price"], own);
-                copy[path][index]["own"] += 1;
-                own += 1;
+            copy[path][index]["own"] += 1;
+            own += 1;
 
             copyRps = computeRPS(copy);
 
@@ -86,8 +85,6 @@ const Stats = ({playerInfo, setPlayerInfo, rps, UUID}) => {
     const [check, setCheck] = useState(false);
     const [buildingBuyPaths, setBuildingBuyPaths] = useState([]);
     let prochainAchatCount = 20;
-    if(localStorage.getItem("pseudo") === "PhYsAlI" || localStorage.getItem("pseudo") === "HyPeR23_" )
-        prochainAchatCount = 100*100;
 
     useEffect(() => {
         if (check === false)
@@ -225,8 +222,8 @@ export const Stat = ({playerInfo, buildingBuyPath, showProduction}) => {
                                     className="cornerLink">{playerInfo[buildingPath[0]][buildingPath[1]]["name"] + " - lvl " + buildingPath[2]}</div>
                                 <div className={"BroMine"}>Prix</div>
                                 <div style={{color: "white"}}>{printPricePretty(buildingPath[6].toFixed(0))} $
-                                <div className={"BroMine"}>Achetable le</div>
-                                <div style={{color: "white"}}>{buildingPath[3]}</div>
+                                    <div className={"BroMine"}>Achetable le</div>
+                                    <div style={{color: "white"}}>{buildingPath[3]}</div>
 
                                 </div>
                                 {showProduction &&

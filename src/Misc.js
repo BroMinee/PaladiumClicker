@@ -6,8 +6,9 @@ function checkIfKeyExists(obj, key) {
 
 export function getTotalSpend(playerInfo) {
     let total = 0;
+    const validKey = ["building", "building_upgrade", "category_upgrade", "global_upgrade", "many_upgrade", "terrain_upgrade", "posterior_upgrade", "CPS", "metier"];
     for (const key in playerInfo) {
-        if (key !== "production") {
+        if (validKey.includes(key)) {
             playerInfo[key].forEach(e => {
                 if (checkIfKeyExists(e, "price") && (e["own"] === true || e["own"] >= 1)) {
                     if (key === "building") {
@@ -62,7 +63,7 @@ export function checkCondition(playerInfo, conditions) {
     const totalCoins = getTotalProduction(playerInfo);
     const buildingIndex = getBuildingIndexCondition(conditions);
     const buildingNeed = getBuildingCountCondition(conditions);
-    const daySinceStart = (new Date().getTime() - new Date("2024-02-19").getTime()) / (1000 * 60 * 60 * 24);
+    const daySinceStart = (new Date().getTime() - new Date("2024-02-18").getTime()) / (1000 * 60 * 60 * 24);
     const buildingCount = buildingIndex === -1 ? -1 : playerInfo["building"][buildingIndex]["own"];
 
     const unlockable = totalCoins >= coinsCondition && daySinceStart >= dayCondition && (buildingIndex === -1 ? true : playerInfo["building"][buildingIndex]["own"] >= buildingNeed); // TODO change day
