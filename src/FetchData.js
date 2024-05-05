@@ -1,5 +1,5 @@
 import axios from "axios";
-import {setTimer} from "./Components/ImportProfil/ImportProfil";
+
 
 
 const API_PREFIX = "https://api.paladium.games/";

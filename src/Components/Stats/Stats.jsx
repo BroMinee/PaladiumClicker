@@ -1,10 +1,9 @@
 import React, {useContext, useEffect, useState} from "react";
 import "./Stats.css";
 import {getPathImg, getTotalSpend, printPricePretty} from "../../Misc";
-import {ComputePrice, computeRPS, scaleCurrentProduction} from "../Building/BuildingList";
+import {ComputePrice, computeRPS} from "../Building/BuildingList";
 import {computeBestBuildingUgrade, findBestUpgrade} from "../RPS/RPS";
-import fetchDataOnPublicURL, {fetchDataOnPaladiumAPI, fetchLeaderboardPosition} from "../../FetchData";
-import {isCacheDateValid, isCacheValid} from "../../App";
+import {fetchLeaderboardPosition} from "../../FetchData";
 import {playerInfoContext} from "../../Context";
 
 
@@ -128,7 +127,7 @@ const Stats = ({rps}) => {
                             ~ {printPricePretty(Math.round(coinsDormants))}
                         </div>
                         <div>
-                            <img src={process.env.PUBLIC_URL + "/" + "coin.png"} className="App-logo"
+                            <img src={`${process.env.PUBLIC_URL}/coin.png`} className="App-logo"
                                  alt="logo"/>
                         </div>
                     </div>

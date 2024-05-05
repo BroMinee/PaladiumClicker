@@ -2,7 +2,6 @@ import React, {useEffect} from 'react';
 import {ImCross} from "react-icons/im";
 import Plot from 'react-plotly.js';
 import fetchDataOnPublicURL from "../../FetchData";
-import {graphJson} from "plotly.js/src/plots/plots";
 
 const Graph = () => {
     let [graphCSV, setGraphCSV] = React.useState({});
@@ -12,7 +11,6 @@ const Graph = () => {
     }
 
     const fetchAllData = async () => {
-        var newPlayerInfo = {}
         let res = await fetchDataOnPublicURL("/graph.csv").then((data) => {
             return csvJSON(data);
         })
@@ -74,7 +72,8 @@ const Graph = () => {
 
     return <div className="modal" id="modal2" style={{display: "none"}}>
         <div className="modal-back"></div>
-        <div className="modal-container">
+        <div className="modal-container"
+             style={{"background-image": `url(${process.env.PUBLIC_URL}/background.png)`}}>
             <ImCross onClick={closeModal} className="RedCrossIcon"/>
             <Plot
                 data={

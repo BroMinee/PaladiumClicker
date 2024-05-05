@@ -1,7 +1,6 @@
-import React, {useEffect, useRef, useState} from "react";
+import React, {useEffect, useState} from "react";
 import fetchDataOnPublicURL from "../../FetchData";
 import "./PalaAnimation.css";
-import {question} from "plotly.js/src/fonts/ploticon";
 
 
 const PalaAnimation = () => {
@@ -192,7 +191,6 @@ const PalaAnimationBody = () => {
     }, [questionsList]);
 
     const question = localStorage.getItem("question");
-    const answer = localStorage.getItem("answer");
 
     return (
         <div className={"App-header"}>

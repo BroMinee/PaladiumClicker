@@ -4,7 +4,7 @@ import MetierList from "./Components/Metier/MetierList";
 import RPS from "./Components/RPS/RPS";
 import React, {useContext, useEffect, useState} from "react";
 import ClickList from "./Components/ClickList/ClickList";
-import fetchDataOnPublicURL, {fetchAllData, fetchAllDataButKeepOwn, fetchDataOnPaladiumAPI} from "./FetchData";
+import {fetchAllData, fetchAllDataButKeepOwn} from "./FetchData";
 import ImportProfil from "./Components/ImportProfil/ImportProfil";
 import News from "./Components/News/News";
 import Graph from "./Components/Graph/Graph";
@@ -78,7 +78,7 @@ const OptiClicker = () => {
 
     useEffect(() => {
 
-        async function asyncFetchAllData () {
+        async function asyncFetchAllData() {
             const newPlayerInfo = await fetchAllData();
             setPlayerInfo(newPlayerInfo)
             localStorage.setItem("cacheInfo", JSON.stringify({
@@ -87,8 +87,7 @@ const OptiClicker = () => {
             }));
         }
 
-        async function asyncFetchAllDataButKeepOwn()
-        {
+        async function asyncFetchAllDataButKeepOwn() {
             const newPlayerInfo = await fetchAllDataButKeepOwn(playerInfo);
             setPlayerInfo(newPlayerInfo)
             localStorage.setItem("cacheInfo", JSON.stringify({
@@ -98,20 +97,19 @@ const OptiClicker = () => {
         }
 
 
-        if (Object.keys(playerInfo).length === 0) {
-            if (!isCacheValid()) {
-                cacheHasBeenReset = true
-                console.log("No cache")
-                asyncFetchAllData()
-            } else if (!isCacheDateValid()) {
-                cacheHasBeenReset = true
-                console.log("Cache is outdated")
-                asyncFetchAllDataButKeepOwn()
-            } else {
-                console.log("Using cache")
-                setPlayerInfo(JSON.parse(localStorage.getItem("cacheInfo"))["playerInfo"])
-            }
+        if (!isCacheValid()) {
+            cacheHasBeenReset = true
+            console.log("No cache")
+            asyncFetchAllData()
+        } else if (!isCacheDateValid()) {
+            cacheHasBeenReset = true
+            console.log("Cache is outdated")
+            asyncFetchAllDataButKeepOwn()
+        } else {
+            console.log("Using cache")
+            setPlayerInfo(JSON.parse(localStorage.getItem("cacheInfo"))["playerInfo"])
         }
+
     }, []);
 
     useEffect(() => {
@@ -124,12 +122,12 @@ const OptiClicker = () => {
         }));
     }, [playerInfo]);
 
-    if(Object.keys(playerInfo).length === 0)
+    if (Object.keys(playerInfo).length === 0)
         return <div>Loading</div>
-    else if(playerInfo["username"] === "Entre ton pseudo")
+    else if (playerInfo["username"] === "Entre ton pseudo")
         return <NoPseudoPage/>
     else
-    return (
+        return (
             <div>
                 <div id="container" className="container">
                 </div>
@@ -215,7 +213,7 @@ const OptiClicker = () => {
                     <UpgradeList upgradeName={"category_upgrade"}/>
                 </div>
             </div>
-    )
+        )
 }
 
 export function isCacheValid() {

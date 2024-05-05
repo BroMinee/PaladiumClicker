@@ -1,5 +1,12 @@
 [
   {
+    "date": "05-05-2024 - 22h27",
+    "events": [
+      "Giga refacto du code pour une amélioration de la lisibilité et de la maintenabilité",
+      "Préparation de la mise en place du nouvel UI"
+    ]
+  },
+  {
     "date": "05-05-2024 - 01h30",
     "events": [
       "Ajout de la beta du profil Paladium, il s'agit d'un beta, l'affichage va nettement changer dans les prochains jours",

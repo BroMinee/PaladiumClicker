@@ -1,12 +1,9 @@
 import React, {useContext, useEffect, useState} from "react";
-import fetchDataOnPublicURL, {fetchDataOnPaladiumAPI} from "../../FetchData";
 import MetierList from "../../Components/Metier/MetierList";
 import ReactSkinview3d from "react-skinview3d"
 import axios from "axios";
 import "./Profil.css"
 import ImportProfil, {setTimer} from "../../Components/ImportProfil/ImportProfil";
-import {isCacheDateValid, isCacheValid} from "../../App";
-import {VERSION} from "../../Constant";
 import {printPricePretty} from "../../Misc";
 import {playerInfoContext} from "../../Context";
 
@@ -128,7 +125,7 @@ const ProfilBody = ({playerInfo, setPlayerInfo}) => {
                 <div id={"errorAPI"}></div>
                 <div id={"ApiDown"} style={{display: "none", fontSize: "20px"}}>
                     <div>L'API de pala est peut-être down:</div>
-                    <a href="https://status.palaguidebot.fr/" target="_blank">Vérifier le status</a>
+                    <a href="https://status.palaguidebot.fr/">Vérifier le status</a>
                 </div>
 
             </div>));

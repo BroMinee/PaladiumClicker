@@ -1,5 +1,5 @@
-import React, {useEffect, useState} from "react";
-import fetchDataOnPublicURL from "../../FetchData";
+import React from "react";
+
 
 
 const About = () => {
