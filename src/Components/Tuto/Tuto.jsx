@@ -12,8 +12,7 @@ const Tuto = () => {
 
     return <div className="modal" id="modal3" style={{display: "none"}}>
         <div className="modal-back"></div>
-        <div className="modal-container"
-             style={{"background-image": `url(${process.env.PUBLIC_URL}/background.png)`}}>
+        <div className="modal-container">
             <ImCross onClick={closeModal} className="RedCrossIcon"/>
 
             <ul>

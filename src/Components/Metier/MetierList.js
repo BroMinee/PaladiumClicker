@@ -1,10 +1,16 @@
-import React from "react";
+import React, {useContext} from "react";
 
 import {SlArrowUp, SlArrowDown} from "react-icons/sl";
 
 import "./MetierList.css"
+import {playerInfoContext} from "../../Context";
 
-const MetierList = ({playerInfo, setPlayerInfo}) => {
+const MetierList = () => {
+    const {
+        playerInfo,
+        setPlayerInfo
+    } = useContext(playerInfoContext);
+
     return <ul className={"ul-horizontal ul-metier"}>
         {
             playerInfo["metier"].map((metier, index) => {

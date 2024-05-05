@@ -4,8 +4,7 @@ import fetchDataOnPublicURL from "../../FetchData";
 
 const About = () => {
     return (
-    <div className="App"
-         style={{backgroundImage: `url(${process.env.PUBLIC_URL}/background.png)`, height: "calc(100vh - 91.4px)"}}>
+    <div className="App">
         <header className="App-header">
             <div style={{flexDirection: "row", display: "flex"}}>
                 <h2 style={{marginBottom: "0px", zIndex: 1, position: "relative"}}>

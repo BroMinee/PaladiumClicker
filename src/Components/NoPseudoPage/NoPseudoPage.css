@@ -1,0 +1,5 @@
+.NoPseudoPage
+{
+    display: grid;
+    justify-content: center;
+}

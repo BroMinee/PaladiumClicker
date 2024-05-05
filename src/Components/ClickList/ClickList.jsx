@@ -1,8 +1,14 @@
-import React, {useEffect} from "react";
+import React, {useContext, useEffect} from "react";
 import "./ClickList.css";
 import {checkCondition, printPricePretty} from "../../Misc";
+import {playerInfoContext} from "../../Context";
 
-const ClickList = ({playerInfo, setPlayerInfo}) => {
+const ClickList = () => {
+
+    const {
+        playerInfo,
+        setPlayerInfo
+    } = useContext(playerInfoContext);
 
     function getImgPath(index, price) {
         if (price === -1)

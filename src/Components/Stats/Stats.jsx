@@ -1,10 +1,11 @@
-import React, {useEffect, useState} from "react";
+import React, {useContext, useEffect, useState} from "react";
 import "./Stats.css";
 import {getPathImg, getTotalSpend, printPricePretty} from "../../Misc";
 import {ComputePrice, computeRPS, scaleCurrentProduction} from "../Building/BuildingList";
 import {computeBestBuildingUgrade, findBestUpgrade} from "../RPS/RPS";
 import fetchDataOnPublicURL, {fetchDataOnPaladiumAPI, fetchLeaderboardPosition} from "../../FetchData";
 import {isCacheDateValid, isCacheValid} from "../../App";
+import {playerInfoContext} from "../../Context";
 
 
 function getBestUpgrade(copyPlayerInfo) {
@@ -80,7 +81,11 @@ function buyBuilding(playerInfo, setPlayerInfo, buildingPaths) {
     setPlayerInfo({...playerInfo});
 }
 
-const Stats = ({playerInfo, setPlayerInfo, rps, UUID}) => {
+const Stats = ({rps}) => {
+    const {
+        playerInfo,
+        setPlayerInfo
+    } = useContext(playerInfoContext);
 
     const [check, setCheck] = useState(false);
     const [buildingBuyPaths, setBuildingBuyPaths] = useState([]);
@@ -95,18 +100,18 @@ const Stats = ({playerInfo, setPlayerInfo, rps, UUID}) => {
     const [positionLeaderboard, setPositionLeaderboard] = useState("Récupération en cours");
     useEffect(() => {
         const setLeaderboard = async () => {
-            if (UUID === "Pseudo inconnu") {
-                setPositionLeaderboard("Pseudo inconnu");
+            if (playerInfo["uuid"] === "Entre ton pseudo") {
+                setPositionLeaderboard("Entre ton pseudo");
                 return;
             }
 
-            const position = await fetchLeaderboardPosition(UUID).then((data) => {
+            const position = await fetchLeaderboardPosition(playerInfo["uuid"]).then((data) => {
                 return data;
             });
             setPositionLeaderboard(position);
         }
         setLeaderboard();
-    }, [UUID]);
+    }, [playerInfo]);
 
 
     const coinsDormants = Math.max(playerInfo["production"] - getTotalSpend(playerInfo), 0);
@@ -144,7 +149,7 @@ const Stats = ({playerInfo, setPlayerInfo, rps, UUID}) => {
                     Classement
                     <div style={{display: "flex", flexDirection: "row", justifyContent: "center"}}>
                         <div className={"RPSValue"} id={"leaderboardPosition"}>
-                            {(positionLeaderboard === "Pseudo inconnu" ? "" : "Top #") + positionLeaderboard}
+                            {(positionLeaderboard === "Entre ton pseudo" ? "" : "Top #") + positionLeaderboard}
                         </div>
                     </div>
                 </div>

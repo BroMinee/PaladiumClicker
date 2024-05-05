@@ -1,15 +1,18 @@
 import React from "react";
 
-import { FaBars } from "react-icons/fa";
-import { NavLink as Link } from "react-router-dom";
+import {FaBars} from "react-icons/fa";
+import {NavLink as Link} from "react-router-dom";
 import styled from "styled-components";
+import ImportProfil from "../Components/ImportProfil/ImportProfil";
 
 export const Nav = styled.nav`
     background: #FF5C00;
-    height: 85px;
+    height: auto;
+    max-height: 50px;
+    overflow: auto;
     display: flex;
     justify-content: space-between;
-    padding: 0.2rem calc((100vw - 1000px) / 2);
+    padding: 0.7rem calc((100vw - 1000px) / 2);
     z-index: 1;
     position: sticky;
 `;
@@ -23,6 +26,7 @@ export const NavLink = styled(Link)`
     height: 100%;
     font-weight: bold;
     cursor: pointer;
+
     &.active {
         /* Underline text*/
         text-after-overflow: underline;
@@ -52,9 +56,6 @@ export const NavMenu = styled.div`
     /* Third Nav */
     /* width: 100vw;
 white-space: nowrap; */
-    @media screen and (max-width: 768px) {
-        display: none;
-    }
 `;
 
 
@@ -63,6 +64,8 @@ const Navbar = () => {
         <>
             <Nav>
                 <NavMenu>
+                    <img src={process.env.PUBLIC_URL + "/favicon.ico"} alt="image"
+                         className={"Building-img"} style={{maxHeight: "99%"}}></img>
                     <NavLink to="/Profil" activestyle="true">
                         Profil (Beta)
                     </NavLink>
@@ -72,6 +75,9 @@ const Navbar = () => {
                     <NavLink to="/PalaAnimation" activestyle="true">
                         PalaAnimation Trainer
                     </NavLink>
+
+                    <ImportProfil resetButton={false} logError={false} idPseudoInput={"pseudoInputNavBar"}/>
+
                     <NavLink to="/About" activestyle="true">
                         About
                     </NavLink>

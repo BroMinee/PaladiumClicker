@@ -24,7 +24,7 @@ const Popup = () => {
                 <div style={{display: "flex"}}>
                     <div className="BroMine"> bromine__</div>
                     <div>&nbsp;(avec deux
-                        underscore)
+                        underscores)
                     </div>
                 </div>
             </h2>

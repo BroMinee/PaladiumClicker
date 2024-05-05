@@ -1,11 +1,16 @@
-import React from "react";
+import React, {useContext} from "react";
 
 import "./RPS.css"
 import {ComputePrice, computeRPS} from "../Building/BuildingList.jsx";
 import {checkCondition} from "../../Misc";
 import {computeXBuildingAhead, Stat} from "../Stats/Stats";
+import {playerInfoContext} from "../../Context";
 
-const RPS = ({RPS, estimatedRPS, playerInfo, setPlayerInfo, setEstimatedRPS}) => {
+const RPS = ({RPS, estimatedRPS, setEstimatedRPS}) => {
+    const {
+        playerInfo,
+        setPlayerInfo
+    } = useContext(playerInfoContext);
     const [bestIndex, setBestIndex] = React.useState(-1);
 
     function printPricePretty(price) {

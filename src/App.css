@@ -1,3 +1,18 @@
+.background
+{
+    background: url("background.png")  no-repeat center center fixed;
+    background-size:cover;
+}
+.blurry-background
+{
+    backdrop-filter: blur(16px) brightness(0.5);
+}
+
+.header
+{
+
+}
+
 .App {
     text-align: center;
 }
@@ -170,10 +185,10 @@ body, ul, li {
 
 button
 {
-    background-color: #FF5C00;
+    background-color: rgb(256, 92, 0);
     color: white;
     border: none;
-    border-radius: 10px;
+    border-radius: 24px;
     padding: 10px 20px;
     text-align: center;
     text-decoration: none;
@@ -182,3 +197,8 @@ button
     cursor: pointer;
 }
 
+button:hover
+{
+    background-color: rgb(256, 120, 0);
+    transition: background-color 0.1s;
+}

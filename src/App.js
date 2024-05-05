@@ -2,16 +2,10 @@ import './App.css';
 import BuildingList from "./Components/Building/BuildingList";
 import MetierList from "./Components/Metier/MetierList";
 import RPS from "./Components/RPS/RPS";
-import React, {useEffect, useState} from "react";
+import React, {useContext, useEffect, useState} from "react";
 import ClickList from "./Components/ClickList/ClickList";
-import GlobalList from "./Components/GlobalList/GlobalList";
-import TerrainList from "./Components/TerrainList/TerrainList";
-import BuildingUpgradeList from "./Components/BuildingUpgradeList/BuildingUpgradeList";
-import ManyList from "./Components/ManyList/ManyList";
-import PosteriorList from "./Components/PosteriorList/PosteriorList";
-import CategoryList from "./Components/CategoryList/CategoryList";
-import fetchDataOnPublicURL, {fetchDataOnPaladiumAPI} from "./FetchData";
-import Refesh from "./Components/RefeshAll/Refesh";
+import fetchDataOnPublicURL, {fetchAllData, fetchAllDataButKeepOwn, fetchDataOnPaladiumAPI} from "./FetchData";
+import ImportProfil from "./Components/ImportProfil/ImportProfil";
 import News from "./Components/News/News";
 import Graph from "./Components/Graph/Graph";
 import Tuto from "./Components/Tuto/Tuto";
@@ -30,192 +24,94 @@ import About from "./pages/About/About";
 import Bugs from "./pages/Bugs/Bugs";
 import Popup from "./Components/Popup/Popup";
 import {VERSION} from "./Constant";
+import Header from "./pages/Header";
+import {playerInfoContext} from "./Context";
+import NoPseudoPage from "./Components/NoPseudoPage/NoPseudoPage";
+import UpgradeList from "./Components/UpgradeList/UpgradeList";
 
 let cacheHasBeenReset = false;
 
 
 const App = () => {
+    const [playerInfo, setPlayerInfo] = useState(JSON.parse(localStorage.getItem("cacheInfo") || "{}")["playerInfo"] || {});
     return (
-        <BrowserRouter>
-            <Navbar/>
-            <Routes>
-                <Route exact path="/Profil" element={<Profil/>}/>
-                <Route exact path="/PaladiumClicker" element={<OptiClicker/>}/>
-                <Route exact path="/PalaAnimation" element={<PalaAnimation/>}/>
-                <Route exact path="/About" element={<About/>}/>
-                <Route exact path="/Bugs" element={<Bugs/>}/>
-            </Routes>
-        </BrowserRouter>
+        <playerInfoContext.Provider
+            value={{
+                playerInfo,
+                setPlayerInfo
+            }}>
+            <div>
+                <BrowserRouter>
+                    <header>
+                        <Header/>
+                    </header>
+                    <body>
+                    <Popup/>
+                    <Routes>
+                        <Route exact path="/Profil"
+                               element={<Profil/>}/>
+                        <Route exact path="/PaladiumClicker"
+                               element={<OptiClicker/>}/>
+                        <Route exact path="/PalaAnimation"
+                               element={<PalaAnimation/>}/>
+                        <Route exact path="/About"
+                               element={<About/>}/>
+                        <Route exact path="/Bugs"
+                               element={<Bugs/>}/>
+                    </Routes>
+                    </body>
+                </BrowserRouter>
+            </div>
+        </playerInfoContext.Provider>
     )
 }
 
 const OptiClicker = () => {
 
+    const {
+        playerInfo,
+        setPlayerInfo
+    } = useContext(playerInfoContext);
+
     const [rps, setRPS] = useState(1)
     const [estimatedRPS, setEstimatedRPS] = useState(3)
 
-    const [playerInfo, setPlayerInfo] = useState({})
-
-    const [UUID, setUUID] = useState("Pseudo inconnu");
-
     useEffect(() => {
-        const fetchAllData = async () => {
-            var newPlayerInfo = {}
-            await fetchDataOnPublicURL("/metier.json").then((data) => {
-                newPlayerInfo["metier"] = data
-            })
-            await fetchDataOnPublicURL("/building.json").then((data) => {
-                newPlayerInfo["building"] = data
-            })
-            await fetchDataOnPublicURL("/building_upgrade.json").then((data) => {
-                newPlayerInfo["building_upgrade"] = data
-            })
-            await fetchDataOnPublicURL("/category_upgrade.json").then((data) => {
-                newPlayerInfo["category_upgrade"] = data
-            })
-            await fetchDataOnPublicURL("/CPS.json").then((data) => {
-                newPlayerInfo["CPS"] = data
-            })
-            await fetchDataOnPublicURL("/global_upgrade.json").then((data) => {
-                newPlayerInfo["global_upgrade"] = data
-            })
-            await fetchDataOnPublicURL("/many_upgrade.json").then((data) => {
-                newPlayerInfo["many_upgrade"] = data
-            })
-            await fetchDataOnPublicURL("/posterior_upgrade.json").then((data) => {
-                newPlayerInfo["posterior_upgrade"] = data
-            })
-            await fetchDataOnPublicURL("/terrain_upgrade.json").then((data) => {
-                newPlayerInfo["terrain_upgrade"] = data
-            })
 
-            newPlayerInfo["production"] = 0.5;
-
-            newPlayerInfo["faction"] = "";
-            newPlayerInfo["firstJoin"] = 0;
-            newPlayerInfo["money"] = 0;
-            newPlayerInfo["timePlayed"] =0;
-            newPlayerInfo["username"] = "Pseudo inconnu";
-            newPlayerInfo["uuid"] = 0;
-            newPlayerInfo["rank"] = "Rank inconnu";
-
-
-
-            setPlayerInfo(newPlayerInfo)
-            localStorage.setItem("cacheInfo", JSON.stringify({
-                "playerInfo": newPlayerInfo,
-                "version": VERSION
-            }));
-
-        }
-        const fetchAllDataButKeepOwn = async () => {
-            var newPlayerInfo = {}
-            await fetchDataOnPublicURL("/metier.json").then((data) => {
-                newPlayerInfo["metier"] = data
-            })
-            await fetchDataOnPublicURL("/building.json").then((data) => {
-                newPlayerInfo["building"] = data
-            })
-            await fetchDataOnPublicURL("/building_upgrade.json").then((data) => {
-                newPlayerInfo["building_upgrade"] = data
-            })
-            await fetchDataOnPublicURL("/category_upgrade.json").then((data) => {
-                newPlayerInfo["category_upgrade"] = data
-            })
-            await fetchDataOnPublicURL("/CPS.json").then((data) => {
-                newPlayerInfo["CPS"] = data
-            })
-            await fetchDataOnPublicURL("/global_upgrade.json").then((data) => {
-                newPlayerInfo["global_upgrade"] = data
-            })
-            await fetchDataOnPublicURL("/many_upgrade.json").then((data) => {
-                newPlayerInfo["many_upgrade"] = data
-            })
-            await fetchDataOnPublicURL("/posterior_upgrade.json").then((data) => {
-                newPlayerInfo["posterior_upgrade"] = data
-            })
-            await fetchDataOnPublicURL("/terrain_upgrade.json").then((data) => {
-                newPlayerInfo["terrain_upgrade"] = data
-            })
-
-            const cachePlayerInfo = JSON.parse(localStorage.getItem("cacheInfo"))["playerInfo"]
-            console.log("Keeping own")
-            newPlayerInfo["metier"].forEach((metier, index) => {
-                newPlayerInfo["metier"][index]["level"] = cachePlayerInfo["metier"][index]["level"];
-            })
-
-            // Building
-            newPlayerInfo["building"].forEach((building, index) => {
-                if (cachePlayerInfo["building"][index] !== undefined)
-                    newPlayerInfo["building"][index]["own"] = cachePlayerInfo["building"][index]["own"];
-            })
-
-            // Global
-            newPlayerInfo["global_upgrade"].forEach((global, index) => {
-                newPlayerInfo["global_upgrade"][index]["own"] = cachePlayerInfo["global_upgrade"][index]["own"];
-            })
-
-
-            // Terrain
-            newPlayerInfo["terrain_upgrade"].forEach((terrain, index) => {
-                newPlayerInfo["terrain_upgrade"][index]["own"] = cachePlayerInfo["terrain_upgrade"][index]["own"];
-            })
-
-            // building_upgrade
-            newPlayerInfo["building_upgrade"].forEach((building, index) => {
-                newPlayerInfo["building_upgrade"][index]["own"] = cachePlayerInfo["building_upgrade"][index]["own"];
-            })
-
-
-            // many_upgrade
-            newPlayerInfo["many_upgrade"].forEach((many, index) => {
-                newPlayerInfo["many_upgrade"][index]["own"] = cachePlayerInfo["many_upgrade"][index]["own"];
-            })
-
-
-            // posterior_upgrade
-            newPlayerInfo["posterior_upgrade"].forEach((posterior, index) => {
-                newPlayerInfo["posterior_upgrade"][index]["own"] = cachePlayerInfo["posterior_upgrade"][index]["own"];
-            })
-
-            // category_upgrade
-            newPlayerInfo["category_upgrade"].forEach((category, index) => {
-                newPlayerInfo["category_upgrade"][index]["own"] = cachePlayerInfo["category_upgrade"][index]["own"];
-            })
-
-            // CPS
-            newPlayerInfo["CPS"].forEach((category, index) => {
-                newPlayerInfo["CPS"][index]["own"] = cachePlayerInfo["CPS"][index]["own"];
-            })
-
-            newPlayerInfo["production"] = 0.5;
-
+        async function asyncFetchAllData () {
+            const newPlayerInfo = await fetchAllData();
             setPlayerInfo(newPlayerInfo)
             localStorage.setItem("cacheInfo", JSON.stringify({
                 "playerInfo": newPlayerInfo,
                 "version": VERSION
             }));
         }
+
+        async function asyncFetchAllDataButKeepOwn()
+        {
+            const newPlayerInfo = await fetchAllDataButKeepOwn(playerInfo);
+            setPlayerInfo(newPlayerInfo)
+            localStorage.setItem("cacheInfo", JSON.stringify({
+                "playerInfo": newPlayerInfo,
+                "version": VERSION
+            }));
+        }
+
 
         if (Object.keys(playerInfo).length === 0) {
             if (!isCacheValid()) {
                 cacheHasBeenReset = true
                 console.log("No cache")
-                fetchAllData()
+                asyncFetchAllData()
             } else if (!isCacheDateValid()) {
                 cacheHasBeenReset = true
                 console.log("Cache is outdated")
-                fetchAllDataButKeepOwn()
+                asyncFetchAllDataButKeepOwn()
             } else {
                 console.log("Using cache")
                 setPlayerInfo(JSON.parse(localStorage.getItem("cacheInfo"))["playerInfo"])
             }
         }
-
-        const uuid = localStorage.getItem("uuid")
-        if (uuid !== null)
-            setUUID(uuid)
-
     }, []);
 
     useEffect(() => {
@@ -228,18 +124,20 @@ const OptiClicker = () => {
         }));
     }, [playerInfo]);
 
-
+    if(Object.keys(playerInfo).length === 0)
+        return <div>Loading</div>
+    else if(playerInfo["username"] === "Entre ton pseudo")
+        return <NoPseudoPage/>
+    else
     return (
-        Object.keys(playerInfo).length === 0 ? <div>Loading</div> :
             <div>
                 <div id="container" className="container">
                 </div>
                 <News cacheHasBeenReset={cacheHasBeenReset}/>
                 <Graph/>
                 <Tuto/>
-                <Popup/>
 
-                <div className="App" style={{backgroundImage: `url(${process.env.PUBLIC_URL}/background.png)`}}>
+                <div className="App">
                     <header className="App-header">
                         <div style={{flexDirection: "row", display: "flex"}}>
                             <h3 style={{marginBottom: "0px", zIndex: 1, position: "relative"}}>
@@ -278,42 +176,43 @@ const OptiClicker = () => {
                     </header>
                     <br/>
 
-                    <Refesh playerInfo={playerInfo} setPlayerInfo={setPlayerInfo} setUUID={setUUID}/>
+                    <ImportProfil resetButton={true} logError={true} idPseudoInput={"pseudoInputClicker"}/>
                     <br/>
 
-                    <RPS RPS={rps} estimatedRPS={estimatedRPS} playerInfo={playerInfo} setPlayerInfo={setPlayerInfo}
-                         setEstimatedRPS={setEstimatedRPS}/>
+                    <RPS RPS={rps} estimatedRPS={estimatedRPS} setEstimatedRPS={setEstimatedRPS}/>
 
                     <h1>Statistiques</h1>
-                    <Stats playerInfo={playerInfo} setPlayerInfo={setPlayerInfo} rps={rps} UUID={UUID}/>
+                    <Stats rps={rps}/>
 
                     <h1>Métier</h1>
 
 
-                    <MetierList playerInfo={playerInfo} setPlayerInfo={setPlayerInfo}/>
+                    <MetierList/>
+
                     <h1>Bâtiments</h1>
-                    <BuildingList playerInfo={playerInfo} setPlayerInfo={setPlayerInfo} setRPS={setRPS}/>
+                    <BuildingList setRPS={setRPS}/>
 
                     <h1>Clic</h1>
-                    <ClickList playerInfo={playerInfo} setPlayerInfo={setPlayerInfo}/>
+                    <ClickList/>
 
                     <h1>Global</h1>
-                    <GlobalList playerInfo={playerInfo} setPlayerInfo={setPlayerInfo}/>
+                    <UpgradeList upgradeName={"global_upgrade"}/>
 
                     <h1>Terrain</h1>
-                    <TerrainList playerInfo={playerInfo} setPlayerInfo={setPlayerInfo}/>
+                    <UpgradeList upgradeName={"terrain_upgrade"}/>
 
                     <h1>Amélioration des bâtiments</h1>
-                    <BuildingUpgradeList playerInfo={playerInfo} setPlayerInfo={setPlayerInfo}/>
+                    <UpgradeList upgradeName={"building_upgrade"}/>
 
                     <h1>Many</h1>
-                    <ManyList playerInfo={playerInfo} setPlayerInfo={setPlayerInfo}/>
+                    <UpgradeList upgradeName={"many_upgrade"}/>
 
                     <h1>Postérieur</h1>
-                    <PosteriorList playerInfo={playerInfo} setPlayerInfo={setPlayerInfo}/>
+                    <UpgradeList upgradeName={"posterior_upgrade"}/>
+
 
                     <h1>Catégorie</h1>
-                    <CategoryList playerInfo={playerInfo} setPlayerInfo={setPlayerInfo}/>
+                    <UpgradeList upgradeName={"category_upgrade"}/>
                 </div>
             </div>
     )
@@ -326,7 +225,7 @@ export function isCacheValid() {
     }
     try {
         const r = JSON.parse(cacheInfo);
-        if(r["version"] === undefined)
+        if (r["version"] === undefined)
             return false
     } catch (e) {
         return false
@@ -341,8 +240,8 @@ export function isCacheDateValid() {
     }
     try {
         const jsonCacheInfo = JSON.parse(cacheInfo);
-        if(jsonCacheInfo === undefined || jsonCacheInfo["version"] === undefined) {
-            if(VERSION === 1.0) {
+        if (jsonCacheInfo === undefined || jsonCacheInfo["version"] === undefined) {
+            if (VERSION === 1.0) {
                 localStorage.clear();
                 window.location.reload();
             }

@@ -1,9 +1,14 @@
-import React from "react";
+import React, {useContext} from "react";
 import "./BuildingList.css";
+import {playerInfoContext} from "../../Context";
 
 
-const BuildingList = ({playerInfo, setPlayerInfo, setRPS}) => {
+const BuildingList = ({setRPS}) => {
 
+    const {
+        playerInfo,
+        setPlayerInfo
+    } = useContext(playerInfoContext);
     function getImgPath(index, price) {
         if (price === -1)
             return "/unknown.png";
