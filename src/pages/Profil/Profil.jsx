@@ -14,42 +14,9 @@ const Profil = () => {
         playerInfo,
         setPlayerInfo
     } = useContext(playerInfoContext);
-
+    const [skinUrl, setSkinUrl] = useState("");
 
     const pseudo = playerInfo["username"] || "";
-    if (Object.keys(playerInfo).length === 0)
-        return <div>Loading</div>
-    else if (playerInfo["username"] === "Entre ton pseudo")
-        return <NoPseudoPage/>;
-
-    return (
-        <div className="App">
-            <header className="App-header">
-                <h3 style={{
-                    marginBottom: "0px",
-                    zIndex: 1,
-                    position: "relative",
-                    flexDirection: "row",
-                    display: "flex"
-                }}>
-                    Profil de&nbsp;
-                    <div className={"BroMine"}>{pseudo}</div>
-                    <div>&nbsp; - &nbsp;</div>
-                    <div className={"BroMine"}>{playerInfo["faction"]}</div>
-                </h3>
-            </header>
-            <br/>
-            <ProfilBody playerInfo={playerInfo} setPlayerInfo={setPlayerInfo}/>
-        </div>
-    )
-}
-
-const ProfilBody = ({playerInfo, setPlayerInfo}) => {
-
-
-    const [errorInARow, setErrorInARow] = React.useState(0);
-    const [skinUrl, setSkinUrl] = useState("");
-    const pseudo = playerInfo["username"];
 
     useEffect(() => {
         axios.get(`https://api.ashcon.app/mojang/v2/user/${pseudo}`)
@@ -65,6 +32,61 @@ const ProfilBody = ({playerInfo, setPlayerInfo}) => {
         cacheInfo["playerInfo"] = playerInfo;
         localStorage.setItem("cacheInfo", JSON.stringify(cacheInfo));
     }, [playerInfo]);
+
+    if (Object.keys(playerInfo).length === 0)
+        return <div>Loading</div>
+    else if (playerInfo["username"] === "Entre ton pseudo")
+        return <NoPseudoPage/>;
+
+    return (
+        <div style={{width: "100%"}}>
+            <SkinViewer skinUrl={skinUrl}/>
+            <div className={"App blurry without-border parentProfil"}>
+                <div className="PseudoFac">
+                    <h3 style={{
+                        marginBottom: "0px",
+                        zIndex: 1,
+                        position: "relative",
+                        flexDirection: "row",
+                        display: "flex"
+                    }}>
+                        Profil de&nbsp;
+                        <div className={"BroMine"}>{pseudo}</div>
+                        <div>&nbsp; - &nbsp;</div>
+                        <div className={"BroMine"}>{playerInfo["faction"]}</div>
+                    </h3>
+                </div>
+
+                <BasicStats/>
+
+                <MetierStats/>
+            </div>
+        </div>
+
+    )
+}
+
+const MetierStats = () => {
+    const {
+        playerInfo,
+        setPlayerInfo
+    } = useContext(playerInfoContext);
+
+    return (
+        <div className={"MetierStatProfil"}>
+            <MetierList playerInfo={playerInfo} grid={true}/>
+        </div>)
+
+}
+
+const BasicStats = () => {
+    const {
+        playerInfo,
+        setPlayerInfo
+    } = useContext(playerInfoContext);
+
+    const [errorInARow, setErrorInARow] = React.useState(0);
+
 
     useEffect(() => {
         if (errorInARow >= 2) {
@@ -88,9 +110,8 @@ const ProfilBody = ({playerInfo, setPlayerInfo}) => {
     }, []);
 
 
-
     return (
-        <div>
+        <div className={"BasicStatProfil"}>
             <div style={{fontSize: "3vmin"}}>
                 <div style={{display: "flex", justifyContent: "center"}}>
                     Rank:&nbsp;
@@ -112,28 +133,30 @@ const ProfilBody = ({playerInfo, setPlayerInfo}) => {
                 </div>
                 {playerInfo["timePlayed"] > 43200 ? <div>Ca explique l'odeur si forte 😘</div> : ""}
             </div>
-
-            <div className={"Profil"}>
-                <div>
-                    <ReactSkinview3d className={"SkinViewer"}
-                                     skinUrl={skinUrl}
-                                     height="250"
-                                     width="250"
-                    />
-                    <ImportProfil resetButton={false} logError={true} idPseudoInput={"pseudoInputProfil"}/>
-                </div>
-
-                <MetierList playerInfo={playerInfo}/>
-            </div>
-
-
-            <div id={"errorAPI"}></div>
-            <div id={"ApiDown"} style={{display: "none", fontSize: "20px"}}>
-                <div>L'API de pala est peut-être down:</div>
-                <a href="https://status.palaguidebot.fr/">Vérifier le status</a>
-            </div>
-
         </div>);
+}
+
+const SkinViewer = ({skinUrl}) => {
+    return (<div className={"SkinViewerParent blurry"}>
+        <ReactSkinview3d className={"SkinViewer"}
+                         skinUrl={skinUrl}
+                         height="250"
+                         width="250"
+                         onReady={({
+                                       viewer
+                                   }) => {
+                             // Add an animation
+                             // Enabled auto rotate
+                             viewer.autoRotate = true;
+                         }}/>
+        <ImportProfil resetButton={false} logError={true} idPseudoInput={"pseudoInputProfil"}/>
+        <div id={"errorAPI"} style={{paddingBottom: "10px"}}></div>
+        <div id={"ApiDown"} style={{display: "none", fontSize: "20px"}}>
+            <div>L'API de pala est peut-être down:</div>
+            <a href="https://status.palaguidebot.fr/">Vérifier le status</a>
+        </div>
+    </div>);
+
 }
 
 function computeTimePlayed(timeInMinutes) {

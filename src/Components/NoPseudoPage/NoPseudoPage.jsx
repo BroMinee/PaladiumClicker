@@ -35,7 +35,7 @@ const NoPseudoPage = () => {
 
     return (
         <div style={{display: "flex", justifyContent: "space-around"}}>
-            <div className={"gridNoPseudoPage"}>
+            <div className={"gridNoPseudoPage children-blurry"}>
                 <div className={"NoPseudoPage"}>
                     <p style={{display: "flex", justifyContent: "center", fontSize: "50px"}}>Afficher le profil&nbsp;
                         <div className={"BroMine"}>Paladium</div>

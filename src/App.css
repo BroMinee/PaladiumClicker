@@ -1,8 +1,38 @@
+:root
+{
+    --blurry: blur(16px) brightness(0.4);
+    --blurry-border: 10px;
+}
+
+
 .background
 {
     background: url("background.png")  no-repeat center center fixed;
     background-size:cover;
 }
+
+.blurry
+{
+    backdrop-filter: var(--blurry);
+    border-radius: var(--blurry-border);
+}
+
+.children-blurry > *
+{
+    backdrop-filter: var(--blurry);
+    border-radius: var(--blurry-border);
+}
+
+.children-without-border > *
+{
+    border-radius: 0px;
+}
+
+.without-border
+{
+    border-radius: 0px;
+}
+
 
 .header
 {

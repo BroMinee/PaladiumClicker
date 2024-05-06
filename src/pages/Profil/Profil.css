@@ -1,28 +1,49 @@
-.Profil
-{
+.parentProfil {
+    display: flex;
+    flex-direction: column;
+    margin-left: 44vmin;
+}
+
+.MetierStatProfil {
     display: flex;
     flex-direction: row;
     justify-content: center;
 }
 
-.SkinViewer
-{
-    width: 100vmin;
-    height: 100vmin;
-    /* add rounded corners */
-    border-radius: 20px;
-    /* add shadow */
-    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.5);
-
-    /* add margin */
-    margin: 1rem;
-
-    /* add blur background */
-    /*background: rgba(255, 135, 0, 0.5);*/
+.PseudoFac {
+    display: flex;
+    justify-content: left;
 
 }
 
-.pseudoInputProfil
+.BasicStatProfil
 {
+
+}
+
+.SkinViewerParent {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: fixed;
+    top: 20vh;
+    left: 2vmin;
+    width: 40vmin !important;
+    bottom:5vh;
+    height: fit-content;
+}
+
+
+
+.SkinViewer {
+    width: 20vmin !important;
+    height: 20vmin !important;
+    border-radius: 20px;
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.5);
+    margin: 1rem;
+
+}
+
+.pseudoInputProfil {
     font-size: 16px;
 }

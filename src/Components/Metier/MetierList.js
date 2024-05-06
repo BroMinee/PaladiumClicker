@@ -5,13 +5,13 @@ import {SlArrowUp, SlArrowDown} from "react-icons/sl";
 import "./MetierList.css"
 import {playerInfoContext} from "../../Context";
 
-const MetierList = ({editable}) => {
+const MetierList = ({editable=false, grid=false}) => {
     const {
         playerInfo,
         setPlayerInfo
     } = useContext(playerInfoContext);
 
-    return <ul className={"ul-horizontal ul-metier"}>
+    return <ul className={`ul-horizontal ul-metier ${grid ? "grid-metier" : ""}`}>
         {
             playerInfo["metier"].map((metier, index) => {
                 return <Metier metierName={metier["name"]} imgPath={metier["name"] + ".webp"} playerInfo={playerInfo}
@@ -133,9 +133,9 @@ function getXpForLevel(level, currentXp) {
     return (currentXp - sum) / metierPalier[level]
 }
 
-const Metier = ({metierName, imgPath, playerInfo, setPlayerInfo, level, editable}) => {
+const Metier = ({metierName, imgPath, playerInfo, setPlayerInfo, level, editable = true}) => {
     function enforceMinMax(el) {
-        if(editable === undefined)
+        if(editable === false)
             return
 
         if (el.target.value !== "") {
@@ -198,14 +198,14 @@ const Metier = ({metierName, imgPath, playerInfo, setPlayerInfo, level, editable
             <div className={"Lvl-txt ul-horizontal"}
                  style={{backgroundColor: `rgb(${bgc[0]},${bgc[1]},${bgc[2]})`}}>
                 <div>
-                    <input className={"Lvl-inside-txt"} style={{padding: (editable === undefined ? "0 0" : "")}} type="number" min="1" step="1" max="100" value={level} onKeyUp={enforceMinMax}
+                    <input className={"Lvl-inside-txt"} style={{padding: (editable === false ? "0 0" : "")}} type="number" min="1" step="1" max="100" value={level} onKeyUp={enforceMinMax}
                            onChange={enforceMinMax}/>
                 </div>
-                {editable === undefined ? "" :
+                {editable === false ? "" :
                 <div className={"ArrowUpDown"}>
 
                     <div onClick={() => {
-                        if(editable === undefined)
+                        if(editable === false)
                             return
                         if(playerInfo["metier"].find((metier) => metier["name"] === metierName)["level"] === 100)
                             return
@@ -217,7 +217,7 @@ const Metier = ({metierName, imgPath, playerInfo, setPlayerInfo, level, editable
                     </div>
                     <div onClick={() =>
                     {
-                        if(editable === undefined)
+                        if(editable === false)
                             return
                         if(playerInfo["metier"].find((metier) => metier["name"] === metierName)["level"] === 1)
                             return

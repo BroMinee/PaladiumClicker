@@ -2,6 +2,16 @@
 
 }
 
+.grid-metier
+{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    grid-gap: 5vmin 5vmin;
+    width: auto;
+    overflow: hidden;
+}
+
 .Info-Metier-list {
     list-style-type: none;
     align-items: center;
@@ -9,7 +19,7 @@
     width: 100%;
     justify-content: center;
     margin: 10px 10px;
-    display: inherit;
+    display: flex;
 }
 
 .Metier-Cercle {
@@ -44,8 +54,8 @@
 .progress .track,
 .progress .fill {
     fill: rgba(0, 0, 0, 0);
-    stroke-width: 75;
-    transform: translate(75px, 685px) rotate(-90deg);
+    stroke-width: 90;
+    transform: translate(75px, 700px) rotate(-90deg);
 }
 .progress .track {
     stroke: #293249;

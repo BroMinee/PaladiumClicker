@@ -10,10 +10,7 @@
 
 .NoPseudoPage > div {
     padding-bottom: 10px;
-
 }
-
-
 
 .gridNoPseudoPage
 {
@@ -26,13 +23,6 @@
     grid-gap: 5vmin 5vmin;
     grid-auto-rows: minmax(100px, auto);
 }
-
-.gridNoPseudoPage > *
-{
-    backdrop-filter: blur(16px) brightness(0.5);
-    border-radius: 10px;
-}
-
 
 .DiscordUrl
 {

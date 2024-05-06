@@ -24,7 +24,6 @@ import About from "./pages/About/About";
 import Bugs from "./pages/Bugs/Bugs";
 import Popup from "./Components/Popup/Popup";
 import {VERSION} from "./Constant";
-import Header from "./pages/Header";
 import {playerInfoContext} from "./Context";
 import NoPseudoPage from "./Components/NoPseudoPage/NoPseudoPage";
 import UpgradeList from "./Components/UpgradeList/UpgradeList";
@@ -40,12 +39,11 @@ const App = () => {
                 playerInfo,
                 setPlayerInfo
             }}>
-            <div>
-                <BrowserRouter>
-                    <header>
-                        <Header/>
-                    </header>
-                    <body>
+            <BrowserRouter>
+                <header>
+                    <Navbar/>
+                </header>
+                <main>
                     <Popup/>
                     <Routes>
                         <Route exact path="/Profil"
@@ -59,9 +57,8 @@ const App = () => {
                         <Route exact path="/Bugs"
                                element={<Bugs/>}/>
                     </Routes>
-                    </body>
-                </BrowserRouter>
-            </div>
+                </main>
+            </BrowserRouter>
         </playerInfoContext.Provider>
     )
 }
@@ -185,7 +182,7 @@ const OptiClicker = () => {
                     <h1>Métier</h1>
 
 
-                    <MetierList/>
+                    <MetierList editable={true}/>
 
                     <h1>Bâtiments</h1>
                     <BuildingList setRPS={setRPS}/>
