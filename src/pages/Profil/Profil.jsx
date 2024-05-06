@@ -118,7 +118,7 @@ const ProfilBody = ({playerInfo, setPlayerInfo}) => {
                         <ImportProfil resetButton={false} logError={true} idPseudoInput={"pseudoInputProfil"}/>
                     </div>
 
-                    <MetierList playerInfo={playerInfo}/>
+                    <MetierList playerInfo={playerInfo} editable={false}/>
                 </div>
 
 

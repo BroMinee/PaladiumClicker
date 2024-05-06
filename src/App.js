@@ -185,7 +185,7 @@ const OptiClicker = () => {
                     <h1>Métier</h1>
 
 
-                    <MetierList/>
+                    <MetierList editable={true}/>
 
                     <h1>Bâtiments</h1>
                     <BuildingList setRPS={setRPS}/>

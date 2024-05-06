@@ -250,6 +250,7 @@ export async function fetchInfoFromPseudo(pseudo, playerInfo, errorInARow) {
 
 
     } catch (e) {
+        let newPlayerInfo = {...playerInfo};
         let errorMsg = "";
         let timer = 0;
         if (e.status === 429) {
@@ -257,6 +258,7 @@ export async function fetchInfoFromPseudo(pseudo, playerInfo, errorInARow) {
         } else if (e.status === 403) {
             errorMsg = "Ton profil n'est pas visible, c'est le cas si tu es Youtubeur ou Streamer\n";
             if (pseudo.toLowerCase() === "levraifuze") {
+                newPlayerInfo["username"] = "LeVraiFuze";
                 document.getElementById("modal4").style.display = "block";
             }
         } else if (e.status === 404) {
@@ -267,7 +269,7 @@ export async function fetchInfoFromPseudo(pseudo, playerInfo, errorInARow) {
         } else {
             errorMsg = e["data"] !== undefined && e["data"]["message"] !== undefined ? JSON.stringify(e["data"]["message"]) : e;
         }
-        return [playerInfo, errorInARow + 1, errorMsg, timer];
+        return [newPlayerInfo, errorInARow + 1, errorMsg, timer];
     }
 }
 
