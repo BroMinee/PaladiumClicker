@@ -54,7 +54,7 @@
 .progress .track,
 .progress .fill {
     fill: rgba(0, 0, 0, 0);
-    stroke-width: 90;
+    stroke-width: 85;
     transform: translate(75px, 700px) rotate(-90deg);
 }
 .progress .track {

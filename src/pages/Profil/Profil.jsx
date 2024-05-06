@@ -39,31 +39,55 @@ const Profil = () => {
         return <NoPseudoPage/>;
 
     return (
-        <div style={{width: "100%"}}>
+        <div className={"profilGrid children-blurry"}>
             <SkinViewer skinUrl={skinUrl}/>
-            <div className={"App blurry without-border parentProfil"}>
-                <div className="PseudoFac">
-                    <h3 style={{
-                        marginBottom: "0px",
+            <div className={"parentProfil"}>
+                <div className="ProfilInfo blurry-lighter" style={{marginTop: "1vmin"}}>
+                    <h1 style={{
+                        padding: "1vmin",
                         zIndex: 1,
                         position: "relative",
                         flexDirection: "row",
                         display: "flex"
                     }}>
                         Profil de&nbsp;
-                        <div className={"BroMine"}>{pseudo}</div>
+                        <div className={"BroMine blurry-lighter"}>{pseudo}</div>
                         <div>&nbsp; - &nbsp;</div>
-                        <div className={"BroMine"}>{playerInfo["faction"]}</div>
-                    </h3>
+                        <div className={"BroMine blurry-lighter"}>{playerInfo["faction"]}</div>
+                    </h1>
                 </div>
+                <div style={{display: "flex", gap: "4vmin", justifyContent: "space-around"}}>
+                    <BasicStats/>
 
-                <BasicStats/>
+                    <MetierStats/>
+                </div>
+                <div>
 
-                <MetierStats/>
+                </div>
+                <div>
+                    <h1>Hôtel de vente</h1>
+                    <h3>TODO</h3>
+                </div>
             </div>
+
+            <FactionInfo faction={playerInfo["faction"]}/>
         </div>
 
     )
+}
+
+const FactionInfo = ({faction}) => {
+    return (
+        <div className={"FactionInfo"}>
+            <h1>
+                {faction}
+
+            </h1>
+            TODO
+        </div>
+
+    )
+
 }
 
 const MetierStats = () => {
@@ -73,7 +97,7 @@ const MetierStats = () => {
     } = useContext(playerInfoContext);
 
     return (
-        <div className={"MetierStatProfil"}>
+        <div className={"MetierStatProfil blurry"}>
             <MetierList playerInfo={playerInfo} grid={true}/>
         </div>)
 
@@ -112,32 +136,56 @@ const BasicStats = () => {
 
     return (
         <div className={"BasicStatProfil"}>
-            <div style={{fontSize: "3vmin"}}>
-                <div style={{display: "flex", justifyContent: "center"}}>
-                    Rank:&nbsp;
-                    <div className={"BroMine"}>{playerInfo["rank"]}
-                    </div>
-                </div>
-                <div style={{display: "flex", justifyContent: "center"}}>
-                    Tu joues depuis le&nbsp;
-                    <div className={"BroMine"}>{convertEpochToDateUTC2(playerInfo["firstJoin"])}</div>
-                </div>
-                <div style={{display: "flex", justifyContent: "center"}}>
-                    Tu possèdes&nbsp;
-                    <div className={"BroMine"}>{printPricePretty(playerInfo["money"])}</div>
-                    &nbsp;$
-                </div>
-                <div style={{display: "flex", justifyContent: "center"}}>
-                    Tu as joué un total de&nbsp;
-                    <div className={"BroMine"}>{computeTimePlayed(playerInfo["timePlayed"])}</div>
-                </div>
-                {playerInfo["timePlayed"] > 43200 ? <div>Ca explique l'odeur si forte 😘</div> : ""}
-            </div>
+            <SmallInfo imgPath={`clock.gif`} title={"Temps de jeu"}
+                       value={computeTimePlayed(playerInfo["timePlayed"])}/>
+            <SmallInfo imgPath={`clock.gif`} title={"Première connexion"}
+                       value={convertEpochToDateUTC2(playerInfo["firstJoin"])}/>
+            <SmallInfo imgPath={`dollar.png`} title={"Argent actuel"}
+                       value={printPricePretty(Math.round(playerInfo["money"])) + " $"}/>
+            <SmallInfo imgPath={`trixium_block.webp`} title={"Rang en jeu"} value={playerInfo["rank"]}/>
         </div>);
 }
 
+const SmallInfo = ({imgPath, title, value}) => {
+
+    if (title === "Rang en jeu") {
+        if (value === "default") {
+            imgPath = "dirt.png";
+        } else if (value === "titan") {
+            imgPath = "titan.png";
+        } else if (value === "paladin") {
+            imgPath = "paladin.png";
+        } else if (value === "endium") {
+            imgPath = "endium.png";
+        } else if (value === "trixium") {
+            imgPath = "trixium.png";
+        } else if (value === "trixium+") {
+            imgPath = "trixium+.png";
+        } else if (value === "youtuber") {
+            imgPath = "yT2.png";
+        } else {
+            imgPath = "unknown.png"
+        }
+    }
+
+
+    return (
+        <div className={"SmallInfo"}>
+            <div className="imageWrapper" style={{background: "#FF5C00", borderRadius: "17px 0px 0px 17px", marginRight: "2vmin", paddingLeft: "1vmin", paddingRight: "1vmin"}}>
+                <img src={`${process.env.PUBLIC_URL}/${imgPath}`} alt="image"
+                     className={"Metier-img"} style={{height: "8vmin",width: "8vmin", margin: "1vmin 1vmin"}}></img>
+            </div>
+            <div style={{display: "flex", flexDirection: "column", justifyContent: "space-evenly"}}>
+                <div style={{fontWeight: "bold"}}>{title}</div>
+                <div style={{fontSize: "xx-large"}}>{value}</div>
+            </div>
+        </div>
+    )
+
+}
+
 const SkinViewer = ({skinUrl}) => {
-    return (<div className={"SkinViewerParent blurry"}>
+    return (<div className={"SkinViewerParent"}>
         <ReactSkinview3d className={"SkinViewer"}
                          skinUrl={skinUrl}
                          height="250"

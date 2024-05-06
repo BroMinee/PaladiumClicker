@@ -2,8 +2,14 @@
 {
     --blurry: blur(16px) brightness(0.4);
     --blurry-border: 10px;
+    --blurry-lighter: blur(16px) brightness(0.7);
 }
 
+
+html
+{
+    scrollbar-color: #FF5C00 rgba(127,127,127, 0.25);
+}
 
 .background
 {
@@ -14,6 +20,12 @@
 .blurry
 {
     backdrop-filter: var(--blurry);
+    border-radius: var(--blurry-border);
+}
+
+.blurry-lighter
+{
+    backdrop-filter: var(--blurry-lighter);
     border-radius: var(--blurry-border);
 }
 
