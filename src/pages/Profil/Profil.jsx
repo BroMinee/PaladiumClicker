@@ -6,6 +6,7 @@ import "./Profil.css"
 import ImportProfil, {setTimer} from "../../Components/ImportProfil/ImportProfil";
 import {printPricePretty} from "../../Misc";
 import {playerInfoContext} from "../../Context";
+import NoPseudoPage from "../../Components/NoPseudoPage/NoPseudoPage";
 
 const Profil = () => {
 
@@ -16,6 +17,10 @@ const Profil = () => {
 
 
     const pseudo = playerInfo["username"] || "";
+    if (Object.keys(playerInfo).length === 0)
+        return <div>Loading</div>
+    else if (playerInfo["username"] === "Entre ton pseudo")
+        return <NoPseudoPage/>;
 
     return (
         <div className="App">
@@ -83,52 +88,52 @@ const ProfilBody = ({playerInfo, setPlayerInfo}) => {
     }, []);
 
 
+
     return (
-        Object.keys(playerInfo).length === 0 ? <div></div> : (
-            <div>
-                <div style={{fontSize: "3vmin"}}>
-                    <div style={{display: "flex", justifyContent: "center"}}>
-                        Rank:&nbsp;
-                        <div className={"BroMine"}>{playerInfo["rank"]}
-                        </div>
+        <div>
+            <div style={{fontSize: "3vmin"}}>
+                <div style={{display: "flex", justifyContent: "center"}}>
+                    Rank:&nbsp;
+                    <div className={"BroMine"}>{playerInfo["rank"]}
                     </div>
-                    <div style={{display: "flex", justifyContent: "center"}}>
-                        Tu joues depuis le&nbsp;
-                        <div className={"BroMine"}>{convertEpochToDateUTC2(playerInfo["firstJoin"])}</div>
-                    </div>
-                    <div style={{display: "flex", justifyContent: "center"}}>
-                        Tu possèdes&nbsp;
-                        <div className={"BroMine"}>{printPricePretty(playerInfo["money"])}</div>
-                        &nbsp;$
-                    </div>
-                    <div style={{display: "flex", justifyContent: "center"}}>
-                        Tu as joué un total de&nbsp;
-                        <div className={"BroMine"}>{computeTimePlayed(playerInfo["timePlayed"])}</div>
-                    </div>
-                    {playerInfo["timePlayed"] > 43200 ? <div>Ca explique l'odeur si forte 😘</div> : ""}
+                </div>
+                <div style={{display: "flex", justifyContent: "center"}}>
+                    Tu joues depuis le&nbsp;
+                    <div className={"BroMine"}>{convertEpochToDateUTC2(playerInfo["firstJoin"])}</div>
+                </div>
+                <div style={{display: "flex", justifyContent: "center"}}>
+                    Tu possèdes&nbsp;
+                    <div className={"BroMine"}>{printPricePretty(playerInfo["money"])}</div>
+                    &nbsp;$
+                </div>
+                <div style={{display: "flex", justifyContent: "center"}}>
+                    Tu as joué un total de&nbsp;
+                    <div className={"BroMine"}>{computeTimePlayed(playerInfo["timePlayed"])}</div>
+                </div>
+                {playerInfo["timePlayed"] > 43200 ? <div>Ca explique l'odeur si forte 😘</div> : ""}
+            </div>
+
+            <div className={"Profil"}>
+                <div>
+                    <ReactSkinview3d className={"SkinViewer"}
+                                     skinUrl={skinUrl}
+                                     height="250"
+                                     width="250"
+                    />
+                    <ImportProfil resetButton={false} logError={true} idPseudoInput={"pseudoInputProfil"}/>
                 </div>
 
-                <div className={"Profil"}>
-                    <div>
-                        <ReactSkinview3d className={"SkinViewer"}
-                                         skinUrl={skinUrl}
-                                         height="250"
-                                         width="250"
-                        />
-                        <ImportProfil resetButton={false} logError={true} idPseudoInput={"pseudoInputProfil"}/>
-                    </div>
-
-                    <MetierList playerInfo={playerInfo}/>
-                </div>
+                <MetierList playerInfo={playerInfo}/>
+            </div>
 
 
-                <div id={"errorAPI"}></div>
-                <div id={"ApiDown"} style={{display: "none", fontSize: "20px"}}>
-                    <div>L'API de pala est peut-être down:</div>
-                    <a href="https://status.palaguidebot.fr/">Vérifier le status</a>
-                </div>
+            <div id={"errorAPI"}></div>
+            <div id={"ApiDown"} style={{display: "none", fontSize: "20px"}}>
+                <div>L'API de pala est peut-être down:</div>
+                <a href="https://status.palaguidebot.fr/">Vérifier le status</a>
+            </div>
 
-            </div>));
+        </div>);
 }
 
 function computeTimePlayed(timeInMinutes) {

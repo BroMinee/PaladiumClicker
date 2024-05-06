@@ -3,10 +3,6 @@
     background: url("background.png")  no-repeat center center fixed;
     background-size:cover;
 }
-.blurry-background
-{
-    backdrop-filter: blur(16px) brightness(0.5);
-}
 
 .header
 {
