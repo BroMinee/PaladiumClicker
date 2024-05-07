@@ -29,7 +29,7 @@ const Profil = () => {
             }
         )
 
-        const cacheInfo = JSON.parse(localStorage.getItem("cacheInfo"));
+        const cacheInfo = JSON.parse(localStorage.getItem("cacheInfo")) || {};
         cacheInfo["playerInfo"] = playerInfo;
         localStorage.setItem("cacheInfo", JSON.stringify(cacheInfo));
     }, [playerInfo]);
@@ -130,8 +130,8 @@ const FactionInfo = ({faction}) => {
     const level = playerInfo["faction_info"]["level"]["level"];
     const xp = playerInfo["faction_info"]["level"]["xp"];
     const playerList = playerInfo["faction_info"]["players"];
-
-    const factionClassement = (factionLeaderboard["classement"].filter((faction) => faction["name"] === name)[0] || {position: `>${factionLeaderboard["classement"][factionLeaderboard["classement"].length -1]["position"]}`})["position"];
+    const factionIndex = factionLeaderboard["classement"].findIndex((faction) => faction["name"] === name) +1;
+    const factionClassement = (factionIndex !== 0 ? factionIndex : `>${factionLeaderboard["classement"].length}`);
 
 
     return (
@@ -216,27 +216,27 @@ const BasicStats = () => {
                        value={convertEpochToDateUTC2(playerInfo["firstJoin"])}/>
             <SmallInfo imgPath={`dollar.png`} title={"Argent actuel"}
                        value={printPricePretty(Math.round(playerInfo["money"])) + " $"}/>
-            <SmallInfo imgPath={`trixium_block.webp`} title={"Rang en jeu"} value={playerInfo["rank"]}/>
+            <SmallInfo imgPath={`trixium_block.webp`} title={"Rang en jeu"} value={playerInfo["rank"][0].toUpperCase() + playerInfo["rank"].slice(1).toLowerCase()}/>
         </div>);
 }
 
 export const SmallInfo = ({imgPath, title, value}) => {
 
     if (title === "Rang en jeu") {
-        if (value === "default") {
+        if (value === "Default") {
             imgPath = "dirt.png";
-        } else if (value === "titan") {
+        } else if (value === "Titan") {
             imgPath = "titan.png";
-        } else if (value === "paladin") {
+        } else if (value === "Paladin") {
             imgPath = "paladin.png";
-        } else if (value === "endium") {
+        } else if (value === "Endium") {
             imgPath = "endium.png";
-        } else if (value === "trixium") {
+        } else if (value === "Trixium") {
             imgPath = "trixium.png";
-        } else if (value === "trixium+") {
+        } else if (value === "Trixium+") {
             imgPath = "trixium+.png";
-        } else if (value === "youtuber") {
-            imgPath = "yT2.png";
+        } else if (value === "Youtuber") {
+            imgPath = "youtuber.png";
         } else {
             imgPath = "unknown.png"
         }
