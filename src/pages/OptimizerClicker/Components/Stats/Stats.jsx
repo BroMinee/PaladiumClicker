@@ -95,18 +95,18 @@ const Stats = ({rps}) => {
         setBuildingBuyPaths(computeXBuildingAhead(playerInfo, prochainAchatCount, rps));
     }, [check, playerInfo]);
 
-    const [positionLeaderboard, setPositionLeaderboard] = useState("Récupération en cours");
+
     useEffect(() => {
         const setLeaderboard = async () => {
             if (playerInfo["uuid"] === "Entre ton pseudo") {
-                setPositionLeaderboard("Entre ton pseudo");
                 return;
             }
-
-            const position = await fetchLeaderboardPosition(playerInfo["uuid"]).then((data) => {
+            if(playerInfo["leaderboard"] === undefined){
+                playerInfo["leaderboard"] = await fetchLeaderboardPosition(playerInfo["uuid"]).then((data) => {
                 return data;
             });
-            setPositionLeaderboard(position);
+            setPlayerInfo({...playerInfo});
+            }
         }
         setLeaderboard();
     }, [playerInfo]);
@@ -147,7 +147,7 @@ const Stats = ({rps}) => {
                     Classement
                     <div style={{display: "flex", flexDirection: "row", justifyContent: "center"}}>
                         <div className={"RPSValue"} id={"leaderboardPosition"}>
-                            {(positionLeaderboard === "Entre ton pseudo" ? "" : "Top #") + positionLeaderboard}
+                            {(playerInfo["leaderboard"] === undefined ? "Chargement en cours" : `Top #${playerInfo["leaderboard"]}`)}
                         </div>
                     </div>
                 </div>
