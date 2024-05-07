@@ -4,7 +4,7 @@ const Bugs = () => {
 
 
     return (
-        <div className={"App-header"} style={{
+        <div className={"App-header children-blurry"} style={{
             justifyContent: ""
         }}>
             <h2 style={{marginTop: "0px"}}>Heuuu, des bugs non il y en a pas 🧐</h2>

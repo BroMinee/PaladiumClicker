@@ -33,16 +33,18 @@ html
 {
     backdrop-filter: var(--blurry);
     border-radius: var(--blurry-border);
+    padding: 1vmin;
 }
 
 .children-without-border > *
 {
-    border-radius: 0px;
+    border-radius: 0px !important;
+    padding: 1vmin;
 }
 
 .without-border
 {
-    border-radius: 0px;
+    border-radius: 0px !important;
 }
 
 

@@ -2,9 +2,6 @@
     display: grid;
     justify-content: center;
     height: 100%;
-    width: 101%;
-
-
     grid-column: 1/-1;
 }
 
@@ -15,13 +12,16 @@
 .gridNoPseudoPage
 {
     display: grid;
-
-
     margin-top: 5vmin;
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(1, 1fr);
     grid-gap: 5vmin 5vmin;
     grid-auto-rows: minmax(100px, auto);
+}
+
+.gridNoPseudoPage > *
+{
+    width: 100%;
 }
 
 .DiscordUrl
@@ -32,7 +32,6 @@
     grid-template-columns: 1fr;
     justify-content: center;
     height: fit-content;
-    width: 100%;
     grid-column: 1/-1;
 }
 
@@ -55,7 +54,6 @@
     grid-template-columns: 1fr;
     justify-content: center;
     height: fit-content;
-    width: 100%;
 }
 
 .Contributor > div

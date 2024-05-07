@@ -6,7 +6,7 @@ import "./PalaAnimation.css";
 const PalaAnimation = () => {
 
     return (
-        <div className="App">
+        <div className="App children-blurry children-without-border">
             <header className="App-header">
                 <div style={{flexDirection: "row", display: "flex"}}>
                     <h3 style={{marginBottom: "0px", zIndex: 1, position: "relative"}}>
