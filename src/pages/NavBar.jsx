@@ -3,7 +3,7 @@ import React from "react";
 import {FaBars} from "react-icons/fa";
 import {NavLink as Link} from "react-router-dom";
 import styled from "styled-components";
-import ImportProfil from "../Components/ImportProfil/ImportProfil";
+import ImportProfil from "./OptimizerClicker/Components/ImportProfil/ImportProfil";
 
 export const Nav = styled.nav`
     background: #FF5C00;

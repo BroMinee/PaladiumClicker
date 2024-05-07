@@ -1,6 +1,4 @@
 import React, {useContext} from "react";
-import {checkCondition, printPricePretty} from "../../Misc";
-import {playerInfoContext} from "../../Context";
 
 import "./BuildingUpgradeList.css";
 import "./CategoryList.css";
@@ -8,7 +6,10 @@ import "./GlobalList.css"
 import "./ManyList.css"
 import "./PosteriorList.css"
 import "./TerrainList.css"
+import {playerInfoContext} from "../../../../Context";
+import {checkCondition, printPricePretty} from "../../../../Misc";
 
+import "./UpgradeList.css"
 
 
 const UpgradeList = ({upgradeName}) => {
@@ -31,15 +32,31 @@ const UpgradeList = ({upgradeName}) => {
             return `/${nameShort}Icon/${index}.png`;
     }
 
+    let customClassName = "";
+    switch (nameShort) {
+        case "Global":
+            customClassName = "GlobalGrid";
+            break;
+        case "Building":
+            customClassName = "BuildingUpgradeGrid";
+            break;
+        case "Many":
+            customClassName = "ManyGrid";
+            break;
+        case "Posterior":
+            customClassName = "PosteriorGrid";
+            break;
+    }
+
     return (
-        <ul className={"ul-horizontal"}>
+        <div className={`ul-horizontal ${customClassName}`}>
             {
                 playerInfo[upgradeName] && playerInfo[upgradeName].map((terrain, index) => (
                     <Upgrade upgradeName={upgradeName} buildingName={terrain["name"]}
                              imgPath={getImgPath(index, terrain["name"])} index={index}/>
                 ))
             }
-        </ul>
+        </div>
     )
 }
 
@@ -76,8 +93,8 @@ const Upgrade = ({upgradeName, buildingName, imgPath, index}) => {
     }
 
     return (
-        <li key={index} onClick={setOwn} className={"fit-all-width"}>
-            <ul className={`Info-${nameShort}-list ` + (playerInfo[upgradeName][index]["own"] === true ? "Owned" : "NotOwned") + " " + (unlockable ? "" : "Lock")}>
+        <div key={index} onClick={setOwn} className={"fit-all-width"}>
+            <div className={(playerInfo[upgradeName][index]["own"] === true ? "Owned" : "NotOwned") + " " + (unlockable ? "" : "Lock")}>
                 <div className="imageWrapper">
                     <img src={process.env.PUBLIC_URL + "/" + imgPath} alt="image" className={`${nameShort}-img`}></img>
                     <div className="cornerLink">{buildingName}
@@ -95,8 +112,8 @@ const Upgrade = ({upgradeName, buildingName, imgPath, index}) => {
                         }
                     </div>
                 </div>
-            </ul>
-        </li>
+            </div>
+        </div>
     );
 }
 

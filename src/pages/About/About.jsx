@@ -1,6 +1,5 @@
 import React from "react";
 import {DiscordAndContributors} from "../../Components/NoPseudoPage/NoPseudoPage";
-import ImportProfil from "../../Components/ImportProfil/ImportProfil";
 
 import "./About.css"
 

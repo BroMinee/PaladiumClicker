@@ -1,4 +1,4 @@
-import {ComputePrice} from "./Components/Building/BuildingList";
+import {ComputePrice} from "./pages/OptimizerClicker/Components/Building/BuildingList";
 
 function checkIfKeyExists(obj, key) {
     return obj.hasOwnProperty(key);

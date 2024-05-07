@@ -203,7 +203,6 @@ const Metier = ({metierName, imgPath, playerInfo, setPlayerInfo, level, editable
                 </div>
                 {editable === false ? "" :
                 <div className={"ArrowUpDown"}>
-
                     <div onClick={() => {
                         if(editable === false)
                             return

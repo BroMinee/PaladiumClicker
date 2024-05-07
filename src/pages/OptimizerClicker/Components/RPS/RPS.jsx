@@ -2,9 +2,10 @@ import React, {useContext} from "react";
 
 import "./RPS.css"
 import {ComputePrice, computeRPS} from "../Building/BuildingList.jsx";
-import {checkCondition} from "../../Misc";
 import {computeXBuildingAhead, Stat} from "../Stats/Stats";
-import {playerInfoContext} from "../../Context";
+import {playerInfoContext} from "../../../../Context";
+import {checkCondition} from "../../../../Misc";
+
 
 const RPS = ({RPS, estimatedRPS, setEstimatedRPS}) => {
     const {
@@ -33,8 +34,8 @@ const RPS = ({RPS, estimatedRPS, setEstimatedRPS}) => {
     if (buildingBuyPaths.length !== 0)
         setEstimatedRPS(buildingBuyPaths[0][5]);
 
-    return <div className={"RPS-father"}>
-        <div className={"RPS"}>
+    return [
+        <div className={"RPS"} key={"RPS1"}>
             Production actuelle par seconde
             <div style={{display: "flex", flexDirection: "row", justifyContent: "center"}}>
                 <div className={"RPSValue"}>
@@ -44,8 +45,8 @@ const RPS = ({RPS, estimatedRPS, setEstimatedRPS}) => {
                 </div>
                 <img src={process.env.PUBLIC_URL + "/" + "coin.png"} className="App-logo" alt="logo"/>
             </div>
-        </div>
-        <div className={"RPS"}>
+        </div>,
+        <div className={"RPS"} key={"RPS2"}>
             Prochain achat optimal
             <div>
                 {(buildingBuyPaths.length !== 0) &&
@@ -70,8 +71,8 @@ const RPS = ({RPS, estimatedRPS, setEstimatedRPS}) => {
                 }
             </div>
 
-        </div>
-        <div className={"RPS"}>
+        </div>,
+        <div className={"RPS"} key={"RPS3"}>
             Production estimée après achat
             <div style={{display: "flex", flexDirection: "row", justifyContent: "center"}}>
                 <div
@@ -79,9 +80,7 @@ const RPS = ({RPS, estimatedRPS, setEstimatedRPS}) => {
                 </div>
                 <img src={process.env.PUBLIC_URL + "/" + "coin.png"} className="App-logo" alt="logo"/>
             </div>
-        </div>
-    </div>
-
+        </div>]
 }
 
 

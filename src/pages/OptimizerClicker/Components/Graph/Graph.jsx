@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react';
 import {ImCross} from "react-icons/im";
 import Plot from 'react-plotly.js';
-import fetchDataOnPublicURL from "../../FetchData";
+import fetchDataOnPublicURL from "../../../../FetchData";
 
 const Graph = () => {
     let [graphCSV, setGraphCSV] = React.useState({});

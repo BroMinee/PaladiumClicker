@@ -1,0 +1,70 @@
+.BuildingGrid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    grid-column-gap: 1vmin;
+    grid-row-gap: 1vmin;
+}
+
+.Building-img {
+    height: 8vmin;
+    pointer-events: none;
+}
+
+.Count-inside-txt {
+    -moz-appearance: textfield;
+    background: transparent;
+    border: none;
+    padding-left: 15px;
+    padding-right: 0px;
+    width: 5vmin;
+    min-width: 6vmin;
+    text-align: center;
+    font-size: 3vmin;
+    font-weight: bold;
+    color: white;
+}
+
+.Count-father
+{
+    border: 1px solid transparent;
+    border-radius: 10px;
+    z-index: 2;
+    width: fit-content;
+    /*padding-right: 2vmin;*/
+    padding-bottom: 0px !important;
+    margin-bottom: 1vmin;
+}
+{
+    border: 1px solid transparent;
+    justify-content: space-between;
+    border-radius: 10px;
+    position: absolute;
+    margin-top: 15vmin;
+    /*margin-left: 17.5vmin;*/
+    z-index: 2;
+    width: fit-content;
+    /*padding-left: 2vmin;*/
+    /*padding-right: 2vmin;*/
+    padding-bottom: 0px;
+}
+
+.InfoUpgrade
+{
+    display: inline-flex;
+    flex-direction: column;
+}
+.InfoUpgrade > *
+{
+    width: 20vmin;
+}
+
+.InfoUpgrade  .Metier-img
+{
+    height: 3vmin !important;
+    width: 3vmin !important;
+}
+
+.InfoUpgrade .largeFontSize
+{
+    font-size: inherit;
+}

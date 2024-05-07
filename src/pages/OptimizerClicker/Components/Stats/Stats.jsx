@@ -1,11 +1,10 @@
 import React, {useContext, useEffect, useState} from "react";
 import "./Stats.css";
-import {getPathImg, getTotalSpend, printPricePretty} from "../../Misc";
 import {ComputePrice, computeRPS} from "../Building/BuildingList";
 import {computeBestBuildingUgrade, findBestUpgrade} from "../RPS/RPS";
-import {fetchLeaderboardPosition} from "../../FetchData";
-import {playerInfoContext} from "../../Context";
-
+import {getPathImg, getTotalSpend, printPricePretty} from "../../../../Misc";
+import {playerInfoContext} from "../../../../Context";
+import {fetchLeaderboardPosition} from "../../../../FetchData";
 
 function getBestUpgrade(copyPlayerInfo) {
 
@@ -119,8 +118,8 @@ const Stats = ({rps}) => {
     return (
         <div>
 
-            <div className={"RPS-father"}>
-                <div className={"RPS"}>
+            <div className={"Stat-father"}>
+                <div className={"Stat"}>
                     Coins dormants
                     <div style={{display: "flex", flexDirection: "row", justifyContent: "center"}}>
                         <div className={"RPSValue"}>
@@ -132,7 +131,7 @@ const Stats = ({rps}) => {
                         </div>
                     </div>
                 </div>
-                <div className={"RPS"}>
+                <div className={"Stat"}>
                     Production totale
                     <div style={{display: "flex", flexDirection: "row", justifyContent: "center"}}>
                         <div className={"RPSValue"}>
@@ -144,7 +143,7 @@ const Stats = ({rps}) => {
                         </div>
                     </div>
                 </div>
-                <div className={"RPS"}>
+                <div className={"Stat"}>
                     Classement
                     <div style={{display: "flex", flexDirection: "row", justifyContent: "center"}}>
                         <div className={"RPSValue"} id={"leaderboardPosition"}>
@@ -160,7 +159,7 @@ const Stats = ({rps}) => {
             <label>Afficher les {prochainAchatCount} prochains achats optimaux (non recommandé sur
                 téléphone)</label>
             {check &&
-                <div>
+                <div className={"FuturUpgradeFather"}>
                     <Stat playerInfo={playerInfo} buildingBuyPath={buildingBuyPaths} showProduction={true}/>
                     <button className={"buyButton"}
                             onClick={() => {
@@ -214,11 +213,11 @@ export const Stat = ({playerInfo, buildingBuyPath, showProduction}) => {
     // List of list [path, index, own, timeToBuy, pathImg]
 
     return (
-        <ul className={"ul-horizontal ul-stat"}>
+        <div>
             {
                 buildingBuyPath.map((buildingPath, i) => (
-                    <ul className={"Stat-list"}>
-                        <li>
+                    <div className={"Stat-list"}>
+                        <div>
                             <div className={"imageWrapper"}>
                                 <img src={buildingPath[4]} alt="image"
                                      className={"Stat-img"}></img>
@@ -238,11 +237,11 @@ export const Stat = ({playerInfo, buildingBuyPath, showProduction}) => {
                                     </div>
                                 }
                             </div>
-                        </li>
-                    </ul>
+                        </div>
+                    </div>
                 ))
             }
-        </ul>
+        </div>
     )
 }
 

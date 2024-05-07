@@ -1,9 +1,9 @@
 import React, {useContext, useEffect} from "react";
 
 import "./ImportProfil.css"
-import fetchDataOnPublicURL, {fetchAllData, fetchDataOnPaladiumAPI, fetchInfoFromPseudo} from "../../FetchData";
 import {VERSION} from "axios";
-import {playerInfoContext} from "../../Context";
+import {playerInfoContext} from "../../../../Context";
+import {fetchAllData, fetchInfoFromPseudo} from "../../../../FetchData";
 
 
 const ImportProfil = ({resetButton, logError, idPseudoInput}) => {

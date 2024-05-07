@@ -3,10 +3,10 @@ import MetierList from "../../Components/Metier/MetierList";
 import ReactSkinview3d from "react-skinview3d"
 import axios from "axios";
 import "./Profil.css"
-import ImportProfil, {setTimer} from "../../Components/ImportProfil/ImportProfil";
 import {printPricePretty} from "../../Misc";
 import {playerInfoContext} from "../../Context";
 import NoPseudoPage from "../../Components/NoPseudoPage/NoPseudoPage";
+import ImportProfil, {setTimer} from "../OptimizerClicker/Components/ImportProfil/ImportProfil";
 
 const Profil = () => {
 
@@ -146,7 +146,7 @@ const BasicStats = () => {
         </div>);
 }
 
-const SmallInfo = ({imgPath, title, value}) => {
+export const SmallInfo = ({imgPath, title, value}) => {
 
     if (title === "Rang en jeu") {
         if (value === "default") {
@@ -175,9 +175,9 @@ const SmallInfo = ({imgPath, title, value}) => {
                 <img src={`${process.env.PUBLIC_URL}/${imgPath}`} alt="image"
                      className={"Metier-img"} style={{height: "8vmin",width: "8vmin", margin: "1vmin 1vmin"}}></img>
             </div>
-            <div style={{display: "flex", flexDirection: "column", justifyContent: "space-evenly"}}>
+            <div style={{display: "flex", flexDirection: "column", justifyContent: "space-evenly", width: "100%"}}>
                 <div style={{fontWeight: "bold"}}>{title}</div>
-                <div style={{fontSize: "xx-large"}}>{value}</div>
+                <div className={"largeFontSize"}>{value}</div>
             </div>
         </div>
     )

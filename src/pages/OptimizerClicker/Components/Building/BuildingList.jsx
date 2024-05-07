@@ -1,6 +1,8 @@
 import React, {useContext} from "react";
 import "./BuildingList.css";
-import {playerInfoContext} from "../../Context";
+import {playerInfoContext} from "../../../../Context";
+import {SlArrowDown, SlArrowUp} from "react-icons/sl";
+import {SmallInfo} from "../../../Profil/Profil";
 
 
 const BuildingList = ({setRPS}) => {
@@ -20,7 +22,7 @@ const BuildingList = ({setRPS}) => {
     setRPS(computeRPS(playerInfo))
 
     return (
-        <ul className={"ul-horizontal"} key={this}>
+        <div className={"BuildingGrid"} key={this}>
             {
                 playerInfo["building"] && playerInfo["building"].map((building, index) => (
                     <Building playerInfo={playerInfo} setPlayerInfo={setPlayerInfo} building={building}
@@ -28,7 +30,7 @@ const BuildingList = ({setRPS}) => {
 
                 ))
             }
-        </ul>
+        </div>
     )
 }
 
@@ -59,25 +61,65 @@ const Building = ({playerInfo, setPlayerInfo, building, imgPath, unique_id_react
     function printPricePretty(price) {
         return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
     }
+    let bgc = [0, 0, 0];
 
+    if(playerInfo["building"][index]["own"] === 0)
+        bgc = [127, 127, 127];
+    else if(playerInfo["building"][index]["own"] === 99)
+        bgc = [255, 0, 0];
+    else
+        bgc = [0, 255, 0];
 
     return (
-        <li key={unique_id_react}>
-            <ul className={"Info-Building-list " + (building["own"] !== 0 ? "Owned" : "NotOwned")}>
+        <div key={unique_id_react}>
+            <div className={"blurry-lighter"} style={{display: "flex", flexDirection: "column", alignItems: "center"}}>
 
                 <div className={"imageWrapper"}>
                     <img src={process.env.PUBLIC_URL + "/" + imgPath} alt="image" className={"Building-img"}></img>
                     <div className="cornerLink">{building["name"]}</div>
                 </div>
-                <li>Lvl: {building["own"]}</li>
-                <li>RPS
-                    : {printPricePretty(scaleCurrentProduction(playerInfo, index, building["own"]).toFixed(2))}</li>
-                <li>{printPricePretty(ComputePrice(building["price"], building["own"]))}$</li>
-                <input type="number" min="0" step="1" max="99" value={playerInfo["building"][index]["own"]}
-                       onKeyUp={enforceMinMax}
-                       onChange={enforceMinMax}/>
-            </ul>
-        </li>
+                <div className={"InfoUpgrade"}>
+                    <SmallInfo imgPath={`coin.png`} title={"Coins par seconde"} value={printPricePretty(scaleCurrentProduction(playerInfo, index, building["own"]).toFixed(2))}/>
+                    <SmallInfo imgPath={`dollar.png`} title={"Prix"} value={printPricePretty(ComputePrice(building["price"], building["own"])) + " $"}/>
+                </div>
+
+
+
+                <div className={"Count-father ul-horizontal"}
+                     style={{backgroundColor: `rgb(${bgc[0]},${bgc[1]},${bgc[2]})`}}>
+                    <div>
+                        <input className={"Count-inside-txt"} type="number" min="0" step="1" max="99" value={playerInfo["building"][index]["own"]}
+                               onKeyUp={enforceMinMax}
+                               onChange={enforceMinMax}/>
+                    </div>
+                    {
+                        <div className={"ArrowUpDown"}>
+                            <div
+                                onClick={() => {
+                                    if (playerInfo["building"][index]["name"] === -1)
+                                        return
+                                    playerInfo["building"][index]["own"] += 1;
+                                    playerInfo["building"][index]["own"] = Math.min(playerInfo["building"][index]["own"], 99)
+                                    setPlayerInfo({...playerInfo})
+                                }}
+                            >
+                                <SlArrowUp/>
+                            </div>
+                            <div
+                                onClick={() => {
+                                    if (playerInfo["building"][index]["name"] === -1)
+                                        return
+                                    playerInfo["building"][index]["own"] -= 1;
+                                    playerInfo["building"][index]["own"] = Math.max(playerInfo["building"][index]["own"], 0)
+                                    setPlayerInfo({...playerInfo})
+                                }}>
+                                <SlArrowDown/>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
     );
 }
 

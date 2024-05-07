@@ -188,6 +188,7 @@ body, ul, li {
     z-index: 0;
     animation: fall 3s linear infinite;
     height: 16vmin;
+    image-rendering: pixelated;
 }
 
 @keyframes fall {

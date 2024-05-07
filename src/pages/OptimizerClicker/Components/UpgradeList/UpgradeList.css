@@ -1,0 +1,31 @@
+.GlobalGrid
+{
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-column-gap: 1vmin;
+    grid-row-gap: 1vmin;
+}
+
+.BuildingUpgradeGrid
+{
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    grid-column-gap: 1vmin;
+    grid-row-gap: 1vmin;
+}
+
+.ManyGrid
+{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-column-gap: 1vmin;
+    grid-row-gap: 1vmin;
+}
+
+.PosteriorGrid
+{
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-column-gap: 1vmin;
+    grid-row-gap: 1vmin;
+}

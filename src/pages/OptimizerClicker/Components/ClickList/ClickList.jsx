@@ -1,7 +1,8 @@
 import React, {useContext, useEffect} from "react";
 import "./ClickList.css";
-import {checkCondition, printPricePretty} from "../../Misc";
-import {playerInfoContext} from "../../Context";
+import {playerInfoContext} from "../../../../Context";
+import {checkCondition, printPricePretty} from "../../../../Misc";
+
 
 const ClickList = () => {
 
@@ -24,14 +25,14 @@ const ClickList = () => {
     }, [playerInfo]);
 
     return (
-        <ul className={"ul-horizontal"}>
+        <div className={"CPSGrid"}>
             {
                 playerInfo["CPS"] && playerInfo["CPS"].map((cur_cps, index) => (
                     <CPS playerInfo={playerInfo} setPlayerInfo={setPlayerInfo} buildingName={cur_cps["name"]}
                          imgPath={getImgPath(index, cur_cps["name"])} index={index}/>
                 ))
             }
-        </ul>
+        </div>
     )
 }
 
@@ -75,8 +76,8 @@ const CPS = ({playerInfo, setPlayerInfo, buildingName, imgPath, index}) => {
         texts[0] = "Préconditions non remplies :";
 
     return (
-        <li key={index} onClick={setOwn} className={"fit-all-width"}>
-            <ul className={"Info-CPS-list " + (playerInfo["CPS"][index]["own"] === true ? "Owned" : "NotOwned") + " " + (unlockable ? "" : "Lock")}>
+        <div key={index} onClick={setOwn}>
+            <div className={(playerInfo["CPS"][index]["own"] === true ? "Owned" : "NotOwned") + " " + (unlockable ? "" : "Lock")}>
                 <div className="imageWrapper">
                     <img src={process.env.PUBLIC_URL + "/" + imgPath} alt="image" className={"CPS-img"}></img>
                     <div className="cornerLink">{buildingName}
@@ -94,8 +95,8 @@ const CPS = ({playerInfo, setPlayerInfo, buildingName, imgPath, index}) => {
 
                     </div>
                 </div>
-            </ul>
-        </li>
+            </div>
+        </div>
     );
 }
 
@@ -118,8 +119,8 @@ function createFallingImage() {
     image.classList.add('falling-image');
     container.appendChild(image);
 
-    const randomX = Math.random() * (container.offsetWidth - image.width);
-    image.style.left = randomX + 'px';
+    const randomX = Math.random() * (container.offsetWidth - image.width - 200);
+    image.style.left = 100 + randomX + 'px';
 
     setTimeout(() => {
         image.remove()

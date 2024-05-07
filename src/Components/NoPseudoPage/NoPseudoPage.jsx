@@ -1,9 +1,9 @@
 import React, {useContext} from "react";
 import {playerInfoContext} from "../../Context";
-import ImportProfil from "../ImportProfil/ImportProfil";
 
 import "./NoPseudoPage.css"
 import {DISCORD_NAME, DISCORD_URL} from "../../Constant";
+import ImportProfil from "../../pages/OptimizerClicker/Components/ImportProfil/ImportProfil";
 
 const NoPseudoPage = () => {
 
@@ -52,7 +52,7 @@ export const DiscordAndContributors = () => {
         }
     ];
 
-    return [<a className={"DiscordUrl"} href={DISCORD_URL} target="_blank">
+    return [<a key={"discordkey"} className={"DiscordUrl"} href={DISCORD_URL} target="_blank">
         <div>
             <div style={{padding: "10px 10px"}}>
                 <img src={`${process.env.PUBLIC_URL}/discord_logo.jpg`} alt="image" className="Building-img"
