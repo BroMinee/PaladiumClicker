@@ -9,10 +9,10 @@ const About = () => {
         <div style={{display: "flex", justifyContent: "space-around"}}>
             <div className={"gridNoPseudoPage children-blurry"}>
                 <div className={"NoPseudoPage"}>
-                    <h2 style={{marginBottom: "0px", zIndex: 1, position: "relative", display: "flex"}}>
+                    <p style={{fontSize: "xx-large", marginBottom: "0px"}}>
                         Ce site a été entièrement développé par&nbsp;
-                        <div className={"BroMine"}>BroMine__</div>
-                    </h2>
+                        <span className={"BroMine"}>BroMine__</span>
+                    </p>
                 </div>
                 <AboutBody/>
                 <DiscordAndContributors/>

@@ -43,18 +43,17 @@ const Profil = () => {
             <SkinViewer skinUrl={skinUrl}/>
             <div className={"parentProfil"}>
                 <div className="ProfilInfo blurry-lighter" style={{marginTop: "1vmin"}}>
-                    <h1 style={{
+                    <p style={{
                         padding: "1vmin",
                         zIndex: 1,
                         position: "relative",
-                        flexDirection: "row",
-                        display: "flex"
+                        fontSize: "xx-large",
                     }}>
                         Profil de&nbsp;
-                        <div className={"BroMine blurry-lighter"}>{pseudo}</div>
-                        <div>&nbsp; - &nbsp;</div>
-                        <div className={"BroMine blurry-lighter"}>{playerInfo["faction"]}</div>
-                    </h1>
+                        <span className={"BroMine blurry-lighter"}>{pseudo}</span>
+                        &nbsp; - &nbsp;
+                        <span className={"BroMine blurry-lighter"}>{playerInfo["faction"]}</span>
+                    </p>
                 </div>
                 <div style={{display: "flex", gap: "4vmin", justifyContent: "space-around"}}>
                     <BasicStats/>

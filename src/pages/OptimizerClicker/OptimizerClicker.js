@@ -126,24 +126,19 @@ export const OptiClicker = () => {
                 <Tuto/>
                 <div className="App gridClicker children-blurry">
                     <div style={{justifySelf: "center"}}>
-                        <div style={{flexDirection: "row", display: "flex"}}>
-                            <h3 style={{marginBottom: "0px", zIndex: 1, position: "relative"}}>
+                        <p style={{fontSize: "xx-large", marginBottom: "0px"}}>
                                 Bienvenue sur l'optimiseur du&nbsp;
-                            </h3>
-                            <h3 style={{marginBottom: "0px", zIndex: 1, position: "relative"}}
-                                className={"BroMine"}>
+                            <span className={"BroMine"}>
                                 PalaClicker
-                            </h3>
+                            </span>
+                        </p>
+                        <p style={{fontSize: "x-large", marginTop: "0px"}}>
+                            Made by&nbsp;
+                            <span className={"BroMine"}> BroMine__</span>
+                        </p>
 
-                        </div>
-                        <div style={{flexDirection: "row", display: "flex"}}>
-                            <div>
-                                Made by&nbsp;
-                            </div>
-                            <div className={"BroMine"}> BroMine__</div>
-                        </div>
 
-                        <div style={{flexDirection: "row", display: "flex", paddingTop: "20px", columnGap: "10px"}}>
+                        <div style={{flexDirection: "row", display: "flex", padding: "10px 0px", columnGap: "10px"}}>
                             <button onClick={() => {
                                 document.getElementById("modal3").style.display = "block"
                             }

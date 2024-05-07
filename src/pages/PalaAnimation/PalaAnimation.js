@@ -7,24 +7,19 @@ const PalaAnimation = () => {
 
     return (
         <div className="App children-blurry children-without-border">
-            <header className="App-header">
-                <div style={{flexDirection: "row", display: "flex"}}>
-                    <h3 style={{marginBottom: "0px", zIndex: 1, position: "relative"}}>
-                        Bienvenue dans la zone d'entraînement du&nbsp;
-                    </h3>
-                    <h3 style={{marginBottom: "0px", zIndex: 1, position: "relative"}}
-                        className={"BroMine"}>
-                        PalaAnimation
-                    </h3>
+            <div style={{justifySelf: "center"}}>
+                <p style={{fontSize: "xx-large", marginBottom: "0px"}}>
+                    Bienvenue dans la zone d'entraînement du&nbsp;
+                    <span className={"BroMine"}>
+                                PalaAnimation
+                            </span>
+                </p>
+                <p style={{fontSize: "x-large", marginTop: "0px"}}>
+                    Made by&nbsp;
+                    <span className={"BroMine"}>BroMine__</span>
+                </p>
+            </div>
 
-                </div>
-                <div style={{flexDirection: "row", display: "flex"}}>
-                    <div>
-                        Made by&nbsp;
-                    </div>
-                    <div className={"BroMine"}> BroMine__</div>
-                </div>
-            </header>
             <br/>
             <PalaAnimationBody/>
         </div>

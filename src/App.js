@@ -11,7 +11,6 @@ import PalaAnimation from "./pages/PalaAnimation/PalaAnimation";
 import Navbar from "./pages/NavBar";
 import Profil from "./pages/Profil/Profil";
 import About from "./pages/About/About";
-import Bugs from "./pages/Bugs/Bugs";
 import Popup from "./Components/Popup/Popup";
 import {playerInfoContext} from "./Context";
 import {OptiClicker} from "./pages/OptimizerClicker/OptimizerClicker";
@@ -39,8 +38,6 @@ const App = () => {
                                element={<PalaAnimation/>}/>
                         <Route exact path="/About"
                                element={<About/>}/>
-                        <Route exact path="/Bugs"
-                               element={<Bugs/>}/>
                     </Routes>
                 </main>
             </BrowserRouter>
