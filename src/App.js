@@ -28,9 +28,41 @@ import Header from "./pages/Header";
 import {playerInfoContext} from "./Context";
 import NoPseudoPage from "./Components/NoPseudoPage/NoPseudoPage";
 import UpgradeList from "./Components/UpgradeList/UpgradeList";
+import Countdown from "react-countdown";
 
 let cacheHasBeenReset = false;
 
+
+export const Completionist = () =>
+    <div>
+        Recharge la page dans quelques minutes
+    </div>
+
+function print2digits(time) {
+    if (time < 10) {
+        return "0" + time;
+    }
+    return time;
+}
+
+// Renderer callback with condition
+export const renderer = ({hours, minutes, seconds, completed}) => {
+    let textInRed = false;
+    if(hours === 0 && minutes === 0 && seconds < 30 && seconds % 2 === 0){
+        textInRed = true;
+    }
+    if (completed) {
+        // Render a completed state
+        return <Completionist/>;
+    } else {
+        // Render a countdown
+        return <div>
+            <span>Compte à rebours </span>
+            <br/>
+            <span style={{color: textInRed ? "red" : "inherit"}}>{print2digits(hours)}:{print2digits(minutes)}:{print2digits(seconds)}</span>
+        </div>
+    }
+};
 
 const App = () => {
     const [playerInfo, setPlayerInfo] = useState(JSON.parse(localStorage.getItem("cacheInfo") || "{}")["playerInfo"] || {});
@@ -42,6 +74,10 @@ const App = () => {
             }}>
             <div>
                 <BrowserRouter>
+                    <div style={{position: "absolute", marginTop: "100px", marginLeft: "10px", fontSize: "50px", background: "#FF5C00", borderRadius: "20px", zIndex: 1, maxWidth: "425px", padding: "10px"}}>
+                        <Countdown date={new Date("08 May 2024 19:00 UTC+2")} renderer={renderer}/>
+                    </div>
+
                     <header>
                         <Header/>
                     </header>
