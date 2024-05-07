@@ -11,7 +11,7 @@ const Popup = () => {
     return <div className="modal" id="modal4" style={{display: "none"}}>
         <div className="modal-back"></div>
         <div className="modal-container"
-             style={{"background-image": `url(${process.env.PUBLIC_URL}/background.png)`}}>
+             style={{"background-image": `url(${process.env.PUBLIC_URL}/background_old.png)`}}>
             <ImCross onClick={closeModal} className="RedCrossIcon"/>
             <h2 style={{color: "red"}}>
                 Ton profil n'est pas visible, c'est le cas si tu es Youtubeur ou Streamer

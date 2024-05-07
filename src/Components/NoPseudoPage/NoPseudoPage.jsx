@@ -70,17 +70,12 @@ export const DiscordAndContributors = () => {
     </a>
         ,
         contributeurs.map((contributeur, index) => (
-            <Contributor key={index} contibutor={contributeur}/>
+            <Contributor key={index} pseudo={contributeur["pseudo"]} urlSkin={`https://crafatar.com/avatars/${contributeur["uuid"]}?size=8`} description={contributeur["description"]} url={contributeur["url"]}/>
         ))
     ]
 }
 
-const Contributor = ({contibutor}) => {
-    const pseudo = contibutor["pseudo"];
-    const urlSkin = `https://crafatar.com/avatars/${contibutor["uuid"]}?size=8`;
-    const description = contibutor["description"];
-    const url = contibutor["url"];
-
+export const Contributor = ({pseudo, urlSkin, description, url}) => {
     function handleOnClick(e) {
         // open url in a new tab
         if (url !== "")

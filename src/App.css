@@ -11,11 +11,6 @@ html
     scrollbar-color: #FF5C00 rgba(127,127,127, 0.25);
 }
 
-.background
-{
-    background: url("background.png")  no-repeat center center fixed;
-    background-size:cover;
-}
 
 .blurry
 {
@@ -32,6 +27,13 @@ html
 .children-blurry > *
 {
     backdrop-filter: var(--blurry);
+    border-radius: var(--blurry-border);
+    padding: 1vmin;
+}
+
+.children-blurry-lighter > *
+{
+    backdrop-filter: var(--blurry-lighter);
     border-radius: var(--blurry-border);
     padding: 1vmin;
 }

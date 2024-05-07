@@ -5,8 +5,9 @@ import axios from "axios";
 import "./Profil.css"
 import {printPricePretty} from "../../Misc";
 import {playerInfoContext} from "../../Context";
-import NoPseudoPage from "../../Components/NoPseudoPage/NoPseudoPage";
+import NoPseudoPage, {Contributor} from "../../Components/NoPseudoPage/NoPseudoPage";
 import ImportProfil, {setTimer} from "../OptimizerClicker/Components/ImportProfil/ImportProfil";
+import {fetchFactionInfo, fetchFactionLeaderboard} from "../../FetchData";
 
 const Profil = () => {
 
@@ -65,7 +66,7 @@ const Profil = () => {
                 </div>
                 <div>
                     <h1>Hôtel de vente</h1>
-                    <h3>TODO</h3>
+                    <h3>Working progress</h3>
                 </div>
             </div>
 
@@ -76,18 +77,92 @@ const Profil = () => {
 }
 
 const FactionInfo = ({faction}) => {
+
+    const {
+        playerInfo,
+        setPlayerInfo,
+        factionLeaderboard,
+        setFactionLeaderboard
+    } = useContext(playerInfoContext);
+
+    useEffect(() => {
+            const setFactionInfo = async () => {
+                if (playerInfo["uuid"] === "Entre ton pseudo") {
+                    return;
+                }
+                if (playerInfo["faction_info"] === undefined) {
+                    playerInfo["faction_info"] = await fetchFactionInfo(playerInfo["faction"]).then((data) => {
+                        return data;
+                    });
+                    setPlayerInfo({...playerInfo});
+                }
+            }
+            const asyncSetFactionLeaderboard = async () => {
+                // Update faction leaderboard every 5 minutes
+                if (Object.keys(factionLeaderboard).length === 0 || factionLeaderboard["last_update"] === undefined || Date.now() - factionLeaderboard["last_update"] > 1000 * 60 * 5) {
+                    const newFactionLeaderBoard = {
+                        "classement":
+                            await fetchFactionLeaderboard(playerInfo["faction"]).then((data) => {
+                                return data;
+                            }), "last_update": Date.now()
+                    };
+                    console.log("Updating faction info")
+                    setFactionLeaderboard(newFactionLeaderBoard);
+                }
+                else
+                {
+                    console.log("Using cached faction leaderboard")
+                }
+            }
+
+            setFactionInfo();
+            asyncSetFactionLeaderboard();
+        }, [playerInfo]
+    )
+
+    if (playerInfo["faction_info"] === undefined || Object.keys(factionLeaderboard).length === 0 || factionLeaderboard["classement"] === undefined)
+        return <div>Loading</div>
+
+    const name = playerInfo["faction_info"]["name"];
+    const factionDescription = playerInfo["faction_info"]["description"];
+    const access = playerInfo["faction_info"]["access"];
+    const createdAt = playerInfo["faction_info"]["createdAt"];
+    const level = playerInfo["faction_info"]["level"]["level"];
+    const xp = playerInfo["faction_info"]["level"]["xp"];
+    const playerList = playerInfo["faction_info"]["players"];
+
+    const factionClassement = (factionLeaderboard["classement"].filter((faction) => faction["name"] === name)[0] || {position: `>${factionLeaderboard["classement"][factionLeaderboard["classement"].length -1]["position"]}`})["position"];
+
+
     return (
         <div className={"FactionInfo"}>
             <h1>
-                {faction}
-
+                {`${name} - ${factionClassement}ème`}
             </h1>
-            TODO
+            <SmallInfo imgPath={"BookAndQuill.webp"} title={"Description"} value={factionDescription}/>
+            {/*<SmallInfo imgPath={""} title={"Accès"} value={access[0] + access.slice(1).toLocaleLowerCase()}/>*/}
+            <SmallInfo imgPath={"clock.gif"} title={"Créée le"} value={convertEpochToDateUTC2(createdAt)}/>
+            <SmallInfo imgPath={"ExperienceOrb.webp"} title={"Niveau - [xp]"}
+                       value={`${level} - [${printPricePretty(xp)}]`}/>
+            <div className={"PlayerInFac"}>
+                <h2>{`Membres - ${playerList.length}`}</h2>
+                <div className={"FactionMemberFather children-blurry-lighter"}>
+                    {
+                        playerList.map((player) => {
+                            return <Contributor key={player["uuid"]}
+                                                pseudo={`[${player["group"]}] ${player["username"]}`}
+                                                urlSkin={`https://crafatar.com/avatars/${player["uuid"]}?size=8`}
+                                                description={`Rejoins le ${convertEpochToDateUTC2(player["joinedAt"])}`}
+                                                url={""}/>
+
+                        })
+                    }
+                </div>
+            </div>
         </div>
-
     )
-
 }
+
 
 const MetierStats = () => {
     const {
@@ -170,9 +245,15 @@ export const SmallInfo = ({imgPath, title, value}) => {
 
     return (
         <div className={"SmallInfo"}>
-            <div className="imageWrapper" style={{background: "#FF5C00", borderRadius: "17px 0px 0px 17px", marginRight: "2vmin", paddingLeft: "1vmin", paddingRight: "1vmin"}}>
+            <div className="imageWrapper" style={{
+                background: "#FF5C00",
+                borderRadius: "17px 0px 0px 17px",
+                marginRight: "2vmin",
+                paddingLeft: "1vmin",
+                paddingRight: "1vmin"
+            }}>
                 <img src={`${process.env.PUBLIC_URL}/${imgPath}`} alt="image"
-                     className={"Metier-img"} style={{height: "8vmin",width: "8vmin", margin: "1vmin 1vmin"}}></img>
+                     className={"Metier-img"} style={{height: "8vmin", width: "8vmin", margin: "1vmin 1vmin"}}></img>
             </div>
             <div style={{display: "flex", flexDirection: "column", justifyContent: "space-evenly", width: "100%"}}>
                 <div style={{fontWeight: "bold"}}>{title}</div>

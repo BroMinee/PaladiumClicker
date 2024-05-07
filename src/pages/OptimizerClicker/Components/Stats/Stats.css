@@ -27,6 +27,6 @@
 
 .FuturUpgradeFather >:nth-child(1) > *
 {
-    backdrop-filter: var(--blurry);
+    backdrop-filter: var(--blurry-lighter);
     border-radius: var(--blurry-border);
 }

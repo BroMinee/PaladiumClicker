@@ -1,7 +1,6 @@
 import axios from "axios";
 
 
-
 const API_PREFIX = "https://api.paladium.games/";
 
 const fetchDataOnPublicURL = async (file) => {
@@ -269,6 +268,31 @@ export async function fetchInfoFromPseudo(pseudo, playerInfo, errorInARow) {
         }
         return [playerInfo, errorInARow + 1, errorMsg, timer];
     }
+}
+
+export const fetchFactionInfo = async (factionName) => {
+    return await axios(
+        `${API_PREFIX}/v1/paladium/faction/profile/${factionName}`,
+        {
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        }
+    ).then(response => response.data).catch(error => {
+        throw error.response;
+    });
+}
+export const fetchFactionLeaderboard = async () => {
+    return await axios(
+        `${API_PREFIX}/v1/paladium/faction/leaderboard`,
+        {
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        }
+    ).then(response => response.data).catch(error => {
+        throw error.response;
+    });
 }
 
 export default fetchDataOnPublicURL;

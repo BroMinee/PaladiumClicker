@@ -17,11 +17,14 @@ import {OptiClicker} from "./pages/OptimizerClicker/OptimizerClicker";
 
 const App = () => {
     const [playerInfo, setPlayerInfo] = useState(JSON.parse(localStorage.getItem("cacheInfo") || "{}")["playerInfo"] || {});
+    const [factionLeaderboard, setFactionLeaderboard] = useState(JSON.parse(localStorage.getItem("cacheInfo") || "{}")["factionLeaderboard"] || {});
     return (
         <playerInfoContext.Provider
             value={{
                 playerInfo,
-                setPlayerInfo
+                setPlayerInfo,
+                factionLeaderboard,
+                setFactionLeaderboard
             }}>
             <BrowserRouter>
                 <header>
