@@ -14,7 +14,7 @@ const MetierList = ({editable=false, grid=false}) => {
     return <ul className={`ul-horizontal ul-metier ${grid ? "grid-metier" : ""}`}>
         {
             playerInfo["metier"].map((metier, index) => {
-                return <Metier metierName={metier["name"]} imgPath={metier["name"] + ".webp"} playerInfo={playerInfo}
+                return <Metier key={index} metierName={metier["name"]} imgPath={metier["name"] + ".webp"} playerInfo={playerInfo}
                                setPlayerInfo={setPlayerInfo} level={metier["level"]} editable={editable}/>
             })
         }

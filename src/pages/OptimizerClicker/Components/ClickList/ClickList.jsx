@@ -28,7 +28,7 @@ const ClickList = () => {
         <div className={"CPSGrid"}>
             {
                 playerInfo["CPS"] && playerInfo["CPS"].map((cur_cps, index) => (
-                    <CPS playerInfo={playerInfo} setPlayerInfo={setPlayerInfo} buildingName={cur_cps["name"]}
+                    <CPS key={index} playerInfo={playerInfo} setPlayerInfo={setPlayerInfo} buildingName={cur_cps["name"]}
                          imgPath={getImgPath(index, cur_cps["name"])} index={index}/>
                 ))
             }

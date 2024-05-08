@@ -33,7 +33,7 @@ const News = ({cacheHasBeenReset, index}) => {
             <ImCross onClick={closeModal} className="RedCrossIcon"/>
             <h1 className={"BroMine"}>News depuis la dernière fois</h1>
             {Object.keys(news).map((date, index) => {
-                return <New date={news[date]["date"]} events={news[date]["events"]} index={index}/>
+                return <New key={index} date={news[date]["date"]} events={news[date]["events"]} index={index}/>
             })}
             <br/>
             <h2>Pourquoi BroMine__ n'est plus top 1 clicker</h2>

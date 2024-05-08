@@ -58,8 +58,8 @@ const Profil = () => {
                 </div>
                 <div style={{display: "flex", gap: "4vmin", justifyContent: "space-around"}}>
                     <BasicStats/>
-
                     <MetierStats/>
+                    <FriendList/>
                 </div>
 
 
@@ -71,6 +71,34 @@ const Profil = () => {
         </div>
 
     )
+}
+
+const FriendList = () => {
+    const {
+        playerInfo,
+        setPlayerInfo
+    } = useContext(playerInfoContext);
+
+
+
+    return (
+        <div className={"FriendListFather"}>
+            <h1>{`Amis - ${playerInfo["friends"].length}`}</h1>
+            <div className={"FriendList children-blurry-lighter"}>
+                {
+                    playerInfo["friends"].map((friend) => {
+                        return <Contributor key={friend["name"]}
+                                            pseudo={friend["name"]}
+                                            urlSkin={""}
+                                            description={``}
+                                            url={""}/>
+
+                    })
+                }
+            </div>
+        </div>
+    )
+
 }
 
 const FactionInfo = () => {
@@ -191,8 +219,8 @@ const AhInfo = () => {
             <h1>{`Hôtel de vente (Beta) - ${totalCount} ${totalCount !== 0 ? "ventes en cours" : "vente en cours"}`}</h1>
             <div className={"AhInfoGrid"}>
                 {
-                    playerInfo["ah"]["data"].map((item) => {
-                        return <AhItem key={item["id"]} item={item}/>
+                    playerInfo["ah"]["data"].map((item, index) => {
+                        return <AhItem key={index} item={item}/>
                     })
                 }
             </div>

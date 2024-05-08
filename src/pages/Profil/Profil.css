@@ -13,7 +13,7 @@
 .AhInfoGrid
 {
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
+    grid-template-columns: repeat(4, 1fr);
     /*grid-template-rows: repeat(5, 1fr);*/
     grid-row-gap: 5vmin;
     grid-column-gap: 2vmin;
@@ -22,15 +22,13 @@
 
 .parentProfil {
     padding-left: 3vmin;
-    grid-area: 1 / 2 / -1 / -1;
+    /*grid-area: 1 / 2 / -1 / -1;*/
     height: fit-content;
 }
 
 .AhFather
 {
     grid-area: 2 / 2 / -1 / -1;
-    margin-top: 330px;
-    height: 100%;
 }
 
 .MetierStatProfil {
@@ -78,6 +76,20 @@
     row-gap: 1vmin;
 }
 
+.FriendListFather
+{
+
+}
+.FriendList
+{
+    overflow: auto;
+    display: flex;
+    flex-direction: column;
+    max-height: 50vmin;
+    gap: 1vmin 0vmin;
+    padding: 0vmin 1vmin;
+}
+
 
 .SkinViewerParent {
     grid-area: 1 / 1 / 2 / 2;
@@ -89,7 +101,7 @@
     left: 2vmin;
     width: 40vmin !important;
     bottom:5vh;
-    height: fit-content;
+    height: auto;
 }
 
 

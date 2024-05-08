@@ -70,7 +70,9 @@ export const DiscordAndContributors = () => {
     </a>
         ,
         contributeurs.map((contributeur, index) => (
-            <Contributor key={index} pseudo={contributeur["pseudo"]} urlSkin={`https://crafatar.com/avatars/${contributeur["uuid"]}?size=8`} description={contributeur["description"]} url={contributeur["url"]}/>
+            <Contributor key={index} pseudo={contributeur["pseudo"]}
+                         urlSkin={`https://crafatar.com/avatars/${contributeur["uuid"]}?size=8`}
+                         description={contributeur["description"]} url={contributeur["url"]}/>
         ))
     ]
 }
@@ -83,7 +85,7 @@ export const Contributor = ({pseudo, urlSkin, description, url}) => {
         else {
             // search profil of the contributor
             let realPseudo = pseudo;
-            if(pseudo.includes(" ") && pseudo.split(" ").length > 1)
+            if (pseudo.includes(" ") && pseudo.split(" ").length > 1)
                 realPseudo = pseudo.split(" ")[1];
             document.getElementById("pseudoInputNavBar").value = realPseudo;
             document.getElementById("pseudoInputNavBar-button").click();
@@ -95,10 +97,11 @@ export const Contributor = ({pseudo, urlSkin, description, url}) => {
     return (
         <a className={"Contributor Contributor-hover"} onClick={handleOnClick} target="_blank">
             <div>
-                <div style={{padding: "10px 10px"}}>
-                    <img src={urlSkin} alt="image" className="Building-img"
-                         style={{borderRadius: "8px", imageRendering: "pixelated"}}/>
-                </div>
+                {urlSkin !== "" ?
+                    <div style={{padding: "10px 10px"}}>
+                        <img src={urlSkin} className="Building-img"
+                             style={{borderRadius: "8px", imageRendering: "pixelated"}}/>
+                    </div> : ""}
                 <div style={{
                     display: "flex",
                     flexDirection: "column",

@@ -1,5 +1,20 @@
 [
   {
+    "date": "08-05-2024 - 19h00",
+    "events": [
+      "Ajout de la nouvelle interface utilisateur. Trop hype d'avoir vos retours !",
+      "Création d'un discord pour discuter de la suite du projet, URL disponible dans la section 'A propos'",
+      "Ajout des contributeurs dans la section 'A propos'",
+      "Amélioration du système de cache",
+      "Correction de la popup des news qui s'affichait à chaque fois",
+      "Ajout d'une section 'Faction' dans le profil du joueur",
+      "Ajout d'une beta du AH du joueur dans le profil",
+      "Amélioration des balises dans le code pour un meilleur référencement (même si le site est déjà premier sur Google avec 'PalaClicker' :D)",
+      "Amélioration de la page sur mobile (mais c'est pas encore ça désolé au 12% de personne sur mobile)",
+      "De façon générale, amélioration du site pour une meilleure expérience utilisateur"
+    ]
+  },
+  {
     "date": "05-05-2024 - 22h27",
     "events": [
       "Giga refacto du code pour une amélioration de la lisibilité et de la maintenabilité",

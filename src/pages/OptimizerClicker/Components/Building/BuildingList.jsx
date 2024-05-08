@@ -25,7 +25,7 @@ const BuildingList = ({setRPS}) => {
         <div className={"BuildingGrid"} key={this}>
             {
                 playerInfo["building"] && playerInfo["building"].map((building, index) => (
-                    <Building playerInfo={playerInfo} setPlayerInfo={setPlayerInfo} building={building}
+                    <Building key={index} playerInfo={playerInfo} setPlayerInfo={setPlayerInfo} building={building}
                               imgPath={getImgPath(index, building["price"])} unique_id_react={index} index={index}/>
 
                 ))

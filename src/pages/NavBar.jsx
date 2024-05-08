@@ -67,7 +67,7 @@ const Navbar = () => {
                     <img src={process.env.PUBLIC_URL + "/favicon.ico"} alt="image"
                          className={"Building-img"} style={{maxHeight: "99%"}}></img>
                     <NavLink id="profilNavbar" to="/Profil" activestyle="true">
-                        Profil (Beta)
+                        Profil
                     </NavLink>
                     <NavLink to="/PaladiumClicker" activestyle="true">
                         PalaClicker Optimizer
@@ -79,7 +79,7 @@ const Navbar = () => {
                     <ImportProfil resetButton={false} logError={false} idPseudoInput={"pseudoInputNavBar"}/>
 
                     <NavLink to="/About" activestyle="true">
-                        About
+                        A propos
                     </NavLink>
                 </NavMenu>
             </Nav>

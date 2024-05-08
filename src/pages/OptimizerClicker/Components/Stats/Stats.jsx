@@ -216,7 +216,7 @@ export const Stat = ({playerInfo, buildingBuyPath, showProduction}) => {
         <div>
             {
                 buildingBuyPath.map((buildingPath, i) => (
-                    <div className={"Stat-list"}>
+                    <div key={i} className={"Stat-list"}>
                         <div>
                             <div className={"imageWrapper"}>
                                 <img src={buildingPath[4]} alt="image"

@@ -217,6 +217,7 @@ export async function fetchInfoFromPseudo(pseudo, playerInfo, errorInARow) {
         newPlayerInfo["username"] = profil["username"];
         newPlayerInfo["uuid"] = profil["uuid"];
         newPlayerInfo["rank"] = profil["rank"];
+        newPlayerInfo["friends"] = profil["friends"];
 
         Object.keys(jobs).forEach((job) => {
             switch (job) {

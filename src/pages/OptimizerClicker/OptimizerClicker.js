@@ -1,9 +1,7 @@
 import React, {useContext, useEffect, useState} from "react";
 import {playerInfoContext} from "../../Context";
-import {fetchAllData, fetchAllDataButKeepOwn} from "../../FetchData";
 import {VERSION} from "../../Constant";
 import NoPseudoPage from "../../Components/NoPseudoPage/NoPseudoPage";
-import News from "../../Components/News/News";
 import Tuto from "../../Components/Tuto/Tuto";
 import MetierList from "../../Components/Metier/MetierList";
 import Graph from "./Components/Graph/Graph";
@@ -16,45 +14,8 @@ import Stats from "./Components/Stats/Stats";
 
 import "./OptimizerClicker.css"
 
-let cacheHasBeenReset = false;
 
-function isCacheValid() {
-    const cacheInfo = localStorage.getItem("cacheInfo");
-    if (cacheInfo === null || cacheInfo === "") {
-        return false
-    }
-    try {
-        const r = JSON.parse(cacheInfo);
-        if (r["version"] === undefined)
-            return false
-    } catch (e) {
-        return false
-    }
-    return true
-}
 
-function isCacheDateValid() {
-    const cacheInfo = localStorage.getItem("cacheInfo");
-    if (cacheInfo === null || cacheInfo === "") {
-        return false
-    }
-    try {
-        const jsonCacheInfo = JSON.parse(cacheInfo);
-        if (jsonCacheInfo === undefined || jsonCacheInfo["version"] === undefined) {
-            if (VERSION === 1.0) {
-                localStorage.clear();
-                window.location.reload();
-            }
-            return false
-        }
-        if (jsonCacheInfo["version"] !== VERSION) {
-            return false
-        }
-    } catch (e) {
-        return false
-    }
-    return true
-}
 
 export const OptiClicker = () => {
 
@@ -66,51 +27,7 @@ export const OptiClicker = () => {
     const [rps, setRPS] = useState(1)
     const [estimatedRPS, setEstimatedRPS] = useState(3)
 
-    useEffect(() => {
 
-        async function asyncFetchAllData() {
-            const newPlayerInfo = await fetchAllData();
-            setPlayerInfo(newPlayerInfo)
-            localStorage.setItem("cacheInfo", JSON.stringify({
-                "playerInfo": newPlayerInfo,
-                "version": VERSION
-            }));
-        }
-
-        async function asyncFetchAllDataButKeepOwn() {
-            const newPlayerInfo = await fetchAllDataButKeepOwn(playerInfo);
-            setPlayerInfo(newPlayerInfo)
-            localStorage.setItem("cacheInfo", JSON.stringify({
-                "playerInfo": newPlayerInfo,
-                "version": VERSION
-            }));
-        }
-
-
-        if (!isCacheValid()) {
-            cacheHasBeenReset = true
-            console.log("No cache")
-            asyncFetchAllData()
-        } else if (!isCacheDateValid()) {
-            cacheHasBeenReset = true
-            console.log("Cache is outdated")
-            asyncFetchAllDataButKeepOwn()
-        } else {
-            console.log("Using cache")
-            setPlayerInfo(JSON.parse(localStorage.getItem("cacheInfo"))["playerInfo"])
-        }
-
-    }, []);
-
-    useEffect(() => {
-        if (Object.keys(playerInfo).length === 0)
-
-            return
-        localStorage.setItem("cacheInfo", JSON.stringify({
-            "playerInfo": playerInfo,
-            "version": VERSION
-        }));
-    }, [playerInfo]);
 
     if (Object.keys(playerInfo).length === 0)
         return <div>Loading</div>
@@ -121,7 +38,6 @@ export const OptiClicker = () => {
             <div>
                 <div id="container" className="container">
                 </div>
-                <News cacheHasBeenReset={cacheHasBeenReset}/>
                 <Graph/>
                 <Tuto/>
                 <div className="App gridClicker children-blurry">

@@ -52,7 +52,7 @@ const UpgradeList = ({upgradeName}) => {
         <div className={`ul-horizontal ${customClassName}`}>
             {
                 playerInfo[upgradeName] && playerInfo[upgradeName].map((terrain, index) => (
-                    <Upgrade upgradeName={upgradeName} buildingName={terrain["name"]}
+                    <Upgrade key={index} upgradeName={upgradeName} buildingName={terrain["name"]}
                              imgPath={getImgPath(index, terrain["name"])} index={index}/>
                 ))
             }
