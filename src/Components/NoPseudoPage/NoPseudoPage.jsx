@@ -82,8 +82,13 @@ export const Contributor = ({pseudo, urlSkin, description, url}) => {
             window.open(url, "_blank");
         else {
             // search profil of the contributor
-            document.getElementById("pseudoInputNavBar").value = pseudo;
+            let realPseudo = pseudo;
+            if(pseudo.includes(" ") && pseudo.split(" ").length > 1)
+                realPseudo = pseudo.split(" ")[1];
+            document.getElementById("pseudoInputNavBar").value = realPseudo;
             document.getElementById("pseudoInputNavBar-button").click();
+            document.getElementById("profilNavbar").click();
+
         }
     }
 

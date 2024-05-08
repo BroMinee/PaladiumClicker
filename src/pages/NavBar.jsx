@@ -66,7 +66,7 @@ const Navbar = () => {
                 <NavMenu>
                     <img src={process.env.PUBLIC_URL + "/favicon.ico"} alt="image"
                          className={"Building-img"} style={{maxHeight: "99%"}}></img>
-                    <NavLink to="/Profil" activestyle="true">
+                    <NavLink id="profilNavbar" to="/Profil" activestyle="true">
                         Profil (Beta)
                     </NavLink>
                     <NavLink to="/PaladiumClicker" activestyle="true">

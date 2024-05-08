@@ -7,7 +7,7 @@ import {printPricePretty} from "../../Misc";
 import {playerInfoContext} from "../../Context";
 import NoPseudoPage, {Contributor} from "../../Components/NoPseudoPage/NoPseudoPage";
 import ImportProfil, {setTimer} from "../OptimizerClicker/Components/ImportProfil/ImportProfil";
-import {fetchFactionInfo, fetchFactionLeaderboard} from "../../FetchData";
+import {fetchAhInfo, fetchFactionInfo, fetchFactionLeaderboard} from "../../FetchData";
 
 const Profil = () => {
 
@@ -61,22 +61,19 @@ const Profil = () => {
 
                     <MetierStats/>
                 </div>
-                <div>
 
-                </div>
-                <div>
-                    <h1>Hôtel de vente</h1>
-                    <h3>Working progress</h3>
-                </div>
+
+
             </div>
 
-            <FactionInfo faction={playerInfo["faction"]}/>
+            <FactionInfo/>
+            <AhInfo/>
         </div>
 
     )
 }
 
-const FactionInfo = ({faction}) => {
+const FactionInfo = () => {
 
     const {
         playerInfo,
@@ -108,9 +105,7 @@ const FactionInfo = ({faction}) => {
                     };
                     console.log("Updating faction info")
                     setFactionLeaderboard(newFactionLeaderBoard);
-                }
-                else
-                {
+                } else {
                     console.log("Using cached faction leaderboard")
                 }
             }
@@ -130,7 +125,7 @@ const FactionInfo = ({faction}) => {
     const level = playerInfo["faction_info"]["level"]["level"];
     const xp = playerInfo["faction_info"]["level"]["xp"];
     const playerList = playerInfo["faction_info"]["players"];
-    const factionIndex = factionLeaderboard["classement"].findIndex((faction) => faction["name"] === name) +1;
+    const factionIndex = factionLeaderboard["classement"].findIndex((faction) => faction["name"] === name) + 1;
     const factionClassement = (factionIndex !== 0 ? factionIndex : `>${factionLeaderboard["classement"].length}`);
 
 
@@ -163,6 +158,75 @@ const FactionInfo = ({faction}) => {
     )
 }
 
+
+const AhInfo = () => {
+    const {
+        playerInfo,
+        setPlayerInfo
+    } = useContext(playerInfoContext);
+
+
+    useEffect(() => {
+            const setAhInfo = async () => {
+                if (playerInfo["uuid"] === "Entre ton pseudo") {
+                    return;
+                }
+                if (playerInfo["ah"] === undefined) {
+                    playerInfo["ah"] = await fetchAhInfo(playerInfo["uuid"]).then((data) => {
+                        return data;
+                    });
+                    setPlayerInfo({...playerInfo});
+                }
+            }
+
+            setAhInfo();
+        }, [playerInfo]
+    )
+    if (playerInfo["ah"] === undefined)
+        return <div>Loading</div>
+
+    const totalCount = playerInfo["ah"]["totalCount"];
+    return (
+        <div className={"AhFather"}>
+            <h1>{`Hôtel de vente (Beta) - ${totalCount} ${totalCount !== 0 ? "ventes en cours" : "vente en cours"}`}</h1>
+            <div className={"AhInfoGrid"}>
+                {
+                    playerInfo["ah"]["data"].map((item) => {
+                        return <AhItem key={item["id"]} item={item}/>
+                    })
+                }
+            </div>
+
+
+        </div>
+    )
+}
+
+const AhItem = ({item}) => {
+    const createdAt = convertEpochToDateUTC2(item["createdAt"]);
+    const expireAt = convertEpochToDateUTC2(item["expireAt"]);
+    const item_meta = item["item"]["meta"];
+    const item_name = item["item"]["name"];
+    const quantity = item["item"]["quantity"];
+    const name = item["name"];
+    const price = item["price"];
+    const pricePb = item["pricePb"];
+    const renamed = item["renamed"];
+    const skin = item["skin"];
+    const type = item["type"][0].toUpperCase() + item["type"].slice(1).toLowerCase();
+    return (
+        <div className={"AhItem"}>
+            <div className={"AhItemImg"}>
+                <SmallInfo imgPath={"dirt.png"} title={name} value={`x${quantity}`}/>
+                {/*<SmallInfo imgPath={"clock.gif"} title={"Créée le"} value={createdAt}/>*/}
+                <SmallInfo imgPath={"clock.gif"} title={"Expire le"} value={expireAt}/>
+                <SmallInfo imgPath={"dollar.png"} title={"Prix"} value={`${printPricePretty(price)}$`}/>
+                <SmallInfo imgPath={"pbs.png"} title={"Prix en PBs"} value={`${printPricePretty(pricePb)}PBs`}/>
+                <SmallInfo imgPath={"unknown.png"} title={"Type"} value={type}/>
+            </div>
+        </div>
+    )
+}
 
 const MetierStats = () => {
     const {
@@ -216,7 +280,8 @@ const BasicStats = () => {
                        value={convertEpochToDateUTC2(playerInfo["firstJoin"])}/>
             <SmallInfo imgPath={`dollar.png`} title={"Argent actuel"}
                        value={printPricePretty(Math.round(playerInfo["money"])) + " $"}/>
-            <SmallInfo imgPath={`trixium_block.webp`} title={"Rang en jeu"} value={playerInfo["rank"][0].toUpperCase() + playerInfo["rank"].slice(1).toLowerCase()}/>
+            <SmallInfo imgPath={`trixium_block.webp`} title={"Rang en jeu"}
+                       value={playerInfo["rank"][0].toUpperCase() + playerInfo["rank"].slice(1).toLowerCase()}/>
         </div>);
 }
 

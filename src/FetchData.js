@@ -295,4 +295,17 @@ export const fetchFactionLeaderboard = async () => {
     });
 }
 
+export const fetchAhInfo = async (uuid) => {
+    return await axios(
+        `${API_PREFIX}/v1/paladium/shop/market/players/${uuid}/items`,
+        {
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        }
+    ).then(response => response.data).catch(error => {
+        throw error.response;
+    });
+}
+
 export default fetchDataOnPublicURL;
