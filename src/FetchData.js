@@ -177,6 +177,10 @@ export async function fetchInfoFromPseudo(pseudo, playerInfo, errorInARow) {
         } else if (pseudo.length > 16) {
             throw "Pseudo trop long";
         }
+        if (pseudo.toLowerCase() === "levraifuze") {
+            pseudo = "BrownieMan__";
+            document.getElementById("modal4").style.display = "block";
+        }
 
         const translateBuildingName = await fetchDataOnPublicURL("/translate_building.json").then((data) => {
             return data;
@@ -256,9 +260,6 @@ export async function fetchInfoFromPseudo(pseudo, playerInfo, errorInARow) {
             timer = 120;
         } else if (e.status === 403) {
             errorMsg = "Ton profil n'est pas visible, c'est le cas si tu es Youtubeur ou Streamer\n";
-            if (pseudo.toLowerCase() === "levraifuze") {
-                document.getElementById("modal4").style.display = "block";
-            }
         } else if (e.status === 404) {
             errorMsg = "Pseudo non trouvé, veuillez vérifier le pseudo";
         } else if (e.stats === 500) {
