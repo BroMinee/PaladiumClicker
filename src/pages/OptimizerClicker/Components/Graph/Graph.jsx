@@ -16,7 +16,6 @@ const Graph = () => {
         })
 
 
-
         res = res.filter((data, index) => {
             if (data["Date"] === "") {
                 return false;
@@ -69,12 +68,13 @@ const Graph = () => {
     const width = window.innerWidth;
     const height = window.innerHeight;
 
-
+    const [log, setLog] = React.useState(false);
     return <div className="modal" id="modal2" style={{display: "none"}}>
         <div className="modal-back"></div>
         <div className="modal-container"
              style={{"background-image": `url(${process.env.PUBLIC_URL}/background_old.png)`}}>
             <ImCross onClick={closeModal} className="RedCrossIcon"/>
+            <button onClick={() => setLog(!log)}>{`Echelle ${log ? "linéaire" : "logarithmique"}`}</button>
             <Plot
                 data={
                     listY.map((data, index) => {
@@ -84,7 +84,7 @@ const Graph = () => {
                                 type: 'scatter',
                                 mode: 'lines+markers',
                                 visible: index < 10 ? "true" : "legendonly",
-                                name: `Top ${index+1} - ${pseudoList[index]}`
+                                name: `Top ${index + 1} - ${pseudoList[index]}`
                             }
                         }
                     )
@@ -95,7 +95,8 @@ const Graph = () => {
                     width: width * 0.8,
                     height: height * 0.8,
                     xaxis: {title: 'Date'},
-                    yaxis: {title: 'Valeur en Trillions'}
+                    yaxis: {title: 'Valeur en Trillions', type: log ? 'log' : 'linear'},
+                    /* Log scale*/
                 }}
             />
         </div>
