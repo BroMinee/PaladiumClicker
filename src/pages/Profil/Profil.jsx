@@ -2834,7 +2834,7 @@ const AhItem = ({item}) => {
                 <SmallInfo imgPath={"clock.gif"} title={"Expire le"} value={expireAt}/>
                 <SmallInfo imgPath={"dollar.png"} title={"Prix"} value={`${printPricePretty(price)}$`}/>
                 {<SmallInfo imgPath={"pbs.png"} title={"Prix en PBs"} value={`${printPricePretty(pricePb)}PBs`}/>}
-                <SmallInfo imgPath={"unknown.png"} title={"Type"} value={type}/>
+                {/*<SmallInfo imgPath={"unknown.png"} title={"Type"} value={type}/>*/}
                 {/*{"closest one: " + closestItemName}*/}
                 {/*<br/>*/}
                 {/*{"parsed name: " + item_name}*/}

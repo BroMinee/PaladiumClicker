@@ -12,6 +12,16 @@ html
 }
 
 
+footer
+{
+    backdrop-filter: var(--blurry);
+    display: flex;
+    font-size: x-large;
+    justify-content: center;
+    margin-top: 4vmin;
+    padding: 1vmin 0vmin;
+}
+
 .blurry
 {
     backdrop-filter: var(--blurry);
