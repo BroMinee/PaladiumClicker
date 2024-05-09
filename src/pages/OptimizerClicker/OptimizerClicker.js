@@ -27,7 +27,7 @@ export const OptiClicker = () => {
     const [rps, setRPS] = useState(1)
     const [estimatedRPS, setEstimatedRPS] = useState(3)
 
-
+    const [displayBuilding, setDisplayBuilding] = useState(false);
 
     if (Object.keys(playerInfo).length === 0)
         return <div>Loading</div>
@@ -75,7 +75,7 @@ export const OptiClicker = () => {
                     </div>
 
 
-                    <RPS RPS={rps} estimatedRPS={estimatedRPS} setEstimatedRPS={setEstimatedRPS}/>
+                    <RPS RPS={rps} setRPS={setRPS} estimatedRPS={estimatedRPS} setEstimatedRPS={setEstimatedRPS}/>
 
                     <div>
                         <h1>Statistiques</h1>
@@ -87,9 +87,12 @@ export const OptiClicker = () => {
                         <MetierList editable={true}/>
                     </div>
 
-                    <div>
-                        <h1>Bâtiments</h1>
-                        <BuildingList setRPS={setRPS}/>
+                    <div onClick={() => setDisplayBuilding(!displayBuilding)}>
+                        <h1>Bâtiments (clique pour déployer)</h1>
+                        {
+                            displayBuilding ? <BuildingList setRPS={setRPS}/> : ""
+                        }
+                        {/*<BuildingList setRPS={setRPS}/>*/}
                     </div>
 
                     <div>

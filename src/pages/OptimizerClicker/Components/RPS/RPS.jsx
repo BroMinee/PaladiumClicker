@@ -1,4 +1,4 @@
-import React, {useContext} from "react";
+import React, {useContext, useEffect} from "react";
 
 import "./RPS.css"
 import {ComputePrice, computeRPS} from "../Building/BuildingList.jsx";
@@ -7,7 +7,7 @@ import {playerInfoContext} from "../../../../Context";
 import {checkCondition} from "../../../../Misc";
 
 
-const RPS = ({RPS, estimatedRPS, setEstimatedRPS}) => {
+const RPS = ({RPS,setRPS, estimatedRPS, setEstimatedRPS}) => {
     const {
         playerInfo,
         setPlayerInfo
@@ -33,6 +33,10 @@ const RPS = ({RPS, estimatedRPS, setEstimatedRPS}) => {
     const buildingBuyPaths = computeXBuildingAhead(playerInfo, 1, RPS);
     if (buildingBuyPaths.length !== 0)
         setEstimatedRPS(buildingBuyPaths[0][5]);
+
+    useEffect(() => {
+        setRPS(computeRPS(playerInfo))
+    }, [playerInfo]);
 
     return [
         <div className={"RPS"} key={"RPS1"}>

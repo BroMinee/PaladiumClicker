@@ -19,7 +19,7 @@ const BuildingList = ({setRPS}) => {
     }
 
 
-    setRPS(computeRPS(playerInfo))
+
 
     return (
         <div className={"BuildingGrid"} key={this}>

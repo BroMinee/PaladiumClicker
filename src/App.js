@@ -17,6 +17,7 @@ import {OptiClicker} from "./pages/OptimizerClicker/OptimizerClicker";
 import News from "./Components/News/News";
 import {fetchAllData, fetchAllDataButKeepOwn} from "./FetchData";
 import {VERSION} from "./Constant";
+import {computeRPS} from "./pages/OptimizerClicker/Components/Building/BuildingList";
 
 
 
@@ -73,6 +74,9 @@ const App = () => {
             "playerInfo": playerInfo,
             "version": VERSION
         }));
+
+
+
     }, [playerInfo]);
 
     return (
