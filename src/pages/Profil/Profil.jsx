@@ -32,6 +32,7 @@ function GetAllFileNameInFolder() {
         "HealStick",
         "HyperJumpStick",
         "InfernalKnocker",
+        "IronChestBlockIronChest",
         "JumpStick",
         "LEGENDARYSTONE_CHAOS",
         "LEGENDARYSTONE_FORTUNE",
@@ -45,7 +46,9 @@ function GetAllFileNameInFolder() {
         "PotionMinerFou",
         "PotionPoison",
         "PotionWither",
+        "SecretChest",
         "SicknessPotion",
+        "SolidAir",
         "SpeedStick",
         "SpikeAmethyst_1",
         "SpikeAmethyst_2",
@@ -62,6 +65,9 @@ function GetAllFileNameInFolder() {
         "SpikeWood_1",
         "SpikeWood_2",
         "StickOfGod",
+        "StorageDrawersfullDrawers1",
+        "StorageDrawersfullDrawers2",
+        "StorageDrawersfullDrawers4",
         "StrenghtStick",
         "TeleportStick",
         "TrophyTier0",
@@ -123,6 +129,7 @@ function GetAllFileNameInFolder() {
         "amethyst_backpack",
         "amethyst_block",
         "amethyst_boots",
+        "amethyst_chest",
         "amethyst_chestplate",
         "amethyst_helmet",
         "amethyst_ingot",
@@ -436,6 +443,7 @@ function GetAllFileNameInFolder() {
         "chervil_stage_1",
         "chervil_stage_2",
         "chervil_stage_3",
+        "chest",
         "chestexplorer",
         "chicken_cooked",
         "chicken_raw",
@@ -710,6 +718,13 @@ function GetAllFileNameInFolder() {
         "corrupted_sword",
         "corrupted_ticket",
         "corsair_banner",
+        "cosmetic_hat_farmer",
+        "cosmetic_hat_leprechaun",
+        "cosmetic_particles_ender",
+        "cosmetic_particles_flame",
+        "cosmetic_skin_dirty",
+        "cosmetic_skin_futurist",
+        "cosmetic_skin_steampunk",
         "couac_sword",
         "crab_egg",
         "crab_pliers",
@@ -729,6 +744,7 @@ function GetAllFileNameInFolder() {
         "crusher_top",
         "crusher_top_off",
         "crystal",
+        "crystal_chest",
         "customwither_head",
         "cuts",
         "cyan",
@@ -767,6 +783,7 @@ function GetAllFileNameInFolder() {
         "diamond_axe",
         "diamond_block",
         "diamond_boots",
+        "diamond_chest",
         "diamond_chestplate",
         "diamond_helmet",
         "diamond_hoe",
@@ -918,6 +935,7 @@ function GetAllFileNameInFolder() {
         "encrypted_computer",
         "end_stone",
         "ender_bag",
+        "ender_chest",
         "ender_eye",
         "ender_pearl",
         "endframe_eye",
@@ -930,6 +948,7 @@ function GetAllFileNameInFolder() {
         "endium_big",
         "endium_block",
         "endium_boots",
+        "endium_chest",
         "endium_chestplate",
         "endium_fragment",
         "endium_gauntlet",
@@ -1063,6 +1082,7 @@ function GetAllFileNameInFolder() {
         "flower_tulip_red",
         "flower_tulip_white",
         "foghorn",
+        "food",
         "foreuse",
         "forge_front_off",
         "forge_front_on",
@@ -1162,6 +1182,7 @@ function GetAllFileNameInFolder() {
         "gold_axe",
         "gold_block",
         "gold_boots",
+        "gold_chest",
         "gold_chestplate",
         "gold_helmet",
         "gold_hoe",
@@ -1230,6 +1251,14 @@ function GetAllFileNameInFolder() {
         "grinder_casing_block",
         "grinder_frame_block",
         "growth",
+        "guardian_block",
+        "guardian_box_block",
+        "guardian_box_frame",
+        "guardian_keeper",
+        "guardian_keeper_top",
+        "guardian_renamer",
+        "guardian_stone",
+        "guardianhammer",
         "gun_sword",
         "gunpowder",
         "halloweenRecord",
@@ -1336,6 +1365,7 @@ function GetAllFileNameInFolder() {
         "iron_bars",
         "iron_block",
         "iron_boots",
+        "iron_chest",
         "iron_chestplate",
         "iron_front",
         "iron_helmet",
@@ -1572,6 +1602,7 @@ function GetAllFileNameInFolder() {
         "minecart_tnt",
         "miner",
         "miner_portal",
+        "mini_golem",
         "missile_sol_air",
         "mixed_endium_boots",
         "mixed_endium_chestplate",
@@ -1596,7 +1627,6 @@ function GetAllFileNameInFolder() {
         "mycelium_side",
         "mycelium_top",
         "mystical_bookshelf",
-        "npcNatureSpell",
         "name_tag",
         "neon",
         "neon_panel",
@@ -1615,6 +1645,7 @@ function GetAllFileNameInFolder() {
         "noteblock",
         "november_lucky_block",
         "november_trophy",
+        "npcNatureSpell",
         "obsidian",
         "obsidianBlockDoor_lower",
         "obsidianBlockDoor_upper",
@@ -1669,6 +1700,7 @@ function GetAllFileNameInFolder() {
         "paladium_bow_0",
         "paladium_bow_1",
         "paladium_bow_2",
+        "paladium_chest",
         "paladium_chestplate",
         "paladium_furnace_front_off",
         "paladium_furnace_front_on",
@@ -2141,9 +2173,7 @@ function GetAllFileNameInFolder() {
         "steelframe",
         "stick",
         "stick_moderation",
-        "StorageDrawersfullDrawers1",
-        "StorageDrawersfullDrawers2",
-        "StorageDrawersfullDrawers4",
+        "stone (2)",
         "stone",
         "stone_axe",
         "stone_hoe",
@@ -2331,6 +2361,7 @@ function GetAllFileNameInFolder() {
         "titane_axe",
         "titane_block",
         "titane_boots",
+        "titane_chest",
         "titane_chestplate",
         "titane_helmet",
         "titane_ingot",
@@ -2444,6 +2475,7 @@ function GetAllFileNameInFolder() {
         "white",
         "white_concrete",
         "white_concrete_powder",
+        "whitelist",
         "widedecor_top",
         "widegreek_top",
         "wideplain_top",
@@ -2500,6 +2532,7 @@ function GetAllFileNameInFolder() {
         "wool_colored_silver",
         "wool_colored_white",
         "wool_colored_yellow",
+        "wrench",
         "xp_berry",
         "yellow",
         "yellow_concrete",
@@ -2590,7 +2623,6 @@ const Profil = () => {
                 </div>
 
 
-
             </div>
 
             <FactionInfo/>
@@ -2605,7 +2637,6 @@ const FriendList = () => {
         playerInfo,
         setPlayerInfo
     } = useContext(playerInfoContext);
-
 
 
     return (
@@ -2763,7 +2794,12 @@ const AhItem = ({item}) => {
     const createdAt = convertEpochToDateUTC2(item["createdAt"]);
     const expireAt = convertEpochToDateUTC2(item["expireAt"]);
     const item_meta = item["item"]["meta"];
-    const item_name = item["item"]["name"].replace("palamod:", "").replace("item.", "").replace("minecraft:","").replace("tile.","").replace("customnpc:", "")
+    let item_name = item["item"]["name"].replace("palamod:", "").replace("item.", "").replace("minecraft:", "").replace("tile.", "").replace("customnpc:", "").replace("guardiangolem:", "")
+
+    if (item_name === "IronChest:BlockIronChest") {
+        item_name = item["name"];
+    }
+
 
     const quantity = item["item"]["quantity"];
     const name = item["name"];
@@ -2782,18 +2818,18 @@ const AhItem = ({item}) => {
     });
 
     let displayName = item["item"]["name"];
-    if(item["item"]["name"] === "StorageDrawers:fullDrawers4")
+    if (item["item"]["name"] === "StorageDrawers:fullDrawers4")
         displayName = "StorageDrawers 2x2";
-    else if(item["item"]["name"] === "StorageDrawers:fullDrawers2")
+    else if (item["item"]["name"] === "StorageDrawers:fullDrawers2")
         displayName = "StorageDrawers 1x2";
-    else if(item["item"]["name"] === "StorageDrawers:fullDrawers1")
+    else if (item["item"]["name"] === "StorageDrawers:fullDrawers1")
         displayName = "StorageDrawers 1x1";
-
 
     return (
         <div className={"AhItem"}>
             <div className={"AhItemImg"}>
-                <SmallInfo imgPath={`AH_img/${closestItemName}.png`} title={renamed ? `${displayName} renommé en ${name}` : `${name}`} value={`x${quantity}`}/>
+                <SmallInfo imgPath={`AH_img/${closestItemName}.png`}
+                           title={renamed ? `${displayName} renommé en ${name}` : `${name}`} value={`x${quantity}`}/>
                 {/*<SmallInfo imgPath={"clock.gif"} title={"Créée le"} value={createdAt}/>*/}
                 <SmallInfo imgPath={"clock.gif"} title={"Expire le"} value={expireAt}/>
                 <SmallInfo imgPath={"dollar.png"} title={"Prix"} value={`${printPricePretty(price)}$`}/>
