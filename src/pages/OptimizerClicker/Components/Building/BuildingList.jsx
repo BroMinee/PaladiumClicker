@@ -82,13 +82,19 @@ const Building = ({playerInfo, setPlayerInfo, building, imgPath, unique_id_react
                     <SmallInfo imgPath={`coin.png`} title={"Coins par seconde"} value={printPricePretty(scaleCurrentProduction(playerInfo, index, building["own"]).toFixed(2))}/>
                     <SmallInfo imgPath={`dollar.png`} title={"Prix"} value={printPricePretty(ComputePrice(building["price"], building["own"])) + " $"}/>
                 </div>
-
+                {/*<div>RPS*/}
+                {/*    : {printPricePretty(scaleCurrentProduction(playerInfo, index, building["own"]).toFixed(2))}</div>*/}
+                {/*<div>{printPricePretty(ComputePrice(building["price"], building["own"]))}$</div>*/}
+                {/*<input type="number" min="0" step="1" max="99" value={playerInfo["building"][index]["own"]}*/}
+                {/*       onKeyUp={enforceMinMax}*/}
+                {/*       onChange={enforceMinMax}/>*/}
 
 
                 <div className={"Count-father ul-horizontal"}
                      style={{backgroundColor: `rgb(${bgc[0]},${bgc[1]},${bgc[2]})`}}>
                     <div>
-                        <input className={"Count-inside-txt"} type="number" min="0" step="1" max="99" value={playerInfo["building"][index]["own"]}
+                        <input className={"Count-inside-txt"} type="number" min="0" step="1" max="99"
+                               value={playerInfo["building"][index]["own"]}
                                onKeyUp={enforceMinMax}
                                onChange={enforceMinMax}/>
                     </div>

@@ -1,5 +1,5 @@
 import './App.css';
-import React, { useEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
 
 import {
     BrowserRouter,
@@ -17,8 +17,6 @@ import {OptiClicker} from "./pages/OptimizerClicker/OptimizerClicker";
 import News from "./Components/News/News";
 import {fetchAllData, fetchAllDataButKeepOwn} from "./FetchData";
 import {VERSION} from "./Constant";
-import {computeRPS} from "./pages/OptimizerClicker/Components/Building/BuildingList";
-
 
 
 let cacheHasBeenReset = false;
@@ -26,7 +24,6 @@ let cacheHasBeenReset = false;
 const App = () => {
     const [playerInfo, setPlayerInfo] = useState(JSON.parse(localStorage.getItem("cacheInfo") || "{}")["playerInfo"] || {});
     const [factionLeaderboard, setFactionLeaderboard] = useState(JSON.parse(localStorage.getItem("cacheInfo") || "{}")["factionLeaderboard"] || {});
-
 
 
     useEffect(() => {
@@ -76,7 +73,6 @@ const App = () => {
         }));
 
 
-
     }, [playerInfo]);
 
     return (
@@ -85,7 +81,7 @@ const App = () => {
                 playerInfo,
                 setPlayerInfo,
                 factionLeaderboard,
-                setFactionLeaderboard
+                setFactionLeaderboard,
             }}>
             <BrowserRouter>
                 <header>
