@@ -78,7 +78,7 @@ export const OptiClicker = () => {
                                 du top 10
                             </button>
                         </div>
-                        <ImportProfil resetButton={true} logError={true} idPseudoInput={"pseudoInputClicker"}/>
+                        <ImportProfil resetButton={true} idPseudoInput={"pseudoInputClicker"}/>
                     </div>
 
 

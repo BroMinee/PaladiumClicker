@@ -22,6 +22,24 @@ footer
     padding: 1vmin 0vmin;
 }
 
+#errorAPI
+{
+    color: white;
+    display: flex;
+    flex-direction: column;
+    font-weight: bold;
+    font-size: x-large;
+    position: sticky;
+    text-align: center;
+    top: 0%;
+    gap: 10px;
+    z-index: 99;
+}
+
+#errorAPI > *
+{
+    background: red;
+}
 .blurry
 {
     backdrop-filter: var(--blurry);

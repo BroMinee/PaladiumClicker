@@ -21,7 +21,7 @@ const NoPseudoPage = () => {
                         <div className={"BroMine"}>Paladium</div>
                         &nbsp;de&nbsp;
                     </p>
-                    <ImportProfil idPseudoInput={"PseudoInputNoPseudo"} resetButton={false} logError={true}/>
+                    <ImportProfil idPseudoInput={"PseudoInputNoPseudo"} resetButton={false}/>
                 </div>
                 <DiscordAndContributors/>
             </div>

@@ -112,7 +112,13 @@ const PalaAnimationBody = () => {
 
         if (event.key === "Enter") {
             checkAnswer();
-            event.preventDefault();
+            // test if pseudoInputNavBar is focused
+            console.log(document.activeElement.id);
+            if (document.activeElement.id !== "pseudoInputNavBar") {
+                event.preventDefault();
+            }
+
+
         } else if (event.key === "Backspace") {
             removeLastChar();
         } else if (event.key === "Escape") {
@@ -122,7 +128,6 @@ const PalaAnimationBody = () => {
             if (event.key === " ") {
                 event.preventDefault();
             }
-        } else {
         }
     }
 

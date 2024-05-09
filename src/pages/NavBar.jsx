@@ -76,7 +76,7 @@ const Navbar = () => {
                         PalaAnimation Trainer
                     </NavLink>
 
-                    <ImportProfil resetButton={false} logError={false} idPseudoInput={"pseudoInputNavBar"}/>
+                    <ImportProfil resetButton={false} idPseudoInput={"pseudoInputNavBar"}/>
 
                     <NavLink to="/About" activestyle="true">
                         A propos

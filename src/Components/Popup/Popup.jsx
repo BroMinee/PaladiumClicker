@@ -20,7 +20,7 @@ const Popup = () => {
                 Fuze il faut que tu afk 24/7 jusqu'au 21/05/2024 pour avoir le dernier bâtiment, au boulot ! 🙂
             </h2>
             <h2>
-                Je t'ai chargé un profil par défaut pour que tu puisses entrer tes données.
+                Je t'ai chargé un profil par défaut pour que tu puisses entrer tes données manuellement.
             </h2>
             <h2>
                 Si tu veux discuter de comment j'ai fait ce site ajoute moi sur discord

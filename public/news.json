@@ -1,5 +1,13 @@
 [
   {
+    "date": "09-05-2024 - 16h47",
+    "events": [
+      "Ajout d'un footer",
+      "Amélioration de la gestion d'erreur",
+      "Correction de certaines images du AH"
+    ]
+  },
+  {
     "date": "09-05-2024 - 06h49",
     "events": [
       "Correction temporaire du lag sur la page du PalaClicker Optimizer (sur firefox ça marchait déjà super bien)",

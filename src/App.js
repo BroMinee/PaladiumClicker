@@ -88,6 +88,7 @@ const App = () => {
                     <Navbar/>
                 </header>
                 <main>
+                    <div id={"errorAPI"}></div>
                     <Popup/>
                     <Routes>
                         <Route exact path="/Profil"

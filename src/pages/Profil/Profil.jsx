@@ -3,7 +3,7 @@ import MetierList from "../../Components/Metier/MetierList";
 import ReactSkinview3d from "react-skinview3d"
 import axios from "axios";
 import "./Profil.css"
-import {printPricePretty} from "../../Misc";
+import {ApiDown, printPricePretty} from "../../Misc";
 import {playerInfoContext} from "../../Context";
 import NoPseudoPage, {Contributor} from "../../Components/NoPseudoPage/NoPseudoPage";
 import ImportProfil, {setTimer} from "../OptimizerClicker/Components/ImportProfil/ImportProfil";
@@ -2870,17 +2870,10 @@ const BasicStats = () => {
 
 
     useEffect(() => {
-        if (errorInARow >= 2) {
-            document.getElementById("ApiDown").style.display = "block";
-            document.getElementById("errorAPI").innerHTML = "";
-        }
-        if (errorInARow === 4) {
+        if (errorInARow === 3) {
             setErrorInARow(0);
+            ApiDown();
         }
-        if (errorInARow === 0) {
-            document.getElementById("ApiDown").style.display = "none";
-        }
-
     }, [errorInARow]);
 
     useEffect(() => {
@@ -2961,12 +2954,7 @@ const SkinViewer = ({skinUrl}) => {
                              // Enabled auto rotate
                              viewer.autoRotate = true;
                          }}/>
-        <ImportProfil resetButton={false} logError={true} idPseudoInput={"pseudoInputProfil"}/>
-        <div id={"errorAPI"} style={{paddingBottom: "10px"}}></div>
-        <div id={"ApiDown"} style={{display: "none", fontSize: "20px"}}>
-            <div>L'API de pala est peut-être down:</div>
-            <a href="https://status.palaguidebot.fr/">Vérifier le status</a>
-        </div>
+        <ImportProfil resetButton={false} idPseudoInput={"pseudoInputProfil"}/>
     </div>);
 
 }
