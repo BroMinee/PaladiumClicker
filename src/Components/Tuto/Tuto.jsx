@@ -11,7 +11,7 @@ const Tuto = () => {
 
     return <div className="modal" id="modal3" style={{display: "none"}}>
         <div className="modal-back"></div>
-        <div className="modal-container" style={{"background-image": `url(${process.env.PUBLIC_URL}/background_old.png)`}}>
+        <div className="modal-container" style={{"background-image": `url(${import.meta.env.PUBLIC_URL}/background_old.png)`}}>
             <ImCross onClick={closeModal} className="RedCrossIcon"/>
 
             <ul>
@@ -59,7 +59,7 @@ const Tuto = () => {
             </div>
             <br/>
             <ReactAudioPlayer
-                src={process.env.PUBLIC_URL + "/Presentation_site.mp3"}
+                src={import.meta.env.PUBLIC_URL + "/Presentation_site.mp3"}
                 controls
             />
             <div style={{color: "gray"}}>Musique générée avec suno.ai</div>
