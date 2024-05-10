@@ -63,6 +63,7 @@
 
 .Contributor-hover:hover
 {
+    cursor: pointer;
     transition: transform 0.25s;
     transform: scale(1.02);
 }

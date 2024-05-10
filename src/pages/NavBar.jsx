@@ -72,6 +72,9 @@ const Navbar = () => {
                     <NavLink to="/PaladiumClicker" activestyle="true">
                         PalaClicker Optimizer
                     </NavLink>
+                    {/*<NavLink to="/Calculator" activestyle="true">*/}
+                    {/*    XP Calculator*/}
+                    {/*</NavLink>*/}
                     <NavLink to="/PalaAnimation" activestyle="true">
                         PalaAnimation Trainer
                     </NavLink>

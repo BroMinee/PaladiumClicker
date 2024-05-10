@@ -17,6 +17,7 @@ import {OptiClicker} from "./pages/OptimizerClicker/OptimizerClicker";
 import News from "./Components/News/News";
 import {fetchAllData, fetchAllDataButKeepOwn} from "./FetchData";
 import {VERSION} from "./Constant";
+import Calculator from "./pages/Calculator/Calculator";
 
 
 let cacheHasBeenReset = false;
@@ -91,10 +92,12 @@ const App = () => {
                     <div id={"errorAPI"}></div>
                     <Popup/>
                     <Routes>
+                        <Route exact path="/PaladiumClicker/"
+                               element={<OptiClicker/>}/>
                         <Route exact path="/Profil"
                                element={<Profil/>}/>
-                        <Route exact path="/PaladiumClicker"
-                               element={<OptiClicker/>}/>
+                        <Route exact path="/Calculator"
+                                 element={<Calculator/>}/>
                         <Route exact path="/PalaAnimation"
                                element={<PalaAnimation/>}/>
                         <Route exact path="/About"

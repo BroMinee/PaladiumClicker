@@ -95,7 +95,7 @@ export const Contributor = ({pseudo, urlSkin, description, url}) => {
     }
 
     return (
-        <a className={"Contributor Contributor-hover"} onClick={handleOnClick} target="_blank">
+        <a className={"Contributor Contributor-hover"} onClick={handleOnClick}>
             <div>
                 {urlSkin !== "" ?
                     <div style={{padding: "10px 10px"}}>

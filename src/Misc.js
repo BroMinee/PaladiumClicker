@@ -134,3 +134,23 @@ export function ApiDown() {
         father.removeChild(div);
     }, 5000);
 }
+
+export function levensteinDistance(a, b) {
+    const distance = [];
+    for (let i = 0; i <= a.length; i++) {
+        distance[i] = [i];
+    }
+    for (let j = 0; j <= b.length; j++) {
+        distance[0][j] = j;
+    }
+    for (let i = 1; i <= a.length; i++) {
+        for (let j = 1; j <= b.length; j++) {
+            distance[i][j] = Math.min(
+                distance[i - 1][j] + 1,
+                distance[i][j - 1] + 1,
+                distance[i - 1][j - 1] + (a[i - 1] !== b[j - 1] ? 1 : 0)
+            );
+        }
+    }
+    return distance[a.length][b.length];
+}
