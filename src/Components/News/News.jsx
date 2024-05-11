@@ -29,7 +29,7 @@ const News = ({cacheHasBeenReset, index}) => {
 
     return <div className="modal" id="modal" key={index} style={{display: cacheHasBeenReset ? "block" : "none"}}>
         <div className="modal-back"></div>
-        <div className="modal-container" style={{"background-image": `url(${process.env.PUBLIC_URL}/background_old.png)`}}>
+        <div className="modal-container-news" style={{"background-image": `url(${process.env.PUBLIC_URL}/background_old.png)`}}>
             <ImCross onClick={closeModal} className="RedCrossIcon"/>
             <h1 className={"BroMine"}>News depuis la dernière fois</h1>
             {Object.keys(news).map((date, index) => {

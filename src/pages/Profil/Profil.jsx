@@ -2219,6 +2219,7 @@ export function GetAllFileNameInFolder() {
         "sponge_tnt_side",
         "sponge_tnt_top",
         "squid",
+        "skeleton",
         "squidgame_helmet",
         "stalactite",
         "stand_creeper_side",
@@ -2835,7 +2836,7 @@ const AhInfo = () => {
     const totalCount = playerInfo["ah"]["totalCount"];
     return (
         <div className={"AhFather"}>
-            <h1>{`Hôtel de vente (Beta) - ${totalCount} ${totalCount !== 0 ? "ventes en cours" : "vente en cours"}`}</h1>
+            <h1>{`Hôtel de vente - ${totalCount} ${totalCount !== 0 ? "ventes en cours" : "vente en cours"}`}</h1>
             <div className={"AhInfoGrid"}>
                 {
                     playerInfo["ah"]["data"].map((item, index) => {
@@ -2986,14 +2987,17 @@ export const SmallInfo = ({imgPath, title, value}) => {
                 borderRadius: "17px 0px 0px 17px",
                 marginRight: "2vmin",
                 paddingLeft: "1vmin",
-                paddingRight: "1vmin"
+                paddingRight: "1vmin",
+                justifyContent: "center",
+                display: "flex",
+                flexDirection: "column"
             }}>
                 <img src={`${process.env.PUBLIC_URL}/${imgPath}`} alt="image"
                      className={"Metier-img"} style={{height: "8vmin", width: "8vmin", margin: "1vmin 1vmin"}}></img>
             </div>
             <div style={{display: "flex", flexDirection: "column", justifyContent: "space-evenly", width: "100%"}}>
-                <div style={{fontWeight: "bold"}}>{title}</div>
-                <div className={"largeFontSize"}>{value}</div>
+                {title !== "" ? <div style={{fontWeight: "bold"}}>{title}</div> : ""}
+                {value !== "" ? <div className={"largeFontSize"}>{value}</div> : ""}
             </div>
         </div>
     )

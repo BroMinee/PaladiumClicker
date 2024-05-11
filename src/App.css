@@ -181,19 +181,20 @@ body, ul, li {
 }
 
 .imageWrapper .cornerLink {
+    position: absolute;
     opacity: 0;
     bottom: 0px;
     left: 0px;
     right: 0px;
     background: #000000;
-    text-decoration: none;
-    text-align: center;
+    /*text-decoration: none;*/
+    /*text-align: center;*/
     -webkit-transition: opacity 500ms;
     -moz-transition: opacity 500ms;
     -o-transition: opacity 500ms;
     transition: transform 300ms ease-out, opacity 150ms;
-    margin-top: -25px;
-    margin-bottom: 25px;
+    /*margin-top: -25px;*/
+    /*margin-bottom: 25px;*/
 
     color: #FF5C00;
 
@@ -244,6 +245,7 @@ body, ul, li {
     bottom: 0;
     background: rgba( 0, 0, 0, .25 )
 }
+
 .modal-container {
     position: fixed;
     top: 50%;
@@ -269,6 +271,25 @@ button
 }
 
 button:hover
+{
+    background-color: rgb(256, 120, 0);
+    transition: background-color 0.1s;
+}
+
+
+select
+{
+    background-color: rgb(256, 92, 0);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    padding: 10px 20px;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+select:hover
 {
     background-color: rgb(256, 120, 0);
     transition: background-color 0.1s;

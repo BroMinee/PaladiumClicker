@@ -72,7 +72,7 @@ const Building = ({playerInfo, setPlayerInfo, building, imgPath, unique_id_react
 
     return (
         <div key={unique_id_react}>
-            <div className={"blurry-lighter"} style={{display: "flex", flexDirection: "column", alignItems: "center"}}>
+            <div style={{display: "flex", flexDirection: "column", alignItems: "center"}}>
 
                 <div className={"imageWrapper"}>
                     <img src={process.env.PUBLIC_URL + "/" + imgPath} alt="image" className={"Building-img"}></img>
@@ -80,7 +80,7 @@ const Building = ({playerInfo, setPlayerInfo, building, imgPath, unique_id_react
                 </div>
                 <div className={"InfoUpgrade"}>
                     <SmallInfo imgPath={`coin.png`} title={"Coins par seconde"} value={printPricePretty(scaleCurrentProduction(playerInfo, index, building["own"]).toFixed(2))}/>
-                    <SmallInfo imgPath={`dollar.png`} title={"Prix"} value={printPricePretty(ComputePrice(building["price"], building["own"])) + " $"}/>
+                    <SmallInfo imgPath={`dollar.png`} title={""} value={printPricePretty(ComputePrice(building["price"], building["own"]))}/>
                 </div>
                 {/*<div>RPS*/}
                 {/*    : {printPricePretty(scaleCurrentProduction(playerInfo, index, building["own"]).toFixed(2))}</div>*/}

@@ -3,6 +3,12 @@
     display: flex;
 }
 
+.InfoStatWrapper .imageWrapper > img
+{
+    width: 4vmin !important;
+    height: 4vmin !important;
+}
+
 .Stat
 {
     font-size: calc(10px + 2vmin);
@@ -27,6 +33,7 @@
 
 .FuturUpgradeFather >:nth-child(1) > *
 {
-    backdrop-filter: var(--blurry-lighter);
-    border-radius: var(--blurry-border);
+    /* This is an equivalent of the fork bomb on phone and shitty navigator :) */
+    /*backdrop-filter: var(--blurry-lighter);*/
+    /*border-radius: var(--blurry-border);*/
 }

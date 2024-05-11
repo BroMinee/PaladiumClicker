@@ -5,6 +5,7 @@ import {computeBestBuildingUgrade, findBestUpgrade} from "../RPS/RPS";
 import {getPathImg, getTotalSpend, printPricePretty} from "../../../../Misc";
 import {playerInfoContext} from "../../../../Context";
 import {fetchLeaderboardPosition} from "../../../../FetchData";
+import {SmallInfo} from "../../../Profil/Profil";
 
 function getBestUpgrade(copyPlayerInfo) {
 
@@ -223,19 +224,26 @@ export const Stat = ({playerInfo, buildingBuyPath, showProduction}) => {
                                      className={"Stat-img"}></img>
                                 <div
                                     className="cornerLink">{playerInfo[buildingPath[0]][buildingPath[1]]["name"] + " - lvl " + buildingPath[2]}</div>
-                                <div className={"BroMine"}>Prix</div>
-                                <div style={{color: "white"}}>{printPricePretty(buildingPath[6].toFixed(0))} $
-                                    <div className={"BroMine"}>Achetable le</div>
-                                    <div style={{color: "white"}}>{buildingPath[3]}</div>
 
-                                </div>
-                                {showProduction &&
-                                    <div>
-                                        <div className={"BroMine"}>Production estimée</div>
-                                        <div
-                                            style={{color: "white"}}>{printPricePretty(buildingPath[5].toFixed(2))}</div>
-                                    </div>
-                                }
+                                {/*<div className={"BroMine"}>Prix</div>*/}
+                                {/*<div style={{color: "white"}}>{printPricePretty(buildingPath[6].toFixed(0))} $*/}
+                                {/*    <div className={"BroMine"}>Achetable le</div>*/}
+                                {/*    <div style={{color: "white"}}>{buildingPath[3]}</div>*/}
+                                {/*</div>*/}
+                                {/*{showProduction &&*/}
+                                {/*    <div>*/}
+                                {/*        <div className={"BroMine"}>Production estimée</div>*/}
+                                {/*        <div*/}
+                                {/*            style={{color: "white"}}>{printPricePretty(buildingPath[5].toFixed(2))}</div>*/}
+                                {/*    </div>*/}
+                                {/*}*/}
+                            </div>
+                            <div className={"InfoStatWrapper"}>
+                                <SmallInfo imgPath={"dollar.png"} title={"Prix"}
+                                           value={printPricePretty(buildingPath[6].toFixed(0))}/>
+                                <SmallInfo imgPath={"clock.gif"} title={"Achetable le"} value={buildingPath[3]}/>
+                                {showProduction && <SmallInfo imgPath={"coin.png"} title={"Production estimée"}
+                                                              value={printPricePretty(buildingPath[5].toFixed(2))}/>}
                             </div>
                         </div>
                     </div>

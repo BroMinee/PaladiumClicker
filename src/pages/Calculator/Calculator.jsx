@@ -6,6 +6,7 @@ import {Metier} from "../../Components/Metier/MetierList";
 import {HOW_TO_XP, METIER_PALIER} from "../../Constant";
 import {levensteinDistance, printPricePretty} from "../../Misc";
 import {GetAllFileNameInFolder, SmallInfo} from "../Profil/Profil";
+import {SlArrowDown, SlArrowUp} from "react-icons/sl";
 
 
 const Calculator = () => {
@@ -84,11 +85,10 @@ const Calculator = () => {
     return (
         <div className={"calculatorGrid children-blurry"}>
 
-            <div>
-                <h1>Métier actuel</h1>
+            <div style={{display: "flex", justifyItems: "center", flexDirection: "column"}}>
+                <h1>Niveau actuel</h1>
                 <select onChange={(e) => {
                     setMetierSelected(e.target.value)
-
                 }}>
                     {playerInfo["metier"].map((e) => {
                             return <option value={e["name"]}>{e["name"][0].toUpperCase() + e["name"].slice(1)}</option>
@@ -100,7 +100,7 @@ const Calculator = () => {
                             setPlayerInfo={setPlayerInfo} editable={false}
                             level={playerInfo["metier"][indexMetierName]["level"]}/>
 
-                    <h1>Métier à atteindre</h1>
+                    <h1>Niveau à atteindre</h1>
                     <Metier metierName={metierSelected} imgPath={`${metierSelected}.webp`}
                             playerInfo={playerInfoToReach}
                             setPlayerInfo={setPlayerInfoToReach} editable={true}
@@ -122,13 +122,17 @@ const HowToXp = ({metierName, xpNeeded, bonusXp}) => {
     const methodAvailable = HOW_TO_XP[metierName].map((e) => {
         return e["type"];
     })
+    const [doubleXp, setDoubleXP] = React.useState(0);
+    const [dailyBonus, setDailyBonus] = React.useState(0);
 
     useEffect(() => {
         setMethodSelected(HOW_TO_XP[metierName][0]["type"]);
     }, [metierName]);
 
-
-    const xpNeededWithBonus = xpNeeded / ((100 + bonusXp) / 100);
+    const bonusXpWithoutDouble = bonusXp +dailyBonus;
+    const bonusXpDouble = bonusXpWithoutDouble + doubleXp;
+    const xpNeededWithoutDoubleXP = xpNeeded / ((100 + bonusXpWithoutDouble) / 100);
+    const xpNeededWithDoubleXP = xpNeeded / ((100 + bonusXpDouble) / 100);
 
     const closestItemName = methodSelected !== "" ? GetAllFileNameInFolder().reduce((acc, curr) => {
         if (levensteinDistance(curr, methodSelected) < levensteinDistance(acc, methodSelected)) {
@@ -139,24 +143,55 @@ const HowToXp = ({metierName, xpNeeded, bonusXp}) => {
     }) : "";
 
     return (
-
         <div>
-            <h1>Il te manque {printPricePretty(xpNeeded)} xp (bonus de {bonusXp}%)</h1>
+            <div style={{display: "flex", justifyContent:"center", flexDirection: "row"}}>
+                <button onClick={() => {
+                    if (doubleXp === 0)
+                        setDoubleXP(100);
+                    else
+                        setDoubleXP(0);
+                }}>{doubleXp === 100 ? "Annuler la double XP" : "Prendre une double XP"}</button>
+            </div>
+
+
+            <div style={{display: "flex", justifyContent: "center", flexDirection: "row"}}>
+                <h1 style={{margin: 0}}>Bonus quotidien - {dailyBonus}%</h1>
+                <div className={"ArrowUpDownDailyBonus"}>
+                <div onClick={() => {
+                        setDailyBonus(dailyBonus + 1);
+                    }}>
+                        <SlArrowUp/>
+                    </div>
+                    <div onClick={() => {
+                        if (dailyBonus === 0)
+                            return;
+                        setDailyBonus(dailyBonus - 1);
+                    }}>
+
+                        <SlArrowDown/>
+                    </div>
+                </div>
+            </div>
+
+            <h1>Il te manque {printPricePretty(xpNeeded)} xp (bonus de {bonusXpDouble}%)
+
+            </h1>
             <select onChange={(e) => {
                 setMethodSelected(e.target.value)
-            }} value={""}>
+            }}>
                 {methodAvailable.map((e) => {
                     return <option value={e}>{e}</option>
                 })}
             </select>
+
             {closestItemName !== "" && HOW_TO_XP[metierName].find((e) => e["type"] === methodSelected) !== undefined ?
                 <SmallInfo imgPath={`AH_img/${closestItemName}.png`}
                            title={methodSelected}
-                           value={printPricePretty(Math.ceil(xpNeededWithBonus / HOW_TO_XP[metierName].find((e) => e["type"] === methodSelected)["xp"]))}/> : ""}
+                           value={printPricePretty(Math.ceil(xpNeededWithDoubleXP / HOW_TO_XP[metierName].find((e) => e["type"] === methodSelected)["xp"]))}/> : ""}
 
             {closestItemName !== "" ? <SmallInfo imgPath={`AH_img/glass_bottle.png`}
                                                  title={"bottle xp métier [+1000]"}
-                                                 value={printPricePretty(Math.ceil(xpNeededWithBonus / 1000))}/> : ""}
+                                                 value={printPricePretty(Math.ceil(xpNeededWithoutDoubleXP / 1000))}/> : ""}
 
 
         </div>

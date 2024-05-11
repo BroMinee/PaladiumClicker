@@ -15,8 +15,6 @@ import Stats from "./Components/Stats/Stats";
 import "./OptimizerClicker.css"
 
 
-
-
 export const OptiClicker = () => {
 
     const {
@@ -24,17 +22,10 @@ export const OptiClicker = () => {
         setPlayerInfo
     } = useContext(playerInfoContext);
 
+    const [showGraph, setShowGraph] = useState(false)
+
     const [rps, setRPS] = useState(1)
     const [estimatedRPS, setEstimatedRPS] = useState(3)
-
-    const [displayOptimized, setDisplayOptimized] = useState([false, false, false, false, false, false, false, false]);
-
-
-    const changeDisplayOptimized = (index) => {
-        let newdisplayOptimized = [...displayOptimized]
-        newdisplayOptimized[index] = !displayOptimized[index]
-        setDisplayOptimized(newdisplayOptimized)
-    }
 
     if (Object.keys(playerInfo).length === 0)
         return <div>Loading</div>
@@ -45,12 +36,12 @@ export const OptiClicker = () => {
             <div>
                 <div id="container" className="container">
                 </div>
-                <Graph/>
+                {showGraph ? <Graph setShowGraph={setShowGraph}/> : ""}
                 <Tuto/>
                 <div className="App gridClicker children-blurry">
                     <div style={{justifySelf: "center"}}>
                         <p style={{fontSize: "xx-large", marginBottom: "0px"}}>
-                                Bienvenue sur l'optimiseur du&nbsp;
+                            Bienvenue sur l'optimiseur du&nbsp;
                             <span className={"BroMine"}>
                                 PalaClicker
                             </span>
@@ -73,7 +64,7 @@ export const OptiClicker = () => {
                             }} style={{cursor: "pointer"}}>Voir les nouvelles fonctionnalitées
                             </button>
                             <button onClick={() => {
-                                document.getElementById("modal2").style.display = "block"
+                                setShowGraph(true)
                             }} style={{cursor: "pointer"}}>Voir l'évolution
                                 du top 10
                             </button>
@@ -95,60 +86,52 @@ export const OptiClicker = () => {
                     </div>
 
                     <div>
-                        <h1 onClick={() => {changeDisplayOptimized(0)}}>Bâtiments (clique pour déployer)</h1>
-                        {
-                            displayOptimized[0] ? <BuildingList setRPS={setRPS}/> : ""
-                        }
+                        <h1>Bâtiments</h1>
+                        <BuildingList setRPS={setRPS}/>
+
                         {/*<BuildingList setRPS={setRPS}/>*/}
                     </div>
 
                     <div>
-                        <h1 onClick={() => {changeDisplayOptimized(1)}}>Clic (clique pour déployer)</h1>
-                        {
-                            displayOptimized[1] ? <ClickList/> : ""
-                        }
+                        <h1>Clic</h1>
+                        <ClickList/>
+
                     </div>
 
                     <div>
-                        <h1 onClick={() => {changeDisplayOptimized(2)}}>Global (clique pour déployer)</h1>
-                        {
-                            displayOptimized[2] ? <UpgradeList upgradeName={"global_upgrade"}/> : ""
-                        }
+                        <h1>Global</h1>
+                        <UpgradeList upgradeName={"global_upgrade"}/>
+
                     </div>
 
                     <div>
-                        <h1 onClick={() => {changeDisplayOptimized(3)}}>Terrain (clique pour déployer)</h1>
-                        {
-                            displayOptimized[3] ? <UpgradeList upgradeName={"terrain_upgrade"}/> : ""
-                        }
+                        <h1>Terrain</h1>
+                        <UpgradeList upgradeName={"terrain_upgrade"}/>
+
                     </div>
 
                     <div>
-                        <h1 onClick={() => {changeDisplayOptimized(4)}}>Amélioration des bâtiments (clique pour déployer)</h1>
-                        {
-                            displayOptimized[4] ? <UpgradeList upgradeName={"building_upgrade"}/> : ""
-                        }
+                        <h1>Amélioration des bâtiments</h1>
+                        <UpgradeList upgradeName={"building_upgrade"}/>
+
 
                     </div>
                     <div>
-                        <h1 onClick={() => {changeDisplayOptimized(5)}}>Many (clique pour déployer)</h1>
-                        {
-                            displayOptimized[5] ? <UpgradeList upgradeName={"many_upgrade"}/> : ""
-                        }
+                        <h1>Many</h1>
+                        <UpgradeList upgradeName={"many_upgrade"}/>
+
                     </div>
 
                     <div>
-                        <h1 onClick={() => {changeDisplayOptimized(6)}}>Postérieur (clique pour déployer)</h1>
-                        {
-                            displayOptimized[6] ? <UpgradeList upgradeName={"posterior_upgrade"}/> : ""
-                        }
+                        <h1>Postérieur</h1>
+                        <UpgradeList upgradeName={"posterior_upgrade"}/>
+
                     </div>
 
                     <div>
-                        <h1 onClick={() => {changeDisplayOptimized(7)}}>Catégorie (clique pour déployer)</h1>
-                        {
-                            displayOptimized[7] ? <UpgradeList upgradeName={"category_upgrade"}/> : ""
-                        }
+                        <h1>Catégorie</h1>
+                        <UpgradeList upgradeName={"category_upgrade"}/>
+
                     </div>
 
                 </div>
