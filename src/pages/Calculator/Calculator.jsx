@@ -4,9 +4,11 @@ import "./Calculator.css"
 import {playerInfoContext} from "../../Context";
 import {Metier} from "../../Components/Metier/MetierList";
 import {HOW_TO_XP, METIER_PALIER} from "../../Constant";
-import {levensteinDistance, printPricePretty} from "../../Misc";
+import {levensteinDistance, logError, printPricePretty} from "../../Misc";
 import {GetAllFileNameInFolder, SmallInfo} from "../Profil/Profil";
 import {SlArrowDown, SlArrowUp} from "react-icons/sl";
+import {fetchInfoFromPseudo} from "../../FetchData";
+import {setTimer} from "../OptimizerClicker/Components/ImportProfil/ImportProfil";
 
 
 const Calculator = () => {
@@ -17,6 +19,25 @@ const Calculator = () => {
         playerInfo,
         setPlayerInfo
     } = useContext(playerInfoContext);
+
+    async function fetchBuildingInfoFromPseudo() {
+
+        const pseudo = localStorage.getItem("pseudo")
+        const [newplayerInfo, newErrorInARow, error, timeout] = await fetchInfoFromPseudo(pseudo, playerInfo, 0)
+        if (timeout !== 0)
+            setTimer(timeout);
+
+        logError(error);
+        setPlayerInfo(newplayerInfo);
+
+    }
+
+    for(let i = 0; i < playerInfo["metier"].length; i++){
+        if(playerInfo["metier"][i]["xp"] === 0 && playerInfo["metier"][i]["level"] !== 1){
+            console.log("Resetting xp");
+            fetchBuildingInfoFromPseudo();
+        }
+    }
 
     let bonusXp = 0;
     switch (playerInfo["rank"]) {
