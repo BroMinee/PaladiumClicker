@@ -9,3 +9,18 @@
     grid-column-gap: 30px;
     grid-row-gap: 30px;
 }
+
+.ArrowUpDownDailyBonus
+{
+    margin-top: 3px;
+    margin-left: 10px;
+    display:flex;
+    flex-direction: column;
+    height: 100%;
+    color: black;
+}
+
+.ArrowUpDownDailyBonus > *  :hover{
+    color: white;
+
+}
