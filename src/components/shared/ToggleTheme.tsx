@@ -3,9 +3,8 @@ import { useTheme } from "@/components/shared/ThemeProvider";
 import { FaMoon, FaSun } from "react-icons/fa";
 
 export default function ToggleTheme() {
-  const { theme, setTheme } = useTheme();
-  const currentTheme = theme !== "system" ? theme : "light";
-
+  const { theme, systemTheme, setTheme } = useTheme();
+  const currentTheme = theme === "system" ? systemTheme : theme;
   function toggleTheme() {
     setTheme(currentTheme === "dark" ? "light" : "dark");
   }
