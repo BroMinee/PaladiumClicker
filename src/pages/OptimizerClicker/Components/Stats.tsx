@@ -65,7 +65,7 @@ const Stats = () => {
                   <GradientText className="font-bold">
                     ~ {formatPrice(Math.round(coinsDormants))}
                   </GradientText>
-                  <img src="/coin.png" className="h-6 w-6" alt="Coin" />
+                  <img src={import.meta.env.BASE_URL + "/coin.png"} className="h-6 w-6" alt="Coin" />
                 </div>
               </div>
             </CardContent>
@@ -79,7 +79,7 @@ const Stats = () => {
                   <GradientText className="font-bold">
                     {(formatPrice(Math.round(playerInfo["production"])))}
                   </GradientText>
-                  <img src="/coin.png" className="h-6 w-6" alt="Coin" />
+                  <img src={import.meta.env.BASE_URL + "/coin.png"} className="h-6 w-6" alt="Coin" />
                 </div>
               </div>
             </CardContent>
@@ -150,7 +150,7 @@ export const StatList = ({ playerInfo, buildingBuyPaths, showProduction }) => {
 export const Stat = ({ buildingName, buildingPath, showProduction }) => {
   return (
     <div className="flex flex-col gap-2 items-center">
-      <img src={buildingPath[4]} className="w-12 h-12 object-cover" alt="image" />
+      <img src={import.meta.env.BASE_URL + buildingPath[4]} className="w-12 h-12 object-cover" alt="image" />
       <BuildingName name={buildingName} level={buildingPath[2]} />
       <GradientText className="font-bold">{formatPrice(buildingPath[6].toFixed(0))} $</GradientText>
       <span className="text-sm">Achetable {buildingPath[3] !== "Maintenant" && "le"} {buildingPath[3]}</span>

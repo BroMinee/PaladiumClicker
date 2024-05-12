@@ -32,7 +32,7 @@ const BuildingList = () => {
             <Building
               key={index}
               building={building}
-              imgPath={getImgPath(index, building.price ?? 0)}
+              imgPath={import.meta.env.BASE_URL + getImgPath(index, building.price ?? 0)}
               index={index}
             />
           ))}

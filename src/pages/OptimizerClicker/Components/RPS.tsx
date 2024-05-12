@@ -18,7 +18,6 @@ const RPS = () => {
   const [estimatedRPS, setEstimatedRPS] = useState(3);
 
   const buildingBuyPaths = computeXBuildingAhead(playerInfo!, 1, rps);
-  console.log(buildingBuyPaths)
 
   useEffect(() => {
     if (buildingBuyPaths.length !== 0)
@@ -47,7 +46,7 @@ const RPS = () => {
             }
             {(buildingBuyPaths.length === 0) &&
               <div className="flex flex-col items-center gap-4">
-                <img src="/arty_chocbar.webp" className="w-32 h-auto object-contain" alt="Arty" />
+                <img src={import.meta.env.BASE_URL + "/arty_chocbar.webp"} className="w-32 h-auto object-contain" alt="Arty" />
                 <p className="text-sm">Bravo tu as tout acheté, va prendre une douche maintenant.</p>
                 <Button
                   onClick={() => {
@@ -65,14 +64,14 @@ const RPS = () => {
       <Card>
         <CardContent className="h-full pt-6 flex items-center gap-4">
           {rps < 0 ?
-            <img src="/arty_chocbar.webp" className="w-12 h-auto object-contain" alt="Arty" /> :
+            <img src={import.meta.env.BASE_URL + "/arty_chocbar.webp"} className="w-12 h-auto object-contain" alt="Arty" /> :
             <FaCoins className="w-12 h-12" />
           }
           <div className="flex flex-col gap-2">
             <span className="font-semibold">Production actuelle par seconde</span>
             <div className="flex items-center gap-2">
               <GradientText className="font-bold">{'~ ' + formatPrice(rps)}</GradientText>
-              <img src="/coin.png" className="h-6 w-6" alt="Coin" />
+              <img src={import.meta.env.BASE_URL + "/coin.png"} className="h-6 w-6" alt="Coin" />
             </div>
           </div>
         </CardContent>
@@ -87,7 +86,7 @@ const RPS = () => {
                 {'~ ' + formatPrice(estimatedRPS)}{" "}
                 ({estimatedRPS > rps ? "+" : ""}{(((estimatedRPS - rps) / (rps) * 100)).toFixed(5)}%)
               </GradientText>
-              <img src="/coin.png" className="h-6 w-6" alt="Coin" />
+              <img src={import.meta.env.BASE_URL + "/coin.png"} className="h-6 w-6" alt="Coin" />
             </div>
           </div>
         </CardContent>
@@ -145,7 +144,6 @@ export function findBestUpgrade(playerInfo: PlayerInfo) {
 
   const currentRPS = computeRPS(playerInfo);
 
-  // console.log(buildingUpgradeUnlockable)
   function getBestIndex(list: unknown[], nameList: string) {
     for (let index = 0; index < list.length; index++) {
       const copy = structuredClone(playerInfo)
@@ -154,7 +152,7 @@ export function findBestUpgrade(playerInfo: PlayerInfo) {
       copy[nameList][indexInBuilding]["own"] = true;
 
       const RPSafterUpgrade = (computeRPS(copy) - currentRPS) / (copy[nameList][indexInBuilding]["price"]);
-      // console.log(`${copy[nameList][indexInBuilding]["name"]} ${computeRPS(copy)} ${currentRPS} ${bestRpsAfterUpgrade} ${copy[nameList][indexInBuilding]["price"]} ${RPSafterUpgrade}`)
+
       if (RPSafterUpgrade > bestRpsAfterUpgrade) {
         bestRpsAfterUpgrade = RPSafterUpgrade;
         bestUpgradeIndex = indexInBuilding;
@@ -169,8 +167,6 @@ export function findBestUpgrade(playerInfo: PlayerInfo) {
   getBestIndex(manyUpgradeUnlockable, "many_upgrade");
   getBestIndex(terrainUpgradeUnlockable, "terrain_upgrade");
   getBestIndex(posteriorUpgradeUnlockable, "posterior_upgrade");
-
-  // console.log(`Best upgrade : ${playerInfo[bestListName][bestUpgradeIndex]["name"]}`);
 
   return [bestRpsAfterUpgrade, bestUpgradeIndex, bestListName];
 }

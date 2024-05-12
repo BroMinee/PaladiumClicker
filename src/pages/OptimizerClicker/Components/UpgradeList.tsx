@@ -41,7 +41,7 @@ const UpgradeList = ({ upgradeType }: UpgradeListProps) => {
               key={`${upgrade.name}-${index}`}
               upgradeType={upgradeType}
               upgrade={upgrade}
-              imgPath={getImgPath(index, upgrade.name)}
+              imgPath={import.meta.env.BASE_URL + getImgPath(index, upgrade.name)}
             />
           ))}
       </div>

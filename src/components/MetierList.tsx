@@ -44,7 +44,7 @@ const Metier = ({
     <Card>
       <CardContent className="pt-6 flex flex-col items-center justify-center gap-2">
         <div className="relative">
-        <img src={`/JobsIcon/${metier.name}.webp`} alt="image" />
+        <img src={import.meta.env.BASE_URL + `/JobsIcon/${metier.name}.webp`} alt="image" />
           {/* <svg className="absolute left-0 right-0 bottom-4 rotate-[30deg] scale-[0.85]" viewBox="0 0 776 628">
             <path
               d="M723 314L543 625.77 183 625.77 3 314 183 2.23 543 2.23 723 314z" />

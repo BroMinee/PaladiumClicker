@@ -13,7 +13,7 @@ const FallingClickImage = () => {
       }
       const image = document.createElement('img');
 
-      image.src = `/CPSIcon/${selectedCPS}.png`;
+      image.src = `${import.meta.env.BASE_URL}/CPSIcon/${selectedCPS}.png`;
       image.alt = 'Click';
 
       containerRef.current.appendChild(image);

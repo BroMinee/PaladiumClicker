@@ -27,7 +27,7 @@ const ClickList = () => {
         {playerInfo?.CPS &&
           playerInfo["CPS"]
             .map((cps, index) => (
-              <CPS key={index} cps={cps} imgPath={getImgPath(index, cps.name)} />
+              <CPS key={index} cps={cps} imgPath={import.meta.env.BASE_URL + getImgPath(index, cps.name)} />
             ))}
       </div>
       <ScrollBar orientation="horizontal" />

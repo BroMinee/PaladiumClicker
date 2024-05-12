@@ -19,7 +19,7 @@ const Navbar = () => {
       <MobileNav />
       <div className="hidden lg:flex gap-4">
         <img
-          src="/favicon.ico"
+          src={import.meta.env.BASE_URL + "/favicon.ico"}
           alt="Logo"
           className="h-12 w-12"
         />

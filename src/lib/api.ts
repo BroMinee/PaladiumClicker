@@ -20,7 +20,7 @@ import axios from "axios";
 const PALADIUM_API_URL = "https://api.paladium.games/";
 
 const fetchLocal = async <T>(file: string) => {
-  const result = await axios<T>(window.location.origin + file, {
+  const result = await axios<T>(import.meta.env.BASE_URL + file, {
     headers: {
       Accept: "application/json",
     }
@@ -204,8 +204,6 @@ const getInitialPlayerInfo = async (): Promise<PlayerInfo> => {
 
 const fetchAllDataButKeepOwn = async (playerInfo: PlayerInfo) => {
   const initialPlayerInfo = await getInitialPlayerInfo();
-
-  console.log("Keeping own")
 
   initialPlayerInfo.metier.forEach((metier, index) => {
     metier.level = playerInfo.metier[index].level;
