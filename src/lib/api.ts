@@ -1,3 +1,4 @@
+import { parseCsv } from "@/lib/misc";
 import { usePlayerInfoStore } from "@/stores/use-player-info-store";
 import type {
   Building,
@@ -95,14 +96,24 @@ export const getAuctionHouseInfo = async (uuid: string) => {
 }
 
 export const getPlayerInfo = async (pseudo: string) => {
+
+  if (pseudo === "") {
+    throw "Pseudo is empty";
+  }
+  else if (pseudo.includes(" ")) {
+    throw "Pseudo contains space";
+  } else if (/^[a-zA-Z0-9_]+$/.test(pseudo) === false) {
+    throw "Pseudo doit contenir que des lettres ou des chiffres";
+  } else if (pseudo.length <= 3) {
+    throw "Pseudo trop court";
+  } else if (pseudo.length > 16) {
+    throw "Pseudo trop long";
+  }
+
   const localData = usePlayerInfoStore.getState().data;
 
   if (localData !== null && localData.username === pseudo && localData.uuid !== "") {
     return localData;
-  }
-
-  if (localData !== null && localData.username !== pseudo) {
-    return await fetchAllDataButKeepOwn(localData);
   }
 
   const initialPlayerInfo = localData !== null && localData.username !== pseudo ?
@@ -133,7 +144,7 @@ export const getPlayerInfo = async (pseudo: string) => {
 
     const targettedBuildingUpgrade = initialPlayerInfo[translatedUpgrade].at(Number(translatedPosition));
 
-    if(targettedBuildingUpgrade) {
+    if (targettedBuildingUpgrade) {
       targettedBuildingUpgrade.own = true;
     }
   });
@@ -242,4 +253,23 @@ const fetchAllDataButKeepOwn = async (playerInfo: PlayerInfo) => {
     cps.own = playerInfo.CPS[index].own;
   })
   return initialPlayerInfo;
+}
+
+export const getGraphData = async () => {
+  const parsedCsv = await fetchLocal<string>("/graph.csv").then(parseCsv);
+
+  const data = parsedCsv
+    .filter((data) => data.Date !== "")
+    .map((data) => {
+      for (const key in data) {
+        if (key === "Date") {
+          continue;
+        } else {
+          data[key] = Number(data[key]);
+        }
+      }
+      return data;
+    });
+
+  return data;
 }

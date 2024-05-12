@@ -6,58 +6,69 @@ export type Metier = {
 
 export type Building = {
   name: string,
-  own: number,
-  price?: number,
+  index: number,
+  price: number,
+  base_production: string,
+  own: number | boolean,
 }
 
 export type BuildingUpgrade = {
   name: string,
   own: boolean,
-  price?: number,
-  condition?: string,
+  active_index: number,
+  price: number,
+  condition: [{ day: number }, { index: number, own: number }],
 }
 
 export type CategoryUpgrade = {
   name: string,
+  active_list_index: number[],
+  pourcentage: number,
   own: boolean,
-  price?: number,
-  condition?: string,
+  price: number,
+  condition: [{ index: number, own: number }],
 }
 
 export type CPS = {
   name: string,
+  CPS: number
   own: boolean,
-  index?: number,
-  condition?: string,
-  price?: number,
+  index: number,
+  price: number,
+  condition: [{ coins: number }, { day: number } | undefined],
 }
 
 export type GlobalUpgrade = {
   name: string,
+  pourcentage: number,
   own: boolean,
-  price?: number,
-  condition?: string,
+  price: number,
+  condition: [{ coins: number }, { day: number }],
 }
 
 export type ManyUpgrade = {
   name: string,
   own: boolean,
-  price?: number,
-  condition?: string,
+  active_index: number,
+  price: number,
+  condition: [{ day: number }, { index: number, own: number }],
 }
 
 export type PosteriorUpgrade = {
   name: string,
   own: boolean,
-  price?: number,
-  condition?: string,
+  previous_index: number
+  active_index: number,
+  price: number,
+  condition: [{ day: number }, { index: number, own: number }],
 }
 
 export type TerrainUpgrade = {
   name: string,
+  active_list_index: number[],
   own: boolean,
-  price?: number,
-  condition?: string,
+  price: number,
+  condition: [{ day: number }],
 }
 
 export type PlayerInfo = {
@@ -79,6 +90,14 @@ export type PlayerInfo = {
   uuid: string,
   rank: string
 }
+
+export type UpgradeKey = keyof Pick<PlayerInfo,
+  "global_upgrade" |
+  "building_upgrade" |
+  "category_upgrade" |
+  "many_upgrade" |
+  "posterior_upgrade" |
+  "terrain_upgrade">;
 
 export type PaladiumPlayerInfo = {
   faction: string,

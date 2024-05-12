@@ -1,0 +1,37 @@
+import { usePlayerInfoStore } from "@/stores/use-player-info-store";
+import { useEffect, useRef } from "react";
+
+const FallingClickImage = () => {
+  const { selectedCPS } = usePlayerInfoStore();
+  const containerRef = useRef<HTMLDivElement>(null);
+
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      if (containerRef?.current === null) {
+        return;
+      }
+      const image = document.createElement('img');
+
+      image.src = `/CPSIcon/${selectedCPS}.png`;
+      image.alt = 'Click';
+
+      containerRef.current.appendChild(image);
+
+      const randomX = Math.random() * (containerRef.current.offsetWidth - image.width);
+      image.style.left = randomX + 'px';
+      image.classList.add("absolute", "animate-falling", "h-auto", "w-32", "object-cover");
+      setTimeout(() => {
+        image.remove();
+      }, 3000);
+    }, 2000);
+
+    return () => {
+      clearInterval(interval);
+    }
+  }, [selectedCPS]);
+
+  return (<div ref={containerRef} className="fixed inset-0 z-[-1]" />);
+}
+
+export default FallingClickImage;
