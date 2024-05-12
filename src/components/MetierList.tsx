@@ -1,4 +1,4 @@
-// @ts-nocheck
+// @ts-nocheck - A RETIRER APRES AVOIR CORRIGE LE FICHIER
 
 import { usePlayerInfoStore } from "@/stores/use-player-info-store";
 import type { Metier } from "@/types";

@@ -1,4 +1,4 @@
-// @ts-nocheck
+// @ts-nocheck - A RETIRER APRES AVOIR CORRIGE LE FICHIER
 
 import { computeRPS } from "@/pages/OptimizerClicker/Components/BuildingList";
 import { checkCondition, computePrice, formatPrice } from "@/lib/misc";

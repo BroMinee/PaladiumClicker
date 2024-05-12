@@ -1,4 +1,4 @@
-// @ts-nocheck
+// @ts-nocheck - A RETIRER APRES AVOIR CORRIGE LE FICHIER
 
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
