@@ -48,12 +48,7 @@ const RPS = () => {
               <div className="flex flex-col items-center gap-4">
                 <img src={import.meta.env.BASE_URL + "/arty_chocbar.webp"} className="w-32 h-auto object-contain" alt="Arty" />
                 <p className="text-sm">Bravo tu as tout acheté, va prendre une douche maintenant.</p>
-                <Button
-                  onClick={() => {
-                    localStorage.setItem("CPS", "-2")
-                  }}
-                  style={{ marginTop: "10px" }}
-                >
+                <Button>
                   Aller prendre une douche
                 </Button>
               </div>

@@ -64,7 +64,7 @@ const Tuto = () => {
               </div>
               <div className="flex flex-col gap-2">
                 <ReactAudioPlayer
-                  src={import.meta.env.VITE_PUBLIC_URL + "/Presentation_site.mp3"}
+                  src={import.meta.env.BASE_URL + "/Presentation_site.mp3"}
                   controls
                 />
                 <p className="text-muted-foreground">Musique générée avec suno.ai</p>

@@ -6,9 +6,6 @@ on:
 
   workflow_dispatch:
 
-env:
-  VITE_PUBLIC_URL: ${{ vars.VITE_PUBLIC_URL }}
-
 permissions:
   contents: read
   pages: write

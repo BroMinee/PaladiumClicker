@@ -57,7 +57,7 @@ const MobileNav = () => {
         <SheetHeader className="pb-6">
           <div className="flex items-center gap-2">
             <img
-              src="/favicon.ico"
+              src={import.meta.env.BASE_URL + "/favicon.ico"}
               alt="Logo"
               className="h-12 w-12"
             />

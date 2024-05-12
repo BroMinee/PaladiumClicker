@@ -53,11 +53,11 @@ const News = ({ defaultOpen = false }: NewsProps) => {
             <div className="flex flex-col gap-2 pb-2">
               <h3 className="font-bold">Pourquoi BroMine__ n'est plus top 1 clicker</h3>
               <ReactAudioPlayer
-                src="/music.mp3"
+                src={import.meta.env.BASE_URL + "/music.mp3"}
                 controls
               />
               <ReactAudioPlayer
-                src="/music2.mp3"
+                src={import.meta.env.BASE_URL + "/music2.mp3"}
                 controls
               />
               <p className="text-muted-foreground">Musiques générées avec suno.ai</p>
@@ -65,7 +65,7 @@ const News = ({ defaultOpen = false }: NewsProps) => {
             <div className="flex flex-col gap-2">
               <h3 className="font-bold">BroMine__ le retour</h3>
               <ReactAudioPlayer
-                src="/BroMine_is_back.mp3"
+                src={import.meta.env.BASE_URL + "/BroMine_is_back.mp3"}
                 controls
                 volume={0.15}
               />
