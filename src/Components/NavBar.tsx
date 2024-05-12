@@ -49,7 +49,7 @@ const MobileNav = () => {
   return (
     <Sheet>
       <SheetTrigger asChild>
-        <Button className="lg:hidden" variant="outline" size="icon">
+        <Button className="lg:hidden" variant="secondary" size="icon">
           <FaBars className="h-4 w-4" />
         </Button>
       </SheetTrigger>
