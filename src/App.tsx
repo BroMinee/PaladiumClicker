@@ -31,7 +31,9 @@ const router = createBrowserRouter([
     path: 'bugs',
     element: <NotAvailablePage />
   }
-]);
+], {
+  basename: '/PaladiumClicker',
+});
 
 function App() {
   const queryClient = new QueryClient();

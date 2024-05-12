@@ -66,7 +66,7 @@ const Building = ({ building, imgPath, index }: BuildingProps) => {
         <div className="flex flex-col items-center justify-center gap-2">
           <img src={imgPath} alt="Icône" className="object-cover h-12 w-auto" />
           <span className="text-primary text-sm">{building.name}</span>
-          <div className="text-primary font-bold text-center">{formatPrice(computePrice(Number(building.price), building.own))} $</div>
+          <div className="text-primary font-bold text-center">{formatPrice(computePrice(Number(building.price), Number(building.own)))} $</div>
         </div>
         <div className="space-y-2">
           <div className="text-sm">
@@ -75,9 +75,9 @@ const Building = ({ building, imgPath, index }: BuildingProps) => {
           </div>
           <div className="text-sm">
             <FaBolt className="h-4 w-4 mr-2 inline-block" />
-            RPS: {formatPrice(scaleCurrentProduction(playerInfo!, index, building.own))}
+            RPS: {formatPrice(scaleCurrentProduction(playerInfo!, index, Number(building.own)))}
           </div>
-          <Input className="w-auto" type="number" min="0" step="1" max="99" value={building.own} onChange={onChangeLevel} />
+          <Input className="w-auto" type="number" min="0" step="1" max="99" value={Number(building.own)} onChange={onChangeLevel} />
         </div>
       </CardContent>
     </Card>
@@ -128,7 +128,7 @@ function getPourcentageBonus(playerInfo: PlayerInfo, buildingIndex: number) {
     if (manyUpgrades.length > 1)
       alert(`Error in getBonusFromMany function : more than one bonus from many for ${targetedBuilding.name}`);
     else if (manyUpgrades.length === 1)
-      return targetedBuilding.own * 0.01;
+      return Number(targetedBuilding.own) * 0.01;
     return 0;
   }
 
@@ -149,7 +149,7 @@ function getPourcentageBonus(playerInfo: PlayerInfo, buildingIndex: number) {
     if (posteriorUpgrades.length > 1)
       alert(`Error in getBonusFromPosterior function : more than one bonus from posterior for ${targetedBuilding.name}`)
     if (posteriorUpgrades.length === 1) {
-      return playerInfo.building[posteriorUpgrades[0].previous_index].own * 0.01;
+      return Number(playerInfo.building[posteriorUpgrades[0].previous_index].own) * 0.01;
     }
     return 0;
   }
@@ -195,7 +195,7 @@ export function computeRPS(playerInfo: PlayerInfo) {
   let rps = 0.5;
   playerInfo.building.forEach((building, index) => {
     if (building.own !== 0) {
-      rps += scaleCurrentProduction(playerInfo, index, building.own);
+      rps += scaleCurrentProduction(playerInfo, index, Number(building.own));
     }
   }
   )

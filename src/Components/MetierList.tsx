@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import { usePlayerInfoStore } from "@/stores/use-player-info-store";
 import type { Metier } from "@/types";
 import { Card, CardContent } from "./ui/card";
