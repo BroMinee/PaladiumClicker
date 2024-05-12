@@ -150,7 +150,7 @@ export const StatList = ({ playerInfo, buildingBuyPaths, showProduction }) => {
 export const Stat = ({ buildingName, buildingPath, showProduction }) => {
   return (
     <div className="flex flex-col gap-2 items-center">
-      <img src={import.meta.env.BASE_URL + buildingPath[4]} className="w-12 h-12 object-cover" alt="image" />
+      <img src={buildingPath[4]} className="w-12 h-12 object-cover" alt="image" />
       <BuildingName name={buildingName} level={buildingPath[2]} />
       <GradientText className="font-bold">{formatPrice(buildingPath[6].toFixed(0))} $</GradientText>
       <span className="text-sm">Achetable {buildingPath[3] !== "Maintenant" && "le"} {buildingPath[3]}</span>
