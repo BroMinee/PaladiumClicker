@@ -1,4 +1,4 @@
-import type { PlayerInfo } from "@/types";
+import type { AnyCondition, PlayerInfo } from "@/types";
 
 export function getTotalSpend(playerInfo: PlayerInfo) {
   let total = 0;
@@ -35,37 +35,39 @@ export function getTotalSpend(playerInfo: PlayerInfo) {
   return total;
 }
 
-function getCoinsCondition(conditions) {
+function getCoinsCondition(conditions: AnyCondition | undefined) {
   if (conditions === undefined)
     return 0;
-  const r = conditions.find(c => "coins" in c);
-  return r ? r["coins"] : -1;
+
+  const r = conditions
+    .find(c => typeof c !== 'undefined' && "coins" in c) as { coins: number } | undefined;
+  return r ? r.coins : -1;
 }
 
-function getBuildingIndexCondition(conditions) {
+function getBuildingIndexCondition(conditions: AnyCondition | undefined) {
   if (conditions === undefined)
     return 0;
-  const r = conditions.find(c => "index" in c);
-  return r ? r["index"] : -1;
+  const r = conditions.find(c => typeof c !== 'undefined' && "index" in c) as { index: number } | undefined;
+  return r ? r.index : -1;
 }
 
-function getBuildingCountCondition(conditions) {
+function getBuildingCountCondition(conditions: AnyCondition | undefined) {
   if (conditions === undefined)
     return 0;
-  const r = conditions.find(c => "own" in c);
-  return r ? r["own"] : -1;
+  const r = conditions.find(c => typeof c !== 'undefined' && "own" in c) as { own: number } | undefined;
+  return r ? r.own : -1;
 }
 
-function getDayCondition(conditions) {
+function getDayCondition(conditions: AnyCondition | undefined) {
   if (conditions === undefined)
     return 0;
-  const r = conditions.find(c => "day" in c);
-  return r ? r["day"] : -1;
+  const r = conditions.find(c => typeof c !== 'undefined' && "day" in c) as { day: number } | undefined;
+  return r ? r.day : -1;
 }
 
 
 // unlockable, coins, totalCoins, day, daySinceStart, buildingIndex, buildingNeed, buildingCount
-export function checkCondition(playerInfo: PlayerInfo, conditions) {
+export function checkCondition(playerInfo: PlayerInfo, conditions: AnyCondition) {
   const coinsCondition = getCoinsCondition(conditions);
   const dayCondition = getDayCondition(conditions);
   const totalCoins = playerInfo.production;
@@ -74,7 +76,9 @@ export function checkCondition(playerInfo: PlayerInfo, conditions) {
   const daySinceStart = (new Date().getTime() - new Date("2024-02-18").getTime()) / (1000 * 60 * 60 * 24);
   const buildingCount = buildingIndex === -1 ? -1 : playerInfo["building"][buildingIndex]["own"];
 
-  const unlockable = totalCoins >= coinsCondition && daySinceStart >= dayCondition && (buildingIndex === -1 ? true : playerInfo["building"][buildingIndex]["own"] >= buildingNeed); // TODO change day
+  const unlockable = totalCoins >= coinsCondition &&
+    daySinceStart >= dayCondition &&
+    (buildingIndex === -1 ? true : Number(playerInfo.building[buildingIndex].own) >= buildingNeed); // TODO change day
 
   return [unlockable, coinsCondition, totalCoins, dayCondition, daySinceStart, buildingIndex, buildingNeed, buildingCount];
 }
@@ -88,7 +92,7 @@ export function computePrice(priceLevel0: number, level: number) {
   return Math.round(priceLevel0 * Math.pow(1.100000023841858, level));
 }
 
-export function getPathImg(bestListName, bestUpgradeIndex) {
+export function getPathImg(bestListName: string, bestUpgradeIndex: number) {
   switch (bestListName) {
     case "building":
       return import.meta.env.VITE_PUBLIC_URL + "/BuildingIcon/" + bestUpgradeIndex + ".png";

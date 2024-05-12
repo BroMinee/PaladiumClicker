@@ -99,6 +99,28 @@ export type UpgradeKey = keyof Pick<PlayerInfo,
   "posterior_upgrade" |
   "terrain_upgrade">;
 
+export type ConditionWithCoins = CPS['condition'] | GlobalUpgrade['condition'];
+
+export type ConditionWithIndex = ManyUpgrade['condition'] |
+  PosteriorUpgrade['condition'] |
+  CategoryUpgrade['condition'] |
+  BuildingUpgrade['condition'] |
+  TerrainUpgrade['condition'];
+
+export type ConditionWithOwn = BuildingUpgrade['condition'] |
+  ManyUpgrade['condition'] |
+  PosteriorUpgrade['condition'] |
+  CategoryUpgrade['condition'];
+
+export type ConditionWithDay = ManyUpgrade['condition'] |
+  PosteriorUpgrade['condition'] |
+  TerrainUpgrade['condition'] |
+  GlobalUpgrade['condition'] |
+  CPS['condition'] |
+  CategoryUpgrade['condition'];
+
+export type AnyCondition = ConditionWithCoins | ConditionWithIndex | ConditionWithOwn | ConditionWithDay;
+
 export type PaladiumPlayerInfo = {
   faction: string,
   firstJoin: number,
