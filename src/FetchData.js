@@ -299,7 +299,7 @@ export const fetchFactionLeaderboard = async () => {
 
 export const fetchAhInfo = async (uuid) => {
     return await axios(
-        `${API_PREFIX}/v1/paladium/shop/market/players/${uuid}/items`,
+        `${API_PREFIX}/v1/paladium/shop/market/players/${uuid}/items?limit=45`,
         {
             headers: {
                 'Content-Type': 'application/json',

@@ -2793,7 +2793,7 @@ const FactionInfo = () => {
                             return <Contributor key={player["uuid"]}
                                                 pseudo={`[${player["group"]}] ${player["username"]}`}
                                                 urlSkin={`https://crafatar.com/avatars/${player["uuid"]}?size=8`}
-                                                description={`Rejoins le ${convertEpochToDateUTC2(player["joinedAt"])}`}
+                                                description={`Rejoint le ${convertEpochToDateUTC2(player["joinedAt"])}`}
                                                 url={""}/>
 
                         })
