@@ -75,29 +75,29 @@ const Graph = ({setShowGraph}) => {
             <ImCross onClick={closeModal} className="RedCrossIcon"/>
             <button onClick={() => setLog(!log)}>{`Echelle ${log ? "linéaire" : "logarithmique"}`}</button>
             {listY.length === 0 ? <div>Chargement...</div> :
-            <Plot
-                data={
-                    listY.map((data, index) => {
-                            return {
-                                x: x,
-                                y: data,
-                                type: 'scatter',
-                                mode: 'lines+markers',
-                                visible: index < 10 || pseudoList[index] === "LeVraiFuze" ? "true" : "legendonly",
-                                name: `Top ${index + 1} - ${pseudoList[index]}`
+                <Plot
+                    data={
+                        listY.map((data, index) => {
+                                return {
+                                    x: x,
+                                    y: data,
+                                    type: 'scatter',
+                                    mode: 'lines+markers',
+                                    visible: index < 10 ? "true" : "legendonly",
+                                    name: `Top ${index + 1} - ${pseudoList[index]}`
+                                }
                             }
-                        }
-                    )
-                }
-                layout={{
-                    title: 'Classement Clicker - Graphique intéractif',
-                    autosize: true,
-                    width: width * 0.8,
-                    height: height * 0.8,
-                    yaxis: {title: 'ClicCoins', type: log ? 'log' : 'linear'},
-                    /* Log scale*/
-                }}
-            />}
+                        )
+                    }
+                    layout={{
+                        title: 'Classement Clicker - Graphique intéractif',
+                        autosize: true,
+                        width: width * 0.8,
+                        height: height * 0.8,
+                        yaxis: {title: 'ClicCoins', type: log ? 'log' : 'linear'},
+                        /* Log scale*/
+                    }}
+                />}
         </div>
     </div>
 };
@@ -109,18 +109,21 @@ function csvJSON(csv) {
 
     var result = [];
     var headers = lines[0].split(";");
-    let postFuze = headers.findIndex((e) => { console.log(e); return e === "LeVraiFuze" });
-    if(postFuze === -1) {
+    const max = 300 < headers.length ? 300 : headers.length;
+    let postFuze = headers.findIndex((e) => {
+        return e === "LeVraiFuze"
+    });
+    if (postFuze === -1) {
         postFuze = headers.length;
-    }
-    else if(postFuze +1 !== headers.length) {
-        postFuze += 1;
     }
     for (var i = 1; i < lines.length; i++) {
         var obj = {};
         var currentline = lines[i].split(";");
-        for (var j = 0; j < postFuze; j++) {
-
+        for (var j = 0; j < max; j++) {
+            if (j === postFuze) {
+                obj[headers[j]] = "0";
+                continue;
+            }
             obj[headers[j]] = currentline[j];
         }
         result.push(obj);
