@@ -2,6 +2,16 @@
 
 }
 
+.grid-metier
+{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    grid-gap: 5vmin 5vmin;
+    width: auto;
+    overflow: hidden;
+}
+
 .Info-Metier-list {
     list-style-type: none;
     align-items: center;
@@ -9,7 +19,7 @@
     width: 100%;
     justify-content: center;
     margin: 10px 10px;
-    display: inherit;
+    display: flex;
 }
 
 .Metier-Cercle {
@@ -44,8 +54,8 @@
 .progress .track,
 .progress .fill {
     fill: rgba(0, 0, 0, 0);
-    stroke-width: 75;
-    transform: translate(75px, 685px) rotate(-90deg);
+    stroke-width: 85;
+    transform: translate(75px, 700px) rotate(-90deg);
 }
 .progress .track {
     stroke: #293249;
@@ -114,17 +124,14 @@
     padding-right: 0px;
     width: 5vmin;
     min-width: 6vmin;
+    text-align: center;
+    font-size: 3vmin;
+    font-weight: bold;
+    color: white;
 }
 
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
     -webkit-appearance: none;
     margin: 0;
-}
-.Lvl-inside-txt
-{
-    text-align: center;
-    font-size: 3vmin;
-    font-weight: bold;
-    color: white;
 }

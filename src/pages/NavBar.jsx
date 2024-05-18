@@ -3,7 +3,7 @@ import React from "react";
 import {FaBars} from "react-icons/fa";
 import {NavLink as Link} from "react-router-dom";
 import styled from "styled-components";
-import ImportProfil from "../Components/ImportProfil/ImportProfil";
+import ImportProfil from "./OptimizerClicker/Components/ImportProfil/ImportProfil";
 
 export const Nav = styled.nav`
     background: #FF5C00;
@@ -66,23 +66,23 @@ const Navbar = () => {
                 <NavMenu>
                     <img src={process.env.PUBLIC_URL + "/favicon.ico"} alt="image"
                          className={"Building-img"} style={{maxHeight: "99%"}}></img>
-                    <NavLink to="/Profil" activestyle="true">
-                        Profil (Beta)
+                    <NavLink id="profilNavbar" to="/Profil" activestyle="true">
+                        Profil
                     </NavLink>
                     <NavLink to="/PaladiumClicker" activestyle="true">
                         PalaClicker Optimizer
+                    </NavLink>
+                    <NavLink to="/Calculator" activestyle="true">
+                        XP Calculator
                     </NavLink>
                     <NavLink to="/PalaAnimation" activestyle="true">
                         PalaAnimation Trainer
                     </NavLink>
 
-                    <ImportProfil resetButton={false} logError={false} idPseudoInput={"pseudoInputNavBar"}/>
+                    <ImportProfil resetButton={false} idPseudoInput={"pseudoInputNavBar"}/>
 
                     <NavLink to="/About" activestyle="true">
-                        About
-                    </NavLink>
-                    <NavLink to="/Bugs" activestyle="true">
-                        Bugs
+                        A propos
                     </NavLink>
                 </NavMenu>
             </Nav>

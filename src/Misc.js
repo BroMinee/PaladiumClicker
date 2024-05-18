@@ -1,4 +1,5 @@
-import {ComputePrice} from "./Components/Building/BuildingList";
+import {ComputePrice} from "./pages/OptimizerClicker/Components/Building/BuildingList";
+import React from "react";
 
 function checkIfKeyExists(obj, key) {
     return obj.hasOwnProperty(key);
@@ -98,4 +99,58 @@ export function getPathImg(bestListName, bestUpgradeIndex) {
             return process.env.PUBLIC_URL + "/BuildingUpgradeIcon/0.png";
 
     }
+}
+
+export function logError(error)
+{
+    if(error === undefined || error === "")
+        return;
+
+    const father = document.getElementById("errorAPI");
+    const div = document.createElement("div");
+    div.innerHTML = error;
+    father.prepend(div);
+    setTimeout(() => {
+        father.removeChild(div);
+    }, 5000);
+}
+
+export function ApiDown() {
+    const father = document.getElementById("errorAPI");
+
+    const div = document.createElement("div");
+    div.classList.add("ApiDown");
+    div.innerHTML = "<div>3 erreurs à la suite, l'API de pala est peut-être down:</div>\n" +
+        "<a href=\"https://status.palaguidebot.fr/\" target='_blank'>Vérifier le status</a>";
+    father.prepend(div);
+    /*
+    * {<div id={"errorAPI"} style={{paddingBottom: "10px"}}></div>
+    <div id={"ApiDown"} style={{display: "none", fontSize: "20px"}}>
+        <div>L'API de pala est peut-être down:</div>
+        <a href="https://status.palaguidebot.fr/">Vérifier le status</a>
+    </div>};
+    * */
+    setTimeout(() => {
+        father.removeChild(div);
+    }, 5000);
+}
+
+export function levensteinDistance(a, b) {
+    const distance = [];
+    for (let i = 0; i <= a.length; i++) {
+        distance[i] = [i];
+    }
+    for (let j = 0; j <= b.length; j++) {
+        distance[0][j] = j;
+    }
+    for (let i = 1; i <= a.length; i++) {
+        for (let j = 1; j <= b.length; j++) {
+            distance[i][j] = Math.min(
+                distance[i - 1][j] + 1,
+                distance[i][j - 1] + 1,
+                distance[i - 1][j - 1] + (a[i - 1] !== b[j - 1] ? 1 : 0)
+            );
+        }
+    }
+    return distance[a.length][b.length];
 }

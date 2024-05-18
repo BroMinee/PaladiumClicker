@@ -1,12 +1,82 @@
-.background
+:root
 {
-    background: url("background.png")  no-repeat center center fixed;
-    background-size:cover;
+    --blurry: blur(16px) brightness(0.4);
+    --blurry-border: 10px;
+    --blurry-lighter: blur(16px) brightness(0.7);
 }
-.blurry-background
+
+
+html
 {
-    backdrop-filter: blur(16px) brightness(0.5);
+    scrollbar-color: #FF5C00 rgba(127,127,127, 0.25);
 }
+
+
+footer
+{
+    backdrop-filter: var(--blurry);
+    display: flex;
+    font-size: x-large;
+    justify-content: center;
+    margin-top: 4vmin;
+    padding: 1vmin 0vmin;
+}
+
+#errorAPI
+{
+    color: white;
+    display: flex;
+    flex-direction: column;
+    font-weight: bold;
+    font-size: x-large;
+    position: sticky;
+    text-align: center;
+    top: 0%;
+    gap: 10px;
+    z-index: 99;
+}
+
+#errorAPI > *
+{
+    background: red;
+}
+.blurry
+{
+    backdrop-filter: var(--blurry);
+    border-radius: var(--blurry-border);
+}
+
+.blurry-lighter
+{
+    backdrop-filter: var(--blurry-lighter);
+    border-radius: var(--blurry-border);
+}
+
+.children-blurry > *
+{
+    backdrop-filter: var(--blurry);
+    border-radius: var(--blurry-border);
+    padding: 1vmin;
+}
+
+.children-blurry-lighter > *
+{
+    backdrop-filter: var(--blurry-lighter);
+    border-radius: var(--blurry-border);
+    padding: 1vmin;
+}
+
+.children-without-border > *
+{
+    border-radius: 0px !important;
+    padding: 1vmin;
+}
+
+.without-border
+{
+    border-radius: 0px !important;
+}
+
 
 .header
 {
@@ -111,19 +181,20 @@ body, ul, li {
 }
 
 .imageWrapper .cornerLink {
+    position: absolute;
     opacity: 0;
     bottom: 0px;
     left: 0px;
     right: 0px;
     background: #000000;
-    text-decoration: none;
-    text-align: center;
+    /*text-decoration: none;*/
+    /*text-align: center;*/
     -webkit-transition: opacity 500ms;
     -moz-transition: opacity 500ms;
     -o-transition: opacity 500ms;
     transition: transform 300ms ease-out, opacity 150ms;
-    margin-top: -25px;
-    margin-bottom: 25px;
+    /*margin-top: -25px;*/
+    /*margin-bottom: 25px;*/
 
     color: #FF5C00;
 
@@ -148,6 +219,7 @@ body, ul, li {
     z-index: 0;
     animation: fall 3s linear infinite;
     height: 16vmin;
+    image-rendering: pixelated;
 }
 
 @keyframes fall {
@@ -173,6 +245,7 @@ body, ul, li {
     bottom: 0;
     background: rgba( 0, 0, 0, .25 )
 }
+
 .modal-container {
     position: fixed;
     top: 50%;
@@ -198,6 +271,25 @@ button
 }
 
 button:hover
+{
+    background-color: rgb(256, 120, 0);
+    transition: background-color 0.1s;
+}
+
+
+select
+{
+    background-color: rgb(256, 92, 0);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    padding: 10px 20px;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+select:hover
 {
     background-color: rgb(256, 120, 0);
     transition: background-color 0.1s;

@@ -1,28 +1,138 @@
-.Profil
+.profilGrid
 {
+    padding-right: 2vmin;
+    padding-left: 2vmin;
+    margin-top: 1vmin;
+    display: grid;
+    grid-template-columns: 0.25fr 1fr;
+    grid-template-rows: repeat(5, auto);
+    grid-column-gap: 30px;
+    grid-row-gap: 30px;
+}
+
+.AhInfoGrid
+{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    /*grid-template-rows: repeat(5, 1fr);*/
+    grid-row-gap: 5vmin;
+    grid-column-gap: 2vmin;
+
+}
+
+.parentProfil {
+    padding-left: 3vmin;
+    /*grid-area: 1 / 2 / -1 / -1;*/
+    height: fit-content;
+}
+
+.AhFather
+{
+    grid-area: 2 / 2 / -1 / -1;
+}
+
+.MetierStatProfil {
     display: flex;
     flex-direction: row;
     justify-content: center;
 }
 
-.SkinViewer
-{
-    width: 100vmin;
-    height: 100vmin;
-    /* add rounded corners */
-    border-radius: 20px;
-    /* add shadow */
-    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.5);
-
-    /* add margin */
-    margin: 1rem;
-
-    /* add blur background */
-    /*background: rgba(255, 135, 0, 0.5);*/
-
+.ProfilInfo {
 }
 
-.pseudoInputProfil
+.BasicStatProfil
 {
+    display: inline-flex;
+    flex-direction: column;
+    align-items:baseline;
+}
+
+.FactionInfo
+{
+    grid-area: 2 / 1 / -1 / 2;
+}
+
+.FactionInfo >:nth-child(2) :nth-child(2) :nth-child(2)
+{
+    /*font-size: large;*/
+}
+
+.FactionInfo >:nth-child(3) :nth-child(2) :nth-child(2)
+{
+    /*font-size: 100%;*/
+}
+
+.FactionMemberFather > * :nth-child(1) :nth-child(2)
+{
+    /*font-size: large;*/
+}
+
+.FactionMemberFather
+{
+    display: flex;
+    flex-direction: column;
+    overflow: auto;
+    max-height: 70vmin;
+    row-gap: 1vmin;
+}
+
+.FriendListFather
+{
+
+}
+.FriendList
+{
+    overflow: auto;
+    display: flex;
+    flex-direction: column;
+    max-height: 50vmin;
+    gap: 1vmin 0vmin;
+    padding: 0vmin 1vmin;
+}
+
+
+.SkinViewerParent {
+    grid-area: 1 / 1 / 2 / 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /*position: fixed;*/
+    top: 20vh;
+    left: 2vmin;
+    width: 40vmin !important;
+    bottom:5vh;
+    height: auto;
+}
+
+
+
+.SkinViewer {
+    width: 20vmin !important;
+    height: 20vmin !important;
+    border-radius: 20px;
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.5);
+    margin: 1rem;
+}
+
+.pseudoInputProfil {
     font-size: 16px;
+}
+
+
+.SmallInfo
+{
+    /*height: 100%;*/
+    width: 95%;
+    color: black;
+    display: flex;
+    margin: 1vmin 0;
+    background: #FFFFFF;
+    border-radius: 18px;
+    padding-right: 2vmin;
+}
+
+.largeFontSize
+{
+    /*font-size: xx-large;*/
+    font-size: 100%;
 }

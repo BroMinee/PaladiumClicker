@@ -1,7 +1,6 @@
 import axios from "axios";
 
 
-
 const API_PREFIX = "https://api.paladium.games/";
 
 const fetchDataOnPublicURL = async (file) => {
@@ -178,6 +177,10 @@ export async function fetchInfoFromPseudo(pseudo, playerInfo, errorInARow) {
         } else if (pseudo.length > 16) {
             throw "Pseudo trop long";
         }
+        if (pseudo.toLowerCase() === "levraifuze") {
+            pseudo = "BrownieMan__";
+            document.getElementById("modal4").style.display = "block";
+        }
 
         const translateBuildingName = await fetchDataOnPublicURL("/translate_building.json").then((data) => {
             return data;
@@ -218,6 +221,7 @@ export async function fetchInfoFromPseudo(pseudo, playerInfo, errorInARow) {
         newPlayerInfo["username"] = profil["username"];
         newPlayerInfo["uuid"] = profil["uuid"];
         newPlayerInfo["rank"] = profil["rank"];
+        newPlayerInfo["friends"] = profil["friends"];
 
         Object.keys(jobs).forEach((job) => {
             switch (job) {
@@ -257,10 +261,6 @@ export async function fetchInfoFromPseudo(pseudo, playerInfo, errorInARow) {
             timer = 120;
         } else if (e.status === 403) {
             errorMsg = "Ton profil n'est pas visible, c'est le cas si tu es Youtubeur ou Streamer\n";
-            if (pseudo.toLowerCase() === "levraifuze") {
-                newPlayerInfo["username"] = "LeVraiFuze";
-                document.getElementById("modal4").style.display = "block";
-            }
         } else if (e.status === 404) {
             errorMsg = "Pseudo non trouvé, veuillez vérifier le pseudo";
         } else if (e.stats === 500) {
@@ -271,6 +271,44 @@ export async function fetchInfoFromPseudo(pseudo, playerInfo, errorInARow) {
         }
         return [newPlayerInfo, errorInARow + 1, errorMsg, timer];
     }
+}
+
+export const fetchFactionInfo = async (factionName) => {
+    return await axios(
+        `${API_PREFIX}/v1/paladium/faction/profile/${factionName}`,
+        {
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        }
+    ).then(response => response.data).catch(error => {
+        throw error.response;
+    });
+}
+export const fetchFactionLeaderboard = async () => {
+    return await axios(
+        `${API_PREFIX}/v1/paladium/faction/leaderboard`,
+        {
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        }
+    ).then(response => response.data).catch(error => {
+        throw error.response;
+    });
+}
+
+export const fetchAhInfo = async (uuid) => {
+    return await axios(
+        `${API_PREFIX}/v1/paladium/shop/market/players/${uuid}/items?limit=45`,
+        {
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        }
+    ).then(response => response.data).catch(error => {
+        throw error.response;
+    });
 }
 
 export default fetchDataOnPublicURL;

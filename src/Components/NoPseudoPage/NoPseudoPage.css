@@ -1,5 +1,69 @@
-.NoPseudoPage
-{
+.NoPseudoPage {
     display: grid;
     justify-content: center;
+    height: 100%;
+    grid-column: 1/-1;
+}
+
+.NoPseudoPage > div {
+    padding-bottom: 10px;
+}
+
+.gridNoPseudoPage
+{
+    display: grid;
+    margin-top: 5vmin;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(1, 1fr);
+    grid-gap: 5vmin 5vmin;
+    grid-auto-rows: minmax(100px, auto);
+}
+
+.gridNoPseudoPage > *
+{
+    width: 100%;
+}
+
+.DiscordUrl
+{
+    color: inherit;
+    text-decoration: none;
+    display: grid;
+    grid-template-columns: 1fr;
+    justify-content: center;
+    height: fit-content;
+    grid-column: 1/-1;
+}
+
+.DiscordUrl > div
+{
+    display: flex;
+}
+
+.DiscordUrl:hover
+{
+    transition: transform 0.25s;
+    transform: scale(1.02);
+}
+
+.Contributor
+{
+    color: inherit;
+    text-decoration: none;
+    display: grid;
+    grid-template-columns: 1fr;
+    justify-content: center;
+    height: fit-content;
+}
+
+.Contributor > div
+{
+    display: flex;
+}
+
+.Contributor-hover:hover
+{
+    cursor: pointer;
+    transition: transform 0.25s;
+    transform: scale(1.02);
 }
