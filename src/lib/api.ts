@@ -263,7 +263,7 @@ export const getGraphData = async () => {
         if (key === "Date") {
           continue;
         } else {
-          data[key] = Number(data[key]);
+          data[key] = data[key] === "" ? "" : Number(data[key]);
         }
       }
       return data;

@@ -128,7 +128,7 @@ export const StatList = ({ playerInfo, buildingBuyPaths, showProduction }) => {
   // List of list [path, index, own, timeToBuy, pathImg]
 
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 w-full">
+    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 w-full bg-background">
       {
         buildingBuyPaths.map((buildingPath) => (
           <Card>

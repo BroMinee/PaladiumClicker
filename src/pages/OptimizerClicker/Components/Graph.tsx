@@ -10,8 +10,10 @@ import { getGraphData } from "@/lib/api";
 import { useEffect, useMemo, useState } from 'react';
 import Plot from "react-plotly.js";
 
-const Graph = () => {
+const Graph = ({defaultOpen = false}) => {
   const [graphData, setGraphData] = useState<Awaited<ReturnType<typeof getGraphData>>>([]);
+
+  const [logScale, setLogScale] = useState(false);
 
   useEffect(() => {
     const fetchGraph = async () => {
@@ -40,7 +42,7 @@ const Graph = () => {
   }, [graphData, pseudos]);
 
   return (
-    <Dialog>
+    <Dialog defaultOpen={defaultOpen}>
       <DialogTrigger asChild>
         <Button variant="outline">
           Voir l'évolution du top 10
@@ -51,6 +53,9 @@ const Graph = () => {
           <DialogTitle className="text-primary">Evolution du top 10</DialogTitle>
         </DialogHeader>
         <div className="border-t">
+          <Button variant="outline" onClick={() => setLogScale(!logScale)}>
+            {logScale ? "Passer en échelle linéaire" : "Passer en échelle logarithmique"}
+          </Button>
           <Plot
             className="w-full"
             data={
@@ -69,8 +74,7 @@ const Graph = () => {
               title: 'Classement Clicker - Graphique intéractif',
               autosize: true,
               height: window.innerHeight * 0.8,
-              xaxis: { title: 'Date' },
-              yaxis: { title: 'Valeur en Trillions' }
+              yaxis: {title: 'ClicCoins', type: logScale ? 'log' : 'linear'},
             }}
           />
         </div>

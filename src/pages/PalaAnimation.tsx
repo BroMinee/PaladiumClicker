@@ -1,6 +1,21 @@
 // @ts-nocheck - A RETIRER APRES AVOIR CORRIGE LE FICHIER
 
-import { useEffect, useState } from "react";
+
+import GradientText from "@/components/shared/GradientText";
+import Layout from "@/components/shared/Layout";
+import {
+  Card,
+  CardDescription,
+  CardHeader,
+  CardTitle
+} from "@/components/ui/card";
+import {useEffect, useState} from "react";
+import {FaHeart, FaSearch} from "react-icons/fa";
+import fetchLocal from "@/lib/api.ts";
+import {Button} from "@/components/ui/button.tsx";
+import {Input} from "@/components/ui/input.tsx";
+import {cn} from "@/lib/utils.ts";
+
 
 const PalaAnimationBody = () => {
   const [questionsList, setQuestionsList] = useState({});
@@ -8,30 +23,36 @@ const PalaAnimationBody = () => {
 
 
   function removeLastChar() {
-    const user_response_length = document.getElementById("user-answer").childElementCount;
+    const user_response_length = document.getElementById("user-answer")?.childElementCount;
     if (user_response_length === 0) {
       return;
     }
-    document.getElementById("user-answer").removeChild(document.getElementById("user-answer").lastChild);
+    const lastChild = document.getElementById("user-answer")?.lastChild;
+    if (lastChild) {
+      document.getElementById("user-answer")?.removeChild(lastChild);
+    }
   }
 
   function clearUserAnswer() {
     // remove all the child of the user-answer div
-    document.getElementById("user-answer").innerHTML = "";
+    const user_answer = document.getElementById("user-answer");
+    if (user_answer) {
+      user_answer.innerHTML = "";
+    }
   }
 
   function checkAnswer(showTimer = true) {
     const answer = localStorage.getItem("answer");
-    let user_answers = document.getElementById("user-answer").children;
+    let user_answers = document.getElementById("user-answer")?.children;
     let correct = true;
-    for (let i = 0; i < user_answers.length || i < answer.length; i++) {
+    for (let i = 0; user_answers !== undefined && answer != undefined && (i < user_answers.length || i < answer.length); i++) {
       if (user_answers.length <= i) {
         if (answer[i] === " ") {
           addNewChar(" ")
         } else {
           addNewChar("_")
         }
-        user_answers = document.getElementById("user-answer").children;
+        user_answers = document.getElementById("user-answer")?.children;
         user_answers[i].style.color = "red";
         correct = false;
       }
@@ -97,7 +118,6 @@ const PalaAnimationBody = () => {
       if (event.key === " ") {
         event.preventDefault();
       }
-    } else {
     }
   }
 
@@ -121,15 +141,13 @@ const PalaAnimationBody = () => {
 
   useEffect(() => {
     const fetchQuestions = async () => {
-      var questions_answers = {}
-      await fetchDataOnPublicURL("/Animation/questions.json").then((data) => {
-        // iterator over the key of data
-        Object.keys(data).forEach((key) => {
-          // add the key to the questions_answers object
-          questions_answers[key] = data[key]
-        })
-      })
+      let questions_answers = {}
+      const translateBuildingName = await fetchLocal<Record<string, string>>("/Animation/questions.json");
 
+      Object.keys(translateBuildingName).forEach((key) => {
+        // add the key to the questions_answers object
+        questions_answers[key] = translateBuildingName[key]
+      })
       setQuestionsList(questions_answers)
     }
 
@@ -163,47 +181,69 @@ const PalaAnimationBody = () => {
   const question = localStorage.getItem("question");
 
   return (
-    <div className={"App-header"}>
-      {/*<h2>Il se prépare quelque choses ici 🤫</h2>*/}
-      {/*<h4 style={{marginTop: "0px"}}>Working progress</h4>*/}
-      <h2 style={{ letterSpacing: "2px" }}>{question}</h2>
-      <div id={"user-answer"} contentEditable={false}></div>
-      <div id={"timer"}></div>
-      <div id={"old-response"} contentEditable={false}>
+      <div className="flex flex-col gap-2 items-center">
+        <p className="pb-4">{question}</p>
+        <div id={"user-answer"} contentEditable={false}></div>
+        <div id={"timer"}></div>
+        <div id={"old-response"} contentEditable={false}>
+        </div>
+        <div className="flex gap-2 center">
+          <Button onClick={reveal} variant="outline">Révéler la solution</Button>
+          <Button id={"reroll"} onClick={() => setReroll(true)}>Nouvelle question</Button>
+        </div>
       </div>
-      <div className={"bottom-button"}>
-        <button onClick={reveal}>Révéler la solution</button>
-        <button id={"reroll"} onClick={() => setReroll(true)}>Nouvelle question</button>
-      </div>
-    </div>
   );
 }
 
 const PalaAnimationPage = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <div style={{ flexDirection: "row", display: "flex" }}>
-          <h3 style={{ marginBottom: "0px", zIndex: 1, position: "relative" }}>
-            Bienvenue dans la zone d'entraînement du&nbsp;
-          </h3>
-          <h3 style={{ marginBottom: "0px", zIndex: 1, position: "relative" }}
-            className={"BroMine"}>
-            PalaAnimation
-          </h3>
+      <>
+        <Layout>
+          <div className="flex flex-col gap-4">
+            <Card>
+              <CardHeader className="flex flex-row items-center justify-between">
+                <CardTitle>
+                  Bienvenue dans la zone d'entraînement du{" "}
+                  <GradientText className="font-extrabold">PalaAnimation</GradientText>
+                </CardTitle>
+                <CardDescription>
+                  Made with <FaHeart className="text-primary inline-block"/> by <GradientText>BroMine__</GradientText>
+                </CardDescription>
+              </CardHeader>
+            </Card>
+            <Card>
+              <CardHeader className="flex flex-row items-center justify-between">
+                <PalaAnimationBody/>
+              </CardHeader>
+            </Card>
 
-        </div>
-        <div style={{ flexDirection: "row", display: "flex" }}>
-          <div>
-            Made by&nbsp;
           </div>
-          <div className={"BroMine"}> BroMine__</div>
-        </div>
-      </header>
-      <br />
-      <PalaAnimationBody />
-    </div>
-  );
+        </Layout>
+      </>);
+  // return (
+  //   <div className="App">
+  //     <header className="App-header">
+  //       <div style={{ flexDirection: "row", display: "flex" }}>
+  //         <h3 style={{ marginBottom: "0px", zIndex: 1, position: "relative" }}>
+  //           Bienvenue dans la zone d'entraînement du&nbsp;
+  //         </h3>
+  //         <h3 style={{ marginBottom: "0px", zIndex: 1, position: "relative" }}
+  //           className={"BroMine"}>
+  //           PalaAnimation
+  //         </h3>
+  //
+  //       </div>
+  //       <div style={{ flexDirection: "row", display: "flex" }}>
+  //         <div>
+  //           Made by&nbsp;
+  //         </div>
+  //         <div className={"BroMine"}> BroMine__</div>
+  //       </div>
+  //     </header>
+  //     <br />
+  //
+  //   </div>
+  // );
 }
 
 export default PalaAnimationPage;

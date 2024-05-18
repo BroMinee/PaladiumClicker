@@ -5,6 +5,8 @@ import NotAvailablePage from '@/pages/NotAvailable';
 import OptimizerClickerPage from '@/pages/OptimizerClicker/OptimizerClicker';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { Navigate, RouterProvider, createBrowserRouter } from 'react-router-dom';
+import Profil from "@/pages/Profil.tsx";
+import PalaAnimation from "@/pages/PalaAnimation.tsx";
 
 const router = createBrowserRouter([
   {
@@ -17,11 +19,11 @@ const router = createBrowserRouter([
   },
   {
     path: '/profil',
-    element: <NotAvailablePage />,
+    element: <Profil />,
   },
   {
     path: '/pala-animation',
-    element: <NotAvailablePage />,
+    element: <PalaAnimation />,
   },
   {
     path: '/about',

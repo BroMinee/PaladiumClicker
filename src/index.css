@@ -33,7 +33,7 @@
     --muted-foreground: 240 5% 64.9%;
     --popover: 240 10% 3.9%;
     --popover-foreground: 0 0% 98%;
-    --card: 0 0% 12.94%;
+    --card: 0 0% 4.0%;
     --card-foreground: 0 0% 98%;
     --border: 240 3.7% 15.9%;
     --input: 240 3.7% 15.9%;
@@ -54,6 +54,6 @@
     @apply border-border;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply bg-spawn bg-no-repeat bg-center bg-fixed bg-cover text-foreground;
   }
 }

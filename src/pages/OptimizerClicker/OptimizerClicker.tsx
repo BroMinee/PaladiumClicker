@@ -30,6 +30,7 @@ const OptimizerClickerPage = () => {
 
   const { data: playerInfo } = usePlayerInfoStore();
   const [isModalNewsOpen] = useState(playerInfo === null);
+  const [showGraph] = useState(false);
 
   const upgrades: Array<{ title: string, upgradeType: UpgradeKey }> = [
     { title: "Global", upgradeType: "global_upgrade" },
@@ -66,7 +67,7 @@ const OptimizerClickerPage = () => {
               <div className="flex flex-wrap gap-2">
                 <Tuto />
                 <News defaultOpen={isModalNewsOpen} />
-                <Graph />
+                <Graph defaultOpen={showGraph}/>
               </div>
             </CardContent>
             <CardFooter className="flex flex-col gap-2 items-start">

@@ -9,7 +9,7 @@ type LayoutProps = {
 const Layout = ({ children }: LayoutProps) => {
   return (
     <>
-      <header className="h-16 w-full bg-primary/80 backdrop-blur text-primary-foreground sticky top-0 z-10 border-b">
+      <header className="h-16 w-full bg-primary backdrop-blur text-primary-foreground sticky top-0 z-10 border-b">
         <Navbar />
       </header>
       <main className="container py-4">
