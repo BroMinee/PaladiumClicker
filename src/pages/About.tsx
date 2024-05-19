@@ -1,7 +1,5 @@
 import {Card, CardContent, CardHeader} from "@/components/ui/card.tsx";
-import GradientText from "@/components/shared/GradientText.tsx";
-import {FaDiscord, FaGithub} from "react-icons/fa";
-import constants from "@/lib/constants.ts";
+import {FaGithub} from "react-icons/fa";
 import Contributors from "@/components/Contributors.tsx";
 import Layout from "@/components/shared/Layout.tsx";
 import Discord from "@/components/Discord.tsx";
