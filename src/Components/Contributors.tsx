@@ -41,9 +41,9 @@ const Contributors = () => {
       let realPseudo = pseudo;
       if (pseudo.includes(" ") && pseudo.split(" ").length > 1)
         realPseudo = pseudo.split(" ")[1];
-      const pseudoInput = document.getElementById("pseudo");
-      const searchButton = document.getElementById("pseudo-submit");
-      if (pseudoInput && searchButton) {
+      const pseudoInput = document.getElementById("pseudo") as HTMLInputElement | null;
+      const searchButton  = document.getElementById("pseudo-submit") ;
+      if (pseudoInput !== null && searchButton !== null) {
         pseudoInput.value = realPseudo;
         searchButton.click();
         pseudoInput.value = "";
@@ -61,7 +61,7 @@ const Contributors = () => {
         }}>
           <CardContent className="h-full pt-6 flex items-center gap-4">
             <div className="flex flex-col items-center gap-4">
-              <img src={contributeur["urlImg"]} className="w-16 h-16 object-contain pixelated"
+              <img src={contributeur["urlImg"]} className="w-16 h-16 object-contain pixelated rounded-md"
                    alt={`Skin de ${contributeur["pseudo"]}`}/>
             </div>
             <div className="flex flex-col gap-2">
