@@ -7,6 +7,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { Navigate, RouterProvider, createBrowserRouter } from 'react-router-dom';
 import Profil from "@/pages/Profil.tsx";
 import PalaAnimation from "@/pages/PalaAnimation.tsx";
+import AboutPage from "@/pages/About.tsx";
 
 const router = createBrowserRouter([
   {
@@ -27,12 +28,8 @@ const router = createBrowserRouter([
   },
   {
     path: '/about',
-    element: <NotAvailablePage />,
+    element: <AboutPage />,
   },
-  {
-    path: 'bugs',
-    element: <NotAvailablePage />
-  }
 ], {
   basename: '/PaladiumClicker',
 });

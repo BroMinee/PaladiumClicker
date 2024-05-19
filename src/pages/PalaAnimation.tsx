@@ -79,6 +79,7 @@ const PalaAnimationBody = () => {
       if (oldDestination.childElementCount > 0) {
         const newDiv = document.createElement("div");
         newDiv.classList.add("string-response");
+        newDiv.classList.add("tracking-widest")
         newDestination.insertBefore(newDiv, newDestination.firstChild);
 
         while (document.getElementById("user-answer").childElementCount > 0) {
@@ -185,9 +186,9 @@ const PalaAnimationBody = () => {
         <p className="pb-4">{question}</p>
         <div id={"user-answer"} contentEditable={false}></div>
         <div id={"timer"}></div>
-        <div id={"old-response"} contentEditable={false}>
+        <div id={"old-response"} contentEditable={false} className="max-h-64 overflow-auto">
         </div>
-        <div className="flex gap-2 center">
+        <div className="flex flex-wrap gap-2 justify-center">
           <Button onClick={reveal} variant="outline">Révéler la solution</Button>
           <Button id={"reroll"} onClick={() => setReroll(true)}>Nouvelle question</Button>
         </div>
@@ -195,7 +196,11 @@ const PalaAnimationBody = () => {
   );
 }
 
+
+
 const PalaAnimationPage = () => {
+
+
   return (
       <>
         <Layout>
@@ -212,11 +217,10 @@ const PalaAnimationPage = () => {
               </CardHeader>
             </Card>
             <Card>
-              <CardHeader className="flex flex-row items-center justify-between">
+              <CardHeader>
                 <PalaAnimationBody/>
               </CardHeader>
             </Card>
-
           </div>
         </Layout>
       </>);
