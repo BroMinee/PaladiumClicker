@@ -1,13 +1,13 @@
-import MetierList from "@/components/MetierList";
-import {usePlayerInfoStore} from "@/stores/use-player-info-store";
+import MetierList from "@/components/MetierList.tsx";
+import {usePlayerInfoStore} from "@/stores/use-player-info-store.ts";
 import axios from "axios";
 import {useEffect, useState} from "react";
-import ImportProfil from "./OptimizerClicker/Components/ImportProfil";
+import ImportProfil from "../OptimizerClicker/Components/ImportProfil.tsx";
 import Layout from "@/components/shared/Layout.tsx";
 import NoPseudoPage from "@/components/NoPseudoPage.tsx";
 import {Card, CardContent, CardDescription, CardHeader, CardTitle} from "@/components/ui/card.tsx";
 import GradientText from "@/components/shared/GradientText.tsx";
-import { FaHeart, FaMedal, FaPercentage, FaTachometerAlt} from "react-icons/fa";
+import {FaHeart, FaMedal, FaPercentage, FaTachometerAlt} from "react-icons/fa";
 import HeadingSection from "@/components/shared/HeadingSection.tsx";
 import ReactSkinview3d from "react-skinview3d";
 import {AhItemType} from "@/types";
@@ -2635,6 +2635,38 @@ export function GetAllFileNameInFolder() {
 const ProfilPage = () => {
 
   const {data: playerInfo} = usePlayerInfoStore();
+
+
+  if (!playerInfo) {
+    return (
+        <Layout>
+          <NoPseudoPage/>
+        </Layout>
+    );
+  }
+
+  return (
+      <>
+        <Layout>
+          <div className="flex flex-col gap-4">
+            <ProfilInfo/>
+
+            <MetierList editable={false}/>
+
+            <AhInfo/>
+
+            <HeadingSection>Informations de faction</HeadingSection>
+            <FactionInfo/>
+
+
+          </div>
+        </Layout>
+      </>
+  );
+}
+
+const ProfilInfo = () => {
+  const {data: playerInfo} = usePlayerInfoStore();
   const [skinUrl, setSkinUrl] = useState("");
 
   const pseudo = playerInfo?.username ?? "Guest";
@@ -2658,54 +2690,113 @@ const ProfilPage = () => {
     );
   }
 
-  return (
-      <>
-        <Layout>
-          <div className="flex flex-col gap-4">
-            <Card>
-              <CardHeader className="flex flex-row items-center justify-between">
-                <CardTitle>
-                  Profil de{" "}
-                  <GradientText className="font-extrabold">{playerInfo["username"]}</GradientText>
-                  {" - "}
-                  <GradientText className="font-extrabold">{playerInfo["faction"]["name"]}</GradientText>
-                </CardTitle>
-                <CardDescription>
-                  Made with <FaHeart className="text-primary inline-block"/> by <GradientText>BroMine__</GradientText>
-                </CardDescription>
-              </CardHeader>
-              <CardContent>
-                Some content TODO
-              </CardContent>
-            </Card>
+  const rank = playerInfo["rank"][0].toUpperCase() + playerInfo["rank"].slice(1);
 
-            <Card className="flex flex-col items-center">
-              <CardHeader>
-                <ReactSkinview3d className={"SkinViewer"}
-                                 skinUrl={skinUrl}
-                                 height="250"
-                                 width="250"
-                />
-              </CardHeader>
-              <CardContent>
-                <ImportProfil/>
-              </CardContent>
-            </Card>
+  return (<Card>
+    <CardHeader className="flex flex-row items-center justify-between">
+      <CardTitle>
+        Profil de{" "}
+        <GradientText className="font-extrabold">{playerInfo["username"]}</GradientText>
+        {" - "}
+        <GradientText className="font-extrabold">{playerInfo["faction"]["name"]}</GradientText>
+      </CardTitle>
+      <CardDescription>
+        Made with <FaHeart className="text-primary inline-block"/> by <GradientText>BroMine__</GradientText>
+      </CardDescription>
+    </CardHeader>
+    <CardContent>
+      <div className="grid grid-cols-2 grid-rows-3 md:grid-cols-3 md:grid-rows-4 gap-4">
+        <Card className="flex flex-col items-center justify-center row-span-4">
+          <CardHeader className="w-full h-full">
+            <ReactSkinview3d className="!w-full !h-full rounded-md"
+                             skinUrl={skinUrl}
+                             height="400"
+                             width="400"
+            />
+          </CardHeader>
+          <CardContent>
+            <ImportProfil/>
+          </CardContent>
+        </Card>
+        <Card className="col-start-1 col-span-2 md:col-start-2 md:col-span-1">
+          <CardContent className="h-full pt-6 flex items-center gap-4">
+            <img src={`${import.meta.env.BASE_URL}/dollar.png`} alt="Icône" className="h-12 w-12 pixelated  mr-2"/>
+            <div className="flex flex-col gap-2">
+              <span className="font-semibold">Argent actuel</span>
+              <div className="flex gap-2 items-center">
+                <GradientText className="font-bold">
+                  {formatPrice(Math.round(playerInfo["money"]))} $
+                </GradientText>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+        <Card className="col-start-1 col-span-2 md:col-start-2 md:col-span-1">
+          <CardContent className="h-full pt-6 flex items-center gap-4">
+            <img src={`${import.meta.env.BASE_URL}/${getRankImg(rank)}`} alt="Icône"
+                 className="h-12 w-12 pixelated  mr-2"/>
+            <div className="flex flex-col gap-2">
+              <span className="font-semibold">Rang en jeu</span>
+              <div className="flex gap-2 items-center">
+                <GradientText className="font-bold">
+                  {rank}
+                </GradientText>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+        <Card className="col-start-1 col-span-2 md:col-start-2 md:col-span-1">
+          <CardContent className="h-full pt-6 flex items-center gap-4">
+            <img src={`${import.meta.env.BASE_URL}/clock.gif`} alt="Icône" className="h-12 w-12 pixelated  mr-2"/>
+            <div className="flex flex-col gap-2">
+              <span className="font-semibold">Temps de jeu</span>
+              <div className="flex gap-2 items-center">
+                <GradientText className="font-bold">
+                  {computeTimePlayed(playerInfo["timePlayed"])}
+                </GradientText>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+        <Card className="col-start-1 col-span-2 md:col-start-2 md:col-span-1">
+          <CardContent className="h-full pt-6 flex items-center gap-4">
+            <img src={`${import.meta.env.BASE_URL}/clock.gif`} alt="Icône" className="h-12 w-12 pixelated  mr-2"/>
+            <div className="flex flex-col gap-2">
+              <span className="font-semibold">Première connexion</span>
+              <div className="flex gap-2 items-center">
+                <GradientText className="font-bold">
+                  {convertEpochToDateUTC2(playerInfo["firstJoin"])}
+                </GradientText>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
 
-            <MetierList editable={false}/>
 
-            <AhInfo/>
-
-            <HeadingSection>Informations de faction</HeadingSection>
-            <FactionInfo/>
-
-
-          </div>
-        </Layout>
-      </>
-  );
+        <Card className="col-span-2 row-span-4 col-start-2 row-start-1 md:row-span-4 md:col-start-3 md:row-start-1">
+          <CardHeader>
+            Liste d'amis: {playerInfo.friends.length}
+          </CardHeader>
+          <CardContent className="flex max-h-64 md:max-h-96 justify-center">
+            <ScrollArea className="w-full flex justify-center">
+              <div className="flex flex-col justify-center">
+                {
+                  playerInfo.friends?.map((player, index) => (
+                      <CardContent className="hover:scale-105 duration-300 cursor-pointer pl-0 md:pl-6"
+                                   key={index} onClick={() => handleOnClick(player.name)}>
+                        <div className="text-primary font-bold w-36">{player.name}</div>
+                      </CardContent>
+                  ))
+                }
+              </div>
+              <ScrollBar orientation="horizontal"/>
+            </ScrollArea>
+          </CardContent>
+        </Card>
+      </div>
+    </CardContent>
+  </Card>);
 }
-
 const AhInfo = () => {
   const {data: playerInfo} = usePlayerInfoStore();
 
@@ -2741,7 +2832,7 @@ const AhInfo = () => {
 
 
 type AhItemsProps = {
-    item: AhItemType;
+  item: AhItemType;
 }
 
 const AhItem = ({item}: AhItemsProps) => {
@@ -2810,31 +2901,10 @@ const AhItem = ({item}: AhItemsProps) => {
                    className="object-cover h-10 w-10 pixelated inline-block mr-2"/>
               Expire le : {expireAt}
             </div>
-            {/*<Input className="w-auto" type="number" min="0" step="1" max="99" value={Number(building.own)} onChange={onChangeLevel} />*/}
           </div>
         </CardContent>
       </Card>
   )
-  //
-  // return (
-  //     <div className={"AhItem"}>
-  //       <div className={"AhItemImg"}>
-  //         {/*<div>{renamed ? `${displayName} renommé en ${name}` : `${name}`} {`x${quantity}`}</div>*/}
-  //         {/*<div>Créé le {createdAt}</div>*/}
-  //         {/*<div>Expire le {expireAt}</div>*/}
-  //         {/*<div>Prix {`${formatPrice(price)}$`}</div>*/}
-  //         {/*<div>Prix en PBs `${formatPrice(pricePb)}PBs`</div>*/}
-  //
-  //         <SmallInfo imgPath={}
-  //                    title={renamed ? `${displayName} renommé en ${name}` : `${name}`} value={`x${quantity}`}/>
-  //         {/*<SmallInfo imgPath={"clock.gif"} title={"Créée le"} value={createdAt}/>*/}
-  //         <SmallInfo imgPath={"clock.gif"} title={"Expire le"} value={expireAt}/>
-  //         <SmallInfo imgPath={"dollar.png"} title={"Prix"} value={`${formatPrice(price)}$`}/>
-  //         {<SmallInfo imgPath={"pbs.png"} title={"Prix en PBs"} value={`${formatPrice(pricePb)}PBs`}/>}
-  //
-  //       </div>
-  //     </div>
-  // )
 }
 
 const FactionInfo = () => {
@@ -2856,21 +2926,6 @@ const FactionInfo = () => {
   const factionIndex = factionLeaderboard.findIndex((faction) => faction["name"] === name) + 1;
   const factionClassement = (factionIndex !== 0 ? factionIndex : `>${factionLeaderboard.length}`);
 
-
-  function handleOnClick(pseudo: string) {
-    // open url in a new tab
-    if (pseudo.includes(" ") && pseudo.split(" ").length > 1)
-      pseudo = pseudo.split(" ")[1];
-    const pseudoInput = document.getElementById("pseudo") as HTMLInputElement | null;
-    const searchButton = document.getElementById("pseudo-submit");
-    if (pseudoInput !== null && searchButton !== null) {
-      pseudoInput.value = pseudo;
-      searchButton.click();
-      pseudoInput.value = "";
-      console.log("TODO check that the both element selected are in the same div")
-    }
-
-  }
 
   return (
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -2941,7 +2996,8 @@ const FactionInfo = () => {
           <div className="flex gap-4 pb-3">
             {
               playerList?.map((player, index) => (
-                  <Card key={index} onClick={() => handleOnClick(player.username)} className="hover:scale-105 duration-300 mt-4 ml-1.5 mr-1.5 cursor-pointer">
+                  <Card key={index} onClick={() => handleOnClick(player.username)}
+                        className="hover:scale-105 duration-300 mt-4 ml-1.5 mr-1.5 cursor-pointer">
                     <CardContent className="pt-6 space-y-2">
                       <div className="flex flex-col items-center justify-center gap-2">
                         <img src={`https://crafatar.com/avatars/${player.uuid}?size=8`} alt="Icône"
@@ -2967,34 +3023,6 @@ const FactionInfo = () => {
           <ScrollBar orientation="horizontal"/>
         </ScrollArea>
       </div>
-
-
-
-      //<div className={"FactionInfo"}>
-      //   <h1>
-      //     {`${name} - ${factionClassement}ème`}
-      //   </h1>
-      //   <SmallInfo imgPath={"BookAndQuill.webp"} title={"Description"} value={factionDescription}/>
-      //   {/*<SmallInfo imgPath={""} title={"Accès"} value={access[0] + access.slice(1).toLocaleLowerCase()}/>*/}
-      //   <SmallInfo imgPath={"clock.gif"} title={"Créée le"} value={convertEpochToDateUTC2(createdAt)}/>
-      //   <SmallInfo imgPath={"ExperienceOrb.webp"} title={"Niveau - [xp]"}
-      //              value={`${level} - [${printPricePretty(xp)}]`}/>
-      //   <div className={"PlayerInFac"}>
-      //     <h2>{`Membres - ${playerList.length}`}</h2>
-      //     <div className={"FactionMemberFather children-blurry-lighter"}>
-      //       {
-      //         playerList.map((player) => {
-      //           return <Contributor key={player["uuid"]}
-      //                               pseudo={`[${player["group"]}] ${player["username"]}`}
-      //                               urlSkin={`https://crafatar.com/avatars/${player["uuid"]}?size=8`}
-      //                               description={`Rejoint le ${convertEpochToDateUTC2(player["joinedAt"])}`}
-      //                               url={""}/>
-      //
-      //         })
-      //       }
-      //     </div>
-      //   </div>
-      // </div>
   )
 }
 
@@ -3013,26 +3041,41 @@ function computeTimePlayed(timeInMinutes: number) {
   res += minute + "m";
 
   return res;
+}
 
-  // if (title === "Rang en jeu") {
-  //   if (value === "Default") {
-  //     imgPath = "dirt.png";
-  //   } else if (value === "Titan") {
-  //     imgPath = "titan.png";
-  //   } else if (value === "Paladin") {
-  //     imgPath = "paladin.png";
-  //   } else if (value === "Endium") {
-  //     imgPath = "endium.png";
-  //   } else if (value === "Trixium") {
-  //     imgPath = "trixium.png";
-  //   } else if (value === "Trixium+") {
-  //     imgPath = "trixium+.png";
-  //   } else if (value === "Youtuber") {
-  //     imgPath = "youtuber.png";
-  //   } else {
-  //     imgPath = "unknown.png"
-  //   }
-  // }
+function getRankImg(rank: string) {
+  if (rank === "Default") {
+    return "dirt.png";
+  } else if (rank === "Titan") {
+    return "titan.png";
+  } else if (rank === "Paladin") {
+    return "paladin.png";
+  } else if (rank === "Endium") {
+    return "endium.png";
+  } else if (rank === "Trixium") {
+    return "trixium.png";
+  } else if (rank === "Trixium+") {
+    return "trixium+.png";
+  } else if (rank === "Youtuber") {
+    return "youtuber.png";
+  } else {
+    return "unknown.png"
+  }
+}
+
+function handleOnClick(pseudo: string) {
+  // open url in a new tab
+  if (pseudo.includes(" ") && pseudo.split(" ").length > 1)
+    pseudo = pseudo.split(" ")[1];
+  const pseudoInput = document.getElementById("pseudo") as HTMLInputElement | null;
+  const searchButton = document.getElementById("pseudo-submit");
+  if (pseudoInput !== null && searchButton !== null) {
+    pseudoInput.value = pseudo;
+    searchButton.click();
+    pseudoInput.value = "";
+    console.log("TODO check that the both element selected are in the same div")
+  }
+
 }
 
 function convertEpochToDateUTC2(epoch: number | undefined) {

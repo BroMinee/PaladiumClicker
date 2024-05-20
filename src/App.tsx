@@ -6,7 +6,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { Navigate, RouterProvider, createBrowserRouter } from 'react-router-dom';
 import PalaAnimation from "@/pages/PalaAnimation.tsx";
 import AboutPage from "@/pages/About.tsx";
-import ProfilPage from "@/pages/Profil.tsx";
+import ProfilPage from "@/pages/Profil/Profil.tsx";
 
 const router = createBrowserRouter([
   {

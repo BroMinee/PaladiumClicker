@@ -155,6 +155,7 @@ export const getPlayerInfo = async (pseudo: string) => {
 
   initialPlayerInfo.faction = {name: paladiumProfil.faction === "" ? "Wilderness" : paladiumProfil.faction};
   initialPlayerInfo.firstJoin = paladiumProfil.firstJoin;
+  initialPlayerInfo.friends = paladiumProfil.friends;
   initialPlayerInfo.money = paladiumProfil.money;
   initialPlayerInfo.timePlayed = paladiumProfil.timePlayed;
   initialPlayerInfo.username = paladiumProfil.username;
@@ -198,6 +199,7 @@ const getInitialPlayerInfo = async (): Promise<PlayerInfo> => {
     production: 0.5,
     faction: {name: "Wilderness"},
     firstJoin: 0,
+    friends: [],
     money: 0,
     timePlayed: 0,
     username: "",

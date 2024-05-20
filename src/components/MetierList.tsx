@@ -18,7 +18,7 @@ const MetierList = ({ editable = true }: MetierListProps) => {
   }) ?? [];
 
   return (
-    <div className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 items-center gap-4">
+    <div className="w-full grid grid-cols-2 lg:grid-cols-4 items-center gap-4">
       {metiers.map((metier) => (<Metier key={metier.name} metier={metier} editable={editable} />))}
     </div>
   );

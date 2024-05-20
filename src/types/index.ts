@@ -84,6 +84,7 @@ export type PlayerInfo = {
   production: number,
   faction: PaladiumFactionInfo,
   firstJoin: number,
+  friends: Array<{ name: string }>,
   money: number,
   timePlayed: number,
   username: string,
