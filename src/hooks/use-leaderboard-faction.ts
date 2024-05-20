@@ -1,13 +1,14 @@
-import { getPaladiumLeaderboardPositionByUUID } from "@/lib/api";
+import {getFactionLeaderboard} from "@/lib/api";
 import { usePlayerInfoStore } from "@/stores/use-player-info-store";
 import { useQuery } from "@tanstack/react-query";
 
-const useLeaderboardPosition = () => {
+const useFactionLeaderboard = () => {
   const { data: playerInfo } = usePlayerInfoStore();
   const query = useQuery({
-    queryKey: ["leaderboard", playerInfo!.uuid],
+    queryKey: ["faction_leaderboard"],
     queryFn: () => {
-      return getPaladiumLeaderboardPositionByUUID(playerInfo!.uuid);
+      return getFactionLeaderboard();
+      // return getFactionInfo(factionName);
     },
     retry: 1,
     refetchInterval: false,
@@ -19,7 +20,11 @@ const useLeaderboardPosition = () => {
     return "Récupération en cours...";
   }
 
-  return query.error ? "Erreur" : query.data;
+  if(query.error)
+    return "Erreur";
+
+
+  return query.data;
 }
 
-export default useLeaderboardPosition;
+export default useFactionLeaderboard;

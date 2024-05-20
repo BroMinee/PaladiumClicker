@@ -13,7 +13,7 @@ type ImportProfilProps = {
   withBackground?: boolean
 }
 
-const ImportProfil = ({showResetButton = false, withBackground = false,}: ImportProfilProps) => {
+const ImportProfil = ({showResetButton = false, withBackground = true,}: ImportProfilProps) => {
 
   const {data: playerInfo, reset} = usePlayerInfoStore();
   const {mutate: loadPlayerInfo, isPending, isError} = useLoadPlayerInfoMutation();
@@ -47,7 +47,7 @@ const ImportProfil = ({showResetButton = false, withBackground = false,}: Import
                 type="text"
                 id="pseudo"
                 name="pseudo"
-                className={cn(withBackground && "bg-background text-foreground", isError && "border-destructive")}
+                className={cn(withBackground && "bg-background", isError && "border-destructive")}
                 placeholder={playerInfo?.username ?? "Entre ton pseudo"}
                 disabled={isPending}
             />

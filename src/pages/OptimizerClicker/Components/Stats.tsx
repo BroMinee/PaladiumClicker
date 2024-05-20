@@ -4,7 +4,6 @@ import GradientText from "@/components/shared/GradientText";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Checkbox } from "@/components/ui/checkbox";
-import useLeaderboardPosition from "@/hooks/use-leaderboard-position";
 import { computePrice, formatPrice, getPathImg, getTotalSpend } from "@/lib/misc";
 import { computeRPS } from "@/pages/OptimizerClicker/Components/BuildingList";
 import { usePlayerInfoStore } from "@/stores/use-player-info-store";
@@ -21,7 +20,6 @@ const Stats = () => {
   const { rps } = useRpsStore();
   const [isNextBuildingVisible, setIsNextBuildingVisible] = useState(false);
   const [buildingBuyPaths, setBuildingBuyPaths] = useState([]);
-  const positionLeaderboard = useLeaderboardPosition();
 
   const onChangeNextBuildingVisibility = (value: boolean) => {
 
@@ -92,7 +90,7 @@ const Stats = () => {
                 <div className="flex gap-2 items-center">
                   Top
                   <GradientText className="font-bold">
-                    #{positionLeaderboard}
+                    #{playerInfo["leaderboard"]}
                   </GradientText>
                 </div>
               </div>

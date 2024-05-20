@@ -5,6 +5,7 @@ import { cn } from "@/lib/utils";
 import ImportProfil from "@/pages/OptimizerClicker/Components/ImportProfil";
 import { FaBars } from "react-icons/fa";
 import { NavLink } from "react-router-dom";
+import {usePlayerInfoStore} from "@/stores/use-player-info-store.ts";
 
 const links: Array<{ path: string, label: string }> = [
   { path: "/profil", label: "Profil" },
@@ -14,6 +15,7 @@ const links: Array<{ path: string, label: string }> = [
 ];
 
 const Navbar = () => {
+  const {reset} = usePlayerInfoStore();
   return (
     <nav className="container flex items-center justify-between h-full gap-4">
       <MobileNav />
@@ -21,7 +23,8 @@ const Navbar = () => {
         <img
           src={import.meta.env.BASE_URL + "/favicon.ico"}
           alt="Logo"
-          className="h-12 w-12"
+          className="h-12 w-12 hover:scale-110 duration-300 cursor-pointer"
+          onClick={() => {reset(); window.location.assign("/");}}
         />
         <ul className="flex gap-6 items-center">
           {links.map(({ path, label }) => (

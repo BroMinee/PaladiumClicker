@@ -1,13 +1,12 @@
 import ThemeProvider from '@/components/shared/ThemeProvider';
 import { Toaster } from '@/components/ui/sonner';
 import useCheckLocalDataVersion from '@/hooks/use-check-local-data-version';
-import NotAvailablePage from '@/pages/NotAvailable';
 import OptimizerClickerPage from '@/pages/OptimizerClicker/OptimizerClicker';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { Navigate, RouterProvider, createBrowserRouter } from 'react-router-dom';
-import Profil from "@/pages/Profil.tsx";
 import PalaAnimation from "@/pages/PalaAnimation.tsx";
 import AboutPage from "@/pages/About.tsx";
+import ProfilPage from "@/pages/Profil.tsx";
 
 const router = createBrowserRouter([
   {
@@ -20,7 +19,7 @@ const router = createBrowserRouter([
   },
   {
     path: '/profil',
-    element: <Profil />,
+    element: <ProfilPage />,
   },
   {
     path: '/pala-animation',

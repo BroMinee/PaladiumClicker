@@ -1,6 +1,6 @@
-import { parseCsv } from "@/lib/misc";
-import { usePlayerInfoStore } from "@/stores/use-player-info-store";
-import type {
+import {parseCsv} from "@/lib/misc";
+import {usePlayerInfoStore} from "@/stores/use-player-info-store";
+import {
   Building,
   BuildingUpgrade,
   CPS,
@@ -13,7 +13,7 @@ import type {
   PaladiumRanking,
   PlayerInfo,
   PosteriorUpgrade,
-  TerrainUpgrade
+  TerrainUpgrade, PaladiumFactionInfo, PaladiumFactionLeaderboard
 } from "@/types";
 import axios from "axios";
 
@@ -66,7 +66,7 @@ const getPaladiumClickerDataByUUID = async (uuid: string) => {
 }
 
 export const getFactionInfo = async (factionName: string) => {
-  const response = await axios.get(`${PALADIUM_API_URL}/v1/paladium/faction/profile/${factionName}`);
+  const response = await axios.get<PaladiumFactionInfo>(`${PALADIUM_API_URL}/v1/paladium/faction/profile/${factionName}`);
 
   if (response.status !== 200) {
     throw response;
@@ -76,7 +76,7 @@ export const getFactionInfo = async (factionName: string) => {
 }
 
 export const getFactionLeaderboard = async () => {
-  const response = await axios.get(`${PALADIUM_API_URL}/v1/paladium/faction/leaderboard`);
+  const response = await axios.get<PaladiumFactionLeaderboard>(`${PALADIUM_API_URL}/v1/paladium/faction/leaderboard`);
 
   if (response.status !== 200) {
     throw response;
@@ -92,15 +92,17 @@ export const getAuctionHouseInfo = async (uuid: string) => {
     throw response;
   }
 
-  return response.data;
+  const res = response.data;
+  res.dateUpdated = new Date().getTime();
+
+  return res;
 }
 
 export const getPlayerInfo = async (pseudo: string) => {
 
   if (pseudo === "") {
     throw "Pseudo is empty";
-  }
-  else if (pseudo.includes(" ")) {
+  } else if (pseudo.includes(" ")) {
     throw "Pseudo contains space";
   } else if (/^[a-zA-Z0-9_]+$/.test(pseudo) === false) {
     throw "Pseudo doit contenir que des lettres ou des chiffres";
@@ -117,15 +119,15 @@ export const getPlayerInfo = async (pseudo: string) => {
   }
 
   const initialPlayerInfo = localData !== null && localData.username !== pseudo ?
-    await fetchAllDataButKeepOwn(localData) :
-    await getInitialPlayerInfo();
+      await fetchAllDataButKeepOwn(localData) :
+      await getInitialPlayerInfo();
 
   const paladiumProfil = await getPaladiumProfileByPseudo(pseudo);
-  const { buildings, upgrades } = await getPaladiumClickerDataByUUID(paladiumProfil.uuid);
+  const {buildings, upgrades} = await getPaladiumClickerDataByUUID(paladiumProfil.uuid);
 
   const translateBuildingName = await fetchLocal<Record<string, number>>("/translate_building.json");
   const translateBuildingUpgradeName = await fetchLocal<
-    Record<string, [keyof Pick<PlayerInfo, "building_upgrade">, string]>
+      Record<string, [keyof Pick<PlayerInfo, "building_upgrade">, string]>
   >("/translate_upgrade.json");
 
   buildings.forEach((building) => {
@@ -149,13 +151,18 @@ export const getPlayerInfo = async (pseudo: string) => {
     }
   });
 
-  initialPlayerInfo.faction = paladiumProfil.faction === "" ? "Wilderness" : paladiumProfil.faction;
+  const AhInfo = await getAuctionHouseInfo(paladiumProfil.uuid);
+
+  initialPlayerInfo.faction = {name: paladiumProfil.faction === "" ? "Wilderness" : paladiumProfil.faction};
   initialPlayerInfo.firstJoin = paladiumProfil.firstJoin;
   initialPlayerInfo.money = paladiumProfil.money;
   initialPlayerInfo.timePlayed = paladiumProfil.timePlayed;
   initialPlayerInfo.username = paladiumProfil.username;
   initialPlayerInfo.uuid = paladiumProfil.uuid;
   initialPlayerInfo.rank = paladiumProfil.rank;
+  initialPlayerInfo.ah = AhInfo;
+  initialPlayerInfo.leaderboard = await getPaladiumLeaderboardPositionByUUID(paladiumProfil.uuid);
+  initialPlayerInfo.faction = await getFactionInfo(initialPlayerInfo.faction.name);
 
   const existingJobs = ["miner", "farmer", "hunter", "alchemist"] as const;
 
@@ -178,7 +185,6 @@ const getInitialPlayerInfo = async (): Promise<PlayerInfo> => {
   const manyUpgrade = await fetchLocal<ManyUpgrade[]>("/many_upgrade.json");
   const posteriorUpgrade = await fetchLocal<PosteriorUpgrade[]>("/posterior_upgrade.json");
   const terrainUpgrade = await fetchLocal<TerrainUpgrade[]>("/terrain_upgrade.json");
-
   const playerInfo: PlayerInfo = {
     metier: metiers,
     building: buildings,
@@ -190,13 +196,15 @@ const getInitialPlayerInfo = async (): Promise<PlayerInfo> => {
     posterior_upgrade: posteriorUpgrade,
     terrain_upgrade: terrainUpgrade,
     production: 0.5,
-    faction: "",
+    faction: {name: "Wilderness"},
     firstJoin: 0,
     money: 0,
     timePlayed: 0,
     username: "",
     uuid: "",
-    rank: "Rank inconnu"
+    rank: "Rank inconnu",
+    leaderboard: "Unranked",
+    ah: {data: [], totalCount: 0, dateUpdated: 0}
   };
 
   return playerInfo;
@@ -257,17 +265,17 @@ export const getGraphData = async () => {
   const parsedCsv = await fetchLocal<string>("/graph.csv").then(parseCsv);
 
   const data = parsedCsv
-    .filter((data) => data.Date !== "")
-    .map((data) => {
-      for (const key in data) {
-        if (key === "Date") {
-          continue;
-        } else {
-          data[key] = data[key] === "" ? "" : Number(data[key]);
+      .filter((data) => data.Date !== "")
+      .map((data) => {
+        for (const key in data) {
+          if (key === "Date") {
+            continue;
+          } else {
+            data[key] = data[key] === "" ? "" : Number(data[key]);
+          }
         }
-      }
-      return data;
-    });
+        return data;
+      });
 
   return data;
 }
