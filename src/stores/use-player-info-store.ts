@@ -1,5 +1,5 @@
 import constants from "@/lib/constants";
-import {PlayerInfo, UpgradeKey} from "@/types";
+import {Metier, PlayerInfo, UpgradeKey} from "@/types";
 import {create} from "zustand";
 import {persist, createJSONStorage} from "zustand/middleware";
 
@@ -14,7 +14,7 @@ type Actions = {
   setPlayerInfo: (playerInfo: PlayerInfo | null) => void;
   reset: () => void;
   increaseMetierLevel: (name: string, value: number) => void;
-  decreaseMetierLevel: (name: string, value: number) => void;
+  decreaseMetierLevel: (name: string, value: number, min?: number) => void;
   setBuildingOwn: (name: string, value: number) => void;
   toggleUpgradeOwn: (type: UpgradeKey, name: string) => void;
   selectCPS: (name: string) => void;
@@ -22,12 +22,38 @@ type Actions = {
   checkVersion: () => void;
 }
 
+type StateMetierToReach = {
+  metierToReach: Metier[];
+  metierSelected: string;
+}
+
+type ActionsToReach = {
+  resetToReach: () => void;
+  setMetierToReach: (metierToReach: Metier[]) => void;
+  getIndexMetierSelected: () => number;
+  setMetierSelected: (name: string) => void;
+  increaseMetierLevelToReach: (name: string, value: number) => void;
+  decreaseMetierLevelToReach: (name: string, value: number, min?: number) => void;
+}
+
 const storageKey = 'player-info';
+const storageKeyToReach = 'player-info-to-reach';
 const initialState: State = {
   data: null,
   selectedCPS: -1,
   version: constants.version,
 };
+
+const initialStateToReach: StateMetierToReach =
+    {
+      metierToReach: [
+        {name: "alchimiste", level: 1, xp: 0},
+        {name: "farmer", level: 1, xp: 0},
+        {name: "hunter", level: 1, xp: 0},
+        {name: "mineur", level: 1, xp: 0}
+      ],
+      metierSelected: "alchimiste",
+    };
 
 export const usePlayerInfoStore = create(persist<State & Actions>(
     (set) => ({
@@ -56,18 +82,19 @@ export const usePlayerInfoStore = create(persist<State & Actions>(
             metier: state.data.metier.filter((m) => m.name !== name).concat({
               ...targettedMetier,
               level: targettedMetier.level + value,
+              xp: 0,
             }),
           },
         };
       }),
-      decreaseMetierLevel: (name, value) => set((state) => {
+      decreaseMetierLevel: (name, value, min = 1) => set((state) => {
         if (!state.data) {
           return state;
         }
 
         const targettedMetier = state.data.metier.find((m) => m.name === name);
 
-        if (!targettedMetier || targettedMetier.level <= 0) {
+        if (!targettedMetier || targettedMetier.level <= min) {
           return state;
         }
 
@@ -77,6 +104,7 @@ export const usePlayerInfoStore = create(persist<State & Actions>(
             metier: state.data.metier.filter((m) => m.name !== name).concat({
               ...targettedMetier,
               level: targettedMetier.level - value,
+              xp: 0,
             }),
           },
         };
@@ -203,6 +231,75 @@ export const usePlayerInfoStore = create(persist<State & Actions>(
     }),
     {
       name: storageKey,
+      storage: createJSONStorage(() => localStorage)
+    },
+))
+
+export const useMetierToReachStore = create(persist<StateMetierToReach & ActionsToReach>(
+    (set, get) => ({
+      ...initialStateToReach,
+      resetToReach: () => set(initialStateToReach),
+      setMetierToReach: (metier) => set(() => {
+        return {
+          metierToReach: metier.map((m) => ({
+            ...m,
+            level: m.level !== 100 ? m.level + 1 : m.level,
+            xp: 0,
+          })),
+          metierSelected: metier[0].name,
+        };
+      }),
+      increaseMetierLevelToReach: (name, value) => set((state) => {
+        if (!state.metierToReach) {
+          return state;
+        }
+
+        const targettedMetier = state.metierToReach.find((m) => m.name === name);
+
+        if (!targettedMetier || targettedMetier.level === 100) {
+          return state;
+        }
+
+        return {
+          metierToReach: state.metierToReach.filter((m) => m.name !== name).concat({
+            ...targettedMetier,
+            level: targettedMetier.level + value,
+            xp: 0,
+          }),
+          metierSelected: state.metierSelected
+        };
+      }),
+      decreaseMetierLevelToReach: (name, value, min = 1) => set((state) => {
+        if (!state.metierToReach) {
+          return state;
+        }
+
+        const targettedMetier = state.metierToReach.find((m) => m.name === name);
+
+        if (!targettedMetier || targettedMetier.level <= min) {
+          return state;
+        }
+
+        return {
+          metierToReach: state.metierToReach.filter((m) => m.name !== name).concat({
+            ...targettedMetier,
+            level: targettedMetier.level - value,
+            xp: 0,
+          }),
+          metierSelected: state.metierSelected
+        };
+      }),
+      getIndexMetierSelected: () => get().metierToReach.findIndex((m) => m.name === get().metierSelected),
+      setMetierSelected: (name) => set((state) => {
+        return {
+          ...state.metierToReach,
+          metierSelected: name,
+        };
+      }),
+    }),
+
+    {
+      name: storageKeyToReach,
       storage: createJSONStorage(() => localStorage)
     },
 ))

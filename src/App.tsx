@@ -7,11 +7,16 @@ import { Navigate, RouterProvider, createBrowserRouter } from 'react-router-dom'
 import PalaAnimation from "@/pages/PalaAnimation.tsx";
 import AboutPage from "@/pages/About.tsx";
 import ProfilPage from "@/pages/Profil/Profil.tsx";
+import CalculatorPage from "@/pages/Calculator/CalculatorPage.tsx";
 
 const router = createBrowserRouter([
   {
     path: '/',
     element: <Navigate to="/optimizer-clicker" />,
+  },
+  {
+    path: '/xp-calculator',
+    element: <CalculatorPage />,
   },
   {
     path: '/optimizer-clicker',

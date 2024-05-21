@@ -15,6 +15,7 @@ import {ScrollArea, ScrollBar} from "@/components/ui/scroll-area.tsx";
 import {formatPrice, levensteinDistance} from "@/lib/misc.ts";
 import useFactionLeaderboard from "@/hooks/use-leaderboard-faction.ts";
 
+
 export function GetAllFileNameInFolder() {
 
   return [
@@ -2810,7 +2811,7 @@ const AhInfo = () => {
           <CardTitle className="flex flex-row items-center">
             Hôtel de vente - {" "}
             {totalCount}{" "}
-            {totalCount !== 0 ? "ventes en cours" : "vente en cours"}
+            {totalCount !== 1 ? "ventes en cours" : "vente en cours"}
           </CardTitle>
 
         </CardHeader>
@@ -3026,7 +3027,6 @@ const FactionInfo = () => {
   )
 }
 
-// TODO this function will be used later
 function computeTimePlayed(timeInMinutes: number) {
   const minute = timeInMinutes % 60;
   const hour = Math.floor(timeInMinutes / 60) % 24;
