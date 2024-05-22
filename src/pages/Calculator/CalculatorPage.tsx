@@ -7,10 +7,11 @@ import Layout from "@/components/shared/Layout.tsx";
 import NoPseudoPage from "@/components/NoPseudoPage.tsx";
 import {Card, CardContent, CardDescription, CardHeader, CardTitle} from "@/components/ui/card.tsx";
 import GradientText from "@/components/shared/GradientText.tsx";
-import {FaHeart, FaPercentage, FaTachometerAlt} from "react-icons/fa";
+import {FaHeart, FaInfoCircle, FaPercentage, FaTachometerAlt} from "react-icons/fa";
 import {Button} from "@/components/ui/button.tsx";
 import {Input} from "@/components/ui/input.tsx";
 import {cn} from "@/lib/utils.ts";
+import {Popover, PopoverContent, PopoverTrigger} from "@/components/ui/popover.tsx";
 
 
 const CalculatorPage = () => {
@@ -215,21 +216,37 @@ const XpBonus = ({dailyBonus, doubleXp, setDoubleXP, setDailyBonus, bonusXpRank}
               </div>
             </div>
           </CardContent>
-
-
         </Card>
+
         <Card>
           <CardContent className="h-full pt-6 flex items-center gap-4">
             <FaTachometerAlt className="w-12 h-12"/>
             <div className="flex flex-col gap-2">
+
               <span className="font-semibold">Bonus d'xp total</span>
+
               <div className="flex gap-2 items-center">
                 <GradientText className="font-bold">
                   {dailyBonus + doubleXp + bonusXpRank}%
                 </GradientText>
+                <Popover>
+                  <PopoverTrigger asChild>
+                    <Button variant="outline" size="icon">
+                      <FaInfoCircle className="inline-block h-4 w-4"/>
+                    </Button>
+                  </PopoverTrigger>
+                  <PopoverContent className="w-80">
+                    Double XP: {doubleXp}%
+                    <br/>
+                    Bonus Grade: {bonusXpRank}%
+                    <br/>
+                    Bonus quotidien: {dailyBonus}%
+                  </PopoverContent>
+                </Popover>
               </div>
             </div>
           </CardContent>
+
         </Card>
       </div>
   )
