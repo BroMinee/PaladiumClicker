@@ -105,7 +105,7 @@ const CalculatorPage = () => {
               {/*      }*/}
               {/*  )}*/}
               {/*</select>*/}
-              {["alchimiste", "farmer", "hunter", "mineur"].map((e, index) => {
+              {["mineur", "farmer", "hunter", "alchimiste"].map((e, index) => {
                 return (
                     <img key={index} src={`${import.meta.env.BASE_URL}/JobsIcon/${e}.webp`} alt={e}
                          className={cn("object-cover h-36 w-auto pixelated hover:scale-105 duration-300 cursor-pointer",
