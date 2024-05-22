@@ -1,25 +1,20 @@
 import React, {useEffect} from "react";
 import {useMetierToReachStore, usePlayerInfoStore} from "@/stores/use-player-info-store.ts";
-import {toast} from "sonner";
-import {AxiosError} from "axios";
-import useLoadPlayerInfoMutation from "@/hooks/use-load-player-info-mutation.ts";
 import constants from "@/lib/constants.ts";
-import {GetAllFileNameInFolder} from "@/pages/Profil/Profil.tsx";
-import {formatPrice, levensteinDistance} from "@/lib/misc.ts";
-import {SlArrowDown, SlArrowUp} from "react-icons/sl";
+import {formatPrice} from "@/lib/misc.ts";
 import {Metier} from "@/components/MetierList.tsx";
 import Layout from "@/components/shared/Layout.tsx";
 import NoPseudoPage from "@/components/NoPseudoPage.tsx";
 import {Card, CardContent, CardDescription, CardHeader, CardTitle} from "@/components/ui/card.tsx";
 import GradientText from "@/components/shared/GradientText.tsx";
-import {FaBolt, FaHeart, FaPercentage, FaTachometerAlt} from "react-icons/fa";
+import {FaHeart, FaPercentage, FaTachometerAlt} from "react-icons/fa";
 import {Button} from "@/components/ui/button.tsx";
 import {Input} from "@/components/ui/input.tsx";
+import {cn} from "@/lib/utils.ts";
 
 
 const CalculatorPage = () => {
   const {data: playerInfo, increaseMetierLevel, decreaseMetierLevel} = usePlayerInfoStore();
-  const {mutate: loadPlayerInfo, isPending} = useLoadPlayerInfoMutation();
   const {
     metierToReach: metierToReach,
     increaseMetierLevelToReach,
@@ -35,7 +30,9 @@ const CalculatorPage = () => {
   useEffect(() => {
     if (!playerInfo)
       return;
-    setMetierToReach(playerInfo["metier"]);
+
+    if (!metierToReach || metierToReach.some((e) => e["level"] <= playerInfo["metier"][getIndexMetierSelected()]["level"]))
+      setMetierToReach(playerInfo["metier"]);
   }, [playerInfo]);
 
   if (!playerInfo)
@@ -43,45 +40,18 @@ const CalculatorPage = () => {
       <NoPseudoPage/>
     </Layout>
 
-
-  async function refetchPlayerInfo() {
-    if (!playerInfo || isPending)
-      return;
-    loadPlayerInfo(String(playerInfo.username), {
-      onSuccess: () => {
-        toast.success("Profil importé avec succès");
-      },
-      onError: (error) => {
-        const message = error instanceof AxiosError ?
-            error.response?.data.message ?? error.message :
-            typeof error === "string" ?
-                error :
-                "Une erreur est survenue";
-        toast.error(message);
-      }
-    });
-  }
-
-
-  for (let i = 0; i < playerInfo["metier"].length; i++) {
-    if (playerInfo["metier"][i]["xp"] === 0 && playerInfo["metier"][i]["level"] !== 1) {
-      console.log("Resetting xp");
-      refetchPlayerInfo();
-    }
-  }
-
-  let bonusXp = 0;
+  let bonusXpRank = 0;
   switch (playerInfo["rank"]) {
     case "titane":
-      bonusXp = 5;
+      bonusXpRank = 5;
       break;
     case "paladin":
-      bonusXp = 10;
+      bonusXpRank = 10;
       break;
     case "endium":
     case "trixium":
     case "trixium+":
-      bonusXp = 15;
+      bonusXpRank = 15;
       break;
   }
 
@@ -91,15 +61,15 @@ const CalculatorPage = () => {
   }
 
   function getXpDiff() {
-
+    if (!playerInfo?.metier)
+      return 0;
     const higherLevel = metierToReach[getIndexMetierSelected()]["level"];
-    return (getTotalXPForLevel(higherLevel) - playerInfo["metier"][getIndexMetierSelected()]["xp"]);
+    const res = getTotalXPForLevel(higherLevel) - playerInfo["metier"][indexMetierSelectedInPlayerInfo]["xp"];
+    if (res < 0) {
+      return playerInfo["metier"][indexMetierSelectedInPlayerInfo]["level"] === 100 ? 0 : -1;
+    }
+    return res;
   }
-
-
-  const xpNeeded = getXpDiff();
-
-  console.log(getIndexMetierSelected());
 
 
   if (!playerInfo)
@@ -117,24 +87,35 @@ const CalculatorPage = () => {
           <Card>
             <CardHeader className="flex flex-row items-center justify-between">
               <CardTitle>
-                Bienvenue sur le calculateur d'{" "}
-                <GradientText className="font-extrabold">xp</GradientText>
+                Bienvenue sur le calculateur{" "}
+                <GradientText className="font-extrabold">d'xp de métier</GradientText>
               </CardTitle>
               <CardDescription>
                 Made with <FaHeart className="text-primary inline-block"/> by <GradientText>BroMine__</GradientText>
               </CardDescription>
             </CardHeader>
-            <CardContent>
-              <select onChange={(e) => {
-                setMetierSelected(e.target.value)
-                console.log(e.target.value)
-              }}>
-                {playerInfo["metier"].map((e, index) => {
-                      return <option key={index}
-                                     value={e["name"]}>{e["name"][0].toUpperCase() + e["name"].slice(1)}</option>
-                    }
-                )}
-              </select>
+            <CardContent className="flex justify-evenly">
+              {/*<select onChange={(e) => {*/}
+              {/*  setMetierSelected(e.target.value)*/}
+              {/*}}>*/}
+              {/*  {playerInfo["metier"].map((e, index) => {*/}
+              {/*        return <option key={index}*/}
+              {/*                       value={e["name"]}>{e["name"][0].toUpperCase() + e["name"].slice(1)}</option>*/}
+              {/*      }*/}
+              {/*  )}*/}
+              {/*</select>*/}
+              {["alchimiste", "farmer", "hunter", "mineur"].map((e, index) => {
+                return (
+                    <img key={index} src={`${import.meta.env.BASE_URL}/JobsIcon/${e}.webp`} alt={e}
+                         className={cn("object-cover h-36 w-auto pixelated hover:scale-105 duration-300 cursor-pointer",
+                             metierToReach[getIndexMetierSelected()]["name"] !== e ? "grayscale" : "")}
+                         onClick={() => {
+                           setMetierSelected(e);
+                         }}
+                    />
+                )
+              })
+              }
             </CardContent>
           </Card>
           <div className="grid grid-cols-2 grid-rows-1 gap-4">
@@ -170,12 +151,11 @@ const CalculatorPage = () => {
 
           {getIndexMetierSelected() !== -1 ?
               <XpBonus setDailyBonus={setDailyBonus} dailyBonus={dailyBonus} doubleXp={doubleXp}
-                       setDoubleXP={setDoubleXP}/>
+                       setDoubleXP={setDoubleXP} bonusXpRank={bonusXpRank}/>
               : ""}
-          <Card>
-            <HowToXp metierName={playerInfo["metier"][indexMetierSelectedInPlayerInfo]["name"]} bonusXp={bonusXp}
-                     xpNeeded={getXpDiff()} doubleXp={doubleXp} dailyBonus={dailyBonus}/>
-          </Card>
+          <HowToXp metierName={playerInfo["metier"][indexMetierSelectedInPlayerInfo]["name"]} bonusXpRank={bonusXpRank}
+                   xpNeeded={getXpDiff()} doubleXp={doubleXp} dailyBonus={dailyBonus}/>
+
         </div>
       </Layout>
   )
@@ -187,14 +167,15 @@ type XpBonusProps = {
   doubleXp: number,
   setDoubleXP: (value: number) => void,
   setDailyBonus: (value: number) => void,
+  bonusXpRank: number,
 }
 
-const XpBonus = ({dailyBonus, doubleXp, setDoubleXP, setDailyBonus}: XpBonusProps) => {
+const XpBonus = ({dailyBonus, doubleXp, setDoubleXP, setDailyBonus, bonusXpRank}: XpBonusProps) => {
   return (
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <Card>
           <CardContent className="p-6">
-            <div className="flex flex-row gap-6 justify-evenly">
+            <div className="flex flex-col lg:flex-row gap-6 justify-evenly">
               <div className="flex justify-center flex-row">
                 <div className="space-y-2 flex justify-center flex-col">
                   <div className="text-sm">
@@ -205,16 +186,15 @@ const XpBonus = ({dailyBonus, doubleXp, setDoubleXP, setDailyBonus}: XpBonusProp
                     </GradientText>
                   </div>
                   <Button className={doubleXp === 100 ? "bg-red-500" : "bg-green-500"}
-                      onClick={() => {
-                        if (doubleXp === 0)
-                          setDoubleXP(100);
-                        else
-                          setDoubleXP(0);
-                      }}
+                          onClick={() => {
+                            if (doubleXp === 0)
+                              setDoubleXP(100);
+                            else
+                              setDoubleXP(0);
+                          }}
                   >
                     {doubleXp === 100 ? "Annuler la double XP" : "Prendre une double XP"}
                   </Button>
-
                 </div>
               </div>
               <div className="flex justify-center flex-row">
@@ -228,7 +208,6 @@ const XpBonus = ({dailyBonus, doubleXp, setDoubleXP, setDailyBonus}: XpBonusProp
                   </div>
                   <Input className="w-auto" type="number" min="0" step="0.1" max="99" value={Number(dailyBonus)}
                          onChange={(e) => {
-                           console.log(e.target.value)
                            setDailyBonus(Number(e.target.value))
                          }}/>
 
@@ -246,7 +225,7 @@ const XpBonus = ({dailyBonus, doubleXp, setDoubleXP, setDailyBonus}: XpBonusProp
               <span className="font-semibold">Bonus d'xp total</span>
               <div className="flex gap-2 items-center">
                 <GradientText className="font-bold">
-                  {dailyBonus + doubleXp}%
+                  {dailyBonus + doubleXp + bonusXpRank}%
                 </GradientText>
               </div>
             </div>
@@ -259,67 +238,63 @@ const XpBonus = ({dailyBonus, doubleXp, setDoubleXP, setDailyBonus}: XpBonusProp
 type HowToXpProps = {
   metierName: string,
   xpNeeded: number,
-  bonusXp: number,
+  bonusXpRank: number,
   dailyBonus: number,
   doubleXp: number,
 }
 
-const HowToXp = ({metierName, xpNeeded, bonusXp, dailyBonus, doubleXp}: HowToXpProps) => {
-  const [methodSelected, setMethodSelected] = React.useState(constants.how_to_xp[metierName][0]["type"]);
-  const methodAvailable = constants.how_to_xp[metierName].map((e) => {
-    return e["type"];
-  })
-
-
-  useEffect(() => {
-    setMethodSelected(constants.how_to_xp[metierName][0]["type"]);
-  }, [metierName]);
-
-  const bonusXpWithoutDouble = bonusXp + dailyBonus;
+const HowToXp = ({metierName, xpNeeded, bonusXpRank, dailyBonus, doubleXp}: HowToXpProps) => {
+  const bonusXpWithoutDouble = bonusXpRank + dailyBonus;
   const bonusXpDouble = bonusXpWithoutDouble + doubleXp;
   const xpNeededWithoutDoubleXP = xpNeeded / ((100 + bonusXpWithoutDouble) / 100);
   const xpNeededWithDoubleXP = xpNeeded / ((100 + bonusXpDouble) / 100);
 
-  const closestItemName = methodSelected !== "" ? GetAllFileNameInFolder().reduce((acc, curr) => {
-    if (levensteinDistance(curr, methodSelected) < levensteinDistance(acc, methodSelected)) {
-      return curr;
-    } else {
-      return acc;
-    }
-  }) : "";
-
   return (
-      <div>
-
-
-        <h1>Il te manque {formatPrice(xpNeeded)} xp (bonus de {bonusXpDouble}%)
-
-        </h1>
-        <select onChange={(e) => {
-          setMethodSelected(e.target.value)
-        }}>
-          {methodAvailable.map((e, index) => {
-            return <option key={index} value={e}>{e}</option>
-          })}
-        </select>
-
-        {closestItemName !== "" && constants.how_to_xp[metierName].find((e) => e["type"] === methodSelected) !== undefined ?
-            <div>
-              {`AH_img/${closestItemName}.png`}
-              {methodSelected}
-              {formatPrice(Math.ceil(xpNeededWithDoubleXP / constants.how_to_xp[metierName].find((e) => e["type"] === methodSelected)["xp"]))}
-            </div> : ""}
-        {closestItemName !== "" ?
-            <div>
-
-              {`AH_img/glass_bottle.png`}
-              {"bottle xp métier [+1000]"}
-              {formatPrice(Math.ceil(xpNeededWithoutDoubleXP / 1000))}
-            </div> : ""
-        }
-
-
-      </div>
+      <Card>
+        <CardHeader className="flex items-center">
+          <CardTitle className="text-2xl">
+            Il te manque{" "}
+            <GradientText>
+              {formatPrice(Math.ceil(xpNeeded))} xp
+            </GradientText>
+          </CardTitle>
+        </CardHeader>
+        <CardContent>
+          <div className={`grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4 items-center`}>
+            {
+              constants.how_to_xp[metierName].map((e, index) => {
+                return (
+                    <div key={index} className="flex flex-row items-center gap-4">
+                      <img src={`${import.meta.env.BASE_URL}/AH_img/${e["imgPath"]}`} alt={e.imgPath}
+                           className="object-cover h-16 w-auto pixelated"/>
+                      <div className="flex flex-col">
+                        <span className="font-semibold">
+                          {e.action}
+                        </span>
+                        <GradientText className="font-bold">
+                          {formatPrice(Math.ceil(xpNeededWithDoubleXP / e.xp))} fois
+                        </GradientText>
+                        <span className="font-semibold">{e.type}</span>
+                      </div>
+                    </div>)
+              })
+            }
+            <div className="flex flex-row items-center gap-4">
+              <img src={`${import.meta.env.BASE_URL}/AH_img/glass_bottle.png`} alt="glass_bottle.png"
+                   className="object-cover h-12 w-auto pixelated"/>
+              <div className="flex flex-col">
+                        <span className="font-semibold">
+                          {"Consume"}{" "}
+                          <GradientText className="font-bold">
+                            {formatPrice(Math.ceil(xpNeededWithoutDoubleXP / 1000))} fois
+                        </GradientText>
+                        </span>
+                <span className="font-semibold">Expérience de {metierName} [+1000]</span>
+              </div>
+            </div>
+          </div>
+        </CardContent>
+      </Card>
   )
 }
 

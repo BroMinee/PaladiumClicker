@@ -2882,7 +2882,7 @@ const AhItem = ({item}: AhItemsProps) => {
       <Card>
         <CardContent className="pt-6 space-y-2">
           <div className="flex flex-col items-center justify-center gap-2">
-            <img src={`AH_img/${closestItemName}.png`} alt="Icône" className="object-cover h-12 w-auto pixelated"/>
+            <img src={`${import.meta.env.BASE_URL}/AH_img/${closestItemName}.png`} alt="Icône" className="object-cover h-12 w-auto pixelated"/>
             <span
                 className="text-primary text-sm">{quantity}x {renamed ? `${displayName} renommé en ${name}` : `${name}`}</span>
           </div>

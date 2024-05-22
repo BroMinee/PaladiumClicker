@@ -7,6 +7,7 @@ import {Button} from "./ui/button";
 import {FaArrowDown, FaArrowUp} from "react-icons/fa";
 
 import "./MetierList.css";
+import constants from "@/lib/constants.ts";
 
 type MetierListProps = {
   editable?: boolean;
@@ -21,8 +22,8 @@ const MetierList = ({editable = true}: MetierListProps) => {
 
   return (
       <div className="w-full grid grid-cols-2 lg:grid-cols-4 items-center gap-4">
-        {metiers.map((metier) => (
-            <Card>
+        {metiers.map((metier, index) => (
+            <Card key={index}>
               <CardContent className="pt-6 flex flex-col items-center justify-center gap-2">
                 <Metier key={metier.name} playerInfoMetier={playerInfo.metier} increaseMetierLevel={increaseMetierLevel}
                         decreaseMetierLevel={decreaseMetierLevel} metier={metier} editable={editable}/>
@@ -50,7 +51,7 @@ export const Metier = ({
                        }: MetierProps) => {
 
   const playerMetier = playerInfoMetier.find((m) => m.name === metier.name);
-  const coefXp = getXpForLevel(metier.level, playerMetier?.xp || 0);
+  const coefXp = getXpCoef(metier.level, playerMetier?.xp || 0);
   const colors = getColorByMetierName(metier.name);
 
   return (
@@ -94,116 +95,12 @@ export const Metier = ({
 
 export default MetierList;
 
-const metierPalier = [
-  480,
-  1044,
-  1713,
-  2497,
-  3408,
-  4451,
-  5635,
-  6966,
-  8447,
-  10086,
-  11885,
-  13850,
-  15983,
-  18290,
-  20773,
-  23435,
-  26281,
-  29312,
-  32532,
-  35943,
-  39549,
-  43351,
-  47353,
-  51556,
-  55964,
-  60577,
-  65399,
-  70432,
-  75677,
-  81137,
-  86813,
-  92709,
-  98824,
-  105162,
-  111724,
-  118512,
-  125527,
-  132772,
-  140248,
-  147956,
-  155898,
-  164076,
-  172492,
-  181146,
-  190040,
-  199176,
-  208555,
-  218179,
-  228049,
-  238166,
-  248532,
-  259148,
-  270015,
-  281135,
-  292509,
-  304138,
-  316023,
-  328166,
-  340568,
-  353230,
-  366153,
-  379399,
-  392788,
-  406502,
-  420482,
-  434728,
-  449243,
-  464027,
-  479081,
-  494407,
-  510004,
-  525875,
-  542021,
-  558442,
-  575150,
-  592115,
-  609368,
-  626901,
-  644714,
-  662809,
-  681186,
-  699846,
-  718791,
-  738021,
-  757537,
-  777339,
-  797430,
-  817810,
-  838479,
-  859438,
-  880690,
-  902234,
-  924071,
-  946202,
-  968628,
-  991349,
-  1014368,
-  1037683,
-  1061297,
-  1085210
-]
-
-function getXpForLevel(level: number, currentXp: number) {
+function getXpCoef(level: number, currentXp: number) {
   if (level === 100)
-    return 1
+    return 1;
   if (currentXp === 0)
-    return 0
-  const sum = metierPalier.slice(0, level).reduce((a, b) => a + b, 0)
-  return (currentXp - sum) / metierPalier[level]
+    return 0;
+  return (currentXp - constants.metier_palier[level - 1]) / constants.metier_xp[level];
 }
 
 const getColorByMetierName = (name: string) => {

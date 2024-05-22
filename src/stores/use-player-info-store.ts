@@ -75,14 +75,13 @@ export const usePlayerInfoStore = create(persist<State & Actions>(
         if (!targettedMetier || targettedMetier.level === 100) {
           return state;
         }
-
         return {
           data: {
             ...state.data,
             metier: state.data.metier.filter((m) => m.name !== name).concat({
               ...targettedMetier,
               level: targettedMetier.level + value,
-              xp: 0,
+              xp: constants.metier_palier[targettedMetier.level],
             }),
           },
         };
@@ -97,14 +96,13 @@ export const usePlayerInfoStore = create(persist<State & Actions>(
         if (!targettedMetier || targettedMetier.level <= min) {
           return state;
         }
-
         return {
           data: {
             ...state.data,
             metier: state.data.metier.filter((m) => m.name !== name).concat({
               ...targettedMetier,
               level: targettedMetier.level - value,
-              xp: 0,
+              xp: constants.metier_palier[targettedMetier.level - value - 1],
             }),
           },
         };
