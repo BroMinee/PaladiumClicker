@@ -1,23 +1,24 @@
 // @ts-nocheck - A RETIRER APRES AVOIR CORRIGE LE FICHIER
 
 import GradientText from "@/components/shared/GradientText";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
-import { Checkbox } from "@/components/ui/checkbox";
-import { computePrice, formatPrice, getPathImg, getTotalSpend } from "@/lib/misc";
-import { computeRPS } from "@/pages/OptimizerClicker/Components/BuildingList";
-import { usePlayerInfoStore } from "@/stores/use-player-info-store";
-import type { PlayerInfo } from "@/types";
-import { useState } from "react";
-import { FaBed, FaMedal, FaTachometerAlt } from "react-icons/fa";
-import { computeBestBuildingUgrade, findBestUpgrade } from "./RPS";
-import { useRpsStore } from "@/stores/use-rps-store";
+import {Button} from "@/components/ui/button";
+import {Card, CardContent} from "@/components/ui/card";
+import {Checkbox} from "@/components/ui/checkbox";
+import {computePrice, formatPrice, getPathImg, getTotalSpend} from "@/lib/misc";
+import {computeRPS} from "@/pages/OptimizerClicker/Components/BuildingList";
+import {usePlayerInfoStore} from "@/stores/use-player-info-store";
+import type {PlayerInfo} from "@/types";
+import React, {useEffect, useState} from "react";
+import {FaBed, FaInfoCircle, FaMedal, FaTachometerAlt} from "react-icons/fa";
+import {computeBestBuildingUgrade, findBestUpgrade} from "./RPS";
+import {useRpsStore} from "@/stores/use-rps-store";
+import {Popover, PopoverContent, PopoverTrigger} from "@/components/ui/popover.tsx";
 
 const PROCHAIN_ACHAT_COUNT = 20;
 
 const Stats = () => {
-  const { data: playerInfo, setPlayerInfo } = usePlayerInfoStore();
-  const { rps } = useRpsStore();
+  const {data: playerInfo, setPlayerInfo} = usePlayerInfoStore();
+  const {rps} = useRpsStore();
   const [isNextBuildingVisible, setIsNextBuildingVisible] = useState(false);
   const [buildingBuyPaths, setBuildingBuyPaths] = useState([]);
 
@@ -34,6 +35,11 @@ const Stats = () => {
     }
   }
 
+  useEffect(() => {
+    setBuildingBuyPaths(computeXBuildingAhead(playerInfo, PROCHAIN_ACHAT_COUNT, rps));
+  }, [playerInfo]);
+
+
   if (!playerInfo) {
     return null;
   }
@@ -41,95 +47,118 @@ const Stats = () => {
   const coinsDormants = Math.max(playerInfo.production - getTotalSpend(playerInfo), 0);
 
   return (
-    <>
-      <div className="flex items-center space-x-2">
-        <Checkbox
-          id="next-building-visibility"
-          checked={isNextBuildingVisible}
-          onCheckedChange={onChangeNextBuildingVisibility}
-        />
-        <label htmlFor="next-building-visibility">
-          Afficher les {PROCHAIN_ACHAT_COUNT} prochains achats optimaux (non recommandé sur téléphone)
-        </label>
-      </div>
-      <div>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          <Card>
-            <CardContent className="h-full pt-6 flex items-center gap-4">
-              <FaBed className="w-12 h-12" />
-              <div className="flex flex-col gap-2">
-                <span className="font-semibold">Coins dormants</span>
-                <div className="flex gap-2 items-center">
-                  <GradientText className="font-bold">
-                    ~ {formatPrice(Math.round(coinsDormants))}
-                  </GradientText>
-                  <img src={import.meta.env.BASE_URL + "/coin.png"} className="h-6 w-6" alt="Coin" />
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-          <Card>
-            <CardContent className="h-full pt-6 flex items-center gap-4">
-              <FaTachometerAlt className="w-12 h-12" />
-              <div className="flex flex-col gap-2">
-                <span className="font-semibold">Production totale</span>
-                <div className="flex gap-2 items-center">
-                  <GradientText className="font-bold">
-                    {(formatPrice(Math.round(playerInfo["production"])))}
-                  </GradientText>
-                  <img src={import.meta.env.BASE_URL + "/coin.png"} className="h-6 w-6" alt="Coin" />
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-          <Card className="md:col-span-2 lg:col-span-1">
-            <CardContent className="h-full pt-6 flex items-center gap-4">
-              <FaMedal className="w-12 h-12" />
-              <div className="flex flex-col gap-2">
-                <span className="font-semibold">Classement</span>
-                <div className="flex gap-2 items-center">
-                  Top
-                  <GradientText className="font-bold">
-                    #{playerInfo["leaderboard"]}
-                  </GradientText>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
+      <>
+        <div className="flex items-center space-x-2">
+          <Checkbox
+              id="next-building-visibility"
+              checked={isNextBuildingVisible}
+              onCheckedChange={onChangeNextBuildingVisibility}
+          />
+          <label htmlFor="next-building-visibility">
+            Afficher les {PROCHAIN_ACHAT_COUNT} prochains achats optimaux (non recommandé sur téléphone)
+          </label>
         </div>
-        {isNextBuildingVisible &&
-          <div className="flex flex-col gap-4 items-center pt-4">
-            <StatList playerInfo={playerInfo} buildingBuyPaths={buildingBuyPaths} showProduction={true} />
-            <Button
-              onClick={() => buyBuilding(playerInfo, setPlayerInfo, buildingBuyPaths)}
-            >
-              Simuler les {buildingBuyPaths.length} achats
-            </Button>
+        <div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            <Card>
+              <CardContent className="h-full pt-6 flex items-center gap-4">
+                <FaBed className="w-12 h-12"/>
+                <div className="flex flex-col gap-2 justify">
+                    <span className="font-semibold flex items-center gap-2">Coins dormants
+                    <Popover>
+                      <PopoverTrigger asChild>
+                        <Button variant="outline" size="icon">
+                          <FaInfoCircle className="inline-block h-4 w-4"/>
+                        </Button>
+                      </PopoverTrigger>
+                      <PopoverContent className="w-80">
+                        Coins que vous avez sur votre clicker in-game, mais que vous n'avez pas encore dépensés.
+                      </PopoverContent>
+                    </Popover></span>
+                  <div className="flex gap-2 items-center">
+                    <GradientText className="font-bold">
+                      ~ {formatPrice(Math.round(coinsDormants))}
+                    </GradientText>
+                    <img src={import.meta.env.BASE_URL + "/coin.png"} className="h-6 w-6" alt="Coin"/>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+            <Card>
+              <CardContent className="h-full pt-6 flex items-center gap-4">
+                <FaTachometerAlt className="w-12 h-12"/>
+                <div className="flex flex-col gap-2">
+                  <span className="font-semibold flex items-center gap-2">Production totale
+                  <Popover>
+                      <PopoverTrigger asChild>
+                        <Button variant="outline" size="icon">
+                          <FaInfoCircle className="inline-block h-4 w-4"/>
+                        </Button>
+                      </PopoverTrigger>
+                      <PopoverContent className="w-80">
+                        Ne prends pas en compte la production des cliques manuels.
+                      </PopoverContent>
+                    </Popover>
+                  </span>
+                  <div className="flex gap-2 items-center">
+                    <GradientText className="font-bold">
+                      {(formatPrice(Math.round(playerInfo["production"])))}
+                    </GradientText>
+                    <img src={import.meta.env.BASE_URL + "/coin.png"} className="h-6 w-6" alt="Coin"/>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+            <Card className="md:col-span-2 lg:col-span-1">
+              <CardContent className="h-full pt-6 flex items-center gap-4">
+                <FaMedal className="w-12 h-12"/>
+                <div className="flex flex-col gap-2">
+                  <span className="font-semibold">Classement</span>
+                  <div className="flex gap-2 items-center">
+                    Top
+                    <GradientText className="font-bold">
+                      #{playerInfo["leaderboard"]}
+                    </GradientText>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
           </div>
-        }
-      </div>
-    </>
+          {isNextBuildingVisible &&
+              <div className="flex flex-col gap-4 items-center pt-4">
+                  <StatList buildingBuyPaths={buildingBuyPaths} showProduction={true}/>
+                  <Button
+                      onClick={() => buyBuilding(playerInfo, setPlayerInfo, buildingBuyPaths)}
+                  >
+                      Simuler les {buildingBuyPaths.length} achats
+                  </Button>
+              </div>
+          }
+        </div>
+      </>
   );
 }
 
-const BuildingName = ({ name, level }: { name: string, level: string }) => {
+const BuildingName = ({name, level}: { name: string, level: string }) => {
   return (
-    <div className="flex flex-col rounded-sm px-2 py-1 bg-primary text-primary-foreground">
-      <span className="text-xs font-bold">{name}</span>
-      <span className="text-xs text-center">Level {level}</span>
-    </div>
+      <div className="flex flex-col rounded-sm px-2 py-1 bg-primary text-primary-foreground">
+        <span className="text-xs font-bold">{name}</span>
+        <span className="text-xs text-center">Level {level}</span>
+      </div>
   );
 }
 
-export const StatList = ({ playerInfo, buildingBuyPaths, showProduction }) => {
+export const StatList = ({buildingBuyPaths, showProduction}) => {
+
+  const {data: playerInfo} = usePlayerInfoStore();
 
   // List of list [path, index, own, timeToBuy, pathImg]
 
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 w-full bg-background">
+    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 w-full">
       {
-        buildingBuyPaths.map((buildingPath) => (
-          <Card>
+        buildingBuyPaths.map((buildingPath, index) => (
+          <Card key={index}>
             <CardContent className="p-4">
               <Stat
                 key={buildingPath[0] + buildingPath[1]}
@@ -145,20 +174,20 @@ export const StatList = ({ playerInfo, buildingBuyPaths, showProduction }) => {
   )
 }
 
-export const Stat = ({ buildingName, buildingPath, showProduction }) => {
+export const Stat = ({buildingName, buildingPath, showProduction}) => {
   return (
-    <div className="flex flex-col gap-2 items-center">
-      <img src={buildingPath[4]} className="w-12 h-12 object-cover" alt="image" />
-      <BuildingName name={buildingName} level={buildingPath[2]} />
-      <GradientText className="font-bold">{formatPrice(buildingPath[6].toFixed(0))} $</GradientText>
-      <span className="text-sm">Achetable {buildingPath[3] !== "Maintenant" && "le"} {buildingPath[3]}</span>
-      {showProduction &&
-        <div className="flex flex-col items-center">
-          <span className="text-sm">Production estimée</span>
-          <GradientText className="text-sm font-bold">{formatPrice(buildingPath[5])}</GradientText>
-        </div>
-      }
-    </div>
+      <div className="flex flex-col gap-2 items-center">
+        <img src={buildingPath[4]} className="w-12 h-12 object-cover" alt="image"/>
+        <BuildingName name={buildingName} level={buildingPath[2]}/>
+        <GradientText className="font-bold">{formatPrice(buildingPath[6].toFixed(0))} $</GradientText>
+        <span className="text-sm">Achetable {buildingPath[3] !== "Maintenant" && "le"} {buildingPath[3]}</span>
+        {showProduction &&
+            <div className="flex flex-col items-center">
+                <span className="text-sm">Production estimée</span>
+                <GradientText className="text-sm font-bold">{formatPrice(buildingPath[5])}</GradientText>
+            </div>
+        }
+      </div>
   );
 }
 

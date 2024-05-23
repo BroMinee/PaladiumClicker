@@ -1,5 +1,5 @@
 import {parseCsv} from "@/lib/misc";
-import {usePlayerInfoStore} from "@/stores/use-player-info-store";
+
 import {
   Building,
   BuildingUpgrade,
@@ -16,6 +16,7 @@ import {
   TerrainUpgrade, PaladiumFactionInfo, PaladiumFactionLeaderboard
 } from "@/types";
 import axios from "axios";
+import {usePlayerInfoStore} from "@/stores/use-player-info-store.ts";
 
 const PALADIUM_API_URL = "https://api.paladium.games/";
 
@@ -114,13 +115,11 @@ export const getPlayerInfo = async (pseudo: string) => {
 
   const localData = usePlayerInfoStore.getState().data;
 
-  if (localData !== null && localData.username === pseudo && localData.uuid !== "") {
-    return localData;
+  if (localData !== null && localData.username === pseudo && localData.uuid !== "" && new Date().getTime() - localData.last_fetch < 5*60*1000) {
+    throw "Profil déjà importé, veuillez patienter 5 minutes avant de réimporter le profil"
   }
 
-  const initialPlayerInfo = localData !== null && localData.username !== pseudo ?
-      await fetchAllDataButKeepOwn(localData) :
-      await getInitialPlayerInfo();
+  const initialPlayerInfo = await getInitialPlayerInfo();
 
   const paladiumProfil = await getPaladiumProfileByPseudo(pseudo);
   const {buildings, upgrades} = await getPaladiumClickerDataByUUID(paladiumProfil.uuid);
@@ -206,61 +205,10 @@ const getInitialPlayerInfo = async (): Promise<PlayerInfo> => {
     uuid: "",
     rank: "Rank inconnu",
     leaderboard: "Unranked",
-    ah: {data: [], totalCount: 0, dateUpdated: 0}
+    ah: {data: [], totalCount: 0, dateUpdated: 0},
+    last_fetch: new Date().getTime(),
   };
-
   return playerInfo;
-}
-
-const fetchAllDataButKeepOwn = async (playerInfo: PlayerInfo) => {
-  const initialPlayerInfo = await getInitialPlayerInfo();
-
-  initialPlayerInfo.metier.forEach((metier, index) => {
-    metier.level = playerInfo.metier[index].level;
-  });
-
-  // Building
-  initialPlayerInfo["building"].forEach((building, index) => {
-    if (playerInfo["building"][index] !== undefined)
-      building.own = playerInfo.building[index].own;
-  })
-
-  // Global
-  initialPlayerInfo["global_upgrade"].forEach((global, index) => {
-    global.own = playerInfo.global_upgrade[index].own;
-  })
-
-  // Terrain
-  initialPlayerInfo["terrain_upgrade"].forEach((terrain, index) => {
-    terrain.own = playerInfo.terrain_upgrade[index].own;
-  })
-
-  // building_upgrade
-  initialPlayerInfo.building_upgrade.forEach((building, index) => {
-    building.own = playerInfo.building_upgrade[index].own;
-  })
-
-
-  // many_upgrade
-  initialPlayerInfo.many_upgrade.forEach((many, index) => {
-    many.own = playerInfo.many_upgrade[index].own;
-  })
-
-  // posterior_upgrade
-  initialPlayerInfo.posterior_upgrade.forEach((posterior, index) => {
-    posterior.own = playerInfo.posterior_upgrade[index].own;
-  })
-
-  // category_upgrade
-  initialPlayerInfo.category_upgrade.forEach((category, index) => {
-    category.own = playerInfo.category_upgrade[index].own;
-  })
-
-  // CPS
-  initialPlayerInfo.CPS.forEach((cps, index) => {
-    cps.own = playerInfo.CPS[index].own;
-  })
-  return initialPlayerInfo;
 }
 
 export const getGraphData = async () => {

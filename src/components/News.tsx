@@ -11,6 +11,7 @@ import fetchDataOnPublicURL from "@/lib/api";
 import type { New } from "@/types";
 import React, { useEffect } from "react";
 import ReactAudioPlayer from "react-audio-player";
+import Discord from "@/components/Discord.tsx";
 
 type NewsProps = {
   defaultOpen?: boolean
@@ -42,6 +43,7 @@ const News = ({ defaultOpen = false }: NewsProps) => {
           <DialogTitle className="text-primary">News depuis la dernière fois</DialogTitle>
         </DialogHeader>
         <ScrollArea className="h-[80dvh] px-6 border-t">
+          <Discord className="mt-4"/>
           <div className="py-2">
             {news.map((element, index) => (
               <New

@@ -92,6 +92,7 @@ export type PlayerInfo = {
   rank: string,
   leaderboard: string,
   ah: AhType,
+  last_fetch: number,
 }
 
 export type AhType = {
@@ -208,8 +209,8 @@ export type PaladiumFactionInfo = {
   createdAt?: number,
   description?: string,
   emblem?: PaladiumEmblem,
-  level?: {level: number, xp: number},
-  players?: {group: string, joinedAt: number, username: string, uuid: string}[],
+  level?: { level: number, xp: number },
+  players?: { group: string, joinedAt: number, username: string, uuid: string }[],
   uuid?: string
 }
 

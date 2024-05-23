@@ -1,4 +1,4 @@
-const version = 6;
+const version = 7;
 
 const discord = {
     url: "https://discord.gg/WGXUKHcZ3P",
