@@ -105,18 +105,21 @@ const CalculatorPage = () => {
               {/*      }*/}
               {/*  )}*/}
               {/*</select>*/}
-              {["mineur", "farmer", "hunter", "alchimiste"].map((e, index) => {
-                return (
-                    <img key={index} src={`${import.meta.env.BASE_URL}/JobsIcon/${e}.webp`} alt={e}
-                         className={cn("object-cover h-36 w-auto pixelated hover:scale-105 duration-300 cursor-pointer",
-                             metierToReach[getIndexMetierSelected()]["name"] !== e ? "grayscale" : "")}
-                         onClick={() => {
-                           setMetierSelected(e);
-                         }}
-                    />
-                )
-              })
-              }
+              <div className="grid-cols-2 grid sm:grid-cols-4">
+                {["mineur", "farmer", "hunter", "alchimiste"].map((e, index) => {
+                  return (
+                      <img key={index} src={`${import.meta.env.BASE_URL}/JobsIcon/${e}.webp`} alt={e}
+                           className={cn("object-cover h-36 w-auto pixelated hover:scale-105 duration-300 cursor-pointer",
+                               metierToReach[getIndexMetierSelected()]["name"] !== e ? "grayscale" : "")}
+                           onClick={() => {
+                             setMetierSelected(e);
+                           }}
+                      />
+                  )
+                })
+
+                }
+              </div>
             </CardContent>
           </Card>
           <div className="grid grid-cols-2 grid-rows-1 gap-4">
@@ -165,13 +168,23 @@ const CalculatorPage = () => {
 
 type XpBonusProps = {
   dailyBonus: number,
-  doubleXp: number,
-  setDoubleXP: (value: number) => void,
-  setDailyBonus: (value: number) => void,
-  bonusXpRank: number,
+  doubleXp
+      :
+      number,
+  setDoubleXP
+      :
+      (value: number) => void,
+  setDailyBonus
+      :
+      (value: number) => void,
+  bonusXpRank
+      :
+      number,
 }
 
-const XpBonus = ({dailyBonus, doubleXp, setDoubleXP, setDailyBonus, bonusXpRank}: XpBonusProps) => {
+const XpBonus = ({
+                   dailyBonus, doubleXp, setDoubleXP, setDailyBonus, bonusXpRank
+                 }: XpBonusProps) => {
   return (
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <Card>
@@ -254,13 +267,23 @@ const XpBonus = ({dailyBonus, doubleXp, setDoubleXP, setDailyBonus, bonusXpRank}
 
 type HowToXpProps = {
   metierName: string,
-  xpNeeded: number,
-  bonusXpRank: number,
-  dailyBonus: number,
-  doubleXp: number,
+  xpNeeded
+      :
+      number,
+  bonusXpRank
+      :
+      number,
+  dailyBonus
+      :
+      number,
+  doubleXp
+      :
+      number,
 }
 
-const HowToXp = ({metierName, xpNeeded, bonusXpRank, dailyBonus, doubleXp}: HowToXpProps) => {
+const HowToXp = ({
+                   metierName, xpNeeded, bonusXpRank, dailyBonus, doubleXp
+                 }: HowToXpProps) => {
   const bonusXpWithoutDouble = bonusXpRank + dailyBonus;
   const bonusXpDouble = bonusXpWithoutDouble + doubleXp;
   const xpNeededWithoutDoubleXP = xpNeeded / ((100 + bonusXpWithoutDouble) / 100);

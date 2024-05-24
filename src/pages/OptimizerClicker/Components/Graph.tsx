@@ -29,13 +29,13 @@ const Graph = ({defaultOpen = false}) => {
   const pseudos = useMemo(() => {
     return graphData.length === 0 ?
       [] :
-      Object.keys(graphData[0]).filter((key) => key !== "Date");
+      Object.keys(graphData[0]).filter((key, i) => key !== "Date" && i < 250);
   }, [graphData]);
 
   const graphDataGroupedByPseudo = useMemo(() => {
     const result = [];
     for (const pseudo of pseudos) {
-      const values = graphData.flatMap((data) => data[pseudo] as number);
+      const values = graphData.flatMap((data) => pseudo === "LeVraiFuze" ? 0 : data[pseudo] as number);
       result.push(values);
     }
     return result;

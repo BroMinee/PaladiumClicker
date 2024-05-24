@@ -1,6 +1,6 @@
 [
   {
-    "date": "24-05-2024 - 20h39",
+    "date": "24-05-2024 - 21h20",
     "events": [
       "Changement de l'interface, ainsi qu'une prise en charge du responsive (pour les mobiles)",
       "Merci Riveur ✨, pour avoir initié la refactorisation du code de JavaScript à TypeScript, pour une meilleure maintenabilité",
