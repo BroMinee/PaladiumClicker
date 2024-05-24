@@ -6,6 +6,7 @@ import ImportProfil from "@/pages/OptimizerClicker/Components/ImportProfil";
 import {FaBars} from "react-icons/fa";
 import {NavLink} from "react-router-dom";
 import {usePlayerInfoStore} from "@/stores/use-player-info-store.ts";
+import Setting from "@/components/shared/Setting.tsx";
 
 const links: Array<{ path: string, label: string }> = [
   {path: "/profil", label: "Profil"},
@@ -43,6 +44,7 @@ const Navbar = () => {
           </ul>
         </div>
         <div className="flex gap-2">
+          <Setting/>
           <ToggleTheme/>
           <ImportProfil showResetButton={false} withBackground/>
         </div>

@@ -1,10 +1,11 @@
-import { usePlayerInfoStore } from "@/stores/use-player-info-store";
-import { useEffect, useRef } from "react";
+import {usePlayerInfoStore} from "@/stores/use-player-info-store";
+import {useEffect, useRef} from "react";
+import {useSettings} from "@/components/shared/SettingsProvider.tsx";
 
 const FallingClickImage = () => {
-  const { selectedCPS } = usePlayerInfoStore();
+  const {selectedCPS} = usePlayerInfoStore();
   const containerRef = useRef<HTMLDivElement>(null);
-
+  const {settings} = useSettings();
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -31,7 +32,11 @@ const FallingClickImage = () => {
     }
   }, [selectedCPS]);
 
-  return (<div ref={containerRef} className="fixed inset-0 z-[-1]" />);
+  if (!settings.fallingImage) {
+    return null;
+  }
+
+  return (<div ref={containerRef} className="fixed inset-0 z-[-1]"/>);
 }
 
 export default FallingClickImage;
