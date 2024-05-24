@@ -4,7 +4,7 @@ interface HeadingSectionProps extends React.HTMLAttributes<HTMLHeadingElement> {
 
 const HeadingSection = ({ className, ...props }: HeadingSectionProps) => {
   return (
-    <h2 className={cn("font-semibold text-xl", className)} {...props} />
+    <h2 className={cn("font-semibold text-xl text-primary-foreground", className)} {...props} />
   );
 }
 

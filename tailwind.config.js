@@ -19,7 +19,8 @@ module.exports = {
     },
     extend: {
       backgroundImage: {
-        spawn: "url('/background.png')",
+        'light': "url('/background_light.webp')",
+        'dark': "url('/background_dark.webp')",
       },
       fontFamily: {
         sans: ["Inter", "sans-serif"],

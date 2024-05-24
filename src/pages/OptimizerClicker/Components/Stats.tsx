@@ -54,7 +54,7 @@ const Stats = () => {
               checked={isNextBuildingVisible}
               onCheckedChange={onChangeNextBuildingVisibility}
           />
-          <label htmlFor="next-building-visibility">
+          <label htmlFor="next-building-visibility" className="text-primary-foreground">
             Afficher les {PROCHAIN_ACHAT_COUNT} prochains achats optimaux (non recommandé sur téléphone)
           </label>
         </div>

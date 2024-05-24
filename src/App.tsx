@@ -3,7 +3,7 @@ import { Toaster } from '@/components/ui/sonner';
 import useCheckLocalDataVersion from '@/hooks/use-check-local-data-version';
 import OptimizerClickerPage from '@/pages/OptimizerClicker/OptimizerClicker';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { Navigate, RouterProvider, createBrowserRouter } from 'react-router-dom';
+import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import PalaAnimation from "@/pages/PalaAnimation.tsx";
 import AboutPage from "@/pages/About.tsx";
 import ProfilPage from "@/pages/Profil/Profil.tsx";
@@ -12,16 +12,17 @@ import CalculatorPage from "@/pages/Calculator/CalculatorPage.tsx";
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <Navigate to="/optimizer-clicker" />,
+    element: <OptimizerClickerPage />, /*<Navigate to="/optimizer-clicker" />,*/
   },
   {
     path: '/xp-calculator',
     element: <CalculatorPage />,
   },
-  {
-    path: '/optimizer-clicker',
-    element: <OptimizerClickerPage />,
-  },
+  // Quand le site ne sera plus hébergé sur github, on pourra utiliser cette route
+  // {
+  //   path: '/optimizer-clicker',
+  //   element: <OptimizerClickerPage />,
+  // },
   {
     path: '/profil',
     element: <ProfilPage />,

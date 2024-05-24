@@ -10,7 +10,7 @@ import {usePlayerInfoStore} from "@/stores/use-player-info-store.ts";
 const links: Array<{ path: string, label: string }> = [
   {path: "/profil", label: "Profil"},
   {path: "/xp-calculator", label: "Calculateur d'xp"},
-  {path: "/optimizer-clicker", label: "PalaClicker Optimizer"},
+  {path: "/", label: "PalaClicker Optimizer"},
   {path: "/pala-animation", label: "PalaAnimation Trainer"},
   {path: "/about", label: "A propos"},
 ];
