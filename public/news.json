@@ -1,5 +1,17 @@
 [
   {
+    "date": "24-05-2024 - 20h39",
+    "events": [
+      "Changement de l'interface, ainsi qu'une prise en charge du responsive (pour les mobiles)",
+      "Merci Riveur ✨, pour avoir initié la refactorisation du code de JavaScript à TypeScript, pour une meilleure maintenabilité",
+      "Merci Riveur ✨, pour le refactorisation du CSS avec TailwindCSS",
+      "Amélioration de la page 'Calculateur d'xp'",
+      "Ajout de la librairie react-query (gestion des requêtes API avec du cache) et zustand (state manager)",
+      "Amélioration de la synchronisation des informations utilisateurs dans le cache",
+      "Correction du prix de l'amélioration 'Combinaison d'apiculteur' qui était à 6 007 500 au lieu de 607 500"
+    ]
+  },
+  {
     "date": "11-05-2024 - 20h23",
     "events": [
       "Correction des lags sur la page du PalaClicker Optimizer",
