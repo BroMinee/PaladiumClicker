@@ -2,7 +2,7 @@
 
 import { computeRPS } from "@/pages/OptimizerClicker/Components/BuildingList";
 import { checkCondition, computePrice, formatPrice } from "@/lib/misc";
-import { computeXBuildingAhead, Stat } from "./Stats";
+import {buyBuilding, computeXBuildingAhead, Stat} from "./Stats";
 import { PlayerInfo } from "@/types";
 import { usePlayerInfoStore } from "@/stores/use-player-info-store";
 import { useEffect, useState } from "react";
@@ -13,16 +13,20 @@ import { useRpsStore } from "@/stores/use-rps-store";
 import { FaCoins, FaRandom } from "react-icons/fa";
 
 const RPS = () => {
-  const { data: playerInfo, buyBuildingByIndex } = usePlayerInfoStore();
+  const { data: playerInfo, setPlayerInfo } = usePlayerInfoStore();
   const { rps } = useRpsStore();
   const [estimatedRPS, setEstimatedRPS] = useState(3);
 
-  const buildingBuyPaths = computeXBuildingAhead(playerInfo!, 1, rps);
+  const [buildingBuyPaths, setBuildingBuyPaths] = useState([]);
 
   useEffect(() => {
     if (buildingBuyPaths.length !== 0)
       setEstimatedRPS(buildingBuyPaths[0][5]);
   }, [setEstimatedRPS, buildingBuyPaths]);
+
+  useEffect(() => {
+    setBuildingBuyPaths(computeXBuildingAhead(playerInfo, 1, rps));
+  }, [playerInfo]);
 
   return (
     <div className="grid grid-cols-1 grid-rows-1 md:grid-cols-2 md:grid-rows-2 gap-4">
@@ -37,7 +41,7 @@ const RPS = () => {
                 <div className="flex flex-col justify-center gap-4">
                   <Stat buildingName={playerInfo[buildingBuyPaths[0][0]][buildingBuyPaths[0][1]]["name"]} buildingPath={buildingBuyPaths.at(0)} showProduction={false} />
                   <Button
-                    onClick={() => buyBuildingByIndex(buildingBuyPaths[0][1])}
+                    onClick={() => buyBuilding(playerInfo, setPlayerInfo, buildingBuyPaths)}
                   >
                     Simuler l'achat
                   </Button>
