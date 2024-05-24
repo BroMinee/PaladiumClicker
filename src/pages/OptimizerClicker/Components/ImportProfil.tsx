@@ -33,7 +33,7 @@ const ImportProfil = ({showResetButton = false, withBackground = true,}: ImportP
             error.response?.data.message ?? error.message :
             typeof error === "string" ?
                 error :
-                "Une erreur est survenue";
+                "Une erreur est survenue dans l'importation du profil";
         toast.error(message);
       }
     });

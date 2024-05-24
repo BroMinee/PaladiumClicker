@@ -167,6 +167,9 @@ export const getPlayerInfo = async (pseudo: string) => {
   const existingJobs = ["miner", "farmer", "hunter", "alchemist"] as const;
 
   existingJobs.forEach((job, index) => {
+    if(paladiumProfil.jobs[job] === undefined) {
+      return;
+    }
     initialPlayerInfo.metier[index].level = paladiumProfil.jobs[job].level;
     initialPlayerInfo.metier[index].xp = paladiumProfil.jobs[job].xp;
   });
