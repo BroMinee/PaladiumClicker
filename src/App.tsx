@@ -1,22 +1,23 @@
 import ThemeProvider from '@/components/shared/ThemeProvider';
-import { Toaster } from '@/components/ui/sonner';
+import {Toaster} from '@/components/ui/sonner';
 import useCheckLocalDataVersion from '@/hooks/use-check-local-data-version';
 import OptimizerClickerPage from '@/pages/OptimizerClicker/OptimizerClicker';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { RouterProvider, createBrowserRouter } from 'react-router-dom';
+import {QueryClient, QueryClientProvider} from '@tanstack/react-query';
+import {RouterProvider, createBrowserRouter} from 'react-router-dom';
 import PalaAnimation from "@/pages/PalaAnimation.tsx";
 import AboutPage from "@/pages/About.tsx";
 import ProfilPage from "@/pages/Profil/Profil.tsx";
 import CalculatorPage from "@/pages/Calculator/CalculatorPage.tsx";
+import SettingProvider from "@/components/shared/SettingsProvider.tsx";
 
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <OptimizerClickerPage />, /*<Navigate to="/optimizer-clicker" />,*/
+    element: <OptimizerClickerPage/>, /*<Navigate to="/optimizer-clicker" />,*/
   },
   {
     path: '/xp-calculator',
-    element: <CalculatorPage />,
+    element: <CalculatorPage/>,
   },
   // Quand le site ne sera plus hébergé sur github, on pourra utiliser cette route
   // {
@@ -25,15 +26,15 @@ const router = createBrowserRouter([
   // },
   {
     path: '/profil',
-    element: <ProfilPage />,
+    element: <ProfilPage/>,
   },
   {
     path: '/pala-animation',
-    element: <PalaAnimation />,
+    element: <PalaAnimation/>,
   },
   {
     path: '/about',
-    element: <AboutPage />,
+    element: <AboutPage/>,
   },
 ], {
   basename: '/PaladiumClicker',
@@ -44,12 +45,14 @@ function App() {
   useCheckLocalDataVersion();
 
   return (
-    <ThemeProvider defaultTheme="system" storageKey="theme">
-      <QueryClientProvider client={queryClient}>
-        <RouterProvider router={router} />
-      </QueryClientProvider>
-      <Toaster />
-    </ThemeProvider>
+      <ThemeProvider defaultTheme="system" storageKey="theme">
+        <SettingProvider storageKey="settings">
+          <QueryClientProvider client={queryClient}>
+            <RouterProvider router={router}/>
+          </QueryClientProvider>
+          <Toaster/>
+        </SettingProvider>
+      </ThemeProvider>
   );
 }
 

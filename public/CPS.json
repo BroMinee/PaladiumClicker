@@ -267,14 +267,14 @@
     ]
   },
   {
-    "name": -1,
-    "CPS": -1,
+    "name": "SpeedPomme Clic",
+    "CPS": 524288,
     "own": false,
     "index": 18,
-    "price": 14609375000,
+    "price": 145000000000,
     "condition": [
       {
-        "coins": 146093750000
+        "coins": 1450000000000
       },
       {
         "day": 96

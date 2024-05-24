@@ -249,7 +249,7 @@ export function computeXBuildingAhead(playerInfo: PlayerInfo, achatCount: number
   return buildingBuyPaths;
 }
 
-function buyBuilding(playerInfo, setPlayerInfo, buildingPaths) {
+export function buyBuilding(playerInfo, setPlayerInfo, buildingPaths) {
   for (let i = 0; i < buildingPaths.length; i++) {
     const bestUpgradeIndex = buildingPaths[i][1];
     const bestListName = buildingPaths[i][0];
