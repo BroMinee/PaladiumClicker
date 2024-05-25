@@ -2,7 +2,7 @@ import React, {useEffect} from "react";
 import {useMetierToReachStore, usePlayerInfoStore} from "@/stores/use-player-info-store.ts";
 import constants from "@/lib/constants.ts";
 import {formatPrice} from "@/lib/misc.ts";
-import {Metier} from "@/components/MetierList.tsx";
+import {MetierComponent} from "@/components/MetierList.tsx";
 import Layout from "@/components/shared/Layout.tsx";
 import NoPseudoPage from "@/components/NoPseudoPage.tsx";
 import {Card, CardContent, CardDescription, CardHeader, CardTitle} from "@/components/ui/card.tsx";
@@ -129,9 +129,9 @@ const CalculatorPage = () => {
               </CardHeader>
               <CardContent>
                 {getIndexMetierSelected() !== -1 ?
-                    <Metier playerInfoMetier={playerInfo.metier} increaseMetierLevel={increaseMetierLevel}
-                            decreaseMetierLevel={decreaseMetierLevel}
-                            metier={playerInfo.metier[indexMetierSelectedInPlayerInfo]} editable={false}/> : ""
+                    <MetierComponent playerInfoMetier={playerInfo.metier} increaseMetierLevel={increaseMetierLevel}
+                                     decreaseMetierLevel={decreaseMetierLevel}
+                                     metier={playerInfo.metier[indexMetierSelectedInPlayerInfo]} editable={false}/> : ""
                 }
               </CardContent>
             </Card>
@@ -141,11 +141,11 @@ const CalculatorPage = () => {
               </CardHeader>
               <CardContent>
                 {getIndexMetierSelected() !== -1 ?
-                    <Metier playerInfoMetier={metierToReach} increaseMetierLevel={increaseMetierLevelToReach}
-                            decreaseMetierLevel={decreaseMetierLevelToReach}
-                            metier={metierToReach[getIndexMetierSelected()]}
-                            editable={true}
-                            minLevel={playerInfo["metier"][indexMetierSelectedInPlayerInfo]["level"] + 1}/> : ""
+                    <MetierComponent playerInfoMetier={metierToReach} increaseMetierLevel={increaseMetierLevelToReach}
+                                     decreaseMetierLevel={decreaseMetierLevelToReach}
+                                     metier={metierToReach[getIndexMetierSelected()]}
+                                     editable={true}
+                                     minLevel={playerInfo["metier"][indexMetierSelectedInPlayerInfo]["level"] + 1}/> : ""
                 }
               </CardContent>
             </Card>

@@ -259,7 +259,7 @@ export function buyBuilding(playerInfo, setPlayerInfo, buildingPaths) {
     if (typeof playerInfo[bestListName][bestUpgradeIndex]["own"] === "boolean") {
       playerInfo[bestListName][bestUpgradeIndex]["own"] = true;
     } else {
-      playerInfo[bestListName][bestUpgradeIndex]["own"] += 1;
+      playerInfo[bestListName][bestUpgradeIndex]["own"] = Math.min(playerInfo[bestListName][bestUpgradeIndex]["own"] + 1, 99);
     }
   }
   setPlayerInfo({ ...playerInfo });

@@ -1,5 +1,14 @@
 [
   {
+    "date": "25-05-2024 - 20h45",
+    "events": [
+      "Correction du calcul de la production actuelle du PalaClicker",
+      "Ajout du classement du jour",
+      "Correction de l'ordre d'affichage des métiers",
+      "Correction des bâtiments pouvant dépasser le niveau 99 lors du spam du bouton"
+    ]
+  },
+  {
     "date": "24-05-2024 - 21h20",
     "events": [
       "Changement de l'interface, ainsi qu'une prise en charge du responsive (pour les mobiles)",

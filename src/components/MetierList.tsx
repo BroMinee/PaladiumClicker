@@ -1,5 +1,3 @@
-// @ts-nocheck - A RETIRER APRES AVOIR CORRIGE LE FICHIER
-
 import {usePlayerInfoStore} from "@/stores/use-player-info-store";
 import type {Metier} from "@/types";
 import {Card, CardContent} from "./ui/card";
@@ -16,17 +14,19 @@ type MetierListProps = {
 const MetierList = ({editable = true}: MetierListProps) => {
   const {data: playerInfo, increaseMetierLevel, decreaseMetierLevel} = usePlayerInfoStore();
 
-  const metiers = playerInfo?.metier.sort((a, b) => {
-    return a.name.localeCompare(b.name);
-  }) ?? [];
+  if(!playerInfo) {
+    return <div>Loading...</div>;
+  }
+
+  const metiers = playerInfo?.metier ?? [];
 
   return (
       <div className="w-full grid grid-cols-2 lg:grid-cols-4 items-center gap-4">
         {metiers.map((metier, index) => (
             <Card key={index}>
               <CardContent className="pt-6 flex flex-col items-center justify-center gap-2">
-                <Metier key={metier.name} playerInfoMetier={playerInfo.metier} increaseMetierLevel={increaseMetierLevel}
-                        decreaseMetierLevel={decreaseMetierLevel} metier={metier} editable={editable}/>
+                <MetierComponent key={metier.name} playerInfoMetier={playerInfo.metier} increaseMetierLevel={increaseMetierLevel}
+                                 decreaseMetierLevel={decreaseMetierLevel} metier={metier} editable={editable}/>
               </CardContent>
             </Card>))
         }
@@ -43,7 +43,7 @@ type MetierProps = {
   minLevel?: number;
 };
 
-export const Metier = ({
+export const MetierComponent = ({
                          playerInfoMetier, increaseMetierLevel, decreaseMetierLevel,
                          metier,
                          editable = false,
@@ -93,7 +93,7 @@ export const Metier = ({
   );
 }
 
-export default MetierList;
+
 
 function getXpCoef(level: number, currentXp: number) {
   if (level === 100)
@@ -127,3 +127,5 @@ const getColorByMetierName = (name: string) => {
 
   return {color, bgColor};
 }
+
+export default MetierList;
