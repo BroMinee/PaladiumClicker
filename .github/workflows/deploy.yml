@@ -1,15 +1,13 @@
 name: Deploy
 
 on:
-  workflow_run:
-    workflows: ["TypeScript Type Check"]
-    types:
-      - completed
+  push:
+    branches:
+      - main
 
 jobs:
-  deploy:
-    if: ${{ github.event.workflow_run.conclusion == 'success' }}
-    name: Deploy
+  build:
+    name: Build
     runs-on: ubuntu-latest
 
     steps:
@@ -19,7 +17,7 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v1
         with:
-          node-version: 20
+          node-version: 16
 
       - name: Install dependencies
         uses: bahmutov/npm-install@v1
@@ -33,6 +31,13 @@ jobs:
           name: production-files
           path: ./dist
 
+  deploy:
+    name: Deploy
+    needs: build
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+
+    steps:
       - name: Download artifact
         uses: actions/download-artifact@v2
         with:
