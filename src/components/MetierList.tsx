@@ -18,7 +18,20 @@ const MetierList = ({editable = true}: MetierListProps) => {
     return <div>Loading...</div>;
   }
 
-  const metiers = playerInfo?.metier ?? [];
+
+  // Sort metiers, first mineur, then farmer, then hunter, then alchimiste
+  const metiers = playerInfo?.metier?.sort((a, b) => {
+    if (a.name === "mineur") return -1;
+    if (b.name === "mineur") return 1;
+    if (a.name === "farmer") return -1;
+    if (b.name === "farmer") return 1;
+    if (a.name === "hunter") return -1;
+    if (b.name === "hunter") return 1;
+    if (a.name === "alchimiste") return -1;
+    if (b.name === "alchimiste") return 1;
+    return 0;
+  }) ?? [];
+
 
   return (
       <div className="w-full grid grid-cols-2 lg:grid-cols-4 items-center gap-4">
