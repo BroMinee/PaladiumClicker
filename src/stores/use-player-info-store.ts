@@ -206,11 +206,8 @@ export const usePlayerInfoStore = create(persist<State & Actions>(
           return state;
         }
 
-        if (typeof targettedBuilding.own === 'boolean') {
-          targettedBuilding.own = true;
-        } else {
-          targettedBuilding.own += 1;
-        }
+        targettedBuilding.own += 1;
+
 
         return {
           data: {

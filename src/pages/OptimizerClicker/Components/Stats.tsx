@@ -1,5 +1,3 @@
-// @ts-nocheck - A RETIRER APRES AVOIR CORRIGE LE FICHIER
-
 import GradientText from "@/components/shared/GradientText";
 import {Button} from "@/components/ui/button";
 import {Card, CardContent} from "@/components/ui/card";
@@ -7,8 +5,8 @@ import {Checkbox} from "@/components/ui/checkbox";
 import {computePrice, formatPrice, getPathImg, getTotalSpend} from "@/lib/misc";
 import {computeRPS} from "@/pages/OptimizerClicker/Components/BuildingList";
 import {usePlayerInfoStore} from "@/stores/use-player-info-store";
-import type {PlayerInfo} from "@/types";
-import React, {useEffect, useState} from "react";
+import {bestPurchaseInfo, PlayerInfo, bestUpgradeInfo, bestBuildingInfo, bestPurchaseInfoDetailed} from "@/types";
+import {useEffect, useState} from "react";
 import {FaBed, FaInfoCircle, FaMedal, FaTachometerAlt} from "react-icons/fa";
 import {computeBestBuildingUgrade, findBestUpgrade} from "./RPS";
 import {useRpsStore} from "@/stores/use-rps-store";
@@ -20,7 +18,7 @@ const Stats = () => {
   const {data: playerInfo, setPlayerInfo} = usePlayerInfoStore();
   const {rps} = useRpsStore();
   const [isNextBuildingVisible, setIsNextBuildingVisible] = useState(false);
-  const [buildingBuyPaths, setBuildingBuyPaths] = useState([]);
+  const [buildingBuyPaths, setBuildingBuyPaths] = useState([] as bestPurchaseInfoDetailed[]);
 
   const onChangeNextBuildingVisibility = (value: boolean) => {
 
@@ -36,6 +34,9 @@ const Stats = () => {
   }
 
   useEffect(() => {
+    if (!playerInfo) {
+      return;
+    }
     setBuildingBuyPaths(computeXBuildingAhead(playerInfo, PROCHAIN_ACHAT_COUNT, rps));
   }, [playerInfo]);
 
@@ -139,52 +140,67 @@ const Stats = () => {
   );
 }
 
-const BuildingName = ({name, level}: { name: string, level: string }) => {
+const BuildingName = ({name, level}: { name: string, level: number | boolean }) => {
   return (
       <div className="flex flex-col rounded-sm px-2 py-1 bg-primary text-primary-foreground">
         <span className="text-xs font-bold">{name}</span>
-        <span className="text-xs text-center">Level {level}</span>
+        {typeof level === "number" ? <span className="text-xs text-center">Level {level}</span> : ""}
       </div>
   );
 }
 
-export const StatList = ({buildingBuyPaths, showProduction}) => {
+type StatsListProps = {
+  buildingBuyPaths: bestPurchaseInfoDetailed[],
+  showProduction: boolean
+}
+
+export const StatList = ({buildingBuyPaths, showProduction}: StatsListProps) => {
 
   const {data: playerInfo} = usePlayerInfoStore();
+
+  if (!playerInfo)
+    return "Loading";
 
   // List of list [path, index, own, timeToBuy, pathImg]
 
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 w-full">
-      {
-        buildingBuyPaths.map((buildingPath, index) => (
-          <Card key={index}>
-            <CardContent className="p-4">
-              <Stat
-                key={buildingPath[0] + buildingPath[1]}
-                buildingName={playerInfo[buildingPath[0]][buildingPath[1]]["name"]}
-                buildingPath={buildingPath}
-                showProduction={showProduction}
-              />
-            </CardContent>
-          </Card>
-        ))
-      }
-    </div>
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 w-full">
+        {
+          buildingBuyPaths.map((buildingPath, index) => (
+              <Card key={index}>
+                <CardContent className="p-4">
+                  <Stat
+                      key={buildingPath.path + buildingPath.index}
+                      buildingName={playerInfo[buildingPath.path][buildingPath.index].name}
+                      buildingPath={buildingPath}
+                      showProduction={showProduction}
+                  />
+                </CardContent>
+              </Card>
+          ))
+        }
+      </div>
   )
 }
 
-export const Stat = ({buildingName, buildingPath, showProduction}) => {
+type StatProps = {
+  buildingName: string,
+  buildingPath: bestPurchaseInfoDetailed,
+  showProduction: boolean
+}
+
+export const Stat = ({buildingName, buildingPath, showProduction}: StatProps) => {
   return (
       <div className="flex flex-col gap-2 items-center">
-        <img src={buildingPath[4]} className="w-12 h-12 object-cover" alt="image"/>
-        <BuildingName name={buildingName} level={buildingPath[2]}/>
-        <GradientText className="font-bold">{formatPrice(buildingPath[6].toFixed(0))} $</GradientText>
-        <span className="text-sm">Achetable {buildingPath[3] !== "Maintenant" && "le"} {buildingPath[3]}</span>
+        <img src={buildingPath.pathImg} className="w-12 h-12 object-cover" alt="image"/>
+        <BuildingName name={buildingName} level={buildingPath.own}/>
+        <GradientText className="font-bold">{formatPrice(buildingPath.price)} $</GradientText>
+        <span
+            className="text-sm">Achetable {buildingPath.timeToBuy !== "Maintenant" && "le"} {buildingPath.timeToBuy}</span>
         {showProduction &&
             <div className="flex flex-col items-center">
                 <span className="text-sm">Production estimée</span>
-                <GradientText className="text-sm font-bold">{formatPrice(buildingPath[5])}</GradientText>
+                <GradientText className="text-sm font-bold">{formatPrice(buildingPath.newRps)}</GradientText>
             </div>
         }
       </div>
@@ -193,29 +209,54 @@ export const Stat = ({buildingName, buildingPath, showProduction}) => {
 
 export default Stats;
 
-function getBestUpgrade(copyPlayerInfo: PlayerInfo) {
 
-  const [indexToBuy, bestRpsBuiding] = computeBestBuildingUgrade(copyPlayerInfo);
-  let path; // building or upgrade_name
-  let index = 0;
-  let own = false; // boolean true or int
+/**
+ * @param {PlayerInfo} copyPlayerInfo
+ * @returns {bestPurchaseInfo}
+ * @description Get the best upgrade to buy
+ * @note Already update the playerInfo own value
+ * */
+function getBestUpgrade(copyPlayerInfo: PlayerInfo): bestPurchaseInfo {
 
-  const [bestRpsAfterUpgrade, bestUpgradeIndex, bestListName] = findBestUpgrade(structuredClone(copyPlayerInfo));
-  if (bestRpsAfterUpgrade > bestRpsBuiding) {
-    index = bestUpgradeIndex;
-    path = bestListName;
-    own = true;
-  } else {
-    index = indexToBuy;
-    path = "building";
-    if (index === -1)
-      own = 0;
-    else
-      own = copyPlayerInfo["building"][index]["own"];
-  }
-  const pathImg = getPathImg(path, index);
-  return [path, index, own, pathImg];
+  const bestBuildingInfo = computeBestBuildingUgrade(copyPlayerInfo);
+  const bestUpgradeInfo = findBestUpgrade(structuredClone(copyPlayerInfo));
+
+
+  let bestPurchase = {} as (bestUpgradeInfo | bestBuildingInfo);
+  if (bestBuildingInfo.bestUpgradeIndex === -1 && bestUpgradeInfo.bestUpgradeIndex === -1)
+    return {
+      path: "building",
+      index: -1,
+      own: -1,
+      pathImg: "",
+    };
+
+  else if (bestBuildingInfo.bestUpgradeIndex === -1)
+    bestPurchase = bestUpgradeInfo;
+  else if (bestUpgradeInfo.bestUpgradeIndex === -1)
+    bestPurchase = bestBuildingInfo;
+  else
+    bestPurchase = bestBuildingInfo.bestRpsAfterUpgrade > bestUpgradeInfo.bestRpsAfterUpgrade ? bestBuildingInfo : bestUpgradeInfo;
+
+  const own = copyPlayerInfo[bestPurchase.bestListName][bestPurchase.bestUpgradeIndex].own;
+  if (typeof own === "boolean" && own === true)
+    alert("Error in getBestUpgrade true");
+  else if (typeof own === "boolean" && own === false)
+    copyPlayerInfo[bestPurchase.bestListName][bestPurchase.bestUpgradeIndex].own = true;
+  else if (typeof own === "number")
+    copyPlayerInfo[bestPurchase.bestListName][bestPurchase.bestUpgradeIndex].own = own + 1;
+  else
+    alert("Error in getBestUpgrade");
+
+
+  return {
+    path: bestPurchase.bestListName,
+    index: bestPurchase.bestUpgradeIndex,
+    own: copyPlayerInfo[bestPurchase.bestListName][bestPurchase.bestUpgradeIndex].own,
+    pathImg: getPathImg(bestPurchase.bestListName, bestPurchase.bestUpgradeIndex),
+  };
 }
+
 
 export function computeXBuildingAhead(playerInfo: PlayerInfo, achatCount: number, rps: number) {
   // Path, index, own, timeToBuy (string), pathImg, newRps, price
@@ -224,64 +265,92 @@ export function computeXBuildingAhead(playerInfo: PlayerInfo, achatCount: number
   let date = new Date();
   const copy = structuredClone(playerInfo);
   let currentCoins = Math.max(playerInfo["production"] - getTotalSpend(copy), 0);
-  const buildingBuyPaths = [];
+  const buildingBuyPaths: bestPurchaseInfoDetailed[] = [];
   for (let i = 0; i < achatCount; i++) {
-    let [path, index, own, pathImg] = getBestUpgrade(copy);
 
-    if (index !== -1) {
-      let price = copy[path][index]["price"];
-      const [timeToBuy, newCoins] = computeTimeToBuy(copy[path][index]["price"], own, currentCoins, copyRps, date);
+    const bestPurchase: bestPurchaseInfo = getBestUpgrade(copy);
+    // own already updated
+    if (bestPurchase.index === -1)
+      break;
+
+    //let [path, index, own, pathImg] = getBestUpgrade(copy);
+
+    if (bestPurchase.index !== -1) {
+      let price = copy[bestPurchase.path][bestPurchase.index].price;
+      const {
+        timeToBuy: timeToBuy,
+        newCoins: newCoins
+      } = computeTimeToBuy(price, bestPurchase.own, currentCoins, copyRps, date);
       currentCoins = Math.max(newCoins, 0)
       date = timeToBuy;
-      if (typeof own === "boolean")
-        copy[path][index]["own"] = true;
-      else
-        price = computePrice(copy[path][index]["price"], own);
-      copy[path][index]["own"] += 1;
-      own += 1;
+      const own = copy[bestPurchase.path][bestPurchase.index].own;
+
+      if (typeof own === "number") {
+        price = computePrice(copy[bestPurchase.path][bestPurchase.index]["price"], own - 1);
+      }
 
       copyRps = computeRPS(copy);
 
-      buildingBuyPaths.push([path, index, own, getDDHHMMSS(timeToBuy), pathImg, copyRps, price]);
-    }
 
+      buildingBuyPaths.push(
+          {
+            path: bestPurchase.path,
+            index: bestPurchase.index,
+            own: copy[bestPurchase.path][bestPurchase.index].own,
+            timeToBuy: getDDHHMMSS(timeToBuy),
+            pathImg: bestPurchase.pathImg,
+            newRps: copyRps,
+            price: price
+          }
+      );
+    }
   }
   return buildingBuyPaths;
 }
 
-export function buyBuilding(playerInfo, setPlayerInfo, buildingPaths) {
+export function buyBuilding(playerInfo: PlayerInfo, setPlayerInfo: (arg0: PlayerInfo) => (void), buildingPaths: bestPurchaseInfoDetailed[]) {
   for (let i = 0; i < buildingPaths.length; i++) {
-    const bestUpgradeIndex = buildingPaths[i][1];
-    const bestListName = buildingPaths[i][0];
+    const bestUpgradeIndex = buildingPaths[i].index;
+    const bestListName = buildingPaths[i].path;
     if (bestUpgradeIndex === -1) {
       return;
     }
-    if (typeof playerInfo[bestListName][bestUpgradeIndex]["own"] === "boolean") {
+    const own = playerInfo[bestListName][bestUpgradeIndex]["own"];
+    if (typeof own === "boolean") {
       playerInfo[bestListName][bestUpgradeIndex]["own"] = true;
     } else {
-      playerInfo[bestListName][bestUpgradeIndex]["own"] = Math.min(playerInfo[bestListName][bestUpgradeIndex]["own"] + 1, 99);
+      playerInfo[bestListName][bestUpgradeIndex]["own"] = Math.min(own + 1, 99);
     }
   }
-  setPlayerInfo({ ...playerInfo });
+  setPlayerInfo({...playerInfo});
 }
 
-function computeTimeToBuy(price, own, coinsDormants, rps, curTime) {
+function computeTimeToBuy(price: number, own: boolean | number, coinsDormants: number, rps: number, curTime: Date) {
   // return date when you can buy the building and the new currentCoins
-  let priceToBuy;
-  if (own === true)
+
+  let priceToBuy = -1;
+  if (typeof own === "boolean" && own === true)
     priceToBuy = price;
+  else if (typeof own === "boolean" && own === false)
+    alert("Error in computeTimeToBuy false");
   else {
-    priceToBuy = computePrice(price, own);
+    priceToBuy = computePrice(price, own - 1);
   }
 
 
   const factorLagServer = 1.33;
   if (coinsDormants >= priceToBuy)
-    return [curTime, coinsDormants - priceToBuy];
+    return {
+      timeToBuy: curTime,
+      newCoins: coinsDormants - priceToBuy
+    }
 
   const nbSec = (priceToBuy - coinsDormants) * factorLagServer / rps;
 
-  return [new Date(curTime.getTime() + nbSec * 1000), 0];
+  return {
+    timeToBuy: new Date(curTime.getTime() + nbSec * 1000),
+    newCoins: 0
+  }
 }
 
 function getDDHHMMSS(d: Date) {
