@@ -282,17 +282,17 @@
     ]
   },
   {
-    "name": -1,
+    "name": "Carpe Clic",
     "CPS": -1,
     "own": false,
     "index": 19,
-    "price": 36523437500,
+    "price": 365000000000,
     "condition": [
       {
-        "coins": 365234375000
+        "coins": 3650000000000
       },
       {
-        "day": 104
+        "day": 106
       }
     ]
   },
