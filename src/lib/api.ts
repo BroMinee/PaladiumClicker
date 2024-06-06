@@ -13,7 +13,7 @@ import {
   PaladiumRanking,
   PlayerInfo,
   PosteriorUpgrade,
-  TerrainUpgrade, PaladiumFactionInfo, PaladiumFactionLeaderboard
+  TerrainUpgrade, PaladiumFactionInfo, PaladiumFactionLeaderboard, PaladiumFriendInfo
 } from "@/types";
 import axios from "axios";
 import {usePlayerInfoStore} from "@/stores/use-player-info-store.ts";
@@ -99,6 +99,17 @@ export const getAuctionHouseInfo = async (uuid: string) => {
   return res;
 }
 
+export const getFriendsList = async (uuid: string) =>
+{
+    const response = await axios.get<PaladiumFriendInfo>(`${PALADIUM_API_URL}/v1/paladium/player/profile/${uuid}/friends`);
+
+    if (response.status !== 200) {
+      throw response;
+    }
+
+    return response.data;
+}
+
 export const getPlayerInfo = async (pseudo: string) => {
 
   if (pseudo === "") {
@@ -152,9 +163,11 @@ export const getPlayerInfo = async (pseudo: string) => {
 
   const AhInfo = await getAuctionHouseInfo(paladiumProfil.uuid);
 
+  const friendsList = await getFriendsList(paladiumProfil.uuid)
+
   initialPlayerInfo.faction = {name: paladiumProfil.faction === "" ? "Wilderness" : paladiumProfil.faction};
   initialPlayerInfo.firstJoin = paladiumProfil.firstJoin;
-  initialPlayerInfo.friends = paladiumProfil.friends;
+  initialPlayerInfo.friends =friendsList;
   initialPlayerInfo.money = paladiumProfil.money;
   initialPlayerInfo.timePlayed = paladiumProfil.timePlayed;
   initialPlayerInfo.username = paladiumProfil.username;
@@ -201,7 +214,7 @@ const getInitialPlayerInfo = async (): Promise<PlayerInfo> => {
     production: 0.5,
     faction: {name: "Wilderness"},
     firstJoin: 0,
-    friends: [],
+    friends: {data: [], totalCount: 0},
     money: 0,
     timePlayed: 0,
     username: "",

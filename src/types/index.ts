@@ -71,6 +71,11 @@ export type TerrainUpgrade = {
   condition: [{ day: number }],
 }
 
+export type FriendInfo = {
+  uuid: string,
+  name: string,
+}
+
 export type PlayerInfo = {
   metier: Metier[],
   building: Building[],
@@ -84,7 +89,7 @@ export type PlayerInfo = {
   production: number,
   faction: PaladiumFactionInfo,
   firstJoin: number,
-  friends: Array<{ name: string }>,
+  friends: PaladiumFriendInfo,
   money: number,
   timePlayed: number,
   username: string,
@@ -149,7 +154,6 @@ export type AnyCondition = ConditionWithCoins | ConditionWithIndex | ConditionWi
 export type PaladiumPlayerInfo = {
   faction: string,
   firstJoin: number,
-  friends: Array<{ name: string }>,
   jobs: {
     alchemist: {
       level: number,
@@ -222,6 +226,11 @@ export type PaladiumFactionLeaderboard = {
   position: number,
   trend: string
 }[]
+
+export type PaladiumFriendInfo = {
+  data: FriendInfo[]
+  totalCount: number;
+}
 
 export type New = {
   date: string,
