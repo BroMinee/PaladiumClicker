@@ -1,6 +1,6 @@
-import { buttonVariants } from "@/components/ui/button";
-import { FaDizzy } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import {buttonVariants} from "@/components/ui/button";
+import {FaDizzy} from "react-icons/fa";
+import {Link} from "react-router-dom";
 
 const NotAvailablePage = () => {
   return (

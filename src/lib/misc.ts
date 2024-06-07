@@ -1,4 +1,4 @@
-import type { AnyCondition, PlayerInfo } from "@/types";
+import type {AnyCondition, PlayerInfo} from "@/types";
 
 export function getTotalSpend(playerInfo: PlayerInfo) {
   let total = 0;

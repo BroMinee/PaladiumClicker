@@ -1,14 +1,14 @@
 // @ts-nocheck - A RETIRER APRES AVOIR CORRIGE LE FICHIER
 
-import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
-import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
-import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
-import { checkCondition, formatPrice } from "@/lib/misc";
-import { cn } from "@/lib/utils";
-import { usePlayerInfoStore } from "@/stores/use-player-info-store";
-import type { CPS as TCPS } from "@/types";
-import { FaInfoCircle } from "react-icons/fa";
+import {Button} from "@/components/ui/button";
+import {Card, CardContent} from "@/components/ui/card";
+import {Popover, PopoverContent, PopoverTrigger} from "@/components/ui/popover";
+import {ScrollArea, ScrollBar} from "@/components/ui/scroll-area";
+import {checkCondition, formatPrice} from "@/lib/misc";
+import {cn} from "@/lib/utils";
+import {usePlayerInfoStore} from "@/stores/use-player-info-store";
+import type {CPS as TCPS} from "@/types";
+import {FaInfoCircle} from "react-icons/fa";
 
 const ClickList = () => {
 

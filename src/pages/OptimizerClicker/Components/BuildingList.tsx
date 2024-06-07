@@ -1,12 +1,12 @@
-import { Card, CardContent } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
-import { computePrice, formatPrice } from "@/lib/misc";
-import { usePlayerInfoStore } from "@/stores/use-player-info-store";
-import { useRpsStore } from "@/stores/use-rps-store";
-import type { PlayerInfo, Building as TBuilding } from "@/types";
-import { ChangeEvent, useEffect } from "react";
-import { FaBolt, FaPercentage } from "react-icons/fa";
+import {Card, CardContent} from "@/components/ui/card";
+import {Input} from "@/components/ui/input";
+import {ScrollArea, ScrollBar} from "@/components/ui/scroll-area";
+import {computePrice, formatPrice} from "@/lib/misc";
+import {usePlayerInfoStore} from "@/stores/use-player-info-store";
+import {useRpsStore} from "@/stores/use-rps-store";
+import type {Building as TBuilding, PlayerInfo} from "@/types";
+import {ChangeEvent, useEffect} from "react";
+import {FaBolt, FaPercentage} from "react-icons/fa";
 
 const BuildingList = () => {
 

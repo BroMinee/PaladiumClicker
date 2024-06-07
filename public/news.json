@@ -1,5 +1,14 @@
 [
   {
+    "date": "07-06-2024 - 23h29",
+    "events": [
+      "Ajout du AH Tracker pour avoir des informations à propos des items en vente (beta)",
+      "Correction de la couleur du texte à l'intérieur des inputs dans le thème blanc",
+      "Correction de la page \"Profil\" suite à une modification de l'API de Paladium",
+      "Correction de l'ordre des Métiers qui changeait lors de l'augmentation manuelle de ces derniers"
+    ]
+  },
+  {
     "date": "25-05-2024 - 20h45",
     "events": [
       "Correction du calcul de la production actuelle du PalaClicker",

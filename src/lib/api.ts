@@ -1,19 +1,24 @@
 import {parseCsv} from "@/lib/misc";
 
 import {
+  AhPaladium,
   Building,
   BuildingUpgrade,
-  CPS,
   CategoryUpgrade,
+  CPS,
   GlobalUpgrade,
   ManyUpgrade,
   Metier,
   PaladiumClickerData,
+  PaladiumFactionInfo,
+  PaladiumFactionLeaderboard,
+  PaladiumFriendInfo,
   PaladiumPlayerInfo,
   PaladiumRanking,
+  PaladiumAhHistory,
   PlayerInfo,
   PosteriorUpgrade,
-  TerrainUpgrade, PaladiumFactionInfo, PaladiumFactionLeaderboard, PaladiumFriendInfo
+  TerrainUpgrade, PaladiumAhItemStat
 } from "@/types";
 import axios from "axios";
 import {usePlayerInfoStore} from "@/stores/use-player-info-store.ts";
@@ -99,15 +104,14 @@ export const getAuctionHouseInfo = async (uuid: string) => {
   return res;
 }
 
-export const getFriendsList = async (uuid: string) =>
-{
-    const response = await axios.get<PaladiumFriendInfo>(`${PALADIUM_API_URL}/v1/paladium/player/profile/${uuid}/friends`);
+export const getFriendsList = async (uuid: string) => {
+  const response = await axios.get<PaladiumFriendInfo>(`${PALADIUM_API_URL}/v1/paladium/player/profile/${uuid}/friends`);
 
-    if (response.status !== 200) {
-      throw response;
-    }
+  if (response.status !== 200) {
+    throw response;
+  }
 
-    return response.data;
+  return response.data;
 }
 
 export const getPlayerInfo = async (pseudo: string) => {
@@ -126,7 +130,7 @@ export const getPlayerInfo = async (pseudo: string) => {
 
   const localData = usePlayerInfoStore.getState().data;
 
-  if (localData !== null && localData.username === pseudo && localData.uuid !== "" && new Date().getTime() - localData.last_fetch < 5*60*1000) {
+  if (localData !== null && localData.username === pseudo && localData.uuid !== "" && new Date().getTime() - localData.last_fetch < 5 * 60 * 1000) {
     throw "Profil déjà importé, veuillez patienter 5 minutes avant de réimporter le profil"
   }
 
@@ -167,7 +171,7 @@ export const getPlayerInfo = async (pseudo: string) => {
 
   initialPlayerInfo.faction = {name: paladiumProfil.faction === "" ? "Wilderness" : paladiumProfil.faction};
   initialPlayerInfo.firstJoin = paladiumProfil.firstJoin;
-  initialPlayerInfo.friends =friendsList;
+  initialPlayerInfo.friends = friendsList;
   initialPlayerInfo.money = paladiumProfil.money;
   initialPlayerInfo.timePlayed = paladiumProfil.timePlayed;
   initialPlayerInfo.username = paladiumProfil.username;
@@ -180,7 +184,7 @@ export const getPlayerInfo = async (pseudo: string) => {
   const existingJobs = ["miner", "farmer", "hunter", "alchemist"] as const;
 
   existingJobs.forEach((job, index) => {
-    if(paladiumProfil.jobs[job] === undefined) {
+    if (paladiumProfil.jobs[job] === undefined) {
       return;
     }
     initialPlayerInfo.metier[index].level = paladiumProfil.jobs[job].level;
@@ -244,4 +248,44 @@ export const getGraphData = async () => {
       });
 
   return data;
+}
+
+export const getAhItemData = async () => {
+  return await fetchLocal<AhPaladium[]>("/AhAssets/items_list.json");
+}
+
+export const getPaladiumAhItemFullHistory = async (itemId: string) => {
+  const response = await axios.get<PaladiumAhHistory>(`${PALADIUM_API_URL}/v1/paladium/shop/market/items/${itemId}/history?limit=100&offset=0`);
+
+  if (response.status !== 200) {
+    throw response;
+  }
+
+  const totalCount = response.data.totalCount;
+
+  let data = response.data.data;
+  let offset = 100;
+  let c = 0;
+  while (offset < totalCount && c <= 10) {
+    const response = await axios.get<PaladiumAhHistory>(`${PALADIUM_API_URL}/v1/paladium/shop/market/items/${itemId}/history?offset=${offset}&limit=100`);
+    if (response.status !== 200) {
+      throw response;
+    }
+    data = data.concat(response.data.data);
+    offset += 100;
+    c++;
+  }
+
+  console.assert(data.length === totalCount, "Data length is not equal to totalCount");
+
+  return data;
+}
+
+export const getPaladiumAhItemStats = async (itemId: string) => {
+  const response = await axios.get<PaladiumAhItemStat>(`${PALADIUM_API_URL}/v1/paladium/shop/market/items/${itemId}`);
+
+  if (response.status !== 200) {
+    throw response;
+  }
+  return response.data;
 }

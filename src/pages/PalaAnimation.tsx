@@ -3,18 +3,11 @@
 
 import GradientText from "@/components/shared/GradientText";
 import Layout from "@/components/shared/Layout";
-import {
-  Card,
-  CardDescription,
-  CardHeader,
-  CardTitle
-} from "@/components/ui/card";
+import {Card, CardDescription, CardHeader, CardTitle} from "@/components/ui/card";
 import {useEffect, useState} from "react";
-import {FaHeart, FaSearch} from "react-icons/fa";
+import {FaHeart} from "react-icons/fa";
 import fetchLocal from "@/lib/api.ts";
 import {Button} from "@/components/ui/button.tsx";
-import {Input} from "@/components/ui/input.tsx";
-import {cn} from "@/lib/utils.ts";
 
 
 const PalaAnimationBody = () => {

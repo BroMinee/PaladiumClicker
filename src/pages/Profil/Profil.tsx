@@ -14,6 +14,7 @@ import {AhItemType} from "@/types";
 import {ScrollArea, ScrollBar} from "@/components/ui/scroll-area.tsx";
 import {formatPrice, levensteinDistance} from "@/lib/misc.ts";
 import useFactionLeaderboard from "@/hooks/use-leaderboard-faction.ts";
+import SmallCardInfo from "@/components/shared/SmallCardInfo.tsx";
 
 
 export function GetAllFileNameInFolder() {
@@ -2640,29 +2641,29 @@ const ProfilPage = () => {
 
   if (!playerInfo) {
     return (
-      <Layout>
-        <NoPseudoPage/>
-      </Layout>
+        <Layout>
+          <NoPseudoPage/>
+        </Layout>
     );
   }
 
   return (
-    <>
-      <Layout>
-        <div className="flex flex-col gap-4">
-          <ProfilInfo/>
+      <>
+        <Layout>
+          <div className="flex flex-col gap-4">
+            <ProfilInfo/>
 
-          <MetierList editable={false}/>
+            <MetierList editable={false}/>
 
-          <AhInfo/>
+            <AhInfo/>
 
-          <HeadingSection>Informations de faction</HeadingSection>
-          <FactionInfo/>
+            <HeadingSection>Informations de faction</HeadingSection>
+            <FactionInfo/>
 
 
-        </div>
-      </Layout>
-    </>
+          </div>
+        </Layout>
+      </>
   );
 }
 
@@ -2674,20 +2675,20 @@ const ProfilInfo = () => {
 
   useEffect(() => {
     axios.get(`https://api.ashcon.app/mojang/v2/user/${pseudo}`)
-      .then(response => {
-        const skinUrl = response.data.textures.skin.url;
-        setSkinUrl(skinUrl);
-      })
-      .catch(error => {
-        console.error(error);
-      });
+        .then(response => {
+          const skinUrl = response.data.textures.skin.url;
+          setSkinUrl(skinUrl);
+        })
+        .catch(error => {
+          console.error(error);
+        });
   }, [pseudo]);
 
   if (!playerInfo) {
     return (
-      <Layout>
-        <NoPseudoPage/>
-      </Layout>
+        <Layout>
+          <NoPseudoPage/>
+        </Layout>
     );
   }
 
@@ -2720,65 +2721,23 @@ const ProfilInfo = () => {
           </CardContent>
         </Card>
         <Card className="col-start-1 col-span-2 md:col-start-2 md:col-span-1">
-          <CardContent className="h-full pt-6 flex items-center gap-4">
-            <img src={`${import.meta.env.BASE_URL}/dollar.png`} alt="Icône"
-                 className="h-12 w-12 pixelated  mr-2"/>
-            <div className="flex flex-col gap-2">
-              <span className="font-semibold">Argent actuel</span>
-              <div className="flex gap-2 items-center">
-                <GradientText className="font-bold">
-                  {formatPrice(Math.round(playerInfo["money"]))} $
-                </GradientText>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-        <Card className="col-start-1 col-span-2 md:col-start-2 md:col-span-1">
-          <CardContent className="h-full pt-6 flex items-center gap-4">
-            <img src={`${import.meta.env.BASE_URL}/${getRankImg(rank)}`} alt="Icône"
-                 className="h-12 w-12 pixelated  mr-2"/>
-            <div className="flex flex-col gap-2">
-              <span className="font-semibold">Rang en jeu</span>
-              <div className="flex gap-2 items-center">
-                <GradientText className="font-bold">
-                  {rank}
-                </GradientText>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-        <Card className="col-start-1 col-span-2 md:col-start-2 md:col-span-1">
-          <CardContent className="h-full pt-6 flex items-center gap-4">
-            <img src={`${import.meta.env.BASE_URL}/clock.gif`} alt="Icône"
-                 className="h-12 w-12 pixelated  mr-2"/>
-            <div className="flex flex-col gap-2">
-              <span className="font-semibold">Temps de jeu</span>
-              <div className="flex gap-2 items-center">
-                <GradientText className="font-bold">
-                  {computeTimePlayed(playerInfo["timePlayed"])}
-                </GradientText>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-        <Card className="col-start-1 col-span-2 md:col-start-2 md:col-span-1">
-          <CardContent className="h-full pt-6 flex items-center gap-4">
-            <img src={`${import.meta.env.BASE_URL}/clock.gif`} alt="Icône"
-                 className="h-12 w-12 pixelated  mr-2"/>
-            <div className="flex flex-col gap-2">
-              <span className="font-semibold">Première connexion</span>
-              <div className="flex gap-2 items-center">
-                <GradientText className="font-bold">
-                  {convertEpochToDateUTC2(playerInfo["firstJoin"])}
-                </GradientText>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
 
+          <SmallCardInfo title="Argent actuel" value={`${formatPrice(Math.round(playerInfo["money"]))} $`}
+                         img="dollar.png"/>
+        </Card>
+        <Card className="col-start-1 col-span-2 md:col-start-2 md:col-span-1">
+          <SmallCardInfo title="Rang en jeu" value={rank} img={getRankImg(rank)}/>
+        </Card>
+        <Card className="col-start-1 col-span-2 md:col-start-2 md:col-span-1">
+          <SmallCardInfo title="Temps de jeu" value={computeTimePlayed(playerInfo["timePlayed"])} img="clock.gif"/>
+        </Card>
+        <Card className="col-start-1 col-span-2 md:col-start-2 md:col-span-1">
+          <SmallCardInfo title="Première connexion" value={convertEpochToDateUTC2(playerInfo["firstJoin"])}
+                         img="clock.gif"/>
+        </Card>
 
         <Card
-          className="col-span-2 row-span-4 col-start-2 row-start-1 md:row-span-4 md:col-start-3 md:row-start-1">
+            className="col-span-2 row-span-4 col-start-2 row-start-1 md:row-span-4 md:col-start-3 md:row-start-1">
           <CardHeader>
             Liste d'amis: {playerInfo.friends.totalCount}
           </CardHeader>
@@ -2787,18 +2746,18 @@ const ProfilInfo = () => {
               <div className="flex flex-col justify-center p-4 pt-0 pb-0">
                 {
                   playerInfo.friends?.data?.map((player, index) => (
-                    <Card key={index} onClick={() => handleOnClick(player.name)}
-                          className="hover:scale-105 duration-300 mt-4 ml-1.5 mr-1.5 cursor-pointer">
-                      <CardContent className="md:pt-6 space-y-2">
-                        <div className="flex flex-col items-center justify-center gap-2">
-                          <img src={`https://crafatar.com/avatars/${player.uuid}?size=8`}
-                               alt="Icône"
-                               className="object-cover h-12 w-12 pixelated rounded-md"/>
-                          <div
-                            className="text-primary font-bold text-center w-36">{player.name}</div>
-                        </div>
-                      </CardContent>
-                    </Card>
+                      <Card key={index} onClick={() => handleOnClick(player.name)}
+                            className="hover:scale-105 duration-300 mt-4 ml-1.5 mr-1.5 cursor-pointer">
+                        <CardContent className="md:pt-6 space-y-2">
+                          <div className="flex flex-col items-center justify-center gap-2">
+                            <img src={`https://crafatar.com/avatars/${player.uuid}?size=8`}
+                                 alt="Icône"
+                                 className="object-cover h-12 w-12 pixelated rounded-md"/>
+                            <div
+                                className="text-primary font-bold text-center w-36">{player.name}</div>
+                          </div>
+                        </CardContent>
+                      </Card>
 
                   ))
                 }
@@ -2819,28 +2778,28 @@ const AhInfo = () => {
 
   const totalCount = playerInfo.ah.totalCount;
   return (
-    <Card>
-      <CardHeader>
-        <CardTitle className="flex flex-row items-center">
-          Hôtel de vente - {" "}
-          {totalCount}{" "}
-          {totalCount !== 1 ? "ventes en cours" : "vente en cours"}
-        </CardTitle>
+      <Card>
+        <CardHeader>
+          <CardTitle className="flex flex-row items-center">
+            Hôtel de vente - {" "}
+            {totalCount}{" "}
+            {totalCount !== 1 ? "ventes en cours" : "vente en cours"}
+          </CardTitle>
 
-      </CardHeader>
-      <CardContent>
-        <ScrollArea>
-          <div className="flex gap-4 pb-3">
-            {totalCount !== 0 &&
-              playerInfo["ah"]["data"].map((e, index) => {
-                return <AhItem key={index} item={e}/>
-              })
-            }
-          </div>
-          <ScrollBar orientation="horizontal"/>
-        </ScrollArea>
-      </CardContent>
-    </Card>
+        </CardHeader>
+        <CardContent>
+          <ScrollArea>
+            <div className="flex gap-4 pb-3">
+              {totalCount !== 0 &&
+                  playerInfo["ah"]["data"].map((e, index) => {
+                    return <AhItem key={index} item={e}/>
+                  })
+              }
+            </div>
+            <ScrollBar orientation="horizontal"/>
+          </ScrollArea>
+        </CardContent>
+      </Card>
   )
 }
 
@@ -2892,33 +2851,33 @@ const AhItem = ({item}: AhItemsProps) => {
     displayName = "StorageDrawers 1x1";
 
   return (
-    <Card>
-      <CardContent className="pt-6 space-y-2">
-        <div className="flex flex-col items-center justify-center gap-2">
-          <img src={`${import.meta.env.BASE_URL}/AH_img/${closestItemName}.png`} alt="Icône"
-               className="object-cover h-12 w-auto pixelated"/>
-          <span
-            className="text-primary text-sm">{quantity}x {renamed ? `${displayName} renommé en ${name}` : `${name}`}</span>
-        </div>
-        <div className="space-y-2">
-          <div className="text-sm">
-            <img src={`${import.meta.env.BASE_URL}/dollar.png`} alt="Icône"
-                 className="object-cover h-10 w-10 inline-block pixelated mr-2"/>
-            Prix: {formatPrice(price)} $
+      <Card>
+        <CardContent className="pt-6 space-y-2">
+          <div className="flex flex-col items-center justify-center gap-2">
+            <img src={`${import.meta.env.BASE_URL}/AH_img/${closestItemName}.png`} alt="Icône"
+                 className="object-cover h-12 w-auto pixelated"/>
+            <span
+                className="text-primary text-sm">{quantity}x {renamed ? `${displayName} renommé en ${name}` : `${name}`}</span>
           </div>
-          <div className="text-sm">
-            <img src={`${import.meta.env.BASE_URL}/pbs.png`} alt="Icône"
-                 className="object-cover h-10 w-10 pixelated inline-block mr-2"/>
-            Prix en pbs: {formatPrice(pricePb)}
+          <div className="space-y-2">
+            <div className="text-sm">
+              <img src={`${import.meta.env.BASE_URL}/dollar.png`} alt="Icône"
+                   className="object-cover h-10 w-10 inline-block pixelated mr-2"/>
+              Prix: {formatPrice(price)} $
+            </div>
+            <div className="text-sm">
+              <img src={`${import.meta.env.BASE_URL}/pbs.png`} alt="Icône"
+                   className="object-cover h-10 w-10 pixelated inline-block mr-2"/>
+              Prix en pbs: {formatPrice(pricePb)}
+            </div>
+            <div className="text-sm">
+              <img src={`${import.meta.env.BASE_URL}/clock.gif`} alt="Icône"
+                   className="object-cover h-10 w-10 pixelated inline-block mr-2"/>
+              Expire le : {expireAt}
+            </div>
           </div>
-          <div className="text-sm">
-            <img src={`${import.meta.env.BASE_URL}/clock.gif`} alt="Icône"
-                 className="object-cover h-10 w-10 pixelated inline-block mr-2"/>
-            Expire le : {expireAt}
-          </div>
-        </div>
-      </CardContent>
-    </Card>
+        </CardContent>
+      </Card>
   )
 }
 
@@ -2943,103 +2902,86 @@ const FactionInfo = () => {
 
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-      <Card className="md:row-span-2">
-        <CardContent className="h-full pt-6 flex gap-4">
-          <img src={`${import.meta.env.BASE_URL}/BookAndQuill.webp`} alt="BookAndQuill.png"
-               className="h-12 w-12"/>
-          <div className="flex flex-col gap-2">
-            <span className="font-semibold">{name}</span>
-            <div className="flex gap-2 items-center">
-              <GradientText className="font-bold">
-                {factionDescription}
-              </GradientText>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <Card className="md:row-span-2">
+          <CardContent className="h-full pt-6 flex gap-4">
+            <img src={`${import.meta.env.BASE_URL}/BookAndQuill.webp`} alt="BookAndQuill.png"
+                 className="h-12 w-12"/>
+            <div className="flex flex-col gap-2">
+              <span className="font-semibold">{name}</span>
+              <div className="flex gap-2 items-center">
+                <GradientText className="font-bold">
+                  {factionDescription}
+                </GradientText>
+              </div>
             </div>
-          </div>
-        </CardContent>
-      </Card>
-      <Card>
-        <CardContent className="h-full pt-6 flex items-center gap-4">
-          <FaTachometerAlt className="w-12 h-12"/>
-          <div className="flex flex-col gap-2">
-            <span className="font-semibold">Nombre de membre</span>
-            <div className="flex gap-2 items-center">
-              <GradientText className="font-bold">
-                {formatPrice(playerList?.length)}
-              </GradientText>
-              Membre{playerList?.length !== undefined && playerList?.length > 1 ? "s" : ""}
+          </CardContent>
+        </Card>
+        <Card>
+          <CardContent className="h-full pt-6 flex items-center gap-4">
+            <FaTachometerAlt className="w-12 h-12"/>
+            <div className="flex flex-col gap-2">
+              <span className="font-semibold">Nombre de membre</span>
+              <div className="flex gap-2 items-center">
+                <GradientText className="font-bold">
+                  {formatPrice(playerList?.length)}
+                </GradientText>
+                Membre{playerList?.length !== undefined && playerList?.length > 1 ? "s" : ""}
+              </div>
             </div>
-          </div>
-        </CardContent>
-      </Card>
-      <Card>
-        <CardContent className="h-full pt-6 flex items-center gap-4">
-          <FaMedal className="w-12 h-12"/>
-          <div className="flex flex-col gap-2">
-            <span className="font-semibold">Classement</span>
-            <div className="flex gap-2 items-center">
-              Top
-              <GradientText className="font-bold">
-                #{factionClassement}
-              </GradientText>
+          </CardContent>
+        </Card>
+        <Card>
+          <CardContent className="h-full pt-6 flex items-center gap-4">
+            <FaMedal className="w-12 h-12"/>
+            <div className="flex flex-col gap-2">
+              <span className="font-semibold">Classement</span>
+              <div className="flex gap-2 items-center">
+                Top
+                <GradientText className="font-bold">
+                  #{factionClassement}
+                </GradientText>
+              </div>
             </div>
+          </CardContent>
+        </Card>
+        <Card>
+          <SmallCardInfo title="Niveau - [xp]" value={`${level} - [${formatPrice(xp)}]`} img="ExperienceOrb.webp"/>
+        </Card>
+        <Card>
+          <SmallCardInfo title="Niveau - [xp]" value={convertEpochToDateUTC2(createdAt)} img="clock.gif"/>
+        </Card>
+        <ScrollArea className="md:col-span-3">
+          <div className="flex gap-4 pb-3">
+            {
+              playerList?.map((player, index) => (
+                  <Card key={index} onClick={() => handleOnClick(player.username)}
+                        className="hover:scale-105 duration-300 mt-4 ml-1.5 mr-1.5 cursor-pointer">
+                    <CardContent className="pt-6 space-y-2">
+                      <div className="flex flex-col items-center justify-center gap-2">
+                        <img src={`https://crafatar.com/avatars/${player.uuid}?size=8`} alt="Icône"
+                             className="object-cover h-12 w-12 pixelated rounded-md"/>
+                        <div className="text-primary font-bold text-center w-36">{player.username}</div>
+                      </div>
+                      <div className="space-y-2">
+                        <div className="text-sm">
+                          <FaPercentage className="h-4 w-4 mr-2 inline-block"/>
+                          Rôle: {player.group}
+                        </div>
+                        <div className="text-sm">
+                          <img src={`${import.meta.env.BASE_URL}/clock.gif`} alt="Icône"
+                               className="object-cover h-4 w-4 inline-block pixelated mr-2"/>
+                          Rejoint le: {convertEpochToDateUTC2(player.joinedAt)}
+                        </div>
+                      </div>
+                    </CardContent>
+                  </Card>
+              ))
+            }
           </div>
-        </CardContent>
-      </Card>
-      <Card>
-        <CardContent className="h-full pt-6 flex items-center gap-4">
-          <img src={`${import.meta.env.BASE_URL}/ExperienceOrb.webp`} alt="BookAndQuill.png"
-               className="h-12 w-12"/>
-          <div className="flex flex-col gap-2">
-            <span className="font-semibold">Niveau - [xp]</span>
-            <GradientText className="font-bold">
-              {`${level} - [${formatPrice(xp)}]`}
-            </GradientText>
-          </div>
-        </CardContent>
-      </Card>
-      <Card>
-        <CardContent className="h-full pt-6 flex items-center gap-4">
-          <img src={`${import.meta.env.BASE_URL}/clock.gif`} alt="BookAndQuill.png" className="h-12 w-12"/>
-          <div className="flex flex-col gap-2">
-            <span className="font-semibold">Créée le:</span>
-            <GradientText className="font-bold">
-              {convertEpochToDateUTC2(createdAt)}
-            </GradientText>
-          </div>
-        </CardContent>
-      </Card>
-      <ScrollArea className="md:col-span-3">
-        <div className="flex gap-4 pb-3">
-          {
-            playerList?.map((player, index) => (
-              <Card key={index} onClick={() => handleOnClick(player.username)}
-                    className="hover:scale-105 duration-300 mt-4 ml-1.5 mr-1.5 cursor-pointer">
-                <CardContent className="pt-6 space-y-2">
-                  <div className="flex flex-col items-center justify-center gap-2">
-                    <img src={`https://crafatar.com/avatars/${player.uuid}?size=8`} alt="Icône"
-                         className="object-cover h-12 w-12 pixelated rounded-md"/>
-                    <div className="text-primary font-bold text-center w-36">{player.username}</div>
-                  </div>
-                  <div className="space-y-2">
-                    <div className="text-sm">
-                      <FaPercentage className="h-4 w-4 mr-2 inline-block"/>
-                      Rôle: {player.group}
-                    </div>
-                    <div className="text-sm">
-                      <img src={`${import.meta.env.BASE_URL}/clock.gif`} alt="Icône"
-                           className="object-cover h-4 w-4 inline-block pixelated mr-2"/>
-                      Rejoint le: {convertEpochToDateUTC2(player.joinedAt)}
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-            ))
-          }
-        </div>
-        <ScrollBar orientation="horizontal"/>
-      </ScrollArea>
-    </div>
+          <ScrollBar orientation="horizontal"/>
+        </ScrollArea>
+      </div>
   )
 }
 

@@ -1,13 +1,7 @@
-import { Button } from '@/components/ui/button';
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger
-} from '@/components/ui/dialog';
-import { getGraphData } from "@/lib/api";
-import { useEffect, useMemo, useState } from 'react';
+import {Button} from '@/components/ui/button';
+import {Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger} from '@/components/ui/dialog';
+import {getGraphData} from "@/lib/api";
+import {useEffect, useMemo, useState} from 'react';
 import Plot from "react-plotly.js";
 
 const Graph = ({defaultOpen = false}) => {

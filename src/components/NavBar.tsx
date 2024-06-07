@@ -10,6 +10,7 @@ import Setting from "@/components/shared/Setting.tsx";
 
 const links: Array<{ path: string, label: string }> = [
   {path: "/profil", label: "Profil"},
+  {path: "/ah", label: "AH"},
   {path: "/xp-calculator", label: "Calculateur d'xp"},
   {path: "/", label: "PalaClicker Optimizer"},
   {path: "/pala-animation", label: "PalaAnimation Trainer"},

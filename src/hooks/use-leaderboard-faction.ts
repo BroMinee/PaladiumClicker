@@ -1,6 +1,6 @@
 import {getFactionLeaderboard} from "@/lib/api";
-import { usePlayerInfoStore } from "@/stores/use-player-info-store";
-import { useQuery } from "@tanstack/react-query";
+import {usePlayerInfoStore} from "@/stores/use-player-info-store";
+import {useQuery} from "@tanstack/react-query";
 
 const useFactionLeaderboard = () => {
   const { data: playerInfo } = usePlayerInfoStore();

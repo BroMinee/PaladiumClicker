@@ -5,20 +5,13 @@ import Tuto from "@/components/Tuto";
 import GradientText from "@/components/shared/GradientText";
 import HeadingSection from "@/components/shared/HeadingSection";
 import Layout from "@/components/shared/Layout";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle
-} from "@/components/ui/card";
+import {Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle} from "@/components/ui/card";
 import BuildingList from "@/pages/OptimizerClicker/Components/BuildingList";
 import FallingClickImage from "@/pages/OptimizerClicker/Components/FallingClickImage";
-import { usePlayerInfoStore } from "@/stores/use-player-info-store";
-import { UpgradeKey } from "@/types";
-import { Fragment, useState } from "react";
-import { FaHeart } from "react-icons/fa";
+import {usePlayerInfoStore} from "@/stores/use-player-info-store";
+import {UpgradeKey} from "@/types";
+import {Fragment, useState} from "react";
+import {FaHeart} from "react-icons/fa";
 import ClickList from "./Components/ClickList";
 import Graph from "./Components/Graph";
 import ImportProfil from "./Components/ImportProfil";

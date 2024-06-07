@@ -236,3 +236,31 @@ export type New = {
   date: string,
   events: string[]
 }
+
+export type AhPaladium = {
+  value: string,
+  label: string,
+}
+
+export type AhItemHistory = {
+  date: string,
+  price: number,
+  pricePb: number,
+  quantity: number,
+  sells: number,
+  sellsPb: number,
+}
+
+export type PaladiumAhHistory = {
+  data: AhItemHistory[],
+  totalCount: number
+}
+
+export type PaladiumAhItemStat = {
+  name: string,
+  countListings: number,
+  quantityAvailable: number,
+  quantitySoldTotal: number,
+  priceSum: number,
+  priceAverage: number,
+}

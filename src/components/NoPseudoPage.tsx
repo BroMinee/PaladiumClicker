@@ -1,18 +1,12 @@
 import GradientText from "@/components/shared/GradientText";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle
-} from "@/components/ui/card";
+import {Card, CardContent, CardDescription, CardHeader, CardTitle} from "@/components/ui/card";
 import ImportProfil from "@/pages/OptimizerClicker/Components/ImportProfil";
 import {FaHeart} from "react-icons/fa";
 import Contributors from "@/components/Contributors.tsx";
 import Discord from "@/components/Discord.tsx";
 
-
 const NoPseudoPage = () => {
+
   return (
       <div className="flex flex-col gap-4">
         <Card>

@@ -1,16 +1,16 @@
 // @ts-nocheck - A RETIRER APRES AVOIR CORRIGE LE FICHIER
 
-import { computeRPS } from "@/pages/OptimizerClicker/Components/BuildingList";
-import { checkCondition, computePrice, formatPrice } from "@/lib/misc";
+import {computeRPS} from "@/pages/OptimizerClicker/Components/BuildingList";
+import {checkCondition, computePrice, formatPrice} from "@/lib/misc";
 import {buyBuilding, computeXBuildingAhead, Stat} from "./Stats";
-import { PlayerInfo } from "@/types";
-import { usePlayerInfoStore } from "@/stores/use-player-info-store";
-import { useEffect, useState } from "react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import {PlayerInfo} from "@/types";
+import {usePlayerInfoStore} from "@/stores/use-player-info-store";
+import {useEffect, useState} from "react";
+import {Card, CardContent, CardHeader, CardTitle} from "@/components/ui/card";
 import GradientText from "@/components/shared/GradientText";
-import { Button } from "@/components/ui/button";
-import { useRpsStore } from "@/stores/use-rps-store";
-import { FaCoins, FaRandom } from "react-icons/fa";
+import {Button} from "@/components/ui/button";
+import {useRpsStore} from "@/stores/use-rps-store";
+import {FaCoins, FaRandom} from "react-icons/fa";
 
 const RPS = () => {
   const { data: playerInfo, setPlayerInfo } = usePlayerInfoStore();

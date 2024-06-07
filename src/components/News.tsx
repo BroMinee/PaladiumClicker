@@ -1,15 +1,9 @@
-import { Button } from "@/components/ui/button";
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger
-} from "@/components/ui/dialog";
-import { ScrollArea } from "@/components/ui/scroll-area";
+import {Button} from "@/components/ui/button";
+import {Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger} from "@/components/ui/dialog";
+import {ScrollArea} from "@/components/ui/scroll-area";
 import fetchDataOnPublicURL from "@/lib/api";
-import type { New } from "@/types";
-import React, { useEffect } from "react";
+import type {New} from "@/types";
+import React, {useEffect} from "react";
 import ReactAudioPlayer from "react-audio-player";
 import Discord from "@/components/Discord.tsx";
 

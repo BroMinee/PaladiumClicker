@@ -1,0 +1,4334 @@
+[
+  {
+    "value": "CRYSTAL",
+    "label": "Crystal"
+  },
+  {
+    "value": "CamoflaugePaste",
+    "label": "Camoflaugepaste"
+  },
+  {
+    "value": "DIAMOND",
+    "label": "Diamond"
+  },
+  {
+    "value": "DIRTCHEST9000",
+    "label": "Dirtchest9000"
+  },
+  {
+    "value": "GOLD",
+    "label": "Gold"
+  },
+  {
+    "value": "IRON",
+    "label": "Iron"
+  },
+  {
+    "value": "LEGENDARYSTONE-CHAOS",
+    "label": "Legendarystone chaos"
+  },
+  {
+    "value": "LEGENDARYSTONE-FORTUNE",
+    "label": "Legendarystone fortune"
+  },
+  {
+    "value": "LEGENDARYSTONE-INVISIBILITY",
+    "label": "Legendarystone invisibility"
+  },
+  {
+    "value": "LEGENDARYSTONE-JOBS",
+    "label": "Legendarystone jobs"
+  },
+  {
+    "value": "LEGENDARYSTONE-POWER",
+    "label": "Legendarystone power"
+  },
+  {
+    "value": "LEGENDARYSTONE-RANDOM",
+    "label": "Legendarystone random"
+  },
+  {
+    "value": "LEGENDARYSTONE-TELEPORTATION",
+    "label": "Legendarystone teleportation"
+  },
+  {
+    "value": "airMin-Boots",
+    "label": "Airmin boots"
+  },
+  {
+    "value": "amethyst-axe",
+    "label": "Amethyst axe"
+  },
+  {
+    "value": "amethyst-boots",
+    "label": "Amethyst boots"
+  },
+  {
+    "value": "amethyst-chestplate",
+    "label": "Amethyst chestplate"
+  },
+  {
+    "value": "amethyst-helmet",
+    "label": "Amethyst helmet"
+  },
+  {
+    "value": "amethyst-ingot",
+    "label": "Amethyst ingot"
+  },
+  {
+    "value": "amethyst-leggings",
+    "label": "Amethyst leggings"
+  },
+  {
+    "value": "amethyst-pickaxe",
+    "label": "Amethyst pickaxe"
+  },
+  {
+    "value": "amethyst-radius-hoe",
+    "label": "Amethyst radius hoe"
+  },
+  {
+    "value": "amethyst-shovel",
+    "label": "Amethyst shovel"
+  },
+  {
+    "value": "amethyst-sword",
+    "label": "Amethyst sword"
+  },
+  {
+    "value": "amethystMixedCoal",
+    "label": "Amethystmixedcoal"
+  },
+  {
+    "value": "amethyste-portal-key",
+    "label": "Amethyste portal key"
+  },
+  {
+    "value": "angelicwater",
+    "label": "Angelicwater"
+  },
+  {
+    "value": "anti-fuze",
+    "label": "Anti fuze"
+  },
+  {
+    "value": "apple",
+    "label": "Apple"
+  },
+  {
+    "value": "april-fish",
+    "label": "April fish"
+  },
+  {
+    "value": "arrow",
+    "label": "Arrow"
+  },
+  {
+    "value": "arrow-frost",
+    "label": "Arrow frost"
+  },
+  {
+    "value": "arrow-poison",
+    "label": "Arrow poison"
+  },
+  {
+    "value": "arrow-slowness",
+    "label": "Arrow slowness"
+  },
+  {
+    "value": "arrow-switch",
+    "label": "Arrow switch"
+  },
+  {
+    "value": "bait",
+    "label": "Bait"
+  },
+  {
+    "value": "balaclava-helmet",
+    "label": "Balaclava helmet"
+  },
+  {
+    "value": "bamboo-boat",
+    "label": "Bamboo boat"
+  },
+  {
+    "value": "banana",
+    "label": "Banana"
+  },
+  {
+    "value": "bandage",
+    "label": "Bandage"
+  },
+  {
+    "value": "baseclaim-compass",
+    "label": "Baseclaim compass"
+  },
+  {
+    "value": "bass",
+    "label": "Bass"
+  },
+  {
+    "value": "bed",
+    "label": "Bed"
+  },
+  {
+    "value": "beefCooked",
+    "label": "Beefcooked"
+  },
+  {
+    "value": "beefRaw",
+    "label": "Beefraw"
+  },
+  {
+    "value": "biome-painter",
+    "label": "Biome painter"
+  },
+  {
+    "value": "bionic-snowball",
+    "label": "Bionic snowball"
+  },
+  {
+    "value": "blaze-and-steel",
+    "label": "Blaze and steel"
+  },
+  {
+    "value": "blazePowder",
+    "label": "Blazepowder"
+  },
+  {
+    "value": "blazeRod",
+    "label": "Blazerod"
+  },
+  {
+    "value": "blue-glueball",
+    "label": "Blue glueball"
+  },
+  {
+    "value": "boat",
+    "label": "Boat"
+  },
+  {
+    "value": "boatfurnace",
+    "label": "Boatfurnace"
+  },
+  {
+    "value": "bone",
+    "label": "Bone"
+  },
+  {
+    "value": "book",
+    "label": "Book"
+  },
+  {
+    "value": "bootsCloth",
+    "label": "Bootscloth"
+  },
+  {
+    "value": "bootsIron",
+    "label": "Bootsiron"
+  },
+  {
+    "value": "bow",
+    "label": "Bow"
+  },
+  {
+    "value": "bowl",
+    "label": "Bowl"
+  },
+  {
+    "value": "bowspeedmodifier",
+    "label": "Bowspeedmodifier"
+  },
+  {
+    "value": "bread",
+    "label": "Bread"
+  },
+  {
+    "value": "brewingStand",
+    "label": "Brewingstand"
+  },
+  {
+    "value": "brick",
+    "label": "Brick"
+  },
+  {
+    "value": "broadsword-amethyst",
+    "label": "Broadsword amethyst"
+  },
+  {
+    "value": "broadsword-paladium",
+    "label": "Broadsword paladium"
+  },
+  {
+    "value": "broadsword-titane",
+    "label": "Broadsword titane"
+  },
+  {
+    "value": "bucket",
+    "label": "Bucket"
+  },
+  {
+    "value": "bucketLava",
+    "label": "Bucketlava"
+  },
+  {
+    "value": "bucketWater",
+    "label": "Bucketwater"
+  },
+  {
+    "value": "builder-wand-0",
+    "label": "Builder wand 0"
+  },
+  {
+    "value": "builder-wand-1",
+    "label": "Builder wand 1"
+  },
+  {
+    "value": "builder-wand-2",
+    "label": "Builder wand 2"
+  },
+  {
+    "value": "builder-wand-3",
+    "label": "Builder wand 3"
+  },
+  {
+    "value": "cake",
+    "label": "Cake"
+  },
+  {
+    "value": "calcium",
+    "label": "Calcium"
+  },
+  {
+    "value": "canon-ammo-damage-2",
+    "label": "Canon ammo damage 2"
+  },
+  {
+    "value": "canon-ammo-explosive-1",
+    "label": "Canon ammo explosive 1"
+  },
+  {
+    "value": "canon-ammo-human-launcher-0",
+    "label": "Canon ammo human launcher 0"
+  },
+  {
+    "value": "canon-ammo-human-launcher-1",
+    "label": "Canon ammo human launcher 1"
+  },
+  {
+    "value": "capture-stone",
+    "label": "Capture stone"
+  },
+  {
+    "value": "capture-sword",
+    "label": "Capture sword"
+  },
+  {
+    "value": "carp",
+    "label": "Carp"
+  },
+  {
+    "value": "carrots",
+    "label": "Carrots"
+  },
+  {
+    "value": "cauldron",
+    "label": "Cauldron"
+  },
+  {
+    "value": "cave-helmet",
+    "label": "Cave helmet"
+  },
+  {
+    "value": "cavern-hammer",
+    "label": "Cavern hammer"
+  },
+  {
+    "value": "charcoal",
+    "label": "Charcoal"
+  },
+  {
+    "value": "chase",
+    "label": "Chase"
+  },
+  {
+    "value": "chestexplorer",
+    "label": "Chestexplorer"
+  },
+  {
+    "value": "chestplateChain",
+    "label": "Chestplatechain"
+  },
+  {
+    "value": "chestplateCloth",
+    "label": "Chestplatecloth"
+  },
+  {
+    "value": "chestplateDiamond",
+    "label": "Chestplatediamond"
+  },
+  {
+    "value": "chestplateGold",
+    "label": "Chestplategold"
+  },
+  {
+    "value": "chestplateIron",
+    "label": "Chestplateiron"
+  },
+  {
+    "value": "chickenCooked",
+    "label": "Chickencooked"
+  },
+  {
+    "value": "chickenRaw",
+    "label": "Chickenraw"
+  },
+  {
+    "value": "chisel",
+    "label": "Chisel"
+  },
+  {
+    "value": "chocolate-egg",
+    "label": "Chocolate egg"
+  },
+  {
+    "value": "chocolate-milk",
+    "label": "Chocolate milk"
+  },
+  {
+    "value": "chunk-analyser",
+    "label": "Chunk analyser"
+  },
+  {
+    "value": "clash-kumiz",
+    "label": "Clash kumiz"
+  },
+  {
+    "value": "clay",
+    "label": "Clay"
+  },
+  {
+    "value": "clock",
+    "label": "Clock"
+  },
+  {
+    "value": "coal",
+    "label": "Coal"
+  },
+  {
+    "value": "cobblebreaker-amethyst-upgrade",
+    "label": "Cobblebreaker amethyst upgrade"
+  },
+  {
+    "value": "cobblebreaker-paladium-upgrade",
+    "label": "Cobblebreaker paladium upgrade"
+  },
+  {
+    "value": "cobblebreaker-titane-upgrade",
+    "label": "Cobblebreaker titane upgrade"
+  },
+  {
+    "value": "comparator",
+    "label": "Comparator"
+  },
+  {
+    "value": "compass",
+    "label": "Compass"
+  },
+  {
+    "value": "compressed-amethyst",
+    "label": "Compressed amethyst"
+  },
+  {
+    "value": "compressed-paladium",
+    "label": "Compressed paladium"
+  },
+  {
+    "value": "compressed-titane",
+    "label": "Compressed titane"
+  },
+  {
+    "value": "compressed-xp-berry",
+    "label": "Compressed xp berry"
+  },
+  {
+    "value": "cookie",
+    "label": "Cookie"
+  },
+  {
+    "value": "corrupted-chrono",
+    "label": "Corrupted chrono"
+  },
+  {
+    "value": "corrupted-splash-potion",
+    "label": "Corrupted splash potion"
+  },
+  {
+    "value": "corrupted-sword",
+    "label": "Corrupted sword"
+  },
+  {
+    "value": "cosmetic-hat-leprechaun",
+    "label": "Cosmetic hat leprechaun"
+  },
+  {
+    "value": "cosmetic-particles-flame",
+    "label": "Cosmetic particles flame"
+  },
+  {
+    "value": "cosmetic-skin-dirty",
+    "label": "Cosmetic skin dirty"
+  },
+  {
+    "value": "cosmetic-skin-futurist",
+    "label": "Cosmetic skin futurist"
+  },
+  {
+    "value": "cosmetics",
+    "label": "Cosmetics"
+  },
+  {
+    "value": "couac-sword",
+    "label": "Couac sword"
+  },
+  {
+    "value": "crab-pliers",
+    "label": "Crab pliers"
+  },
+  {
+    "value": "cursed-chocolate-egg",
+    "label": "Cursed chocolate egg"
+  },
+  {
+    "value": "damagestick",
+    "label": "Damagestick"
+  },
+  {
+    "value": "dark-axe",
+    "label": "Dark axe"
+  },
+  {
+    "value": "dark-knight-helmet",
+    "label": "Dark knight helmet"
+  },
+  {
+    "value": "dark-pickaxe",
+    "label": "Dark pickaxe"
+  },
+  {
+    "value": "dark-shovel",
+    "label": "Dark shovel"
+  },
+  {
+    "value": "dark-sword",
+    "label": "Dark sword"
+  },
+  {
+    "value": "diamond",
+    "label": "Diamond"
+  },
+  {
+    "value": "diamondString",
+    "label": "Diamondstring"
+  },
+  {
+    "value": "diode",
+    "label": "Diode"
+  },
+  {
+    "value": "diorite-diorite",
+    "label": "Diorite diorite"
+  },
+  {
+    "value": "dolphin-noise-box",
+    "label": "Dolphin noise box"
+  },
+  {
+    "value": "doorWood",
+    "label": "Doorwood"
+  },
+  {
+    "value": "dragonRoll",
+    "label": "Dragonroll"
+  },
+  {
+    "value": "dragonScales",
+    "label": "Dragonscales"
+  },
+  {
+    "value": "dyePowder-black",
+    "label": "Dyepowder black"
+  },
+  {
+    "value": "dyePowder-blue",
+    "label": "Dyepowder blue"
+  },
+  {
+    "value": "dyePowder-brown",
+    "label": "Dyepowder brown"
+  },
+  {
+    "value": "dyePowder-gray",
+    "label": "Dyepowder gray"
+  },
+  {
+    "value": "dyePowder-green",
+    "label": "Dyepowder green"
+  },
+  {
+    "value": "dyePowder-lightBlue",
+    "label": "Dyepowder lightblue"
+  },
+  {
+    "value": "dyePowder-pink",
+    "label": "Dyepowder pink"
+  },
+  {
+    "value": "dyePowder-red",
+    "label": "Dyepowder red"
+  },
+  {
+    "value": "dyePowder-white",
+    "label": "Dyepowder white"
+  },
+  {
+    "value": "dyePowder-yellow",
+    "label": "Dyepowder yellow"
+  },
+  {
+    "value": "dynamite",
+    "label": "Dynamite"
+  },
+  {
+    "value": "dynamite-big",
+    "label": "Dynamite big"
+  },
+  {
+    "value": "dynamite-ninja",
+    "label": "Dynamite ninja"
+  },
+  {
+    "value": "easter-bunny-boots",
+    "label": "Easter bunny boots"
+  },
+  {
+    "value": "easter-bunny-chestplate",
+    "label": "Easter bunny chestplate"
+  },
+  {
+    "value": "easter-bunny-helmet",
+    "label": "Easter bunny helmet"
+  },
+  {
+    "value": "easter-bunny-leggings",
+    "label": "Easter bunny leggings"
+  },
+  {
+    "value": "easter-egg",
+    "label": "Easter egg"
+  },
+  {
+    "value": "easter-totem",
+    "label": "Easter totem"
+  },
+  {
+    "value": "echanted-plate",
+    "label": "Echanted plate"
+  },
+  {
+    "value": "egg",
+    "label": "Egg"
+  },
+  {
+    "value": "emerald",
+    "label": "Emerald"
+  },
+  {
+    "value": "emptyMap",
+    "label": "Emptymap"
+  },
+  {
+    "value": "enchantedBook",
+    "label": "Enchantedbook"
+  },
+  {
+    "value": "enderPearl",
+    "label": "Enderpearl"
+  },
+  {
+    "value": "endium-battery",
+    "label": "Endium battery"
+  },
+  {
+    "value": "endium-fake-boots",
+    "label": "Endium fake boots"
+  },
+  {
+    "value": "endium-fake-chestplate",
+    "label": "Endium fake chestplate"
+  },
+  {
+    "value": "endium-fake-helmet",
+    "label": "Endium fake helmet"
+  },
+  {
+    "value": "endium-fake-leggings",
+    "label": "Endium fake leggings"
+  },
+  {
+    "value": "endium-fragment",
+    "label": "Endium fragment"
+  },
+  {
+    "value": "endium-heart",
+    "label": "Endium heart"
+  },
+  {
+    "value": "endium-ingot",
+    "label": "Endium ingot"
+  },
+  {
+    "value": "endium-nugget",
+    "label": "Endium nugget"
+  },
+  {
+    "value": "endium-pollen",
+    "label": "Endium pollen"
+  },
+  {
+    "value": "endium-portal-key",
+    "label": "Endium portal key"
+  },
+  {
+    "value": "endium-rod",
+    "label": "Endium rod"
+  },
+  {
+    "value": "excavator-amethyst",
+    "label": "Excavator amethyst"
+  },
+  {
+    "value": "excavator-titane",
+    "label": "Excavator titane"
+  },
+  {
+    "value": "exp-fish",
+    "label": "Exp fish"
+  },
+  {
+    "value": "expBottle",
+    "label": "Expbottle"
+  },
+  {
+    "value": "exploration-compass",
+    "label": "Exploration compass"
+  },
+  {
+    "value": "extrapolatedbucket",
+    "label": "Extrapolatedbucket"
+  },
+  {
+    "value": "eyeOfEnder",
+    "label": "Eyeofender"
+  },
+  {
+    "value": "fake-chocolate-egg",
+    "label": "Fake chocolate egg"
+  },
+  {
+    "value": "fake-money",
+    "label": "Fake money"
+  },
+  {
+    "value": "fallen-axe",
+    "label": "Fallen axe"
+  },
+  {
+    "value": "fallen-pickaxe",
+    "label": "Fallen pickaxe"
+  },
+  {
+    "value": "fallen-shovel",
+    "label": "Fallen shovel"
+  },
+  {
+    "value": "fallen-sword",
+    "label": "Fallen sword"
+  },
+  {
+    "value": "fastsword-amethyst",
+    "label": "Fastsword amethyst"
+  },
+  {
+    "value": "fastsword-paladium",
+    "label": "Fastsword paladium"
+  },
+  {
+    "value": "fastsword-titane",
+    "label": "Fastsword titane"
+  },
+  {
+    "value": "feather",
+    "label": "Feather"
+  },
+  {
+    "value": "fermentedSpiderEye",
+    "label": "Fermentedspidereye"
+  },
+  {
+    "value": "findium",
+    "label": "Findium"
+  },
+  {
+    "value": "fire-axe",
+    "label": "Fire axe"
+  },
+  {
+    "value": "fire-pickaxe",
+    "label": "Fire pickaxe"
+  },
+  {
+    "value": "fire-shovel",
+    "label": "Fire shovel"
+  },
+  {
+    "value": "fire-sword",
+    "label": "Fire sword"
+  },
+  {
+    "value": "fireworks",
+    "label": "Fireworks"
+  },
+  {
+    "value": "fish-clownfish-raw",
+    "label": "Fish clownfish raw"
+  },
+  {
+    "value": "fish-cod-cooked",
+    "label": "Fish cod cooked"
+  },
+  {
+    "value": "fish-cod-raw",
+    "label": "Fish cod raw"
+  },
+  {
+    "value": "fish-pufferfish-raw",
+    "label": "Fish pufferfish raw"
+  },
+  {
+    "value": "fish-salmon-cooked",
+    "label": "Fish salmon cooked"
+  },
+  {
+    "value": "fish-salmon-raw",
+    "label": "Fish salmon raw"
+  },
+  {
+    "value": "fishingRod",
+    "label": "Fishingrod"
+  },
+  {
+    "value": "flask0",
+    "label": "Flask0"
+  },
+  {
+    "value": "flask1",
+    "label": "Flask1"
+  },
+  {
+    "value": "flask3",
+    "label": "Flask3"
+  },
+  {
+    "value": "flask4",
+    "label": "Flask4"
+  },
+  {
+    "value": "flask5",
+    "label": "Flask5"
+  },
+  {
+    "value": "flask6",
+    "label": "Flask6"
+  },
+  {
+    "value": "flint",
+    "label": "Flint"
+  },
+  {
+    "value": "flintAndSteel",
+    "label": "Flintandsteel"
+  },
+  {
+    "value": "flowerPot",
+    "label": "Flowerpot"
+  },
+  {
+    "value": "follow-compass",
+    "label": "Follow compass"
+  },
+  {
+    "value": "food",
+    "label": "Food"
+  },
+  {
+    "value": "fruits-chervil",
+    "label": "Fruits chervil"
+  },
+  {
+    "value": "fruits-eggplants",
+    "label": "Fruits eggplants"
+  },
+  {
+    "value": "fruits-kiwano",
+    "label": "Fruits kiwano"
+  },
+  {
+    "value": "fruits-orangeblue",
+    "label": "Fruits orangeblue"
+  },
+  {
+    "value": "furnace-upgrade",
+    "label": "Furnace upgrade"
+  },
+  {
+    "value": "fuzeiii",
+    "label": "Fuzeiii"
+  },
+  {
+    "value": "gadgeto",
+    "label": "Gadgeto"
+  },
+  {
+    "value": "galactic-pile",
+    "label": "Galactic pile"
+  },
+  {
+    "value": "galette",
+    "label": "Galette"
+  },
+  {
+    "value": "ghastTear",
+    "label": "Ghasttear"
+  },
+  {
+    "value": "ghostcape",
+    "label": "Ghostcape"
+  },
+  {
+    "value": "ghostly-sword",
+    "label": "Ghostly sword"
+  },
+  {
+    "value": "giant-fish",
+    "label": "Giant fish"
+  },
+  {
+    "value": "glassBottle",
+    "label": "Glassbottle"
+  },
+  {
+    "value": "glue",
+    "label": "Glue"
+  },
+  {
+    "value": "goat-shoe",
+    "label": "Goat shoe"
+  },
+  {
+    "value": "god-pickaxe",
+    "label": "God pickaxe"
+  },
+  {
+    "value": "god-pickaxe-auto-smelt",
+    "label": "God pickaxe auto smelt"
+  },
+  {
+    "value": "gold-record",
+    "label": "Gold record"
+  },
+  {
+    "value": "goldMixedCoal",
+    "label": "Goldmixedcoal"
+  },
+  {
+    "value": "goldNugget",
+    "label": "Goldnugget"
+  },
+  {
+    "value": "golden-egg",
+    "label": "Golden egg"
+  },
+  {
+    "value": "granite-granite",
+    "label": "Granite granite"
+  },
+  {
+    "value": "grappin",
+    "label": "Grappin"
+  },
+  {
+    "value": "grappin-hook",
+    "label": "Grappin hook"
+  },
+  {
+    "value": "green-paladium-radius-hoe",
+    "label": "Green paladium radius hoe"
+  },
+  {
+    "value": "guardian-renamer",
+    "label": "Guardian renamer"
+  },
+  {
+    "value": "guardian-stone",
+    "label": "Guardian stone"
+  },
+  {
+    "value": "guardianhammer",
+    "label": "Guardianhammer"
+  },
+  {
+    "value": "halloween",
+    "label": "Halloween"
+  },
+  {
+    "value": "halloween-chestplate",
+    "label": "Halloween chestplate"
+  },
+  {
+    "value": "hammer-amethyst",
+    "label": "Hammer amethyst"
+  },
+  {
+    "value": "hammer-paladium",
+    "label": "Hammer paladium"
+  },
+  {
+    "value": "hammer-smith",
+    "label": "Hammer smith"
+  },
+  {
+    "value": "hammer-titane",
+    "label": "Hammer titane"
+  },
+  {
+    "value": "hangglider",
+    "label": "Hangglider"
+  },
+  {
+    "value": "happy-new-year",
+    "label": "Happy new year"
+  },
+  {
+    "value": "hatchetDiamond",
+    "label": "Hatchetdiamond"
+  },
+  {
+    "value": "hatchetStone",
+    "label": "Hatchetstone"
+  },
+  {
+    "value": "hatchetWood",
+    "label": "Hatchetwood"
+  },
+  {
+    "value": "healstick",
+    "label": "Healstick"
+  },
+  {
+    "value": "helmetChain",
+    "label": "Helmetchain"
+  },
+  {
+    "value": "helmetCloth",
+    "label": "Helmetcloth"
+  },
+  {
+    "value": "helmetIron",
+    "label": "Helmetiron"
+  },
+  {
+    "value": "hoeDiamond",
+    "label": "Hoediamond"
+  },
+  {
+    "value": "hoeGold",
+    "label": "Hoegold"
+  },
+  {
+    "value": "hoeIron",
+    "label": "Hoeiron"
+  },
+  {
+    "value": "hoeWood",
+    "label": "Hoewood"
+  },
+  {
+    "value": "hoodhelmet",
+    "label": "Hoodhelmet"
+  },
+  {
+    "value": "horsearmordiamond",
+    "label": "Horsearmordiamond"
+  },
+  {
+    "value": "horsearmorgold",
+    "label": "Horsearmorgold"
+  },
+  {
+    "value": "horsearmormetal",
+    "label": "Horsearmormetal"
+  },
+  {
+    "value": "housing-stone",
+    "label": "Housing stone"
+  },
+  {
+    "value": "hunter-amulet",
+    "label": "Hunter amulet"
+  },
+  {
+    "value": "hunter-backpack-amethyste",
+    "label": "Hunter backpack amethyste"
+  },
+  {
+    "value": "hunter-backpack-endium",
+    "label": "Hunter backpack endium"
+  },
+  {
+    "value": "hunter-backpack-paladium",
+    "label": "Hunter backpack paladium"
+  },
+  {
+    "value": "hunter-backpack-titane",
+    "label": "Hunter backpack titane"
+  },
+  {
+    "value": "hunter-compass-amethyste",
+    "label": "Hunter compass amethyste"
+  },
+  {
+    "value": "hunter-compass-legendaire",
+    "label": "Hunter compass legendaire"
+  },
+  {
+    "value": "hunter-compass-paladium",
+    "label": "Hunter compass paladium"
+  },
+  {
+    "value": "hunter-compass-titane",
+    "label": "Hunter compass titane"
+  },
+  {
+    "value": "huntingtreasure-compass",
+    "label": "Huntingtreasure compass"
+  },
+  {
+    "value": "hyperjumpstick",
+    "label": "Hyperjumpstick"
+  },
+  {
+    "value": "ice-axe",
+    "label": "Ice axe"
+  },
+  {
+    "value": "ice-pickaxe",
+    "label": "Ice pickaxe"
+  },
+  {
+    "value": "ice-shovel",
+    "label": "Ice shovel"
+  },
+  {
+    "value": "ice-sword",
+    "label": "Ice sword"
+  },
+  {
+    "value": "infernalknocker",
+    "label": "Infernalknocker"
+  },
+  {
+    "value": "infused-stone-1",
+    "label": "Infused stone 1"
+  },
+  {
+    "value": "ingotGold",
+    "label": "Ingotgold"
+  },
+  {
+    "value": "ingotIron",
+    "label": "Ingotiron"
+  },
+  {
+    "value": "invisible-boots",
+    "label": "Invisible boots"
+  },
+  {
+    "value": "invisible-chestplate",
+    "label": "Invisible chestplate"
+  },
+  {
+    "value": "invisible-helmet",
+    "label": "Invisible helmet"
+  },
+  {
+    "value": "invisible-leggings",
+    "label": "Invisible leggings"
+  },
+  {
+    "value": "invulnerability-potion",
+    "label": "Invulnerability potion"
+  },
+  {
+    "value": "iron-skull-hammer",
+    "label": "Iron skull hammer"
+  },
+  {
+    "value": "jetpack",
+    "label": "Jetpack"
+  },
+  {
+    "value": "job-candy",
+    "label": "Job candy"
+  },
+  {
+    "value": "job-candy-BLUE",
+    "label": "Job candy blue"
+  },
+  {
+    "value": "job-candy-GREEN",
+    "label": "Job candy green"
+  },
+  {
+    "value": "job-candy-PINK",
+    "label": "Job candy pink"
+  },
+  {
+    "value": "job-candy-RAINBOW",
+    "label": "Job candy rainbow"
+  },
+  {
+    "value": "job-candy-YELLOW",
+    "label": "Job candy yellow"
+  },
+  {
+    "value": "job-quest-potion",
+    "label": "Job quest potion"
+  },
+  {
+    "value": "jumpchest",
+    "label": "Jumpchest"
+  },
+  {
+    "value": "jumpstick",
+    "label": "Jumpstick"
+  },
+  {
+    "value": "kraken",
+    "label": "Kraken"
+  },
+  {
+    "value": "laser-gun",
+    "label": "Laser gun"
+  },
+  {
+    "value": "lasso",
+    "label": "Lasso"
+  },
+  {
+    "value": "leather",
+    "label": "Leather"
+  },
+  {
+    "value": "leggingsChain",
+    "label": "Leggingschain"
+  },
+  {
+    "value": "leggingsCloth",
+    "label": "Leggingscloth"
+  },
+  {
+    "value": "leggingsIron",
+    "label": "Leggingsiron"
+  },
+  {
+    "value": "light-axe",
+    "label": "Light axe"
+  },
+  {
+    "value": "light-pickaxe",
+    "label": "Light pickaxe"
+  },
+  {
+    "value": "light-saber",
+    "label": "Light saber"
+  },
+  {
+    "value": "light-shovel",
+    "label": "Light shovel"
+  },
+  {
+    "value": "light-sword",
+    "label": "Light sword"
+  },
+  {
+    "value": "lightning-potion",
+    "label": "Lightning potion"
+  },
+  {
+    "value": "lucky-painting",
+    "label": "Lucky painting"
+  },
+  {
+    "value": "magic-potion",
+    "label": "Magic potion"
+  },
+  {
+    "value": "magicalTool",
+    "label": "Magicaltool"
+  },
+  {
+    "value": "magma-amulet",
+    "label": "Magma amulet"
+  },
+  {
+    "value": "magmaCream",
+    "label": "Magmacream"
+  },
+  {
+    "value": "magnet",
+    "label": "Magnet"
+  },
+  {
+    "value": "map",
+    "label": "Map"
+  },
+  {
+    "value": "mariomushroom",
+    "label": "Mariomushroom"
+  },
+  {
+    "value": "mars-ticket",
+    "label": "Mars ticket"
+  },
+  {
+    "value": "meduse-hook",
+    "label": "Meduse hook"
+  },
+  {
+    "value": "melon",
+    "label": "Melon"
+  },
+  {
+    "value": "meter",
+    "label": "Meter"
+  },
+  {
+    "value": "mid-life-arrow",
+    "label": "Mid life arrow"
+  },
+  {
+    "value": "miichallenge",
+    "label": "Miichallenge"
+  },
+  {
+    "value": "milk",
+    "label": "Milk"
+  },
+  {
+    "value": "mini-golem",
+    "label": "Mini golem"
+  },
+  {
+    "value": "mixed-endium-boots",
+    "label": "Mixed endium boots"
+  },
+  {
+    "value": "mixed-endium-chestplate",
+    "label": "Mixed endium chestplate"
+  },
+  {
+    "value": "mixed-endium-helmet",
+    "label": "Mixed endium helmet"
+  },
+  {
+    "value": "mixed-endium-ingot",
+    "label": "Mixed endium ingot"
+  },
+  {
+    "value": "mixed-endium-leggings",
+    "label": "Mixed endium leggings"
+  },
+  {
+    "value": "modifier-damage",
+    "label": "Modifier damage"
+  },
+  {
+    "value": "modifier-flame",
+    "label": "Modifier flame"
+  },
+  {
+    "value": "modifier-fortune",
+    "label": "Modifier fortune"
+  },
+  {
+    "value": "modifier-knockback",
+    "label": "Modifier knockback"
+  },
+  {
+    "value": "modifier-moreupgrade",
+    "label": "Modifier moreupgrade"
+  },
+  {
+    "value": "modifier-smelt",
+    "label": "Modifier smelt"
+  },
+  {
+    "value": "modifier-speed",
+    "label": "Modifier speed"
+  },
+  {
+    "value": "monstrous-sword",
+    "label": "Monstrous sword"
+  },
+  {
+    "value": "moon-boots",
+    "label": "Moon boots"
+  },
+  {
+    "value": "moon-piece",
+    "label": "Moon piece"
+  },
+  {
+    "value": "moonfish",
+    "label": "Moonfish"
+  },
+  {
+    "value": "moula-stone",
+    "label": "Moula stone"
+  },
+  {
+    "value": "mount-gemstone",
+    "label": "Mount gemstone"
+  },
+  {
+    "value": "mushroomStew",
+    "label": "Mushroomstew"
+  },
+  {
+    "value": "nameTag",
+    "label": "Nametag"
+  },
+  {
+    "value": "netherStalkSeeds",
+    "label": "Netherstalkseeds"
+  },
+  {
+    "value": "netherStar",
+    "label": "Netherstar"
+  },
+  {
+    "value": "netherbrick",
+    "label": "Netherbrick"
+  },
+  {
+    "value": "netherquartz",
+    "label": "Netherquartz"
+  },
+  {
+    "value": "npcCowleatherChest",
+    "label": "Npccowleatherchest"
+  },
+  {
+    "value": "npcCowleatherHead",
+    "label": "Npccowleatherhead"
+  },
+  {
+    "value": "npcCrown",
+    "label": "Npccrown"
+  },
+  {
+    "value": "npcDiamondGlaive",
+    "label": "Npcdiamondglaive"
+  },
+  {
+    "value": "npcDiamondTrident",
+    "label": "Npcdiamondtrident"
+  },
+  {
+    "value": "npcEmeraldBattleAxe",
+    "label": "Npcemeraldbattleaxe"
+  },
+  {
+    "value": "npcEmeraldBullet",
+    "label": "Npcemeraldbullet"
+  },
+  {
+    "value": "npcEmeraldGlaive",
+    "label": "Npcemeraldglaive"
+  },
+  {
+    "value": "npcEmeraldHalberd",
+    "label": "Npcemeraldhalberd"
+  },
+  {
+    "value": "npcEmeraldTrident",
+    "label": "Npcemeraldtrident"
+  },
+  {
+    "value": "npcFrenchHorn",
+    "label": "Npcfrenchhorn"
+  },
+  {
+    "value": "npcFullLeatherChest",
+    "label": "Npcfullleatherchest"
+  },
+  {
+    "value": "npcFullLeatherHead",
+    "label": "Npcfullleatherhead"
+  },
+  {
+    "value": "npcGoldenBattleAxe",
+    "label": "Npcgoldenbattleaxe"
+  },
+  {
+    "value": "npcGoldenGlaive",
+    "label": "Npcgoldenglaive"
+  },
+  {
+    "value": "npcGuitar",
+    "label": "Npcguitar"
+  },
+  {
+    "value": "npcIronBattleAxe",
+    "label": "Npcironbattleaxe"
+  },
+  {
+    "value": "npcIronGlaive",
+    "label": "Npcironglaive"
+  },
+  {
+    "value": "npcIronTrident",
+    "label": "Npcirontrident"
+  },
+  {
+    "value": "npcLocket",
+    "label": "Npclocket"
+  },
+  {
+    "value": "npcMana",
+    "label": "Npcmana"
+  },
+  {
+    "value": "npcNatureSpell",
+    "label": "Npcnaturespell"
+  },
+  {
+    "value": "npcPhone",
+    "label": "Npcphone"
+  },
+  {
+    "value": "npcSatchel",
+    "label": "Npcsatchel"
+  },
+  {
+    "value": "npcStoneBullet",
+    "label": "Npcstonebullet"
+  },
+  {
+    "value": "npcWand",
+    "label": "Npcwand"
+  },
+  {
+    "value": "obsidian-pickaxe",
+    "label": "Obsidian pickaxe"
+  },
+  {
+    "value": "obsidianFlowerPot",
+    "label": "Obsidianflowerpot"
+  },
+  {
+    "value": "obsidianItemDoor",
+    "label": "Obsidianitemdoor"
+  },
+  {
+    "value": "orb-heal",
+    "label": "Orb heal"
+  },
+  {
+    "value": "orb-jump",
+    "label": "Orb jump"
+  },
+  {
+    "value": "orb-knockback",
+    "label": "Orb knockback"
+  },
+  {
+    "value": "orb-speed",
+    "label": "Orb speed"
+  },
+  {
+    "value": "orb-strenght",
+    "label": "Orb strenght"
+  },
+  {
+    "value": "palaMixedCoal",
+    "label": "Palamixedcoal"
+  },
+  {
+    "value": "paladium-apple",
+    "label": "Paladium apple"
+  },
+  {
+    "value": "paladium-axe",
+    "label": "Paladium axe"
+  },
+  {
+    "value": "paladium-boots",
+    "label": "Paladium boots"
+  },
+  {
+    "value": "paladium-chestplate",
+    "label": "Paladium chestplate"
+  },
+  {
+    "value": "paladium-green-axe",
+    "label": "Paladium green axe"
+  },
+  {
+    "value": "paladium-green-boots",
+    "label": "Paladium green boots"
+  },
+  {
+    "value": "paladium-green-chestplate",
+    "label": "Paladium green chestplate"
+  },
+  {
+    "value": "paladium-green-helmet",
+    "label": "Paladium green helmet"
+  },
+  {
+    "value": "paladium-green-ingot",
+    "label": "Paladium green ingot"
+  },
+  {
+    "value": "paladium-green-leggings",
+    "label": "Paladium green leggings"
+  },
+  {
+    "value": "paladium-green-pickaxe",
+    "label": "Paladium green pickaxe"
+  },
+  {
+    "value": "paladium-green-shovel",
+    "label": "Paladium green shovel"
+  },
+  {
+    "value": "paladium-green-sword",
+    "label": "Paladium green sword"
+  },
+  {
+    "value": "paladium-helmet",
+    "label": "Paladium helmet"
+  },
+  {
+    "value": "paladium-horn",
+    "label": "Paladium horn"
+  },
+  {
+    "value": "paladium-ingot",
+    "label": "Paladium ingot"
+  },
+  {
+    "value": "paladium-ink",
+    "label": "Paladium ink"
+  },
+  {
+    "value": "paladium-key",
+    "label": "Paladium key"
+  },
+  {
+    "value": "paladium-leggings",
+    "label": "Paladium leggings"
+  },
+  {
+    "value": "paladium-pickaxe",
+    "label": "Paladium pickaxe"
+  },
+  {
+    "value": "paladium-pollen",
+    "label": "Paladium pollen"
+  },
+  {
+    "value": "paladium-portal-key",
+    "label": "Paladium portal key"
+  },
+  {
+    "value": "paladium-radius-hoe",
+    "label": "Paladium radius hoe"
+  },
+  {
+    "value": "paladium-rod",
+    "label": "Paladium rod"
+  },
+  {
+    "value": "paladium-shovel",
+    "label": "Paladium shovel"
+  },
+  {
+    "value": "paladium-sword",
+    "label": "Paladium sword"
+  },
+  {
+    "value": "paladiumCore",
+    "label": "Paladiumcore"
+  },
+  {
+    "value": "paladiumbow",
+    "label": "Paladiumbow"
+  },
+  {
+    "value": "palamod-entity-egg",
+    "label": "Palamod entity egg"
+  },
+  {
+    "value": "palamod-mutton-cooked",
+    "label": "Palamod mutton cooked"
+  },
+  {
+    "value": "palamod-mutton-raw",
+    "label": "Palamod mutton raw"
+  },
+  {
+    "value": "palamod-rabbit-cooked",
+    "label": "Palamod rabbit cooked"
+  },
+  {
+    "value": "palamod-rabbit-foot",
+    "label": "Palamod rabbit foot"
+  },
+  {
+    "value": "palamod-rabbit-hide",
+    "label": "Palamod rabbit hide"
+  },
+  {
+    "value": "palamod-rabbit-raw",
+    "label": "Palamod rabbit raw"
+  },
+  {
+    "value": "palamod-wooden-armorstand",
+    "label": "Palamod wooden armorstand"
+  },
+  {
+    "value": "panda-drool",
+    "label": "Panda drool"
+  },
+  {
+    "value": "paper",
+    "label": "Paper"
+  },
+  {
+    "value": "paper-airplane",
+    "label": "Paper airplane"
+  },
+  {
+    "value": "paralyzing-radio",
+    "label": "Paralyzing radio"
+  },
+  {
+    "value": "parrot-feather",
+    "label": "Parrot feather"
+  },
+  {
+    "value": "particle-amethyst",
+    "label": "Particle amethyst"
+  },
+  {
+    "value": "particle-diamond",
+    "label": "Particle diamond"
+  },
+  {
+    "value": "particle-paladium",
+    "label": "Particle paladium"
+  },
+  {
+    "value": "particle-titane",
+    "label": "Particle titane"
+  },
+  {
+    "value": "patern-block",
+    "label": "Patern block"
+  },
+  {
+    "value": "patern-broadsword",
+    "label": "Patern broadsword"
+  },
+  {
+    "value": "patern-fastsword",
+    "label": "Patern fastsword"
+  },
+  {
+    "value": "patern-hammer",
+    "label": "Patern hammer"
+  },
+  {
+    "value": "patern-ingot",
+    "label": "Patern ingot"
+  },
+  {
+    "value": "patern-socket",
+    "label": "Patern socket"
+  },
+  {
+    "value": "patern-sword",
+    "label": "Patern sword"
+  },
+  {
+    "value": "perfect-helmet",
+    "label": "Perfect helmet"
+  },
+  {
+    "value": "personal-thruster",
+    "label": "Personal thruster"
+  },
+  {
+    "value": "pet-snack",
+    "label": "Pet snack"
+  },
+  {
+    "value": "pet-xp-medium",
+    "label": "Pet xp medium"
+  },
+  {
+    "value": "pickaxeDiamond",
+    "label": "Pickaxediamond"
+  },
+  {
+    "value": "pickaxeGold",
+    "label": "Pickaxegold"
+  },
+  {
+    "value": "pickaxeIron",
+    "label": "Pickaxeiron"
+  },
+  {
+    "value": "pickaxeStone",
+    "label": "Pickaxestone"
+  },
+  {
+    "value": "pickaxeWood",
+    "label": "Pickaxewood"
+  },
+  {
+    "value": "pig-boots",
+    "label": "Pig boots"
+  },
+  {
+    "value": "pig-chestplate",
+    "label": "Pig chestplate"
+  },
+  {
+    "value": "pig-helmet",
+    "label": "Pig helmet"
+  },
+  {
+    "value": "pig-leggings",
+    "label": "Pig leggings"
+  },
+  {
+    "value": "pistol-tank",
+    "label": "Pistol tank"
+  },
+  {
+    "value": "player-saddle",
+    "label": "Player saddle"
+  },
+  {
+    "value": "porkchopCooked",
+    "label": "Porkchopcooked"
+  },
+  {
+    "value": "porkchopRaw",
+    "label": "Porkchopraw"
+  },
+  {
+    "value": "potato",
+    "label": "Potato"
+  },
+  {
+    "value": "potatoBaked",
+    "label": "Potatobaked"
+  },
+  {
+    "value": "potatoPoisonous",
+    "label": "Potatopoisonous"
+  },
+  {
+    "value": "potion",
+    "label": "Potion"
+  },
+  {
+    "value": "potion-doublexp",
+    "label": "Potion doublexp"
+  },
+  {
+    "value": "potion-launcher",
+    "label": "Potion launcher"
+  },
+  {
+    "value": "potion-minerfou",
+    "label": "Potion minerfou"
+  },
+  {
+    "value": "potion-soda",
+    "label": "Potion soda"
+  },
+  {
+    "value": "poulpogun",
+    "label": "Poulpogun"
+  },
+  {
+    "value": "present",
+    "label": "Present"
+  },
+  {
+    "value": "pumpkinPie",
+    "label": "Pumpkinpie"
+  },
+  {
+    "value": "pumpkinshear",
+    "label": "Pumpkinshear"
+  },
+  {
+    "value": "radio",
+    "label": "Radio"
+  },
+  {
+    "value": "rainbow-axe",
+    "label": "Rainbow axe"
+  },
+  {
+    "value": "rainbow-coloring",
+    "label": "Rainbow coloring"
+  },
+  {
+    "value": "rainbow-leather",
+    "label": "Rainbow leather"
+  },
+  {
+    "value": "rainbow-leather-boots",
+    "label": "Rainbow leather boots"
+  },
+  {
+    "value": "rainbow-leather-chestplate",
+    "label": "Rainbow leather chestplate"
+  },
+  {
+    "value": "rainbow-leather-helmet",
+    "label": "Rainbow leather helmet"
+  },
+  {
+    "value": "rainbow-leather-leggings",
+    "label": "Rainbow leather leggings"
+  },
+  {
+    "value": "rainbow-pickaxe",
+    "label": "Rainbow pickaxe"
+  },
+  {
+    "value": "rainbow-shovel",
+    "label": "Rainbow shovel"
+  },
+  {
+    "value": "rainbow-sword",
+    "label": "Rainbow sword"
+  },
+  {
+    "value": "ray",
+    "label": "Ray"
+  },
+  {
+    "value": "record",
+    "label": "Record"
+  },
+  {
+    "value": "red-tuna",
+    "label": "Red tuna"
+  },
+  {
+    "value": "redstone",
+    "label": "Redstone"
+  },
+  {
+    "value": "reeds",
+    "label": "Reeds"
+  },
+  {
+    "value": "resurrection-stone",
+    "label": "Resurrection stone"
+  },
+  {
+    "value": "ring-big",
+    "label": "Ring big"
+  },
+  {
+    "value": "ring-medium",
+    "label": "Ring medium"
+  },
+  {
+    "value": "ring-small",
+    "label": "Ring small"
+  },
+  {
+    "value": "roller",
+    "label": "Roller"
+  },
+  {
+    "value": "rottenFlesh",
+    "label": "Rottenflesh"
+  },
+  {
+    "value": "roulette-paladienne",
+    "label": "Roulette paladienne"
+  },
+  {
+    "value": "saddle",
+    "label": "Saddle"
+  },
+  {
+    "value": "scubahelmet",
+    "label": "Scubahelmet"
+  },
+  {
+    "value": "sealed-xp-bottle",
+    "label": "Sealed xp bottle"
+  },
+  {
+    "value": "seed-chervil",
+    "label": "Seed chervil"
+  },
+  {
+    "value": "seed-eggplant",
+    "label": "Seed eggplant"
+  },
+  {
+    "value": "seed-ice",
+    "label": "Seed ice"
+  },
+  {
+    "value": "seed-kiwano",
+    "label": "Seed kiwano"
+  },
+  {
+    "value": "seed-orangeblue",
+    "label": "Seed orangeblue"
+  },
+  {
+    "value": "seedplanter-lvl1",
+    "label": "Seedplanter lvl1"
+  },
+  {
+    "value": "seedplanter-lvl2",
+    "label": "Seedplanter lvl2"
+  },
+  {
+    "value": "seedplanter-lvl3",
+    "label": "Seedplanter lvl3"
+  },
+  {
+    "value": "seedplanter-lvl4",
+    "label": "Seedplanter lvl4"
+  },
+  {
+    "value": "seedplanter-lvl5",
+    "label": "Seedplanter lvl5"
+  },
+  {
+    "value": "seeds",
+    "label": "Seeds"
+  },
+  {
+    "value": "seeds-melon",
+    "label": "Seeds melon"
+  },
+  {
+    "value": "seeds-pumpkin",
+    "label": "Seeds pumpkin"
+  },
+  {
+    "value": "shears",
+    "label": "Shears"
+  },
+  {
+    "value": "sheep-noise-box",
+    "label": "Sheep noise box"
+  },
+  {
+    "value": "shovelGold",
+    "label": "Shovelgold"
+  },
+  {
+    "value": "shovelStone",
+    "label": "Shovelstone"
+  },
+  {
+    "value": "sign",
+    "label": "Sign"
+  },
+  {
+    "value": "skull-char",
+    "label": "Skull char"
+  },
+  {
+    "value": "skull-creeper",
+    "label": "Skull creeper"
+  },
+  {
+    "value": "skull-skeleton",
+    "label": "Skull skeleton"
+  },
+  {
+    "value": "skull-wither",
+    "label": "Skull wither"
+  },
+  {
+    "value": "skull-zombie",
+    "label": "Skull zombie"
+  },
+  {
+    "value": "slimeball",
+    "label": "Slimeball"
+  },
+  {
+    "value": "slimyhelmet",
+    "label": "Slimyhelmet"
+  },
+  {
+    "value": "smokebomb-blue",
+    "label": "Smokebomb blue"
+  },
+  {
+    "value": "smokebomb-brown",
+    "label": "Smokebomb brown"
+  },
+  {
+    "value": "smokebomb-gray",
+    "label": "Smokebomb gray"
+  },
+  {
+    "value": "smokebomb-green",
+    "label": "Smokebomb green"
+  },
+  {
+    "value": "smokebomb-light-blue",
+    "label": "Smokebomb light blue"
+  },
+  {
+    "value": "smokebomb-light-gray",
+    "label": "Smokebomb light gray"
+  },
+  {
+    "value": "smokebomb-lime",
+    "label": "Smokebomb lime"
+  },
+  {
+    "value": "smokebomb-magenta",
+    "label": "Smokebomb magenta"
+  },
+  {
+    "value": "smokebomb-white",
+    "label": "Smokebomb white"
+  },
+  {
+    "value": "snail-shell",
+    "label": "Snail shell"
+  },
+  {
+    "value": "snake-venom",
+    "label": "Snake venom"
+  },
+  {
+    "value": "snowball",
+    "label": "Snowball"
+  },
+  {
+    "value": "spacefood",
+    "label": "Spacefood"
+  },
+  {
+    "value": "spawner-finder",
+    "label": "Spawner finder"
+  },
+  {
+    "value": "speaker",
+    "label": "Speaker"
+  },
+  {
+    "value": "speckledMelon",
+    "label": "Speckledmelon"
+  },
+  {
+    "value": "speed-apple",
+    "label": "Speed apple"
+  },
+  {
+    "value": "speedstick",
+    "label": "Speedstick"
+  },
+  {
+    "value": "spell-scroll",
+    "label": "Spell scroll"
+  },
+  {
+    "value": "spiderEye",
+    "label": "Spidereye"
+  },
+  {
+    "value": "spiderglove",
+    "label": "Spiderglove"
+  },
+  {
+    "value": "splash-potion-jupiter-gravity",
+    "label": "Splash potion jupiter gravity"
+  },
+  {
+    "value": "splash-potion-mars-gravity",
+    "label": "Splash potion mars gravity"
+  },
+  {
+    "value": "splash-potion-moon-gravity",
+    "label": "Splash potion moon gravity"
+  },
+  {
+    "value": "squidgame-helmet",
+    "label": "Squidgame helmet"
+  },
+  {
+    "value": "star-helmet",
+    "label": "Star helmet"
+  },
+  {
+    "value": "stats-stone",
+    "label": "Stats stone"
+  },
+  {
+    "value": "stick",
+    "label": "Stick"
+  },
+  {
+    "value": "stick-amethyst",
+    "label": "Stick amethyst"
+  },
+  {
+    "value": "stick-paladium",
+    "label": "Stick paladium"
+  },
+  {
+    "value": "stick-titane",
+    "label": "Stick titane"
+  },
+  {
+    "value": "stickofgod",
+    "label": "Stickofgod"
+  },
+  {
+    "value": "storagedrawers-upgrade-diamond",
+    "label": "Storagedrawers upgrade diamond"
+  },
+  {
+    "value": "storagedrawers-upgrade-emerald",
+    "label": "Storagedrawers upgrade emerald"
+  },
+  {
+    "value": "storagedrawers-upgrade-gold",
+    "label": "Storagedrawers upgrade gold"
+  },
+  {
+    "value": "storagedrawers-upgrade-iron",
+    "label": "Storagedrawers upgrade iron"
+  },
+  {
+    "value": "storagedrawers-upgrade-obsidian",
+    "label": "Storagedrawers upgrade obsidian"
+  },
+  {
+    "value": "storagedrawers-upgradeLock",
+    "label": "Storagedrawers upgradelock"
+  },
+  {
+    "value": "storagedrawers-upgradeTemplate",
+    "label": "Storagedrawers upgradetemplate"
+  },
+  {
+    "value": "storagedrawers-upgradeVoid",
+    "label": "Storagedrawers upgradevoid"
+  },
+  {
+    "value": "strenghtstick",
+    "label": "Strenghtstick"
+  },
+  {
+    "value": "string",
+    "label": "String"
+  },
+  {
+    "value": "sugar",
+    "label": "Sugar"
+  },
+  {
+    "value": "sulfuricwater",
+    "label": "Sulfuricwater"
+  },
+  {
+    "value": "sulphur",
+    "label": "Sulphur"
+  },
+  {
+    "value": "supersonic-rocket",
+    "label": "Supersonic rocket"
+  },
+  {
+    "value": "survivingstone",
+    "label": "Survivingstone"
+  },
+  {
+    "value": "swordDiamond",
+    "label": "Sworddiamond"
+  },
+  {
+    "value": "swordGold",
+    "label": "Swordgold"
+  },
+  {
+    "value": "swordIron",
+    "label": "Swordiron"
+  },
+  {
+    "value": "swordStone",
+    "label": "Swordstone"
+  },
+  {
+    "value": "tile-CamoGate",
+    "label": "Tile camogate"
+  },
+  {
+    "value": "tile-GhostBlock",
+    "label": "Tile ghostblock"
+  },
+  {
+    "value": "tile-OneWayGlass",
+    "label": "Tile onewayglass"
+  },
+  {
+    "value": "tile-SecretButton-stone",
+    "label": "Tile secretbutton stone"
+  },
+  {
+    "value": "tile-SecretChest",
+    "label": "Tile secretchest"
+  },
+  {
+    "value": "tile-SecretLever",
+    "label": "Tile secretlever"
+  },
+  {
+    "value": "tile-SecretPressurePlate",
+    "label": "Tile secretpressureplate"
+  },
+  {
+    "value": "tile-SecretRedstone",
+    "label": "Tile secretredstone"
+  },
+  {
+    "value": "tile-SecretStair",
+    "label": "Tile secretstair"
+  },
+  {
+    "value": "tile-SolidAir",
+    "label": "Tile solidair"
+  },
+  {
+    "value": "tile-alarm",
+    "label": "Tile alarm"
+  },
+  {
+    "value": "tile-alarm-clock",
+    "label": "Tile alarm clock"
+  },
+  {
+    "value": "tile-alchemy-creator-block",
+    "label": "Tile alchemy creator block"
+  },
+  {
+    "value": "tile-alien-plush",
+    "label": "Tile alien plush"
+  },
+  {
+    "value": "tile-amethyst-block",
+    "label": "Tile amethyst block"
+  },
+  {
+    "value": "tile-amethyst-chest",
+    "label": "Tile amethyst chest"
+  },
+  {
+    "value": "tile-amethyst-ore",
+    "label": "Tile amethyst ore"
+  },
+  {
+    "value": "tile-amethystBlockSlab",
+    "label": "Tile amethystblockslab"
+  },
+  {
+    "value": "tile-amethyste-portal-block",
+    "label": "Tile amethyste portal block"
+  },
+  {
+    "value": "tile-amethyste-tank",
+    "label": "Tile amethyste tank"
+  },
+  {
+    "value": "tile-anti-aggro-obsi",
+    "label": "Tile anti aggro obsi"
+  },
+  {
+    "value": "tile-anvil-amethyst-tool",
+    "label": "Tile anvil amethyst tool"
+  },
+  {
+    "value": "tile-anvil-intact",
+    "label": "Tile anvil intact"
+  },
+  {
+    "value": "tile-anvil-money",
+    "label": "Tile anvil money"
+  },
+  {
+    "value": "tile-anvil-paladium-tool",
+    "label": "Tile anvil paladium tool"
+  },
+  {
+    "value": "tile-anvil-slightlyDamaged",
+    "label": "Tile anvil slightlydamaged"
+  },
+  {
+    "value": "tile-anvil-titane-tool",
+    "label": "Tile anvil titane tool"
+  },
+  {
+    "value": "tile-anvil-veryDamaged",
+    "label": "Tile anvil verydamaged"
+  },
+  {
+    "value": "tile-autocrafter",
+    "label": "Tile autocrafter"
+  },
+  {
+    "value": "tile-ball-basket",
+    "label": "Tile ball basket"
+  },
+  {
+    "value": "tile-bamboo",
+    "label": "Tile bamboo"
+  },
+  {
+    "value": "tile-bamboo-block",
+    "label": "Tile bamboo block"
+  },
+  {
+    "value": "tile-banana-wood",
+    "label": "Tile banana wood"
+  },
+  {
+    "value": "tile-barn",
+    "label": "Tile barn"
+  },
+  {
+    "value": "tile-barn-fence",
+    "label": "Tile barn fence"
+  },
+  {
+    "value": "tile-barn-foundation",
+    "label": "Tile barn foundation"
+  },
+  {
+    "value": "tile-barrelwood",
+    "label": "Tile barrelwood"
+  },
+  {
+    "value": "tile-basket",
+    "label": "Tile basket"
+  },
+  {
+    "value": "tile-beacon",
+    "label": "Tile beacon"
+  },
+  {
+    "value": "tile-berry-xp-bush",
+    "label": "Tile berry xp bush"
+  },
+  {
+    "value": "tile-big-obsi",
+    "label": "Tile big obsi"
+  },
+  {
+    "value": "tile-big-tnt",
+    "label": "Tile big tnt"
+  },
+  {
+    "value": "tile-blockCoal",
+    "label": "Tile blockcoal"
+  },
+  {
+    "value": "tile-blockDiamond",
+    "label": "Tile blockdiamond"
+  },
+  {
+    "value": "tile-blockEmerald",
+    "label": "Tile blockemerald"
+  },
+  {
+    "value": "tile-blockGold",
+    "label": "Tile blockgold"
+  },
+  {
+    "value": "tile-blockIron",
+    "label": "Tile blockiron"
+  },
+  {
+    "value": "tile-blockLapis",
+    "label": "Tile blocklapis"
+  },
+  {
+    "value": "tile-blockRedstone",
+    "label": "Tile blockredstone"
+  },
+  {
+    "value": "tile-bookshelf",
+    "label": "Tile bookshelf"
+  },
+  {
+    "value": "tile-boom-obsi",
+    "label": "Tile boom obsi"
+  },
+  {
+    "value": "tile-bow-machine-block",
+    "label": "Tile bow machine block"
+  },
+  {
+    "value": "tile-brick",
+    "label": "Tile brick"
+  },
+  {
+    "value": "tile-bright-sound",
+    "label": "Tile bright sound"
+  },
+  {
+    "value": "tile-bruteforcer",
+    "label": "Tile bruteforcer"
+  },
+  {
+    "value": "tile-bunny-plush",
+    "label": "Tile bunny plush"
+  },
+  {
+    "value": "tile-cactus",
+    "label": "Tile cactus"
+  },
+  {
+    "value": "tile-cannon-1",
+    "label": "Tile cannon 1"
+  },
+  {
+    "value": "tile-canon-base-1",
+    "label": "Tile canon base 1"
+  },
+  {
+    "value": "tile-canon-base-2",
+    "label": "Tile canon base 2"
+  },
+  {
+    "value": "tile-canon-base-3",
+    "label": "Tile canon base 3"
+  },
+  {
+    "value": "tile-canon-mag",
+    "label": "Tile canon mag"
+  },
+  {
+    "value": "tile-canon-main",
+    "label": "Tile canon main"
+  },
+  {
+    "value": "tile-cat-detector",
+    "label": "Tile cat detector"
+  },
+  {
+    "value": "tile-cauldron-block",
+    "label": "Tile cauldron block"
+  },
+  {
+    "value": "tile-cauldron-core",
+    "label": "Tile cauldron core"
+  },
+  {
+    "value": "tile-cauldron-tanksupport",
+    "label": "Tile cauldron tanksupport"
+  },
+  {
+    "value": "tile-cave-block",
+    "label": "Tile cave block"
+  },
+  {
+    "value": "tile-chat-detector",
+    "label": "Tile chat detector"
+  },
+  {
+    "value": "tile-chest",
+    "label": "Tile chest"
+  },
+  {
+    "value": "tile-chisel-cobblestone",
+    "label": "Tile chisel cobblestone"
+  },
+  {
+    "value": "tile-chisel-gold",
+    "label": "Tile chisel gold"
+  },
+  {
+    "value": "tile-chisel-iron",
+    "label": "Tile chisel iron"
+  },
+  {
+    "value": "tile-chisel-lapis",
+    "label": "Tile chisel lapis"
+  },
+  {
+    "value": "tile-chisel-planks-spruce",
+    "label": "Tile chisel planks spruce"
+  },
+  {
+    "value": "tile-chisel-quartz",
+    "label": "Tile chisel quartz"
+  },
+  {
+    "value": "tile-chisel-sandstoneyellow",
+    "label": "Tile chisel sandstoneyellow"
+  },
+  {
+    "value": "tile-chisel-valentines",
+    "label": "Tile chisel valentines"
+  },
+  {
+    "value": "tile-chisel-wool",
+    "label": "Tile chisel wool"
+  },
+  {
+    "value": "tile-clay",
+    "label": "Tile clay"
+  },
+  {
+    "value": "tile-clayHardened",
+    "label": "Tile clayhardened"
+  },
+  {
+    "value": "tile-clayHardenedStained-black",
+    "label": "Tile clayhardenedstained black"
+  },
+  {
+    "value": "tile-clayHardenedStained-cyan",
+    "label": "Tile clayhardenedstained cyan"
+  },
+  {
+    "value": "tile-clayHardenedStained-gray",
+    "label": "Tile clayhardenedstained gray"
+  },
+  {
+    "value": "tile-clayHardenedStained-orange",
+    "label": "Tile clayhardenedstained orange"
+  },
+  {
+    "value": "tile-clayHardenedStained-red",
+    "label": "Tile clayhardenedstained red"
+  },
+  {
+    "value": "tile-clayHardenedStained-silver",
+    "label": "Tile clayhardenedstained silver"
+  },
+  {
+    "value": "tile-clayHardenedStained-white",
+    "label": "Tile clayhardenedstained white"
+  },
+  {
+    "value": "tile-clayHardenedStained-yellow",
+    "label": "Tile clayhardenedstained yellow"
+  },
+  {
+    "value": "tile-cloth-brown",
+    "label": "Tile cloth brown"
+  },
+  {
+    "value": "tile-cloth-gray",
+    "label": "Tile cloth gray"
+  },
+  {
+    "value": "tile-cloth-pink",
+    "label": "Tile cloth pink"
+  },
+  {
+    "value": "tile-cloth-red",
+    "label": "Tile cloth red"
+  },
+  {
+    "value": "tile-cloth-white",
+    "label": "Tile cloth white"
+  },
+  {
+    "value": "tile-cloud",
+    "label": "Tile cloud"
+  },
+  {
+    "value": "tile-cobbleBreaker",
+    "label": "Tile cobblebreaker"
+  },
+  {
+    "value": "tile-cobbleWall-normal",
+    "label": "Tile cobblewall normal"
+  },
+  {
+    "value": "tile-colored-grass-seeds",
+    "label": "Tile colored grass seeds"
+  },
+  {
+    "value": "tile-colored-lamp",
+    "label": "Tile colored lamp"
+  },
+  {
+    "value": "tile-compDrawers",
+    "label": "Tile compdrawers"
+  },
+  {
+    "value": "tile-compressed-quartz",
+    "label": "Tile compressed quartz"
+  },
+  {
+    "value": "tile-compressed-quartz-1",
+    "label": "Tile compressed quartz 1"
+  },
+  {
+    "value": "tile-compressed-quartz-2",
+    "label": "Tile compressed quartz 2"
+  },
+  {
+    "value": "tile-compressed-quartz-3",
+    "label": "Tile compressed quartz 3"
+  },
+  {
+    "value": "tile-compressed-quartz-4",
+    "label": "Tile compressed quartz 4"
+  },
+  {
+    "value": "tile-concrete-powder-red",
+    "label": "Tile concrete powder red"
+  },
+  {
+    "value": "tile-concrete-powder-white",
+    "label": "Tile concrete powder white"
+  },
+  {
+    "value": "tile-concrete-powder-yellow",
+    "label": "Tile concrete powder yellow"
+  },
+  {
+    "value": "tile-concrete-red",
+    "label": "Tile concrete red"
+  },
+  {
+    "value": "tile-connectedDirt",
+    "label": "Tile connecteddirt"
+  },
+  {
+    "value": "tile-controllerSlave",
+    "label": "Tile controllerslave"
+  },
+  {
+    "value": "tile-coordinate-jammer",
+    "label": "Tile coordinate jammer"
+  },
+  {
+    "value": "tile-corrupted-ore",
+    "label": "Tile corrupted ore"
+  },
+  {
+    "value": "tile-creeper-plush",
+    "label": "Tile creeper plush"
+  },
+  {
+    "value": "tile-crops-ice",
+    "label": "Tile crops ice"
+  },
+  {
+    "value": "tile-crusher",
+    "label": "Tile crusher"
+  },
+  {
+    "value": "tile-customwither-head",
+    "label": "Tile customwither head"
+  },
+  {
+    "value": "tile-deadbush",
+    "label": "Tile deadbush"
+  },
+  {
+    "value": "tile-decrypted-computer",
+    "label": "Tile decrypted computer"
+  },
+  {
+    "value": "tile-didier",
+    "label": "Tile didier"
+  },
+  {
+    "value": "tile-digicode",
+    "label": "Tile digicode"
+  },
+  {
+    "value": "tile-dirt-default",
+    "label": "Tile dirt default"
+  },
+  {
+    "value": "tile-dirt-podzol",
+    "label": "Tile dirt podzol"
+  },
+  {
+    "value": "tile-dispenser",
+    "label": "Tile dispenser"
+  },
+  {
+    "value": "tile-doublePlant-paeonia",
+    "label": "Tile doubleplant paeonia"
+  },
+  {
+    "value": "tile-doublePlant-rose",
+    "label": "Tile doubleplant rose"
+  },
+  {
+    "value": "tile-doublePlant-sunflower",
+    "label": "Tile doubleplant sunflower"
+  },
+  {
+    "value": "tile-doublePlant-syringa",
+    "label": "Tile doubleplant syringa"
+  },
+  {
+    "value": "tile-drawbridge",
+    "label": "Tile drawbridge"
+  },
+  {
+    "value": "tile-drawerController",
+    "label": "Tile drawercontroller"
+  },
+  {
+    "value": "tile-dropper",
+    "label": "Tile dropper"
+  },
+  {
+    "value": "tile-dyeing-machine",
+    "label": "Tile dyeing machine"
+  },
+  {
+    "value": "tile-easter-gift",
+    "label": "Tile easter gift"
+  },
+  {
+    "value": "tile-easterLuckyBlock",
+    "label": "Tile easterluckyblock"
+  },
+  {
+    "value": "tile-effect-tnt",
+    "label": "Tile effect tnt"
+  },
+  {
+    "value": "tile-elevator-block",
+    "label": "Tile elevator block"
+  },
+  {
+    "value": "tile-empowered-quartz",
+    "label": "Tile empowered quartz"
+  },
+  {
+    "value": "tile-empty-broken-mob-spawner",
+    "label": "Tile empty broken mob spawner"
+  },
+  {
+    "value": "tile-empty-mob-spawner",
+    "label": "Tile empty mob spawner"
+  },
+  {
+    "value": "tile-enchantmentTable",
+    "label": "Tile enchantmenttable"
+  },
+  {
+    "value": "tile-encrypted-computer",
+    "label": "Tile encrypted computer"
+  },
+  {
+    "value": "tile-enderChest",
+    "label": "Tile enderchest"
+  },
+  {
+    "value": "tile-endium-angle-portal-block",
+    "label": "Tile endium angle portal block"
+  },
+  {
+    "value": "tile-endium-block",
+    "label": "Tile endium block"
+  },
+  {
+    "value": "tile-endium-chest",
+    "label": "Tile endium chest"
+  },
+  {
+    "value": "tile-endium-hearth",
+    "label": "Tile endium hearth"
+  },
+  {
+    "value": "tile-endium-portal-block",
+    "label": "Tile endium portal block"
+  },
+  {
+    "value": "tile-endium-totem",
+    "label": "Tile endium totem"
+  },
+  {
+    "value": "tile-endiumLuckyBlock",
+    "label": "Tile endiumluckyblock"
+  },
+  {
+    "value": "tile-extractor",
+    "label": "Tile extractor"
+  },
+  {
+    "value": "tile-fake-blockGold",
+    "label": "Tile fake blockgold"
+  },
+  {
+    "value": "tile-fake-easter-gift",
+    "label": "Tile fake easter gift"
+  },
+  {
+    "value": "tile-fake-obsi",
+    "label": "Tile fake obsi"
+  },
+  {
+    "value": "tile-fakecommandblock",
+    "label": "Tile fakecommandblock"
+  },
+  {
+    "value": "tile-fakelava",
+    "label": "Tile fakelava"
+  },
+  {
+    "value": "tile-farmer-throne",
+    "label": "Tile farmer throne"
+  },
+  {
+    "value": "tile-fenceIron",
+    "label": "Tile fenceiron"
+  },
+  {
+    "value": "tile-feve-arty",
+    "label": "Tile feve arty"
+  },
+  {
+    "value": "tile-feve-dancarok",
+    "label": "Tile feve dancarok"
+  },
+  {
+    "value": "tile-feve-ravirok",
+    "label": "Tile feve ravirok"
+  },
+  {
+    "value": "tile-findium-block",
+    "label": "Tile findium block"
+  },
+  {
+    "value": "tile-findium-ore",
+    "label": "Tile findium ore"
+  },
+  {
+    "value": "tile-findiumBlockSlab",
+    "label": "Tile findiumblockslab"
+  },
+  {
+    "value": "tile-findiumBlockStairs",
+    "label": "Tile findiumblockstairs"
+  },
+  {
+    "value": "tile-findiumLuckyBlock",
+    "label": "Tile findiumluckyblock"
+  },
+  {
+    "value": "tile-fishBowl",
+    "label": "Tile fishbowl"
+  },
+  {
+    "value": "tile-flashy-block",
+    "label": "Tile flashy block"
+  },
+  {
+    "value": "tile-flower-clathrusarcheri",
+    "label": "Tile flower clathrusarcheri"
+  },
+  {
+    "value": "tile-flower-endium",
+    "label": "Tile flower endium"
+  },
+  {
+    "value": "tile-flower-harpagophytum",
+    "label": "Tile flower harpagophytum"
+  },
+  {
+    "value": "tile-flower-hunter",
+    "label": "Tile flower hunter"
+  },
+  {
+    "value": "tile-flower-lucky",
+    "label": "Tile flower lucky"
+  },
+  {
+    "value": "tile-flower-mineral",
+    "label": "Tile flower mineral"
+  },
+  {
+    "value": "tile-flower-paladium",
+    "label": "Tile flower paladium"
+  },
+  {
+    "value": "tile-flower-sauge",
+    "label": "Tile flower sauge"
+  },
+  {
+    "value": "tile-flower1-dandelion",
+    "label": "Tile flower1 dandelion"
+  },
+  {
+    "value": "tile-flower2-allium",
+    "label": "Tile flower2 allium"
+  },
+  {
+    "value": "tile-flower2-blueOrchid",
+    "label": "Tile flower2 blueorchid"
+  },
+  {
+    "value": "tile-flower2-houstonia",
+    "label": "Tile flower2 houstonia"
+  },
+  {
+    "value": "tile-flower2-oxeyeDaisy",
+    "label": "Tile flower2 oxeyedaisy"
+  },
+  {
+    "value": "tile-flower2-poppy",
+    "label": "Tile flower2 poppy"
+  },
+  {
+    "value": "tile-flower2-tulipRed",
+    "label": "Tile flower2 tulipred"
+  },
+  {
+    "value": "tile-flower2-tulipWhite",
+    "label": "Tile flower2 tulipwhite"
+  },
+  {
+    "value": "tile-food-machine",
+    "label": "Tile food machine"
+  },
+  {
+    "value": "tile-forge",
+    "label": "Tile forge"
+  },
+  {
+    "value": "tile-framingTable",
+    "label": "Tile framingtable"
+  },
+  {
+    "value": "tile-fullCustom1",
+    "label": "Tile fullcustom1"
+  },
+  {
+    "value": "tile-fullCustom2",
+    "label": "Tile fullcustom2"
+  },
+  {
+    "value": "tile-fullCustom4",
+    "label": "Tile fullcustom4"
+  },
+  {
+    "value": "tile-fullDrawers1-acacia",
+    "label": "Tile fulldrawers1 acacia"
+  },
+  {
+    "value": "tile-fullDrawers1-big-oak",
+    "label": "Tile fulldrawers1 big oak"
+  },
+  {
+    "value": "tile-fullDrawers1-birch",
+    "label": "Tile fulldrawers1 birch"
+  },
+  {
+    "value": "tile-fullDrawers1-jungle",
+    "label": "Tile fulldrawers1 jungle"
+  },
+  {
+    "value": "tile-fullDrawers1-oak",
+    "label": "Tile fulldrawers1 oak"
+  },
+  {
+    "value": "tile-fullDrawers1-spruce",
+    "label": "Tile fulldrawers1 spruce"
+  },
+  {
+    "value": "tile-fullDrawers2-big-oak",
+    "label": "Tile fulldrawers2 big oak"
+  },
+  {
+    "value": "tile-fullDrawers2-birch",
+    "label": "Tile fulldrawers2 birch"
+  },
+  {
+    "value": "tile-fullDrawers2-jungle",
+    "label": "Tile fulldrawers2 jungle"
+  },
+  {
+    "value": "tile-fullDrawers2-oak",
+    "label": "Tile fulldrawers2 oak"
+  },
+  {
+    "value": "tile-fullDrawers2-spruce",
+    "label": "Tile fulldrawers2 spruce"
+  },
+  {
+    "value": "tile-fullDrawers4-acacia",
+    "label": "Tile fulldrawers4 acacia"
+  },
+  {
+    "value": "tile-fullDrawers4-big-oak",
+    "label": "Tile fulldrawers4 big oak"
+  },
+  {
+    "value": "tile-fullDrawers4-birch",
+    "label": "Tile fulldrawers4 birch"
+  },
+  {
+    "value": "tile-fullDrawers4-jungle",
+    "label": "Tile fulldrawers4 jungle"
+  },
+  {
+    "value": "tile-fullDrawers4-oak",
+    "label": "Tile fulldrawers4 oak"
+  },
+  {
+    "value": "tile-fullDrawers4-spruce",
+    "label": "Tile fulldrawers4 spruce"
+  },
+  {
+    "value": "tile-furnace",
+    "label": "Tile furnace"
+  },
+  {
+    "value": "tile-glass",
+    "label": "Tile glass"
+  },
+  {
+    "value": "tile-gold-tank",
+    "label": "Tile gold tank"
+  },
+  {
+    "value": "tile-golden-cage",
+    "label": "Tile golden cage"
+  },
+  {
+    "value": "tile-gpaladium-block",
+    "label": "Tile gpaladium block"
+  },
+  {
+    "value": "tile-grass",
+    "label": "Tile grass"
+  },
+  {
+    "value": "tile-gravel",
+    "label": "Tile gravel"
+  },
+  {
+    "value": "tile-grinder-block",
+    "label": "Tile grinder block"
+  },
+  {
+    "value": "tile-grinder-casing-block",
+    "label": "Tile grinder casing block"
+  },
+  {
+    "value": "tile-grinder-frame-block",
+    "label": "Tile grinder frame block"
+  },
+  {
+    "value": "tile-guardian-block",
+    "label": "Tile guardian block"
+  },
+  {
+    "value": "tile-guardian-box-block",
+    "label": "Tile guardian box block"
+  },
+  {
+    "value": "tile-guardian-box-frame",
+    "label": "Tile guardian box frame"
+  },
+  {
+    "value": "tile-guardian-keeper",
+    "label": "Tile guardian keeper"
+  },
+  {
+    "value": "tile-halfCustom2",
+    "label": "Tile halfcustom2"
+  },
+  {
+    "value": "tile-halfCustom4",
+    "label": "Tile halfcustom4"
+  },
+  {
+    "value": "tile-halfDrawers2-big-oak",
+    "label": "Tile halfdrawers2 big oak"
+  },
+  {
+    "value": "tile-halfDrawers2-oak",
+    "label": "Tile halfdrawers2 oak"
+  },
+  {
+    "value": "tile-halfDrawers2-spruce",
+    "label": "Tile halfdrawers2 spruce"
+  },
+  {
+    "value": "tile-halfDrawers4-big-oak",
+    "label": "Tile halfdrawers4 big oak"
+  },
+  {
+    "value": "tile-halfDrawers4-birch",
+    "label": "Tile halfdrawers4 birch"
+  },
+  {
+    "value": "tile-halfDrawers4-jungle",
+    "label": "Tile halfdrawers4 jungle"
+  },
+  {
+    "value": "tile-halfDrawers4-oak",
+    "label": "Tile halfdrawers4 oak"
+  },
+  {
+    "value": "tile-halfDrawers4-spruce",
+    "label": "Tile halfdrawers4 spruce"
+  },
+  {
+    "value": "tile-hardenedObsidian",
+    "label": "Tile hardenedobsidian"
+  },
+  {
+    "value": "tile-hardenedObsidianBlockSlab",
+    "label": "Tile hardenedobsidianblockslab"
+  },
+  {
+    "value": "tile-hayBlock",
+    "label": "Tile hayblock"
+  },
+  {
+    "value": "tile-hellrock",
+    "label": "Tile hellrock"
+  },
+  {
+    "value": "tile-hellsand",
+    "label": "Tile hellsand"
+  },
+  {
+    "value": "tile-home-finder",
+    "label": "Tile home finder"
+  },
+  {
+    "value": "tile-hopper",
+    "label": "Tile hopper"
+  },
+  {
+    "value": "tile-hunter-throne",
+    "label": "Tile hunter throne"
+  },
+  {
+    "value": "tile-ice",
+    "label": "Tile ice"
+  },
+  {
+    "value": "tile-icePacked",
+    "label": "Tile icepacked"
+  },
+  {
+    "value": "tile-incubator",
+    "label": "Tile incubator"
+  },
+  {
+    "value": "tile-jawstrap",
+    "label": "Tile jawstrap"
+  },
+  {
+    "value": "tile-jukebox",
+    "label": "Tile jukebox"
+  },
+  {
+    "value": "tile-juneLuckyBlock",
+    "label": "Tile juneluckyblock"
+  },
+  {
+    "value": "tile-kawaii-tnt",
+    "label": "Tile kawaii tnt"
+  },
+  {
+    "value": "tile-lava-obsi",
+    "label": "Tile lava obsi"
+  },
+  {
+    "value": "tile-lava-sponge",
+    "label": "Tile lava sponge"
+  },
+  {
+    "value": "tile-lava-sponge-wet",
+    "label": "Tile lava sponge wet"
+  },
+  {
+    "value": "tile-leaves-big-oak",
+    "label": "Tile leaves big oak"
+  },
+  {
+    "value": "tile-leaves-oak",
+    "label": "Tile leaves oak"
+  },
+  {
+    "value": "tile-less-kawaii-tnt",
+    "label": "Tile less kawaii tnt"
+  },
+  {
+    "value": "tile-lever",
+    "label": "Tile lever"
+  },
+  {
+    "value": "tile-lightgem",
+    "label": "Tile lightgem"
+  },
+  {
+    "value": "tile-lily-of-the-valley",
+    "label": "Tile lily of the valley"
+  },
+  {
+    "value": "tile-limestone",
+    "label": "Tile limestone"
+  },
+  {
+    "value": "tile-litpumpkin",
+    "label": "Tile litpumpkin"
+  },
+  {
+    "value": "tile-log-acacia",
+    "label": "Tile log acacia"
+  },
+  {
+    "value": "tile-log-big-oak",
+    "label": "Tile log big oak"
+  },
+  {
+    "value": "tile-log-birch",
+    "label": "Tile log birch"
+  },
+  {
+    "value": "tile-log-dead-wood",
+    "label": "Tile log dead wood"
+  },
+  {
+    "value": "tile-log-erable",
+    "label": "Tile log erable"
+  },
+  {
+    "value": "tile-log-jacaranda",
+    "label": "Tile log jacaranda"
+  },
+  {
+    "value": "tile-log-judeecercis",
+    "label": "Tile log judeecercis"
+  },
+  {
+    "value": "tile-log-jungle",
+    "label": "Tile log jungle"
+  },
+  {
+    "value": "tile-log-oak",
+    "label": "Tile log oak"
+  },
+  {
+    "value": "tile-log-ostrya",
+    "label": "Tile log ostrya"
+  },
+  {
+    "value": "tile-log-spruce",
+    "label": "Tile log spruce"
+  },
+  {
+    "value": "tile-magic-bell",
+    "label": "Tile magic bell"
+  },
+  {
+    "value": "tile-marble",
+    "label": "Tile marble"
+  },
+  {
+    "value": "tile-march-lucky-block",
+    "label": "Tile march lucky block"
+  },
+  {
+    "value": "tile-march-trophy",
+    "label": "Tile march trophy"
+  },
+  {
+    "value": "tile-may-trophy",
+    "label": "Tile may trophy"
+  },
+  {
+    "value": "tile-mayLuckyBlock",
+    "label": "Tile mayluckyblock"
+  },
+  {
+    "value": "tile-mega-boom-obsi",
+    "label": "Tile mega boom obsi"
+  },
+  {
+    "value": "tile-megasafe-chest",
+    "label": "Tile megasafe chest"
+  },
+  {
+    "value": "tile-melon",
+    "label": "Tile melon"
+  },
+  {
+    "value": "tile-monster-black-hole",
+    "label": "Tile monster black hole"
+  },
+  {
+    "value": "tile-mushroom",
+    "label": "Tile mushroom"
+  },
+  {
+    "value": "tile-musicBlock",
+    "label": "Tile musicblock"
+  },
+  {
+    "value": "tile-mycel",
+    "label": "Tile mycel"
+  },
+  {
+    "value": "tile-mystical-bookshelf",
+    "label": "Tile mystical bookshelf"
+  },
+  {
+    "value": "tile-netherBrick",
+    "label": "Tile netherbrick"
+  },
+  {
+    "value": "tile-netherquartz",
+    "label": "Tile netherquartz"
+  },
+  {
+    "value": "tile-notGate",
+    "label": "Tile notgate"
+  },
+  {
+    "value": "tile-npcBarrel",
+    "label": "Tile npcbarrel"
+  },
+  {
+    "value": "tile-npcCarpentyBench",
+    "label": "Tile npccarpentybench"
+  },
+  {
+    "value": "tile-npcChair",
+    "label": "Tile npcchair"
+  },
+  {
+    "value": "tile-npcCouchWood",
+    "label": "Tile npccouchwood"
+  },
+  {
+    "value": "tile-npcCouchWool",
+    "label": "Tile npccouchwool"
+  },
+  {
+    "value": "tile-npcCrate",
+    "label": "Tile npccrate"
+  },
+  {
+    "value": "tile-npcShelf",
+    "label": "Tile npcshelf"
+  },
+  {
+    "value": "tile-npcTable",
+    "label": "Tile npctable"
+  },
+  {
+    "value": "tile-npcWallBanner",
+    "label": "Tile npcwallbanner"
+  },
+  {
+    "value": "tile-obsidian",
+    "label": "Tile obsidian"
+  },
+  {
+    "value": "tile-obsidianBlockSlab",
+    "label": "Tile obsidianblockslab"
+  },
+  {
+    "value": "tile-obsidianBlockStairs",
+    "label": "Tile obsidianblockstairs"
+  },
+  {
+    "value": "tile-obsidianTrapDoor",
+    "label": "Tile obsidiantrapdoor"
+  },
+  {
+    "value": "tile-online-detector-block",
+    "label": "Tile online detector block"
+  },
+  {
+    "value": "tile-oreCoal",
+    "label": "Tile orecoal"
+  },
+  {
+    "value": "tile-oreDiamond",
+    "label": "Tile orediamond"
+  },
+  {
+    "value": "tile-oreEmerald",
+    "label": "Tile oreemerald"
+  },
+  {
+    "value": "tile-oreGold",
+    "label": "Tile oregold"
+  },
+  {
+    "value": "tile-oreIron",
+    "label": "Tile oreiron"
+  },
+  {
+    "value": "tile-oreLapis",
+    "label": "Tile orelapis"
+  },
+  {
+    "value": "tile-oreRedstone",
+    "label": "Tile oreredstone"
+  },
+  {
+    "value": "tile-paladium-block",
+    "label": "Tile paladium block"
+  },
+  {
+    "value": "tile-paladium-chest",
+    "label": "Tile paladium chest"
+  },
+  {
+    "value": "tile-paladium-ender-chest",
+    "label": "Tile paladium ender chest"
+  },
+  {
+    "value": "tile-paladium-fake-block",
+    "label": "Tile paladium fake block"
+  },
+  {
+    "value": "tile-paladium-fake-ore",
+    "label": "Tile paladium fake ore"
+  },
+  {
+    "value": "tile-paladium-fake-tnt",
+    "label": "Tile paladium fake tnt"
+  },
+  {
+    "value": "tile-paladium-furnace-block",
+    "label": "Tile paladium furnace block"
+  },
+  {
+    "value": "tile-paladium-green-ore",
+    "label": "Tile paladium green ore"
+  },
+  {
+    "value": "tile-paladium-hopper",
+    "label": "Tile paladium hopper"
+  },
+  {
+    "value": "tile-paladium-machine",
+    "label": "Tile paladium machine"
+  },
+  {
+    "value": "tile-paladium-ore",
+    "label": "Tile paladium ore"
+  },
+  {
+    "value": "tile-paladium-portal-block",
+    "label": "Tile paladium portal block"
+  },
+  {
+    "value": "tile-paladium-tank",
+    "label": "Tile paladium tank"
+  },
+  {
+    "value": "tile-paladiumBlockSlab",
+    "label": "Tile paladiumblockslab"
+  },
+  {
+    "value": "tile-paladiumBlockStairs",
+    "label": "Tile paladiumblockstairs"
+  },
+  {
+    "value": "tile-paladiumLuckyBlock",
+    "label": "Tile paladiumluckyblock"
+  },
+  {
+    "value": "tile-paladiumLuckyDrawer",
+    "label": "Tile paladiumluckydrawer"
+  },
+  {
+    "value": "tile-palamod-banner",
+    "label": "Tile palamod banner"
+  },
+  {
+    "value": "tile-palamod-bark-3",
+    "label": "Tile palamod bark 3"
+  },
+  {
+    "value": "tile-palamod-brown-mushroom",
+    "label": "Tile palamod brown mushroom"
+  },
+  {
+    "value": "tile-palamod-fence-acacia",
+    "label": "Tile palamod fence acacia"
+  },
+  {
+    "value": "tile-palamod-fence-jungle",
+    "label": "Tile palamod fence jungle"
+  },
+  {
+    "value": "tile-palamod-fence-oak",
+    "label": "Tile palamod fence oak"
+  },
+  {
+    "value": "tile-palamod-rose",
+    "label": "Tile palamod rose"
+  },
+  {
+    "value": "tile-palamod-slime",
+    "label": "Tile palamod slime"
+  },
+  {
+    "value": "tile-palamod-sponge",
+    "label": "Tile palamod sponge"
+  },
+  {
+    "value": "tile-passifwither-head",
+    "label": "Tile passifwither head"
+  },
+  {
+    "value": "tile-perlinpinpin-power",
+    "label": "Tile perlinpinpin power"
+  },
+  {
+    "value": "tile-pet-cage",
+    "label": "Tile pet cage"
+  },
+  {
+    "value": "tile-petrock",
+    "label": "Tile petrock"
+  },
+  {
+    "value": "tile-pistonBase",
+    "label": "Tile pistonbase"
+  },
+  {
+    "value": "tile-pistonStickyBase",
+    "label": "Tile pistonstickybase"
+  },
+  {
+    "value": "tile-planks-dead-wood",
+    "label": "Tile planks dead wood"
+  },
+  {
+    "value": "tile-planks-erable",
+    "label": "Tile planks erable"
+  },
+  {
+    "value": "tile-planks-jacaranda",
+    "label": "Tile planks jacaranda"
+  },
+  {
+    "value": "tile-planks-judeecercis",
+    "label": "Tile planks judeecercis"
+  },
+  {
+    "value": "tile-planks-ostrya",
+    "label": "Tile planks ostrya"
+  },
+  {
+    "value": "tile-poison-obsi",
+    "label": "Tile poison obsi"
+  },
+  {
+    "value": "tile-powder-barrel",
+    "label": "Tile powder barrel"
+  },
+  {
+    "value": "tile-print-press",
+    "label": "Tile print press"
+  },
+  {
+    "value": "tile-pumpkin",
+    "label": "Tile pumpkin"
+  },
+  {
+    "value": "tile-pumpkincustom-2",
+    "label": "Tile pumpkincustom 2"
+  },
+  {
+    "value": "tile-pumpkincustom-3",
+    "label": "Tile pumpkincustom 3"
+  },
+  {
+    "value": "tile-quartzBlock-default",
+    "label": "Tile quartzblock default"
+  },
+  {
+    "value": "tile-quartzBlock-lines",
+    "label": "Tile quartzblock lines"
+  },
+  {
+    "value": "tile-rail",
+    "label": "Tile rail"
+  },
+  {
+    "value": "tile-random-statue",
+    "label": "Tile random statue"
+  },
+  {
+    "value": "tile-real-jukebox",
+    "label": "Tile real jukebox"
+  },
+  {
+    "value": "tile-redstone-obsi",
+    "label": "Tile redstone obsi"
+  },
+  {
+    "value": "tile-redstoneLight",
+    "label": "Tile redstonelight"
+  },
+  {
+    "value": "tile-sacrifice-hotel",
+    "label": "Tile sacrifice hotel"
+  },
+  {
+    "value": "tile-safe-chest",
+    "label": "Tile safe chest"
+  },
+  {
+    "value": "tile-sand-default",
+    "label": "Tile sand default"
+  },
+  {
+    "value": "tile-sand-red",
+    "label": "Tile sand red"
+  },
+  {
+    "value": "tile-sandStone-chiseled",
+    "label": "Tile sandstone chiseled"
+  },
+  {
+    "value": "tile-sandStone-default",
+    "label": "Tile sandstone default"
+  },
+  {
+    "value": "tile-sapling-acacia",
+    "label": "Tile sapling acacia"
+  },
+  {
+    "value": "tile-sapling-birch",
+    "label": "Tile sapling birch"
+  },
+  {
+    "value": "tile-sapling-jacaranda",
+    "label": "Tile sapling jacaranda"
+  },
+  {
+    "value": "tile-sapling-judeecercis",
+    "label": "Tile sapling judeecercis"
+  },
+  {
+    "value": "tile-sapling-jungle",
+    "label": "Tile sapling jungle"
+  },
+  {
+    "value": "tile-sapling-oak",
+    "label": "Tile sapling oak"
+  },
+  {
+    "value": "tile-sapling-ostrya",
+    "label": "Tile sapling ostrya"
+  },
+  {
+    "value": "tile-sapling-roofed-oak",
+    "label": "Tile sapling roofed oak"
+  },
+  {
+    "value": "tile-sapling-spruce",
+    "label": "Tile sapling spruce"
+  },
+  {
+    "value": "tile-shark-plush",
+    "label": "Tile shark plush"
+  },
+  {
+    "value": "tile-shiny-erable-block",
+    "label": "Tile shiny erable block"
+  },
+  {
+    "value": "tile-shiny-jacaranda-block",
+    "label": "Tile shiny jacaranda block"
+  },
+  {
+    "value": "tile-shiny-judeecercis-block",
+    "label": "Tile shiny judeecercis block"
+  },
+  {
+    "value": "tile-shiny-ostrya-block",
+    "label": "Tile shiny ostrya block"
+  },
+  {
+    "value": "tile-slime-obsi",
+    "label": "Tile slime obsi"
+  },
+  {
+    "value": "tile-slime-obsi-1",
+    "label": "Tile slime obsi 1"
+  },
+  {
+    "value": "tile-slime-obsi-2",
+    "label": "Tile slime obsi 2"
+  },
+  {
+    "value": "tile-slime-obsi-3",
+    "label": "Tile slime obsi 3"
+  },
+  {
+    "value": "tile-slime-obsi-5",
+    "label": "Tile slime obsi 5"
+  },
+  {
+    "value": "tile-slime-purple",
+    "label": "Tile slime purple"
+  },
+  {
+    "value": "tile-slimepad",
+    "label": "Tile slimepad"
+  },
+  {
+    "value": "tile-slimepad-blue",
+    "label": "Tile slimepad blue"
+  },
+  {
+    "value": "tile-slimepad-orange",
+    "label": "Tile slimepad orange"
+  },
+  {
+    "value": "tile-snow",
+    "label": "Tile snow"
+  },
+  {
+    "value": "tile-sound-test-block",
+    "label": "Tile sound test block"
+  },
+  {
+    "value": "tile-spike-obsi",
+    "label": "Tile spike obsi"
+  },
+  {
+    "value": "tile-spike-obsi-1",
+    "label": "Tile spike obsi 1"
+  },
+  {
+    "value": "tile-spike-obsi-2",
+    "label": "Tile spike obsi 2"
+  },
+  {
+    "value": "tile-spike-obsi-3",
+    "label": "Tile spike obsi 3"
+  },
+  {
+    "value": "tile-spike-obsi-4",
+    "label": "Tile spike obsi 4"
+  },
+  {
+    "value": "tile-spike-obsi-5",
+    "label": "Tile spike obsi 5"
+  },
+  {
+    "value": "tile-spike-obsi-6",
+    "label": "Tile spike obsi 6"
+  },
+  {
+    "value": "tile-spikeamethyst",
+    "label": "Tile spikeamethyst"
+  },
+  {
+    "value": "tile-spikediamond",
+    "label": "Tile spikediamond"
+  },
+  {
+    "value": "tile-spikegold",
+    "label": "Tile spikegold"
+  },
+  {
+    "value": "tile-spikeiron",
+    "label": "Tile spikeiron"
+  },
+  {
+    "value": "tile-spikepaladium",
+    "label": "Tile spikepaladium"
+  },
+  {
+    "value": "tile-spiketitane",
+    "label": "Tile spiketitane"
+  },
+  {
+    "value": "tile-spikewood",
+    "label": "Tile spikewood"
+  },
+  {
+    "value": "tile-sponge",
+    "label": "Tile sponge"
+  },
+  {
+    "value": "tile-stairsQuartz",
+    "label": "Tile stairsquartz"
+  },
+  {
+    "value": "tile-stairsStoneBrickSmooth",
+    "label": "Tile stairsstonebricksmooth"
+  },
+  {
+    "value": "tile-stairsWoodSpruce",
+    "label": "Tile stairswoodspruce"
+  },
+  {
+    "value": "tile-stalactites",
+    "label": "Tile stalactites"
+  },
+  {
+    "value": "tile-statue",
+    "label": "Tile statue"
+  },
+  {
+    "value": "tile-stone",
+    "label": "Tile stone"
+  },
+  {
+    "value": "tile-stone-hearth",
+    "label": "Tile stone hearth"
+  },
+  {
+    "value": "tile-stoneMoss",
+    "label": "Tile stonemoss"
+  },
+  {
+    "value": "tile-stoneSlab-quartz",
+    "label": "Tile stoneslab quartz"
+  },
+  {
+    "value": "tile-stonebrick",
+    "label": "Tile stonebrick"
+  },
+  {
+    "value": "tile-stonebricksmooth-chiseled",
+    "label": "Tile stonebricksmooth chiseled"
+  },
+  {
+    "value": "tile-stonebricksmooth-cracked",
+    "label": "Tile stonebricksmooth cracked"
+  },
+  {
+    "value": "tile-stonebricksmooth-default",
+    "label": "Tile stonebricksmooth default"
+  },
+  {
+    "value": "tile-stonebricksmooth-mossy",
+    "label": "Tile stonebricksmooth mossy"
+  },
+  {
+    "value": "tile-super-beacon",
+    "label": "Tile super beacon"
+  },
+  {
+    "value": "tile-tallgrass",
+    "label": "Tile tallgrass"
+  },
+  {
+    "value": "tile-tallgrass-fern",
+    "label": "Tile tallgrass fern"
+  },
+  {
+    "value": "tile-tallgrass-grass",
+    "label": "Tile tallgrass grass"
+  },
+  {
+    "value": "tile-tallgrass-shrub",
+    "label": "Tile tallgrass shrub"
+  },
+  {
+    "value": "tile-telescope",
+    "label": "Tile telescope"
+  },
+  {
+    "value": "tile-thinGlass",
+    "label": "Tile thinglass"
+  },
+  {
+    "value": "tile-titane-block",
+    "label": "Tile titane block"
+  },
+  {
+    "value": "tile-titane-chest",
+    "label": "Tile titane chest"
+  },
+  {
+    "value": "tile-titane-ore",
+    "label": "Tile titane ore"
+  },
+  {
+    "value": "tile-titane-portal-block",
+    "label": "Tile titane portal block"
+  },
+  {
+    "value": "tile-titane-tank",
+    "label": "Tile titane tank"
+  },
+  {
+    "value": "tile-titaneBlockSlab",
+    "label": "Tile titaneblockslab"
+  },
+  {
+    "value": "tile-tnt",
+    "label": "Tile tnt"
+  },
+  {
+    "value": "tile-torch",
+    "label": "Tile torch"
+  },
+  {
+    "value": "tile-totem",
+    "label": "Tile totem"
+  },
+  {
+    "value": "tile-trash",
+    "label": "Tile trash"
+  },
+  {
+    "value": "tile-trim-big-oak",
+    "label": "Tile trim big oak"
+  },
+  {
+    "value": "tile-trim-oak",
+    "label": "Tile trim oak"
+  },
+  {
+    "value": "tile-trim-spruce",
+    "label": "Tile trim spruce"
+  },
+  {
+    "value": "tile-tripWireSource",
+    "label": "Tile tripwiresource"
+  },
+  {
+    "value": "tile-trixium-block",
+    "label": "Tile trixium block"
+  },
+  {
+    "value": "tile-trixium-ore",
+    "label": "Tile trixium ore"
+  },
+  {
+    "value": "tile-trophy",
+    "label": "Tile trophy"
+  },
+  {
+    "value": "tile-type-machine",
+    "label": "Tile type machine"
+  },
+  {
+    "value": "tile-ventilator",
+    "label": "Tile ventilator"
+  },
+  {
+    "value": "tile-vine",
+    "label": "Tile vine"
+  },
+  {
+    "value": "tile-water-leaves",
+    "label": "Tile water leaves"
+  },
+  {
+    "value": "tile-water-log",
+    "label": "Tile water log"
+  },
+  {
+    "value": "tile-water-sapling",
+    "label": "Tile water sapling"
+  },
+  {
+    "value": "tile-waterlily",
+    "label": "Tile waterlily"
+  },
+  {
+    "value": "tile-web",
+    "label": "Tile web"
+  },
+  {
+    "value": "tile-whiteStone",
+    "label": "Tile whitestone"
+  },
+  {
+    "value": "tile-wireless-lever",
+    "label": "Tile wireless lever"
+  },
+  {
+    "value": "tile-wither-obsi",
+    "label": "Tile wither obsi"
+  },
+  {
+    "value": "tile-withered-obsidian",
+    "label": "Tile withered obsidian"
+  },
+  {
+    "value": "tile-withered-reinforced-piston",
+    "label": "Tile withered reinforced piston"
+  },
+  {
+    "value": "tile-wood-acacia",
+    "label": "Tile wood acacia"
+  },
+  {
+    "value": "tile-wood-big-oak",
+    "label": "Tile wood big oak"
+  },
+  {
+    "value": "tile-wood-birch",
+    "label": "Tile wood birch"
+  },
+  {
+    "value": "tile-wood-jungle",
+    "label": "Tile wood jungle"
+  },
+  {
+    "value": "tile-wood-oak",
+    "label": "Tile wood oak"
+  },
+  {
+    "value": "tile-wood-spruce",
+    "label": "Tile wood spruce"
+  },
+  {
+    "value": "tile-woodSlab-big-oak",
+    "label": "Tile woodslab big oak"
+  },
+  {
+    "value": "tile-woolCarpet-pink",
+    "label": "Tile woolcarpet pink"
+  },
+  {
+    "value": "tile-woolCarpet-white",
+    "label": "Tile woolcarpet white"
+  },
+  {
+    "value": "tile-workbench",
+    "label": "Tile workbench"
+  },
+  {
+    "value": "tile-yellow-easter-egg",
+    "label": "Tile yellow easter egg"
+  },
+  {
+    "value": "titane-axe",
+    "label": "Titane axe"
+  },
+  {
+    "value": "titane-boots",
+    "label": "Titane boots"
+  },
+  {
+    "value": "titane-chestplate",
+    "label": "Titane chestplate"
+  },
+  {
+    "value": "titane-helmet",
+    "label": "Titane helmet"
+  },
+  {
+    "value": "titane-ingot",
+    "label": "Titane ingot"
+  },
+  {
+    "value": "titane-leggings",
+    "label": "Titane leggings"
+  },
+  {
+    "value": "titane-pickaxe",
+    "label": "Titane pickaxe"
+  },
+  {
+    "value": "titane-portal-key",
+    "label": "Titane portal key"
+  },
+  {
+    "value": "titane-radius-hoe",
+    "label": "Titane radius hoe"
+  },
+  {
+    "value": "titane-shovel",
+    "label": "Titane shovel"
+  },
+  {
+    "value": "titane-sword",
+    "label": "Titane sword"
+  },
+  {
+    "value": "titaneMixedCoal",
+    "label": "Titanemixedcoal"
+  },
+  {
+    "value": "toolpart-head-broadsword",
+    "label": "Toolpart head broadsword"
+  },
+  {
+    "value": "toolpart-head-fastsword",
+    "label": "Toolpart head fastsword"
+  },
+  {
+    "value": "toolpart-head-hammer",
+    "label": "Toolpart head hammer"
+  },
+  {
+    "value": "toolpart-head-pickaxe",
+    "label": "Toolpart head pickaxe"
+  },
+  {
+    "value": "travelboots",
+    "label": "Travelboots"
+  },
+  {
+    "value": "travellegging",
+    "label": "Travellegging"
+  },
+  {
+    "value": "trixium",
+    "label": "Trixium"
+  },
+  {
+    "value": "turtle-scales",
+    "label": "Turtle scales"
+  },
+  {
+    "value": "tusk",
+    "label": "Tusk"
+  },
+  {
+    "value": "unclaimfinder",
+    "label": "Unclaimfinder"
+  },
+  {
+    "value": "unclaimfinder-bleu",
+    "label": "Unclaimfinder bleu"
+  },
+  {
+    "value": "unclaimfinder-orange",
+    "label": "Unclaimfinder orange"
+  },
+  {
+    "value": "unclaimfinder-rouge",
+    "label": "Unclaimfinder rouge"
+  },
+  {
+    "value": "universal-dollar-stone",
+    "label": "Universal dollar stone"
+  },
+  {
+    "value": "vision-helmet",
+    "label": "Vision helmet"
+  },
+  {
+    "value": "voidstone",
+    "label": "Voidstone"
+  },
+  {
+    "value": "voidstone-minage",
+    "label": "Voidstone minage"
+  },
+  {
+    "value": "voyance-amulet",
+    "label": "Voyance amulet"
+  },
+  {
+    "value": "war-star",
+    "label": "War star"
+  },
+  {
+    "value": "weighted-boots",
+    "label": "Weighted boots"
+  },
+  {
+    "value": "whale",
+    "label": "Whale"
+  },
+  {
+    "value": "wheat",
+    "label": "Wheat"
+  },
+  {
+    "value": "wing",
+    "label": "Wing"
+  },
+  {
+    "value": "witchbroom",
+    "label": "Witchbroom"
+  },
+  {
+    "value": "wither-dust",
+    "label": "Wither dust"
+  },
+  {
+    "value": "witherSkullFragment",
+    "label": "Witherskullfragment"
+  },
+  {
+    "value": "wrench",
+    "label": "Wrench"
+  },
+  {
+    "value": "writtenBook",
+    "label": "Writtenbook"
+  },
+  {
+    "value": "xp-berry",
+    "label": "Xp berry"
+  },
+  {
+    "value": "yellow-glueball",
+    "label": "Yellow glueball"
+  },
+  {
+    "value": "yellowDust",
+    "label": "Yellowdust"
+  }
+]
