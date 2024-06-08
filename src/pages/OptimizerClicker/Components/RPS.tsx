@@ -1,4 +1,3 @@
-
 import {computeRPS} from "@/pages/OptimizerClicker/Components/BuildingList";
 import {checkCondition, computePrice, formatPrice} from "@/lib/misc";
 import {buyBuilding, computeXBuildingAhead, Stat} from "./Stats";
@@ -18,8 +17,6 @@ const RPS = () => {
 
   const [buildingBuyPaths, setBuildingBuyPaths] = useState([] as bestPurchaseInfoDetailed[]);
 
-  console.log(buildingBuyPaths);
-
   useEffect(() => {
     if (buildingBuyPaths.length !== 0)
       setEstimatedRPS(buildingBuyPaths[0].newRps);
@@ -37,71 +34,74 @@ const RPS = () => {
   }
 
   return (
-      <div className="grid grid-cols-1 grid-rows-1 md:grid-cols-2 md:grid-rows-2 gap-4">
-        <Card className="md:row-span-2">
-          <CardHeader>
-            <CardTitle>Prochain achat optimal</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div>
-              {(buildingBuyPaths.length !== 0) &&
-                  <>
-                      <div className="flex flex-col justify-center gap-4">
-                          <Stat buildingName={playerInfo[buildingBuyPaths[0].path][buildingBuyPaths[0].index]["name"]}
-                                buildingPath={buildingBuyPaths[0]} showProduction={false}/>
-                          <Button
-                              onClick={() => buyBuilding(playerInfo, setPlayerInfo, buildingBuyPaths)}
-                          >
-                              Simuler l'achat
-                          </Button>
-                      </div>
-                  </>
-              }
-              {(buildingBuyPaths.length === 0) &&
-                  <div className="flex flex-col items-center gap-4">
-                      <img src={import.meta.env.BASE_URL + "/arty_chocbar.webp"} className="w-32 h-auto object-contain"
-                           alt="Arty"/>
-                      <p className="text-sm">Bravo tu as tout acheté, va prendre une douche maintenant.</p>
-                      <Button>
-                          Aller prendre une douche
-                      </Button>
-                  </div>
-              }
-            </div>
-          </CardContent>
-        </Card>
-        <Card>
-          <CardContent className="h-full pt-6 flex items-center gap-4">
-            {rps < 0 ?
-                <img src={import.meta.env.BASE_URL + "/arty_chocbar.webp"} className="w-12 h-auto object-contain"
-                     alt="Arty"/> :
-                <FaCoins className="w-12 h-12"/>
+    <div className="grid grid-cols-1 grid-rows-1 md:grid-cols-2 md:grid-rows-2 gap-4">
+      <Card className="md:row-span-2">
+        <CardHeader>
+          <CardTitle>Prochain achat optimal</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <div>
+            {(buildingBuyPaths.length !== 0) &&
+                <>
+                    <div className="flex flex-col justify-center gap-4">
+                        <Stat
+                            buildingName={playerInfo[buildingBuyPaths[0].path][buildingBuyPaths[0].index]["name"]}
+                            buildingPath={buildingBuyPaths[0]} showProduction={false}/>
+                        <Button
+                            onClick={() => buyBuilding(playerInfo, setPlayerInfo, buildingBuyPaths)}
+                        >
+                            Simuler l'achat
+                        </Button>
+                    </div>
+                </>
             }
-            <div className="flex flex-col gap-2">
-              <span className="font-semibold">Production actuelle par seconde</span>
-              <div className="flex items-center gap-2">
-                <GradientText className="font-bold">{'~ ' + formatPrice(rps)}</GradientText>
-                <img src={import.meta.env.BASE_URL + "/coin.png"} className="h-6 w-6" alt="Coin"/>
-              </div>
+            {(buildingBuyPaths.length === 0) &&
+                <div className="flex flex-col items-center gap-4">
+                    <img src={import.meta.env.BASE_URL + "/arty_chocbar.webp"}
+                         className="w-32 h-auto object-contain"
+                         alt="Arty"/>
+                    <p className="text-sm">Bravo tu as tout acheté, va prendre une douche maintenant.</p>
+                    <Button>
+                        Aller prendre une douche
+                    </Button>
+                </div>
+            }
+          </div>
+        </CardContent>
+      </Card>
+      <Card>
+        <CardContent className="h-full pt-6 flex items-center gap-4">
+          {rps < 0 ?
+            <img src={import.meta.env.BASE_URL + "/arty_chocbar.webp"}
+                 className="w-12 h-auto object-contain"
+                 alt="Arty"/> :
+            <FaCoins className="w-12 h-12"/>
+          }
+          <div className="flex flex-col gap-2">
+            <span className="font-semibold">Production actuelle par seconde</span>
+            <div className="flex items-center gap-2">
+              <GradientText className="font-bold">{'~ ' + formatPrice(rps)}</GradientText>
+              <img src={import.meta.env.BASE_URL + "/coin.png"} className="h-6 w-6" alt="Coin"/>
             </div>
-          </CardContent>
-        </Card>
-        <Card>
-          <CardContent className="h-full pt-6 flex items-center gap-4">
-            <FaRandom className="w-12 h-12"/>
-            <div className="flex flex-col gap-2">
-              <span className="font-semibold">Production estimée après achat</span>
-              <div className="flex items-center gap-2">
-                <GradientText className="font-bold">
-                  {'~ ' + formatPrice(estimatedRPS)}{" "}
-                  ({estimatedRPS > rps ? "+" : ""}{(((estimatedRPS - rps) / (rps) * 100)).toFixed(5)}%)
-                </GradientText>
-                <img src={import.meta.env.BASE_URL + "/coin.png"} className="h-6 w-6" alt="Coin"/>
-              </div>
+          </div>
+        </CardContent>
+      </Card>
+      <Card>
+        <CardContent className="h-full pt-6 flex items-center gap-4">
+          <FaRandom className="w-12 h-12"/>
+          <div className="flex flex-col gap-2">
+            <span className="font-semibold">Production estimée après achat</span>
+            <div className="flex items-center gap-2">
+              <GradientText className="font-bold">
+                {'~ ' + formatPrice(estimatedRPS)}{" "}
+                ({estimatedRPS > rps ? "+" : ""}{(((estimatedRPS - rps) / (rps) * 100)).toFixed(5)}%)
+              </GradientText>
+              <img src={import.meta.env.BASE_URL + "/coin.png"} className="h-6 w-6" alt="Coin"/>
             </div>
-          </CardContent>
-        </Card>
-      </div>
+          </div>
+        </CardContent>
+      </Card>
+    </div>
   );
 }
 
@@ -166,12 +166,12 @@ export function findBestUpgrade(playerInfo: PlayerInfo): bestUpgradeInfo {
 
 
   type typeListTmp =
-      typeof buildingUpgradeUnlockable
-      | typeof categoryUpgradeUnlockable
-      | typeof globalUpgradeUnlockable
-      | typeof manyUpgradeUnlockable
-      | typeof terrainUpgradeUnlockable
-      | typeof posteriorUpgradeUnlockable;
+    typeof buildingUpgradeUnlockable
+    | typeof categoryUpgradeUnlockable
+    | typeof globalUpgradeUnlockable
+    | typeof manyUpgradeUnlockable
+    | typeof terrainUpgradeUnlockable
+    | typeof posteriorUpgradeUnlockable;
 
   function getBestIndex(list: typeListTmp, nameList: buildingPathType) {
     for (let index = 0; index < list.length; index++) {
