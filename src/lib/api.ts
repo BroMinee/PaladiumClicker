@@ -18,7 +18,7 @@ import {
   PaladiumAhHistory,
   PlayerInfo,
   PosteriorUpgrade,
-  TerrainUpgrade, PaladiumAhItemStat
+  TerrainUpgrade, PaladiumAhItemStat, NetworkError, AhItemHistory
 } from "@/types";
 import axios from "axios";
 import {usePlayerInfoStore} from "@/stores/use-player-info-store.ts";
@@ -41,8 +41,16 @@ const fetchLocal = async <T>(file: string) => {
 
 export default fetchLocal;
 
-const getPaladiumProfileByPseudo = async (pseudo: string) => {
-  const response = await axios.get<PaladiumPlayerInfo>(`${PALADIUM_API_URL}/v1/paladium/player/profile/${pseudo}`);
+const getPaladiumProfileByPseudo = async (pseudo: string) : Promise<PaladiumPlayerInfo> => {
+  const response = await axios.get<PaladiumPlayerInfo>(`${PALADIUM_API_URL}/v1/paladium/player/profile/${pseudo}`, {
+    timeout: 4000
+  }).catch((error) => error);
+
+  if (response instanceof Error) {
+    if ((response as NetworkError).code === "ECONNABORTED") {
+      throw "Timeout error of \"Get player information by pseudo\" API, please try again later";
+    }
+  }
 
   if (response.status !== 200) {
     throw response;
@@ -51,8 +59,17 @@ const getPaladiumProfileByPseudo = async (pseudo: string) => {
   return response.data;
 }
 
-export const getPaladiumLeaderboardPositionByUUID = async (uuid: string) => {
-  const response = await axios.get<PaladiumRanking>(`${PALADIUM_API_URL}/v1/paladium/ranking/position/clicker/${uuid}`);
+export const getPaladiumLeaderboardPositionByUUID = async (uuid: string) : Promise<string> => {
+// set a timeout of 2 seconds to avoid blocking the main thread for too long
+  const response = await axios.get<PaladiumRanking>(`${PALADIUM_API_URL}/v1/paladium/ranking/position/clicker/${uuid}`, {
+    timeout: 4000
+  }).catch((error) => error);
+
+  if (response instanceof Error) {
+    if ((response as NetworkError).code === "ECONNABORTED") {
+      throw "Timeout error of \"Get player positions in a specific leaderboard\" API, please try again later";
+    }
+  }
 
   if (response.status !== 200) {
     throw response;
@@ -61,8 +78,16 @@ export const getPaladiumLeaderboardPositionByUUID = async (uuid: string) => {
   return response.data.ranked ? response.data.position.toString() : "Unranked";
 }
 
-const getPaladiumClickerDataByUUID = async (uuid: string) => {
-  const response = await axios.get<PaladiumClickerData>(`${PALADIUM_API_URL}/v1/paladium/player/profile/${uuid}/clicker`);
+const getPaladiumClickerDataByUUID = async (uuid: string) : Promise<PaladiumClickerData> => {
+  const response = await axios.get<PaladiumClickerData>(`${PALADIUM_API_URL}/v1/paladium/player/profile/${uuid}/clicker`, {
+    timeout: 4000
+  }).catch((error) => error);
+
+  if (response instanceof Error) {
+    if ((response as NetworkError).code === "ECONNABORTED") {
+      throw "Timeout error of \"Get player's clicker information\" API, please try again later";
+    }
+  }
 
   if (response.status !== 200) {
     throw response;
@@ -71,8 +96,16 @@ const getPaladiumClickerDataByUUID = async (uuid: string) => {
   return response.data;
 }
 
-export const getFactionInfo = async (factionName: string) => {
-  const response = await axios.get<PaladiumFactionInfo>(`${PALADIUM_API_URL}/v1/paladium/faction/profile/${factionName}`);
+export const getFactionInfo = async (factionName: string) : Promise<PaladiumFactionInfo> => {
+  const response = await axios.get<PaladiumFactionInfo>(`${PALADIUM_API_URL}/v1/paladium/faction/profile/${factionName}`, {
+    timeout: 4000
+  }).catch((error) => error);
+
+  if (response instanceof Error) {
+    if ((response as NetworkError).code === "ECONNABORTED") {
+      throw "Timeout error of \"Get faction profile\" API, please try again later";
+    }
+  }
 
   if (response.status !== 200) {
     throw response;
@@ -81,8 +114,16 @@ export const getFactionInfo = async (factionName: string) => {
   return response.data;
 }
 
-export const getFactionLeaderboard = async () => {
-  const response = await axios.get<PaladiumFactionLeaderboard>(`${PALADIUM_API_URL}/v1/paladium/faction/leaderboard`);
+export const getFactionLeaderboard = async () : Promise<PaladiumFactionLeaderboard> => {
+  const response = await axios.get<PaladiumFactionLeaderboard>(`${PALADIUM_API_URL}/v1/paladium/faction/leaderboard`, {
+    timeout: 4000
+  }).catch((error) => error);
+
+  if (response instanceof Error) {
+    if ((response as NetworkError).code === "ECONNABORTED") {
+      throw "Timeout error of \"Get faction leaderboard\" API, please try again later";
+    }
+  }
 
   if (response.status !== 200) {
     throw response;
@@ -91,8 +132,16 @@ export const getFactionLeaderboard = async () => {
   return response.data;
 }
 
-export const getAuctionHouseInfo = async (uuid: string) => {
-  const response = await axios.get(`${PALADIUM_API_URL}/v1/paladium/shop/market/players/${uuid}/items`);
+export const getAuctionHouseInfo = async (uuid: string)   => {
+  const response = await axios.get<PaladiumAhItemStat>(`${PALADIUM_API_URL}/v1/paladium/shop/market/players/${uuid}/items`, {
+    timeout: 4000
+  }).catch((error) => error);
+
+  if (response instanceof Error) {
+    if ((response as NetworkError).code === "ECONNABORTED") {
+      throw "Timeout error of \"Get items for sale of a player in the Market Shop\" API, please try again later";
+    }
+  }
 
   if (response.status !== 200) {
     throw response;
@@ -104,8 +153,16 @@ export const getAuctionHouseInfo = async (uuid: string) => {
   return res;
 }
 
-export const getFriendsList = async (uuid: string) => {
-  const response = await axios.get<PaladiumFriendInfo>(`${PALADIUM_API_URL}/v1/paladium/player/profile/${uuid}/friends`);
+export const getFriendsList = async (uuid: string) : Promise<PaladiumFriendInfo> => {
+  const response = await axios.get<PaladiumFriendInfo>(`${PALADIUM_API_URL}/v1/paladium/player/profile/${uuid}/friends`, {
+    timeout: 4000
+  }).catch((error) => error);
+
+  if (response instanceof Error) {
+    if ((response as NetworkError).code === "ECONNABORTED") {
+      throw "Timeout error of \"Get player friend list\" API, please try again later";
+    }
+  }
 
   if (response.status !== 200) {
     throw response;
@@ -114,7 +171,7 @@ export const getFriendsList = async (uuid: string) => {
   return response.data;
 }
 
-export const getPlayerInfo = async (pseudo: string) => {
+export const getPlayerInfo = async (pseudo: string) : Promise<PlayerInfo> => {
 
   if (pseudo === "") {
     throw "Pseudo is empty";
@@ -254,7 +311,7 @@ export const getAhItemData = async () => {
   return await fetchLocal<AhPaladium[]>("/AhAssets/items_list.json");
 }
 
-export const getPaladiumAhItemFullHistory = async (itemId: string) => {
+export const getPaladiumAhItemFullHistory = async (itemId: string) : Promise<AhItemHistory[]> => {
   const response = await axios.get<PaladiumAhHistory>(`${PALADIUM_API_URL}/v1/paladium/shop/market/items/${itemId}/history?limit=100&offset=0`);
 
   if (response.status !== 200) {
@@ -267,7 +324,18 @@ export const getPaladiumAhItemFullHistory = async (itemId: string) => {
   let offset = 100;
   let c = 0;
   while (offset < totalCount && c <= 10) {
-    const response = await axios.get<PaladiumAhHistory>(`${PALADIUM_API_URL}/v1/paladium/shop/market/items/${itemId}/history?offset=${offset}&limit=100`);
+    const response = await axios.get<PaladiumAhHistory>(`${PALADIUM_API_URL}/v1/paladium/shop/market/items/${itemId}/history?offset=${offset}&limit=100`, {
+      timeout: 4000
+    }).catch((error) => error);
+
+    if (response instanceof Error) {
+      if ((response as NetworkError).code === "ECONNABORTED") {
+        throw "Timeout error of \"Get item history in the Market Shop\" API, please try again later";
+      }
+    }
+
+
+
     if (response.status !== 200) {
       throw response;
     }
@@ -281,8 +349,16 @@ export const getPaladiumAhItemFullHistory = async (itemId: string) => {
   return data;
 }
 
-export const getPaladiumAhItemStats = async (itemId: string) => {
-  const response = await axios.get<PaladiumAhItemStat>(`${PALADIUM_API_URL}/v1/paladium/shop/market/items/${itemId}`);
+export const getPaladiumAhItemStats = async (itemId: string) : Promise<PaladiumAhItemStat> => {
+  const response = await axios.get<PaladiumAhItemStat>(`${PALADIUM_API_URL}/v1/paladium/shop/market/items/${itemId}`, {
+    timeout: 4000
+  }).catch((error) => error);
+
+  if (response instanceof Error ) {
+    if ((response as NetworkError).code === "ECONNABORTED") {
+      throw "Timeout error of \"Get item information in the Market Shop\" API, please try again later";
+    }
+  }
 
   if (response.status !== 200) {
     throw response;

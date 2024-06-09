@@ -303,3 +303,7 @@ export type bestPurchaseInfoDetailed =
         newRps: number,
         price: number
     }
+
+export interface NetworkError extends Error {
+  code?: string;
+}
