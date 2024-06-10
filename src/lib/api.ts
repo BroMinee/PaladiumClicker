@@ -72,7 +72,7 @@ export const getPaladiumLeaderboardPositionByUUID = async (uuid: string) : Promi
   }
 
   if (response.status !== 200) {
-    throw response;
+    return "Error";
   }
 
   return response.data.ranked ? response.data.position.toString() : "Unranked";
