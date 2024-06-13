@@ -18,11 +18,21 @@ import ImportProfil from "./Components/ImportProfil";
 import RPS from "./Components/RPS";
 import Stats from "./Components/Stats";
 import UpgradeList from "./Components/UpgradeList";
+import DailyPopup from "@/components/dailyPopup.tsx";
 
 const OptimizerClickerPage = () => {
 
     const {data: playerInfo} = usePlayerInfoStore();
     const [isModalNewsOpen, setIsModalNewsOpen] = useState(playerInfo === null);
+
+    const getTimeLocalStorage = localStorage.getItem("getTime");
+    const [showDayPopup] = useState(getTimeLocalStorage === null || new Date(getTimeLocalStorage).getDay() != new Date().getDay());
+
+    useEffect(() => {
+        if (showDayPopup) {
+            localStorage.setItem("getTime", new Date().toString());
+        }
+    }, []);
 
     useEffect(() => {
         if (playerInfo === null) {
@@ -54,6 +64,7 @@ const OptimizerClickerPage = () => {
         <>
             <Layout>
                 <div className="flex flex-col gap-4">
+                    <DailyPopup defaultOpen={showDayPopup}/>
                     <Card>
                         <CardHeader className="flex flex-row items-center justify-between">
                             <CardTitle>
