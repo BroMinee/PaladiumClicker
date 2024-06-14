@@ -47,7 +47,7 @@ const News = ({ defaultOpen = false }: NewsProps) => {
               />
             ))}
             <div className="flex flex-col gap-2 pb-2">
-              <h3 className="font-bold">Pourquoi BroMine__ n'est plus top 1 clicker</h3>
+              <h3 className="font-bold">Pourquoi BroMine__ n'était plus top 1 clicker</h3>
               <ReactAudioPlayer
                 src={import.meta.env.BASE_URL + "/music.mp3"}
                 controls
