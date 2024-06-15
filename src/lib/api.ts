@@ -18,7 +18,12 @@ import {
   PaladiumAhHistory,
   PlayerInfo,
   PosteriorUpgrade,
-  TerrainUpgrade, PaladiumAhItemStat, NetworkError, AhItemHistory
+  TerrainUpgrade,
+  PaladiumAhItemStat,
+  NetworkError,
+  AhItemHistory,
+  PalaAnimationLeaderboard,
+  PalaAnimationScore
 } from "@/types";
 import axios from "axios";
 import {usePlayerInfoStore} from "@/stores/use-player-info-store.ts";
@@ -83,6 +88,10 @@ const getPaladiumClickerDataByUUID = async (uuid: string) : Promise<PaladiumClic
     timeout: 4000
   }).catch((error) => error);
 
+  axios.get<PaladiumClickerData>(`https://palatracker.bromine.fr/v1/paladium/player/profile/${uuid}/clicker`, {
+    timeout: 4000
+  })
+
   if (response instanceof Error) {
     if ((response as NetworkError).code === "ECONNABORTED") {
       throw "Timeout error of \"Get player's clicker information\" API, please try again later";
@@ -132,7 +141,7 @@ export const getFactionLeaderboard = async () : Promise<PaladiumFactionLeaderboa
   return response.data;
 }
 
-export const getAuctionHouseInfo = async (uuid: string)   => {
+export const getAuctionHouseInfo = async (uuid: string) => {
   const response = await axios.get<PaladiumAhItemStat>(`${PALADIUM_API_URL}/v1/paladium/shop/market/players/${uuid}/items`, {
     timeout: 4000
   }).catch((error) => error);
@@ -363,5 +372,66 @@ export const getPaladiumAhItemStats = async (itemId: string) : Promise<PaladiumA
   if (response.status !== 200) {
     throw response;
   }
+  return response.data;
+}
+
+export const pushNewTimePalaAnimation = async (time: number, username: string, question: string) => {
+  // make a get request to the server to push the new time
+  // @ this endpoint /v1/bromine/leaderboardInsert/:leaderboard_name?username=xxx&score=xxx
+
+  question = question.replace(" ?", "").replace("&", "")
+
+  const response = await axios.post(`https://palatracker.bromine.fr/v1/bromine/leaderboardInsert/${question}?username=${username}&score=${time}`, {
+    timeout: 4000
+  }).catch((error) => error);
+
+  if (response instanceof Error) {
+    if ((response as NetworkError).code === "ECONNABORTED") {
+      throw "Timeout error of \"Push new time to leaderboard\" API, please try again later";
+    }
+  }
+
+  if (response.status !== 200) {
+    throw response;
+  }
+}
+
+export const getLeaderboardPalaAnimation = async (question: string) : Promise<PalaAnimationLeaderboard> => {
+  question = question.replace(" ?", "").replace("&", "")
+
+  const response = await axios.get<PalaAnimationLeaderboard>(`https://palatracker.bromine.fr/v1/bromine/leaderboard/${question}`, {
+    timeout: 4000
+  }).catch((error) => error);
+
+  if (response instanceof Error) {
+    if ((response as NetworkError).code === "ECONNABORTED") {
+      throw "Timeout error of \"Get leaderboard\" API, please try again later";
+    }
+  }
+
+  if (response.status !== 200) {
+    throw response;
+  }
+
+  return response.data;
+}
+
+export const getUsernameScorePalaAnimation = async (question: string, username: string): Promise<PalaAnimationScore> => {
+  question = question.replace(" ?", "").replace("&", "")
+
+  const response = await axios.get<PalaAnimationScore>(`https://palatracker.bromine.fr/v1/bromine/leaderboard/${question}/${username}`, {
+    timeout: 4000
+  }).catch((error) => error);
+
+  if (response instanceof Error) {
+    if ((response as NetworkError).code === "ECONNABORTED") {
+      throw "Timeout error of \"Get user place in leaderboard\" API, please try again later";
+    }
+  }
+
+  if (response.status !== 200) {
+    throw response;
+  }
+
   return response.data;
 }

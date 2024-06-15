@@ -305,5 +305,18 @@ export type bestPurchaseInfoDetailed =
     }
 
 export interface NetworkError extends Error {
-  code?: string;
+    code?: string;
+}
+
+export type PalaAnimationLeaderboard = {
+    data: {
+        username: string,
+        score: number
+    }[],
+    length: number
+}
+
+export type PalaAnimationScore = {
+    position: number
+    score: number
 }

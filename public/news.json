@@ -1,5 +1,11 @@
 [
   {
+    "date": "15-06-2024 - 21h40",
+    "events": [
+      "Ajout d'un classement dans le PalaAnimation"
+      ]
+  },
+  {
     "date": "07-06-2024 - 23h29",
     "events": [
       "Ajout du AH Tracker pour avoir des informations à propos des items en vente (beta)",
