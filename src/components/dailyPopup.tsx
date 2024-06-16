@@ -18,7 +18,6 @@ const DailyPopup = ({defaultOpen = false}) => {
                 <div>- Endium pickaxe</div>
                 <div>- Endium axe</div>
                 <div>- Endium battery</div>
-                <div>- Fake endium stuff</div>
                 <div>- Cloche magique en endium</div>
                 <div>- Endium stone heart</div>
                 <div>- Endium dynamite (même si je crois qu'il y en a pas en circulation)</div>
