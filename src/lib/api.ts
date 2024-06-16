@@ -381,7 +381,7 @@ export const pushNewTimePalaAnimation = async (time: number, username: string, q
 
   question = question.replace(" ?", "").replace("&", "")
 
-  const response = await axios.post(`https://palatracker.bromine.fr/v1/bromine/leaderboardInsert/${question}?username=${username}&score=${time}`, {
+  const response = await axios.get(`https://palatracker.bromine.fr/v1/bromine/leaderboardInsert/${question}?username=${username}&score=${time}`, {
     timeout: 4000
   }).catch((error) => error);
 
