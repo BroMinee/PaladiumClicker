@@ -19,7 +19,6 @@ import RPS from "./Components/RPS";
 import Stats from "./Components/Stats";
 import UpgradeList from "./Components/UpgradeList";
 import DailyPopup from "@/components/dailyPopup.tsx";
-import SmallCardInfo from "@/components/shared/SmallCardInfo.tsx";
 
 const OptimizerClickerPage = () => {
 
@@ -88,7 +87,6 @@ const OptimizerClickerPage = () => {
                             <CardDescription>Vous avez la possibilité de choisir un pseudo pour voir son
                                 profil</CardDescription>
                             <ImportProfil showResetButton/>
-                            {(playerInfo.faction.name === 'BlackOld' || playerInfo.faction.name === 'WithHold') ? <SmallCardInfo title={"Mieux vaut une grande famille que 200 drawers de gunpowder"} value={"Signé la WithHold"} img={"AH_img/gunpowder.png"} /> : ""}
                         </CardFooter>
                     </Card>
                     <RPS/>

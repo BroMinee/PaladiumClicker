@@ -24,11 +24,6 @@ const DailyPopup = ({defaultOpen = false}) => {
                   <div>Cloche magique en endium</div>
                 </div>
                 <div className="flex flex-row gap-2 items-center">
-                  <img src={import.meta.env.BASE_URL + "/AH_img/endium_stone_heart.png"} className="h-6 w-6 pixelated"
-                       alt="Endium Stone heart"/>
-                  <div>Endium stone heart</div>
-                </div>
-                <div className="flex flex-row gap-2 items-center">
                   <img src={import.meta.env.BASE_URL + "/AH_img/dynamite_endium.png"} className="h-6 w-6 pixelated"
                        alt="Endium Dynamite"/>
                   <div>Endium dynamite (même si je crois qu'il y en a pas en circulation)</div>
