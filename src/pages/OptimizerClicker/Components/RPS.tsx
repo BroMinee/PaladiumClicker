@@ -26,8 +26,9 @@ const RPS = () => {
     if (!playerInfo) {
       return;
     }
-    setBuildingBuyPaths(computeXBuildingAhead(playerInfo, 1, rps));
-  }, [playerInfo]);
+    if(rps !== 0)
+      setBuildingBuyPaths(computeXBuildingAhead(playerInfo, 1, rps));
+  }, [playerInfo,rps]);
 
   if (!playerInfo) {
     return <div>Loading...</div>
