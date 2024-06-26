@@ -167,13 +167,10 @@ const PalaAnimationBody = ({questionsList, setQuestionsList}: PalaAnimationBodyT
     fetchLocal<Record<string, string>>("/Animation/questions.json").then(
         (data) => {
           //random sort data
-          data = Object.fromEntries(Object.entries(data).sort(() => Math.random() - 0.5));
-
-
           setQuestionsList(
               Object.entries(data).map(([question, answer]) => {
                 return {question, answer};
-              })
+              }).sort(() => Math.random() - 0.5)
           );
         }
     ).catch(

@@ -379,7 +379,7 @@ export const pushNewTimePalaAnimation = async (time: number, username: string, q
   // make a get request to the server to push the new time
   // @ this endpoint /v1/bromine/leaderboardInsert/:leaderboard_name?username=xxx&score=xxx
 
-  question = question.replace(" ?", "").replace("&", "")
+  question = question.replace(" ?", "").replace("&", "").replace("?", "")
 
   const response = await axios.get(`https://palatracker.bromine.fr/v1/bromine/leaderboardInsert/${question}?username=${username}&score=${time}`, {
     timeout: 4000
