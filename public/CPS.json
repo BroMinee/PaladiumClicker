@@ -312,17 +312,17 @@
     ]
   },
   {
-    "name": -1,
-    "CPS": -1,
+    "name": "Burger Clic",
+    "CPS": 4194304,
     "own": false,
     "index": 21,
-    "price": 228271484375,
+    "price": 2250000000000,
     "condition": [
       {
-        "coins": 2282714843750
+        "coins": 22500000000000
       },
       {
-        "day": 128
+        "day": 129
       }
     ]
   },
