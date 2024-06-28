@@ -9,7 +9,9 @@ type DiscordProps = {
 
 const Discord = ({className = ""} : DiscordProps) => {
   return (
-      <Card className={cn("md:col-span-2 lg:col-span-1 hover:scale-105 duration-300", className)}>
+      <Card className={cn("md:col-span-2 lg:col-span-1 hover:scale-105 duration-300", className)}
+      onClick={() => window.open(constants.discord.url, "_blank")}
+      >
         <CardContent className="h-full pt-6 flex items-center gap-4 ">
           <div>
             <FaDiscord className="w-14 h-14 p-2 rounded-md bg-discord"/>
