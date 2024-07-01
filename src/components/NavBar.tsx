@@ -29,7 +29,7 @@ const Navbar = () => {
               className="h-12 w-12 hover:scale-110 duration-300 cursor-pointer"
               onClick={() => {
                 reset();
-                window.location.assign("/");
+                window.location.assign("/PaladiumClicker");
               }}
           />
           <ul className="flex gap-6 items-center">
