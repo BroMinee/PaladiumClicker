@@ -251,7 +251,7 @@ const Step5 = ({step, setStep}: StepProps) => {
       propose de faire un jeu que tu connais bien, la <GradientText className="font-extrabold">roulette
       Paladienne.</GradientText>
       <div><br/>
-        Descent d'un étage via l'elevator dans le ClicCoin pour tester ta chance.
+        Descent d'un étage via l'elevator dans le ClicCoin pour tester ta chance, tu vas devoir faire <GradientText className="font-extrabold">3 essais</GradientText> ou 4 fois si l'envie te chante.
       </div>
 
       <div className="grid grid-cols-2 grid-rows-5">
