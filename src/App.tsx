@@ -10,6 +10,7 @@ import ProfilPage from "@/pages/Profil/Profil.tsx";
 import CalculatorPage from "@/pages/Calculator/CalculatorPage.tsx";
 import SettingProvider from "@/components/shared/SettingsProvider.tsx";
 import AhTracker from "@/pages/AhTracker/AhTracker.tsx";
+import SecretPage from "@/pages/SecretPage/SecretPage.tsx";
 
 const router = createBrowserRouter([
   {
@@ -41,6 +42,10 @@ const router = createBrowserRouter([
     path: '/about',
     element: <AboutPage/>,
   },
+  {
+    path: '/secret',
+    element: <SecretPage/>
+  }
 ], {
   basename: '/PaladiumClicker',
 });

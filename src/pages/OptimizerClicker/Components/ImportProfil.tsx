@@ -24,6 +24,11 @@ const ImportProfil = ({showResetButton = false, withBackground = true,}: ImportP
       return;
     }
     const formData = new FormData(event.target as HTMLFormElement);
+    if(String(formData.get("pseudo")).toLowerCase() === "levraifuze") {
+      // navigate to the secret page
+      window.location.assign("/PaladiumClicker/secret");
+      return;
+    }
     loadPlayerInfo(String(formData.get("pseudo")), {
       onSuccess: () => {
         toast.success("Profil importé avec succès");
