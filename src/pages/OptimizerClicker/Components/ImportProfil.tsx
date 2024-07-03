@@ -7,6 +7,7 @@ import {AxiosError} from "axios";
 import {FormEvent} from "react";
 import {FaSearch} from "react-icons/fa";
 import {toast} from "sonner";
+import { useNavigate } from 'react-router-dom';
 
 type ImportProfilProps = {
   showResetButton?: boolean,
@@ -14,6 +15,8 @@ type ImportProfilProps = {
 }
 
 const ImportProfil = ({showResetButton = false, withBackground = true,}: ImportProfilProps) => {
+
+  const navigate = useNavigate();
 
   const {data: playerInfo, reset} = usePlayerInfoStore();
   const {mutate: loadPlayerInfo, isPending, isError} = useLoadPlayerInfoMutation();
@@ -26,7 +29,7 @@ const ImportProfil = ({showResetButton = false, withBackground = true,}: ImportP
     const formData = new FormData(event.target as HTMLFormElement);
     if(String(formData.get("pseudo")).toLowerCase() === "levraifuze") {
       // navigate to the secret page
-      window.location.assign("/PaladiumClicker/secret");
+      navigate("/secret");
       return;
     }
     loadPlayerInfo(String(formData.get("pseudo")), {
