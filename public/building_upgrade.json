@@ -241,7 +241,7 @@
     "name": "Suppression des taxes douanières",
     "active_index": 2,
     "own": false,
-    "price": 114000,
+    "price": 99750,
     "condition": [
       {"day": 4},
       {

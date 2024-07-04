@@ -25,8 +25,8 @@ const OptimizerClickerPage = () => {
     const {data: playerInfo} = usePlayerInfoStore();
     const [isModalNewsOpen, setIsModalNewsOpen] = useState(playerInfo === null);
 
-    const getTimeLocalStorage = localStorage.getItem("getTime");
-    const [showDayPopup] = useState(getTimeLocalStorage === null || new Date(getTimeLocalStorage).getDay() != new Date().getDay());
+    //const getTimeLocalStorage = localStorage.getItem("getTime");
+    const [showDayPopup] = useState(false);//useState(getTimeLocalStorage === null || new Date(getTimeLocalStorage).getDay() != new Date().getDay());
 
     useEffect(() => {
         if (showDayPopup) {
