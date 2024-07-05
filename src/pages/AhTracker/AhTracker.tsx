@@ -165,7 +165,7 @@ const AhInfoSelected = ({itemHover}: CurrentAhInfoProps) => {
       <CardContent className="h-full pt-6 flex items-center gap-4">
         <LuCalendarClock className="size-12 mr-2"/>
         <div className="flex flex-col gap-2">
-          <span className="font-semibold">Vente journalière</span>
+          <span className="font-semibold">Lots vendus ce jour</span>
           <div className="flex gap-2 items-center">
             <GradientText className="font-bold">
               {formatPrice(itemHover.sells + itemHover.sellsPb)}
