@@ -1,17 +1,17 @@
 import Layout from "@/components/shared/Layout.tsx";
 
-import {Card, CardContent, CardDescription, CardHeader, CardTitle} from "@/components/ui/card.tsx";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card.tsx";
 import GradientText from "@/components/shared/GradientText.tsx";
-import {FaBoxOpen, FaHeart} from "react-icons/fa";
+import { FaBoxOpen, FaHeart } from "react-icons/fa";
 import Plot from "react-plotly.js";
-import {useEffect, useState} from "react";
+import { useEffect, useState } from "react";
 import SmallCardInfo from "@/components/shared/SmallCardInfo.tsx";
-import {getAhItemData, getPaladiumAhItemFullHistory, getPaladiumAhItemStats} from "@/lib/api.ts";
-import {AhItemHistory, AhPaladium} from "@/types";
+import { getAhItemData, getPaladiumAhItemFullHistory, getPaladiumAhItemStats } from "@/lib/apiPala.ts";
+import { AhItemHistory, AhPaladium } from "@/types";
 import Selector from "@/components/shared/Selector.tsx";
-import {LuCalendarClock} from "react-icons/lu";
-import {formatPrice, levensteinDistance} from "@/lib/misc.ts";
-import {GetAllFileNameInFolder} from "@/pages/Profil/Profil.tsx";
+import { LuCalendarClock } from "react-icons/lu";
+import { formatPrice, levensteinDistance } from "@/lib/misc.ts";
+import { GetAllFileNameInFolder } from "@/pages/Profil/Profil.tsx";
 
 type itemHoverType = {
   quantityAvailable: number,
@@ -37,11 +37,11 @@ const itemHoverTypeInit = {
 
 const ProfilPage = () => {
   return (
-      <>
-        <Layout>
-          <AhInfo/>
-        </Layout>
-      </>
+    <>
+      <Layout>
+        <AhInfo/>
+      </Layout>
+    </>
   );
 }
 
@@ -104,8 +104,10 @@ const AhInfo = () => {
     <Card className="bg-red-700">
       <CardHeader>
         <CardTitle className="text-primary-foreground">
-          Le prix de vente en $ journalier est inexact, il est calculé en divisant la somme des prix de vente en $ par
-          le nombre de vente journalière, or le nombre de vente journalière contient aussi les ventes en pbs. Il y a
+          Le prix de vente en $ journalier est inexact, il est calculé en divisant la somme des prix de vente
+          en $ par
+          le nombre de vente journalière, or le nombre de vente journalière contient aussi les ventes en pbs.
+          Il y a
           donc une surévaluation du vrai prix.
           Cela sera corrigé après une mise à jour de l'API de Paladium.
         </CardTitle>
@@ -118,13 +120,14 @@ const AhInfo = () => {
     </div>
     <div className="w-full">
       {x.length === 0 ? <Card className="col-start-1 col-span-4 w-full">
-            <CardHeader>
-              <CardTitle>
-                Veuillez sélectionner un item
-              </CardTitle>
-            </CardHeader>
-          </Card>
-          : <GraphItem x={x} y={y} itemHover={itemHover} setItemHover={setItemHover} inputValue={inputValue}/>}
+          <CardHeader>
+            <CardTitle>
+              Veuillez sélectionner un item
+            </CardTitle>
+          </CardHeader>
+        </Card>
+        :
+        <GraphItem x={x} y={y} itemHover={itemHover} setItemHover={setItemHover} inputValue={inputValue}/>}
 
     </div>
 
@@ -132,7 +135,7 @@ const AhInfo = () => {
 }
 
 
-const AhInfoSelected = ({itemHover}: CurrentAhInfoProps) => {
+const AhInfoSelected = ({ itemHover }: CurrentAhInfoProps) => {
   return [
     <Card key="Info-selected" className="md:col-start-3 md:col-span-2 md:row-start-1 ">
       <CardHeader className="flex flex-row items-center justify-between">
@@ -183,7 +186,7 @@ type MarketSelectorProps = {
   inputValue: string
 }
 
-const MarketSelector = ({itemAvailable, setInputValue, itemHover, inputValue}: MarketSelectorProps) => {
+const MarketSelector = ({ itemAvailable, setInputValue, itemHover, inputValue }: MarketSelectorProps) => {
 
   const closestItemName = inputValue.length === 0 ? "" : GetAllFileNameInFolder().reduce((acc, curr) => {
     if (levensteinDistance(curr, inputValue) < levensteinDistance(acc, inputValue)) {
@@ -198,24 +201,26 @@ const MarketSelector = ({itemAvailable, setInputValue, itemHover, inputValue}: M
     <CardContent className="gap-2 flex flex-col pt-4">
       <Selector options={itemAvailable} setInputValue={setInputValue}/>
       {inputValue.length === 0 ? "" :
-          [<Card key="nameItem">
-            <SmallCardInfo title={inputValue} value="Image non contractuelle" img={`AH_img/${closestItemName}.png`}/>
-          </Card>, <Card key="quantity">
-            <CardContent className="h-full pt-6 flex items-center gap-4">
-              <FaBoxOpen className="size-12 mr-2"/>
-              <div className="flex flex-col gap-2">
-                <span className="font-semibold">Quantité en vente actuellement</span>
-                <div className="flex gap-2 items-center">
-                  <GradientText className="font-bold">
-                    {`x${formatPrice(itemHover.quantityAvailable)}`}
-                  </GradientText>
-                </div>
+        [<Card key="nameItem">
+          <SmallCardInfo title={inputValue} value="Image non contractuelle"
+                         img={`AH_img/${closestItemName}.png`}/>
+        </Card>, <Card key="quantity">
+          <CardContent className="h-full pt-6 flex items-center gap-4">
+            <FaBoxOpen className="size-12 mr-2"/>
+            <div className="flex flex-col gap-2">
+              <span className="font-semibold">Quantité en vente actuellement</span>
+              <div className="flex gap-2 items-center">
+                <GradientText className="font-bold">
+                  {`x${formatPrice(itemHover.quantityAvailable)}`}
+                </GradientText>
               </div>
-            </CardContent>
-          </Card>, <Card key="avgPrice">
-            <SmallCardInfo title="Prix moyen actuellement en vente" value={`${formatPrice(itemHover.averagePrice)} $`}
-                           img="dollar.png"/>
-          </Card>]
+            </div>
+          </CardContent>
+        </Card>, <Card key="avgPrice">
+          <SmallCardInfo title="Prix moyen actuellement en vente"
+                         value={`${formatPrice(itemHover.averagePrice)} $`}
+                         img="dollar.png"/>
+        </Card>]
       }
     </CardContent>
   </Card>
@@ -233,50 +238,50 @@ type CurrentAhInfoProps = {
   itemHover: itemHoverType
 }
 
-const GraphItem = ({x, y, itemHover, setItemHover, inputValue}: GraphItemProps) => {
+const GraphItem = ({ x, y, itemHover, setItemHover, inputValue }: GraphItemProps) => {
   return <Plot
-      onHover={(data) => setItemHover(
-          {
-            ...itemHover,
-            ...y[data.points[0].pointIndex],
-          })
+    onHover={(data) => setItemHover(
+      {
+        ...itemHover,
+        ...y[data.points[0].pointIndex],
+      })
+    }
+    className="w-full col-start-1 col-span-4"
+    data={
+      [
+        {
+          x: x,
+          y: y.map((item) => item.price / item.sells),
+          type: 'scatter',
+          mode: 'lines',
+          fill: "tozeroy",
+          marker: { color: '#FF5C00' },
+          name: "Prix en $",
+        },
+        {
+          x: x,
+          y: y.map((item) => item.quantity),
+          type: 'scatter',
+          fill: "tozeroy",
+          mode: 'lines',
+          marker: { color: '#007aff' },
+          name: "Quantité en vente",
+          yaxis: 'y2',
+        },
+      ]
+    }
+    layout={{
+      title: `Historique du prix - ${inputValue}`,
+      autosize: true,
+      yaxis: { title: 'Prix en $', type: 'linear' },
+      yaxis2: {
+        title: 'Nombre de vente par jour',
+        titlefont: { color: '#007aff' },
+        tickfont: { color: '#007aff' },
+        overlaying: 'y',
+        side: 'right',
       }
-      className="w-full col-start-1 col-span-4"
-      data={
-        [
-          {
-            x: x,
-            y: y.map((item) => item.price / item.sells),
-            type: 'scatter',
-            mode: 'lines',
-            fill: "tozeroy",
-            marker: {color: '#FF5C00'},
-            name: "Prix en $",
-          },
-          {
-            x: x,
-            y: y.map((item) => item.quantity),
-            type: 'scatter',
-            fill: "tozeroy",
-            mode: 'lines',
-            marker: {color: '#007aff'},
-            name: "Quantité en vente",
-            yaxis: 'y2',
-          },
-        ]
-      }
-      layout={{
-        title: `Historique du prix - ${inputValue}`,
-        autosize: true,
-        yaxis: {title: 'Prix en $', type: 'linear'},
-        yaxis2: {
-          title: 'Nombre de vente par jour',
-          titlefont: {color: '#007aff'},
-          tickfont: {color: '#007aff'},
-          overlaying: 'y',
-          side: 'right',
-        }
-      }}
+    }}
   />
 }
 

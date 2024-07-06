@@ -1,10 +1,10 @@
-import {Button} from '@/components/ui/button';
-import {Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger} from '@/components/ui/dialog';
-import {getGraphData} from "@/lib/api";
-import {useEffect, useMemo, useState} from 'react';
+import { Button } from '@/components/ui/button';
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
+import { getGraphData } from "@/lib/apiPala.ts";
+import { useEffect, useMemo, useState } from 'react';
 import Plot from "react-plotly.js";
 
-const Graph = ({defaultOpen = false}) => {
+const Graph = ({ defaultOpen = false }) => {
   const [graphData, setGraphData] = useState<Awaited<ReturnType<typeof getGraphData>>>([]);
 
   const [logScale, setLogScale] = useState(false);
@@ -68,7 +68,7 @@ const Graph = ({defaultOpen = false}) => {
               title: 'Classement Clicker - Graphique intéractif',
               autosize: true,
               height: window.innerHeight * 0.8,
-              yaxis: {title: 'ClicCoins', type: logScale ? 'log' : 'linear'},
+              yaxis: { title: 'ClicCoins', type: logScale ? 'log' : 'linear' },
             }}
           />
         </div>

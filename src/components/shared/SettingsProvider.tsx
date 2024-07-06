@@ -1,4 +1,4 @@
-import {createContext, useContext, useState} from "react"
+import { createContext, useContext, useState } from "react"
 
 type Settings = {
   fallingImage: boolean
@@ -15,7 +15,7 @@ type SettingsProviderState = {
 }
 
 const initialState: SettingsProviderState = {
-  settings: {fallingImage: true},
+  settings: { fallingImage: true },
   setFalling: () => null,
 }
 
@@ -28,7 +28,7 @@ export default function SettingsProvider({
                                          }: SettingsProviderProps) {
 
   const [settings, setFalling] = useState<Settings>(
-      () => (JSON.parse(localStorage.getItem(storageKey) || JSON.stringify(initialState)) as Settings)
+    () => (JSON.parse(localStorage.getItem(storageKey) || JSON.stringify(initialState)) as Settings)
   )
 
   const [systemTheme] = useState<SettingsProviderState>();
@@ -38,7 +38,7 @@ export default function SettingsProvider({
     settings,
     systemTheme,
     setFalling: (e: boolean) => {
-      const newSettings = {...settings}
+      const newSettings = { ...settings }
       newSettings.fallingImage = e
       setFalling(newSettings)
       localStorage.setItem(storageKey, JSON.stringify(newSettings))
@@ -46,9 +46,9 @@ export default function SettingsProvider({
   }
 
   return (
-      <SettingsProviderContext.Provider {...props} value={value}>
-        {children}
-      </SettingsProviderContext.Provider>
+    <SettingsProviderContext.Provider {...props} value={value}>
+      {children}
+    </SettingsProviderContext.Provider>
   )
 }
 

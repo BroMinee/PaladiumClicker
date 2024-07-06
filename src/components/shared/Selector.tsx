@@ -1,6 +1,6 @@
-import Select, {StylesConfig} from "react-select";
+import Select, { StylesConfig } from "react-select";
 import makeAnimated from 'react-select/animated';
-import {useState} from "react";
+import { useState } from "react";
 
 // Définition des styles personnalisés pour react-select
 const customStyles: StylesConfig<OptionType, false> = {
@@ -39,7 +39,7 @@ type SelectorProps = {
 
 const animatedComponents = makeAnimated();
 
-const Selector = ({options, setInputValue}: SelectorProps) => {
+const Selector = ({ options, setInputValue }: SelectorProps) => {
   const [menuIsOpen, setMenuIsOpen] = useState<boolean>(false);
   const handleInputChange = (value: string) => {
 
@@ -52,19 +52,19 @@ const Selector = ({options, setInputValue}: SelectorProps) => {
 
 
   return <Select
-      options={options}
-      components={animatedComponents}
-      styles={customStyles}
-      onInputChange={handleInputChange}
-      menuIsOpen={menuIsOpen}
-      placeholder="Entre 3 lettres pour rechercher un item"
-      onChange={(selectedOptions) => {
-        if (selectedOptions === null) {
-          setInputValue('');
-        } else {
-          setInputValue(selectedOptions.value)
-        }
-      }}
+    options={options}
+    components={animatedComponents}
+    styles={customStyles}
+    onInputChange={handleInputChange}
+    menuIsOpen={menuIsOpen}
+    placeholder="Entre 3 lettres pour rechercher un item"
+    onChange={(selectedOptions) => {
+      if (selectedOptions === null) {
+        setInputValue('');
+      } else {
+        setInputValue(selectedOptions.value)
+      }
+    }}
   />
 
 }

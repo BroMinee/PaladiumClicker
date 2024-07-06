@@ -1,18 +1,18 @@
-import {computeRPS} from "@/pages/OptimizerClicker/Components/BuildingList";
-import {checkCondition, computePrice, formatPrice} from "@/lib/misc";
-import {buyBuilding, computeXBuildingAhead, Stat} from "./Stats";
-import {bestBuildingInfo, bestPurchaseInfoDetailed, bestUpgradeInfo, buildingPathType, PlayerInfo} from "@/types";
-import {usePlayerInfoStore} from "@/stores/use-player-info-store";
-import {useEffect, useState} from "react";
-import {Card, CardContent, CardHeader, CardTitle} from "@/components/ui/card";
+import { computeRPS } from "@/pages/OptimizerClicker/Components/BuildingList";
+import { checkCondition, computePrice, formatPrice } from "@/lib/misc";
+import { buyBuilding, computeXBuildingAhead, Stat } from "./Stats";
+import { bestBuildingInfo, bestPurchaseInfoDetailed, bestUpgradeInfo, buildingPathType, PlayerInfo } from "@/types";
+import { usePlayerInfoStore } from "@/stores/use-player-info-store";
+import { useEffect, useState } from "react";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import GradientText from "@/components/shared/GradientText";
-import {Button} from "@/components/ui/button";
-import {useRpsStore} from "@/stores/use-rps-store";
-import {FaCoins, FaRandom} from "react-icons/fa";
+import { Button } from "@/components/ui/button";
+import { useRpsStore } from "@/stores/use-rps-store";
+import { FaCoins, FaRandom } from "react-icons/fa";
 
 const RPS = () => {
-  const {data: playerInfo, setPlayerInfo} = usePlayerInfoStore();
-  const {rps} = useRpsStore();
+  const { data: playerInfo, setPlayerInfo } = usePlayerInfoStore();
+  const { rps } = useRpsStore();
   const [estimatedRPS, setEstimatedRPS] = useState(3);
 
   const [buildingBuyPaths, setBuildingBuyPaths] = useState([] as bestPurchaseInfoDetailed[]);
@@ -26,9 +26,9 @@ const RPS = () => {
     if (!playerInfo) {
       return;
     }
-    if(rps !== 0)
+    if (rps !== 0)
       setBuildingBuyPaths(computeXBuildingAhead(playerInfo, 1, rps));
-  }, [playerInfo,rps]);
+  }, [playerInfo, rps]);
 
   if (!playerInfo) {
     return <div>Loading...</div>
@@ -43,29 +43,30 @@ const RPS = () => {
         <CardContent>
           <div>
             {(buildingBuyPaths.length !== 0) &&
-                <>
-                    <div className="flex flex-col justify-center gap-4">
-                        <Stat
-                            buildingName={playerInfo[buildingBuyPaths[0].path][buildingBuyPaths[0].index]["name"]}
-                            buildingPath={buildingBuyPaths[0]} showProduction={false}/>
-                        <Button
-                            onClick={() => buyBuilding(playerInfo, setPlayerInfo, buildingBuyPaths)}
-                        >
-                            Simuler l'achat
-                        </Button>
-                    </div>
-                </>
+              <>
+                <div className="flex flex-col justify-center gap-4">
+                  <Stat
+                    buildingName={playerInfo[buildingBuyPaths[0].path][buildingBuyPaths[0].index]["name"]}
+                    buildingPath={buildingBuyPaths[0]} showProduction={false}/>
+                  <Button
+                    onClick={() => buyBuilding(playerInfo, setPlayerInfo, buildingBuyPaths)}
+                  >
+                    Simuler l'achat
+                  </Button>
+                </div>
+              </>
             }
             {(buildingBuyPaths.length === 0) &&
-                <div className="flex flex-col items-center gap-4">
-                    <img src={import.meta.env.BASE_URL + "/arty_chocbar.webp"}
-                         className="w-32 h-auto object-contain"
-                         alt="Arty"/>
-                    <p className="text-sm">Bravo tu as tout acheté, va prendre une douche maintenant.</p>
-                    <Button>
-                        Aller prendre une douche
-                    </Button>
-                </div>
+              <div className="flex flex-col items-center gap-4">
+                <img src={import.meta.env.BASE_URL + "/arty_chocbar.webp"}
+                     className="w-32 h-auto object-contain"
+                     alt="Arty"/>
+                <p className="text-sm">Bravo tu as tout acheté, va prendre une douche
+                  maintenant.</p>
+                <Button>
+                  Aller prendre une douche
+                </Button>
+              </div>
             }
           </div>
         </CardContent>

@@ -1,6 +1,7 @@
-import {parseCsv} from "@/lib/misc";
+import { parseCsv } from "@/lib/misc";
 
 import {
+  AhItemHistory,
   AhPaladium,
   Building,
   BuildingUpgrade,
@@ -9,24 +10,21 @@ import {
   GlobalUpgrade,
   ManyUpgrade,
   Metier,
+  NetworkError,
+  PaladiumAhHistory,
+  PaladiumAhItemStat,
   PaladiumClickerData,
   PaladiumFactionInfo,
   PaladiumFactionLeaderboard,
   PaladiumFriendInfo,
   PaladiumPlayerInfo,
   PaladiumRanking,
-  PaladiumAhHistory,
   PlayerInfo,
   PosteriorUpgrade,
   TerrainUpgrade,
-  PaladiumAhItemStat,
-  NetworkError,
-  AhItemHistory,
-  PalaAnimationLeaderboard,
-  PalaAnimationScore
 } from "@/types";
 import axios from "axios";
-import {usePlayerInfoStore} from "@/stores/use-player-info-store.ts";
+import { usePlayerInfoStore } from "@/stores/use-player-info-store.ts";
 
 const PALADIUM_API_URL = "https://api.paladium.games/";
 
@@ -46,7 +44,7 @@ const fetchLocal = async <T>(file: string) => {
 
 export default fetchLocal;
 
-const getPaladiumProfileByPseudo = async (pseudo: string) : Promise<PaladiumPlayerInfo> => {
+const getPaladiumProfileByPseudo = async (pseudo: string): Promise<PaladiumPlayerInfo> => {
   const response = await axios.get<PaladiumPlayerInfo>(`${PALADIUM_API_URL}/v1/paladium/player/profile/${pseudo}`, {
     timeout: 4000
   }).catch((error) => error);
@@ -64,7 +62,7 @@ const getPaladiumProfileByPseudo = async (pseudo: string) : Promise<PaladiumPlay
   return response.data;
 }
 
-export const getPaladiumLeaderboardPositionByUUID = async (uuid: string) : Promise<string> => {
+export const getPaladiumLeaderboardPositionByUUID = async (uuid: string): Promise<string> => {
 // set a timeout of 2 seconds to avoid blocking the main thread for too long
   const response = await axios.get<PaladiumRanking>(`${PALADIUM_API_URL}/v1/paladium/ranking/position/clicker/${uuid}`, {
     timeout: 4000
@@ -83,7 +81,7 @@ export const getPaladiumLeaderboardPositionByUUID = async (uuid: string) : Promi
   return response.data.ranked ? response.data.position.toString() : "Unranked";
 }
 
-const getPaladiumClickerDataByUUID = async (uuid: string) : Promise<PaladiumClickerData> => {
+const getPaladiumClickerDataByUUID = async (uuid: string): Promise<PaladiumClickerData> => {
   const response = await axios.get<PaladiumClickerData>(`${PALADIUM_API_URL}/v1/paladium/player/profile/${uuid}/clicker`, {
     timeout: 4000
   }).catch((error) => error);
@@ -105,7 +103,7 @@ const getPaladiumClickerDataByUUID = async (uuid: string) : Promise<PaladiumClic
   return response.data;
 }
 
-export const getFactionInfo = async (factionName: string) : Promise<PaladiumFactionInfo> => {
+export const getFactionInfo = async (factionName: string): Promise<PaladiumFactionInfo> => {
   const response = await axios.get<PaladiumFactionInfo>(`${PALADIUM_API_URL}/v1/paladium/faction/profile/${factionName}`, {
     timeout: 4000
   }).catch((error) => error);
@@ -123,7 +121,7 @@ export const getFactionInfo = async (factionName: string) : Promise<PaladiumFact
   return response.data;
 }
 
-export const getFactionLeaderboard = async () : Promise<PaladiumFactionLeaderboard> => {
+export const getFactionLeaderboard = async (): Promise<PaladiumFactionLeaderboard> => {
   const response = await axios.get<PaladiumFactionLeaderboard>(`${PALADIUM_API_URL}/v1/paladium/faction/leaderboard`, {
     timeout: 4000
   }).catch((error) => error);
@@ -162,7 +160,7 @@ export const getAuctionHouseInfo = async (uuid: string) => {
   return res;
 }
 
-export const getFriendsList = async (uuid: string) : Promise<PaladiumFriendInfo> => {
+export const getFriendsList = async (uuid: string): Promise<PaladiumFriendInfo> => {
   const response = await axios.get<PaladiumFriendInfo>(`${PALADIUM_API_URL}/v1/paladium/player/profile/${uuid}/friends`, {
     timeout: 4000
   }).catch((error) => error);
@@ -180,7 +178,7 @@ export const getFriendsList = async (uuid: string) : Promise<PaladiumFriendInfo>
   return response.data;
 }
 
-export const getPlayerInfo = async (pseudo: string) : Promise<PlayerInfo> => {
+export const getPlayerInfo = async (pseudo: string): Promise<PlayerInfo> => {
 
   if (pseudo === "") {
     throw "Pseudo is empty";
@@ -203,11 +201,11 @@ export const getPlayerInfo = async (pseudo: string) : Promise<PlayerInfo> => {
   const initialPlayerInfo = await getInitialPlayerInfo();
 
   const paladiumProfil = await getPaladiumProfileByPseudo(pseudo);
-  const {buildings, upgrades} = await getPaladiumClickerDataByUUID(paladiumProfil.uuid);
+  const { buildings, upgrades } = await getPaladiumClickerDataByUUID(paladiumProfil.uuid);
 
   const translateBuildingName = await fetchLocal<Record<string, number>>("/translate_building.json");
   const translateBuildingUpgradeName = await fetchLocal<
-      Record<string, [keyof Pick<PlayerInfo, "building_upgrade">, string]>
+    Record<string, [keyof Pick<PlayerInfo, "building_upgrade">, string]>
   >("/translate_upgrade.json");
 
   buildings.forEach((building) => {
@@ -235,7 +233,7 @@ export const getPlayerInfo = async (pseudo: string) : Promise<PlayerInfo> => {
 
   const friendsList = await getFriendsList(paladiumProfil.uuid)
 
-  initialPlayerInfo.faction = {name: paladiumProfil.faction === "" ? "Wilderness" : paladiumProfil.faction};
+  initialPlayerInfo.faction = { name: paladiumProfil.faction === "" ? "Wilderness" : paladiumProfil.faction };
   initialPlayerInfo.firstJoin = paladiumProfil.firstJoin;
   initialPlayerInfo.friends = friendsList;
   initialPlayerInfo.money = paladiumProfil.money;
@@ -282,16 +280,16 @@ const getInitialPlayerInfo = async (): Promise<PlayerInfo> => {
     posterior_upgrade: posteriorUpgrade,
     terrain_upgrade: terrainUpgrade,
     production: 0.5,
-    faction: {name: "Wilderness"},
+    faction: { name: "Wilderness" },
     firstJoin: 0,
-    friends: {data: [], totalCount: 0},
+    friends: { data: [], totalCount: 0 },
     money: 0,
     timePlayed: 0,
     username: "",
     uuid: "",
     rank: "Rank inconnu",
     leaderboard: "Unranked",
-    ah: {data: [], totalCount: 0, dateUpdated: 0},
+    ah: { data: [], totalCount: 0, dateUpdated: 0 },
     last_fetch: new Date().getTime(),
   };
   return playerInfo;
@@ -301,17 +299,17 @@ export const getGraphData = async () => {
   const parsedCsv = await fetchLocal<string>("/graph.csv").then(parseCsv);
 
   const data = parsedCsv
-      .filter((data) => data.Date !== "")
-      .map((data) => {
-        for (const key in data) {
-          if (key === "Date") {
-            continue;
-          } else {
-            data[key] = data[key] === "" ? "" : Number(data[key]);
-          }
+    .filter((data) => data.Date !== "")
+    .map((data) => {
+      for (const key in data) {
+        if (key === "Date") {
+
+        } else {
+          data[key] = data[key] === "" ? "" : Number(data[key]);
         }
-        return data;
-      });
+      }
+      return data;
+    });
 
   return data;
 }
@@ -320,7 +318,7 @@ export const getAhItemData = async () => {
   return await fetchLocal<AhPaladium[]>("/AhAssets/items_list.json");
 }
 
-export const getPaladiumAhItemFullHistory = async (itemId: string) : Promise<AhItemHistory[]> => {
+export const getPaladiumAhItemFullHistory = async (itemId: string): Promise<AhItemHistory[]> => {
   const response = await axios.get<PaladiumAhHistory>(`${PALADIUM_API_URL}/v1/paladium/shop/market/items/${itemId}/history?limit=100&offset=0`);
 
   if (response.status !== 200) {
@@ -344,7 +342,6 @@ export const getPaladiumAhItemFullHistory = async (itemId: string) : Promise<AhI
     }
 
 
-
     if (response.status !== 200) {
       throw response;
     }
@@ -358,12 +355,12 @@ export const getPaladiumAhItemFullHistory = async (itemId: string) : Promise<AhI
   return data;
 }
 
-export const getPaladiumAhItemStats = async (itemId: string) : Promise<PaladiumAhItemStat> => {
+export const getPaladiumAhItemStats = async (itemId: string): Promise<PaladiumAhItemStat> => {
   const response = await axios.get<PaladiumAhItemStat>(`${PALADIUM_API_URL}/v1/paladium/shop/market/items/${itemId}`, {
     timeout: 4000
   }).catch((error) => error);
 
-  if (response instanceof Error ) {
+  if (response instanceof Error) {
     if ((response as NetworkError).code === "ECONNABORTED") {
       throw "Timeout error of \"Get item information in the Market Shop\" API, please try again later";
     }
@@ -372,66 +369,5 @@ export const getPaladiumAhItemStats = async (itemId: string) : Promise<PaladiumA
   if (response.status !== 200) {
     throw response;
   }
-  return response.data;
-}
-
-export const pushNewTimePalaAnimation = async (time: number, username: string, question: string) => {
-  // make a get request to the server to push the new time
-  // @ this endpoint /v1/bromine/leaderboardInsert/:leaderboard_name?username=xxx&score=xxx
-
-  question = question.replace(" ?", "").replace("&", "").replace("?", "")
-
-  const response = await axios.get(`https://palatracker.bromine.fr/v1/bromine/leaderboardInsert/${question}?username=${username}&score=${time}`, {
-    timeout: 4000
-  }).catch((error) => error);
-
-  if (response instanceof Error) {
-    if ((response as NetworkError).code === "ECONNABORTED") {
-      throw "Timeout error of \"Push new time to leaderboard\" API, please try again later";
-    }
-  }
-
-  if (response.status !== 200) {
-    throw response;
-  }
-}
-
-export const getLeaderboardPalaAnimation = async (question: string) : Promise<PalaAnimationLeaderboard> => {
-  question = question.replace(" ?", "").replace("&", "")
-
-  const response = await axios.get<PalaAnimationLeaderboard>(`https://palatracker.bromine.fr/v1/bromine/leaderboard/${question}`, {
-    timeout: 4000
-  }).catch((error) => error);
-
-  if (response instanceof Error) {
-    if ((response as NetworkError).code === "ECONNABORTED") {
-      throw "Timeout error of \"Get leaderboard\" API, please try again later";
-    }
-  }
-
-  if (response.status !== 200) {
-    throw response;
-  }
-
-  return response.data;
-}
-
-export const getUsernameScorePalaAnimation = async (question: string, username: string): Promise<PalaAnimationScore> => {
-  question = question.replace(" ?", "").replace("&", "")
-
-  const response = await axios.get<PalaAnimationScore>(`https://palatracker.bromine.fr/v1/bromine/leaderboard/${question}/${username}`, {
-    timeout: 4000
-  }).catch((error) => error);
-
-  if (response instanceof Error) {
-    if ((response as NetworkError).code === "ECONNABORTED") {
-      throw "Timeout error of \"Get user place in leaderboard\" API, please try again later";
-    }
-  }
-
-  if (response.status !== 200) {
-    throw response;
-  }
-
   return response.data;
 }

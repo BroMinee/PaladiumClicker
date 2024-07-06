@@ -1,4 +1,4 @@
-import type {AnyCondition, PlayerInfo} from "@/types";
+import type { AnyCondition, PlayerInfo } from "@/types";
 
 export function getTotalSpend(playerInfo: PlayerInfo) {
   let total = 0;
@@ -84,8 +84,8 @@ export function checkCondition(playerInfo: PlayerInfo, conditions: AnyCondition)
 }
 
 export function formatPrice(price: number | undefined) {
-    if (price === undefined)
-        return "Error";
+  if (price === undefined)
+    return "Error";
   const numberFormatter = new Intl.NumberFormat("fr-FR");
   return numberFormatter.format(price);
 }
@@ -133,7 +133,7 @@ export function parseCsv(csv: string) {
   return result;
 }
 
-export function levensteinDistance(a :string, b : string) {
+export function levensteinDistance(a: string, b: string) {
   const distance = [];
   for (let i = 0; i <= a.length; i++) {
     distance[i] = [i];
@@ -144,11 +144,19 @@ export function levensteinDistance(a :string, b : string) {
   for (let i = 1; i <= a.length; i++) {
     for (let j = 1; j <= b.length; j++) {
       distance[i][j] = Math.min(
-          distance[i - 1][j] + 1,
-          distance[i][j - 1] + 1,
-          distance[i - 1][j - 1] + (a[i - 1] !== b[j - 1] ? 1 : 0)
+        distance[i - 1][j] + 1,
+        distance[i][j - 1] + 1,
+        distance[i - 1][j - 1] + (a[i - 1] !== b[j - 1] ? 1 : 0)
       );
     }
   }
   return distance[a.length][b.length];
+}
+
+export function getDDHHMMSS(d: Date) {
+  if (new Date() > d)
+    return "Maintenant";
+  const padL = (num: number, chr = `0`) => `${num}`.padStart(2, chr);
+
+  return `${padL(d.getDate())}/${padL(d.getMonth() + 1)}/${d.getFullYear()} à ${padL(d.getHours())}:${padL(d.getMinutes())}:${padL(d.getSeconds())}`;
 }

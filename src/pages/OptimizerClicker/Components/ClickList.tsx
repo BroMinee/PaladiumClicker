@@ -1,14 +1,14 @@
 // @ts-nocheck - A RETIRER APRES AVOIR CORRIGE LE FICHIER
 
-import {Button} from "@/components/ui/button";
-import {Card, CardContent} from "@/components/ui/card";
-import {Popover, PopoverContent, PopoverTrigger} from "@/components/ui/popover";
-import {ScrollArea, ScrollBar} from "@/components/ui/scroll-area";
-import {checkCondition, formatPrice} from "@/lib/misc";
-import {cn} from "@/lib/utils";
-import {usePlayerInfoStore} from "@/stores/use-player-info-store";
-import type {CPS as TCPS} from "@/types";
-import {FaInfoCircle} from "react-icons/fa";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
+import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
+import { checkCondition, formatPrice } from "@/lib/misc";
+import { cn } from "@/lib/utils";
+import { usePlayerInfoStore } from "@/stores/use-player-info-store";
+import type { CPS as TCPS } from "@/types";
+import { FaInfoCircle } from "react-icons/fa";
 
 const ClickList = () => {
 
@@ -27,10 +27,11 @@ const ClickList = () => {
         {playerInfo?.CPS &&
           playerInfo["CPS"]
             .map((cps, index) => (
-              <CPS key={index} cps={cps} imgPath={import.meta.env.BASE_URL + getImgPath(index, cps.name)} />
+              <CPS key={index} cps={cps}
+                   imgPath={import.meta.env.BASE_URL + getImgPath(index, cps.name)}/>
             ))}
       </div>
-      <ScrollBar orientation="horizontal" />
+      <ScrollBar orientation="horizontal"/>
     </ScrollArea>
   )
 }
@@ -83,12 +84,12 @@ const CPS = ({ cps, imgPath }: CPSProps) => {
       <Card>
         <CardContent className="p-4 w-36">
           <div className="flex flex-col items-center justify-center">
-            <img src={imgPath} alt="Icône" className="h-12 w-auto object-cover" />
+            <img src={imgPath} alt="Icône" className="h-12 w-auto object-cover"/>
             <div>{cps.name}</div>
             <Popover>
               <PopoverTrigger asChild>
                 <Button variant="outline" size="icon">
-                  <FaInfoCircle className="inline-block h-4 w-4" />
+                  <FaInfoCircle className="inline-block h-4 w-4"/>
                 </Button>
               </PopoverTrigger>
               <PopoverContent className="w-80">
@@ -114,7 +115,7 @@ const CPS = ({ cps, imgPath }: CPSProps) => {
       onClick={() => selectCPS(cps.name)}
     >
       <div className="flex flex-col items-center justify-center">
-        <img src={imgPath} alt="Icône" className="h-12 w-auto object-cover" />
+        <img src={imgPath} alt="Icône" className="h-12 w-auto object-cover"/>
         <div>{cps.name}</div>
         <div className="font-bold">
           {formatPrice(cps.price ?? 0)} $

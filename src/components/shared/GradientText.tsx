@@ -1,6 +1,7 @@
-import {cn} from "@/lib/utils";
+import { cn } from "@/lib/utils";
 
-interface GradientTextProps extends React.HTMLAttributes<HTMLSpanElement> { }
+interface GradientTextProps extends React.HTMLAttributes<HTMLSpanElement> {
+}
 
 const GradientText = ({ children, className, ...props }: GradientTextProps) => {
   return (

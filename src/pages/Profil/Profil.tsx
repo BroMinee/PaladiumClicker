@@ -1,20 +1,21 @@
 import MetierList from "@/components/MetierList.tsx";
-import {usePlayerInfoStore} from "@/stores/use-player-info-store.ts";
+import { usePlayerInfoStore } from "@/stores/use-player-info-store.ts";
 import axios from "axios";
-import {useEffect, useState} from "react";
+import { useEffect, useState } from "react";
 import ImportProfil from "../OptimizerClicker/Components/ImportProfil.tsx";
 import Layout from "@/components/shared/Layout.tsx";
 import NoPseudoPage from "@/components/NoPseudoPage.tsx";
-import {Card, CardContent, CardDescription, CardHeader, CardTitle} from "@/components/ui/card.tsx";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card.tsx";
 import GradientText from "@/components/shared/GradientText.tsx";
-import {FaHeart, FaMedal, FaPercentage, FaTachometerAlt} from "react-icons/fa";
+import { FaEye, FaHeart, FaMedal, FaPercentage, FaTachometerAlt } from "react-icons/fa";
 import HeadingSection from "@/components/shared/HeadingSection.tsx";
 import ReactSkinview3d from "react-skinview3d";
-import {AhItemType} from "@/types";
-import {ScrollArea, ScrollBar} from "@/components/ui/scroll-area.tsx";
-import {formatPrice, levensteinDistance} from "@/lib/misc.ts";
+import { AhItemType, ProfilViewType } from "@/types";
+import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area.tsx";
+import { formatPrice, levensteinDistance } from "@/lib/misc.ts";
 import useFactionLeaderboard from "@/hooks/use-leaderboard-faction.ts";
 import SmallCardInfo from "@/components/shared/SmallCardInfo.tsx";
+import { getViewsFromUUID } from "@/lib/apiPalaTracker.ts";
 
 
 export function GetAllFileNameInFolder() {
@@ -2635,60 +2636,73 @@ export function GetAllFileNameInFolder() {
 }
 
 const ProfilPage = () => {
-
-  const {data: playerInfo} = usePlayerInfoStore();
-
+  const { data: playerInfo } = usePlayerInfoStore();
 
   if (!playerInfo) {
     return (
-        <Layout>
-          <NoPseudoPage/>
-        </Layout>
+      <Layout>
+        <NoPseudoPage/>
+      </Layout>
     );
   }
 
   return (
-      <>
-        <Layout>
-          <div className="flex flex-col gap-4">
-            <ProfilInfo/>
+    <>
+      <Layout>
+        <div className="flex flex-col gap-4">
+          <ProfilInfo/>
 
-            <MetierList editable={false}/>
+          <MetierList editable={false}/>
 
-            <AhInfo/>
+          <AhInfo/>
 
-            <HeadingSection>Informations de faction</HeadingSection>
-            <FactionInfo/>
+          <HeadingSection>Informations de faction</HeadingSection>
+          <FactionInfo/>
 
 
-          </div>
-        </Layout>
-      </>
+        </div>
+      </Layout>
+    </>
   );
 }
 
 const ProfilInfo = () => {
-  const {data: playerInfo} = usePlayerInfoStore();
+  const { data: playerInfo } = usePlayerInfoStore();
   const [skinUrl, setSkinUrl] = useState("");
 
   const pseudo = playerInfo?.username ?? "Guest";
 
+  const [views, setViews] = useState({ uuid: '', count: 0 } as ProfilViewType);
+
+
   useEffect(() => {
     axios.get(`https://api.ashcon.app/mojang/v2/user/${pseudo}`)
-        .then(response => {
-          const skinUrl = response.data.textures.skin.url;
-          setSkinUrl(skinUrl);
-        })
-        .catch(error => {
-          console.error(error);
-        });
+      .then(response => {
+        const skinUrl = response.data.textures.skin.url;
+        setSkinUrl(skinUrl);
+      })
+      .catch(error => {
+        console.error(error);
+      });
+
+    if (playerInfo) {
+      getViewsFromUUID(playerInfo.uuid).then(
+        (data) => {
+          setViews(data);
+        }
+      ).catch(
+        (error) => {
+          console.error("Error while fetching user views count", error);
+        }
+      );
+    }
   }, [pseudo]);
 
   if (!playerInfo) {
     return (
-        <Layout>
-          <NoPseudoPage/>
-        </Layout>
+      <Layout>
+        <NoPseudoPage/>
+      </Layout>
     );
   }
 
@@ -2701,7 +2715,12 @@ const ProfilInfo = () => {
         <GradientText className="font-extrabold">{playerInfo["username"]}</GradientText>
         {" - "}
         <GradientText className="font-extrabold">{playerInfo["faction"]["name"]}</GradientText>
+        <div className="flex flex-row gap-2 items-center mt-1.5">
+          <FaEye/>
+          <GradientText className="font-extrabold">{views.count} vues</GradientText>
+        </div>
       </CardTitle>
+
       <CardDescription>
         Made with <FaHeart className="text-primary inline-block"/> by <GradientText>BroMine__</GradientText>
       </CardDescription>
@@ -2729,7 +2748,8 @@ const ProfilInfo = () => {
           <SmallCardInfo title="Rang en jeu" value={rank} img={getRankImg(rank)}/>
         </Card>
         <Card className="col-start-1 col-span-2 md:col-start-2 md:col-span-1">
-          <SmallCardInfo title="Temps de jeu" value={computeTimePlayed(playerInfo["timePlayed"])} img="clock.gif"/>
+          <SmallCardInfo title="Temps de jeu" value={computeTimePlayed(playerInfo["timePlayed"])}
+                         img="clock.gif"/>
         </Card>
         <Card className="col-start-1 col-span-2 md:col-start-2 md:col-span-1">
           <SmallCardInfo title="Première connexion" value={convertEpochToDateUTC2(playerInfo["firstJoin"])}
@@ -2737,7 +2757,7 @@ const ProfilInfo = () => {
         </Card>
 
         <Card
-            className="col-span-2 row-span-4 col-start-2 row-start-1 md:row-span-4 md:col-start-3 md:row-start-1">
+          className="col-span-2 row-span-4 col-start-2 row-start-1 md:row-span-4 md:col-start-3 md:row-start-1">
           <CardHeader>
             Liste d'amis: {playerInfo.friends.totalCount}
           </CardHeader>
@@ -2746,18 +2766,18 @@ const ProfilInfo = () => {
               <div className="flex flex-col justify-center p-4 pt-0 pb-0">
                 {
                   playerInfo.friends?.data?.map((player, index) => (
-                      <Card key={index} onClick={() => handleOnClick(player.name)}
-                            className="hover:scale-105 duration-300 mt-4 ml-1.5 mr-1.5 cursor-pointer">
-                        <CardContent className="md:pt-6 space-y-2">
-                          <div className="flex flex-col items-center justify-center gap-2">
-                            <img src={`https://crafatar.com/avatars/${player.uuid}?size=8`}
-                                 alt="Icône"
-                                 className="object-cover h-12 w-12 pixelated rounded-md"/>
-                            <div
-                                className="text-primary font-bold text-center w-36">{player.name}</div>
-                          </div>
-                        </CardContent>
-                      </Card>
+                    <Card key={index} onClick={() => handleOnClick(player.name)}
+                          className="hover:scale-105 duration-300 mt-4 ml-1.5 mr-1.5 cursor-pointer">
+                      <CardContent className="md:pt-6 space-y-2">
+                        <div className="flex flex-col items-center justify-center gap-2">
+                          <img src={`https://crafatar.com/avatars/${player.uuid}?size=8`}
+                               alt="Icône"
+                               className="object-cover h-12 w-12 pixelated rounded-md"/>
+                          <div
+                            className="text-primary font-bold text-center w-36">{player.name}</div>
+                        </div>
+                      </CardContent>
+                    </Card>
 
                   ))
                 }
@@ -2771,35 +2791,35 @@ const ProfilInfo = () => {
   </Card>);
 }
 const AhInfo = () => {
-  const {data: playerInfo} = usePlayerInfoStore();
+  const { data: playerInfo } = usePlayerInfoStore();
 
   if (!playerInfo || !playerInfo.ah)
     return <div>Loading</div>
 
   const totalCount = playerInfo.ah.totalCount;
   return (
-      <Card>
-        <CardHeader>
-          <CardTitle className="flex flex-row items-center">
-            Hôtel de vente - {" "}
-            {totalCount}{" "}
-            {totalCount !== 1 ? "ventes en cours" : "vente en cours"}
-          </CardTitle>
+    <Card>
+      <CardHeader>
+        <CardTitle className="flex flex-row items-center">
+          Hôtel de vente - {" "}
+          {totalCount}{" "}
+          {totalCount !== 1 ? "ventes en cours" : "vente en cours"}
+        </CardTitle>
 
-        </CardHeader>
-        <CardContent>
-          <ScrollArea>
-            <div className="flex gap-4 pb-3">
-              {totalCount !== 0 &&
-                  playerInfo["ah"]["data"].map((e, index) => {
-                    return <AhItem key={index} item={e}/>
-                  })
-              }
-            </div>
-            <ScrollBar orientation="horizontal"/>
-          </ScrollArea>
-        </CardContent>
-      </Card>
+      </CardHeader>
+      <CardContent>
+        <ScrollArea>
+          <div className="flex gap-4 pb-3">
+            {totalCount !== 0 &&
+              playerInfo["ah"]["data"].map((e, index) => {
+                return <AhItem key={index} item={e}/>
+              })
+            }
+          </div>
+          <ScrollBar orientation="horizontal"/>
+        </ScrollArea>
+      </CardContent>
+    </Card>
   )
 }
 
@@ -2808,8 +2828,8 @@ type AhItemsProps = {
   item: AhItemType;
 }
 
-const AhItem = ({item}: AhItemsProps) => {
-  const {data: playerInfo} = usePlayerInfoStore();
+const AhItem = ({ item }: AhItemsProps) => {
+  const { data: playerInfo } = usePlayerInfoStore();
 
 
   if (!playerInfo || !item["item"])
@@ -2851,38 +2871,38 @@ const AhItem = ({item}: AhItemsProps) => {
     displayName = "StorageDrawers 1x1";
 
   return (
-      <Card>
-        <CardContent className="pt-6 space-y-2">
-          <div className="flex flex-col items-center justify-center gap-2">
-            <img src={`${import.meta.env.BASE_URL}/AH_img/${closestItemName}.png`} alt="Icône"
-                 className="object-cover h-12 w-auto pixelated"/>
-            <span
-                className="text-primary text-sm">{quantity}x {renamed ? `${displayName} renommé en ${name}` : `${name}`}</span>
+    <Card>
+      <CardContent className="pt-6 space-y-2">
+        <div className="flex flex-col items-center justify-center gap-2">
+          <img src={`${import.meta.env.BASE_URL}/AH_img/${closestItemName}.png`} alt="Icône"
+               className="object-cover h-12 w-auto pixelated"/>
+          <span
+            className="text-primary text-sm">{quantity}x {renamed ? `${displayName} renommé en ${name}` : `${name}`}</span>
+        </div>
+        <div className="space-y-2">
+          <div className="text-sm">
+            <img src={`${import.meta.env.BASE_URL}/dollar.png`} alt="Icône"
+                 className="object-cover h-10 w-10 inline-block pixelated mr-2"/>
+            Prix: {formatPrice(price)} $
           </div>
-          <div className="space-y-2">
-            <div className="text-sm">
-              <img src={`${import.meta.env.BASE_URL}/dollar.png`} alt="Icône"
-                   className="object-cover h-10 w-10 inline-block pixelated mr-2"/>
-              Prix: {formatPrice(price)} $
-            </div>
-            <div className="text-sm">
-              <img src={`${import.meta.env.BASE_URL}/pbs.png`} alt="Icône"
-                   className="object-cover h-10 w-10 pixelated inline-block mr-2"/>
-              Prix en pbs: {formatPrice(pricePb)}
-            </div>
-            <div className="text-sm">
-              <img src={`${import.meta.env.BASE_URL}/clock.gif`} alt="Icône"
-                   className="object-cover h-10 w-10 pixelated inline-block mr-2"/>
-              Expire le : {expireAt}
-            </div>
+          <div className="text-sm">
+            <img src={`${import.meta.env.BASE_URL}/pbs.png`} alt="Icône"
+                 className="object-cover h-10 w-10 pixelated inline-block mr-2"/>
+            Prix en pbs: {formatPrice(pricePb)}
           </div>
-        </CardContent>
-      </Card>
+          <div className="text-sm">
+            <img src={`${import.meta.env.BASE_URL}/clock.gif`} alt="Icône"
+                 className="object-cover h-10 w-10 pixelated inline-block mr-2"/>
+            Expire le : {expireAt}
+          </div>
+        </div>
+      </CardContent>
+    </Card>
   )
 }
 
 const FactionInfo = () => {
-  const {data: playerInfo} = usePlayerInfoStore();
+  const { data: playerInfo } = usePlayerInfoStore();
 
   const factionLeaderboard = useFactionLeaderboard();
 
@@ -2902,86 +2922,88 @@ const FactionInfo = () => {
 
 
   return (
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        <Card className="md:row-span-2">
-          <CardContent className="h-full pt-6 flex gap-4">
-            <img src={`${import.meta.env.BASE_URL}/BookAndQuill.webp`} alt="BookAndQuill.png"
-                 className="h-12 w-12"/>
-            <div className="flex flex-col gap-2">
-              <span className="font-semibold">{name}</span>
-              <div className="flex gap-2 items-center">
-                <GradientText className="font-bold">
-                  {factionDescription}
-                </GradientText>
-              </div>
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+      <Card className="md:row-span-2">
+        <CardContent className="h-full pt-6 flex gap-4">
+          <img src={`${import.meta.env.BASE_URL}/BookAndQuill.webp`} alt="BookAndQuill.png"
+               className="h-12 w-12"/>
+          <div className="flex flex-col gap-2">
+            <span className="font-semibold">{name}</span>
+            <div className="flex gap-2 items-center">
+              <GradientText className="font-bold">
+                {factionDescription}
+              </GradientText>
             </div>
-          </CardContent>
-        </Card>
-        <Card>
-          <CardContent className="h-full pt-6 flex items-center gap-4">
-            <FaTachometerAlt className="w-12 h-12"/>
-            <div className="flex flex-col gap-2">
-              <span className="font-semibold">Nombre de membre</span>
-              <div className="flex gap-2 items-center">
-                <GradientText className="font-bold">
-                  {formatPrice(playerList?.length)}
-                </GradientText>
-                Membre{playerList?.length !== undefined && playerList?.length > 1 ? "s" : ""}
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-        <Card>
-          <CardContent className="h-full pt-6 flex items-center gap-4">
-            <FaMedal className="w-12 h-12"/>
-            <div className="flex flex-col gap-2">
-              <span className="font-semibold">Classement</span>
-              <div className="flex gap-2 items-center">
-                Top
-                <GradientText className="font-bold">
-                  #{factionClassement}
-                </GradientText>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-        <Card>
-          <SmallCardInfo title="Niveau - [xp]" value={`${level} - [${formatPrice(xp)}]`} img="ExperienceOrb.webp"/>
-        </Card>
-        <Card>
-          <SmallCardInfo title="Niveau - [xp]" value={convertEpochToDateUTC2(createdAt)} img="clock.gif"/>
-        </Card>
-        <ScrollArea className="md:col-span-3">
-          <div className="flex gap-4 pb-3">
-            {
-              playerList?.map((player, index) => (
-                  <Card key={index} onClick={() => handleOnClick(player.username)}
-                        className="hover:scale-105 duration-300 mt-4 ml-1.5 mr-1.5 cursor-pointer">
-                    <CardContent className="pt-6 space-y-2">
-                      <div className="flex flex-col items-center justify-center gap-2">
-                        <img src={`https://crafatar.com/avatars/${player.uuid}?size=8`} alt="Icône"
-                             className="object-cover h-12 w-12 pixelated rounded-md"/>
-                        <div className="text-primary font-bold text-center w-36">{player.username}</div>
-                      </div>
-                      <div className="space-y-2">
-                        <div className="text-sm">
-                          <FaPercentage className="h-4 w-4 mr-2 inline-block"/>
-                          Rôle: {player.group}
-                        </div>
-                        <div className="text-sm">
-                          <img src={`${import.meta.env.BASE_URL}/clock.gif`} alt="Icône"
-                               className="object-cover h-4 w-4 inline-block pixelated mr-2"/>
-                          Rejoint le: {convertEpochToDateUTC2(player.joinedAt)}
-                        </div>
-                      </div>
-                    </CardContent>
-                  </Card>
-              ))
-            }
           </div>
-          <ScrollBar orientation="horizontal"/>
-        </ScrollArea>
-      </div>
+        </CardContent>
+      </Card>
+      <Card>
+        <CardContent className="h-full pt-6 flex items-center gap-4">
+          <FaTachometerAlt className="w-12 h-12"/>
+          <div className="flex flex-col gap-2">
+            <span className="font-semibold">Nombre de membre</span>
+            <div className="flex gap-2 items-center">
+              <GradientText className="font-bold">
+                {formatPrice(playerList?.length)}
+              </GradientText>
+              Membre{playerList?.length !== undefined && playerList?.length > 1 ? "s" : ""}
+            </div>
+          </div>
+        </CardContent>
+      </Card>
+      <Card>
+        <CardContent className="h-full pt-6 flex items-center gap-4">
+          <FaMedal className="w-12 h-12"/>
+          <div className="flex flex-col gap-2">
+            <span className="font-semibold">Classement</span>
+            <div className="flex gap-2 items-center">
+              Top
+              <GradientText className="font-bold">
+                #{factionClassement}
+              </GradientText>
+            </div>
+          </div>
+        </CardContent>
+      </Card>
+      <Card>
+        <SmallCardInfo title="Niveau - [xp]" value={`${level} - [${formatPrice(xp)}]`}
+                       img="ExperienceOrb.webp"/>
+      </Card>
+      <Card>
+        <SmallCardInfo title="Niveau - [xp]" value={convertEpochToDateUTC2(createdAt)} img="clock.gif"/>
+      </Card>
+      <ScrollArea className="md:col-span-3">
+        <div className="flex gap-4 pb-3">
+          {
+            playerList?.map((player, index) => (
+              <Card key={index} onClick={() => handleOnClick(player.username)}
+                    className="hover:scale-105 duration-300 mt-4 ml-1.5 mr-1.5 cursor-pointer">
+                <CardContent className="pt-6 space-y-2">
+                  <div className="flex flex-col items-center justify-center gap-2">
+                    <img src={`https://crafatar.com/avatars/${player.uuid}?size=8`}
+                         alt="Icône"
+                         className="object-cover h-12 w-12 pixelated rounded-md"/>
+                    <div className="text-primary font-bold text-center w-36">{player.username}</div>
+                  </div>
+                  <div className="space-y-2">
+                    <div className="text-sm">
+                      <FaPercentage className="h-4 w-4 mr-2 inline-block"/>
+                      Rôle: {player.group}
+                    </div>
+                    <div className="text-sm">
+                      <img src={`${import.meta.env.BASE_URL}/clock.gif`} alt="Icône"
+                           className="object-cover h-4 w-4 inline-block pixelated mr-2"/>
+                      Rejoint le: {convertEpochToDateUTC2(player.joinedAt)}
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            ))
+          }
+        </div>
+        <ScrollBar orientation="horizontal"/>
+      </ScrollArea>
+    </div>
   )
 }
 

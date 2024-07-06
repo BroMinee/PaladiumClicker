@@ -1,9 +1,9 @@
 import ThemeProvider from '@/components/shared/ThemeProvider';
-import {Toaster} from '@/components/ui/sonner';
+import { Toaster } from '@/components/ui/sonner';
 import useCheckLocalDataVersion from '@/hooks/use-check-local-data-version';
 import OptimizerClickerPage from '@/pages/OptimizerClicker/OptimizerClicker';
-import {QueryClient, QueryClientProvider} from '@tanstack/react-query';
-import {createBrowserRouter, RouterProvider} from 'react-router-dom';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import PalaAnimation from "@/pages/PalaAnimation.tsx";
 import AboutPage from "@/pages/About.tsx";
 import ProfilPage from "@/pages/Profil/Profil.tsx";
@@ -55,14 +55,14 @@ function App() {
   useCheckLocalDataVersion();
 
   return (
-      <ThemeProvider defaultTheme="system" storageKey="theme">
-        <SettingProvider storageKey="settings">
-          <QueryClientProvider client={queryClient}>
-            <RouterProvider router={router}/>
-          </QueryClientProvider>
-          <Toaster/>
-        </SettingProvider>
-      </ThemeProvider>
+    <ThemeProvider defaultTheme="system" storageKey="theme">
+      <SettingProvider storageKey="settings">
+        <QueryClientProvider client={queryClient}>
+          <RouterProvider router={router}/>
+        </QueryClientProvider>
+        <Toaster/>
+      </SettingProvider>
+    </ThemeProvider>
   );
 }
 

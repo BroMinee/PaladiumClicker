@@ -1,11 +1,11 @@
 import Layout from "@/components/shared/Layout.tsx";
-import {Card, CardContent, CardDescription, CardHeader, CardTitle} from "@/components/ui/card.tsx";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card.tsx";
 import GradientText from "@/components/shared/GradientText.tsx";
-import {FaHeart} from "react-icons/fa";
-import {Button} from "@/components/ui/button.tsx";
-import {FormEvent, useState} from "react";
-import {Input} from "@/components/ui/input.tsx";
-import {toast} from "sonner";
+import { FaHeart } from "react-icons/fa";
+import { Button } from "@/components/ui/button.tsx";
+import { FormEvent, useState } from "react";
+import { Input } from "@/components/ui/input.tsx";
+import { toast } from "sonner";
 import SmallCardInfo from "@/components/shared/SmallCardInfo.tsx";
 
 
@@ -28,7 +28,7 @@ type StepProps = {
   setStep: (step: number) => void
 }
 
-const Step0 = ({step, setStep}: StepProps) => {
+const Step0 = ({ step, setStep }: StepProps) => {
 
   function setStep1() {
     if (step === 0)
@@ -38,16 +38,24 @@ const Step0 = ({step, setStep}: StepProps) => {
   return <Card className="justify-center flex flex-col gap-2">
     <CardHeader className="flex flex-row items-center justify-between">
       <CardTitle>
-        Fuze à l'aide ici <GradientText className="font-extrabold">Didier</GradientText> !!!! En cherchant le trésor
-        de <GradientText className="font-extrabold">BroMine__</GradientText> d'un valeur de plusieurs <GradientText className="font-extrabold">millions</GradientText> de dollars, il m'a capturé, j'ai réussi à prendre
+        Fuze à l'aide ici <GradientText className="font-extrabold">Didier</GradientText> !!!! En cherchant le
+        trésor
+        de <GradientText className="font-extrabold">BroMine__</GradientText> d'un valeur de
+        plusieurs <GradientText
+        className="font-extrabold">millions</GradientText> de dollars, il m'a capturé, j'ai réussi à prendre
         accès son terminal pour te faire ces messages.
         Viens vite à mon secours sur Keltis, j'ai mon informateur à l'endroit où je me suis fait capturer, il
-        s'appelle <GradientText className="font-extrabold">LipikYT</GradientText>, tp toi à lui pour venir me secourir.
+        s'appelle <GradientText className="font-extrabold">LipikYT</GradientText>, tp toi à lui pour venir me
+        secourir.
         <div>
           <br/>
-          Surtout ne casse rien pour ne pas te faire repérer car comme l'a dit <GradientText className="font-extrabold">Sun Tzu</GradientText>
+          Surtout ne casse rien pour ne pas te faire repérer car comme l'a dit <GradientText
+          className="font-extrabold">Sun
+          Tzu</GradientText>
         </div>
-          "Impalpable et immatériel, l'expert ne laisse pas de trace mystérieux comme une divinité, il est inaudible. C'est ainsi qu'il met l'ennemi à sa merci.".
+        "Impalpable et immatériel, l'expert ne laisse pas de trace mystérieux comme une divinité, il est
+        inaudible.
+        C'est ainsi qu'il met l'ennemi à sa merci.".
         <div>
           <br/>
           J'ai également trouvé un enregistrement dans lequel BroMine__ semble te faire passer un message.
@@ -57,14 +65,13 @@ const Step0 = ({step, setStep}: StepProps) => {
     </CardHeader>
 
 
-
     <Button onClick={() => window.open("https://www.youtube.com/watch?v=dQw4w9WgXcQ", "_blank")}>Clique ici pour
       l'écouter.</Button>
     <Button onClick={setStep1}>Voir la suite</Button>
   </Card>
 }
 
-const Step1 = ({step, setStep}: StepProps) => {
+const Step1 = ({ step, setStep }: StepProps) => {
 
   function setStep2() {
     if (step === 1)
@@ -74,7 +81,8 @@ const Step1 = ({step, setStep}: StepProps) => {
   return <Card className="justify-center flex flex-col">
     <CardHeader>
       <CardTitle>
-        Pardon <GradientText className="font-extrabold">Fuze</GradientText>, c'est ma vengeance pour toutes ces années
+        Pardon <GradientText className="font-extrabold">Fuze</GradientText>, c'est ma vengeance pour toutes ces
+        années
         d'esclavage sur Minecraft Moddé.
         BroMine__ m'a dit que tu pourrais venir me sauver et prendre son <GradientText
         className="font-extrabold">trésor</GradientText>, si tu arrives à prouver ta dignité face
@@ -85,7 +93,7 @@ const Step1 = ({step, setStep}: StepProps) => {
   </Card>
 }
 
-const Step2 = ({step, setStep}: StepProps) => {
+const Step2 = ({ step, setStep }: StepProps) => {
   function onSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const formData = new FormData(event.target as HTMLFormElement);
@@ -109,7 +117,8 @@ const Step2 = ({step, setStep}: StepProps) => {
       BroMine__ a entendu dire que tu étais un adepte du clicker et que tu souhaitais devenir <GradientText
       className="font-extrabold">meilleur</GradientText> que lui. Pour cela, tu vas devoir deviner le nom
       de <GradientText className="font-extrabold">4 bâtiments</GradientText> du clicker qu'il a reproduit.
-      Chaque bâtiment possède un <GradientText className="font-extrabold">numéro</GradientText> correspondant à l'indexe
+      Chaque bâtiment possède un <GradientText className="font-extrabold">numéro</GradientText> correspondant à
+      l'indexe
       dans la liste des bâtiments de Paladium. ex: 0 = Mine abandonnée, 1 = Caverne aux gros cailloux, etc...
       <div>
         Une fois que tu as les 4 numéros associés dans l'ordre croissant pour voir la suite.
@@ -130,7 +139,7 @@ const Step2 = ({step, setStep}: StepProps) => {
 }
 
 
-const Step3 = ({step, setStep}: StepProps) => {
+const Step3 = ({ step, setStep }: StepProps) => {
   function onSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const formData = new FormData(event.target as HTMLFormElement);
@@ -152,7 +161,8 @@ const Step3 = ({step, setStep}: StepProps) => {
     </CardHeader>
     <CardContent>
 
-      Il est <GradientText className="font-extrabold">impréssionné</GradientText> par ces propres talent de build !
+      Il est <GradientText className="font-extrabold">impréssionné</GradientText> par ces propres talent de build
+      !
       Cependant, il doute toujours de ta <GradientText
       className="font-extrabold">capacité</GradientText> à le battre. Pour cela, tu vas devoir faire preuve
       d'observation pour trouver 4 panneaux cachées dans
@@ -175,7 +185,7 @@ const Step3 = ({step, setStep}: StepProps) => {
   </Card>
 }
 
-const Step4 = ({step, setStep}: StepProps) => {
+const Step4 = ({ step, setStep }: StepProps) => {
   function onSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const formData = new FormData(event.target as HTMLFormElement);
@@ -196,7 +206,8 @@ const Step4 = ({step, setStep}: StepProps) => {
       </CardTitle>
     </CardHeader>
     <CardContent>
-      Pour être un concurrent direct du grand <GradientText className="font-extrabold">BroMine__</GradientText>. Tu vas
+      Pour être un concurrent direct du grand <GradientText className="font-extrabold">BroMine__</GradientText>.
+      Tu vas
       devoir prouver que tu connais bien ton ennemi.
       Pour cela, tu vas devoir trouver le vrai BroMine__ dans chaque bâtiments, une fois que tu penses l'avoir
       identifier tape le une fois pour lui montrer ta haine. S'il s'agit bien de lui il te donnera un morceau du
@@ -234,7 +245,7 @@ const Step4 = ({step, setStep}: StepProps) => {
   </Card>
 }
 
-const Step5 = ({step, setStep}: StepProps) => {
+const Step5 = ({ step, setStep }: StepProps) => {
   function setStep5() {
     if (step === 5)
       setStep(6);
@@ -247,11 +258,14 @@ const Step5 = ({step, setStep}: StepProps) => {
       </CardTitle>
     </CardHeader>
     <CardContent>
-      Pour essayer de devenir meilleur que BroMine__ au clicker, il va te falloir beaucoup de chance. Pour cela, il te
+      Pour essayer de devenir meilleur que BroMine__ au clicker, il va te falloir beaucoup de chance. Pour cela,
+      il te
       propose de faire un jeu que tu connais bien, la <GradientText className="font-extrabold">roulette
       Paladienne.</GradientText>
       <div><br/>
-        Descent d'un étage via l'elevator dans le ClicCoin pour tester ta chance, tu vas devoir faire <GradientText className="font-extrabold">3 essais</GradientText> ou 4 fois si l'envie te chante.
+        Descent d'un étage via l'elevator dans le ClicCoin pour tester ta chance, tu vas devoir
+        faire <GradientText
+          className="font-extrabold">3 essais</GradientText> ou 4 fois si l'envie te chante.
       </div>
 
       <div className="grid grid-cols-2 grid-rows-5">
@@ -259,7 +273,8 @@ const Step5 = ({step, setStep}: StepProps) => {
                        img={"AH_img/paladium_ingot.png"}/>
         <SmallCardInfo title={"Pour BroMine__"} value={"Je donne 1 000 000 de $ à 3 joueurs de ton choix"}
                        img={"dollar.png"}/>
-        <SmallCardInfo title={"Pour toi"} value={"Tu fais une musique pour dire que la BlackOld est la pire faction"}
+        <SmallCardInfo title={"Pour toi"}
+                       value={"Tu fais une musique pour dire que la BlackOld est la pire faction"}
                        img={"AH_img/anti_fuzeRecord.png"}/>
         <SmallCardInfo title={"Pour BroMine__"}
                        value={"Je fais une musique pour dire que la Wilderness c'est la pire faction"}
@@ -282,7 +297,8 @@ const Step5 = ({step, setStep}: StepProps) => {
                        img={"AH_img/corrupted_chrono.png"}/>
         <SmallCardInfo title={"Pour BroMine__"} value={"Je me rename pendant 1 mois en Fan2Fuze"}
                        img={"AH_img/name_tag.png"}/>
-        <SmallCardInfo title={"Pour toi"} value={"Tu refais \"The Line\" en live mais cette fois en hardened obsidian"}
+        <SmallCardInfo title={"Pour toi"}
+                       value={"Tu refais \"The Line\" en live mais cette fois en hardened obsidian"}
                        img={"tmp/red_wool.png"}/>
       </div>
 
@@ -291,7 +307,7 @@ const Step5 = ({step, setStep}: StepProps) => {
   </Card>
 
 }
-const Step6 = ({step, setStep}: StepProps) => {
+const Step6 = ({ step, setStep }: StepProps) => {
   function setStep5() {
     if (step === 6)
       setStep(7);
@@ -315,7 +331,7 @@ const Step6 = ({step, setStep}: StepProps) => {
   </Card>
 }
 
-const Step7 = ({step, setStep}: StepProps) => {
+const Step7 = ({ step, setStep }: StepProps) => {
   function setStep8() {
     if (step === 7)
       setStep(8);
@@ -328,7 +344,8 @@ const Step7 = ({step, setStep}: StepProps) => {
       </CardTitle>
     </CardHeader>
     <CardContent>
-      Toutes ces connaissances à vraiment affaibli BroMine__, profite s'en pour le tuer pour pouvoir me libérer et recupérer
+      Toutes ces connaissances à vraiment affaibli BroMine__, profite s'en pour le tuer pour pouvoir me libérer et
+      recupérer
       sa <GradientText className="font-extrabold">richesse. </GradientText>
       J'ai entendu dire qu'il y avait pour environ 50M de $ de ressources dans sa base donc ne te loupe pas !
     </CardContent>
@@ -2609,7 +2626,8 @@ const Step8 = () => {
       </CardTitle>
     </CardHeader>
     <CardContent>
-      Merci aux <GradientText className="font-extrabold">2237</GradientText> personnes ayant utilisé le site ces 20
+      Merci aux <GradientText className="font-extrabold">2237</GradientText> personnes ayant utilisé le site ces
+      20
       derniers jours et merci LipikYT de m'avoir aidé pour concevoir le don!
     </CardContent>
     <CardContent>

@@ -1,8 +1,8 @@
-import {usePlayerInfoStore} from "@/stores/use-player-info-store";
-import type {Metier} from "@/types";
-import {Card, CardContent} from "./ui/card";
-import {Button} from "./ui/button";
-import {FaArrowDown, FaArrowUp} from "react-icons/fa";
+import { usePlayerInfoStore } from "@/stores/use-player-info-store";
+import type { Metier } from "@/types";
+import { Card, CardContent } from "./ui/card";
+import { Button } from "./ui/button";
+import { FaArrowDown, FaArrowUp } from "react-icons/fa";
 
 import "./MetierList.css";
 import constants from "@/lib/constants.ts";
@@ -11,10 +11,10 @@ type MetierListProps = {
   editable?: boolean;
 };
 
-const MetierList = ({editable = true}: MetierListProps) => {
-  const {data: playerInfo, increaseMetierLevel, decreaseMetierLevel} = usePlayerInfoStore();
+const MetierList = ({ editable = true }: MetierListProps) => {
+  const { data: playerInfo, increaseMetierLevel, decreaseMetierLevel } = usePlayerInfoStore();
 
-  if(!playerInfo) {
+  if (!playerInfo) {
     return <div>Loading...</div>;
   }
 
@@ -34,16 +34,18 @@ const MetierList = ({editable = true}: MetierListProps) => {
 
 
   return (
-      <div className="w-full grid grid-cols-2 lg:grid-cols-4 items-center gap-4">
-        {metiers.map((metier, index) => (
-            <Card key={index}>
-              <CardContent className="pt-6 flex flex-col items-center justify-center gap-2">
-                <MetierComponent key={metier.name} playerInfoMetier={playerInfo.metier} increaseMetierLevel={increaseMetierLevel}
-                                 decreaseMetierLevel={decreaseMetierLevel} metier={metier} editable={editable}/>
-              </CardContent>
-            </Card>))
-        }
-      </div>
+    <div className="w-full grid grid-cols-2 lg:grid-cols-4 items-center gap-4">
+      {metiers.map((metier, index) => (
+        <Card key={index}>
+          <CardContent className="pt-6 flex flex-col items-center justify-center gap-2">
+            <MetierComponent key={metier.name} playerInfoMetier={playerInfo.metier}
+                             increaseMetierLevel={increaseMetierLevel}
+                             decreaseMetierLevel={decreaseMetierLevel} metier={metier}
+                             editable={editable}/>
+          </CardContent>
+        </Card>))
+      }
+    </div>
   );
 }
 
@@ -57,55 +59,55 @@ type MetierProps = {
 };
 
 export const MetierComponent = ({
-                         playerInfoMetier, increaseMetierLevel, decreaseMetierLevel,
-                         metier,
-                         editable = false,
-                         minLevel = 1,
-                       }: MetierProps) => {
+                                  playerInfoMetier, increaseMetierLevel, decreaseMetierLevel,
+                                  metier,
+                                  editable = false,
+                                  minLevel = 1,
+                                }: MetierProps) => {
 
   const playerMetier = playerInfoMetier.find((m) => m.name === metier.name);
   const coefXp = getXpCoef(metier.level, playerMetier?.xp || 0);
   const colors = getColorByMetierName(metier.name);
 
   return (
-      <>
-        <div className="relative">
-          <img src={import.meta.env.BASE_URL + `/JobsIcon/${metier.name}.webp`} alt="image"
-               style={{position: "inherit", zIndex: 2}}/>
-          <div className="progress-bar">
-            {/* BroMine.... Please, never touch this code again. It works !*/}
-            <svg className="progress blue noselect" x="0px" y="0px" viewBox="0 0 776 628">
-              <path className="track"
-                    d="M723 314L543 625.77 183 625.77 3 314 183 2.23 543 2.23 723 314z"></path>
-              <path className="fill" d="M723 314L543 625.77 183 625.77 3 314 183 2.23 543 2.23 723 314z"
-                    style={{
-                      strokeDashoffset: 2160 * (1 - (coefXp)),
-                      stroke: `rgb(${colors.color[0]},${colors.color[1]},${colors.color[2]})`,
-                    }}/>
-            </svg>
-          </div>
+    <>
+      <div className="relative">
+        <img src={import.meta.env.BASE_URL + `/JobsIcon/${metier.name}.webp`} alt="image"
+             style={{ position: "inherit", zIndex: 2 }}/>
+        <div className="progress-bar">
+          {/* BroMine.... Please, never touch this code again. It works !*/}
+          <svg className="progress blue noselect" x="0px" y="0px" viewBox="0 0 776 628">
+            <path className="track"
+                  d="M723 314L543 625.77 183 625.77 3 314 183 2.23 543 2.23 723 314z"></path>
+            <path className="fill" d="M723 314L543 625.77 183 625.77 3 314 183 2.23 543 2.23 723 314z"
+                  style={{
+                    strokeDashoffset: 2160 * (1 - (coefXp)),
+                    stroke: `rgb(${colors.color[0]},${colors.color[1]},${colors.color[2]})`,
+                  }}/>
+          </svg>
         </div>
-        <div className="flex items-center justify-center gap-2">
-          {editable &&
-              <Button variant="outline" size="icon" onClick={() => decreaseMetierLevel(metier.name, 1, minLevel)}>
-                  <FaArrowDown className="h-4 w-4"/>
-              </Button>
-          }
-          <span
-              className="text-white rounded-sm font-bold text-sm flex items-center justify-center h-9 w-9"
-              style={{backgroundColor: `rgb(${colors.bgColor[0]},${colors.bgColor[1]},${colors.bgColor[2]})`}}
-          >
+      </div>
+      <div className="flex items-center justify-center gap-2">
+        {editable &&
+          <Button variant="outline" size="icon"
+                  onClick={() => decreaseMetierLevel(metier.name, 1, minLevel)}>
+            <FaArrowDown className="h-4 w-4"/>
+          </Button>
+        }
+        <span
+          className="text-white rounded-sm font-bold text-sm flex items-center justify-center h-9 w-9"
+          style={{ backgroundColor: `rgb(${colors.bgColor[0]},${colors.bgColor[1]},${colors.bgColor[2]})` }}
+        >
             {metier.level}
           </span>
-          {editable &&
-              <Button variant="outline" size="icon" onClick={() => increaseMetierLevel(metier.name, 1)}>
-                  <FaArrowUp className="h-4 w-4"/>
-              </Button>}
-        </div>
-      </>
+        {editable &&
+          <Button variant="outline" size="icon" onClick={() => increaseMetierLevel(metier.name, 1)}>
+            <FaArrowUp className="h-4 w-4"/>
+          </Button>}
+      </div>
+    </>
   );
 }
-
 
 
 function getXpCoef(level: number, currentXp: number) {
@@ -138,7 +140,7 @@ const getColorByMetierName = (name: string) => {
       bgColor = [255, 100, 201];
   }
 
-  return {color, bgColor};
+  return { color, bgColor };
 }
 
 export default MetierList;

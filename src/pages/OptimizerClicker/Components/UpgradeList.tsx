@@ -1,14 +1,14 @@
 // @ts-nocheck - A RETIRER APRES AVOIR CORRIGE LE FICHIER
 
-import {Button} from "@/components/ui/button";
-import {Card, CardContent} from "@/components/ui/card";
-import {Popover, PopoverContent, PopoverTrigger} from "@/components/ui/popover";
-import {ScrollArea, ScrollBar} from "@/components/ui/scroll-area";
-import {checkCondition, formatPrice} from "@/lib/misc";
-import {cn} from "@/lib/utils";
-import {usePlayerInfoStore} from "@/stores/use-player-info-store";
-import type {PlayerInfo, UpgradeKey} from "@/types";
-import {FaInfoCircle} from "react-icons/fa";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
+import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
+import { checkCondition, formatPrice } from "@/lib/misc";
+import { cn } from "@/lib/utils";
+import { usePlayerInfoStore } from "@/stores/use-player-info-store";
+import type { PlayerInfo, UpgradeKey } from "@/types";
+import { FaInfoCircle } from "react-icons/fa";
 
 type UpgradeListProps = {
   upgradeType: UpgradeKey;
@@ -45,7 +45,7 @@ const UpgradeList = ({ upgradeType }: UpgradeListProps) => {
             />
           ))}
       </div>
-      <ScrollBar orientation="horizontal" />
+      <ScrollBar orientation="horizontal"/>
     </ScrollArea>
   );
 }
@@ -88,12 +88,12 @@ function Upgrade<T extends UpgradeKey>({ upgradeType, upgrade, imgPath }: Upgrad
       <Card>
         <CardContent className="p-4 w-36">
           <div className="flex flex-col items-center justify-center">
-            <img src={imgPath} alt="Icône" className="h-12 w-auto object-cover" />
+            <img src={imgPath} alt="Icône" className="h-12 w-auto object-cover"/>
             <div>{upgrade.name}</div>
             <Popover>
               <PopoverTrigger asChild>
                 <Button variant="outline" size="icon">
-                  <FaInfoCircle className="inline-block h-4 w-4" />
+                  <FaInfoCircle className="inline-block h-4 w-4"/>
                 </Button>
               </PopoverTrigger>
               <PopoverContent className="w-80">
@@ -119,7 +119,7 @@ function Upgrade<T extends UpgradeKey>({ upgradeType, upgrade, imgPath }: Upgrad
       onClick={() => toggleUpgradeOwn(upgradeType, upgrade.name)}
     >
       <div className="w-36 flex flex-col items-center justify-center gap-2">
-        <img src={imgPath} alt="Icône" className="h-12 w-auto object-cover" />
+        <img src={imgPath} alt="Icône" className="h-12 w-auto object-cover"/>
         <span className="text-wrap">{upgrade.name}</span>
         <div className="font-bold">
           {formatPrice(upgrade.price ?? -1)} $

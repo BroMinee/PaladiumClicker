@@ -1,4 +1,4 @@
-import {Card, CardContent} from "@/components/ui/card.tsx";
+import { Card, CardContent } from "@/components/ui/card.tsx";
 
 const Contributors = () => {
   const contributeurs = [
@@ -42,7 +42,7 @@ const Contributors = () => {
       if (pseudo.includes(" ") && pseudo.split(" ").length > 1)
         realPseudo = pseudo.split(" ")[1];
       const pseudoInput = document.getElementById("pseudo") as HTMLInputElement | null;
-      const searchButton  = document.getElementById("pseudo-submit") ;
+      const searchButton = document.getElementById("pseudo-submit");
       if (pseudoInput !== null && searchButton !== null) {
         pseudoInput.value = realPseudo;
         searchButton.click();
@@ -54,24 +54,24 @@ const Contributors = () => {
 
   return <div className="grid grid-cols-1 grid-rows-1 md:grid-cols-2 md:grid-rows-2 gap-6">
     {contributeurs.map((contributeur, index) => (
-        <Card key={index} className="hover:scale-105 duration-300 cursor-pointer" onClick={() => {
-          handleOnClick(contributeur["url"], contributeur["pseudo"]);
-        }}>
-          <CardContent className="h-full pt-6 flex items-center gap-4">
-            <div className="flex flex-col items-center gap-4">
-              <img src={contributeur["urlImg"]} className="w-16 h-16 object-contain pixelated rounded-md"
-                   alt={`Skin de ${contributeur["pseudo"]}`}/>
+      <Card key={index} className="hover:scale-105 duration-300 cursor-pointer" onClick={() => {
+        handleOnClick(contributeur["url"], contributeur["pseudo"]);
+      }}>
+        <CardContent className="h-full pt-6 flex items-center gap-4">
+          <div className="flex flex-col items-center gap-4">
+            <img src={contributeur["urlImg"]} className="w-16 h-16 object-contain pixelated rounded-md"
+                 alt={`Skin de ${contributeur["pseudo"]}`}/>
+          </div>
+          <div className="flex flex-col gap-2">
+            <div className="font-bold  text-primary">
+              {contributeur["pseudo"]}
             </div>
-            <div className="flex flex-col gap-2">
-              <div className="font-bold  text-primary">
-                {contributeur["pseudo"]}
-              </div>
-              <span className="font-semibold">
+            <span className="font-semibold">
               {contributeur["description"]}
             </span>
-            </div>
-          </CardContent>
-        </Card>
+          </div>
+        </CardContent>
+      </Card>
     ))}
   </div>
 

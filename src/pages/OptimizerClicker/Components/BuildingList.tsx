@@ -1,12 +1,12 @@
-import {Card, CardContent} from "@/components/ui/card";
-import {Input} from "@/components/ui/input";
-import {ScrollArea, ScrollBar} from "@/components/ui/scroll-area";
-import {computePrice, formatPrice} from "@/lib/misc";
-import {usePlayerInfoStore} from "@/stores/use-player-info-store";
-import {useRpsStore} from "@/stores/use-rps-store";
-import type {Building as TBuilding, PlayerInfo} from "@/types";
-import {ChangeEvent, useEffect} from "react";
-import {FaBolt, FaPercentage} from "react-icons/fa";
+import { Card, CardContent } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
+import { computePrice, formatPrice } from "@/lib/misc";
+import { usePlayerInfoStore } from "@/stores/use-player-info-store";
+import { useRpsStore } from "@/stores/use-rps-store";
+import type { Building as TBuilding, PlayerInfo } from "@/types";
+import { ChangeEvent, useEffect } from "react";
+import { FaBolt, FaPercentage } from "react-icons/fa";
 
 const BuildingList = () => {
 
@@ -37,7 +37,7 @@ const BuildingList = () => {
             />
           ))}
       </div>
-      <ScrollBar orientation="horizontal" />
+      <ScrollBar orientation="horizontal"/>
     </ScrollArea>
   );
 }
@@ -64,20 +64,23 @@ const Building = ({ building, imgPath, index }: BuildingProps) => {
     <Card>
       <CardContent className="pt-6 space-y-2">
         <div className="flex flex-col items-center justify-center gap-2">
-          <img src={imgPath} alt="Icône" className="object-cover h-12 w-auto" />
+          <img src={imgPath} alt="Icône" className="object-cover h-12 w-auto"/>
           <span className="text-primary text-sm">{building.name}</span>
-          <div className="text-primary font-bold text-center">{formatPrice(computePrice(Number(building.price), Number(building.own)))} $</div>
+          <div
+            className="text-primary font-bold text-center">{formatPrice(computePrice(Number(building.price), Number(building.own)))} $
+          </div>
         </div>
         <div className="space-y-2">
           <div className="text-sm">
-            <FaPercentage className="h-4 w-4 mr-2 inline-block" />
+            <FaPercentage className="h-4 w-4 mr-2 inline-block"/>
             Level: {building.own}
           </div>
           <div className="text-sm">
-            <FaBolt className="h-4 w-4 mr-2 inline-block" />
+            <FaBolt className="h-4 w-4 mr-2 inline-block"/>
             RPS: {formatPrice(scaleCurrentProduction(playerInfo!, index, Number(building.own)))}
           </div>
-          <Input className="w-auto" type="number" min="0" step="1" max="99" value={Number(building.own)} onChange={onChangeLevel} />
+          <Input className="w-auto" type="number" min="0" step="1" max="99" value={Number(building.own)}
+                 onChange={onChangeLevel}/>
         </div>
       </CardContent>
     </Card>
@@ -194,10 +197,10 @@ function convertToFloat(str: string | number) {
 export function computeRPS(playerInfo: PlayerInfo) {
   let rps = 0.5;
   playerInfo.building.forEach((building, index) => {
-    if (building.own !== 0) {
-      rps += scaleCurrentProduction(playerInfo, index, Number(building.own));
+      if (building.own !== 0) {
+        rps += scaleCurrentProduction(playerInfo, index, Number(building.own));
+      }
     }
-  }
   )
   return rps;
 }

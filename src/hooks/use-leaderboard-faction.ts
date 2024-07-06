@@ -1,6 +1,6 @@
-import {getFactionLeaderboard} from "@/lib/api";
-import {usePlayerInfoStore} from "@/stores/use-player-info-store";
-import {useQuery} from "@tanstack/react-query";
+import { getFactionLeaderboard } from "@/lib/apiPala.ts";
+import { usePlayerInfoStore } from "@/stores/use-player-info-store";
+import { useQuery } from "@tanstack/react-query";
 
 const useFactionLeaderboard = () => {
   const { data: playerInfo } = usePlayerInfoStore();
@@ -20,7 +20,7 @@ const useFactionLeaderboard = () => {
     return "Récupération en cours...";
   }
 
-  if(query.error)
+  if (query.error)
     return "Erreur";
 
 

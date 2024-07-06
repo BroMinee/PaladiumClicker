@@ -1,11 +1,11 @@
-import {usePlayerInfoStore} from "@/stores/use-player-info-store";
-import {useEffect, useRef} from "react";
-import {useSettings} from "@/components/shared/SettingsProvider.tsx";
+import { usePlayerInfoStore } from "@/stores/use-player-info-store";
+import { useEffect, useRef } from "react";
+import { useSettings } from "@/components/shared/SettingsProvider.tsx";
 
 const FallingClickImage = () => {
-  const {selectedCPS} = usePlayerInfoStore();
+  const { selectedCPS } = usePlayerInfoStore();
   const containerRef = useRef<HTMLDivElement>(null);
-  const {settings} = useSettings();
+  const { settings } = useSettings();
 
   useEffect(() => {
     const interval = setInterval(() => {
