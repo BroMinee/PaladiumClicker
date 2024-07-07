@@ -327,17 +327,17 @@
     ]
   },
   {
-    "name": -1,
+    "name": "Clic de la Carotte Divine",
     "CPS": -1,
     "own": false,
     "index": 22,
-    "price": 570678710937,
+    "price": 5650000000000,
     "condition": [
       {
-        "coins": 5706787109375
+        "coins": 56500000000000
       },
       {
-        "day": 139
+        "day": 140
       }
     ]
   },
