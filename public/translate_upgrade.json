@@ -285,6 +285,26 @@
     "CPS", "21"
   ],
   "click_23": [
-      "CPS", "22"
+    "CPS", "22"
+  ],
+  "global_3": [
+    "global_upgrade", "2"
+  ],
+  "global_4": [
+    "global_upgrade", "3"
+  ],
+  "global_5": [
+    "global_upgrade", "4"
+  ],"global_6": [
+  "global_upgrade", "5"
+  ],
+  "global_7": [
+    "global_upgrade", "6"
+  ],
+  "global_8": [
+    "global_upgrade", "7"
+  ],
+  "global_9": [
+    "global_upgrade", "8"
   ]
 }

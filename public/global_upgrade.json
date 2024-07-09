@@ -1,6 +1,6 @@
 [
   {
-    "name": "Namu Ecolier",
+    "name": "Namuu Ecolier",
     "pourcentage": 10,
     "own": false,
     "price": 1760000,
@@ -14,7 +14,7 @@
     ]
   },
   {
-    "name": "Namu Contructeur",
+    "name": "Namuu Contructeur",
     "pourcentage": 10,
     "own": false,
     "price": 14000000,
@@ -28,39 +28,102 @@
     ]
   },
   {
-    "name": -1,
-    "pourcentage": -1,
-    "own": false
+    "name": "Namuu Mécanicien",
+    "pourcentage": 10,
+    "own": false,
+    "price": 102000000,
+    "condition": [
+      {
+        "coins": 1020000000
+      },
+      {
+        "day": 40
+      }
+    ]
   },
   {
-    "name": -1,
-    "pourcentage": -1,
-    "own": false
+    "name": "Manuu Scientifique",
+    "pourcentage": 10,
+    "own": false,
+    "price": 800000000,
+    "condition": [
+      {
+        "coins": 8000000000
+      },
+      {
+        "day": 55
+      }
+    ]
   },
   {
-    "name": -1,
-    "pourcentage": -1,
-    "own": false
+    "name": "Manuu Investisseur",
+    "pourcentage": 10,
+    "own": false,
+    "price": 6200000000,
+    "condition": [
+      {
+        "coins": 62000000000
+      },
+      {
+        "day": 70
+      }
+    ]
   },
   {
-    "name": -1,
-    "pourcentage": -1,
-    "own": false
+    "name": "Manuu Magicien",
+    "pourcentage": 10,
+    "own": false,
+    "price": 48000000000,
+    "condition": [
+      {
+        "coins": 480000000000
+      },
+      {
+        "day": 86
+      }
+    ]
   },
   {
-    "name": -1,
-    "pourcentage": -1,
-    "own": false
+    "name": "Manuu Robotique",
+    "pourcentage": 10,
+    "own": false,
+    "price": 366000000000,
+    "condition": [
+      {
+        "coins": 3660000000000
+      },
+      {
+        "day": 101
+      }
+    ]
   },
   {
-    "name": -1,
-    "pourcentage": -1,
-    "own": false
+    "name": "Manuu Extraterrestre",
+    "pourcentage": 10,
+    "own": false,
+    "price": 2820000000000,
+    "condition": [
+      {
+        "coins": 28200000000000
+      },
+      {
+        "day": 117
+      }
+    ]
   },
   {
-    "name": -1,
-    "pourcentage": -1,
-    "own": false
+    "name": "Manuu en Endium",
+    "pourcentage": 10,
+    "own": false,
+    "price": 22000000000000,
+    "condition": [
+      {
+        "coins": 220000000000000
+      },
+      {
+        "day": 132
+      }
+    ]
   },
   {
     "name": -1,
