@@ -77,7 +77,7 @@ const DailyPopup = ({ defaultOpen = false }) => {
                 <div> J'organise un tirage au sort pour tenter de gagner un total de 6 000 000$ :</div>
                 <div className={"flex flex-row"}>
                   <div>
-                    Nombre de participant :
+                    Nombre de participants :
                   </div>
                   <div className="text-primary ml-2">
                     {usersParticipanting.length}
