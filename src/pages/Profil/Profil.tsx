@@ -2970,7 +2970,7 @@ const FactionInfo = () => {
                        img="ExperienceOrb.webp"/>
       </Card>
       <Card>
-        <SmallCardInfo title="Niveau - [xp]" value={convertEpochToDateUTC2(createdAt)} img="clock.gif"/>
+        <SmallCardInfo title="Date de création" value={convertEpochToDateUTC2(createdAt)} img="clock.gif"/>
       </Card>
       <ScrollArea className="md:col-span-3">
         <div className="flex gap-4 pb-3">

@@ -319,13 +319,13 @@ const PalaAnimationClassementGlobal = () => {
           <div>
             {globalLeaderboard.data.slice(0, 10).map((entry, i) => {
               return <p key={i}
-                        className={entry.username === playerInfo.username ? "text-blue-400" : ""}>{i + 1}. {entry.username} - {entry.score / 1000} secondes</p>
+                        className={entry.username === playerInfo.username ? "text-blue-400" : ""}>{i + 1}. {entry.username} - {Math.round(entry.score) / 1000} secondes</p>
             })}
           </div>
           : ""
         }
         {userPosition > 10 ? <p
-          className="text-blue-400">{userPosition + 1}. {playerInfo.username} - {globalLeaderboard.data[userPosition].score / 1000} secondes</p> : ""}
+          className="text-blue-400">{userPosition + 1}. {playerInfo.username} - {Math.round(globalLeaderboard.data[userPosition].score) / 1000} secondes</p> : ""}
       </CardContent>
     </Card>)
 }
