@@ -3,7 +3,8 @@ import { useEffect, useRef } from "react";
 import { useSettings } from "@/components/shared/SettingsProvider.tsx";
 import { safeJoinPaths } from "@/lib/misc.ts";
 
-const FallingClickImage = () => {
+
+const FallingClickImage = ({ PalaTime = false }) => {
   const { selectedCPS } = usePlayerInfoStore();
   const containerRef = useRef<HTMLDivElement>(null);
   const { settings } = useSettings();
@@ -15,7 +16,11 @@ const FallingClickImage = () => {
       }
       const image = document.createElement('img');
 
-      image.src = safeJoinPaths(import.meta.env.BASE_URL, `/CPSIcon/${selectedCPS}.png`);
+      if (PalaTime) {
+        image.src = safeJoinPaths(import.meta.env.BASE_URL, `/AH_img/paper.png`);
+      } else {
+        image.src = safeJoinPaths(import.meta.env.BASE_URL, `/CPSIcon/${selectedCPS}.png`);
+      }
       image.alt = 'Click';
 
       containerRef.current.appendChild(image);

@@ -10,12 +10,14 @@ import Setting from "@/components/shared/Setting.tsx";
 import { safeJoinPaths } from "@/lib/misc.ts";
 import ShareButton from "@/components/shared/ShareButton.tsx";
 
+
 const links: Array<{ path: string, label: string, pseudo: boolean }> = [
   { path: "/profil", label: "Profil", pseudo: true },
   { path: "/ah", label: "AH", pseudo: false },
   { path: "/xp-calculator", label: "Calculateur d'xp", pseudo: true },
   { path: "/optimizer-clicker", label: "PalaClicker Optimizer", pseudo: true },
   { path: "/pala-animation", label: "PalaAnimation Trainer", pseudo: true },
+  { path: "/palatime", label: "Palatime", pseudo: false },
   { path: "/about", label: "A propos", pseudo: false },
 ];
 

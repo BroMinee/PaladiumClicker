@@ -11,6 +11,7 @@ import CalculatorPage from "@/pages/Calculator/CalculatorPage.tsx";
 import SettingProvider from "@/components/shared/SettingsProvider.tsx";
 import AhTracker from "@/pages/AhTracker/AhTracker.tsx";
 import SecretPage from "@/pages/SecretPage/SecretPage.tsx";
+import PalatimePage from "@/pages/Palatime/Palatime.tsx";
 
 const router = createBrowserRouter([
   {
@@ -35,7 +36,11 @@ const router = createBrowserRouter([
     element: <ProfilPage/>,
   },
   {
-    path: '/pala-animation/:pseudoParams?',
+    path: '/palatime',
+    element: <PalatimePage/>,
+  },
+  {
+    path: '/pala-animation/:pseudo?',
     element: <PalaAnimation/>,
   },
   {
