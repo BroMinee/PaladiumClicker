@@ -1,5 +1,22 @@
 [
   {
+    "date": "17-07-2024 - 16h12",
+    "events": [
+      "Ajout d'un classement général pour le PalaAnimation",
+      "Ajout d'une popup journalière",
+      "Ajout du nombre de vues totale dans la section profil",
+      "Correction de la date qui affichait NaN au lieu",
+      "Ajout des nouvelles améliorations de clics",
+      "Ajout des nouvelles améliorations globales !",
+      "Correction de jeu de question dans le PalaAnimation qui n'était pas aléatoire",
+      "Correction de l'url du discord qui était manquante",
+      "Correction du bouton pour revenir à la home page qui ne réenvoyait pas au bon endroit",
+      "Correction du prix dans le l'amélioration 'Suppression des taxes douanières' 114 000$ -> 99 750$",
+      "Changement du texte dans le AH Tracker pour éviter la confusion 'Vente journalière' -> 'Lots vendus ce jour'",
+      "Ajout d'une coding style pour le typescript pour réduire les conflits pendant les merges"
+    ]
+  },
+  {
     "date": "15-06-2024 - 21h40",
     "events": [
       "Ajout d'un classement dans le PalaAnimation"

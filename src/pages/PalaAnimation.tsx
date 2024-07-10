@@ -4,6 +4,7 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { FormEvent, useEffect, useState } from "react";
 import { FaHeart } from "react-icons/fa";
 import {
+  getGlobalLeaderboard,
   getLeaderboardPalaAnimation,
   getUsernameScorePalaAnimation,
   pushNewTimePalaAnimation
@@ -256,8 +257,10 @@ const PalaAnimationPage = () => {
               <ImportProfil showResetButton/>
             </CardFooter>
           </Card>
+
+
           {!playerInfo ? "" :
-            <div className="grid grid-cols-2 md:grid-cols-3 grid-rows-4 gap-4">
+            <div className="grid grid-cols-2 md:grid-cols-3 grid-rows-1 gap-4">
               <Card className="col-span-2">
                 <CardHeader>
                   <PalaAnimationBody questionsList={questionsList}
@@ -266,6 +269,7 @@ const PalaAnimationPage = () => {
               </Card>
               <PalaAnimationClassement questionsList={questionsList}/>
             </div>}
+          <PalaAnimationClassementGlobal/>
         </div>
       </Layout>
     </>
@@ -274,6 +278,56 @@ const PalaAnimationPage = () => {
 
 type PalaAnimationClassementType = {
   questionsList: questionListType[]
+}
+
+const PalaAnimationClassementGlobal = () => {
+  const { data: playerInfo } = usePlayerInfoStore();
+  const [globalLeaderboard, setGlobalLeaderboard] = useState({ data: [], length: -1 } as PalaAnimationLeaderboard)
+
+  async function updateLeaderboardGlobalUI() {
+    getGlobalLeaderboard().then(
+      (data) => {
+        console.log(data);
+        setGlobalLeaderboard(data);
+      }
+    ).catch(
+      (error) => {
+        console.error("Error while fetching global leaderboard", error);
+      }
+    );
+  }
+
+  useEffect(() => {
+    updateLeaderboardGlobalUI();
+  }, []);
+
+  const userPosition = globalLeaderboard.data.findIndex((entry) => entry.username === playerInfo?.username);
+
+  if (!playerInfo)
+    return null;
+
+  return (
+    <Card>
+      <CardHeader className="flex">
+        <CardTitle>Classement Général</CardTitle>
+        <CardDescription>Vous devez faire un minimum de 20 réponses différentes pour apparaître dans le classement.<br/> Recharge la page pour actualiser le classement</CardDescription>
+      </CardHeader>
+      <CardContent className="flex gap-2 flex-col">
+        {globalLeaderboard.length === -1 ? "Chargement du classement..." : ""}
+        {globalLeaderboard.length === 0 ? "Aucun classement pour le moment" : ""}
+        {globalLeaderboard.length > 0 ?
+          <div>
+            {globalLeaderboard.data.slice(0, 10).map((entry, i) => {
+              return <p key={i}
+                        className={entry.username === playerInfo.username ? "text-blue-400" : ""}>{i + 1}. {entry.username} - {entry.score / 1000} secondes</p>
+            })}
+          </div>
+          : ""
+        }
+        {userPosition > 10 ? <p
+          className="text-blue-400">{userPosition + 1}. {playerInfo.username} - {globalLeaderboard.data[userPosition].score / 1000} secondes</p> : ""}
+      </CardContent>
+    </Card>)
 }
 
 const PalaAnimationClassement = ({ questionsList }: PalaAnimationClassementType) => {

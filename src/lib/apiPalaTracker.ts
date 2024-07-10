@@ -62,6 +62,24 @@ export const getUsernameScorePalaAnimation = async (question: string, username: 
   return response.data;
 }
 
+export const getGlobalLeaderboard = async (): Promise<PalaAnimationLeaderboard> => {
+  const response = await axios.get<PalaAnimationLeaderboard>(`https://palatracker.bromine.fr/v1/bromine/leaderboard/classement`, {
+    timeout: 4000
+  }).catch((error) => error);
+
+  if (response instanceof Error) {
+    if ((response as NetworkError).code === "ECONNABORTED") {
+      throw "Timeout error of \"Get Global leaderboard\" API, please try again later";
+    }
+  }
+
+  if (response.status !== 200) {
+    throw response;
+  }
+
+  return response.data;
+}
+
 export const getViewsFromUUID = async (uuid: string): Promise<ProfilViewType> => {
   const response = await axios.get<PalaAnimationScore>(`https://palatracker.bromine.fr/v1/bromine/user/${uuid}`, {
     timeout: 4000
@@ -113,3 +131,5 @@ export const getEventUsers = async (): Promise<{ username: string }[]> => {
 
   return response.data;
 }
+
+
