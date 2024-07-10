@@ -19,54 +19,43 @@ const PalatimePage = () => {
       : never;
   };
 
-  function validateObject(obj: MonObjet): asserts obj is MonObjet {
-    for (const key in obj) {
-      // @ts-ignore
-      if (obj[key].length !== 30) {
-        console.warn(`La chaîne ${key} n'a pas exactement 30 caractères.`);
-        // @ts-ignore
-        obj[key] = "Erreur de longeur de la chaine"
-      }
-    }
-  }
+
 
 // Exemple d'utilisation
   const journal: MonObjet = {
-    ligne1: "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
-    ligne2: "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
-    ligne3: "cccccccccccccccccccccccccccccc",
-    ligne4: "dddddddddddddddddddddddddddddd",
-    ligne5: "eeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
-    ligne6: "ffffffffffffffffffffffffffffff",
-    ligne7: "gggggggggggggggggggggggggggggg",
-    ligne8: "hhhhhhhhhhhhhhhhhhhhhhhhhhhhhh",
-    ligne9: "iiiiiiiiiiiiiiiiiiiiiiiiiiiiii",
-    ligne10: "jjjjjjjjjjjjjjjjjjjjjjjjjjjjjj",
-    ligne11: "kkkkkkkkkkkkkkkkkkkkkkkkkkkkkk",
-    ligne12: "llllllllllllllllllllllllllllll",
-    ligne13: "mmmmmmmmmmmmmmmmmmmmmmmmmmmmmm",
-    ligne14: "nnnnnnnnnnnnnnnnnnnnnnnnnnnnnn",
-    ligne15: "oooooooooooooooooooooooooooooo",
-    ligne16: "pppppppppppppppppppppppppppppp",
-    ligne17: "qqqqqqqqqqqqqqqqqqqqqqqqqqqqqq",
-    ligne18: "rrrrrrrrrrrrrrrrrrrrrrrrrrrrrr",
-    ligne19: "ssssssssssssssssssssssssssssss",
-    ligne20: "tttttttttttttttttttttttttttttt",
-    ligne21: "uuuuuuuuuuuuuuuuuuuuuuuuuuuuuu",
-    ligne22: "vvvvvvvvvvvvvvvvvvvvvvvvvvvvvv",
-    ligne23: "wwwwwwwwwwwwwwwwwwwwwwwwwwwwww",
-    ligne24: "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
-    ligne25: "yyyyyyyyyyyyyyyyyyyyyyyyyyyyyy",
-    ligne26: "zzzzzzzzzzzzzzzzzzzzzzzzzzzzzz",
-    ligne27: "111111111111111111111111111111",
-    ligne28: "222222222222222222222222222222",
-    ligne29: "333333333333333333333333333333",
-    ligne30: "444444444444444444444444444444",
-    ligne31: "555555555555555555555555555555",
-    ligne32: "666666666666666666666666666666",
+    ligne1: "Zerolivier a ecrit 1 dinguerie",
+    ligne2: "= ) alors ouvrez bien les yeux",
+    ligne3: "Malgre tout les indices, votre",
+    ligne4: "objectif n'a pas ete atteint.",
+    ligne5: "Il y a donc sur un serveur (",
+    ligne6: "non je ne redirais pas lequel,",
+    ligne7: "seul les lecteurs reguliers",
+    ligne8: "sauront le serv dont on parle)",
+    ligne9: "et sur lequel se trouve l'",
+    ligne10: "incroyable butin de 400k$. Le",
+    ligne11: "z de ce coffre est cache ici",
+    ligne12: "et 4 000 titane ore, en fr des",
+    ligne13: "minerais de titane sont ",
+    ligne14: "insere dans le chest tresor.",
+    ligne15: "La piste a suivre est ainsi :",
+    ligne16: "La solution est en dbt de page",
+    ligne17: "En parallele, mefiez vous de",
+    ligne18: "cette arnaque qui consiste",
+    ligne19: "en la vente d'item cher",
+    ligne20: "n'etant pas directement vendu",
+    ligne21: "tres cher mais mis en vente au",
+    ligne22: "travers de oak drawer. En",
+    ligne23: "realite, l'item n'y est pas.",
+    ligne24: "En effet, demandez vous pk il",
+    ligne25: "ne vend pas normalement comme",
+    ligne26: "tout le monde l'item direct ?",
+    ligne27: "Enfin, qdf, 275 000 Bamboo",
+    ligne28: "seront necessaire a votre fac.",
+    ligne29: "Eh au fait j'oubliais il n'y a",
+    ligne30: "pas de prochain Palatime",
+    ligne31: "tant que le coffre est impille",
+    ligne32: ". Cherchez bien, a bientot.Plt",
   };
-
-  validateObject(journal);
 
 
   return (
@@ -100,9 +89,9 @@ const PalatimePage = () => {
               <CardContent className="mt-4">
                 {
                   Object.entries(journal).map(([key, value]) => (
-                    <div key={key} className="flex flex-row gap-2">
-                      <div className="font-bold">{key.substring(5)} - {value}</div>
-                    </div>
+                    <p key={key} className="flex justify-around">
+                      {value}
+                    </p>
                   ))
                 }
               </CardContent>
