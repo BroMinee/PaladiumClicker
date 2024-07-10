@@ -25,8 +25,8 @@ const OptimizerClickerPage = () => {
   const { data: playerInfo } = usePlayerInfoStore();
   const [isModalNewsOpen, setIsModalNewsOpen] = useState(playerInfo === null);
 
-  //const getTimeLocalStorage = localStorage.getItem("getTime");
-  const [showDayPopup] = useState(false);//useState(getTimeLocalStorage === null || new Date(getTimeLocalStorage).getDay() != new Date().getDay());
+  const getTimeLocalStorage = localStorage.getItem("getTime");
+  const [showDayPopup] = useState(getTimeLocalStorage === null || new Date(getTimeLocalStorage).getDay() != new Date().getDay());
 
   useEffect(() => {
     if (showDayPopup) {
@@ -64,7 +64,7 @@ const OptimizerClickerPage = () => {
     <>
       <Layout>
         <div className="flex flex-col gap-4">
-          <DailyPopup defaultOpen={showDayPopup}/>
+
           <Card>
             <CardHeader className="flex flex-row items-center justify-between">
               <CardTitle>
@@ -80,6 +80,7 @@ const OptimizerClickerPage = () => {
               <div className="flex flex-wrap gap-2">
                 <Tuto/>
                 <News defaultOpen={isModalNewsOpen}/>
+                <DailyPopup defaultOpen={showDayPopup}/>
                 <Graph defaultOpen={showGraph}/>
               </div>
             </CardContent>

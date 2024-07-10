@@ -42,7 +42,7 @@
     ]
   },
   {
-    "name": "Manuu Scientifique",
+    "name": "Namuu Scientifique",
     "pourcentage": 10,
     "own": false,
     "price": 800000000,
@@ -56,7 +56,7 @@
     ]
   },
   {
-    "name": "Manuu Investisseur",
+    "name": "Namuu Investisseur",
     "pourcentage": 10,
     "own": false,
     "price": 6200000000,
@@ -70,7 +70,7 @@
     ]
   },
   {
-    "name": "Manuu Magicien",
+    "name": "Namuu Magicien",
     "pourcentage": 10,
     "own": false,
     "price": 48000000000,
@@ -84,7 +84,7 @@
     ]
   },
   {
-    "name": "Manuu Robotique",
+    "name": "Namuu Robotique",
     "pourcentage": 10,
     "own": false,
     "price": 366000000000,
@@ -98,7 +98,7 @@
     ]
   },
   {
-    "name": "Manuu Extraterrestre",
+    "name": "Namuu Extraterrestre",
     "pourcentage": 10,
     "own": false,
     "price": 2820000000000,
@@ -112,7 +112,7 @@
     ]
   },
   {
-    "name": "Manuu en Endium",
+    "name": "Namuu en Endium",
     "pourcentage": 10,
     "own": false,
     "price": 22000000000000,

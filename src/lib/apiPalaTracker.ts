@@ -79,3 +79,37 @@ export const getViewsFromUUID = async (uuid: string): Promise<ProfilViewType> =>
 
   return response.data;
 }
+
+export const pushNewUserEvent = async (username: string): Promise<void> => {
+  const response = await axios.get(`https://palatracker.bromine.fr/v1/bromine/event/${username}`, {
+    timeout: 4000
+  }).catch((error) => error);
+
+  if (response instanceof Error) {
+    if ((response as NetworkError).code === "ECONNABORTED") {
+      throw "Timeout error of \"Push new user event\" API, please try again later";
+    }
+  }
+
+  if (response.status !== 200) {
+    throw response;
+  }
+}
+
+export const getEventUsers = async (): Promise<{ username: string }[]> => {
+  const response = await axios.get<string[]>(`https://palatracker.bromine.fr/v1/bromine/event/users`, {
+    timeout: 4000
+  }).catch((error) => error);
+
+  if (response instanceof Error) {
+    if ((response as NetworkError).code === "ECONNABORTED") {
+      throw "Timeout error of \"Get Event Users\" API, please try again later";
+    }
+  }
+
+  if (response.status !== 200) {
+    throw response;
+  }
+
+  return response.data;
+}
