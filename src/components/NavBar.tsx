@@ -13,6 +13,7 @@ const links: Array<{ path: string, label: string }> = [
   { path: "/ah", label: "AH" },
   { path: "/xp-calculator", label: "Calculateur d'xp" },
   { path: "/", label: "PalaClicker Optimizer" },
+  { path: "/palatime", label: "Palatime" },
   { path: "/pala-animation", label: "PalaAnimation Trainer" },
   { path: "/about", label: "A propos" },
 ];
