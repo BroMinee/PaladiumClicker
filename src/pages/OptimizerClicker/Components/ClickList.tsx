@@ -111,6 +111,8 @@ const CPS = ({ cps, imgPath }: CPSProps) => {
         "p-4 h-auto w-36",
         cps.own && "bg-primary text-primary-foreground",
         !cps.own && "bg-yellow-500 text-primary-foreground",
+        cps.own && "hover:bg-primary-darker",
+        !cps.own && "hover:bg-yellow-600",
       )}
       onClick={() => selectCPS(cps.name)}
     >
