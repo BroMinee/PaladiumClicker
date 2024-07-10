@@ -115,6 +115,8 @@ function Upgrade<T extends UpgradeKey>({ upgradeType, upgrade, imgPath }: Upgrad
         "p-4 h-auto",
         upgrade.own && "bg-primary text-primary-foreground",
         !upgrade.own && "bg-yellow-500 text-primary-foreground",
+        upgrade.own && "hover:bg-primary-darker",
+        !upgrade.own && "hover:bg-yellow-600",
       )}
       onClick={() => toggleUpgradeOwn(upgradeType, upgrade.name)}
     >
