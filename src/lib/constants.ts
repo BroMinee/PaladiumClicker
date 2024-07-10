@@ -236,8 +236,8 @@ interface HowToXp {
 
 const how_to_xp: HowToXp = {
   "mineur": [
-    { type: "Nether brick", "action": BREAK, "xp": 0.1, imgPath: "nether_brick.png" },
-    { type: "Stone", "action": SMELT, "xp": 0.5, imgPath: "stone.png" },
+    { type: "Nether brick", "action": SMELT, "xp": 0.1, imgPath: "nether_brick.png" },
+    { type: "Stone", "action": BREAK, "xp": 0.5, imgPath: "stone.png" },
     { type: "Charcoal", "action": SMELT, "xp": 1, imgPath: "charcoal.png" },
     { type: "Andesite", "action": BREAK, "xp": 3, imgPath: "andesite.png" },
     { type: "Granite", "action": BREAK, "xp": 3, imgPath: "granite.png" },
@@ -258,7 +258,7 @@ const how_to_xp: HowToXp = {
     { type: "Amethyst Particle", "action": OBTAIN_FROM_COBBLEBREAKER, "xp": 12, imgPath: "amethyst_particle.png" },
     { type: "Titane Particle", "action": OBTAIN_FROM_COBBLEBREAKER, "xp": 16, imgPath: "titane_particle.png" },
     { type: "Paladium Particle", "action": OBTAIN_FROM_COBBLEBREAKER, "xp": 20, imgPath: "paladium_particle.png" },
-    { type: "Titane Ingot", "action": OBTAIN_FROM_COBBLEBREAKER, "xp": 50, imgPath: "titane_ingot.png" },
+    { type: "Titane Ingot", "action": SMELT, "xp": 50, imgPath: "titane_ingot.png" },
     { type: "Cavernous Zombie", "action": KILL, "xp": NaN, imgPath: "cavernous_zombie.png" },
     { type: "Paladium Ingot", "action": SMELT, "xp": 150, imgPath: "paladium_ingot.png" },
     { type: "Findium Ore", "action": BREAK, "xp": 110, imgPath: "findium_ore.png" },

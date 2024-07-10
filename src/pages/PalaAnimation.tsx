@@ -19,6 +19,7 @@ import { Input } from "@/components/ui/input.tsx";
 import { cn } from "@/lib/utils.ts";
 import { PalaAnimationLeaderboard, PalaAnimationScore } from "@/types";
 import fetchLocal from "@/lib/apiPala.ts";
+import { adaptPlurial } from "@/lib/misc.ts";
 
 
 type userAnswerType =
@@ -207,7 +208,7 @@ const PalaAnimationBody = ({ questionsList, setQuestionsList }: PalaAnimationBod
           />
         </div>
       </form>
-      {timer === 0 ? "" : <div>Vous avez répondu en {timer} secondes !</div>}
+      {timer === 0 ? "" : <div>Vous avez répondu en {timer} {adaptPlurial("seconde", timer)} !</div>}
       <div contentEditable={false} className="max-h-64 overflow-auto">
         {
           oldAnswer.map((old, i1) => {
@@ -319,13 +320,13 @@ const PalaAnimationClassementGlobal = () => {
           <div>
             {globalLeaderboard.data.slice(0, 10).map((entry, i) => {
               return <p key={i}
-                        className={entry.username === playerInfo.username ? "text-blue-400" : ""}>{i + 1}. {entry.username} - {Math.round(entry.score) / 1000} secondes</p>
+                        className={entry.username === playerInfo.username ? "text-blue-400" : ""}>{i + 1}. {entry.username} - {Math.round(entry.score) / 1000} {adaptPlurial("seconde", Math.round(entry.score) / 1000)}</p>
             })}
           </div>
           : ""
         }
         {userPosition > 10 ? <p
-          className="text-blue-400">{userPosition + 1}. {playerInfo.username} - {Math.round(globalLeaderboard.data[userPosition].score) / 1000} secondes</p> : ""}
+          className="text-blue-400">{userPosition + 1}. {playerInfo.username} - {Math.round(globalLeaderboard.data[userPosition].score) / 1000} {adaptPlurial("seconde", Math.round(globalLeaderboard.data[userPosition].score) / 1000)}</p> : ""}
       </CardContent>
     </Card>)
 }
@@ -384,14 +385,14 @@ const PalaAnimationClassement = ({ questionsList }: PalaAnimationClassementType)
           <div>
             {currentLeaderboard.data.map((entry, i) => {
               return <p key={i}
-                        className={entry.username === playerInfo.username ? "text-blue-400" : ""}>{i + 1}. {entry.username} - {entry.score / 1000} secondes</p>
+                        className={entry.username === playerInfo.username ? "text-blue-400" : ""}>{i + 1}. {entry.username} - {entry.score / 1000} {adaptPlurial("seconde", entry.score/ 1000)}</p>
             })}
           </div>
           : ""
         }
         {userScore.position === -1 || userScore.position < currentLeaderboard.length ? "" :
           <p
-            className="text-blue-400">{userScore.position + 1}. {playerInfo.username} - {userScore.score / 1000} secondes</p>}
+            className="text-blue-400">{userScore.position + 1}. {playerInfo.username} - {userScore.score / 1000} {adaptPlurial("seconde", userScore.score/ 1000)}</p>}
       </CardContent>
     </Card>)
 }

@@ -160,3 +160,8 @@ export function getDDHHMMSS(d: Date) {
 
   return `${padL(d.getDate())}/${padL(d.getMonth() + 1)}/${d.getFullYear()} à ${padL(d.getHours())}:${padL(d.getMinutes())}:${padL(d.getSeconds())}`;
 }
+
+export function adaptPlurial(word: string, count: number) {
+  console.log(count)
+  return count >= 2 ? word + "s" : word;
+}

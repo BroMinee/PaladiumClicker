@@ -106,7 +106,7 @@ const AhInfo = () => {
         <CardTitle className="text-primary-foreground">
           Le prix de vente en $ journalier est inexact, il est calculé en divisant la somme des prix de vente
           en $ par
-          le nombre de vente journalière, or le nombre de vente journalière contient aussi les ventes en pbs.
+          le nombre de ventes journalières, or le nombre de ventes journalières contient aussi les ventes en pbs.
           Il y a
           donc une surévaluation du vrai prix.
           Cela sera corrigé après une mise à jour de l'API de Paladium.
@@ -265,7 +265,7 @@ const GraphItem = ({ x, y, itemHover, setItemHover, inputValue }: GraphItemProps
           fill: "tozeroy",
           mode: 'lines',
           marker: { color: '#007aff' },
-          name: "Quantité en vente",
+          name: "Nombre de ventes par jour",
           yaxis: 'y2',
         },
       ]
@@ -275,7 +275,7 @@ const GraphItem = ({ x, y, itemHover, setItemHover, inputValue }: GraphItemProps
       autosize: true,
       yaxis: { title: 'Prix en $', type: 'linear' },
       yaxis2: {
-        title: 'Nombre de vente par jour',
+        title: 'Nombre de ventes par jour',
         titlefont: { color: '#007aff' },
         tickfont: { color: '#007aff' },
         overlaying: 'y',
