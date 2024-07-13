@@ -102,7 +102,12 @@ const PalaAnimationBody = ({ questionsList, setQuestionsList }: PalaAnimationBod
           correct = false;
         }
       } else if (i < userAnswer.length) {
-        newEntryOldAnswer.push({ c: userAnswer[i], color: "text-red-700" });
+        if (userAnswer[i] === ' ') {
+          newEntryOldAnswer.push({ c: '_', color: "text-red-700" });
+        } else {
+          newEntryOldAnswer.push({ c: userAnswer[i], color: "text-red-700" });
+        }
+
         correct = false;
       } else if (answer[i] === " ") {
         newEntryOldAnswer.push({ c: " ", color: "text-green-700" });
@@ -205,6 +210,7 @@ const PalaAnimationBody = ({ questionsList, setQuestionsList }: PalaAnimationBod
             placeholder={"Entre ta réponse"}
             value={inputValue}
             onChange={e => setInputValue(e.target.value)}
+            onPaste={e => e.preventDefault()}
           />
         </div>
       </form>
@@ -311,7 +317,8 @@ const PalaAnimationClassementGlobal = () => {
     <Card>
       <CardHeader className="flex">
         <CardTitle>Classement Général</CardTitle>
-        <CardDescription>Vous devez faire un minimum de 20 réponses différentes pour apparaître dans le classement.<br/> Recharge la page pour actualiser le classement</CardDescription>
+        <CardDescription>Vous devez faire un minimum de 20 réponses différentes pour apparaître dans le
+          classement.<br/> Recharge la page pour actualiser le classement</CardDescription>
       </CardHeader>
       <CardContent className="flex gap-2 flex-col">
         {globalLeaderboard.length === -1 ? "Chargement du classement..." : ""}
@@ -385,14 +392,14 @@ const PalaAnimationClassement = ({ questionsList }: PalaAnimationClassementType)
           <div>
             {currentLeaderboard.data.map((entry, i) => {
               return <p key={i}
-                        className={entry.username === playerInfo.username ? "text-blue-400" : ""}>{i + 1}. {entry.username} - {entry.score / 1000} {adaptPlurial("seconde", entry.score/ 1000)}</p>
+                        className={entry.username === playerInfo.username ? "text-blue-400" : ""}>{i + 1}. {entry.username} - {entry.score / 1000} {adaptPlurial("seconde", entry.score / 1000)}</p>
             })}
           </div>
           : ""
         }
         {userScore.position === -1 || userScore.position < currentLeaderboard.length ? "" :
           <p
-            className="text-blue-400">{userScore.position + 1}. {playerInfo.username} - {userScore.score / 1000} {adaptPlurial("seconde", userScore.score/ 1000)}</p>}
+            className="text-blue-400">{userScore.position + 1}. {playerInfo.username} - {userScore.score / 1000} {adaptPlurial("seconde", userScore.score / 1000)}</p>}
       </CardContent>
     </Card>)
 }
