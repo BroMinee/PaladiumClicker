@@ -2941,7 +2941,7 @@ const FactionInfo = () => {
         <CardContent className="h-full pt-6 flex items-center gap-4">
           <FaTachometerAlt className="w-12 h-12"/>
           <div className="flex flex-col gap-2">
-            <span className="font-semibold">Nombre de membre</span>
+            <span className="font-semibold">Nombre de membres</span>
             <div className="flex gap-2 items-center">
               <GradientText className="font-bold">
                 {formatPrice(playerList?.length)}

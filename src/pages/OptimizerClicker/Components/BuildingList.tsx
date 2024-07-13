@@ -114,13 +114,13 @@ function getPourcentageBonus(playerInfo: PlayerInfo, buildingIndex: number) {
 
   function getBonusFromGlobal() {
     return playerInfo.global_upgrade
-      .filter((global) => global.own).length * 0.10;
+      .filter((global) => global.own).length * 0.1;
   }
 
   function getBonusFromCategory() {
     const categoryUpgrades = playerInfo.category_upgrade
       .filter((category) => category.own && category.active_list_index.includes(buildingIndex))
-    const categoryPourcentage = categoryUpgrades.reduce((total, category) => total + category.pourcentage / 100, 0);
+    const categoryPourcentage = categoryUpgrades.reduce((total, category) => total + category.pourcentage, 0);
     return categoryPourcentage;
   }
 

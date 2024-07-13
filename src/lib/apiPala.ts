@@ -262,6 +262,9 @@ const getInitialPlayerInfo = async (): Promise<PlayerInfo> => {
 
   const metiers = await fetchLocal<Metier[]>("/metier.json");
   const buildings = await fetchLocal<Building[]>("/building.json");
+  for(let i = 0; i < buildings.length; i++) {
+    buildings[i].base_production = String(0.10000000149011612  * Math.pow(1.7999999523162842, i));
+  }
   const buildingUpgrade = await fetchLocal<BuildingUpgrade[]>("/building_upgrade.json");
   const categoryUpgrade = await fetchLocal<CategoryUpgrade[]>("/category_upgrade.json");
   const CPS = await fetchLocal<CPS[]>("/CPS.json");
