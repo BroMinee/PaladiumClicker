@@ -1,5 +1,5 @@
 const Completionist = () =>
-  <span className="text-secondary-foreground">You are good to go!</span>;
+  <span className="text-secondary-foreground">00:00:00</span>;
 
 function print2digits(time: number) {
   if (time < 10) {
