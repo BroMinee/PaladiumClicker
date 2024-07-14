@@ -5,6 +5,7 @@ import { useSettings } from "@/components/shared/SettingsProvider.tsx";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog.tsx";
 import { ScrollArea } from "@/components/ui/scroll-area.tsx";
 import GradientText from "@/components/shared/GradientText.tsx";
+import { safeJoinPaths } from "@/lib/misc.ts";
 
 
 const FallingClickImage = ({ PalaTime = false }) => {
@@ -35,14 +36,11 @@ const FallingClickImage = ({ PalaTime = false }) => {
         image.classList.add("animate-falling", "h-auto", "w-32", "object-cover");
 
         if (PalaTime) {
-          image.src = import.meta.env.BASE_URL + `/AH_img/paper.png`;
-        } else if(selectedCPS === 24)
-        {
-          image.src = import.meta.env.BASE_URL + `/CPSIcon/${selectedCPS}.webp`;
-        }
-        else
-        {
-          image.src = import.meta.env.BASE_URL + `/CPSIcon/${selectedCPS}.png`;
+          image.src = safeJoinPaths(import.meta.env.BASE_URL, `/AH_img/paper.png`);
+        } else if (selectedCPS === 24) {
+          image.src = safeJoinPaths(import.meta.env.BASE_URL, `/CPSIcon/${selectedCPS}.webp`);
+        } else {
+          image.src = safeJoinPaths(import.meta.env.BASE_URL, `/CPSIcon/${selectedCPS}.png`);
         }
 
         image.alt = 'Click';

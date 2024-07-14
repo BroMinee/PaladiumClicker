@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useMetierToReachStore, usePlayerInfoStore } from "@/stores/use-player-info-store.ts";
 import constants from "@/lib/constants.ts";
-import { formatPrice } from "@/lib/misc.ts";
+import { formatPrice, safeJoinPaths } from "@/lib/misc.ts";
 import { MetierComponent } from "@/components/MetierList.tsx";
 import Layout from "@/components/shared/Layout.tsx";
 import NoPseudoPage from "@/components/NoPseudoPage.tsx";
@@ -12,9 +12,17 @@ import { Button } from "@/components/ui/button.tsx";
 import { Input } from "@/components/ui/input.tsx";
 import { cn } from "@/lib/utils.ts";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover.tsx";
+import { useParams } from "react-router-dom";
+import useLoadPlayerInfoMutation from "@/hooks/use-load-player-info-mutation.ts";
+import { toast } from "sonner";
+import { AxiosError } from "axios";
+import PendingPage from "@/pages/UnknownUsername.tsx";
 
 
 const CalculatorPage = () => {
+  const { pseudoParams } = useParams();
+  const { mutate: loadPlayerInfo, isError } = useLoadPlayerInfoMutation();
+
   const { data: playerInfo, increaseMetierLevel, decreaseMetierLevel } = usePlayerInfoStore();
   const {
     metierToReach: metierToReach,
@@ -29,12 +37,44 @@ const CalculatorPage = () => {
   const [dailyBonus, setDailyBonus] = React.useState(0);
 
   useEffect(() => {
+    if (!pseudoParams && playerInfo) {
+      window.location.href = `/optimizer-clicker/${playerInfo.username}`;
+      return;
+    }
+    // load playerInfo using pseudoParams only if the username is different from the one in the store or if it has been 5 minutes since the last load
+    if (pseudoParams && playerInfo && (playerInfo.username.toLowerCase() !== pseudoParams.toLowerCase() || new Date().getTime() - playerInfo.last_fetch > 5 * 60 * 1000)) {
+      loadPlayerInfo(pseudoParams as string, {
+        onSuccess: () => {
+          toast.success("Profil importé avec succès");
+        },
+        onError: (error) => {
+          const message = error instanceof AxiosError ?
+            error.response?.data.message ?? error.message :
+            typeof error === "string" ?
+              error :
+              "Une erreur est survenue dans l'importation du profil";
+          toast.error(message);
+        }
+      })
+    }
+  }, []);
+
+
+  useEffect(() => {
     if (!playerInfo)
       return;
 
     if (!metierToReach || metierToReach.some((e) => e["level"] <= playerInfo["metier"][getIndexMetierSelected()]["level"]))
       setMetierToReach(playerInfo["metier"]);
   }, [playerInfo]);
+
+  if (isError) {
+    return (
+      <Layout>
+        <PendingPage/>
+      </Layout>
+    )
+  }
 
   if (!playerInfo)
     return <Layout>
@@ -109,7 +149,7 @@ const CalculatorPage = () => {
             <div className="grid-cols-2 grid sm:grid-cols-4">
               {["mineur", "farmer", "hunter", "alchimiste"].map((e, index) => {
                 return (
-                  <img key={index} src={`${import.meta.env.BASE_URL}/JobsIcon/${e}.webp`}
+                  <img key={index} src={safeJoinPaths(import.meta.env.BASE_URL, "/JobsIcon/", `${e}.webp`)}
                        alt={e}
                        className={cn("object-cover h-36 w-auto pixelated hover:scale-105 duration-300 cursor-pointer",
                          metierToReach[getIndexMetierSelected()]["name"] !== e ? "grayscale" : "")}
@@ -312,7 +352,7 @@ const HowToXp = ({
             constants.how_to_xp[metierName].map((e, index) => {
               return (
                 <div key={index} className="flex flex-row items-center gap-4">
-                  <img src={`${import.meta.env.BASE_URL}/AH_img/${e["imgPath"]}`}
+                  <img src={safeJoinPaths(import.meta.env.BASE_URL, `/AH_img/${e["imgPath"]}`)}
                        alt={e.imgPath}
                        className="object-cover h-16 w-auto pixelated"/>
                   <div className="flex flex-col">
@@ -328,7 +368,7 @@ const HowToXp = ({
             })
           }
           <div className="flex flex-row items-center gap-4">
-            <img src={`${import.meta.env.BASE_URL}/AH_img/glass_bottle.png`} alt="glass_bottle.png"
+            <img src={safeJoinPaths(import.meta.env.BASE_URL, `/AH_img/glass_bottle.png`)} alt="glass_bottle.png"
                  className="object-cover h-12 w-auto pixelated"/>
             <div className="flex flex-col">
                         <span className="font-semibold">

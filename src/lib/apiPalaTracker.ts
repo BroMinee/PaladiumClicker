@@ -1,13 +1,14 @@
 import axios from "axios";
 import { NetworkError, PalaAnimationLeaderboard, PalaAnimationScore, ProfilViewType } from "@/types";
 
+const API_PALATRACKER_URL = "https://palatracker.bromine.fr";
 export const pushNewTimePalaAnimation = async (time: number, username: string, question: string) => {
   // make a get request to the server to push the new time
   // @ this endpoint /v1/bromine/leaderboardInsert/:leaderboard_name?username=xxx&score=xxx
 
   question = question.replace(" ?", "").replace("&", "").replace("?", "")
 
-  const response = await axios.get(`https://palatracker.bromine.fr/v1/bromine/leaderboardInsert/${question}?username=${username}&score=${time}`, {
+  const response = await axios.get(`${API_PALATRACKER_URL}/v1/bromine/leaderboardInsert/${question}?username=${username}&score=${time}`, {
     timeout: 4000
   }).catch((error) => error);
 
@@ -25,7 +26,7 @@ export const pushNewTimePalaAnimation = async (time: number, username: string, q
 export const getLeaderboardPalaAnimation = async (question: string): Promise<PalaAnimationLeaderboard> => {
   question = question.replace(" ?", "").replace("&", "")
 
-  const response = await axios.get<PalaAnimationLeaderboard>(`https://palatracker.bromine.fr/v1/bromine/leaderboard/${question}`, {
+  const response = await axios.get<PalaAnimationLeaderboard>(`${API_PALATRACKER_URL}/v1/bromine/leaderboard/${question}`, {
     timeout: 4000
   }).catch((error) => error);
 
@@ -45,7 +46,7 @@ export const getLeaderboardPalaAnimation = async (question: string): Promise<Pal
 export const getUsernameScorePalaAnimation = async (question: string, username: string): Promise<PalaAnimationScore> => {
   question = question.replace(" ?", "").replace("&", "")
 
-  const response = await axios.get<PalaAnimationScore>(`https://palatracker.bromine.fr/v1/bromine/leaderboard/${question}/${username}`, {
+  const response = await axios.get<PalaAnimationScore>(`${API_PALATRACKER_URL}/v1/bromine/leaderboard/${question}/${username}`, {
     timeout: 4000
   }).catch((error) => error);
 
@@ -63,7 +64,7 @@ export const getUsernameScorePalaAnimation = async (question: string, username: 
 }
 
 export const getGlobalLeaderboard = async (): Promise<PalaAnimationLeaderboard> => {
-  const response = await axios.get<PalaAnimationLeaderboard>(`https://palatracker.bromine.fr/v1/bromine/leaderboard/classement`, {
+  const response = await axios.get<PalaAnimationLeaderboard>(`${API_PALATRACKER_URL}/v1/bromine/leaderboard/classement`, {
     timeout: 4000
   }).catch((error) => error);
 
@@ -81,7 +82,7 @@ export const getGlobalLeaderboard = async (): Promise<PalaAnimationLeaderboard> 
 }
 
 export const getViewsFromUUID = async (uuid: string): Promise<ProfilViewType> => {
-  const response = await axios.get<PalaAnimationScore>(`https://palatracker.bromine.fr/v1/bromine/user/${uuid}`, {
+  const response = await axios.get<PalaAnimationScore>(`${API_PALATRACKER_URL}/v1/bromine/user/${uuid}`, {
     timeout: 4000
   }).catch((error) => error);
 
@@ -99,7 +100,7 @@ export const getViewsFromUUID = async (uuid: string): Promise<ProfilViewType> =>
 }
 
 export const pushNewUserEvent = async (username: string): Promise<void> => {
-  const response = await axios.get(`https://palatracker.bromine.fr/v1/bromine/event/${username}`, {
+  const response = await axios.get(`${API_PALATRACKER_URL}/v1/bromine/event/${username}`, {
     timeout: 4000
   }).catch((error) => error);
 
@@ -115,7 +116,7 @@ export const pushNewUserEvent = async (username: string): Promise<void> => {
 }
 
 export const getEventUsers = async (): Promise<{ username: string }[]> => {
-  const response = await axios.get<string[]>(`https://palatracker.bromine.fr/v1/bromine/event/users`, {
+  const response = await axios.get<string[]>(`${API_PALATRACKER_URL}/v1/bromine/event/users`, {
     timeout: 4000
   }).catch((error) => error);
 

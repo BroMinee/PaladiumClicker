@@ -7,38 +7,41 @@ import { FaBars } from "react-icons/fa";
 import { NavLink } from "react-router-dom";
 import { usePlayerInfoStore } from "@/stores/use-player-info-store.ts";
 import Setting from "@/components/shared/Setting.tsx";
+import { safeJoinPaths } from "@/lib/misc.ts";
+import ShareButton from "@/components/shared/ShareButton.tsx";
 
-const links: Array<{ path: string, label: string }> = [
-  { path: "/profil", label: "Profil" },
-  { path: "/ah", label: "AH" },
-  { path: "/xp-calculator", label: "Calculateur d'xp" },
-  { path: "/", label: "PalaClicker Optimizer" },
-  { path: "/palatime", label: "Palatime" },
-  { path: "/pala-animation", label: "PalaAnimation Trainer" },
-  { path: "/about", label: "A propos" },
+
+const links: Array<{ path: string, label: string, pseudo: boolean }> = [
+  { path: "/profil", label: "Profil", pseudo: true },
+  { path: "/ah", label: "AH", pseudo: false },
+  { path: "/xp-calculator", label: "Calculateur d'xp", pseudo: true },
+  { path: "/optimizer-clicker", label: "PalaClicker Optimizer", pseudo: true },
+    { path: "/palatime", label: "Palatime", pseudo: false },
+  { path: "/pala-animation", label: "PalaAnimation Trainer", pseudo: true },
+  { path: "/about", label: "A propos", pseudo: false },
 ];
 
 const Navbar = () => {
-  const { reset } = usePlayerInfoStore();
+  const { data: playerInfo, reset } = usePlayerInfoStore();
   return (
     <nav className="container flex items-center justify-between h-full gap-4">
       <MobileNav/>
       <div className="hidden lg:flex gap-4">
         <img
-          src={import.meta.env.BASE_URL + "/favicon.ico"}
+          src={safeJoinPaths(import.meta.env.BASE_URL, "/favicon.ico")}
           alt="Logo"
           className="h-12 w-12 hover:scale-110 duration-300 cursor-pointer"
           onClick={() => {
             reset();
-            window.location.assign("/PaladiumClicker");
+            window.location.assign("/");
           }}
         />
         <ul className="flex gap-6 items-center">
-          {links.map(({ path, label }) => (
+          {links.map(({ path, label, pseudo }) => (
             <li key={path}>
               <NavLink
                 className={({ isActive }) => cn("font-medium hover:underline", isActive && "underline")}
-                to={path}
+                to={pseudo && playerInfo?.username ? safeJoinPaths(path, playerInfo.username) : path}
                 children={label}
               />
             </li>
@@ -46,6 +49,7 @@ const Navbar = () => {
         </ul>
       </div>
       <div className="flex gap-2">
+        <ShareButton/>
         <Setting/>
         <ToggleTheme/>
         <ImportProfil showResetButton={false} withBackground/>
@@ -68,7 +72,7 @@ const MobileNav = () => {
         <SheetHeader className="pb-6">
           <div className="flex items-center gap-2">
             <img
-              src={import.meta.env.BASE_URL + "/favicon.ico"}
+              src={safeJoinPaths(import.meta.env.BASE_URL, "/favicon.ico")}
               alt="Logo"
               className="h-12 w-12"
             />

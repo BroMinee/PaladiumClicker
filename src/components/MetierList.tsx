@@ -6,6 +6,7 @@ import { FaArrowDown, FaArrowUp } from "react-icons/fa";
 
 import "./MetierList.css";
 import constants from "@/lib/constants.ts";
+import { safeJoinPaths } from "@/lib/misc.ts";
 
 type MetierListProps = {
   editable?: boolean;
@@ -72,7 +73,7 @@ export const MetierComponent = ({
   return (
     <>
       <div className="relative">
-        <img src={import.meta.env.BASE_URL + `/JobsIcon/${metier.name}.webp`} alt="image"
+        <img src={safeJoinPaths(import.meta.env.BASE_URL, "/JobsIcon/", `${metier.name}.webp`)} alt="image"
              style={{ position: "inherit", zIndex: 2 }}/>
         <div className="progress-bar">
           {/* BroMine.... Please, never touch this code again. It works !*/}

@@ -20,6 +20,9 @@ import { cn } from "@/lib/utils.ts";
 import { PalaAnimationLeaderboard, PalaAnimationScore } from "@/types";
 import fetchLocal from "@/lib/apiPala.ts";
 import { adaptPlurial } from "@/lib/misc.ts";
+import { useParams } from "react-router-dom";
+import useLoadPlayerInfoMutation from "@/hooks/use-load-player-info-mutation.ts";
+import PendingPage from "@/pages/UnknownUsername.tsx";
 
 
 type userAnswerType =
@@ -124,7 +127,6 @@ const PalaAnimationBody = ({ questionsList, setQuestionsList }: PalaAnimationBod
       if (showTimer) {
         pushTime(time, playerInfo.username, questionsList[0].question);
         setTimer(time / 1000);
-        console.log("Time: " + time / 1000)
       }
       setOldAnswer([newEntryOldAnswer, ...oldAnswer]);
 
@@ -239,9 +241,43 @@ const PalaAnimationBody = ({ questionsList, setQuestionsList }: PalaAnimationBod
 
 
 const PalaAnimationPage = () => {
+  const { pseudoParams } = useParams();
+  const { mutate: loadPlayerInfo, isError } = useLoadPlayerInfoMutation();
 
   const { data: playerInfo } = usePlayerInfoStore();
   const [questionsList, setQuestionsList] = useState([] as questionListType[]);
+
+  useEffect(() => {
+    if (!pseudoParams && playerInfo) {
+      window.location.href = `/optimizer-clicker/${playerInfo.username}`;
+      return;
+    }
+    // load playerInfo using pseudoParams only if the username is different from the one in the store or if it has been 5 minutes since the last load
+    if (pseudoParams && playerInfo && (playerInfo.username.toLowerCase() !== pseudoParams.toLowerCase() || new Date().getTime() - playerInfo.last_fetch > 5 * 60 * 1000)) {
+      loadPlayerInfo(pseudoParams as string, {
+        onSuccess: () => {
+          toast.success("Profil importé avec succès");
+        },
+        onError: (error) => {
+          const message = error instanceof AxiosError ?
+            error.response?.data.message ?? error.message :
+            typeof error === "string" ?
+              error :
+              "Une erreur est survenue dans l'importation du profil";
+          toast.error(message);
+        }
+      })
+    }
+  }, []);
+
+  if (isError) {
+    return (
+      <Layout>
+        <PendingPage/>
+      </Layout>
+    )
+  }
+
 
   return (
     <>
@@ -294,7 +330,6 @@ const PalaAnimationClassementGlobal = () => {
   async function updateLeaderboardGlobalUI() {
     getGlobalLeaderboard().then(
       (data) => {
-        console.log(data);
         setGlobalLeaderboard(data);
       }
     ).catch(
@@ -347,7 +382,6 @@ const PalaAnimationClassement = ({ questionsList }: PalaAnimationClassementType)
   async function updateLeaderboardUI(leaderboard_name: string) {
     getLeaderboardPalaAnimation(leaderboard_name).then(
       (data) => {
-        console.log(data);
         setCurrentLeaderboard(data);
       }
     ).catch(

@@ -1,5 +1,5 @@
 import { computeRPS } from "@/pages/OptimizerClicker/Components/BuildingList";
-import { checkCondition, computePrice, formatPrice } from "@/lib/misc";
+import { checkCondition, computePrice, formatPrice, safeJoinPaths } from "@/lib/misc";
 import { buyBuilding, computeXBuildingAhead, Stat } from "./Stats";
 import { bestBuildingInfo, bestPurchaseInfoDetailed, bestUpgradeInfo, buildingPathType, PlayerInfo } from "@/types";
 import { usePlayerInfoStore } from "@/stores/use-player-info-store";
@@ -58,7 +58,7 @@ const RPS = () => {
             }
             {(buildingBuyPaths.length === 0) &&
               <div className="flex flex-col items-center gap-4">
-                <img src={import.meta.env.BASE_URL + "/arty_chocbar.webp"}
+                <img src={safeJoinPaths(import.meta.env.BASE_URL, "/arty_chocbar.webp")}
                      className="w-32 h-auto object-contain"
                      alt="Arty"/>
                 <p className="text-sm">Bravo tu as tout acheté, va prendre une douche
@@ -74,7 +74,7 @@ const RPS = () => {
       <Card>
         <CardContent className="h-full pt-6 flex items-center gap-4">
           {rps < 0 ?
-            <img src={import.meta.env.BASE_URL + "/arty_chocbar.webp"}
+            <img src={safeJoinPaths(import.meta.env.BASE_URL, "/arty_chocbar.webp")}
                  className="w-12 h-auto object-contain"
                  alt="Arty"/> :
             <FaCoins className="w-12 h-12"/>
@@ -83,7 +83,7 @@ const RPS = () => {
             <span className="font-semibold">Production actuelle par seconde</span>
             <div className="flex items-center gap-2">
               <GradientText className="font-bold">{'~ ' + formatPrice(rps)}</GradientText>
-              <img src={import.meta.env.BASE_URL + "/coin.png"} className="h-6 w-6" alt="Coin"/>
+              <img src={safeJoinPaths(import.meta.env.BASE_URL, "/coin.png")} className="h-6 w-6" alt="Coin"/>
             </div>
           </div>
         </CardContent>
@@ -98,7 +98,7 @@ const RPS = () => {
                 {'~ ' + formatPrice(estimatedRPS)}{" "}
                 ({estimatedRPS > rps ? "+" : ""}{(((estimatedRPS - rps) / (rps) * 100)).toFixed(5)}%)
               </GradientText>
-              <img src={import.meta.env.BASE_URL + "/coin.png"} className="h-6 w-6" alt="Coin"/>
+              <img src={safeJoinPaths(import.meta.env.BASE_URL, "/coin.png")} className="h-6 w-6" alt="Coin"/>
             </div>
           </div>
         </CardContent>

@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
-import { checkCondition, formatPrice } from "@/lib/misc";
+import { checkCondition, formatPrice, safeJoinPaths } from "@/lib/misc";
 import { cn } from "@/lib/utils";
 import { usePlayerInfoStore } from "@/stores/use-player-info-store";
 import type { CPS as TCPS } from "@/types";
@@ -30,7 +30,7 @@ const ClickList = () => {
           playerInfo["CPS"]
             .map((cps, index) => (
               <CPS key={index} cps={cps}
-                   imgPath={import.meta.env.BASE_URL + getImgPath(index, cps.name)}/>
+                   imgPath={safeJoinPaths(import.meta.env.BASE_URL, getImgPath(index, cps.name))}/>
             ))}
       </div>
       <ScrollBar orientation="horizontal"/>
