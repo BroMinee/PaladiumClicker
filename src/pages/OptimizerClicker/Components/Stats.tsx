@@ -2,7 +2,7 @@ import GradientText from "@/components/shared/GradientText";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Checkbox } from "@/components/ui/checkbox";
-import { computePrice, formatPrice, getDDHHMMSS, getPathImg, getTotalSpend } from "@/lib/misc";
+import { computePrice, formatPrice, getDDHHMMSS, getPathImg, getTotalSpend, safeJoinPaths } from "@/lib/misc";
 import { computeRPS } from "@/pages/OptimizerClicker/Components/BuildingList";
 import { usePlayerInfoStore } from "@/stores/use-player-info-store";
 import { bestBuildingInfo, bestPurchaseInfo, bestPurchaseInfoDetailed, bestUpgradeInfo, PlayerInfo } from "@/types";
@@ -80,7 +80,7 @@ const Stats = () => {
                   <GradientText className="font-bold">
                     ~ {formatPrice(Math.round(coinsDormants))}
                   </GradientText>
-                  <img src={import.meta.env.BASE_URL + "/coin.png"} className="h-6 w-6"
+                  <img src={safeJoinPaths(import.meta.env.BASE_URL, "/coin.png")} className="h-6 w-6"
                        alt="Coin"/>
                 </div>
               </div>
@@ -106,7 +106,7 @@ const Stats = () => {
                   <GradientText className="font-bold">
                     {(formatPrice(Math.round(playerInfo["production"])))}
                   </GradientText>
-                  <img src={import.meta.env.BASE_URL + "/coin.png"} className="h-6 w-6"
+                  <img src={safeJoinPaths(import.meta.env.BASE_URL, "/coin.png")} className="h-6 w-6"
                        alt="Coin"/>
                 </div>
               </div>

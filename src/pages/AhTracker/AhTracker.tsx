@@ -35,18 +35,8 @@ const itemHoverTypeInit = {
   sellsPb: 0,
 }
 
-const ProfilPage = () => {
-  return (
-    <>
-      <Layout>
-        <AhInfo/>
-      </Layout>
-    </>
-  );
-}
 
-
-const AhInfo = () => {
+const AhTracker = () => {
   const [itemHover, setItemHover] = useState(itemHoverTypeInit as itemHoverType);
   const [itemAvailable, setItemAvailable] = useState<Awaited<ReturnType<typeof getAhItemData>>>([]);
   const [inputValue, setInputValue] = useState("");
@@ -89,49 +79,49 @@ const AhInfo = () => {
   }, [inputValue]);
 
 
-  return <div className="flex flex-col gap-4">
-    <Card>
-      <CardHeader className="flex flex-row items-center justify-between">
-        <CardTitle>
-          Bienvenue sur{" "}
-          <GradientText className="font-extrabold">l'AH Tracker</GradientText>
-        </CardTitle>
-        <CardDescription>
-          Made with <FaHeart className="text-primary inline-block"/> by <GradientText>BroMine__</GradientText>
-        </CardDescription>
-      </CardHeader>
-    </Card>
-    <Card className="bg-red-700">
-      <CardHeader>
-        <CardTitle className="text-primary-foreground">
-          Le prix de vente en $ journalier est inexact, il est calculé en divisant la somme des prix de vente
-          en $ par
-          le nombre de ventes journalières, or le nombre de ventes journalières contient aussi les ventes en pbs.
-          Il y a
-          donc une surévaluation du vrai prix.
-          Cela sera corrigé après une mise à jour de l'API de Paladium.
-        </CardTitle>
-      </CardHeader>
-    </Card>
-    <div className="grid md:grid-cols-4 md:grid-rows-3 gap-4 grid-cols-1 grid-rows-6">
-      <MarketSelector itemAvailable={itemAvailable} setInputValue={setInputValue} itemHover={itemHover}
-                      inputValue={inputValue}/>
-      <AhInfoSelected itemHover={itemHover}/>
+  return <Layout>
+    <div className="flex flex-col gap-4">
+      <Card>
+        <CardHeader className="flex flex-row items-center justify-between">
+          <CardTitle>
+            Bienvenue sur{" "}
+            <GradientText className="font-extrabold">l'AH Tracker</GradientText>
+          </CardTitle>
+          <CardDescription>
+            Made with <FaHeart className="text-primary inline-block"/> by <GradientText>BroMine__</GradientText>
+          </CardDescription>
+        </CardHeader>
+      </Card>
+      <Card className="bg-red-700">
+        <CardHeader>
+          <CardTitle className="text-primary-foreground">
+            Le prix de vente en $ journalier est inexact, il est calculé en divisant la somme des prix de vente
+            en $ par
+            le nombre de ventes journalières, or le nombre de ventes journalières contient aussi les ventes en pbs.
+            Il y a
+            donc une surévaluation du vrai prix.
+            Cela sera corrigé après une mise à jour de l'API de Paladium.
+          </CardTitle>
+        </CardHeader>
+      </Card>
+      <div className="grid md:grid-cols-4 md:grid-rows-3 gap-4 grid-cols-1 grid-rows-6">
+        <MarketSelector itemAvailable={itemAvailable} setInputValue={setInputValue} itemHover={itemHover}
+                        inputValue={inputValue}/>
+        <AhInfoSelected itemHover={itemHover}/>
+      </div>
+      <div className="w-full">
+        {x.length === 0 ? <Card className="col-start-1 col-span-4 w-full">
+            <CardHeader>
+              <CardTitle>
+                Veuillez sélectionner un item
+              </CardTitle>
+            </CardHeader>
+          </Card>
+          :
+          <GraphItem x={x} y={y} itemHover={itemHover} setItemHover={setItemHover} inputValue={inputValue}/>}
+      </div>
     </div>
-    <div className="w-full">
-      {x.length === 0 ? <Card className="col-start-1 col-span-4 w-full">
-          <CardHeader>
-            <CardTitle>
-              Veuillez sélectionner un item
-            </CardTitle>
-          </CardHeader>
-        </Card>
-        :
-        <GraphItem x={x} y={y} itemHover={itemHover} setItemHover={setItemHover} inputValue={inputValue}/>}
-
-    </div>
-
-  </div>
+  </Layout>
 }
 
 
@@ -286,4 +276,4 @@ const GraphItem = ({ x, y, itemHover, setItemHover, inputValue }: GraphItemProps
 }
 
 
-export default ProfilPage;
+export default AhTracker;

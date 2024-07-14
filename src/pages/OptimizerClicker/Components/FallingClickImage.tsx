@@ -1,6 +1,7 @@
 import { usePlayerInfoStore } from "@/stores/use-player-info-store";
 import { useEffect, useRef } from "react";
 import { useSettings } from "@/components/shared/SettingsProvider.tsx";
+import { safeJoinPaths } from "@/lib/misc.ts";
 
 const FallingClickImage = () => {
   const { selectedCPS } = usePlayerInfoStore();
@@ -14,7 +15,7 @@ const FallingClickImage = () => {
       }
       const image = document.createElement('img');
 
-      image.src = `${import.meta.env.BASE_URL}/CPSIcon/${selectedCPS}.png`;
+      image.src = safeJoinPaths(import.meta.env.BASE_URL, `/CPSIcon/${selectedCPS}.png`);
       image.alt = 'Click';
 
       containerRef.current.appendChild(image);

@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
-import { checkCondition, formatPrice } from "@/lib/misc";
+import { checkCondition, formatPrice, safeJoinPaths } from "@/lib/misc";
 import { cn } from "@/lib/utils";
 import { usePlayerInfoStore } from "@/stores/use-player-info-store";
 import type { PlayerInfo, UpgradeKey } from "@/types";
@@ -41,7 +41,7 @@ const UpgradeList = ({ upgradeType }: UpgradeListProps) => {
               key={`${upgrade.name}-${index}`}
               upgradeType={upgradeType}
               upgrade={upgrade}
-              imgPath={import.meta.env.BASE_URL + getImgPath(index, upgrade.name)}
+              imgPath={safeJoinPaths(import.meta.env.BASE_URL, getImgPath(index, upgrade.name))}
             />
           ))}
       </div>

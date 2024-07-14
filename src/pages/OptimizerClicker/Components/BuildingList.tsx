@@ -1,7 +1,7 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
-import { computePrice, formatPrice } from "@/lib/misc";
+import { computePrice, formatPrice, safeJoinPaths } from "@/lib/misc";
 import { usePlayerInfoStore } from "@/stores/use-player-info-store";
 import { useRpsStore } from "@/stores/use-rps-store";
 import type { Building as TBuilding, PlayerInfo } from "@/types";
@@ -32,7 +32,7 @@ const BuildingList = () => {
             <Building
               key={index}
               building={building}
-              imgPath={import.meta.env.BASE_URL + getImgPath(index, building.price ?? 0)}
+              imgPath={safeJoinPaths(import.meta.env.BASE_URL, getImgPath(index, building.price ?? 0))}
               index={index}
             />
           ))}
