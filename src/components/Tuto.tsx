@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import ReactAudioPlayer from "react-audio-player";
+import { safeJoinPaths } from "@/lib/misc.ts";
 
 const Tuto = () => {
   return (<Dialog>
@@ -64,7 +65,7 @@ const Tuto = () => {
             </div>
             <div className="flex flex-col gap-2">
               <ReactAudioPlayer
-                src={import.meta.env.BASE_URL + "/Presentation_site.mp3"}
+                src={safeJoinPaths(import.meta.env.BASE_URL, "/Presentation_site.mp3")}
                 controls
               />
               <p className="text-muted-foreground">Musique générée avec suno.ai</p>

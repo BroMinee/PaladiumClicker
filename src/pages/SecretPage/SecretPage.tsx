@@ -7,6 +7,7 @@ import { FormEvent, useState } from "react";
 import { Input } from "@/components/ui/input.tsx";
 import { toast } from "sonner";
 import SmallCardInfo from "@/components/shared/SmallCardInfo.tsx";
+import { safeJoinPaths } from "@/lib/misc.ts";
 
 
 // 9,13,21,29
@@ -280,7 +281,7 @@ const Step5 = ({ step, setStep }: StepProps) => {
                        value={"Je fais une musique pour dire que la Wilderness c'est la pire faction"}
                        img={"AH_img/roulette_paladienneRecord.png"}/>
         <CardContent className="h-full pt-6 flex items-center gap-4 ml-6">
-          <img src={`${import.meta.env.BASE_URL}/tmp/banner.png`} alt="tmp/banner.png"
+          <img src={safeJoinPaths(import.meta.env.BASE_URL, "/tmp/banner.png")} alt="tmp/banner.png"
                className="h-12 pixelated mr-2 rounded-md"/>
           <div className="flex flex-col gap-2">
             <span className="font-semibold">Pour toi</span>
@@ -2608,7 +2609,7 @@ const Step8 = () => {
       pseudoInput.value = "";
       console.log("TODO check that the both element selected are in the same div")
       setTimeout(() => {
-        window.location.assign("/PaladiumClicker");
+        window.location.assign("/");
       }, 3100);
     }
 

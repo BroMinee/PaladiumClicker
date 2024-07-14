@@ -97,23 +97,22 @@ export function computePrice(priceLevel0: number, level: number) {
 export function getPathImg(bestListName: string, bestUpgradeIndex: number) {
   switch (bestListName) {
     case "building":
-      return import.meta.env.BASE_URL + "/BuildingIcon/" + bestUpgradeIndex + ".png";
+      return safeJoinPaths(import.meta.env.BASE_URL, "/BuildingIcon/", `${bestUpgradeIndex}.png`);
     case "building_upgrade":
-      return import.meta.env.BASE_URL + "/BuildingUpgradeIcon/" + (bestUpgradeIndex < 16 ? "0" : "1") + ".png";
+      return safeJoinPaths(import.meta.env.BASE_URL, "/BuildingUpgradeIcon/", (bestUpgradeIndex < 16 ? "0" : "1") + ".png");
     case "category_upgrade":
-      return import.meta.env.BASE_URL + "/CategoryIcon/" + bestUpgradeIndex + ".png";
+      return safeJoinPaths(import.meta.env.BASE_URL, "/CategoryIcon/", `${bestUpgradeIndex}.png`);
     case "global_upgrade":
-      return import.meta.env.BASE_URL + "/GlobalIcon/" + bestUpgradeIndex + ".png";
+      return safeJoinPaths(import.meta.env.BASE_URL, "/GlobalIcon/", `${bestUpgradeIndex}.png`);
     case "many_upgrade":
-      return import.meta.env.BASE_URL + "/ManyIcon/0.png";
+      return safeJoinPaths(import.meta.env.BASE_URL, "/ManyIcon/0.png");
     case "terrain_upgrade":
-      return import.meta.env.BASE_URL + "/TerrainIcon/" + bestUpgradeIndex + ".png";
+      return safeJoinPaths(import.meta.env.BASE_URL, "/TerrainIcon/", `${bestUpgradeIndex}.png`);
     case "posterior_upgrade":
-      return import.meta.env.BASE_URL + "/PosteriorIcon/0.png";
+      return safeJoinPaths(import.meta.env.BASE_URL, "/PosteriorIcon/0.png");
     default:
       alert("Error in bestListName");
-      return import.meta.env.BASE_URL + "/BuildingUpgradeIcon/0.png";
-
+      return safeJoinPaths(import.meta.env.BASE_URL, "/BuildingUpgradeIcon/0.png");
   }
 }
 
@@ -162,6 +161,11 @@ export function getDDHHMMSS(d: Date) {
 }
 
 export function adaptPlurial(word: string, count: number) {
-  console.log(count)
   return count >= 2 ? word + "s" : word;
+}
+
+export function safeJoinPaths(base: string, ...paths: string[]): string {
+  const allPaths = [base, ...paths];
+  const result = allPaths.join('/');
+  return result.replace(/\/+/g, '/');
 }

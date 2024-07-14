@@ -1,6 +1,5 @@
 import MetierList from "@/components/MetierList.tsx";
 import { usePlayerInfoStore } from "@/stores/use-player-info-store.ts";
-import axios from "axios";
 import { useEffect, useState } from "react";
 import ImportProfil from "../OptimizerClicker/Components/ImportProfil.tsx";
 import Layout from "@/components/shared/Layout.tsx";
@@ -12,10 +11,15 @@ import HeadingSection from "@/components/shared/HeadingSection.tsx";
 import ReactSkinview3d from "react-skinview3d";
 import { AhItemType, ProfilViewType } from "@/types";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area.tsx";
-import { formatPrice, levensteinDistance } from "@/lib/misc.ts";
+import { formatPrice, levensteinDistance, safeJoinPaths } from "@/lib/misc.ts";
 import useFactionLeaderboard from "@/hooks/use-leaderboard-faction.ts";
 import SmallCardInfo from "@/components/shared/SmallCardInfo.tsx";
 import { getViewsFromUUID } from "@/lib/apiPalaTracker.ts";
+import { toast } from "sonner";
+import PendingPage from "@/pages/UnknownUsername.tsx";
+import { useParams } from "react-router-dom";
+import useLoadPlayerInfoMutation from "@/hooks/use-load-player-info-mutation.ts";
+import { AxiosError } from "axios";
 
 
 export function GetAllFileNameInFolder() {
@@ -2636,7 +2640,41 @@ export function GetAllFileNameInFolder() {
 }
 
 const ProfilPage = () => {
+  const { pseudoParams } = useParams();
+  const { mutate: loadPlayerInfo, isError } = useLoadPlayerInfoMutation();
   const { data: playerInfo } = usePlayerInfoStore();
+
+
+  useEffect(() => {
+    if (!pseudoParams && playerInfo) {
+      window.location.href = `/optimizer-clicker/${playerInfo.username}`;
+      return;
+    }
+    // load playerInfo using pseudoParams only if the username is different from the one in the store or if it has been 5 minutes since the last load
+    if (pseudoParams && playerInfo && (playerInfo.username.toLowerCase() !== pseudoParams.toLowerCase() || new Date().getTime() - playerInfo.last_fetch > 5 * 60 * 1000)) {
+      loadPlayerInfo(pseudoParams as string, {
+        onSuccess: () => {
+          toast.success("Profil importé avec succès");
+        },
+        onError: (error) => {
+          const message = error instanceof AxiosError ?
+            error.response?.data.message ?? error.message :
+            typeof error === "string" ?
+              error :
+              "Une erreur est survenue dans l'importation du profil";
+          toast.error(message);
+        }
+      })
+    }
+  }, []);
+
+  if (isError) {
+    return (
+      <Layout>
+        <PendingPage/>
+      </Layout>
+    )
+  }
 
   if (!playerInfo) {
     return (
@@ -2668,22 +2706,15 @@ const ProfilPage = () => {
 
 const ProfilInfo = () => {
   const { data: playerInfo } = usePlayerInfoStore();
-  const [skinUrl, setSkinUrl] = useState("");
+  const pseudo = playerInfo?.username ?? "Notch";
+  const skinUrl = `https://mineskin.eu/skin/${pseudo}`;
 
-  const pseudo = playerInfo?.username ?? "Guest";
 
   const [views, setViews] = useState({ uuid: '', count: 0 } as ProfilViewType);
 
 
   useEffect(() => {
-    axios.get(`https://api.ashcon.app/mojang/v2/user/${pseudo}`)
-      .then(response => {
-        const skinUrl = response.data.textures.skin.url;
-        setSkinUrl(skinUrl);
-      })
-      .catch(error => {
-        console.error(error);
-      });
+
 
     if (playerInfo) {
       getViewsFromUUID(playerInfo.uuid).then(
@@ -2874,24 +2905,24 @@ const AhItem = ({ item }: AhItemsProps) => {
     <Card>
       <CardContent className="pt-6 space-y-2">
         <div className="flex flex-col items-center justify-center gap-2">
-          <img src={`${import.meta.env.BASE_URL}/AH_img/${closestItemName}.png`} alt="Icône"
+          <img src={safeJoinPaths(import.meta.env.BASE_URL, "/AH_img/", `${closestItemName}.png`)} alt="Icône"
                className="object-cover h-12 w-auto pixelated"/>
           <span
             className="text-primary text-sm">{quantity}x {renamed ? `${displayName} renommé en ${name}` : `${name}`}</span>
         </div>
         <div className="space-y-2">
           <div className="text-sm">
-            <img src={`${import.meta.env.BASE_URL}/dollar.png`} alt="Icône"
+            <img src={safeJoinPaths(import.meta.env.BASE_URL, "dollar.png")} alt="Icône"
                  className="object-cover h-10 w-10 inline-block pixelated mr-2"/>
             Prix: {formatPrice(price)} $
           </div>
           <div className="text-sm">
-            <img src={`${import.meta.env.BASE_URL}/pbs.png`} alt="Icône"
+            <img src={safeJoinPaths(import.meta.env.BASE_URL, "/pbs.png")} alt="Icône"
                  className="object-cover h-10 w-10 pixelated inline-block mr-2"/>
             Prix en pbs: {formatPrice(pricePb)}
           </div>
           <div className="text-sm">
-            <img src={`${import.meta.env.BASE_URL}/clock.gif`} alt="Icône"
+            <img src={safeJoinPaths(import.meta.env.BASE_URL, "/clock.gif")} alt="Icône"
                  className="object-cover h-10 w-10 pixelated inline-block mr-2"/>
             Expire le : {expireAt}
           </div>
@@ -2925,7 +2956,7 @@ const FactionInfo = () => {
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
       <Card className="md:row-span-2">
         <CardContent className="h-full pt-6 flex gap-4">
-          <img src={`${import.meta.env.BASE_URL}/BookAndQuill.webp`} alt="BookAndQuill.png"
+          <img src={safeJoinPaths(import.meta.env.BASE_URL, "BookAndQuill.webp")} alt="BookAndQuill.png"
                className="h-12 w-12"/>
           <div className="flex flex-col gap-2">
             <span className="font-semibold">{name}</span>
@@ -2991,7 +3022,7 @@ const FactionInfo = () => {
                       Rôle: {player.group}
                     </div>
                     <div className="text-sm">
-                      <img src={`${import.meta.env.BASE_URL}/clock.gif`} alt="Icône"
+                      <img src={safeJoinPaths(import.meta.env.BASE_URL, "clock.gif")} alt="Icône"
                            className="object-cover h-4 w-4 inline-block pixelated mr-2"/>
                       Rejoint le: {convertEpochToDateUTC2(player.joinedAt)}
                     </div>

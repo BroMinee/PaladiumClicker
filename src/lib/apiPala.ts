@@ -1,4 +1,4 @@
-import { parseCsv } from "@/lib/misc";
+import { parseCsv, safeJoinPaths } from "@/lib/misc";
 
 import {
   AhItemHistory,
@@ -28,8 +28,9 @@ import { usePlayerInfoStore } from "@/stores/use-player-info-store.ts";
 
 const PALADIUM_API_URL = "https://api.paladium.games/";
 
+
 const fetchLocal = async <T>(file: string) => {
-  const result = await axios<T>(import.meta.env.BASE_URL + file, {
+  const result = await axios<T>(safeJoinPaths(import.meta.env.BASE_URL, file), {
     headers: {
       Accept: "application/json",
     }
@@ -262,8 +263,8 @@ const getInitialPlayerInfo = async (): Promise<PlayerInfo> => {
 
   const metiers = await fetchLocal<Metier[]>("/metier.json");
   const buildings = await fetchLocal<Building[]>("/building.json");
-  for(let i = 0; i < buildings.length; i++) {
-    buildings[i].base_production = String(0.10000000149011612  * Math.pow(1.7999999523162842, i));
+  for (let i = 0; i < buildings.length; i++) {
+    buildings[i].base_production = String(0.10000000149011612 * Math.pow(1.7999999523162842, i));
   }
   const buildingUpgrade = await fetchLocal<BuildingUpgrade[]>("/building_upgrade.json");
   const categoryUpgrade = await fetchLocal<CategoryUpgrade[]>("/category_upgrade.json");

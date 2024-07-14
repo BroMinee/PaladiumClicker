@@ -19,8 +19,16 @@ import RPS from "./Components/RPS";
 import Stats from "./Components/Stats";
 import UpgradeList from "./Components/UpgradeList";
 import DailyPopup from "@/components/dailyPopup.tsx";
+import { useParams } from "react-router-dom";
+import useLoadPlayerInfoMutation from "@/hooks/use-load-player-info-mutation.ts";
+import { toast } from "sonner";
+import { AxiosError } from "axios";
+import PendingPage from "@/pages/UnknownUsername.tsx";
+
 
 const OptimizerClickerPage = () => {
+  const { pseudoParams } = useParams();
+  const { mutate: loadPlayerInfo, isError } = useLoadPlayerInfoMutation();
 
   const { data: playerInfo } = usePlayerInfoStore();
   const [isModalNewsOpen, setIsModalNewsOpen] = useState(playerInfo === null);
@@ -31,6 +39,27 @@ const OptimizerClickerPage = () => {
   useEffect(() => {
     if (showDayPopup) {
       localStorage.setItem("getTime", new Date().toString());
+    }
+
+    if (!pseudoParams && playerInfo) {
+      window.location.href = `/optimizer-clicker/${playerInfo.username}`;
+      return;
+    }
+    // load playerInfo using pseudoParams only if the username is different from the one in the store or if it has been 5 minutes since the last load
+    if (pseudoParams && playerInfo && (playerInfo.username.toLowerCase() !== pseudoParams.toLowerCase() || new Date().getTime() - playerInfo.last_fetch > 5 * 60 * 1000)) {
+      loadPlayerInfo(pseudoParams as string, {
+        onSuccess: () => {
+          toast.success("Profil importé avec succès");
+        },
+        onError: (error) => {
+          const message = error instanceof AxiosError ?
+            error.response?.data.message ?? error.message :
+            typeof error === "string" ?
+              error :
+              "Une erreur est survenue dans l'importation du profil";
+          toast.error(message);
+        }
+      })
     }
   }, []);
 
@@ -51,6 +80,14 @@ const OptimizerClickerPage = () => {
     { title: "Catégorie", upgradeType: "category_upgrade" },
   ];
 
+
+  if (isError) {
+    return (
+      <Layout>
+        <PendingPage/>
+      </Layout>
+    )
+  }
 
   if (!playerInfo) {
     return (
