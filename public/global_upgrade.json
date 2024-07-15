@@ -126,8 +126,17 @@
     ]
   },
   {
-    "name": -1,
-    "pourcentage": -1,
-    "own": false
+    "name": "Namuu Divin",
+    "pourcentage": 10,
+    "own": false,
+    "price": 166000000000000,
+    "condition": [
+      {
+        "coins": 1660000000000000
+      },
+      {
+        "day": 147
+      }
+    ]
   }
 ]
