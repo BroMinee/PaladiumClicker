@@ -1,8 +1,8 @@
 import GradientText from "@/components/shared/GradientText";
 import Layout from "@/components/shared/Layout";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import FallingClickImage from "@/pages/OptimizerClicker/Components/FallingClickImage";
 import { FaHeart } from "react-icons/fa";
+import FallingClickImage from "@/pages/OptimizerClicker/Components/FallingClickImage.tsx";
 
 
 const PalatimePage = () => {
@@ -18,7 +18,6 @@ const PalatimePage = () => {
         : never
       : never;
   };
-
 
 
 // Exemple d'utilisation
@@ -84,7 +83,11 @@ const PalatimePage = () => {
               loto, etc... Tu vas bien t'amuser.
             </CardContent>
           </Card>
-          <div className="flex flex-col w-full items-center">
+          <div className="flex flex-row w-full">
+            <div className="flex-grow">
+              <FallingClickImage PalaTime={true}/>
+            </div>
+
             <Card className="w-fit">
               <CardContent className="mt-4">
                 {
@@ -96,9 +99,11 @@ const PalatimePage = () => {
                 }
               </CardContent>
             </Card>
+            <div className="flex-grow">
+              <FallingClickImage PalaTime={true}/>
+            </div>
           </div>
         </div>
-        <FallingClickImage PalaTime={true}/>
       </Layout>
 
     </>
