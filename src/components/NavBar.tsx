@@ -20,32 +20,9 @@ const links: Array<{ path: string, label: string, pseudo: boolean }> = [
 ];
 
 const Navbar = () => {
-  const { data: playerInfo, reset } = usePlayerInfoStore();
   return (
     <nav className="container flex items-center justify-between h-full gap-4">
-      <MobileNav/>
-      <div className="hidden lg:flex gap-4">
-        <img
-          src={safeJoinPaths(import.meta.env.BASE_URL, "/favicon.ico")}
-          alt="Logo"
-          className="h-12 w-12 hover:scale-110 duration-300 cursor-pointer"
-          onClick={() => {
-            reset();
-            window.location.assign("/");
-          }}
-        />
-        <ul className="flex gap-6 items-center">
-          {links.map(({ path, label, pseudo }) => (
-            <li key={path}>
-              <NavLink
-                className={({ isActive }) => cn("font-medium hover:underline", isActive && "underline")}
-                to={pseudo && playerInfo?.username ? safeJoinPaths(path, playerInfo.username) : path}
-                children={label}
-              />
-            </li>
-          ))}
-        </ul>
-      </div>
+      <MainNav/>
       <div className="flex gap-2">
         <ShareButton/>
         <Setting/>
@@ -58,11 +35,12 @@ const Navbar = () => {
 
 export default Navbar;
 
-const MobileNav = () => {
+const MainNav = () => {
+  const { data: playerInfo, reset } = usePlayerInfoStore();
   return (
     <Sheet>
       <SheetTrigger asChild>
-        <Button className="lg:hidden" variant="secondary" size="icon">
+        <Button variant="secondary" size="icon">
           <FaBars className="h-4 w-4"/>
         </Button>
       </SheetTrigger>
@@ -72,20 +50,24 @@ const MobileNav = () => {
             <img
               src={safeJoinPaths(import.meta.env.BASE_URL, "/favicon.ico")}
               alt="Logo"
-              className="h-12 w-12"
+              className="h-12 w-12 hover:scale-110 duration-300 cursor-pointer"
+              onClick={() => {
+                reset();
+                window.location.assign("/");
+              }}
             />
             <span className="text-xl">Menu</span>
           </div>
         </SheetHeader>
         <ul className="flex flex-col gap-2">
-          {links.map(({ path, label }) => (
+          {links.map(({ path, label, pseudo }) => (
             <li key={path}>
               <NavLink
                 className={({ isActive }) => cn(buttonVariants({
                   variant: "ghost",
                   className: "block"
                 }), isActive && "bg-accent")}
-                to={path}
+                to={pseudo && playerInfo?.username ? safeJoinPaths(path, playerInfo.username) : path}
                 children={label}
               />
             </li>
