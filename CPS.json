@@ -342,17 +342,17 @@
     ]
   },
   {
-    "name": -1,
+    "name": "Thon rouge Clic",
     "CPS": -1,
     "own": false,
     "index": 23,
-    "price": 1426696777343,
+    "price": 14500000000000,
     "condition": [
       {
-        "coins": 14266967773438
+        "coins": 145000000000000
       },
       {
-        "day": 150
+        "day": 152
       }
     ]
   },
@@ -361,13 +361,13 @@
     "CPS": -1,
     "own": false,
     "index": 24,
-    "price": 3566741943359,
+    "price": 3600000000000,
     "condition": [
       {
-        "coins": 35667419433594
+        "coins": 36000000000000
       },
       {
-        "day": 161
+        "day": 164
       }
     ]
   }
