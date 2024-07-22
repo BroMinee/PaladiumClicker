@@ -4,6 +4,7 @@ import { useSettings } from "@/components/shared/SettingsProvider.tsx";
 
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog.tsx";
 import { ScrollArea } from "@/components/ui/scroll-area.tsx";
+import GradientText from "@/components/shared/GradientText.tsx";
 
 
 const FallingClickImage = ({ PalaTime = false }) => {
@@ -72,12 +73,14 @@ const FallingClickImage = ({ PalaTime = false }) => {
       <Dialog open={openEvent} onOpenChange={() => setOpenEvent(false)}>
         <DialogContent className="px-0 pb-0 max-w-4xl">
           <DialogHeader className="px-6">
-            <DialogTitle className="text-primary">CUSTOM TEXT</DialogTitle>
+            <DialogTitle className="text-primary">Easter egg Palatime</DialogTitle>
           </DialogHeader>
-          <ScrollArea className="h-[80dvh] px-6 border-t">
+          <ScrollArea className="h-[10dvh] px-6 border-t">
             <div className="py-2">
               <div className="flex flex-col gap-2 pb-2">
-                <h3 className="font-bold">CUSTOM TEXT</h3>
+                <h3 className="font-bold">Bien joué tu as trouvé un easter egg !</h3>
+                <h3 className="font-bold">Envoie "Palaclicker Optimizer" dans la mailbox in-game de <GradientText
+                  className="font-extrabold">Palatimes</GradientText></h3>
               </div>
             </div>
           </ScrollArea>
