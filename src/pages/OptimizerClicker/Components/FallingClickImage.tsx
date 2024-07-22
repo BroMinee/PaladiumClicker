@@ -37,7 +37,7 @@ const FallingClickImage = ({ PalaTime = false }) => {
         if (PalaTime) {
           image.src = import.meta.env.BASE_URL + `/AH_img/paper.png`;
         } else {
-          image.src = import.meta.env.BASE_URL + ` /CPSIcon/${selectedCPS}.png`;
+          image.src = import.meta.env.BASE_URL + `/CPSIcon/${selectedCPS}.png`;
         }
 
         image.alt = 'Click';
