@@ -328,7 +328,7 @@
   },
   {
     "name": "Clic de la Carotte Divine",
-    "CPS": -1,
+    "CPS": 8388608,
     "own": false,
     "index": 22,
     "price": 5650000000000,
@@ -343,7 +343,7 @@
   },
   {
     "name": "Thon rouge Clic",
-    "CPS": -1,
+    "CPS": 16777216,
     "own": false,
     "index": 23,
     "price": 14500000000000,
@@ -357,14 +357,14 @@
     ]
   },
   {
-    "name": -1,
-    "CPS": -1,
+    "name": "Clic de la Pomme Divine",
+    "CPS": 33554432,
     "own": false,
     "index": 24,
-    "price": 3600000000000,
+    "price": 35500000000000,
     "condition": [
       {
-        "coins": 36000000000000
+        "coins": 355000000000000
       },
       {
         "day": 164

@@ -36,7 +36,12 @@ const FallingClickImage = ({ PalaTime = false }) => {
 
         if (PalaTime) {
           image.src = import.meta.env.BASE_URL + `/AH_img/paper.png`;
-        } else {
+        } else if(selectedCPS === 24)
+        {
+          image.src = import.meta.env.BASE_URL + `/CPSIcon/${selectedCPS}.webp`;
+        }
+        else
+        {
           image.src = import.meta.env.BASE_URL + `/CPSIcon/${selectedCPS}.png`;
         }
 
