@@ -25,17 +25,21 @@ const AboutPage = () => {
           </CardContent>
 
         </Card>
-        <Card className="hover:scale-105 duration-300" onClick={() => {
-          window.open("https://github.com/BroMinee/PaladiumClicker", "_blank");
-        }}>
-          <CardContent className="h-full pt-6 flex items-center gap-4">
-            <FaGithub className="w-14 h-14 p-2 rounded-md"/>
-            <div className="flex flex-col gap-2">
-              <div className="font-bold text-primary">
-                Code source
+        <Card className="hover:scale-105 duration-300">
+          <a
+            href="https://github.com/BroMinee/PaladiumClicker"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <CardContent className="h-full pt-6 flex items-center gap-4">
+              <FaGithub className="w-14 h-14 p-2 rounded-md"/>
+              <div className="flex flex-col gap-2">
+                <div className="font-bold text-primary">
+                  Code source
+                </div>
               </div>
-            </div>
-          </CardContent>
+            </CardContent>
+          </a>
         </Card>
 
         <Discord/>
