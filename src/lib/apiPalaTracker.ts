@@ -1,32 +1,17 @@
 import axios from "axios";
-import { NetworkError, PalaAnimationLeaderboard, PalaAnimationScore, ProfilViewType } from "@/types";
+import {
+  checkAnswerPalaAnimationType, KeyDownTimestampType,
+  NetworkError,
+  PalaAnimationLeaderboard, PalaAnimationLeaderboardGlobal,
+  PalaAnimationScore,
+  ProfilViewType
+} from "@/types";
 
-const API_PALATRACKER_URL = "https://palatracker.bromine.fr";
-export const pushNewTimePalaAnimation = async (time: number, username: string, question: string) => {
-  // make a get request to the server to push the new time
-  // @ this endpoint /v1/bromine/leaderboardInsert/:leaderboard_name?username=xxx&score=xxx
+const API_PALATRACKER_URL = "http://localhost:3000";
 
-  question = question.replace(" ?", "").replace("&", "").replace("?", "")
+export const getLeaderboardPalaAnimation = async (session_uuid: string, username: string): Promise<PalaAnimationLeaderboard> => {
 
-  const response = await axios.get(`${API_PALATRACKER_URL}/v1/bromine/leaderboardInsert/${question}?username=${username}&score=${time}`, {
-    timeout: 4000
-  }).catch((error) => error);
-
-  if (response instanceof Error) {
-    if ((response as NetworkError).code === "ECONNABORTED") {
-      throw "Timeout error of \"Push new time to leaderboard\" API, please try again later";
-    }
-  }
-
-  if (response.status !== 200) {
-    throw response;
-  }
-}
-
-export const getLeaderboardPalaAnimation = async (question: string): Promise<PalaAnimationLeaderboard> => {
-  question = question.replace(" ?", "").replace("&", "")
-
-  const response = await axios.get<PalaAnimationLeaderboard>(`${API_PALATRACKER_URL}/v1/bromine/leaderboard/${question}`, {
+  const response = await axios.get<PalaAnimationLeaderboard>(`${API_PALATRACKER_URL}/v1/palaAnimation/leaderboard?username=${username}&session_uuid=${session_uuid}`, {
     timeout: 4000
   }).catch((error) => error);
 
@@ -63,14 +48,32 @@ export const getUsernameScorePalaAnimation = async (question: string, username: 
   return response.data;
 }
 
-export const getGlobalLeaderboard = async (): Promise<PalaAnimationLeaderboard> => {
-  const response = await axios.get<PalaAnimationLeaderboard>(`${API_PALATRACKER_URL}/v1/bromine/leaderboard/classement`, {
+export const getGlobalLeaderboard = async (): Promise<PalaAnimationLeaderboardGlobal> => {
+  const response = await axios.get<PalaAnimationLeaderboardGlobal>(`${API_PALATRACKER_URL}/v1/palaAnimation/leaderboard/global`, {
     timeout: 4000
   }).catch((error) => error);
 
   if (response instanceof Error) {
     if ((response as NetworkError).code === "ECONNABORTED") {
       throw "Timeout error of \"Get Global leaderboard\" API, please try again later";
+    }
+  }
+
+  if (response.status !== 200) {
+    throw response;
+  }
+
+  return response.data;
+}
+
+export const getAnswerPalaAnimation = async (session_uuid: string): Promise<{answer: string}> => {
+  const response = await axios.get<{answer: string}>(`${API_PALATRACKER_URL}/v1/palaAnimation/answer?session_uuid=${session_uuid}`, {
+    timeout: 4000
+  }).catch((error) => error);
+
+  if (response instanceof Error) {
+    if ((response as NetworkError).code === "ECONNABORTED") {
+      throw "Timeout error of \"Get Answer\" API, please try again later";
     }
   }
 
@@ -133,4 +136,43 @@ export const getEventUsers = async (): Promise<{ username: string }[]> => {
   return response.data;
 }
 
+export const getNewQuestionPalaAnimation = async (username: string): Promise<{ question: string, session_uuid: string }> => {
+const response = await axios.get<{ question: string, session_uuid: string }>(`${API_PALATRACKER_URL}/v1/palaAnimation/question?username=${username}`, {
+    timeout: 4000
+  }).catch((error) => error);
 
+  if (response instanceof Error) {
+    if ((response as NetworkError).code === "ECONNABORTED") {
+      throw "Timeout error of \"Get New Question\" API, please try again later";
+    }
+  }
+
+  if (response.status !== 200) {
+    throw response;
+  }
+
+  return response.data;
+}
+
+export const checkAnswerPalaAnimation = async (answer: string, session_uuid: string, keyPressTimestamp : KeyDownTimestampType[], user_time: number): Promise<checkAnswerPalaAnimationType> => {
+  const response = await axios.post<checkAnswerPalaAnimationType>(`${API_PALATRACKER_URL}/v1/palaAnimation/checkAnswer`, {
+    answer,
+    session_uuid,
+    keyPressTimestamp,
+    user_time
+  }, {
+    timeout: 4000
+  }).catch((error) => error);
+
+  if (response instanceof Error) {
+    if ((response as NetworkError).code === "ECONNABORTED") {
+      throw "Timeout error of \"Check Answer\" API, please try again later";
+    }
+  }
+
+  if (response.status !== 200) {
+    throw response;
+  }
+
+  return response.data;
+}

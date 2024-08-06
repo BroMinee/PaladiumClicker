@@ -4,10 +4,11 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { FormEvent, useEffect, useState } from "react";
 import { FaHeart } from "react-icons/fa";
 import {
+  checkAnswerPalaAnimation,
+  getAnswerPalaAnimation,
   getGlobalLeaderboard,
   getLeaderboardPalaAnimation,
-  getUsernameScorePalaAnimation,
-  pushNewTimePalaAnimation
+  getNewQuestionPalaAnimation,
 } from "@/lib/apiPalaTracker.ts";
 
 import { Button } from "@/components/ui/button.tsx";
@@ -17,54 +18,41 @@ import { toast } from "sonner";
 import { AxiosError } from "axios";
 import { Input } from "@/components/ui/input.tsx";
 import { cn } from "@/lib/utils.ts";
-import { PalaAnimationLeaderboard, PalaAnimationScore } from "@/types";
-import fetchLocal from "@/lib/apiPala.ts";
+import {
+  KeyDownTimestampType,
+  PalaAnimationLeaderboard,
+  PalaAnimationLeaderboardGlobal,
+  PalaAnimationScore,
+  userAnswerType
+} from "@/types";
 import { adaptPlurial } from "@/lib/misc.ts";
 import { useParams } from "react-router-dom";
 import useLoadPlayerInfoMutation from "@/hooks/use-load-player-info-mutation.ts";
 import PendingPage from "@/pages/UnknownUsername.tsx";
 
 
-type userAnswerType =
-  {
-    c: string,
-    color: string
-  }
-
-type questionListType = {
-  question: string,
-  answer: string
-}
-
 type PalaAnimationBodyType = {
-  questionsList: questionListType[],
-  setQuestionsList: (questionsList: questionListType[]) => void
+  question: string | null,
+  setQuestion: (question: string) => void
+  setSessionUUID: (session_uuid: string) => void
+  session_uuid: string
 }
 
-const PalaAnimationBody = ({ questionsList, setQuestionsList }: PalaAnimationBodyType) => {
+const PalaAnimationBody = ({ question, setQuestion, session_uuid, setSessionUUID }: PalaAnimationBodyType) => {
   const { data: playerInfo } = usePlayerInfoStore();
 
 
   const [reroll, setReroll] = useState(false);
   const [oldAnswer, setOldAnswer] = useState([] as userAnswerType[][])
-  const [timer, setTimer] = useState(0);
+  const [timer, setTimer] = useState("");
   const [inputValue, setInputValue] = useState("");
+  const [keyPressTimestamp, setKeyPressTimestamp] = useState([] as KeyDownTimestampType[]);
 
 
-  async function pushTime(time: number, username: string, question: string) {
-    pushNewTimePalaAnimation(time, username, question).then(
-      () => {
-        toast.success("Temps enregistré avec succès");
-      }).catch(
-      (error) => {
-        const message = error instanceof AxiosError ?
-          error.response?.data.message ?? error.message :
-          typeof error === "string" ?
-            error :
-            "Une erreur est survenue dans l'enregistrement du temps";
-        toast.error(message);
-      }
-    );
+  function saveKeyPressTimestamp(event: React.KeyboardEvent<HTMLInputElement>) {
+    const key = event.key;
+    const timestamp = new Date().getTime();
+    setKeyPressTimestamp([...keyPressTimestamp, { key, timestamp }]);
   }
 
   function clearUserAnswer() {
@@ -80,62 +68,55 @@ const PalaAnimationBody = ({ questionsList, setQuestionsList }: PalaAnimationBod
   }
 
 
-  function checkAnswer(userAnswer = "", showTimer = true) {
+  // legitCheck = false if the button "Révéler la solution" is clicked
+  async function checkAnswer(userAnswer = "", legitCheck = true) {
     if (!playerInfo) {
       console.error("No player info");
       return;
     }
-
-    if (questionsList.length === 0) {
-      console.error("Question List is empty");
+    if (session_uuid === "") {
+      console.error("No session uuid");
       return;
     }
 
-    const answer = questionsList[0].answer;
-    let correct = true;
 
-    const newEntryOldAnswer = [] as userAnswerType[];
+    let correct = false;
 
-    for (let i = 0; (i < userAnswer.length || i < answer.length); i++) {
-      if (i < userAnswer.length && i < answer.length) {
-        if (userAnswer[i].toLowerCase() === answer[i].toLowerCase()) {
-          newEntryOldAnswer.push({ c: userAnswer[i], color: "text-green-700" });
+    let newEntryOldAnswer = [] as userAnswerType[];
+    const time = new Date().getTime() - parseInt(localStorage.getItem("startingTime") || "0");
+    if (legitCheck) {
+      await checkAnswerPalaAnimation(userAnswer, session_uuid, keyPressTimestamp, time).then((data) => {
+        newEntryOldAnswer = data.text;
+        if (data.valid) {
+          correct = true;
+          if (legitCheck) {
+            setTimer(data.message);
+          }
         } else {
-          newEntryOldAnswer.push({ c: userAnswer[i], color: "text-red-700" });
-          correct = false;
+          console.error(data.message);
         }
-      } else if (i < userAnswer.length) {
-        if (userAnswer[i] === ' ') {
-          newEntryOldAnswer.push({ c: '_', color: "text-red-700" });
-        } else {
-          newEntryOldAnswer.push({ c: userAnswer[i], color: "text-red-700" });
-        }
-
-        correct = false;
-      } else if (answer[i] === " ") {
-        newEntryOldAnswer.push({ c: " ", color: "text-green-700" });
-      } else {
-        newEntryOldAnswer.push({ c: "_", color: "text-red-700" });
-        correct = false;
-      }
+      }).catch(
+        (error) => {
+          const message = error instanceof AxiosError ?
+            error.response?.data.message ?? error.message :
+            typeof error === "string" ?
+              error :
+              "Une erreur est survenue dans l'enregistrement du temps";
+          console.error(message);
+        }).finally(() => {
+        setKeyPressTimestamp([{ key: " ", timestamp: new Date().getTime() }]);
+      })
+    } else {
+      newEntryOldAnswer = userAnswer.split("").map((c) => {
+        return { c, color: "text-gray-400" }
+      });
     }
 
-    if (correct && userAnswer.length === answer.length) {
-      const date = new Date();
-      const time = date.getTime() - parseInt(localStorage.getItem("startingTime") || "0");
-
-      if (showTimer) {
-        pushTime(time, playerInfo.username, questionsList[0].question);
-        setTimer(time / 1000);
-      }
+    if (correct || !legitCheck) {
       setOldAnswer([newEntryOldAnswer, ...oldAnswer]);
-
       setTimeout(() => {
         setReroll(true);
-        setOldAnswer([]);
       }, 1500);
-
-
     } else {
       setOldAnswer([newEntryOldAnswer, ...oldAnswer]);
     }
@@ -147,51 +128,55 @@ const PalaAnimationBody = ({ questionsList, setQuestionsList }: PalaAnimationBod
     document.getElementById("user_answer")?.focus();
 
     clearUserAnswer();
-    checkAnswer(questionsList[0].answer, false);
+    getAnswerPalaAnimation(session_uuid).then((r) => {
+      checkAnswer(r.answer, false);
+    }).catch((error) => {
+      toast.error("Error while fetching answer", error);
+    });
   }
 
   useEffect(() => {
-    if (reroll) {
-      // remove first element of questionList
-      questionsList.shift()!;
-      setQuestionsList([...questionsList]);
-      setTimer(0);
-      setReroll(false);
+    if (!playerInfo) {
+      console.error("No player info");
+      return;
     }
+
+    if (!reroll)
+      return
+    const interval = setInterval(() => {
+      getNewQuestionPalaAnimation(playerInfo.username).then(
+        (data) => {
+
+          if (data.question !== question)
+            clearInterval(interval);
+          setQuestion(data.question);
+          setSessionUUID(data.session_uuid);
+        }
+      ).catch(
+        (error) => {
+          console.error("Error while fetching new question", error);
+        }
+      );
+    }, 1000);
+
+
   }, [reroll]);
 
   useEffect(() => {
-    function setTimer() {
-      if (Object.keys(questionsList).length === 0) {
-        fetchAllQuestions();
-      }
+    function setTimerLS() {
       localStorage.setItem("startingTime", new Date().getTime().toString());
     }
 
-    setTimer();
-  }, [questionsList]);
+    setTimer("");
+    setReroll(false);
+    setOldAnswer([]);
+    setKeyPressTimestamp([{ key: " ", timestamp: new Date().getTime() }]);
 
+    setTimerLS();
+  }, [question]);
 
-  const fetchAllQuestions = () => {
-    fetchLocal<Record<string, string>>("/Animation/questions.json").then(
-      (data) => {
-        //random sort data
-        setQuestionsList(
-          Object.entries(data).map(([question, answer]) => {
-            return { question, answer };
-          }).sort(() => Math.random() - 0.5)
-        );
-      }
-    ).catch(
-      (error) => {
-        console.error("Error while fetching questions list", error);
-      }
-    );
-  }
 
   useEffect(() => {
-    fetchAllQuestions();
-
     setReroll(true);
   }, []);
 
@@ -201,7 +186,7 @@ const PalaAnimationBody = ({ questionsList, setQuestionsList }: PalaAnimationBod
 
   return (
     <div className="flex flex-col gap-2 items-center">
-      <p className="pb-4">{questionsList.length === 0 ? "Chargement de la question..." : questionsList[0].question}</p>
+      <p className="pb-4">{question === null ? "Chargement de la question..." : question}</p>
       <form onSubmit={onSubmit}>
         <div className="relative">
           <Input
@@ -212,17 +197,33 @@ const PalaAnimationBody = ({ questionsList, setQuestionsList }: PalaAnimationBod
             placeholder={"Entre ta réponse"}
             value={inputValue}
             onChange={e => setInputValue(e.target.value)}
+            onKeyDown={e => saveKeyPressTimestamp(e)}
             onPaste={e => e.preventDefault()}
           />
         </div>
       </form>
-      {timer === 0 ? "" : <div>Vous avez répondu en {timer} {adaptPlurial("seconde", timer)} !</div>}
+      {timer === "" ? "" :
+        <div className="flex flex-col items-center">
+          <span>
+            {timer.split(":")[0]}
+            <span className={(timer.includes("lent") ? 'text-red-400' : 'text-green-400')}>{timer.split(":")[1]}</span>
+          </span>
+
+        </div>
+      }
       <div contentEditable={false} className="max-h-64 overflow-auto">
         {
           oldAnswer.map((old, i1) => {
             return (<div key={i1}>
               {old.map((e, i2) => {
-                return <span key={i2} className={e.color}>{e.c}</span>
+                if (e.color === "text-green-700")
+                  return <span key={i2} className="text-green-700">{e.c}</span>
+                else if (e.color === "text-red-700")
+                  return <span key={i2} className="text-red-700">{e.c}</span>
+                else if (e.color === "text-gray-400")
+                  return <span key={i2} className="text-gray-400">{e.c}</span>
+                else
+                  return <span key={i2} className={e.color.toString()}>{e.c}</span>
               })}
             </div>)
           })
@@ -245,7 +246,9 @@ const PalaAnimationPage = () => {
   const { mutate: loadPlayerInfo, isError } = useLoadPlayerInfoMutation();
 
   const { data: playerInfo } = usePlayerInfoStore();
-  const [questionsList, setQuestionsList] = useState([] as questionListType[]);
+
+  const [question, setQuestion] = useState(null as string | null);
+  const [session_uuid, setSessionUUID] = useState("");
 
   useEffect(() => {
     if (!pseudoParams && playerInfo) {
@@ -306,11 +309,11 @@ const PalaAnimationPage = () => {
             <div className="grid grid-cols-2 md:grid-cols-3 grid-rows-1 gap-4">
               <Card className="col-span-2">
                 <CardHeader>
-                  <PalaAnimationBody questionsList={questionsList}
-                                     setQuestionsList={setQuestionsList}/>
+                  <PalaAnimationBody question={question} setQuestion={setQuestion} session_uuid={session_uuid}
+                                     setSessionUUID={setSessionUUID}/>
                 </CardHeader>
               </Card>
-              <PalaAnimationClassement questionsList={questionsList}/>
+              <PalaAnimationClassement question={question} session_uuid={session_uuid}/>
             </div>}
           <PalaAnimationClassementGlobal/>
         </div>
@@ -319,13 +322,9 @@ const PalaAnimationPage = () => {
   );
 }
 
-type PalaAnimationClassementType = {
-  questionsList: questionListType[]
-}
-
 const PalaAnimationClassementGlobal = () => {
   const { data: playerInfo } = usePlayerInfoStore();
-  const [globalLeaderboard, setGlobalLeaderboard] = useState({ data: [], length: -1 } as PalaAnimationLeaderboard)
+  const [globalLeaderboard, setGlobalLeaderboard] = useState([] as PalaAnimationLeaderboardGlobal)
 
   async function updateLeaderboardGlobalUI() {
     getGlobalLeaderboard().then(
@@ -340,11 +339,10 @@ const PalaAnimationClassementGlobal = () => {
   }
 
   useEffect(() => {
-    updateLeaderboardGlobalUI();
+    updateLeaderboardGlobalUI().catch((error) => toast.error("Error while updating global leaderboard", error));
   }, []);
 
-  const userPosition = globalLeaderboard.data.findIndex((entry) => entry.username === playerInfo?.username);
-
+  const userPosition = globalLeaderboard.findIndex((entry) => entry.username === playerInfo?.username);
   if (!playerInfo)
     return null;
 
@@ -356,59 +354,58 @@ const PalaAnimationClassementGlobal = () => {
           classement.<br/> Recharge la page pour actualiser le classement</CardDescription>
       </CardHeader>
       <CardContent className="flex gap-2 flex-col">
-        {globalLeaderboard.length === -1 ? "Chargement du classement..." : ""}
         {globalLeaderboard.length === 0 ? "Aucun classement pour le moment" : ""}
         {globalLeaderboard.length > 0 ?
           <div>
-            {globalLeaderboard.data.slice(0, 10).map((entry, i) => {
+            {globalLeaderboard.slice(0, 10).map((entry, i) => {
               return <p key={i}
-                        className={entry.username === playerInfo.username ? "text-blue-400" : ""}>{i + 1}. {entry.username} - {Math.round(entry.score) / 1000} {adaptPlurial("seconde", Math.round(entry.score) / 1000)}</p>
+                        className={entry.username === playerInfo.username ? "text-blue-400" : ""}>{i + 1}. {entry.username} - {Math.round(entry.avg_completion_time) / 1000} {adaptPlurial("seconde", Math.round(entry.avg_completion_time) / 1000)}</p>
             })}
           </div>
           : ""
         }
         {userPosition > 10 ? <p
-          className="text-blue-400">{userPosition + 1}. {playerInfo.username} - {Math.round(globalLeaderboard.data[userPosition].score) / 1000} {adaptPlurial("seconde", Math.round(globalLeaderboard.data[userPosition].score) / 1000)}</p> : ""}
+          className="text-blue-400">{userPosition + 1}. {playerInfo.username} - {Math.round(globalLeaderboard[userPosition].avg_completion_time) / 1000} {adaptPlurial("seconde", Math.round(globalLeaderboard[userPosition].avg_completion_time) / 1000)}</p> : ""}
       </CardContent>
     </Card>)
 }
 
-const PalaAnimationClassement = ({ questionsList }: PalaAnimationClassementType) => {
+const PalaAnimationClassement = ({ question, session_uuid }: { question: string | null, session_uuid: string }) => {
 
-  const [currentLeaderboard, setCurrentLeaderboard] = useState({ data: [], length: -1 } as PalaAnimationLeaderboard);
-  const [userScore, setUserScore] = useState({ position: -1, score: -1 } as PalaAnimationScore);
+  const [currentLeaderboard, setCurrentLeaderboard] = useState([] as PalaAnimationLeaderboard);
+  const [userScore, setUserScore] = useState({ username: "" } as PalaAnimationScore);
   const { data: playerInfo } = usePlayerInfoStore();
 
-  async function updateLeaderboardUI(leaderboard_name: string) {
-    getLeaderboardPalaAnimation(leaderboard_name).then(
+  async function updateLeaderboardUI() {
+    if (!playerInfo || question === null || session_uuid === "")
+      return;
+
+    getLeaderboardPalaAnimation(session_uuid, playerInfo.username).then(
       (data) => {
-        setCurrentLeaderboard(data);
+
+        setCurrentLeaderboard(data.slice(0, 10));
+        const userPosInfo = data.find((entry) => {
+          if (entry.username === playerInfo.username) {
+            return entry;
+          }
+        })
+        if (userPosInfo)
+          setUserScore(userPosInfo);
+        else
+          setUserScore({ username: "" } as PalaAnimationScore)
       }
     ).catch(
       (error) => {
         console.error("Error while fetching leaderboard", error);
       }
     );
-
-    if (playerInfo) {
-      getUsernameScorePalaAnimation(leaderboard_name, playerInfo.username).then(
-        (data) => {
-          setUserScore(data);
-        }
-      ).catch(
-        (error) => {
-          console.error("Error while fetching user position", error);
-        }
-      );
-    }
-
   }
 
   useEffect(() => {
-    if (questionsList.length === 0)
+    if (question === null)
       return;
-    updateLeaderboardUI(questionsList[0].question);
-  }, [questionsList]);
+    updateLeaderboardUI().catch((error) => toast.error("Error while updating leaderboard", error));
+  }, [question]);
 
   if (!playerInfo)
     return null;
@@ -417,23 +414,22 @@ const PalaAnimationClassement = ({ questionsList }: PalaAnimationClassementType)
     <Card className="md:col-span-1 md:col-start-3 col-span-2 col-start-1">
       <CardHeader className="flex">
         <CardTitle>Classement</CardTitle>
-        <CardDescription>{questionsList.length === 0 ? "" : questionsList[0].question}</CardDescription>
+        <CardDescription>{question === null ? "" : question}</CardDescription>
       </CardHeader>
       <CardContent className="flex gap-2 flex-col">
-        {currentLeaderboard.length === -1 ? "Chargement du classement..." : ""}
         {currentLeaderboard.length === 0 ? "Aucun classement pour le moment" : ""}
         {currentLeaderboard.length > 0 ?
           <div>
-            {currentLeaderboard.data.map((entry, i) => {
+            {currentLeaderboard.map((entry, i) => {
               return <p key={i}
-                        className={entry.username === playerInfo.username ? "text-blue-400" : ""}>{i + 1}. {entry.username} - {entry.score / 1000} {adaptPlurial("seconde", entry.score / 1000)}</p>
+                        className={entry.username === playerInfo.username ? "text-blue-400" : ""}>{i + 1}. {entry.username} - {entry.completion_time / 1000} {adaptPlurial("seconde", entry.completion_time / 1000)}</p>
             })}
           </div>
           : ""
         }
-        {userScore.position === -1 || userScore.position < currentLeaderboard.length ? "" :
+        {userScore.username === "" || userScore.rank_completion_time <= currentLeaderboard.length ? "" :
           <p
-            className="text-blue-400">{userScore.position + 1}. {playerInfo.username} - {userScore.score / 1000} {adaptPlurial("seconde", userScore.score / 1000)}</p>}
+            className="text-blue-400">{userScore.rank_completion_time}. {playerInfo.username} - {userScore.completion_time / 1000} {adaptPlurial("seconde", userScore.completion_time / 1000)}</p>}
       </CardContent>
     </Card>)
 }
