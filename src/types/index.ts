@@ -308,17 +308,22 @@ export interface NetworkError extends Error {
   code?: string;
 }
 
-export type PalaAnimationLeaderboard = {
-  data: {
-    username: string,
-    score: number
-  }[],
-  length: number
-}
+export type PalaAnimationLeaderboard = PalaAnimationScore[]
+
+export type PalaAnimationLeaderboardGlobal = {
+  username: string,
+  avg_completion_time: number,
+  avg_user_completion_time: number,
+  rank_completion_time: number,
+  rank_user_completion_time: number,
+}[]
 
 export type PalaAnimationScore = {
-  position: number
-  score: number
+  username: string,
+  completion_time: number,
+  user_completion_time: number,
+  rank_completion_time: number,
+  rank_user_completion_time: number,
 }
 
 export type ProfilViewType =
@@ -326,3 +331,24 @@ export type ProfilViewType =
     uuid: string,
     count: number,
   }
+
+export type KeyDownTimestampType =
+  {
+    key: string,
+    timestamp: number
+  }
+
+export type userAnswerType =
+  {
+    c: string,
+    color: string
+  }
+
+
+export type checkAnswerPalaAnimationType =
+    {
+      valid: boolean,
+      message: string,
+      time: number,
+      text : userAnswerType[]
+    }
