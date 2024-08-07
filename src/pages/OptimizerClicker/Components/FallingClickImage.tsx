@@ -85,8 +85,8 @@ const FallingClickImage = ({ PalaTime = false }) => {
             <div className="py-2">
               <div className="flex flex-col gap-2 pb-2">
                 <h3 className="font-bold">Bien joué tu as trouvé un easter egg !</h3>
-                <h3 className="font-bold">Envoie "Palaclicker Optimizer" dans la mailbox in-game de <GradientText
-                  className="font-extrabold">Palatimes</GradientText></h3>
+                <h3 className="font-bold">Malheureusement il est trop tard pour gagné le <GradientText
+                  className="font-extrabold">bonus</GradientText>. Il fallait être plus rapide !</h3>
               </div>
             </div>
           </ScrollArea>
