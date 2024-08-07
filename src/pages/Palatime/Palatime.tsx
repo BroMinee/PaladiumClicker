@@ -22,7 +22,7 @@ const PalatimePage = () => {
 
 // Exemple d'utilisation
   const journal: MonObjet = {
-    ligne1: "Flemme de mettre ça en order ?",
+    ligne1: "Flemme de mettre ça en ordre ?",
     ligne2: "Lis ton Palatime bien aimé",
     ligne3: "sur le PalaClicker Optimizer.",
     ligne4: "En plus, il y a les accents :)",
