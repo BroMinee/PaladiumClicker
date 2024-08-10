@@ -3,7 +3,7 @@ import { Toaster } from '@/components/ui/sonner';
 import useCheckLocalDataVersion from '@/hooks/use-check-local-data-version';
 import OptimizerClickerPage from '@/pages/OptimizerClicker/OptimizerClicker';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { createBrowserRouter, Navigate, RouterProvider } from 'react-router-dom';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import PalaAnimation from "@/pages/PalaAnimation.tsx";
 import AboutPage from "@/pages/About.tsx";
 import ProfilPage from "@/pages/Profil/Profil.tsx";
@@ -15,27 +15,27 @@ import PalatimePage from "@/pages/Palatime/Palatime.tsx";
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <Navigate to="/optimizer-clicker"/>
+    element: <OptimizerClickerPage/>
   },
   {
-    path: '/ah/:pseudoParams?',
+    path: '/ah',
     element: <AhTracker/>,
   },
   {
-    path: '/xp-calculator/:pseudoParams?',
+    path: ':pseudoParams?/xp-calculator',
     element: <CalculatorPage/>,
   },
   // Quand le site ne sera plus hébergé sur github, on pourra utiliser cette route
   {
-    path: '/optimizer-clicker/:pseudoParams?',
+    path: '/:pseudoParams?/optimizer-clicker',
     element: <OptimizerClickerPage/>,
   },
   {
-    path: '/profil/:pseudoParams?',
+    path: '/:pseudoParams?/profil',
     element: <ProfilPage/>,
   },
   {
-    path: '/pala-animation/:pseudoParams?',
+    path: ':pseudoParams?/pala-animation/',
     element: <PalaAnimation/>,
   },
   {
@@ -49,7 +49,7 @@ const router = createBrowserRouter([
   {
     path: '/secret',
     element: <SecretPage/>
-  }
+  },
 ], {
   basename: '/',
 });

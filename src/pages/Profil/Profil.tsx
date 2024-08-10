@@ -3,7 +3,6 @@ import { usePlayerInfoStore } from "@/stores/use-player-info-store.ts";
 import { useEffect, useState } from "react";
 import ImportProfil from "../OptimizerClicker/Components/ImportProfil.tsx";
 import Layout from "@/components/shared/Layout.tsx";
-import NoPseudoPage from "@/components/NoPseudoPage.tsx";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card.tsx";
 import GradientText from "@/components/shared/GradientText.tsx";
 import { FaEye, FaHeart, FaMedal, FaPercentage, FaTachometerAlt } from "react-icons/fa";
@@ -15,12 +14,8 @@ import { formatPrice, levensteinDistance, safeJoinPaths } from "@/lib/misc.ts";
 import useFactionLeaderboard from "@/hooks/use-leaderboard-faction.ts";
 import SmallCardInfo from "@/components/shared/SmallCardInfo.tsx";
 import { getViewsFromUUID } from "@/lib/apiPalaTracker.ts";
-import { toast } from "sonner";
-import PendingPage from "@/pages/UnknownUsername.tsx";
-import { useParams } from "react-router-dom";
-import useLoadPlayerInfoMutation from "@/hooks/use-load-player-info-mutation.ts";
-import { AxiosError } from "axios";
-
+import { useNavigate, useParams } from "react-router-dom";
+import constants from "@/lib/constants.ts";
 
 export function GetAllFileNameInFolder() {
 
@@ -2641,52 +2636,27 @@ export function GetAllFileNameInFolder() {
 
 const ProfilPage = () => {
   const { pseudoParams } = useParams();
-  const { mutate: loadPlayerInfo, isError } = useLoadPlayerInfoMutation();
   const { data: playerInfo } = usePlayerInfoStore();
-
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (!pseudoParams && playerInfo) {
-      window.location.href = `/optimizer-clicker/${playerInfo.username}`;
+      navigate(safeJoinPaths("/" + playerInfo.username, constants.profilPath));
       return;
-    }
-    // load playerInfo using pseudoParams only if the username is different from the one in the store or if it has been 5 minutes since the last load
-    if (pseudoParams && playerInfo && (playerInfo.username.toLowerCase() !== pseudoParams.toLowerCase() || new Date().getTime() - playerInfo.last_fetch > 5 * 60 * 1000)) {
-      loadPlayerInfo(pseudoParams as string, {
-        onSuccess: () => {
-          toast.success("Profil importé avec succès");
-        },
-        onError: (error) => {
-          const message = error instanceof AxiosError ?
-            error.response?.data.message ?? error.message :
-            typeof error === "string" ?
-              error :
-              "Une erreur est survenue dans l'importation du profil";
-          toast.error(message);
-        }
-      })
     }
   }, []);
 
-  if (isError) {
-    return (
-      <Layout>
-        <PendingPage/>
-      </Layout>
-    )
-  }
-
   if (!playerInfo) {
     return (
-      <Layout>
-        <NoPseudoPage/>
+      <Layout requiredPseudo={true}>
+        null
       </Layout>
     );
   }
 
   return (
     <>
-      <Layout>
+      <Layout requiredPseudo={true}>
         <div className="flex flex-col gap-4">
           <ProfilInfo/>
 
@@ -2696,8 +2666,6 @@ const ProfilPage = () => {
 
           <HeadingSection>Informations de faction</HeadingSection>
           <FactionInfo/>
-
-
         </div>
       </Layout>
     </>
@@ -2731,8 +2699,8 @@ const ProfilInfo = () => {
 
   if (!playerInfo) {
     return (
-      <Layout>
-        <NoPseudoPage/>
+      <Layout requiredPseudo={true}>
+        null
       </Layout>
     );
   }

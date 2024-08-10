@@ -9,6 +9,20 @@ import {
 
 const API_PALATRACKER_URL = "http://localhost:3000";
 
+export const isMyApiDown = async () : Promise<boolean> => {
+  const response = await axios.get<{backend_status: string, db_status: string}>(`${API_PALATRACKER_URL}/v1/other/status`, {
+    timeout: 4000
+  }).catch((error) => error);
+
+  if (response instanceof Error) {
+    if ((response as NetworkError).code === "ECONNABORTED") {
+      return true;
+    }
+  }
+  console.log(!(response.status === 200 && response.data.backend_status === "OK" && response.data.db_status === "OK"))
+  return !(response.status === 200 && response.data.backend_status === "OK" && response.data.db_status === "OK");
+}
+
 export const getLeaderboardPalaAnimation = async (session_uuid: string, username: string): Promise<PalaAnimationLeaderboard> => {
 
   const response = await axios.get<PalaAnimationLeaderboard>(`${API_PALATRACKER_URL}/v1/palaAnimation/leaderboard?username=${username}&session_uuid=${session_uuid}`, {

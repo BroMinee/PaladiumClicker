@@ -24,10 +24,22 @@ import {
   TerrainUpgrade,
 } from "@/types";
 import axios from "axios";
-import { usePlayerInfoStore } from "@/stores/use-player-info-store.ts";
 
 const PALADIUM_API_URL = "https://api.paladium.games/";
 
+
+export const isApiDown = async () : Promise<boolean> => {
+  const response = await axios.get(`${PALADIUM_API_URL}/v1/status`, {
+    timeout: 4000
+  }).catch((error) => error);
+
+  if (response instanceof Error) {
+    if ((response as NetworkError).code === "ECONNABORTED") {
+      return true;
+    }
+  }
+  return response.status !== 200;
+}
 
 const fetchLocal = async <T>(file: string) => {
   const result = await axios<T>(safeJoinPaths(import.meta.env.BASE_URL, file), {
@@ -193,12 +205,6 @@ export const getPlayerInfo = async (pseudo: string): Promise<PlayerInfo> => {
     throw "Pseudo trop long";
   }
 
-  const localData = usePlayerInfoStore.getState().data;
-
-  if (localData !== null && localData.username === pseudo && localData.uuid !== "" && new Date().getTime() - localData.last_fetch < 5 * 60 * 1000) {
-    throw "Profil déjà importé, veuillez patienter 5 minutes avant de réimporter le profil"
-  }
-
   const initialPlayerInfo = await getInitialPlayerInfo();
 
   const paladiumProfil = await getPaladiumProfileByPseudo(pseudo);
@@ -306,9 +312,7 @@ export const getGraphData = async () => {
     .filter((data) => data.Date !== "")
     .map((data) => {
       for (const key in data) {
-        if (key === "Date") {
-
-        } else {
+        if (key !== "Date") {
           data[key] = data[key] === "" ? "" : Number(data[key]);
         }
       }

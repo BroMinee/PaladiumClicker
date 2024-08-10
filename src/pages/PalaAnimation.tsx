@@ -25,10 +25,9 @@ import {
   PalaAnimationScore,
   userAnswerType
 } from "@/types";
-import { adaptPlurial } from "@/lib/misc.ts";
-import { useParams } from "react-router-dom";
-import useLoadPlayerInfoMutation from "@/hooks/use-load-player-info-mutation.ts";
-import PendingPage from "@/pages/UnknownUsername.tsx";
+import { adaptPlurial, safeJoinPaths } from "@/lib/misc.ts";
+import { useNavigate, useParams } from "react-router-dom";
+import constants from "@/lib/constants.ts";
 
 
 type PalaAnimationBodyType = {
@@ -243,48 +242,23 @@ const PalaAnimationBody = ({ question, setQuestion, session_uuid, setSessionUUID
 
 const PalaAnimationPage = () => {
   const { pseudoParams } = useParams();
-  const { mutate: loadPlayerInfo, isError } = useLoadPlayerInfoMutation();
 
   const { data: playerInfo } = usePlayerInfoStore();
-
+const navigate = useNavigate();
   const [question, setQuestion] = useState(null as string | null);
   const [session_uuid, setSessionUUID] = useState("");
 
   useEffect(() => {
     if (!pseudoParams && playerInfo) {
-      window.location.href = `/optimizer-clicker/${playerInfo.username}`;
+      navigate(safeJoinPaths("/" + playerInfo.username, constants.palaAnimationPath));
       return;
     }
-    // load playerInfo using pseudoParams only if the username is different from the one in the store or if it has been 5 minutes since the last load
-    if (pseudoParams && playerInfo && (playerInfo.username.toLowerCase() !== pseudoParams.toLowerCase() || new Date().getTime() - playerInfo.last_fetch > 5 * 60 * 1000)) {
-      loadPlayerInfo(pseudoParams as string, {
-        onSuccess: () => {
-          toast.success("Profil importé avec succès");
-        },
-        onError: (error) => {
-          const message = error instanceof AxiosError ?
-            error.response?.data.message ?? error.message :
-            typeof error === "string" ?
-              error :
-              "Une erreur est survenue dans l'importation du profil";
-          toast.error(message);
-        }
-      })
-    }
   }, []);
-
-  if (isError) {
-    return (
-      <Layout>
-        <PendingPage/>
-      </Layout>
-    )
-  }
 
 
   return (
     <>
-      <Layout>
+      <Layout requiredPseudo={true}>
         <div className="flex flex-col gap-4">
           <Card>
             <CardHeader className="flex flex-row items-center justify-between">

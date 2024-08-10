@@ -6,6 +6,25 @@ const discord = {
 };
 
 
+const profilPath = "/profil";
+
+const calculatorXpPath = "/xp-calculator";
+const optimizerClickerPath = "/optimizer-clicker";
+
+const palaAnimationPath = "/pala-animation";
+
+
+const links: Array<{ path: string, label: string, requiredPseudo: boolean }> = [
+  { path: profilPath, label: "Profil", requiredPseudo: true },
+  { path: "/ah", label: "AH", requiredPseudo: false },
+  { path: calculatorXpPath, label: "PalaClicker Optimizer", requiredPseudo: true },
+  { path: optimizerClickerPath, label: "Calculateur d'xp", requiredPseudo: true },
+  { path: "/palatime", label: "Palatime", requiredPseudo: false },
+  { path: palaAnimationPath, label: "PalaAnimation Trainer", requiredPseudo: true },
+  { path: "/about", label: "A propos", requiredPseudo: false },
+];
+
+
 const SMELT = "Smelt";
 const BREAK = "Break";
 const OBTAIN_FROM_COBBLEBREAKER = "Obtain from CobbleBreaker";
@@ -373,6 +392,11 @@ const constants = {
   metier_xp,
   metier_palier,
   how_to_xp,
+  links,
+  calculatorXpPath,
+  profilPath,
+  optimizerClickerPath,
+  palaAnimationPath,
 };
 
 export default constants;

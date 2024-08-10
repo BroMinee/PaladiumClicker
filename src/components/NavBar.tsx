@@ -9,17 +9,8 @@ import { usePlayerInfoStore } from "@/stores/use-player-info-store.ts";
 import Setting from "@/components/shared/Setting.tsx";
 import { safeJoinPaths } from "@/lib/misc.ts";
 import ShareButton from "@/components/shared/ShareButton.tsx";
+import constants from "@/lib/constants.ts";
 
-
-const links: Array<{ path: string, label: string, pseudo: boolean }> = [
-  { path: "/profil", label: "Profil", pseudo: true },
-  { path: "/ah", label: "AH", pseudo: false },
-  { path: "/xp-calculator", label: "Calculateur d'xp", pseudo: true },
-  { path: "/optimizer-clicker", label: "PalaClicker Optimizer", pseudo: true },
-  { path: "/palatime", label: "Palatime", pseudo: false },
-  { path: "/pala-animation", label: "PalaAnimation Trainer", pseudo: true },
-  { path: "/about", label: "A propos", pseudo: false },
-];
 
 const Navbar = () => {
   const { data: playerInfo, reset } = usePlayerInfoStore();
@@ -37,11 +28,11 @@ const Navbar = () => {
           }}
         />
         <ul className="flex gap-6 items-center">
-          {links.map(({ path, label, pseudo }) => (
+          {constants.links.map(({ path, label, requiredPseudo }) => (
             <li key={path}>
               <NavLink
                 className={({ isActive }) => cn("font-medium hover:underline", isActive && "underline")}
-                to={pseudo && playerInfo?.username ? safeJoinPaths(path, playerInfo.username) : path}
+                to={requiredPseudo && playerInfo?.username ? safeJoinPaths("/" + playerInfo.username, path) : path}
                 children={label}
               />
             </li>
@@ -80,7 +71,7 @@ const MobileNav = () => {
           </div>
         </SheetHeader>
         <ul className="flex flex-col gap-2">
-          {links.map(({ path, label }) => (
+          {constants.links.map(({ path, label }) => (
             <li key={path}>
               <NavLink
                 className={({ isActive }) => cn(buttonVariants({

@@ -4,7 +4,6 @@ import constants from "@/lib/constants.ts";
 import { formatPrice, safeJoinPaths } from "@/lib/misc.ts";
 import { MetierComponent } from "@/components/MetierList.tsx";
 import Layout from "@/components/shared/Layout.tsx";
-import NoPseudoPage from "@/components/NoPseudoPage.tsx";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card.tsx";
 import GradientText from "@/components/shared/GradientText.tsx";
 import { FaHeart, FaInfoCircle, FaPercentage, FaTachometerAlt } from "react-icons/fa";
@@ -12,16 +11,12 @@ import { Button } from "@/components/ui/button.tsx";
 import { Input } from "@/components/ui/input.tsx";
 import { cn } from "@/lib/utils.ts";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover.tsx";
-import { useParams } from "react-router-dom";
-import useLoadPlayerInfoMutation from "@/hooks/use-load-player-info-mutation.ts";
-import { toast } from "sonner";
-import { AxiosError } from "axios";
-import PendingPage from "@/pages/UnknownUsername.tsx";
+import { useNavigate, useParams } from "react-router-dom";
 
 
 const CalculatorPage = () => {
   const { pseudoParams } = useParams();
-  const { mutate: loadPlayerInfo, isError } = useLoadPlayerInfoMutation();
+  const navigate = useNavigate();
 
   const { data: playerInfo, increaseMetierLevel, decreaseMetierLevel } = usePlayerInfoStore();
   const {
@@ -38,27 +33,10 @@ const CalculatorPage = () => {
 
   useEffect(() => {
     if (!pseudoParams && playerInfo) {
-      window.location.href = `/optimizer-clicker/${playerInfo.username}`;
+      navigate(safeJoinPaths("/" + playerInfo.username, constants.calculatorXpPath));
       return;
     }
-    // load playerInfo using pseudoParams only if the username is different from the one in the store or if it has been 5 minutes since the last load
-    if (pseudoParams && playerInfo && (playerInfo.username.toLowerCase() !== pseudoParams.toLowerCase() || new Date().getTime() - playerInfo.last_fetch > 5 * 60 * 1000)) {
-      loadPlayerInfo(pseudoParams as string, {
-        onSuccess: () => {
-          toast.success("Profil importé avec succès");
-        },
-        onError: (error) => {
-          const message = error instanceof AxiosError ?
-            error.response?.data.message ?? error.message :
-            typeof error === "string" ?
-              error :
-              "Une erreur est survenue dans l'importation du profil";
-          toast.error(message);
-        }
-      })
-    }
   }, []);
-
 
   useEffect(() => {
     if (!playerInfo)
@@ -68,17 +46,9 @@ const CalculatorPage = () => {
       setMetierToReach(playerInfo["metier"]);
   }, [playerInfo]);
 
-  if (isError) {
-    return (
-      <Layout>
-        <PendingPage/>
-      </Layout>
-    )
-  }
-
   if (!playerInfo)
-    return <Layout>
-      <NoPseudoPage/>
+    return <Layout requiredPseudo={true}>
+      null
     </Layout>
 
   let bonusXpRank = 0;
@@ -112,18 +82,12 @@ const CalculatorPage = () => {
     return res;
   }
 
-
-  if (!playerInfo)
-    return (<Layout>
-      "Chargement..."
-    </Layout>)
-
   const indexMetierSelectedInPlayerInfo = playerInfo["metier"].findIndex((e) => {
     return e["name"] === metierToReach[getIndexMetierSelected()]["name"];
   });
 
   return (
-    <Layout>
+    <Layout requiredPseudo={true}>
       <div className="flex flex-col gap-4">
         <Card>
           <CardHeader className="flex flex-row items-center justify-between">

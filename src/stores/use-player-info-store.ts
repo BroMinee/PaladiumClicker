@@ -2,6 +2,7 @@ import constants from "@/lib/constants";
 import { Metier, PlayerInfo, UpgradeKey } from "@/types";
 import { create } from "zustand";
 import { createJSONStorage, persist } from "zustand/middleware";
+import { safeJoinPaths } from "@/lib/misc.ts";
 
 type State = {
   data: PlayerInfo | null;
@@ -64,7 +65,12 @@ export const usePlayerInfoStore = create(persist<State & Actions>(
         selectedCPS: playerInfo?.CPS.filter(c => c.own).at(-1)?.index ?? -1,
       };
     }),
-    reset: () => set(initialState),
+    reset: () =>
+    {
+      const endUrl = window.location.pathname.split("/").pop();
+      window.location.href = safeJoinPaths("/", endUrl ?? "");
+      set(initialState)
+    },
     increaseMetierLevel: (name, value) => set((state) => {
       if (!state.data) {
         return state;

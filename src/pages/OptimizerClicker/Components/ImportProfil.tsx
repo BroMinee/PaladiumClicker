@@ -3,11 +3,11 @@ import { Input } from "@/components/ui/input";
 import useLoadPlayerInfoMutation from "@/hooks/use-load-player-info-mutation";
 import { cn } from "@/lib/utils";
 import { usePlayerInfoStore } from "@/stores/use-player-info-store";
-import { AxiosError } from "axios";
 import { FormEvent } from "react";
 import { FaSearch } from "react-icons/fa";
-import { toast } from "sonner";
 import { useNavigate } from 'react-router-dom';
+import constants from "@/lib/constants.ts";
+import { safeJoinPaths } from "@/lib/misc.ts";
 
 type ImportProfilProps = {
   showResetButton?: boolean,
@@ -19,7 +19,7 @@ const ImportProfil = ({ showResetButton = false, withBackground = true, }: Impor
   const navigate = useNavigate();
 
   const { data: playerInfo, reset } = usePlayerInfoStore();
-  const { mutate: loadPlayerInfo, isPending, isError } = useLoadPlayerInfoMutation();
+  const { isPending, isError } = useLoadPlayerInfoMutation();
 
   async function onSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -32,19 +32,14 @@ const ImportProfil = ({ showResetButton = false, withBackground = true, }: Impor
       navigate("/secret");
       return;
     }
-    loadPlayerInfo(String(formData.get("pseudo")), {
-      onSuccess: () => {
-        toast.success("Profil importé avec succès");
-      },
-      onError: (error) => {
-        const message = error instanceof AxiosError ?
-          error.response?.data.message ?? error.message :
-          typeof error === "string" ?
-            error :
-            "Une erreur est survenue dans l'importation du profil";
-        toast.error(message);
-      }
-    });
+    let endUrl = window.location.pathname.split("/").pop();
+    if (constants.links.find(({ path }) => path.includes(endUrl ?? "error"))?.requiredPseudo) {
+      if (endUrl === undefined || endUrl === "")
+        endUrl = "optimizer-clicker";
+      window.location.href = safeJoinPaths("/", String(formData.get("pseudo")), endUrl);
+    } else {
+      navigate(safeJoinPaths("/", String(formData.get("pseudo")), "optimizer-clicker"));
+    }
   }
 
   return (
