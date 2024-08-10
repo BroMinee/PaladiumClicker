@@ -11,6 +11,8 @@ import CalculatorPage from "@/pages/Calculator/CalculatorPage.tsx";
 import AhTracker from "@/pages/AhTracker/AhTracker.tsx";
 import SecretPage from "@/pages/SecretPage/SecretPage.tsx";
 import PalatimePage from "@/pages/Palatime/Palatime.tsx";
+import Layout from "@/components/shared/Layout.tsx";
+import Error404Page from "@/pages/Error404Page.tsx";
 
 const router = createBrowserRouter([
   {
@@ -50,6 +52,10 @@ const router = createBrowserRouter([
     path: '/secret',
     element: <SecretPage/>
   },
+  {
+    path: '/*',
+    element: <Layout><Error404Page/></Layout>
+  }
 ], {
   basename: '/',
 });
