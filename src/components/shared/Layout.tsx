@@ -46,7 +46,7 @@ const Layout = ({ children, requiredPseudo }: LayoutProps) => {
 const ContentLayout = ({ children, requiredPseudo }: LayoutProps) => {
   const { pseudoParams } = useParams();
   const { mutate: loadPlayerInfo, isPending, isError } = useLoadPlayerInfoMutation();
-  const {data: playerInfo} = usePlayerInfoStore();
+  const { data: playerInfo } = usePlayerInfoStore();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -72,7 +72,7 @@ const ContentLayout = ({ children, requiredPseudo }: LayoutProps) => {
   }, []);
 
 
-  if(requiredPseudo && !pseudoParams) {
+  if (requiredPseudo && !pseudoParams) {
     return <NoPseudoPage/>;
   }
 
@@ -80,8 +80,7 @@ const ContentLayout = ({ children, requiredPseudo }: LayoutProps) => {
     return <LoadingData username={pseudoParams}/>;
   }
 
-  if(isError)
-  {
+  if (isError) {
     return <Error500Page/>;
   }
 

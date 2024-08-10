@@ -20,7 +20,7 @@ const ClickList = () => {
     else if (index === 24)
       return "/CPSIcon/" + index + ".webp";
     else
-    return "/CPSIcon/" + index + ".png";
+      return "/CPSIcon/" + index + ".png";
   }
 
   return (

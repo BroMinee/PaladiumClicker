@@ -12,7 +12,8 @@ import { IoHourglassOutline } from "react-icons/io5";
 
 const Error500Page = () => {
   return (
-    <Card className="flex flex-col gap-4 font-bold center bg-no-repeat bg-center bg-cover text-white" style={{ backgroundImage: "url(background.webp"}}>
+    <Card className="flex flex-col gap-4 font-bold center bg-no-repeat bg-center bg-cover text-white"
+          style={{ backgroundImage: "url(background.webp" }}>
       <CardHeader className="flex flex-row gap-2 ">
         <div className="py-8 px-4 mx-auto max-w-screen-xl lg:py-16 lg:px-6">
           <div className="mx-auto max-w-screen-sm text-center">
@@ -54,7 +55,8 @@ const Error500Page = () => {
               <div>
                 <IoHourglassOutline className="text-red-500"/>
               </div>
-              "Rate limit exceeded for this resource.", nous sommes actuellements surchargés, merci de réessayer plus tard.
+              "Rate limit exceeded for this resource.", nous sommes actuellements surchargés, merci de réessayer plus
+              tard.
             </li>
           </ul>
         </CardContent>

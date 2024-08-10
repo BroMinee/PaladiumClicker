@@ -65,7 +65,6 @@ const DailyPopup = ({ defaultOpen = false }) => {
   if (!playerInfo) {
     return null;
   }
-
   return (
     <Dialog defaultOpen={defaultOpen}>
       <DialogTrigger asChild>

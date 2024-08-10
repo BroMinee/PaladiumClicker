@@ -346,9 +346,9 @@ export type userAnswerType =
 
 
 export type checkAnswerPalaAnimationType =
-    {
-      valid: boolean,
-      message: string,
-      time: number,
-      text : userAnswerType[]
-    }
+  {
+    valid: boolean,
+    message: string,
+    time: number,
+    text: userAnswerType[]
+  }

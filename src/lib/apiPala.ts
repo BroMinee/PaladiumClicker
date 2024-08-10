@@ -28,7 +28,7 @@ import axios from "axios";
 const PALADIUM_API_URL = "https://api.paladium.games/";
 
 
-export const isApiDown = async () : Promise<boolean> => {
+export const isApiDown = async (): Promise<boolean> => {
   const response = await axios.get(`${PALADIUM_API_URL}/v1/status`, {
     timeout: 4000
   }).catch((error) => error);

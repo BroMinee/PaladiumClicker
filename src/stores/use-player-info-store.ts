@@ -65,8 +65,7 @@ export const usePlayerInfoStore = create(persist<State & Actions>(
         selectedCPS: playerInfo?.CPS.filter(c => c.own).at(-1)?.index ?? -1,
       };
     }),
-    reset: () =>
-    {
+    reset: () => {
       const endUrl = window.location.pathname.split("/").pop();
       window.location.href = safeJoinPaths("/", endUrl ?? "");
       set(initialState)

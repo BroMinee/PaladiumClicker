@@ -244,7 +244,7 @@ const PalaAnimationPage = () => {
   const { pseudoParams } = useParams();
 
   const { data: playerInfo } = usePlayerInfoStore();
-const navigate = useNavigate();
+  const navigate = useNavigate();
   const [question, setQuestion] = useState(null as string | null);
   const [session_uuid, setSessionUUID] = useState("");
 

@@ -3,7 +3,9 @@ import { safeJoinPaths } from "@/lib/misc.ts";
 
 const Error404Page = () => {
   return (
-    <Card className="flex flex-col gap-4 font-bold center bg-no-repeat bg-center bg-cover text-white bg-black justify-center items-center" style={{height: '70vh'}} >
+    <Card
+      className="flex flex-col gap-4 font-bold center bg-no-repeat bg-center bg-cover text-white bg-black justify-center items-center"
+      style={{ height: '70vh' }}>
       <CardHeader className="flex flex-row gap-2 ">
         <div className="py-8 px-4 mx-auto max-w-screen-xl lg:py-16 lg:px-6">
           <div className="mx-auto max-w-screen-sm text-center">
@@ -18,8 +20,10 @@ const Error404Page = () => {
               > 4
               </div>
             </div>
-            <p className="mb-4 text-3xl tracking-tight font-bold md:text-4xl text-white">Désolé, cette page n'existe pas.</p>
-            <p className="mb-4 text-lg font-light text-gray-400">Si vous êtes persuadé que cette page devrait exister, merci de contacter un développeur.</p>
+            <p className="mb-4 text-3xl tracking-tight font-bold md:text-4xl text-white">Désolé, cette page n'existe
+              pas.</p>
+            <p className="mb-4 text-lg font-light text-gray-400">Si vous êtes persuadé que cette page devrait exister,
+              merci de contacter un développeur.</p>
           </div>
         </div>
       </CardHeader>
