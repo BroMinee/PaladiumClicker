@@ -4,9 +4,7 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import fetchDataOnPublicURL from "@/lib/apiPala.ts";
 import type { New } from "@/types";
 import React, { useEffect } from "react";
-import ReactAudioPlayer from "react-audio-player";
 import Discord from "@/components/Discord.tsx";
-import { safeJoinPaths } from "@/lib/misc.ts";
 
 type NewsProps = {
   defaultOpen?: boolean
@@ -47,27 +45,6 @@ const News = ({ defaultOpen = false }: NewsProps) => {
                 key={index}
               />
             ))}
-            <div className="flex flex-col gap-2 pb-2">
-              <h3 className="font-bold">Pourquoi BroMine__ n'était plus top 1 clicker</h3>
-              <ReactAudioPlayer
-                src={safeJoinPaths(import.meta.env.BASE_URL, "/music.mp3")}
-                controls
-              />
-              <ReactAudioPlayer
-                src={safeJoinPaths(import.meta.env.BASE_URL, "/music2.mp3")}
-                controls
-              />
-              <p className="text-muted-foreground">Musiques générées avec suno.ai</p>
-            </div>
-            <div className="flex flex-col gap-2">
-              <h3 className="font-bold">BroMine__ le retour</h3>
-              <ReactAudioPlayer
-                src={safeJoinPaths(import.meta.env.BASE_URL, "/BroMine_is_back.mp3")}
-                controls
-                volume={0.15}
-              />
-              <p className="text-muted-foreground">Musiques générées avec suno.ai</p>
-            </div>
           </div>
         </ScrollArea>
       </DialogContent>
