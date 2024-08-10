@@ -1,16 +1,21 @@
 import axios from "axios";
 import {
-  checkAnswerPalaAnimationType, KeyDownTimestampType,
+  checkAnswerPalaAnimationType,
+  KeyDownTimestampType,
   NetworkError,
-  PalaAnimationLeaderboard, PalaAnimationLeaderboardGlobal,
+  PalaAnimationLeaderboard,
+  PalaAnimationLeaderboardGlobal,
   PalaAnimationScore,
   ProfilViewType
 } from "@/types";
 
-const API_PALATRACKER_URL = "http://localhost:3000";
+const API_PALATRACKER_URL = "https://palatracker.bromine.fr";
 
-export const isMyApiDown = async () : Promise<boolean> => {
-  const response = await axios.get<{backend_status: string, db_status: string}>(`${API_PALATRACKER_URL}/v1/other/status`, {
+export const isMyApiDown = async (): Promise<boolean> => {
+  const response = await axios.get<{
+    backend_status: string,
+    db_status: string
+  }>(`${API_PALATRACKER_URL}/v1/other/status`, {
     timeout: 4000
   }).catch((error) => error);
 
@@ -80,8 +85,10 @@ export const getGlobalLeaderboard = async (): Promise<PalaAnimationLeaderboardGl
   return response.data;
 }
 
-export const getAnswerPalaAnimation = async (session_uuid: string): Promise<{answer: string}> => {
-  const response = await axios.get<{answer: string}>(`${API_PALATRACKER_URL}/v1/palaAnimation/answer?session_uuid=${session_uuid}`, {
+export const getAnswerPalaAnimation = async (session_uuid: string): Promise<{ answer: string }> => {
+  const response = await axios.get<{
+    answer: string
+  }>(`${API_PALATRACKER_URL}/v1/palaAnimation/answer?session_uuid=${session_uuid}`, {
     timeout: 4000
   }).catch((error) => error);
 
@@ -150,8 +157,14 @@ export const getEventUsers = async (): Promise<{ username: string }[]> => {
   return response.data;
 }
 
-export const getNewQuestionPalaAnimation = async (username: string): Promise<{ question: string, session_uuid: string }> => {
-const response = await axios.get<{ question: string, session_uuid: string }>(`${API_PALATRACKER_URL}/v1/palaAnimation/question?username=${username}`, {
+export const getNewQuestionPalaAnimation = async (username: string): Promise<{
+  question: string,
+  session_uuid: string
+}> => {
+  const response = await axios.get<{
+    question: string,
+    session_uuid: string
+  }>(`${API_PALATRACKER_URL}/v1/palaAnimation/question?username=${username}`, {
     timeout: 4000
   }).catch((error) => error);
 
@@ -168,7 +181,7 @@ const response = await axios.get<{ question: string, session_uuid: string }>(`${
   return response.data;
 }
 
-export const checkAnswerPalaAnimation = async (answer: string, session_uuid: string, keyPressTimestamp : KeyDownTimestampType[], user_time: number): Promise<checkAnswerPalaAnimationType> => {
+export const checkAnswerPalaAnimation = async (answer: string, session_uuid: string, keyPressTimestamp: KeyDownTimestampType[], user_time: number): Promise<checkAnswerPalaAnimationType> => {
   const response = await axios.post<checkAnswerPalaAnimationType>(`${API_PALATRACKER_URL}/v1/palaAnimation/checkAnswer`, {
     answer,
     session_uuid,

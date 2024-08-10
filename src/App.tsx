@@ -13,58 +13,63 @@ import SecretPage from "@/pages/SecretPage/SecretPage.tsx";
 import PalatimePage from "@/pages/Palatime/Palatime.tsx";
 import Layout from "@/components/shared/Layout.tsx";
 import Error404Page from "@/pages/Error404Page.tsx";
+import ErrorBoundaryLayout from "@/pages/ErrorBoundary.tsx";
 
 const router = createBrowserRouter([
   {
-    path: '/',
-    element: <OptimizerClickerPage/>
+    element: <ErrorBoundaryLayout/>,
+    children: [
+      {
+        path: "/",
+        element: <OptimizerClickerPage/>,
+      },
+      {
+        path: '/:pseudoParams?/profil',
+        element: <ProfilPage/>,
+      },
+      {
+        path: "/ah",
+        element: <AhTracker/>,
+      },
+      {
+        path: "/:pseudoParams?/xp-calculator",
+        element: <CalculatorPage/>,
+      },
+      {
+        path: "/:pseudoParams?/optimizer-clicker",
+        element: <OptimizerClickerPage/>,
+      },
+
+      {
+        path: '/:pseudoParams?/pala-animation/',
+        element: <PalaAnimation/>,
+      },
+      {
+        path: '/palatime',
+        element: <PalatimePage/>,
+      },
+      {
+        path: '/about',
+        element: <AboutPage/>,
+      },
+      {
+        path: '/secret',
+        element: <SecretPage/>
+      },
+      {
+        path: '/*',
+        element: <Layout><Error404Page/></Layout>
+      },
+    ],
   },
-  {
-    path: '/ah',
-    element: <AhTracker/>,
-  },
-  {
-    path: ':pseudoParams?/xp-calculator',
-    element: <CalculatorPage/>,
-  },
-  // Quand le site ne sera plus hébergé sur github, on pourra utiliser cette route
-  {
-    path: '/:pseudoParams?/optimizer-clicker',
-    element: <OptimizerClickerPage/>,
-  },
-  {
-    path: '/:pseudoParams?/profil',
-    element: <ProfilPage/>,
-  },
-  {
-    path: ':pseudoParams?/pala-animation/',
-    element: <PalaAnimation/>,
-  },
-  {
-    path: '/palatime',
-    element: <PalatimePage/>,
-  },
-  {
-    path: '/about',
-    element: <AboutPage/>,
-  },
-  {
-    path: '/secret',
-    element: <SecretPage/>
-  },
-  {
-    path: '/*',
-    element: <Layout><Error404Page/></Layout>
-  }
-], {
-  basename: '/',
-});
+]);
 
 function App() {
   const queryClient = new QueryClient();
   useCheckLocalDataVersion();
 
   return (
+
     <ThemeProvider defaultTheme="system" storageKey="theme">
       <QueryClientProvider client={queryClient}>
         <RouterProvider router={router}/>

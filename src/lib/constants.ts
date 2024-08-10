@@ -17,8 +17,8 @@ const palaAnimationPath = "/pala-animation";
 const links: Array<{ path: string, label: string, requiredPseudo: boolean }> = [
   { path: profilPath, label: "Profil", requiredPseudo: true },
   { path: "/ah", label: "AH", requiredPseudo: false },
-  { path: calculatorXpPath, label: "PalaClicker Optimizer", requiredPseudo: true },
-  { path: optimizerClickerPath, label: "Calculateur d'xp", requiredPseudo: true },
+  { path: calculatorXpPath, label: "Calculateur d'xp", requiredPseudo: true },
+  { path: optimizerClickerPath, label: "PalaClicker Optimizer", requiredPseudo: true },
   { path: "/palatime", label: "Palatime", requiredPseudo: false },
   { path: palaAnimationPath, label: "PalaAnimation Trainer", requiredPseudo: true },
   { path: "/about", label: "A propos", requiredPseudo: false },

@@ -2658,7 +2658,7 @@ const SecretPageBody = () => {
             <GradientText className="font-extrabold">la page secrète.</GradientText>
           </CardTitle>
           <CardDescription>
-            Made with <FaHeart className="text-primary inline-block"/> by <GradientText>BroMine__ and
+            Made with <FaHeart className="text-primary inline-block"/> by <GradientText>BroMine__</GradientText> and <GradientText>
             LipikYT</GradientText>
           </CardDescription>
         </CardHeader>
