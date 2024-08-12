@@ -8,7 +8,6 @@ import PalaAnimation from "@/pages/PalaAnimation.tsx";
 import AboutPage from "@/pages/About.tsx";
 import ProfilPage from "@/pages/Profil/Profil.tsx";
 import CalculatorPage from "@/pages/Calculator/CalculatorPage.tsx";
-import SettingProvider from "@/components/shared/SettingsProvider.tsx";
 import AhTracker from "@/pages/AhTracker/AhTracker.tsx";
 import SecretPage from "@/pages/SecretPage/SecretPage.tsx";
 import PalatimePage from "@/pages/Palatime/Palatime.tsx";
@@ -40,8 +39,8 @@ const router = createBrowserRouter([
     element: <PalaAnimation/>,
   },
   {
-  path: '/palatime',
-  element: <PalatimePage/>,
+    path: '/palatime',
+    element: <PalatimePage/>,
   },
   {
     path: '/about',
@@ -61,12 +60,10 @@ function App() {
 
   return (
     <ThemeProvider defaultTheme="system" storageKey="theme">
-      <SettingProvider storageKey="settings">
-        <QueryClientProvider client={queryClient}>
-          <RouterProvider router={router}/>
-        </QueryClientProvider>
-        <Toaster/>
-      </SettingProvider>
+      <QueryClientProvider client={queryClient}>
+        <RouterProvider router={router}/>
+      </QueryClientProvider>
+      <Toaster/>
     </ThemeProvider>
   );
 }
