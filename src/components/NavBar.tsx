@@ -24,20 +24,18 @@ const Navbar = () => {
     <nav className="container flex items-center justify-between h-full gap-4">
       <MobileNav/>
       <div className="hidden lg:flex gap-4">
-        <img
-          src={import.meta.env.BASE_URL + "/favicon.ico"}
-          alt="Logo"
-          className="h-12 w-12 hover:scale-110 duration-300 cursor-pointer"
-          onClick={() => {
-            reset();
-            window.location.assign("/PaladiumClicker");
-          }}
-        />
+        <NavLink to='/' onClick={reset}>
+          <img
+            src={import.meta.env.BASE_URL + "/favicon.ico"}
+            alt="Logo"
+            className="h-12 w-12 hover:scale-110 duration-300 cursor-pointer"
+          />
+        </NavLink>
         <ul className="flex gap-6 items-center">
           {links.map(({ path, label }) => (
             <li key={path}>
               <NavLink
-                className={({ isActive }) => cn("font-medium hover:underline", isActive && "underline")}
+                className={({ isActive }) => cn("text-sm font-medium hover:underline", isActive && "underline")}
                 to={path}
                 children={label}
               />
