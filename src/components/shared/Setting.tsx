@@ -1,25 +1,40 @@
-import { Button } from "@/components/ui/button.tsx";
 import { IoSettings } from "react-icons/io5";
-import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover.tsx";
-import { useSettings } from "@/components/shared/SettingsProvider.tsx";
+
+import { Button } from "@/components/ui/button";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger
+} from "@/components/ui/dropdown-menu";
+import { Switch } from "@/components/ui/switch";
+import { useSettingsStore } from "@/stores/use-settings-store";
 
 export default function Setting() {
 
-  const { settings, setFalling, } = useSettings();
+  const { settings, setFallingImage } = useSettingsStore();
 
   return (
-    <Popover>
-      <PopoverTrigger asChild>
+    <DropdownMenu>
+      <DropdownMenuTrigger asChild>
         <Button size="icon" variant="ghost">
-          <IoSettings/>
+          <IoSettings />
         </Button>
-      </PopoverTrigger>
-      <PopoverContent className="justify-center align-middle flex">
-        <Button className={settings.fallingImage ? "bg-red-500" : "bg-green-500"}
-                onClick={() => setFalling(!settings.fallingImage)}>{!settings.fallingImage ? "Activer les images tombantes" : "Désactiver les images tombantes"}
-        </Button>
-      </PopoverContent>
-    </Popover>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent align="end" className="w-56">
+        <DropdownMenuLabel>Paramètres</DropdownMenuLabel>
+        <DropdownMenuSeparator />
+        <DropdownMenuItem
+          onSelect={(event) => event.preventDefault()}
+          className="flex items-center justify-between"
+        >
+          <span>Images tombantes</span>
+          <Switch checked={settings.fallingImage} onCheckedChange={setFallingImage} />
+        </DropdownMenuItem>
+      </DropdownMenuContent>
+    </DropdownMenu>
 
   );
 }

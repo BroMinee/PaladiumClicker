@@ -1,16 +1,16 @@
-import { usePlayerInfoStore } from "@/stores/use-player-info-store";
 import { useEffect, useRef, useState } from "react";
-import { useSettings } from "@/components/shared/SettingsProvider.tsx";
 
+import GradientText from "@/components/shared/GradientText.tsx";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog.tsx";
 import { ScrollArea } from "@/components/ui/scroll-area.tsx";
-import GradientText from "@/components/shared/GradientText.tsx";
+import { usePlayerInfoStore } from "@/stores/use-player-info-store";
+import { useSettingsStore } from "@/stores/use-settings-store";
 
 
 const FallingClickImage = ({ PalaTime = false }) => {
   const { selectedCPS } = usePlayerInfoStore();
   const containerRef = useRef<HTMLDivElement>(null);
-  const { settings } = useSettings();
+  const { settings } = useSettingsStore();
   const [openEvent, setOpenEvent] = useState(false);
 
 
