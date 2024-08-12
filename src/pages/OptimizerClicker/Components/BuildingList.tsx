@@ -61,13 +61,13 @@ const Building = ({ building, imgPath, index }: BuildingProps) => {
   }
 
   return (
-    <Card>
+    <Card className="min-w-60">
       <CardContent className="pt-6 space-y-2">
         <div className="flex flex-col items-center justify-center gap-2">
           <img src={imgPath} alt="Icône" className="object-cover h-12 w-auto"/>
-          <span className="text-primary text-sm">{building.name}</span>
+          <span className="text-primary text-sm text-nowrap">{building.name}</span>
           <div
-            className="text-primary font-bold text-center">{formatPrice(computePrice(Number(building.price), Number(building.own)))} $
+            className="text-primary font-bold text-center text-nowrap">{formatPrice(computePrice(Number(building.price), Number(building.own)))} $
           </div>
         </div>
         <div className="space-y-2">
@@ -79,8 +79,14 @@ const Building = ({ building, imgPath, index }: BuildingProps) => {
             <FaBolt className="h-4 w-4 mr-2 inline-block"/>
             RPS: {formatPrice(scaleCurrentProduction(playerInfo!, index, Number(building.own)))}
           </div>
-          <Input className="w-auto" type="number" min="0" step="1" max="99" value={Number(building.own)}
-                 onChange={onChangeLevel}/>
+          <Input 
+            type="number"
+            min="0"
+            step="1"
+            max="99"
+            value={Number(building.own)}
+            onChange={onChangeLevel}
+          />
         </div>
       </CardContent>
     </Card>
