@@ -28,6 +28,8 @@ import {
 import { adaptPlurial, safeJoinPaths } from "@/lib/misc.ts";
 import { useNavigate, useParams } from "react-router-dom";
 import constants from "@/lib/constants.ts";
+import { load } from "@fingerprintjs/botd";
+import Error500Page from "@/pages/Error500Page.tsx";
 
 
 type PalaAnimationBodyType = {
@@ -83,8 +85,11 @@ const PalaAnimationBody = ({ question, setQuestion, session_uuid, setSessionUUID
 
     let newEntryOldAnswer = [] as userAnswerType[];
     const time = new Date().getTime() - parseInt(localStorage.getItem("startingTime") || "0");
+    const keyPressTimestampCopy = [...keyPressTimestamp];
+    setKeyPressTimestamp([{ key: " ", timestamp: new Date().getTime() }]);
+
     if (legitCheck) {
-      await checkAnswerPalaAnimation(userAnswer, session_uuid, keyPressTimestamp, time).then((data) => {
+      await checkAnswerPalaAnimation(userAnswer, session_uuid, keyPressTimestampCopy, time).then((data) => {
         newEntryOldAnswer = data.text;
         if (data.valid) {
           correct = true;
@@ -101,10 +106,8 @@ const PalaAnimationBody = ({ question, setQuestion, session_uuid, setSessionUUID
             typeof error === "string" ?
               error :
               "Une erreur est survenue dans l'enregistrement du temps";
-          console.error(message);
-        }).finally(() => {
-        setKeyPressTimestamp([{ key: " ", timestamp: new Date().getTime() }]);
-      })
+          setTimer(message);
+    });
     } else {
       newEntryOldAnswer = userAnswer.split("").map((c) => {
         return { c, color: "text-gray-400" }
@@ -115,7 +118,7 @@ const PalaAnimationBody = ({ question, setQuestion, session_uuid, setSessionUUID
       setOldAnswer([newEntryOldAnswer, ...oldAnswer]);
       setTimeout(() => {
         setReroll(true);
-      }, 1500);
+      }, 200);
     } else {
       setOldAnswer([newEntryOldAnswer, ...oldAnswer]);
     }
@@ -247,14 +250,25 @@ const PalaAnimationPage = () => {
   const navigate = useNavigate();
   const [question, setQuestion] = useState(null as string | null);
   const [session_uuid, setSessionUUID] = useState("");
+  const [bot, setBot] = useState(false);
 
   useEffect(() => {
     if (!pseudoParams && playerInfo) {
       navigate(safeJoinPaths("/" + playerInfo.username, constants.palaAnimationPath));
       return;
     }
+  }, [navigate, playerInfo, pseudoParams]);
+
+  useEffect(() => {
+    load()
+      .then((botd) => botd.detect())
+      .then((result) => setBot(result.bot))
+      .catch((error) => console.error(error))
   }, []);
 
+
+  if(bot)
+    return <Layout><Error500Page/></Layout>
 
   return (
     <>

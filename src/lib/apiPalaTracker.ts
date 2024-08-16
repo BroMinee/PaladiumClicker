@@ -5,7 +5,6 @@ import {
   NetworkError,
   PalaAnimationLeaderboard,
   PalaAnimationLeaderboardGlobal,
-  PalaAnimationScore,
   ProfilViewType
 } from "@/types";
 
@@ -24,7 +23,6 @@ export const isMyApiDown = async (): Promise<boolean> => {
       return true;
     }
   }
-  console.log(!(response.status === 200 && response.data.backend_status === "OK" && response.data.db_status === "OK"))
   return !(response.status === 200 && response.data.backend_status === "OK" && response.data.db_status === "OK");
 }
 
@@ -37,26 +35,6 @@ export const getLeaderboardPalaAnimation = async (session_uuid: string, username
   if (response instanceof Error) {
     if ((response as NetworkError).code === "ECONNABORTED") {
       throw "Timeout error of \"Get leaderboard\" API, please try again later";
-    }
-  }
-
-  if (response.status !== 200) {
-    throw response;
-  }
-
-  return response.data;
-}
-
-export const getUsernameScorePalaAnimation = async (question: string, username: string): Promise<PalaAnimationScore> => {
-  question = question.replace(" ?", "").replace("&", "")
-
-  const response = await axios.get<PalaAnimationScore>(`${API_PALATRACKER_URL}/v1/bromine/leaderboard/${question}/${username}`, {
-    timeout: 4000
-  }).catch((error) => error);
-
-  if (response instanceof Error) {
-    if ((response as NetworkError).code === "ECONNABORTED") {
-      throw "Timeout error of \"Get user place in leaderboard\" API, please try again later";
     }
   }
 
@@ -106,7 +84,7 @@ export const getAnswerPalaAnimation = async (session_uuid: string): Promise<{ an
 }
 
 export const getViewsFromUUID = async (uuid: string): Promise<ProfilViewType> => {
-  const response = await axios.get<PalaAnimationScore>(`${API_PALATRACKER_URL}/v1/bromine/user/${uuid}`, {
+  const response = await axios.get<ProfilViewType>(`${API_PALATRACKER_URL}/v1/user/getUser/${uuid}`, {
     timeout: 4000
   }).catch((error) => error);
 
@@ -127,6 +105,7 @@ export const pushNewUserEvent = async (username: string): Promise<void> => {
   const response = await axios.get(`${API_PALATRACKER_URL}/v1/bromine/event/${username}`, {
     timeout: 4000
   }).catch((error) => error);
+  alert("Adapt to new endpoint");
 
   if (response instanceof Error) {
     if ((response as NetworkError).code === "ECONNABORTED") {
@@ -143,6 +122,7 @@ export const getEventUsers = async (): Promise<{ username: string }[]> => {
   const response = await axios.get<string[]>(`${API_PALATRACKER_URL}/v1/bromine/event/users`, {
     timeout: 4000
   }).catch((error) => error);
+  alert("Adapt to new endpoint");
 
   if (response instanceof Error) {
     if ((response as NetworkError).code === "ECONNABORTED") {
