@@ -48,7 +48,7 @@ const PalaAnimationBody = ({ question, setQuestion, session_uuid, setSessionUUID
   const [timer, setTimer] = useState("");
   const [inputValue, setInputValue] = useState("");
   const [keyPressTimestamp, setKeyPressTimestamp] = useState([] as KeyDownTimestampType[]);
-
+  const [isChecking, setIsChecking] = useState(false);
 
   function saveKeyPressTimestamp(event: React.KeyboardEvent<HTMLInputElement>) {
     const key = event.key;
@@ -71,6 +71,8 @@ const PalaAnimationBody = ({ question, setQuestion, session_uuid, setSessionUUID
 
   // legitCheck = false if the button "Révéler la solution" is clicked
   async function checkAnswer(userAnswer = "", legitCheck = true) {
+    if(isChecking)
+      return;
     if (!playerInfo) {
       console.error("No player info");
       return;
@@ -89,6 +91,7 @@ const PalaAnimationBody = ({ question, setQuestion, session_uuid, setSessionUUID
     setKeyPressTimestamp([{ key: " ", timestamp: new Date().getTime() }]);
 
     if (legitCheck) {
+      setIsChecking(true);
       await checkAnswerPalaAnimation(userAnswer, session_uuid, keyPressTimestampCopy, time).then((data) => {
         newEntryOldAnswer = data.text;
         if (data.valid) {
@@ -107,7 +110,7 @@ const PalaAnimationBody = ({ question, setQuestion, session_uuid, setSessionUUID
               error :
               "Une erreur est survenue dans l'enregistrement du temps";
           setTimer(message);
-    });
+    }).finally(() => {setIsChecking(false);})
     } else {
       newEntryOldAnswer = userAnswer.split("").map((c) => {
         return { c, color: "text-gray-400" }
@@ -127,6 +130,9 @@ const PalaAnimationBody = ({ question, setQuestion, session_uuid, setSessionUUID
 
 
   function reveal() {
+    if(isChecking)
+      return;
+    setIsChecking(true);
     document.getElementById("user_answer")?.focus();
 
     clearUserAnswer();
@@ -134,6 +140,8 @@ const PalaAnimationBody = ({ question, setQuestion, session_uuid, setSessionUUID
       checkAnswer(r.answer, false);
     }).catch((error) => {
       toast.error("Error while fetching answer", error);
+    }).finally(() => {
+      setIsChecking(false);
     });
   }
 
@@ -148,7 +156,6 @@ const PalaAnimationBody = ({ question, setQuestion, session_uuid, setSessionUUID
     const interval = setInterval(() => {
       getNewQuestionPalaAnimation(playerInfo.username).then(
         (data) => {
-
           if (data.question !== question)
             clearInterval(interval);
           setQuestion(data.question);
@@ -158,7 +165,9 @@ const PalaAnimationBody = ({ question, setQuestion, session_uuid, setSessionUUID
         (error) => {
           console.error("Error while fetching new question", error);
         }
-      );
+      ).finally(() => {
+        setIsChecking(false);
+      });
     }, 1000);
 
 
@@ -232,11 +241,17 @@ const PalaAnimationBody = ({ question, setQuestion, session_uuid, setSessionUUID
         }
       </div>
       <div className="flex flex-wrap gap-2 justify-center">
-        <Button onClick={reveal} variant="outline">Révéler la solution</Button>
+        <Button onClick={reveal} variant="outline" disabled={isChecking}>Révéler la solution</Button>
         <Button onClick={() => {
+          if(isChecking)
+            return;
+          setIsChecking(true);
+          clearUserAnswer();
           document.getElementById("user_answer")?.focus();
           setReroll(true)
-        }}>Nouvelle question</Button>
+        }}
+        disabled={isChecking}
+        >Nouvelle question</Button>
       </div>
     </div>
   );
@@ -339,7 +354,9 @@ const PalaAnimationClassementGlobal = () => {
       <CardHeader className="flex">
         <CardTitle>Classement Général</CardTitle>
         <CardDescription>Vous devez faire un minimum de 20 réponses différentes pour apparaître dans le
-          classement.<br/> Recharge la page pour actualiser le classement</CardDescription>
+          classement.<br/>
+          Recharge la page pour actualiser le classement.<br/>
+          Seulement les temps inférieurs à 10 secondes sont pris en compte dans le classement.</CardDescription>
       </CardHeader>
       <CardContent className="flex gap-2 flex-col">
         {globalLeaderboard.length === 0 ? "Aucun classement pour le moment" : ""}

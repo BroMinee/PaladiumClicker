@@ -17,3 +17,6 @@ RewriteRule ^(.*) https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
   RewriteCond %{REQUEST_FILENAME} !-d
   RewriteRule . /index.html [L]
 </IfModule>
+RewriteCond %{HTTP_HOST} ^bromine\.fr$ [OR]
+RewriteCond %{HTTP_HOST} ^www\.bromine\.fr$
+RewriteRule ^/?$ "https\:\/\/palatracker\.bromine\.fr\/" [R=301,L]

@@ -62,15 +62,14 @@ const MobileNav = () => {
       </SheetTrigger>
       <SheetContent side="left">
         <SheetHeader className="pb-6">
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2 hover:scale-110 duration-300 cursor-pointer" onClick={() => {
+            reset();
+            window.location.assign("/");
+          }}>
             <img
               src={safeJoinPaths(import.meta.env.BASE_URL, "/favicon.ico")}
               alt="Logo"
-              className="h-12 w-12 hover:scale-110 duration-300 cursor-pointer"
-              onClick={() => {
-                reset();
-                window.location.assign("/");
-              }}
+              className="h-12 w-12"
             />
             <span className="text-xl">Menu</span>
           </div>
