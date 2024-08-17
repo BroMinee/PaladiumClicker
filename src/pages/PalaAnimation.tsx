@@ -222,7 +222,7 @@ const PalaAnimationBody = ({ question, setQuestion, session_uuid, setSessionUUID
 
         </div>
       }
-      <div contentEditable={false} className="max-h-64 overflow-auto">
+      <div className="flex flex-col items-center max-h-64 overflow-auto max-w-full">
         {
           oldAnswer.map((old, i1) => {
             return (<div key={i1}>
