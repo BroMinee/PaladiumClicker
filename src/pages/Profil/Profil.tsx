@@ -2769,7 +2769,7 @@ const ProfilInfo = () => {
                           className="hover:scale-105 duration-300 mt-4 ml-1.5 mr-1.5 cursor-pointer">
                       <CardContent className="md:pt-6 space-y-2">
                         <div className="flex flex-col items-center justify-center gap-2">
-                          <img src={`https://crafatar.com/avatars/${player.uuid}?size=8`}
+                          <img src={`https://crafatar.com/avatars/${player.uuid}?size=8&overlay`}
                                alt="Icône"
                                className="object-cover h-12 w-12 pixelated rounded-md"/>
                           <div
@@ -2979,7 +2979,7 @@ const FactionInfo = () => {
                     className="hover:scale-105 duration-300 mt-4 ml-1.5 mr-1.5 cursor-pointer">
                 <CardContent className="pt-6 space-y-2">
                   <div className="flex flex-col items-center justify-center gap-2">
-                    <img src={`https://crafatar.com/avatars/${player.uuid}?size=8`}
+                    <img src={`https://crafatar.com/avatars/${player.uuid}?size=8&overlay`}
                          alt="Icône"
                          className="object-cover h-12 w-12 pixelated rounded-md"/>
                     <div className="text-primary font-bold text-center w-36">{player.username}</div>
