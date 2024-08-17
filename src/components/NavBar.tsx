@@ -52,6 +52,7 @@ const Navbar = () => {
 export default Navbar;
 
 const MobileNav = () => {
+  const { data: playerInfo, reset } = usePlayerInfoStore();
   return (
     <Sheet>
       <SheetTrigger asChild>
@@ -65,20 +66,24 @@ const MobileNav = () => {
             <img
               src={safeJoinPaths(import.meta.env.BASE_URL, "/favicon.ico")}
               alt="Logo"
-              className="h-12 w-12"
+              className="h-12 w-12 hover:scale-110 duration-300 cursor-pointer"
+              onClick={() => {
+                reset();
+                window.location.assign("/");
+              }}
             />
             <span className="text-xl">Menu</span>
           </div>
         </SheetHeader>
         <ul className="flex flex-col gap-2">
-          {constants.links.map(({ path, label }) => (
+          {constants.links.map(({ path, label, requiredPseudo }) => (
             <li key={path}>
               <NavLink
                 className={({ isActive }) => cn(buttonVariants({
                   variant: "ghost",
                   className: "block"
                 }), isActive && "bg-accent")}
-                to={path}
+                to={requiredPseudo && playerInfo?.username ? safeJoinPaths("/" + playerInfo.username, path) : path}
                 children={label}
               />
             </li>
