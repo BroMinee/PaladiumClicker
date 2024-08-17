@@ -353,10 +353,9 @@ const PalaAnimationClassementGlobal = () => {
     <Card>
       <CardHeader className="flex">
         <CardTitle>Classement Général</CardTitle>
-        <CardDescription>Vous devez faire un minimum de 20 réponses différentes pour apparaître dans le
+        <CardDescription>Vous devez faire un minimum de 20 réponses différentes ayant un temps inférieur à 10 secondes pour apparaître dans le
           classement.<br/>
-          Recharge la page pour actualiser le classement.<br/>
-          Seulement les temps inférieurs à 10 secondes sont pris en compte dans le classement.</CardDescription>
+          Recharge la page pour actualiser le classement.</CardDescription>
       </CardHeader>
       <CardContent className="flex gap-2 flex-col">
         {globalLeaderboard.length === 0 ? "Aucun classement pour le moment" : ""}
