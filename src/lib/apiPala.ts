@@ -86,7 +86,7 @@ const getPaladiumClickerDataByUUID = async (uuid: string): Promise<PaladiumClick
     timeout: 4000
   }).catch((error) => error);
 
-  axios.get<PaladiumClickerData>(`https://palatracker.bromine.fr/v1/paladium/player/profile/${uuid}/clicker`, {
+  axios.get<PaladiumClickerData>(`https://palatracker.bromine.fr/v1/paladium/player/profile/${uuid}`, {
     timeout: 4000
   })
 

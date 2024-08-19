@@ -81,7 +81,7 @@ export const getGlobalLeaderboard = async (): Promise<PalaAnimationLeaderboard> 
 }
 
 export const getViewsFromUUID = async (uuid: string): Promise<ProfilViewType> => {
-  const response = await axios.get<PalaAnimationScore>(`https://palatracker.bromine.fr/v1/bromine/user/${uuid}`, {
+  const response = await axios.get<ProfilViewType>(`https://palatracker.bromine.fr/v1/user/getUser/${uuid}`, {
     timeout: 4000
   }).catch((error) => error);
 
