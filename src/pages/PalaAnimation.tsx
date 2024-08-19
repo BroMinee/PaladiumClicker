@@ -49,6 +49,7 @@ const PalaAnimationBody = ({ question, setQuestion, session_uuid, setSessionUUID
   const [inputValue, setInputValue] = useState("");
   const [keyPressTimestamp, setKeyPressTimestamp] = useState([] as KeyDownTimestampType[]);
   const [isChecking, setIsChecking] = useState(false);
+  const [startingTime, setStartingTime] = useState(0);
 
   function clearUserAnswer() {
     // reset input field with id user_answer
@@ -80,9 +81,9 @@ const PalaAnimationBody = ({ question, setQuestion, session_uuid, setSessionUUID
     let correct = false;
 
     let newEntryOldAnswer = [] as userAnswerType[];
-    const time = new Date().getTime() - parseInt(localStorage.getItem("startingTime") || "0");
-    const keyPressTimestampCopy = [...keyPressTimestamp];
-    setKeyPressTimestamp([{ key: " ", timestamp: new Date().getTime() }]);
+    const currentTime = new Date().getTime();
+    const time = currentTime - startingTime;
+    const keyPressTimestampCopy = [...keyPressTimestamp, {key: " ", timestamp: new Date().getTime()}];
 
     if (legitCheck) {
       setIsChecking(true);
@@ -169,17 +170,18 @@ const PalaAnimationBody = ({ question, setQuestion, session_uuid, setSessionUUID
   }, [reroll]);
 
   useEffect(() => {
-    function setTimerLS() {
-      localStorage.setItem("startingTime", new Date().getTime().toString());
-    }
+
+
 
     setTimer("");
     setReroll(false);
     setOldAnswer([]);
-    setKeyPressTimestamp([{ key: " ", timestamp: new Date().getTime() }]);
-
-    setTimerLS();
+    setStartingTime(new Date().getTime());
   }, [question]);
+
+  useEffect(() => {
+    setKeyPressTimestamp([{ key: " ", timestamp: startingTime }]);
+  }, [startingTime]);
 
 
   useEffect(() => {
