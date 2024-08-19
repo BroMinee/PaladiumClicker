@@ -1,14 +1,12 @@
 import axios from "axios";
 import {
-  checkAnswerPalaAnimationType,
-  KeyDownTimestampType,
   NetworkError,
   PalaAnimationLeaderboard,
   PalaAnimationLeaderboardGlobal,
   ProfilViewType
 } from "@/types";
 
-const API_PALATRACKER_URL = "https://palatracker.bromine.fr";
+export const API_PALATRACKER_URL = "https://palatracker.bromine.fr";
 
 export const isMyApiDown = async (): Promise<boolean> => {
   const response = await axios.get<{
@@ -127,53 +125,6 @@ export const getEventUsers = async (): Promise<{ username: string }[]> => {
   if (response instanceof Error) {
     if ((response as NetworkError).code === "ECONNABORTED") {
       throw "Timeout error of \"Get Event Users\" API, please try again later";
-    }
-  }
-
-  if (response.status !== 200) {
-    throw response;
-  }
-
-  return response.data;
-}
-
-export const getNewQuestionPalaAnimation = async (username: string): Promise<{
-  question: string,
-  session_uuid: string
-}> => {
-  const response = await axios.get<{
-    question: string,
-    session_uuid: string
-  }>(`${API_PALATRACKER_URL}/v1/palaAnimation/question?username=${username}`, {
-    timeout: 4000
-  }).catch((error) => error);
-
-  if (response instanceof Error) {
-    if ((response as NetworkError).code === "ECONNABORTED") {
-      throw "Timeout error of \"Get New Question\" API, please try again later";
-    }
-  }
-
-  if (response.status !== 200) {
-    throw response;
-  }
-
-  return response.data;
-}
-
-export const checkAnswerPalaAnimation = async (answer: string, session_uuid: string, keyPressTimestamp: KeyDownTimestampType[], user_time: number): Promise<checkAnswerPalaAnimationType> => {
-  const response = await axios.post<checkAnswerPalaAnimationType>(`${API_PALATRACKER_URL}/v1/palaAnimation/checkAnswer`, {
-    answer,
-    session_uuid,
-    keyPressTimestamp,
-    user_time
-  }, {
-    timeout: 4000
-  }).catch((error) => error);
-
-  if (response instanceof Error) {
-    if ((response as NetworkError).code === "ECONNABORTED") {
-      throw "Timeout error of \"Check Answer\" API, please try again later";
     }
   }
 

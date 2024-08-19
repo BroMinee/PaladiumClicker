@@ -4,11 +4,9 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { FormEvent, useEffect, useState } from "react";
 import { FaHeart } from "react-icons/fa";
 import {
-  checkAnswerPalaAnimation,
   getAnswerPalaAnimation,
   getGlobalLeaderboard,
-  getLeaderboardPalaAnimation,
-  getNewQuestionPalaAnimation,
+  getLeaderboardPalaAnimation
 } from "@/lib/apiPalaTracker.ts";
 
 import { Button } from "@/components/ui/button.tsx";
@@ -30,6 +28,8 @@ import { useNavigate, useParams } from "react-router-dom";
 import constants from "@/lib/constants.ts";
 import { load } from "@fingerprintjs/botd";
 import Error500Page from "@/pages/Error500Page.tsx";
+import { checkAnswerPalaAnimation, getNewQuestionPalaAnimation } from "@/lib/cypher.ts";
+import CanvasWithText from "@/components/ui/canvas.tsx";
 
 
 type PalaAnimationBodyType = {
@@ -49,12 +49,6 @@ const PalaAnimationBody = ({ question, setQuestion, session_uuid, setSessionUUID
   const [inputValue, setInputValue] = useState("");
   const [keyPressTimestamp, setKeyPressTimestamp] = useState([] as KeyDownTimestampType[]);
   const [isChecking, setIsChecking] = useState(false);
-
-  function saveKeyPressTimestamp(event: React.KeyboardEvent<HTMLInputElement>) {
-    const key = event.key;
-    const timestamp = new Date().getTime();
-    setKeyPressTimestamp([...keyPressTimestamp, { key, timestamp }]);
-  }
 
   function clearUserAnswer() {
     // reset input field with id user_answer
@@ -104,6 +98,7 @@ const PalaAnimationBody = ({ question, setQuestion, session_uuid, setSessionUUID
         }
       }).catch(
         (error) => {
+          console.error(error)
           const message = error instanceof AxiosError ?
             error.response?.data.message ?? error.message :
             typeof error === "string" ?
@@ -191,13 +186,38 @@ const PalaAnimationBody = ({ question, setQuestion, session_uuid, setSessionUUID
     setReroll(true);
   }, []);
 
+  useEffect(() => {
+
+    const lastChar = inputValue.slice(-1);
+    // reminder: keyPressTimestamp[0] is " " corresponding to the time at which the timer started
+    if(inputValue.length === 0)
+    {
+      if(keyPressTimestamp.length !== 0)
+      {
+        setKeyPressTimestamp([keyPressTimestamp[0]]);
+      }
+      return;
+    }
+
+
+    if(keyPressTimestamp.length - 1 > inputValue.length)
+    {
+      setKeyPressTimestamp(keyPressTimestamp.slice(0, inputValue.length + 1));
+    }
+    else
+    {
+      setKeyPressTimestamp([...keyPressTimestamp, { key: lastChar, timestamp: new Date().getTime() }]);
+    }
+  }, [inputValue]);
+
+
 
   if (!playerInfo)
     return null;
 
   return (
     <div className="flex flex-col gap-2 items-center">
-      <p className="pb-4">{question === null ? "Chargement de la question..." : question}</p>
+      {question === null ? "Chargement de la question..." : <CanvasWithText text={question} height={50}/>}
       <form onSubmit={onSubmit}>
         <div className="relative">
           <Input
@@ -208,7 +228,6 @@ const PalaAnimationBody = ({ question, setQuestion, session_uuid, setSessionUUID
             placeholder={"Entre ta réponse"}
             value={inputValue}
             onChange={e => setInputValue(e.target.value)}
-            onKeyDown={e => saveKeyPressTimestamp(e)}
             onPaste={e => e.preventDefault()}
           />
         </div>
@@ -418,7 +437,6 @@ const PalaAnimationClassement = ({ question, session_uuid }: { question: string 
     <Card className="md:col-span-1 md:col-start-3 col-span-2 col-start-1">
       <CardHeader className="flex">
         <CardTitle>Classement</CardTitle>
-        <CardDescription>{question === null ? "" : question}</CardDescription>
       </CardHeader>
       <CardContent className="flex gap-2 flex-col">
         {currentLeaderboard.length === 0 ? "Aucun classement pour le moment" : ""}
