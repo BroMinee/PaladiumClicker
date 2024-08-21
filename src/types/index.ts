@@ -154,29 +154,18 @@ export type AnyCondition = ConditionWithCoins | ConditionWithIndex | ConditionWi
 export type PaladiumPlayerInfo = {
   faction: string,
   firstJoin: number,
-  jobs: {
-    alchemist: {
-      level: number,
-      xp: number
-    },
-    farmer: {
-      level: number,
-      xp: number
-    },
-    hunter: {
-      level: number,
-      xp: number
-    },
-    miner: {
-      level: number,
-      xp: number
-    }
-  },
+  jobs: PaladiumJobs,
   money: number,
   timePlayed: number,
   username: string,
   uuid: string,
   rank: string
+}
+export type PaladiumJobs = {
+  alchemist: { level: number; xp: number; };
+  farmer: { level: number; xp: number; };
+  hunter: { level: number; xp: number; };
+  miner: { level: number; xp: number; };
 }
 
 export type PaladiumRanking = {
