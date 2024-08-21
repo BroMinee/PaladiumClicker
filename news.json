@@ -1,5 +1,11 @@
 [
   {
+    "date": "21-08-2024 - 1h43",
+    "events": [
+      "Changement des endpoints de l'API de Paladium, peut potentiellement rendre impossible l'importation des données en cas de forte charge"
+    ]
+  },
+  {
     "date": "10-07-2024 - 16h44",
     "events": [
       "Ajout d'un classement général pour le PalaAnimation",
