@@ -26,7 +26,7 @@ import {
 import axios from "axios";
 import { usePlayerInfoStore } from "@/stores/use-player-info-store.ts";
 
-const PALADIUM_API_URL = "https://api.paladium.games/";
+const PALADIUM_API_URL = "https://palatracker.bromine.fr/";
 
 const fetchLocal = async <T>(file: string) => {
   const result = await axios<T>(import.meta.env.BASE_URL + file, {
@@ -85,10 +85,6 @@ const getPaladiumClickerDataByUUID = async (uuid: string): Promise<PaladiumClick
   const response = await axios.get<PaladiumClickerData>(`${PALADIUM_API_URL}/v1/paladium/player/profile/${uuid}/clicker`, {
     timeout: 4000
   }).catch((error) => error);
-
-  axios.get<PaladiumClickerData>(`https://palatracker.bromine.fr/v1/paladium/player/profile/${uuid}`, {
-    timeout: 4000
-  })
 
   if (response instanceof Error) {
     if ((response as NetworkError).code === "ECONNABORTED") {
