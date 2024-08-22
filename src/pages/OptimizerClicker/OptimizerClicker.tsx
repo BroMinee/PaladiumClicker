@@ -18,7 +18,6 @@ import ImportProfil from "./Components/ImportProfil";
 import RPS from "./Components/RPS";
 import Stats from "./Components/Stats";
 import UpgradeList from "./Components/UpgradeList";
-import DailyPopup from "@/components/dailyPopup.tsx";
 
 const OptimizerClickerPage = () => {
 
@@ -80,7 +79,7 @@ const OptimizerClickerPage = () => {
               <div className="flex flex-wrap gap-2">
                 <Tuto/>
                 <News defaultOpen={isModalNewsOpen}/>
-                <DailyPopup defaultOpen={showDayPopup}/>
+                {/*<DailyPopup defaultOpen={showDayPopup}/>*/}
                 <Graph defaultOpen={showGraph}/>
               </div>
             </CardContent>

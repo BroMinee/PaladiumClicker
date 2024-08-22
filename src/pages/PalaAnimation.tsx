@@ -50,19 +50,19 @@ const PalaAnimationBody = ({ questionsList, setQuestionsList }: PalaAnimationBod
 
 
   async function pushTime(time: number, username: string, question: string) {
-    pushNewTimePalaAnimation(time, username, question).then(
-      () => {
-        toast.success("Temps enregistré avec succès");
-      }).catch(
-      (error) => {
-        const message = error instanceof AxiosError ?
-          error.response?.data.message ?? error.message :
-          typeof error === "string" ?
-            error :
-            "Une erreur est survenue dans l'enregistrement du temps";
-        toast.error(message);
-      }
-    );
+    // pushNewTimePalaAnimation(time, username, question).then(
+    //   () => {
+    //     toast.success("Temps enregistré avec succès");
+    //   }).catch(
+    //   (error) => {
+    //     const message = error instanceof AxiosError ?
+    //       error.response?.data.message ?? error.message :
+    //       typeof error === "string" ?
+    //         error :
+    //         "Une erreur est survenue dans l'enregistrement du temps";
+    //     toast.error(message);
+    //   }
+    // );
   }
 
   function clearUserAnswer() {
@@ -273,7 +273,7 @@ const PalaAnimationPage = () => {
             <CardContent>
               Malheureusement quand il y a un classement il y a de la triche, j'aurais du m'en douter avant ...<br/>
               Etant donné qu'il y a eu de la triche les leaderboards vont être réinitialisés et un anti-cheat est en train
-              d'être développé, il devrait voir le jour avant le 21/08.<br/>
+              d'être développé, il devrait voir le jour d'ici la fin du mois.<br/>
               Je suis désolé si cela impacte votre expérience, mais je préfère que tout le monde soit sur un pied
               d'égalité.<br/>
               De plus, le logiciel de triche a été mis à disposition à tous, il est presque impossible dans
@@ -281,16 +281,17 @@ const PalaAnimationPage = () => {
             </CardContent>
           </Card>
 
-          {/*{!playerInfo ? "" :*/}
-          {/*  <div className="grid grid-cols-2 md:grid-cols-3 grid-rows-1 gap-4">*/}
-          {/*    <Card className="col-span-2">*/}
-          {/*      <CardHeader>*/}
-          {/*        <PalaAnimationBody questionsList={questionsList}*/}
-          {/*                           setQuestionsList={setQuestionsList}/>*/}
-          {/*      </CardHeader>*/}
-          {/*    </Card>*/}
+          {!playerInfo ? "" :
+            <div className="">
+              {/*grid grid-cols-2 md:grid-cols-3 grid-rows-1 gap-4*/}
+              <Card className="col-span-2">
+                <CardHeader>
+                  <PalaAnimationBody questionsList={questionsList}
+                                     setQuestionsList={setQuestionsList}/>
+                </CardHeader>
+              </Card>
           {/*    <PalaAnimationClassement questionsList={questionsList}/>*/}
-          {/*  </div>}*/}
+            </div>}
           {/*<PalaAnimationClassementGlobal/>*/}
         </div>
       </Layout>
