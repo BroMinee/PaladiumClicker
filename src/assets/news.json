@@ -1,0 +1,247 @@
+[
+  {
+    "date": "10-07-2024 - 16h44",
+    "events": [
+      "Ajout d'un classement général pour le PalaAnimation",
+      "Ajout d'une popup journalière",
+      "Ajout du nombre de vues totale dans la section profil",
+      "Correction de la date qui affichait NaN au lieu de la date",
+      "Ajout des nouvelles améliorations de clics",
+      "Ajout des nouvelles améliorations globales !",
+      "Correction de jeu de question dans le PalaAnimation qui n'était pas aléatoire",
+      "Correction de l'url du discord qui était manquante",
+      "Correction du bouton pour revenir à la home page qui ne réenvoyait pas au bon endroit",
+      "Correction du prix dans le l'amélioration 'Suppression des taxes douanières' 114 000$ -> 99 750$",
+      "Changement du texte dans le AH Tracker pour éviter la confusion 'Vente journalière' -> 'Lots vendus ce jour'",
+      "Ajout d'une coding style pour le typescript pour réduire les conflits pendant les merges"
+    ]
+  },
+  {
+    "date": "15-06-2024 - 21h40",
+    "events": [
+      "Ajout d'un classement dans le PalaAnimation"
+      ]
+  },
+  {
+    "date": "07-06-2024 - 23h29",
+    "events": [
+      "Ajout du AH Tracker pour avoir des informations à propos des items en vente (beta)",
+      "Correction de la couleur du texte à l'intérieur des inputs dans le thème blanc",
+      "Correction de la page \"Profil\" suite à une modification de l'API de Paladium",
+      "Correction de l'ordre des Métiers qui changeait lors de l'augmentation manuelle de ces derniers"
+    ]
+  },
+  {
+    "date": "25-05-2024 - 20h45",
+    "events": [
+      "Correction du calcul de la production actuelle du PalaClicker",
+      "Ajout du classement du jour",
+      "Correction de l'ordre d'affichage des métiers",
+      "Correction des bâtiments pouvant dépasser le niveau 99 lors du spam du bouton"
+    ]
+  },
+  {
+    "date": "24-05-2024 - 21h20",
+    "events": [
+      "Changement de l'interface, ainsi qu'une prise en charge du responsive (pour les mobiles)",
+      "Merci Riveur ✨, pour avoir initié la refactorisation du code de JavaScript à TypeScript, pour une meilleure maintenabilité",
+      "Merci Riveur ✨, pour le refactorisation du CSS avec TailwindCSS",
+      "Amélioration de la page 'Calculateur d'xp'",
+      "Ajout de la librairie react-query (gestion des requêtes API avec du cache) et zustand (state manager)",
+      "Amélioration de la synchronisation des informations utilisateurs dans le cache",
+      "Correction du prix de l'amélioration 'Combinaison d'apiculteur' qui était à 6 007 500 au lieu de 607 500"
+    ]
+  },
+  {
+    "date": "11-05-2024 - 20h23",
+    "events": [
+      "Correction des lags sur la page du PalaClicker Optimizer",
+      "Ajout de l'XP Calculator pour les métiers (beta)",
+      "Correction de la popup des news qui était impossible à fermer",
+      "Modification des informations des bâtiments pour une meilleure cohérence dans l'interface",
+      "Ajout du leaderboard jusqu'à la position de Fuze"
+    ]
+  },
+  {
+    "date": "10-05-2024 - 02h14",
+    "events": [
+      "Ajout d'un footer",
+      "Amélioration de la gestion d'erreur",
+      "Correction de certaines images du AH"
+    ]
+  },
+  {
+    "date": "09-05-2024 - 06h49",
+    "events": [
+      "Correction temporaire du lag sur la page du PalaClicker Optimizer (sur firefox ça marchait déjà super bien)",
+      "Ajout des images pour les items dans le AH du joueur (beta)"
+    ]
+  },
+  {
+    "date": "08-05-2024 - 19h00",
+    "events": [
+      "Ajout de la nouvelle interface utilisateur. Trop hype d'avoir vos retours !",
+      "Création d'un discord pour discuter de la suite du projet, URL disponible dans la section 'A propos'",
+      "Ajout des contributeurs dans la section 'A propos'",
+      "Amélioration du système de cache",
+      "Correction de la popup des news qui s'affichait à chaque fois",
+      "Ajout d'une section 'Faction' dans le profil du joueur",
+      "Ajout d'une beta du AH du joueur dans le profil",
+      "Amélioration des balises dans le code pour un meilleur référencement (même si le site est déjà premier sur Google avec 'PalaClicker' :D)",
+      "Amélioration de la page sur mobile (mais c'est pas encore ça désolé au 12% de personne sur mobile)",
+      "De façon générale, amélioration du site pour une meilleure expérience utilisateur"
+    ]
+  },
+  {
+    "date": "05-05-2024 - 22h27",
+    "events": [
+      "Giga refacto du code pour une amélioration de la lisibilité et de la maintenabilité",
+      "Préparation de la mise en place du nouvel UI"
+    ]
+  },
+  {
+    "date": "05-05-2024 - 01h30",
+    "events": [
+      "Ajout de la beta du profil Paladium, il s'agit d'un beta, l'affichage va nettement changer dans les prochains jours",
+      "Ajout du 'steak clic'"
+    ]
+  },
+  {
+    "date": "01-05-2024 - 15h34",
+    "events": [
+      "Correction de fautes de frappe",
+      "Ajout du classement du jour"
+    ]
+  },
+  {
+    "date": "29-04-2024 - 19h09",
+    "events": [
+      "Ajout des préconditions pour les améliorations de clic"
+    ]
+  },
+  {
+    "date": "29-04-2024 - 01h52",
+    "events": [
+      "Correction du changement dans l'API de Paladium (encore)",
+      "Ajout du prix et du niveau des améliorations à acheter",
+      "Ajout du classement du jour"
+    ]
+  },
+  {
+    "date": "28-04-2024 - 21h43",
+    "events": [
+      "Correction du changement dans l'API de Paladium"
+    ]
+  },
+  {
+    "date": "27-04-2024 - 15h15",
+    "events": [
+      "Ajout du 'Côtelette Clic'"
+    ]
+  },
+  {
+    "date": "24-04-2024 - 23h18",
+    "events": [
+      "Ajout du PalaAnimation training !"
+    ]
+  },
+  {
+    "date": "24-04-2024 - 00h51",
+    "events": [
+      "Ajout d'une navbar",
+      "Teasing de la prochaine mise à jour",
+      "Correction d'un bug d'affichage sur les métiers"
+    ]
+  },
+  {
+    "date": "22-04-2024 - 18h51",
+    "events": [
+      "Ajout de la section 'Statistiques'",
+      "Ajout de la date quand la prochaine amélioration sera disponible",
+      "Il est maintenant possible de voir les 20 prochaines améliorations",
+      "Changement du design des métiers",
+      "Optimisation du code"
+    ]
+  },
+  {
+    "date": "19-04-2024 - 19h43",
+    "events": [
+      "Il est maintenant possible d'importer les informations directement de Paladium via un pseudo !",
+      "Ajout du click gâteau",
+      "Ajout d'une barre de progression autour des métiers"
+    ]
+  },
+  {
+    "date": "18-04-2024 - 00h41",
+    "events": [
+      "Ajout du classement des 2 derniers jours",
+      "Correction de quelques fautes d'orthographe",
+      "Changement de la description du site pour un meilleur rendu sur discord"
+    ]
+  },
+  {
+    "date": "15-04-2024 - 23h40",
+    "events": [
+      "Correction de la précondition du 'Portail en Paladium'",
+      "Ajout du classement des 2 derniers jours"
+    ]
+  },
+  {
+    "date": "14-04-2024 - 01h26",
+    "events": [
+      "Ajout de 'Tarte Clic'",
+      "Ajout du classement des 3 derniers jours"
+    ]
+  },
+  {
+    "date": "11-04-2024 - 15h32",
+    "events": [
+      "Ajout du dernier bâtiment"
+    ]
+  },
+  {
+    "date": "08-04-2024 - 02h54",
+    "events": [
+      "Ajout des prix d'achat pour les améliorations",
+      "Nouvelle façon de calculer la prochaine amélioration : les améliorations sont maintenant prises en considération",
+      "Ajout des conditions pour débloquer les améliorations des bâtiments",
+      "Ajout des dernières données du classement clicker, j'ai oublié le 06/04 :("
+    ]
+  },
+  {
+    "date": "05-04-2024 - 00h54",
+    "events": [
+      "Ajout des dernières données du classement du clicker et les données entre le 12/03 et 21/03.",
+      "Meilleur prise en charge des popups sur mobile"
+    ]
+  },
+  {
+    "date": "03-04-2024 - 00h41",
+    "events": [
+      "Ajout d'un graphique pour le classement du clicker",
+      "Changement de la charte graphique"
+    ]
+  },
+  {
+    "date": "02-04-2024 - 20h43",
+    "events": [
+      "Ajout du bâtiment 'clicker.building.Great_Ancients_Pantheon'",
+      "Amélioration du système de cache : les données sont conservées après modification de la base de données",
+      "Ajout d'un bouton pour réinitialiser les buildings (clear le cache)"
+
+    ]
+  },
+  {
+  "date": "02-04-2024 - 00h15",
+  "events": [
+    "Ajout d'un système de cache permettant de ne pas devoir reconfigurer le système à chaque recharge de la page",
+    "Ajout du building 'Altantis' dans la liste des buildings",
+    "Ajout des améliorations 'Corde en fibre de carbone (x100)' et 'Production postérieur - Gouffre sans fond'"
+  ]}
+  ,{
+  "date": "01-04-2024",
+  "events": [
+    "Correction de l'importation/exportation des données pour les améliorations 'Many' et 'Posterior'"
+  ]
+}
+]

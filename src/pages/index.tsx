@@ -1,4 +1,5 @@
 import Image from "next/image";
+import ThemeProvider from "@/components/shared/ThemeProvider";
 
 export default function Home() {
   return (

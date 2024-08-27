@@ -1,5 +1,5 @@
 export type Metier = {
-  name: string,
+  name: 'Alchimiste' | 'Fermier' | 'Mineur' | 'Chasseur',
   level: number,
   xp: number
 }
@@ -76,8 +76,23 @@ export type FriendInfo = {
   name: string,
 }
 
+export type MetierKey = keyof Pick<Metiers,
+  "alchemist" |
+  "farmer" |
+  "hunter" |
+  "miner">;
+
+export type Metiers = {
+  alchemist: Metier,
+  farmer: Metier,
+  hunter: Metier,
+  miner: Metier,
+}
+
+
+
 export type PlayerInfo = {
-  metier: Metier[],
+  metier: Metiers
   building: Building[],
   building_upgrade: BuildingUpgrade[],
   category_upgrade: CategoryUpgrade[],
@@ -98,6 +113,7 @@ export type PlayerInfo = {
   leaderboard: string,
   ah: AhType,
   last_fetch: number,
+  view_count: ProfilViewType
 }
 
 export type AhType = {
@@ -154,24 +170,6 @@ export type AnyCondition = ConditionWithCoins | ConditionWithIndex | ConditionWi
 export type PaladiumPlayerInfo = {
   faction: string,
   firstJoin: number,
-  jobs: {
-    alchemist: {
-      level: number,
-      xp: number
-    },
-    farmer: {
-      level: number,
-      xp: number
-    },
-    hunter: {
-      level: number,
-      xp: number
-    },
-    miner: {
-      level: number,
-      xp: number
-    }
-  },
   money: number,
   timePlayed: number,
   username: string,

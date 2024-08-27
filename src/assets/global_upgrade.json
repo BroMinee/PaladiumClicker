@@ -1,0 +1,142 @@
+[
+  {
+    "name": "Namuu Ecolier",
+    "pourcentage": 10,
+    "own": false,
+    "price": 1760000,
+    "condition": [
+      {
+        "coins": 17600000
+      },
+      {
+        "day": 10
+      }
+    ]
+  },
+  {
+    "name": "Namuu Contructeur",
+    "pourcentage": 10,
+    "own": false,
+    "price": 14000000,
+    "condition": [
+      {
+        "coins": 140000000
+      },
+      {
+        "day": 24
+      }
+    ]
+  },
+  {
+    "name": "Namuu Mécanicien",
+    "pourcentage": 10,
+    "own": false,
+    "price": 102000000,
+    "condition": [
+      {
+        "coins": 1020000000
+      },
+      {
+        "day": 40
+      }
+    ]
+  },
+  {
+    "name": "Namuu Scientifique",
+    "pourcentage": 10,
+    "own": false,
+    "price": 800000000,
+    "condition": [
+      {
+        "coins": 8000000000
+      },
+      {
+        "day": 55
+      }
+    ]
+  },
+  {
+    "name": "Namuu Investisseur",
+    "pourcentage": 10,
+    "own": false,
+    "price": 6200000000,
+    "condition": [
+      {
+        "coins": 62000000000
+      },
+      {
+        "day": 70
+      }
+    ]
+  },
+  {
+    "name": "Namuu Magicien",
+    "pourcentage": 10,
+    "own": false,
+    "price": 48000000000,
+    "condition": [
+      {
+        "coins": 480000000000
+      },
+      {
+        "day": 86
+      }
+    ]
+  },
+  {
+    "name": "Namuu Robotique",
+    "pourcentage": 10,
+    "own": false,
+    "price": 366000000000,
+    "condition": [
+      {
+        "coins": 3660000000000
+      },
+      {
+        "day": 101
+      }
+    ]
+  },
+  {
+    "name": "Namuu Extraterrestre",
+    "pourcentage": 10,
+    "own": false,
+    "price": 2820000000000,
+    "condition": [
+      {
+        "coins": 28200000000000
+      },
+      {
+        "day": 117
+      }
+    ]
+  },
+  {
+    "name": "Namuu en Endium",
+    "pourcentage": 10,
+    "own": false,
+    "price": 22000000000000,
+    "condition": [
+      {
+        "coins": 220000000000000
+      },
+      {
+        "day": 132
+      }
+    ]
+  },
+  {
+    "name": "Namuu Divin",
+    "pourcentage": 10,
+    "own": false,
+    "price": 166000000000000,
+    "condition": [
+      {
+        "coins": 1660000000000000
+      },
+      {
+        "day": 147
+      }
+    ]
+  }
+]

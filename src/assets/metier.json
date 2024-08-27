@@ -1,0 +1,22 @@
+{
+  "alchemist": {
+    "name": "Alchimiste",
+    "level": 1,
+    "xp": 0
+  },
+  "farmer": {
+    "name": "Fermier",
+    "level": 1,
+    "xp": 0
+  },
+  "hunter": {
+    "name": "Chasseur",
+    "level": 1,
+    "xp": 0
+  },
+  "miner": {
+    "name": "Mineur",
+    "level": 1,
+    "xp": 0
+  }
+}
