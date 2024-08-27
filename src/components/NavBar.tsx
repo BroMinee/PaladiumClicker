@@ -11,9 +11,11 @@ import { usePlayerInfoStore } from "@/stores/use-player-info-store";
 import Link from "next/link";
 
 import Image from "next/image";
+import { usePlayerInfo } from "@/components/shared/PlayerProvider";
 
 const Navbar = () => {
-  const { data: playerInfo, reset } = usePlayerInfoStore();
+  const { data: playerInfo, reset } = usePlayerInfo();
+  console.log(playerInfo);
   return (
     <nav className="container flex items-center justify-between h-full gap-4">
       <MobileNav/>
@@ -55,7 +57,7 @@ const Navbar = () => {
 export default Navbar;
 
 const MobileNav = () => {
-  const { data: playerInfo, reset } = usePlayerInfoStore();
+  const { data: playerInfo, reset } = usePlayerInfo();
   return (
     <Sheet>
       <SheetTrigger asChild>

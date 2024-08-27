@@ -14,11 +14,12 @@ import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area.tsx";
 import { formatPrice, levensteinDistance, safeJoinPaths } from "@/lib/misc.ts";
 import useFactionLeaderboard from "@/hooks/use-leaderboard-faction.ts";
 import SmallCardInfo from "@/components/shared/SmallCardInfo.tsx";
-import { getPlayerInfo } from "@/lib/apiPala";
-import { PlayerInfoProvider, usePlayerInfo } from "@/components/shared/PlayerProvider";
+import { usePlayerInfo } from "@/components/shared/PlayerProvider";
 
 const ReactSkinview3d = dynamic(() => import("react-skinview3d"), { ssr: false });
 
+
+export { getServerSideProps } from "@/components/shared/PlayerProvider.tsx";
 
 export function GetAllFileNameInFolder() {
 
@@ -2637,14 +2638,9 @@ export function GetAllFileNameInFolder() {
   // return imageList;
 }
 
-export default function ProfilePage({ playerInfoParams }: { playerInfoParams?: PlayerInfo }) {
+export default function ProfilePage() {
 
-  const { data: playerInfo,  setPlayerInfo: setPlayerInfo } = usePlayerInfoStore();
-  useEffect(() => {
-    if (!playerInfoParams)
-      return;
-    setPlayerInfo(playerInfoParams);
-  }, [playerInfoParams, setPlayerInfo]);
+
 
   // useEffect(() => {
   //   if (!pseudoParams && playerInfo) {
@@ -2653,13 +2649,8 @@ export default function ProfilePage({ playerInfoParams }: { playerInfoParams?: P
   //   }
   // }, []);
 
-  if (!playerInfoParams) {
-    return <>PlayerInfo is null</>
-  }
-
   return (
     <>
-    <PlayerInfoProvider playerInfo={playerInfoParams}>
       <div className="flex flex-col gap-4">
         <ProfilInfo/>
         <MetierList editable={false}/>
@@ -2667,13 +2658,12 @@ export default function ProfilePage({ playerInfoParams }: { playerInfoParams?: P
         <HeadingSection>Informations de faction</HeadingSection>
         <FactionInfo/>
       </div>
-    </PlayerInfoProvider>
     </>
   );
 }
 
 const ProfilInfo = () => {
-  const playerInfo = usePlayerInfo();
+  const {data: playerInfo} = usePlayerInfo();
   const pseudo = playerInfo?.username ?? "Notch";
   const skinUrl = `https://mineskin.eu/skin/${pseudo}`;
 
@@ -3043,16 +3033,4 @@ function convertEpochToDateUTC2(epoch: number | undefined) {
   const date = new Date(0); // The 0 there is the key, which sets the date to the epoch
   date.setUTCSeconds(epoch / 1000);
   return date.toLocaleString();
-}
-
-
-export async function getServerSideProps({ params }) {
-  const startTime = Date.now();
-  const playerInfo = await getPlayerInfo(params.username).catch((e) => {return null})
-  console.log(`Time taken: ${Date.now() - startTime}ms - To fetch ${params.username}`)
-  return {
-    props: {
-      playerInfoParams: playerInfo,
-    }
-  }
 }

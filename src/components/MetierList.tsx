@@ -17,7 +17,7 @@ type MetierListProps = {
 const MetierList = ({ editable = true }: MetierListProps) => {
   const { increaseMetierLevel, decreaseMetierLevel } = usePlayerInfoStore();
 
-  const playerInfo = usePlayerInfo();
+  const {data: playerInfo} = usePlayerInfo();
 
   if (!playerInfo) {
     return <div>Loading...</div>;
