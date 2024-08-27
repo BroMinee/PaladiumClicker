@@ -1,3 +1,4 @@
+// @ts-nocheck - A RETIRER APRES AVOIR CORRIGE LE FICHIER
 import type { AnyCondition, PlayerInfo } from "@/types";
 
 export function getTotalSpend(playerInfo: PlayerInfo) {

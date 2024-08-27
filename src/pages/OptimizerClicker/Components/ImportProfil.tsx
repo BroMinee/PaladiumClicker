@@ -1,12 +1,13 @@
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { cn } from "@/lib/utils";
-import { usePlayerInfoStore } from "@/stores/use-player-info-store";
-import { FormEvent } from "react";
-import { FaSearch } from "react-icons/fa";
-import { useNavigate } from 'react-router-dom';
-import constants from "@/lib/constants.ts";
-import { safeJoinPaths } from "@/lib/misc.ts";
+// @ts-nocheck - A RETIRER APRES AVOIR CORRIGE LE FICHIER
+// import { Button } from "@/components/ui/button";
+// import { Input } from "@/components/ui/input";
+// import { cn } from "@/lib/utils";
+// import { usePlayerInfoStore } from "@/stores/use-player-info-store";
+// import { FormEvent } from "react";
+// import { FaSearch } from "react-icons/fa";
+// import { useNavigate } from 'react-router-dom';
+// import constants from "@/lib/constants.ts";
+// import { safeJoinPaths } from "@/lib/misc.ts";
 
 type ImportProfilProps = {
   showResetButton?: boolean,
@@ -15,8 +16,8 @@ type ImportProfilProps = {
 
 const ImportProfil = ({ showResetButton = false, withBackground = true, }: ImportProfilProps) => {
 
-
-  const { data: playerInfo, reset } = usePlayerInfoStore();
+  //
+  // const { data: playerInfo, reset } = usePlayerInfoStore();
 
   return <>TODO</>;
   // async function onSubmit(event: FormEvent<HTMLFormElement>) {

@@ -1,20 +1,18 @@
 import MetierList from "@/components/MetierList.tsx";
-import { usePlayerInfo } from "@/stores/use-player-info-store.ts";
-import { useEffect } from "react";
 import ImportProfil from "../OptimizerClicker/Components/ImportProfil.tsx";
-import Layout from "@/components/shared/Layout.tsx";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card.tsx";
 import GradientText from "@/components/shared/GradientText.tsx";
 import { FaEye, FaHeart, FaMedal, FaPercentage, FaTachometerAlt } from "react-icons/fa";
 import HeadingSection from "@/components/shared/HeadingSection.tsx";
 
 import dynamic from "next/dynamic";
-import { AhItemType, PlayerInfo } from "@/types";
+import { AhItemType } from "@/types";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area.tsx";
 import { formatPrice, levensteinDistance, safeJoinPaths } from "@/lib/misc.ts";
 import useFactionLeaderboard from "@/hooks/use-leaderboard-faction.ts";
 import SmallCardInfo from "@/components/shared/SmallCardInfo.tsx";
 import { usePlayerInfoStore } from "@/stores/use-player-info-store";
+import Head from "next/head";
 
 const ReactSkinview3d = dynamic(() => import("react-skinview3d"), { ssr: false });
 
@@ -2641,16 +2639,29 @@ export function GetAllFileNameInFolder() {
 export default function ProfilePage() {
 
 
-
   // useEffect(() => {
   //   if (!pseudoParams && playerInfo) {
   //     navigate(safeJoinPaths("/" + playerInfo.username, constants.profilPath));
   //     return;
   //   }
   // }, []);
+  const { data: playerInfo } = usePlayerInfoStore();
 
   return (
     <>
+      <Head>
+        <title>Profil de {playerInfo?.username ?? "Notch"}</title>
+        {/* set description*/}
+        <meta name="description"
+              content={`Profil de ${playerInfo?.username ?? "Notch"} - faction : ${playerInfo?.faction.name}`}/>
+
+        {/*set og title*/}
+        <meta property="og:title" content={`Profil de ${playerInfo?.username ?? "Notch"}`}/>
+        {/*set og description*/}
+        <meta property="og:description"
+              content={`Profil de ${playerInfo?.username ?? "Notch"} - faction : ${playerInfo?.faction.name}`}/>
+        {/*set og url*/}
+      </Head>
       <div className="flex flex-col gap-4">
         <ProfilInfo/>
         <MetierList editable={false}/>
@@ -2663,16 +2674,14 @@ export default function ProfilePage() {
 }
 
 const ProfilInfo = () => {
-  const {data: playerInfo} = usePlayerInfoStore();
+  const { data: playerInfo } = usePlayerInfoStore();
   const pseudo = playerInfo?.username ?? "Notch";
   const skinUrl = `https://mineskin.eu/skin/${pseudo}`;
 
   if (!playerInfo) {
-    return (
-      <Layout requiredPseudo={true}>
-        null
-      </Layout>
-    );
+    return <>
+      Player Info is null
+    </>
   }
 
   const rank = playerInfo["rank"][0].toUpperCase() + playerInfo["rank"].slice(1);

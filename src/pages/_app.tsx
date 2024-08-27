@@ -4,8 +4,9 @@ import { Toaster } from "@/components/ui/sonner";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import ThemeProvider from "@/components/shared/ThemeProvider";
 import { PlayerInfoProvider } from "@/components/shared/PlayerProvider";
+import { AppProps } from "next/app";
 
-export default function MyApp({ Component, pageProps }) {
+export default function MyApp({ Component, pageProps } :AppProps) {
   const queryClient = new QueryClient();
   return (
     <PlayerInfoProvider playerInfo={pageProps.playerInfoParams}>

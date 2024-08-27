@@ -1,8 +1,5 @@
-import { parseCsv } from "@/lib/misc";
-
 import {
   AhItemHistory,
-  AhPaladium,
   AhType,
   Building,
   BuildingUpgrade,
@@ -10,7 +7,6 @@ import {
   CPS,
   GlobalUpgrade,
   ManyUpgrade,
-  Metier,
   Metiers,
   NetworkError,
   PaladiumAhHistory,
@@ -202,7 +198,8 @@ export const getPlayerInfo = async (pseudo: string): Promise<PlayerInfo> => {
   const { buildings, upgrades } = await getPaladiumClickerDataByUUID(paladiumProfil.uuid);
 
   const translateBuildingName = translate_building_json as Record<string, number>;
-  const translateBuildingUpgradeName = translate_upgrade_json as Record<string, [keyof Pick<PlayerInfo, "building_upgrade">, string]>;
+  const translateBuildingUpgradeName = translate_upgrade_json as Record<string, (string | number)[]>;
+
 
   buildings.forEach((building) => {
     const buildingIndex = translateBuildingName[building["name"]];
@@ -218,7 +215,7 @@ export const getPlayerInfo = async (pseudo: string): Promise<PlayerInfo> => {
 
     const [translatedUpgrade, translatedPosition] = pathToFollow;
 
-    const targettedBuildingUpgrade = initialPlayerInfo[translatedUpgrade].at(Number(translatedPosition));
+    const targettedBuildingUpgrade = initialPlayerInfo[translatedUpgrade as keyof Pick<PlayerInfo, "building_upgrade">].at(translatedPosition as number);
 
     if (targettedBuildingUpgrade) {
       targettedBuildingUpgrade.own = true;
@@ -286,26 +283,26 @@ const getInitialPlayerInfo = async (): Promise<PlayerInfo> => {
   };
 }
 
-export const getGraphData = async () => {
-  const parsedCsv = await fetchLocal<string>("/graph.csv").then(parseCsv);
-
-  const data = parsedCsv
-    .filter((data) => data.Date !== "")
-    .map((data) => {
-      for (const key in data) {
-        if (key !== "Date") {
-          data[key] = data[key] === "" ? "" : Number(data[key]);
-        }
-      }
-      return data;
-    });
-
-  return data;
-}
-
-export const getAhItemData = async () => {
-  return await fetchLocal<AhPaladium[]>("/AhAssets/items_list.json");
-}
+// export const getGraphData = async () => {
+//   const parsedCsv = await fetchLocal<string>("/graph.csv").then(parseCsv);
+//
+//   const data = parsedCsv
+//     .filter((data) => data.Date !== "")
+//     .map((data) => {
+//       for (const key in data) {
+//         if (key !== "Date") {
+//           data[key] = data[key] === "" ? "" : Number(data[key]);
+//         }
+//       }
+//       return data;
+//     });
+//
+//   return data;
+// }
+//
+// export const getAhItemData = async () => {
+//   return await fetchLocal<AhPaladium[]>("/AhAssets/items_list.json");
+// }
 
 export const getPaladiumAhItemFullHistory = async (itemId: string): Promise<AhItemHistory[]> => {
   const response = await axios.get<PaladiumAhHistory>(`${PALADIUM_API_URL}/v1/paladium/shop/market/items/${itemId}/history?limit=100&offset=0`);
@@ -373,10 +370,18 @@ export const getJobsFromUUID = async (uuid: string): Promise<Metiers> => {
 
   // NOTE we take the original JSON to have name easily modifiable
   const res = metier_json as Metiers;
-  for (const key in res) {
-    res[key].level = response.data[key].level;
-    res[key].xp = response.data[key].xp;
-  }
+
+  res.farmer.level = response.data.farmer.level;
+  res.farmer.xp = response.data.farmer.xp;
+
+  res.hunter.level = response.data.hunter.level;
+  res.hunter.xp = response.data.hunter.xp;
+
+  res.alchemist.level = response.data.alchemist.level;
+  res.alchemist.xp = response.data.alchemist.xp;
+
+  res.miner.level = response.data.miner.level;
+  res.miner.xp = response.data.miner.xp;
 
   return res as Metiers;
 }

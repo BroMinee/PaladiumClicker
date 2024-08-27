@@ -1,6 +1,4 @@
-import { MetierKey, Metiers, PlayerInfo, UpgradeKey } from "@/types";
-import { create } from "zustand";
-import { createJSONStorage} from "zustand/middleware";
+import { MetierKey, PlayerInfo, UpgradeKey } from "@/types";
 import constants from "@/lib/constants";
 import { useContext, useState } from "react";
 import { PlayerInfoContext } from "@/components/shared/PlayerProvider";
@@ -9,19 +7,6 @@ const initialState: State = {
   data: null,
   selectedCPS: -1,
   version: constants.version
-};
-
-export const initialPlayerController: ControllerType = {
-  ...initialState,
-  setPlayerInfo: () => {},
-  reset: () => {},
-  increaseMetierLevel: () => {},
-  decreaseMetierLevel: () => {},
-  setBuildingOwn: () => {},
-  toggleUpgradeOwn: () => {},
-  selectCPS: () => {},
-  buyBuildingByIndex: () => {},
-  checkVersion: () => {}
 };
 
 export type State = {
@@ -45,38 +30,36 @@ type Actions = {
 
 export type ControllerType = State & Actions;
 
-type StateMetierToReach = {
-  metierToReach: Metiers;
-  metierSelected: MetierKey;
-}
+// type StateMetierToReach = {
+//   metierToReach: Metiers;
+//   metierSelected: MetierKey;
+// }
 
-type ActionsToReach = {
-  resetToReach: () => void;
-  setMetierToReach: (metierToReach: Metiers) => void;
-  getIndexMetierSelected: () => number;
-  setMetierSelected: (name: string) => void;
-  increaseMetierLevelToReach: (name: string, value: number) => void;
-  decreaseMetierLevelToReach: (name: string, value: number, min?: number) => void;
-}
-
-
-const storageKeyToReach = 'player-info-to-reach';
+// type ActionsToReach = {
+//   resetToReach: () => void;
+//   setMetierToReach: (metierToReach: Metiers) => void;
+//   getIndexMetierSelected: () => number;
+//   setMetierSelected: (name: string) => void;
+//   increaseMetierLevelToReach: (name: string, value: number) => void;
+//   decreaseMetierLevelToReach: (name: string, value: number, min?: number) => void;
+// }
 
 
+// const storageKeyToReach = 'player-info-to-reach';
 
 
-const initialStateToReach: StateMetierToReach =
-  {
-    metierToReach: {
-      alchemist:
-        { name: "Alchimiste", level: 1, xp: 0 },
-      farmer: { name: "Fermier", level: 1, xp: 0 },
-      hunter: { name: "Chasseur", level: 1, xp: 0 },
-      miner: { name: "Mineur", level: 1, xp: 0 }
-    },
-    metierSelected: 'alchemist',
-  };
-
+//
+// const initialStateToReach: StateMetierToReach =
+//   {
+//     metierToReach: {
+//       alchemist:
+//         { name: "Alchimiste", level: 1, xp: 0 },
+//       farmer: { name: "Fermier", level: 1, xp: 0 },
+//       hunter: { name: "Chasseur", level: 1, xp: 0 },
+//       miner: { name: "Mineur", level: 1, xp: 0 }
+//     },
+//     metierSelected: 'alchemist',
+//   };
 
 
 export const usePlayerController = (piAtInitController: PlayerInfo): ControllerType => {
@@ -156,7 +139,7 @@ export const usePlayerController = (piAtInitController: PlayerInfo): ControllerT
       },
     });
   }
-  const setBuildingOwn = (name, value) => {
+  const setBuildingOwn = (name: string, value: number) => {
     if (!state.data) {
       return;
     }
@@ -185,7 +168,7 @@ export const usePlayerController = (piAtInitController: PlayerInfo): ControllerT
       },
     });
   }
-  const toggleUpgradeOwn = (type, name) => {
+  const toggleUpgradeOwn = (type: UpgradeKey, name: string) => {
     if (!state.data) {
       return;
     }
@@ -206,7 +189,7 @@ export const usePlayerController = (piAtInitController: PlayerInfo): ControllerT
       },
     });
   }
-  const selectCPS = (name) => {
+  const selectCPS = (name: string) => {
     if (!state.data) {
       return;
     }
@@ -248,7 +231,7 @@ export const usePlayerController = (piAtInitController: PlayerInfo): ControllerT
     });
 
   }
-  const buyBuildingByIndex = (index) => {
+  const buyBuildingByIndex = (index: number) => {
     if (!state.data) {
       return;
     }
@@ -271,10 +254,8 @@ export const usePlayerController = (piAtInitController: PlayerInfo): ControllerT
     });
   }
   const checkVersion = () => {
-    const r = () => {
-      if (state.data && state.version !== constants.version) {
-        setState(initialState);
-      }
+    if (state.data && state.version !== constants.version) {
+      setState(initialState);
     }
   };
 
@@ -293,74 +274,74 @@ export const usePlayerController = (piAtInitController: PlayerInfo): ControllerT
     toggleUpgradeOwn
   };
 }
-
-export const useMetierToReachStore = create(
-  (set, get) => ({
-    ...initialStateToReach,
-    resetToReach: () => set(initialStateToReach),
-    setMetierToReach: (metier) => set(() => {
-      return {
-        metierToReach: metier.map((m) => ({
-          ...m,
-          level: m.level !== 100 ? m.level + 1 : m.level,
-          xp: 0,
-        })),
-        metierSelected: metier[0].name,
-      };
-    }),
-    increaseMetierLevelToReach: (name, value) => set((state) => {
-      if (!state.metierToReach) {
-        return state;
-      }
-
-      const targettedMetier = state.metierToReach.find((m) => m.name === name);
-
-      if (!targettedMetier || targettedMetier.level === 100) {
-        return state;
-      }
-
-      return {
-        metierToReach: state.metierToReach.filter((m) => m.name !== name).concat({
-          ...targettedMetier,
-          level: targettedMetier.level + value,
-          xp: 0,
-        }),
-        metierSelected: state.metierSelected
-      };
-    }),
-    decreaseMetierLevelToReach: (name, value, min = 1) => set((state) => {
-      if (!state.metierToReach) {
-        return state;
-      }
-
-      const targettedMetier = state.metierToReach.find((m) => m.name === name);
-
-      if (!targettedMetier || targettedMetier.level <= min) {
-        return state;
-      }
-
-      return {
-        metierToReach: state.metierToReach.filter((m) => m.name !== name).concat({
-          ...targettedMetier,
-          level: targettedMetier.level - value,
-          xp: 0,
-        }),
-        metierSelected: state.metierSelected
-      };
-    }),
-    getIndexMetierSelected: () => get().metierToReach.findIndex((m) => m.name === get().metierSelected),
-    setMetierSelected: (name) => set((state) => {
-      return {
-        ...state.metierToReach,
-        metierSelected: name,
-      };
-    }),
-  }),
-
-  {
-    name: storageKeyToReach,
-    storage: createJSONStorage(() => localStorage)
-  },
-)
+//
+// export const useMetierToReachStore = create(
+//   (set, get) => ({
+//     ...initialStateToReach,
+//     resetToReach: () => set(initialStateToReach),
+//     setMetierToReach: (metier) => set(() => {
+//       return {
+//         metierToReach: metier.map((m) => ({
+//           ...m,
+//           level: m.level !== 100 ? m.level + 1 : m.level,
+//           xp: 0,
+//         })),
+//         metierSelected: metier[0].name,
+//       };
+//     }),
+//     increaseMetierLevelToReach: (name, value) => set((state) => {
+//       if (!state.metierToReach) {
+//         return state;
+//       }
+//
+//       const targettedMetier = state.metierToReach.find((m) => m.name === name);
+//
+//       if (!targettedMetier || targettedMetier.level === 100) {
+//         return state;
+//       }
+//
+//       return {
+//         metierToReach: state.metierToReach.filter((m) => m.name !== name).concat({
+//           ...targettedMetier,
+//           level: targettedMetier.level + value,
+//           xp: 0,
+//         }),
+//         metierSelected: state.metierSelected
+//       };
+//     }),
+//     decreaseMetierLevelToReach: (name, value, min = 1) => set((state) => {
+//       if (!state.metierToReach) {
+//         return state;
+//       }
+//
+//       const targettedMetier = state.metierToReach.find((m) => m.name === name);
+//
+//       if (!targettedMetier || targettedMetier.level <= min) {
+//         return state;
+//       }
+//
+//       return {
+//         metierToReach: state.metierToReach.filter((m) => m.name !== name).concat({
+//           ...targettedMetier,
+//           level: targettedMetier.level - value,
+//           xp: 0,
+//         }),
+//         metierSelected: state.metierSelected
+//       };
+//     }),
+//     getIndexMetierSelected: () => get().metierToReach.findIndex((m) => m.name === get().metierSelected),
+//     setMetierSelected: (name) => set((state) => {
+//       return {
+//         ...state.metierToReach,
+//         metierSelected: name,
+//       };
+//     }),
+//   }),
+//
+//   {
+//     name: storageKeyToReach,
+//     storage: createJSONStorage(() => localStorage)
+//   },
+// )
 
 export const usePlayerInfoStore = (): ControllerType => useContext(PlayerInfoContext);

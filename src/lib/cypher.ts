@@ -92,7 +92,7 @@ export const getNewQuestionPalaAnimation = async (username: string): Promise<{
     throw response;
   }
 
-  const decrypted = await decryptAES256(response.data, import.meta.env.VITE_CRYPT_KEY!);
+  const decrypted = await decryptAES256(response.data, process.env.VITE_CRYPT_KEY!);
   return JSON.parse(decrypted) as {question: string, session_uuid: string};
 }
 
@@ -102,7 +102,7 @@ export const checkAnswerPalaAnimation = async (answer: string, session_uuid: str
     session_uuid,
     keyPressTimestamp,
     user_time
-  }), import.meta.env.VITE_CRYPT_KEY!);
+  }), process.env.VITE_CRYPT_KEY!);
 
 
   const response = await axios.post<checkAnswerPalaAnimationType>(`${API_PALATRACKER_URL}/v1/palaAnimation/checkAnswer`, {

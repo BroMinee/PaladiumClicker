@@ -1,7 +1,7 @@
-import React, { useEffect } from "react";
+import React from "react";
 import Navbar from "@/components/NavBar";
 import GradientText from "@/components/shared/GradientText";
-import { useNavigate, useParams } from "react-router-dom";
+// import {  useParams } from "react-router-dom";
 
 // import { toast } from "sonner";
 // import { AxiosError } from "axios";
@@ -45,12 +45,12 @@ const Layout = ({ children, requiredPseudo }: LayoutProps) => {
   );
 }
 
-const ContentLayout = ({ children, requiredPseudo }: LayoutProps) => {
-  const { pseudoParams } = useParams();
+const ContentLayout = ({ children }: LayoutProps) => {
+  // const { pseudoParams } = useParams();
   // const { mutate: loadPlayerInfo, isPending, isError } = useLoadPlayerInfoMutation();
   // const { data: playerInfo } = usePlayerInfo();
   // const navigate = useNavigate();
-
+  //
   // useEffect(() => {
   //   // load playerInfo using pseudoParams only if the username is different from the one in the store
   //   if (pseudoParams !== undefined && pseudoParams.toLowerCase() !== playerInfo?.username.toLowerCase()) {

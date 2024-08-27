@@ -3,6 +3,7 @@ import { createContext } from 'react';
 import { getPlayerInfo } from "@/lib/apiPala";
 import { ControllerType, State, usePlayerController } from "@/stores/use-player-info-store";
 import constants from "@/lib/constants";
+import { PlayerInfo } from "@/types";
 
 const initialState: State = {
   data: null,
@@ -26,7 +27,11 @@ export const initialPlayerController: ControllerType = {
 export const PlayerInfoContext = createContext<ControllerType>(initialPlayerController);
 
 
-export const PlayerInfoProvider = ({ playerInfo, children }) => {
+export const PlayerInfoProvider = ({ playerInfo, children }:
+                                     {
+                                       playerInfo: PlayerInfo,
+                                       children: React.ReactNode
+                                     }) => {
   return (
     <PlayerInfoContext.Provider value={usePlayerController(playerInfo)}>
       {children}
@@ -34,9 +39,9 @@ export const PlayerInfoProvider = ({ playerInfo, children }) => {
   );
 };
 
-export async function getServerSideProps({ params }) {
+export async function getServerSideProps({ params } : {params : {username: string}}) {
   const startTime = Date.now();
-  const playerInfo = await getPlayerInfo(params.username).catch((e) => {return null})
+  const playerInfo = await getPlayerInfo(params.username).catch(() => {return null})
   console.log(`Time taken: ${Date.now() - startTime}ms - To fetch ${params.username}`)
   return {
     props: {
