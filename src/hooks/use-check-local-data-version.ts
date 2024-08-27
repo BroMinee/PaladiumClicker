@@ -1,8 +1,8 @@
-import { usePlayerInfoStore } from "@/stores/use-player-info-store"
+import { usePlayerInfo } from "@/stores/use-player-info-store"
 import { useEffect } from "react";
 
 const useCheckLocalDataVersion = () => {
-  const { checkVersion } = usePlayerInfoStore();
+  const { checkVersion } = usePlayerInfo();
 
   useEffect(() => {
     checkVersion();

@@ -1,5 +1,5 @@
 import MetierList from "@/components/MetierList.tsx";
-import { usePlayerInfoStore } from "@/stores/use-player-info-store.ts";
+import { usePlayerInfo } from "@/stores/use-player-info-store.ts";
 import { useEffect } from "react";
 import ImportProfil from "../OptimizerClicker/Components/ImportProfil.tsx";
 import Layout from "@/components/shared/Layout.tsx";
@@ -14,7 +14,7 @@ import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area.tsx";
 import { formatPrice, levensteinDistance, safeJoinPaths } from "@/lib/misc.ts";
 import useFactionLeaderboard from "@/hooks/use-leaderboard-faction.ts";
 import SmallCardInfo from "@/components/shared/SmallCardInfo.tsx";
-import { usePlayerInfo } from "@/components/shared/PlayerProvider";
+import { usePlayerInfoStore } from "@/stores/use-player-info-store";
 
 const ReactSkinview3d = dynamic(() => import("react-skinview3d"), { ssr: false });
 
@@ -2663,7 +2663,7 @@ export default function ProfilePage() {
 }
 
 const ProfilInfo = () => {
-  const {data: playerInfo} = usePlayerInfo();
+  const {data: playerInfo} = usePlayerInfoStore();
   const pseudo = playerInfo?.username ?? "Notch";
   const skinUrl = `https://mineskin.eu/skin/${pseudo}`;
 

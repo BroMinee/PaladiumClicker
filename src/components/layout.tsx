@@ -8,7 +8,7 @@ import { useNavigate, useParams } from "react-router-dom";
 // import LoadingData from "@/pages/LoadingData.tsx";
 // import NoPseudoPage from "@/components/NoPseudoPage.tsx";
 // import Error500Page from "@/pages/Error500Page.tsx";
-// import { usePlayerInfoStore } from "@/stores/use-player-info-store.ts";
+// import { usePlayerInfo } from "@/stores/use-player-info-store.ts";
 
 type LayoutProps = {
   children: React.ReactNode;
@@ -48,7 +48,7 @@ const Layout = ({ children, requiredPseudo }: LayoutProps) => {
 const ContentLayout = ({ children, requiredPseudo }: LayoutProps) => {
   const { pseudoParams } = useParams();
   // const { mutate: loadPlayerInfo, isPending, isError } = useLoadPlayerInfoMutation();
-  // const { data: playerInfo } = usePlayerInfoStore();
+  // const { data: playerInfo } = usePlayerInfo();
   // const navigate = useNavigate();
 
   // useEffect(() => {

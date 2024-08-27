@@ -1,10 +1,30 @@
-import constants from "@/lib/constants";
-import { Metier, MetierKey, Metiers, PlayerInfo, UpgradeKey } from "@/types";
+import { MetierKey, Metiers, PlayerInfo, UpgradeKey } from "@/types";
 import { create } from "zustand";
-import { createJSONStorage, persist } from "zustand/middleware";
-import { safeJoinPaths } from "@/lib/misc.ts";
+import { createJSONStorage} from "zustand/middleware";
+import constants from "@/lib/constants";
+import { useContext, useState } from "react";
+import { PlayerInfoContext } from "@/components/shared/PlayerProvider";
 
-type State = {
+const initialState: State = {
+  data: null,
+  selectedCPS: -1,
+  version: constants.version
+};
+
+export const initialPlayerController: ControllerType = {
+  ...initialState,
+  setPlayerInfo: () => {},
+  reset: () => {},
+  increaseMetierLevel: () => {},
+  decreaseMetierLevel: () => {},
+  setBuildingOwn: () => {},
+  toggleUpgradeOwn: () => {},
+  selectCPS: () => {},
+  buyBuildingByIndex: () => {},
+  checkVersion: () => {}
+};
+
+export type State = {
   data: PlayerInfo | null;
   selectedCPS: number;
   version: number;
@@ -14,14 +34,16 @@ type State = {
 type Actions = {
   setPlayerInfo: (playerInfo: PlayerInfo | null) => void;
   reset: () => void;
-  increaseMetierLevel: (name: string, value: number) => void;
-  decreaseMetierLevel: (name: string, value: number, min?: number) => void;
+  increaseMetierLevel: (name: MetierKey, value: number) => void;
+  decreaseMetierLevel: (name: MetierKey, value: number, min?: number) => void;
   setBuildingOwn: (name: string, value: number) => void;
   toggleUpgradeOwn: (type: UpgradeKey, name: string) => void;
   selectCPS: (name: string) => void;
   buyBuildingByIndex: (index: number) => void;
   checkVersion: () => void;
 }
+
+export type ControllerType = State & Actions;
 
 type StateMetierToReach = {
   metierToReach: Metiers;
@@ -37,13 +59,11 @@ type ActionsToReach = {
   decreaseMetierLevelToReach: (name: string, value: number, min?: number) => void;
 }
 
-const storageKey = 'player-info';
+
 const storageKeyToReach = 'player-info-to-reach';
-const initialState: State = {
-  data: null,
-  selectedCPS: -1,
-  version: constants.version,
-};
+
+
+
 
 const initialStateToReach: StateMetierToReach =
   {
@@ -57,184 +77,222 @@ const initialStateToReach: StateMetierToReach =
     metierSelected: 'alchemist',
   };
 
-export const usePlayerInfoStore = create(
-  (set) => ({
-    ...initialState,
-    setPlayerInfo: (playerInfo) => set(() => {
-      return {
-        data: playerInfo,
-        selectedCPS: playerInfo?.CPS.filter(c => c.own).at(-1)?.index ?? -1,
-      };
-    }),
-    reset: () => {
-      const endUrl = window.location.pathname.split("/").pop();
-      window.location.href = safeJoinPaths("/", endUrl ?? "");
-      set(initialState)
-    },
-    increaseMetierLevel: (name, value) => set((state) => {
-      if (!state.data) {
-        return state;
+
+
+export const usePlayerController = (piAtInitController: PlayerInfo): ControllerType => {
+
+  const [state, setState] = useState<State>({
+    data: piAtInitController,
+    selectedCPS: piAtInitController?.CPS.filter(c => c.own).at(-1)?.index ?? -1,
+    version: constants.version
+  });
+
+  const reset = () => {
+    setState(initialState);
+  };
+
+  const setPlayerInfo = (playerInfo: PlayerInfo | null) => {
+    if (!playerInfo) {
+      return;
+    }
+    setState({
+      ...state,
+      data: playerInfo,
+      selectedCPS: playerInfo?.CPS.filter(c => c.own).at(-1)?.index ?? -1,
+    });
+  }
+
+  const increaseMetierLevel = (metierKey: MetierKey, value: number) => {
+    if (!state.data) {
+      return;
+    }
+
+    const targettedMetier = state.data.metier[metierKey];
+
+    if (!targettedMetier || targettedMetier.level === 100) {
+      return;
+    }
+
+    const newMetier = { ...state.data.metier };
+    newMetier[metierKey] = {
+      ...targettedMetier,
+      level: targettedMetier.level + value,
+      xp: constants.metier_palier[targettedMetier.level],
+    };
+
+    setState({
+      ...state,
+      data: {
+        ...state.data,
+        metier: newMetier,
+      },
+    });
+  }
+
+  const decreaseMetierLevel = (metierKey: MetierKey, value: number, min = 1) => {
+    if (!state.data) {
+      return;
+    }
+
+
+    const targettedMetier = state.data.metier[metierKey];
+
+    if (!targettedMetier || targettedMetier.level <= min) {
+      return;
+    }
+    const newMetier = { ...state.data.metier };
+    newMetier[metierKey] = {
+      ...targettedMetier,
+      level: targettedMetier.level - value,
+      xp: constants.metier_palier[targettedMetier.level - value - 1],
+    };
+
+
+    setState({
+      ...state,
+      data: {
+        ...state.data,
+        metier: newMetier,
+      },
+    });
+  }
+  const setBuildingOwn = (name, value) => {
+    if (!state.data) {
+      return;
+    }
+
+    const targettedBuilding = state.data.building.find((b) => b.name === name);
+
+    if (!targettedBuilding) {
+      return;
+    }
+
+    if (value > 99) {
+      value = 99;
+    }
+
+    if (value < 0) {
+      value = 0;
+    }
+
+    targettedBuilding.own = value;
+
+    setState({
+      ...state,
+      data: {
+        ...state.data,
+        building: state.data.building.map((b) => b.name === name ? targettedBuilding : b),
+      },
+    });
+  }
+  const toggleUpgradeOwn = (type, name) => {
+    if (!state.data) {
+      return;
+    }
+
+    const targetUpgrade = state.data[type].find((u) => u.name === name);
+
+    if (!targetUpgrade || Number(targetUpgrade.name) === -1) {
+      return;
+    }
+
+    targetUpgrade.own = !targetUpgrade.own;
+
+    setState({
+      ...state,
+      data: {
+        ...state.data,
+        [type]: state.data[type].map((u) => u.name === name ? targetUpgrade : u),
+      },
+    });
+  }
+  const selectCPS = (name) => {
+    if (!state.data) {
+      return;
+    }
+
+    const targetCPS = state.data.CPS.find((c) => c.name === name);
+
+    if (!targetCPS || Number(name) === -1) {
+      return;
+    }
+
+    if (!targetCPS.own) {
+      targetCPS.own = true;
+    }
+
+    const playerCps = state.data.CPS.map((c) => c.name === targetCPS.name ? targetCPS : c);
+
+    let targetReached = false;
+
+    for (const c of playerCps) {
+      if (!targetReached && targetCPS.own) {
+        c.own = true;
       }
-
-      const targettedMetier = state.data.metier.find((m) => m.name === name);
-
-      if (!targettedMetier || targettedMetier.level === 100) {
-        return state;
+      if (c.name === targetCPS.name) {
+        targetReached = true;
+        continue;
       }
-      return {
-        data: {
-          ...state.data,
-          metier: state.data.metier.filter((m) => m.name !== name).concat({
-            ...targettedMetier,
-            level: targettedMetier.level + value,
-            xp: constants.metier_palier[targettedMetier.level],
-          }),
-        },
-      };
-    }),
-    decreaseMetierLevel: (name, value, min = 1) => set((state) => {
-      if (!state.data) {
-        return state;
+      if (targetReached) {
+        c.own = false;
       }
+    }
 
-      const targettedMetier = state.data.metier.find((m) => m.name === name);
+    setState({
+      ...state,
+      selectedCPS: targetCPS.own ? (targetCPS.index ?? -1) : -1,
+      data: {
+        ...state.data,
+        CPS: playerCps,
+      },
+    });
 
-      if (!targettedMetier || targettedMetier.level <= min) {
-        return state;
-      }
-      return {
-        data: {
-          ...state.data,
-          metier: state.data.metier.filter((m) => m.name !== name).concat({
-            ...targettedMetier,
-            level: targettedMetier.level - value,
-            xp: constants.metier_palier[targettedMetier.level - value - 1],
-          }),
-        },
-      };
-    }),
-    setBuildingOwn: (name, value) => set((state) => {
-      if (!state.data) {
-        return state;
-      }
+  }
+  const buyBuildingByIndex = (index) => {
+    if (!state.data) {
+      return;
+    }
 
-      const targettedBuilding = state.data.building.find((b) => b.name === name);
+    const targettedBuilding = state.data.building[index];
 
-      if (!targettedBuilding) {
-        return state;
-      }
+    if (!targettedBuilding) {
+      return;
+    }
 
-      if (value > 99) {
-        value = 99;
-      }
-
-      if (value < 0) {
-        value = 0;
-      }
-
-      targettedBuilding.own = value;
-
-      return {
-        data: {
-          ...state.data,
-          building: state.data.building.map((b) => b.name === name ? targettedBuilding : b),
-        },
-      };
-    }),
-    toggleUpgradeOwn: (type, name) => set((state) => {
-      if (!state.data) {
-        return state;
-      }
-
-      const targetUpgrade = state.data[type].find((u) => u.name === name);
-
-      if (!targetUpgrade || Number(targetUpgrade.name) === -1) {
-        return state;
-      }
-
-      targetUpgrade.own = !targetUpgrade.own;
-
-      return {
-        data: {
-          ...state.data,
-          [type]: state.data[type].map((u) => u.name === name ? targetUpgrade : u),
-        },
-      };
-    }),
-    selectCPS: (name) => set((state) => {
-      if (!state.data) {
-        return state;
-      }
-
-      const targetCPS = state.data.CPS.find((c) => c.name === name);
-
-      if (!targetCPS || Number(name) === -1) {
-        return state;
-      }
-
-      if (!targetCPS.own) {
-        targetCPS.own = true;
-      }
-
-      const playerCps = state.data.CPS.map((c) => c.name === targetCPS.name ? targetCPS : c);
-
-      let targetReached = false;
-
-      for (const c of playerCps) {
-        if (!targetReached && targetCPS.own) {
-          c.own = true;
-        }
-        if (c.name === targetCPS.name) {
-          targetReached = true;
-          continue;
-        }
-        if (targetReached) {
-          c.own = false;
-        }
-      }
-
-      return {
-        selectedCPS: targetCPS.own ? (targetCPS.index ?? -1) : -1,
-        data: {
-          ...state.data,
-          CPS: playerCps,
-        },
-      };
-    }),
-    buyBuildingByIndex: (index) => set((state) => {
-      if (!state.data) {
-        return state;
-      }
-
-      const targettedBuilding = state.data.building[index];
-
-      if (!targettedBuilding) {
-        return state;
-      }
-
-      targettedBuilding.own += 1;
+    targettedBuilding.own += 1;
 
 
-      return {
-        data: {
-          ...state.data,
-          building: state.data.building.map((b, i) => i === index ? targettedBuilding : b),
-        },
-      };
-    }),
-    checkVersion: () => set((state) => {
+    setState({
+      ...state,
+      data: {
+        ...state.data,
+        building: state.data.building.map((b, i) => i === index ? targettedBuilding : b),
+      },
+    });
+  }
+  const checkVersion = () => {
+    const r = () => {
       if (state.data && state.version !== constants.version) {
-        return initialState;
+        setState(initialState);
       }
+    }
+  };
 
-      return state;
-    }),
-  }),
-  {
-    name: storageKey,
-    storage: createJSONStorage(() => localStorage)
-  },
-)
+  return {
+    data: state.data,
+    selectedCPS: -1,
+    version: 10,
+    setPlayerInfo,
+    checkVersion,
+    buyBuildingByIndex,
+    selectCPS,
+    setBuildingOwn,
+    decreaseMetierLevel,
+    increaseMetierLevel,
+    reset,
+    toggleUpgradeOwn
+  };
+}
 
 export const useMetierToReachStore = create(
   (set, get) => ({
@@ -304,3 +362,5 @@ export const useMetierToReachStore = create(
     storage: createJSONStorage(() => localStorage)
   },
 )
+
+export const usePlayerInfoStore = (): ControllerType => useContext(PlayerInfoContext);

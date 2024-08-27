@@ -8,7 +8,6 @@ import "./MetierList.css";
 import constants from "@/lib/constants.ts";
 import { safeJoinPaths } from "@/lib/misc.ts";
 import Image from "next/image";
-import { usePlayerInfo } from "@/components/shared/PlayerProvider";
 
 type MetierListProps = {
   editable?: boolean;
@@ -17,7 +16,7 @@ type MetierListProps = {
 const MetierList = ({ editable = true }: MetierListProps) => {
   const { increaseMetierLevel, decreaseMetierLevel } = usePlayerInfoStore();
 
-  const {data: playerInfo} = usePlayerInfo();
+  const {data: playerInfo} = usePlayerInfoStore();
 
   if (!playerInfo) {
     return <div>Loading...</div>;

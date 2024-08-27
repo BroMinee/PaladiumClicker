@@ -7,15 +7,12 @@ import Setting from "@/components/shared/Setting.tsx";
 import { safeJoinPaths } from "@/lib/misc.ts";
 import ShareButton from "@/components/shared/ShareButton.tsx";
 import constants from "@/lib/constants.ts";
-import { usePlayerInfoStore } from "@/stores/use-player-info-store";
 import Link from "next/link";
-
 import Image from "next/image";
-import { usePlayerInfo } from "@/components/shared/PlayerProvider";
+import { usePlayerInfoStore } from "@/stores/use-player-info-store";
 
 const Navbar = () => {
-  const { data: playerInfo, reset } = usePlayerInfo();
-  console.log(playerInfo);
+  const { data: playerInfo, reset } = usePlayerInfoStore();
   return (
     <nav className="container flex items-center justify-between h-full gap-4">
       <MobileNav/>
@@ -57,7 +54,7 @@ const Navbar = () => {
 export default Navbar;
 
 const MobileNav = () => {
-  const { data: playerInfo, reset } = usePlayerInfo();
+  const { data: playerInfo, reset } = usePlayerInfoStore();
   return (
     <Sheet>
       <SheetTrigger asChild>
