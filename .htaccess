@@ -17,9 +17,9 @@ RewriteRule ^(.*) https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
   RewriteCond %{REQUEST_FILENAME} !-d
   RewriteRule ^v1(/.*)?$ - [L]
   RewriteRule ^index\.html$ - [L]
-  RewriteCond %{REQUEST_FILENAME} !-f
-  RewriteCond %{REQUEST_FILENAME} !-d
-  RewriteRule . /index.html [L]
+  RewriteCond %{REQUEST_FILENAME} -f
+  RewriteCond %{REQUEST_FILENAME} -d
+  RewriteRule ^(.*[^/])$ /$1/index.html [L]
 </IfModule>
 RewriteCond %{HTTP_HOST} ^bromine\.fr$ [OR]
 RewriteCond %{HTTP_HOST} ^www\.bromine\.fr$
