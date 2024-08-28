@@ -15,7 +15,7 @@ const Contributors = () => {
       pseudo: "Hyper23_",
       uuid: "74b0f9b7-89ca-42ea-a93b-93681c9c83a3",
       description: "Fournisseur de données pour le PalaClicker",
-      url: "https://palatracker.bromine.fr/Hyper23_/optimizer-clicker",
+      url: "https://palatracker.bromine.fr/optimizer-clicker/Hyper23_",
       urlImg: `https://crafatar.com/avatars/74b0f9b7-89ca-42ea-a93b-93681c9c83a3?size=8&overlay`
     },
     {

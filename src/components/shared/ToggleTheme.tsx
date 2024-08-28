@@ -1,3 +1,4 @@
+'use client';
 import { Button } from "@/components/ui/button";
 import { useTheme } from "@/components/shared/ThemeProvider";
 import { FaMoon, FaSun } from "react-icons/fa";
