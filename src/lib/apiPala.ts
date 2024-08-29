@@ -302,9 +302,7 @@ const getInitialPlayerInfo = async (): Promise<PlayerInfo> => {
 //   return data;
 // }
 //
-// export const getAhItemData = async () => {
-//   return await fetchLocal<AhPaladium[]>("/AhAssets/items_list.json");
-// }
+
 
 export const getPaladiumAhItemFullHistory = async (itemId: string): Promise<AhItemHistory[]> => {
   const response = await axios.get<PaladiumAhHistory>(`${PALADIUM_API_URL}/v1/paladium/shop/market/items/${itemId}/history?limit=100&offset=0`);

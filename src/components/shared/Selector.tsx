@@ -2,7 +2,7 @@ import Select, { StylesConfig } from "react-select";
 import makeAnimated from 'react-select/animated';
 import { useState } from "react";
 
-// Définition des styles personnalisés pour react-select
+
 const customStyles: StylesConfig<OptionType, false> = {
   control: (provided, state) => ({
     ...provided,
