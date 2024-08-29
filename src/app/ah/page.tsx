@@ -17,7 +17,7 @@ import LoadingSpinner from "@/components/ui/loading-spinner.tsx";
 import MarketSelector from "@/components/AhTracker/MarketSelector.tsx";
 import QuantitySelectorDisplay from "@/components/AhTracker/QuantitySelectorDisplay.tsx";
 
-export default function AhTrackerPage({ searchParams }: { searchParams: { selectedItem: string | undefined } }) {
+export default function AhTrackerPage({ searchParams }: { searchParams: { item: string | undefined } }) {
   return (
     <div className="flex flex-col gap-4">
       <Card>
@@ -47,17 +47,17 @@ export default function AhTrackerPage({ searchParams }: { searchParams: { select
         <CardContent className="gap-2 flex flex-col pt-4">
           <MarketSelector/>
         </CardContent>
-        {searchParams.selectedItem ?
-          <Suspense fallback={<QuantitySelectorDisplayFallBack selectedItem={searchParams.selectedItem}/>}>
-            <QuantitySelectorDisplay selectedItem={searchParams.selectedItem}/>
+        {searchParams.item ?
+          <Suspense fallback={<QuantitySelectorDisplayFallBack selectedItem={searchParams.item}/>}>
+            <QuantitySelectorDisplay selectedItem={searchParams.item}/>
           </Suspense>
           :
           null}
       </Card>
       <div className="w-full">
-        {searchParams.selectedItem ?
-          <Suspense fallback={<GraphItemFallback selectedItem={searchParams.selectedItem}/>}>
-            <GraphItem selectedItem={searchParams.selectedItem}/>
+        {searchParams.item ?
+          <Suspense fallback={<GraphItemFallback selectedItem={searchParams.item}/>}>
+            <GraphItem selectedItem={searchParams.item}/>
           </Suspense>
           :
           <Card className="col-start-1 col-span-4 w-full">

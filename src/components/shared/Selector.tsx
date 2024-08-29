@@ -1,3 +1,4 @@
+'use client';
 import Select, { StylesConfig } from "react-select";
 import makeAnimated from 'react-select/animated';
 import { useState } from "react";

@@ -8,7 +8,6 @@ import { formatPrice, GetAllFileNameInFolder, levensteinDistance } from "@/lib/m
 import SmallCardInfo from "@/components/shared/SmallCardInfo.tsx";
 
 import itemListJson from "@/assets/items_list.json";
-import ItemListJson from "@/assets/items_list.json";
 
 export default async function QuantitySelectorDisplay({ selectedItem }: { selectedItem: string }) {
   let itemInfo = null as PaladiumAhItemStat | null;
