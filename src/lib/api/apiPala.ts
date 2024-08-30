@@ -9,7 +9,8 @@ import {
   CPS,
   GlobalUpgrade,
   ManyUpgrade,
-  Metiers, MetiersPossiblyUndefined,
+  Metiers,
+  MetiersPossiblyUndefined,
   PaladiumAhHistory,
   PaladiumAhItemStat,
   PaladiumClickerData,
@@ -47,18 +48,14 @@ export const isApiDown = async (): Promise<boolean> => {
   let response = null;
 
   try {
-    response = await fetch(`${PALADIUM_API_URL}/v1/status`,
-      {
-        cache: 'no-cache',
-        signal: AbortSignal.timeout(4000),
-        headers: {
-          'Authorization': `Bearer ${process.env.PALADIUM_API_KEY}`
-        }
-      })
+    response = await fetch(`${PALADIUM_API_URL}/v1/status`, {
+      cache: 'no-cache', signal: AbortSignal.timeout(4000), headers: {
+        'Authorization': `Bearer ${process.env.PALADIUM_API_KEY}`
+      }
+    })
     await response.json();
 
-    if (!response.ok)
-      return true;
+    if (!response.ok) return true;
   } catch (error) {
     return true;
   }
@@ -140,15 +137,13 @@ export const getPlayerInfo = async (pseudo: string): Promise<PlayerInfo> => {
 
   clickerData.buildings.forEach((building) => {
     const buildingIndex = translateBuildingName[building["name"]];
-    if (buildingIndex === undefined)
-      throw `Unknown building name : '${building["name"]}', please contact the developer to fix it`;
+    if (buildingIndex === undefined) throw `Unknown building name : '${building["name"]}', please contact the developer to fix it`;
     initialPlayerInfo["building"][buildingIndex].own = building["quantity"];
     initialPlayerInfo["production"] += building["production"];
   })
   clickerData.upgrades.forEach((upgrade) => {
     const pathToFollow = translateBuildingUpgradeName[upgrade];
-    if (pathToFollow === undefined)
-      throw `Unknown upgrade name : '${upgrade}', please contact the developer to fix it`;
+    if (pathToFollow === undefined) throw `Unknown upgrade name : '${upgrade}', please contact the developer to fix it`;
 
     const [translatedUpgrade, translatedPosition] = pathToFollow;
 
@@ -163,7 +158,6 @@ export const getPlayerInfo = async (pseudo: string): Promise<PlayerInfo> => {
 
   const friendsList = friendList;
 
-  initialPlayerInfo.faction = { name: paladiumProfil.faction === "" ? "Wilderness" : paladiumProfil.faction };
   initialPlayerInfo.firstJoin = paladiumProfil.firstJoin;
   initialPlayerInfo.friends = friendsList;
   initialPlayerInfo.money = paladiumProfil.money;
@@ -206,7 +200,20 @@ const getInitialPlayerInfo = (): PlayerInfo => {
     posterior_upgrade: posteriorUpgrade,
     terrain_upgrade: terrainUpgrade,
     production: 0.5,
-    faction: { name: "Wilderness" },
+    faction: {
+
+      access: "INVITATION", createdAt: 1707909089647, description: "Zone libre", emblem: {
+        backgroundColor: -1,
+        backgroundId: 0,
+        borderColor: -1,
+        forcedTexture: "Wilderness",
+        foregroundColor: -1,
+        foregroundId: 0,
+        iconBorderColor: -1,
+        iconColor: -1,
+        iconId: 0,
+      }, level: { level: 1, xp: 0 }, name: "Wilderness", players: [], uuid: "00000000-0000-0000-0000-000000000000"
+    },
     firstJoin: 0,
     friends: { data: [], totalCount: 0 },
     money: 0,

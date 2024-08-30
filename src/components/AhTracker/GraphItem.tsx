@@ -7,7 +7,6 @@ import PlotTest from "@/components/AhTracker/PlotTest.tsx";
 import { Card } from "@/components/ui/card.tsx";
 
 
-
 export default async function GraphItem({ selectedItem }: { selectedItem: string }) {
   let data = [] as AhItemHistory[];
   try {

@@ -10,7 +10,7 @@ interface CanvasWithTextProps {
 
 
 // TODO: {...props}
-const CanvasWithText: React.FC<CanvasWithTextProps> = ({ text , className, height, width}) => {
+const CanvasWithText: React.FC<CanvasWithTextProps> = ({ text, className, height, width }) => {
   const { theme } = useTheme();
 
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -41,7 +41,7 @@ const CanvasWithText: React.FC<CanvasWithTextProps> = ({ text , className, heigh
     context.fillText(text, x, y);
 
 
-  }, [text,theme]);
+  }, [text, theme]);
 
   return (
     <canvas

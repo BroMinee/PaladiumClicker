@@ -16,7 +16,7 @@ const SmallCardInfo = ({ className, title, value, img }: SmallCardInfoProps) => 
     <CardContent className={cn(className, "h-full pt-6 flex items-center gap-4")}>
       <Image src={safeJoinPaths(img)} alt={img}
              className="h-12 w-12 pixelated mr-2 rounded-md" width={48} height={48}
-            unoptimized={img.includes(".gif") || img.includes(".webp")}
+             unoptimized={img.includes(".gif") || img.includes(".webp")}
       />
       <div className="flex flex-col gap-2">
         <span className="font-semibold">{title}</span>

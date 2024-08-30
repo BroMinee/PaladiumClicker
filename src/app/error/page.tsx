@@ -12,8 +12,9 @@ import {
 } from "@/components/ui/TestApiOnError.tsx";
 import { Suspense } from "react";
 
-export default function Error500Page({ searchParams }: { searchParams: { [key: string]: string | string[] | undefined } })
-{
+export default function Error500Page({ searchParams }: {
+  searchParams: { [key: string]: string | string[] | undefined }
+}) {
   if (Array.isArray(searchParams.username)) {
     return (<Card>
       Pourquoi tu donnes une array en query params ?
@@ -65,14 +66,16 @@ export default function Error500Page({ searchParams }: { searchParams: { [key: s
               <div>
                 <TbClockHour5 className="text-red-500"/>
               </div>
-              Si tu viens de commencer le jeu il y a moins de 24h en général ton profile n&apos;est pas encore chargeable, il
+              Si tu viens de commencer le jeu il y a moins de 24h en général ton profile n&apos;est pas encore
+              chargeable, il
               faut attendre encore un peu.
             </li>
             <li className="flex items-center gap-2">
               <div>
                 <IoHourglassOutline className="text-red-500"/>
               </div>
-              &quot;Rate limit exceeded for this resource.&quot;, nous sommes actuellements surchargés, merci de réessayer plus
+              &quot;Rate limit exceeded for this resource.&quot;, nous sommes actuellements surchargés, merci de
+              réessayer plus
               tard.
             </li>
           </ul>

@@ -35,7 +35,9 @@
     "own": false,
     "price": 47250,
     "condition": [
-      {"day": 3},
+      {
+        "day": 3
+      },
       {
         "index": 2,
         "own": 3
@@ -48,7 +50,9 @@
     "own": false,
     "price": 112500,
     "condition": [
-      {"day": 5},
+      {
+        "day": 5
+      },
       {
         "index": 3,
         "own": 3
@@ -61,7 +65,9 @@
     "own": false,
     "price": 247500,
     "condition": [
-      {"day": 8},
+      {
+        "day": 8
+      },
       {
         "index": 4,
         "own": 3
@@ -74,7 +80,9 @@
     "own": false,
     "price": 607500,
     "condition": [
-      {"day": 11},
+      {
+        "day": 11
+      },
       {
         "index": 5,
         "own": 3
@@ -87,7 +95,9 @@
     "own": false,
     "price": 1125000,
     "condition": [
-      {"day": 14},
+      {
+        "day": 14
+      },
       {
         "index": 6,
         "own": 3
@@ -100,7 +110,9 @@
     "own": false,
     "price": 2835000,
     "condition": [
-      {"day": 16},
+      {
+        "day": 16
+      },
       {
         "index": 7,
         "own": 3
@@ -113,7 +125,9 @@
     "own": false,
     "price": 5850000,
     "condition": [
-      {"day": 19},
+      {
+        "day": 19
+      },
       {
         "index": 8,
         "own": 3
@@ -126,7 +140,9 @@
     "own": false,
     "price": 14175000,
     "condition": [
-      {"day": 22},
+      {
+        "day": 22
+      },
       {
         "index": 9,
         "own": 3
@@ -139,7 +155,9 @@
     "own": false,
     "price": 28350000,
     "condition": [
-      {"day": 24},
+      {
+        "day": 24
+      },
       {
         "index": 10,
         "own": 3
@@ -152,7 +170,9 @@
     "own": false,
     "price": 54000000,
     "condition": [
-      {"day": 27},
+      {
+        "day": 27
+      },
       {
         "index": 11,
         "own": 3
@@ -165,7 +185,9 @@
     "own": false,
     "price": 103500000,
     "condition": [
-      {"day": 30},
+      {
+        "day": 30
+      },
       {
         "index": 12,
         "own": 3
@@ -178,7 +200,9 @@
     "own": false,
     "price": 231750000,
     "condition": [
-      {"day": 34},
+      {
+        "day": 34
+      },
       {
         "index": 13,
         "own": 3
@@ -191,7 +215,9 @@
     "own": false,
     "price": 495000000,
     "condition": [
-      {"day": 39},
+      {
+        "day": 39
+      },
       {
         "index": 14,
         "own": 3
@@ -204,7 +230,9 @@
     "own": false,
     "price": 855000000,
     "condition": [
-      {"day": 43},
+      {
+        "day": 43
+      },
       {
         "index": 15,
         "own": 3
@@ -217,7 +245,9 @@
     "own": false,
     "price": 11875,
     "condition": [
-      {"day": 1},
+      {
+        "day": 1
+      },
       {
         "index": 0,
         "own": 7
@@ -230,7 +260,9 @@
     "own": false,
     "price": 46550,
     "condition": [
-      {"day": 1},
+      {
+        "day": 1
+      },
       {
         "index": 1,
         "own": 7
@@ -243,7 +275,9 @@
     "own": false,
     "price": 99750,
     "condition": [
-      {"day": 4},
+      {
+        "day": 4
+      },
       {
         "index": 2,
         "own": 7
@@ -256,7 +290,9 @@
     "own": false,
     "price": 237500,
     "condition": [
-      {"day": 6},
+      {
+        "day": 6
+      },
       {
         "index": 3,
         "own": 7
@@ -269,7 +305,9 @@
     "own": false,
     "price": 522500,
     "condition": [
-      {"day": 9},
+      {
+        "day": 9
+      },
       {
         "index": 4,
         "own": 7
@@ -282,7 +320,9 @@
     "own": false,
     "price": 1282500,
     "condition": [
-      {"day": 12},
+      {
+        "day": 12
+      },
       {
         "index": 5,
         "own": 7
@@ -295,7 +335,9 @@
     "own": false,
     "price": 2375000,
     "condition": [
-      {"day": 15},
+      {
+        "day": 15
+      },
       {
         "index": 6,
         "own": 7
@@ -308,7 +350,9 @@
     "own": false,
     "price": 5985000,
     "condition": [
-      {"day": 17},
+      {
+        "day": 17
+      },
       {
         "index": 7,
         "own": 7
@@ -321,7 +365,9 @@
     "own": false,
     "price": 12350000,
     "condition": [
-      {"day": 20},
+      {
+        "day": 20
+      },
       {
         "index": 8,
         "own": 7
@@ -334,7 +380,9 @@
     "own": false,
     "price": 29925000,
     "condition": [
-      {"day": 23},
+      {
+        "day": 23
+      },
       {
         "index": 9,
         "own": 7
@@ -347,7 +395,9 @@
     "own": false,
     "price": 59850000,
     "condition": [
-      {"day": 25},
+      {
+        "day": 25
+      },
       {
         "index": 10,
         "own": 7
@@ -360,7 +410,9 @@
     "own": false,
     "price": 114000000,
     "condition": [
-      {"day": 28},
+      {
+        "day": 28
+      },
       {
         "index": 11,
         "own": 7
@@ -373,7 +425,9 @@
     "own": false,
     "price": 218500000,
     "condition": [
-      {"day": 31},
+      {
+        "day": 31
+      },
       {
         "index": 12,
         "own": 7
@@ -386,7 +440,9 @@
     "own": false,
     "price": 489250000,
     "condition": [
-      {"day": 35},
+      {
+        "day": 35
+      },
       {
         "index": 13,
         "own": 7
@@ -399,7 +455,9 @@
     "own": false,
     "price": 1045000000,
     "condition": [
-      {"day": 40},
+      {
+        "day": 40
+      },
       {
         "index": 14,
         "own": 7
@@ -412,7 +470,9 @@
     "own": false,
     "price": 1805000000,
     "condition": [
-      {"day": 44},
+      {
+        "day": 44
+      },
       {
         "index": 15,
         "own": 7

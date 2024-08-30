@@ -7,7 +7,6 @@ import { ScrollArea } from "@/components/ui/scroll-area.tsx";
 import { safeJoinPaths } from "@/lib/misc.ts";
 
 
-
 const FallingClickImagePalaTime = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const [openEvent, setOpenEvent] = useState(false);
@@ -61,24 +60,24 @@ const FallingClickImagePalaTime = () => {
   }, []);
 
 
-    return (<div ref={containerRef} className="z-[-1]">
-      <Dialog open={openEvent} onOpenChange={() => setOpenEvent(false)}>
-        <DialogContent className="px-0 pb-0 max-w-4xl">
-          <DialogHeader className="px-6">
-            <DialogTitle className="text-primary">Easter egg Palatime</DialogTitle>
-          </DialogHeader>
-          <ScrollArea className="h-[10dvh] px-6 border-t">
-            <div className="py-2">
-              <div className="flex flex-col gap-2 pb-2">
-                <h3 className="font-bold">Bien joué tu as trouvé un easter egg !</h3>
-                <h3 className="font-bold">Malheureusement il est trop tard pour gagné le <GradientText
-                  className="font-extrabold">bonus</GradientText>. Il fallait être plus rapide !</h3>
-              </div>
+  return (<div ref={containerRef} className="z-[-1]">
+    <Dialog open={openEvent} onOpenChange={() => setOpenEvent(false)}>
+      <DialogContent className="px-0 pb-0 max-w-4xl">
+        <DialogHeader className="px-6">
+          <DialogTitle className="text-primary">Easter egg Palatime</DialogTitle>
+        </DialogHeader>
+        <ScrollArea className="h-[10dvh] px-6 border-t">
+          <div className="py-2">
+            <div className="flex flex-col gap-2 pb-2">
+              <h3 className="font-bold">Bien joué tu as trouvé un easter egg !</h3>
+              <h3 className="font-bold">Malheureusement il est trop tard pour gagné le <GradientText
+                className="font-extrabold">bonus</GradientText>. Il fallait être plus rapide !</h3>
             </div>
-          </ScrollArea>
-        </DialogContent>
-      </Dialog>
-    </div>);
+          </div>
+        </ScrollArea>
+      </DialogContent>
+    </Dialog>
+  </div>);
 }
 
 export default FallingClickImagePalaTime;

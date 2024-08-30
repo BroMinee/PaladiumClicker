@@ -21,18 +21,18 @@ export default function Setting() {
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button size="icon" variant="ghost">
-          <IoSettings />
+          <IoSettings/>
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" className="w-56">
         <DropdownMenuLabel>Paramètres</DropdownMenuLabel>
-        <DropdownMenuSeparator />
+        <DropdownMenuSeparator/>
         <DropdownMenuItem
           onSelect={(event) => event.preventDefault()}
           className="flex items-center justify-between"
         >
           <span>Images tombantes</span>
-          <Switch checked={settings.fallingImage} onCheckedChange={setFallingImage} />
+          <Switch checked={settings.fallingImage} onCheckedChange={setFallingImage}/>
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>

@@ -6,7 +6,7 @@ import { toast } from "sonner";
 
 export default function ShareButton() {
   function OnClick() {
-    if(typeof window === "undefined")
+    if (typeof window === "undefined")
       return;
 
     if (navigator.clipboard === undefined)

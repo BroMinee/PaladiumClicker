@@ -10,7 +10,7 @@ import SmallCardInfo from "@/components/shared/SmallCardInfo.tsx";
 import itemListJson from "@/assets/items_list.json";
 
 export default async function QuantitySelectorDisplay({ selectedItem }: { selectedItem: string }) {
-    let itemInfo = null as PaladiumAhItemStat | null;
+  let itemInfo = null as PaladiumAhItemStat | null;
   try {
     itemInfo = await getPaladiumAhItemStats(selectedItem);
   } catch (e) {

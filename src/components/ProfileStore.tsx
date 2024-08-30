@@ -5,7 +5,7 @@ import { useEffect } from "react";
 import { PlayerInfo } from "@/types";
 
 
-export default function ProfileStore({data, children} : {data: PlayerInfo, children: React.ReactNode}) {
+export default function ProfileStore({ data, children }: { data: PlayerInfo, children: React.ReactNode }) {
   const { setPlayerInfo } = usePlayerInfoStore();
   useEffect(() => {
     setPlayerInfo(data);

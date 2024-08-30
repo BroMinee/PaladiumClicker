@@ -1,18 +1,24 @@
-import ProfileFetcher from "@/components/ProfileFetcher.tsx";
-import { Suspense } from "react";
-import LoadingData from "@/components/LoadingData.tsx";
-import ComponentThatNeedsData2 from "@/components/ComponentThatNeedsData2.tsx";
+import ProfileFetcherWrapper from "@/components/ProfileFetcher.tsx";
+import MetierList from "@/components/MetierList.tsx";
+import HeadingSection from "@/components/shared/HeadingSection.tsx";
+import ProfilInfo from "@/components/Profil/ProfilInfo.tsx";
+import AhInfo from "@/components/Profil/AhInfo.tsx";
+import FactionInfo from "@/components/Profil/FactionInfo.tsx";
+// import FactionInfo from "@/components/Profil/FactionInfo.tsx";
 
 
 export default function Home({ params }: { params: { username: string } }) {
-
   return (
     <div className="text-primary">
-      <Suspense fallback={<LoadingData username={params.username}/>}>
-        <ProfileFetcher username={params.username}>
-          <ComponentThatNeedsData2/>
-        </ProfileFetcher>
-      </Suspense>
+      <ProfileFetcherWrapper username={params.username}>
+        <div className="flex flex-col gap-4">
+          <ProfilInfo/>
+          <MetierList editable={false}/>
+          <AhInfo/>
+          <HeadingSection>Informations de faction</HeadingSection>
+          <FactionInfo/>
+        </div>
+      </ProfileFetcherWrapper>
     </div>
   )
 }

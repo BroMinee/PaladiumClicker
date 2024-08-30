@@ -93,7 +93,7 @@ export const getNewQuestionPalaAnimation = async (username: string): Promise<{
   }
 
   const decrypted = await decryptAES256(response.data, process.env.VITE_CRYPT_KEY!);
-  return JSON.parse(decrypted) as {question: string, session_uuid: string};
+  return JSON.parse(decrypted) as { question: string, session_uuid: string };
 }
 
 export const checkAnswerPalaAnimation = async (answer: string, session_uuid: string, keyPressTimestamp: KeyDownTimestampType[], user_time: number): Promise<checkAnswerPalaAnimationType> => {

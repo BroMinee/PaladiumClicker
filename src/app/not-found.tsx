@@ -21,7 +21,8 @@ export default function NotFound() {
               > 4
               </div>
             </div>
-            <p className="mb-4 text-3xl tracking-tight font-bold md:text-4xl text-white">Désolé, cette page n&apos;existe
+            <p className="mb-4 text-3xl tracking-tight font-bold md:text-4xl text-white">Désolé, cette page
+              n&apos;existe
               pas.</p>
             <p className="mb-4 text-lg font-light text-gray-400">Si vous êtes persuadé que cette page devrait exister,
               merci de contacter un développeur.</p>

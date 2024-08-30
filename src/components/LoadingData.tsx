@@ -9,7 +9,8 @@ export default function LoadingData({ username }: { username: string | undefined
         <CardHeader className="flex flex-row gap-4">
           <LoadingSpinner/>
           {username === undefined ? <p>Chargement des données...</p> :
-            <p> Téléchargement des données pour l&aposutilisateur : <span className="text-primary">{username}</span></p>
+            <p> Téléchargement des données pour l&apos;utilisateur : <span className="text-primary">{username}</span>
+            </p>
           }
         </CardHeader>
       </Card>

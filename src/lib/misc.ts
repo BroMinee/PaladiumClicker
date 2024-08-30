@@ -1,5 +1,7 @@
 // @ts-nocheck - A RETIRER APRES AVOIR CORRIGE LE FICHIER
 import type { AnyCondition, PlayerInfo } from "@/types";
+import { MetierKey } from "@/types";
+import constants from "@/lib/constants.ts";
 
 export function getTotalSpend(playerInfo: PlayerInfo) {
   let total = 0;
@@ -97,22 +99,22 @@ export function computePrice(priceLevel0: number, level: number) {
 export function getPathImg(bestListName: string, bestUpgradeIndex: number) {
   switch (bestListName) {
     case "building":
-      return safeJoinPaths( "/BuildingIcon/", `${bestUpgradeIndex}.png`);
+      return safeJoinPaths("/BuildingIcon/", `${bestUpgradeIndex}.png`);
     case "building_upgrade":
-      return safeJoinPaths( "/BuildingUpgradeIcon/", (bestUpgradeIndex < 16 ? "0" : "1") + ".png");
+      return safeJoinPaths("/BuildingUpgradeIcon/", (bestUpgradeIndex < 16 ? "0" : "1") + ".png");
     case "category_upgrade":
-      return safeJoinPaths( "/CategoryIcon/", `${bestUpgradeIndex}.png`);
+      return safeJoinPaths("/CategoryIcon/", `${bestUpgradeIndex}.png`);
     case "global_upgrade":
-      return safeJoinPaths( "/GlobalIcon/", `${bestUpgradeIndex}.png`);
+      return safeJoinPaths("/GlobalIcon/", `${bestUpgradeIndex}.png`);
     case "many_upgrade":
-      return safeJoinPaths( "/ManyIcon/0.png");
+      return safeJoinPaths("/ManyIcon/0.png");
     case "terrain_upgrade":
-      return safeJoinPaths( "/TerrainIcon/", `${bestUpgradeIndex}.png`);
+      return safeJoinPaths("/TerrainIcon/", `${bestUpgradeIndex}.png`);
     case "posterior_upgrade":
-      return safeJoinPaths( "/PosteriorIcon/0.png");
+      return safeJoinPaths("/PosteriorIcon/0.png");
     default:
       alert("Error in bestListName");
-      return safeJoinPaths( "/BuildingUpgradeIcon/0.png");
+      return safeJoinPaths("/BuildingUpgradeIcon/0.png");
   }
 }
 
@@ -168,6 +170,100 @@ export function safeJoinPaths(base: string, ...paths: string[]): string {
   const allPaths = ["/" + base, ...paths];
   const result = allPaths.join('/');
   return result.replace(/\/+/g, '/');
+}
+
+export function getRankImg(rank: string) {
+  if (rank === "Default") {
+    return "dirt.png";
+  } else if (rank === "Titan") {
+    return "titan.png";
+  } else if (rank === "Paladin") {
+    return "paladin.png";
+  } else if (rank === "Endium") {
+    return "endium.png";
+  } else if (rank === "Trixium") {
+    return "trixium.png";
+  } else if (rank === "Trixium+") {
+    return "trixium+.png";
+  } else if (rank === "Youtuber") {
+    return "youtuber.png";
+  } else {
+    return "unknown.png"
+  }
+}
+
+
+export function computeTimePlayed(timeInMinutes: number) {
+  const minute = timeInMinutes % 60;
+  const hour = Math.floor(timeInMinutes / 60) % 24;
+  const day = Math.floor(timeInMinutes / 60 / 24);
+  let res = "";
+  if (day > 0) {
+    res += day + "j ";
+  }
+  if (hour > 0) {
+    res += hour + "h ";
+  }
+  res += minute + "m";
+
+  return res;
+}
+
+export function convertEpochToDateUTC2(epoch: number | undefined) {
+  if (!epoch) return "Error";
+  const date = new Date(0); // The 0 there is the key, which sets the date to the epoch
+  date.setUTCSeconds(epoch / 1000);
+  return date.toLocaleString();
+}
+
+export function getXpCoef(level: number, currentXp: number) {
+  if (level === 100)
+    return 1;
+  if (currentXp === 0)
+    return 0;
+  return (currentXp - constants.metier_palier[level - 1]) / constants.metier_xp[level];
+}
+
+
+export const getColorByMetierName = (name: MetierKey) => {
+  let color = [0, 150, 0];
+  let bgColor = [0, 0, 0];
+
+  switch (name) {
+    case "miner":
+      color = [255, 47, 47];
+      bgColor = [255, 47, 47];
+      break;
+    case "farmer":
+      color = [199, 169, 33];
+      bgColor = [255, 209, 1];
+      break;
+    case "hunter":
+      color = [47, 103, 255];
+      bgColor = [47, 103, 255];
+      break;
+    case "alchemist":
+      color = [255, 100, 201];
+      bgColor = [255, 100, 201];
+  }
+
+  return { color, bgColor };
+}
+
+export function onClickLoadProfil(pseudo: string) {
+  alert(`Refacto alter TODO ${pseudo}`);
+  // // open url in a new tab
+  // if (pseudo.includes(" ") && pseudo.split(" ").length > 1)
+  //   pseudo = pseudo.split(" ")[1];
+  // const pseudoInput = document.getElementById("pseudo") as HTMLInputElement | null;
+  // const searchButton = document.getElementById("pseudo-submit");
+  // if (pseudoInput !== null && searchButton !== null) {
+  //   pseudoInput.value = pseudo;
+  //   searchButton.click();
+  //   pseudoInput.value = "";
+  //   console.log("TODO check that the both element selected are in the same div")
+  // }
+
 }
 
 export function GetAllFileNameInFolder() {
