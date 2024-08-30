@@ -1,13 +1,13 @@
 import ToggleTheme from "@/components/shared/ToggleTheme";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetHeader, SheetTrigger } from "@/components/ui/sheet";
-import ImportProfil from "@/pages/OptimizerClicker/Components/ImportProfil";
 import { FaBars } from "react-icons/fa";
 import Setting from "@/components/shared/Setting.tsx";
 import ShareButton from "@/components/shared/ShareButton.tsx";
 import constants from "@/lib/constants.ts";
 import Link from "next/link";
 import { LogoClient } from "@/components/ui/logoClient.tsx";
+import ImportProfil from "@/components/shared/ImportProfil.tsx";
 
 
 const Navbar = () => {

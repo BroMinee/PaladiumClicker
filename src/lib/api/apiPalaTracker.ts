@@ -1,5 +1,6 @@
 import { PalaAnimationLeaderboard, PalaAnimationLeaderboardGlobal, ProfilViewType } from "@/types";
 import { fetchWithHeader } from "@/lib/api/misc.ts";
+import { timeout } from "d3-timer";
 
 export const API_PALATRACKER = "https://palatracker.bromine.fr"
 
@@ -41,7 +42,7 @@ export const getAnswerPalaAnimation = async (session_uuid: string): Promise<{ an
 }
 
 export const getViewsFromUUID = async (uuid: string): Promise<ProfilViewType> => {
-  return await fetchWithHeader<ProfilViewType>(`${API_PALATRACKER}/v1/user/getUser/${uuid}`)
+  return await fetchWithHeader<ProfilViewType>(`${API_PALATRACKER}/v1/user/getUser/${uuid}`, 10);
 }
 
 export const pushNewUserEvent = async (username: string): Promise<void> => {

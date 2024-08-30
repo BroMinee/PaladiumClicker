@@ -97,7 +97,6 @@ export function FactionDetails() {
 
 export function FactionClassementClient({ factionLeaderboard }: { factionLeaderboard: PaladiumFactionLeaderboard }) {
   const { data: playerInfo } = usePlayerInfoStore();
-  console.log(factionLeaderboard);
   let factionIndex = -1;
   if (playerInfo && factionLeaderboard.length > 0)
     factionIndex = factionLeaderboard.findIndex((faction) => faction["name"] === playerInfo.faction.name) + 1;

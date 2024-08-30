@@ -5,7 +5,12 @@ import React from "react";
 import Navbar from "@/components/NavBar";
 import GradientText from "@/components/shared/GradientText";
 import ThemeProvider from "@/components/shared/ThemeProvider.tsx";
+import { Inter } from '@next/font/google';
 
+const inter = Inter({
+  subsets: ['latin'],  // specify subsets according to your needs
+  variable: '--font-inter', // optional variable to use in CSS
+});
 
 export default function RootLayout({
                                      // Layouts must accept a children prop.
@@ -15,7 +20,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="fr">
+    <html lang="fr" className={inter.className}>
     <body>
     <ThemeProvider defaultTheme="system" storageKey="theme">
       <div className="relative min-h-screen flex flex-col">

@@ -9,7 +9,7 @@ const discord = {
 const profilPath = "/profil";
 
 const calculatorXpPath = "/xp-calculator";
-const optimizerClickerPath = "/optimizer-clicker";
+const optimizerClickerPath = "/clicker-optimizer";
 
 const palaAnimationPath = "/pala-animation";
 

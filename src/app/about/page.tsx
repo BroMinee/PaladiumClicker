@@ -1,3 +1,4 @@
+'use client';
 import { Card, CardContent, CardHeader } from "@/components/ui/card.tsx";
 import { FaGithub } from "react-icons/fa";
 import Contributors from "@/components/Contributors.tsx";

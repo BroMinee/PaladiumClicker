@@ -9,16 +9,14 @@ import FactionInfo from "@/components/Profil/FactionInfo.tsx";
 
 export default function Home({ params }: { params: { username: string } }) {
   return (
-    <div className="text-primary">
-      <ProfileFetcherWrapper username={params.username}>
-        <div className="flex flex-col gap-4">
-          <ProfilInfo/>
-          <MetierList editable={false}/>
-          <AhInfo/>
-          <HeadingSection>Informations de faction</HeadingSection>
-          <FactionInfo/>
-        </div>
-      </ProfileFetcherWrapper>
-    </div>
+    <ProfileFetcherWrapper username={params.username}>
+      <div className="flex flex-col gap-4">
+        <ProfilInfo/>
+        <MetierList editable={false}/>
+        <AhInfo/>
+        <HeadingSection>Informations de faction</HeadingSection>
+        <FactionInfo/>
+      </div>
+    </ProfileFetcherWrapper>
   )
 }

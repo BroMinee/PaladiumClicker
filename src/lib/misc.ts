@@ -1,7 +1,13 @@
-// @ts-nocheck - A RETIRER APRES AVOIR CORRIGE LE FICHIER
-import type { AnyCondition, PlayerInfo } from "@/types";
+import type { AnyCondition, CPS, PlayerInfo, UpgradeKey } from "@/types";
 import { MetierKey } from "@/types";
 import constants from "@/lib/constants.ts";
+
+import globalUpgradeJson from "@/assets/global_upgrade.json";
+import terrainUpgradeJson from "@/assets/terrain_upgrade.json";
+import buildingUpgradeJson from "@/assets/building_upgrade.json";
+import manyUpgradeJson from "@/assets/many_upgrade.json";
+import posteriorUpgradeJson from "@/assets/posterior_upgrade.json";
+import categoryUpgradeJson from "@/assets/category_upgrade.json";
 
 export function getTotalSpend(playerInfo: PlayerInfo) {
   let total = 0;
@@ -13,14 +19,14 @@ export function getTotalSpend(playerInfo: PlayerInfo) {
     "many_upgrade",
     "terrain_upgrade",
     "posterior_upgrade",
-    "CPS",
-    "metier"
+    "CPS"
   ] as const;
 
-  for (const key in playerInfo) {
-    if (validKeys.includes(key as typeof validKeys[number])) {
-      const target = playerInfo[key as typeof validKeys[number]];
 
+  for (const key in playerInfo) {
+
+    if (validKeys.includes(key as typeof validKeys[number])) {
+      let target = playerInfo[key as typeof validKeys[number]]
       for (const element of target) {
         if (
           ("price" in element) &&
@@ -76,13 +82,22 @@ export function checkCondition(playerInfo: PlayerInfo, conditions: AnyCondition)
   const buildingIndex = getBuildingIndexCondition(conditions);
   const buildingNeed = getBuildingCountCondition(conditions);
   const daySinceStart = (new Date().getTime() - new Date("2024-02-18").getTime()) / (1000 * 60 * 60 * 24);
-  const buildingCount = buildingIndex === -1 ? -1 : playerInfo["building"][buildingIndex]["own"];
+  const buildingCount = buildingIndex === -1 ? -1 : playerInfo.building[buildingIndex].own;
 
   const unlockable = totalCoins >= coinsCondition &&
     daySinceStart >= dayCondition &&
     (buildingIndex === -1 ? true : Number(playerInfo.building[buildingIndex].own) >= buildingNeed); // TODO change day
 
-  return [unlockable, coinsCondition, totalCoins, dayCondition, daySinceStart, buildingIndex, buildingNeed, buildingCount];
+  return {
+    unlockable,
+    coinsCondition,
+    totalCoins,
+    dayCondition,
+    daySinceStart,
+    buildingIndex,
+    buildingNeed,
+    buildingCount
+  };
 }
 
 export function formatPrice(price: number | undefined) {
@@ -264,6 +279,137 @@ export function onClickLoadProfil(pseudo: string) {
   //   console.log("TODO check that the both element selected are in the same div")
   // }
 
+}
+
+export function scaleCurrentProduction(playerInfo: PlayerInfo, buildingIndex: number, level: number) {
+  if (level === 0 || level === -1)
+    return 0;
+  const newBaseProduction = scaleBaseProduction(playerInfo, buildingIndex)
+  return newBaseProduction * level;
+}
+
+function scaleBaseProduction(playerInfo: PlayerInfo, buildingIndex: number) {
+  const baseProduction = convertToFloat(playerInfo.building?.[buildingIndex].base_production)
+  const pourcentageBonus = getPourcentageBonus(playerInfo, buildingIndex)
+  return (baseProduction * pourcentageBonus);
+}
+
+function getPourcentageBonus(playerInfo: PlayerInfo, buildingIndex: number) {
+  function getBonusFromTerrain() {
+    const terrainUpgrades = playerInfo.terrain_upgrade
+      .filter((terrain) => terrain.own && terrain.active_list_index.includes(buildingIndex));
+    const targetedBuilding = playerInfo.building[buildingIndex];
+    let terrainPourcentage = 0;
+    if (terrainUpgrades.length > 1)
+      alert(`Error in getBonusFromTerrain function : more than one bonus from terrain for ${targetedBuilding.name}`);
+    else if (terrainUpgrades.length === 1) {
+      const terrainUpgrade = terrainUpgrades[0];
+      if (terrainUpgrade.name.includes("Mineur"))
+        terrainPourcentage += 0.01 * playerInfo.metier.miner.level;
+      else if (terrainUpgrade.name.includes("Farmer"))
+        terrainPourcentage += 0.01 * playerInfo.metier.farmer.level;
+      else if (terrainUpgrade.name.includes("Hunter"))
+        terrainPourcentage += 0.01 * playerInfo.metier.hunter.level;
+      else if (terrainUpgrade.name.includes("Alchimiste"))
+        terrainPourcentage += 0.01 * playerInfo.metier.alchemist.level;
+      else
+        alert(`Error in getBonusFromTerrain function : unknown bonus from terrain for ${playerInfo["building"][buildingIndex]["name"]}`);
+    }
+    return terrainPourcentage;
+  }
+
+  function getBonusFromGlobal() {
+    return playerInfo.global_upgrade
+      .filter((global) => global.own).length * 0.1;
+  }
+
+  function getBonusFromCategory() {
+    const categoryUpgrades = playerInfo.category_upgrade
+      .filter((category) => category.own && category.active_list_index.includes(buildingIndex))
+    const categoryPourcentage = categoryUpgrades.reduce((total, category) => total + category.pourcentage, 0);
+    return categoryPourcentage;
+  }
+
+  function getBonusFromMany() {
+    const manyUpgrades = playerInfo.many_upgrade
+      .filter((many) => many.own && many.active_index === buildingIndex);
+    const targetedBuilding = playerInfo.building[buildingIndex];
+    if (manyUpgrades.length > 1)
+      alert(`Error in getBonusFromMany function : more than one bonus from many for ${targetedBuilding.name}`);
+    else if (manyUpgrades.length === 1)
+      return Number(targetedBuilding.own) * 0.01;
+    return 0;
+  }
+
+  function getBonusFromBuild() {
+    const buildingUpgrades = playerInfo.building_upgrade
+      .filter((building) => building.own && building.active_index === buildingIndex);
+    const targetedBuilding = playerInfo.building[buildingIndex];
+    if (buildingUpgrades.length > 2)
+      alert(`Error in getBonusFromBuild function : more than one/two bonus from building for ${targetedBuilding.name}`)
+
+    return buildingUpgrades.length;
+  }
+
+  function getBonusFromPosterior() {
+    const posteriorUpgrades = playerInfo.posterior_upgrade
+      .filter((posterior) => posterior.own && posterior.active_index === buildingIndex);
+    const targetedBuilding = playerInfo.building[buildingIndex];
+    if (posteriorUpgrades.length > 1)
+      alert(`Error in getBonusFromPosterior function : more than one bonus from posterior for ${targetedBuilding.name}`)
+    if (posteriorUpgrades.length === 1) {
+      return Number(playerInfo.building[posteriorUpgrades[0].previous_index].own) * 0.01;
+    }
+    return 0;
+  }
+
+  const bonusFunctions = [
+    getBonusFromGlobal,
+    getBonusFromTerrain,
+    getBonusFromBuild,
+    getBonusFromMany,
+    getBonusFromPosterior,
+    getBonusFromCategory
+  ];
+
+  const pourcentageBonus = bonusFunctions.reduce((total, bonusFunction) => total + bonusFunction(), 1);
+
+  return pourcentageBonus;
+
+}
+
+
+function convertToFloat(str: string | number) {
+  if (typeof str === "number")
+    return str;
+  else if (typeof str === "string") {
+    return parseFloat(str.replace(/,/g, '.'));
+  }
+  return -1;
+}
+
+export function computeRPS(playerInfo: PlayerInfo) {
+  let rps = 0.5;
+  playerInfo.building.forEach((building, index) => {
+      if (building.own !== 0) {
+        rps += scaleCurrentProduction(playerInfo, index, Number(building.own));
+      }
+    }
+  )
+  return rps;
+}
+
+
+export function getJsonToUseForUpgrade(upgradeType: UpgradeKey) {
+  let jsonToUse = null;
+  if (upgradeType === "global_upgrade") return globalUpgradeJson;
+  else if (upgradeType === "building_upgrade") return buildingUpgradeJson;
+  else if (upgradeType === "category_upgrade") return categoryUpgradeJson;
+  else if (upgradeType === "many_upgrade") return manyUpgradeJson;
+  else if (upgradeType === "posterior_upgrade") return posteriorUpgradeJson;
+  else if (upgradeType === "terrain_upgrade") return terrainUpgradeJson;
+
+  return jsonToUse;
 }
 
 export function GetAllFileNameInFolder() {

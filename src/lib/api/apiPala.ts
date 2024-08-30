@@ -129,7 +129,8 @@ export const getPlayerInfo = async (pseudo: string): Promise<PlayerInfo> => {
   const [clickerData, ahInfo, friendList, metiers, leaderboardPosition, paladiumFactionInfo, viewCount] = await Promise.all([p1, p2, p3, p4, p5, p6, p7]);
 
 
-  initialPlayerInfo = getInitialPlayerInfo();
+  // NOTE: We use structuredClone to avoid modifying the original JSON by accident (it already happened once oupsy)
+  initialPlayerInfo = structuredClone(getInitialPlayerInfo());
 
   const translateBuildingName = translate_building_json as Record<string, number>;
   const translateBuildingUpgradeName = translate_upgrade_json as Record<string, (string | number)[]>;
@@ -137,13 +138,15 @@ export const getPlayerInfo = async (pseudo: string): Promise<PlayerInfo> => {
 
   clickerData.buildings.forEach((building) => {
     const buildingIndex = translateBuildingName[building["name"]];
-    if (buildingIndex === undefined) throw `Unknown building name : '${building["name"]}', please contact the developer to fix it`;
+    if (buildingIndex === undefined)
+      throw `Unknown building name : '${building["name"]}', please contact the developer to fix it`;
     initialPlayerInfo["building"][buildingIndex].own = building["quantity"];
     initialPlayerInfo["production"] += building["production"];
   })
   clickerData.upgrades.forEach((upgrade) => {
     const pathToFollow = translateBuildingUpgradeName[upgrade];
-    if (pathToFollow === undefined) throw `Unknown upgrade name : '${upgrade}', please contact the developer to fix it`;
+    if (pathToFollow === undefined)
+      throw `Unknown upgrade name : '${upgrade}', please contact the developer to fix it`;
 
     const [translatedUpgrade, translatedPosition] = pathToFollow;
 
@@ -153,6 +156,9 @@ export const getPlayerInfo = async (pseudo: string): Promise<PlayerInfo> => {
       targettedBuildingUpgrade.own = true;
     }
   });
+
+
+
 
   initialPlayerInfo.metier = metiers;
 
@@ -201,7 +207,6 @@ const getInitialPlayerInfo = (): PlayerInfo => {
     terrain_upgrade: terrainUpgrade,
     production: 0.5,
     faction: {
-
       access: "INVITATION", createdAt: 1707909089647, description: "Zone libre", emblem: {
         backgroundColor: -1,
         backgroundId: 0,

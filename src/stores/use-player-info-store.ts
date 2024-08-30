@@ -19,7 +19,7 @@ type Actions = {
   decreaseMetierLevel: (name: MetierKey, value: number, min?: number) => void;
   setBuildingOwn: (name: string, value: number) => void;
   toggleUpgradeOwn: (type: UpgradeKey, name: string) => void;
-  selectCPS: (name: string) => void;
+  selectCPS: (index: number) => void;
   buyBuildingByIndex: (index: number) => void;
   checkVersion: () => void;
 }
@@ -57,7 +57,7 @@ const initialStateToReach: StateMetierToReach =
     metierSelected: "alchimiste",
   };
 
-export const usePlayerInfoStore = create(persist<State & Actions>(
+export const usePlayerInfoStore = create<State & Actions>(persist<State & Actions>(
   (set) => ({
     ...initialState,
     setPlayerInfo: (playerInfo) => set(() => {
@@ -169,40 +169,31 @@ export const usePlayerInfoStore = create(persist<State & Actions>(
         },
       };
     }),
-    selectCPS: (name) => set((state) => {
+    selectCPS: (index) => set((state) => {
       if (!state.data) {
         return state;
       }
 
-      const targetCPS = state.data.CPS.find((c) => c.name === name);
-
-      if (!targetCPS || Number(name) === -1) {
+      if (index < 0 || index >= state.data.CPS.length)
         return state;
-      }
 
-      if (!targetCPS.own) {
-        targetCPS.own = true;
-      }
+      const playerCps = [...state.data.CPS];
 
-      const playerCps = state.data.CPS.map((c) => c.name === targetCPS.name ? targetCPS : c);
-
-      let targetReached = false;
-
-      for (const c of playerCps) {
-        if (!targetReached && targetCPS.own) {
-          c.own = true;
-        }
-        if (c.name === targetCPS.name) {
-          targetReached = true;
-          continue;
-        }
-        if (targetReached) {
-          c.own = false;
+      for (let i = 0; i < state.data.CPS.length; i++) {
+        if (i < index)
+          playerCps[i].own = true;
+        else if (i === index) {
+          playerCps[i].own = !playerCps[i].own;
+          if (state.data.CPS[index].own === true)
+            break;
+        } else if (i > index) {
+          playerCps[i].own = false;
         }
       }
+
 
       return {
-        selectedCPS: targetCPS.own ? (targetCPS.index ?? -1) : -1,
+        selectedCPS: index,
         data: {
           ...state.data,
           CPS: playerCps,
