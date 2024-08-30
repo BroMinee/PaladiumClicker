@@ -1,6 +1,6 @@
 import { Card, CardContent } from "@/components/ui/card.tsx";
 import { FaBoxOpen } from "react-icons/fa";
-import { getPaladiumAhItemStats } from "@/lib/apiPala.ts";
+import { getPaladiumAhItemStats } from "@/lib/api/apiPala.ts";
 import { PaladiumAhItemStat } from "@/types";
 import { redirect } from "next/navigation";
 import GradientText from "@/components/shared/GradientText.tsx";
@@ -10,7 +10,7 @@ import SmallCardInfo from "@/components/shared/SmallCardInfo.tsx";
 import itemListJson from "@/assets/items_list.json";
 
 export default async function QuantitySelectorDisplay({ selectedItem }: { selectedItem: string }) {
-  let itemInfo = null as PaladiumAhItemStat | null;
+    let itemInfo = null as PaladiumAhItemStat | null;
   try {
     itemInfo = await getPaladiumAhItemStats(selectedItem);
   } catch (e) {
@@ -33,7 +33,8 @@ export default async function QuantitySelectorDisplay({ selectedItem }: { select
     <div className="flex flex-row justify-evenly gap-3 pb-4">
       {selectedItem.length === 0 ? "" :
         <Card>
-          <SmallCardInfo title={itemListJson.find((item) => item.value === selectedItem)?.label} value="Image non contractuelle"
+          <SmallCardInfo title={itemListJson.find((item) => item.value === selectedItem)?.label || "Not Found"}
+                         value="Image non contractuelle"
                          img={`AH_img/${closestItemName}.png`}/>
         </Card>
       }

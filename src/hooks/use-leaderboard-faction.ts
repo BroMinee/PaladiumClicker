@@ -1,4 +1,4 @@
-import { getFactionLeaderboard } from "@/lib/apiPala.ts";
+import { getFactionLeaderboard } from "@/lib/api/apiPala.ts";
 import { usePlayerInfoStore } from "@/stores/use-player-info-store";
 import { useQuery } from "@tanstack/react-query";
 

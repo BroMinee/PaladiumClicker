@@ -1,7 +1,7 @@
 import 'server-only';
-import { getPlayerInfo, isApiDown } from "@/lib/apiPala.ts";
+import { getPlayerInfo, isApiDown } from "@/lib/api/apiPala.ts";
 import LoadingSpinner from "@/components/ui/loading-spinner.tsx";
-import { isMyApiDown } from "@/lib/apiPalaTracker.ts";
+import { isMyApiDown } from "@/lib/api/apiPalaTracker.ts";
 import { MdError } from "react-icons/md";
 import { FaCheck } from "react-icons/fa";
 import { AxiosError } from "axios";
@@ -63,7 +63,10 @@ export function TestImportProfileFetching() {
   </li>
 }
 
-export async function TestImportProfile({ pseudoParams = "BroMine__" }) {
+export async function TestImportProfile({ pseudoParams = "BroMine__" }: {
+  pseudoParams?: string | undefined
+}) {
+
 
   const [apiDown, msgError] = await getPlayerInfo(pseudoParams ?? "BroMine__").then(() => {
     return [false, ""];

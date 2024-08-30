@@ -72,10 +72,10 @@ export default function PalatimePage() {
             par <GradientText>0livierMinecraft</GradientText> le
             rédacteur en chef et <GradientText>Palatimes</GradientText> le journaliste.
             <br/>
-            Une fois par semaine tu y trouveras l'actualité du serveur comme la quête de faction ; des astuces
+            Une fois par semaine tu y trouveras l&apos;actualité du serveur comme la quête de faction ; des astuces
             indispensables ; mais surtout un évent communautaire. Que ce soit tirage au sort, énigme, chasse au
             trésor,
-            loto, etc... Tu vas bien t'amuser.
+            loto, etc... Tu vas bien t&apos;amuser.
           </CardContent>
         </Card>
         <div className="flex flex-row w-full">

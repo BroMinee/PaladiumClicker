@@ -1,6 +1,6 @@
 import { checkAnswerPalaAnimationType, KeyDownTimestampType, NetworkError } from "@/types";
 import axios from "axios";
-import { API_PALATRACKER_URL } from "@/lib/apiPalaTracker.ts";
+import { API_PALATRACKER } from "@/lib/api/apiPalaTracker.ts";
 
 function base64ToUint8Array(base64String: string): Uint8Array {
   // Decode the base64 string into a binary string
@@ -80,7 +80,7 @@ export const getNewQuestionPalaAnimation = async (username: string): Promise<{
   question: string,
   session_uuid: string
 }> => {
-  const response = await axios.get<string>(`${API_PALATRACKER_URL}/v1/palaAnimation/question?username=${username}`).catch((error) => error);
+  const response = await axios.get<string>(`${API_PALATRACKER}/v1/palaAnimation/question?username=${username}`).catch((error) => error);
 
   if (response instanceof Error) {
     if ((response as NetworkError).code === "ECONNABORTED") {
@@ -105,7 +105,7 @@ export const checkAnswerPalaAnimation = async (answer: string, session_uuid: str
   }), process.env.VITE_CRYPT_KEY!);
 
 
-  const response = await axios.post<checkAnswerPalaAnimationType>(`${API_PALATRACKER_URL}/v1/palaAnimation/checkAnswer`, {
+  const response = await axios.post<checkAnswerPalaAnimationType>(`${API_PALATRACKER}/v1/palaAnimation/checkAnswer`, {
     message: encrypted
   }).catch((error) => error);
 

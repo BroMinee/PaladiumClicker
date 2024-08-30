@@ -21,23 +21,28 @@ import { GetAllFileNameInFolder, levensteinDistance } from "@/lib/misc.ts";
 export function generateMetadata(
   { searchParams }: { searchParams: { item: string | undefined } },
 ) {
+  const itemName = itemListJson.find((item) => item.value === searchParams.item)?.label as string | undefined;
+
   let closestItemName = searchParams.item === undefined ? "" : GetAllFileNameInFolder().reduce((acc, curr) => {
-      if (levensteinDistance(curr, searchParams.item as string) < levensteinDistance(acc, searchParams.item as string)) {
+      if (levensteinDistance(curr, searchParams.item!) < levensteinDistance(acc, searchParams.item!)) {
         return curr;
       } else {
         return acc;
       }
     });
 
+  const title = `AH Tracker${itemName ? ` - ${itemName}` : ""}`;
+  const description = "Suivez les historiques de vente de vos items préférés sur Paladium";
+  const defaultImage = "https://brominee.github.io/PaladiumClicker/favicon.ico";
     return {
-      title: `AH Tracker ${searchParams.item ? " - " + itemListJson.find((item) => item.value === searchParams.item)?.label : ""}`,
+      title: title,
       description: "Suivez les historiques de vente de vos items préférés sur Paladium",
       openGraph: {
-        title: `AH Tracker ${searchParams.item ? " - " + itemListJson.find((item) => item.value === searchParams.item)?.label : ""}`,
-        description: "Suivez les historiques de vente de vos items préférés sur Paladium",
+        title: title,
+        description: description,
         images: [
           {
-            url: `https://brominee.github.io/PaladiumClicker/AH_img/${closestItemName}.png`,
+            url: itemName !== undefined ? `https://brominee.github.io/PaladiumClicker/AH_img/${closestItemName}.png` : defaultImage,
             width: 800,
             height: 600,
           }
@@ -53,7 +58,7 @@ export function generateMetadata(
           <CardHeader className="flex flex-row items-center justify-between">
             <CardTitle>
               Bienvenue sur{" "}
-              <GradientText className="font-extrabold">l'AH Tracker</GradientText>
+              <GradientText className="font-extrabold">l&apos;AH Tracker</GradientText>
             </CardTitle>
             <CardDescription>
               Made with <FaHeart className="text-primary inline-block"/> by <GradientText>BroMine__</GradientText>
@@ -68,7 +73,7 @@ export function generateMetadata(
               le nombre de ventes journalières, or le nombre de ventes journalières contient aussi les ventes en pbs.
               Il y a
               donc une surévaluation du vrai prix.
-              Cela sera corrigé après une mise à jour de l'API de Paladium.
+              Cela sera corrigé après une mise à jour de l&apos;API de Paladium.
             </CardTitle>
           </CardHeader>
         </Card>

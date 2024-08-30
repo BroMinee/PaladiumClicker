@@ -4,14 +4,12 @@ import { useEffect, useRef, useState } from "react";
 import GradientText from "@/components/shared/GradientText.tsx";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog.tsx";
 import { ScrollArea } from "@/components/ui/scroll-area.tsx";
-import { useSettingsStore } from "@/stores/use-settings-store";
 import { safeJoinPaths } from "@/lib/misc.ts";
 
 
 
 const FallingClickImagePalaTime = () => {
   const containerRef = useRef<HTMLDivElement>(null);
-  const { settings } = useSettingsStore();
   const [openEvent, setOpenEvent] = useState(false);
 
 
@@ -19,7 +17,7 @@ const FallingClickImagePalaTime = () => {
     setTimeout(() => {
       const interval = setInterval(() => {
 
-        if (containerRef?.current === null) {
+        if (containerRef?.current === null || containerRef?.current === undefined) {
           return;
         }
         const leftTop = {

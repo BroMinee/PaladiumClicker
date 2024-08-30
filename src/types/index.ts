@@ -89,6 +89,12 @@ export type Metiers = {
   miner: Metier,
 }
 
+export type MetiersPossiblyUndefined = {
+  alchemist: Metier,
+  farmer: Metier,
+  hunter: Metier,
+  miner: Metier,
+}
 
 
 export type PlayerInfo = {

@@ -1,7 +1,7 @@
 import 'server-only'
 
 import { AhItemHistory } from "@/types";
-import { getPaladiumAhItemFullHistory } from "@/lib/apiPala.ts";
+import { getPaladiumAhItemFullHistory } from "@/lib/api/apiPala.ts";
 import { redirect } from "next/navigation";
 import PlotTest from "@/components/AhTracker/PlotTest.tsx";
 import { Card } from "@/components/ui/card.tsx";

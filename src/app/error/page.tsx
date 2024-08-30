@@ -14,6 +14,12 @@ import { Suspense } from "react";
 
 export default function Error500Page({ searchParams }: { searchParams: { [key: string]: string | string[] | undefined } })
 {
+  if (Array.isArray(searchParams.username)) {
+    return (<Card>
+      Pourquoi tu donnes une array en query params ?
+    </Card>)
+  }
+
   return (
     <Card className="flex flex-col gap-4 font-bold center bg-no-repeat bg-center bg-cover text-white bg-black">
       <CardHeader className="flex flex-row gap-2 ">

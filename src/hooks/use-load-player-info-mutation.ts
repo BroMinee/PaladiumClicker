@@ -1,4 +1,4 @@
-import { getPlayerInfo } from "@/lib/apiPala.ts";
+import { getPlayerInfo } from "@/lib/api/apiPala.ts";
 import { usePlayerInfoStore } from "@/stores/use-player-info-store";
 import { useMutation } from "@tanstack/react-query";
 
