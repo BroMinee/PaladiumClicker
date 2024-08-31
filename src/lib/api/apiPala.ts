@@ -158,8 +158,6 @@ export const getPlayerInfo = async (pseudo: string): Promise<PlayerInfo> => {
   });
 
 
-
-
   initialPlayerInfo.metier = metiers;
 
   const friendsList = friendList;

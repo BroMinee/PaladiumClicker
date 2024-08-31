@@ -57,7 +57,7 @@ const initialStateToReach: StateMetierToReach =
     metierSelected: "alchimiste",
   };
 
-export const usePlayerInfoStore = create<State & Actions>(persist<State & Actions>(
+export const usePlayerInfoStore = create<State & Actions, [["zustand/persist", State & Actions]]>(persist<State & Actions>(
   (set) => ({
     ...initialState,
     setPlayerInfo: (playerInfo) => set(() => {

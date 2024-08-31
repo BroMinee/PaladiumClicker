@@ -1,4 +1,4 @@
-import type { AnyCondition, CPS, PlayerInfo, UpgradeKey } from "@/types";
+import type { AnyCondition, PlayerInfo, UpgradeKey } from "@/types";
 import { MetierKey } from "@/types";
 import constants from "@/lib/constants.ts";
 

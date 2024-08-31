@@ -3,7 +3,7 @@ import 'server-only'
 import { AhItemHistory } from "@/types";
 import { getPaladiumAhItemFullHistory } from "@/lib/api/apiPala.ts";
 import { redirect } from "next/navigation";
-import PlotTest from "@/components/AhTracker/PlotTest.tsx";
+import PlotHistoricChart from "@/components/AhTracker/PlotHistoricChart.tsx";
 import { Card } from "@/components/ui/card.tsx";
 
 
@@ -21,7 +21,7 @@ export default async function GraphItem({ selectedItem }: { selectedItem: string
 
   return (
     <Card className="w-full">
-      <PlotTest data={data}/>
+      <PlotHistoricChart data={data}/>
     </Card>
 
   )

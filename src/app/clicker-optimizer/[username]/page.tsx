@@ -1,11 +1,9 @@
-import { UpgradeKey } from "@/types";
+import { RankingType, UpgradeKey } from "@/types";
 import ProfileFetcherWrapper from "@/components/ProfileFetcher.tsx";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card.tsx";
 import GradientText from "@/components/shared/GradientText.tsx";
 import { FaHeart } from "react-icons/fa";
 import Tuto from "@/components/Tuto.tsx";
-import News from "@/components/News.tsx";
-import DailyPopup from "@/components/dailyPopup.tsx";
 import ImportProfil from "@/components/shared/ImportProfil.tsx";
 import HeadingSection from "@/components/shared/HeadingSection.tsx";
 import RPS from "@/components/Clicker-Optimizer/RPS.tsx";
@@ -17,6 +15,7 @@ import ClickList from "@/components/Clicker-Optimizer/ClickList.tsx";
 import { Fragment } from "react";
 import UpgradeList from "@/components/Clicker-Optimizer/UpgradeList.tsx";
 import FallingClickImage from "@/components/PalaTime/FallingClickImage.tsx";
+import GraphItem from "@/components/Clicker-Optimizer/GraphRanking.tsx";
 
 export default function Home({ params }: { params: { username: string } }) {
 
@@ -31,7 +30,6 @@ export default function Home({ params }: { params: { username: string } }) {
   ];
 
 
-
   return (
     <>
       <ProfileFetcherWrapper username={params.username}>
@@ -39,7 +37,7 @@ export default function Home({ params }: { params: { username: string } }) {
           <Card>
             <CardHeader className="flex flex-row items-center justify-between">
               <CardTitle>
-                Bienvenue sur l'optimiseur du{" "}
+                Bienvenue sur l`&apos;optimiseur du{" "}
                 <GradientText className="font-extrabold">PalaClicker</GradientText>
               </CardTitle>
               <CardDescription>
@@ -49,10 +47,11 @@ export default function Home({ params }: { params: { username: string } }) {
             </CardHeader>
             <CardContent>
               <div className="flex flex-wrap gap-2">
-                {/*<Tuto/>*/}
+                <Tuto/>
                 {/*<News defaultOpen={isModalNewsOpen}/>*/}
                 {/*<DailyPopup defaultOpen={showDayPopup}/>*/}
-                {/*<Graph defaultOpen={showGraph}/>*/}
+                {/*<Graph/>*/}
+                <GraphItem rankingType={'clicker' as RankingType}/>
               </div>
             </CardContent>
             <CardFooter className="flex flex-col gap-2 items-start">

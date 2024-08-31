@@ -1,7 +1,7 @@
 'use client';
 import { usePlayerInfoStore } from "@/stores/use-player-info-store.ts";
 import { checkCondition, formatPrice } from "@/lib/misc.ts";
-import { UpgradeKey } from "@/types";
+import { BuildingUpgrade, CategoryUpgrade, GlobalUpgrade, TerrainUpgrade, UpgradeKey } from "@/types";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover.tsx";
 import { Button } from "@/components/ui/button.tsx";
 import { FaInfoCircle } from "react-icons/fa";
@@ -65,7 +65,8 @@ export function ButtonUpgrade({ index, upgradeType, children }: {
 }) {
   const { data: playerInfo, toggleUpgradeOwn } = usePlayerInfoStore();
 
-  let upgrade = playerInfo ? playerInfo[upgradeType][index] : { own: false };
+
+  let upgrade : BuildingUpgrade | CategoryUpgrade | GlobalUpgrade | TerrainUpgrade | { own: false; name: string} = playerInfo ? playerInfo[upgradeType][index] : { own: false, name: "uninitialized" };
 
   return (
     <Button

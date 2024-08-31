@@ -1,5 +1,4 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card.tsx";
-import ImportProfil from "@/pages/OptimizerClicker/Components/ImportProfil.tsx";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area.tsx";
 import GradientText from "@/components/shared/GradientText.tsx";
 import { FaEye, FaHeart } from "react-icons/fa";
@@ -15,6 +14,7 @@ import {
   ProfilUsernameInfo
 } from "@/components/Profil/ProfilInfoClient.tsx";
 import { FactionNameInfo } from "@/components/Profil/FactionInfoClient.tsx";
+import ImportProfil from "@/components/shared/ImportProfil.tsx";
 
 
 export default function ProfilInfo() {

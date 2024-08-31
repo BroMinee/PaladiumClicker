@@ -26,7 +26,7 @@ const BuildingList = () => {
         {BuildingJson.map((building, index) => (
           <Building
             key={building.name + index}
-            imgPath={safeJoinPaths(getImgPath(index, building.price ?? 0))}
+            imgPath={safeJoinPaths(getImgPath(index, Number(building.price) ?? -1))}
             index={index}
           />
         ))

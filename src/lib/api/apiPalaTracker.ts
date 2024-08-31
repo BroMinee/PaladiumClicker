@@ -1,6 +1,11 @@
-import { PalaAnimationLeaderboard, PalaAnimationLeaderboardGlobal, ProfilViewType } from "@/types";
+import {
+  PalaAnimationLeaderboard,
+  PalaAnimationLeaderboardGlobal,
+  ProfilViewType,
+  RankingResponse,
+  RankingType
+} from "@/types";
 import { fetchWithHeader } from "@/lib/api/misc.ts";
-import { timeout } from "d3-timer";
 
 export const API_PALATRACKER = "https://palatracker.bromine.fr"
 
@@ -55,4 +60,13 @@ export const getEventUsers = async (): Promise<{ username: string }[]> => {
   alert("Adapt to new endpoint");
 
   return response as { username: string }[];
+}
+
+
+export function getRankingLeaderboard(rankingType: RankingType, limit = 10, offset = 0) {
+  return fetchWithHeader<RankingResponse>(`${API_PALATRACKER}/v1/ranking/${rankingType}/all?limit=${limit}&offset=${offset}`, 0);
+}
+
+export function getRankingLeaderboardPlayer(uuid: string, rankingType: RankingType) {
+  return fetchWithHeader<RankingResponse>(`${API_PALATRACKER}/v1/ranking/${rankingType}/${uuid}`, 0)
 }

@@ -357,3 +357,28 @@ export type checkAnswerPalaAnimationType =
     time: number,
     text: userAnswerType[]
   }
+
+export enum RankingType {
+  "money" = "money",
+  "job.alchemist" = "job.alchemist",
+  "job.hunter" = "job.hunter",
+  "job.miner" = "job.miner",
+  "job.farmer" = "job.farmer",
+  "boss" = "boss",
+  "egghunt" = "egghunt",
+  "end" = "end",
+  "chorus" = "chorus",
+  "koth" = "koth",
+  "clicker" = "clicker",
+}
+
+export type RankingResponse =
+  rankingResponseSubType[]
+
+type rankingResponseSubType = {
+  uuid: string,
+  username: string,
+  date: Date,
+  value: number,
+  position: number
+}

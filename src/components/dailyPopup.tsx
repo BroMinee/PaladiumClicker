@@ -86,7 +86,7 @@ const DailyPopup = ({ defaultOpen = false }) => {
             <CardHeader>
               <CardTitle className="text-secondary-foreground flex flex-col gap-2 justify-center">
                 <div>Le tirage au sort pour tenter de gagner un total de 20 000 000$ a déjà été réalisé, rester à
-                  l'affut pour les prochains events !
+                  l&apos;affut pour les prochains events !
                 </div>
                 <div className={hasWin ? "text-green-500" : "text-red-500"}>
                   {hasWin ? `Tu as gagné un lot : ${playerInfo.username} , contactez moi sur discord : bromine__ ou par mail in-game : BroMine__` : `Malheureusement, ${playerInfo.username} tu n'as pas gagné, mais tu peux retenter ta chance lors du prochain tirage au sort !`}
