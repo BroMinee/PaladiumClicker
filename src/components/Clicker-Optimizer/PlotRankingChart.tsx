@@ -44,7 +44,7 @@ const PlotRankingChart = ({ data }: { data: RankingResponse }) => {
 
   const uniqueUsernames = getUniqueUsernames(data).sort((a, b) => {
     const lastDay = transformedData[transformedData.length - 1];
-    return lastDay[`${a}_pos`] - lastDay[`${b}_pos`];
+    return Number(lastDay[`${a}_pos`]) - Number(lastDay[`${b}_pos`]);
   })
 
 
@@ -130,7 +130,7 @@ const PlotRankingChart = ({ data }: { data: RankingResponse }) => {
     alert(`clicked on ${value} (legends)`);
   };
 
-  const DataFormater = (number) => {
+  const DataFormatter = (number: number) => {
     if (number > 1000000000000000000000000)
       return (Math.floor(number / 1000000000000000000000000)).toString() + 'Y';
     else if (number > 1000000000000000000000)
@@ -167,7 +167,7 @@ const PlotRankingChart = ({ data }: { data: RankingResponse }) => {
         </defs>
         <CartesianGrid strokeDasharray="4"/>
         <XAxis dataKey="date"/>
-        <YAxis type="number" tickFormatter={DataFormater}/>
+        <YAxis type="number" tickFormatter={DataFormatter}/>
         <Tooltip content={<CustomTooltip/>}/>
         <Legend layout="horizontal" verticalAlign="bottom" align="center" payload={
           uniqueUsernames.map(

@@ -3,7 +3,6 @@ import constants from "@/lib/constants";
 import { Metier, MetierKey, PlayerInfo, UpgradeKey } from "@/types";
 import { create } from "zustand";
 import { createJSONStorage, persist } from "zustand/middleware";
-import { safeJoinPaths } from "@/lib/misc.ts";
 
 type State = {
   data: PlayerInfo | null;

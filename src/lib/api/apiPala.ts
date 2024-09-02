@@ -63,7 +63,7 @@ export const isApiDown = async (): Promise<boolean> => {
 }
 
 
-const getPaladiumProfileByPseudo = async (pseudo: string): Promise<PaladiumPlayerInfo> => {
+export const getPaladiumProfileByPseudo = async (pseudo: string): Promise<PaladiumPlayerInfo> => {
   return await fetchWithHeader<PaladiumPlayerInfo>(`${PALADIUM_API_URL}/v1/paladium/player/profile/${pseudo}`);
 }
 
@@ -77,6 +77,8 @@ const getPaladiumClickerDataByUUID = async (uuid: string): Promise<PaladiumClick
 }
 
 export const getFactionInfo = async (factionName: string): Promise<PaladiumFactionInfo> => {
+  if (factionName === "")
+    factionName = "Wilderness";
   return await fetchWithHeader<PaladiumFactionInfo>(`${PALADIUM_API_URL}/v1/paladium/faction/profile/${factionName}`)
 }
 

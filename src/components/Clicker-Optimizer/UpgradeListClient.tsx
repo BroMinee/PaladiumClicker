@@ -66,7 +66,10 @@ export function ButtonUpgrade({ index, upgradeType, children }: {
   const { data: playerInfo, toggleUpgradeOwn } = usePlayerInfoStore();
 
 
-  let upgrade : BuildingUpgrade | CategoryUpgrade | GlobalUpgrade | TerrainUpgrade | { own: false; name: string} = playerInfo ? playerInfo[upgradeType][index] : { own: false, name: "uninitialized" };
+  let upgrade: BuildingUpgrade | CategoryUpgrade | GlobalUpgrade | TerrainUpgrade | {
+    own: false;
+    name: string
+  } = playerInfo ? playerInfo[upgradeType][index] : { own: false, name: "uninitialized" };
 
   return (
     <Button

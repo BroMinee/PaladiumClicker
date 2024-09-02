@@ -5,9 +5,13 @@ import { cn } from "@/lib/utils.ts";
 import { usePlayerInfoStore } from "@/stores/use-player-info-store.ts";
 
 
-export default function LinkClient({ path, label, requiredPseudo }: { path: string, label: string, requiredPseudo: boolean }) {
+export default function LinkClient({ path, label, requiredPseudo }: {
+  path: string,
+  label: string,
+  requiredPseudo: boolean
+}) {
 
-  const { data: playerInfo, reset } = usePlayerInfoStore();
+  const { data: playerInfo } = usePlayerInfoStore();
 
   let link = undefined
   if (typeof window !== 'undefined')
@@ -17,7 +21,7 @@ export default function LinkClient({ path, label, requiredPseudo }: { path: stri
 
   const isActive = link?.path === path;
   return <Link className={cn(isActive && "underline", "font-medium hover:underline")}
-               href={href}>
+               href={href} suppressHydrationWarning>
     {label}
   </Link>
 }
