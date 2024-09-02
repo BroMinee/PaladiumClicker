@@ -43,6 +43,9 @@ const CPS = ({ index, imgPath }: CPSProps) => {
         <div className="font-bold">
           {formatPrice(CPSJson[index].price)} $
         </div>
+        <div>
+          {formatPrice(CPSJson[index].CPS)} / clic
+        </div>
         <PreconditionDisplay index={index}/>
       </div>
 

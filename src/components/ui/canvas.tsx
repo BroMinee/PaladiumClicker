@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from 'react';
-import { useTheme } from "@/components/shared/ThemeProvider.tsx";
+import { useTheme } from "next-themes";
 
 interface CanvasWithTextProps {
   text: string;
