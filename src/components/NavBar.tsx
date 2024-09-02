@@ -5,9 +5,9 @@ import { FaBars } from "react-icons/fa";
 import Setting from "@/components/shared/Setting.tsx";
 import ShareButton from "@/components/shared/ShareButton.tsx";
 import constants from "@/lib/constants.ts";
-import Link from "next/link";
 import { LogoClient } from "@/components/ui/logoClient.tsx";
 import ImportProfil from "@/components/shared/ImportProfil.tsx";
+import LinkClient from "@/components/NavBarClient.tsx";
 
 
 const Navbar = () => {
@@ -17,15 +17,10 @@ const Navbar = () => {
       <div className="hidden lg:flex gap-4">
         <LogoClient/>
         <ul className="flex gap-6 items-center">
-          {constants.links.map(({ path, label }) => (
+          {constants.links.map(({ path, label, requiredPseudo }) => (
             // TODO put back required username
             <li key={path}>
-              <Link
-                className="font-medium hover:underline"
-                href={path}
-              >
-                {label}
-              </Link>
+              <LinkClient path={path} label={label} requiredPseudo={requiredPseudo}/>
             </li>
           ))}
         </ul>
@@ -52,21 +47,16 @@ const MobileNav = () => {
       </SheetTrigger>
       <SheetContent side="left">
         <SheetHeader className="pb-6">
-          <div>
+          <div className="flex flex-row items-center gap-2">
             <LogoClient/>
-            <span className="text-xl">Menu</span>
+            <span className="text-xl font-bold">Menu</span>
           </div>
         </SheetHeader>
         <ul className="flex flex-col gap-2">
-          {constants.links.map(({ path, label }) => (
+          {constants.links.map(({ path, label, requiredPseudo }) => (
             // TODO put back required username
             <li key={path}>
-              <Link
-                className="font-medium hover:underline"
-                href={path}>
-                {label}
-              </Link>
-
+              <LinkClient path={path} label={label} requiredPseudo={requiredPseudo}/>
             </li>
           ))}
         </ul>

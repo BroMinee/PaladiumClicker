@@ -67,8 +67,6 @@ export const usePlayerInfoStore = create<State & Actions, [["zustand/persist", S
       };
     }),
     reset: () => {
-      const endUrl = window.location.pathname.split("/").pop();
-      window.location.href = safeJoinPaths("/", endUrl ?? "");
       set(initialState)
     },
     increaseMetierLevel: (metierKey: MetierKey, value: number) => set((state) => {

@@ -3028,3 +3028,18 @@ export function GetAllFileNameInFolder() {
   // console.log(imageList);
   // return imageList;
 }
+
+
+export function getLinkFromUrl(url: string) {
+  const urlArray = url.split("/");
+  let trouvaille = undefined as typeof constants.links[0] | undefined;
+  while (urlArray.length > 0 && urlArray[urlArray.length - 1] !== "") {
+    trouvaille = constants.links.find(({ path }) => path.includes(urlArray[urlArray.length - 1]));
+    if (trouvaille) {
+      break;
+    } else {
+      urlArray.pop();
+    }
+  }
+  return trouvaille;
+}
