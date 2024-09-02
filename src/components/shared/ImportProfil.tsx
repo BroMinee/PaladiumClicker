@@ -58,7 +58,7 @@ export default function ImportProfil({ showResetButton = false, withBackground =
           </Button>
         </div>
       </form>
-      {showResetButton ? <Button onClick={() => reset()}>Réinitialiser</Button> : ""}
+      {showResetButton ? <Button onClick={async () => {reset(); await navigate(constants.optimizerClickerPath)}}>Réinitialiser</Button> : ""}
     </div>
   );
 }
