@@ -14,8 +14,9 @@ import BuildingList from "@/components/Clicker-Optimizer/BuildingList.tsx";
 import ClickList from "@/components/Clicker-Optimizer/ClickList.tsx";
 import { Fragment } from "react";
 import UpgradeList from "@/components/Clicker-Optimizer/UpgradeList.tsx";
-import FallingClickImage from "@/components/PalaTime/FallingClickImage.tsx";
+import FallingClickImage from "@/components/Clicker-Optimizer/FallingClick.tsx";
 import GraphItem from "@/components/Clicker-Optimizer/GraphRanking.tsx";
+import News from "@/components/News.tsx";
 
 export default function Home({ params }: { params: { username: string } }) {
 
@@ -48,9 +49,8 @@ export default function Home({ params }: { params: { username: string } }) {
             <CardContent>
               <div className="flex flex-wrap gap-2">
                 <Tuto/>
-                {/*<News defaultOpen={isModalNewsOpen}/>*/}
+                <News/>
                 {/*<DailyPopup defaultOpen={showDayPopup}/>*/}
-                {/*<Graph/>*/}
                 <GraphItem rankingType={'clicker' as RankingType}/>
               </div>
             </CardContent>

@@ -1,5 +1,26 @@
 [
   {
+    "date": "TODO",
+    "events": [
+      "Changement du mode de rendu de la page pour une meilleure performance",
+      "Refactorisation du code en NextJS",
+      "Amélioration de la gestion des erreurs",
+      "Suppréssion de données inutiles dans le ah tracker",
+      "Ajout des intégrations discord : title, description, etc sur toutes les pages",
+      "Ajout d'un bouton pour copier le lien de la page dans le presse-papier",
+      "Amélioration des graphiques du classement clicker",
+      "Ajout d'une page 404 personnalisée",
+      "Passage du repository en privé, notamment pour garder notre clé d'API privée et ne pas mettre à disposition notre backend a tout le monde",
+      "Ajout d'une page de chargement du profil"
+    ]
+  },
+  {
+    "date": "21-08-2024 - 1h43",
+    "events": [
+      "Changement des endpoints de l'API de Paladium, peut potentiellement rendre impossible l'importation des données en cas de forte charge"
+    ]
+  },
+  {
     "date": "10-07-2024 - 16h44",
     "events": [
       "Ajout d'un classement général pour le PalaAnimation",
@@ -228,6 +249,7 @@
       "Ajout du bâtiment 'clicker.building.Great_Ancients_Pantheon'",
       "Amélioration du système de cache : les données sont conservées après modification de la base de données",
       "Ajout d'un bouton pour réinitialiser les buildings (clear le cache)"
+
     ]
   },
   {
@@ -236,12 +258,11 @@
       "Ajout d'un système de cache permettant de ne pas devoir reconfigurer le système à chaque recharge de la page",
       "Ajout du building 'Altantis' dans la liste des buildings",
       "Ajout des améliorations 'Corde en fibre de carbone (x100)' et 'Production postérieur - Gouffre sans fond'"
-    ]
-  },
-  {
-    "date": "01-04-2024",
-    "events": [
-      "Correction de l'importation/exportation des données pour les améliorations 'Many' et 'Posterior'"
-    ]
-  }
+    ]}
+,{
+  "date": "01-04-2024",
+  "events": [
+    "Correction de l'importation/exportation des données pour les améliorations 'Many' et 'Posterior'"
+  ]
+}
 ]

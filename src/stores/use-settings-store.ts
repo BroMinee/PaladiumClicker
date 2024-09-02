@@ -20,7 +20,7 @@ const initialState: State = {
   }
 };
 
-export const useSettingsStore = create(persist<State & Actions>(
+export const useSettingsStore = create<State & Actions, [["zustand/persist", State & Actions]]>(persist<State & Actions>(
   (set) => ({
     ...initialState,
     settings: { ...initialState.settings },
