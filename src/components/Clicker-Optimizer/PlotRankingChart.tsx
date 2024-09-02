@@ -1,7 +1,7 @@
 'use client'
 import dynamic from "next/dynamic";
 import { RankingResponse } from "@/types";
-import { Area, Legend, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
+import { Area, CartesianGrid, Legend, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
 import React from "react";
 import { formatPrice } from "@/lib/misc.ts";
 import { Payload } from "recharts/types/component/DefaultLegendContent";
@@ -9,8 +9,13 @@ import { Payload } from "recharts/types/component/DefaultLegendContent";
 const AreaChart = dynamic(() => import("recharts").then((mod) => mod.AreaChart), { ssr: false });
 
 
-const PlotRankingChart = ({ data, offset }: { data: RankingResponse, offset: number }) => {
-  function getUniqueUsernames(data: any[]) {
+const PlotRankingChart = ({ data }: { data: RankingResponse }) => {
+  // TODO insert data of NaN for every missing date
+  // TODO enable zoom
+  // TODO allow to select the range of dates to display
+  // TODO add a button to reset the zoom
+  // TODO add curve of a specific username
+  function getUniqueUsernames(data: RankingResponse) {
     const usernames = new Set<string>();
     data.forEach(item => usernames.add(item.username));
     return Array.from(usernames);
@@ -22,7 +27,9 @@ const PlotRankingChart = ({ data, offset }: { data: RankingResponse, offset: num
 
   const transformedData = Object.values(data.reduce((acc, item) => {
 
-    const date = item.date.toString();
+
+    // format the date to DD-MM-YYYY
+    const date = new Date(item.date.toString()).toLocaleDateString("fr-FR");
     const username = item.username;
     const value = item.value;
 
@@ -35,7 +42,10 @@ const PlotRankingChart = ({ data, offset }: { data: RankingResponse, offset: num
     return acc;
   }, {} as transformedDataType));
 
-  const uniqueUsernames = getUniqueUsernames(data);
+  const uniqueUsernames = getUniqueUsernames(data).sort((a, b) => {
+    const lastDay = transformedData[transformedData.length - 1];
+    return lastDay[`${a}_pos`] - lastDay[`${b}_pos`];
+  })
 
 
   const CustomTooltip = ({ active, payload, label }: any) => {
@@ -53,8 +63,8 @@ const PlotRankingChart = ({ data, offset }: { data: RankingResponse, offset: num
           <p className="text-card-foreground">{`Date : ${label}`}</p>
           {payloadOrder.map((entry: any) => {
             const index = uniqueUsernames.indexOf(entry.name);
-            const gradientStart = gradientColors[index].color;
-            const gradientEnd = gradientColors[index].color2;
+            const gradientStart = gradientColors[index % gradientColors.length].color;
+            const gradientEnd = gradientColors[index % gradientColors.length].color2;
             const position = entry.payload[`${entry.name}_pos`];
             return <div key={`item-${index}`}>
               <h3 className="bg-clip-text text-transparent drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)]"
@@ -87,11 +97,11 @@ const PlotRankingChart = ({ data, offset }: { data: RankingResponse, offset: num
   const opacityInit = uniqueUsernames.reduce((acc, username) => {
     acc[username] = 1;
     return acc;
-  }, {} as { [key: string]: number });
+  }, {} as { [key: string]: number })
 
   const [opacity, setOpacity] = React.useState(opacityInit);
 
-  const handleMouseEnterLegends = (o : Payload) => {
+  const handleMouseEnterLegends = (o: Payload) => {
     const { value } = o;
 
 
@@ -115,16 +125,38 @@ const PlotRankingChart = ({ data, offset }: { data: RankingResponse, offset: num
     setOpacity(copy_op);
   };
 
-  const handleMouseClickLegends = (o : Payload) => {
+  const handleMouseClickLegends = (o: Payload) => {
     const { value } = o;
     alert(`clicked on ${value} (legends)`);
   };
+
+  const DataFormater = (number) => {
+    if (number > 1000000000000000000000000)
+      return (Math.floor(number / 1000000000000000000000000)).toString() + 'Y';
+    else if (number > 1000000000000000000000)
+      return (Math.floor(number / 1000000000000000000000)).toString() + 'Z';
+    else if (number > 1000000000000000000)
+      return (Math.floor(number / 1000000000000000000)).toString() + 'E';
+    else if (number > 1000000000000000)
+      return (Math.floor(number / 1000000000000000)).toString() + 'P';
+    else if (number > 1000000000000) {
+      return (Math.floor(number / 1000000000000)).toString() + 'T';
+    } else if (number > 1000000000) {
+      return (Math.floor(number / 1000000000)).toString() + 'G';
+    } else if (number > 1000000) {
+      return (Math.floor(number / 1000000)).toString() + 'M';
+    } else if (number > 1000) {
+      return (Math.floor(number / 1000)).toString() + 'k';
+    } else {
+      return number.toString();
+    }
+  }
 
 
   return (
     <ResponsiveContainer width="100%" height="100%">
       <AreaChart data={transformedData}
-                 margin={{ top: 20, right: 20, left: 30, bottom: 10 }}>
+                 margin={{ top: 20, right: 20, left: 20, bottom: 10 }}>
         <defs>
           {gradientColors.map((color, index) => (
             <linearGradient key={index} id={`top${index + 1}`} x1="0" y1="0" x2="1" y2="0">
@@ -133,16 +165,17 @@ const PlotRankingChart = ({ data, offset }: { data: RankingResponse, offset: num
             </linearGradient>
           ))}
         </defs>
+        <CartesianGrid strokeDasharray="4"/>
         <XAxis dataKey="date"/>
-        <YAxis/>
-        <Tooltip content={<CustomTooltip offset={offset}/>}/>
+        <YAxis type="number" tickFormatter={DataFormater}/>
+        <Tooltip content={<CustomTooltip/>}/>
         <Legend layout="horizontal" verticalAlign="bottom" align="center" payload={
           uniqueUsernames.map(
             (item) => ({
               id: item,
               type: "line",
               value: item,
-              color: gradientColors[uniqueUsernames.indexOf(item)].color2,
+              color: gradientColors[uniqueUsernames.indexOf(item) % gradientColors.length].color2,
             })
           )
         }
@@ -155,11 +188,10 @@ const PlotRankingChart = ({ data, offset }: { data: RankingResponse, offset: num
             key={username + index}
             dataKey={username}
             type="monotone"
-            stroke={transformedData.every((a) => a[username] === transformedData[0][username]) ? gradientColors[index].color2 : `url(#top${index + 1})`}
+            stroke={transformedData.every((a) => a[username] === transformedData[0][username]) ? gradientColors[index % gradientColors.length].color2 : `url(#top${index + 1})`}
             strokeWidth={5}
             fillOpacity={0}
             opacity={opacity[username] || 1}
-
           />
         ))}
       </AreaChart>

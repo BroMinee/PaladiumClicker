@@ -30,7 +30,7 @@ export default async function GraphItem({ rankingType }: { rankingType: RankingT
           <DialogHeader className="px-6">
             <DialogTitle className="text-primary">Evolution du top 10</DialogTitle>
           </DialogHeader>
-          <PlotRankingChart data={data} offset={0}/>
+          <PlotRankingChart data={data}/>
         </DialogContent>
       </Dialog>
     </Card>
