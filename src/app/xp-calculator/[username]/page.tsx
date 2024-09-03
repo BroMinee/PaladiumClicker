@@ -38,7 +38,7 @@ export default function Home({ params, searchParams }: {
           <CardHeader className="flex flex-row items-center justify-between">
             <CardTitle>
               Bienvenue sur le calculateur{" "}
-              <GradientText className="font-extrabold">d'xp de métier</GradientText>
+              <GradientText className="font-extrabold">d&apos;xp de métier</GradientText>
             </CardTitle>
             <CardDescription>
               Made with <FaHeart
@@ -87,7 +87,7 @@ export default function Home({ params, searchParams }: {
           </Card>
         </div>
         <XpBonus params={params} searchParams={searchParams}/>
-        <HowToXp params={params} searchParams={searchParams}/>
+        <HowToXp searchParams={searchParams}/>
       </div>
     </ProfileFetcherWrapper>
   )

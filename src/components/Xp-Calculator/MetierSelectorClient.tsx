@@ -1,7 +1,7 @@
 'use client';
 import { formatPrice, generateXpCalculatorUrl, safeJoinPaths } from "@/lib/misc.ts";
 import { cn } from "@/lib/utils.ts";
-import { MetierKey } from "@/types";
+import { MetierKey, PlayerInfo } from "@/types";
 import { useRouter } from "next/navigation";
 import { usePlayerInfoStore } from "@/stores/use-player-info-store.ts";
 import metierJson from "@/assets/metier.json";
@@ -28,6 +28,7 @@ export function SetLevelInUrl({ selected, params, searchParams }: {
   levelToReach = Math.min(levelToReach, 100);
 
   router.push(generateXpCalculatorUrl(params.username, selected, levelToReach, searchParams.double, searchParams.dailyBonus), { scroll: false });
+  return null;
 }
 
 export function MetierSelectorClient({ username, metier, selected, searchParams }: {
@@ -138,8 +139,9 @@ export function InputDailyBonus({ params, searchParams }: {
                 }/>
 }
 
-function getBonusRank() {
-  const { data: playerInfo } = usePlayerInfoStore();
+function getBonusRank(playerInfo : PlayerInfo | null) {
+  if(!playerInfo)
+    return 0;
 
   let bonusXpRank = 0;
   if (playerInfo) {
@@ -161,23 +163,26 @@ function getBonusRank() {
 }
 
 export function DisplayDailyDoubleRank({ dailyBonus, doubleXp }: { dailyBonus: number, doubleXp: number }) {
-  let bonusXpRank = getBonusRank();
+  const { data: playerInfo } = usePlayerInfoStore();
+
+  let bonusXpRank = getBonusRank(playerInfo);
   return <>{dailyBonus + doubleXp + bonusXpRank}%</>
 }
 
 export function DisplayXpBonus() {
-  let bonusXpRank = getBonusRank();
+  const { data: playerInfo } = usePlayerInfoStore();
+
+  let bonusXpRank = getBonusRank(playerInfo);
   return <>{bonusXpRank}%</>
 }
 
-function getXpDiff(searchParams: searchParamsXpBonusPage) {
-  const { data: playerInfo } = usePlayerInfoStore();
-  if (!playerInfo?.metier || searchParams.level === undefined || !searchParams.metier)
+function getXpDiff(playerInfo : PlayerInfo | null, searchParams: searchParamsXpBonusPage) {
+  if (!playerInfo || !playerInfo?.metier || searchParams.level === undefined || !searchParams.metier)
     return 0;
   const higherLevel = searchParams.level;
-  const res = getTotalXPForLevel(higherLevel) - playerInfo.metier[searchParams.metier].xp;
+  const res = getTotalXPForLevel(higherLevel) - playerInfo.metier[searchParams.metier as MetierKey].xp;
   if (res < 0) {
-    return playerInfo.metier[searchParams.metier].level === 100 ? 0 : -1;
+    return playerInfo.metier[searchParams.metier as MetierKey].level === 100 ? 0 : -1;
   }
   return res;
 }
@@ -188,13 +193,16 @@ function getTotalXPForLevel(level: number) {
 }
 
 export function DisplayXpNeeded({ searchParams }: { searchParams: searchParamsXpBonusPage }) {
-  const xpNeeded = getXpDiff(searchParams);
+  const { data: playerInfo } = usePlayerInfoStore();
+  const xpNeeded = getXpDiff(playerInfo, searchParams);
   return <>{formatPrice(Math.ceil(xpNeeded))} xp</>
 }
 
 export function DisplayXpNeededWithDouble({ searchParams, xp }: { searchParams: searchParamsXpBonusPage, xp: number }) {
-  const xpNeeded = getXpDiff(searchParams);
-  const bonusXpRank = getBonusRank();
+  const { data: playerInfo } = usePlayerInfoStore();
+  const xpNeeded = getXpDiff(playerInfo,searchParams);
+
+  const bonusXpRank = getBonusRank(playerInfo);
   const bonusXpWithoutDouble = bonusXpRank + (searchParams.dailyBonus || 0);
   const bonusXpDouble = bonusXpWithoutDouble + (searchParams.double ? 100 : 0);
   const xpNeededWithDoubleXP = xpNeeded / ((100 + bonusXpDouble) / 100);
@@ -202,8 +210,11 @@ export function DisplayXpNeededWithDouble({ searchParams, xp }: { searchParams: 
 }
 
 export function DisplayXpNeededWithBottle({ searchParams }: { searchParams: searchParamsXpBonusPage }) {
-  const xpNeeded = getXpDiff(searchParams);
-  const bonusXpRank = getBonusRank();
+  const { data: playerInfo } = usePlayerInfoStore();
+  const xpNeeded = getXpDiff(playerInfo, searchParams);
+
+
+  const bonusXpRank = getBonusRank(playerInfo);
   const bonusXpWithoutDouble = bonusXpRank + (searchParams.dailyBonus || 0);
   const xpNeededWithoutDoubleXP = xpNeeded / ((100 + bonusXpWithoutDouble) / 100);
   return <>{formatPrice(Math.ceil(xpNeededWithoutDoubleXP / 1000))} fois</>

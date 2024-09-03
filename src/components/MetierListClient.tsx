@@ -8,16 +8,16 @@ import { Button } from "@/components/ui/button.tsx";
 import { useRouter } from "next/navigation";
 import { searchParamsXpBonusPage } from "@/components/Xp-Calculator/XpCalculator.tsx";
 
-export function MetierOutline({ metierKey, metierToReach = false }: { metierKey: MetierKey }) {
+export function MetierOutline({ metierKey, metierToReach = false }: { metierKey: MetierKey, metierToReach?: boolean }) {
 
   const { data: playerInfo } = usePlayerInfoStore();
 
   const colors = getColorByMetierName(metierKey);
 
   let coefXp = 0;
-  if (metierToReach)
+  if (metierToReach) {
     coefXp = 1;
-  else if (playerInfo) {
+  } else if (playerInfo) {
     const metier = playerInfo.metier[metierKey];
     coefXp = getXpCoef(metier.level, metier?.xp || 0);
   }
@@ -57,7 +57,8 @@ export function MetierDecrease({ minLevel, metierKey, searchParams, username }: 
     router.push(`/error?message=MetierDecrease: searchParams.level and username must be both defined or both undefined but not only one of them.`)
   if (searchParams?.level !== undefined && username !== undefined)
     return <Button variant="outline" size="icon"
-                   onClick={() => router.push(generateXpCalculatorUrl(username || "undefined", metierKey, Math.max(searchParams?.level - 1, playerInfo?.metier[metierKey].level + 1) || 1, searchParams?.double, searchParams?.dailyBonus), { scroll: false })}>
+                   onClick={() => router.push(generateXpCalculatorUrl(username || "undefined", metierKey, Math.max((searchParams?.level || 1) - 1 , (playerInfo?.metier[metierKey].level || 1) + 1), searchParams?.double, searchParams?.dailyBonus), { scroll: false })
+                   }>
       <FaArrowDown className="h-4 w-4"/>
     </Button>
 
@@ -80,7 +81,7 @@ export function MetierIncrease({ metierKey, searchParams, username }: {
     router.push(`/error?message=MetierIncrease: searchParams.level and username must be both defined or both undefined but not only one of them.`)
   if (searchParams?.level !== undefined && username !== undefined)
     return <Button variant="outline" size="icon"
-                   onClick={() => router.push(generateXpCalculatorUrl(username || "undefined", metierKey, Math.min(searchParams?.level + 1, 100), searchParams?.double, searchParams?.dailyBonus), { scroll: false })}>
+                   onClick={() => router.push(generateXpCalculatorUrl(username || "undefined", metierKey, Math.min((searchParams?.level || 0) + 1, 100), searchParams?.double, searchParams?.dailyBonus), { scroll: false })}>
       <FaArrowUp className="h-4 w-4"/>
     </Button>
 

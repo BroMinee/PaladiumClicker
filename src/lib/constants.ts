@@ -246,13 +246,13 @@ const metier_palier = [
 ]
 
 
-interface HowToXp {
-  [key: MetierKey]: {
+type HowToXp = {
+  [K in MetierKey]: {
     type: string;
     action: string;
     xp: number;
     imgPath: string
-  }[];
+  }[]
 }
 
 const how_to_xp: HowToXp = {

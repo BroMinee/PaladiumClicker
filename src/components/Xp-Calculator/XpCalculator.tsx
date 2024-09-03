@@ -70,7 +70,7 @@ export function XpBonus({ params, searchParams }: {
           <FaTachometerAlt className="w-12 h-12"/>
           <div className="flex flex-col gap-2">
 
-            <span className="font-semibold">Bonus d'xp total</span>
+            <span className="font-semibold">Bonus d&apos;xp total</span>
 
             <div className="flex gap-2 items-center">
               <GradientText className="font-bold">
@@ -98,8 +98,7 @@ export function XpBonus({ params, searchParams }: {
     </div>)
 }
 
-export function HowToXp({ params, searchParams }: {
-  params: { username: string },
+export function HowToXp({ searchParams }: {
   searchParams: searchParamsXpBonusPage
 }) {
   if (searchParams.metier === undefined)
