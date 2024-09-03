@@ -20,7 +20,6 @@ import { checkAnswerPalaAnimation, getNewQuestionPalaAnimation } from "@/lib/cyp
 import { useRouter } from "next/navigation";
 
 
-
 export function TestBot() {
   const [bot, setBot] = useState(false);
   const router = useRouter();
@@ -43,9 +42,9 @@ type PalaAnimationBodyType = {
   username: string
 }
 
-export function PalaAnimationBody ({ username }: PalaAnimationBodyType)  {
+export function PalaAnimationBody({ username }: PalaAnimationBodyType) {
 
-  const {sessionUuid, question, setQuestion, setSessionUuid} = useSessionContext();
+  const { sessionUuid, question, setQuestion, setSessionUuid } = useSessionContext();
 
   const [reroll, setReroll] = useState(false);
   const [oldAnswer, setOldAnswer] = useState([] as userAnswerType[][])

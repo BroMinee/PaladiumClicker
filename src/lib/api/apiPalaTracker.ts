@@ -1,10 +1,4 @@
-import {
-  PalaAnimationLeaderboard,
-  PalaAnimationLeaderboardGlobal,
-  ProfilViewType,
-  RankingResponse,
-  RankingType
-} from "@/types";
+import { PalaAnimationLeaderboardGlobal, ProfilViewType, RankingResponse, RankingType } from "@/types";
 import { fetchWithHeader } from "@/lib/api/misc.ts";
 
 export const API_PALATRACKER = "https://palatracker.bromine.fr"
@@ -33,11 +27,9 @@ export const isMyApiDown = async (): Promise<boolean> => {
 }
 
 
-
 export const getGlobalLeaderboard = async (): Promise<PalaAnimationLeaderboardGlobal> => {
   return await fetchWithHeader<PalaAnimationLeaderboardGlobal>(`${API_PALATRACKER}/v1/palaAnimation/leaderboard/global`)
 }
-
 
 
 export const getViewsFromUUID = async (uuid: string): Promise<ProfilViewType> => {

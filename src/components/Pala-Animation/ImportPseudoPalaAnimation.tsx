@@ -1,14 +1,13 @@
 'use client';
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { cn } from "@/lib/utils";
 import { FormEvent } from "react";
 import { FaSearch } from "react-icons/fa";
 import constants from "@/lib/constants.ts";
 import { useRouter } from "next/navigation";
 
 type ImportProfilProps = {
-  username: string| undefined;
+  username: string | undefined;
 }
 
 export default function ImportPseudoPalaAnimation({ username }: ImportProfilProps) {

@@ -23,8 +23,7 @@ export function generateMetadata(
 ) {
   const itemName = itemListJson.find((item) => item.value === searchParams.item)?.label as string | undefined;
 
-  if(!itemName)
-  {
+  if (!itemName) {
     return {
       title: "AH Tracker",
       description: "Suivez les historiques de vente de vos items préférés sur Paladium",

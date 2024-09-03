@@ -19,7 +19,6 @@ export default function PalaAnimationPage({ searchParams }: { searchParams: { us
   const username = searchParams.username;
 
 
-
   return (
     <>
       <TestBot/>

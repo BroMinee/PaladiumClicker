@@ -14,31 +14,30 @@ export async function generateMetadata(
   try {
 
 
-  let paladiumProfil = await getPaladiumProfileByPseudo(params.username);
-  let jobInfo = await getJobsFromUUID(paladiumProfil.uuid);
-  let factionInfo = await getFactionInfo(paladiumProfil.faction || "Wilderness");
+    let paladiumProfil = await getPaladiumProfileByPseudo(params.username);
+    let jobInfo = await getJobsFromUUID(paladiumProfil.uuid);
+    let factionInfo = await getFactionInfo(paladiumProfil.faction || "Wilderness");
 
-  const title = `${params.username} - ${factionInfo.name} - Paladium Tracker - Profil`;
-  const description = `⛏️ ${jobInfo.miner.level} 🌾 ${jobInfo.farmer.level} 🏹 ${jobInfo.hunter.level} 🧙🏽 ${jobInfo.alchemist.level} \n\n💰 ${formatPrice(Math.round(paladiumProfil?.money || 0))} $`;
+    const title = `${params.username} - ${factionInfo.name} - Paladium Tracker - Profil`;
+    const description = `⛏️ ${jobInfo.miner.level} 🌾 ${jobInfo.farmer.level} 🏹 ${jobInfo.hunter.level} 🧙🏽 ${jobInfo.alchemist.level} \n\n💰 ${formatPrice(Math.round(paladiumProfil?.money || 0))} $`;
 
-  // const defaultImage = "https://brominee.github.io/PaladiumClicker/favicon.ico";
-  return {
-    title: title,
-    description: description,
-    openGraph: {
+    // const defaultImage = "https://brominee.github.io/PaladiumClicker/favicon.ico";
+    return {
       title: title,
       description: description,
-      // images: [
-      //   {
-      //     url: defaultImage,
-      //     width: 800,
-      //     height: 600,
-      //   }
-      // ]
-    },
-  }
-  }
-  catch (error) {
+      openGraph: {
+        title: title,
+        description: description,
+        // images: [
+        //   {
+        //     url: defaultImage,
+        //     width: 800,
+        //     height: 600,
+        //   }
+        // ]
+      },
+    }
+  } catch (error) {
     console.error(error);
     return {
       title: "PalaTracker - Profil",

@@ -15,7 +15,8 @@ export const SessionContextProvider: React.FC = ({ children }) => {
   const [question, setQuestion] = useState('');
 
   return (
-    <SessionContext.Provider value={{ sessionUuid: session_uuid, setSessionUuid: setSession_uuid, question, setQuestion }}>
+    <SessionContext.Provider
+      value={{ sessionUuid: session_uuid, setSessionUuid: setSession_uuid, question, setQuestion }}>
       {children}
     </SessionContext.Provider>
   );

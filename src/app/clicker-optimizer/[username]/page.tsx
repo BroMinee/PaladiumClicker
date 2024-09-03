@@ -47,8 +47,7 @@ export async function generateMetadata(
         // ]
       },
     }
-  }
-  catch (error) {
+  } catch (error) {
     console.error(error);
     return {
       title: "PalaTracker - Clicker Optimizer",

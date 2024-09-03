@@ -10,8 +10,6 @@ export default function ToggleTheme() {
   const { setTheme, resolvedTheme } = useTheme()
 
 
-
-
   function toggleTheme() {
     setTheme(resolvedTheme === "dark" ? "light" : "dark");
   }
