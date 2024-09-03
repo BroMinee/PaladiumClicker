@@ -51,7 +51,6 @@ export async function generateMetadata(
 }
 
 export default function Home({ params }: { params: { username: string } }) {
-  console.log(params.username, new Date())
   return (
     <ProfileFetcherWrapper username={params.username}>
       <div className="flex flex-col gap-4">

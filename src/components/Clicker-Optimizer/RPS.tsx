@@ -139,13 +139,11 @@ export function computeBestBuildingUgrade(playerInfo: PlayerInfo): bestBuildingI
     }
   }
 
-  const res: bestBuildingInfo = {
+  return {
     bestRpsAfterUpgrade: bestRpsAfterUpgrade,
     bestUpgradeIndex: bestBuildingIndex,
     bestListName: "building"
   };
-
-  return res;
 }
 
 

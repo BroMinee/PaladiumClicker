@@ -1,3 +1,5 @@
+import { MetierKey } from "@/types";
+
 const version = 11;
 
 const discord = {
@@ -245,7 +247,7 @@ const metier_palier = [
 
 
 interface HowToXp {
-  [key: string]: {
+  [key: MetierKey]: {
     type: string;
     action: string;
     xp: number;
@@ -254,7 +256,7 @@ interface HowToXp {
 }
 
 const how_to_xp: HowToXp = {
-  "mineur": [
+  "miner": [
     { type: "Nether brick", "action": SMELT, "xp": 0.1, imgPath: "nether_brick.png" },
     { type: "Stone", "action": BREAK, "xp": 0.5, imgPath: "stone.png" },
     { type: "Charcoal", "action": SMELT, "xp": 1, imgPath: "charcoal.png" },
@@ -347,7 +349,7 @@ const how_to_xp: HowToXp = {
     { type: "Cave Spider", "action": KILL, "xp": 15, imgPath: "cave_spider.png" },
     { type: "Jelly Fish", "action": KILL, "xp": 150, imgPath: "jelly_fish.png" },
   ],
-  "alchimiste": [
+  "alchemist": [
     { type: "Empty Flask", "action": CRAFT, "xp": 0.2, imgPath: "empty_flask.png" },
     { type: "Jacaranda Log", "action": BREAK, "xp": 10, imgPath: "jacaranda_log.png" },
     { type: "Judeecercis Log", "action": BREAK, "xp": 10, imgPath: "judeecercis_log.png" },

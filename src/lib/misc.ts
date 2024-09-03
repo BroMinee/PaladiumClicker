@@ -181,6 +181,15 @@ export function adaptPlurial(word: string, count: number) {
   return count >= 2 ? word + "s" : word;
 }
 
+export function generateXpCalculatorUrl(username: string, metier: string | undefined, level: number | undefined, double: boolean | undefined, dailyBonus: number | undefined) {
+  const argMetier = metier ? `metier=${metier}` : "";
+  const argLevel = level ? `level=${level}` : "";
+  const argDouble = double ? `double=${double}` : "";
+  const argDailyBonus = dailyBonus ? `dailyBonus=${dailyBonus}` : "";
+  const args = [argMetier, argLevel, argDouble, argDailyBonus].filter((e) => e).join("&");
+  return safeJoinPaths(constants.calculatorXpPath, username, `?${args}`);
+}
+
 export function safeJoinPaths(base: string, ...paths: string[]): string {
   const allPaths = ["/" + base, ...paths];
   const result = allPaths.join('/');

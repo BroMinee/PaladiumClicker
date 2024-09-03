@@ -10,7 +10,7 @@ export type SessionContextType = {
 
 const SessionContext = createContext({} as SessionContextType);
 
-export const SessionContextProvider = ({ children } : {children: React.ReactNode}) => {
+export const SessionContextProvider = ({ children }: { children: React.ReactNode }) => {
   const [session_uuid, setSession_uuid] = useState('');
   const [question, setQuestion] = useState('');
 
@@ -26,7 +26,7 @@ export const useSessionContext = () => {
   return React.useContext(SessionContext);
 }
 
-export default function SessionProvider({ children } : {children: React.ReactNode}) {
+export default function SessionProvider({ children }: { children: React.ReactNode }) {
   return <SessionContextProvider>
     {children}
   </SessionContextProvider>

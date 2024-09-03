@@ -11,5 +11,5 @@ export const getLeaderboardPalaAnimation = async (session_uuid: string, username
 export const getAnswerPalaAnimation = async (session_uuid: string): Promise<{ answer: string }> => {
   return await fetchWithHeader<{
     answer: string
-  }>(`${API_PALATRACKER}/v1/palaAnimation/answer?session_uuid=${session_uuid}`,0)
+  }>(`${API_PALATRACKER}/v1/palaAnimation/answer?session_uuid=${session_uuid}`, 0)
 }

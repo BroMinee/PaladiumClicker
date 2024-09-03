@@ -8,7 +8,7 @@ export default function MarketSelector() {
 
   const router = useRouter();
   const setInputValue = (value: string) => {
-    router.push(`${constants.ahPath}?item=` + value);
+    router.push(`${constants.ahPath}?item=` + value, { scroll: false });
   }
   return (
 

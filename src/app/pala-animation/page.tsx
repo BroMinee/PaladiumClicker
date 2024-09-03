@@ -13,6 +13,28 @@ import ImportPseudoPalaAnimation from "@/components/Pala-Animation/ImportPseudoP
 import { getGlobalLeaderboard } from "@/lib/api/apiPalaTracker.ts";
 import SessionProvider from "@/components/Pala-Animation/SessionContextProvider.tsx";
 
+export async function generateMetadata(
+  { params }: { params: { username: string } },
+) {
+  const title = `${params.username}  - Paladium Tracker - Pala Animation Trainer`;
+  const description = "Viens t'entraîner sur PalaAnimation et compare ton temps avec les autres joueurs ! 🚀"
+  // const defaultImage = "https://brominee.github.io/PaladiumClicker/favicon.ico";
+  return {
+    title: title,
+    description: description,
+    openGraph: {
+      title: title,
+      description: description,
+      // images: [
+      //   {
+      //     url: defaultImage,
+      //     width: 800,
+      //     height: 600,
+      //   }
+      // ]
+    },
+  }
+}
 
 export default function PalaAnimationPage({ searchParams }: { searchParams: { username: string | undefined } }) {
 
