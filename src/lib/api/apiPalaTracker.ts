@@ -32,19 +32,13 @@ export const isMyApiDown = async (): Promise<boolean> => {
   return !(json && json.backend_status === "OK" && json.db_status === "OK");
 }
 
-export const getLeaderboardPalaAnimation = async (session_uuid: string, username: string): Promise<PalaAnimationLeaderboard> => {
-  return await fetchWithHeader<PalaAnimationLeaderboard>(`${API_PALATRACKER}/v1/palaAnimation/leaderboard?username=${username}&session_uuid=${session_uuid}`)
-}
+
 
 export const getGlobalLeaderboard = async (): Promise<PalaAnimationLeaderboardGlobal> => {
   return await fetchWithHeader<PalaAnimationLeaderboardGlobal>(`${API_PALATRACKER}/v1/palaAnimation/leaderboard/global`)
 }
 
-export const getAnswerPalaAnimation = async (session_uuid: string): Promise<{ answer: string }> => {
-  return await fetchWithHeader<{
-    answer: string
-  }>(`${API_PALATRACKER}/v1/palaAnimation/answer?session_uuid=${session_uuid}`)
-}
+
 
 export const getViewsFromUUID = async (uuid: string): Promise<ProfilViewType> => {
   return await fetchWithHeader<ProfilViewType>(`${API_PALATRACKER}/v1/user/getUser/${uuid}`, 10);

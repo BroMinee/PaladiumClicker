@@ -7,7 +7,7 @@ const discord = {
 
 
 const profilPath = "/profil";
-
+const ahPath = "/ah";
 const calculatorXpPath = "/xp-calculator";
 const optimizerClickerPath = "/clicker-optimizer";
 
@@ -16,11 +16,11 @@ const palaAnimationPath = "/pala-animation";
 
 const links: Array<{ path: string, label: string, requiredPseudo: boolean }> = [
   { path: profilPath, label: "Profil", requiredPseudo: true },
-  { path: "/ah", label: "AH", requiredPseudo: false },
+  { path: ahPath, label: "AH", requiredPseudo: false },
   { path: calculatorXpPath, label: "Calculateur d'xp", requiredPseudo: true },
   { path: optimizerClickerPath, label: "PalaClicker Optimizer", requiredPseudo: true },
   { path: "/palatime", label: "Palatime", requiredPseudo: false },
-  { path: palaAnimationPath, label: "PalaAnimation Trainer", requiredPseudo: true },
+  { path: palaAnimationPath, label: "PalaAnimation Trainer", requiredPseudo: false },
   { path: "/about", label: "A propos", requiredPseudo: false },
 ];
 
@@ -395,6 +395,7 @@ const constants = {
   links,
   calculatorXpPath,
   profilPath,
+  ahPath,
   optimizerClickerPath,
   palaAnimationPath,
 };

@@ -1,5 +1,7 @@
-import { checkAnswerPalaAnimationType, KeyDownTimestampType, NetworkError } from "@/types";
+'use server'
+import 'server-only';
 import axios from "axios";
+import { checkAnswerPalaAnimationType, KeyDownTimestampType, NetworkError } from "@/types";
 import { API_PALATRACKER } from "@/lib/api/apiPalaTracker.ts";
 
 function base64ToUint8Array(base64String: string): Uint8Array {
@@ -17,12 +19,12 @@ function base64ToUint8Array(base64String: string): Uint8Array {
   return uint8Array;
 }
 
-async function encryptAES256(plainText: string, key: string): Promise<string> {
+export async function encryptAES256(plainText: string, key: string): Promise<string> {
   const enc = new TextEncoder();
   const keyBuffer = base64ToUint8Array(key);
   const data = enc.encode(plainText);
 
-  const cryptoKey = await window.crypto.subtle.importKey(
+  const cryptoKey = await crypto.subtle.importKey(
     "raw",
     keyBuffer,
     { name: "AES-CBC", length: 256 },
@@ -30,9 +32,9 @@ async function encryptAES256(plainText: string, key: string): Promise<string> {
     ["encrypt"]
   );
 
-  const iv = window.crypto.getRandomValues(new Uint8Array(16));
+  const iv = crypto.getRandomValues(new Uint8Array(16));
 
-  const encryptedData = await window.crypto.subtle.encrypt(
+  const encryptedData = await crypto.subtle.encrypt(
     { name: "AES-CBC", iv: iv },
     cryptoKey,
     data
@@ -46,7 +48,7 @@ async function encryptAES256(plainText: string, key: string): Promise<string> {
   return btoa(String.fromCharCode(...result));
 }
 
-async function decryptAES256(encryptedText: string, key: string): Promise<string> {
+export async function decryptAES256(encryptedText: string, key: string): Promise<string> {
   const keyBuffer = base64ToUint8Array(key);
 
   const encryptedDataWithIv = Uint8Array.from(atob(encryptedText).split("").map((c) => c.charCodeAt(0)));
@@ -56,7 +58,7 @@ async function decryptAES256(encryptedText: string, key: string): Promise<string
 
   const encryptedData = encryptedDataWithIv.slice(16);
 
-  const cryptoKey = await window.crypto.subtle.importKey(
+  const cryptoKey = await crypto.subtle.importKey(
     "raw",
     keyBuffer,
     { name: "AES-CBC", length: 256 },
@@ -65,7 +67,7 @@ async function decryptAES256(encryptedText: string, key: string): Promise<string
   );
 
   // Decrypt the data
-  const decryptedData = await window.crypto.subtle.decrypt(
+  const decryptedData = await crypto.subtle.decrypt(
     { name: "AES-CBC", iv: iv },
     cryptoKey,
     encryptedData
