@@ -28,7 +28,7 @@ export const isMyApiDown = async (): Promise<boolean> => {
 
 
 export const getGlobalLeaderboard = async (): Promise<PalaAnimationLeaderboardGlobal> => {
-  return await fetchWithHeader<PalaAnimationLeaderboardGlobal>(`${API_PALATRACKER}/v1/palaAnimation/leaderboard/global`)
+  return await fetchWithHeader<PalaAnimationLeaderboardGlobal>(`${API_PALATRACKER}/v1/palaAnimation/leaderboard/global`, 0)
 }
 
 

@@ -27,7 +27,7 @@ export default function PalaAnimationPage({ searchParams }: { searchParams: { us
           <Card>
             <CardHeader className="flex flex-row items-center justify-between">
               <CardTitle>
-                Bienvenue dans la zone d'entraînement du{" "}
+                Bienvenue dans la zone d&apos;entraînement du{" "}
                 <GradientText className="font-extrabold">PalaAnimation</GradientText>
               </CardTitle>
               <CardDescription>
