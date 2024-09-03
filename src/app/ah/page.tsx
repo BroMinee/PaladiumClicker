@@ -23,6 +23,18 @@ export function generateMetadata(
 ) {
   const itemName = itemListJson.find((item) => item.value === searchParams.item)?.label as string | undefined;
 
+  if(!itemName)
+  {
+    return {
+      title: "AH Tracker",
+      description: "Suivez les historiques de vente de vos items préférés sur Paladium",
+      openGraph: {
+        title: "AH Tracker",
+        description: "Suivez les historiques de vente de vos items préférés sur Paladium"
+      },
+    }
+  }
+
   let closestItemName = searchParams.item === undefined ? "" : GetAllFileNameInFolder().reduce((acc, curr) => {
     if (levensteinDistance(curr, searchParams.item!) < levensteinDistance(acc, searchParams.item!)) {
       return curr;
@@ -31,9 +43,8 @@ export function generateMetadata(
     }
   });
 
-  const title = `AH Tracker${itemName ? ` - ${itemName}` : ""}`;
+  const title = `AH Tracker  - ${itemName}`;
   const description = "Suivez les historiques de vente de vos items préférés sur Paladium";
-  const defaultImage = "https://brominee.github.io/PaladiumClicker/favicon.ico";
   return {
     title: title,
     description: "Suivez les historiques de vente de vos items préférés sur Paladium",
@@ -42,9 +53,9 @@ export function generateMetadata(
       description: description,
       images: [
         {
-          url: itemName !== undefined ? `https://brominee.github.io/PaladiumClicker/AH_img/${closestItemName}.png` : defaultImage,
-          width: 800,
-          height: 600,
+          url: `https://dev.bromine.fr/AH_img/${closestItemName}.png`,
+          width: 500,
+          height: 500,
         }
       ]
     },

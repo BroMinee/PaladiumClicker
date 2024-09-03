@@ -4,6 +4,20 @@ import { FaGithub } from "react-icons/fa";
 import Contributors from "@/components/Contributors.tsx";
 import Discord from "@/components/Discord.tsx";
 
+export async function generateMetadata() {
+  const title = `Paladium Tracker - About`;
+  const description = "Le site qui te permet de suivre ton profil Paladium, d'optimiser ton PalaClicker, de suivre les historiques de vente de l'AH et bien plus encore !";
+
+  return {
+    title: title,
+    description: description,
+    openGraph: {
+      title: title,
+      description: description,
+    },
+  }
+}
+
 const AboutPage = () => {
   return (
     <div className="flex flex-col gap-4 ">

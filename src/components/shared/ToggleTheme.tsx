@@ -1,19 +1,24 @@
 'use client';
 import { Button } from "@/components/ui/button";
-import { useTheme } from "@/components/shared/ThemeProvider";
+import { useTheme } from 'next-themes'
 import { FaMoon, FaSun } from "react-icons/fa";
 
+
 export default function ToggleTheme() {
-  const { theme, systemTheme, setTheme } = useTheme();
-  const currentTheme = theme === "system" ? systemTheme : theme;
+
+
+  const { setTheme, resolvedTheme } = useTheme()
+
+
+
 
   function toggleTheme() {
-    setTheme(currentTheme === "dark" ? "light" : "dark");
+    setTheme(resolvedTheme === "dark" ? "light" : "dark");
   }
 
   return (
     <Button variant="ghost" size="icon" onClick={() => toggleTheme()}>
-      {currentTheme === "dark" ? <FaMoon/> : <FaSun/>}
+      {resolvedTheme === "dark" ? <FaMoon/> : <FaSun/>}
     </Button>
   );
 }

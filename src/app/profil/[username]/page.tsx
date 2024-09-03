@@ -11,30 +11,43 @@ import { formatPrice } from "@/lib/misc.ts";
 export async function generateMetadata(
   { params }: { params: { username: string } },
 ) {
-  console.log(params.username)
+  try {
+
+
   let paladiumProfil = await getPaladiumProfileByPseudo(params.username);
-  console.log(paladiumProfil)
   let jobInfo = await getJobsFromUUID(paladiumProfil.uuid);
   let factionInfo = await getFactionInfo(paladiumProfil.faction || "Wilderness");
 
-  const title = `${params.username} - ${factionInfo.name} Paladium Tracker`;
+  const title = `${params.username} - ${factionInfo.name} - Paladium Tracker - Profil`;
   const description = `⛏️ ${jobInfo.miner.level} 🌾 ${jobInfo.farmer.level} 🏹 ${jobInfo.hunter.level} 🧙🏽 ${jobInfo.alchemist.level} \n\n💰 ${formatPrice(Math.round(paladiumProfil?.money || 0))} $`;
 
-  const defaultImage = "https://brominee.github.io/PaladiumClicker/favicon.ico";
+  // const defaultImage = "https://brominee.github.io/PaladiumClicker/favicon.ico";
   return {
     title: title,
-    description: "Suivez les historiques de vente de vos items préférés sur Paladium",
+    description: description,
     openGraph: {
       title: title,
       description: description,
-      images: [
-        {
-          url: defaultImage,
-          width: 800,
-          height: 600,
-        }
-      ]
+      // images: [
+      //   {
+      //     url: defaultImage,
+      //     width: 800,
+      //     height: 600,
+      //   }
+      // ]
     },
+  }
+  }
+  catch (error) {
+    console.error(error);
+    return {
+      title: "PalaTracker - Profil",
+      description: "📝 Viens consulter ton profil Paladium sur PalaTracker ! 📝",
+      openGraph: {
+        title: "PalaTracker - Profil",
+        description: "📝 Viens consulter ton profil Paladium sur PalaTracker ! 📝"
+      },
+    }
   }
 }
 

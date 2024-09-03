@@ -4,8 +4,8 @@ import "@/styles/globals.css"
 import React from "react";
 import Navbar from "@/components/NavBar";
 import GradientText from "@/components/shared/GradientText";
-import ThemeProvider from "@/components/shared/ThemeProvider.tsx";
 import { Inter } from '@next/font/google';
+import { ThemeProviders } from "@/components/shared/ThemeProvider.tsx";
 
 const inter = Inter({
   subsets: ['latin'],  // specify subsets according to your needs
@@ -20,9 +20,9 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="fr" className={inter.className}>
+    <html lang="fr" className={inter.className} suppressHydrationWarning>
     <body>
-    <ThemeProvider defaultTheme="system" storageKey="theme">
+    <ThemeProviders>
       <div className="relative min-h-screen flex flex-col">
         <header
           className="h-16 w-full bg-primary text-primary-foreground sticky top-0 z-10 border-b border-primary-200 backdrop-blur-md">
@@ -48,7 +48,7 @@ export default function RootLayout({
         </GradientText>.
         </footer>
       </div>
-    </ThemeProvider>
+    </ThemeProviders>
     </body>
     </html>
   );
