@@ -29,7 +29,6 @@ const RPS = () => {
 
   useEffect(() => {
     if (!playerInfo) {
-      console.log("No player info")
       return;
     }
 

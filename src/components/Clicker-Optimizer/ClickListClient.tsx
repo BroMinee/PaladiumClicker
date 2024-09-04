@@ -1,20 +1,21 @@
 'use client';
 import { cn } from "@/lib/utils.ts";
-import { Button } from "@/components/ui/button.tsx";
+import { Button, buttonVariants } from "@/components/ui/button.tsx";
 import { usePlayerInfoStore } from "@/stores/use-player-info-store.ts";
 import React from "react";
 import { checkCondition, formatPrice } from "@/lib/misc.ts";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover.tsx";
 import { FaInfoCircle } from "react-icons/fa";
+import { Card } from "@/components/ui/card.tsx";
 
 export function ButtonCPS({ index, children }: { index: number, children: React.ReactNode }) {
   const { data: playerInfo, selectCPS } = usePlayerInfoStore();
   const cps = playerInfo?.CPS[index];
 
   return (
-    <Button
-      variant="card"
+    <Card
       className={cn(
+        buttonVariants({ variant: "card" }),
         "p-4 h-auto min-w-36 w-fit",
         cps?.own && "bg-primary text-primary-foreground",
         !cps?.own && "bg-yellow-500 text-primary-foreground",
@@ -24,7 +25,7 @@ export function ButtonCPS({ index, children }: { index: number, children: React.
       onClick={() => selectCPS(index)}
     >
       {children}
-    </Button>
+    </Card>
   );
 }
 

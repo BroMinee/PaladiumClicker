@@ -3,10 +3,11 @@ import { usePlayerInfoStore } from "@/stores/use-player-info-store.ts";
 import { checkCondition, formatPrice } from "@/lib/misc.ts";
 import { BuildingUpgrade, CategoryUpgrade, GlobalUpgrade, TerrainUpgrade, UpgradeKey } from "@/types";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover.tsx";
-import { Button } from "@/components/ui/button.tsx";
+import { Button, buttonVariants } from "@/components/ui/button.tsx";
 import { FaInfoCircle } from "react-icons/fa";
 import { cn } from "@/lib/utils.ts";
 import React from "react";
+import { Card } from "@/components/ui/card.tsx";
 
 export function PreconditionDisplay({ index, upgradeType }: { index: number, upgradeType: UpgradeKey }) {
   const { data: playerInfo } = usePlayerInfoStore();
@@ -72,9 +73,9 @@ export function ButtonUpgrade({ index, upgradeType, children }: {
   } = playerInfo ? playerInfo[upgradeType][index] : { own: false, name: "uninitialized" };
 
   return (
-    <Button
-      variant="card"
+    <Card
       className={cn(
+        buttonVariants({ variant: "card" }),
         "p-4 h-auto",
         upgrade.own && "bg-primary text-primary-foreground",
         !upgrade.own && "bg-yellow-500 text-primary-foreground",
@@ -84,6 +85,6 @@ export function ButtonUpgrade({ index, upgradeType, children }: {
       onClick={() => toggleUpgradeOwn(upgradeType, upgrade.name)}
     >
       {children}
-    </Button>
+    </Card>
   );
 }
