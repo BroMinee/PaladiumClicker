@@ -40,7 +40,7 @@ export async function generateMetadata(
         imgPath = "Mineur";
         break;
     }
-  let image = `https://palatracker.bromine.fr/JobsIcon/${imgPath}.webp`;
+  let image = `https://dev.bromine.fr/JobsIcon/${imgPath}.webp`;
   return {
     title: title,
     description: description,
