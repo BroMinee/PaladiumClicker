@@ -11,7 +11,35 @@ import {
 } from "@/components/Xp-Calculator/MetierSelectorClient.tsx";
 import { MetierKey } from "@/types";
 import { HowToXp, searchParamsXpBonusPage, XpBonus } from "@/components/Xp-Calculator/XpCalculator.tsx";
+import { getFactionInfo, getJobsFromUUID, getPaladiumProfileByPseudo } from "@/lib/api/apiPala.ts";
+import { formatPrice } from "@/lib/misc.ts";
 
+
+export async function generateMetadata(
+  { params ,searchParams }: { params: { username: string }, searchParams: searchParamsXpBonusPage},
+) {
+
+
+    const title = `Paladium Tracker - Calculateur d'xp de métier - ${params.username}`;
+    const description = `Renseignez votre pseudo Paladium et le métier que vous souhaitez xp pour obtenir des quantités à farmer pour atteindre le niveau souhaité.`;
+    // const defaultImage = "https://brominee.github.io/PaladiumClicker/favicon.ico";
+    return {
+      title: title,
+      description: description,
+      openGraph: {
+        title: title,
+        description: description,
+        // images: [
+        //   {
+        //     url: defaultImage,
+        //     width: 800,
+        //     height: 600,
+        //   }
+        // ]
+      },
+    }
+  
+}
 
 export default function Home({ params, searchParams }: {
   params: { username: string },
