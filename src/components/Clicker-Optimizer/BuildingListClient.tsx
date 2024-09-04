@@ -1,8 +1,8 @@
 'use client';
 import { computePrice, formatPrice, scaleCurrentProduction } from "@/lib/misc.ts";
 import { usePlayerInfoStore } from "@/stores/use-player-info-store.ts";
-import { Input } from "@/components/ui/input.tsx";
 import { ChangeEvent } from "react";
+import { Input } from "@/components/ui/input.tsx";
 
 export function BuildingRPS({ index }: { index: number }) {
   const { data: playerInfo } = usePlayerInfoStore();
@@ -50,7 +50,7 @@ export function BuildingInput({ index }: { index: number }) {
       min="0"
       step="1"
       max="99"
-      defaultValue={0}
+      value={0}
     />
 
   return <Input
@@ -58,7 +58,7 @@ export function BuildingInput({ index }: { index: number }) {
     min="0"
     step="1"
     max="99"
-    defaultValue={Number(playerInfo.building[index].own)}
+    value={playerInfo.building[index].own}
     onChange={onChangeLevel}
   />
 }
