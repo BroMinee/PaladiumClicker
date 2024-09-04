@@ -1,7 +1,5 @@
-import { Card } from "@/components/ui/card.tsx";
+import { NoPseudoPage } from "@/components/NoPseudoPage.tsx";
 
 export default function HomeProfilWithoutUsername() {
-  return <Card>
-    TODO
-  </Card>
+  return <NoPseudoPage noBoldText="sur l'optimiseur du" boldText="PalaClicker"/>
 }

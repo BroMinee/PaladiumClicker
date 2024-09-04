@@ -14,9 +14,13 @@ import { getGlobalLeaderboard } from "@/lib/api/apiPalaTracker.ts";
 import SessionProvider from "@/components/Pala-Animation/SessionContextProvider.tsx";
 
 export async function generateMetadata(
-  { params }: { params: { username: string } },
+  { searchParams }: { searchParams: { username: string } },
 ) {
-  const title = `${params.username}  - Paladium Tracker - Pala Animation Trainer`;
+  let title = "";
+  if (searchParams.username)
+    title = `${searchParams.username}  - Paladium Tracker - Pala Animation Trainer`;
+  else
+    title = "Paladium Tracker - Pala Animation Trainer";
   const description = "Viens t'entraîner sur PalaAnimation et compare ton temps avec les autres joueurs ! 🚀"
   // const defaultImage = "https://brominee.github.io/PaladiumClicker/favicon.ico";
   return {
