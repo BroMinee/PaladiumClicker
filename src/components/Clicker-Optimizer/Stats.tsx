@@ -229,7 +229,7 @@ export default Stats;
  * */
 function getBestUpgrade(copyPlayerInfo: PlayerInfo): bestPurchaseInfo {
 
-  const bestBuildingInfo = computeBestBuildingUgrade(copyPlayerInfo);
+  const bestBuildingInfo = computeBestBuildingUgrade(structuredClone(copyPlayerInfo));
   const bestUpgradeInfo = findBestUpgrade(structuredClone(copyPlayerInfo));
 
 
