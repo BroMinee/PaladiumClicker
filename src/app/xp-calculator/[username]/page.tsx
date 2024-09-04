@@ -11,34 +11,52 @@ import {
 } from "@/components/Xp-Calculator/MetierSelectorClient.tsx";
 import { MetierKey } from "@/types";
 import { HowToXp, searchParamsXpBonusPage, XpBonus } from "@/components/Xp-Calculator/XpCalculator.tsx";
-import { getFactionInfo, getJobsFromUUID, getPaladiumProfileByPseudo } from "@/lib/api/apiPala.ts";
-import { formatPrice } from "@/lib/misc.ts";
 
 
 export async function generateMetadata(
-  { params ,searchParams }: { params: { username: string }, searchParams: searchParamsXpBonusPage},
+  { params, searchParams }: { params: { username: string }, searchParams: searchParamsXpBonusPage },
 ) {
 
 
-    const title = `Paladium Tracker - Calculateur d'xp de métier - ${params.username}`;
-    const description = `Renseignez votre pseudo Paladium et le métier que vous souhaitez xp pour obtenir des quantités à farmer pour atteindre le niveau souhaité.`;
-    // const defaultImage = "https://brominee.github.io/PaladiumClicker/favicon.ico";
-    return {
+  const title = `Paladium Tracker - Calculateur d'xp de métier - ${params.username}`;
+  const description = `Renseignez votre pseudo Paladium et le métier que vous souhaitez xp pour obtenir des quantités à farmer pour atteindre le niveau souhaité.`;
+  // const defaultImage = "https://brominee.github.io/PaladiumClicker/favicon.ico";
+  let imgPath = "Mineur";
+  if (searchParams.metier !== undefined)
+    switch (searchParams.metier) {
+      case "miner":
+        imgPath = "Mineur";
+        break;
+      case "farmer":
+        imgPath = "Fermier";
+        break;
+      case "hunter":
+        imgPath = "Chasseur";
+        break;
+      case "alchemist":
+        imgPath = "Alchimiste";
+        break;
+      default:
+        imgPath = "Mineur";
+        break;
+    }
+  let image = `https://palatracker.bromine.fr/JobsIcon/${imgPath}.webp`;
+  return {
+    title: title,
+    description: description,
+    openGraph: {
       title: title,
       description: description,
-      openGraph: {
-        title: title,
-        description: description,
-        // images: [
-        //   {
-        //     url: defaultImage,
-        //     width: 800,
-        //     height: 600,
-        //   }
-        // ]
-      },
-    }
-  
+      images: [
+        {
+          url: image,
+          width: 256,
+          height: 256,
+        }
+      ]
+    },
+  }
+
 }
 
 export default function Home({ params, searchParams }: {
