@@ -56,7 +56,7 @@ export const MetierComponentWrapper = ({
                                          metierKey
                                        }: MetierProps) => {
 
-  const metierName = metierJson[metierKey].name as MetierKey;
+  const metierName = structuredClone(metierJson[metierKey].name as MetierKey);
 
 
   return (

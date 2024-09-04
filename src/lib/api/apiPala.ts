@@ -280,7 +280,7 @@ export const getJobsFromUUID = async (uuid: string): Promise<Metiers> => {
 
 
   // NOTE we take the original JSON to have name easily modifiable (for example response.farmer.name witch is not in the response JSON)
-  const initialMetierJson = metier_json as Metiers;
+  const initialMetierJson = structuredClone(metier_json as Metiers);
 
 
   if (response.farmer) {

@@ -74,7 +74,7 @@ export const MetierToReachWrapper = ({
                                        searchParams,
                                      }: MetierProps) => {
 
-  const metierName = metierJson[metierKey].name as MetierKey;
+  const metierName = structuredClone(metierJson[metierKey].name as MetierKey);
 
   const { data: playerInfo } = usePlayerInfoStore();
   if (!playerInfo || searchParams.level === undefined)
