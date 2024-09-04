@@ -132,7 +132,7 @@ export function computeBestBuildingUgrade(playerInfo: PlayerInfo): bestBuildingI
 
     building.own += 1;
 
-    const rpsAfterUpgrade = (computeRPS(copy) - currentRPS) / (computePrice(copy.building[index].price, Number(copy.building[index].own)));
+    const rpsAfterUpgrade = (computeRPS(copy) - currentRPS) / (computePrice(copy.building[index].price, Number(copy.building[index].own) - 1));
     if (rpsAfterUpgrade > bestRpsAfterUpgrade) {
       bestRpsAfterUpgrade = rpsAfterUpgrade;
       bestBuildingIndex = index;
