@@ -38,7 +38,7 @@ export function BuildingInput({ index }: { index: number }) {
       return;
 
     let value = Number(event.target.value);
-    if (value) {
+    if (!isNaN(value)) {
       value = Math.floor(value);
       setBuildingOwn(playerInfo.building[index].name, value);
     }
@@ -50,7 +50,7 @@ export function BuildingInput({ index }: { index: number }) {
       min="0"
       step="1"
       max="99"
-      value={0}
+      defaultValue={0}
     />
 
   return <Input
@@ -58,7 +58,7 @@ export function BuildingInput({ index }: { index: number }) {
     min="0"
     step="1"
     max="99"
-    value={playerInfo.building[index].own}
+    placeholder={String(playerInfo.building[index].own)}
     onChange={onChangeLevel}
   />
 }

@@ -15,7 +15,7 @@ export function ButtonCPS({ index, children }: { index: number, children: React.
     <Button
       variant="card"
       className={cn(
-        "p-4 h-auto w-36",
+        "p-4 h-auto min-w-36 w-fit",
         cps?.own && "bg-primary text-primary-foreground",
         !cps?.own && "bg-yellow-500 text-primary-foreground",
         cps?.own && "hover:bg-primary-darker",
