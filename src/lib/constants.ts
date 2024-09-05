@@ -8,23 +8,91 @@ const discord = {
 };
 
 
-const profilPath = "/profil";
-const ahPath = "/ah";
-const calculatorXpPath = "/xp-calculator";
-const optimizerClickerPath = "/clicker-optimizer";
+export type PathValid =
+  "/profil"
+  | "/ah"
+  | "/xp-calculator"
+  | "/clicker-optimizer"
+  | "/palatime"
+  | "/pala-animation"
+  | "/about"
+  | "/ranking?category=money"
+  | "/ranking?category=metiers"
+  | "/ranking?category=boss"
+  | "/ranking?category=egg_hunt"
+  | "/ranking?category=koth"
+  | "/ranking?category=clicker"
+  | "/admin-shop"
+  | "/status"
+  | "/politique-de-confidentialite"
+  | "/patchnote";
 
-const palaAnimationPath = "/pala-animation";
+export type LabelValid =
+  "Profil"
+  | "Market"
+  | "Calculateur d'xp"
+  | "PalaClicker Optimizer"
+  | "Palatime"
+  | "PalaAnimation Trainer"
+  | "A propos"
+  | "Money"
+  | "Métiers"
+  | "Boss"
+  | "Egg Hunt"
+  | "KOTH"
+  | "Clicker"
+  | "Admin Shop"
+  | "Status"
+  | "Politique de confidentialité"
+  | "Patchnote";
 
 
-const links: Array<{ path: string, label: string, requiredPseudo: boolean }> = [
-  { path: profilPath, label: "Profil", requiredPseudo: true },
-  { path: ahPath, label: "AH", requiredPseudo: false },
-  { path: calculatorXpPath, label: "Calculateur d'xp", requiredPseudo: true },
-  { path: optimizerClickerPath, label: "PalaClicker Optimizer", requiredPseudo: true },
-  { path: "/palatime", label: "Palatime", requiredPseudo: false },
-  { path: palaAnimationPath, label: "PalaAnimation Trainer", requiredPseudo: false },
-  { path: "/about", label: "A propos", requiredPseudo: false },
-];
+const profilPath: PathValid = "/profil";
+const ahPath: PathValid = "/ah";
+const calculatorXpPath: PathValid = "/xp-calculator";
+const optimizerClickerPath: PathValid = "/clicker-optimizer";
+const palatimePath: PathValid = "/palatime";
+const palaAnimationPath: PathValid = "/pala-animation";
+const moneyRanking: PathValid = "/ranking?category=money";
+const metiersRanking: PathValid = "/ranking?category=metiers";
+const bossRanking: PathValid = "/ranking?category=boss";
+const eggHuntRanking: PathValid = "/ranking?category=egg_hunt";
+const kothRanking: PathValid = "/ranking?category=koth";
+const clickerRanking: PathValid = "/ranking?category=clicker";
+const adminShopPath: PathValid = "/admin-shop";
+const statusPath: PathValid = "/status";
+const politiqueDeConfidentialitePath: PathValid = "/politique-de-confidentialite";
+const patchnotePath: PathValid = "/patchnote";
+
+
+type LinkInfo = {
+  label: LabelValid;
+  requiredPseudo: boolean;
+};
+
+type LinkList = {
+  [K in PathValid]: LinkInfo;
+};
+
+const links: LinkList = {
+  "/profil": { label: "Profil", requiredPseudo: true },
+  "/ah": { label: "Market", requiredPseudo: false },
+  "/xp-calculator": { label: "Calculateur d'xp", requiredPseudo: true },
+  "/clicker-optimizer": { label: "PalaClicker Optimizer", requiredPseudo: true },
+  "/palatime": { label: "Palatime", requiredPseudo: false },
+  "/pala-animation": { label: "PalaAnimation Trainer", requiredPseudo: false },
+  "/about": { label: "A propos", requiredPseudo: false },
+  "/ranking?category=money": { label: "Money", requiredPseudo: false },
+  "/ranking?category=metiers": { label: "Métiers", requiredPseudo: false },
+  "/ranking?category=boss": { label: "Boss", requiredPseudo: false },
+  "/ranking?category=egg_hunt": { label: "Egg Hunt", requiredPseudo: false },
+  "/ranking?category=koth": { label: "KOTH", requiredPseudo: false },
+  "/ranking?category=clicker": { label: "Clicker", requiredPseudo: false },
+  "/admin-shop": { label: "Admin Shop", requiredPseudo: false },
+  "/status": { label: "Status", requiredPseudo: false },
+  "/politique-de-confidentialite": { label: "Politique de confidentialité", requiredPseudo: false },
+  "/patchnote": { label: "Patchnote", requiredPseudo: false },
+};
 
 
 const SMELT = "Smelt";
@@ -398,8 +466,19 @@ const constants = {
   calculatorXpPath,
   profilPath,
   ahPath,
+  palatimePath,
   optimizerClickerPath,
   palaAnimationPath,
+  moneyRanking,
+  metiersRanking,
+  bossRanking,
+  eggHuntRanking,
+  kothRanking,
+  clickerRanking,
+  adminShopPath,
+  statusPath,
+  politiqueDeConfidentialitePath,
+  patchnotePath
 };
 
 export default constants;

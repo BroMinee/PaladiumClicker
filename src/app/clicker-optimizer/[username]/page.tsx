@@ -1,4 +1,4 @@
-import { RankingType, UpgradeKey } from "@/types";
+import { UpgradeKey } from "@/types";
 import ProfileFetcherWrapper from "@/components/ProfileFetcher.tsx";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card.tsx";
 import GradientText from "@/components/shared/GradientText.tsx";
@@ -15,8 +15,6 @@ import ClickList from "@/components/Clicker-Optimizer/ClickList.tsx";
 import { Fragment } from "react";
 import UpgradeList from "@/components/Clicker-Optimizer/UpgradeList.tsx";
 import FallingClickImage from "@/components/Clicker-Optimizer/FallingClick.tsx";
-import GraphItem from "@/components/Clicker-Optimizer/GraphRanking.tsx";
-import News from "@/components/News.tsx";
 import { getFactionInfo, getJobsFromUUID, getPaladiumProfileByPseudo } from "@/lib/api/apiPala.ts";
 import { formatPrice } from "@/lib/misc.ts";
 
@@ -92,9 +90,6 @@ export default function Home({ params }: { params: { username: string } }) {
             <CardContent>
               <div className="flex flex-wrap gap-2">
                 <Tuto/>
-                <News/>
-                {/*<DailyPopup defaultOpen={showDayPopup}/>*/}
-                <GraphItem rankingType={'clicker' as RankingType}/>
               </div>
             </CardContent>
             <CardFooter className="flex flex-col gap-2 items-start">

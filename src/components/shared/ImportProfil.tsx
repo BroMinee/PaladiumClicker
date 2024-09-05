@@ -12,9 +12,14 @@ import { navigate } from '@/components/actions'
 type ImportProfilProps = {
   showResetButton?: boolean,
   withBackground?: boolean
+  classNameInput?: string
 }
 
-export default function ImportProfil({ showResetButton = false, withBackground = true, }: ImportProfilProps) {
+export default function ImportProfil({
+                                       showResetButton = false,
+                                       withBackground = true,
+                                       classNameInput
+                                     }: ImportProfilProps) {
 
   const { data: playerInfo, reset } = usePlayerInfoStore();
 
@@ -29,8 +34,8 @@ export default function ImportProfil({ showResetButton = false, withBackground =
     }
 
     const trouvaille = getLinkFromUrl(window.location.pathname);
-    if (trouvaille?.requiredPseudo) {
-      await navigate(safeJoinPaths(trouvaille.path, String(formData.get("pseudo"))));
+    if (trouvaille !== undefined && constants.links[trouvaille].requiredPseudo) {
+      await navigate(safeJoinPaths(trouvaille, String(formData.get("pseudo"))));
     } else {
       await navigate(safeJoinPaths(constants.profilPath, String(formData.get("pseudo"))));
     }
@@ -44,7 +49,7 @@ export default function ImportProfil({ showResetButton = false, withBackground =
             type="text"
             id="pseudo"
             name="pseudo"
-            className={cn(withBackground && "bg-background")}
+            className={cn(classNameInput, withBackground && "bg-background")}
             placeholder={playerInfo?.username ?? "Entre ton pseudo"}
           />
           <Button

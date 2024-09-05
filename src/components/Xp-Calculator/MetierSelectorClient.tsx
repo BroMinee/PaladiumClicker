@@ -139,8 +139,8 @@ export function InputDailyBonus({ params, searchParams }: {
                 }/>
 }
 
-function getBonusRank(playerInfo : PlayerInfo | null) {
-  if(!playerInfo)
+function getBonusRank(playerInfo: PlayerInfo | null) {
+  if (!playerInfo)
     return 0;
 
   let bonusXpRank = 0;
@@ -176,7 +176,7 @@ export function DisplayXpBonus() {
   return <>{bonusXpRank}%</>
 }
 
-function getXpDiff(playerInfo : PlayerInfo | null, searchParams: searchParamsXpBonusPage) {
+function getXpDiff(playerInfo: PlayerInfo | null, searchParams: searchParamsXpBonusPage) {
   if (!playerInfo || !playerInfo?.metier || searchParams.level === undefined || !searchParams.metier)
     return 0;
   const higherLevel = searchParams.level;
@@ -200,7 +200,7 @@ export function DisplayXpNeeded({ searchParams }: { searchParams: searchParamsXp
 
 export function DisplayXpNeededWithDouble({ searchParams, xp }: { searchParams: searchParamsXpBonusPage, xp: number }) {
   const { data: playerInfo } = usePlayerInfoStore();
-  const xpNeeded = getXpDiff(playerInfo,searchParams);
+  const xpNeeded = getXpDiff(playerInfo, searchParams);
 
   const bonusXpRank = getBonusRank(playerInfo);
   const bonusXpWithoutDouble = bonusXpRank + (searchParams.dailyBonus || 0);

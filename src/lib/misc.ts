@@ -1,6 +1,6 @@
 import type { AnyCondition, PlayerInfo, UpgradeKey } from "@/types";
 import { MetierKey } from "@/types";
-import constants from "@/lib/constants.ts";
+import constants, { PathValid } from "@/lib/constants.ts";
 
 import globalUpgradeJson from "@/assets/global_upgrade.json";
 import terrainUpgradeJson from "@/assets/terrain_upgrade.json";
@@ -3039,12 +3039,13 @@ export function GetAllFileNameInFolder() {
 }
 
 
-export function getLinkFromUrl(url: string) {
+export function getLinkFromUrl(url: string):
+  PathValid | undefined {
   const urlArray = url.split("/");
-  let trouvaille = undefined as typeof constants.links[0] | undefined;
+  let trouvaille: PathValid | undefined = undefined;
   while (urlArray.length > 0 && urlArray[urlArray.length - 1] !== "") {
-    trouvaille = constants.links.find(({ path }) => path.includes(urlArray[urlArray.length - 1]));
-    if (trouvaille) {
+    trouvaille = Object.keys(constants.links).find((key) => { return key.includes(urlArray[urlArray.length - 1])}) as PathValid | undefined;
+    if (trouvaille !== undefined) {
       break;
     } else {
       urlArray.pop();

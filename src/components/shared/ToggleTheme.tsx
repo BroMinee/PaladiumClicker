@@ -14,12 +14,15 @@ export default function ToggleTheme() {
   function toggleTheme() {
     setTheme(resolvedTheme === "dark" ? "light" : "dark");
   }
+
   useEffect(() => {
     setMounted(true)
   }, [])
 
   if (!mounted) {
-    return null
+    return <Button variant="ghost" size="icon">
+      <FaMoon/>
+    </Button>
   }
   return (
     <Button variant="ghost" size="icon" onClick={() => toggleTheme()}>
