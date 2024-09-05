@@ -1,5 +1,5 @@
 import type { AnyCondition, PlayerInfo, UpgradeKey } from "@/types";
-import { MetierKey } from "@/types";
+import { MetierKey, RankingType } from "@/types";
 import constants, { PathValid } from "@/lib/constants.ts";
 
 import globalUpgradeJson from "@/assets/global_upgrade.json";
@@ -188,6 +188,12 @@ export function generateXpCalculatorUrl(username: string, metier: string | undef
   const argDailyBonus = dailyBonus ? `dailyBonus=${dailyBonus}` : "";
   const args = [argMetier, argLevel, argDouble, argDailyBonus].filter((e) => e).join("&");
   return safeJoinPaths(constants.calculatorXpPath, username, `?${args}`);
+}
+
+export function generateRankingUrl(category: string | undefined) {
+  const argCategory = category ? `category=${category}` : "";
+  const args = [argCategory].filter((e) => e).join("&");
+  return safeJoinPaths("/ranking", `?${args}`);
 }
 
 export function safeJoinPaths(base: string, ...paths: string[]): string {
@@ -3036,6 +3042,49 @@ export function GetAllFileNameInFolder() {
   // });
   // console.log(imageList);
   // return imageList;
+}
+
+export function getImagePathFromRankingType(rankingType: string): string {
+  let imgPath = "";
+  switch (rankingType) {
+    case RankingType.money:
+      imgPath = safeJoinPaths("/RankingIcon/", `money.png`);
+      break;
+    case RankingType["job.alchemist"]:
+      imgPath = safeJoinPaths("/RankingIcon/", `alchimiste.png`);
+      break;
+    case RankingType["job.farmer"]:
+      imgPath = safeJoinPaths("/RankingIcon/", `farmeur.png`);
+      break;
+    case RankingType["job.hunter"]:
+      imgPath = safeJoinPaths("/RankingIcon/", `hunter.png`);
+      break;
+    case RankingType["job.miner"]:
+      imgPath = safeJoinPaths("/RankingIcon/", `mineur.png`);
+      break;
+    case RankingType.boss:
+      imgPath = safeJoinPaths("/RankingIcon/", `boss.png`);
+      break;
+    case RankingType.egghunt:
+      imgPath = safeJoinPaths("/RankingIcon/", `egghunt.png`);
+      break;
+    case RankingType.end:
+      imgPath = safeJoinPaths("/RankingIcon/", `end.png`);
+      break;
+    case RankingType.chorus:
+      imgPath = safeJoinPaths("/RankingIcon/", `chorus.png`);
+      break;
+    case RankingType.koth:
+      imgPath = safeJoinPaths("/RankingIcon/", `koth.png`);
+      break;
+    case RankingType.clicker:
+      imgPath = safeJoinPaths("/RankingIcon/", `clicker.png`);
+      break;
+    default:
+      imgPath = safeJoinPaths("/unknown.png");
+      break;
+  }
+  return imgPath;
 }
 
 

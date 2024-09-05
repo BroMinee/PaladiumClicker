@@ -11,20 +11,20 @@ export async function generateMetadata() {
   const description = "📰 Le Palatime est un journal indépendant écrit et publié par 0livierMinecraft le rédacteur en chef et Palatimes le journaliste.\n" +
     "🗓️ Tu y trouveras l'actualité du serveur comme la quête de faction ; des astuces indispensables ; mais surtout un évent communautaire.\n" +
     "🕵️ Que ce soit tirage au sort, énigme, chasse au trésor, loto, etc... Tu vas bien t'amuser.";
-  const defaultImage = "https://dev.bromine.fr/AH_img/paper.png";
+  // const defaultImage = "https://dev.bromine.fr/AH_img/paper.png";
   return {
     title: title,
     description: description,
     openGraph: {
       title: title,
       description: description,
-      images: [
-        {
-          url: defaultImage,
-          width: 500,
-          height: 500,
-        }
-      ]
+      // images: [
+      //   {
+      //     url: defaultImage,
+      //     width: 500,
+      //     height: 500,
+      //   }
+      // ]
     },
   }
 }

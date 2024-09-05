@@ -17,7 +17,7 @@ export type PathValid =
   | "/pala-animation"
   | "/about"
   | "/ranking?category=money"
-  | "/ranking?category=metiers"
+  | "/ranking?category=job.miner"
   | "/ranking?category=boss"
   | "/ranking?category=egg_hunt"
   | "/ranking?category=koth"
@@ -54,7 +54,7 @@ const optimizerClickerPath: PathValid = "/clicker-optimizer";
 const palatimePath: PathValid = "/palatime";
 const palaAnimationPath: PathValid = "/pala-animation";
 const moneyRanking: PathValid = "/ranking?category=money";
-const metiersRanking: PathValid = "/ranking?category=metiers";
+const metiersRanking: PathValid = "/ranking?category=job.miner";
 const bossRanking: PathValid = "/ranking?category=boss";
 const eggHuntRanking: PathValid = "/ranking?category=egg_hunt";
 const kothRanking: PathValid = "/ranking?category=koth";
@@ -83,7 +83,7 @@ const links: LinkList = {
   "/pala-animation": { label: "PalaAnimation Trainer", requiredPseudo: false },
   "/about": { label: "A propos", requiredPseudo: false },
   "/ranking?category=money": { label: "Money", requiredPseudo: false },
-  "/ranking?category=metiers": { label: "Métiers", requiredPseudo: false },
+  "/ranking?category=job.miner": { label: "Métiers", requiredPseudo: false },
   "/ranking?category=boss": { label: "Boss", requiredPseudo: false },
   "/ranking?category=egg_hunt": { label: "Egg Hunt", requiredPseudo: false },
   "/ranking?category=koth": { label: "KOTH", requiredPseudo: false },
