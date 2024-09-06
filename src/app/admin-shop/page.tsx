@@ -65,7 +65,7 @@ export default function Home({ searchParams }: {
       <Card className="flex flex-col gap-4">
         <CardHeader className="flex flex-row items-center justify-between">
           <CardTitle>
-            Bienvenue sur le visualisateur d'historique de prix de{" "}
+            Bienvenue sur le visualisateur d&apos;historique de prix de{" "}
             <GradientText className="font-extrabold">{adminShopItem}</GradientText>
           </CardTitle>
           <CardDescription>
