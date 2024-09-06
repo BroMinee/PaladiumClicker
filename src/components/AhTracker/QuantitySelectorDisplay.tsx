@@ -4,7 +4,7 @@ import { getPaladiumAhItemStats } from "@/lib/api/apiPala.ts";
 import { PaladiumAhItemStat } from "@/types";
 import { redirect } from "next/navigation";
 import GradientText from "@/components/shared/GradientText.tsx";
-import { formatPrice, GetAllFileNameInFolder, levensteinDistance } from "@/lib/misc.ts";
+import { formatPrice, GetAllFileNameInFolder, levenshteinDistance } from "@/lib/misc.ts";
 import SmallCardInfo from "@/components/shared/SmallCardInfo.tsx";
 
 import itemListJson from "@/assets/items_list.json";
@@ -21,7 +21,7 @@ export default async function QuantitySelectorDisplay({ selectedItem }: { select
     redirect(`/error?message=Impossible de récupérer les données actuelles de ${selectedItem}`)
 
   const closestItemName = selectedItem.length === 0 ? "" : GetAllFileNameInFolder().reduce((acc, curr) => {
-    if (levensteinDistance(curr, selectedItem) < levensteinDistance(acc, selectedItem)) {
+    if (levenshteinDistance(curr, selectedItem) < levenshteinDistance(acc, selectedItem)) {
       return curr;
     } else {
       return acc;

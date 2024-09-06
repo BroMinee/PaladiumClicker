@@ -1,4 +1,11 @@
-import { PalaAnimationLeaderboardGlobal, ProfilViewType, RankingResponse, RankingType } from "@/types";
+import {
+  AdminShopItem,
+  AdminShopItemDetail,
+  PalaAnimationLeaderboardGlobal,
+  ProfilViewType,
+  RankingResponse,
+  RankingType
+} from "@/types";
 import { fetchWithHeader } from "@/lib/api/misc.ts";
 
 export const API_PALATRACKER = "https://palatracker.bromine.fr"
@@ -55,4 +62,8 @@ export function getRankingLeaderboard(rankingType: RankingType, limit = 10, offs
 
 export function getRankingLeaderboardPlayer(uuid: string, rankingType: RankingType) {
   return fetchWithHeader<RankingResponse>(`${API_PALATRACKER}/v1/ranking/${rankingType}/${uuid}`, 0)
+}
+
+export function getAdminShopHistory(item: AdminShopItem) {
+  return fetchWithHeader<AdminShopItemDetail[]>(`${API_PALATRACKER}/v1/admin-shop/${item}`, 0)
 }

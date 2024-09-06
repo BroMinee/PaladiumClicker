@@ -1,5 +1,4 @@
-import type { AnyCondition, PlayerInfo, UpgradeKey } from "@/types";
-import { MetierKey, RankingType } from "@/types";
+import { AdminShopItem, AnyCondition, MetierKey, PlayerInfo, RankingType, UpgradeKey } from "@/types";
 import constants, { PathValid } from "@/lib/constants.ts";
 
 import globalUpgradeJson from "@/assets/global_upgrade.json";
@@ -133,23 +132,8 @@ export function getPathImg(bestListName: string, bestUpgradeIndex: number) {
   }
 }
 
-export function parseCsv(csv: string) {
-  const lines = csv.split("\n");
-  const result = [];
-  const headers = lines[0].split(";");
-  for (let i = 1; i < lines.length; i++) {
-    const obj: Record<string | 'Date', string | number | "NaN"> = {};
-    const currentline = lines[i].split(";");
-    for (let j = 0; j < headers.length; j++) {
-      obj[headers[j]] = currentline[j];
-    }
-    result.push(obj);
-  }
 
-  return result;
-}
-
-export function levensteinDistance(a: string, b: string) {
+export function levenshteinDistance(a: string, b: string) {
   const distance = [];
   for (let i = 0; i <= a.length; i++) {
     distance[i] = [i];
@@ -169,9 +153,15 @@ export function levensteinDistance(a: string, b: string) {
   return distance[a.length][b.length];
 }
 
-export function getDDHHMMSS(d: Date) {
+export function getDDHHMMSSOnlyClicker(d: Date) {
   if (new Date() > d)
     return "Maintenant";
+  const padL = (num: number, chr = `0`) => `${num}`.padStart(2, chr);
+
+  return `${padL(d.getDate())}/${padL(d.getMonth() + 1)}/${d.getFullYear()} à ${padL(d.getHours())}:${padL(d.getMinutes())}:${padL(d.getSeconds())}`;
+}
+
+export function getDDHHMMSS(d: Date) {
   const padL = (num: number, chr = `0`) => `${num}`.padStart(2, chr);
 
   return `${padL(d.getDate())}/${padL(d.getMonth() + 1)}/${d.getFullYear()} à ${padL(d.getHours())}:${padL(d.getMinutes())}:${padL(d.getSeconds())}`;
@@ -194,6 +184,12 @@ export function generateRankingUrl(category: string | undefined) {
   const argCategory = category ? `category=${category}` : "";
   const args = [argCategory].filter((e) => e).join("&");
   return safeJoinPaths("/ranking", `?${args}`);
+}
+
+export function generateAdminShopUrl(item: AdminShopItem) {
+  const argItem = item ? `item=${item}` : "";
+  const args = [argItem].filter((e) => e).join("&");
+  return safeJoinPaths("/admin-shop", `?${args}`);
 }
 
 export function safeJoinPaths(base: string, ...paths: string[]): string {
@@ -341,8 +337,7 @@ function getPourcentageBonus(playerInfo: PlayerInfo, buildingIndex: number) {
   function getBonusFromCategory() {
     const categoryUpgrades = playerInfo.category_upgrade
       .filter((category) => category.own && category.active_list_index.includes(buildingIndex))
-    const categoryPourcentage = categoryUpgrades.reduce((total, category) => total + category.pourcentage, 0);
-    return categoryPourcentage;
+    return categoryUpgrades.reduce((total, category) => total + category.pourcentage, 0);
   }
 
   function getBonusFromMany() {
@@ -387,9 +382,7 @@ function getPourcentageBonus(playerInfo: PlayerInfo, buildingIndex: number) {
     getBonusFromCategory
   ];
 
-  const pourcentageBonus = bonusFunctions.reduce((total, bonusFunction) => total + bonusFunction(), 1);
-
-  return pourcentageBonus;
+  return bonusFunctions.reduce((total, bonusFunction) => total + bonusFunction(), 1);
 
 }
 
@@ -397,10 +390,8 @@ function getPourcentageBonus(playerInfo: PlayerInfo, buildingIndex: number) {
 function convertToFloat(str: string | number) {
   if (typeof str === "number")
     return str;
-  else if (typeof str === "string") {
-    return parseFloat(str.replace(/,/g, '.'));
-  }
-  return -1;
+
+  return parseFloat(str.replace(/,/g, '.'));
 }
 
 export function computeRPS(playerInfo: PlayerInfo) {
@@ -3045,7 +3036,7 @@ export function GetAllFileNameInFolder() {
 }
 
 export function getImagePathFromRankingType(rankingType: string): string {
-  let imgPath = "";
+  let imgPath: string;
   switch (rankingType) {
     case RankingType.money:
       imgPath = safeJoinPaths("/RankingIcon/", `money.png`);
@@ -3085,6 +3076,28 @@ export function getImagePathFromRankingType(rankingType: string): string {
       break;
   }
   return imgPath;
+}
+
+export function getImagePathFromAdminShopType(item: AdminShopItem): string {
+  const translateTable: Record<string, string> = {
+    "wool": `wool_colored_white`,
+    "tile-passifwither-head": "passifwither_head",
+    "slime-ball": "slimeball",
+    "log": "log_oak",
+    "red-mushroom": "mushroom_red",
+    "brown-mushroom": "mushroom_brown",
+    "cactus": "cactus_side",
+    "skull-1": "skull_wither",
+    "wheat-seeds": "seeds",
+    "dye": "dye_powder_black",
+    "redstone": "redstone_dust",
+    "fermented-spider-eye": "spider_eye_fermented",
+  }
+  if (translateTable[item]) {
+    return `/AH_img/${translateTable[item]}.png`;
+  }
+
+  return `/AH_img/${item.replaceAll("-", "_")}.png`;
 }
 
 

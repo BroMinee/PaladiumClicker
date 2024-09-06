@@ -2,7 +2,7 @@ import {
   convertEpochToDateUTC2,
   formatPrice,
   GetAllFileNameInFolder,
-  levensteinDistance,
+  levenshteinDistance,
   safeJoinPaths
 } from "@/lib/misc.ts";
 import { Card, CardContent } from "@/components/ui/card.tsx";
@@ -39,7 +39,7 @@ export default function AhItem({ item }: AhItemsProps) {
   // const type = item["type"][0].toUpperCase() + item["type"].slice(1).toLowerCase();
 
   const closestItemName = GetAllFileNameInFolder().reduce((acc, curr) => {
-    if (levensteinDistance(curr, item_name) < levensteinDistance(acc, item_name)) {
+    if (levenshteinDistance(curr, item_name) < levenshteinDistance(acc, item_name)) {
       return curr;
     } else {
       return acc;

@@ -16,7 +16,7 @@ import itemListJson from "@/assets/items_list.json";
 import LoadingSpinner from "@/components/ui/loading-spinner.tsx";
 import MarketSelector from "@/components/AhTracker/MarketSelector.tsx";
 import QuantitySelectorDisplay from "@/components/AhTracker/QuantitySelectorDisplay.tsx";
-import { GetAllFileNameInFolder, levensteinDistance } from "@/lib/misc.ts";
+import { GetAllFileNameInFolder, levenshteinDistance } from "@/lib/misc.ts";
 
 export function generateMetadata(
   { searchParams }: { searchParams: { item: string | undefined } },
@@ -35,7 +35,7 @@ export function generateMetadata(
   }
 
   let closestItemName = searchParams.item === undefined ? "" : GetAllFileNameInFolder().reduce((acc, curr) => {
-    if (levensteinDistance(curr, searchParams.item!) < levensteinDistance(acc, searchParams.item!)) {
+    if (levenshteinDistance(curr, searchParams.item!) < levenshteinDistance(acc, searchParams.item!)) {
       return curr;
     } else {
       return acc;

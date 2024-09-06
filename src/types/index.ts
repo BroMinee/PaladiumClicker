@@ -382,3 +382,73 @@ type rankingResponseSubType = {
   value: number,
   position: number
 }
+
+export type AdminShopItem =
+  'feather'
+  | 'wool'
+  | 'paladium-ingot'
+  | 'ender-pearl'
+  | 'egg'
+  | 'string'
+  | 'log'
+  | 'red-mushroom'
+  | 'soul-sand'
+  | 'glowstone-dust'
+  | 'findium'
+  | 'titane-ingot'
+  | 'apple'
+  | 'cobblestone'
+  | 'reeds'
+  | 'ghast-tear'
+  | 'potato'
+  | 'tile-passifwither-head'
+  | 'cactus'
+  | 'melon'
+  | 'obsidian'
+  | 'slime-ball'
+  | 'skull-1'
+  | 'spider-eye'
+  | 'dirt'
+  | 'quartz'
+  | 'bone'
+  | 'nether-wart'
+  | 'wheat-seeds'
+  | 'gunpowder'
+  | 'iron-ingot'
+  | 'fermented-spider-eye'
+  | 'leather'
+  | 'sand'
+  | 'dye'
+  | 'diamond'
+  | 'gold-ingot'
+  | 'flint'
+  | 'coal'
+  | 'redstone'
+  | 'emerald'
+  | 'brown-mushroom'
+  | 'blaze-rod'
+  | 'amethyst-ingot'
+  | 'carrot'
+  | 'cooked-beef';
+
+export const adminShopItemsAvailable: AdminShopItem[] = [
+  'feather', 'wool', 'paladium-ingot', 'ender-pearl', 'egg', 'string', 'log', 'red-mushroom', 'soul-sand',
+  'glowstone-dust', 'findium', 'titane-ingot', 'apple', 'cobblestone', 'reeds', 'ghast-tear', 'potato',
+  'tile-passifwither-head', 'cactus', 'melon', 'obsidian', 'slime-ball', 'skull-1', 'spider-eye', 'dirt',
+  'quartz', 'bone', 'nether-wart', 'wheat-seeds', 'gunpowder', 'iron-ingot', 'fermented-spider-eye', 'leather',
+  'sand', 'dye', 'diamond', 'gold-ingot', 'flint', 'coal', 'redstone', 'emerald', 'brown-mushroom', 'blaze-rod',
+  'amethyst-ingot', 'carrot', 'cooked-beef'
+];
+
+export function isShopItem(item: string): item is AdminShopItem {
+  return adminShopItemsAvailable.includes(item as AdminShopItem);
+}
+
+export type AdminShopItemDetail = {
+  date: number
+  name: AdminShopItem,
+  canBuy: boolean,
+  buyPrice: number,
+  sellPrice: number,
+  canSell: boolean,
+}

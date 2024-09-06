@@ -1,7 +1,7 @@
 import { RankingResponse, RankingType } from "@/types";
 import { redirect } from "next/navigation";
 import { getRankingLeaderboard } from "@/lib/api/apiPalaTracker.ts";
-import PlotRankingChart from "@/components/Clicker-Optimizer/PlotRankingChart.tsx";
+import PlotRankingChart from "@/components/Ranking/PlotRankingChart.tsx";
 import LoadingSpinner from "@/components/ui/loading-spinner.tsx";
 
 export default async function GraphRanking({ rankingType }: { rankingType: RankingType }) {

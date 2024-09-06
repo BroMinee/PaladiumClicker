@@ -7,7 +7,7 @@ import {
   computePrice,
   computeRPS,
   formatPrice,
-  getDDHHMMSS,
+  getDDHHMMSSOnlyClicker,
   getPathImg,
   getTotalSpend,
   safeJoinPaths
@@ -308,7 +308,7 @@ export function computeXBuildingAhead(playerInfo: PlayerInfo, achatCount: number
           path: bestPurchase.path,
           index: bestPurchase.index,
           own: copy[bestPurchase.path][bestPurchase.index].own,
-          timeToBuy: getDDHHMMSS(timeToBuy),
+          timeToBuy: getDDHHMMSSOnlyClicker(timeToBuy),
           pathImg: bestPurchase.pathImg,
           newRps: copyRps,
           price: price

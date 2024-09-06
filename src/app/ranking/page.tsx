@@ -6,7 +6,7 @@ import { RankingType } from "@/types";
 import { searchParamsRankingPage } from "@/components/Ranking/RankingSelector.tsx";
 import { generateRankingUrl, getImagePathFromRankingType } from "@/lib/misc.ts";
 import { Suspense } from "react";
-import GraphRanking, { GraphRankingFallback } from "@/components/Clicker-Optimizer/GraphRanking.tsx";
+import GraphRanking, { GraphRankingFallback } from "@/components/Ranking/GraphRanking.tsx";
 import { RankingSelectorClient } from "@/components/Ranking/RankingSelectorClient.tsx";
 
 
