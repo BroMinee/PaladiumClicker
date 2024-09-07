@@ -6,6 +6,25 @@ import React from "react";
 
 const AreaChart = dynamic(() => import("recharts").then((mod) => mod.AreaChart), { ssr: false });
 
+const CustomTooltip = ({ active, payload, label }: any) => {
+
+  if (!payload || payload.length === 0)
+    return null;
+
+  if (active && payload && payload.length) {
+    return (
+      <div className="recharts-tooltip-wrapper bg-secondary rounded-md p-2 ">
+        <p className="recharts-tooltip-label text-card-foreground">{`${label}`}</p>
+        <ul>
+          {payload.map((entry: any, index: number) => {
+            return <li key={index} style={{ color: entry.color }}>
+              {entry.name}: {Math.round(entry.value)}
+            </li>
+          })}
+        </ul>
+      </div>)
+  }
+}
 
 const Charts = ({ data }: { data: AhItemHistory[] }) => {
   const data_clean = data.map((item) => {
@@ -31,9 +50,9 @@ const Charts = ({ data }: { data: AhItemHistory[] }) => {
         </defs>
         <Legend layout="horizontal" verticalAlign="top" align="center"/>
         <XAxis dataKey="date"/>
-        <YAxis yAxisId="left"/>
-        <YAxis yAxisId="right" orientation="right"/>
-        <Tooltip/>
+        <YAxis yAxisId="left" domain={[(dataMin : number) => Math.round(dataMin * 0.9), (dataMax: number) => Math.round(dataMax * 1.1)]}/>
+        <YAxis yAxisId="right" orientation="right" domain={[(dataMin : number) => Math.round(dataMin * 0.9), (dataMax: number) => Math.round(dataMax * 1.1)]}/>
+        <Tooltip content={<CustomTooltip/>}/>
         <Area yAxisId="left" type="monotone" dataKey="price" stroke="#8884d8" fillOpacity={1} fill="url(#colorUv)"/>
         <Area yAxisId="right" type="monotone" dataKey="quantity" stroke="#82ca9d" fillOpacity={1} fill="url(#colorPv)"/>
       </AreaChart>
