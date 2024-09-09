@@ -4,7 +4,6 @@ import { FaHeart } from "react-icons/fa";
 import Contributors from "@/components/Contributors.tsx";
 import Discord from "@/components/Discord.tsx";
 import ImportProfil from "@/components/shared/ImportProfil.tsx";
-import News from "@/components/News.tsx";
 
 
 export function NoPseudoPage({ noBoldText, boldText }: { noBoldText: string, boldText: string }) {
@@ -33,8 +32,6 @@ export function NoPseudoPage({ noBoldText, boldText }: { noBoldText: string, bol
             </CardContent>
           </Card>
           <div className="flex flex-col sm:flex-row gap-2 pb-4">
-            <News/>
-            {/*<DailyPopup defaultOpen={showDayPopup}/>*/}
           </div>
         </CardContent>
       </Card>

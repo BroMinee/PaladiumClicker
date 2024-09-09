@@ -1,59 +1,56 @@
-import { Button } from "@/components/ui/button";
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
-import { ScrollArea } from "@/components/ui/scroll-area";
-import type { New } from "@/types";
-import Discord from "@/components/Discord.tsx";
+// const News = () => {
+//   return (
+//     <Dialog>
+//       <DialogTrigger asChild>
+//         <Button variant="outline">
+//           Voir les nouvelles fonctionnalités
+//         </Button>
+//       </DialogTrigger>
+//       <DialogContent className="px-0 pb-0 max-w-4xl">
+//         <DialogHeader className="px-6">
+//           <DialogTitle className="text-primary">News depuis la dernière fois</DialogTitle>
+//         </DialogHeader>
+//         <ScrollArea className="h-[80dvh] px-6 border-t">
+//           <Discord className="mt-4"/>
+//           <div className="py-2">
+//             {newsJson.map((element, index) => (
+//               <New
+//                 date={element.date}
+//                 events={element.events}
+//                 key={index}
+//               />
+//             ))}
+//           </div>
+//         </ScrollArea>
+//       </DialogContent>
+//     </Dialog>
+//   );
+// }
 
-
-import newsJson from "@/assets/news.json";
-
-const News = () => {
-  return (
-    <Dialog>
-      <DialogTrigger asChild>
-        <Button variant="outline">
-          Voir les nouvelles fonctionnalités
-        </Button>
-      </DialogTrigger>
-      <DialogContent className="px-0 pb-0 max-w-4xl">
-        <DialogHeader className="px-6">
-          <DialogTitle className="text-primary">News depuis la dernière fois</DialogTitle>
-        </DialogHeader>
-        <ScrollArea className="h-[80dvh] px-6 border-t">
-          <Discord className="mt-4"/>
-          <div className="py-2">
-            {newsJson.map((element, index) => (
-              <New
-                date={element.date}
-                events={element.events}
-                key={index}
-              />
-            ))}
-          </div>
-        </ScrollArea>
-      </DialogContent>
-    </Dialog>
-  );
-}
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card.tsx";
 
 type NewProps = {
   date: string,
   events: string[],
 }
 
-const New = ({ date, events }: NewProps) => {
+export default function New({ date, events }: NewProps) {
   return (
-    <div className="pb-2">
-      <h3 className="text-primary font-bold">{date}</h3>
-      <ul className="list-disc list-inside [&>li]:pl-4 [&>li]:text-sm">
-        {events.map((event, index) => {
-          return <li key={index}>{event}</li>
-        })}
-      </ul>
-    </div>
+    <Card className="pb-2" id={date}>
+      <CardHeader>
+        <CardTitle className="text-primary font-bold">{date}</CardTitle>
+      </CardHeader>
+      <CardContent>
+        <ul className="list-disc list-inside [&>li]:pl-4">
+          {events.map((event, index) => {
+            return <li key={index}>{event}</li>
+          })}
+        </ul>
+      </CardContent>
+    </Card>
   );
 }
 
 
-export default News;
+
 

@@ -93,22 +93,21 @@ function NavBarContent() {
           </LinkClient>
         </CategorieDisplay>
         <CategorieDisplay name={"Autres"}>
+          <LinkClient path={constants.statusPath}>
+            <HiOutlineStatusOnline size={24}/>
+          </LinkClient>
           <LinkClient path={constants.palatimePath}>
             <ImNewspaper size={24}/>
           </LinkClient>
           <LinkClient path={constants.palaAnimationPath}>
             <IoMdStopwatch size={24}/>
           </LinkClient>
-          <LinkClient path={constants.statusPath}>
-            <HiOutlineStatusOnline size={24}/>
+          <LinkClient path={constants.patchnotePath}>
+            <FaClipboardList size={24}/>
           </LinkClient>
           <LinkClient path={constants.politiqueDeConfidentialitePath}>
             <FaKey size={24}/>
           </LinkClient>
-          <LinkClient path={constants.patchnotePath}>
-            <FaClipboardList size={24}/>
-          </LinkClient>
-
         </CategorieDisplay>
       </nav>
       <footer>
