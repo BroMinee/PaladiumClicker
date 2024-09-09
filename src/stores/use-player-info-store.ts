@@ -25,7 +25,6 @@ type Actions = {
 }
 
 
-
 const storageKey = 'player-info';
 const initialState: State = {
   data: null,

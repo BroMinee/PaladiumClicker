@@ -1,6 +1,6 @@
 import { ServerPaladiumStatusResponse } from "@/types";
 import { redirect } from "next/navigation";
-import {  getStatusPaladium } from "@/lib/api/apiPalaTracker.ts";
+import { getStatusPaladium } from "@/lib/api/apiPalaTracker.ts";
 import LoadingSpinner from "@/components/ui/loading-spinner.tsx";
 import PlotStatusChart from "@/components/Status/PlotStatusChart.tsx";
 

@@ -60,8 +60,10 @@ const PlotAdminShopChart = ({ data }: { data: AdminShopItemDetail[] }) => {
         </defs>
         <Legend layout="horizontal" verticalAlign="top" align="center"/>
         <XAxis dataKey="date"/>
-        <YAxis yAxisId="left" domain={[(dataMin : number) => parseFloat((dataMin * 0.9).toFixed(2)), (dataMax: number) => parseFloat((dataMax * 1.1).toFixed(2))]}/>
-        <YAxis yAxisId="right" orientation="right" domain={[(dataMin : number) => parseFloat((dataMin * 0.9).toFixed(2)), (dataMax: number) => parseFloat((dataMax * 1.1).toFixed(2))]}/>
+        <YAxis yAxisId="left"
+               domain={[(dataMin: number) => parseFloat((dataMin * 0.9).toFixed(2)), (dataMax: number) => parseFloat((dataMax * 1.1).toFixed(2))]}/>
+        <YAxis yAxisId="right" orientation="right"
+               domain={[(dataMin: number) => parseFloat((dataMin * 0.9).toFixed(2)), (dataMax: number) => parseFloat((dataMax * 1.1).toFixed(2))]}/>
         <Tooltip content={<CustomTooltip/>}/>
         <Area yAxisId="left" type="monotone" dataKey="sellPrice" stroke="#8884d8" fillOpacity={1}
               fill="url(#colorUv)"/>

@@ -7,23 +7,9 @@ const Contributors = () => {
     {
       pseudo: "BroMine__",
       uuid: "10b887ce-133b-4d5e-8b54-41376b832536",
-      description: "Développeur",
+      description: "Développeur Frontend et Backend",
       url: "https://github.com/BroMinee",
       urlImg: `https://crafatar.com/avatars/10b887ce-133b-4d5e-8b54-41376b832536?size=8&overlay`
-    },
-    {
-      pseudo: "Hyper23_",
-      uuid: "74b0f9b7-89ca-42ea-a93b-93681c9c83a3",
-      description: "Fournisseur de données pour le PalaClicker",
-      url: "https://palatracker.bromine.fr/clicker-optimizer/Hyper23_",
-      urlImg: `https://crafatar.com/avatars/74b0f9b7-89ca-42ea-a93b-93681c9c83a3?size=8&overlay`
-    },
-    {
-      pseudo: "LipikYT",
-      uuid: "258ec2e8-411e-4b9a-af19-4a1f684a54f5",
-      description: "Autoproclamé : \"Le plus grand fan\"",
-      url: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-      urlImg: `https://crafatar.com/avatars/258ec2e8-411e-4b9a-af19-4a1f684a54f5?size=8&overlay`
     },
     {
       pseudo: "Riveur",

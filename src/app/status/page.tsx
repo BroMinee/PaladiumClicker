@@ -19,9 +19,10 @@ export default function Home() {
             className="text-primary inline-block"/> by <GradientText>BroMine__</GradientText>
           </CardDescription>
         </CardHeader>
-        <CardContent className="flex flex-row items-center justify-between gap-2 h-96">
+        <CardContent className="flex flex-col items-center justify-between gap-2 h-[calc(100vh-30vh)]">
+          Cette page n'est pas encore finie, mais vous pouvez déjà voir le graphique des joueurs connectés sur Paladium.
           <Suspense fallback={<GraphStatusFallback/>}>
-            <GraphStatus />
+            <GraphStatus/>
           </Suspense>
         </CardContent>
       </Card>

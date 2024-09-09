@@ -36,8 +36,7 @@ export function MetierDisplayLvl({ metierKey, lvlToReach }: { metierKey: MetierK
   const { data: playerInfo, decreaseMetierLevel, increaseMetierLevel } = usePlayerInfoStore();
 
   function onChangeLevel(event: ChangeEvent<HTMLInputElement>) {
-    if(lvlToReach === undefined)
-    {
+    if (lvlToReach === undefined) {
       if (!playerInfo)
         return;
 
@@ -52,17 +51,18 @@ export function MetierDisplayLvl({ metierKey, lvlToReach }: { metierKey: MetierK
       }
     }
   }
+
   return (
-      <input
-        type="number"
-        min="0"
-        step="1"
-        max="100"
-        className="text-white text-center rounded-sm font-bold text-sm flex items-center justify-center h-9 w-9 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
-        style={{ backgroundColor: `rgb(${colors.bgColor[0]},${colors.bgColor[1]},${colors.bgColor[2]})` }}
-        placeholder={String(lvlToReach ? lvlToReach : playerInfo?.metier[metierKey].level)}
-        onChange={onChangeLevel}
-        value={lvlToReach ? lvlToReach : playerInfo?.metier[metierKey].level}/>
+    <input
+      type="number"
+      min="0"
+      step="1"
+      max="100"
+      className="text-white text-center rounded-sm font-bold text-sm flex items-center justify-center h-9 w-9 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+      style={{ backgroundColor: `rgb(${colors.bgColor[0]},${colors.bgColor[1]},${colors.bgColor[2]})` }}
+      placeholder={String(lvlToReach ? lvlToReach : playerInfo?.metier[metierKey].level)}
+      onChange={onChangeLevel}
+      value={lvlToReach ? lvlToReach : playerInfo?.metier[metierKey].level}/>
   )
 }
 

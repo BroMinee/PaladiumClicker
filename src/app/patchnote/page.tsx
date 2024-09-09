@@ -8,17 +8,16 @@ import New from "@/components/News.tsx";
 export async function generateMetadata() {
 
 
-
-    const title = `PalaTracker - Patchnotes`;
-    const description = `📝 Viens consulter les dernières nouveautés de PalaTracker ! 📝`;
-    return {
+  const title = `PalaTracker - Patchnotes`;
+  const description = `📝 Viens consulter les dernières nouveautés de PalaTracker ! 📝`;
+  return {
+    title: title,
+    description: description,
+    openGraph: {
       title: title,
       description: description,
-      openGraph: {
-        title: title,
-        description: description,
-      },
-    }
+    },
+  }
 
 }
 
@@ -38,7 +37,7 @@ export default function Home() {
           </CardDescription>
         </CardHeader>
         <CardContent>
-          <h2 className="text-primary">Plus d'informations techniques sur le discord</h2>
+          <h2 className="text-primary">Plus d&apos;informations techniques sur le discord</h2>
           <Discord className="mt-4"/>
         </CardContent>
       </Card>

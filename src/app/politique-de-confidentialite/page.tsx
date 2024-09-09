@@ -50,7 +50,7 @@ export default function Home() {
           <CardTitle className="text-primary">Collecte de données</CardTitle>
         </CardHeader>
         <CardContent>
-          Nous collectons des données sur les utilisateurs de PalaTracker à partir de l'<a
+          Nous collectons des données sur les utilisateurs de PalaTracker à partir de l&apos;<a
           href="https://api.paladium.games/docs"
           target="_blank"
           rel="noopener noreferrer"
@@ -76,11 +76,12 @@ export default function Home() {
           <CardTitle className="text-primary">Utilisation des données</CardTitle>
         </CardHeader>
         <CardContent>
-          Nous utilisons les données collectées via l'API pour fournir et améliorer nos services, notamment en
+          Nous utilisons les données collectées via l&apos;API pour fournir et améliorer nos services, notamment en
           permettant aux
-          utilisateurs de suivre leur progression et de comparer leurs performances avec d'autres joueurs. Nous ne
+          utilisateurs de suivre leur progression et de comparer leurs performances avec d&apos;autres joueurs. Nous ne
           vendons pas, ne louons pas et ne partageons pas vos données personnelles avec des tiers. Vos données sont
-          sécurisé par un système d'authentification pour garantir la protection de vos données contre tout accès non
+          sécurisé par un système d&apos;authentification pour garantir la protection de vos données contre tout accès
+          non
           autorisé.
         </CardContent>
       </Card>
@@ -117,7 +118,8 @@ export default function Home() {
           <CardTitle className="text-primary">Contactez-nous</CardTitle>
         </CardHeader>
         <CardContent>
-          Si vous avez des questions ou des préoccupations concernant notre politique de confidentialité, n'hésitez pas
+          Si vous avez des questions ou des préoccupations concernant notre politique de confidentialité, n&apos;hésitez
+          pas
           à nous contacter via notre <a
           href={constants.discord.url}
           target="_blank"
@@ -127,7 +129,7 @@ export default function Home() {
           discord
         </a>.<br/><br/>
           Merci de votre confiance.<br/>
-          L'équipe de PalaTracker.
+          L&apos;équipe de PalaTracker.
         </CardContent>
       </Card>
 

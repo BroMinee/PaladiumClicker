@@ -60,7 +60,8 @@ const PlotStatusChart = ({ data }: { data: ServerPaladiumStatusResponse[] }) => 
         <Tooltip content={<CustomTooltip/>}/>
         <Area yAxisId="left" type="monotone" dataKey="players" stroke="#fe6212" fillOpacity={1}
               fill="url(#colorUv)" name="Joueurs"/>
-        <ReferenceLine yAxisId="left" type="linear" y={average} stroke="gray" strokeDasharray="3, 3" label={{position: 'top', value: "Moyenne du jour"}}/>
+        <ReferenceLine yAxisId="left" type="linear" y={average} stroke="gray" strokeDasharray="3, 3"
+                       label={{ position: 'top', value: "Moyenne du jour" }}/>
       </AreaChart>
     </ResponsiveContainer>
   )

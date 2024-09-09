@@ -10,7 +10,7 @@ export function NoPseudoPage({ noBoldText, boldText }: { noBoldText: string, bol
 
   return (
     <div className="flex flex-col gap-4">
-      <Card className="h-96">
+      <Card className="mb-10 mt-10">
         <CardHeader className="flex flex-row items-center justify-between">
           <CardTitle>
             Bienvenue{" "}{noBoldText}{" "}
@@ -31,8 +31,6 @@ export function NoPseudoPage({ noBoldText, boldText }: { noBoldText: string, bol
               <ImportProfil classNameInput="w-40 sm:w-96"/>
             </CardContent>
           </Card>
-          <div className="flex flex-col sm:flex-row gap-2 pb-4">
-          </div>
         </CardContent>
       </Card>
       <Discord/>
