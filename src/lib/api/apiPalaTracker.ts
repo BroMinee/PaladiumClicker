@@ -1,3 +1,4 @@
+import 'server-only';
 import {
   AdminShopItem,
   AdminShopItemDetail,
@@ -10,7 +11,7 @@ import {
 } from "@/types";
 import { fetchWithHeader } from "@/lib/api/misc.ts";
 
-export const API_PALATRACKER = "https://palatracker.bromine.fr"
+export const API_PALATRACKER = "https://dev.bromine.fr/"
 
 export const isMyApiDown = async (): Promise<boolean> => {
   let response = null;
@@ -42,7 +43,7 @@ export const getGlobalLeaderboard = async (): Promise<PalaAnimationLeaderboardGl
 
 
 export const getViewsFromUUID = async (uuid: string): Promise<ProfilViewType> => {
-  return await fetchWithHeader<ProfilViewType>(`${API_PALATRACKER}/v1/user/getUser/${uuid}`, 10);
+  return await fetchWithHeader<ProfilViewType>(`${API_PALATRACKER}/v1/user/getUser/${uuid}`, 10 * 60);
 }
 
 export const pushNewUserEvent = async (username: string): Promise<void> => {
@@ -80,4 +81,8 @@ export function getStatusFaction() {
 
 export function getStatusLauncher() {
   return fetchWithHeader<ServerStatusResponse[]>(`${API_PALATRACKER}/v1/status-history/launcher`, 0);
+}
+
+export async function registerPlayer(uuid: string, username: string) {
+  return await fetchWithHeader(`${API_PALATRACKER}/v1/user/register/${uuid}/${username}`, 5 * 60);
 }

@@ -27,12 +27,6 @@ export default function ImportProfil({
     event.preventDefault();
     const formData = new FormData(event.target as HTMLFormElement);
 
-    if (String(formData.get("pseudo")).toLowerCase() === "levraifuze") {
-      // navigate to the secret page
-      window.location.href = ("/secret");
-      return;
-    }
-
     const trouvaille = getLinkFromUrl(window.location.pathname);
     if (trouvaille !== undefined && constants.links[trouvaille].requiredPseudo) {
       await navigate(safeJoinPaths(trouvaille, String(formData.get("pseudo"))));

@@ -32,13 +32,13 @@ export const fetchWithoutHeader = async <T>(url: string, cache_duration = 15 * 6
 }
 
 
-export const fetchWithHeader = async <T>(url: string, cache_duration = 15 * 60, username = ""): Promise<T> => {
+export const fetchWithHeader = async <T>(url: string, cache_duration_in_sec = 15 * 60, username = ""): Promise<T> => {
   let response = null;
   let json = null;
   try {
     response = await fetch(url,
       {
-        next: { revalidate: cache_duration, tags: ['playerInfo'] },
+        next: { revalidate: cache_duration_in_sec, tags: ['playerInfo'] },
         signal: AbortSignal.timeout(4000),
         headers: {
           'Authorization': `Bearer ${process.env.PALADIUM_API_KEY}`
