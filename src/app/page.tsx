@@ -1,7 +1,6 @@
 import { NoPseudoPage } from "@/components/NoPseudoPage.tsx";
 
-export function generateMetadata()
-{
+export function generateMetadata() {
   const title = `Paladium Tracker`;
   const description = `Paladium Tracker : boostez votre progression et votre clicker sur Paladium comme jamais auparavant !"`;
   return {
@@ -13,6 +12,7 @@ export function generateMetadata()
     },
   }
 }
+
 export default function Home() {
   return (<NoPseudoPage noBoldText="sur " boldText="PalaTracker"/>
   );

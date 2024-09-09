@@ -5,7 +5,6 @@ import React, { Suspense } from "react";
 import { registerPlayer } from "@/lib/api/apiPalaTracker.ts";
 
 
-
 export default async function ProfileFetcherWrapper({ username, children }: {
   username: string,
   children: React.ReactNode

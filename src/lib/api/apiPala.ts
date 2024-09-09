@@ -188,7 +188,6 @@ export const getPlayerInfo = async (pseudo: string): Promise<PlayerInfo> => {
   initialPlayerInfo.view_count = viewCount;
 
 
-
   return initialPlayerInfo;
 
 }
