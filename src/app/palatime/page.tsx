@@ -104,7 +104,7 @@ export default function PalatimePage() {
           </CardContent>
         </Card>
         <div className="flex flex-row w-full">
-          <div className="flex-grow hidden md:flex">
+          <div className="flex-grow md:block hidden">
             <FallingClickImagePalaTime/>
           </div>
 

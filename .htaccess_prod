@@ -1,0 +1,32 @@
+# DO NOT REMOVE. CLOUDLINUX PASSENGER CONFIGURATION BEGIN
+PassengerAppRoot "/home/giju4092/prod_frontend"
+PassengerBaseURI "/"
+PassengerNodejs "/home/giju4092/nodevenv/prod_frontend/20/bin/node"
+PassengerAppType node
+PassengerStartupFile dist/server.js
+PassengerAppLogFile "/home/giju4092/prod_frontend/log"
+# DO NOT REMOVE. CLOUDLINUX PASSENGER CONFIGURATION END
+RewriteEngine On
+RewriteCond %{HTTP:X-Forwarded-Proto} !https
+RewriteCond %{HTTPS} !on
+RewriteRule ^(.*) https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteBase /
+  # Exclusion pour les endpoints API
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteRule ^v1(/.*)?$ - [L]
+  RewriteRule ^index\.html$ - [L]
+  RewriteCond %{REQUEST_FILENAME} -f
+  RewriteCond %{REQUEST_FILENAME} -d
+  RewriteRule ^(.*[^/])$ /$1/index.html [L]
+</IfModule>
+RewriteCond %{HTTP_HOST} ^bromine\.fr$ [OR]
+RewriteCond %{HTTP_HOST} ^www\.bromine\.fr$
+RewriteRule ^/?$ "https\:\/\/palatracker\.bromine\.fr\/" [R=301,L]
+
+# DO NOT REMOVE OR MODIFY. CLOUDLINUX ENV VARS CONFIGURATION BEGIN
+<IfModule Litespeed>
+</IfModule>
+# DO NOT REMOVE OR MODIFY. CLOUDLINUX ENV VARS CONFIGURATION END
