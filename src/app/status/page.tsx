@@ -25,11 +25,6 @@ export default function Home() {
           </Suspense>
         </CardContent>
       </Card>
-
-      <Card className="w-full h-[calc(100vh-30vh)]">
-
-      </Card>
-
     </div>
   )
 }

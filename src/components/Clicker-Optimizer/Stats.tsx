@@ -14,7 +14,7 @@ import {
 } from "@/lib/misc";
 import { usePlayerInfoStore } from "@/stores/use-player-info-store";
 import { bestBuildingInfo, bestPurchaseInfo, bestPurchaseInfoDetailed, bestUpgradeInfo, PlayerInfo } from "@/types";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FaBed, FaInfoCircle, FaMedal, FaTachometerAlt } from "react-icons/fa";
 import { computeBestBuildingUgrade, findBestUpgrade } from "./RPS";
 import { useRpsStore } from "@/stores/use-rps-store";
@@ -53,7 +53,6 @@ const Stats = () => {
     return null;
   }
 
-  const coinsDormants = Math.max(playerInfo.production - getTotalSpend(playerInfo), 0);
 
   return (
     <>
@@ -86,7 +85,7 @@ const Stats = () => {
                     </Popover></span>
                 <div className="flex gap-2 items-center">
                   <GradientText className="font-bold">
-                    ~ {formatPrice(Math.round(coinsDormants))}
+                    <DisplayCoinsDormants/>
                   </GradientText>
                   <img src={safeJoinPaths("/coin.png")} className="h-6 w-6"
                        alt="Coin"/>
@@ -128,7 +127,7 @@ const Stats = () => {
                 <div className="flex gap-2 items-center">
                   Top
                   <GradientText className="font-bold">
-                    #{playerInfo["leaderboard"]}
+                    #{playerInfo.leaderboard}
                   </GradientText>
                 </div>
               </div>
@@ -365,4 +364,43 @@ function computeTimeToBuy(price: number, own: boolean | number, coinsDormants: n
     timeToBuy: new Date(curTime.getTime() + nbSec * 1000),
     newCoins: 0
   }
+}
+
+
+export function DisplayCoinsDormants() {
+  const { data: playerInfo, setProduction } = usePlayerInfoStore();
+
+  if (!playerInfo) {
+    return 0;
+  }
+
+
+  const totalSpend = getTotalSpend(playerInfo);
+  const coinsDormants = playerInfo.production - totalSpend;
+
+  const onChangeCoinsDormants = (event: React.ChangeEvent<HTMLInputElement>) => {
+    if (!playerInfo) {
+      return;
+    }
+    const rowValue = event.target.value;
+    const bitBetterValue = rowValue.replaceAll(" ", "");
+    let value = Number(bitBetterValue);
+    if (!isNaN(value)) {
+      value = Math.floor(value);
+      const production = value + totalSpend;
+      setProduction(production);
+    }
+  }
+
+  return <div className="flex flex-row items-center">
+    ~ <input
+    type="text"
+    min="0"
+    step="1"
+    max="100"
+    className="bg-clip-text text-transparent bg-gradient-to-tr from-primary to-destructive/85 text-center rounded-sm font-bold w-32 md:w-48 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+    placeholder={String(coinsDormants)}
+    onChange={onChangeCoinsDormants}
+    value={formatPrice(Math.round(coinsDormants))}/>
+  </div>
 }

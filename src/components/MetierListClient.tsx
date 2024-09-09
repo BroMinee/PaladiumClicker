@@ -7,6 +7,7 @@ import { FaArrowDown, FaArrowUp } from "react-icons/fa";
 import { Button } from "@/components/ui/button.tsx";
 import { useRouter } from "next/navigation";
 import { searchParamsXpBonusPage } from "@/components/Xp-Calculator/XpCalculator.tsx";
+import { ChangeEvent } from "react";
 
 export function MetierOutline({ metierKey, metierToReach = false }: { metierKey: MetierKey, metierToReach?: boolean }) {
 
@@ -32,16 +33,37 @@ export function MetierOutline({ metierKey, metierToReach = false }: { metierKey:
 
 export function MetierDisplayLvl({ metierKey, lvlToReach }: { metierKey: MetierKey, lvlToReach?: number }) {
   const colors = getColorByMetierName(metierKey);
-  const { data: playerInfo } = usePlayerInfoStore();
+  const { data: playerInfo, decreaseMetierLevel, increaseMetierLevel } = usePlayerInfoStore();
 
+  function onChangeLevel(event: ChangeEvent<HTMLInputElement>) {
+    if(lvlToReach === undefined)
+    {
+      if (!playerInfo)
+        return;
+
+      let value = Number(event.target.value);
+      if (!isNaN(value)) {
+        value = Math.floor(value);
+        value = Math.max(1, Math.min(100, value));
+        if (value <= playerInfo.metier[metierKey].level)
+          decreaseMetierLevel(metierKey, playerInfo.metier[metierKey].level - value);
+        else if (value > playerInfo.metier[metierKey].level)
+          increaseMetierLevel(metierKey, value - playerInfo.metier[metierKey].level);
+      }
+    }
+  }
   return (
-    <span
-      className="text-white rounded-sm font-bold text-sm flex items-center justify-center h-9 w-9"
-      style={{ backgroundColor: `rgb(${colors.bgColor[0]},${colors.bgColor[1]},${colors.bgColor[2]})` }}
-    >
-      {lvlToReach ? lvlToReach : playerInfo?.metier[metierKey].level}
-    </span>)
-
+      <input
+        type="number"
+        min="0"
+        step="1"
+        max="100"
+        className="text-white text-center rounded-sm font-bold text-sm flex items-center justify-center h-9 w-9 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+        style={{ backgroundColor: `rgb(${colors.bgColor[0]},${colors.bgColor[1]},${colors.bgColor[2]})` }}
+        placeholder={String(lvlToReach ? lvlToReach : playerInfo?.metier[metierKey].level)}
+        onChange={onChangeLevel}
+        value={lvlToReach ? lvlToReach : playerInfo?.metier[metierKey].level}/>
+  )
 }
 
 export function MetierDecrease({ minLevel, metierKey, searchParams, username }: {

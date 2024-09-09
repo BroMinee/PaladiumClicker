@@ -60,5 +60,6 @@ export function BuildingInput({ index }: { index: number }) {
     max="99"
     placeholder={String(playerInfo.building[index].own)}
     onChange={onChangeLevel}
+    value={playerInfo.building[index].own}
   />
 }
