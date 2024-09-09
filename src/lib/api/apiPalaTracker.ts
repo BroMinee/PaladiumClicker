@@ -4,7 +4,7 @@ import {
   PalaAnimationLeaderboardGlobal,
   ProfilViewType,
   RankingResponse,
-  RankingType
+  RankingType, ServerPaladiumStatusResponse, ServerStatusResponse
 } from "@/types";
 import { fetchWithHeader } from "@/lib/api/misc.ts";
 
@@ -66,4 +66,19 @@ export function getRankingLeaderboardPlayer(uuid: string, rankingType: RankingTy
 
 export function getAdminShopHistory(item: AdminShopItem) {
   return fetchWithHeader<AdminShopItemDetail[]>(`${API_PALATRACKER}/v1/admin-shop/${item}`, 0)
+}
+
+export function getStatusPaladium()
+{
+  return fetchWithHeader<ServerPaladiumStatusResponse[]>(`${API_PALATRACKER}/v1/status-history/paladium`, 0);
+}
+
+export function getStatusFaction()
+{
+  return fetchWithHeader<ServerStatusResponse[]>(`${API_PALATRACKER}/v1/status-history/faction`, 0);
+}
+
+export function getStatusLauncher()
+{
+  return fetchWithHeader<ServerStatusResponse[]>(`${API_PALATRACKER}/v1/status-history/launcher`, 0);
 }

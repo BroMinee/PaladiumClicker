@@ -452,3 +452,30 @@ export type AdminShopItemDetail = {
   sellPrice: number,
   canSell: boolean,
 }
+
+export type StatusType =
+  'online' | 'offline' | 'maintenance' | 'unknown' | 'starting' | 'running' | 'restart' | 'stopping' | 'whitelist'
+
+export type ServerName =
+  'Soleratl'
+  | 'Muzdan'
+  | 'Manashino'
+  | 'Event'
+  | 'Luccento'
+  | 'Imbali'
+  | 'Keltis'
+  | 'Neolith'
+  | 'Untaa'
+  | 'Launcher'
+  | 'Paladium';
+
+export type ServerStatusResponse =
+  {
+    date: number,
+    faction_name: ServerName,
+    status: StatusType,
+  }
+
+export type ServerPaladiumStatusResponse = ServerStatusResponse & {
+  players: number
+}

@@ -167,6 +167,12 @@ export function getDDHHMMSS(d: Date) {
   return `${padL(d.getDate())}/${padL(d.getMonth() + 1)}/${d.getFullYear()} à ${padL(d.getHours())}:${padL(d.getMinutes())}:${padL(d.getSeconds())}`;
 }
 
+export function getHHMM(d: Date) {
+  const padL = (num: number, chr = `0`) => `${num}`.padStart(2, chr);
+
+  return `${padL(d.getHours())}:${padL(d.getMinutes())}`;
+}
+
 export function adaptPlurial(word: string, count: number) {
   return count >= 2 ? word + "s" : word;
 }
