@@ -3,7 +3,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import GradientText from "@/components/shared/GradientText.tsx";
 import { FaHeart } from "react-icons/fa";
 import { AdminShopItem, adminShopItemsAvailable, isShopItem } from "@/types";
-import { generateAdminShopUrl } from "@/lib/misc.ts";
+import { generateAdminShopUrl, getImagePathFromAdminShopType } from "@/lib/misc.ts";
 import { Suspense } from "react";
 import { AdminShopSelectorClient } from "@/components/AdminShop/AdminShopSelectorClient.tsx";
 import GraphAdminShop, { GraphAdminShopFallback } from "@/components/AdminShop/GraphAdminShop.tsx";
@@ -19,10 +19,10 @@ export async function generateMetadata(
 
   let title = "Paladium Tracker - Admin Shop";
   let itemImgPath = "";
-  let defaultImage = "https://dev.bromine.fr/PaladiumClicker/favicon.ico";
+  let defaultImage = "https://palatracker.bromine.fr/PaladiumClicker/favicon.ico";
   if (isShopItem(searchParams.item)) {
-    itemImgPath = `AH_img/${searchParams.item}.png`;
-    defaultImage = `https://dev.bromine.fr/${itemImgPath}`;
+    itemImgPath = getImagePathFromAdminShopType(searchParams.item);
+    defaultImage = `https://palatracker.bromine.fr/${itemImgPath}`;
     title += ` - ${searchParams.item}`;
   }
 

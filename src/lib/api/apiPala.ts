@@ -62,6 +62,17 @@ export const isApiDown = async (): Promise<boolean> => {
   return false;
 }
 
+export const getPlayerOnlineCount = async (): Promise<number> => {
+  const response = await fetchWithHeader<{
+    java: {
+      global: {
+        players: number;
+      }
+    }
+  }>(`${PALADIUM_API_URL}/v1/status`, 0);
+  return response.java.global.players;
+}
+
 
 export const getPaladiumProfileByPseudo = async (pseudo: string): Promise<PaladiumPlayerInfo> => {
   return await fetchWithHeader<PaladiumPlayerInfo>(`${PALADIUM_API_URL}/v1/paladium/player/profile/${pseudo}`);

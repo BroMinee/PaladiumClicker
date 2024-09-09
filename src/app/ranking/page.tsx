@@ -16,10 +16,10 @@ export async function generateMetadata(
 
   let title = "Paladium Tracker - Classement";
   let rankingImgPath = "";
-  let defaultImage = "https://dev.bromine.fr/PaladiumClicker/favicon.ico";
+  let defaultImage = "https://palatracker.bromine.fr/PaladiumClicker/favicon.ico";
   if (Object.values(RankingType).includes(searchParams.category as RankingType)) {
     rankingImgPath = getImagePathFromRankingType(searchParams.category as RankingType);
-    defaultImage = `https://dev.bromine.fr/${rankingImgPath}`;
+    defaultImage = `https://palatracker.bromine.fr/${rankingImgPath}`;
     title += ` - ${searchParams.category}`;
   }
 

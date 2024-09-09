@@ -15,34 +15,22 @@ import ClickList from "@/components/Clicker-Optimizer/ClickList.tsx";
 import { Fragment } from "react";
 import UpgradeList from "@/components/Clicker-Optimizer/UpgradeList.tsx";
 import FallingClickImage from "@/components/Clicker-Optimizer/FallingClick.tsx";
-import { getFactionInfo, getJobsFromUUID, getPaladiumProfileByPseudo } from "@/lib/api/apiPala.ts";
-import { formatPrice } from "@/lib/misc.ts";
+import { getPaladiumProfileByPseudo } from "@/lib/api/apiPala.ts";
 
 export async function generateMetadata(
   { params }: { params: { username: string } },
 ) {
   try {
-    let paladiumProfil = await getPaladiumProfileByPseudo(params.username);
-    let jobInfo = await getJobsFromUUID(paladiumProfil.uuid);
-    let factionInfo = await getFactionInfo(paladiumProfil.faction || "Wilderness");
+    const paladiumProfile = await getPaladiumProfileByPseudo(params.username);
+    const title = `PalaTracker - Clicker Optimizer - ${paladiumProfile.username}`;
+    const description = "🚀 Tu cherches à optimiser le PalaClicker ? C'est ici que ça se passe !! 📈 Ce site calcule le meilleur achat en fonction de tes métiers, tes améliorations et tes bâtiments.";
 
-    const title = `${params.username} - ${factionInfo.name} - Paladium Tracker - Clicker Optimizer`;
-    const description = `⛏️ ${jobInfo.miner.level} 🌾 ${jobInfo.farmer.level} 🏹 ${jobInfo.hunter.level} 🧙🏽 ${jobInfo.alchemist.level} \n\n💰 ${formatPrice(Math.round(paladiumProfil?.money || 0))} $`;
-
-    // const defaultImage = "https://brominee.github.io/PaladiumClicker/favicon.ico";
     return {
       title: title,
       description: description,
       openGraph: {
         title: title,
         description: description,
-        // images: [
-        //   {
-        //     url: defaultImage,
-        //     width: 800,
-        //     height: 600,
-        //   }
-        // ]
       },
     }
   } catch (error) {

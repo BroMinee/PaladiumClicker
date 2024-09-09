@@ -38,7 +38,6 @@ export async function generateMetadata(
       },
     }
   } catch (error) {
-    console.error(error);
     return {
       title: "PalaTracker - Profil",
       description: "📝 Viens consulter ton profil Paladium sur PalaTracker ! 📝",

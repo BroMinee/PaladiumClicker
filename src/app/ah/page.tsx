@@ -52,7 +52,7 @@ export function generateMetadata(
       description: description,
       images: [
         {
-          url: `https://dev.bromine.fr/AH_img/${closestItemName}.png`,
+          url: `https://palatracker.bromine.fr/AH_img/${closestItemName}.png`,
           width: 500,
           height: 500,
         }

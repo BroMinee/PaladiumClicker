@@ -1,5 +1,16 @@
 import { NoPseudoPage } from "@/components/NoPseudoPage.tsx";
 
+export function generateMetadata() {
+  return {
+    title: "PalaTracker - Clicker Optimizer",
+    description: "🚀 Tu cherches à optimiser le PalaClicker ? C'est ici que ça se passe !! 📈 Ce site calcule le meilleur achat en fonction de tes métiers, tes améliorations et tes bâtiments.",
+    openGraph: {
+      title: "PalaTracker - Clicker Optimizer",
+      description: "🚀 Tu cherches à optimiser le PalaClicker ? C'est ici que ça se passe !! 📈 Ce site calcule le meilleur achat en fonction de tes métiers, tes améliorations et tes bâtiments."
+    },
+  }
+}
+
 export default function HomeProfilWithoutUsername() {
   return <NoPseudoPage noBoldText="sur l'optimiseur du" boldText="PalaClicker"/>
 }
