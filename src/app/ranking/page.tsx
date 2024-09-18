@@ -4,7 +4,7 @@ import GradientText from "@/components/shared/GradientText.tsx";
 import { FaHeart } from "react-icons/fa";
 import { RankingType } from "@/types";
 import { searchParamsRankingPage } from "@/components/Ranking/RankingSelector.tsx";
-import { generateRankingUrl, getImagePathFromRankingType } from "@/lib/misc.ts";
+import { generateRankingUrl, getImagePathFromRankingType, rankingTypeToUserFriendlyText } from "@/lib/misc.ts";
 import { Suspense } from "react";
 import GraphRanking, { GraphRankingFallback } from "@/components/Ranking/GraphRanking.tsx";
 import { RankingSelectorClient } from "@/components/Ranking/RankingSelectorClient.tsx";
@@ -20,7 +20,7 @@ export async function generateMetadata(
   if (Object.values(RankingType).includes(searchParams.category as RankingType)) {
     rankingImgPath = getImagePathFromRankingType(searchParams.category as RankingType);
     defaultImage = `https://palatracker.bromine.fr/${rankingImgPath}`;
-    title += ` - ${searchParams.category}`;
+    title += ` - ${rankingTypeToUserFriendlyText(searchParams.category as RankingType)}`;
   }
 
 
@@ -63,7 +63,7 @@ export default function Home({ searchParams }: {
         <CardHeader className="flex flex-row items-center justify-between">
           <CardTitle>
             Bienvenue sur le visualisateur du classement{" "}
-            <GradientText className="font-extrabold">{rankingType}</GradientText>
+            <GradientText className="font-extrabold">{rankingTypeToUserFriendlyText(rankingType)}</GradientText>
           </CardTitle>
           <CardDescription>
             Made with <FaHeart

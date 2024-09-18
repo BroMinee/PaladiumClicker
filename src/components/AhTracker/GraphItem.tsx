@@ -12,12 +12,8 @@ export default async function GraphItem({ selectedItem }: { selectedItem: string
   try {
     data = await getPaladiumAhItemFullHistory(selectedItem);
   } catch (e) {
-    console.error(e);
-  }
-
-  if (data.length === 0)
     redirect("/error?message=Impossible de récupérer les données de l'item sélectionné");
-
+  }
 
   return (
     <Card className="w-full">
