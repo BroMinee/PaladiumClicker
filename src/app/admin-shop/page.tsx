@@ -3,7 +3,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import GradientText from "@/components/shared/GradientText.tsx";
 import { FaHeart } from "react-icons/fa";
 import { AdminShopItem, adminShopItemsAvailable, isShopItem } from "@/types";
-import { generateAdminShopUrl, getImagePathFromAdminShopType } from "@/lib/misc.ts";
+import { adminShopItemToUserFriendlyText, generateAdminShopUrl, getImagePathFromAdminShopType } from "@/lib/misc.ts";
 import { Suspense } from "react";
 import { AdminShopSelectorClient } from "@/components/AdminShop/AdminShopSelectorClient.tsx";
 import GraphAdminShop, { GraphAdminShopFallback } from "@/components/AdminShop/GraphAdminShop.tsx";
@@ -17,13 +17,13 @@ export async function generateMetadata(
   { searchParams }: { searchParams: searchParamsAdminShopPage },
 ) {
 
-  let title = "Paladium Tracker - Admin Shop";
+  let title = "PalaTracker - Admin Shop";
   let itemImgPath = "";
   let defaultImage = "https://palatracker.bromine.fr/PaladiumClicker/favicon.ico";
   if (isShopItem(searchParams.item)) {
     itemImgPath = getImagePathFromAdminShopType(searchParams.item);
     defaultImage = `https://palatracker.bromine.fr/${itemImgPath}`;
-    title += ` - ${searchParams.item}`;
+    title += ` - ${adminShopItemToUserFriendlyText(searchParams.item)}`;
   }
 
 
@@ -66,7 +66,7 @@ export default function Home({ searchParams }: {
         <CardHeader className="flex flex-row items-center justify-between">
           <CardTitle>
             Bienvenue sur le visualisateur d&apos;historique de prix de{" "}
-            <GradientText className="font-extrabold">{adminShopItem}</GradientText>
+            <GradientText className="font-extrabold">{adminShopItemToUserFriendlyText(adminShopItem)}</GradientText>
           </CardTitle>
           <CardDescription>
             Made with <FaHeart

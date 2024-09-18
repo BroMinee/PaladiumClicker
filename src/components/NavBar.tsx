@@ -23,7 +23,8 @@ import GradientText from "@/components/shared/GradientText.tsx";
 const Navbar = () => {
   return (
     <>
-      <div className="h-screen overflow-auto bg-card hidden lg:flex flex-col w-64 border-r border-gray-600">
+      <div
+        className="h-screen overflow-auto no-scrollbar bg-card hidden lg:flex flex-col w-64 border-r border-gray-600">
         <NavBarContent/>
       </div>
 
@@ -153,7 +154,7 @@ const MobileNav = () => {
           <FaBars className="h-4 w-4"/>
         </Button>
       </SheetTrigger>
-      <SheetContent side="left" className="w-72 overflow-auto">
+      <SheetContent side="left" className="w-72 overflow-auto no-scrollbar">
         <SheetHeader>
           <NavBarContent/>
         </SheetHeader>

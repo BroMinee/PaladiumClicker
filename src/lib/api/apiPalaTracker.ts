@@ -11,7 +11,7 @@ import {
 } from "@/types";
 import { fetchWithHeader } from "@/lib/api/misc.ts";
 
-export const API_PALATRACKER = "https://dev.bromine.fr/"
+export const API_PALATRACKER = "https://palatracker.bromine.fr"
 
 export const isMyApiDown = async (): Promise<boolean> => {
   let response = null;

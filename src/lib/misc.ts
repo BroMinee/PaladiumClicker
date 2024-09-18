@@ -3084,6 +3084,53 @@ export function getImagePathFromRankingType(rankingType: string): string {
   return imgPath;
 }
 
+
+export function rankingTypeToUserFriendlyText(rankingType: RankingType): string {
+  switch (rankingType) {
+    case RankingType.money:
+      return "Money";
+    case RankingType["job.alchemist"]:
+      return "Métier Alchimiste";
+    case RankingType["job.farmer"]:
+      return "Métier Fermier";
+    case RankingType["job.hunter"]:
+      return "Métier Chasseur";
+    case RankingType["job.miner"]:
+      return "Métier Mineur";
+    case RankingType.boss:
+      return "Boss";
+    case RankingType.egghunt:
+      return "EggHunt";
+    case RankingType.end:
+      return "End";
+    case RankingType.chorus:
+      return "Chorus";
+    case RankingType.koth:
+      return "KOTH";
+    case RankingType.clicker:
+      return "Clicker";
+    default:
+      return "Inconnu";
+  }
+}
+
+export function adminShopItemToUserFriendlyText(item: AdminShopItem): string {
+  switch (item) {
+    case "tile-passifwither-head":
+      return "Passif Wither Head";
+    case "reeds":
+      return "Sugar Cane"
+    case "dye":
+      return "Ink Sack"
+    case "skull-1":
+      return "Wither Skull"
+  }
+
+  return item.replaceAll('tile', '').split('-')
+    .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(' ');
+}
+
 export function getImagePathFromAdminShopType(item: AdminShopItem): string {
   const translateTable: Record<string, string> = {
     "wool": `wool_colored_white`,

@@ -41,7 +41,7 @@ import { fetchWithHeader } from "@/lib/api/misc.ts";
 import { redirect } from "next/navigation";
 
 
-const PALADIUM_API_URL = "https://api.paladium.games/";
+const PALADIUM_API_URL = "https://api.paladium.games";
 
 
 export const isApiDown = async (): Promise<boolean> => {
@@ -69,7 +69,7 @@ export const getPlayerOnlineCount = async (): Promise<number> => {
         players: number;
       }
     }
-  }>(`${PALADIUM_API_URL}/v1/status`, 0);
+  }>(`${PALADIUM_API_URL}/v1/status`, 0).catch(() => { return { java: { global: { players: -1 } } } });
   return response.java.global.players;
 }
 

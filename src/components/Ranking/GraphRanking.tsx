@@ -9,11 +9,8 @@ export default async function GraphRanking({ rankingType }: { rankingType: Ranki
   try {
     data = await getRankingLeaderboard(rankingType);
   } catch (e) {
-    console.error(e);
-  }
-
-  if (data.length === 0)
     redirect("/error?message=Impossible de récupérer les données du classement sélectionné");
+  }
 
 
   return (

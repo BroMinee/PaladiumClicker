@@ -25,10 +25,10 @@ export function generateMetadata(
 
   if (!itemName) {
     return {
-      title: "AH Tracker",
+      title: "PalaTracker - AH Tracker",
       description: "Suivez les historiques de vente de vos items préférés sur Paladium",
       openGraph: {
-        title: "AH Tracker",
+        title: "PalaTracker - AH Tracker",
         description: "Suivez les historiques de vente de vos items préférés sur Paladium"
       },
     }
@@ -42,7 +42,7 @@ export function generateMetadata(
     }
   });
 
-  const title = `AH Tracker  - ${itemName}`;
+  const title = `PalaTracker - AH Tracker  - ${itemName}`;
   const description = "Suivez les historiques de vente de vos items préférés sur Paladium";
   return {
     title: title,

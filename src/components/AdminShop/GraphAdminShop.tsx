@@ -9,11 +9,8 @@ export default async function GraphAdminShop({ item }: { item: AdminShopItem }) 
   try {
     data = await getAdminShopHistory(item);
   } catch (e) {
-    console.error(e);
-  }
-
-  if (data.length === 0)
     redirect("/error?message=Impossible de récupérer les données de l'item sélectionné");
+  }
 
 
   return (

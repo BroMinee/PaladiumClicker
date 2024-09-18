@@ -9,12 +9,8 @@ export default async function GraphStatus() {
   try {
     data = await getStatusPaladium();
   } catch (e) {
-    console.error(e);
-  }
-
-  if (data.length === 0)
     redirect("/error?message=Impossible de récupérer les données de status du serveur");
-
+  }
 
   return (
     <PlotStatusChart data={data}/>
