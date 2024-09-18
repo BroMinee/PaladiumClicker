@@ -1,5 +1,5 @@
 import "@/styles/globals.css"
-
+import { GoogleAnalytics } from '@next/third-parties/google'
 
 import React from "react";
 import Navbar from "@/components/NavBar";
@@ -35,6 +35,7 @@ export default function RootLayout({
 
     </ThemeProviders>
     </body>
+    <GoogleAnalytics gaId="G-XR5BQZPZBD" />
     </html>
   );
 }
