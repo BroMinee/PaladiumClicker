@@ -20,8 +20,8 @@ export default function ErrorBoundary({ error }: { error: Error }) {
             <Image src={safeJoinPaths("/arty_decu_left.webp")} alt="arty" width={128} height={92}/>
           </div>
           <p className="mb-4 text-2xl tracking-tight font-bold md:text-4xl text-red-500">{error.message}</p>
-          <p className="mb-4 text-lg font-light text-gray-400">Si le problème persiste merci d'envoyer une capture
-            d'écran de cette page à un développeur</p>
+          <p className="mb-4 text-lg font-light text-gray-400">Si le problème persiste merci d&apos;envoyer une capture
+            d&apos;écran de cette page à un développeur</p>
         </div>
 
       </div>
@@ -31,10 +31,7 @@ export default function ErrorBoundary({ error }: { error: Error }) {
         <div>{error.stack?.split('\n').map((line, index) => (
           <div key={line + index} className="flex md:flex-row flex-col gap-2">
             <div>
-              {line.split(" (")[0]}
-            </div>
-            <div className="dark:text-gray-400 text-gray-500">
-              {" ("}{line.split(" (")[1]}
+              {line}
             </div>
           </div>
         ))}</div>
