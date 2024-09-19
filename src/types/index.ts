@@ -485,6 +485,7 @@ export type ServerPaladiumStatusResponse = ServerStatusResponse & {
   players: number
 }
 
+
 export type PlayerDBApiReponse =
   {
     data: { player: { id: string } }
@@ -530,5 +531,18 @@ export type NodeType = OptionType & { count: number } & { checked: boolean }
 export type Tree<T> = {
   value: T;
   children: Tree<T>[];
+}
+
+export enum ProfilSectionEnum {
+  "Home" = "Home",
+  "Achievements" = "Achievements",
+  "Boss" = "Boss",
+  "Clicker" = "Clicker",
+  "Cosmetics" = "Cosmetics",
+  "Friends" = "Friends",
+  "Jobs" = "Jobs",
+  "Pet" = "Pet",
+  "Pvp" = "Pvp",
+  "Showcase" = "Showcase"
 }
 

@@ -20,7 +20,7 @@ import ImportProfil from "@/components/shared/ImportProfil.tsx";
 export default function ProfilInfo() {
 
 
-  return (<Card>
+  return (<Card className="rounded-b-xl rounded-t-none">
     <CardHeader className="flex flex-row items-center justify-between">
       <CardTitle>
         Profil de{" "}

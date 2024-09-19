@@ -1,21 +1,13 @@
 import {
   AdminShopItem,
   AnyCondition,
-  Building,
-  BuildingUpgrade,
-  CategoryUpgrade,
   CPS,
-  GlobalUpgrade,
-  ManyUpgrade,
   MetierKey,
-  Metiers,
   NodeType,
   OptionType,
-  PlayerInfo,
-  PosteriorUpgrade,
   RankingType,
-  TerrainUpgrade,
   Tree,
+  ProfilSectionEnum,
   UpgradeKey
 } from "@/types";
 import constants, { PathValid } from "@/lib/constants.ts";
@@ -35,6 +27,16 @@ import category_upgrade_json from "@/assets/category_upgrade.json";
 import metier_json from "@/assets/metier.json";
 import building_json from "@/assets/building.json";
 import CPS_json from "@/assets/CPS.json";
+import {
+  Building,
+  BuildingUpgrade,
+  CategoryUpgrade,
+  GlobalUpgrade,
+  ManyUpgrade,
+  Metiers,
+  PlayerInfo,
+  PosteriorUpgrade, TerrainUpgrade
+} from "@/types";
 
 export function getTotalSpend(playerInfo: PlayerInfo) {
   let total = 0;
@@ -3280,4 +3282,19 @@ export function getInternalNode<T>(root: Tree<T>): Tree<T>[] {
   if (root.children.length === 0)
     return [];
   return [root, ...root.children.flatMap((child) => getInternalNode(child))];
+}
+
+export const ProfilSectionValid = Object.values(ProfilSectionEnum) as string[];
+
+export function isProfilSection(section?: string): boolean {
+  if (section === undefined) return false;
+  return ProfilSectionValid.includes(section);
+}
+
+export function generateProfilUrl(username: string, item: ProfilSectionEnum | string) {
+  if (!isProfilSection(item))
+    throw new Error(`Invalid section given in generateProfilUrl ${item}`);
+  const argItem = item ? `section=${item}` : "";
+  const args = [argItem].filter((e) => e).join("&");
+  return safeJoinPaths(constants.profilPath, username, `?${args}`);
 }
