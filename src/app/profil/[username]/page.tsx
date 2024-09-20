@@ -5,9 +5,12 @@ import ProfilInfo from "@/components/Profil/ProfilInfo.tsx";
 import AhInfo from "@/components/Profil/AhInfo.tsx";
 import FactionInfo from "@/components/Profil/FactionInfo.tsx";
 import { generateProfilUrl, isProfilSection } from "@/lib/misc.ts";
+import { getFactionInfo, getJobsFromUUID, getPaladiumProfileByPseudo } from "@/lib/api/apiPala.ts";
+import { formatPrice, generateProfilUrl, isProfilSection } from "@/lib/misc.ts";
 import ProfilSelector from "@/components/Profil/ProfilSelector.tsx";
 import { ProfilSectionEnum } from "@/types";
 import { redirect } from "next/navigation";
+import ProfilSelectorDisplay from "@/components/Profil/ProfilSelectorDisplay.tsx";
 
 
 export async function generateMetadata(
@@ -39,11 +42,7 @@ export default function Home({ params, searchParams }: {
     <ProfileFetcherWrapper username={params.username}>
       <ProfilSelector/>
       <div className="flex flex-col gap-4">
-        <ProfilInfo/>
-        <MetierList editable={false}/>
-        <AhInfo/>
-        <HeadingSection>Informations de faction</HeadingSection>
-        <FactionInfo/>
+        <ProfilSelectorDisplay params={params} searchParams={searchParams}/>
       </div>
     </ProfileFetcherWrapper>
   )

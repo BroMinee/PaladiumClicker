@@ -5,7 +5,7 @@ import { AhInfoTitleClient, AhItemClient } from "@/components/Profil/AhInfoClien
 
 export default function AhInfo() {
   return (
-    <Card>
+    <Card className="rounded-b-xl rounded-t-none">
       <CardHeader>
         <CardTitle className="flex flex-row items-center">
           Hôtel de vente - {" "}

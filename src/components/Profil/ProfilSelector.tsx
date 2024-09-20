@@ -46,7 +46,7 @@ export default function ProfilSelector() {
         />
         <div className="w-1 bg-secondary"></div>
         <IoMdArrowDropright size={48} className="hover:text-gray-400 text-secondary"
-                            onClick={() => setSelected(Math.min(allSelector.length, selected + 1))}
+                            onClick={() => setSelected(Math.min(allSelector.length - 4, selected + 1))}
         />
       </div>
     </div>

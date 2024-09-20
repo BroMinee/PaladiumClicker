@@ -1,8 +1,16 @@
 import 'server-only';
 
 import {
+  Achievement,
   AhItemHistory,
   AhType,
+  Building,
+  BuildingUpgrade,
+  CategoryEnum,
+  CategoryUpgrade,
+  CPS,
+  GlobalUpgrade,
+  ManyUpgrade,
   Metiers,
   MetiersPossiblyUndefined,
   PaladiumAhHistory,
@@ -169,10 +177,10 @@ export const getPlayerInfo = async (pseudo: string): Promise<PlayerInfo> => {
   const p5 = getPaladiumLeaderboardPositionByUUID(paladiumProfil.uuid, paladiumProfil.username);
   const p6 = getFactionInfo(paladiumProfil.faction === "" ? "Wilderness" : paladiumProfil.faction);
   const p7 = getViewsFromUUID(paladiumProfil.uuid, paladiumProfil.username);
+  const p8 = getPlayerAchievements(paladiumProfil.uuid);
 
 
-  const [clickerData, ahInfo, friendList, metiers, leaderboardPosition, paladiumFactionInfo, viewCount] = await Promise.all([p1, p2, p3, p4, p5, p6, p7]);
-
+  const [clickerData, ahInfo, friendList, metiers, leaderboardPosition, paladiumFactionInfo, viewCount, achievements] = await Promise.all([p1, p2, p3, p4, p5, p6, p7, p8]);
 
   // NOTE: We use structuredClone to avoid modifying the original JSON by accident (it already happened once oupsy)
   initialPlayerInfo = structuredClone(getInitialPlayerInfo());
@@ -218,6 +226,7 @@ export const getPlayerInfo = async (pseudo: string): Promise<PlayerInfo> => {
   initialPlayerInfo.leaderboard = leaderboardPosition;
   initialPlayerInfo.faction = paladiumFactionInfo;
   initialPlayerInfo.view_count = viewCount;
+  initialPlayerInfo.achievements = achievements;
 
   registerPlayerAction(paladiumProfil.uuid, paladiumProfil.username);
 
@@ -260,7 +269,8 @@ export const getPaladiumAhItemFullHistory = async (itemId: string): Promise<AhIt
     c++;
   }
 
-  console.assert(data.length === totalCount, "Data length is not equal to totalCount");
+  if (data.length !== totalCount)
+    redirect(`/error?message=Data length is not equal to totalCount (getPaladiumAhItemFullHistory)`);
 
   return data;
 }
@@ -300,4 +310,212 @@ export const getJobsFromUUID = async (uuid: string, username: string): Promise<M
   }
 
   return initialMetierJson;
+}
+
+
+export const getPlayerAchievements = async (uuid: string): Promise<{ data: Achievement[], totalCount: number }> => {
+  return {
+    data: [
+      {
+        id: "test-achivement-1",
+        progress: 100,
+        completed: true,
+        category: CategoryEnum.HOW_TO_START,
+        name: "Test Achievement 1",
+        description: "Obtient 100",
+        amount: 100,
+        icon: "https://via.placeholder.com/150"
+      },
+      {
+        id: "test-achivement-1.1",
+        progress: 100,
+        completed: true,
+        category: CategoryEnum.HOW_TO_START,
+        name: "Test Achievement 1.1",
+        description: "Obtient 100",
+        amount: 100,
+        icon: "https://via.placeholder.com/150"
+      },
+
+      {
+        id: "test-achivement-2",
+        progress: 5,
+        completed: false,
+        category: CategoryEnum.JOBS,
+        name: "Test Achievement 2",
+        description: "Obtient 100",
+        amount: 10,
+        icon: "https://via.placeholder.com/150"
+      },
+      {
+        id: "test-achivement-2.1",
+        progress: 5,
+        completed: false,
+        category: CategoryEnum.JOBS,
+        name: "Test Achievement 2.1",
+        description: "Obtient 100",
+        amount: 10,
+        icon: "https://via.placeholder.com/150"
+      },
+      {
+        id: "test-achivement-2.2",
+        progress: 5,
+        completed: true,
+        category: CategoryEnum.JOBS,
+        name: "Test Achievement 2.2",
+        description: "Obtient 100",
+        amount: 5,
+        icon: "https://via.placeholder.com/150"
+      },
+
+      {
+        id: "test-achivement-3",
+        progress: 66,
+        completed: false,
+        category: CategoryEnum.FACTION,
+        name: "Test Achievement 3",
+        description: "Obtient 5000 point dans un texte assez long genre tres long. Obtient 5000 point dans un texte assez long genre tres long. Obtient 5000 point dans un texte assez long genre tres long. Obtient 5000 point dans un texte assez long genre tres long.",
+        amount: 5000,
+        icon: "https://via.placeholder.com/150"
+      },
+      {
+        id: "test-achivement-3.1",
+        progress: 66,
+        completed: false,
+        category: CategoryEnum.FACTION,
+        name: "Test Achievement 3.1",
+        description: "Obtient 5000 point dans un texte assez long genre tres long. Obtient 5000 point dans un texte assez long genre tres long. Obtient 5000 point dans un texte assez long genre tres long. Obtient 5000 point dans un texte assez long genre tres long.",
+        amount: 5000,
+        icon: "https://via.placeholder.com/150"
+      },
+
+      {
+        id: "test-achivement-4",
+        progress: 100,
+        completed: true,
+        category: CategoryEnum.ATTACK_DEFENSE,
+        name: "Test Achievement 4",
+        description: "Obtient 100",
+        amount: 100,
+        icon: "https://via.placeholder.com/150"
+      },
+      {
+        id: "test-achivement-4.1",
+        progress: 1,
+        completed: false,
+        category: CategoryEnum.ATTACK_DEFENSE,
+        name: "Test Achievement 4.1",
+        description: "Obtient 100",
+        amount: 100,
+        icon: "https://via.placeholder.com/150"
+      },
+
+      {
+        id: "test-achivement-5",
+        progress: 99.9,
+        completed: false,
+        category: CategoryEnum.ECONOMY,
+        name: "Test Achievement 5",
+        description: "Obtient 100",
+        amount: 100,
+        icon: "https://via.placeholder.com/150"
+      },
+      {
+        id: "test-achivement-5.1",
+        progress: 15.5,
+        completed: true,
+        category: CategoryEnum.ECONOMY,
+        name: "Test Achievement 5.1",
+        description: "Obtient 100",
+        amount: 15.5,
+        icon: "https://via.placeholder.com/150"
+      },
+
+      {
+        id: "test-achivement-6",
+        progress: 0,
+        completed: false,
+        category: CategoryEnum.OTHERS,
+        name: "Test Achievement 6",
+        description: "Obtient 100",
+        amount: 100,
+        icon: "https://via.placeholder.com/150"
+      },
+      {
+        id: "test-achivement-6.1",
+        progress: 0,
+        completed: true,
+        category: CategoryEnum.OTHERS,
+        name: "Test Achievement 6.1",
+        description: "Obtient 100",
+        amount: 0,
+        icon: "https://via.placeholder.com/150"
+      },
+
+    ],
+    totalCount: 13
+  }
+
+  type AchievementResponse = {
+    totalCount: number,
+    data: { id: string, progress: number, completed: boolean }[]
+  }
+  const response = await fetchWithHeader<AchievementResponse>(`${PALADIUM_API_URL}/v1/paladium/player/profile/${uuid}/achievements?limit=100&offset=0`);
+  const totalCount = response.totalCount;
+
+  let data = response.data;
+  let offset = 100;
+  let c = 0;
+  while (offset < totalCount && c <= 10) {
+    const response = await fetchWithHeader<AchievementResponse>(`${PALADIUM_API_URL}/v1/paladium/player/profile/${uuid}/achievements?offset=${offset}&limit=100`)
+    data = data.concat(response.data);
+    offset += 100;
+    c++;
+  }
+
+  if (data.length !== totalCount)
+    redirect(`/error?message=Data length is not equal to totalCount (getPlayerAchievements)`);
+
+  const allAchievements = await getAllAchievements();
+
+  return {
+    data: allAchievements.data.map((achievement) => {
+      const found = data.find((a) => a.id === achievement.id);
+      return {
+        id: achievement.id,
+        progress: found ? found.progress : 0,
+        completed: found ? found.completed : false,
+        category: achievement.category,
+        name: achievement.name,
+        description: achievement.description,
+        amount: achievement.amount,
+        icon: achievement.icon,
+      }
+    }), totalCount: totalCount
+  };
+}
+
+type AllAchievementResponse = {
+  totalCount: number,
+  data: { id: string, category: CategoryEnum, name: string, description: string, amount: number, icon: string }[]
+}
+
+const getAllAchievements = async (): Promise<AllAchievementResponse> => {
+  const response = await fetchWithHeader<AllAchievementResponse>(`${PALADIUM_API_URL}/v1/paladium/alchievements?limit=100&offset=0`, 3600);
+  const totalCount = response.totalCount;
+
+  let data = response.data;
+  let offset = 100;
+  let c = 0;
+  while (offset < totalCount && c <= 10) {
+    const response = await fetchWithHeader<AllAchievementResponse>(`${PALADIUM_API_URL}/v1/paladium/alchievements?offset=${offset}&limit=100`, 3600)
+    data = data.concat(response.data);
+    offset += 100;
+    c++;
+  }
+
+  if (data.length !== totalCount)
+    redirect(`/error?message=Data length is not equal to totalCount (getAllAchievements)`);
+
+  return { data: data, totalCount: totalCount };
 }

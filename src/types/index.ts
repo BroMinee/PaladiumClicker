@@ -119,7 +119,8 @@ export type PlayerInfo = {
   leaderboard: string,
   ah: AhType,
   last_fetch: number,
-  view_count: ProfilViewType
+  view_count: ProfilViewType,
+  achievements: { data: Achievement[], totalCount: number },
 }
 
 export type AhType = {
@@ -536,6 +537,8 @@ export type Tree<T> = {
 export enum ProfilSectionEnum {
   "Home" = "Home",
   "Achievements" = "Achievements",
+  "Market" = "Market",
+  "Faction" = "Faction",
   "Boss" = "Boss",
   "Clicker" = "Clicker",
   "Cosmetics" = "Cosmetics",
@@ -546,3 +549,22 @@ export enum ProfilSectionEnum {
   "Showcase" = "Showcase"
 }
 
+export type Achievement = {
+  id: string,
+  progress: number,
+  completed: boolean,
+  category: CategoryEnum,
+  name: string,
+  description: string,
+  amount: number,
+  icon: string,
+}
+
+export enum CategoryEnum {
+  "HOW_TO_START" = "HOW_TO_START",
+  "JOBS" = "JOBS",
+  "FACTION" = "FACTION",
+  "ATTACK_DEFENSE" = "ATTACK_DEFENSE",
+  "ECONOMY" = "ECONOMY",
+  "OTHERS" = "OTHERS",
+}
