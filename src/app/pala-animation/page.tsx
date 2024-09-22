@@ -51,6 +51,13 @@ export default function PalaAnimationPage({ searchParams }: { searchParams: { us
       <SessionProvider>
         <div className="flex flex-col gap-4">
           <Card>
+            <CardHeader>
+              <CardTitle>
+                De nouvelles questions ont été ajoutées sur Paladium, donc cette page est en cours de maintenance donc ne marchera pas.
+              </CardTitle>
+            </CardHeader>
+          </Card>
+          <Card>
             <CardHeader className="flex flex-row items-center justify-between">
               <CardTitle>
                 Bienvenue dans la zone d&apos;entraînement du{" "}

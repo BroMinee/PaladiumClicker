@@ -28,6 +28,7 @@ export default function Error500Page({ searchParams }: {
           <div className="mx-auto max-w-screen-sm text-center">
             <h1
               className="mb-4 text-7xl tracking-tight font-extrabold lg:text-9xl text-primary-600 text-primary-500">500</h1>
+            <p className="mb-4 text-3xl tracking-tight font-bold md:text-4xl text-red-500">(22/09/2024 - 13h11) L&apos;API de Paladium rencontre actuellement des soucis, il faut être patient et réesayer plus tard, inutile de recharger votre profil en boucle.</p>
             <p className="mb-4 text-3xl tracking-tight font-bold md:text-4xl text-white">Une erreur
               est survenue.</p>
             <p className="text-primary">
