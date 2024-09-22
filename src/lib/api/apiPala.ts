@@ -1,7 +1,7 @@
 import 'server-only';
 
 import {
-  AhItemHistory,
+  AhItemHistory, AhItemType,
   AhType,
   Building,
   BuildingUpgrade,
@@ -98,6 +98,11 @@ export const getFactionLeaderboard = async (): Promise<PaladiumFactionLeaderboar
 }
 
 export const getAuctionHouseInfo = async (uuid: string): Promise<AhType> => {
+  return {
+    data: [],
+    totalCount: 0,
+    dateUpdated: new Date().getTime(),
+  }
   const response = await fetchWithHeader<AhType>(`${PALADIUM_API_URL}/v1/paladium/shop/market/players/${uuid}/items`)
   response.dateUpdated = new Date().getTime();
   return response;
