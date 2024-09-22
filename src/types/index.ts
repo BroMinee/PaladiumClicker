@@ -90,10 +90,10 @@ export type Metiers = {
 }
 
 export type MetiersPossiblyUndefined = {
-  alchemist: Metier,
-  farmer: Metier,
-  hunter: Metier,
-  miner: Metier,
+  alchemist?: Metier,
+  farmer?: Metier,
+  hunter?: Metier,
+  miner?: Metier,
 }
 
 
