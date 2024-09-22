@@ -84,5 +84,5 @@ export function getStatusLauncher() {
 }
 
 export async function registerPlayer(uuid: string, username: string) {
-  return await fetchWithHeader(`${API_PALATRACKER}/v1/user/register/${uuid}/${username}`, 5 * 60);
+  return await fetchWithHeader(`${API_PALATRACKER}/v1/user/register/${uuid}/${username}`, 5 * 60).catch((e) => { console.error(e) });
 }
