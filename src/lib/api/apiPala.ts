@@ -1,7 +1,7 @@
 import 'server-only';
 
 import {
-  AhItemHistory, AhItemType,
+  AhItemHistory,
   AhType,
   Building,
   BuildingUpgrade,
