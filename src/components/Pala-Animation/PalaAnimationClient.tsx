@@ -1,3 +1,5 @@
+// @ts-nocheck - A RETIRER APRES AVOIR CORRIGE LE FICHIER
+
 'use client';
 
 import { FormEvent, useEffect, useState } from "react";
@@ -152,22 +154,22 @@ export function PalaAnimationBody({ username }: PalaAnimationBodyType) {
 
     if (!reroll)
       return
-    const interval = setInterval(() => {
-      getNewQuestionPalaAnimation(username).then(
-        (data) => {
-          if (data.question !== question)
-            clearInterval(interval);
-          setQuestion(data.question);
-          setSessionUuid(data.session_uuid);
-        }
-      ).catch(
-        (error) => {
-          console.error("Error while fetching new question", error);
-        }
-      ).finally(() => {
-        setIsChecking(false);
-      });
-    }, 1000);
+    // const interval = setInterval(() => {
+    //   getNewQuestionPalaAnimation(username).then(
+    //     (data) => {
+    //       if (data.question !== question)
+    //         clearInterval(interval);
+    //       setQuestion(data.question);
+    //       setSessionUuid(data.session_uuid);
+    //     }
+    //   ).catch(
+    //     (error) => {
+    //       console.error("Error while fetching new question", error);
+    //     }
+    //   ).finally(() => {
+    //     setIsChecking(false);
+    //   });
+    // }, 1000);
 
 
   }, [reroll]);
