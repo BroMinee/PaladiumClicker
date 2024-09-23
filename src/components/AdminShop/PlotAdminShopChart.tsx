@@ -60,7 +60,7 @@ const PlotAdminShopChart = ({ data }: { data: AdminShopItemDetail[] }) => {
         <YAxis yAxisId="left"
                domain={[(dataMin: number) => parseFloat((dataMin * 0.9).toFixed(2)), (dataMax: number) => parseFloat((dataMax * 1.1).toFixed(2))]}/>
         <Tooltip content={<CustomTooltip/>}/>
-        <Area yAxisId="left" type="monotone" dataKey="sellPrice" name="Prix vente" stroke="#8884d8" fillOpacity={1}
+        <Area yAxisId="left" type="monotone" dataKey="sellPrice" name="Prix de vente" stroke="#8884d8" fillOpacity={1}
               fill="url(#colorUv)"/>
       </AreaChart>
     </ResponsiveContainer>
