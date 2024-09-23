@@ -47,10 +47,10 @@ export const fetchWithHeader = async <T>(url: string, cache_duration_in_sec = 15
     json = await response.json();
 
     if (!response.ok)
-      throw new Error(json.message);
+      throw new Error(url + json.message);
     return json as T;
   } catch (error) {
-    console.error(error)
+    console.error(error, url);
   }
 
   if (json)
