@@ -109,7 +109,7 @@ export const getAuctionHouseInfo = async (uuid: string): Promise<AhType> => {
 }
 
 export const getFriendsList = async (uuid: string): Promise<PaladiumFriendInfo> => {
-  return await fetchWithHeader<PaladiumFriendInfo>(`${PALADIUM_API_URL}/v1/paladium/player/profile/${uuid}/friends`)
+  return await fetchWithHeader<PaladiumFriendInfo>(`${PALADIUM_API_URL}/v1/paladium/player/profile/${uuid}/friends`).catch(() => { return { data: [], totalCount: 0 } });
 }
 
 export const getPlayerInfo = async (pseudo: string): Promise<PlayerInfo> => {
