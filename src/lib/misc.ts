@@ -80,7 +80,7 @@ export function checkCondition(playerInfo: PlayerInfo, conditions: AnyCondition)
   const totalCoins = playerInfo.production;
   const buildingIndex = getBuildingIndexCondition(conditions);
   const buildingNeed = getBuildingCountCondition(conditions);
-  const daySinceStart = (new Date().getTime() - new Date("2024-03-21").getTime()) / (1000 * 60 * 60 * 24);
+  const daySinceStart = (new Date().getTime() - new Date("2024-09-21").getTime()) / (1000 * 60 * 60 * 24);
   const buildingCount = buildingIndex === -1 ? -1 : playerInfo.building[buildingIndex].own;
 
   const unlockable = totalCoins >= coinsCondition &&
