@@ -11,15 +11,16 @@ export const LogoClient = ({ menu = false }: { menu?: boolean }) => {
 
   return (
     <div
-      className="flex flex-row items-center justify-start p-6 pb-3 space-x-3 hover:scale-110 duration-300 cursor-pointer">
+      className="flex flex-row items-center justify-start p-6 pb-3 space-x-3 hover:scale-110 duration-300 cursor-pointer"
+      onClick={async () => {
+        reset();
+        await navigate("/");
+      }}
+    >
       <Image
         src={safeJoinPaths("/favicon.ico")}
         alt="Logo"
         className="h-12 w-12"
-        onClick={async () => {
-          reset();
-          await navigate("/");
-        }}
         width={48}
         height={48}
       />
