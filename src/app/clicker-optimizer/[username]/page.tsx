@@ -15,35 +15,19 @@ import ClickList from "@/components/Clicker-Optimizer/ClickList.tsx";
 import { Fragment } from "react";
 import UpgradeList from "@/components/Clicker-Optimizer/UpgradeList.tsx";
 import FallingClickImage from "@/components/Clicker-Optimizer/FallingClick.tsx";
-import { getPaladiumProfileByPseudo } from "@/lib/api/apiPala.ts";
 
 export async function generateMetadata(
   { params }: { params: { username: string } },
 ) {
-  try {
-    const paladiumProfile = await getPaladiumProfileByPseudo(params.username);
-    const title = `PalaTracker - Clicker Optimizer - ${paladiumProfile.username}`;
-    const description = "🚀 Tu cherches à optimiser le PalaClicker ? C'est ici que ça se passe !! 📈 Ce site calcule le meilleur achat en fonction de tes métiers, tes améliorations et tes bâtiments.";
-
-    return {
-      title: title,
-      description: description,
-      openGraph: {
-        title: title,
-        description: description,
-      },
-    }
-  } catch (error) {
-    console.error(error);
-    return {
-      title: "PalaTracker - Clicker Optimizer",
-      description: "🚀 Tu cherches à optimiser le PalaClicker ? C'est ici que ça se passe !! 📈 Ce site calcule le meilleur achat en fonction de tes métiers, tes améliorations et tes bâtiments.",
-      openGraph: {
-        title: "PalaTracker - Clicker Optimizer",
-        description: "🚀 Tu cherches à optimiser le PalaClicker ? C'est ici que ça se passe !! 📈 Ce site calcule le meilleur achat en fonction de tes métiers, tes améliorations et tes bâtiments."
-      },
-    }
+  return {
+    title: `PalaTracker - Clicker Optimizer - ${params.username}`,
+    description: "🚀 Tu cherches à optimiser le PalaClicker ? C'est ici que ça se passe !! 📈 Ce site calcule le meilleur achat en fonction de tes métiers, tes améliorations et tes bâtiments.",
+    openGraph: {
+      title: `PalaTracker - Clicker Optimizer - ${params.username}`,
+      description: "🚀 Tu cherches à optimiser le PalaClicker ? C'est ici que ça se passe !! 📈 Ce site calcule le meilleur achat en fonction de tes métiers, tes améliorations et tes bâtiments."
+    },
   }
+
 }
 
 
