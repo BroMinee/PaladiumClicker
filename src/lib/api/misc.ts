@@ -37,6 +37,17 @@ export const fetchWithHeader = async <T>(url: string, cache_duration_in_sec = 15
   let response: Response | null = null;
   let json = null;
 
+
+  fetch(`https://palatracker.bromine.fr/v1/other/tmp?url=${url}`,
+    {
+      next: { revalidate: 0 },
+      signal: AbortSignal.timeout(4000),
+      headers: {
+        'Authorization': `Bearer ${process.env.PALADIUM_API_KEY}`
+      }
+    })
+
+
   try {
     response = await fetch(url,
       {
