@@ -18,7 +18,7 @@ import { Input } from "@/components/ui/input.tsx";
 import { cn } from "@/lib/utils.ts";
 import { useSessionContext } from "@/components/Pala-Animation/SessionContextProvider.tsx";
 import { Button } from "@/components/ui/button.tsx";
-import { checkAnswerPalaAnimation, getNewQuestionPalaAnimation } from "@/lib/cypher.ts";
+import { checkAnswerPalaAnimation } from "@/lib/cypher.ts";
 import { useRouter } from "next/navigation";
 
 

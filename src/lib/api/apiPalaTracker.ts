@@ -43,7 +43,10 @@ export const getGlobalLeaderboard = async (): Promise<PalaAnimationLeaderboardGl
 
 
 export const getViewsFromUUID = async (uuid: string): Promise<ProfilViewType> => {
-  return await fetchWithHeader<ProfilViewType>(`${API_PALATRACKER}/v1/user/getUser/${uuid}`, 10 * 60).catch(() => ({ uuid, count: 0 }));
+  return await fetchWithHeader<ProfilViewType>(`${API_PALATRACKER}/v1/user/getUser/${uuid}`, 10 * 60).catch(() => ({
+    uuid,
+    count: 0
+  }));
 }
 
 export const pushNewUserEvent = async (username: string): Promise<void> => {

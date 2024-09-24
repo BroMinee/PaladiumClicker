@@ -53,7 +53,8 @@ export default function PalaAnimationPage({ searchParams }: { searchParams: { us
           <Card>
             <CardHeader>
               <CardTitle>
-                De nouvelles questions ont été ajoutées sur Paladium, donc cette page est en cours de maintenance donc ne marchera pas.
+                De nouvelles questions ont été ajoutées sur Paladium, donc cette page est en cours de maintenance donc
+                ne marchera pas.
               </CardTitle>
             </CardHeader>
           </Card>
