@@ -75,7 +75,11 @@ export const getPlayerOnlineCount = async (): Promise<number> => {
 
 
 export const getPaladiumProfileByPseudo = async (pseudo: string): Promise<PaladiumPlayerInfo> => {
-  return await fetchWithHeader<PaladiumPlayerInfo>(`${PALADIUM_API_URL}/v1/paladium/player/profile/${pseudo}`);
+  return await fetchWithHeader<PaladiumPlayerInfo>(`${PALADIUM_API_URL}/v1/paladium/player/profile/${pseudo}`, 15 * 60, pseudo);
+}
+
+export const getPaladiumProfileByUUID = async (uuid: string): Promise<PaladiumPlayerInfo> => {
+  return await fetchWithHeader<PaladiumPlayerInfo>(`${PALADIUM_API_URL}/v1/paladium/player/profile/${uuid}`);
 }
 
 export const getPaladiumLeaderboardPositionByUUID = async (uuid: string): Promise<string> => {
@@ -109,7 +113,12 @@ export const getAuctionHouseInfo = async (uuid: string): Promise<AhType> => {
 }
 
 export const getFriendsList = async (uuid: string): Promise<PaladiumFriendInfo> => {
-  return await fetchWithHeader<PaladiumFriendInfo>(`${PALADIUM_API_URL}/v1/paladium/player/profile/${uuid}/friends`).catch(() => { return { data: [], totalCount: 0 } });
+  return await fetchWithHeader<PaladiumFriendInfo>(`${PALADIUM_API_URL}/v1/paladium/player/profile/${uuid}/friends`).catch(() => {
+    return {
+      data: [],
+      totalCount: 0
+    }
+  });
 }
 
 export const getPlayerInfo = async (pseudo: string): Promise<PlayerInfo> => {

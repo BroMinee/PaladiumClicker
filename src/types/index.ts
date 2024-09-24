@@ -479,3 +479,8 @@ export type ServerStatusResponse =
 export type ServerPaladiumStatusResponse = ServerStatusResponse & {
   players: number
 }
+
+export type PlayerDBApiReponse =
+  {
+    data: { player: { id: string } }
+  }

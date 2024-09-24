@@ -1,5 +1,6 @@
 import 'server-only';
 import { redirect } from "next/navigation";
+import { PlayerDBApiReponse } from "@/types";
 
 export const fetchWithoutHeader = async <T>(url: string, cache_duration = 15 * 60, username = ""): Promise<T> | never => {
   alert("Refacto like fetchWithHeader");
@@ -33,8 +34,9 @@ export const fetchWithoutHeader = async <T>(url: string, cache_duration = 15 * 6
 
 
 export const fetchWithHeader = async <T>(url: string, cache_duration_in_sec = 15 * 60, username = ""): Promise<T> => {
-  let response = null;
+  let response: Response | null = null;
   let json = null;
+
   try {
     response = await fetch(url,
       {
@@ -51,6 +53,45 @@ export const fetchWithHeader = async <T>(url: string, cache_duration_in_sec = 15
     return json as T;
   } catch (error) {
     console.error(error, url);
+  }
+
+
+  if (username !== "" && url === "https://api.paladium.games/v1/paladium/player/profile/" + username && response && response.status === 404) {
+    let uuid = "";
+    try {
+      const playerdbAPI = await fetch(`https://playerdb.co/api/player/minecraft/${username}`, {
+        next: { revalidate: 0, tags: ['playerInfo'] },
+        signal: AbortSignal.timeout(4000),
+      })
+      const playerdbAPIJson = await playerdbAPI.json();
+      uuid = (playerdbAPIJson as PlayerDBApiReponse).data.player.id;
+    } catch (error) {
+      console.error("Using the other API " + error);
+    }
+
+    if (uuid !== "") {
+      try {
+        response = await fetch(`https://api.paladium.games/v1/paladium/player/profile/${uuid}`,
+          {
+            next: { revalidate: cache_duration_in_sec, tags: ['playerInfo'] },
+            signal: AbortSignal.timeout(4000),
+            headers: {
+              'Authorization': `Bearer ${process.env.PALADIUM_API_KEY}`
+            }
+          })
+        json = await response.json();
+
+        if (!response.ok)
+          throw new Error(url + json.message);
+        return json as T;
+      } catch (error) {
+        console.error(error, url);
+      }
+    }
+    else
+    {
+      redirect(`/error?message=Le pseudo ${username} n'existe pas sur Minecraft.`);
+    }
   }
 
   if (json)
