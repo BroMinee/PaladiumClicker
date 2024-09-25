@@ -222,14 +222,15 @@ export default Stats;
 
 /**
  * @param {PlayerInfo} copyPlayerInfo
+ * @param {Date} date
  * @returns {bestPurchaseInfo}
  * @description Get the best upgrade to buy
  * @note Already update the playerInfo own value
  * */
-function getBestUpgrade(copyPlayerInfo: PlayerInfo): bestPurchaseInfo {
+function getBestUpgrade(copyPlayerInfo: PlayerInfo, date: Date): bestPurchaseInfo {
 
   const bestBuildingInfo = computeBestBuildingUgrade(structuredClone(copyPlayerInfo));
-  const bestUpgradeInfo = findBestUpgrade(structuredClone(copyPlayerInfo));
+  const bestUpgradeInfo = findBestUpgrade(structuredClone(copyPlayerInfo), date);
 
 
   let bestPurchase = {} as (bestUpgradeInfo | bestBuildingInfo);
@@ -278,7 +279,7 @@ export function computeXBuildingAhead(playerInfo: PlayerInfo, achatCount: number
   const buildingBuyPaths: bestPurchaseInfoDetailed[] = [];
   for (let i = 0; i < achatCount; i++) {
 
-    const bestPurchase: bestPurchaseInfo = getBestUpgrade(copy);
+    const bestPurchase: bestPurchaseInfo = getBestUpgrade(copy, date);
     // own already updated
     if (bestPurchase.index === -1)
       break;

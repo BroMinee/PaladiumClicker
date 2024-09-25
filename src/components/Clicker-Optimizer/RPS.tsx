@@ -146,7 +146,7 @@ export function computeBestBuildingUgrade(playerInfo: PlayerInfo): bestBuildingI
 }
 
 
-export function findBestUpgrade(playerInfo: PlayerInfo): bestUpgradeInfo {
+export function findBestUpgrade(playerInfo: PlayerInfo, date: Date): bestUpgradeInfo {
 
   // building_upgrade
   // category_upgrade
@@ -160,12 +160,12 @@ export function findBestUpgrade(playerInfo: PlayerInfo): bestUpgradeInfo {
     bestListName: "building_upgrade"
   }
 
-  const buildingUpgradeUnlockable = playerInfo["building_upgrade"].filter((building) => !building["own"] && checkCondition(playerInfo, building["condition"]).unlockable);
-  const categoryUpgradeUnlockable = playerInfo["category_upgrade"].filter((building) => !building["own"] && checkCondition(playerInfo, building["condition"]).unlockable);
-  const globalUpgradeUnlockable = playerInfo["global_upgrade"].filter((building) => !building["own"] && building["name"] !== "-1" && checkCondition(playerInfo, building["condition"]).unlockable);
-  const manyUpgradeUnlockable = playerInfo["many_upgrade"].filter((building) => !building["own"] && checkCondition(playerInfo, building["condition"]).unlockable);
-  const terrainUpgradeUnlockable = playerInfo["terrain_upgrade"].filter((building) => !building["own"] && checkCondition(playerInfo, building["condition"]).unlockable);
-  const posteriorUpgradeUnlockable = playerInfo["posterior_upgrade"].filter((building) => !building["own"] && checkCondition(playerInfo, building["condition"]).unlockable);
+  const buildingUpgradeUnlockable = playerInfo["building_upgrade"].filter((building) => !building["own"] && checkCondition(playerInfo, building["condition"], date).unlockable);
+  const categoryUpgradeUnlockable = playerInfo["category_upgrade"].filter((building) => !building["own"] && checkCondition(playerInfo, building["condition"], date).unlockable);
+  const globalUpgradeUnlockable = playerInfo["global_upgrade"].filter((building) => !building["own"] && building["name"] !== "-1" && checkCondition(playerInfo, building["condition"], date).unlockable);
+  const manyUpgradeUnlockable = playerInfo["many_upgrade"].filter((building) => !building["own"] && checkCondition(playerInfo, building["condition"], date).unlockable);
+  const terrainUpgradeUnlockable = playerInfo["terrain_upgrade"].filter((building) => !building["own"] && checkCondition(playerInfo, building["condition"], date).unlockable);
+  const posteriorUpgradeUnlockable = playerInfo["posterior_upgrade"].filter((building) => !building["own"] && checkCondition(playerInfo, building["condition"], date).unlockable);
 
 
   const currentRPS = computeRPS(playerInfo);

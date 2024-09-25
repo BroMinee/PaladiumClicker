@@ -44,7 +44,7 @@ export function PreconditionDisplay({ index }: { index: number }) {
     buildingIndex,
     buildingNeed,
     buildingCount
-  } = checkCondition(playerInfo, playerInfo.CPS[index].condition);
+  } = checkCondition(playerInfo, playerInfo.CPS[index].condition, new Date());
 
 
   const texts = ["Précondition non remplie :"];

@@ -78,9 +78,6 @@ export const getPaladiumProfileByPseudo = async (pseudo: string): Promise<Paladi
   return await fetchWithHeader<PaladiumPlayerInfo>(`${PALADIUM_API_URL}/v1/paladium/player/profile/${pseudo}`, 15 * 60, pseudo);
 }
 
-export const getPaladiumProfileByUUID = async (uuid: string): Promise<PaladiumPlayerInfo> => {
-  return await fetchWithHeader<PaladiumPlayerInfo>(`${PALADIUM_API_URL}/v1/paladium/player/profile/${uuid}`);
-}
 
 export const getPaladiumLeaderboardPositionByUUID = async (uuid: string): Promise<string> => {
   const response = await fetchWithHeader<PaladiumRanking>(`${PALADIUM_API_URL}/v1/paladium/ranking/position/clicker/${uuid}`);

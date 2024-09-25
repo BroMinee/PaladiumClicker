@@ -25,7 +25,7 @@ export function PreconditionDisplay({ index, upgradeType }: { index: number, upg
     buildingIndex,
     buildingNeed,
     buildingCount
-  } = checkCondition(playerInfo, playerInfo[upgradeType][index].condition);
+  } = checkCondition(playerInfo, playerInfo[upgradeType][index].condition, new Date());
 
   const texts = [];
   if (!unlockable) {

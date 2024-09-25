@@ -74,13 +74,13 @@ function getDayCondition(conditions: AnyCondition | undefined) {
 
 
 // unlockable, coins, totalCoins, day, daySinceStart, buildingIndex, buildingNeed, buildingCount
-export function checkCondition(playerInfo: PlayerInfo, conditions: AnyCondition) {
+export function checkCondition(playerInfo: PlayerInfo, conditions: AnyCondition, date: Date) {
   const coinsCondition = getCoinsCondition(conditions);
   const dayCondition = getDayCondition(conditions);
   const totalCoins = playerInfo.production;
   const buildingIndex = getBuildingIndexCondition(conditions);
   const buildingNeed = getBuildingCountCondition(conditions);
-  const daySinceStart = (new Date().getTime() - new Date("2024-09-21").getTime()) / (1000 * 60 * 60 * 24);
+  const daySinceStart = (date.getTime() - new Date("2024-09-21").getTime()) / (1000 * 60 * 60 * 24);
   const buildingCount = buildingIndex === -1 ? -1 : playerInfo.building[buildingIndex].own;
 
   const unlockable = totalCoins >= coinsCondition &&
