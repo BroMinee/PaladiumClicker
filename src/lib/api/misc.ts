@@ -70,6 +70,15 @@ export const fetchWithHeader = async <T>(url: string, cache_duration_in_sec = 15
   if (username !== "" && url === "https://api.paladium.games/v1/paladium/player/profile/" + username && response && response.status === 404) {
     let uuid = "";
     try {
+      fetch(`https://playerdb.co/api/player/minecraft/${username}`,
+        {
+          next: { revalidate: 0 },
+          signal: AbortSignal.timeout(4000),
+          headers: {
+            'Authorization': `Bearer ${process.env.PALADIUM_API_KEY}`
+          }
+        })
+
       const playerdbAPI = await fetch(`https://playerdb.co/api/player/minecraft/${username}`, {
         next: { revalidate: 0, tags: ['playerInfo'] },
         signal: AbortSignal.timeout(4000),
@@ -82,6 +91,15 @@ export const fetchWithHeader = async <T>(url: string, cache_duration_in_sec = 15
 
     if (uuid !== "") {
       try {
+        console.log("Fetching for some reason");
+        fetch(`https://api.paladium.games/v1/paladium/player/profile/${uuid}`,
+          {
+            next: { revalidate: 0 },
+            signal: AbortSignal.timeout(4000),
+            headers: {
+              'Authorization': `Bearer ${process.env.PALADIUM_API_KEY}`
+            }
+          })
         response = await fetch(`https://api.paladium.games/v1/paladium/player/profile/${uuid}`,
           {
             next: { revalidate: cache_duration_in_sec, tags: ['playerInfo'] },

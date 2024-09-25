@@ -1,8 +1,5 @@
-import { getPlayerInfo } from "@/lib/api/apiPala.ts";
-import ProfileStore from "@/components/ProfileStore.tsx";
 import LoadingData from "@/components/LoadingData.tsx";
 import React, { Suspense } from "react";
-import { registerPlayer } from "@/lib/api/apiPalaTracker.ts";
 
 
 export default async function ProfileFetcherWrapper({ username, children }: {
@@ -11,23 +8,24 @@ export default async function ProfileFetcherWrapper({ username, children }: {
 }) {
 
   return (<Suspense fallback={<LoadingData username={username}/>}>
-    <ProfileFetcher username={username}>
+    {/*<ProfileFetcher username={username}>*/}
       {children}
-    </ProfileFetcher>
+    {/*</ProfileFetcher>*/}
   </Suspense>);
 }
 
-async function ProfileFetcher({ username, children }: { username: string, children: React.ReactNode }) {
-  const data = await getPlayerInfo(username);
-  registerPlayer(data.uuid, data.username);
-
-
-  return (
-    <ProfileStore data={data}>
-      {children}
-    </ProfileStore>
-  )
-
-}
+// async function ProfileFetcher({ username, children }: { username: string, children: React.ReactNode }) {
+//   const data = await getPlayerInfo(username);
+//   // TODO enable this again when i have a api key
+//   // registerPlayer(data.uuid, data.username);
+//
+//
+//   return (
+//     <ProfileStore data={data}>
+//       {children}
+//     </ProfileStore>
+//   )
+//
+// }
 
 

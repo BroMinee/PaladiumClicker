@@ -1,5 +1,5 @@
 import 'server-only';
-import { getPlayerInfo, isApiDown } from "@/lib/api/apiPala.ts";
+import { getPlayerInfo } from "@/lib/api/apiPala.ts";
 import LoadingSpinner from "@/components/ui/loading-spinner.tsx";
 import { isMyApiDown } from "@/lib/api/apiPalaTracker.ts";
 import { MdError } from "react-icons/md";
@@ -14,7 +14,8 @@ export function TestApiFetching() {
 }
 
 export async function TestApi() {
-  const apiDown = await isApiDown();
+  // const apiDown = await isApiDown();
+  const apiDown = true;
 
   if (!apiDown) return (
     <li className="flex items-center gap-2">
