@@ -179,6 +179,8 @@ export const usePlayerInfoStore = create<State & Actions, [["zustand/persist", S
         return state;
       }
 
+      console.log(`Setting Production to :${value}`)
+
       return {
         data: {
           ...state.data,

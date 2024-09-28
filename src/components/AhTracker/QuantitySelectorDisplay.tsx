@@ -1,6 +1,6 @@
 import { Card, CardContent } from "@/components/ui/card.tsx";
 import { FaBoxOpen } from "react-icons/fa";
-// import { getPaladiumAhItemStats } from "@/lib/api/apiPala.ts";
+import { getPaladiumAhItemStats } from "@/lib/api/apiPala.ts";
 import { PaladiumAhItemStat } from "@/types";
 import { redirect } from "next/navigation";
 import GradientText from "@/components/shared/GradientText.tsx";
@@ -11,11 +11,11 @@ import itemListJson from "@/assets/items_list.json";
 
 export default async function QuantitySelectorDisplay({ selectedItem }: { selectedItem: string }) {
   let itemInfo = null as PaladiumAhItemStat | null;
-  // try {
-  //   itemInfo = await getPaladiumAhItemStats(selectedItem);
-  // } catch (e) {
-  //   console.error(e);
-  // }
+  try {
+    itemInfo = await getPaladiumAhItemStats(selectedItem);
+  } catch (e) {
+    console.error(e);
+  }
 
   if (!itemInfo)
     redirect(`/error?message=Impossible de récupérer les données actuelles de ${selectedItem}`)

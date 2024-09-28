@@ -4,19 +4,17 @@ import { FaHeart } from "react-icons/fa";
 import { Suspense } from "react";
 import GraphStatus, { GraphStatusFallback } from "@/components/Status/GraphStatus.tsx";
 import { isMyApiDown } from "@/lib/api/apiPalaTracker.ts";
-import { getPlayerInfo } from "@/lib/api/apiPala.ts";
+import { getPlayerInfo, getPlayerOnlineCount, isApiDown } from "@/lib/api/apiPala.ts";
 
 
 export async function generateMetadata() {
   const title = "PalaTracker - Status du serveur Paladium et de nos services";
-  // const apiDownPaladium = await isApiDown();
-  const apiDownPaladium = true;
+  const apiDownPaladium = await isApiDown();
   const apiDownPalaTracker = await isMyApiDown().catch(() => true);
   const apiImportProfil = await getPlayerInfo("BroMine__").then(() => {
     return false
   }).catch(() => { return true });
-  // let description = `${await getPlayerOnlineCount()} joueurs connectés sur Paladium.\n\n`;
-  let description = "0 joueurs connectés sur Paladium.\n\n";
+  let description = `${await getPlayerOnlineCount()} joueurs connectés sur Paladium.\n\n`;
 
   if (apiDownPaladium)
     description += "🚨 L'API de Paladium est actuellement hors service.\n";

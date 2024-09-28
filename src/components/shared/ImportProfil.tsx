@@ -6,7 +6,7 @@ import { usePlayerInfoStore } from "@/stores/use-player-info-store";
 import { FormEvent } from "react";
 import { FaSearch } from "react-icons/fa";
 import constants from "@/lib/constants.ts";
-import { getInitialPlayerInfo, getLinkFromUrl, safeJoinPaths } from "@/lib/misc.ts";
+import { getLinkFromUrl, safeJoinPaths } from "@/lib/misc.ts";
 import { navigate } from '@/components/actions'
 
 type ImportProfilProps = {
@@ -21,12 +21,11 @@ export default function ImportProfil({
                                        classNameInput
                                      }: ImportProfilProps) {
 
-  const { data: playerInfo, reset, setPlayerInfo } = usePlayerInfoStore();
+  const { data: playerInfo, reset } = usePlayerInfoStore();
 
   async function onSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const formData = new FormData(event.target as HTMLFormElement);
-    setPlayerInfo(getInitialPlayerInfo());
 
     const trouvaille = getLinkFromUrl(window.location.pathname);
     if (trouvaille !== undefined && constants.links[trouvaille].requiredPseudo) {

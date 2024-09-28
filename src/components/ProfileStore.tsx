@@ -6,11 +6,10 @@ import { PlayerInfo } from "@/types";
 
 
 export default function ProfileStore({ data, children }: { data: PlayerInfo, children: React.ReactNode }) {
-  const { data: playerInfo, setPlayerInfo } = usePlayerInfoStore();
+  const { setPlayerInfo } = usePlayerInfoStore();
   useEffect(() => {
-    if (playerInfo === null)
-      setPlayerInfo(data);
-  }, []);
+    setPlayerInfo(data);
+  }, [data, setPlayerInfo]);
 
   return (
     <>

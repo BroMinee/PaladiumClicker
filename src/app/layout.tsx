@@ -5,7 +5,6 @@ import React from "react";
 import Navbar from "@/components/NavBar";
 import { Inter } from '@next/font/google';
 import { ThemeProviders } from "@/components/shared/ThemeProvider.tsx";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card.tsx";
 
 const inter = Inter({
   subsets: ['latin'],  // specify subsets according to your needs
@@ -29,17 +28,6 @@ export default function RootLayout({
             <Navbar/>
           </header>
           <main className="flex-1 container py-4 pb-16 mx-auto">
-            <Card className="mb-4 text-red-500">
-              <CardHeader>
-                <CardTitle className="font-bold text-2xl">
-                  Important
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="font-bold text-2xl">
-                L&apos;utilisation de l&apos;API est actuellement désactivée, il faudra donc renseigner ses informations
-                manuellement, le pseudo que vous entrez n&apos;aura aucune incident sur les valeurs.
-              </CardContent>
-            </Card>
             {children}
           </main>
         </div>

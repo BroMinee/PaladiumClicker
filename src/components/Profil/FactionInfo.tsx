@@ -9,8 +9,7 @@ import {
   FactionNameInfo
 } from "@/components/Profil/FactionInfoClient.tsx";
 import { FaMedal, FaTachometerAlt } from "react-icons/fa";
-// import { getFactionLeaderboard } from "@/lib/api/apiPala.ts";
-import { PaladiumFactionLeaderboard } from "@/types";
+import { getFactionLeaderboard } from "@/lib/api/apiPala.ts";
 
 
 export default function FactionInfo() {
@@ -64,8 +63,8 @@ export default function FactionInfo() {
 }
 
 async function FactionClassement() {
-  // const factionLeaderboard = await getFactionLeaderboard();
-  const factionLeaderboard: PaladiumFactionLeaderboard = [];
+  const factionLeaderboard = await getFactionLeaderboard();
+
   return <>
     <FactionClassementClient factionLeaderboard={factionLeaderboard}/>
   </>
