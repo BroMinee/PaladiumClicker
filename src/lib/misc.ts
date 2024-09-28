@@ -282,22 +282,6 @@ export const getColorByMetierName = (name: MetierKey) => {
   return { color, bgColor };
 }
 
-export function onClickLoadProfil(pseudo: string) {
-  alert(`Refacto alter TODO ${pseudo}`);
-  // // open url in a new tab
-  // if (pseudo.includes(" ") && pseudo.split(" ").length > 1)
-  //   pseudo = pseudo.split(" ")[1];
-  // const pseudoInput = document.getElementById("pseudo") as HTMLInputElement | null;
-  // const searchButton = document.getElementById("pseudo-submit");
-  // if (pseudoInput !== null && searchButton !== null) {
-  //   pseudoInput.value = pseudo;
-  //   searchButton.click();
-  //   pseudoInput.value = "";
-  //   console.log("TODO check that the both element selected are in the same div")
-  // }
-
-}
-
 export function scaleCurrentProduction(playerInfo: PlayerInfo, buildingIndex: number, level: number) {
   if (level === 0 || level === -1)
     return 0;

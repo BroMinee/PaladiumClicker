@@ -1,9 +1,10 @@
 'use client'
 import { usePlayerInfoStore } from "@/stores/use-player-info-store.ts";
 import SmallCardInfo from "@/components/shared/SmallCardInfo.tsx";
-import { computeTimePlayed, convertEpochToDateUTC2, formatPrice, getRankImg, onClickLoadProfil } from "@/lib/misc.ts";
+import { computeTimePlayed, convertEpochToDateUTC2, formatPrice, getRankImg } from "@/lib/misc.ts";
 import dynamic from "next/dynamic";
 import { Card, CardContent } from "@/components/ui/card.tsx";
+import constants from "@/lib/constants.ts";
 
 const ReactSkinview3d = dynamic(() => import("react-skinview3d"), { ssr: false });
 
@@ -86,8 +87,8 @@ export function PlayerFriends() {
     <>
       {
         playerInfo.friends?.data?.map((player, index) => (
-          <Card key={index} onClick={() => onClickLoadProfil(player.name)}
-                className="hover:scale-105 duration-300 mt-4 ml-1.5 mr-1.5 cursor-pointer">
+          <a href={`${constants.profilPath}/${player.name}`}>
+            <Card key={index} className="hover:scale-105 duration-300 mt-4 ml-1.5 mr-1.5 cursor-pointer">
             <CardContent className="md:pt-6 space-y-2">
               <div className="flex flex-col items-center justify-center gap-2">
                 <img src={`https://crafatar.com/avatars/${player.uuid}?size=8&overlay`}
@@ -98,7 +99,7 @@ export function PlayerFriends() {
               </div>
             </CardContent>
           </Card>
-
+          </a>
         ))
       }
     </>

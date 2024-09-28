@@ -1,7 +1,7 @@
 'use client';
 import { usePlayerInfoStore } from "@/stores/use-player-info-store.ts";
 import GradientText from "@/components/shared/GradientText.tsx";
-import { convertEpochToDateUTC2, formatPrice, onClickLoadProfil, safeJoinPaths } from "@/lib/misc.ts";
+import { convertEpochToDateUTC2, formatPrice, safeJoinPaths } from "@/lib/misc.ts";
 import { Card, CardContent } from "@/components/ui/card.tsx";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area.tsx";
 import SmallCardInfo from "@/components/shared/SmallCardInfo.tsx";
@@ -9,6 +9,7 @@ import { FaPercentage } from "react-icons/fa";
 import { PaladiumFactionLeaderboard } from "@/types";
 import LoadingData from "@/components/LoadingData.tsx";
 import { Suspense } from "react";
+import constants from "@/lib/constants.ts";
 
 export function FactionNameInfo() {
   const { data: playerInfo } = usePlayerInfoStore();
@@ -65,7 +66,8 @@ export function FactionDetails() {
         <div className="flex gap-4 pb-3">
           {
             playerList?.map((player, index) => (
-              <Card key={index} onClick={() => onClickLoadProfil(player.username)}
+              <a href={`${constants.profilPath}/${player.username}`}>
+              <Card key={index}
                     className="hover:scale-105 duration-300 mt-4 ml-1.5 mr-1.5 cursor-pointer">
                 <CardContent className="pt-6 space-y-2">
                   <div className="flex flex-col items-center justify-center gap-2">
@@ -87,6 +89,7 @@ export function FactionDetails() {
                   </div>
                 </CardContent>
               </Card>
+              </a>
             ))
           }
         </div>
