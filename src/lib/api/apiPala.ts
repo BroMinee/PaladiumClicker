@@ -3,12 +3,6 @@ import 'server-only';
 import {
   AhItemHistory,
   AhType,
-  Building,
-  BuildingUpgrade,
-  CategoryUpgrade,
-  CPS,
-  GlobalUpgrade,
-  ManyUpgrade,
   Metiers,
   MetiersPossiblyUndefined,
   PaladiumAhHistory,
@@ -20,25 +14,16 @@ import {
   PaladiumPlayerInfo,
   PaladiumRanking,
   PlayerInfo,
-  PosteriorUpgrade,
-  TerrainUpgrade,
 } from "@/types";
 
 
 import translate_building_json from "@/assets/translate_building.json";
 import translate_upgrade_json from "@/assets/translate_upgrade.json";
-import building_json from "@/assets/building.json";
-import building_upgrade_json from "@/assets/building_upgrade.json";
 import metier_json from "@/assets/metier.json";
-import category_upgrade_json from "@/assets/category_upgrade.json";
-import CPS_json from "@/assets/CPS.json";
-import global_upgrade_json from "@/assets/global_upgrade.json";
-import many_upgrade_json from "@/assets/many_upgrade.json";
-import posterior_upgrade_json from "@/assets/posterior_upgrade.json";
-import terrain_upgrade_json from "@/assets/terrain_upgrade.json";
 import { getViewsFromUUID } from "@/lib/api/apiPalaTracker.ts";
 import { fetchWithHeader } from "@/lib/api/misc.ts";
 import { redirect } from "next/navigation";
+import { getInitialPlayerInfo } from "@/lib/misc.ts";
 
 
 const PALADIUM_API_URL = "https://api.paladium.games";
@@ -203,57 +188,6 @@ export const getPlayerInfo = async (pseudo: string): Promise<PlayerInfo> => {
 
 }
 
-const getInitialPlayerInfo = (): PlayerInfo => {
-
-  const metiers = metier_json as Metiers;
-  const buildings = building_json as Building[];
-  for (let i = 0; i < buildings.length; i++) {
-    buildings[i].base_production = String(0.10000000149011612 * Math.pow(1.7999999523162842, i));
-  }
-  const buildingUpgrade = building_upgrade_json as BuildingUpgrade[];
-  const categoryUpgrade = category_upgrade_json as CategoryUpgrade[];
-  const CPS = CPS_json as CPS[];
-  const globalUpgrade = global_upgrade_json as GlobalUpgrade[];
-  const manyUpgrade = many_upgrade_json as ManyUpgrade[];
-  const posteriorUpgrade = posterior_upgrade_json as PosteriorUpgrade[];
-  const terrainUpgrade = terrain_upgrade_json as TerrainUpgrade[];
-  return {
-    metier: metiers,
-    building: buildings,
-    building_upgrade: buildingUpgrade,
-    category_upgrade: categoryUpgrade,
-    CPS: CPS,
-    global_upgrade: globalUpgrade,
-    many_upgrade: manyUpgrade,
-    posterior_upgrade: posteriorUpgrade,
-    terrain_upgrade: terrainUpgrade,
-    production: 0.5,
-    faction: {
-      access: "INVITATION", createdAt: 1707909089647, description: "Zone libre", emblem: {
-        backgroundColor: -1,
-        backgroundId: 0,
-        borderColor: -1,
-        forcedTexture: "Wilderness",
-        foregroundColor: -1,
-        foregroundId: 0,
-        iconBorderColor: -1,
-        iconColor: -1,
-        iconId: 0,
-      }, level: { level: 1, xp: 0 }, name: "Wilderness", players: [], uuid: "00000000-0000-0000-0000-000000000000"
-    },
-    firstJoin: 0,
-    friends: { data: [], totalCount: 0 },
-    money: 0,
-    timePlayed: 0,
-    username: "",
-    uuid: "",
-    rank: "Rank inconnu",
-    leaderboard: "Unranked",
-    ah: { data: [], totalCount: 0, dateUpdated: 0 },
-    last_fetch: new Date().getTime(),
-    view_count: { count: 0, uuid: "" },
-  };
-}
 
 // export const getGraphData = async () => {
 //   const parsedCsv = await fetchLocal<string>("/graph.csv").then(parseCsv);

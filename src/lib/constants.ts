@@ -7,6 +7,7 @@ const discord = {
   name: "Paladium Profile Tracker"
 };
 
+const defaultUsername = "Profil_vide";
 
 export type PathValid =
   "/profil"
@@ -457,6 +458,7 @@ const how_to_xp: HowToXp = {
 
 
 const constants = {
+  defaultUsername,
   version,
   discord,
   metier_xp,

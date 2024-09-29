@@ -5,6 +5,7 @@ import React from "react";
 import Navbar from "@/components/NavBar";
 import { Inter } from '@next/font/google';
 import { ThemeProviders } from "@/components/shared/ThemeProvider.tsx";
+import { Toaster } from "@/components/ui/sonner.tsx";
 
 const inter = Inter({
   subsets: ['latin'],  // specify subsets according to your needs
@@ -29,6 +30,7 @@ export default function RootLayout({
           </header>
           <main className="flex-1 container py-4 pb-16 mx-auto">
             {children}
+            <Toaster/>
           </main>
         </div>
       </div>

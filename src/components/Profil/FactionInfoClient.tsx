@@ -65,9 +65,9 @@ export function FactionDetails() {
       <ScrollArea className="md:col-span-3">
         <div className="flex gap-4 pb-3">
           {
-            playerList?.map((player, index) => (
-              <a href={`${constants.profilPath}/${player.username}`}>
-              <Card key={index}
+            playerList?.map((player) => (
+              <a href={`${constants.profilPath}/${player.username}`} key={player.uuid}>
+              <Card
                     className="hover:scale-105 duration-300 mt-4 ml-1.5 mr-1.5 cursor-pointer">
                 <CardContent className="pt-6 space-y-2">
                   <div className="flex flex-col items-center justify-center gap-2">

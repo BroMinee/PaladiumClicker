@@ -6,8 +6,11 @@ import { usePlayerInfoStore } from "@/stores/use-player-info-store";
 import { FormEvent } from "react";
 import { FaSearch } from "react-icons/fa";
 import constants from "@/lib/constants.ts";
-import { getLinkFromUrl, safeJoinPaths } from "@/lib/misc.ts";
+import { getHHMMSS, getInitialPlayerInfo, getLinkFromUrl, safeJoinPaths } from "@/lib/misc.ts";
 import { navigate } from '@/components/actions'
+import { useSettingsStore } from "@/stores/use-settings-store.ts";
+import { getPlayerInfoAction, registerPlayerAction } from "@/lib/api/apiServerAction.ts";
+import { toast } from "sonner";
 
 type ImportProfilProps = {
   showResetButton?: boolean,
@@ -21,11 +24,17 @@ export default function ImportProfil({
                                        classNameInput
                                      }: ImportProfilProps) {
 
-  const { data: playerInfo, reset } = usePlayerInfoStore();
+  const { data: playerInfo, setPlayerInfo } = usePlayerInfoStore();
+  const { settings } = useSettingsStore();
 
   async function onSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const formData = new FormData(event.target as HTMLFormElement);
+
+    if (settings.defaultProfile) {
+      toast.error("Impossible d'importer un pseudo car vous avez activé dans les paramètres l'option : \"profil vide\".");
+      return;
+    }
 
     const trouvaille = getLinkFromUrl(window.location.pathname);
     if (trouvaille !== undefined && constants.links[trouvaille].requiredPseudo) {
@@ -34,6 +43,9 @@ export default function ImportProfil({
       await navigate(safeJoinPaths(constants.profilPath, String(formData.get("pseudo"))));
     }
   }
+
+  // if (playerInfo !== null)
+  // alert(`${new Date(playerInfo.last_fetch + 1000 * 15 * 60)}, ${new Date()} ${new Date(playerInfo.last_fetch + 1000 * 15 * 60) <= new Date()}`)
 
   return (
     <div className="flex gap-2">
@@ -57,10 +69,27 @@ export default function ImportProfil({
           </Button>
         </div>
       </form>
-      {showResetButton ? <Button onClick={async () => {
-        reset();
-        await navigate(constants.optimizerClickerPath)
-      }}>Réinitialiser</Button> : ""}
+      {showResetButton && !settings.defaultProfile &&
+        <Button disabled={playerInfo !== null && new Date(playerInfo.last_fetch + 1000 * 15 * 60) >= new Date()}
+                onClick={async () => {
+                  if (playerInfo === null) return;
+                  getPlayerInfoAction(playerInfo.username).then((data) => {
+                    toast.success(`Profil de ${data.username} chargé`);
+                    registerPlayerAction(data.uuid, data.username);
+                    setPlayerInfo(data);
+                  }).catch((e) => {
+                    console.error(e);
+                    toast.error(`Erreur lors du chargement du profil de ${playerInfo.username}`);
+                  });
+                }}>{
+          playerInfo !== null && new Date(playerInfo.last_fetch + 1000 * 15 * 60) >= new Date() ?
+            `Mise à jour disponible à ${getHHMMSS(new Date(playerInfo.last_fetch + 1000 * 15 * 60))}` : `Mettre à jour`}</Button>}
+      {showResetButton && settings.defaultProfile &&
+        <Button onClick={() => {
+          setPlayerInfo(getInitialPlayerInfo());
+        }}>
+          Réinitialiser
+        </Button>}
     </div>
   );
 }

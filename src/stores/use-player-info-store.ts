@@ -3,6 +3,7 @@ import constants from "@/lib/constants";
 import { MetierKey, PlayerInfo, UpgradeKey } from "@/types";
 import { create } from "zustand";
 import { createJSONStorage, persist } from "zustand/middleware";
+import { getInitialPlayerInfo } from "@/lib/misc.ts";
 
 type State = {
   data: PlayerInfo | null;
@@ -22,6 +23,7 @@ type Actions = {
   buyBuildingByIndex: (index: number) => void;
   setProduction: (value: number) => void;
   checkVersion: () => void;
+  setDefaultProfile: () => void;
 }
 
 
@@ -217,6 +219,10 @@ export const usePlayerInfoStore = create<State & Actions, [["zustand/persist", S
 
       return state;
     }),
+    setDefaultProfile: () => set((state) => {
+      state.data = getInitialPlayerInfo();
+      return { ...state };
+    })
   }),
   {
     name: storageKey,

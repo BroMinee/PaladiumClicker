@@ -12,10 +12,18 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Switch } from "@/components/ui/switch";
 import { useSettingsStore } from "@/stores/use-settings-store";
+import { usePlayerInfoStore } from "@/stores/use-player-info-store.ts";
+import { useEffect } from "react";
 
 export default function Setting() {
 
-  const { settings, setFallingImage } = useSettingsStore();
+  const { settings, setFallingImage, setDefaultProfile } = useSettingsStore();
+  const { setDefaultProfile: setDefaultProfileLocal } = usePlayerInfoStore();
+
+  useEffect(() => {
+    if (settings.defaultProfile)
+      setDefaultProfileLocal();
+  }, [settings.defaultProfile]);
 
   return (
     <DropdownMenu>
@@ -33,6 +41,13 @@ export default function Setting() {
         >
           <span>Images tombantes</span>
           <Switch checked={settings.fallingImage} onCheckedChange={setFallingImage}/>
+        </DropdownMenuItem>
+        <DropdownMenuItem
+          onSelect={(event) => event.preventDefault()}
+          className="flex items-center justify-between"
+        >
+          <span>Utiliser un profil par vide</span>
+          <Switch checked={settings.defaultProfile} onCheckedChange={setDefaultProfile}/>
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
