@@ -51,7 +51,7 @@ export default function Home({ params }: { params: { username: string } }) {
           <Card>
             <CardHeader className="flex flex-row items-center justify-between">
               <CardTitle>
-                Bienvenue sur l`&apos;optimiseur du{" "}
+                Bienvenue sur l&apos;optimiseur du{" "}
                 <GradientText className="font-extrabold">PalaClicker</GradientText>
               </CardTitle>
               <CardDescription>
