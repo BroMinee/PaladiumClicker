@@ -76,7 +76,29 @@ const getPaladiumClickerDataByUUID = async (uuid: string): Promise<PaladiumClick
 export const getFactionInfo = async (factionName: string): Promise<PaladiumFactionInfo> => {
   if (factionName === "")
     factionName = "Wilderness";
-  return await fetchWithHeader<PaladiumFactionInfo>(`${PALADIUM_API_URL}/v1/paladium/faction/profile/${factionName}`)
+
+  return await fetchWithHeader<PaladiumFactionInfo>(`${PALADIUM_API_URL}/v1/paladium/faction/profile/${factionName}`).catch(() => {
+    return {
+      name: "Wilderness",
+      access: "INVITATION",
+      createdAt: 1726671074505,
+      description: "Zone libre",
+      emblem: {
+        backgroundId: 0,
+        borderColor: -1,
+        backgroundColor: -1,
+        forcedTexture: "wilderness",
+        foregroundColor: -1,
+        foregroundId: 0,
+        iconBorderColor: -1,
+        iconColor: -1,
+        iconId: 0,
+      },
+      level: { level: 1, xp: 0 },
+      players: [],
+      uuid: "00000000-0000-0000-0000-000000000000"
+    };
+  });
 }
 
 export const getFactionLeaderboard = async (): Promise<PaladiumFactionLeaderboard> => {
