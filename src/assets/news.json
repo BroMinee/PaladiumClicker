@@ -1,5 +1,20 @@
 [
   {
+    "date": "29/09/2024 - 21h00",
+    "events": [
+      "Réactivation de l'API",
+      "Ajout de la possibilité de charger un profil vide dans les paramètres pour que les joueurs ayant désactivé l'accès à certains ressources nécessaires au site puisse quand même utiliser le site",
+      "Amélioration de la gestion des erreurs",
+      "Désactivation temporaire des OG tags car ils réalisaient une deuxième requête à l'API de Paladium",
+      "Suppression du bouton 'réinitialisater le profil'",
+      "Ajout d'un bouton d'actualisation du profil disponible toutes les 15 minutes",
+      "Correction d'un bug causant le chargement du projet plusieurs fois",
+      "Correction de faute de frappe",
+      "Récupération du UUID via une API externe à Paladium lorsque le joueur n'est pas encore présent dans la base de donnée de Paladium",
+      "Réinitialisation du nombre de vue pour tout les profils"
+    ]
+  },
+  {
     "date": "21/09/2024 - 19h00",
     "events": [
       "Changement du mode de rendu de la page pour une meilleure performance",
