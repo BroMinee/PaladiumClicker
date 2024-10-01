@@ -15,6 +15,7 @@ import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover
 import constants from "@/lib/constants.ts";
 import { safeJoinPaths } from "@/lib/misc.ts";
 import { MetierKey } from "@/types";
+import Image from "next/image";
 
 export type searchParamsXpBonusPage = {
   metier: string | undefined,
@@ -118,8 +119,9 @@ export function HowToXp({ searchParams }: {
       <CardContent>
         <div className={`grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4 items-center`}>
           <div className="flex flex-row items-center gap-4">
-            <img src={safeJoinPaths(`/AH_img/glass_bottle.png`)} alt="glass_bottle.png"
-                 className="object-cover h-12 w-auto pixelated"/>
+            <Image src={safeJoinPaths(`/AH_img/glass_bottle.png`)} alt="glass_bottle.png"
+                   width={48} height={48}
+                   className="object-cover pixelated"/>
             <div className="flex flex-col">
                         <span className="font-semibold">
                           {"Consume"}{" "}
@@ -134,9 +136,11 @@ export function HowToXp({ searchParams }: {
             searchParams.metier && constants.how_to_xp[searchParams.metier as MetierKey].map((e, index) => {
               return (
                 <div key={index} className="flex flex-row items-center gap-4">
-                  <img src={safeJoinPaths(`/AH_img/${e["imgPath"]}`)}
-                       alt={e.imgPath}
-                       className="object-cover h-16 w-auto pixelated"/>
+                  <Image src={safeJoinPaths(`/AH_img/${e["imgPath"]}`)}
+                         alt={e.imgPath}
+                         width={64} height={64}
+                         unoptimized={true}
+                         className="object-cover pixelated"/>
                   <div className="flex flex-col">
                         <span className="font-semibold">
                           {e.action}

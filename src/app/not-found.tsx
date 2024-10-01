@@ -1,5 +1,6 @@
 import { safeJoinPaths } from "@/lib/misc.ts";
 import { Card, CardHeader } from "@/components/ui/card.tsx";
+import Image from "next/image";
 
 export default function NotFound() {
 
@@ -15,7 +16,7 @@ export default function NotFound() {
                 className="mb-4 tracking-tight font-extrabold text-9xl text-primary-600 text-primary-500"
               > 4
               </div>
-              <img className="w-28" src={safeJoinPaths("/pedro.gif")}/>
+              <Image width={112} height={112} alt="pedro gif" src={safeJoinPaths("/pedro.gif")}/>
               <div
                 className="mb-4 tracking-tight font-extrabold text-9xl text-primary-600 text-primary-500"
               > 4

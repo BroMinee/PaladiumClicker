@@ -11,6 +11,7 @@ import {
   BuildingPrice,
   BuildingRPS
 } from "@/components/Clicker-Optimizer/BuildingListClient.tsx";
+import Image from "next/image";
 
 const BuildingList = () => {
   function getImgPath(index: number, price: number) {
@@ -47,7 +48,7 @@ const Building = ({ imgPath, index }: BuildingProps) => {
     <Card className="min-w-60">
       <CardContent className="pt-6 space-y-2">
         <div className="flex flex-col items-center justify-center gap-2">
-          <img src={imgPath} alt="Icône" className="object-cover h-12 w-auto"/>
+          <Image width={48} height={48} src={imgPath} alt="Icône" className="object-cover"/>
           <span className="text-primary text-sm text-nowrap">{BuildingJson[index].name}</span>
           <div
             className="text-primary font-bold text-center text-nowrap">

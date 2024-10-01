@@ -19,6 +19,7 @@ import { FaBed, FaInfoCircle, FaMedal, FaTachometerAlt } from "react-icons/fa";
 import { computeBestBuildingUgrade, findBestUpgrade } from "./RPS";
 import { useRpsStore } from "@/stores/use-rps-store";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover.tsx";
+import Image from "next/image";
 
 const PROCHAIN_ACHAT_COUNT = 20;
 
@@ -87,8 +88,8 @@ const Stats = () => {
                   <GradientText className="font-bold">
                     <DisplayCoinsDormants/>
                   </GradientText>
-                  <img src={safeJoinPaths("/coin.png")} className="h-6 w-6"
-                       alt="Coin"/>
+                  <Image src={safeJoinPaths("/coin.png")} width={24} height={24}
+                         alt="Coin"/>
                 </div>
               </div>
             </CardContent>
@@ -113,7 +114,7 @@ const Stats = () => {
                   <GradientText className="font-bold">
                     {(formatPrice(Math.round(playerInfo["production"])))}
                   </GradientText>
-                  <img src={safeJoinPaths("/coin.png")} className="h-6 w-6"
+                  <Image width={24} height={24} src={safeJoinPaths("/coin.png")}
                        alt="Coin"/>
                 </div>
               </div>
@@ -201,7 +202,7 @@ type StatProps = {
 export const Stat = ({ buildingName, buildingPath, showProduction }: StatProps) => {
   return (
     <div className="flex flex-col gap-2 items-center">
-      <img src={buildingPath.pathImg} className="w-12 h-12 object-cover" alt="image"/>
+      <Image src={buildingPath.pathImg} height={48} width={48} className="object-cover" alt="image"/>
       <BuildingName name={buildingName} level={buildingPath.own}/>
       <GradientText className="font-bold">{formatPrice(buildingPath.price)} $</GradientText>
       <span

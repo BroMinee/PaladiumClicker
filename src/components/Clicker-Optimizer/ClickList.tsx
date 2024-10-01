@@ -3,6 +3,7 @@ import { formatPrice, safeJoinPaths } from "@/lib/misc";
 
 import CPSJson from "@/assets/CPS.json"
 import { ButtonCPS, PreconditionDisplay } from "@/components/Clicker-Optimizer/ClickListClient.tsx";
+import Image from "next/image";
 
 const ClickList = () => {
   function getImgPath(index: number, price: string) {
@@ -38,7 +39,7 @@ const CPS = ({ index, imgPath }: CPSProps) => {
   return (
     <ButtonCPS index={index}>
       <div className="flex flex-col items-center justify-center">
-        <img src={imgPath} alt="Icône" className="h-12 w-auto object-cover"/>
+        <Image width={48} height={48} src={imgPath} alt="Icône" className="object-cover"/>
         <div>{CPSJson[index].name}</div>
         <div className="font-bold">
           {formatPrice(CPSJson[index].price)} $

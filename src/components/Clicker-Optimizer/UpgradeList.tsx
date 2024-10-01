@@ -4,6 +4,7 @@ import type { UpgradeKey } from "@/types";
 
 import { redirect } from "next/navigation";
 import { ButtonUpgrade, PreconditionDisplay } from "@/components/Clicker-Optimizer/UpgradeListClient.tsx";
+import Image from "next/image";
 
 type UpgradeListProps = {
   upgradeType: UpgradeKey;
@@ -60,7 +61,7 @@ function Upgrade({ upgradeType, index, imgPath, jsonToUse }: UpgradeProps) {
   return (
     <ButtonUpgrade upgradeType={upgradeType} index={index}>
       <div className="w-36 flex flex-col items-center justify-center gap-2">
-        <img src={imgPath} alt="Icône" className="h-12 w-auto object-cover"/>
+        <Image src={imgPath} width={48} height={48} alt="Icône" className="object-cover"/>
         <span className="text-wrap">{jsonToUse[index].name}</span>
         <div className="font-bold">
           {formatPrice(jsonToUse[index].price ?? -1)} $

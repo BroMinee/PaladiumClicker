@@ -54,9 +54,10 @@ export function MetierSelectorClient({ username, metier, selected, searchParams 
       break;
   }
   return (
-    <img src={safeJoinPaths("/JobsIcon/", `${imgPath}.webp`)}
+    <Image src={safeJoinPaths("/JobsIcon/", `${imgPath}.webp`)}
+           width={144} height={144}
          alt={metier}
-         className={cn("object-cover h-36 w-auto pixelated hover:scale-105 duration-300 cursor-pointer",
+           className={cn("object-cover pixelated hover:scale-105 duration-300 cursor-pointer",
            !selected ? "grayscale" : "")}
          onClick={() => router.push(generateXpCalculatorUrl(username, metier, searchParams.level, searchParams.double, searchParams.dailyBonus), { scroll: false })}
     />

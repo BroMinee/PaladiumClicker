@@ -9,6 +9,7 @@ import GradientText from "@/components/shared/GradientText";
 import { Button } from "@/components/ui/button";
 import { useRpsStore } from "@/stores/use-rps-store";
 import { FaCoins, FaRandom } from "react-icons/fa";
+import Image from "next/image";
 
 const RPS = () => {
   const { data: playerInfo, setPlayerInfo } = usePlayerInfoStore();
@@ -64,8 +65,8 @@ const RPS = () => {
             }
             {(buildingBuyPaths.length === 0) &&
               <div className="flex flex-col items-center gap-4">
-                <img src={safeJoinPaths("/arty_chocbar.webp")}
-                     className="w-32 h-auto object-contain"
+                <Image width={128} height={128} src={safeJoinPaths("/arty_chocbar.webp")}
+                       className="h-auto object-contain"
                      alt="Arty"/>
                 <p className="text-sm">Bravo tu as tout acheté, va prendre une douche
                   maintenant.</p>
@@ -80,8 +81,8 @@ const RPS = () => {
       <Card>
         <CardContent className="h-full pt-6 flex items-center gap-4">
           {rps < 0 ?
-            <img src={safeJoinPaths("/arty_chocbar.webp")}
-                 className="w-12 h-auto object-contain"
+            <Image width={48} height={48} src={safeJoinPaths("/arty_chocbar.webp")}
+                   className="h-auto object-contain"
                  alt="Arty"/> :
             <FaCoins className="w-12 h-12"/>
           }
@@ -89,7 +90,7 @@ const RPS = () => {
             <span className="font-semibold">Production actuelle par seconde</span>
             <div className="flex items-center gap-2">
               <GradientText className="font-bold">{'~ ' + formatPrice(rps)}</GradientText>
-              <img src={safeJoinPaths("/coin.png")} className="h-6 w-6" alt="Coin"/>
+              <Image width={24} height={24} src={safeJoinPaths("/coin.png")} alt="Coin"/>
             </div>
           </div>
         </CardContent>
@@ -104,7 +105,7 @@ const RPS = () => {
                 {'~ ' + formatPrice(estimatedRPS)}{" "}
                 ({estimatedRPS > rps ? "+" : ""}{(((estimatedRPS - rps) / (rps) * 100)).toFixed(5)}%)
               </GradientText>
-              <img src={safeJoinPaths("/coin.png")} className="h-6 w-6" alt="Coin"/>
+              <Image src={safeJoinPaths("/coin.png")} height={24} width={24} alt="Coin"/>
             </div>
           </div>
         </CardContent>

@@ -11,6 +11,8 @@ import LoadingData from "@/components/LoadingData.tsx";
 import { Suspense } from "react";
 import constants from "@/lib/constants.ts";
 
+import Image from "next/image";
+
 export function FactionNameInfo() {
   const { data: playerInfo } = usePlayerInfoStore();
   if (playerInfo === null)
@@ -71,9 +73,10 @@ export function FactionDetails() {
                     className="hover:scale-105 duration-300 mt-4 ml-1.5 mr-1.5 cursor-pointer">
                 <CardContent className="pt-6 space-y-2">
                   <div className="flex flex-col items-center justify-center gap-2">
-                    <img src={`https://crafatar.com/avatars/${player.uuid}?size=8&overlay`}
+                    <Image src={`https://crafatar.com/avatars/${player.uuid}?size=8&overlay`}
                          alt="Icône"
-                         className="object-cover h-12 w-12 pixelated rounded-md"/>
+                           width={48} height={48}
+                           className="object-cover pixelated rounded-md"/>
                     <div className="text-primary font-bold text-center w-36">{player.username}</div>
                   </div>
                   <div className="space-y-2">
@@ -82,8 +85,9 @@ export function FactionDetails() {
                       Rôle: {player.group}
                     </div>
                     <div className="text-sm">
-                      <img src={safeJoinPaths("clock.gif")} alt="Icône"
-                           className="object-cover h-4 w-4 inline-block pixelated mr-2"/>
+                      <Image src={safeJoinPaths("clock.gif")} alt="Icône"
+                             width={16} height={16}
+                             className="object-cover inline-block pixelated mr-2"/>
                       Rejoint le: {convertEpochToDateUTC2(player.joinedAt)}
                     </div>
                   </div>

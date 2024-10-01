@@ -10,6 +10,7 @@ import {
 } from "@/components/Profil/FactionInfoClient.tsx";
 import { FaMedal, FaTachometerAlt } from "react-icons/fa";
 import { getFactionLeaderboard } from "@/lib/api/apiPala.ts";
+import Image from "next/image";
 
 
 export default function FactionInfo() {
@@ -20,8 +21,7 @@ export default function FactionInfo() {
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
       <Card className="md:row-span-2">
         <CardContent className="h-full pt-6 flex gap-4">
-          <img src={safeJoinPaths("BookAndQuill.webp")} alt="BookAndQuill.png"
-               className="h-12 w-12"/>
+          <Image width={48} height={48} src={safeJoinPaths("BookAndQuill.webp")} alt="BookAndQuill.png"/>
           <div className="flex flex-col gap-2">
             <FactionNameInfo/>
             <div className="flex gap-2 items-center">

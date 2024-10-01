@@ -30,6 +30,7 @@ export function RankingSelectorClient({ rankingType }: {
                  alt={searchParams.get("category") || "unknown"}
                  width={64}
                  height={64}
+                 unoptimized={true}
                  className="object-cover pixelated w-64"
           />
         </button>

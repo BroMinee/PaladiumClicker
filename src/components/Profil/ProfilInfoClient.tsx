@@ -5,6 +5,7 @@ import { computeTimePlayed, convertEpochToDateUTC2, formatPrice, getRankImg } fr
 import dynamic from "next/dynamic";
 import { Card, CardContent } from "@/components/ui/card.tsx";
 import constants from "@/lib/constants.ts";
+import Image from "next/image";
 
 const ReactSkinview3d = dynamic(() => import("react-skinview3d"), { ssr: false });
 
@@ -91,9 +92,10 @@ export function PlayerFriends() {
             <Card  className="hover:scale-105 duration-300 mt-4 ml-1.5 mr-1.5 cursor-pointer">
             <CardContent className="md:pt-6 space-y-2">
               <div className="flex flex-col items-center justify-center gap-2">
-                <img src={`https://crafatar.com/avatars/${player.uuid}?size=8&overlay`}
+                <Image src={`https://crafatar.com/avatars/${player.uuid}?size=8&overlay`}
                      alt="Icône"
-                     className="object-cover h-12 w-12 pixelated rounded-md"/>
+                       width={48} height={48}
+                       className="object-cover pixelated rounded-md"/>
                 <div
                   className="text-primary font-bold text-center w-36">{player.name}</div>
               </div>
