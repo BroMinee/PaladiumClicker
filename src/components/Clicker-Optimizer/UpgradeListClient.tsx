@@ -43,7 +43,7 @@ export function PreconditionDisplay({ index, upgradeType }: { index: number, upg
   if (!unlockable) {
     return (
       <Popover>
-        <PopoverTrigger asChild>
+        <PopoverTrigger asChild onClick={(e) => e.stopPropagation()}>
           <Button variant="outline" size="icon">
             <FaInfoCircle className="inline-block h-4 w-4"/>
           </Button>
