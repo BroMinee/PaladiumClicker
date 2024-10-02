@@ -87,7 +87,7 @@ export const getFactionInfo = async (factionName: string): Promise<PaladiumFacti
     factionName = "Wilderness";
 
   return await fetchWithHeader<PaladiumFactionInfo>(`${PALADIUM_API_URL}/v1/paladium/faction/profile/${factionName}`).catch(() => {
-    toast.warning("Impossible de récupérer les données de la faction, c'est le cas quand elle vient de changer de nom ou a été supprimée.");
+    toast.info("Impossible de récupérer les données de la faction, c'est le cas quand elle vient de changer de nom ou a été supprimée.");
     return {
       name: "Wilderness",
       access: "INVITATION",
@@ -116,27 +116,24 @@ export const getFactionLeaderboard = async (): Promise<PaladiumFactionLeaderboar
 }
 
 export const getAuctionHouseInfo = async (uuid: string, username: string): Promise<AhType> => {
-  return {
-    data: [],
-    totalCount: 0,
-    dateUpdated: new Date().getTime(),
-  }
   const response = await fetchWithHeader<AhType>(`${PALADIUM_API_URL}/v1/paladium/shop/market/players/${uuid}/items`).catch((error: Error) => {
     const message = error.message;
-    return redirect(`/error?message=Impossible de récupérer les données de l'AH, vérifie que tu ne les as pas désactivées sur ton profil Paladium via la commande /profil.&detail=${message}&username=${username}`);
+    return redirect(`/error?message=Impossible de récupérer les données du AH du joueur.&detail=${message}&username=${username}`);
   })
   response.dateUpdated = new Date().getTime();
   return response;
 }
 
 export const getFriendsList = async (uuid: string): Promise<PaladiumFriendInfo> => {
-  return await fetchWithHeader<PaladiumFriendInfo>(`${PALADIUM_API_URL}/v1/paladium/player/profile/${uuid}/friends`).catch(() => {
-    toast.warning("Ce joueur a désactivé l'accès à sa liste d'amis.");
+  try {
+    return await fetchWithHeader<PaladiumFriendInfo>(`${PALADIUM_API_URL}/v1/paladium/player/profile/${uuid}/friends`);
+  } catch (error: any) {
+    toast.info("Ce joueur a désactivé l'accès à sa liste d'amis.");
     return {
       data: [],
       totalCount: 0
     }
-  });
+  }
 }
 
 export const getPlayerInfo = async (pseudo: string): Promise<PlayerInfo> => {

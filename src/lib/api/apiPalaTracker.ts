@@ -45,7 +45,7 @@ export const getGlobalLeaderboard = async (): Promise<PalaAnimationLeaderboardGl
 
 export const getViewsFromUUID = async (uuid: string, username: string): Promise<ProfilViewType> => {
   return await fetchWithHeader<ProfilViewType>(`${API_PALATRACKER}/v1/user/getUser/${uuid}`, 10 * 60).catch(() => {
-    toast.warning(`Impossible de récupérer les vues de ${username}`);
+    toast.info(`Impossible de récupérer les vues de ${username}`);
     return {
       uuid,
       count: 0

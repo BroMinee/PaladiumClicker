@@ -54,6 +54,9 @@ export default function AhItem({ item }: AhItemsProps) {
     displayName = "StorageDrawers 1x2";
   else if (item["item"]["name"] === "StorageDrawers:fullDrawers1")
     displayName = "StorageDrawers 1x1";
+  else if(item["item"]["name"] === "palamarket:tile.luckydrawer")
+    displayName = "Lucky Drawer";
+
 
   return (
     <Card>
