@@ -95,6 +95,7 @@ export function PlayerFriends() {
                 <Image src={`https://crafatar.com/avatars/${player.uuid}?size=8&overlay`}
                      alt="Icône"
                        width={48} height={48}
+                       unoptimized={true}
                        className="object-cover pixelated rounded-md"/>
                 <div
                   className="text-primary font-bold text-center w-36">{player.name}</div>
