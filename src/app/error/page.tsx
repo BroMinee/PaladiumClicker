@@ -30,8 +30,9 @@ export default function Error500Page({ searchParams }: {
               className="mb-4 text-7xl tracking-tight font-extrabold lg:text-9xl text-primary-600 text-primary-500">500</h1>
             <p className="mb-4 text-3xl tracking-tight font-bold md:text-4xl text-white">Une erreur
               est survenue.</p>
-            <p className="text-primary">
+            <p className="text-primary flex flex-col pb-5 gap-2">
               {searchParams.message}
+              {searchParams.detail && <span className="text-red-400"> {searchParams.detail}</span>}
             </p>
             <p className="mb-4 text-lg font-light text-gray-400">Si le problème persiste merci de
               contacter un développeur</p>

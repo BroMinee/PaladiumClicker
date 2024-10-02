@@ -24,6 +24,7 @@ import { getViewsFromUUID } from "@/lib/api/apiPalaTracker.ts";
 import { fetchWithHeader } from "@/lib/api/misc.ts";
 import { redirect } from "next/navigation";
 import { getInitialPlayerInfo } from "@/lib/misc.ts";
+import { toast } from "sonner";
 
 
 const PALADIUM_API_URL = "https://api.paladium.games";
@@ -60,17 +61,25 @@ export const getPlayerOnlineCount = async (): Promise<number> => {
 
 
 export const getPaladiumProfileByPseudo = async (pseudo: string): Promise<PaladiumPlayerInfo> => {
-  return await fetchWithHeader<PaladiumPlayerInfo>(`${PALADIUM_API_URL}/v1/paladium/player/profile/${pseudo}`, 15 * 60, pseudo);
+    return await fetchWithHeader<PaladiumPlayerInfo>(`${PALADIUM_API_URL}/v1/paladium/player/profile/${pseudo}`, 15 * 60, pseudo).catch((error: Error) => {
+      return redirect(`/error?message=Impossible de récupérer les données de ${pseudo}, vérifie que tu as bien écrit ton pseudo.&detail=${error.message}&username=${pseudo}`)
+    });
 }
 
 
-export const getPaladiumLeaderboardPositionByUUID = async (uuid: string): Promise<string> => {
-  const response = await fetchWithHeader<PaladiumRanking>(`${PALADIUM_API_URL}/v1/paladium/ranking/position/clicker/${uuid}`);
+export const getPaladiumLeaderboardPositionByUUID = async (uuid: string, username: string): Promise<string> => {
+  const response = await fetchWithHeader<PaladiumRanking>(`${PALADIUM_API_URL}/v1/paladium/ranking/position/clicker/${uuid}`).catch((e : Error) => {
+    const message = e.message;
+    return redirect(`/error?message=Impossible de récupérer ta position dans le classement. : ${message}&username=${username}`);
+  });
   return response.ranked ? response.position.toString() : "Unranked";
 }
 
-const getPaladiumClickerDataByUUID = async (uuid: string): Promise<PaladiumClickerData> => {
-  return await fetchWithHeader<PaladiumClickerData>(`${PALADIUM_API_URL}/v1/paladium/player/profile/${uuid}/clicker`)
+const getPaladiumClickerDataByUUID = async (uuid: string, username: string): Promise<PaladiumClickerData> => {
+  return await fetchWithHeader<PaladiumClickerData>(`${PALADIUM_API_URL}/v1/paladium/player/profile/${uuid}/clicker`).catch((error: Error) => {
+    const message = error.message;
+    return redirect(`/error?message=Impossible de récupérer les données du clicker, vérifie que tu ne les as pas désactivées sur ton profil Paladium via la commande /profil.&detail=${message}&username=${username}`);
+  })
 }
 
 export const getFactionInfo = async (factionName: string): Promise<PaladiumFactionInfo> => {
@@ -78,6 +87,7 @@ export const getFactionInfo = async (factionName: string): Promise<PaladiumFacti
     factionName = "Wilderness";
 
   return await fetchWithHeader<PaladiumFactionInfo>(`${PALADIUM_API_URL}/v1/paladium/faction/profile/${factionName}`).catch(() => {
+    toast.warning("Impossible de récupérer les données de la faction, c'est le cas quand elle vient de changer de nom ou a été supprimée.");
     return {
       name: "Wilderness",
       access: "INVITATION",
@@ -105,19 +115,23 @@ export const getFactionLeaderboard = async (): Promise<PaladiumFactionLeaderboar
   return await fetchWithHeader<PaladiumFactionLeaderboard>(`${PALADIUM_API_URL}/v1/paladium/faction/leaderboard`);
 }
 
-export const getAuctionHouseInfo = async (uuid: string): Promise<AhType> => {
+export const getAuctionHouseInfo = async (uuid: string, username: string): Promise<AhType> => {
   return {
     data: [],
     totalCount: 0,
     dateUpdated: new Date().getTime(),
   }
-  const response = await fetchWithHeader<AhType>(`${PALADIUM_API_URL}/v1/paladium/shop/market/players/${uuid}/items`)
+  const response = await fetchWithHeader<AhType>(`${PALADIUM_API_URL}/v1/paladium/shop/market/players/${uuid}/items`).catch((error: Error) => {
+    const message = error.message;
+    return redirect(`/error?message=Impossible de récupérer les données de l'AH, vérifie que tu ne les as pas désactivées sur ton profil Paladium via la commande /profil.&detail=${message}&username=${username}`);
+  })
   response.dateUpdated = new Date().getTime();
   return response;
 }
 
 export const getFriendsList = async (uuid: string): Promise<PaladiumFriendInfo> => {
   return await fetchWithHeader<PaladiumFriendInfo>(`${PALADIUM_API_URL}/v1/paladium/player/profile/${uuid}/friends`).catch(() => {
+    toast.warning("Ce joueur a désactivé l'accès à sa liste d'amis.");
     return {
       data: [],
       totalCount: 0
@@ -144,17 +158,17 @@ export const getPlayerInfo = async (pseudo: string): Promise<PlayerInfo> => {
   }
 
 
-  let paladiumProfil = await getPaladiumProfileByPseudo(pseudo);
+  let paladiumProfil = await getPaladiumProfileByPseudo(pseudo)
 
 
   // Do all fetches in parallel to save time
-  const p1 = getPaladiumClickerDataByUUID(paladiumProfil.uuid);
-  const p2 = getAuctionHouseInfo(paladiumProfil.uuid);
+  const p1 = getPaladiumClickerDataByUUID(paladiumProfil.uuid, paladiumProfil.username);
+  const p2 = getAuctionHouseInfo(paladiumProfil.uuid, paladiumProfil.username);
   const p3 = getFriendsList(paladiumProfil.uuid);
-  const p4 = getJobsFromUUID(paladiumProfil.uuid);
-  const p5 = getPaladiumLeaderboardPositionByUUID(paladiumProfil.uuid);
+  const p4 = getJobsFromUUID(paladiumProfil.uuid, paladiumProfil.username);
+  const p5 = getPaladiumLeaderboardPositionByUUID(paladiumProfil.uuid, paladiumProfil.username);
   const p6 = getFactionInfo(paladiumProfil.faction === "" ? "Wilderness" : paladiumProfil.faction);
-  const p7 = getViewsFromUUID(paladiumProfil.uuid);
+  const p7 = getViewsFromUUID(paladiumProfil.uuid, paladiumProfil.username);
 
 
   const [clickerData, ahInfo, friendList, metiers, leaderboardPosition, paladiumFactionInfo, viewCount] = await Promise.all([p1, p2, p3, p4, p5, p6, p7]);
@@ -253,8 +267,11 @@ export const getPaladiumAhItemStats = async (itemId: string): Promise<PaladiumAh
   return await fetchWithHeader<PaladiumAhItemStat>(`${PALADIUM_API_URL}/v1/paladium/shop/market/items/${itemId}`)
 }
 
-export const getJobsFromUUID = async (uuid: string): Promise<Metiers> => {
-  const response = await fetchWithHeader<MetiersPossiblyUndefined>(`${PALADIUM_API_URL}/v1/paladium/player/profile/${uuid}/jobs`)
+export const getJobsFromUUID = async (uuid: string, username: string): Promise<Metiers> => {
+  const response = await fetchWithHeader<MetiersPossiblyUndefined>(`${PALADIUM_API_URL}/v1/paladium/player/profile/${uuid}/jobs`).catch((e: Error) => {
+    const message = e.message;
+    return redirect(`/error?message=Impossible de récupérer tes données de métiers, vérifie que tu ne les as pas désactivées sur ton profil Paladium via la commande /profil.&detail=${message}&username=${username}`);
+  })
 
 
   // NOTE we take the original JSON to have name easily modifiable (for example response.farmer.name witch is not in the response JSON)
@@ -280,5 +297,5 @@ export const getJobsFromUUID = async (uuid: string): Promise<Metiers> => {
     initialMetierJson.miner.xp = response.miner.xp;
   }
 
-  return initialMetierJson as Metiers;
+  return initialMetierJson;
 }

@@ -37,17 +37,6 @@ export const fetchWithHeader = async <T>(url: string, cache_duration_in_sec = 15
   let response: Response | null = null;
   let json = null;
 
-
-  fetch(`https://palatracker.bromine.fr/v1/other/tmp?url=${url}`,
-    {
-      next: { revalidate: 0 },
-      signal: AbortSignal.timeout(4000),
-      headers: {
-        'Authorization': `Bearer ${process.env.PALADIUM_API_KEY}`
-      }
-    })
-
-
   try {
     response = await fetch(url,
       {
@@ -99,17 +88,12 @@ export const fetchWithHeader = async <T>(url: string, cache_duration_in_sec = 15
         console.error(error, url);
       }
     } else {
-      redirect(`/error?message=Le pseudo ${username} n'existe pas sur Minecraft.`);
+      throw new Error("Le pseudo ${username} n'existe pas sur Minecraft.");
     }
   }
 
   if (json)
-    if (username !== "")
-      redirect(`/error?message=${json.message}&username=${username}`);
-    else
-      redirect(`/error?message=${json.message}`);
-  else if (username !== "")
-    redirect(`/error?message=Impossible de récupérer les données actuelles de ${url}&username=${username}`);
+    throw new Error(json.message);
   else
-    redirect(`/error?message=Impossible de récupérer les données actuelles de ${url}`);
+    throw new Error(`Impossible de récupérer les données actuelles de ${url}`);
 }

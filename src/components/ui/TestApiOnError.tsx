@@ -19,14 +19,14 @@ export async function TestApi() {
   if (!apiDown) return (
     <li className="flex items-center gap-2">
       <FaCheck className="text-green-400"/>
-      API de Paladium est fonctionnelle
+      L&apos;API de Paladium est fonctionnelle
     </li>
   );
 
   return (
     <li className="flex items-center gap-2">
       <MdError className="text-red-400"/>
-      API de Paladium est hors service
+      L&apos;API de Paladium est hors service
     </li>
   );
 }
@@ -76,7 +76,7 @@ export async function TestImportProfile({ pseudoParams = "BroMine__" }: {
       error.response?.data.message ?? error.message :
       typeof error === "string" ?
         error :
-        "Une erreur est survenue dans l'importation du profil";
+        `Une erreur est survenue dans l'importation du profil de ${pseudoParams ?? "BroMine__"}`;
     return [true, message];
   })
 
