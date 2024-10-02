@@ -1,5 +1,15 @@
 [
   {
+    "date": "02/10/2024 - 20h50",
+    "events": [
+      "Ajout de messages beaucoup plus explicites pour les erreurs, ajout également du pseudo dans le message pour un débogage plus facile",
+      "Changement des balises <img> en <Image> de NextJS pour une meilleure performance, au détriment d'une légère perte de qualité de l'image",
+      "Ajout d'une barre de recherche de pseudo dans la page d'erreur pour pouvoir réessayer plus rapidement",
+      "Correction du clic sur les préconditions d'achat provoquant l'achat accidentel de l'amélioration",
+      "Réactivation de l'API du market de Paladium"
+    ]
+  },
+  {
     "date": "29/09/2024 - 21h00",
     "events": [
       "Réactivation de l'API",
