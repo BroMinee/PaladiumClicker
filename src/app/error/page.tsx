@@ -11,6 +11,7 @@ import {
   TestMyApiFetching
 } from "@/components/ui/TestApiOnError.tsx";
 import { Suspense } from "react";
+import ImportProfil from "@/components/shared/ImportProfil.tsx";
 
 export default function Error500Page({ searchParams }: {
   searchParams: { [key: string]: string | string[] | undefined }
@@ -36,6 +37,9 @@ export default function Error500Page({ searchParams }: {
             </p>
             <p className="mb-4 text-lg font-light text-gray-400">Si le problème persiste merci de
               contacter un développeur</p>
+          </div>
+          <div className="flex justify-center">
+            <ImportProfil/>
           </div>
         </div>
       </CardHeader>
