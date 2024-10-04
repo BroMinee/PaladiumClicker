@@ -43,7 +43,7 @@ function NavBarContent() {
         {/*<MobileNav/>*/}
         <LogoClient menu={true}/>
         <div className="flex justify-center w-full border-gray-600 border-b space-y-3 pb-5 ">
-          <ImportProfil/>
+          <ImportProfil showResetButton navBar/>
         </div>
         <CategorieDisplay name={"Utilisateur"} defaultOpen={true}>
           <LinkClient path={constants.profilPath}>

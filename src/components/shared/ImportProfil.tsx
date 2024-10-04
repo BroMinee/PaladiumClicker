@@ -16,11 +16,13 @@ type ImportProfilProps = {
   showResetButton?: boolean,
   withBackground?: boolean
   classNameInput?: string
+  navBar?: boolean
 }
 
 export default function ImportProfil({
                                        showResetButton = false,
                                        withBackground = true,
+                                       navBar = false,
                                        classNameInput
                                      }: ImportProfilProps) {
 
@@ -48,7 +50,7 @@ export default function ImportProfil({
   // alert(`${new Date(playerInfo.last_fetch + 1000 * 15 * 60)}, ${new Date()} ${new Date(playerInfo.last_fetch + 1000 * 15 * 60) <= new Date()}`)
 
   return (
-    <div className="flex gap-2">
+    <div className={cn("flex gap-2", navBar ? "flex-col" : "")}>
       <form onSubmit={onSubmit}>
         <div className="relative">
           <Input

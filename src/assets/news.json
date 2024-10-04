@@ -1,8 +1,9 @@
 [
   {
-    "date": "04/10/2024 - 12h15",
+    "date": "04/10/2024 - 12h34",
     "events": [
-      "Ajout des fortunes F2 et F3 dans le calculateur d'xp. Note : Il s'agit d'une estimation car les fortunes sont aléatoires, environ 1.5 pour le F2 et 1.65 pour le F3"
+      "Ajout des fortunes F2 et F3 dans le calculateur d'xp. Note : Il s'agit d'une estimation car les fortunes sont aléatoires, environ 1.5 pour le F2 et 1.65 pour le F3",
+      "Ajout du bouton d'actualisation du profil dans la navbar"
     ]
   },
   {
