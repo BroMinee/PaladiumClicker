@@ -46,7 +46,7 @@ export default function Setting() {
           onSelect={(event) => event.preventDefault()}
           className="flex items-center justify-between"
         >
-          <span>Utiliser un profil par vide</span>
+          <span>Utiliser un profil vide</span>
           <Switch checked={settings.defaultProfile} onCheckedChange={setDefaultProfile}/>
         </DropdownMenuItem>
       </DropdownMenuContent>
