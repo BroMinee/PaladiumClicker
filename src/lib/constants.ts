@@ -314,14 +314,15 @@ const metier_palier = [
   34604832
 ]
 
+export type HowToXpElement = {
+  type: string;
+  action: string;
+  xp: number;
+  imgPath: string;
+};
 
 type HowToXp = {
-  [K in MetierKey]: {
-    type: string;
-    action: string;
-    xp: number;
-    imgPath: string
-  }[]
+  [K in MetierKey]: HowToXpElement[]
 }
 
 const how_to_xp: HowToXp = {
@@ -480,7 +481,8 @@ const constants = {
   adminShopPath,
   statusPath,
   politiqueDeConfidentialitePath,
-  patchnotePath
+  patchnotePath,
+  SMELT,
 };
 
 export default constants;

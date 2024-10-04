@@ -1,5 +1,11 @@
 [
   {
+    "date": "04/10/2024 - 12h15",
+    "events": [
+      "Ajout des fortunes F2 et F3 dans le calculateur d'xp. Note : Il s'agit d'une estimation car les fortunes sont aléatoires, environ 1.5 pour le F2 et 1.65 pour le F3"
+    ]
+  },
+  {
     "date": "02/10/2024 - 20h50",
     "events": [
       "Ajout de messages beaucoup plus explicites pour les erreurs, ajout également du pseudo dans le message pour un débogage plus facile",

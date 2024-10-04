@@ -79,7 +79,7 @@ export function MetierDecrease({ minLevel, metierKey, searchParams, username }: 
     router.push(`/error?message=MetierDecrease: searchParams.level and username must be both defined or both undefined but not only one of them.`)
   if (searchParams?.level !== undefined && username !== undefined)
     return <Button variant="outline" size="icon"
-                   onClick={() => router.push(generateXpCalculatorUrl(username || "undefined", metierKey, Math.max((searchParams?.level || 1) - 1, (playerInfo?.metier[metierKey].level || 1) + 1), searchParams?.double, searchParams?.dailyBonus), { scroll: false })
+                   onClick={() => router.push(generateXpCalculatorUrl(username || "undefined", metierKey, Math.max((searchParams?.level || 1) - 1, (playerInfo?.metier[metierKey].level || 1) + 1), searchParams?.double, searchParams?.dailyBonus, searchParams?.f2, searchParams?.f3), { scroll: false })
                    }>
       <FaArrowDown className="h-4 w-4"/>
     </Button>
@@ -103,7 +103,7 @@ export function MetierIncrease({ metierKey, searchParams, username }: {
     router.push(`/error?message=MetierIncrease: searchParams.level and username must be both defined or both undefined but not only one of them.`)
   if (searchParams?.level !== undefined && username !== undefined)
     return <Button variant="outline" size="icon"
-                   onClick={() => router.push(generateXpCalculatorUrl(username || "undefined", metierKey, Math.min((searchParams?.level || 0) + 1, 100), searchParams?.double, searchParams?.dailyBonus), { scroll: false })}>
+                   onClick={() => router.push(generateXpCalculatorUrl(username || "undefined", metierKey, Math.min((searchParams?.level || 0) + 1, 100), searchParams?.double, searchParams?.dailyBonus, searchParams?.f2, searchParams?.f3), { scroll: false })}>
       <FaArrowUp className="h-4 w-4"/>
     </Button>
 

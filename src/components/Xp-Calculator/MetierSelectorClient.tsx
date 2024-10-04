@@ -10,7 +10,7 @@ import { MetierDecrease, MetierDisplayLvl, MetierIncrease, MetierOutline } from 
 import { Button } from "@/components/ui/button.tsx";
 import { Input } from "@/components/ui/input.tsx";
 import { searchParamsXpBonusPage } from "@/components/Xp-Calculator/XpCalculator.tsx";
-import constants from "@/lib/constants.ts";
+import constants, { HowToXpElement } from "@/lib/constants.ts";
 
 export function SetLevelInUrl({ selected, params, searchParams }: {
   selected: MetierKey,
@@ -27,7 +27,7 @@ export function SetLevelInUrl({ selected, params, searchParams }: {
 
   levelToReach = Math.min(levelToReach, 100);
 
-  router.push(generateXpCalculatorUrl(params.username, selected, levelToReach, searchParams.double, searchParams.dailyBonus), { scroll: false });
+  router.push(generateXpCalculatorUrl(params.username, selected, levelToReach, searchParams.double, searchParams.dailyBonus, searchParams.f2, searchParams.f3), { scroll: false });
   return null;
 }
 
@@ -59,7 +59,7 @@ export function MetierSelectorClient({ username, metier, selected, searchParams 
          alt={metier}
            className={cn("object-cover pixelated hover:scale-105 duration-300 cursor-pointer",
            !selected ? "grayscale" : "")}
-         onClick={() => router.push(generateXpCalculatorUrl(username, metier, searchParams.level, searchParams.double, searchParams.dailyBonus), { scroll: false })}
+           onClick={() => router.push(generateXpCalculatorUrl(username, metier, searchParams.level, searchParams.double, searchParams.dailyBonus, searchParams.f2, searchParams.f3), { scroll: false })}
     />
   )
 }
@@ -118,14 +118,55 @@ export function ButtonTakeDoubleXp({ params, searchParams, doubleXp, children }:
   return <Button className={doubleXp === 100 ? "bg-red-500" : "bg-green-500"}
                  onClick={() => {
                    if (doubleXp === 0)
-                     router.push(generateXpCalculatorUrl(params.username, searchParams.metier, searchParams.level, true, searchParams.dailyBonus), { scroll: false })
+                     router.push(generateXpCalculatorUrl(params.username, searchParams.metier, searchParams.level, true, searchParams.dailyBonus, searchParams.f2, searchParams.f3), { scroll: false })
                    else
-                     router.push(generateXpCalculatorUrl(params.username, searchParams.metier, searchParams.level, false, searchParams.dailyBonus), { scroll: false })
+                     router.push(generateXpCalculatorUrl(params.username, searchParams.metier, searchParams.level, false, searchParams.dailyBonus, searchParams.f2, searchParams.f3), { scroll: false })
                  }}
   >
     {children}
   </Button>
 }
+
+export function ButtonUseF2({ params, searchParams, F2, children }: {
+  params: { username: string },
+  searchParams: searchParamsXpBonusPage,
+  F2: boolean,
+  children: React.ReactNode
+}) {
+  const router = useRouter();
+
+  return <Button className={F2 ? "bg-red-500" : "bg-green-500"}
+                 onClick={() => {
+                   if (F2 === false)
+                     router.push(generateXpCalculatorUrl(params.username, searchParams.metier, searchParams.level, searchParams.double, searchParams.dailyBonus, true, undefined), { scroll: false })
+                   else
+                     router.push(generateXpCalculatorUrl(params.username, searchParams.metier, searchParams.level, searchParams.double, searchParams.dailyBonus, false, undefined), { scroll: false })
+                 }}
+  >
+    {children}
+  </Button>
+}
+
+export function ButtonUseF3({ params, searchParams, F3, children }: {
+  params: { username: string },
+  searchParams: searchParamsXpBonusPage,
+  F3: boolean,
+  children: React.ReactNode
+}) {
+  const router = useRouter();
+
+  return <Button className={F3 ? "bg-red-500" : "bg-green-500"}
+                 onClick={() => {
+                   if (F3 === false)
+                     router.push(generateXpCalculatorUrl(params.username, searchParams.metier, searchParams.level, searchParams.double, searchParams.dailyBonus, searchParams.f2, true), { scroll: false })
+                   else
+                     router.push(generateXpCalculatorUrl(params.username, searchParams.metier, searchParams.level, searchParams.double, searchParams.dailyBonus, searchParams.f2, false), { scroll: false })
+                 }}
+  >
+    {children}
+  </Button>
+}
+
 
 export function InputDailyBonus({ params, searchParams }: {
   params: { username: string },
@@ -135,7 +176,7 @@ export function InputDailyBonus({ params, searchParams }: {
   return <Input className="w-auto" type="number" min="0" step="0.1" max="99"
                 value={Number(searchParams.dailyBonus || 0)}
                 onChange={(e) => {
-                  router.push(generateXpCalculatorUrl(params.username, searchParams.metier, searchParams.level, searchParams.double, Number(e.target.value)), { scroll: false });
+                  router.push(generateXpCalculatorUrl(params.username, searchParams.metier, searchParams.level, searchParams.double, Number(e.target.value), searchParams.f2, searchParams.f3), { scroll: false });
                 }
                 }/>
 }
@@ -199,15 +240,27 @@ export function DisplayXpNeeded({ searchParams }: { searchParams: searchParamsXp
   return <>{formatPrice(Math.ceil(xpNeeded))} xp</>
 }
 
-export function DisplayXpNeededWithDouble({ searchParams, xp }: { searchParams: searchParamsXpBonusPage, xp: number }) {
+export function DisplayXpNeededWithDouble({ searchParams, xp, element }: {
+  searchParams: searchParamsXpBonusPage,
+  xp: number,
+  element: HowToXpElement
+}) {
   const { data: playerInfo } = usePlayerInfoStore();
   const xpNeeded = getXpDiff(playerInfo, searchParams);
+
+
+  let fortuneBonus = searchParams.f2 ? 1.5 : 1;
+  fortuneBonus = searchParams.f3 ? 1.65 : fortuneBonus;
+  if (searchParams.metier !== "miner" || element.action !== constants.SMELT) {
+    fortuneBonus = 1;
+  }
 
   const bonusXpRank = getBonusRank(playerInfo);
   const bonusXpWithoutDouble = bonusXpRank + (searchParams.dailyBonus || 0);
   const bonusXpDouble = bonusXpWithoutDouble + (searchParams.double ? 100 : 0);
-  const xpNeededWithDoubleXP = xpNeeded / ((100 + bonusXpDouble) / 100);
-  return <>{formatPrice(Math.ceil(xpNeededWithDoubleXP / xp))} fois</>
+  const xpNeededWithDoubleXP = (xpNeeded / fortuneBonus) / ((100 + bonusXpDouble) / 100);
+
+  return <>{fortuneBonus !== 1 && "~ "}{formatPrice(Math.ceil(xpNeededWithDoubleXP / xp))} fois</>
 }
 
 export function DisplayXpNeededWithBottle({ searchParams }: { searchParams: searchParamsXpBonusPage }) {

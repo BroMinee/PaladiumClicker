@@ -4,6 +4,8 @@ import { Button } from "@/components/ui/button.tsx";
 import GradientText from "@/components/shared/GradientText.tsx";
 import {
   ButtonTakeDoubleXp,
+  ButtonUseF2,
+  ButtonUseF3,
   DisplayDailyDoubleRank,
   DisplayXpBonus,
   DisplayXpNeeded,
@@ -22,6 +24,8 @@ export type searchParamsXpBonusPage = {
   level: number | undefined,
   double: boolean | undefined
   dailyBonus: number | undefined
+  f2: boolean | undefined
+  f3: boolean | undefined
 }
 
 export function XpBonus({ params, searchParams }: {
@@ -29,6 +33,8 @@ export function XpBonus({ params, searchParams }: {
   searchParams: searchParamsXpBonusPage
 }) {
   const doubleXp = searchParams.double ? 100 : 0;
+  const F2 = searchParams.f2 || false;
+  const F3 = searchParams.f3 || false;
   const dailyBonus = searchParams.dailyBonus || 0;
 
   return (
@@ -48,6 +54,16 @@ export function XpBonus({ params, searchParams }: {
                 <ButtonTakeDoubleXp params={params} searchParams={searchParams} doubleXp={doubleXp}>
                   {doubleXp === 100 ? "Annuler la double XP" : "Prendre une double XP"}
                 </ButtonTakeDoubleXp>
+                {searchParams.metier === "miner" &&
+                  <>
+                    <ButtonUseF2 params={params} searchParams={searchParams} F2={F2}>
+                      {F2 ? "Annuler le hammer Fortune 2" : "Utiliser un hammer Fortune 2"}
+                    </ButtonUseF2>
+                    <ButtonUseF3 params={params} searchParams={searchParams} F3={F3}>
+                      {F3 ? "Annuler le hammer Fortune 3" : "Utiliser un hammer Fortune 3"}
+                    </ButtonUseF3>
+                  </>
+                }
               </div>
             </div>
             <div className="flex justify-center flex-row">
@@ -146,7 +162,7 @@ export function HowToXp({ searchParams }: {
                           {e.action}
                         </span>
                     <GradientText className="font-bold">
-                      <DisplayXpNeededWithDouble searchParams={searchParams} xp={e.xp}/>
+                      <DisplayXpNeededWithDouble searchParams={searchParams} xp={e.xp} element={e}/>
                     </GradientText>
                     <span className="font-semibold">{e.type}</span>
                   </div>
