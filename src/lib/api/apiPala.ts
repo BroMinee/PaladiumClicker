@@ -24,7 +24,7 @@ import { getViewsFromUUID } from "@/lib/api/apiPalaTracker.ts";
 import { fetchWithHeader } from "@/lib/api/misc.ts";
 import { redirect } from "next/navigation";
 import { getInitialPlayerInfo } from "@/lib/misc.ts";
-import { toast } from "sonner";
+// import { toast } from "sonner";
 
 
 const PALADIUM_API_URL = "https://api.paladium.games";
@@ -87,7 +87,7 @@ export const getFactionInfo = async (factionName: string): Promise<PaladiumFacti
     factionName = "Wilderness";
 
   return await fetchWithHeader<PaladiumFactionInfo>(`${PALADIUM_API_URL}/v1/paladium/faction/profile/${factionName}`).catch(() => {
-    toast.info("Impossible de récupérer les données de la faction, c'est le cas quand elle vient de changer de nom ou a été supprimée.");
+    // toast.info("Impossible de récupérer les données de la faction, c'est le cas quand elle vient de changer de nom ou a été supprimée.");
     return {
       name: "Wilderness",
       access: "INVITATION",
@@ -128,7 +128,7 @@ export const getFriendsList = async (uuid: string): Promise<PaladiumFriendInfo> 
   try {
     return await fetchWithHeader<PaladiumFriendInfo>(`${PALADIUM_API_URL}/v1/paladium/player/profile/${uuid}/friends`);
   } catch (error: any) {
-    toast.info("Ce joueur a désactivé l'accès à sa liste d'amis.");
+    // toast.info("Ce joueur a désactivé l'accès à sa liste d'amis.");
     return {
       data: [],
       totalCount: 0

@@ -10,7 +10,7 @@ import {
   ServerStatusResponse
 } from "@/types";
 import { fetchWithHeader } from "@/lib/api/misc.ts";
-import { toast } from "sonner";
+// import { toast } from "sonner";
 
 export const API_PALATRACKER = process.env.PALACLICKER_API_URL || "https://palatracker.bromine.fr"
 
@@ -44,8 +44,9 @@ export const getGlobalLeaderboard = async (): Promise<PalaAnimationLeaderboardGl
 
 
 export const getViewsFromUUID = async (uuid: string, username: string): Promise<ProfilViewType> => {
+  username.toLowerCase();
   return await fetchWithHeader<ProfilViewType>(`${API_PALATRACKER}/v1/user/getUser/${uuid}`, 10 * 60).catch(() => {
-    toast.info(`Impossible de récupérer les vues de ${username}`);
+    // toast.info(`Impossible de récupérer les vues de ${username}`);
     return {
       uuid,
       count: 0
