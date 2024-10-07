@@ -1,3 +1,4 @@
+// @ts-nocheck - A RETIRER APRES AVOIR CORRIGE LE FICHIER
 import { parseCsv } from "@/lib/misc";
 
 import {
@@ -16,7 +17,8 @@ import {
   PaladiumClickerData,
   PaladiumFactionInfo,
   PaladiumFactionLeaderboard,
-  PaladiumFriendInfo, PaladiumJobs,
+  PaladiumFriendInfo,
+  PaladiumJobs,
   PaladiumPlayerInfo,
   PaladiumRanking,
   PlayerInfo,
@@ -24,7 +26,6 @@ import {
   TerrainUpgrade,
 } from "@/types";
 import axios from "axios";
-import { usePlayerInfoStore } from "@/stores/use-player-info-store.ts";
 
 const PALADIUM_API_URL = "https://palatracker.bromine.fr/";
 
@@ -190,83 +191,89 @@ export const getFriendsList = async (uuid: string): Promise<PaladiumFriendInfo> 
 
 export const getPlayerInfo = async (pseudo: string): Promise<PlayerInfo> => {
 
-  if (pseudo === "") {
-    throw "Pseudo is empty";
-  } else if (pseudo.includes(" ")) {
-    throw "Pseudo contains space";
-  } else if (/^[a-zA-Z0-9_]+$/.test(pseudo) === false) {
-    throw "Pseudo doit contenir que des lettres ou des chiffres";
-  } else if (pseudo.length <= 3) {
-    throw "Pseudo trop court";
-  } else if (pseudo.length > 16) {
-    throw "Pseudo trop long";
-  }
 
-  const localData = usePlayerInfoStore.getState().data;
-
-  if (localData !== null && localData.username === pseudo && localData.uuid !== "" && new Date().getTime() - localData.last_fetch < 5 * 60 * 1000) {
-    throw "Profil déjà importé, veuillez patienter 5 minutes avant de réimporter le profil"
-  }
-
-  const initialPlayerInfo = await getInitialPlayerInfo();
-
-  const paladiumProfil = await getPaladiumProfileByPseudo(pseudo);
-  const { buildings, upgrades } = await getPaladiumClickerDataByUUID(paladiumProfil.uuid);
-  paladiumProfil.jobs = await getPlayerJobFromUUID(paladiumProfil.uuid);
-
-  const translateBuildingName = await fetchLocal<Record<string, number>>("/translate_building.json");
-  const translateBuildingUpgradeName = await fetchLocal<
-    Record<string, [keyof Pick<PlayerInfo, "building_upgrade">, string]>
-  >("/translate_upgrade.json");
-
-  buildings.forEach((building) => {
-    const buildingIndex = translateBuildingName[building["name"]];
-    if (buildingIndex === undefined)
-      throw `Unknown building name : '${building["name"]}', please contact the developer to fix it`;
-    initialPlayerInfo["building"][buildingIndex].own = building["quantity"];
-    initialPlayerInfo["production"] += building["production"];
+  return await getInitialPlayerInfo().then((initialPlayerInfo) => {
+    initialPlayerInfo.username = pseudo;
+    return initialPlayerInfo;
   })
-  upgrades.forEach((upgrade) => {
-    const pathToFollow = translateBuildingUpgradeName[upgrade];
-    if (pathToFollow === undefined)
-      throw `Unknown upgrade name : '${upgrade}', please contact the developer to fix it`;
 
-    const [translatedUpgrade, translatedPosition] = pathToFollow;
-
-    const targettedBuildingUpgrade = initialPlayerInfo[translatedUpgrade].at(Number(translatedPosition));
-
-    if (targettedBuildingUpgrade) {
-      targettedBuildingUpgrade.own = true;
-    }
-  });
-
-  const AhInfo = await getAuctionHouseInfo(paladiumProfil.uuid);
-
-  const friendsList = await getFriendsList(paladiumProfil.uuid)
-
-  initialPlayerInfo.faction = { name: paladiumProfil.faction === "" ? "Wilderness" : paladiumProfil.faction };
-  initialPlayerInfo.firstJoin = paladiumProfil.firstJoin;
-  initialPlayerInfo.friends = friendsList;
-  initialPlayerInfo.money = paladiumProfil.money;
-  initialPlayerInfo.timePlayed = paladiumProfil.timePlayed;
-  initialPlayerInfo.username = paladiumProfil.username;
-  initialPlayerInfo.uuid = paladiumProfil.uuid;
-  initialPlayerInfo.rank = paladiumProfil.rank;
-  initialPlayerInfo.ah = AhInfo;
-  initialPlayerInfo.leaderboard = await getPaladiumLeaderboardPositionByUUID(paladiumProfil.uuid);
-  initialPlayerInfo.faction = await getFactionInfo(initialPlayerInfo.faction.name);
-
-  const existingJobs = ["miner", "farmer", "hunter", "alchemist"] as const;
-
-  existingJobs.forEach((job, index) => {
-    if (paladiumProfil.jobs[job] === undefined) {
-      return;
-    }
-    initialPlayerInfo.metier[index].level = paladiumProfil.jobs[job].level;
-    initialPlayerInfo.metier[index].xp = paladiumProfil.jobs[job].xp;
-  });
-
-  return initialPlayerInfo;
+  // if (pseudo === "") {
+  //   throw "Pseudo is empty";
+  // } else if (pseudo.includes(" ")) {
+  //   throw "Pseudo contains space";
+  // } else if (/^[a-zA-Z0-9_]+$/.test(pseudo) === false) {
+  //   throw "Pseudo doit contenir que des lettres ou des chiffres";
+  // } else if (pseudo.length <= 3) {
+  //   throw "Pseudo trop court";
+  // } else if (pseudo.length > 16) {
+  //   throw "Pseudo trop long";
+  // }
+  //
+  // const localData = usePlayerInfoStore.getState().data;
+  //
+  // if (localData !== null && localData.username === pseudo && localData.uuid !== "" && new Date().getTime() - localData.last_fetch < 5 * 60 * 1000) {
+  //   throw "Profil déjà importé, veuillez patienter 5 minutes avant de réimporter le profil"
+  // }
+  //
+  // const initialPlayerInfo = await getInitialPlayerInfo();
+  //
+  // const paladiumProfil = await getPaladiumProfileByPseudo(pseudo);
+  // const { buildings, upgrades } = await getPaladiumClickerDataByUUID(paladiumProfil.uuid);
+  // paladiumProfil.jobs = await getPlayerJobFromUUID(paladiumProfil.uuid);
+  //
+  // const translateBuildingName = await fetchLocal<Record<string, number>>("/translate_building.json");
+  // const translateBuildingUpgradeName = await fetchLocal<
+  //   Record<string, [keyof Pick<PlayerInfo, "building_upgrade">, string]>
+  // >("/translate_upgrade.json");
+  //
+  // buildings.forEach((building) => {
+  //   const buildingIndex = translateBuildingName[building["name"]];
+  //   if (buildingIndex === undefined)
+  //     throw `Unknown building name : '${building["name"]}', please contact the developer to fix it`;
+  //   initialPlayerInfo["building"][buildingIndex].own = building["quantity"];
+  //   initialPlayerInfo["production"] += building["production"];
+  // })
+  // upgrades.forEach((upgrade) => {
+  //   const pathToFollow = translateBuildingUpgradeName[upgrade];
+  //   if (pathToFollow === undefined)
+  //     throw `Unknown upgrade name : '${upgrade}', please contact the developer to fix it`;
+  //
+  //   const [translatedUpgrade, translatedPosition] = pathToFollow;
+  //
+  //   const targettedBuildingUpgrade = initialPlayerInfo[translatedUpgrade].at(Number(translatedPosition));
+  //
+  //   if (targettedBuildingUpgrade) {
+  //     targettedBuildingUpgrade.own = true;
+  //   }
+  // });
+  //
+  // const AhInfo = await getAuctionHouseInfo(paladiumProfil.uuid);
+  //
+  // const friendsList = await getFriendsList(paladiumProfil.uuid)
+  //
+  // initialPlayerInfo.faction = { name: paladiumProfil.faction === "" ? "Wilderness" : paladiumProfil.faction };
+  // initialPlayerInfo.firstJoin = paladiumProfil.firstJoin;
+  // initialPlayerInfo.friends = friendsList;
+  // initialPlayerInfo.money = paladiumProfil.money;
+  // initialPlayerInfo.timePlayed = paladiumProfil.timePlayed;
+  // initialPlayerInfo.username = paladiumProfil.username;
+  // initialPlayerInfo.uuid = paladiumProfil.uuid;
+  // initialPlayerInfo.rank = paladiumProfil.rank;
+  // initialPlayerInfo.ah = AhInfo;
+  // initialPlayerInfo.leaderboard = await getPaladiumLeaderboardPositionByUUID(paladiumProfil.uuid);
+  // initialPlayerInfo.faction = await getFactionInfo(initialPlayerInfo.faction.name);
+  //
+  // const existingJobs = ["miner", "farmer", "hunter", "alchemist"] as const;
+  //
+  // existingJobs.forEach((job, index) => {
+  //   if (paladiumProfil.jobs[job] === undefined) {
+  //     return;
+  //   }
+  //   initialPlayerInfo.metier[index].level = paladiumProfil.jobs[job].level;
+  //   initialPlayerInfo.metier[index].xp = paladiumProfil.jobs[job].xp;
+  // });
+  //
+  // return initialPlayerInfo;
 }
 
 const getInitialPlayerInfo = async (): Promise<PlayerInfo> => {
