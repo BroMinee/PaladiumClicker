@@ -1,0 +1,2678 @@
+{
+    "airMin-Boots": {
+        "us": "AirMin",
+        "fr": "AirMin"
+    },
+    "amethyst-axe": {
+        "us": "Amethyst Axe",
+        "fr": "Hache en améthyste"
+    },
+    "amethyst-boots": {
+        "us": "Amethyst Boots",
+        "fr": "Bottes en améthyste"
+    },
+    "amethyst-chestplate": {
+        "us": "Amethyst Chestplate",
+        "fr": "Plastron en améthyste"
+    },
+    "amethyst-helmet": {
+        "us": "Amethyst Helmet",
+        "fr": "Casque en améthyste"
+    },
+    "amethyst-ingot": {
+        "us": "Amethyst Ingot",
+        "fr": "Lingot d'améthyste"
+    },
+    "amethyst-leggings": {
+        "us": "Amethyst Leggings",
+        "fr": "Jambières en améthyste"
+    },
+    "amethyst-pickaxe": {
+        "us": "Amethyst Pickaxe",
+        "fr": "Pioche en améthyste"
+    },
+    "amethyst-radius-hoe": {
+        "us": "Large amethyst hoe",
+        "fr": "Grande houe en amethyste"
+    },
+    "amethyst-shovel": {
+        "us": "Amethyst Shovel",
+        "fr": "Pelle en améthyste"
+    },
+    "amethyst-sword": {
+        "us": "Amethyst Sword",
+        "fr": "Épée en améthyste"
+    },
+    "amethyste-portal-key": {
+        "us": "Amethyst Portal Key",
+        "fr": "Clé de portail en améthyste"
+    },
+    "amethystMixedCoal": {
+        "us": "Amethystmixed Coal",
+        "fr": "Charbon d’améthyste"
+    },
+    "angelicwater": {
+        "us": "Angelic Water",
+        "fr": "Angelic Water"
+    },
+    "apple": {
+        "us": "Palapple",
+        "fr": "Pommadium"
+    },
+    "arrow": {
+        "us": "Arrow",
+        "fr": "Flèche"
+    },
+    "arrow-poison": {
+        "us": "Poison Arrow",
+        "fr": "Poison Arrow"
+    },
+    "arrow-switch": {
+        "us": "Switch Arrow",
+        "fr": "Flèche de Switch"
+    },
+    "bait": {
+        "us": "Bait",
+        "fr": "Appât"
+    },
+    "banana": {
+        "us": "Banana",
+        "fr": "Banane"
+    },
+    "bass": {
+        "us": "Bass",
+        "fr": "Bar"
+    },
+    "bed": {
+        "us": "Bed",
+        "fr": "Lit"
+    },
+    "beefCooked": {
+        "us": "Steak",
+        "fr": "Steak"
+    },
+    "beefRaw": {
+        "us": "Raw Beef",
+        "fr": "Boeuf cru"
+    },
+    "biome-painter": {
+        "us": "Biome Painter",
+        "fr": "Biome Painter"
+    },
+    "blaze-and-steel": {
+        "us": "Blaze and Steel",
+        "fr": "Briquet de blaze"
+    },
+    "blazePowder": {
+        "us": "Blaze Powder",
+        "fr": "Poudre de Blaze"
+    },
+    "blazeRod": {
+        "us": "Blaze Rod",
+        "fr": "Bâton de Blaze"
+    },
+    "boat": {
+        "us": "Boat",
+        "fr": "Bateau"
+    },
+    "boatfurnace": {
+        "us": "TurboBoat",
+        "fr": "TurboBoat"
+    },
+    "bone": {
+        "us": "Bone",
+        "fr": "Os"
+    },
+    "book": {
+        "us": "Book",
+        "fr": "Livre"
+    },
+    "bootsCloth": {
+        "us": "Leather Boots",
+        "fr": "Bottes en cuir"
+    },
+    "bootsDiamond": {
+        "us": "Diamond Boots",
+        "fr": "Bottes en diamant"
+    },
+    "bootsIron": {
+        "us": "Iron Boots",
+        "fr": "Bottes en fer"
+    },
+    "bow": {
+        "us": "Bow",
+        "fr": "Arc"
+    },
+    "bowl": {
+        "us": "Bowl",
+        "fr": "Bol"
+    },
+    "bread": {
+        "us": "Bread",
+        "fr": "Pain"
+    },
+    "brewingStand": {
+        "us": "Brewing Stand",
+        "fr": "Alambic"
+    },
+    "brick": {
+        "us": "Bricks Slab",
+        "fr": "Brique"
+    },
+    "broadsword-paladium": {
+        "us": "Paladium Broadsword",
+        "fr": "Broadsword en paladium"
+    },
+    "broadsword-titane": {
+        "us": "Titane Broadsword",
+        "fr": "Broadsword en titane"
+    },
+    "bucket": {
+        "us": "Bucket",
+        "fr": "Seau"
+    },
+    "bucketLava": {
+        "us": "Lava Bucket",
+        "fr": "Seau de lave"
+    },
+    "bucketWater": {
+        "us": "Water Bucket",
+        "fr": "Seau d'eau"
+    },
+    "builder-wand-0": {
+        "us": "Amethyst Builder Wand",
+        "fr": "Outil de construction en améthyste"
+    },
+    "builder-wand-1": {
+        "us": "Titane Builder Wand",
+        "fr": "Outil de construction en titane"
+    },
+    "builder-wand-2": {
+        "us": "Paladium Builder Wand",
+        "fr": "Outil de construction en paladium"
+    },
+    "calcium": {
+        "us": "Milk carton",
+        "fr": "Brique de lait"
+    },
+    "capture-stone": {
+        "us": "Capture Stone",
+        "fr": "Pierre de capture"
+    },
+    "capture-sword": {
+        "us": "Capture Sword",
+        "fr": "Épée de capture"
+    },
+    "carp": {
+        "us": "Carp",
+        "fr": "Carpe"
+    },
+    "carrots": {
+        "us": "Carrots",
+        "fr": "Carotte"
+    },
+    "cavern-hammer": {
+        "us": "Cavern Hammer",
+        "fr": "Marteau des Cavernes"
+    },
+    "charcoal": {
+        "us": "Chiseled Charcoal",
+        "fr": "Charbon de bois ciselé"
+    },
+    "chase": {
+        "us": "Plate",
+        "fr": "Plaque d’impression"
+    },
+    "chestexplorer": {
+        "us": "Chest Explorer",
+        "fr": "Explorateur de Coffre"
+    },
+    "chestplateCloth": {
+        "us": "Leather Tunic",
+        "fr": "Tunique en cuir"
+    },
+    "chestplateDiamond": {
+        "us": "Diamond Chestplate",
+        "fr": "Plastron en diamant"
+    },
+    "chestplateGold": {
+        "us": "Golden Chestplate",
+        "fr": "Plastron en or"
+    },
+    "chestplateIron": {
+        "us": "Iron Chestplate",
+        "fr": "Plastron en fer"
+    },
+    "chickenCooked": {
+        "us": "Cooked Chicken",
+        "fr": "Poulet rôti"
+    },
+    "chickenRaw": {
+        "us": "Raw Chicken",
+        "fr": "Poulet cru"
+    },
+    "chisel": {
+        "us": "Chisel",
+        "fr": "Ciseau"
+    },
+    "chunk-analyser": {
+        "us": "Chunk Analyser",
+        "fr": "Analyseur de chunk"
+    },
+    "clay": {
+        "us": "Clay",
+        "fr": "Argile"
+    },
+    "clock": {
+        "us": "Clock",
+        "fr": "Montre"
+    },
+    "coal": {
+        "us": "Chiseled Coal",
+        "fr": "Bloc de charbon ciselé"
+    },
+    "cobblebreaker-amethyst-upgrade": {
+        "us": "Amethyst Cobblebreaker Upgrade",
+        "fr": "Amélioration en améthyste pour Cobblebreaker"
+    },
+    "comparator": {
+        "us": "Redstone Comparator",
+        "fr": "Comparateur"
+    },
+    "compass": {
+        "us": "compass",
+        "fr": "boussole"
+    },
+    "compressed-amethyst": {
+        "us": "Compressed Amethyst",
+        "fr": "Améthyste compressée"
+    },
+    "compressed-paladium": {
+        "us": "Compressed Paladium",
+        "fr": "Paladium compressé"
+    },
+    "compressed-titane": {
+        "us": "Compressed Titane",
+        "fr": "Titane compressé"
+    },
+    "compressed-xp-berry": {
+        "us": "Compressed XP Berry",
+        "fr": "Compressed XP Berry"
+    },
+    "cookie": {
+        "us": "Cookie",
+        "fr": "Cookie"
+    },
+    "couac-sword": {
+        "us": "Couac Sword",
+        "fr": "Epee Couac"
+    },
+    "daemon-amulet": {
+        "us": "Demonic Amulet",
+        "fr": "Amulette démoniaque"
+    },
+    "damagestick": {
+        "us": "Damage Stick",
+        "fr": "Stick de dommage"
+    },
+    "diamond": {
+        "us": "Chiseled Diamond",
+        "fr": "Diamant ciselé"
+    },
+    "diamondString": {
+        "us": "Diamond String",
+        "fr": "Ficelle diamantée"
+    },
+    "diode": {
+        "us": "Redstone Repeater",
+        "fr": "Répéteur"
+    },
+    "dolphin-noise-box": {
+        "us": "Dolphin Noise Box",
+        "fr": "Boite à bruits de dauphin"
+    },
+    "doorIron": {
+        "us": "Iron Door",
+        "fr": "Porte en fer"
+    },
+    "dragonRoll": {
+        "us": "Dragon Roll",
+        "fr": "Parchemin de Dragon"
+    },
+    "dragonScales": {
+        "us": "Dragon Scales",
+        "fr": "Écaille de Dragon"
+    },
+    "dyePowder-black": {
+        "us": "Ink Sac",
+        "fr": "Poche d'encre"
+    },
+    "dyePowder-blue": {
+        "us": "Lapis Lazuli",
+        "fr": "Lapis-lazuli"
+    },
+    "dyePowder-brown": {
+        "us": "Cocoa Beans",
+        "fr": "Fèves de cacao"
+    },
+    "dyePowder-cyan": {
+        "us": "Cyan Dye",
+        "fr": "Teinture cyan"
+    },
+    "dyePowder-gray": {
+        "us": "Gray Dye",
+        "fr": "Teinture grise"
+    },
+    "dyePowder-green": {
+        "us": "Cactus Green",
+        "fr": "Vert de cactus"
+    },
+    "dyePowder-lightBlue": {
+        "us": "Light Blue Dye",
+        "fr": "Teinture bleu clair"
+    },
+    "dyePowder-red": {
+        "us": "Rose Red",
+        "fr": "Rouge de rose"
+    },
+    "dyePowder-white": {
+        "us": "Bone Meal",
+        "fr": "Poudre d'os"
+    },
+    "dyePowder-yellow": {
+        "us": "Dandelion Yellow",
+        "fr": "Jaune pissenlit"
+    },
+    "dynamite": {
+        "us": "Dynamite",
+        "fr": "Dynamite"
+    },
+    "dynamite-big": {
+        "us": "Big Dynamite",
+        "fr": "Big Dynamite"
+    },
+    "echanted-plate": {
+        "us": "Enchanted Plate",
+        "fr": "Plaque d’impression enchantée"
+    },
+    "egg": {
+        "us": "Egg",
+        "fr": "Oeuf"
+    },
+    "emerald": {
+        "us": "Chiseled Emerald",
+        "fr": "Émeraude ciselée"
+    },
+    "enchantedBook": {
+        "us": "Enchanted Book",
+        "fr": "Livre enchanté"
+    },
+    "enderPearl": {
+        "us": "Ender Pearl",
+        "fr": "Perle du Néant"
+    },
+    "endium-fragment": {
+        "us": "Endium Fragment",
+        "fr": "Fragment d'endium"
+    },
+    "endium-nugget": {
+        "us": "Endium Nugget",
+        "fr": "Pépite d'endium"
+    },
+    "excavator-amethyst": {
+        "us": "Amethyst Excavator",
+        "fr": "Excavatrice en améthyste"
+    },
+    "exp-fish": {
+        "us": "Exp Fish",
+        "fr": "Poisson à exp"
+    },
+    "extrapolatedbucket": {
+        "us": "Extrapolated Bucket",
+        "fr": "Extrapolated Bucket"
+    },
+    "eyeOfEnder": {
+        "us": "Eye of Ender",
+        "fr": "Oeil du Néant"
+    },
+    "fake-money": {
+        "us": "Billet",
+        "fr": "Billet"
+    },
+    "fastsword-amethyst": {
+        "us": "Amethyst Fastsword",
+        "fr": "Fastsword en améthyste"
+    },
+    "fastsword-paladium": {
+        "us": "Paladium Fastsword",
+        "fr": "Fastsword en paladium"
+    },
+    "feather": {
+        "us": "Feather",
+        "fr": "Plume"
+    },
+    "fermentedSpiderEye": {
+        "us": "Fermented Spider Eye",
+        "fr": "Oeil d'araignée fermenté"
+    },
+    "findium": {
+        "us": "Findium",
+        "fr": "Findium"
+    },
+    "fireworks": {
+        "us": "Firework Rocket",
+        "fr": "Fusée de feu d'artifice"
+    },
+    "fish-clownfish-raw": {
+        "us": "Clownfish",
+        "fr": "Poisson-clown"
+    },
+    "fish-cod-cooked": {
+        "us": "Cooked Fish",
+        "fr": "Poisson cuit"
+    },
+    "fish-cod-raw": {
+        "us": "Raw Fish",
+        "fr": "Poisson cru"
+    },
+    "fish-pufferfish-raw": {
+        "us": "Pufferfish",
+        "fr": "Poisson-globe"
+    },
+    "fish-salmon-cooked": {
+        "us": "Cooked Salmon",
+        "fr": "Saumon cuit"
+    },
+    "fish-salmon-raw": {
+        "us": "Raw Salmon",
+        "fr": "Saumon cru"
+    },
+    "fishingRod": {
+        "us": "Fishing Rod",
+        "fr": "Canne à pêche"
+    },
+    "flask0": {
+        "us": "Empty Flask",
+        "fr": "Fiole Vide"
+    },
+    "flask1": {
+        "us": "Sap Flask",
+        "fr": "Fiole de sève"
+    },
+    "flask4": {
+        "us": "Sap Flask",
+        "fr": "Fiole de sève"
+    },
+    "flask5": {
+        "us": "Sap Flask",
+        "fr": "Fiole de sève"
+    },
+    "flask6": {
+        "us": "Sap Flask",
+        "fr": "Fiole de sève"
+    },
+    "flint": {
+        "us": "Flint",
+        "fr": "Silex"
+    },
+    "flintAndSteel": {
+        "us": "Flint and Steel",
+        "fr": "Briquet"
+    },
+    "flowerPot": {
+        "us": "Flower Pot",
+        "fr": "Pot de fleurs"
+    },
+    "fruits-chervil": {
+        "us": "Chervil",
+        "fr": "Chervil"
+    },
+    "fruits-eggplants": {
+        "us": "Eggplant",
+        "fr": "Eggplant"
+    },
+    "fruits-kiwano": {
+        "us": "Kiwano",
+        "fr": "Kiwano"
+    },
+    "fruits-orangeblue": {
+        "us": "Orangeblue",
+        "fr": "Orangeblue"
+    },
+    "furnace-upgrade": {
+        "us": "Furnace Upgrade",
+        "fr": "Amélioration pour Palafurnace"
+    },
+    "fuzeiii": {
+        "us": "FuzeIII Music",
+        "fr": "FuzeIII Musique"
+    },
+    "ghastTear": {
+        "us": "Ghast Tear",
+        "fr": "Larme de Ghast"
+    },
+    "ghostcape": {
+        "us": "Cape de fantôme",
+        "fr": "Cape de fantôme"
+    },
+    "glassBottle": {
+        "us": "Glass Bottle",
+        "fr": "Fiole"
+    },
+    "glue": {
+        "us": "Glue",
+        "fr": "Colle"
+    },
+    "goat-shoe": {
+        "us": "Goat Hoof",
+        "fr": "Sabot de chèvre"
+    },
+    "god-pickaxe-auto-smelt": {
+        "us": "God Pickaxe Auto Smelt",
+        "fr": "God Pickaxe Auto Smelt"
+    },
+    "goldMixedCoal": {
+        "us": "Goldmixed Coal",
+        "fr": "Charbon d’or"
+    },
+    "goldNugget": {
+        "us": "Gold Nugget",
+        "fr": "Pépite d'or"
+    },
+    "grappin": {
+        "us": "Grappling",
+        "fr": "Grappin"
+    },
+    "grappin-hook": {
+        "us": "Grappling Hook",
+        "fr": "Crochet de grappin"
+    },
+    "green-paladium-radius-hoe": {
+        "us": "Large paladium green hoe",
+        "fr": "Grande houe en paladium vert"
+    },
+    "halloween": {
+        "us": "CD d’Halloween",
+        "fr": "CD d’Halloween"
+    },
+    "halloween-boots": {
+        "us": "Bottes Squelette",
+        "fr": "Bottes Squelette"
+    },
+    "halloween-helmet": {
+        "us": "Casque Squelette",
+        "fr": "Casque Squelette"
+    },
+    "halloween-leggings": {
+        "us": "Jambières Squelette",
+        "fr": "Jambières Squelette"
+    },
+    "halloweenstone": {
+        "us": "Halloween Stone",
+        "fr": "Halloween Stone"
+    },
+    "hammer-amethyst": {
+        "us": "Amethyst Hammer",
+        "fr": "Marteau en améthyste"
+    },
+    "hammer-paladium": {
+        "us": "Paladium Hammer",
+        "fr": "Marteau en paladium"
+    },
+    "hammer-smith": {
+        "us": "Smith Hammer",
+        "fr": "Marteau de Forgeron"
+    },
+    "hammer-titane": {
+        "us": "Titane Hammer",
+        "fr": "Marteau en titane"
+    },
+    "hangglider": {
+        "us": "Hang Glider",
+        "fr": "Hang Glider"
+    },
+    "happy-new-year": {
+        "us": "Findium Firework",
+        "fr": "Feu d'artifice en Findium"
+    },
+    "hatchetDiamond": {
+        "us": "Diamond Axe",
+        "fr": "Hache en diamant"
+    },
+    "hatchetStone": {
+        "us": "Stone Axe",
+        "fr": "Hache en pierre"
+    },
+    "healstick": {
+        "us": "Heal Stick",
+        "fr": "Stick de régénération"
+    },
+    "helmetChain": {
+        "us": "Chain Helmet",
+        "fr": "Casque de mailles"
+    },
+    "helmetCloth": {
+        "us": "Leather Cap",
+        "fr": "Chapeau en cuir"
+    },
+    "helmetDiamond": {
+        "us": "Diamond Helmet",
+        "fr": "Casque en diamant"
+    },
+    "helmetIron": {
+        "us": "Iron Helmet",
+        "fr": "Casque en fer"
+    },
+    "hoeDiamond": {
+        "us": "Diamond Hoe",
+        "fr": "Houe en diamant"
+    },
+    "hoeIron": {
+        "us": "Iron Hoe",
+        "fr": "Houe en fer"
+    },
+    "hoeStone": {
+        "us": "Stone Hoe",
+        "fr": "Houe en pierre"
+    },
+    "hoodhelmet": {
+        "us": "Hood Helmet",
+        "fr": "Cagoule"
+    },
+    "horsearmordiamond": {
+        "us": "Diamond Horse Armor",
+        "fr": "Armure pour cheval en diamant"
+    },
+    "horsearmorgold": {
+        "us": "Gold Horse Armor",
+        "fr": "Armure pour cheval en or"
+    },
+    "horsearmormetal": {
+        "us": "Iron Horse Armor",
+        "fr": "Armure pour cheval en fer"
+    },
+    "hunter-backpack-amethyste": {
+        "us": "Amethyst Backpack",
+        "fr": "Sac à dos en améthyste"
+    },
+    "hunter-backpack-endium": {
+        "us": "Endium Backpack",
+        "fr": "Sac à dos en endium"
+    },
+    "hunter-backpack-paladium": {
+        "us": "Paladium Backpack",
+        "fr": "Sac à dos en paladium"
+    },
+    "hunter-backpack-titane": {
+        "us": "Titane Backpack",
+        "fr": "Sac à dos en titane"
+    },
+    "hunter-compass-amethyste": {
+        "us": "Amethyst Compass",
+        "fr": "Boussole en améthyste"
+    },
+    "hunter-compass-paladium": {
+        "us": "Paladium Compass",
+        "fr": "Boussole en paladium"
+    },
+    "hyperjumpstick": {
+        "us": "Hyper Jump Stick",
+        "fr": "Stick de super saut"
+    },
+    "ingotGold": {
+        "us": "Gold Ingot",
+        "fr": "Lingot d'or"
+    },
+    "ingotIron": {
+        "us": "Iron Ingot",
+        "fr": "Lingot de fer"
+    },
+    "jetpack": {
+        "us": "Jetpack",
+        "fr": "Jetpack"
+    },
+    "job-candy": {
+        "us": "BonBon à déballer",
+        "fr": "BonBon à déballer"
+    },
+    "job-candy-BLUE": {
+        "us": "BonBon §9Bleu§f",
+        "fr": "BonBon §9Bleu§f"
+    },
+    "job-candy-GREEN": {
+        "us": "BonBon §aVert§f",
+        "fr": "BonBon §aVert§f"
+    },
+    "job-candy-PINK": {
+        "us": "BonBon §dMauve§f",
+        "fr": "BonBon §dMauve§f"
+    },
+    "job-candy-RAINBOW": {
+        "us": "BonBon §aMu§elti§9col§dor§f",
+        "fr": "BonBon §aMu§elti§9col§dor§f"
+    },
+    "job-candy-YELLOW": {
+        "us": "BonBon §eJaune§f",
+        "fr": "BonBon §eJaune§f"
+    },
+    "jumpchest": {
+        "us": "Jump Chestplate",
+        "fr": "Plastron de Saut"
+    },
+    "jumpstick": {
+        "us": "Jump Stick",
+        "fr": "Stick de saut"
+    },
+    "kraken": {
+        "us": "Kraken",
+        "fr": "Kraken"
+    },
+    "lasso": {
+        "us": "Lasso",
+        "fr": "Lasso"
+    },
+    "leather": {
+        "us": "Leather",
+        "fr": "Cuir"
+    },
+    "LEGENDARYSTONE-CHAOS": {
+        "us": "LegendaryStone Chaos",
+        "fr": "Pierre Légendaire de Chaos"
+    },
+    "LEGENDARYSTONE-FORTUNE": {
+        "us": "LegendaryStone Fortune",
+        "fr": "Pierre Légendaire de Fortune"
+    },
+    "LEGENDARYSTONE-INVISIBILITY": {
+        "us": "LegendaryStone Invisibility",
+        "fr": "Pierre Légendaire d’Invisibilité"
+    },
+    "LEGENDARYSTONE-JOBS": {
+        "us": "LegendaryStone Jobs",
+        "fr": "Pierre Légendaire de Métier"
+    },
+    "LEGENDARYSTONE-POWER": {
+        "us": "LegendaryStone Power",
+        "fr": "Pierre Légendaire de Pouvoir"
+    },
+    "LEGENDARYSTONE-RANDOM": {
+        "us": "LegendaryStone Random",
+        "fr": "Pierre Légendaire aléatoire"
+    },
+    "LEGENDARYSTONE-TELEPORTATION": {
+        "us": "LegendaryStone Teleportation",
+        "fr": "Pierre Légendaire de Téléportation"
+    },
+    "leggingsChain": {
+        "us": "Chain Leggings",
+        "fr": "Jambières de mailles"
+    },
+    "leggingsCloth": {
+        "us": "Leather Pants",
+        "fr": "Pantalon en cuir"
+    },
+    "leggingsIron": {
+        "us": "Iron Leggings",
+        "fr": "Jambières en fer"
+    },
+    "lightning-potion": {
+        "us": "Lightning Potion",
+        "fr": "Lightning Potion"
+    },
+    "lucky-painting": {
+        "us": "Lucky Painting",
+        "fr": "Tableau porte-bonheur"
+    },
+    "magic-potion": {
+        "us": "Magic Potion",
+        "fr": "Potion Magique"
+    },
+    "magicalTool": {
+        "us": "Magical Tool",
+        "fr": "Magical Tool"
+    },
+    "magma-amulet": {
+        "us": "Magma Amulet",
+        "fr": "Amulette de Feu"
+    },
+    "magmaCream": {
+        "us": "Magma Cream",
+        "fr": "Crème de magma"
+    },
+    "magnet": {
+        "us": "Magnet",
+        "fr": "Aimant"
+    },
+    "map": {
+        "us": "Map",
+        "fr": "Carte"
+    },
+    "mariomushroom": {
+        "us": "Mushroom Mario",
+        "fr": "Champignon de Mario"
+    },
+    "meduse-hook": {
+        "us": "Jellyfish Fang",
+        "fr": "Crochet de méduse"
+    },
+    "melon": {
+        "us": "Melon",
+        "fr": "Pastèque"
+    },
+    "meter": {
+        "us": "Meter",
+        "fr": "Mètre"
+    },
+    "milk": {
+        "us": "Milk",
+        "fr": "Seau de lait"
+    },
+    "mixed-endium-ingot": {
+        "us": "Mixed Endium Ingot",
+        "fr": "Lingot d'endium mixé"
+    },
+    "modifier-damage": {
+        "us": "Damage Modifier",
+        "fr": "Modifieur de Dommage"
+    },
+    "modifier-flame": {
+        "us": "Flame Modifier",
+        "fr": "Modifieur de Flamme"
+    },
+    "modifier-fortune": {
+        "us": "Fortune Modifier",
+        "fr": "Modifieur de Fortune"
+    },
+    "modifier-knockback": {
+        "us": "Knockback Modifier",
+        "fr": "Modifieur de Recul"
+    },
+    "modifier-moreupgrade": {
+        "us": "More Upgrade Modifier",
+        "fr": "Amélioration d’emplacement de Modifieur"
+    },
+    "modifier-smelt": {
+        "us": "Smelt Modifier",
+        "fr": "Modifieur de Fusion"
+    },
+    "modifier-speed": {
+        "us": "Speed Modifier",
+        "fr": "Modifieur de Vitesse"
+    },
+    "moonfish": {
+        "us": "Moonfish",
+        "fr": "Poisson lune"
+    },
+    "moula-stone": {
+        "us": "Dollars Stone",
+        "fr": "Dollars Stone"
+    },
+    "mount-gemstone": {
+        "us": "Mount Gem",
+        "fr": "Gemme de monture"
+    },
+    "mushroomStew": {
+        "us": "Mushroom Stew",
+        "fr": "Soupe de champignons"
+    },
+    "nameTag": {
+        "us": "Name Tag",
+        "fr": "Étiquette"
+    },
+    "netherbrick": {
+        "us": "Chiseled Netherbrick",
+        "fr": "Brique du Nether ciselée"
+    },
+    "netherquartz": {
+        "us": "Nether Quartz Ore",
+        "fr": "Quartz du Nether"
+    },
+    "netherStalkSeeds": {
+        "us": "Nether Wart",
+        "fr": "Verrue du Nether"
+    },
+    "netherStar": {
+        "us": "Nether Star",
+        "fr": "Étoile du Nether"
+    },
+    "obsidian-pickaxe": {
+        "us": "Obsidian Pickaxe",
+        "fr": "Pioche en Obsidienne"
+    },
+    "obsidianItemDoor": {
+        "us": "Obsidian Door",
+        "fr": "Porte en obsidienne"
+    },
+    "orb-heal": {
+        "us": "Heal Orb",
+        "fr": "Orbe de régénération"
+    },
+    "orb-jump": {
+        "us": "Jump Orb",
+        "fr": "Orbe de saut"
+    },
+    "orb-knockback": {
+        "us": "Knockback Orb",
+        "fr": "Orbe de recul"
+    },
+    "orb-speed": {
+        "us": "Speed Orb",
+        "fr": "Orbe de vitesse"
+    },
+    "orb-strenght": {
+        "us": "Strength Orb",
+        "fr": "Orbe de force"
+    },
+    "paladium-apple": {
+        "us": "Palapple",
+        "fr": "Pommadium"
+    },
+    "paladium-axe": {
+        "us": "Paladium Axe",
+        "fr": "Hache en paladium"
+    },
+    "paladium-boots": {
+        "us": "Paladium Boots",
+        "fr": "Bottes en paladium"
+    },
+    "paladium-chestplate": {
+        "us": "Paladium Chestplate",
+        "fr": "Plastron en paladium"
+    },
+    "paladium-green-axe": {
+        "us": "Green Paladium Axe",
+        "fr": "Hache en paladium vert"
+    },
+    "paladium-green-boots": {
+        "us": "Green Paladium Boots",
+        "fr": "Bottes en paladium vert"
+    },
+    "paladium-green-chestplate": {
+        "us": "Green Paladium Chestplate",
+        "fr": "Plastron en paladium vert"
+    },
+    "paladium-green-helmet": {
+        "us": "Green Paladium Helmet",
+        "fr": "Casque en paladium vert"
+    },
+    "paladium-green-leggings": {
+        "us": "Green Paladium Leggings",
+        "fr": "Jambières en paladium vert"
+    },
+    "paladium-green-pickaxe": {
+        "us": "Green Paladium Pickaxe",
+        "fr": "Pioche en paladium vert"
+    },
+    "paladium-green-shovel": {
+        "us": "Green Paladium Shovel",
+        "fr": "Pelle en paladium vert"
+    },
+    "paladium-green-sword": {
+        "us": "Green Paladium Sword",
+        "fr": "Épée en paladium vert"
+    },
+    "paladium-helmet": {
+        "us": "Paladium Helmet",
+        "fr": "Casque en paladium"
+    },
+    "paladium-ingot": {
+        "us": "Paladium Ingot",
+        "fr": "Lingot de paladium"
+    },
+    "paladium-ink": {
+        "us": "Paladium ink",
+        "fr": "Encre de Paladium"
+    },
+    "paladium-leggings": {
+        "us": "Paladium Leggings",
+        "fr": "Jambières en paladium"
+    },
+    "paladium-pickaxe": {
+        "us": "Paladium Pickaxe",
+        "fr": "Pioche en paladium"
+    },
+    "paladium-radius-hoe": {
+        "us": "Large paladium hoe",
+        "fr": "Grande houe en paladium"
+    },
+    "paladium-rod": {
+        "us": "Paladium fishing rod",
+        "fr": "Canne a peche en paladium"
+    },
+    "paladium-shovel": {
+        "us": "Paladium Shovel",
+        "fr": "Pelle en paladium"
+    },
+    "paladium-sword": {
+        "us": "Paladium Sword",
+        "fr": "Épée en paladium"
+    },
+    "paladiumbow": {
+        "us": "Paladium Bow",
+        "fr": "Paladium Bow"
+    },
+    "paladiumCore": {
+        "us": "Paladium Core",
+        "fr": "Coeur en paladium"
+    },
+    "palaMixedCoal": {
+        "us": "Palamixed Coal",
+        "fr": "Charbon de paladium"
+    },
+    "palamod-beetroot": {
+        "us": "Beetroot",
+        "fr": "Betterave"
+    },
+    "panda-drool": {
+        "us": "Panda Drool",
+        "fr": "Bave de panda"
+    },
+    "paper": {
+        "us": "Paper",
+        "fr": "Papier"
+    },
+    "parrot-feather": {
+        "us": "Parrot Feather",
+        "fr": "Plume de perroquet"
+    },
+    "particle-amethyst": {
+        "us": "Amethyst Particle",
+        "fr": "Particule d’améthyste"
+    },
+    "particle-iron": {
+        "us": "Iron Particle",
+        "fr": "Particule de fer"
+    },
+    "particle-paladium": {
+        "us": "Paladium Particle",
+        "fr": "Particule de paladium"
+    },
+    "particle-titane": {
+        "us": "Titane Particle",
+        "fr": "Particule de titane"
+    },
+    "patern-broadsword": {
+        "us": "Broadsword Pattern",
+        "fr": "Pattern de Broadsword"
+    },
+    "patern-fastsword": {
+        "us": "Fastsword Pattern",
+        "fr": "Pattern de Fastsword"
+    },
+    "patern-hammer": {
+        "us": "Hammer Pattern",
+        "fr": "Pattern de Marteau"
+    },
+    "patern-ingot": {
+        "us": "Ingot Pattern",
+        "fr": "Pattern de Lingot"
+    },
+    "patern-socket": {
+        "us": "Socket Pattern",
+        "fr": "Pattern de base"
+    },
+    "pickaxeDiamond": {
+        "us": "Diamond Pickaxe",
+        "fr": "Pioche en diamant"
+    },
+    "pickaxeIron": {
+        "us": "Iron Pickaxe",
+        "fr": "Pioche en fer"
+    },
+    "pickaxeStone": {
+        "us": "Stone Pickaxe",
+        "fr": "Pioche en pierre"
+    },
+    "pickaxeWood": {
+        "us": "Wooden Pickaxe",
+        "fr": "Pioche en bois"
+    },
+    "pig-boots": {
+        "us": "Pig Boots",
+        "fr": "Bottes de cochon"
+    },
+    "pig-chestplate": {
+        "us": "Pig Chestplate",
+        "fr": "Plastron de cochon"
+    },
+    "pig-helmet": {
+        "us": "Pig Helmet",
+        "fr": "Casque de cochon"
+    },
+    "porkchopCooked": {
+        "us": "Cooked Porkchop",
+        "fr": "Côtelette de porc cuite"
+    },
+    "porkchopRaw": {
+        "us": "Raw Porkchop",
+        "fr": "Côtelette de porc crue"
+    },
+    "potato": {
+        "us": "Potato",
+        "fr": "Pomme de terre"
+    },
+    "potatoBaked": {
+        "us": "Baked Potato",
+        "fr": "Pomme de terre cuite"
+    },
+    "potatoPoisonous": {
+        "us": "Poisonous Potato",
+        "fr": "Pomme de terre empoisonnée"
+    },
+    "potion": {
+        "us": "Potion",
+        "fr": "Potion"
+    },
+    "potion-launcher": {
+        "us": "Potion Launcher",
+        "fr": "Lanceur de potions"
+    },
+    "potion-soda": {
+        "us": "Soda",
+        "fr": "Soda"
+    },
+    "pumpkinPie": {
+        "us": "Pumpkin Pie",
+        "fr": "Tarte à la citrouille"
+    },
+    "pumpkinshear": {
+        "us": "Tailleur de Citrouilles",
+        "fr": "Tailleur de Citrouilles"
+    },
+    "ray": {
+        "us": "Manta Ray",
+        "fr": "Raie Manta"
+    },
+    "record": {
+        "us": "Music Disc",
+        "fr": "Disque"
+    },
+    "red-tuna": {
+        "us": "Red Tuna",
+        "fr": "Thon rouge"
+    },
+    "redstone": {
+        "us": "Chiseled Redstone",
+        "fr": "Redstone ciselée"
+    },
+    "reeds": {
+        "us": "Sugar cane",
+        "fr": "Canne à sucre"
+    },
+    "ring-big": {
+        "us": "Big Ring",
+        "fr": "Big Ring"
+    },
+    "ring-medium": {
+        "us": "Medium Ring",
+        "fr": "Medium Ring"
+    },
+    "ring-small": {
+        "us": "Small Ring",
+        "fr": "Small Ring"
+    },
+    "roller": {
+        "us": "Roller",
+        "fr": "Roller"
+    },
+    "rottenFlesh": {
+        "us": "Rotten Flesh",
+        "fr": "Chair putréfiée"
+    },
+    "saddle": {
+        "us": "Saddle",
+        "fr": "Selle"
+    },
+    "scubahelmet": {
+        "us": "Scuba Helmet",
+        "fr": "Casque de Plongée"
+    },
+    "sealed-xp-bottle": {
+        "us": "Sealed XP Bottle",
+        "fr": "Bouteille d’XP"
+    },
+    "seed-chervil": {
+        "us": "Chervil Seed",
+        "fr": "Graines de Chervil"
+    },
+    "seed-eggplant": {
+        "us": "Eggplant Seed",
+        "fr": "Ice Crystal Seed"
+    },
+    "seed-ice": {
+        "us": "Ice Crystal Seed",
+        "fr": "Ice Crystal Seed"
+    },
+    "seed-kiwano": {
+        "us": "Kiwano Seed",
+        "fr": "Graines de Kiwano"
+    },
+    "seed-orangeblue": {
+        "us": "Orangeblue Seed",
+        "fr": "Graines d’orangeblue"
+    },
+    "seedplanter-lvl1": {
+        "us": "Amethyst SeedPlanter",
+        "fr": "Seedplanter en améthyste"
+    },
+    "seedplanter-lvl2": {
+        "us": "Titane SeedPlanter",
+        "fr": "Seedplanter en titane"
+    },
+    "seedplanter-lvl3": {
+        "us": "Paladium SeedPlanter",
+        "fr": "Seedplanter en paladium"
+    },
+    "seedplanter-lvl4": {
+        "us": "Endium SeedPlanter",
+        "fr": "Seedplanter en endium"
+    },
+    "seedplanter-lvl5": {
+        "us": "Green Paladium SeedPlanter",
+        "fr": "Seedplanter en paladium vert"
+    },
+    "seeds": {
+        "us": "Seeds",
+        "fr": "Graines de blé"
+    },
+    "seeds-melon": {
+        "us": "Melon Seeds",
+        "fr": "Graines de pastèque"
+    },
+    "seeds-pumpkin": {
+        "us": "Pumpkin Seeds",
+        "fr": "Graines de citrouille"
+    },
+    "shears": {
+        "us": "Shears",
+        "fr": "Cisailles"
+    },
+    "shovelDiamond": {
+        "us": "Diamond Shovel",
+        "fr": "Pelle en diamant"
+    },
+    "skull-char": {
+        "us": "Head",
+        "fr": "Tête"
+    },
+    "skull-creeper": {
+        "us": "Creeper Head",
+        "fr": "Tête de Creeper"
+    },
+    "skull-skeleton": {
+        "us": "Skeleton Skull",
+        "fr": "Crâne de squelette"
+    },
+    "skull-wither": {
+        "us": "Wither Skeleton Skull",
+        "fr": "Crâne de Wither squelette"
+    },
+    "skull-zombie": {
+        "us": "Zombie Head",
+        "fr": "Tête de zombie"
+    },
+    "slimeball": {
+        "us": "Slimeball",
+        "fr": "Boule de Slime"
+    },
+    "slimyhelmet": {
+        "us": "Slimy Helmet",
+        "fr": "Casque en Slime"
+    },
+    "smokebomb-lime": {
+        "us": "Lime Smokebomb",
+        "fr": "Bombe de fumée verte claire"
+    },
+    "smokebomb-orange": {
+        "us": "Orange Smokebomb",
+        "fr": "Bombe de fumée orange"
+    },
+    "snake-venom": {
+        "us": "Snake Venom",
+        "fr": "Venin de serpent"
+    },
+    "snowball": {
+        "us": "Snowball",
+        "fr": "Boule de neige"
+    },
+    "spacefood": {
+        "us": "Space Food",
+        "fr": "Space Food"
+    },
+    "speckledMelon": {
+        "us": "Glistering Melon",
+        "fr": "Pastèque scintillante"
+    },
+    "speedstick": {
+        "us": "Speed Stick",
+        "fr": "Stick de vitesse"
+    },
+    "spell-scroll": {
+        "us": "Spell Scroll",
+        "fr": "Parchemin de sort"
+    },
+    "spiderEye": {
+        "us": "Spider Eye",
+        "fr": "Oeil d'araignée"
+    },
+    "spiderglove": {
+        "us": "Gant de Spiderman",
+        "fr": "Gant de Spiderman"
+    },
+    "squidgame-helmet": {
+        "us": "Guard mask",
+        "fr": "Masque de garde"
+    },
+    "star-helmet": {
+        "us": "Star Helmet",
+        "fr": "Casque Étoilé"
+    },
+    "stats-stone": {
+        "us": "Stats Stone",
+        "fr": "Pierre de Statistiques"
+    },
+    "stick": {
+        "us": "Stick",
+        "fr": "Bâton"
+    },
+    "stick-amethyst": {
+        "us": "Amethyst Stick",
+        "fr": "Stick d’améthyste"
+    },
+    "stick-paladium": {
+        "us": "Paladium Stick",
+        "fr": "Stick de paladium"
+    },
+    "stick-titane": {
+        "us": "Titane Stick",
+        "fr": "Stick de titane"
+    },
+    "stickofgod": {
+        "us": "Stick of God",
+        "fr": "Bâton Divin"
+    },
+    "strenghtstick": {
+        "us": "Strength Stick",
+        "fr": "Stick de force"
+    },
+    "string": {
+        "us": "String",
+        "fr": "Ficelle"
+    },
+    "sugar": {
+        "us": "Sugar",
+        "fr": "Sucre"
+    },
+    "sulfuricwater": {
+        "us": "Fake Water",
+        "fr": "Fake Water"
+    },
+    "sulphur": {
+        "us": "Gunpowder",
+        "fr": "Poudre à canon"
+    },
+    "swordDiamond": {
+        "us": "Diamond Sword",
+        "fr": "Épée en diamant"
+    },
+    "swordGold": {
+        "us": "Golden Sword",
+        "fr": "Épée en or"
+    },
+    "swordIron": {
+        "us": "Iron Sword",
+        "fr": "Épée en fer"
+    },
+    "swordStone": {
+        "us": "Stone Sword",
+        "fr": "Épée en pierre"
+    },
+    "swordWood": {
+        "us": "Wooden Sword",
+        "fr": "Épée en bois"
+    },
+    "tile-alchemy-creator-block": {
+        "us": "Alchemy Creator",
+        "fr": "Table d’Alchimiste"
+    },
+    "tile-amethyst-block": {
+        "us": "Amethyst Block",
+        "fr": "Bloc d’améthyste"
+    },
+    "tile-amethyst-chest": {
+        "us": "Amethyst Chest",
+        "fr": "Coffre en améthyste"
+    },
+    "tile-amethyst-ore": {
+        "us": "Amethyst Ore",
+        "fr": "Minerai d'améthyste"
+    },
+    "tile-amethyste-portal-block": {
+        "us": "Amethyst Portal Block",
+        "fr": "Bloc de portail en améthyste"
+    },
+    "tile-amethyste-tank": {
+        "us": "Amethyst Tank",
+        "fr": "Tank en améthyste"
+    },
+    "tile-anvil-amethyst-tool": {
+        "us": "Amethyst Anvil",
+        "fr": "Enclume en améthyste"
+    },
+    "tile-anvil-intact": {
+        "us": "Anvil",
+        "fr": "Enclume"
+    },
+    "tile-anvil-money": {
+        "us": "Anvil Money",
+        "fr": "Anvil Money"
+    },
+    "tile-anvil-paladium-tool": {
+        "us": "Paladium Anvil",
+        "fr": "Enclume en paladium"
+    },
+    "tile-anvil-slightlyDamaged": {
+        "us": "Slightly Damaged Anvil",
+        "fr": "Enclume légèrement endommagée"
+    },
+    "tile-anvil-titane-tool": {
+        "us": "Titane Anvil",
+        "fr": "Enclume en titane"
+    },
+    "tile-autocrafter": {
+        "us": "Autocrafter",
+        "fr": "Autocrafter"
+    },
+    "tile-ball-basket": {
+        "us": "Balle de Basket",
+        "fr": "Balle de Basket"
+    },
+    "tile-bamboo": {
+        "us": "Bamboo",
+        "fr": "Bambou"
+    },
+    "tile-bamboo-block": {
+        "us": "Bamboo Block",
+        "fr": "Bloc de bambou"
+    },
+    "tile-banana-wood": {
+        "us": "Banana wood",
+        "fr": "Bois de Bananier"
+    },
+    "tile-barn": {
+        "us": "Barn Controller",
+        "fr": "Gestionnaire d'enclos"
+    },
+    "tile-barn-fence": {
+        "us": "Barn Fence",
+        "fr": "Barrière d'enclos"
+    },
+    "tile-barn-foundation": {
+        "us": "Barn Foundation",
+        "fr": "Fondation d'enclos"
+    },
+    "tile-barrelwood": {
+        "us": "Barrel",
+        "fr": "Fût"
+    },
+    "tile-basket": {
+        "us": "Panier de Basket",
+        "fr": "Panier de Basket"
+    },
+    "tile-beacon": {
+        "us": "Beacon",
+        "fr": "Balise"
+    },
+    "tile-berry-xp-bush": {
+        "us": "XP Bush",
+        "fr": "Buisson à XP"
+    },
+    "tile-big-obsi": {
+        "us": "Big Obsidian",
+        "fr": "Obsidienne Compacte"
+    },
+    "tile-big-tnt": {
+        "us": "Big TNT",
+        "fr": "TNT Compacte"
+    },
+    "tile-blockCoal": {
+        "us": "Block of Coal",
+        "fr": "Bloc de charbon"
+    },
+    "tile-blockDiamond": {
+        "us": "Block of Diamond",
+        "fr": "Bloc de diamant"
+    },
+    "tile-blockEmerald": {
+        "us": "Block of Emerald",
+        "fr": "Bloc d'émeraude"
+    },
+    "tile-blockGold": {
+        "us": "Block of Gold",
+        "fr": "Bloc d'or"
+    },
+    "tile-blockIron": {
+        "us": "Block of Iron",
+        "fr": "Bloc de fer"
+    },
+    "tile-blockLapis": {
+        "us": "Lapis Lazuli Block",
+        "fr": "Bloc de lapis-lazuli"
+    },
+    "tile-blockRedstone": {
+        "us": "Block of Redstone",
+        "fr": "Bloc de redstone"
+    },
+    "tile-bookshelf": {
+        "us": "Bookshelf",
+        "fr": "Bibliothèque"
+    },
+    "tile-boom-obsi": {
+        "us": "Boom Obsidian",
+        "fr": "Boom Obsidienne"
+    },
+    "tile-brick": {
+        "us": "Bricks",
+        "fr": "Briques"
+    },
+    "tile-bruteforcer": {
+        "us": "Safe Chest Bruteforcer",
+        "fr": "Forceur de coffre-fort"
+    },
+    "tile-button": {
+        "us": "Button",
+        "fr": "Bouton"
+    },
+    "tile-cactus": {
+        "us": "Cactus",
+        "fr": "Cactus"
+    },
+    "tile-cat-detector": {
+        "us": "Cat Detector",
+        "fr": "Detecteur de chat"
+    },
+    "tile-cauldron-block": {
+        "us": "Cauldron Block",
+        "fr": "Bloc du Chaudron"
+    },
+    "tile-cauldron-core": {
+        "us": "Cauldron Core",
+        "fr": "Coeur du Chaudron"
+    },
+    "tile-cave-block": {
+        "us": "Cave Block",
+        "fr": "Cave Block"
+    },
+    "tile-chest": {
+        "us": "Chest",
+        "fr": "Coffre"
+    },
+    "tile-chisel-cobblestone": {
+        "us": "Chiseled Cobblestone",
+        "fr": "Pierre ciselée"
+    },
+    "tile-chisel-dirt": {
+        "us": "Chiseled Dirt",
+        "fr": "Terre ciselée"
+    },
+    "tile-chisel-glowstone": {
+        "us": "Chiseled Glowstone",
+        "fr": "Pierre lumineuse ciselée"
+    },
+    "tile-chisel-gold": {
+        "us": "Chiseled Gold",
+        "fr": "Or ciselé"
+    },
+    "tile-chisel-lapis": {
+        "us": "Chiseled Lapis Lazuli",
+        "fr": "Lapis Lazuli ciselé"
+    },
+    "tile-chisel-metals": {
+        "us": "Chiseled Metal",
+        "fr": "Métal ciselé"
+    },
+    "tile-chisel-stone": {
+        "us": "Chiseled Stone",
+        "fr": "Roche Ciselée"
+    },
+    "tile-clay": {
+        "us": "Clay",
+        "fr": "Argile"
+    },
+    "tile-clayHardened": {
+        "us": "Hardened Clay",
+        "fr": "Terre cuite"
+    },
+    "tile-clayHardenedStained-black": {
+        "us": "Black Stained Clay",
+        "fr": "Terre cuite noire"
+    },
+    "tile-clayHardenedStained-brown": {
+        "us": "Brown Stained Clay",
+        "fr": "Terre cuite marron"
+    },
+    "tile-clayHardenedStained-cyan": {
+        "us": "Cyan Stained Clay",
+        "fr": "Terre cuite cyan"
+    },
+    "tile-clayHardenedStained-gray": {
+        "us": "Gray Stained Clay",
+        "fr": "Terre cuite grise"
+    },
+    "tile-clayHardenedStained-orange": {
+        "us": "Orange Stained Clay",
+        "fr": "Terre cuite orange"
+    },
+    "tile-clayHardenedStained-pink": {
+        "us": "Pink Stained Clay",
+        "fr": "Terre cuite rose"
+    },
+    "tile-clayHardenedStained-red": {
+        "us": "Red Stained Clay",
+        "fr": "Terre cuite rouge"
+    },
+    "tile-clayHardenedStained-yellow": {
+        "us": "Yellow Stained Clay",
+        "fr": "Terre cuite jaune"
+    },
+    "tile-cloth-black": {
+        "us": "Black Wool",
+        "fr": "Laine noire"
+    },
+    "tile-cloth-brown": {
+        "us": "Brown Wool",
+        "fr": "Laine marron"
+    },
+    "tile-cloth-cyan": {
+        "us": "Cyan Wool",
+        "fr": "Laine cyan"
+    },
+    "tile-cloth-gray": {
+        "us": "Gray Wool",
+        "fr": "Laine grise"
+    },
+    "tile-cloth-pink": {
+        "us": "Pink Wool",
+        "fr": "Laine rose"
+    },
+    "tile-cloth-red": {
+        "us": "Red Wool",
+        "fr": "Laine rouge"
+    },
+    "tile-cloth-silver": {
+        "us": "Light Gray Wool",
+        "fr": "Laine gris clair"
+    },
+    "tile-cloth-white": {
+        "us": "Wool",
+        "fr": "Laine blanche"
+    },
+    "tile-cloud": {
+        "us": "Cloud",
+        "fr": "Fabrique à nuage"
+    },
+    "tile-cobbleBreaker": {
+        "us": "Cobblebreaker",
+        "fr": "Cobblebreaker"
+    },
+    "tile-cobbleWall-normal": {
+        "us": "Cobblestone Wall",
+        "fr": "Muret"
+    },
+    "tile-colored-lamp": {
+        "us": "Colored Lamp",
+        "fr": "Lampe colorée"
+    },
+    "tile-colored-lentern": {
+        "us": "Jack o'Lantern",
+        "fr": "Jack o'Lantern"
+    },
+    "tile-compressed-quartz": {
+        "us": "Compressed Quartz",
+        "fr": "Quartz Compressé"
+    },
+    "tile-compressed-quartz-1": {
+        "us": "Compressed Quartz x2",
+        "fr": "Quartz Compressé x2"
+    },
+    "tile-connectedDirt": {
+        "us": "Fertilized Dirt",
+        "fr": "Terre Fertilisée"
+    },
+    "tile-creeper-plush": {
+        "us": "Creeper Plush",
+        "fr": "Peluche de creeper"
+    },
+    "tile-crops-ice": {
+        "us": "Ice Crystal",
+        "fr": "Ice Crystal"
+    },
+    "tile-crusher": {
+        "us": "Crusher",
+        "fr": "Crusher"
+    },
+    "tile-customwither-head": {
+        "us": "Custom Wither Head",
+        "fr": "Custom Wither Head"
+    },
+    "tile-deadbush": {
+        "us": "Dead Bush",
+        "fr": "Arbuste mort"
+    },
+    "tile-dirt-default": {
+        "us": "Dirt",
+        "fr": "Terre"
+    },
+    "tile-dirt-podzol": {
+        "us": "Podzol",
+        "fr": "Podzol"
+    },
+    "tile-dispenser": {
+        "us": "Dispenser",
+        "fr": "Distributeur"
+    },
+    "tile-doublePlant-rose": {
+        "us": "Rose Bush",
+        "fr": "Rosier"
+    },
+    "tile-doublePlant-sunflower": {
+        "us": "Sunflower",
+        "fr": "Tournesol"
+    },
+    "tile-doublePlant-syringa": {
+        "us": "Lilac",
+        "fr": "Lilas"
+    },
+    "tile-drawbridge": {
+        "us": "Drawbridge",
+        "fr": "Drawbridge"
+    },
+    "tile-dropper": {
+        "us": "Dropper",
+        "fr": "Dropper"
+    },
+    "tile-dyeing-machine": {
+        "us": "Dyeing Machine",
+        "fr": "Dyeing Machine"
+    },
+    "tile-elevator-block": {
+        "us": "Elevator",
+        "fr": "Ascenseur"
+    },
+    "tile-empty-broken-mob-spawner": {
+        "us": "Broken Spawner",
+        "fr": "Spawner cassé"
+    },
+    "tile-empty-mob-spawner": {
+        "us": "Empty Spawner",
+        "fr": "Spawner vide"
+    },
+    "tile-enchantmentTable": {
+        "us": "Enchantment Table",
+        "fr": "Table d'enchantement"
+    },
+    "tile-enderChest": {
+        "us": "Ender Chest",
+        "fr": "Coffre du Néant"
+    },
+    "tile-endiumLuckyBlock": {
+        "us": "Endium Lucky Block",
+        "fr": "Lucky Block en endium"
+    },
+    "tile-erable": {
+        "us": "Erable Leaves",
+        "fr": "Feuilles d’érable"
+    },
+    "tile-extractor": {
+        "us": "Extractor",
+        "fr": "Extracteur"
+    },
+    "tile-fakecommandblock": {
+        "us": "Command Block",
+        "fr": "Bloc de commande"
+    },
+    "tile-findium-block": {
+        "us": "Findium Block",
+        "fr": "Bloc de findium"
+    },
+    "tile-findium-ore": {
+        "us": "Findium Ore",
+        "fr": "Minerai de findium"
+    },
+    "tile-findiumLuckyBlock": {
+        "us": "Findium Lucky Block",
+        "fr": "Lucky Block en findium"
+    },
+    "tile-fishBowl": {
+        "us": "Fish Bowl",
+        "fr": "Bocal à poissons"
+    },
+    "tile-flashy-block": {
+        "us": "Bloc retro",
+        "fr": "Bloc retro"
+    },
+    "tile-flower-clathrusarcheri": {
+        "us": "Clathrusarcheri",
+        "fr": "Clathrusarcheri"
+    },
+    "tile-flower-endium": {
+        "us": "Endium Flower",
+        "fr": "Fleur d’endium"
+    },
+    "tile-flower-harpagophytum": {
+        "us": "Harpagophytum",
+        "fr": "Harpagophytum"
+    },
+    "tile-flower-hunter": {
+        "us": "Hunter Plant",
+        "fr": "Fleur de Chasse"
+    },
+    "tile-flower-mineral": {
+        "us": "Mineral Flower",
+        "fr": "Fleur minérale"
+    },
+    "tile-flower-paladium": {
+        "us": "Paladium Flower",
+        "fr": "Fleur de paladium"
+    },
+    "tile-flower1-dandelion": {
+        "us": "Dandelion",
+        "fr": "Pissenlit"
+    },
+    "tile-flower2-allium": {
+        "us": "Allium",
+        "fr": "Allium"
+    },
+    "tile-flower2-blueOrchid": {
+        "us": "Blue Orchid",
+        "fr": "Orchidée bleue"
+    },
+    "tile-flower2-houstonia": {
+        "us": "Azure Bluet",
+        "fr": "Houstonie"
+    },
+    "tile-flower2-oxeyeDaisy": {
+        "us": "Oxeye Daisy",
+        "fr": "Marguerite"
+    },
+    "tile-flower2-poppy": {
+        "us": "Poppy",
+        "fr": "Coquelicot"
+    },
+    "tile-flower2-tulipOrange": {
+        "us": "Orange Tulip",
+        "fr": "Tulipe orange"
+    },
+    "tile-flower2-tulipPink": {
+        "us": "Pink Tulip",
+        "fr": "Tulipe rose"
+    },
+    "tile-flower2-tulipRed": {
+        "us": "Red Tulip",
+        "fr": "Tulipe rouge"
+    },
+    "tile-flower2-tulipWhite": {
+        "us": "White Tulip",
+        "fr": "Tulipe blanche"
+    },
+    "tile-furnace": {
+        "us": "Furnace",
+        "fr": "Fourneau"
+    },
+    "tile-glass": {
+        "us": "Glass",
+        "fr": "Verre"
+    },
+    "tile-gold-tank": {
+        "us": "Gold Tank",
+        "fr": "Tank en or"
+    },
+    "tile-gpaladium-block": {
+        "us": "Green Paladium Block",
+        "fr": "Bloc de paladium vert"
+    },
+    "tile-gpaladium-chest": {
+        "us": "Green Paladium Chest",
+        "fr": "Coffre en paladium vert"
+    },
+    "tile-grass": {
+        "us": "Grass Block",
+        "fr": "Bloc d'herbe"
+    },
+    "tile-gravel": {
+        "us": "Gravel",
+        "fr": "Gravier"
+    },
+    "tile-grinder-block": {
+        "us": "Grinder Block",
+        "fr": "Grinder Block"
+    },
+    "tile-grinder-casing-block": {
+        "us": "Grinder Casing",
+        "fr": "Grinder Casing"
+    },
+    "tile-grinder-frame-block": {
+        "us": "Grinder Frame",
+        "fr": "Grinder Frame"
+    },
+    "tile-halloween-trade": {
+        "us": "Halloween Trade Block",
+        "fr": "Bloc d'échange Halloween"
+    },
+    "tile-halloweenLuckyBlock": {
+        "us": "LuckyBlock d'Halloween",
+        "fr": "LuckyBlock d'Halloween"
+    },
+    "tile-hardenedObsidian": {
+        "us": "Hardened Obsidian",
+        "fr": "Obsidienne renforcée"
+    },
+    "tile-hardenedObsidianBlockSlab": {
+        "us": "Hardened Slab Obsidian",
+        "fr": "Dalle en Obsidienne renforcée"
+    },
+    "tile-hayBlock": {
+        "us": "Hay Bale",
+        "fr": "Bloc de paille"
+    },
+    "tile-hellrock": {
+        "us": "Netherrack",
+        "fr": "Roche du Nether"
+    },
+    "tile-hellsand": {
+        "us": "Soul Sand",
+        "fr": "Sable des âmes"
+    },
+    "tile-home-finder": {
+        "us": "Home Finder",
+        "fr": "Home Finder"
+    },
+    "tile-hopper": {
+        "us": "Hopper",
+        "fr": "Entonnoir"
+    },
+    "tile-ice": {
+        "us": "Ice",
+        "fr": "Glace"
+    },
+    "tile-icePacked": {
+        "us": "Packed Ice",
+        "fr": "Glace compactée"
+    },
+    "tile-incubator": {
+        "us": "Barn Incubator",
+        "fr": "Couveuse d'enclos"
+    },
+    "tile-jacaranda": {
+        "us": "Jacaranda Leaves",
+        "fr": "Feuilles de jacaranda"
+    },
+    "tile-jawstrap": {
+        "us": "Jaws Trap",
+        "fr": "Piège à loups"
+    },
+    "tile-judeecercis": {
+        "us": "Judeecercis Leaves",
+        "fr": "Feuilles de judeecercis"
+    },
+    "tile-jukebox": {
+        "us": "Jukebox",
+        "fr": "Jukebox"
+    },
+    "tile-kawaii-tnt": {
+        "us": "Kawaii TNT",
+        "fr": "TNT Mignonne"
+    },
+    "tile-ladder": {
+        "us": "Ladder",
+        "fr": "Échelle"
+    },
+    "tile-lava-sponge": {
+        "us": "Lava Sponge",
+        "fr": "Éponge à lave"
+    },
+    "tile-lava-sponge-wet": {
+        "us": "Wet Lava Sponge",
+        "fr": "Éponge à lave humide"
+    },
+    "tile-leaves-birch": {
+        "us": "Birch Leaves",
+        "fr": "Feuilles de bouleau"
+    },
+    "tile-leaves-oak": {
+        "us": "Oak Leaves",
+        "fr": "Feuilles de chêne"
+    },
+    "tile-less-kawaii-tnt": {
+        "us": "Less Kawaii TNT",
+        "fr": "TNT Moins Mignonne"
+    },
+    "tile-lever": {
+        "us": "Lever",
+        "fr": "Levier"
+    },
+    "tile-lightgem": {
+        "us": "Glowstone",
+        "fr": "Pierre lumineuse"
+    },
+    "tile-limestone": {
+        "us": "Limestone",
+        "fr": "Limestone"
+    },
+    "tile-litpumpkin": {
+        "us": "Jack o'Lantern",
+        "fr": "Citrouille-lanterne"
+    },
+    "tile-log-acacia": {
+        "us": "Acacia Wood",
+        "fr": "Bois d'acacia"
+    },
+    "tile-log-birch": {
+        "us": "Birch Wood",
+        "fr": "Bois de bouleau"
+    },
+    "tile-log-erable": {
+        "us": "Erable Log",
+        "fr": "Bûche d’érable"
+    },
+    "tile-log-jacaranda": {
+        "us": "Jacaranda Log",
+        "fr": "Bûche de jacaranda"
+    },
+    "tile-log-judeecercis": {
+        "us": "Judeecercis Log",
+        "fr": "Bûche de judeecercis"
+    },
+    "tile-log-jungle": {
+        "us": "Jungle Wood",
+        "fr": "Bois d'acajou"
+    },
+    "tile-log-oak": {
+        "us": "Oak Wood",
+        "fr": "Bois de chêne"
+    },
+    "tile-log-ostrya": {
+        "us": "Ostrya Log",
+        "fr": "Bûche d’ostrya"
+    },
+    "tile-log-spruce": {
+        "us": "Spruce Wood",
+        "fr": "Bois de sapin"
+    },
+    "tile-marble": {
+        "us": "Marble",
+        "fr": "Marbre"
+    },
+    "tile-melon": {
+        "us": "Melon",
+        "fr": "Pastèque"
+    },
+    "tile-mushroom": {
+        "us": "Mushroom",
+        "fr": "Champignon"
+    },
+    "tile-musicBlock": {
+        "us": "Note Block",
+        "fr": "Bloc musical"
+    },
+    "tile-mycel": {
+        "us": "Mycelium",
+        "fr": "Mycélium"
+    },
+    "tile-mystical-bookshelf": {
+        "us": "Mystical Bookshelf",
+        "fr": "Bibliothèque Mystique"
+    },
+    "tile-netherBrick": {
+        "us": "Nether Brick",
+        "fr": "Briques du Nether"
+    },
+    "tile-netherquartz": {
+        "us": "Nether Quartz Ore",
+        "fr": "Minerai de quartz du Nether"
+    },
+    "tile-notGate": {
+        "us": "Redstone Torch",
+        "fr": "Torche de redstone"
+    },
+    "tile-obsidian": {
+        "us": "Obsidian",
+        "fr": "Obsidienne"
+    },
+    "tile-obsidianTrapDoor": {
+        "us": "Obsidian Trapdoor",
+        "fr": "Trappe en obsidienne"
+    },
+    "tile-online-detector-block": {
+        "us": "Online Detector",
+        "fr": "Détecteur de présence"
+    },
+    "tile-oreCoal": {
+        "us": "Coal Ore",
+        "fr": "Minerai de charbon"
+    },
+    "tile-oreDiamond": {
+        "us": "Diamond Ore",
+        "fr": "Minerai de diamant"
+    },
+    "tile-oreEmerald": {
+        "us": "Emerald Ore",
+        "fr": "Minerai d'émeraude"
+    },
+    "tile-oreGold": {
+        "us": "Gold Ore",
+        "fr": "Minerai d'or"
+    },
+    "tile-oreIron": {
+        "us": "Iron Ore",
+        "fr": "Minerai de fer"
+    },
+    "tile-oreLapis": {
+        "us": "Lapis Lazuli Ore",
+        "fr": "Minerai de lapis-lazuli"
+    },
+    "tile-oreRedstone": {
+        "us": "Redstone Ore",
+        "fr": "Minerai de redstone"
+    },
+    "tile-ostrya": {
+        "us": "Ostrya Leaves",
+        "fr": "Feuilles d’ostrya"
+    },
+    "tile-paladium-block": {
+        "us": "Paladium Block",
+        "fr": "Bloc de paladium"
+    },
+    "tile-paladium-chest": {
+        "us": "Paladium Chest",
+        "fr": "Coffre en paladium"
+    },
+    "tile-paladium-ender-chest": {
+        "us": "Paladium Ender Chest",
+        "fr": "Paladium Ender Chest"
+    },
+    "tile-paladium-fake-block": {
+        "us": "Paladium Block",
+        "fr": "Bloc de paladium"
+    },
+    "tile-paladium-fake-ore": {
+        "us": "Fake Paladium Ore",
+        "fr": "Faux minerai de Paladium"
+    },
+    "tile-paladium-fake-tnt": {
+        "us": "Fake TNT",
+        "fr": "Fake TNT"
+    },
+    "tile-paladium-furnace-block": {
+        "us": "Palafurnace",
+        "fr": "Palafurnace"
+    },
+    "tile-paladium-green-ore": {
+        "us": "Green Paladium Ore",
+        "fr": "Minerai de paladium vert"
+    },
+    "tile-paladium-hopper": {
+        "us": "Paladium Hopper",
+        "fr": "Entonnoir en paladium"
+    },
+    "tile-paladium-machine": {
+        "us": "Palamachine",
+        "fr": "Palamachine"
+    },
+    "tile-paladium-ore": {
+        "us": "Paladium Ore",
+        "fr": "Minerai de paladium"
+    },
+    "tile-paladium-tank": {
+        "us": "Paladium Tank",
+        "fr": "Tank en paladium"
+    },
+    "tile-paladiumBlockSlab": {
+        "us": "Paladium Slab",
+        "fr": "Dalle en paladium"
+    },
+    "tile-paladiumBlockStairs": {
+        "us": "Paladium Stairs",
+        "fr": "Escalier en paladium"
+    },
+    "tile-paladiumLuckyBlock": {
+        "us": "Paladium Lucky Block",
+        "fr": "Lucky Block en paladium"
+    },
+    "tile-palamod-rose": {
+        "us": "Rose",
+        "fr": "Rose"
+    },
+    "tile-palamod-slime": {
+        "us": "Slime Block",
+        "fr": "Bloc de Slime"
+    },
+    "tile-palamod-sponge": {
+        "us": "Sponge",
+        "fr": "Éponge"
+    },
+    "tile-pet-cage": {
+        "us": "Pet Cage",
+        "fr": "Cage à familier"
+    },
+    "tile-petrock": {
+        "us": "Pet Rock <3",
+        "fr": "Caillou de compagnie <3"
+    },
+    "tile-pistonBase": {
+        "us": "Piston",
+        "fr": "Piston"
+    },
+    "tile-pistonStickyBase": {
+        "us": "Sticky Piston",
+        "fr": "Piston collant"
+    },
+    "tile-planks-erable": {
+        "us": "Erable Planks",
+        "fr": "Planches d’érable"
+    },
+    "tile-planks-jacaranda": {
+        "us": "Jacaranda Planks",
+        "fr": "Planches de jacaranda"
+    },
+    "tile-planks-judeecercis": {
+        "us": "Judeecercis Planks",
+        "fr": "Planches de judeecercis"
+    },
+    "tile-print-press": {
+        "us": "Printing Press",
+        "fr": "Presse à imprimer"
+    },
+    "tile-pumpkin": {
+        "us": "Pumpkin",
+        "fr": "Citrouille"
+    },
+    "tile-pumpkincustom-3": {
+        "us": "Citrouille",
+        "fr": "Citrouille"
+    },
+    "tile-pumpkincustom-8": {
+        "us": "Citrouille",
+        "fr": "Citrouille"
+    },
+    "tile-quartzBlock-default": {
+        "us": "Block of Quartz",
+        "fr": "Bloc de quartz"
+    },
+    "tile-rail": {
+        "us": "Rail",
+        "fr": "Rails"
+    },
+    "tile-redstoneLight": {
+        "us": "Redstone Lamp",
+        "fr": "Lampe à redstone"
+    },
+    "tile-safe-chest": {
+        "us": "Safe Chest",
+        "fr": "Coffre-fort"
+    },
+    "tile-sand-default": {
+        "us": "Sand",
+        "fr": "Sable"
+    },
+    "tile-sand-red": {
+        "us": "Red Sand",
+        "fr": "Sable rouge"
+    },
+    "tile-sandStone-default": {
+        "us": "Sandstone",
+        "fr": "Grès"
+    },
+    "tile-sapling-birch": {
+        "us": "Birch Sapling",
+        "fr": "Pousse de bouleau"
+    },
+    "tile-sapling-erable": {
+        "us": "Erable Sapling",
+        "fr": "Pousse d’érable"
+    },
+    "tile-sapling-jacaranda": {
+        "us": "Jacaranda Sapling",
+        "fr": "Pousse de jacaranda"
+    },
+    "tile-sapling-judeecercis": {
+        "us": "Judeecercis Sapling",
+        "fr": "Pousse de judeecercis"
+    },
+    "tile-sapling-jungle": {
+        "us": "Jungle Sapling",
+        "fr": "Pousse d'acajou"
+    },
+    "tile-sapling-oak": {
+        "us": "Oak Sapling",
+        "fr": "Pousse de chêne"
+    },
+    "tile-sapling-ostrya": {
+        "us": "Ostrya Sapling",
+        "fr": "Pousse d’ostrya"
+    },
+    "tile-sapling-spruce": {
+        "us": "Spruce Sapling",
+        "fr": "Pousse de sapin"
+    },
+    "tile-shiny-jacaranda-block": {
+        "us": "Shiny Jacaranda Wood",
+        "fr": "Bois de jacaranda brillant"
+    },
+    "tile-shiny-judeecercis-block": {
+        "us": "Shiny Judeecercis Wood",
+        "fr": "Bois de judeecercis brillant"
+    },
+    "tile-slime-obsi": {
+        "us": "Slime Obsidian",
+        "fr": "Slime Obsidienne"
+    },
+    "tile-slimepad": {
+        "us": "Slimepad",
+        "fr": "Slimepad"
+    },
+    "tile-snow": {
+        "us": "Snow",
+        "fr": "Neige"
+    },
+    "tile-spike-obsi-6": {
+        "us": "Spike Obsidian (Paladium)",
+        "fr": "Spike Obsidienne (paladium)"
+    },
+    "tile-spikegold": {
+        "us": "Gold Spike",
+        "fr": "Spike en or"
+    },
+    "tile-spikeiron": {
+        "us": "Iron Spike",
+        "fr": "Spike en fer"
+    },
+    "tile-spikepaladium": {
+        "us": "Paladium Spike",
+        "fr": "Spike en paladium"
+    },
+    "tile-spiketitane": {
+        "us": "Titane Spike",
+        "fr": "Spike en titane"
+    },
+    "tile-sponge": {
+        "us": "Sponge",
+        "fr": "Éponge"
+    },
+    "tile-stairsStone": {
+        "us": "Stone Stairs",
+        "fr": "Escaliers en pierre"
+    },
+    "tile-stalactites": {
+        "us": "Stalactite",
+        "fr": "Stalactite"
+    },
+    "tile-stone": {
+        "us": "Stone",
+        "fr": "Roche"
+    },
+    "tile-stonebrick": {
+        "us": "Cobblestone",
+        "fr": "Pierres"
+    },
+    "tile-stonebricksmooth-chiseled": {
+        "us": "Chiseled Stone Bricks",
+        "fr": "Pierre sculptée"
+    },
+    "tile-stonebricksmooth-cracked": {
+        "us": "Cracked Stone Bricks",
+        "fr": "Pierre taillée craquelée"
+    },
+    "tile-stonebricksmooth-default": {
+        "us": "Stone Bricks",
+        "fr": "Pierre taillée"
+    },
+    "tile-stonebricksmooth-mossy": {
+        "us": "Mossy Stone Bricks",
+        "fr": "Pierre taillée moussue"
+    },
+    "tile-stoneMoss": {
+        "us": "Moss Stone",
+        "fr": "Pierres moussues"
+    },
+    "tile-stoneSlab-smoothStoneBrick": {
+        "us": "Stone Bricks Slab",
+        "fr": "Dalle en pierre taillée"
+    },
+    "tile-stoneSlab-stone": {
+        "us": "Stone Slab",
+        "fr": "Dalle en pierre"
+    },
+    "tile-super-beacon": {
+        "us": "Super Beacon",
+        "fr": "Super Beacon"
+    },
+    "tile-tallgrass": {
+        "us": "Grass",
+        "fr": "Hautes herbes"
+    },
+    "tile-tallgrass-fern": {
+        "us": "Fern",
+        "fr": "Fougère"
+    },
+    "tile-tallgrass-grass": {
+        "us": "Grass",
+        "fr": "Hautes herbes"
+    },
+    "tile-titane-block": {
+        "us": "Titane Block",
+        "fr": "Bloc de titane"
+    },
+    "tile-titane-chest": {
+        "us": "Titane Chest",
+        "fr": "Coffre en titane"
+    },
+    "tile-titane-ore": {
+        "us": "Titane Ore",
+        "fr": "Minerai de titane"
+    },
+    "tile-titane-portal-block": {
+        "us": "Titane Portal Block",
+        "fr": "Bloc de portail en titane"
+    },
+    "tile-titane-tank": {
+        "us": "Titane Tank",
+        "fr": "Tank en titane"
+    },
+    "tile-titaneBlockSlab": {
+        "us": "Titane Slab",
+        "fr": "Dalle en titane"
+    },
+    "tile-tnt": {
+        "us": "TNT",
+        "fr": "TNT"
+    },
+    "tile-torch": {
+        "us": "Torch",
+        "fr": "Torche"
+    },
+    "tile-totem": {
+        "us": "Totem of Fertility",
+        "fr": "Totem de Fertilité"
+    },
+    "tile-tripWireSource": {
+        "us": "Tripwire Hook",
+        "fr": "Crochet"
+    },
+    "tile-trixium-block": {
+        "us": "Trixium Block",
+        "fr": "Bloc de trixium"
+    },
+    "tile-trixium-ore": {
+        "us": "Trixium Ore",
+        "fr": "Minerai de trixium"
+    },
+    "tile-type-machine": {
+        "us": "Typesetting Table",
+        "fr": "Table d'écriture"
+    },
+    "tile-water-leaves": {
+        "us": "Birch Water Leave",
+        "fr": "Feuilles de Bouleau des Rivières"
+    },
+    "tile-water-sapling": {
+        "us": "Birch Water Sapling",
+        "fr": "Pousse de Bouleau des Rivières"
+    },
+    "tile-waterlily": {
+        "us": "Lily Pad",
+        "fr": "Nénuphar"
+    },
+    "tile-web": {
+        "us": "Cobweb",
+        "fr": "Toile d'araignée"
+    },
+    "tile-wireless-lever": {
+        "us": "Wireless Lever",
+        "fr": "Levier sans fil"
+    },
+    "tile-wood-acacia": {
+        "us": "Acacia Wood Planks",
+        "fr": "Planches d'acacia"
+    },
+    "tile-wood-birch": {
+        "us": "Birch Wood Planks",
+        "fr": "Planches de bouleau"
+    },
+    "tile-wood-jungle": {
+        "us": "Jungle Wood Planks",
+        "fr": "Planches d'acajou"
+    },
+    "tile-wood-oak": {
+        "us": "Oak Wood Planks",
+        "fr": "Planches de chêne"
+    },
+    "tile-wood-spruce": {
+        "us": "Spruce Wood Planks",
+        "fr": "Planches de sapin"
+    },
+    "tile-workbench": {
+        "us": "Crafting Table",
+        "fr": "Établi"
+    },
+    "titane-axe": {
+        "us": "Titane Axe",
+        "fr": "Hache en titane"
+    },
+    "titane-boots": {
+        "us": "Titane Boots",
+        "fr": "Bottes en titane"
+    },
+    "titane-chestplate": {
+        "us": "Titane Chestplate",
+        "fr": "Plastron en titane"
+    },
+    "titane-helmet": {
+        "us": "Titane Helmet",
+        "fr": "Casque en titane"
+    },
+    "titane-ingot": {
+        "us": "Titane Ingot",
+        "fr": "Lingot de titane"
+    },
+    "titane-leggings": {
+        "us": "Titane Leggings",
+        "fr": "Jambières en titane"
+    },
+    "titane-pickaxe": {
+        "us": "Titane Pickaxe",
+        "fr": "Pioche en titane"
+    },
+    "titane-portal-key": {
+        "us": "Titane Portal Key",
+        "fr": "Clé de portail en titane"
+    },
+    "titane-radius-hoe": {
+        "us": "Large titane hoe",
+        "fr": "Grande houe en titane"
+    },
+    "titane-shovel": {
+        "us": "Titane Shovel",
+        "fr": "Pelle en titane"
+    },
+    "titane-sword": {
+        "us": "Titane Sword",
+        "fr": "Épée en titane"
+    },
+    "travelboots": {
+        "us": "Travel Boots",
+        "fr": "Bottes de Voyage"
+    },
+    "travellegging": {
+        "us": "Travel Legging",
+        "fr": "Jambières de Voyage"
+    },
+    "trixium": {
+        "us": "Trixium",
+        "fr": "Trixium"
+    },
+    "turtle-scales": {
+        "us": "Turtle Scale",
+        "fr": "Écaille de tortue"
+    },
+    "tusk": {
+        "us": "Elephant Tusk",
+        "fr": "Défense d’éléphant"
+    },
+    "unclaimfinder": {
+        "us": "Green Unclaim Finder",
+        "fr": "Unclaim Finder vert"
+    },
+    "unclaimfinder-bleu": {
+        "us": "Blue Unclaim Finder",
+        "fr": "Unclaim Finder bleu"
+    },
+    "unclaimfinder-orange": {
+        "us": "Orange Unclaim Finder",
+        "fr": "Unclaim Finder orange"
+    },
+    "unclaimfinder-rouge": {
+        "us": "Red Unclaim Finder",
+        "fr": "Unclaim Finder rouge"
+    },
+    "voidstone": {
+        "us": "Chiseled Voidstone",
+        "fr": "Voidstone ciselé"
+    },
+    "voidstone-minage": {
+        "us": "Minage Voidstone",
+        "fr": "Voidstone Minage"
+    },
+    "weighted-boots": {
+        "us": "Weighted Boots",
+        "fr": "Bottes lestées"
+    },
+    "whale": {
+        "us": "Whale",
+        "fr": "Baleine"
+    },
+    "wheat": {
+        "us": "Wheat",
+        "fr": "Blé"
+    },
+    "wing": {
+        "us": "Wing",
+        "fr": "Aile"
+    },
+    "witchbroom": {
+        "us": "Balais de sorcier",
+        "fr": "Balais de sorcier"
+    },
+    "writtenBook": {
+        "us": "Written Book",
+        "fr": "Livre écrit"
+    },
+    "xp-berry": {
+        "us": "XP Berry",
+        "fr": "Baie d’XP"
+    },
+    "yellowDust": {
+        "us": "Glowstone Dust",
+        "fr": "Poudre de pierre luisante"
+    }
+}

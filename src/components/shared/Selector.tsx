@@ -3,6 +3,9 @@ import Select, { StylesConfig } from "react-select";
 import makeAnimated from 'react-select/animated';
 import { useState } from "react";
 
+import Image from "next/image";
+
+import items_list from "@/assets/items_list.json";
 
 const customStyles: StylesConfig<OptionType, false> = {
   control: (provided, state) => ({
@@ -51,12 +54,28 @@ const Selector = ({ options, setInputValue }: SelectorProps) => {
     }
   };
 
+  const getItemImg = (item_to_find: string) => {
+    const v = items_list.find((item) => item.value === item_to_find);
+    if (v) {
+      return v.img;
+    }
+    return 'default';
+  }
+
+  const formatOptionLabel = ({ value, label }: OptionType) => (
+    <div className="flex items-center">
+      <Image src={`/AH_img/${getItemImg(value)}.png`} alt="label" width={48} height={48} unoptimized={true} className="h-12 w-12 pixelated mr-2 rounded-md"/>
+      <span className="ml-2">{label}</span>
+    </div>
+  );
+
 
   return <Select
     options={options}
     components={animatedComponents}
     styles={customStyles}
     onInputChange={handleInputChange}
+    formatOptionLabel={formatOptionLabel}
     menuIsOpen={menuIsOpen}
     placeholder="Entre 3 lettres pour rechercher un item"
     onChange={(selectedOptions) => {
