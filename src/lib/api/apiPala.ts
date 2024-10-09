@@ -116,9 +116,11 @@ export const getFactionLeaderboard = async (): Promise<PaladiumFactionLeaderboar
 }
 
 export const getAuctionHouseInfo = async (uuid: string, username: string): Promise<AhType> => {
+
   const response = await fetchWithHeader<AhType>(`${PALADIUM_API_URL}/v1/paladium/shop/market/players/${uuid}/items`).catch((error: Error) => {
     const message = error.message;
-    return redirect(`/error?message=Impossible de récupérer les données du AH du joueur.&detail=${message}&username=${username}`);
+    console.error(message, username);
+    return {data: [], totalCount:0, dateUpdated: new Date().getTime()};
   })
   response.dateUpdated = new Date().getTime();
   return response;
