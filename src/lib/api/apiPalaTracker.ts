@@ -2,6 +2,7 @@ import 'server-only';
 import {
   AdminShopItem,
   AdminShopItemDetail,
+  CraftingRecipeType,
   OptionType,
   PalaAnimationLeaderboardGlobal,
   ProfilViewType,
@@ -110,5 +111,11 @@ export function getAllItems(): Promise<OptionType[]> {
     });
   }).catch(() => {
     redirect(`/error?message=Impossible de charger la liste des items`);
+  })
+}
+
+export function getCraft(item_name: string): Promise<CraftingRecipeType> {
+  return fetchWithHeader<CraftingRecipeType>(`${API_PALATRACKER}/v1/craft/item/${item_name}`, 30 * 60).catch(() => {
+    redirect(`/error?message=Impossible de charger le craft de cette item : ${item_name}`);
   })
 }

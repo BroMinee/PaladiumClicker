@@ -24,7 +24,7 @@ export default async function QuantitySelectorDisplay({ item }: { item: OptionTy
         <Card>
           <SmallCardInfo title={item.label || "Not Found"}
                          value={item.label2 || "Not Found"}
-                         img={`AH_img/${item.img}`}/>
+                         img={`AH_img/${item.img}`} unoptimized/>
         </Card>
       <Card>
         <CardContent className="h-full pt-6 flex items-center gap-4">

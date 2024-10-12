@@ -1,7 +1,6 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card.tsx";
 import { FaHeart } from "react-icons/fa";
 import GradientText from "@/components/shared/GradientText.tsx";
-import GraphItem from "@/components/AhTracker/GraphItem.tsx";
 import { Suspense } from "react";
 
 import LoadingSpinner from "@/components/ui/loading-spinner.tsx";
@@ -9,7 +8,10 @@ import MarketSelector from "@/components/AhTracker/MarketSelector.tsx";
 import QuantitySelectorDisplay from "@/components/AhTracker/QuantitySelectorDisplay.tsx";
 import { getAllItems } from "@/lib/api/apiPalaTracker.ts";
 import { OptionType } from "@/types";
-import constants from "@/lib/constants";
+import constants from "@/lib/constants.ts";
+import { CraftItemRecipe } from "@/components/Craft/CraftItemRecipe.tsx";
+import MyTreeView from "@/components/Craft/MyTreeView.tsx";
+import { CraftResourceList } from "@/components/Craft/CraftResourceList.tsx";
 
 export async function generateMetadata(
   { searchParams }: { searchParams: { item: string | undefined } },
@@ -23,21 +25,21 @@ export async function generateMetadata(
 
   if (!item) {
     return {
-      title: "PalaTracker - AH Tracker",
-      description: "Suivez les historiques de vente de vos items préférés sur Paladium",
+      title: "PalaTracker - Craft Optimizer",
+      description: "Optimisez vos crafts sur Paladium",
       openGraph: {
-        title: "PalaTracker - AH Tracker",
-        description: "Suivez les historiques de vente de vos items préférés sur Paladium"
+        title: "PalaTracker - Craft Optimizer",
+        description: "Optimisez vos crafts sur Paladium"
       },
     }
   }
 
 
-  const title = `PalaTracker - AH Tracker  - ${item.value}`;
-  const description = "Suivez les historiques de vente de vos items préférés sur Paladium";
+  const title = `PalaTracker - Craft Optimizer  - ${item.value}`;
+  const description = "Optimisez vos crafts sur Paladium";
   return {
     title: title,
-    description: "Suivez les historiques de vente de vos items préférés sur Paladium",
+    description: description,
     openGraph: {
       title: title,
       description: description,
@@ -56,6 +58,9 @@ export default async function AhTrackerPage({ searchParams }: { searchParams: { 
   const options = await getAllItems();
 
   const item = options.find((item) => item.value === searchParams.item);
+
+
+  const itemList = item !== undefined ? [item, item]  : undefined;
 
   if (item === undefined && searchParams.item !== undefined) {
     return <div>
@@ -82,21 +87,9 @@ export default async function AhTrackerPage({ searchParams }: { searchParams: { 
           </CardDescription>
         </CardHeader>
       </Card>
-      <Card className="bg-red-700">
-        <CardHeader>
-          <CardTitle className="text-primary-foreground">
-            Le prix de vente en $ journalier est inexact, il est calculé en divisant la somme des prix de vente
-            en $ par
-            le nombre de ventes journalières, or le nombre de ventes journalières contient aussi les ventes en pbs.
-            Il y a
-            donc une surévaluation du vrai prix.
-            Cela sera corrigé après une mise à jour de l&apos;API de Paladium.
-          </CardTitle>
-        </CardHeader>
-      </Card>
       <Card className="md:col-start-1 md:col-span-2 md:row-start-1 md:row-span-3 row-span-3">
         <CardContent className="gap-2 flex flex-col pt-4">
-          <MarketSelector url={`${constants.ahPath}?item=`}/>
+          <MarketSelector url={`${constants.craftPath}?item=`}/>
         </CardContent>
         {item ?
           <Suspense fallback={<QuantitySelectorDisplayFallBack item={item}/>}>
@@ -105,20 +98,18 @@ export default async function AhTrackerPage({ searchParams }: { searchParams: { 
           :
           null}
       </Card>
-      <div className="w-full">
-        {item ?
+      <div className="flex flex-row gap-2 w-full">
+
+        {item &&
           <Suspense fallback={<GraphItemFallback item={item}/>}>
-            <GraphItem item={item}/>
+            <CraftItemRecipe item={item} options={options}/>
           </Suspense>
-          :
-          <Card className="col-start-1 col-span-4 w-full">
-            <CardHeader>
-              <CardTitle>
-                Veuillez sélectionner un item
-              </CardTitle>
-            </CardHeader>
-          </Card>}
+        }
+
+        <MyTreeView/>
+        <CraftResourceList list={itemList}/>
       </div>
+
     </div>)
 }
 

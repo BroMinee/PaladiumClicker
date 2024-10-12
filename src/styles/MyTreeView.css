@@ -1,0 +1,16 @@
+.rct-text > label {
+    display: inline-flex;
+    flex-direction: row;
+    justify-items: center;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.rct-checkbox {
+    display: flex;
+    justify-items: center;
+    align-items: center;
+    justify-content: center;
+}
+

@@ -1,16 +1,14 @@
 'use client';
 import { useRouter } from "next/navigation";
-import constants from "@/lib/constants.ts";
 import Selector from "@/components/shared/Selector.tsx";
 import { OptionType } from "@/types";
 
 
-
-export function SelectorItemClient({options} :{options: OptionType[]} ) {
+export function SelectorItemClient({ options, url }: { options: OptionType[], url: string }) {
 
   const router = useRouter();
   const setInputValue = (value: string) => {
-    router.push(`${constants.ahPath}?item=` + value, { scroll: false });
+    router.push(`${url}` + value, { scroll: false });
   }
 
 

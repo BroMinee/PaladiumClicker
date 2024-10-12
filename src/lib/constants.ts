@@ -16,6 +16,7 @@ export type PathValid =
   | "/clicker-optimizer"
   | "/palatime"
   | "/pala-animation"
+  | "/craft"
   | "/about"
   | "/ranking?category=money"
   | "/ranking?category=job.miner"
@@ -35,6 +36,7 @@ export type LabelValid =
   | "PalaClicker Optimizer"
   | "Palatime"
   | "PalaAnimation Trainer"
+  | "Optimizer de craft"
   | "A propos"
   | "Money"
   | "Métiers"
@@ -54,6 +56,7 @@ const calculatorXpPath: PathValid = "/xp-calculator";
 const optimizerClickerPath: PathValid = "/clicker-optimizer";
 const palatimePath: PathValid = "/palatime";
 const palaAnimationPath: PathValid = "/pala-animation";
+const craftPath: PathValid = "/craft";
 const moneyRanking: PathValid = "/ranking?category=money";
 const metiersRanking: PathValid = "/ranking?category=job.miner";
 const bossRanking: PathValid = "/ranking?category=boss";
@@ -82,6 +85,7 @@ const links: LinkList = {
   "/clicker-optimizer": { label: "PalaClicker Optimizer", requiredPseudo: true },
   "/palatime": { label: "Palatime", requiredPseudo: false },
   "/pala-animation": { label: "PalaAnimation Trainer", requiredPseudo: true },
+  "/craft": { label: "Optimizer de craft", requiredPseudo: false },
   "/about": { label: "A propos", requiredPseudo: false },
   "/ranking?category=money": { label: "Money", requiredPseudo: false },
   "/ranking?category=job.miner": { label: "Métiers", requiredPseudo: false },
@@ -472,6 +476,7 @@ const constants = {
   palatimePath,
   optimizerClickerPath,
   palaAnimationPath,
+  craftPath,
   moneyRanking,
   metiersRanking,
   bossRanking,

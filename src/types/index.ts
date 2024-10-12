@@ -491,3 +491,30 @@ export type OptionType = {
   label2: string
   img: string
 }
+
+export type CraftingRecipeType =
+  {
+    item_name: string,
+    table: string,
+    item_name_slot1: string,
+    item_name_slot2: string,
+    item_name_slot3: string,
+    item_name_slot4: string,
+    item_name_slot5: string,
+    item_name_slot6: string,
+    item_name_slot7: string,
+    item_name_slot8: string,
+    item_name_slot9: string,
+  }
+
+export type CraftingRecipeKey = keyof Pick<CraftingRecipeType,
+  "item_name_slot1" |
+  "item_name_slot2" |
+  "item_name_slot3" |
+  "item_name_slot4" |
+  "item_name_slot5" |
+  "item_name_slot6" |
+  "item_name_slot7" |
+  "item_name_slot8" |
+  "item_name_slot9"
+>;
