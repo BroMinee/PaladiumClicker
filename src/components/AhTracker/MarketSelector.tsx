@@ -1,17 +1,9 @@
-'use client';
-import itemListJson from "@/assets/items_list.json";
-import Selector from "@/components/shared/Selector.tsx";
-import { useRouter } from "next/navigation";
-import constants from "@/lib/constants.ts";
+'use server';
+import { getAllItems } from "@/lib/api/apiPalaTracker.ts";
+import { SelectorItemClient } from "@/components/Items/SelectorItemClient.tsx";
 
-export default function MarketSelector() {
+export default async function MarketSelector() {
+  const options = await getAllItems();
 
-  const router = useRouter();
-  const setInputValue = (value: string) => {
-    router.push(`${constants.ahPath}?item=` + value, { scroll: false });
-  }
-  return (
-
-    <Selector options={itemListJson} setInputValue={setInputValue}/>
-  )
+  return <SelectorItemClient options={options}/>
 }

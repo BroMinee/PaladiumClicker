@@ -4,8 +4,7 @@ import makeAnimated from 'react-select/animated';
 import { useState } from "react";
 
 import Image from "next/image";
-
-import items_list from "@/assets/items_list.json";
+import { OptionType } from "@/types";
 
 const customStyles: StylesConfig<OptionType, false> = {
   control: (provided, state) => ({
@@ -31,10 +30,6 @@ const customStyles: StylesConfig<OptionType, false> = {
 };
 
 
-interface OptionType {
-  value: string;
-  label: string;
-}
 
 type SelectorProps = {
   options: OptionType[]
@@ -54,18 +49,16 @@ const Selector = ({ options, setInputValue }: SelectorProps) => {
     }
   };
 
-  const getItemImg = (item_to_find: string) => {
-    const v = items_list.find((item) => item.value === item_to_find);
-    if (v) {
-      return v.img;
-    }
-    return 'default';
-  }
 
-  const formatOptionLabel = ({ value, label }: OptionType) => (
+  const formatOptionLabel = ({ label,label2, img }: OptionType) => (
     <div className="flex items-center">
-      <Image src={`/AH_img/${getItemImg(value)}.png`} alt="label" width={48} height={48} unoptimized={true} className="h-12 w-12 pixelated mr-2 rounded-md"/>
-      <span className="ml-2">{label}</span>
+      <Image src={`/AH_img/${img}`} alt="label" width={48} height={48} unoptimized={true}
+             className="h-12 w-12 pixelated mr-2 rounded-md"/>
+      <div className="flex flex-col gap-1">
+        <span className="ml-2 font-bold">{label}</span>
+        <span className="ml-2 text-gray-500">{label2}</span>
+      </div>
+
     </div>
   );
 

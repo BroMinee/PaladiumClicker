@@ -2,6 +2,7 @@ import 'server-only';
 import {
   AdminShopItem,
   AdminShopItemDetail,
+  OptionType,
   PalaAnimationLeaderboardGlobal,
   ProfilViewType,
   RankingResponse,
@@ -10,6 +11,7 @@ import {
   ServerStatusResponse
 } from "@/types";
 import { fetchWithHeader } from "@/lib/api/misc.ts";
+import { redirect } from "next/navigation";
 // import { toast } from "sonner";
 
 export const API_PALATRACKER = process.env.PALACLICKER_API_URL || "https://palatracker.bromine.fr"
@@ -89,4 +91,24 @@ export function getStatusFaction() {
 
 export function getStatusLauncher() {
   return fetchWithHeader<ServerStatusResponse[]>(`${API_PALATRACKER}/v1/status-history/launcher`, 0);
+}
+
+export function getAllItems(): Promise<OptionType[]> {
+  return fetchWithHeader<{
+    item_name: string,
+    us_trad: string,
+    fr_trad: string,
+    img: string
+  }[]>(`${API_PALATRACKER}/v1/craft/items`, 30 * 60).then((res) => {
+    return res.map((item) => {
+      return {
+        value: item.item_name,
+        label: item.us_trad,
+        label2: item.fr_trad,
+        img: item.img
+      }
+    });
+  }).catch(() => {
+    redirect(`/error?message=Impossible de charger la liste des items`);
+  })
 }

@@ -484,3 +484,10 @@ export type PlayerDBApiReponse =
   {
     data: { player: { id: string } }
   }
+
+export type OptionType = {
+  value: string
+  label: string
+  label2: string
+  img: string
+}

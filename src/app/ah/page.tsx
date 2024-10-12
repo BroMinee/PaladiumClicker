@@ -1,29 +1,26 @@
-// import Plot from "react-plotly.js";
-// import SmallCardInfo from "@/components/shared/SmallCardInfo.tsx";
-// import { getPaladiumAhItemFullHistory, getPaladiumAhItemStats } from "@/lib/apiPala.ts";
-// import { AhItemHistory, AhPaladium } from "@/types";
-// import Selector from "@/components/shared/Selector.tsx";
-// import { LuCalendarClock } from "react-icons/lu";
-// import { formatPrice, GetAllFileNameInFolder, levensteinDistance } from "@/lib/misc.ts";
-
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card.tsx";
 import { FaHeart } from "react-icons/fa";
 import GradientText from "@/components/shared/GradientText.tsx";
 import GraphItem from "@/components/AhTracker/GraphItem.tsx";
 import { Suspense } from "react";
 
-import itemListJson from "@/assets/items_list.json";
 import LoadingSpinner from "@/components/ui/loading-spinner.tsx";
 import MarketSelector from "@/components/AhTracker/MarketSelector.tsx";
 import QuantitySelectorDisplay from "@/components/AhTracker/QuantitySelectorDisplay.tsx";
-import { GetAllFileNameInFolder, levenshteinDistance } from "@/lib/misc.ts";
+import { getAllItems } from "@/lib/api/apiPalaTracker.ts";
+import { OptionType } from "@/types";
 
-export function generateMetadata(
+export async function generateMetadata(
   { searchParams }: { searchParams: { item: string | undefined } },
 ) {
-  const itemName = itemListJson.find((item) => item.value === searchParams.item)?.label as string | undefined;
 
-  if (!itemName) {
+  const itemListJson = await getAllItems().catch(() => {
+    return [] as OptionType[];
+  })
+
+  const item = itemListJson.find((item) => item.value === searchParams.item);
+
+  if (!item) {
     return {
       title: "PalaTracker - AH Tracker",
       description: "Suivez les historiques de vente de vos items préférés sur Paladium",
@@ -34,15 +31,8 @@ export function generateMetadata(
     }
   }
 
-  let closestItemName = searchParams.item === undefined ? "" : GetAllFileNameInFolder().reduce((acc, curr) => {
-    if (levenshteinDistance(curr, searchParams.item!) < levenshteinDistance(acc, searchParams.item!)) {
-      return curr;
-    } else {
-      return acc;
-    }
-  });
 
-  const title = `PalaTracker - AH Tracker  - ${itemName}`;
+  const title = `PalaTracker - AH Tracker  - ${item.value}`;
   const description = "Suivez les historiques de vente de vos items préférés sur Paladium";
   return {
     title: title,
@@ -52,7 +42,7 @@ export function generateMetadata(
       description: description,
       images: [
         {
-          url: `https://palatracker.bromine.fr/AH_img/${closestItemName}.png`,
+          url: `https://palatracker.bromine.fr/AH_img/${item.img}`,
           width: 500,
           height: 500,
         }
@@ -61,7 +51,23 @@ export function generateMetadata(
   }
 }
 
-export default function AhTrackerPage({ searchParams }: { searchParams: { item: string | undefined } }) {
+export default async function AhTrackerPage({ searchParams }: { searchParams: { item: string | undefined } }) {
+  const options = await getAllItems();
+
+  const item = options.find((item) => item.value === searchParams.item);
+
+  if (item === undefined && searchParams.item !== undefined) {
+    return <div>
+      <Card className="bg-red-700">
+        <CardHeader>
+          <CardTitle className="text-primary-foreground">
+            L&apos;item sélectionné n&apos;existe pas
+          </CardTitle>
+        </CardHeader>
+      </Card>
+    </div>
+  }
+
   return (
     <div className="flex flex-col gap-4">
       <Card>
@@ -91,17 +97,17 @@ export default function AhTrackerPage({ searchParams }: { searchParams: { item: 
         <CardContent className="gap-2 flex flex-col pt-4">
           <MarketSelector/>
         </CardContent>
-        {searchParams.item ?
-          <Suspense fallback={<QuantitySelectorDisplayFallBack selectedItem={searchParams.item}/>}>
-            <QuantitySelectorDisplay selectedItem={searchParams.item}/>
+        {item ?
+          <Suspense fallback={<QuantitySelectorDisplayFallBack item={item}/>}>
+            <QuantitySelectorDisplay item={item}/>
           </Suspense>
           :
           null}
       </Card>
       <div className="w-full">
-        {searchParams.item ?
-          <Suspense fallback={<GraphItemFallback selectedItem={searchParams.item}/>}>
-            <GraphItem selectedItem={searchParams.item}/>
+        {item ?
+          <Suspense fallback={<GraphItemFallback item={item}/>}>
+            <GraphItem item={item}/>
           </Suspense>
           :
           <Card className="col-start-1 col-span-4 w-full">
@@ -116,28 +122,28 @@ export default function AhTrackerPage({ searchParams }: { searchParams: { item: 
 }
 
 
-function QuantitySelectorDisplayFallBack({ selectedItem }: { selectedItem: string }) {
+function QuantitySelectorDisplayFallBack({ item }: { item: OptionType }) {
   return (<Card>
     <CardHeader>
       <CardTitle className="flex flex-row gap-2">
         <LoadingSpinner size={4}/>
         Chargement des informations de :{" "}
         <GradientText
-          className="font-extrabold">{itemListJson.find((item) => item.value === selectedItem)?.label}
+          className="font-extrabold">{item.label}
         </GradientText>
       </CardTitle>
     </CardHeader>
   </Card>)
 }
 
-function GraphItemFallback({ selectedItem }: { selectedItem: string }) {
+function GraphItemFallback({ item }: { item: OptionType }) {
   return (<Card>
     <CardHeader>
       <CardTitle className="flex flex-row gap-2">
         <LoadingSpinner size={4}/>
         Chargement du graphique de prix de :{" "}
         <GradientText
-          className="font-extrabold">{itemListJson.find((item) => item.value === selectedItem)?.label}
+          className="font-extrabold">{item.label || "Not Found"}
         </GradientText>
       </CardTitle>
     </CardHeader>

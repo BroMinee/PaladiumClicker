@@ -1,43 +1,31 @@
 import { Card, CardContent } from "@/components/ui/card.tsx";
 import { FaBoxOpen } from "react-icons/fa";
 import { getPaladiumAhItemStats } from "@/lib/api/apiPala.ts";
-import { PaladiumAhItemStat } from "@/types";
+import { OptionType, PaladiumAhItemStat } from "@/types";
 import { redirect } from "next/navigation";
 import GradientText from "@/components/shared/GradientText.tsx";
-import { formatPrice, GetAllFileNameInFolder, levenshteinDistance } from "@/lib/misc.ts";
+import { formatPrice } from "@/lib/misc.ts";
 import SmallCardInfo from "@/components/shared/SmallCardInfo.tsx";
 
-import itemListJson from "@/assets/items_list.json";
 
-export default async function QuantitySelectorDisplay({ selectedItem }: { selectedItem: string }) {
+export default async function QuantitySelectorDisplay({ item }: { item: OptionType }) {
   let itemInfo = null as PaladiumAhItemStat | null;
   try {
-    itemInfo = await getPaladiumAhItemStats(selectedItem);
+    itemInfo = await getPaladiumAhItemStats(item.value);
   } catch (e) {
     console.error(e);
   }
 
   if (!itemInfo)
-    redirect(`/error?message=Impossible de récupérer les données actuelles de ${selectedItem}`)
-
-  const closestItemName = selectedItem.length === 0 ? "" : GetAllFileNameInFolder().reduce((acc, curr) => {
-    if (levenshteinDistance(curr, selectedItem) < levenshteinDistance(acc, selectedItem)) {
-      return curr;
-    } else {
-      return acc;
-    }
-  });
-
+    redirect(`/error?message=Impossible de récupérer les données actuelles de ${item.label}`)
 
   return (
     <div className="flex flex-row justify-evenly gap-3 pb-4">
-      {selectedItem.length === 0 ? "" :
         <Card>
-          <SmallCardInfo title={itemListJson.find((item) => item.value === selectedItem)?.label || "Not Found"}
-                         value="Image non contractuelle"
-                         img={`AH_img/${closestItemName}.png`}/>
+          <SmallCardInfo title={item.label || "Not Found"}
+                         value={item.label2 || "Not Found"}
+                         img={`AH_img/${item.img}`}/>
         </Card>
-      }
       <Card>
         <CardContent className="h-full pt-6 flex items-center gap-4">
           <FaBoxOpen className="size-12 mr-2"/>
