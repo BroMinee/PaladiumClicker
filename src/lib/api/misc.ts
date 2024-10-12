@@ -97,3 +97,36 @@ export const fetchWithHeader = async <T>(url: string, cache_duration_in_sec = 15
   else
     throw new Error(`Impossible de récupérer les données actuelles de ${url}`);
 }
+
+
+export const fetchPostWithHeader = async <T>(url: string, body: string, cache_duration_in_sec = 15 * 60): Promise<T> => {
+  let response: Response | null = null;
+  let json = null;
+
+  console.log(body);
+  try {
+    response = await fetch(url,
+      {
+        method: 'POST',
+        next: { revalidate: cache_duration_in_sec },
+        signal: AbortSignal.timeout(4000),
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${process.env.PALADIUM_API_KEY}`
+        },
+        body: body
+      })
+    json = await response.json();
+
+    if (!response.ok)
+      throw new Error(url + json.message);
+    return json as T;
+  } catch (error) {
+    console.error(error, url);
+  }
+
+  if (json)
+    throw new Error(json.message);
+  else
+    throw new Error(`Impossible de récupérer les données actuelles de ${url}`);
+}

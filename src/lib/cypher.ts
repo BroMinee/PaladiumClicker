@@ -1,8 +1,8 @@
 'use server'
 import 'server-only';
-import axios from "axios";
-import { checkAnswerPalaAnimationType, KeyDownTimestampType, NetworkError } from "@/types";
+import { checkAnswerPalaAnimationType, KeyDownTimestampType } from "@/types";
 import { API_PALATRACKER } from "@/lib/api/apiPalaTracker.ts";
+import { fetchPostWithHeader, fetchWithHeader } from "@/lib/api/misc.ts";
 
 function base64ToUint8Array(base64String: string): Uint8Array {
   // Decode the base64 string into a binary string
@@ -78,50 +78,33 @@ export async function decryptAES256(encryptedText: string, key: string): Promise
   return dec.decode(decryptedData);
 }
 
-export const getNewQuestionPalaAnimation = async (username: string): Promise<{
+export const getNewQuestionPalaAnimation = async (username: string, lastQuestion: string | undefined): Promise<{
   question: string,
   session_uuid: string
 }> => {
-  const response = await axios.get<string>(`${API_PALATRACKER}/v1/palaAnimation/question?username=${username}`).catch((error) => error);
-
-  if (response instanceof Error) {
-    if ((response as NetworkError).code === "ECONNABORTED") {
-      throw "Timeout error of \"Get New Question\" API, please try again later";
-    }
-  }
-
-  if (response.status !== 200) {
-    throw response;
-  }
-
-  const decrypted = await decryptAES256(response.data, process.env.VITE_CRYPT_KEY!);
-  return JSON.parse(decrypted) as { question: string, session_uuid: string };
+  if (lastQuestion === undefined || lastQuestion === "")
+    lastQuestion = "0";
+  // const decrypted = await decryptAES256(response.data, process.env.VITE_CRYPT_KEY!);
+  return await fetchWithHeader<{
+    question: string,
+    session_uuid: string
+  }>(`${API_PALATRACKER}/v1/palaAnimation/question?username=${username}&last_question=${lastQuestion}`, 0);
 }
 
 export const checkAnswerPalaAnimation = async (answer: string, session_uuid: string, keyPressTimestamp: KeyDownTimestampType[], user_time: number): Promise<checkAnswerPalaAnimationType> => {
-  const encrypted = await encryptAES256(JSON.stringify({
+  // const encrypted = await encryptAES256(JSON.stringify({
+  //   answer,
+  //   session_uuid,
+  //   keyPressTimestamp,
+  //   user_time
+  // }), process.env.VITE_CRYPT_KEY!);
+
+
+  return await fetchPostWithHeader<checkAnswerPalaAnimationType>(`${API_PALATRACKER}/v1/palaAnimation/checkAnswer`, JSON.stringify({
     answer,
     session_uuid,
     keyPressTimestamp,
     user_time
-  }), process.env.VITE_CRYPT_KEY!);
-
-
-  const response = await axios.post<checkAnswerPalaAnimationType>(`${API_PALATRACKER}/v1/palaAnimation/checkAnswer`, {
-    message: encrypted
-  }).catch((error) => error);
-
-
-  if (response instanceof Error) {
-    if ((response as NetworkError).code === "ECONNABORTED") {
-      throw "Timeout error of \"Check Answer\" API, please try again later";
-    }
-  }
-
-  if (response.status !== 200) {
-    throw response;
-  }
-
-  return response.data as checkAnswerPalaAnimationType;
+  }), 0);
 }
 

@@ -1,5 +1,3 @@
-// @ts-nocheck - A RETIRER APRES AVOIR CORRIGE LE FICHIER
-
 'use client';
 
 import { FormEvent, useEffect, useState } from "react";
@@ -18,7 +16,7 @@ import { Input } from "@/components/ui/input.tsx";
 import { cn } from "@/lib/utils.ts";
 import { useSessionContext } from "@/components/Pala-Animation/SessionContextProvider.tsx";
 import { Button } from "@/components/ui/button.tsx";
-import { checkAnswerPalaAnimation } from "@/lib/cypher.ts";
+import { checkAnswerPalaAnimation, getNewQuestionPalaAnimation } from "@/lib/cypher.ts";
 import { useRouter } from "next/navigation";
 
 
@@ -110,6 +108,9 @@ export function PalaAnimationBody({ username }: PalaAnimationBodyType) {
             typeof error === "string" ?
               error :
               "Une erreur est survenue dans l'enregistrement du temps";
+          setTimeout(() => {
+            setReroll(true);
+          }, 500);
           setTimer(message);
         }).finally(() => {setIsChecking(false);})
     } else {
@@ -122,7 +123,7 @@ export function PalaAnimationBody({ username }: PalaAnimationBodyType) {
       setOldAnswer([newEntryOldAnswer, ...oldAnswer]);
       setTimeout(() => {
         setReroll(true);
-      }, 200);
+      }, 500);
     } else {
       setOldAnswer([newEntryOldAnswer, ...oldAnswer]);
     }
@@ -154,23 +155,18 @@ export function PalaAnimationBody({ username }: PalaAnimationBodyType) {
 
     if (!reroll)
       return
-    // const interval = setInterval(() => {
-    //   getNewQuestionPalaAnimation(username).then(
-    //     (data) => {
-    //       if (data.question !== question)
-    //         clearInterval(interval);
-    //       setQuestion(data.question);
-    //       setSessionUuid(data.session_uuid);
-    //     }
-    //   ).catch(
-    //     (error) => {
-    //       console.error("Error while fetching new question", error);
-    //     }
-    //   ).finally(() => {
-    //     setIsChecking(false);
-    //   });
-    // }, 1000);
-
+    getNewQuestionPalaAnimation(username, question).then(
+      (data) => {
+        setQuestion(data.question);
+        setSessionUuid(data.session_uuid);
+      }
+    ).catch(
+      (error) => {
+        console.error("Error while fetching new question", error);
+      }
+    ).finally(() => {
+      setIsChecking(false);
+    });
 
   }, [reroll]);
 
