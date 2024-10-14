@@ -10,15 +10,21 @@ type SmallCardInfoProps = {
   value: string;
   img: string;
   unoptimized?: boolean;
+  count?: number;
 }
 
-const SmallCardInfo = ({ className, title, value, img, unoptimized }: SmallCardInfoProps) => {
+const SmallCardInfo = ({ className, title, value, img, unoptimized, count }: SmallCardInfoProps) => {
   return (
     <CardContent className={cn(className, "h-full pt-6 flex items-center gap-4")}>
-      <Image src={safeJoinPaths(img)} alt={img}
-             className="h-12 w-12 pixelated mr-2 rounded-md" width={48} height={48}
-             unoptimized={unoptimized || img.includes(".gif") || img.includes(".webp")}
-      />
+      <div className="relative inline-block">
+        <Image src={safeJoinPaths(img)} alt={img}
+               className="h-12 w-12 pixelated mr-2 rounded-md" width={48} height={48}
+               unoptimized={unoptimized || img.includes(".gif") || img.includes(".webp")}/>
+        {count &&
+          <span className="bottom-0 right-0 pr-2 pb-0 absolute text-xl" style={{ bottom: "-10px" }}>{count}</span>}
+      </div>
+
+
       <div className="flex flex-col gap-2">
         <span className="font-semibold">{title}</span>
         <div className="flex gap-2 items-center">

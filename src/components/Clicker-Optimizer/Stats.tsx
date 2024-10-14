@@ -21,7 +21,7 @@ import { useRpsStore } from "@/stores/use-rps-store";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover.tsx";
 import Image from "next/image";
 
-const PROCHAIN_ACHAT_COUNT = 20;
+const PROCHAIN_ACHAT_COUNT = 100*40;
 
 const Stats = () => {
   const { data: playerInfo, setPlayerInfo } = usePlayerInfoStore();
@@ -317,6 +317,9 @@ export function computeXBuildingAhead(playerInfo: PlayerInfo, achatCount: number
       );
     }
   }
+  if(achatCount === 100*40)
+    console.log(buildingBuyPaths[buildingBuyPaths.length - 1]);
+
   return buildingBuyPaths;
 }
 

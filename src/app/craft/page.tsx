@@ -1,17 +1,17 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card.tsx";
 import { FaHeart } from "react-icons/fa";
 import GradientText from "@/components/shared/GradientText.tsx";
-import { Suspense } from "react";
+import React, { Suspense } from "react";
 
 import LoadingSpinner from "@/components/ui/loading-spinner.tsx";
 import MarketSelector from "@/components/AhTracker/MarketSelector.tsx";
-import QuantitySelectorDisplay from "@/components/AhTracker/QuantitySelectorDisplay.tsx";
 import { getAllItems } from "@/lib/api/apiPalaTracker.ts";
 import { OptionType } from "@/types";
 import constants from "@/lib/constants.ts";
 import { CraftItemRecipe } from "@/components/Craft/CraftItemRecipe.tsx";
 import MyTreeView from "@/components/Craft/MyTreeView.tsx";
 import { CraftResourceList } from "@/components/Craft/CraftResourceList.tsx";
+import CraftingInformationFetcher from "@/components/Craft/CraftingInformationFetcher.tsx";
 
 export async function generateMetadata(
   { searchParams }: { searchParams: { item: string | undefined } },
@@ -59,8 +59,8 @@ export default async function AhTrackerPage({ searchParams }: { searchParams: { 
 
   const item = options.find((item) => item.value === searchParams.item);
 
-
   const itemList = item !== undefined ? [item, item]  : undefined;
+
 
   if (item === undefined && searchParams.item !== undefined) {
     return <div>
@@ -80,7 +80,7 @@ export default async function AhTrackerPage({ searchParams }: { searchParams: { 
         <CardHeader className="flex flex-row items-center justify-between">
           <CardTitle>
             Bienvenue sur{" "}
-            <GradientText className="font-extrabold">l&apos;AH Tracker</GradientText>
+            <GradientText className="font-extrabold">l&apos;optimiseur de Craft</GradientText>
           </CardTitle>
           <CardDescription>
             Made with <FaHeart className="text-primary inline-block"/> by <GradientText>BroMine__</GradientText>
@@ -91,49 +91,46 @@ export default async function AhTrackerPage({ searchParams }: { searchParams: { 
         <CardContent className="gap-2 flex flex-col pt-4">
           <MarketSelector url={`${constants.craftPath}?item=`}/>
         </CardContent>
-        {item ?
-          <Suspense fallback={<QuantitySelectorDisplayFallBack item={item}/>}>
-            <QuantitySelectorDisplay item={item}/>
-          </Suspense>
-          :
-          null}
+        {/*{item ?*/}
+        {/*  <Suspense fallback={<QuantitySelectorDisplayFallBack item={item}/>}>*/}
+        {/*    <QuantitySelectorDisplay item={item}/>*/}
+        {/*  </Suspense>*/}
+        {/*  :*/}
+        {/*  null}*/}
       </Card>
       <div className="flex flex-row gap-2 w-full">
 
         {item &&
-          <Suspense fallback={<GraphItemFallback item={item}/>}>
-            <CraftItemRecipe item={item} options={options}/>
+          <Suspense fallback={<CraftRecipeFallback item={item}/>}>
+            <CraftingInformationFetcher item={item} options={options} count={1}>
+              <Suspense fallback={<CraftRecipeFallback item={item}/>}>
+                <CraftItemRecipe item={item} options={options}/>
+              </Suspense>
+              <MyTreeView/>
+              <CraftResourceList list={itemList}/>
+            </CraftingInformationFetcher>
           </Suspense>
         }
-
-        <MyTreeView/>
-        <CraftResourceList list={itemList}/>
+        {/*{item &&*/}
+        {/*  <Suspense fallback={<CraftRecipeFallback item={item}/>}>*/}
+        {/*    <CraftItemRecipe item={item} options={options}/>*/}
+        {/*  </Suspense>*/}
+        {/*}*/}
+        {/*{item &&*/}
+        {/*  <MyTreeView/>*/}
+        {/*}*/}
+        {/*<CraftResourceList list={itemList}/>*/}
       </div>
 
     </div>)
 }
 
-
-function QuantitySelectorDisplayFallBack({ item }: { item: OptionType }) {
+export function CraftRecipeFallback({ item }: { item: OptionType }) {
   return (<Card>
     <CardHeader>
       <CardTitle className="flex flex-row gap-2">
         <LoadingSpinner size={4}/>
-        Chargement des informations de :{" "}
-        <GradientText
-          className="font-extrabold">{item.label}
-        </GradientText>
-      </CardTitle>
-    </CardHeader>
-  </Card>)
-}
-
-function GraphItemFallback({ item }: { item: OptionType }) {
-  return (<Card>
-    <CardHeader>
-      <CardTitle className="flex flex-row gap-2">
-        <LoadingSpinner size={4}/>
-        Chargement du graphique de prix de :{" "}
+        Chargement des crafts de l&apos;item :{" "}
         <GradientText
           className="font-extrabold">{item.label || "Not Found"}
         </GradientText>

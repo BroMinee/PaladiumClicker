@@ -495,7 +495,7 @@ export type OptionType = {
 export type CraftingRecipeType =
   {
     item_name: string,
-    table: string,
+    table: 'crafting table' | 'furnace' | 'grinder' | 'palamachine' | 'cauldron' | 'alchemy creator',
     item_name_slot1: string,
     item_name_slot2: string,
     item_name_slot3: string,
@@ -505,6 +505,7 @@ export type CraftingRecipeType =
     item_name_slot7: string,
     item_name_slot8: string,
     item_name_slot9: string,
+    count: number
   }
 
 export type CraftingRecipeKey = keyof Pick<CraftingRecipeType,
@@ -518,3 +519,5 @@ export type CraftingRecipeKey = keyof Pick<CraftingRecipeType,
   "item_name_slot8" |
   "item_name_slot9"
 >;
+
+export type NodeType = OptionType & { count: number }

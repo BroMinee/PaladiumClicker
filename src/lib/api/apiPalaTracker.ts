@@ -114,8 +114,15 @@ export function getAllItems(): Promise<OptionType[]> {
   })
 }
 
-export function getCraft(item_name: string): Promise<CraftingRecipeType> {
-  return fetchWithHeader<CraftingRecipeType>(`${API_PALATRACKER}/v1/craft/item/${item_name}`, 30 * 60).catch(() => {
-    redirect(`/error?message=Impossible de charger le craft de cette item : ${item_name}`);
+export async function getCraft(item_name: string): Promise<CraftingRecipeType> {
+  const allCraft = await fetchWithHeader<CraftingRecipeType[]>(`${API_PALATRACKER}/v1/craft/item/all`, 30 * 60).catch(() => {
+    redirect(`/error?message=Impossible de charger la totalité des crafts.`);
+    return [] as CraftingRecipeType[];
   })
+
+  const craft = allCraft.find((craft) => craft.item_name === item_name);
+  if (craft === undefined)
+    redirect(`/error?message=Impossible de trouver le craft de ${item_name}`);
+
+  return craft;
 }
