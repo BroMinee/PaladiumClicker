@@ -461,6 +461,19 @@ const how_to_xp: HowToXp = {
   ]
 }
 
+const notificationPath: Map<PathValid, number> = new Map<PathValid, number>(
+  [
+    ["/craft", new Date("2024-10-14").getTime()],
+    ["/patchnote", new Date("2024-10-14").getTime()],
+    ["/pala-animation", new Date("2024-10-14").getTime()],
+  ]);
+
+const menuPaths: Map<string, PathValid[]> = new Map<string, PathValid[]>([
+  ['Utilisateur', ["/profil", "/xp-calculator", "/clicker-optimizer"]],
+  ['Classement', ["/ranking?category=money", "/ranking?category=job.miner", "/ranking?category=boss", "/ranking?category=egg_hunt", "/ranking?category=koth", "/ranking?category=clicker"]],
+  ['Statistiques', ["/ah", "/admin-shop"]],
+  ['Autres', ["/status", "/palatime", "/pala-animation", "/patchnote", "/craft", "/politique-de-confidentialite"]],
+]);
 
 const constants = {
   defaultUsername,
@@ -488,6 +501,8 @@ const constants = {
   politiqueDeConfidentialitePath,
   patchnotePath,
   SMELT,
+  notificationPath,
+  MenuPath: menuPaths,
 };
 
 export default constants;

@@ -4,7 +4,8 @@
     "events": [
       "Ajout des nouvelles questions du PalaAnimation",
       "Correction d'un crash lorsque l'API du market d'un joueur est down",
-      "Correction de l'association du nom d'un item avec son image png"
+      "Correction de l'association du nom d'un item avec son image png",
+      "Ajout d'un système de notification lors de correction de bug majeur ou d'ajout de fonctionnalité"
     ]
   },
   {

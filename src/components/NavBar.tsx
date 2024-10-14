@@ -10,7 +10,7 @@ import { GrOptimize } from "react-icons/gr";
 import { RiMoneyDollarCircleFill } from "react-icons/ri";
 import { LuShoppingCart, LuSkull } from "react-icons/lu";
 import { PiEggCrackBold } from "react-icons/pi";
-import { GiCrenelCrown } from "react-icons/gi";
+import { GiCrenelCrown, GiStoneCrafting } from "react-icons/gi";
 import { TbHandClick } from "react-icons/tb";
 import { ImNewspaper } from "react-icons/im";
 import { IoMdStopwatch } from "react-icons/io";
@@ -102,6 +102,9 @@ function NavBarContent() {
           </LinkClient>
           <LinkClient path={constants.palaAnimationPath}>
             <IoMdStopwatch size={24}/>
+          </LinkClient>
+          <LinkClient path={constants.craftPath}>
+            <GiStoneCrafting size={24}/>
           </LinkClient>
           <LinkClient path={constants.patchnotePath}>
             <FaClipboardList size={24}/>
