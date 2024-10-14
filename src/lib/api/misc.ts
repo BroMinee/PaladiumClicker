@@ -103,7 +103,6 @@ export const fetchPostWithHeader = async <T>(url: string, body: string, cache_du
   let response: Response | null = null;
   let json = null;
 
-  console.log(body);
   try {
     response = await fetch(url,
       {

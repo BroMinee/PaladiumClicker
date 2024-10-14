@@ -317,9 +317,6 @@ export function computeXBuildingAhead(playerInfo: PlayerInfo, achatCount: number
       );
     }
   }
-  if(achatCount === 100*40)
-    console.log(buildingBuyPaths[buildingBuyPaths.length - 1]);
-
   return buildingBuyPaths;
 }
 
