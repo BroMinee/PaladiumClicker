@@ -12,6 +12,7 @@ const customStyles: StylesConfig<OptionType, false> = {
     backgroundColor: 'white',
     borderColor: state.isFocused ? 'blue' : 'gray',
     boxShadow: state.isFocused ? '0 0 0 1px blue' : 'none',
+    cursor: 'text',
     '&:hover': {
       borderColor: state.isFocused ? 'blue' : 'gray',
     },
@@ -35,6 +36,9 @@ type SelectorProps = {
   options: OptionType[]
   setInputValue: (value: string) => void
 }
+
+const DropdownIndicator = () => null;
+const IndicatorSeparator = () => null;
 
 const animatedComponents = makeAnimated();
 
@@ -65,7 +69,7 @@ const Selector = ({ options, setInputValue }: SelectorProps) => {
 
   return <Select
     options={options}
-    components={animatedComponents}
+    components={{...animatedComponents, DropdownIndicator,IndicatorSeparator}}
     styles={customStyles}
     onInputChange={handleInputChange}
     formatOptionLabel={formatOptionLabel}
