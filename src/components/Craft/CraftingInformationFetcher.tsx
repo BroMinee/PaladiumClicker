@@ -16,24 +16,26 @@ export default async function CraftingInformationFetcher({ item, options, count 
   count: number,
 }) {
 
-  const root = await BuildTreeRecursively(createNodeType(item, count), options, new Map<string, CraftingRecipeType>());
+  const root = await BuildTreeRecursively(createNodeType(item, count), options, new Map<string, CraftingRecipeType>(), 0, false);
 
   const internalNodeName = getInternalNode(root).map((el) => { return el.value });
 
   return (
     <>
-      <Card>
-        <CardHeader>
-          <CardTitle>
-            Aide à la fabrication
-          </CardTitle>
-        </CardHeader>
-        <Suspense fallback={<CraftRecipeFallback item={item}/>}>
+      <Suspense fallback={<CraftRecipeFallback item={item}/>}>
+        <Card className="row-start-2">
+          <CardHeader>
+            <CardTitle>
+              Aide à la fabrication
+            </CardTitle>
+          </CardHeader>
+
           {internalNodeName.map((el, index) => {
             return <CraftItemRecipe key={el.value + index + "-craft"} item={el} options={options}/>
           })}
-        </Suspense>
-      </Card>
+        </Card>
+      </Suspense>
+
       <CraftingInformationClient
         root={root}>
       </CraftingInformationClient>
@@ -42,7 +44,7 @@ export default async function CraftingInformationFetcher({ item, options, count 
 }
 
 
-export async function BuildTreeRecursively(el: NodeType, options: OptionType[], valueToRes: Map<string, CraftingRecipeType>, depth = 0): Promise<Tree<NodeType>> {
+export async function BuildTreeRecursively(el: NodeType, options: OptionType[], valueToRes: Map<string, CraftingRecipeType>, depth: number, testCompilation : boolean): Promise<Tree<NodeType>> {
 
   const root = createTreeNode(el, el.count);
 
@@ -56,17 +58,16 @@ export async function BuildTreeRecursively(el: NodeType, options: OptionType[], 
 
   valueToRes.set(el.value, craft_recipe);
 
-  // if(testIfLoopingTree(father, craft_recipe))
-  //   throw new Error(`Looping tree for ${el.value}`)
-
-
   const slotAvailable: CraftingRecipeKey[] = ['item_name_slot1', 'item_name_slot2', 'item_name_slot3', 'item_name_slot4', 'item_name_slot5', 'item_name_slot6', 'item_name_slot7', 'item_name_slot8', 'item_name_slot9'] as const;
-  const childrenOrNull = slotAvailable.map((slot) => {
+  const childrenOrNull = slotAvailable.map((slot, index) => {
     if (craft_recipe[slot] === 'air')
       return null;
     const t = options.find((option) => option.value === craft_recipe[slot]);
-    if (t === undefined)
-      return null;
+    if (t === undefined) {
+      if (testCompilation)
+        return null;
+      throw new Error(`Le craft de ${el.value} n'existe pas encore car il été implémenté. De de détail : slot ${index} = ${craft_recipe[slot]}`)
+    }
     return t;
   });
   const children = childrenOrNull.filter((el) => el !== null) as OptionType[];
@@ -80,7 +81,7 @@ export async function BuildTreeRecursively(el: NodeType, options: OptionType[], 
   });
 
   for (const child of uniqueChildrenMap) {
-    const childNode = await BuildTreeRecursively(createNodeType(child[0], child[1] * countChildrenResource), options, valueToRes, depth + 1);
+    const childNode = await BuildTreeRecursively(createNodeType(child[0], child[1] * countChildrenResource), options, valueToRes, depth + 1, testCompilation);
     addChildrenToTree(root, childNode);
   }
   return root;

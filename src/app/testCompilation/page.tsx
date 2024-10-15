@@ -6,7 +6,7 @@ import { CraftRecipeFallback } from "@/app/craft/page.tsx";
 import { CraftItemRecipe } from "@/components/Craft/CraftItemRecipe.tsx";
 
 function createNodeType(item: OptionType, count: number): NodeType {
-  return { ...item, count };
+  return { ...item, count, checked: false };
 }
 
 export default async function Page() {
@@ -17,7 +17,7 @@ export default async function Page() {
 
   for (const option of options) {
     // wait 2 sec between each craft
-    await BuildTreeRecursively(createNodeType(option, 1), options, new Map<string, CraftingRecipeType>()).catch((e) => { map.set(option.value, e.message) });
+    await BuildTreeRecursively(createNodeType(option, 1), options, new Map<string, CraftingRecipeType>(), 0, true).catch((e) => { map.set(option.value, e.message) });
   }
 
   if (map.size > 0) {

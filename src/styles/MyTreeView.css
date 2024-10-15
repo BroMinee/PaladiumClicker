@@ -4,6 +4,7 @@
     justify-items: center;
     align-items: center;
     justify-content: center;
+    border-radius: 12px;
 }
 
 
@@ -12,5 +13,6 @@
     justify-items: center;
     align-items: center;
     justify-content: center;
+
 }
 

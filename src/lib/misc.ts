@@ -3253,13 +3253,13 @@ export function reloadProfilNeeded(playerInfoLocal: PlayerInfo | null, username:
   return playerInfoLocal === null || playerInfoLocal.username.toLowerCase() !== username.toLowerCase()
 }
 
-export function createTreeNode(item: OptionType, count: number): Tree<NodeType> {
-  const node: NodeType = createNodeType(item, count);
+export function createTreeNode(item: OptionType, count: number, checked = false): Tree<NodeType> {
+  const node: NodeType = createNodeType(item, count, checked);
   return { value: node, children: [] };
 }
 
-export function createNodeType(item: OptionType, count: number): NodeType {
-  return { ...item, count };
+export function createNodeType(item: OptionType, count: number, checked = false): NodeType {
+  return { ...item, count: count, checked: checked };
 }
 
 export function addChildrenToTree<T>(father: Tree<T>, children: Tree<T>) {

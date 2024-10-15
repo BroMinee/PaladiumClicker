@@ -520,7 +520,7 @@ export type CraftingRecipeKey = keyof Pick<CraftingRecipeType,
   "item_name_slot9"
 >;
 
-export type NodeType = OptionType & { count: number }
+export type NodeType = OptionType & { count: number } & { checked: boolean }
 
 export type Tree<T> = {
   value: T;

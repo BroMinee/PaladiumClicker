@@ -94,8 +94,7 @@ export default async function AhTrackerPage({ searchParams }: { searchParams: { 
         {/*  :*/}
         {/*  null}*/}
       </Card>
-      <div className="flex flex-row gap-2 w-full">
-
+      <div className="grid grid-cols-2 gap-2 w-full">
         {item &&
           <Suspense fallback={<CraftRecipeFallback item={item}/>}>
             <CraftingInformationFetcher item={item} options={options} count={1}/>
