@@ -9,10 +9,13 @@ import {
   ManyUpgrade,
   MetierKey,
   Metiers,
+  NodeType,
+  OptionType,
   PlayerInfo,
   PosteriorUpgrade,
   RankingType,
   TerrainUpgrade,
+  Tree,
   UpgradeKey
 } from "@/types";
 import constants, { PathValid } from "@/lib/constants.ts";
@@ -3248,4 +3251,33 @@ export function reloadProfilNeeded(playerInfoLocal: PlayerInfo | null, username:
     return false;
 
   return playerInfoLocal === null || playerInfoLocal.username.toLowerCase() !== username.toLowerCase()
+}
+
+export function createTreeNode(item: OptionType, count: number): Tree<NodeType> {
+  const node: NodeType = createNodeType(item, count);
+  return { value: node, children: [] };
+}
+
+export function createNodeType(item: OptionType, count: number): NodeType {
+  return { ...item, count };
+}
+
+export function addChildrenToTree<T>(father: Tree<T>, children: Tree<T>) {
+  father.children.push(children);
+}
+
+export function getValueTree<T>(root: Tree<T>): T {
+  return root.value;
+}
+
+export function getAllLeaves<T>(root: Tree<T>): Tree<T>[] {
+  if (root.children.length === 0)
+    return [root];
+  return root.children.flatMap((child) => getAllLeaves(child));
+}
+
+export function getInternalNode<T>(root: Tree<T>): Tree<T>[] {
+  if (root.children.length === 0)
+    return [];
+  return [root, ...root.children.flatMap((child) => getInternalNode(child))];
 }

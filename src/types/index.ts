@@ -521,3 +521,9 @@ export type CraftingRecipeKey = keyof Pick<CraftingRecipeType,
 >;
 
 export type NodeType = OptionType & { count: number }
+
+export type Tree<T> = {
+  value: T;
+  children: Tree<T>[];
+}
+

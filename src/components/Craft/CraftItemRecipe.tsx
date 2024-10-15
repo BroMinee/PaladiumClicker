@@ -2,10 +2,11 @@ import { CraftingRecipeKey, OptionType } from "@/types";
 import { getCraft } from "@/lib/api/apiPalaTracker.ts";
 import { redirect } from "next/navigation";
 import Image from "next/image";
-import { Card, CardContent } from "@/components/ui/card.tsx";
 import SmallCardInfo from "@/components/shared/SmallCardInfo.tsx";
 import { CraftingArrow } from "@/components/Craft/CraftingArrow.tsx";
 import constants from "@/lib/constants.ts";
+import React from "react";
+import { CardContent } from "@/components/ui/card.tsx";
 
 export async function CraftItemRecipe({ item, options }: { item: OptionType, options: OptionType[] }) {
 
@@ -20,23 +21,22 @@ export async function CraftItemRecipe({ item, options }: { item: OptionType, opt
   });
 
   return (
-    <Card>
-      <CardContent className="flex flex-row gap-4 pt-2">
-        <div className="grid grid-cols-3 grid-rows-3 w-fit gap-1 bg-secondary">
-          {slotItemInfo.map((slot, index) => {
-            return (
-              <a key={slot.label + index} href={constants.craftPath + `?item=${slot.value}`}
-                 className="hover:scale-105 duration-300">
+    <CardContent className="flex flex-row gap-4 pt-2">
+      <div className="grid grid-cols-3 grid-rows-3 w-fit gap-1 bg-secondary">
+        {slotItemInfo.map((slot, index) => {
+          return (
+            <a key={slot.label + index} href={constants.craftPath + `?item=${slot.value}`}
+               className="hover:scale-105 duration-300">
 
-                <div className="bg-primary grid justify-center items-center">
-                  <Image src={`/AH_img/${slot.img}`} alt={slot.value}
-                         className="h-12 w-12 pixelated m-2 rounded-sm" width={48} height={48}
-                         unoptimized={true}/>
+              <div className="bg-primary grid justify-center items-center">
+                <Image src={`/AH_img/${slot.img}`} alt={slot.value}
+                       className="h-12 w-12 pixelated m-2 rounded-sm" width={48} height={48}
+                       unoptimized={true}/>
               </div>
-              </a>
+            </a>
 
-            )
-          })}
+          )
+        })}
         </div>
 
         <div className="flex flex-row gap-2 items-center justify-center w-96">
@@ -44,7 +44,6 @@ export async function CraftItemRecipe({ item, options }: { item: OptionType, opt
           <SmallCardInfo title={craft_recipe.count + "x " + item.label} value={craft_recipe.count + "x " + item.label2}
                          img={`/AH_img/${item.img}`} unoptimized count={craft_recipe.count}/>
         </div>
-      </CardContent>
-    </Card>
+    </CardContent>
   );
 }

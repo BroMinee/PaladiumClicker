@@ -8,9 +8,6 @@ import MarketSelector from "@/components/AhTracker/MarketSelector.tsx";
 import { getAllItems } from "@/lib/api/apiPalaTracker.ts";
 import { OptionType } from "@/types";
 import constants from "@/lib/constants.ts";
-import { CraftItemRecipe } from "@/components/Craft/CraftItemRecipe.tsx";
-import MyTreeView from "@/components/Craft/MyTreeView.tsx";
-import { CraftResourceList } from "@/components/Craft/CraftResourceList.tsx";
 import CraftingInformationFetcher from "@/components/Craft/CraftingInformationFetcher.tsx";
 
 export async function generateMetadata(
@@ -59,7 +56,6 @@ export default async function AhTrackerPage({ searchParams }: { searchParams: { 
 
   const item = options.find((item) => item.value === searchParams.item);
 
-  const itemList = item !== undefined ? [item, item]  : undefined;
 
 
   if (item === undefined && searchParams.item !== undefined) {
@@ -102,13 +98,7 @@ export default async function AhTrackerPage({ searchParams }: { searchParams: { 
 
         {item &&
           <Suspense fallback={<CraftRecipeFallback item={item}/>}>
-            <CraftingInformationFetcher item={item} options={options} count={1}>
-              <Suspense fallback={<CraftRecipeFallback item={item}/>}>
-                <CraftItemRecipe item={item} options={options}/>
-              </Suspense>
-              <MyTreeView/>
-              <CraftResourceList list={itemList}/>
-            </CraftingInformationFetcher>
+            <CraftingInformationFetcher item={item} options={options} count={1}/>
           </Suspense>
         }
         {/*{item &&*/}

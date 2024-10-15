@@ -1,74 +1,42 @@
 'use server';
 
-import { CraftingRecipeKey, CraftingRecipeType, NodeType, OptionType } from "@/types";
-import React from "react";
+import { CraftingRecipeKey, CraftingRecipeType, NodeType, OptionType, Tree } from "@/types";
+import React, { Suspense } from "react";
 import { getCraft } from "@/lib/api/apiPalaTracker.ts";
+import { CraftingInformationClient } from "@/components/Craft/CraftingInformation.tsx";
+import { addChildrenToTree, createNodeType, createTreeNode, getInternalNode } from "@/lib/misc.ts";
+import { CraftItemRecipe } from "@/components/Craft/CraftItemRecipe.tsx";
+import { CraftRecipeFallback } from "@/app/craft/page.tsx";
+import { Card, CardHeader, CardTitle } from "@/components/ui/card.tsx";
 
 
-class Tree<T> {
-  value: T;
-  children: Tree<T>[];
-
-  constructor(value: T) {
-    this.value = value;
-    this.children = [];
-  }
-
-  addChildren(children: Tree<T>) {
-    this.children.push(children);
-  }
-
-  getValue(): T {
-    return this.value;
-  }
-
-  getAllLeaves(): Tree<T>[] {
-    if (this.children.length === 0)
-      return [this];
-    return this.children.flatMap((child) => child.getAllLeaves());
-  }
-}
-
-function createTreeNode(item: OptionType, count: number): Tree<NodeType> {
-  return new Tree<NodeType>(createNodeType(item, count));
-}
-
-function createNodeType(item: OptionType, count: number): NodeType {
-  return { ...item, count };
-}
-
-
-
-export default async function CraftingInformationFetcher({ item, options, count, children }: {
+export default async function CraftingInformationFetcher({ item, options, count }: {
   item: OptionType,
   options: OptionType[],
   count: number,
-  children: React.ReactNode
 }) {
 
+  const root = await BuildTreeRecursively(createNodeType(item, count), options, new Map<string, CraftingRecipeType>());
 
+  const internalNodeName = getInternalNode(root).map((el) => { return el.value });
 
-  const alreadyVisitedValue = new Set<string>();
-  const valueToRes = new Map<string, CraftingRecipeType>();
-
-  let root = await BuildTreeRecursively(createNodeType(item, count), options, valueToRes);
-  let leaves = root.getAllLeaves();
-
-
-  // group the same leafs together and sum their count
-  const groupedLeaves = leaves.reduce((acc, leaf) => {
-    const value = leaf.getValue();
-    if (alreadyVisitedValue.has(value.value)) {
-      return acc;
-    }
-    alreadyVisitedValue.add(value.value);
-    const count = leaves.filter((el) => el.getValue().value === value.value).reduce((acc, el) => acc + el.getValue().count, 0);
-    return [...acc, createTreeNode(value, count)];
-  }, [] as Tree<NodeType>[]);
-  console.log(groupedLeaves);
   return (
     <>
-      {children}
+      <Card>
+        <CardHeader>
+          <CardTitle>
+            Aide à la fabrication
+          </CardTitle>
+        </CardHeader>
+        <Suspense fallback={<CraftRecipeFallback item={item}/>}>
+          {internalNodeName.map((el, index) => {
+            return <CraftItemRecipe key={el.value + index + "-craft"} item={el} options={options}/>
+          })}
+        </Suspense>
+      </Card>
+      <CraftingInformationClient
+        root={root}>
+      </CraftingInformationClient>
     </>
   );
 }
@@ -76,16 +44,16 @@ export default async function CraftingInformationFetcher({ item, options, count,
 
 export async function BuildTreeRecursively(el: NodeType, options: OptionType[], valueToRes: Map<string, CraftingRecipeType>, depth = 0): Promise<Tree<NodeType>> {
 
-  // console.log(`Building tree for ${el.value}`)
-  const root = createTreeNode(el, 1);
+  const root = createTreeNode(el, el.count);
 
   if (depth > 10) {
-    console.error(`Max depth reached ${el.value}`);
     throw new Error(`Max depth reached ${el.value}`);
   }
 
 
   let craft_recipe = valueToRes.get(el.value) || await getCraft(el.value);
+  let countChildrenResource = Math.ceil(el.count / craft_recipe.count);
+
   valueToRes.set(el.value, craft_recipe);
 
   // if(testIfLoopingTree(father, craft_recipe))
@@ -103,8 +71,17 @@ export async function BuildTreeRecursively(el: NodeType, options: OptionType[], 
   });
   const children = childrenOrNull.filter((el) => el !== null) as OptionType[];
 
-  for (const child of children) {
-    root.addChildren(await BuildTreeRecursively(createNodeType(child, 1), options, valueToRes, depth + 1));
+  const uniqueChildrenMap = new Map<OptionType, number>();
+  children.forEach((child) => {
+    if (!uniqueChildrenMap.has(child))
+      uniqueChildrenMap.set(child, 1);
+    else
+      uniqueChildrenMap.set(child, uniqueChildrenMap.get(child)! + 1);
+  });
+
+  for (const child of uniqueChildrenMap) {
+    const childNode = await BuildTreeRecursively(createNodeType(child[0], child[1] * countChildrenResource), options, valueToRes, depth + 1);
+    addChildrenToTree(root, childNode);
   }
   return root;
 }
