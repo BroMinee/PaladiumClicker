@@ -21,7 +21,7 @@ export type PathValid =
   | "/ranking?category=money"
   | "/ranking?category=job.miner"
   | "/ranking?category=boss"
-  | "/ranking?category=egg_hunt"
+  | "/ranking?category=egghunt"
   | "/ranking?category=koth"
   | "/ranking?category=clicker"
   | "/admin-shop"
@@ -60,7 +60,7 @@ const craftPath: PathValid = "/craft";
 const moneyRanking: PathValid = "/ranking?category=money";
 const metiersRanking: PathValid = "/ranking?category=job.miner";
 const bossRanking: PathValid = "/ranking?category=boss";
-const eggHuntRanking: PathValid = "/ranking?category=egg_hunt";
+const eggHuntRanking: PathValid = "/ranking?category=egghunt";
 const kothRanking: PathValid = "/ranking?category=koth";
 const clickerRanking: PathValid = "/ranking?category=clicker";
 const adminShopPath: PathValid = "/admin-shop";
@@ -90,7 +90,7 @@ const links: LinkList = {
   "/ranking?category=money": { label: "Money", requiredPseudo: false },
   "/ranking?category=job.miner": { label: "Métiers", requiredPseudo: false },
   "/ranking?category=boss": { label: "Boss", requiredPseudo: false },
-  "/ranking?category=egg_hunt": { label: "Egg Hunt", requiredPseudo: false },
+  "/ranking?category=egghunt": { label: "Egg Hunt", requiredPseudo: false },
   "/ranking?category=koth": { label: "KOTH", requiredPseudo: false },
   "/ranking?category=clicker": { label: "Clicker", requiredPseudo: false },
   "/admin-shop": { label: "Admin Shop", requiredPseudo: false },
@@ -461,16 +461,16 @@ const how_to_xp: HowToXp = {
   ]
 }
 
-const notificationPath: Map<PathValid, number> = new Map<PathValid, number>(
+const notificationPath: Map<PathValid, [number,string]> = new Map<PathValid, [number,string]>(
   [
-    ["/craft", new Date("2024-10-14").getTime()],
-    ["/patchnote", new Date("2024-10-14").getTime()],
-    ["/pala-animation", new Date("2024-10-14").getTime()],
+    ["/craft", [new Date("2024-10-14").getTime(),"Nouvelle page"]],
+    ["/patchnote", [new Date("2024-10-14").getTime(), "Nouveau patchnote"]],
+    ["/pala-animation", [new Date("2024-10-14").getTime(),"Réactivation de cette page"]],
   ]);
 
 const menuPaths: Map<string, PathValid[]> = new Map<string, PathValid[]>([
   ['Utilisateur', ["/profil", "/xp-calculator", "/clicker-optimizer"]],
-  ['Classement', ["/ranking?category=money", "/ranking?category=job.miner", "/ranking?category=boss", "/ranking?category=egg_hunt", "/ranking?category=koth", "/ranking?category=clicker"]],
+  ['Classement', ["/ranking?category=money", "/ranking?category=job.miner", "/ranking?category=boss", "/ranking?category=egghunt", "/ranking?category=koth", "/ranking?category=clicker"]],
   ['Statistiques', ["/ah", "/admin-shop"]],
   ['Autres', ["/status", "/palatime", "/pala-animation", "/patchnote", "/craft", "/politique-de-confidentialite"]],
 ]);

@@ -26,11 +26,11 @@ export async function CraftItemRecipe({ item, options }: { item: OptionType, opt
         {slotItemInfo.map((slot, index) => {
           return (
             <a key={slot.label + index} href={constants.craftPath + `?item=${slot.value}`}
-               className="hover:scale-105 duration-300">
+               className="">
               <div className="bg-primary grid justify-center items-center w-16 h-16">
                 {
                   slot.value !== 'air' && <Image src={`/AH_img/${slot.img}`} alt={slot.value}
-                       className="h-12 w-12 pixelated m-2 rounded-sm" width={48} height={48}
+                       className="h-12 w-12 pixelated m-2 rounded-sm hover:scale-125 duration-300" width={48} height={48}
                        unoptimized={true}/>
                 }
               </div>

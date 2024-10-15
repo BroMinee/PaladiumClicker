@@ -8,6 +8,7 @@ import { usePathname } from "next/navigation";
 import constants, { PathValid } from "@/lib/constants.ts";
 import { FaAngleDown, FaAngleUp } from "react-icons/fa";
 import { useNotificationStore } from "@/stores/use-notifications-store.ts";
+import HoverText from "@/components/ui/hovertext.tsx";
 
 
 export default function LinkClient({ path, children }: {
@@ -42,8 +43,9 @@ export default function LinkClient({ path, children }: {
   }, [pathname])
 
   let newNotification = false;
+  let newNotificationText = "";
   if (mounted) {
-    newNotification = hasNewNotification(last_visited, path);
+    [newNotification, newNotificationText] = hasNewNotification(last_visited, path);
   }
 
 
@@ -57,19 +59,40 @@ export default function LinkClient({ path, children }: {
 
   const href = requiredPseudo && playerInfo?.username ? safeJoinPaths("/", path, playerInfo.username) : path;
 
+    if(newNotification)
+    {
+      return <HoverText text={newNotificationText}>
+        <Link
+          onClick={() => setLastVisited(path)}
+          className={cn("font-medium flex justify-start items-center space-x-6 focus:bg-gray-700 focus:text-white hover:bg-accent text-card-foreground rounded px-3 py-2 w-56", isActive && "underline bg-accent")}
+          href={href}>
+          {children}
+          <p className="text-base leading-4 flex-grow">{label}</p>
+          {newNotification &&
+            <div className="relative inline-block bg-green-400">
+             <span
+               className="absolute right-0 w-6 h-6 text-white bg-red-500  rounded-md text-center"
+               style={{ top: "-18px", right: "-10px" }}>1</span>
+            </div>}
+        </Link>
+      </HoverText>
+    }
+
   return (
-    <Link
-      onClick={() => setLastVisited(path)}
-      className={cn("font-medium flex justify-start items-center space-x-6 focus:bg-gray-700 focus:text-white hover:bg-accent text-card-foreground rounded px-3 py-2 w-56", isActive && "underline bg-accent")}
-      href={href}>
-      {children}
-      <p className="text-base leading-4 flex-grow">{label}</p>
-      {newNotification && <div className="relative inline-block bg-green-400">
-         <span
-           className="absolute right-0 w-6 h-6 text-white bg-red-500  rounded-md text-center"
-           style={{ top: "-18px", right: "-10px" }}>1</span>
-      </div>}
-    </Link>);
+      <Link
+        onClick={() => setLastVisited(path)}
+        className={cn("font-medium flex justify-start items-center space-x-6 focus:bg-gray-700 focus:text-white hover:bg-accent text-card-foreground rounded px-3 py-2 w-56", isActive && "underline bg-accent")}
+        href={href}>
+        {children}
+        <p className="text-base leading-4 flex-grow">{label}</p>
+        {newNotification &&
+          <div className="relative inline-block bg-green-400">
+             <span
+               className="absolute right-0 w-6 h-6 text-white bg-red-500  rounded-md text-center"
+               style={{ top: "-18px", right: "-10px" }}>1</span>
+          </div>}
+      </Link>
+  );
 }
 
 export function CategorieDisplay({ name, children, defaultOpen = false }: {
@@ -82,9 +105,8 @@ export function CategorieDisplay({ name, children, defaultOpen = false }: {
   const { last_visited } = useNotificationStore();
   let subLinks: PathValid[] = constants.MenuPath.get(name) || [];
 
-
   const newNotification = subLinks.reduce((acc, path) => {
-    if (hasNewNotification(last_visited, path))
+    if (hasNewNotification(last_visited, path)[0])
       acc += 1;
     return acc;
   }, 0);
@@ -109,13 +131,13 @@ export function CategorieDisplay({ name, children, defaultOpen = false }: {
   </div>)
 }
 
-function hasNewNotification(last_visited: { [T in PathValid]: number }, path: PathValid): boolean {
+function hasNewNotification(last_visited: { [T in PathValid]: number }, path: PathValid): [boolean, string] {
   if (!constants.notificationPath.has(path)) {
-    return false;
+    return [false, ""];
   } else if (!last_visited.hasOwnProperty(path)) {
-    return true;
-  } else if ((path in last_visited) && (last_visited[path] < constants.notificationPath.get(path)!)) {
-    return true;
+    return [true, constants.notificationPath.get(path)![1]];
+  } else if ((path in last_visited) && (last_visited[path] < constants.notificationPath.get(path)![0])) {
+    return [true, constants.notificationPath.get(path)![1]];
   }
-  return false;
+  return [false, ""];
 }
