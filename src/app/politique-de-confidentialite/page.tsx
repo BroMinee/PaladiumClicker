@@ -80,7 +80,7 @@ export default function Home() {
           permettant aux
           utilisateurs de suivre leur progression et de comparer leurs performances avec d&apos;autres joueurs. Nous ne
           vendons pas, ne louons pas et ne partageons pas vos données personnelles avec des tiers. Vos données sont
-          sécurisé par un système d&apos;authentification pour garantir la protection de vos données contre tout accès
+          sécurisées par un système d&apos;authentification pour garantir la protection de vos données contre tout accès
           non
           autorisé.
         </CardContent>
