@@ -1,9 +1,9 @@
 [
   {
-    "date": "16/10/2024 - 20h25",
+    "date": "16/10/2024 - 20h40",
     "events": [
       "Ajout d'une nouvelle page /craft pour calculer les quantités de ressources nécessaires et leurs prix en matière première",
-      "Ajout des nouvelles questions de la V10 du PalaAnimation",
+      "Ajout des nouvelles questions de la V10 au PalaAnimation Trainer",
       "Ajout d'un système de notification dans la navbar lors de correction de bug majeur ou d'ajout de fonctionnalité",
       "Correction d'un crash client lorsque l'API du market d'un joueur est down",
       "Correction de l'association du nom d'un item avec son image png",

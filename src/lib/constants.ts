@@ -36,7 +36,7 @@ export type LabelValid =
   | "PalaClicker Optimizer"
   | "Palatime"
   | "PalaAnimation Trainer"
-  | "Optimizer de craft"
+  | "Craft Optimizer"
   | "A propos"
   | "Money"
   | "Métiers"
@@ -85,7 +85,7 @@ const links: LinkList = {
   "/clicker-optimizer": { label: "PalaClicker Optimizer", requiredPseudo: true },
   "/palatime": { label: "Palatime", requiredPseudo: false },
   "/pala-animation": { label: "PalaAnimation Trainer", requiredPseudo: true },
-  "/craft": { label: "Optimizer de craft", requiredPseudo: false },
+  "/craft": { label: "Craft Optimizer", requiredPseudo: false },
   "/about": { label: "A propos", requiredPseudo: false },
   "/ranking?category=money": { label: "Money", requiredPseudo: false },
   "/ranking?category=job.miner": { label: "Métiers", requiredPseudo: false },
@@ -463,10 +463,11 @@ const how_to_xp: HowToXp = {
 
 const notificationPath: Map<PathValid, [number,string]> = new Map<PathValid, [number,string]>(
   [
-    ["/palatime", [new Date("2024-10-14").getTime(), "Nouvelle édition"]],
-    ["/craft", [new Date("2024-10-14").getTime(), "Nouvel outil"]],
-    ["/patchnote", [new Date("2024-10-14").getTime(), "Nouveau patchnote"]],
-    ["/pala-animation", [new Date("2024-10-14").getTime(), "Ajout des nouvelles questions"]],
+    ["/xp-calculator", [new Date("2024-10-16").getTime(), "Ajout des \"fortunes modifiers\" dans les calculs"]],
+    ["/palatime", [new Date("2024-10-16").getTime(), "Nouvelle édition"]],
+    ["/craft", [new Date("2024-10-16").getTime(), "Nouvel outil"]],
+    ["/patchnote", [new Date("2024-10-16").getTime(), "Nouveau patchnote"]],
+    ["/pala-animation", [new Date("2024-10-16").getTime(), "Ajout des nouvelles questions"]],
   ]);
 
 const menuPaths: Map<string, PathValid[]> = new Map<string, PathValid[]>([
