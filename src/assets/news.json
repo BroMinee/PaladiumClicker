@@ -1,10 +1,10 @@
 [
   {
-    "date": "TODO",
+    "date": "16/10/2024 - 20h25",
     "events": [
-      "Ajout des nouvelles questions du PalaAnimation",
-      "Ajout d'un système de notification lors de correction de bug majeur ou d'ajout de fonctionnalité",
       "Ajout d'une nouvelle page /craft pour calculer les quantités de ressources nécessaires et leurs prix en matière première",
+      "Ajout des nouvelles questions de la V10 du PalaAnimation",
+      "Ajout d'un système de notification dans la navbar lors de correction de bug majeur ou d'ajout de fonctionnalité",
       "Correction d'un crash client lorsque l'API du market d'un joueur est down",
       "Correction de l'association du nom d'un item avec son image png",
       "Persistance de la donnée sélectionnée dans le market lors de l'actualisation de la page"
