@@ -104,12 +104,20 @@ export function CategorieDisplay({ name, children, defaultOpen = false }: {
   const [open, setOpen] = useState(defaultOpen);
   const { last_visited } = useNotificationStore();
   let subLinks: PathValid[] = constants.MenuPath.get(name) || [];
+  const [mounted, setMounted] = useState(false);
 
-  const newNotification = subLinks.reduce((acc, path) => {
-    if (hasNewNotification(last_visited, path)[0])
-      acc += 1;
-    return acc;
-  }, 0);
+  useEffect(() => {
+    setMounted(true);
+  }, [])
+  let newNotification = 0;
+
+  if (mounted) {
+    newNotification = subLinks.reduce((acc, path) => {
+      if (hasNewNotification(last_visited, path)[0])
+        acc += 1;
+      return acc;
+    }, 0);
+  }
 
 
   return (<div className="flex flex-col justify-start items-center px-6 border-b border-gray-600 w-full">

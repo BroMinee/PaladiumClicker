@@ -2,7 +2,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { FaHeart } from "react-icons/fa";
 import GradientText from "@/components/shared/GradientText.tsx";
 import GraphItem from "@/components/AhTracker/GraphItem.tsx";
-import { Suspense } from "react";
+import React, { Suspense } from "react";
 
 import LoadingSpinner from "@/components/ui/loading-spinner.tsx";
 import MarketSelector from "@/components/AhTracker/MarketSelector.tsx";
@@ -95,8 +95,13 @@ export default async function AhTrackerPage({ searchParams }: { searchParams: { 
         </CardHeader>
       </Card>
       <Card className="md:col-start-1 md:col-span-2 md:row-start-1 md:row-span-3 row-span-3">
+        <CardHeader>
+          <CardTitle>
+            Sélection un item à pour voir son historique de vente
+          </CardTitle>
+        </CardHeader>
         <CardContent className="gap-2 flex flex-col pt-4">
-          <MarketSelector url={`${constants.ahPath}?item=`}/>
+          <MarketSelector url={`${constants.ahPath}?item=`} item={item || null}/>
         </CardContent>
         {item ?
           <Suspense fallback={<QuantitySelectorDisplayFallBack item={item}/>}>

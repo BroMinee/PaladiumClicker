@@ -4,7 +4,11 @@ import Selector from "@/components/shared/Selector.tsx";
 import { OptionType } from "@/types";
 
 
-export function SelectorItemClient({ options, url }: { options: OptionType[], url: string }) {
+export function SelectorItemClient({ options, url, defaultValue }: {
+  options: OptionType[],
+  url: string,
+  defaultValue: OptionType | null
+}) {
 
   const router = useRouter();
   const setInputValue = (value: string) => {
@@ -13,6 +17,6 @@ export function SelectorItemClient({ options, url }: { options: OptionType[], ur
 
 
   return (
-    <Selector options={options} setInputValue={setInputValue}/>
+    <Selector options={options} setInputValue={setInputValue} defaultValue={defaultValue}/>
   )
 }

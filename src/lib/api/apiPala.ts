@@ -27,7 +27,7 @@ import { getInitialPlayerInfo } from "@/lib/misc.ts";
 // import { toast } from "sonner";
 
 
-const PALADIUM_API_URL = "https://api.paladium.games";
+export const PALADIUM_API_URL = "https://api.paladium.games";
 
 
 export const isApiDown = async (): Promise<boolean> => {

@@ -271,6 +271,11 @@ export type PaladiumAhItemStat = {
   priceAverage: number,
 }
 
+export type PaladiumAhItemStatResponse = {
+  data: PaladiumAhItemStat[]
+  totalCount: number
+}
+
 export type buildingPathType =
   "building_upgrade"
   | "category_upgrade"

@@ -463,9 +463,10 @@ const how_to_xp: HowToXp = {
 
 const notificationPath: Map<PathValid, [number,string]> = new Map<PathValid, [number,string]>(
   [
-    ["/craft", [new Date("2024-10-14").getTime(),"Nouvelle page"]],
+    ["/palatime", [new Date("2024-10-14").getTime(), "Nouvelle édition"]],
+    ["/craft", [new Date("2024-10-14").getTime(), "Nouvel outil"]],
     ["/patchnote", [new Date("2024-10-14").getTime(), "Nouveau patchnote"]],
-    ["/pala-animation", [new Date("2024-10-14").getTime(),"Réactivation de cette page"]],
+    ["/pala-animation", [new Date("2024-10-14").getTime(), "Ajout des nouvelles questions"]],
   ]);
 
 const menuPaths: Map<string, PathValid[]> = new Map<string, PathValid[]>([

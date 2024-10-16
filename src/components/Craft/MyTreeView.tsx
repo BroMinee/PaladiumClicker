@@ -88,7 +88,7 @@ const MyTreeView = ({ root, setRoot }: MyTreeViewProps) => {
 
 
   return (
-    <Card className="row-start-2">
+    <Card className="row-start-3">
       {/*flex-grow TODO*/}
       <CardHeader>
         <CardTitle>Arbre de craft</CardTitle>

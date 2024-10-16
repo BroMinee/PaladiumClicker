@@ -8,6 +8,7 @@ import { addChildrenToTree, createNodeType, createTreeNode, getInternalNode } fr
 import { CraftItemRecipe } from "@/components/Craft/CraftItemRecipe.tsx";
 import { CraftRecipeFallback } from "@/app/craft/page.tsx";
 import { Card, CardHeader, CardTitle } from "@/components/ui/card.tsx";
+import { redirect } from "next/navigation";
 
 
 export default async function CraftingInformationFetcher({ item, options, count }: {
@@ -18,19 +19,23 @@ export default async function CraftingInformationFetcher({ item, options, count 
 
   const root = await BuildTreeRecursively(createNodeType(item, count), options, new Map<string, CraftingRecipeType>(), 0, false);
 
-  const internalNodeName = getInternalNode(root).map((el) => { return el.value });
+  const internalNodeNameUnique = getInternalNode(root).map((el) => { return el.value }).reduce((acc, el) => {
+    if (acc.findIndex((el2) => el2.value === el.value) === -1)
+      return [...acc, el];
+    return acc;
+  }, [] as NodeType[]);
 
   return (
     <>
       <Suspense fallback={<CraftRecipeFallback item={item}/>}>
-        <Card className="row-start-2">
+        <Card className="row-start-3">
           <CardHeader>
             <CardTitle>
               Aide à la fabrication
             </CardTitle>
           </CardHeader>
 
-          {internalNodeName.map((el, index) => {
+          {internalNodeNameUnique.map((el, index) => {
             return <CraftItemRecipe key={el.value + index + "-craft"} item={el} options={options}/>
           })}
         </Card>
@@ -49,7 +54,7 @@ export async function BuildTreeRecursively(el: NodeType, options: OptionType[], 
   const root = createTreeNode(el, el.count);
 
   if (depth > 10) {
-    throw new Error(`Max depth reached ${el.value}`);
+    redirect("/error?message=Il semblerait que le craft soit trop complexe pour être affiché. Contactez un administrateur pour plus d'informations.")
   }
 
 
@@ -59,14 +64,14 @@ export async function BuildTreeRecursively(el: NodeType, options: OptionType[], 
   valueToRes.set(el.value, craft_recipe);
 
   const slotAvailable: CraftingRecipeKey[] = ['item_name_slot1', 'item_name_slot2', 'item_name_slot3', 'item_name_slot4', 'item_name_slot5', 'item_name_slot6', 'item_name_slot7', 'item_name_slot8', 'item_name_slot9'] as const;
-  const childrenOrNull = slotAvailable.map((slot, index) => {
+  const childrenOrNull = slotAvailable.map((slot) => {
     if (craft_recipe[slot] === 'air')
       return null;
     const t = options.find((option) => option.value === craft_recipe[slot]);
     if (t === undefined) {
       if (testCompilation)
         return null;
-      throw new Error(`Le craft de ${el.value} n'existe pas encore car il été implémenté. De de détail : slot ${index} = ${craft_recipe[slot]}`)
+      redirect(`/error?message=Le craft de ${el.value} n'existe pas dans la base de donnée. Il sera ajouté prochainement.`)
     }
     return t;
   });

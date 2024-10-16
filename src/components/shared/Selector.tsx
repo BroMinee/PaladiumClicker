@@ -34,6 +34,7 @@ const customStyles: StylesConfig<OptionType, false> = {
 
 type SelectorProps = {
   options: OptionType[]
+  defaultValue: OptionType | null
   setInputValue: (value: string) => void
 }
 
@@ -42,7 +43,7 @@ const IndicatorSeparator = () => null;
 
 const animatedComponents = makeAnimated();
 
-const Selector = ({ options, setInputValue }: SelectorProps) => {
+const Selector = ({ options, defaultValue, setInputValue }: SelectorProps) => {
   const [menuIsOpen, setMenuIsOpen] = useState<boolean>(false);
   const handleInputChange = (value: string) => {
 
@@ -82,6 +83,7 @@ const Selector = ({ options, setInputValue }: SelectorProps) => {
         setInputValue(selectedOptions.value)
       }
     }}
+    defaultValue={defaultValue}
   />
 
 }

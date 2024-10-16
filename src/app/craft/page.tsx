@@ -9,6 +9,7 @@ import { getAllItems } from "@/lib/api/apiPalaTracker.ts";
 import { OptionType } from "@/types";
 import constants from "@/lib/constants.ts";
 import CraftingInformationFetcher from "@/components/Craft/CraftingInformationFetcher.tsx";
+import { CountSelector } from "@/components/Craft/CountSelector.tsx";
 
 export async function generateMetadata(
   { searchParams }: { searchParams: { item: string | undefined } },
@@ -51,10 +52,13 @@ export async function generateMetadata(
   }
 }
 
-export default async function AhTrackerPage({ searchParams }: { searchParams: { item: string | undefined } }) {
+export default async function AhTrackerPage({ searchParams }: {
+  searchParams: { item: string | undefined, count: number | undefined }
+}) {
   const options = await getAllItems();
 
   const item = options.find((item) => item.value === searchParams.item);
+  const count = searchParams.count || 1;
 
 
 
@@ -82,10 +86,23 @@ export default async function AhTrackerPage({ searchParams }: { searchParams: { 
             Made with <FaHeart className="text-primary inline-block"/> by <GradientText>BroMine__</GradientText>
           </CardDescription>
         </CardHeader>
+        <CardContent>
+          Cet outil permet de lister les ressources nécessaires pour fabriquer un item en fonction de la quantité.
+          <br/>
+          Il permet également d&apos;avoir une indication du prix de fabrication de l&apos;item.
+        </CardContent>
       </Card>
       <Card className="md:col-start-1 md:col-span-2 md:row-start-1 md:row-span-3 row-span-3">
-        <CardContent className="gap-2 flex flex-col pt-4">
-          <MarketSelector url={`${constants.craftPath}?item=`}/>
+        <CardHeader>
+          <CardTitle>
+            Sélection un item à crafter
+          </CardTitle>
+        </CardHeader>
+        <CardContent className="flex flex-row gap-2 pt-4 justify-center items-center w-full">
+          <CountSelector item={item} count={count}/>
+          <div className="flex-grow">
+            <MarketSelector url={`${constants.craftPath}?count=${count || 1}&item=`} item={item || null}/>
+          </div>
         </CardContent>
         {/*{item ?*/}
         {/*  <Suspense fallback={<QuantitySelectorDisplayFallBack item={item}/>}>*/}
@@ -97,7 +114,7 @@ export default async function AhTrackerPage({ searchParams }: { searchParams: { 
       <div className="grid grid-cols-2 gap-2 w-full">
         {item &&
           <Suspense fallback={<CraftRecipeFallback item={item}/>}>
-            <CraftingInformationFetcher item={item} options={options} count={1}/>
+            <CraftingInformationFetcher item={item} options={options} count={count}/>
           </Suspense>
         }
         {/*{item &&*/}
