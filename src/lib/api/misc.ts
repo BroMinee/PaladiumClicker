@@ -88,7 +88,7 @@ export const fetchWithHeader = async <T>(url: string, cache_duration_in_sec = 15
         console.error(error, url);
       }
     } else {
-      throw new Error("Le pseudo ${username} n'existe pas sur Minecraft.");
+      throw new Error(`Le pseudo ${username} n'existe pas sur Minecraft.`);
     }
   }
 
