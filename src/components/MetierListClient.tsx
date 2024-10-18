@@ -31,9 +31,15 @@ export function MetierOutline({ metierKey, metierToReach = false }: { metierKey:
                }}/>
 }
 
-export function MetierDisplayLvl({ metierKey, lvlToReach }: { metierKey: MetierKey, lvlToReach?: number }) {
+export function MetierDisplayLvl({ metierKey, lvlToReach, searchParams }:
+                                   {
+                                     metierKey: MetierKey,
+                                     lvlToReach?: number,
+                                     searchParams?: searchParamsXpBonusPage | undefined
+                                   }) {
   const colors = getColorByMetierName(metierKey);
   const { data: playerInfo, decreaseMetierLevel, increaseMetierLevel } = usePlayerInfoStore();
+  const router = useRouter();
 
   function onChangeLevel(event: ChangeEvent<HTMLInputElement>) {
     if (lvlToReach === undefined) {
@@ -48,6 +54,17 @@ export function MetierDisplayLvl({ metierKey, lvlToReach }: { metierKey: MetierK
           decreaseMetierLevel(metierKey, playerInfo.metier[metierKey].level - value);
         else if (value > playerInfo.metier[metierKey].level)
           increaseMetierLevel(metierKey, value - playerInfo.metier[metierKey].level);
+      }
+    } else {
+      let value = Number(event.target.value);
+      if (!playerInfo)
+        return;
+
+      if (!isNaN(value)) {
+        value = Math.floor(value);
+        value = Math.max(0, Math.min(100, value));
+        const newLevel = value;
+        router.push(generateXpCalculatorUrl(playerInfo.username || "undefined", metierKey, Math.min(newLevel, 100), searchParams?.double, searchParams?.dailyBonus, searchParams?.f2, searchParams?.f3), { scroll: false })
       }
     }
   }

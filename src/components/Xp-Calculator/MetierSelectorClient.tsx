@@ -22,7 +22,7 @@ export function SetLevelInUrl({ selected, params, searchParams }: {
   if (!playerInfo)
     return;
   let levelToReach = searchParams.level;
-  if (levelToReach === undefined || levelToReach <= playerInfo.metier[selected].level)
+  if (levelToReach === undefined)
     levelToReach = playerInfo.metier[selected].level + 1;
 
   levelToReach = Math.min(levelToReach, 100);
@@ -100,7 +100,7 @@ export const MetierToReachWrapper = ({
       <div className="flex items-center justify-center gap-2">
         <MetierDecrease minLevel={minLevel} metierKey={metierKey} searchParams={searchParams}
                         username={playerInfo.username}/>
-        <MetierDisplayLvl metierKey={metierKey} lvlToReach={searchParams.level}/>
+        <MetierDisplayLvl metierKey={metierKey} lvlToReach={searchParams.level} searchParams={searchParams}/>
         <MetierIncrease metierKey={metierKey} searchParams={searchParams} username={playerInfo.username}/>
       </div>
     </>
@@ -224,7 +224,7 @@ function getXpDiff(playerInfo: PlayerInfo | null, searchParams: searchParamsXpBo
   const higherLevel = searchParams.level;
   const res = getTotalXPForLevel(higherLevel) - playerInfo.metier[searchParams.metier as MetierKey].xp;
   if (res < 0) {
-    return playerInfo.metier[searchParams.metier as MetierKey].level === 100 ? 0 : -1;
+    return playerInfo.metier[searchParams.metier as MetierKey].level === 100 ? 0 : 0;
   }
   return res;
 }
