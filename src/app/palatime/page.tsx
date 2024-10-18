@@ -46,7 +46,7 @@ export default function PalatimePage() {
     ligne1: "A l'aide, zérolivier est",
     ligne2: "devenu fou. Après la victoire",
     ligne3: "contre la corruption, il s'est",
-    ligne4: "mis a fréquenté Heimdall.",
+    ligne4: "mis à fréquenter Heimdall.",
     ligne5: "Et, en quête de pouvoir, s'est ",
     ligne6: "approprié le journal du market.",
     ligne7: "Pour semer le chaos, il a même",
