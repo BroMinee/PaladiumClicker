@@ -378,7 +378,7 @@ export function DisplayCoinsDormants() {
 
 
   const totalSpend = getTotalSpend(playerInfo);
-  const coinsDormants = playerInfo.production - totalSpend;
+  let coinsDormants = Math.max(playerInfo.production - totalSpend, 0);
 
   const onChangeCoinsDormants = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (!playerInfo) {
