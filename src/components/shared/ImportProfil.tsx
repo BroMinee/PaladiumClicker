@@ -6,11 +6,12 @@ import { usePlayerInfoStore } from "@/stores/use-player-info-store";
 import { FormEvent } from "react";
 import { FaSearch } from "react-icons/fa";
 import constants from "@/lib/constants.ts";
-import { getHHMMSS, getInitialPlayerInfo, getLinkFromUrl, safeJoinPaths } from "@/lib/misc.ts";
+import { getInitialPlayerInfo, getLinkFromUrl, safeJoinPaths } from "@/lib/misc.ts";
 import { navigate } from '@/components/actions'
 import { useSettingsStore } from "@/stores/use-settings-store.ts";
 import { getPlayerInfoAction, registerPlayerAction } from "@/lib/api/apiServerAction.ts";
 import { toast } from "sonner";
+import Countdown from "react-countdown";
 
 type ImportProfilProps = {
   showResetButton?: boolean,
@@ -46,6 +47,32 @@ export default function ImportProfil({
     }
   }
 
+  const renderer = ({ minutes, seconds, completed }) => {
+    if (completed) {
+      return <Button
+        onClick={async () => {
+          if (playerInfo === null) return;
+          getPlayerInfoAction(playerInfo.username).then((data) => {
+            toast.success(`Profil de ${data.username} chargé`);
+            registerPlayerAction(data.uuid, data.username);
+            setPlayerInfo(data);
+          }).catch((e) => {
+            console.error(e);
+            toast.error(`Erreur lors du chargement du profil de ${playerInfo.username}`);
+          });
+        }}>
+        <span>Mettre à jour</span>
+      </Button>;
+    } else {
+
+      return <Button className="flex flex-col" disabled={true}>
+        <span>Mise à jour disponible dans :</span>
+        <span>{minutes < 10 ? `0${minutes}` : minutes}:{seconds < 10 ? `0${seconds}` : seconds}
+        </span>
+      </Button>;
+    }
+  };
+
   // if (playerInfo !== null)
   // alert(`${new Date(playerInfo.last_fetch + 1000 * 15 * 60)}, ${new Date()} ${new Date(playerInfo.last_fetch + 1000 * 15 * 60) <= new Date()}`)
 
@@ -72,20 +99,10 @@ export default function ImportProfil({
         </div>
       </form>
       {showResetButton && !settings.defaultProfile &&
-        <Button disabled={playerInfo !== null && new Date(playerInfo.last_fetch + 1000 * 15 * 60) >= new Date()}
-                onClick={async () => {
-                  if (playerInfo === null) return;
-                  getPlayerInfoAction(playerInfo.username).then((data) => {
-                    toast.success(`Profil de ${data.username} chargé`);
-                    registerPlayerAction(data.uuid, data.username);
-                    setPlayerInfo(data);
-                  }).catch((e) => {
-                    console.error(e);
-                    toast.error(`Erreur lors du chargement du profil de ${playerInfo.username}`);
-                  });
-                }}>{
-          playerInfo !== null && new Date(playerInfo.last_fetch + 1000 * 15 * 60) >= new Date() ?
-            `Mise à jour disponible à ${getHHMMSS(new Date(playerInfo.last_fetch + 1000 * 15 * 60))}` : `Mettre à jour`}</Button>}
+        <Countdown
+          date={playerInfo ? new Date(playerInfo.last_fetch + 1000 * 10 * 60) : new Date(new Date().getTime() + 1000 * 10 * 60)}
+          renderer={renderer}/>
+      }
       {showResetButton && settings.defaultProfile &&
         <Button onClick={() => {
           setPlayerInfo(getInitialPlayerInfo());
