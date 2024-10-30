@@ -69,8 +69,6 @@ export default function Home() {
           </CardDescription>
         </CardHeader>
         <CardContent className="flex flex-col items-center justify-between gap-2 h-[calc(100vh-30vh)]">
-          Cette page n&apos;est pas encore finie, mais vous pouvez déjà voir le graphique des joueurs connectés sur
-          Paladium.
           <Suspense fallback={<GraphStatusFallback/>}>
             <GraphStatus/>
           </Suspense>
