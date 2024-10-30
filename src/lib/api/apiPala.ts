@@ -61,14 +61,14 @@ export const getPlayerOnlineCount = async (): Promise<number> => {
 
 
 export const getPaladiumProfileByPseudo = async (pseudo: string): Promise<PaladiumPlayerInfo> => {
-    return await fetchWithHeader<PaladiumPlayerInfo>(`${PALADIUM_API_URL}/v1/paladium/player/profile/${pseudo}`, 15 * 60, pseudo).catch((error: Error) => {
-      return redirect(`/error?message=Impossible de récupérer les données de ${pseudo}, vérifie que tu as bien écrit ton pseudo.&detail=${error.message}&username=${pseudo}`)
-    });
+  return await fetchWithHeader<PaladiumPlayerInfo>(`${PALADIUM_API_URL}/v1/paladium/player/profile/${pseudo}`, 15 * 60, pseudo).catch((error: Error) => {
+    return redirect(`/error?message=Impossible de récupérer les données de ${pseudo}, vérifie que tu as bien écrit ton pseudo.&detail=${error.message}&username=${pseudo}`)
+  });
 }
 
 
 export const getPaladiumLeaderboardPositionByUUID = async (uuid: string, username: string): Promise<string> => {
-  const response = await fetchWithHeader<PaladiumRanking>(`${PALADIUM_API_URL}/v1/paladium/ranking/position/clicker/${uuid}`).catch((e : Error) => {
+  const response = await fetchWithHeader<PaladiumRanking>(`${PALADIUM_API_URL}/v1/paladium/ranking/position/clicker/${uuid}`).catch((e: Error) => {
     const message = e.message;
     return redirect(`/error?message=Impossible de récupérer ta position dans le classement. : ${message}&username=${username}`);
   });
@@ -120,7 +120,7 @@ export const getAuctionHouseInfo = async (uuid: string, username: string): Promi
   const response = await fetchWithHeader<AhType>(`${PALADIUM_API_URL}/v1/paladium/shop/market/players/${uuid}/items`).catch((error: Error) => {
     const message = error.message;
     console.error(message, username);
-    return {data: [], totalCount:0, dateUpdated: new Date().getTime()};
+    return { data: [], totalCount: 0, dateUpdated: new Date().getTime() };
   })
   response.dateUpdated = new Date().getTime();
   return response;

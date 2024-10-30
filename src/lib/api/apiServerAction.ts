@@ -21,7 +21,7 @@ export async function getPaladiumAhItemStatsOfAllItemsAction(): Promise<Paladium
   let offset = 100;
   let c = 0;
   while (offset < totalCount && c <= 10) {
-    const response = await fetchWithHeader<PaladiumAhItemStatResponse>(`${PALADIUM_API_URL}/v1/paladium/shop/market/items?offset=${offset}&limit=100`,5 * 60)
+    const response = await fetchWithHeader<PaladiumAhItemStatResponse>(`${PALADIUM_API_URL}/v1/paladium/shop/market/items?offset=${offset}&limit=100`, 5 * 60)
     data = data.concat(response.data);
     offset += 100;
     c++;

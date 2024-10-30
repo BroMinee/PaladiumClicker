@@ -67,7 +67,7 @@ const RPS = () => {
               <div className="flex flex-col items-center gap-4">
                 <Image width={128} height={128} src={safeJoinPaths("/arty_chocbar.webp")}
                        className="h-auto object-contain"
-                     alt="Arty"/>
+                       alt="Arty"/>
                 <p className="text-sm">Bravo tu as tout acheté, va prendre une douche
                   maintenant.</p>
                 <Button>
@@ -83,7 +83,7 @@ const RPS = () => {
           {rps < 0 ?
             <Image width={48} height={48} src={safeJoinPaths("/arty_chocbar.webp")}
                    className="h-auto object-contain"
-                 alt="Arty"/> :
+                   alt="Arty"/> :
             <FaCoins className="w-12 h-12"/>
           }
           <div className="flex flex-col gap-2">

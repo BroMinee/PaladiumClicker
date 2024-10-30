@@ -31,7 +31,6 @@ const customStyles: StylesConfig<OptionType, false> = {
 };
 
 
-
 type SelectorProps = {
   options: OptionType[]
   defaultValue: OptionType | null
@@ -55,7 +54,7 @@ const Selector = ({ options, defaultValue, setInputValue }: SelectorProps) => {
   };
 
 
-  const formatOptionLabel = ({ label,label2, img }: OptionType) => (
+  const formatOptionLabel = ({ label, label2, img }: OptionType) => (
     <div className="flex items-center">
       <Image src={`/AH_img/${img}`} alt="label" width={48} height={48} unoptimized={true}
              className="h-12 w-12 pixelated mr-2 rounded-md"/>
@@ -70,7 +69,7 @@ const Selector = ({ options, defaultValue, setInputValue }: SelectorProps) => {
 
   return <Select
     options={options}
-    components={{...animatedComponents, DropdownIndicator,IndicatorSeparator}}
+    components={{ ...animatedComponents, DropdownIndicator, IndicatorSeparator }}
     styles={customStyles}
     onInputChange={handleInputChange}
     formatOptionLabel={formatOptionLabel}

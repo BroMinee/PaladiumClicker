@@ -89,19 +89,19 @@ export function PlayerFriends() {
       {
         playerInfo.friends?.data?.map((player) => (
           <a href={`${constants.profilPath}/${player.name}`} key={player.uuid}>
-            <Card  className="hover:scale-105 duration-300 mt-4 ml-1.5 mr-1.5 cursor-pointer">
-            <CardContent className="md:pt-6 space-y-2">
-              <div className="flex flex-col items-center justify-center gap-2">
-                <Image src={`https://crafatar.com/avatars/${player.uuid}?size=8&overlay`}
-                     alt="Icône"
-                       width={48} height={48}
-                       unoptimized={true}
-                       className="object-cover pixelated rounded-md"/>
-                <div
-                  className="text-primary font-bold text-center w-36">{player.name}</div>
-              </div>
-            </CardContent>
-          </Card>
+            <Card className="hover:scale-105 duration-300 mt-4 ml-1.5 mr-1.5 cursor-pointer">
+              <CardContent className="md:pt-6 space-y-2">
+                <div className="flex flex-col items-center justify-center gap-2">
+                  <Image src={`https://crafatar.com/avatars/${player.uuid}?size=8&overlay`}
+                         alt="Icône"
+                         width={48} height={48}
+                         unoptimized={true}
+                         className="object-cover pixelated rounded-md"/>
+                  <div
+                    className="text-primary font-bold text-center w-36">{player.name}</div>
+                </div>
+              </CardContent>
+            </Card>
           </a>
         ))
       }

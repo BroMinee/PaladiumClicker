@@ -28,7 +28,6 @@ export default function LinkClient({ path, children }: {
   const pathname = usePathname();
 
 
-
   useEffect(() => {
     setMounted(true)
     let link: PathValid | undefined;
@@ -59,26 +58,8 @@ export default function LinkClient({ path, children }: {
 
   const href = requiredPseudo && playerInfo?.username ? safeJoinPaths("/", path, playerInfo.username) : path;
 
-    if(newNotification)
-    {
-      return <HoverText text={newNotificationText}>
-        <Link
-          onClick={() => setLastVisited(path)}
-          className={cn("font-medium flex justify-start items-center space-x-6 focus:bg-gray-700 focus:text-white hover:bg-accent text-card-foreground rounded px-3 py-2 w-56", isActive && "underline bg-accent")}
-          href={href}>
-          {children}
-          <p className="text-base leading-4 flex-grow">{label}</p>
-          {newNotification &&
-            <div className="relative inline-block bg-green-400">
-             <span
-               className="absolute right-0 w-6 h-6 text-white bg-red-500  rounded-md text-center"
-               style={{ top: "-18px", right: "-10px" }}>1</span>
-            </div>}
-        </Link>
-      </HoverText>
-    }
-
-  return (
+  if (newNotification) {
+    return <HoverText text={newNotificationText}>
       <Link
         onClick={() => setLastVisited(path)}
         className={cn("font-medium flex justify-start items-center space-x-6 focus:bg-gray-700 focus:text-white hover:bg-accent text-card-foreground rounded px-3 py-2 w-56", isActive && "underline bg-accent")}
@@ -92,6 +73,23 @@ export default function LinkClient({ path, children }: {
                style={{ top: "-18px", right: "-10px" }}>1</span>
           </div>}
       </Link>
+    </HoverText>
+  }
+
+  return (
+    <Link
+      onClick={() => setLastVisited(path)}
+      className={cn("font-medium flex justify-start items-center space-x-6 focus:bg-gray-700 focus:text-white hover:bg-accent text-card-foreground rounded px-3 py-2 w-56", isActive && "underline bg-accent")}
+      href={href}>
+      {children}
+      <p className="text-base leading-4 flex-grow">{label}</p>
+      {newNotification &&
+        <div className="relative inline-block bg-green-400">
+             <span
+               className="absolute right-0 w-6 h-6 text-white bg-red-500  rounded-md text-center"
+               style={{ top: "-18px", right: "-10px" }}>1</span>
+        </div>}
+    </Link>
   );
 }
 

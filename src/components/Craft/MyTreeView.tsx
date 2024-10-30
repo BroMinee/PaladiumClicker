@@ -141,7 +141,7 @@ export function displayNode(node: NodeType) {
   </div>;
 }
 
-function getAllValues(node : MyTreeNode) {
+function getAllValues(node: MyTreeNode) {
   let values = [node.value];
   if (node.children) {
     for (let child of node.children) {

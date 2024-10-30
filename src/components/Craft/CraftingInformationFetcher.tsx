@@ -49,7 +49,7 @@ export default async function CraftingInformationFetcher({ item, options, count 
 }
 
 
-export async function BuildTreeRecursively(el: NodeType, options: OptionType[], valueToRes: Map<string, CraftingRecipeType>, depth: number, testCompilation : boolean): Promise<Tree<NodeType>> {
+export async function BuildTreeRecursively(el: NodeType, options: OptionType[], valueToRes: Map<string, CraftingRecipeType>, depth: number, testCompilation: boolean): Promise<Tree<NodeType>> {
 
   const root = createTreeNode(el, el.count);
 

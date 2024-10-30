@@ -61,7 +61,6 @@ export default async function AhTrackerPage({ searchParams }: {
   const count = searchParams.count || 1;
 
 
-
   if (item === undefined && searchParams.item !== undefined) {
     return <div>
       <Card className="bg-red-700">

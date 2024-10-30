@@ -30,21 +30,22 @@ export async function CraftItemRecipe({ item, options }: { item: OptionType, opt
               <div className="bg-primary grid justify-center items-center w-16 h-16">
                 {
                   slot.value !== 'air' && <Image src={`/AH_img/${slot.img}`} alt={slot.value}
-                       className="h-12 w-12 pixelated m-2 rounded-sm hover:scale-125 duration-300" width={48} height={48}
-                       unoptimized={true}/>
+                                                 className="h-12 w-12 pixelated m-2 rounded-sm hover:scale-125 duration-300"
+                                                 width={48} height={48}
+                                                 unoptimized={true}/>
                 }
               </div>
             </a>
 
           )
         })}
-        </div>
+      </div>
 
-        <div className="flex flex-row gap-2 items-center justify-center w-96">
-          <CraftingArrow/>
-          <SmallCardInfo title={craft_recipe.count + "x " + item.label} value={craft_recipe.count + "x " + item.label2}
-                         img={`/AH_img/${item.img}`} unoptimized count={craft_recipe.count}/>
-        </div>
+      <div className="flex flex-row gap-2 items-center justify-center w-96">
+        <CraftingArrow/>
+        <SmallCardInfo title={craft_recipe.count + "x " + item.label} value={craft_recipe.count + "x " + item.label2}
+                       img={`/AH_img/${item.img}`} unoptimized count={craft_recipe.count}/>
+      </div>
     </CardContent>
   );
 }

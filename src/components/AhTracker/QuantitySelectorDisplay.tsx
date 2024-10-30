@@ -21,11 +21,11 @@ export default async function QuantitySelectorDisplay({ item }: { item: OptionTy
 
   return (
     <div className="flex flex-row justify-evenly gap-3 pb-4">
-        <Card>
-          <SmallCardInfo title={item.label || "Not Found"}
-                         value={item.label2 || "Not Found"}
-                         img={`AH_img/${item.img}`} unoptimized/>
-        </Card>
+      <Card>
+        <SmallCardInfo title={item.label || "Not Found"}
+                       value={item.label2 || "Not Found"}
+                       img={`AH_img/${item.img}`} unoptimized/>
+      </Card>
       <Card>
         <CardContent className="h-full pt-6 flex items-center gap-4">
           <FaBoxOpen className="size-12 mr-2"/>

@@ -8,8 +8,7 @@ export function CountSelector({ item, count }: { item: OptionType | undefined, c
 
   const router = useRouter();
 
-  if(count !== undefined && count <= 0)
-  {
+  if (count !== undefined && count <= 0) {
     if (item)
       router.push(`/craft?item=${item.value}&count=1`, { scroll: false });
     else

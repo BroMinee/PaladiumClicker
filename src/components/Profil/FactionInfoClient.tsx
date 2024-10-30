@@ -69,31 +69,31 @@ export function FactionDetails() {
           {
             playerList?.map((player) => (
               <a href={`${constants.profilPath}/${player.username}`} key={player.uuid}>
-              <Card
-                    className="hover:scale-105 duration-300 mt-4 ml-1.5 mr-1.5 cursor-pointer">
-                <CardContent className="pt-6 space-y-2">
-                  <div className="flex flex-col items-center justify-center gap-2">
-                    <Image src={`https://crafatar.com/avatars/${player.uuid}?size=8&overlay`}
-                         alt="Icône"
-                           width={48} height={48}
-                           unoptimized={true}
-                           className="object-cover pixelated rounded-md"/>
-                    <div className="text-primary font-bold text-center w-36">{player.username}</div>
-                  </div>
-                  <div className="space-y-2">
-                    <div className="text-sm">
-                      <FaPercentage className="h-4 w-4 mr-2 inline-block"/>
-                      Rôle: {player.group}
+                <Card
+                  className="hover:scale-105 duration-300 mt-4 ml-1.5 mr-1.5 cursor-pointer">
+                  <CardContent className="pt-6 space-y-2">
+                    <div className="flex flex-col items-center justify-center gap-2">
+                      <Image src={`https://crafatar.com/avatars/${player.uuid}?size=8&overlay`}
+                             alt="Icône"
+                             width={48} height={48}
+                             unoptimized={true}
+                             className="object-cover pixelated rounded-md"/>
+                      <div className="text-primary font-bold text-center w-36">{player.username}</div>
                     </div>
-                    <div className="text-sm">
-                      <Image src={safeJoinPaths("clock.gif")} alt="Icône"
-                             width={16} height={16}
-                             className="object-cover inline-block pixelated mr-2"/>
-                      Rejoint le: {convertEpochToDateUTC2(player.joinedAt)}
+                    <div className="space-y-2">
+                      <div className="text-sm">
+                        <FaPercentage className="h-4 w-4 mr-2 inline-block"/>
+                        Rôle: {player.group}
+                      </div>
+                      <div className="text-sm">
+                        <Image src={safeJoinPaths("clock.gif")} alt="Icône"
+                               width={16} height={16}
+                               className="object-cover inline-block pixelated mr-2"/>
+                        Rejoint le: {convertEpochToDateUTC2(player.joinedAt)}
+                      </div>
                     </div>
-                  </div>
-                </CardContent>
-              </Card>
+                  </CardContent>
+                </Card>
               </a>
             ))
           }

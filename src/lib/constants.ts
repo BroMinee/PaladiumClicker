@@ -461,7 +461,7 @@ const how_to_xp: HowToXp = {
   ]
 }
 
-const notificationPath: Map<PathValid, [number,string]> = new Map<PathValid, [number,string]>(
+const notificationPath: Map<PathValid, [number, string]> = new Map<PathValid, [number, string]>(
   [
     ["/xp-calculator", [new Date("2024-10-16").getTime(), "Ajout des \"fortunes modifiers\" dans les calculs"]],
     ["/palatime", [new Date("2024-10-16").getTime(), "Nouvelle édition"]],

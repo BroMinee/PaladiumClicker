@@ -40,52 +40,52 @@ export default function PalaAnimationPage({ params }: { params: { username: stri
   return (
     <>
       <ProfileFetcherWrapper username={params.username}>
-      <TestBot/>
-      <SessionProvider>
-        <div className="flex flex-col gap-4">
-          <Card>
-            <CardHeader className="flex flex-row items-center justify-between">
-              <CardTitle>
-                Bienvenue dans la zone d&apos;entraînement du{" "}
-                <GradientText className="font-extrabold">PalaAnimation</GradientText>
-              </CardTitle>
-              <CardDescription>
-                Made with <FaHeart
-                className="text-primary inline-block"/> by <GradientText>BroMine__</GradientText>
-              </CardDescription>
-            </CardHeader>
-            <CardFooter className="flex flex-col gap-2 items-start">
-              <CardDescription>Entre ton pseudo pour que celui-ci soit affiché dans le
-                classement</CardDescription>
-              <ImportProfil/>
-            </CardFooter>
-          </Card>
+        <TestBot/>
+        <SessionProvider>
+          <div className="flex flex-col gap-4">
+            <Card>
+              <CardHeader className="flex flex-row items-center justify-between">
+                <CardTitle>
+                  Bienvenue dans la zone d&apos;entraînement du{" "}
+                  <GradientText className="font-extrabold">PalaAnimation</GradientText>
+                </CardTitle>
+                <CardDescription>
+                  Made with <FaHeart
+                  className="text-primary inline-block"/> by <GradientText>BroMine__</GradientText>
+                </CardDescription>
+              </CardHeader>
+              <CardFooter className="flex flex-col gap-2 items-start">
+                <CardDescription>Entre ton pseudo pour que celui-ci soit affiché dans le
+                  classement</CardDescription>
+                <ImportProfil/>
+              </CardFooter>
+            </Card>
 
 
-          {username !== undefined &&
-            <div className="grid grid-cols-2 md:grid-cols-3 grid-rows-1 gap-4">
-              <Card className="col-span-2">
+            {username !== undefined &&
+              <div className="grid grid-cols-2 md:grid-cols-3 grid-rows-1 gap-4">
+                <Card className="col-span-2">
+                  <CardHeader>
+                    <PalaAnimationBody username={username}/>
+                  </CardHeader>
+                </Card>
+                <PalaAnimationClassement username={username}/>
+              </div>}
+            {username !== undefined &&
+              <Card>
                 <CardHeader>
-                  <PalaAnimationBody username={username}/>
+                  <CardTitle>
+                    Le classement est à titre indicatif et n&apos;est pas officiel.
+                    <br/>
+                    De plus, nous ne garantissons pas que les temps affichés soient effectué sans triche, ni réalisé par
+                    le vrai détenteur du pseudonyme Minecraft.
+                  </CardTitle>
                 </CardHeader>
               </Card>
-              <PalaAnimationClassement username={username}/>
-            </div>}
-          {username !== undefined &&
-            <Card>
-              <CardHeader>
-                <CardTitle>
-                  Le classement est à titre indicatif et n&apos;est pas officiel.
-                  <br/>
-                  De plus, nous ne garantissons pas que les temps affichés soient effectué sans triche, ni réalisé par
-                  le vrai détenteur du pseudonyme Minecraft.
-                </CardTitle>
-              </CardHeader>
-            </Card>
-          }
-          {username !== undefined && <PalaAnimationClassementGlobal username={username}/>}
-        </div>
-      </SessionProvider>
+            }
+            {username !== undefined && <PalaAnimationClassementGlobal username={username}/>}
+          </div>
+        </SessionProvider>
       </ProfileFetcherWrapper>
     </>
 

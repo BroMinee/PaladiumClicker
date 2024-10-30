@@ -115,7 +115,7 @@ const Stats = () => {
                     {(formatPrice(Math.round(playerInfo["production"])))}
                   </GradientText>
                   <Image width={24} height={24} src={safeJoinPaths("/coin.png")}
-                       alt="Coin"/>
+                         alt="Coin"/>
                 </div>
               </div>
             </CardContent>
