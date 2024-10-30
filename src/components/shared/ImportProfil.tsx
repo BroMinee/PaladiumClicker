@@ -100,7 +100,7 @@ export default function ImportProfil({
       </form>
       {showResetButton && !settings.defaultProfile &&
         <Countdown
-          date={playerInfo ? new Date(playerInfo.last_fetch + 1000 * 10 * 60) : new Date(new Date().getTime() + 1000 * 10 * 60)}
+          date={playerInfo ? new Date(playerInfo.last_fetch + 1000 * 15 * 60) : new Date(new Date().getTime() + 1000 * 15 * 60)}
           renderer={renderer}/>
       }
       {showResetButton && settings.defaultProfile &&
