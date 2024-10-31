@@ -105,7 +105,7 @@ function getDayCondition(conditions: AnyCondition | undefined) {
 export function checkCondition(playerInfo: PlayerInfo, conditions: AnyCondition, date: Date) {
   const coinsCondition = getCoinsCondition(conditions);
   const dayCondition = getDayCondition(conditions);
-  const totalCoins = playerInfo.production;
+  const totalCoins = getTotalSpend(playerInfo);
   const buildingIndex = getBuildingIndexCondition(conditions);
   const buildingNeed = getBuildingCountCondition(conditions);
   const daySinceStart = (date.getTime() - new Date("2024-09-21").getTime()) / (1000 * 60 * 60 * 24);
