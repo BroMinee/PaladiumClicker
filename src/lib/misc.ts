@@ -1,13 +1,22 @@
 import {
   AdminShopItem,
   AnyCondition,
+  Building,
+  BuildingUpgrade,
+  CategoryUpgrade,
   CPS,
+  GlobalUpgrade,
+  ManyUpgrade,
   MetierKey,
+  Metiers,
   NodeType,
   OptionType,
-  RankingType,
-  Tree,
+  PlayerInfo,
+  PosteriorUpgrade,
   ProfilSectionEnum,
+  RankingType,
+  TerrainUpgrade,
+  Tree,
   UpgradeKey
 } from "@/types";
 import constants, { PathValid } from "@/lib/constants.ts";
@@ -27,16 +36,6 @@ import category_upgrade_json from "@/assets/category_upgrade.json";
 import metier_json from "@/assets/metier.json";
 import building_json from "@/assets/building.json";
 import CPS_json from "@/assets/CPS.json";
-import {
-  Building,
-  BuildingUpgrade,
-  CategoryUpgrade,
-  GlobalUpgrade,
-  ManyUpgrade,
-  Metiers,
-  PlayerInfo,
-  PosteriorUpgrade, TerrainUpgrade
-} from "@/types";
 
 export function getTotalSpend(playerInfo: PlayerInfo) {
   let total = 0;
@@ -266,6 +265,9 @@ export function getRankImg(rank: string) {
 
 
 export function computeTimePlayed(timeInMinutes: number) {
+  if (timeInMinutes === -1)
+    return "Indisponible";
+
   const minute = timeInMinutes % 60;
   const hour = Math.floor(timeInMinutes / 60) % 24;
   const day = Math.floor(timeInMinutes / 60 / 24);
@@ -3287,7 +3289,7 @@ export function getInternalNode<T>(root: Tree<T>): Tree<T>[] {
 export const ProfilSectionValid = Object.values(ProfilSectionEnum) as string[];
 
 export function isProfilSection(section?: string): boolean {
-  if (section === undefined) return false;
+  if (section === undefined) return true;
   return ProfilSectionValid.includes(section);
 }
 

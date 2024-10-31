@@ -27,6 +27,9 @@ const config: Config = {
         sans: ["Inter", "sans-serif"],
       },
       colors: {
+        dynamic: 'var(--dynamic-color)',
+        chaos: '#93fb37',
+        order: '#FAEC55',
         discord: "#5865f2",
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",

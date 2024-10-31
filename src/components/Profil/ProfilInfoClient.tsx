@@ -1,7 +1,7 @@
 'use client'
 import { usePlayerInfoStore } from "@/stores/use-player-info-store.ts";
 import SmallCardInfo from "@/components/shared/SmallCardInfo.tsx";
-import { computeTimePlayed, convertEpochToDateUTC2, formatPrice, getRankImg } from "@/lib/misc.ts";
+import { computeTimePlayed, convertEpochToDateUTC2, formatPrice, getRankImg, safeJoinPaths } from "@/lib/misc.ts";
 import dynamic from "next/dynamic";
 import { Card, CardContent } from "@/components/ui/card.tsx";
 import constants from "@/lib/constants.ts";
@@ -16,6 +16,51 @@ export function ProfilUsernameInfo() {
   return <>
     {playerInfo?.username}
   </>
+}
+
+export function ProfilDescriptionAndBanner() {
+  const { data: playerInfo } = usePlayerInfoStore();
+
+  const description = playerInfo?.description === "" ? "Aucune description" : playerInfo?.description;
+  let imgPath = "/ProfileImg";
+  switch(playerInfo?.currentBanner) {
+
+    case "shore":
+      imgPath = safeJoinPaths(imgPath,"shore.png");
+      break;
+    case "mine":
+      imgPath = safeJoinPaths(imgPath,"mine.png");
+      break;
+  }
+  return <>
+    {description}
+    {playerInfo && playerInfo.currentBanner &&
+      <Image
+        src={imgPath}
+        width={0}
+        height={0}
+        sizes="100vw"
+        className="w-full h-full"
+        alt="banner">
+      </Image>}
+  </>
+}
+
+export function ProfilAlliance() {
+  const { data: playerInfo } = usePlayerInfoStore();
+
+  if (!playerInfo)
+    return null;
+
+  if (playerInfo.alliance === "NEUTRAL") {
+    return null;
+  }
+
+  const logo = safeJoinPaths(`/ProfileImg/logo_${playerInfo.alliance.toLowerCase()}.png`);
+
+  return <Image src={logo} alt="Chaos" width={32} height={32}
+                unoptimized={true}/>
+
 }
 
 export function PlayerViewCount() {

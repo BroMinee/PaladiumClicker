@@ -13,7 +13,11 @@ export function ProfilSelectorDisplay({ params, searchParams }: {
   searchParams: { section?: string }
 }) {
 
-  if (searchParams.section === undefined || !isProfilSection(searchParams.section)) {
+
+  if(searchParams.section === undefined)
+    searchParams.section = ProfilSectionEnum.Home;
+
+  if (!isProfilSection(searchParams.section)) {
     redirect(generateProfilUrl(params.username as string, ProfilSectionEnum.Home));
   }
 
@@ -21,28 +25,13 @@ export function ProfilSelectorDisplay({ params, searchParams }: {
   switch (sectionAsEnum) {
     case ProfilSectionEnum.Home:
       return <HomeProfilSection/>
-    case ProfilSectionEnum.Market:
-      return <MarketProfilSection/>
     case ProfilSectionEnum.Achievements:
       return <AchievementsProfilSection/>
-    case ProfilSectionEnum.Faction:
-      return <FactionProfilSection/>
-    case ProfilSectionEnum.Boss:
-      return <BossProfilSection/>
-    case ProfilSectionEnum.Clicker:
-      return <ClickerProfilSection/>
-    case ProfilSectionEnum.Cosmetics:
-      return <CosmeticsProfilSection/>
-    case ProfilSectionEnum.Friends:
-      return <FriendsProfilSection/>
-    case ProfilSectionEnum.Jobs:
-      return <JobsProfilSection/>
     case ProfilSectionEnum.Pet:
       return <PetProfilSection/>
-    case ProfilSectionEnum.Pvp:
-      return <PvpProfilSection/>
-    case ProfilSectionEnum.Showcase:
-      return <ShowcaseProfilSection/>
+    case ProfilSectionEnum.Monture:
+      return <MontureProfilSection/>
+
     default:
       return <div>C&apos;est quoi la section ${sectionAsEnum} ?</div>
   }
@@ -51,45 +40,10 @@ export function ProfilSelectorDisplay({ params, searchParams }: {
 function HomeProfilSection() {
   return <>
     <ProfilInfo/>
-
-
-  </>
-}
-
-function MarketProfilSection() {
-  return <>
+    <MetierList editable={false}/>
     <AhInfo/>
-  </>
-}
-
-
-function FactionProfilSection() {
-  return (<>
     <HeadingSection>Informations de faction</HeadingSection>
     <FactionInfo/>
-  </>);
-}
-
-function BossProfilSection() {
-  return <div>Boss TODO</div>
-}
-
-function ClickerProfilSection() {
-  return <div>Clicker TODO</div>
-}
-
-function CosmeticsProfilSection() {
-  return <div>Cosmetics TODO</div>
-}
-
-function FriendsProfilSection() {
-  return <div>Friends TODO</div>
-}
-
-function JobsProfilSection() {
-  return <>
-    <MetierList editable={false}/>
-    TODO
   </>
 }
 
@@ -97,12 +51,8 @@ function PetProfilSection() {
   return <div>Pet TODO</div>
 }
 
-function PvpProfilSection() {
-  return <div>Pvp TODO</div>
-}
-
-function ShowcaseProfilSection() {
-  return <div>Showcase TODO</div>
+function MontureProfilSection() {
+  return <div>Monture TODO</div>
 }
 
 export default ProfilSelectorDisplay;

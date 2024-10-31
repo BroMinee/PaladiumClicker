@@ -1,12 +1,5 @@
 import ProfileFetcherWrapper from "@/components/ProfileFetcher.tsx";
-import MetierList from "@/components/MetierList.tsx";
-import HeadingSection from "@/components/shared/HeadingSection.tsx";
-import ProfilInfo from "@/components/Profil/ProfilInfo.tsx";
-import AhInfo from "@/components/Profil/AhInfo.tsx";
-import FactionInfo from "@/components/Profil/FactionInfo.tsx";
 import { generateProfilUrl, isProfilSection } from "@/lib/misc.ts";
-import { getFactionInfo, getJobsFromUUID, getPaladiumProfileByPseudo } from "@/lib/api/apiPala.ts";
-import { formatPrice, generateProfilUrl, isProfilSection } from "@/lib/misc.ts";
 import ProfilSelector from "@/components/Profil/ProfilSelector.tsx";
 import { ProfilSectionEnum } from "@/types";
 import { redirect } from "next/navigation";

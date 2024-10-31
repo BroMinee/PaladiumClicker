@@ -24,6 +24,9 @@
         --destructive-foreground: 0 0% 98%;
         --ring: 240 5.9% 10%;
         --radius: 0.5rem;
+        --color-chaos: #93fb37;
+        --color-order: #FAEC55;
+        --dynamic-color: var(--primary);
     }
 
     .dark {
@@ -46,6 +49,9 @@
         --destructive: 18.11 65.82% 42.68%;
         --destructive-foreground: 0 0% 98%;
         --ring: 240 4.9% 83.9%;
+        --color-chaos: #93fb37;
+        --color-order: #FAEC55;
+        --dynamic-color: var(--primary);
     }
 }
 

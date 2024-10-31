@@ -121,6 +121,9 @@ export type PlayerInfo = {
   last_fetch: number,
   view_count: ProfilViewType,
   achievements: { data: Achievement[], totalCount: number },
+  alliance: string,
+  currentBanner: string,
+  description: string,
 }
 
 export type AhType = {
@@ -181,7 +184,10 @@ export type PaladiumPlayerInfo = {
   timePlayed: number,
   username: string,
   uuid: string,
-  rank: string
+  rank: string,
+  alliance: string,
+  currentBanner: string,
+  description: string,
 }
 
 export type PaladiumRanking = {
@@ -537,16 +543,8 @@ export type Tree<T> = {
 export enum ProfilSectionEnum {
   "Home" = "Home",
   "Achievements" = "Achievements",
-  "Market" = "Market",
-  "Faction" = "Faction",
-  "Boss" = "Boss",
-  "Clicker" = "Clicker",
-  "Cosmetics" = "Cosmetics",
-  "Friends" = "Friends",
-  "Jobs" = "Jobs",
   "Pet" = "Pet",
-  "Pvp" = "Pvp",
-  "Showcase" = "Showcase"
+  "Monture" = "Monture",
 }
 
 export type Achievement = {
@@ -566,5 +564,6 @@ export enum CategoryEnum {
   "FACTION" = "FACTION",
   "ATTACK_DEFENSE" = "ATTACK_DEFENSE",
   "ECONOMY" = "ECONOMY",
+  "ALLIANCE" = "ALLIANCE",
   "OTHERS" = "OTHERS",
 }

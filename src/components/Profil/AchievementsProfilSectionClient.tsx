@@ -3,7 +3,7 @@ import { Bar, BarChart, LabelList, ResponsiveContainer, XAxis, YAxis } from "rec
 import { useEffect, useRef, useState } from "react";
 import { usePlayerInfoStore } from "@/stores/use-player-info-store.ts";
 import { CardTitle } from "@/components/ui/card.tsx";
-import { formatPrice } from "@/lib/misc.ts";
+import { formatPrice, GetAllFileNameInFolder, levenshteinDistance, safeJoinPaths } from "@/lib/misc.ts";
 import { useTheme } from "next-themes";
 import { Achievement, CategoryEnum } from "@/types";
 import SmallCardInfo from "@/components/shared/SmallCardInfo.tsx";
@@ -52,11 +52,10 @@ export function AchievementsGlobalProgressBar({ value, showText = true }: { valu
       textRef.current.setAttribute("x", `${newX}`);
       textRef.current.setAttribute("y", `${newY}`);
     }
-  }, [textRef.current, viewBoxState]);
+  }, [viewBoxState]);
 
   const renderCustomizedLabel = (props: any) => {
     const { x, y, height, value, viewBox } = props;
-    setViewBoxState(viewBox);
 
     let newX = 0;
     if (value !== 0)
@@ -147,6 +146,9 @@ function AchievementSelectorCategory({ category, selectedCategory, setSelectedCa
     case CategoryEnum.ECONOMY:
       imgPath = "AH_img/gold_ingot.png";
       break;
+      case CategoryEnum.ALLIANCE:
+      imgPath = "AH_img/goggles_of_community.png";
+      break;
     case CategoryEnum.OTHERS:
       imgPath = "AH_img/ender_pearl.png";
       break
@@ -158,7 +160,7 @@ function AchievementSelectorCategory({ category, selectedCategory, setSelectedCa
   return <button
     className={cn("flex bg-secondary hover:border-primary/65 hover:border-4 hover:scale-105 duration-100  cursor-pointer", selectedCategory === category && "border-primary border-4 hover:border-primary")}
     onClick={() => setSelectedCategory(CategoryEnum[category])}>
-    <SmallCardInfo title={category} img={imgPath} className="w-96">
+    <SmallCardInfo title={category} img={imgPath} className="w-96" unoptimized>
       <DisplayProgressionCategory category={category}/>
     </SmallCardInfo>
   </button>
@@ -195,14 +197,29 @@ export function DisplayAllAchievementInCategory({ category }: { category: Catego
   if (!playerInfo)
     return null;
 
-  const allAchivements = playerInfo.achievements.data.filter(achievement => achievement.category === category);
+  console.log(playerInfo.achievements)
 
-  console.log(playerInfo.achievements.data)
+  const allAchivements = playerInfo.achievements.data.filter(achievement => achievement.category === category && achievement.icon);
+
+  const closestItemNames = allAchivements.map(achievement => {
+    if(!achievement.icon) return "unknown"
+    let achievementIcon = achievement.icon.replace("palamod:", "").replace("item.", "").replace("minecraft:", "").replace("tile.", "").replace("customnpc:", "").replace("guardiangolem:", "")
+
+    return GetAllFileNameInFolder().reduce((acc, curr) => {
+      if (levenshteinDistance(curr, achievementIcon) < levenshteinDistance(acc, achievementIcon)) {
+        return curr;
+      } else {
+        return acc;
+      }
+    });
+  });
+
 
   // TODO: achievement.icon
   return <div className="flex flex-col gap-4">
     {allAchivements.map((achievement, index) => {
-      return <SmallCardInfo key={achievement.name + index} title={achievement.name} img={"AH_img/paladium_ingot.png"}
+      return <SmallCardInfo key={achievement.name + index} title={achievement.name}
+                            img={safeJoinPaths("/AH_img/", `${closestItemNames[index]}.png`)}
                             value={achievement.description}
                             className="w-full">
         <DisplayProgressionAchievement achievement={achievement}/>

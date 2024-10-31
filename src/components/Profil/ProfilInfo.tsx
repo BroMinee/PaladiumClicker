@@ -11,6 +11,8 @@ import {
   PlayerSkin,
   PlayerTimePlayed,
   PlayerViewCount,
+  ProfilAlliance,
+  ProfilDescriptionAndBanner,
   ProfilUsernameInfo
 } from "@/components/Profil/ProfilInfoClient.tsx";
 import { FactionNameInfo } from "@/components/Profil/FactionInfoClient.tsx";
@@ -20,31 +22,33 @@ import ImportProfil from "@/components/shared/ImportProfil.tsx";
 export default function ProfilInfo() {
 
 
-  return (<Card className="rounded-b-xl rounded-t-none">
+  return (<><Card className="rounded-b-xl rounded-t-none">
     <CardHeader className="flex flex-row items-center justify-between">
-      <CardTitle>
-        Profil de{" "}
-        <GradientText className="font-extrabold">
-          <ProfilUsernameInfo/>
-        </GradientText>
-        {" - "}
-        <GradientText className="font-extrabold">
-          <FactionNameInfo/>
-        </GradientText>
+      <CardTitle className="text-xl">
+        <div className="flex flex-row gap-1 items-center">
+          <ProfilAlliance/>
+          Profil de{" "}
+          <GradientText className="font-extrabold">
+            <ProfilUsernameInfo/>
+          </GradientText>
+          {" - "}
+          <GradientText className="font-extrabold">
+            <FactionNameInfo/>
+          </GradientText>
+        </div>
+
         <div className="flex flex-row gap-2 items-center mt-1.5">
           <FaEye/>
           <GradientText className="font-extrabold">
             <PlayerViewCount/>
           </GradientText>
         </div>
-
       </CardTitle>
-
       <CardDescription>
         Made with <FaHeart className="text-primary inline-block"/> by <GradientText>BroMine__</GradientText>
       </CardDescription>
     </CardHeader>
-    <CardContent>
+    <CardContent className="flex flex-col gap-2">
       <div className="grid grid-cols-2 grid-rows-3 md:grid-cols-3 md:grid-rows-4 gap-4">
         <Card className="flex flex-col items-center justify-center row-span-4">
           <CardHeader className="w-full h-full">
@@ -82,6 +86,15 @@ export default function ProfilInfo() {
           </CardContent>
         </Card>
       </div>
+      <Card>
+        <CardHeader className="mb-0 pb-0">
+          <GradientText className="font-extrabold">Description du joueur</GradientText>
+        </CardHeader>
+        <CardContent>
+          <ProfilDescriptionAndBanner/>
+        </CardContent>
+      </Card>
     </CardContent>
-  </Card>);
+  </Card>
+  </>);
 }

@@ -168,7 +168,6 @@ export const getPlayerInfo = async (pseudo: string): Promise<PlayerInfo> => {
 
   let paladiumProfil = await getPaladiumProfileByPseudo(pseudo)
 
-
   // Do all fetches in parallel to save time
   const p1 = getPaladiumClickerDataByUUID(paladiumProfil.uuid, paladiumProfil.username);
   const p2 = getAuctionHouseInfo(paladiumProfil.uuid, paladiumProfil.username);
@@ -227,6 +226,10 @@ export const getPlayerInfo = async (pseudo: string): Promise<PlayerInfo> => {
   initialPlayerInfo.faction = paladiumFactionInfo;
   initialPlayerInfo.view_count = viewCount;
   initialPlayerInfo.achievements = achievements;
+  initialPlayerInfo.alliance = paladiumProfil.alliance;
+  initialPlayerInfo.currentBanner = paladiumProfil.currentBanner;
+  initialPlayerInfo.description = paladiumProfil.description;
+  registerPlayerAction(initialPlayerInfo.uuid, initialPlayerInfo.username);
 
   registerPlayerAction(paladiumProfil.uuid, paladiumProfil.username);
 
@@ -314,148 +317,6 @@ export const getJobsFromUUID = async (uuid: string, username: string): Promise<M
 
 
 export const getPlayerAchievements = async (uuid: string): Promise<{ data: Achievement[], totalCount: number }> => {
-  return {
-    data: [
-      {
-        id: "test-achivement-1",
-        progress: 100,
-        completed: true,
-        category: CategoryEnum.HOW_TO_START,
-        name: "Test Achievement 1",
-        description: "Obtient 100",
-        amount: 100,
-        icon: "https://via.placeholder.com/150"
-      },
-      {
-        id: "test-achivement-1.1",
-        progress: 100,
-        completed: true,
-        category: CategoryEnum.HOW_TO_START,
-        name: "Test Achievement 1.1",
-        description: "Obtient 100",
-        amount: 100,
-        icon: "https://via.placeholder.com/150"
-      },
-
-      {
-        id: "test-achivement-2",
-        progress: 5,
-        completed: false,
-        category: CategoryEnum.JOBS,
-        name: "Test Achievement 2",
-        description: "Obtient 100",
-        amount: 10,
-        icon: "https://via.placeholder.com/150"
-      },
-      {
-        id: "test-achivement-2.1",
-        progress: 5,
-        completed: false,
-        category: CategoryEnum.JOBS,
-        name: "Test Achievement 2.1",
-        description: "Obtient 100",
-        amount: 10,
-        icon: "https://via.placeholder.com/150"
-      },
-      {
-        id: "test-achivement-2.2",
-        progress: 5,
-        completed: true,
-        category: CategoryEnum.JOBS,
-        name: "Test Achievement 2.2",
-        description: "Obtient 100",
-        amount: 5,
-        icon: "https://via.placeholder.com/150"
-      },
-
-      {
-        id: "test-achivement-3",
-        progress: 66,
-        completed: false,
-        category: CategoryEnum.FACTION,
-        name: "Test Achievement 3",
-        description: "Obtient 5000 point dans un texte assez long genre tres long. Obtient 5000 point dans un texte assez long genre tres long. Obtient 5000 point dans un texte assez long genre tres long. Obtient 5000 point dans un texte assez long genre tres long.",
-        amount: 5000,
-        icon: "https://via.placeholder.com/150"
-      },
-      {
-        id: "test-achivement-3.1",
-        progress: 66,
-        completed: false,
-        category: CategoryEnum.FACTION,
-        name: "Test Achievement 3.1",
-        description: "Obtient 5000 point dans un texte assez long genre tres long. Obtient 5000 point dans un texte assez long genre tres long. Obtient 5000 point dans un texte assez long genre tres long. Obtient 5000 point dans un texte assez long genre tres long.",
-        amount: 5000,
-        icon: "https://via.placeholder.com/150"
-      },
-
-      {
-        id: "test-achivement-4",
-        progress: 100,
-        completed: true,
-        category: CategoryEnum.ATTACK_DEFENSE,
-        name: "Test Achievement 4",
-        description: "Obtient 100",
-        amount: 100,
-        icon: "https://via.placeholder.com/150"
-      },
-      {
-        id: "test-achivement-4.1",
-        progress: 1,
-        completed: false,
-        category: CategoryEnum.ATTACK_DEFENSE,
-        name: "Test Achievement 4.1",
-        description: "Obtient 100",
-        amount: 100,
-        icon: "https://via.placeholder.com/150"
-      },
-
-      {
-        id: "test-achivement-5",
-        progress: 99.9,
-        completed: false,
-        category: CategoryEnum.ECONOMY,
-        name: "Test Achievement 5",
-        description: "Obtient 100",
-        amount: 100,
-        icon: "https://via.placeholder.com/150"
-      },
-      {
-        id: "test-achivement-5.1",
-        progress: 15.5,
-        completed: true,
-        category: CategoryEnum.ECONOMY,
-        name: "Test Achievement 5.1",
-        description: "Obtient 100",
-        amount: 15.5,
-        icon: "https://via.placeholder.com/150"
-      },
-
-      {
-        id: "test-achivement-6",
-        progress: 0,
-        completed: false,
-        category: CategoryEnum.OTHERS,
-        name: "Test Achievement 6",
-        description: "Obtient 100",
-        amount: 100,
-        icon: "https://via.placeholder.com/150"
-      },
-      {
-        id: "test-achivement-6.1",
-        progress: 0,
-        completed: true,
-        category: CategoryEnum.OTHERS,
-        name: "Test Achievement 6.1",
-        description: "Obtient 100",
-        amount: 0,
-        icon: "https://via.placeholder.com/150"
-      },
-
-    ],
-    totalCount: 13
-  }
-
   type AchievementResponse = {
     totalCount: number,
     data: { id: string, progress: number, completed: boolean }[]
@@ -501,14 +362,14 @@ type AllAchievementResponse = {
 }
 
 const getAllAchievements = async (): Promise<AllAchievementResponse> => {
-  const response = await fetchWithHeader<AllAchievementResponse>(`${PALADIUM_API_URL}/v1/paladium/alchievements?limit=100&offset=0`, 3600);
+  const response = await fetchWithHeader<AllAchievementResponse>(`${PALADIUM_API_URL}/v1/paladium/achievements?limit=100&offset=0`, 3600);
   const totalCount = response.totalCount;
 
   let data = response.data;
   let offset = 100;
   let c = 0;
   while (offset < totalCount && c <= 10) {
-    const response = await fetchWithHeader<AllAchievementResponse>(`${PALADIUM_API_URL}/v1/paladium/alchievements?offset=${offset}&limit=100`, 3600)
+    const response = await fetchWithHeader<AllAchievementResponse>(`${PALADIUM_API_URL}/v1/paladium/achievements?offset=${offset}&limit=100`, 3600)
     data = data.concat(response.data);
     offset += 100;
     c++;
