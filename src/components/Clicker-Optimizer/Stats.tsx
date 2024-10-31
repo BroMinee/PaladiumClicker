@@ -16,7 +16,7 @@ import { usePlayerInfoStore } from "@/stores/use-player-info-store";
 import { bestBuildingInfo, bestPurchaseInfo, bestPurchaseInfoDetailed, bestUpgradeInfo, PlayerInfo } from "@/types";
 import React, { useEffect, useState } from "react";
 import { FaBed, FaInfoCircle, FaMedal, FaTachometerAlt } from "react-icons/fa";
-import { computeBestBuildingUgrade, findBestUpgrade } from "./RPS";
+import { computeBestBuildingUpgrade, findBestUpgrade } from "./RPS";
 import { useRpsStore } from "@/stores/use-rps-store";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover.tsx";
 import Image from "next/image";
@@ -230,7 +230,7 @@ export default Stats;
  * */
 function getBestUpgrade(copyPlayerInfo: PlayerInfo, date: Date): bestPurchaseInfo {
 
-  const bestBuildingInfo = computeBestBuildingUgrade(structuredClone(copyPlayerInfo));
+  const bestBuildingInfo = computeBestBuildingUpgrade(structuredClone(copyPlayerInfo));
   const bestUpgradeInfo = findBestUpgrade(structuredClone(copyPlayerInfo), date);
 
 
@@ -248,7 +248,7 @@ function getBestUpgrade(copyPlayerInfo: PlayerInfo, date: Date): bestPurchaseInf
   else if (bestUpgradeInfo.bestUpgradeIndex === -1)
     bestPurchase = bestBuildingInfo;
   else
-    bestPurchase = bestBuildingInfo.bestRpsAfterUpgrade > bestUpgradeInfo.bestRpsAfterUpgrade ? bestBuildingInfo : bestUpgradeInfo;
+    bestPurchase = bestBuildingInfo.bestCoef > bestUpgradeInfo.bestCoef ? bestBuildingInfo : bestUpgradeInfo;
 
   const own = copyPlayerInfo[bestPurchase.bestListName][bestPurchase.bestUpgradeIndex].own;
   if (typeof own === "boolean" && own === true)

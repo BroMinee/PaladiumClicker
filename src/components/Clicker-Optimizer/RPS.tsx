@@ -115,13 +115,13 @@ const RPS = () => {
 }
 
 
-export function computeBestBuildingUgrade(playerInfo: PlayerInfo): bestBuildingInfo {
+export function computeBestBuildingUpgrade(playerInfo: PlayerInfo): bestBuildingInfo {
   let buildingOwned = playerInfo.building.filter((building) => Number(building.own) > 0).length;
   if (buildingOwned !== playerInfo.building.length && Number(playerInfo.building[buildingOwned]["name"]) !== -1) {
     buildingOwned += 1;
   }
   const currentRPS = computeRPS(playerInfo);
-  let bestRpsAfterUpgrade = 0;
+  let bestCoef = 0;
   let bestBuildingIndex = -1;
   for (let index = 0; index < buildingOwned; index++) {
     const copy = structuredClone(playerInfo);
@@ -132,15 +132,15 @@ export function computeBestBuildingUgrade(playerInfo: PlayerInfo): bestBuildingI
 
     building.own += 1;
 
-    const rpsAfterUpgrade = (computeRPS(copy) - currentRPS) / (computePrice(copy.building[index].price, Number(copy.building[index].own) - 1));
-    if (rpsAfterUpgrade > bestRpsAfterUpgrade) {
-      bestRpsAfterUpgrade = rpsAfterUpgrade;
+    const coef = (computeRPS(copy) - currentRPS) / (computePrice(copy.building[index].price, Number(copy.building[index].own) - 1));
+    if (coef > bestCoef) {
+      bestCoef = coef;
       bestBuildingIndex = index;
     }
   }
 
   return {
-    bestRpsAfterUpgrade: bestRpsAfterUpgrade,
+    bestCoef: bestCoef,
     bestUpgradeIndex: bestBuildingIndex,
     bestListName: "building"
   };
@@ -156,7 +156,7 @@ export function findBestUpgrade(playerInfo: PlayerInfo, date: Date): bestUpgrade
   // terrain_upgrade
 
   const bestUpgradeRes: bestUpgradeInfo = {
-    bestRpsAfterUpgrade: 0,
+    bestCoef: 0,
     bestUpgradeIndex: -1,
     bestListName: "building_upgrade"
   }
@@ -193,10 +193,10 @@ export function findBestUpgrade(playerInfo: PlayerInfo, date: Date): bestUpgrade
       const indexInBuilding = playerInfo[nameList].findIndex((building) => building["name"] === name);
       copy[nameList][indexInBuilding]["own"] = true;
 
-      const RPSafterUpgrade = (computeRPS(copy) - currentRPS) / (copy[nameList][indexInBuilding]["price"]);
+      const coef = (computeRPS(copy) - currentRPS) / (copy[nameList][indexInBuilding]["price"]);
 
-      if (RPSafterUpgrade > bestUpgradeRes.bestRpsAfterUpgrade) {
-        bestUpgradeRes.bestRpsAfterUpgrade = RPSafterUpgrade;
+      if (coef > bestUpgradeRes.bestCoef) {
+        bestUpgradeRes.bestCoef = coef;
         bestUpgradeRes.bestUpgradeIndex = indexInBuilding;
         bestUpgradeRes.bestListName = nameList;
       }

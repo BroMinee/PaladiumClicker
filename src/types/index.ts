@@ -286,14 +286,14 @@ export type buildingPathType =
 
 export type bestUpgradeInfo =
   {
-    bestRpsAfterUpgrade: number,
+    bestCoef: number,
     bestUpgradeIndex: number,
     bestListName: buildingPathType
   };
 
 export type bestBuildingInfo =
   {
-    bestRpsAfterUpgrade: number,
+    bestCoef: number,
     bestUpgradeIndex: number,
     bestListName: "building",
   };
