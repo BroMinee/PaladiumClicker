@@ -47,7 +47,11 @@ export default function ImportProfil({
     }
   }
 
-  const renderer = ({ minutes, seconds, completed }) => {
+  const renderer = ({ minutes, seconds, completed } : {
+    minutes: number,
+    seconds: number,
+    completed: boolean
+  }) => {
     if (completed) {
       return <Button
         onClick={async () => {
