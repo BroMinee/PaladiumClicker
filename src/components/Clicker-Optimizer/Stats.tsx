@@ -36,18 +36,17 @@ const Stats = () => {
     }
 
     setIsNextBuildingVisible(value);
-
-    if (value) {
-      setBuildingBuyPaths(computeXBuildingAhead(playerInfo, PROCHAIN_ACHAT_COUNT, rps));
-    }
   }
 
   useEffect(() => {
     if (!playerInfo) {
       return;
     }
+    if(!isNextBuildingVisible)
+      return;
+
     setBuildingBuyPaths(computeXBuildingAhead(playerInfo, PROCHAIN_ACHAT_COUNT, rps));
-  }, [playerInfo]);
+  }, [playerInfo,isNextBuildingVisible]);
 
 
   if (!playerInfo) {
