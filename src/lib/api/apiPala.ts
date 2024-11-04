@@ -24,6 +24,7 @@ import { getViewsFromUUID } from "@/lib/api/apiPalaTracker.ts";
 import { fetchWithHeader } from "@/lib/api/misc.ts";
 import { redirect } from "next/navigation";
 import { getInitialPlayerInfo } from "@/lib/misc.ts";
+import { registerPlayerAction } from "@/lib/api/apiServerAction.ts";
 // import { toast } from "sonner";
 
 
@@ -217,6 +218,8 @@ export const getPlayerInfo = async (pseudo: string): Promise<PlayerInfo> => {
   initialPlayerInfo.leaderboard = leaderboardPosition;
   initialPlayerInfo.faction = paladiumFactionInfo;
   initialPlayerInfo.view_count = viewCount;
+
+  registerPlayerAction(paladiumProfil.uuid, paladiumProfil.username);
 
 
   return initialPlayerInfo;
