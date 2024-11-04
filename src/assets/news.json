@@ -2,7 +2,8 @@
   {
     "date": "TODO",
     "events": [
-      "Ajout d'un compte à rebours dynamique pour la réimportation du profil"
+      "Ajout d'un compte à rebours dynamique pour la réimportation du profil",
+      "Ajout de la cape et du nametag sur le visuel du joueur"
     ]
   },
   {

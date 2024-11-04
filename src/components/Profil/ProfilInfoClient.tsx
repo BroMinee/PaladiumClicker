@@ -6,6 +6,7 @@ import dynamic from "next/dynamic";
 import { Card, CardContent } from "@/components/ui/card.tsx";
 import constants from "@/lib/constants.ts";
 import Image from "next/image";
+import { NameTagObject } from "skinview3d";
 
 const ReactSkinview3d = dynamic(() => import("react-skinview3d"), { ssr: false });
 
@@ -83,11 +84,14 @@ export function PlayerSkin() {
 
   const pseudo = playerInfo?.username ?? "Notch";
   const skinUrl = `https://mineskin.eu/skin/${pseudo}`;
+  const capeUrl = `https://crafatar.com/capes/${playerInfo?.uuid}`;
 
   return <ReactSkinview3d className="!w-full !h-full rounded-md"
                           skinUrl={skinUrl}
+                          capeUrl={capeUrl}
                           height="400"
                           width="400"
+                          options={{nameTag: new NameTagObject(`${playerInfo?.username}`, { textStyle:  "#ff5c00", backgroundStyle: 'rgba(0,0,0,0)', font: "48px Minecraft" }), zoom: 0.75}}
   />
 }
 
