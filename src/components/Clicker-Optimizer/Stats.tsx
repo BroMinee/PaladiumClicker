@@ -2,7 +2,6 @@
 import GradientText from "@/components/shared/GradientText";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { Checkbox } from "@/components/ui/checkbox";
 import {
   computePrice,
   computeRPS,
@@ -10,16 +9,14 @@ import {
   getDDHHMMSSOnlyClicker,
   getPathImg,
   getTotalSpend,
-  safeJoinPaths
 } from "@/lib/misc";
 import { usePlayerInfoStore } from "@/stores/use-player-info-store";
 import { bestBuildingInfo, bestPurchaseInfo, bestPurchaseInfoDetailed, bestUpgradeInfo, PlayerInfo } from "@/types";
 import React, { useEffect, useState } from "react";
-import { FaBed, FaInfoCircle, FaMedal, FaTachometerAlt } from "react-icons/fa";
 import { computeBestBuildingUpgrade, findBestUpgrade } from "./RPS";
 import { useRpsStore } from "@/stores/use-rps-store";
-import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover.tsx";
 import Image from "next/image";
+import { Checkbox } from "@/components/ui/checkbox.tsx";
 
 const PROCHAIN_ACHAT_COUNT = 20;
 
@@ -66,85 +63,17 @@ const Stats = () => {
           Afficher les {PROCHAIN_ACHAT_COUNT} prochains achats optimaux (non recommandé sur téléphone)
         </label>
       </div>
-      <div>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          <Card>
-            <CardContent className="h-full pt-6 flex items-center gap-4">
-              <FaBed className="w-12 h-12"/>
-              <div className="flex flex-col gap-2 justify">
-                    <span className="font-semibold flex items-center gap-2">Coins dormants
-                    <Popover>
-                      <PopoverTrigger asChild>
-                        <Button variant="outline" size="icon">
-                          <FaInfoCircle className="inline-block h-4 w-4"/>
-                        </Button>
-                      </PopoverTrigger>
-                      <PopoverContent className="w-80">
-                        Coins que vous avez sur votre clicker in-game, mais que vous n&apos;avez pas encore dépensés.
-                      </PopoverContent>
-                    </Popover></span>
-                <div className="flex gap-2 items-center">
-                  <GradientText className="font-bold">
-                    <DisplayCoinsDormants/>
-                  </GradientText>
-                  <Image src={safeJoinPaths("/coin.png")} width={24} height={24}
-                         alt="Coin"/>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-          <Card>
-            <CardContent className="h-full pt-6 flex items-center gap-4">
-              <FaTachometerAlt className="w-12 h-12"/>
-              <div className="flex flex-col gap-2">
-                  <span className="font-semibold flex items-center gap-2">Production totale
-                  <Popover>
-                      <PopoverTrigger asChild>
-                        <Button variant="outline" size="icon">
-                          <FaInfoCircle className="inline-block h-4 w-4"/>
-                        </Button>
-                      </PopoverTrigger>
-                      <PopoverContent className="w-80">
-                        Ne prends pas en compte la production des cliques manuels.
-                      </PopoverContent>
-                    </Popover>
-                  </span>
-                <div className="flex gap-2 items-center">
-                  <GradientText className="font-bold">
-                    {(formatPrice(Math.round(playerInfo["production"])))}
-                  </GradientText>
-                  <Image width={24} height={24} src={safeJoinPaths("/coin.png")}
-                         alt="Coin"/>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-          <Card className="md:col-span-2 lg:col-span-1">
-            <CardContent className="h-full pt-6 flex items-center gap-4">
-              <FaMedal className="w-12 h-12"/>
-              <div className="flex flex-col gap-2">
-                <span className="font-semibold">Classement</span>
-                <div className="flex gap-2 items-center">
-                  Top
-                  <GradientText className="font-bold">
-                    #{playerInfo.leaderboard}
-                  </GradientText>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
+
+      {isNextBuildingVisible &&
+        <div className="flex flex-col gap-4 items-center pt-4">
+          <StatList buildingBuyPaths={buildingBuyPaths} showProduction={true}/>
+          <Button
+            onClick={() => buyBuilding(playerInfo, setPlayerInfo, buildingBuyPaths)}
+          >
+            Simuler les {buildingBuyPaths.length} achats
+          </Button>
         </div>
-        {isNextBuildingVisible &&
-          <div className="flex flex-col gap-4 items-center pt-4">
-            <StatList buildingBuyPaths={buildingBuyPaths} showProduction={true}/>
-            <Button
-              onClick={() => buyBuilding(playerInfo, setPlayerInfo, buildingBuyPaths)}
-            >
-              Simuler les {buildingBuyPaths.length} achats
-            </Button>
-          </div>
-        }
-      </div>
+      }
     </>
   );
 }
@@ -195,15 +124,16 @@ export const StatList = ({ buildingBuyPaths, showProduction }: StatsListProps) =
 type StatProps = {
   buildingName: string,
   buildingPath: bestPurchaseInfoDetailed,
-  showProduction: boolean
+  showProduction: boolean,
+  switchColor?: boolean
 }
 
-export const Stat = ({ buildingName, buildingPath, showProduction }: StatProps) => {
+export const Stat = ({ buildingName, buildingPath, showProduction, switchColor = false }: StatProps) => {
   return (
     <div className="flex flex-col gap-2 items-center">
       <Image src={buildingPath.pathImg} height={48} width={48} className="object-cover" alt="image"/>
       <BuildingName name={buildingName} level={buildingPath.own}/>
-      <GradientText className="font-bold">{formatPrice(buildingPath.price)} $</GradientText>
+      {!switchColor ? <GradientText className="font-bold">{formatPrice(buildingPath.price)} $</GradientText> : `${formatPrice(buildingPath.price)} $`}
       <span
         className="text-sm">Achetable {buildingPath.timeToBuy !== "Maintenant" && "le"} {buildingPath.timeToBuy}</span>
       {showProduction &&

@@ -1,15 +1,16 @@
 'use client'
 import { checkCondition, computePrice, computeRPS, formatPrice, safeJoinPaths } from "@/lib/misc";
-import { buyBuilding, computeXBuildingAhead, Stat } from "./Stats";
+import { buyBuilding, computeXBuildingAhead, DisplayCoinsDormants, Stat } from "./Stats";
 import { bestBuildingInfo, bestPurchaseInfoDetailed, bestUpgradeInfo, buildingPathType, PlayerInfo } from "@/types";
 import { usePlayerInfoStore } from "@/stores/use-player-info-store";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import GradientText from "@/components/shared/GradientText";
 import { Button } from "@/components/ui/button";
 import { useRpsStore } from "@/stores/use-rps-store";
-import { FaCoins, FaRandom } from "react-icons/fa";
+import { FaBed, FaCoins, FaInfoCircle, FaMedal, FaRandom, FaTachometerAlt } from "react-icons/fa";
 import Image from "next/image";
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover.tsx";
 
 const RPS = () => {
   const { data: playerInfo, setPlayerInfo } = usePlayerInfoStore();
@@ -42,8 +43,10 @@ const RPS = () => {
   }
 
   return (
-    <div className="grid grid-cols-1 grid-rows-1 md:grid-cols-2 md:grid-rows-2 gap-4">
-      <Card className="md:row-span-2">
+    <>
+
+      <div className="grid grid-cols-1 grid-rows-1 md:grid-cols-3 md:grid-rows-3 gap-4">
+      <Card className="md:row-span-3 border-primary border-2">
         <CardHeader>
           <CardTitle>Prochain achat optimal</CardTitle>
         </CardHeader>
@@ -78,7 +81,7 @@ const RPS = () => {
           </div>
         </CardContent>
       </Card>
-      <Card>
+        <Card>
         <CardContent className="h-full pt-6 flex items-center gap-4">
           {rps < 0 ?
             <Image width={48} height={48} src={safeJoinPaths("/arty_chocbar.webp")}
@@ -95,7 +98,7 @@ const RPS = () => {
           </div>
         </CardContent>
       </Card>
-      <Card>
+        <Card>
         <CardContent className="h-full pt-6 flex items-center gap-4">
           <FaRandom className="w-12 h-12"/>
           <div className="flex flex-col gap-2">
@@ -110,7 +113,75 @@ const RPS = () => {
           </div>
         </CardContent>
       </Card>
+        <Card>
+          <CardContent className="h-full pt-6 flex items-center gap-4">
+            <FaBed className="w-12 h-12"/>
+            <div className="flex flex-col gap-2 justify">
+                    <span className="font-semibold flex items-center gap-2">Coins dormants
+                    <Popover>
+                      <PopoverTrigger asChild>
+                        <Button variant="outline" size="icon">
+                          <FaInfoCircle className="inline-block h-4 w-4"/>
+                        </Button>
+                      </PopoverTrigger>
+                      <PopoverContent className="w-80">
+                        Coins que vous avez sur votre clicker in-game, mais que vous n&apos;avez pas encore dépensés.
+                      </PopoverContent>
+                    </Popover></span>
+              <div className="flex gap-2 items-center">
+                <GradientText className="font-bold">
+                  <DisplayCoinsDormants/>
+                </GradientText>
+                <Image src={safeJoinPaths("/coin.png")} width={24} height={24}
+                       alt="Coin"/>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+        <Card>
+          <CardContent className="h-full pt-6 flex items-center gap-4">
+            <FaTachometerAlt className="w-12 h-12"/>
+            <div className="flex flex-col gap-2">
+              <span className="font-semibold flex items-center gap-2">Production totale
+                  <Popover>
+                      <PopoverTrigger asChild>
+                        <Button variant="outline" size="icon">
+                          <FaInfoCircle className="inline-block h-4 w-4"/>
+                        </Button>
+                      </PopoverTrigger>
+                      <PopoverContent className="w-80">
+                        Ne prends pas en compte la production des cliques manuels.
+                      </PopoverContent>
+                    </Popover>
+                  </span>
+              <div className="flex gap-2 items-center">
+                <GradientText className="font-bold">
+                  {(formatPrice(Math.round(playerInfo["production"])))}
+                </GradientText>
+                <Image width={24} height={24} src={safeJoinPaths("/coin.png")}
+                       alt="Coin"/>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+        <Card>
+          <CardContent className="h-full pt-6 flex items-center gap-4">
+            <FaMedal className="w-12 h-12"/>
+            <div className="flex flex-col gap-2">
+              <span className="font-semibold">Classement</span>
+              <div className="flex gap-2 items-center">
+                Top
+                <GradientText className="font-bold">
+                  #{playerInfo.leaderboard}
+                </GradientText>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+
     </div>
+
+    </>
   );
 }
 

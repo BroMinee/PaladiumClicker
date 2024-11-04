@@ -88,3 +88,8 @@
         scrollbar-width: none; /* Firefox */
     }
 }
+
+@font-face {
+    font-family: 'Minecraft';
+    src: url('/minecraft.woff2') format('woff2');
+}
