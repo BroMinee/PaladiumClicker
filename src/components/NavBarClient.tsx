@@ -1,9 +1,9 @@
 'use client'
 import Link from "next/link";
-import { getLinkFromUrl, safeJoinPaths } from "@/lib/misc.ts";
+import { adminShopItemToUserFriendlyText, getLinkFromUrl, safeJoinPaths } from "@/lib/misc.ts";
 import { cn } from "@/lib/utils.ts";
 import { usePlayerInfoStore } from "@/stores/use-player-info-store.ts";
-import React, { useEffect, useState } from "react";
+import React, { ReactNode, useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 import constants, { PathValid } from "@/lib/constants.ts";
 import { FaAngleDown, FaAngleUp } from "react-icons/fa";
@@ -57,9 +57,13 @@ export default function LinkClient({ path, children }: {
     </Link>
 
   const href = requiredPseudo && playerInfo?.username ? safeJoinPaths("/", path, playerInfo.username) : path;
+  const hoverElement: ReactNode = (
+    <div className="bg-primary rounded-md p-2 font-bold">{newNotificationText}</div>
+  );
+
 
   if (newNotification) {
-    return <HoverText text={newNotificationText}>
+    return <HoverText text={hoverElement}>
       <Link
         onClick={() => setLastVisited(path)}
         className={cn("font-medium flex justify-start items-center space-x-6 focus:bg-gray-700 focus:text-white hover:bg-accent text-card-foreground rounded px-3 py-2 w-56", isActive && "underline bg-accent")}

@@ -5,6 +5,8 @@ import type { UpgradeKey } from "@/types";
 import { redirect } from "next/navigation";
 import { ButtonUpgrade, PreconditionDisplay } from "@/components/Clicker-Optimizer/UpgradeListClient.tsx";
 import Image from "next/image";
+import { ReactNode } from "react";
+import HoverText from "@/components/ui/hovertext.tsx";
 
 type UpgradeListProps = {
   upgradeType: UpgradeKey;
@@ -32,7 +34,7 @@ const UpgradeList = ({ upgradeType }: UpgradeListProps) => {
 
   return (
     <ScrollArea>
-      <div className="flex gap-4 pb-3">
+      <div className="grid grid-cols-16 gap-2">
         {jsonToUse.map((upgrade, index) => (
           <Upgrade
             key={`${upgrade.name}-${index}`}
@@ -58,17 +60,22 @@ interface UpgradeProps {
 function Upgrade({ upgradeType, index, imgPath, jsonToUse }: UpgradeProps) {
   // NOTE price here can be server side since it's not variable for all upgrades
 
-  return (
-    <ButtonUpgrade upgradeType={upgradeType} index={index}>
-      <div className="w-36 flex flex-col items-center justify-center gap-2">
-        <Image src={imgPath} width={48} height={48} alt="Icône" className="object-cover"/>
-        <span className="text-wrap">{jsonToUse[index].name}</span>
-        <div className="font-bold">
-          {formatPrice(jsonToUse[index].price ?? -1)} $
-        </div>
-        <PreconditionDisplay index={index} upgradeType={upgradeType}/>
+  const hoverElement: ReactNode = (
+    <div className="flex flex-col items-center justify-center border-black border-2 rounded-xl p-2 bg-primary">
+      <span className="text-wrap">{jsonToUse[index].name}</span>
+      <div className="font-bold">
+        {formatPrice(jsonToUse[index].price ?? -1)} $
       </div>
-    </ButtonUpgrade>
+      <PreconditionDisplay index={index} upgradeType={upgradeType}/>
+    </div>
+  );
+
+  return (
+    <HoverText text={hoverElement}>
+      <ButtonUpgrade upgradeType={upgradeType} index={index}>
+        <Image src={imgPath} width={48} height={48} alt="Icône" className="object-cover"/>
+      </ButtonUpgrade>
+    </HoverText>
   );
 }
 

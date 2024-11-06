@@ -12,15 +12,22 @@ export function ButtonCPS({ index, children }: { index: number, children: React.
   const { data: playerInfo, selectCPS } = usePlayerInfoStore();
   const cps = playerInfo?.CPS[index];
 
+  if (!playerInfo) {
+    return null;
+  }
+
+  const unlockable = checkCondition(playerInfo, playerInfo.CPS[index].condition, new Date()).unlockable;
+
   return (
     <Card
       className={cn(
         buttonVariants({ variant: "card" }),
-        "p-4 h-auto min-w-36 w-fit",
+        "p-4 h-auto w-fit",
         cps?.own && "bg-primary text-primary-foreground",
         !cps?.own && "bg-yellow-500 text-primary-foreground",
         cps?.own && "hover:bg-primary-darker",
         !cps?.own && "hover:bg-yellow-600",
+        !unlockable && "bg-gray-500"
       )}
       onClick={() => selectCPS(index)}
     >
@@ -71,20 +78,27 @@ export function PreconditionDisplay({ index }: { index: number }) {
     texts[0] = "Préconditions non remplies :";
 
   if (!unlockable) {
+    // return (
+    //   <Popover>
+    //     <PopoverTrigger asChild onClick={(e) => e.stopPropagation()}>
+    //       <Button variant="outline" size="icon">
+    //         <FaInfoCircle className="inline-block h-4 w-4 text-secondary-foreground"/>
+    //       </Button>
+    //     </PopoverTrigger>
+    //     <PopoverContent className="w-80">
+    //       {texts.map((text, index) => (
+    //         <p key={index} className="text-sm text-destructive">{text}</p>
+    //       ))}
+    //     </PopoverContent>
+    //   </Popover>
+    // );
     return (
-      <Popover>
-        <PopoverTrigger asChild onClick={(e) => e.stopPropagation()}>
-          <Button variant="outline" size="icon">
-            <FaInfoCircle className="inline-block h-4 w-4 text-secondary-foreground"/>
-          </Button>
-        </PopoverTrigger>
-        <PopoverContent className="w-80">
-          {texts.map((text, index) => (
-            <p key={index} className="text-sm text-destructive">{text}</p>
-          ))}
-        </PopoverContent>
-      </Popover>
-    );
+      <div>
+        {texts.map((text, index) => (
+          <p key={index}>{text}</p>
+        ))}
+      </div>
+    )
   }
   return null;
 }

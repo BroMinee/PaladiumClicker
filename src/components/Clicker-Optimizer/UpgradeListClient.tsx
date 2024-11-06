@@ -2,9 +2,7 @@
 import { usePlayerInfoStore } from "@/stores/use-player-info-store.ts";
 import { checkCondition, formatPrice } from "@/lib/misc.ts";
 import { BuildingUpgrade, CategoryUpgrade, GlobalUpgrade, TerrainUpgrade, UpgradeKey } from "@/types";
-import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover.tsx";
-import { Button, buttonVariants } from "@/components/ui/button.tsx";
-import { FaInfoCircle } from "react-icons/fa";
+import { buttonVariants } from "@/components/ui/button.tsx";
 import { cn } from "@/lib/utils.ts";
 import React from "react";
 import { Card } from "@/components/ui/card.tsx";
@@ -42,18 +40,22 @@ export function PreconditionDisplay({ index, upgradeType }: { index: number, upg
 
   if (!unlockable) {
     return (
-      <Popover>
-        <PopoverTrigger asChild onClick={(e) => e.stopPropagation()}>
-          <Button variant="outline" size="icon">
-            <FaInfoCircle className="inline-block h-4 w-4"/>
-          </Button>
-        </PopoverTrigger>
-        <PopoverContent className="w-80">
-          {texts.map((text, index) => (
-            <p key={index} className="text-sm text-destructive">{text}</p>
-          ))}
-        </PopoverContent>
-      </Popover>
+      // <Popover>
+      //   <PopoverTrigger asChild onClick={(e) => e.stopPropagation()}>
+      //     <Button variant="outline" size="icon">
+      //       <FaInfoCircle className="inline-block h-4 w-4"/>
+      //     </Button>
+      //   </PopoverTrigger>
+      //   <PopoverContent className="w-80">
+      <div>
+        {texts.map((text, index) => (
+          <p key={index}>{text}</p>
+        ))}
+      </div>
+
+      // </PopoverContent>
+
+      // </Popover>
     );
   }
   return null;
@@ -66,21 +68,27 @@ export function ButtonUpgrade({ index, upgradeType, children }: {
 }) {
   const { data: playerInfo, toggleUpgradeOwn } = usePlayerInfoStore();
 
+  if (!playerInfo) {
+    return null;
+  }
 
   let upgrade: BuildingUpgrade | CategoryUpgrade | GlobalUpgrade | TerrainUpgrade | {
     own: false;
     name: string
   } = playerInfo ? playerInfo[upgradeType][index] : { own: false, name: "uninitialized" };
 
+  const unlockable = checkCondition(playerInfo, playerInfo[upgradeType][index].condition, new Date()).unlockable;
+
   return (
     <Card
       className={cn(
         buttonVariants({ variant: "card" }),
-        "p-4 h-auto",
+        "p-3 h-auto",
         upgrade.own && "bg-primary text-primary-foreground",
         !upgrade.own && "bg-yellow-500 text-primary-foreground",
         upgrade.own && "hover:bg-primary-darker",
         !upgrade.own && "hover:bg-yellow-600",
+        !unlockable && "bg-gray-500"
       )}
       onClick={() => toggleUpgradeOwn(upgradeType, upgrade.name)}
     >

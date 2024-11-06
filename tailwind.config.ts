@@ -19,6 +19,10 @@ const config: Config = {
       },
     },
     extend: {
+      gridTemplateColumns: {
+        '13': 'repeat(13, minmax(0, 1fr))',
+        '16': 'repeat(16, minmax(0, 1fr))',
+      },
       backgroundImage: {
         'light': "url('/background_light.webp')",
         'dark': "url('/background_dark.webp')",
