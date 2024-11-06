@@ -1,6 +1,6 @@
 'use client'
 import Link from "next/link";
-import { adminShopItemToUserFriendlyText, getLinkFromUrl, safeJoinPaths } from "@/lib/misc.ts";
+import { getLinkFromUrl, safeJoinPaths } from "@/lib/misc.ts";
 import { cn } from "@/lib/utils.ts";
 import { usePlayerInfoStore } from "@/stores/use-player-info-store.ts";
 import React, { ReactNode, useEffect, useState } from "react";

@@ -46,73 +46,73 @@ const RPS = () => {
     <>
 
       <div className="grid grid-cols-1 grid-rows-1 md:grid-cols-3 md:grid-rows-3 gap-4">
-      <Card className="md:row-span-3 border-primary border-2">
-        <CardHeader>
-          <CardTitle>Prochain achat optimal</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <div>
-            {(buildingBuyPaths.length !== 0) &&
-              <>
-                <div className="flex flex-col justify-center gap-4">
-                  <Stat
-                    buildingName={playerInfo[buildingBuyPaths[0].path][buildingBuyPaths[0].index]["name"]}
-                    buildingPath={buildingBuyPaths[0]} showProduction={false}/>
-                  <Button
-                    onClick={() => buyBuilding(playerInfo, setPlayerInfo, buildingBuyPaths)}
-                  >
-                    Simuler l&apos;achat
+        <Card className="md:row-span-3 border-primary border-2">
+          <CardHeader>
+            <CardTitle>Prochain achat optimal</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div>
+              {(buildingBuyPaths.length !== 0) &&
+                <>
+                  <div className="flex flex-col justify-center gap-4">
+                    <Stat
+                      buildingName={playerInfo[buildingBuyPaths[0].path][buildingBuyPaths[0].index]["name"]}
+                      buildingPath={buildingBuyPaths[0]} showProduction={false}/>
+                    <Button
+                      onClick={() => buyBuilding(playerInfo, setPlayerInfo, buildingBuyPaths)}
+                    >
+                      Simuler l&apos;achat
+                    </Button>
+                  </div>
+                </>
+              }
+              {(buildingBuyPaths.length === 0) &&
+                <div className="flex flex-col items-center gap-4">
+                  <Image width={128} height={128} src={safeJoinPaths("/arty_chocbar.webp")}
+                         className="h-auto object-contain"
+                         alt="Arty"/>
+                  <p className="text-sm">Bravo tu as tout acheté, va prendre une douche
+                    maintenant.</p>
+                  <Button>
+                    Aller prendre une douche
                   </Button>
                 </div>
-              </>
+              }
+            </div>
+          </CardContent>
+        </Card>
+        <Card>
+          <CardContent className="h-full pt-6 flex items-center gap-4">
+            {rps < 0 ?
+              <Image width={48} height={48} src={safeJoinPaths("/arty_chocbar.webp")}
+                     className="h-auto object-contain"
+                     alt="Arty"/> :
+              <FaCoins className="w-12 h-12"/>
             }
-            {(buildingBuyPaths.length === 0) &&
-              <div className="flex flex-col items-center gap-4">
-                <Image width={128} height={128} src={safeJoinPaths("/arty_chocbar.webp")}
-                       className="h-auto object-contain"
-                       alt="Arty"/>
-                <p className="text-sm">Bravo tu as tout acheté, va prendre une douche
-                  maintenant.</p>
-                <Button>
-                  Aller prendre une douche
-                </Button>
+            <div className="flex flex-col gap-2">
+              <span className="font-semibold">Production actuelle par seconde</span>
+              <div className="flex items-center gap-2">
+                <GradientText className="font-bold">{'~ ' + formatPrice(rps)}</GradientText>
+                <Image width={24} height={24} src={safeJoinPaths("/coin.png")} alt="Coin"/>
               </div>
-            }
-          </div>
-        </CardContent>
-      </Card>
-        <Card>
-        <CardContent className="h-full pt-6 flex items-center gap-4">
-          {rps < 0 ?
-            <Image width={48} height={48} src={safeJoinPaths("/arty_chocbar.webp")}
-                   className="h-auto object-contain"
-                   alt="Arty"/> :
-            <FaCoins className="w-12 h-12"/>
-          }
-          <div className="flex flex-col gap-2">
-            <span className="font-semibold">Production actuelle par seconde</span>
-            <div className="flex items-center gap-2">
-              <GradientText className="font-bold">{'~ ' + formatPrice(rps)}</GradientText>
-              <Image width={24} height={24} src={safeJoinPaths("/coin.png")} alt="Coin"/>
             </div>
-          </div>
-        </CardContent>
-      </Card>
+          </CardContent>
+        </Card>
         <Card>
-        <CardContent className="h-full pt-6 flex items-center gap-4">
-          <FaRandom className="w-12 h-12"/>
-          <div className="flex flex-col gap-2">
-            <span className="font-semibold">Production estimée après achat</span>
-            <div className="flex items-center gap-2">
-              <GradientText className="font-bold">
-                {'~ ' + formatPrice(estimatedRPS)}{" "}
-                ({estimatedRPS > rps ? "+" : ""}{(((estimatedRPS - rps) / (rps) * 100)).toFixed(5)}%)
-              </GradientText>
-              <Image src={safeJoinPaths("/coin.png")} height={24} width={24} alt="Coin"/>
+          <CardContent className="h-full pt-6 flex items-center gap-4">
+            <FaRandom className="w-12 h-12"/>
+            <div className="flex flex-col gap-2">
+              <span className="font-semibold">Production estimée après achat</span>
+              <div className="flex items-center gap-2">
+                <GradientText className="font-bold">
+                  {'~ ' + formatPrice(estimatedRPS)}{" "}
+                  ({estimatedRPS > rps ? "+" : ""}{(((estimatedRPS - rps) / (rps) * 100)).toFixed(5)}%)
+                </GradientText>
+                <Image src={safeJoinPaths("/coin.png")} height={24} width={24} alt="Coin"/>
+              </div>
             </div>
-          </div>
-        </CardContent>
-      </Card>
+          </CardContent>
+        </Card>
         <Card>
           <CardContent className="h-full pt-6 flex items-center gap-4">
             <FaBed className="w-12 h-12"/>
@@ -179,7 +179,7 @@ const RPS = () => {
           </CardContent>
         </Card>
 
-    </div>
+      </div>
 
     </>
   );

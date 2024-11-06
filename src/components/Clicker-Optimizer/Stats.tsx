@@ -2,14 +2,7 @@
 import GradientText from "@/components/shared/GradientText";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import {
-  computePrice,
-  computeRPS,
-  formatPrice,
-  getDDHHMMSSOnlyClicker,
-  getPathImg,
-  getTotalSpend,
-} from "@/lib/misc";
+import { computePrice, computeRPS, formatPrice, getDDHHMMSSOnlyClicker, getPathImg, getTotalSpend, } from "@/lib/misc";
 import { usePlayerInfoStore } from "@/stores/use-player-info-store";
 import { bestBuildingInfo, bestPurchaseInfo, bestPurchaseInfoDetailed, bestUpgradeInfo, PlayerInfo } from "@/types";
 import React, { useEffect, useState } from "react";
@@ -133,7 +126,8 @@ export const Stat = ({ buildingName, buildingPath, showProduction, switchColor =
     <div className="flex flex-col gap-2 items-center">
       <Image src={buildingPath.pathImg} height={48} width={48} className="object-cover" alt="image"/>
       <BuildingName name={buildingName} level={buildingPath.own}/>
-      {!switchColor ? <GradientText className="font-bold">{formatPrice(buildingPath.price)} $</GradientText> : `${formatPrice(buildingPath.price)} $`}
+      {!switchColor ? <GradientText
+        className="font-bold">{formatPrice(buildingPath.price)} $</GradientText> : `${formatPrice(buildingPath.price)} $`}
       <span
         className="text-sm">Achetable {buildingPath.timeToBuy !== "Maintenant" && "le"} {buildingPath.timeToBuy}</span>
       {showProduction &&

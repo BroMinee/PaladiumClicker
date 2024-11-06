@@ -21,7 +21,7 @@ export function AdminShopSelectorClient({ item }: {
   const selected = item === searchParams.get("item");
 
   const hoverElement: ReactNode = (
-      <div className="bg-primary rounded-md p-2 font-bold">{adminShopItemToUserFriendlyText(item)}</div>
+    <div className="bg-primary rounded-md p-2 font-bold">{adminShopItemToUserFriendlyText(item)}</div>
   );
   return (
     <>

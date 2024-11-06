@@ -19,8 +19,8 @@ export function RankingSelectorClient({ rankingType }: {
 
   const selected = rankingType === searchParams.get("category");
 
-  const hoverElement : ReactNode = (
-      <div className="bg-primary rounded-md p-2 font-bold">{rankingTypeToUserFriendlyText(rankingType)}</div>
+  const hoverElement: ReactNode = (
+    <div className="bg-primary rounded-md p-2 font-bold">{rankingTypeToUserFriendlyText(rankingType)}</div>
   );
 
   return (

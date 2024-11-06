@@ -91,7 +91,13 @@ export function PlayerSkin() {
                           capeUrl={capeUrl}
                           height="400"
                           width="400"
-                          options={{nameTag: new NameTagObject(`${playerInfo?.username}`, { textStyle:  "#ff5c00", backgroundStyle: 'rgba(0,0,0,0)', font: "48px Minecraft" }), zoom: 0.75}}
+                          options={{
+                            nameTag: new NameTagObject(`${playerInfo?.username}`, {
+                              textStyle: "#ff5c00",
+                              backgroundStyle: 'rgba(0,0,0,0)',
+                              font: "48px Minecraft"
+                            }), zoom: 0.75
+                          }}
   />
 }
 

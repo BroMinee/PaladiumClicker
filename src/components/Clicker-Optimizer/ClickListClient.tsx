@@ -1,11 +1,9 @@
 'use client';
 import { cn } from "@/lib/utils.ts";
-import { Button, buttonVariants } from "@/components/ui/button.tsx";
+import { buttonVariants } from "@/components/ui/button.tsx";
 import { usePlayerInfoStore } from "@/stores/use-player-info-store.ts";
 import React from "react";
 import { checkCondition, formatPrice } from "@/lib/misc.ts";
-import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover.tsx";
-import { FaInfoCircle } from "react-icons/fa";
 import { Card } from "@/components/ui/card.tsx";
 
 export function ButtonCPS({ index, children }: { index: number, children: React.ReactNode }) {
