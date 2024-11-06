@@ -11,7 +11,6 @@ import { MetierComponentWrapper } from "@/components/MetierList.tsx";
 import Stats from "@/components/Clicker-Optimizer/Stats.tsx";
 import BuildingList from "@/components/Clicker-Optimizer/BuildingList.tsx";
 import ClickList from "@/components/Clicker-Optimizer/ClickList.tsx";
-import { Fragment } from "react";
 import UpgradeList from "@/components/Clicker-Optimizer/UpgradeList.tsx";
 import FallingClickImage from "@/components/Clicker-Optimizer/FallingClick.tsx";
 import { PlayerSkin } from "@/components/Profil/ProfilInfoClient.tsx";
@@ -89,18 +88,27 @@ export default function Home({ params }: { params: { username: string } }) {
           <RPS/>
           <HeadingSection>Statistiques</HeadingSection>
           <Stats/>
-          <HeadingSection>Métiers</HeadingSection>
 
           <HeadingSection>Bâtiments</HeadingSection>
           <BuildingList/>
-          <HeadingSection>Clicks</HeadingSection>
-          <ClickList/>
-          {upgrades.map((upgrade) => (
-            <Fragment key={upgrade.upgradeType}>
-              <HeadingSection>{upgrade.title}</HeadingSection>
-              <UpgradeList key={upgrade.upgradeType} upgradeType={upgrade.upgradeType}/>
-            </Fragment>
-          ))}
+          <Card>
+            <CardHeader>
+              <CardTitle>Amélioration</CardTitle>
+            </CardHeader>
+            <CardContent className="flex flex-col gap-4">
+              <div>
+                <HeadingSection>Clicks</HeadingSection>
+                <ClickList/>
+              </div>
+
+              {upgrades.map((upgrade) => (
+                <div key={upgrade.upgradeType}>
+                  <HeadingSection>{upgrade.title}</HeadingSection>
+                  <UpgradeList key={upgrade.upgradeType} upgradeType={upgrade.upgradeType}/>
+                </div>
+              ))}
+            </CardContent>
+          </Card>
         </div>
       </ProfileFetcherWrapper>
       <FallingClickImage/>

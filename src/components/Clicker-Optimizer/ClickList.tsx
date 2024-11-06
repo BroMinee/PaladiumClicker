@@ -55,7 +55,7 @@ const CPS = ({ index, imgPath }: CPSProps) => {
   return (
     <HoverText text={hoverElement}>
       <ButtonCPS index={index}>
-        <Image width={48} height={48} src={imgPath} alt="Icône" className="object-cover"/>
+        <Image width={48} height={48} src={imgPath} alt="Icône" className="object-cover pixelated" unoptimized/>
       </ButtonCPS>
     </HoverText>
 

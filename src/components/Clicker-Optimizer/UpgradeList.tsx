@@ -73,7 +73,7 @@ function Upgrade({ upgradeType, index, imgPath, jsonToUse }: UpgradeProps) {
   return (
     <HoverText text={hoverElement}>
       <ButtonUpgrade upgradeType={upgradeType} index={index}>
-        <Image src={imgPath} width={48} height={48} alt="Icône" className="object-cover"/>
+        <Image src={imgPath} width={48} height={48} alt="Icône" className="object-cover pixelated" unoptimized/>
       </ButtonUpgrade>
     </HoverText>
   );
