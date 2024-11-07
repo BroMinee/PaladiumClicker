@@ -19,12 +19,26 @@ export default function HoverText({ text, children }: { text: React.ReactNode, c
     setPosition({ x: e.clientX + 10, y: e.clientY - 30 });
   };
 
+  const handleTouchStart = (e: React.TouchEvent<HTMLDivElement>) => {
+    setPosition({ x: e.touches[0].clientX + 10, y: e.touches[0].clientY - 30 });
+    setShowText(!showText);
+  };
+
+
+  const handleClick = () => {
+    setShowText(false);
+  };
+
 
   return (<>
     <div
       onMouseOver={handleMouseOver}
       onMouseOut={handleMouseOut}
-      onMouseMove={handleMouseMove}>
+      onMouseMove={handleMouseMove}
+      onTouchStart={handleTouchStart}
+      onClick={handleClick}
+
+    >
       {children}
     </div>
     {showText && (
