@@ -1,5 +1,5 @@
 'use client'
-import { checkCondition, computePrice, computeRPS, formatPrice, safeJoinPaths } from "@/lib/misc";
+import { checkCondition, computePrice, computeProgression, computeRPS, formatPrice, safeJoinPaths } from "@/lib/misc";
 import { buyBuilding, computeXBuildingAhead, DisplayCoinsDormants, Stat } from "./Stats";
 import { bestBuildingInfo, bestPurchaseInfoDetailed, bestUpgradeInfo, buildingPathType, PlayerInfo } from "@/types";
 import { usePlayerInfoStore } from "@/stores/use-player-info-store";
@@ -11,6 +11,7 @@ import { useRpsStore } from "@/stores/use-rps-store";
 import { FaBed, FaCoins, FaInfoCircle, FaMedal, FaRandom, FaTachometerAlt } from "react-icons/fa";
 import Image from "next/image";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover.tsx";
+import { GiProgression } from "react-icons/gi";
 
 const RPS = () => {
   const { data: playerInfo, setPlayerInfo } = usePlayerInfoStore();
@@ -104,7 +105,7 @@ const RPS = () => {
               <div className="flex items-center gap-2">
                 <GradientText className="font-bold">
                   {'~ ' + formatPrice(estimatedRPS)}{" "}
-                  ({estimatedRPS > rps ? "+" : ""}{(((estimatedRPS - rps) / (rps) * 100)).toFixed(5)}%)
+                  ({estimatedRPS > rps ? "+" : ""}{(((estimatedRPS - rps) / (rps) * 100)).toFixed(2)}%)
                 </GradientText>
                 <Image src={safeJoinPaths("/coin.png")} height={24} width={24} alt="Coin"/>
               </div>
@@ -173,6 +174,18 @@ const RPS = () => {
                   #{playerInfo.leaderboard}
                 </GradientText>
               </div>
+            </div>
+          </CardContent>
+        </Card>
+
+        <Card>
+          <CardContent className="h-fit pt-6 flex items-center gap-4">
+            <GiProgression className="w-12 h-12"/>
+            <div className="flex flex-col gap-2">
+              <span className="font-semibold">Progression globale</span>
+              <GradientText className="font-bold">
+                {computeProgression(playerInfo).toFixed(2)}%
+              </GradientText>
             </div>
           </CardContent>
         </Card>

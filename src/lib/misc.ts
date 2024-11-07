@@ -3300,3 +3300,28 @@ export function generateProfilUrl(username: string, item: ProfilSectionEnum | st
   const args = [argItem].filter((e) => e).join("&");
   return safeJoinPaths(constants.profilPath, username, `?${args}`);
 }
+
+export function computeProgression(playerInfo: PlayerInfo | null) {
+  if (!playerInfo)
+    return 0;
+
+
+  const maxUpgrade =
+    playerInfo.building.length * 99
+    + playerInfo.CPS.length
+    + playerInfo.global_upgrade.length
+    + playerInfo.terrain_upgrade.length
+    + playerInfo.building_upgrade.length
+    + playerInfo.many_upgrade.length
+    + playerInfo.posterior_upgrade.length;
+
+  let currentUpgrade = playerInfo.building.reduce((acc, building) => acc + building.own, 0)
+    + playerInfo.CPS.reduce((acc, cps) => acc + (cps.own ? 1 : 0), 0)
+    + playerInfo.global_upgrade.reduce((acc, global) => acc + (global.own ? 1 : 0), 0)
+    + playerInfo.terrain_upgrade.reduce((acc, terrain) => acc + (terrain.own ? 1 : 0), 0)
+    + playerInfo.building_upgrade.reduce((acc, building) => acc + (building.own ? 1 : 0), 0)
+    + playerInfo.many_upgrade.reduce((acc, many) => acc + (many.own ? 1 : 0), 0)
+    + playerInfo.posterior_upgrade.reduce((acc, posterior) => acc + (posterior.own ? 1 : 0), 0);
+
+  return currentUpgrade * 100 / maxUpgrade;
+}

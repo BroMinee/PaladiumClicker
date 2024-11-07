@@ -75,7 +75,7 @@ const Stats = () => {
 const BuildingName = ({ name, level }: { name: string, level: number | boolean }) => {
   return (
     <div className="flex flex-col rounded-sm px-2 py-1 bg-primary text-primary-foreground">
-      <span className="text-xs font-bold">{name}</span>
+      <span className="text-xs font-bold text-center break-words">{name}</span>
       {typeof level === "number" ? <span className="text-xs text-center">Level {level}</span> : ""}
     </div>
   );
@@ -119,16 +119,14 @@ type StatProps = {
   buildingName: string,
   buildingPath: bestPurchaseInfoDetailed,
   showProduction: boolean,
-  switchColor?: boolean
 }
 
-export const Stat = ({ buildingName, buildingPath, showProduction, switchColor = false }: StatProps) => {
+export const Stat = ({ buildingName, buildingPath, showProduction }: StatProps) => {
   return (
     <div className="flex flex-col gap-2 items-center text-sm">
       <Image src={buildingPath.pathImg} height={48} width={48} className="object-cover" alt="image"/>
       <BuildingName name={buildingName} level={buildingPath.own}/>
-      {!switchColor ? <GradientText
-        className="font-bold">{formatPrice(buildingPath.price)} $</GradientText> : `${formatPrice(buildingPath.price)} $`}
+      <div className="text-primary font-bold text-center text-nowrap">{formatPrice(buildingPath.price)} $</div>
       <span
         className=" text-center break-words">Achetable {buildingPath.timeToBuy !== "Maintenant" && "le"} {buildingPath.timeToBuy}</span>
       {showProduction &&
