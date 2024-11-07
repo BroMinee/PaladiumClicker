@@ -332,7 +332,7 @@ export function scaleCurrentProduction(playerInfo: PlayerInfo, buildingIndex: nu
 }
 
 function scaleBaseProduction(playerInfo: PlayerInfo, buildingIndex: number) {
-  const baseProduction = convertToFloat(playerInfo.building?.[buildingIndex].base_production)
+  const baseProduction = convertToFloat(playerInfo.building?.[buildingIndex].base_production || 0)
   const pourcentageBonus = getPourcentageBonus(playerInfo, buildingIndex)
   return (baseProduction * pourcentageBonus);
 }
