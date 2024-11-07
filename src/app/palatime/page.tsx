@@ -73,7 +73,7 @@ export default function PalatimePage() {
     ligne28: "roues. Pour avoir dévoilé mes",
     ligne29: "plans, voici les coordonnées",
     ligne30: "de ta base sur egopolis :",
-    ligne31: "x=-10 000 et y= 10 000 environ",
+    ligne31: "x=-10 000 et z= 10 000 environ",
     ligne32: "vu que ta base fait 64 chunks.",
   };
 
