@@ -88,7 +88,7 @@ export function ButtonUpgrade({ index, upgradeType, children }: {
         !upgrade.own && "bg-yellow-500 text-primary-foreground",
         upgrade.own && "hover:bg-primary-darker",
         !upgrade.own && "hover:bg-yellow-600",
-        !unlockable && "bg-gray-500"
+        !upgrade.own && !unlockable && "bg-gray-500"
       )}
       onClick={() => toggleUpgradeOwn(upgradeType, upgrade.name)}
     >

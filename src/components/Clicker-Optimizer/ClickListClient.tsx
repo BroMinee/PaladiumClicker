@@ -26,7 +26,7 @@ export function ButtonCPS({ index, children }: { index: number, children: ReactN
         !cps?.own && "bg-yellow-500 text-primary-foreground",
         cps?.own && "hover:bg-primary-darker",
         !cps?.own && "hover:bg-yellow-600",
-        !unlockable && "bg-gray-500"
+        !cps?.own && !unlockable && "bg-gray-500"
       )}
       onClick={() => selectCPS(index)}
     >
