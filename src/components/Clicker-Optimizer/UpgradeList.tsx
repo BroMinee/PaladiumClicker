@@ -3,10 +3,11 @@ import { formatPrice, getJsonToUseForUpgrade } from "@/lib/misc";
 import type { UpgradeKey } from "@/types";
 
 import { redirect } from "next/navigation";
-import { ButtonUpgrade, PreconditionDisplay } from "@/components/Clicker-Optimizer/UpgradeListClient.tsx";
+import { ButtonUpgrade } from "@/components/Clicker-Optimizer/UpgradeListClient.tsx";
 import Image from "next/image";
 import { ReactNode } from "react";
 import HoverText from "@/components/ui/hovertext.tsx";
+import { PreconditionDisplay } from "@/lib/PreconditionDisplay.tsx";
 
 type UpgradeListProps = {
   upgradeType: UpgradeKey;
@@ -61,7 +62,7 @@ function Upgrade({ upgradeType, index, imgPath, jsonToUse }: UpgradeProps) {
   // NOTE price here can be server side since it's not variable for all upgrades
 
   const hoverElement: ReactNode = (
-    <div className="flex flex-col items-center justify-center border-black border-2 rounded-xl p-2 bg-primary">
+    <div className="flex flex-col items-center justify-center border-black border-2 rounded-xl p-2 bg-secondary">
       <span className="text-wrap">{jsonToUse[index].name}</span>
       <div className="font-bold">
         {formatPrice(jsonToUse[index].price ?? -1)} $

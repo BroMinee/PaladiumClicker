@@ -1,17 +1,12 @@
-import { Card, CardContent } from "@/components/ui/card";
+import { Card } from "@/components/ui/card";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 import { safeJoinPaths } from "@/lib/misc";
-import { FaBolt, FaPercentage } from "react-icons/fa";
 
 
 import BuildingJson from "@/assets/building.json"
-import {
-  BuildingInput,
-  BuildingLvl,
-  BuildingPrice,
-  BuildingRPS
-} from "@/components/Clicker-Optimizer/BuildingListClient.tsx";
+import { BuildingInput, BuildingPrice, BuildingRPS } from "@/components/Clicker-Optimizer/BuildingListClient.tsx";
 import Image from "next/image";
+import React from "react";
 
 const BuildingList = () => {
   function getImgPath(index: number, price: number) {
@@ -23,7 +18,7 @@ const BuildingList = () => {
 
   return (
     <ScrollArea>
-      <div className="flex gap-4 pb-3">
+      <div className="max-h-128 grid grid-cols-7 gap-2 pr-3">
         {BuildingJson.map((building, index) => (
           <Building
             key={building.name + index}
@@ -33,7 +28,7 @@ const BuildingList = () => {
         ))
         }
       </div>
-      <ScrollBar orientation="horizontal"/>
+      <ScrollBar orientation="vertical"/>
     </ScrollArea>
   );
 }
@@ -45,28 +40,23 @@ type BuildingProps = {
 
 const Building = ({ imgPath, index }: BuildingProps) => {
   return (
-    <Card className="min-w-60">
-      <CardContent className="pt-6 space-y-2">
-        <div className="flex flex-col items-center justify-center gap-2">
-          <Image width={48} height={48} src={imgPath} alt="Icône" className="object-cover"/>
-          <span className="text-primary text-sm text-nowrap">{BuildingJson[index].name}</span>
-          <div
-            className="text-primary font-bold text-center text-nowrap">
-            <BuildingPrice index={index}/>
-          </div>
+    <Card
+      className={"flex flex-col pt-4 pb-2 h-auto w-auto text-sm items-center gap-2"}>
+      <div className="flex flex-col items-center justify-center">
+        <Image width={48} height={48} src={imgPath} alt="Icône" className="object-cover pixelated" unoptimized/>
+        <span className="text-primary text-center break-words">{BuildingJson[index].name}</span>
+        <BuildingPrice index={index}/>
+      </div>
+
+      <div className="space-y-2">
+        <div className="flex flex-row items-center gap-1">
+          <BuildingRPS index={index}/>
+          <Image src={safeJoinPaths("/coin.png")} height={16} width={16} alt="Coin"/>
+          <span>/s</span>
         </div>
-        <div className="space-y-2">
-          <div className="text-sm">
-            <FaPercentage className="h-4 w-4 mr-2 inline-block"/>
-            <BuildingLvl index={index}/>
-          </div>
-          <div className="text-sm">
-            <FaBolt className="h-4 w-4 mr-2 inline-block"/>
-            <BuildingRPS index={index}/>
-          </div>
-          <BuildingInput index={index}/>
-        </div>
-      </CardContent>
+      </div>
+      <BuildingInput index={index}/>
+
     </Card>
   );
 }

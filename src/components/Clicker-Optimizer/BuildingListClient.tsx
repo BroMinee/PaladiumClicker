@@ -7,19 +7,21 @@ import { Input } from "@/components/ui/input.tsx";
 export function BuildingRPS({ index }: { index: number }) {
   const { data: playerInfo } = usePlayerInfoStore();
   if (!playerInfo)
-    return <>RPS: 0</>
+    return <>Prod: 0</>
 
   return <>
-    RPS: {formatPrice(scaleCurrentProduction(playerInfo, index, Number(playerInfo.building[index].own)))}
+    Prod: {formatPrice(Math.floor(scaleCurrentProduction(playerInfo, index, Number(playerInfo.building[index].own)) * 10) / 10)}
   </>
 }
 
 export function BuildingPrice({ index }: { index: number }) {
   const { data: playerInfo } = usePlayerInfoStore();
-  if (!playerInfo)
-    return <>0 $</>
 
-  return <>{formatPrice(computePrice(Number(playerInfo.building[index].price), Number(playerInfo.building[index].own)))} $</>
+  const price = !playerInfo ? 0 : formatPrice(computePrice(Number(playerInfo.building[index].price), Number(playerInfo.building[index].own)));
+
+  return <div
+    className="text-primary font-bold text-center text-nowrap">{price} $
+  </div>
 }
 
 export function BuildingLvl({ index }: { index: number }) {
@@ -46,6 +48,7 @@ export function BuildingInput({ index }: { index: number }) {
 
   if (!playerInfo)
     return <Input
+      className="mx-2"
       type="number"
       min="0"
       step="1"
@@ -54,6 +57,7 @@ export function BuildingInput({ index }: { index: number }) {
     />
 
   return <Input
+    className="mx-2 w-fit"
     type="number"
     min="0"
     step="1"

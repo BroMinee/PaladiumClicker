@@ -2,10 +2,11 @@ import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 import { formatPrice, safeJoinPaths } from "@/lib/misc";
 
 import CPSJson from "@/assets/CPS.json"
-import { ButtonCPS, PreconditionDisplay } from "@/components/Clicker-Optimizer/ClickListClient.tsx";
+import { ButtonCPS } from "@/components/Clicker-Optimizer/ClickListClient.tsx";
 import Image from "next/image";
 import HoverText from "@/components/ui/hovertext.tsx";
 import { ReactNode } from "react";
+import { PreconditionDisplay } from "@/lib/PreconditionDisplay.tsx";
 
 const ClickList = () => {
   function getImgPath(index: number, price: string) {
@@ -38,9 +39,8 @@ type CPSProps = {
 const CPS = ({ index, imgPath }: CPSProps) => {
   // NOTE price here can be server side since it's not variable
 
-
   const hoverElement: ReactNode = (
-    <div className="flex flex-col items-center justify-center border-black border-2 rounded-xl p-2 bg-primary">
+    <div className="flex flex-col items-center justify-center border-black border-2 rounded-xl p-2 bg-secondary">
       <div>{CPSJson[index].name}</div>
       <div className="font-bold">
         {formatPrice(CPSJson[index].price)} $
@@ -48,7 +48,7 @@ const CPS = ({ index, imgPath }: CPSProps) => {
       <div>
         {formatPrice(CPSJson[index].CPS)} / clic
       </div>
-      <PreconditionDisplay index={index}/>
+      <PreconditionDisplay index={index} upgradeType="CPS"/>
     </div>
   );
 

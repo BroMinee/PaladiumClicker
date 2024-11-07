@@ -51,7 +51,6 @@ const RPS = () => {
             <CardTitle>Prochain achat optimal</CardTitle>
           </CardHeader>
           <CardContent>
-            <div>
               {(buildingBuyPaths.length !== 0) &&
                 <>
                   <div className="flex flex-col justify-center gap-4">
@@ -78,7 +77,6 @@ const RPS = () => {
                   </Button>
                 </div>
               }
-            </div>
           </CardContent>
         </Card>
         <Card>

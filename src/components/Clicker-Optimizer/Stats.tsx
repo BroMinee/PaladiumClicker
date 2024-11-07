@@ -11,7 +11,7 @@ import { useRpsStore } from "@/stores/use-rps-store";
 import Image from "next/image";
 import { Checkbox } from "@/components/ui/checkbox.tsx";
 
-const PROCHAIN_ACHAT_COUNT = 20;
+const PROCHAIN_ACHAT_COUNT = 21;
 
 const Stats = () => {
   const { data: playerInfo, setPlayerInfo } = usePlayerInfoStore();
@@ -49,6 +49,7 @@ const Stats = () => {
       <div className="flex items-center space-x-2">
         <Checkbox
           id="next-building-visibility"
+          className="h-6 w-6"
           checked={isNextBuildingVisible}
           onCheckedChange={onChangeNextBuildingVisibility}
         />
@@ -95,7 +96,7 @@ export const StatList = ({ buildingBuyPaths, showProduction }: StatsListProps) =
   // List of list [path, index, own, timeToBuy, pathImg]
 
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 w-full">
+    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-7 w-full gap-2">
       {
         buildingBuyPaths.map((buildingPath, index) => (
           <Card key={index}>
@@ -123,18 +124,18 @@ type StatProps = {
 
 export const Stat = ({ buildingName, buildingPath, showProduction, switchColor = false }: StatProps) => {
   return (
-    <div className="flex flex-col gap-2 items-center">
+    <div className="flex flex-col gap-2 items-center text-sm">
       <Image src={buildingPath.pathImg} height={48} width={48} className="object-cover" alt="image"/>
       <BuildingName name={buildingName} level={buildingPath.own}/>
       {!switchColor ? <GradientText
         className="font-bold">{formatPrice(buildingPath.price)} $</GradientText> : `${formatPrice(buildingPath.price)} $`}
       <span
-        className="text-sm">Achetable {buildingPath.timeToBuy !== "Maintenant" && "le"} {buildingPath.timeToBuy}</span>
+        className=" text-center break-words">Achetable {buildingPath.timeToBuy !== "Maintenant" && "le"} {buildingPath.timeToBuy}</span>
       {showProduction &&
         <div className="flex flex-col items-center">
-          <span className="text-sm">Production estimée</span>
+          <span>Production estimée</span>
           <GradientText
-            className="text-sm font-bold">{formatPrice(buildingPath.newRps)}</GradientText>
+            className="font-bold">{formatPrice(Math.floor(buildingPath.newRps * 10) / 10)}</GradientText>
         </div>
       }
     </div>
