@@ -20,7 +20,7 @@ export function BuildingPrice({ index }: { index: number }) {
   const price = !playerInfo ? 0 : formatPrice(computePrice(Number(playerInfo.building[index].price), Number(playerInfo.building[index].own)));
 
   return <div
-    className="text-primary font-bold text-center text-nowrap">{price} $
+    className="text-primary font-bold text-center text-nowrap mx-2">{price} $
   </div>
 }
 

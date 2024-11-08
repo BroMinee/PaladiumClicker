@@ -20,7 +20,8 @@ const config: Config = {
     },
     extend: {
       maxHeight: {
-        '128': '32rem',
+        '120': '30rem',
+        '100': '25rem',
       },
       gridTemplateColumns: {
         '13': 'repeat(13, minmax(0, 1fr))',

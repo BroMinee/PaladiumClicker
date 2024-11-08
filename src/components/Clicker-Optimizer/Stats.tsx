@@ -96,7 +96,7 @@ export const StatList = ({ buildingBuyPaths, showProduction }: StatsListProps) =
   // List of list [path, index, own, timeToBuy, pathImg]
 
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-7 w-full gap-2">
+    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-7 w-full gap-2">
       {
         buildingBuyPaths.map((buildingPath, index) => (
           <Card key={index}>
@@ -131,7 +131,7 @@ export const Stat = ({ buildingName, buildingPath, showProduction }: StatProps) 
         className=" text-center break-words">Achetable {buildingPath.timeToBuy !== "Maintenant" && "le"} {buildingPath.timeToBuy}</span>
       {showProduction &&
         <div className="flex flex-col items-center">
-          <span>Production estimée</span>
+          <span className="text-center">Production estimée</span>
           <GradientText
             className="font-bold">{formatPrice(Math.floor(buildingPath.newRps * 10) / 10)}</GradientText>
         </div>
