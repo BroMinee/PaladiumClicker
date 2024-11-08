@@ -44,40 +44,35 @@ const RPS = () => {
   }
 
   return (
-    <>
-
-      <div className="grid grid-cols-1 grid-rows-1 md:grid-cols-3 md:grid-rows-3 gap-4">
-        <Card className="md:row-span-3 border-primary border-2">
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-2">
+      <Card className="sm:col-span-2 lg:row-span-3 xl:row-span-3 xl:col-span-1 border-primary border-2">
           <CardHeader>
             <CardTitle>Prochain achat optimal</CardTitle>
           </CardHeader>
           <CardContent>
-              {(buildingBuyPaths.length !== 0) &&
-                <>
-                  <div className="flex flex-col justify-center gap-4">
-                    <Stat
-                      buildingName={playerInfo[buildingBuyPaths[0].path][buildingBuyPaths[0].index]["name"]}
-                      buildingPath={buildingBuyPaths[0]} showProduction={false}/>
-                    <Button
-                      onClick={() => buyBuilding(playerInfo, setPlayerInfo, buildingBuyPaths)}
-                    >
-                      Simuler l&apos;achat
-                    </Button>
-                  </div>
-                </>
-              }
-              {(buildingBuyPaths.length === 0) &&
-                <div className="flex flex-col items-center gap-4">
-                  <Image width={128} height={128} src={safeJoinPaths("/arty_chocbar.webp")}
-                         className="h-auto object-contain"
-                         alt="Arty"/>
-                  <p className="text-sm">Bravo tu as tout acheté, va prendre une douche
-                    maintenant.</p>
-                  <Button>
-                    Aller prendre une douche
-                  </Button>
-                </div>
-              }
+            {(buildingBuyPaths.length !== 0) ?
+              <div className="flex flex-col justify-center gap-4">
+                <Stat
+                  buildingName={playerInfo[buildingBuyPaths[0].path][buildingBuyPaths[0].index]["name"]}
+                  buildingPath={buildingBuyPaths[0]} showProduction={false}/>
+                <Button
+                  onClick={() => buyBuilding(playerInfo, setPlayerInfo, buildingBuyPaths)}
+                >
+                  Simuler l&apos;achat
+                </Button>
+              </div>
+              :
+              <div className="flex flex-col items-center gap-4 justify-center">
+                <Image width={128} height={128} src={safeJoinPaths("/arty_chocbar.webp")}
+                       className="h-auto object-contain"
+                       alt="Arty"/>
+                <p className="text-sm text-center">Bravo tu as tout acheté, va prendre une douche
+                  maintenant.</p>
+                <Button>
+                  Aller prendre une douche
+                </Button>
+              </div>
+            }
           </CardContent>
         </Card>
         <Card>
@@ -191,8 +186,6 @@ const RPS = () => {
         </Card>
 
       </div>
-
-    </>
   );
 }
 
