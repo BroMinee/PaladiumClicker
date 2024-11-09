@@ -1,4 +1,4 @@
-import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
+// import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 import { formatPrice, getJsonToUseForUpgrade } from "@/lib/misc";
 import type { UpgradeKey } from "@/types";
 
@@ -34,8 +34,8 @@ const UpgradeList = ({ upgradeType }: UpgradeListProps) => {
     redirect("/error?message=UpgradeType%20not%20found");
 
   return (
-    <ScrollArea>
-      <div className="grid grid-cols-16 gap-2">
+    // <ScrollArea>
+      <div className="grid grid-cols-4 sm:grid-cols-6 md:grid-cols-8 lg:grid-cols-10 xl:grid-cols-16 gap-2">
         {jsonToUse.map((upgrade, index) => (
           <Upgrade
             key={`${upgrade.name}-${index}`}
@@ -46,8 +46,8 @@ const UpgradeList = ({ upgradeType }: UpgradeListProps) => {
           />
         ))}
       </div>
-      <ScrollBar orientation="horizontal"/>
-    </ScrollArea>
+    //   <ScrollBar orientation="horizontal"/>
+    // </ScrollArea>
   );
 }
 
