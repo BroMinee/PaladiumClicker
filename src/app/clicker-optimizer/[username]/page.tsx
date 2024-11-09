@@ -66,20 +66,20 @@ export default function Home({ params }: { params: { username: string } }) {
 
               <ImportProfil showResetButton/>
 
-              <div className="flex flex-row justify-center items-center">
-                <CardContent className="pt-6 flex flex-col items-center justify-center gap-2 w-96">
+              <div className="grid grid-cols-2 2xl:grid-cols-5 justify-center items-center">
+                <CardContent className="pt-6 flex-col hidden 2xl:flex items-center justify-center gap-2 w-96">
                   <PlayerSkin/>
                 </CardContent>
-                <CardContent className="pt-6 flex flex-col items-center justify-center gap-2 w-64">
+                <CardContent className="pt-6 flex flex-col items-center justify-center gap-2">
                   <MetierComponentWrapper editable metierKey="miner"/>
                 </CardContent>
-                <CardContent className="pt-6 flex flex-col items-center justify-center gap-2 w-64">
+                <CardContent className="pt-6 flex flex-col items-center justify-center gap-2">
                   <MetierComponentWrapper editable metierKey="farmer"/>
                 </CardContent>
-                <CardContent className="pt-6 flex flex-col items-center justify-center gap-2 w-64">
+                <CardContent className="pt-6 flex flex-col items-center justify-center gap-2">
                   <MetierComponentWrapper editable metierKey="hunter"/>
                 </CardContent>
-                <CardContent className="pt-6 flex flex-col items-center justify-center gap-2 w-64">
+                <CardContent className="pt-6 flex flex-col items-center justify-center gap-2">
                   <MetierComponentWrapper editable metierKey="alchemist"/>
                 </CardContent>
               </div>
