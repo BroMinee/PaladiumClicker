@@ -34,7 +34,7 @@ export function PreconditionDisplay({ index, upgradeType  }: { index: number, up
   if (Number(playerInfo[upgradeType][index].name) === -1)
     texts[0] = "Précondition:";
 
-  if (coinsCondition !== -1 && totalCoins < coinsCondition)
+  if (coinsCondition !== -1)
     texts.push(GetConditionText(`Avoir récolté ${formatPrice(coinsCondition)} coins. Actuellement : ${formatPrice(totalCoins)}`,totalCoins >= coinsCondition));
   if (dayCondition !== -1) {
     texts.push(GetConditionText(`Saison démarrée depuis ${formatPrice(dayCondition)} jours. Actuellement : ${formatPrice(Math.floor(daySinceStart))} jours`, daySinceStart >= dayCondition));
