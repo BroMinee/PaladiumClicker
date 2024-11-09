@@ -3,8 +3,16 @@
     "date": "TODO",
     "events": [
       "Ajout d'un compte à rebours dynamique pour la réimportation du profil",
-      "Ajout de la cape et du nametag sur le visuel du joueur"
-    ]
+      "Ajout de la cape et du nametag sur le visuel du joueur",
+      "Optimisation des performances du calcul de prochain bâtiment",
+      "Refont de la page du clicker-optimizer pour une meilleure utilisation de l'espace disponible",
+      "Ajout des préconditions déjà remplies sur toutes les améliorations du clicker",
+      "Changement de la couleur d'arrière plan en gris pour les améliorations non débloquables",
+      "Amélioration notable de la qualité des images sur la page du clicker",
+      "Suppression d'informations redondantes sur les bâtiments",
+      "Correction des pages sortant de l'écran sur tablette, provonquant un scroll horizontal",
+      "Correction de fautes lors de la réecriture de texte et de valeur dans le xp-calculator"
+      ]
   },
   {
     "date": "16/10/2024 - 20h40",
