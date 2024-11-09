@@ -20,7 +20,7 @@ const ClickList = () => {
 
   return (
     <ScrollArea>
-      <div className="grid grid-cols-13 gap-2">
+      <div className="grid grid-cols-4 sm:grid-cols-6 md:grid-cols-8 lg:grid-cols-10 xl:grid-cols-13 gap-2">
         {CPSJson.map((cps, index) => (
           <CPS key={cps.name + index} imgPath={safeJoinPaths(getImgPath(index, cps.name))} index={index}/>
         ))}
