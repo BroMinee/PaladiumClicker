@@ -121,7 +121,10 @@ export const getFactionInfo = async (factionName: string): Promise<PaladiumFacti
 }
 
 export const getFactionLeaderboard = async (): Promise<PaladiumFactionLeaderboard> => {
-  return await fetchWithHeader<PaladiumFactionLeaderboard>(`${PALADIUM_API_URL}/v1/paladium/faction/leaderboard`);
+  return await fetchWithHeader<PaladiumFactionLeaderboard>(`${PALADIUM_API_URL}/v1/paladium/faction/leaderboard`).catch((e) => {
+    console.error(e);
+    return []
+  });
 }
 
 export const getAuctionHouseInfo = async (uuid: string, username: string): Promise<AhType> => {
