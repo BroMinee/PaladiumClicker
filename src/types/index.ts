@@ -120,7 +120,7 @@ export type PlayerInfo = {
   ah: AhType,
   last_fetch: number,
   view_count: ProfilViewType,
-  achievements: { data: Achievement[], totalCount: number },
+  achievements:  Achievement[],
   alliance: string,
   currentBanner: string,
   description: string,
@@ -556,6 +556,7 @@ export type Achievement = {
   description: string,
   amount: number,
   icon: string,
+  subAchievements: Achievement[]
 }
 
 export enum CategoryEnum {

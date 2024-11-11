@@ -17,7 +17,9 @@ export function DisplayProgressionCategory({ category }: { category: CategoryEnu
   if (!playerInfo)
     return null;
 
-  const allAchivements = playerInfo.achievements.data.filter(achievement => achievement.category === category);
+  const allAchivements = playerInfo.achievements.filter(achievement => achievement.category === category && achievement.icon);
+
+  console.log("Here", category, allAchivements.toSorted((a,b) => a.id.localeCompare(b.id)))
 
   const totalCompleted = allAchivements.filter(achievement => achievement.completed).length;
 
@@ -66,7 +68,7 @@ export function AchievementsGlobalProgressBar({ value, showText = true }: { valu
       <text ref={textRef} x={x + newX} y={y + height / 2} fill={theme === "dark" ? "#ffffff" : "#000000"}
             textAnchor="middle" dominantBaseline="middle"
             className="bg-red-500">
-        {`${formatPrice(value)}%`}
+        {`${formatPrice(Math.floor(value))}%`}
       </text>
     );
   };
@@ -100,9 +102,10 @@ export function DisplayProgressionGlobal() {
   if (!playerInfo)
     return null;
 
-  const totalCompleted = playerInfo.achievements.data.filter(achievement => achievement.completed).length;
+  const totalCompleted = playerInfo.achievements.filter(achievement => achievement.completed).length;
+  const total = playerInfo.achievements.filter((achievement) => achievement.icon).length;
 
-  const value = totalCompleted * 100 / playerInfo.achievements.totalCount;
+  const value = totalCompleted * 100 / total;
 
   return (
     <>
@@ -111,7 +114,7 @@ export function DisplayProgressionGlobal() {
           Achievements
         </div>
         <div className="text-xl font-bold">
-          Progression Globale : {totalCompleted} / {playerInfo.achievements.totalCount}
+          Progression Globale : {totalCompleted} / {total}
         </div>
       </CardTitle>
       <div className="flex flex-col items-center w-full">
@@ -197,9 +200,11 @@ export function DisplayAllAchievementInCategory({ category }: { category: Catego
   if (!playerInfo)
     return null;
 
-  console.log(playerInfo.achievements)
 
-  const allAchivements = playerInfo.achievements.data.filter(achievement => achievement.category === category && achievement.icon);
+  const allAchivements = playerInfo.achievements.filter(achievement => achievement.category === category && achievement.icon)
+  allAchivements.sort((a, b) => a.id.localeCompare(b.id))
+
+  console.log(allAchivements)
 
   const closestItemNames = allAchivements.map(achievement => {
     if(!achievement.icon) return "unknown"
@@ -221,7 +226,7 @@ export function DisplayAllAchievementInCategory({ category }: { category: Catego
       return <SmallCardInfo key={achievement.name + index} title={achievement.name}
                             img={safeJoinPaths("/AH_img/", `${closestItemNames[index]}.png`)}
                             value={achievement.description}
-                            className="w-full">
+                            className="w-full" unoptimized>
         <DisplayProgressionAchievement achievement={achievement}/>
       </SmallCardInfo>
     })}
@@ -229,11 +234,26 @@ export function DisplayAllAchievementInCategory({ category }: { category: Catego
 }
 
 export function DisplayProgressionAchievement({ achievement }: { achievement: Achievement }) {
-  const value = achievement.completed ? 100 : achievement.progress * 100 / achievement.amount;
+  let achievementProgress;
+  if(achievement.completed)
+    achievementProgress = achievement.subAchievements.length === 0 ? achievement.amount : achievement.subAchievements.length;
+  else if(achievement.subAchievements.length > 0)
+    achievementProgress = achievement.subAchievements.reduce((acc, curr) => acc + curr.completed, 0)
+  else
+    achievementProgress = achievement.progress;
+
+  if(achievement.id === "palamod.craft.luckyhammer")
+  {
+    console.log(achievementProgress, achievement.amount, achievement.subAchievements.length, achievement)
+  }
+
+  const amount = achievement.amount === -1 ? achievement.subAchievements.length : achievement.amount;
+
+  const value = achievementProgress * 100 / amount;
 
   return <div className="flex flex-col items-center w-full">
     <div className="w-full h-12 flex flex-row items-center justify-center gap-2">
-      {achievement.progress}/{achievement.amount}<AchievementsGlobalProgressBar value={value} showText={true}/>
+      {achievementProgress}/{amount}<AchievementsGlobalProgressBar value={value} showText={true}/>
     </div>
   </div>
 }

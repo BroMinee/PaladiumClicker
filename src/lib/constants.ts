@@ -477,6 +477,28 @@ const menuPaths: Map<string, PathValid[]> = new Map<string, PathValid[]>([
   ['Autres', ["/status", "/palatime", "/pala-animation", "/patchnote", "/craft", "/politique-de-confidentialite"]],
 ]);
 
+
+const deprecatedIdAchivement =[
+  "ariane.end",
+  "core.command.achievement",
+  "core.command.home",
+  "core.command.tellrawdaad",
+  "palamod.visitservers.allservers.7",
+  "palamod.visitservers.allservers.8",
+  "palamod.visitservers.allservers.9",
+  "core.command.default",
+  "core.command.defaultAA"
+]
+
+const dictAchievementIdToSubIds : Map<string, string[]>  = new Map<string, string[]>();
+dictAchievementIdToSubIds["palamod.shop.buysell"] = ["palamod.shop.sell.1", "palamod.shop.buy.2"];
+dictAchievementIdToSubIds["palamod.hdv.buysell"] = ["palamod.hdv.sell.1", "palamod.hdv.buy.2"];
+dictAchievementIdToSubIds["palamod.egg.participate"] = ["palamod.egg.hurtdragon.1","palamod.egg.dragonroll.2", "palamod.egg.take.3"]
+dictAchievementIdToSubIds["palamod.spell.unlockuser"] = ["palamod.spell.unlock.1", "palamod.spell.use.1"]
+dictAchievementIdToSubIds["palamod.craftcauldron.pollenall"] = ["palamod.craftcauldron.pollen.1", "palamod.craftcauldron.pollen.2", "palamod.craftcauldron.pollen.3", "palamod.craftcauldron.pollen.4"]
+dictAchievementIdToSubIds["palamod.crusher.all"] = ["palamod.crusher.1", "palamod.crusher.2", "palamod.crusher.3", "palamod.crusher.4"];
+dictAchievementIdToSubIds["palamod.break.paladium.multi.all"] = ["palamod.break.pickaxe.paladium", "palamod.break.shovel.paladium", "palamod.break.axe.paladium", "palamod.break.sword.paladium", "palamod.break.helmet.paladium", "palamod.break.chestplate.paladium", "palamod.break.leggings.paladium", "palamod.break.boots.paladium"];
+dictAchievementIdToSubIds["palamod.craftcauldron.gluballall"] = ["palamod.craftcauldron.glueball.1", "palamod.craftcauldron.glueball.2", "palamod.craftcauldron.glueball.3", "palamod.craftcauldron.glueball.4", "palamod.craftcauldron.glueball.5", "palamod.craftcauldron.glueball.6", "palamod.craftcauldron.glueball.7", "palamod.craftcauldron.glueball.8","palamod.craftcauldron.glueball.9","palamod.craftcauldron.glueball.10"];
 const constants = {
   defaultUsername,
   version,
@@ -505,6 +527,8 @@ const constants = {
   SMELT,
   notificationPath,
   MenuPath: menuPaths,
+  deprecatedIdAchivement,
+  dictAchievementIdToSubIds,
 };
 
 export default constants;

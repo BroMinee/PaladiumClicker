@@ -35,6 +35,8 @@ import { getInitialPlayerInfo } from "@/lib/misc.ts";
 import { registerPlayerAction } from "@/lib/api/apiServerAction.ts";
 // import { toast } from "sonner";
 
+import constants from "@/lib/constants.ts";
+
 
 export const PALADIUM_API_URL = "https://api.paladium.games";
 
@@ -319,7 +321,7 @@ export const getJobsFromUUID = async (uuid: string, username: string): Promise<M
 }
 
 
-export const getPlayerAchievements = async (uuid: string): Promise<{ data: Achievement[], totalCount: number }> => {
+export const getPlayerAchievements = async (uuid: string): Promise<Achievement[]> => {
   type AchievementResponse = {
     totalCount: number,
     data: { id: string, progress: number, completed: boolean }[]
@@ -342,8 +344,7 @@ export const getPlayerAchievements = async (uuid: string): Promise<{ data: Achie
 
   const allAchievements = await getAllAchievements();
 
-  return {
-    data: allAchievements.data.map((achievement) => {
+  const achievements= allAchievements.data.map((achievement) => {
       const found = data.find((a) => a.id === achievement.id);
       return {
         id: achievement.id,
@@ -354,9 +355,62 @@ export const getPlayerAchievements = async (uuid: string): Promise<{ data: Achie
         description: achievement.description,
         amount: achievement.amount,
         icon: achievement.icon,
+        subAchievements: []
+      }});
+
+
+  const dictIdToSubIds = constants.dictAchievementIdToSubIds;
+
+  const categoryAchievements = achievements.filter(achievement => achievement.amount === -1);
+  const nonCategoryAchievements = achievements.filter(achievement => achievement.amount !== -1);
+  const subCategoryAchievements : string[] = [];
+
+
+  categoryAchievements.forEach((achievement) => {
+
+    if(dictIdToSubIds[achievement.id])
+    {
+      dictIdToSubIds[achievement.id].forEach((subId) => {
+        const subAchievement = achievements.find((a) => a.id === subId);
+        if(subAchievement)
+        {
+          if(!subAchievement.completed)
+            achievement.completed = false;
+          subAchievement.category = achievement.category;
+          achievement.subAchievements.push(subAchievement);
+          subCategoryAchievements.push(subId);
+        }
+      })
+    }
+
+
+    let id = achievement.id;
+
+    if(id === "palamod.craftcauldron.gluballall")
+      id = "palamod.craftcauldron.glueball"
+    else if(id === "paladium.pickup.flower.multi.all")
+      id = "paladium.pickup.flower";
+    else if(id === "paladium.pickup.secret.multi.all")
+      id = "paladium.pickup.secret";
+
+    else if(id.endsWith(".all"))
+      id = id.slice(0, -4);
+    else if(id.endsWith("all"))
+      id = id.slice(0, -3);
+
+    achievements.forEach((a) => {
+      if(a.id.startsWith(id + ".") && a.id !== achievement.id && a.category === achievement.category)
+      {
+        a.category = achievement.category;
+        if(!a.completed)
+          achievement.completed = false;
+        achievement.subAchievements.push(a);
+        subCategoryAchievements.push(a.id);
       }
-    }), totalCount: totalCount
-  };
+    })
+  })
+
+  return categoryAchievements.concat(nonCategoryAchievements.filter((a) => subCategoryAchievements.indexOf(a.id) === -1));
 }
 
 type AllAchievementResponse = {
@@ -381,5 +435,9 @@ const getAllAchievements = async (): Promise<AllAchievementResponse> => {
   if (data.length !== totalCount)
     redirect(`/error?message=Data length is not equal to totalCount (getAllAchievements)`);
 
-  return { data: data, totalCount: totalCount };
+
+  // some achivement are deprecated, we remove them
+  data = data.filter((achievement) => constants.deprecatedIdAchivement.indexOf(achievement.id) === -1);
+
+  return { data: data, totalCount: data.length };
 }
