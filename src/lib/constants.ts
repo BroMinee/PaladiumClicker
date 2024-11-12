@@ -490,15 +490,61 @@ const deprecatedIdAchivement =[
   "core.command.defaultAA"
 ]
 
-const dictAchievementIdToSubIds : Map<string, string[]>  = new Map<string, string[]>();
-dictAchievementIdToSubIds["palamod.shop.buysell"] = ["palamod.shop.sell.1", "palamod.shop.buy.2"];
-dictAchievementIdToSubIds["palamod.hdv.buysell"] = ["palamod.hdv.sell.1", "palamod.hdv.buy.2"];
-dictAchievementIdToSubIds["palamod.egg.participate"] = ["palamod.egg.hurtdragon.1","palamod.egg.dragonroll.2", "palamod.egg.take.3"]
-dictAchievementIdToSubIds["palamod.spell.unlockuser"] = ["palamod.spell.unlock.1", "palamod.spell.use.1"]
-dictAchievementIdToSubIds["palamod.craftcauldron.pollenall"] = ["palamod.craftcauldron.pollen.1", "palamod.craftcauldron.pollen.2", "palamod.craftcauldron.pollen.3", "palamod.craftcauldron.pollen.4"]
-dictAchievementIdToSubIds["palamod.crusher.all"] = ["palamod.crusher.1", "palamod.crusher.2", "palamod.crusher.3", "palamod.crusher.4"];
-dictAchievementIdToSubIds["palamod.break.paladium.multi.all"] = ["palamod.break.pickaxe.paladium", "palamod.break.shovel.paladium", "palamod.break.axe.paladium", "palamod.break.sword.paladium", "palamod.break.helmet.paladium", "palamod.break.chestplate.paladium", "palamod.break.leggings.paladium", "palamod.break.boots.paladium"];
-dictAchievementIdToSubIds["palamod.craftcauldron.gluballall"] = ["palamod.craftcauldron.glueball.1", "palamod.craftcauldron.glueball.2", "palamod.craftcauldron.glueball.3", "palamod.craftcauldron.glueball.4", "palamod.craftcauldron.glueball.5", "palamod.craftcauldron.glueball.6", "palamod.craftcauldron.glueball.7", "palamod.craftcauldron.glueball.8","palamod.craftcauldron.glueball.9","palamod.craftcauldron.glueball.10"];
+const dictAchievementIdToSubIds = new Map<string, string[]>([
+
+  ["palamod.shop.buysell", ["palamod.shop.sell.1", "palamod.shop.buy.2"]],
+  ["palamod.hdv.buysell", ["palamod.hdv.sell.1", "palamod.hdv.buy.2"]],
+  ["palamod.egg.participate", ["palamod.egg.hurtdragon.1", "palamod.egg.dragonroll.2", "palamod.egg.take.3"]],
+  ["palamod.spell.unlockuser", ["palamod.spell.unlock.1", "palamod.spell.use.1"]],
+  ["palamod.craftcauldron.pollenall", ["palamod.craftcauldron.pollen.1", "palamod.craftcauldron.pollen.2", "palamod.craftcauldron.pollen.3", "palamod.craftcauldron.pollen.4"]],
+  ["palamod.crusher.all", ["palamod.crusher.1", "palamod.crusher.2", "palamod.crusher.3", "palamod.crusher.4"]],
+  ["palamod.break.paladium.multi.all", ["palamod.break.pickaxe.paladium", "palamod.break.shovel.paladium", "palamod.break.axe.paladium", "palamod.break.sword.paladium", "palamod.break.helmet.paladium", "palamod.break.chestplate.paladium", "palamod.break.leggings.paladium", "palamod.break.boots.paladium"]],
+  ["palamod.craftcauldron.gluballall", ["palamod.craftcauldron.glueball.1", "palamod.craftcauldron.glueball.2", "palamod.craftcauldron.glueball.3", "palamod.craftcauldron.glueball.4", "palamod.craftcauldron.glueball.5", "palamod.craftcauldron.glueball.6", "palamod.craftcauldron.glueball.7", "palamod.craftcauldron.glueball.8", "palamod.craftcauldron.glueball.9", "palamod.craftcauldron.glueball.10"]
+
+  ]
+]);
+
+
+const dictAchievementIdToIcon = new Map<string, string>([
+  // HOW_TO_START
+  ["1:minecraft:chainmail_chestplate:0#", "chestplateChain"],
+  ["1:minecraft:stone_hoe:0#", "hoeStone"],
+  ["1:minecraft:diamond:0#", "diamond"],
+  ["1:palamod:item.paladium.pickaxe:0#", "paladium-pickaxe"],
+  ["1:palamod:item.paladium.chestplate:0#", "paladium-chestplate"],
+  ["1:palamod:tile.grinder_block:0#", "tile-grinder-block"],
+  ["1:palamod:item.hammer.paladium:0#", "hammer-paladium"],
+  ["3:palamod:tile.withered_obsidian:0#", "air"],
+  ["1:palamod:item.broadsword.paladium:0#{modifiersmax:4,upgradearray:[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,],modifiersammount:0}", "broadsword-paladium"],
+  ["1:palamod:egg:6#", "egg"],
+  ["1:minecraft:enchanted_book:0#", "enchantedBook"],
+  ["1:factions:tile.townmarket:0#", "air"],
+  ["1:factions:tile.townmarket:0#", "writtenBook"],
+  ["1:customnpcs:npcMoney:0#", "fake-money"],
+  ["1:minecraft:compass:0#", "compass"],
+  ["1:palamod:item.travelboots:0#", "travelboots"],
+  // JOBS
+  // FACTION
+  // ATTACK_DEFENSE
+  // ECONOMY
+  // ALLIANCE
+  ["1:palamod:item.amethyst.boots:0#", "amethyst-boots"],
+  ["1:palamod:item.titane.boots:0#", "titane-boots"],
+  ["1:palamod:item.paladium.boots:0#", "paladium-boots"],
+  ["1:customnpcs:npcCrown:0#", "air"],
+  ["1:alliancemod:item.potion_neutral:0#", "air"],
+  ["1:palamod:item.paladium.green.sword:0#", "paladium-green-sword"],
+  ["1:palamod:tile.effect_tnt:0#", "air"],
+  ["1:palamod:tile.endium_tnt:0#", "air"],
+  ["1:palamod:tile.big_tnt:0#", "tile-big-tnt"],
+  ["1:alliancemod:item.nexus_shard_order:0#", "air"],
+  ["1:alliancemod:item.nexus_shard_order:0#", "air"],
+  ["1:alliancemod:item.magic_glue:0#", "glue"],
+  ["1:alliancemod:tile.protection_block:0#", "tile-protection-block"],
+  // OTHERS
+]);
+
+
 const constants = {
   defaultUsername,
   version,
@@ -529,6 +575,7 @@ const constants = {
   MenuPath: menuPaths,
   deprecatedIdAchivement,
   dictAchievementIdToSubIds,
+  dictAchievementIdToIcon,
 };
 
 export default constants;
