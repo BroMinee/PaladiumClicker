@@ -3,7 +3,7 @@ import { Bar, BarChart, LabelList, ResponsiveContainer, XAxis, YAxis } from "rec
 import { useEffect, useRef, useState } from "react";
 import { usePlayerInfoStore } from "@/stores/use-player-info-store.ts";
 import { CardTitle } from "@/components/ui/card.tsx";
-import { formatPrice, safeJoinPaths } from "@/lib/misc.ts";
+import { formatPrice, GetAllFileNameInFolder, levenshteinDistance } from "@/lib/misc.ts";
 import { useTheme } from "next-themes";
 import { Achievement, CategoryEnum } from "@/types";
 import SmallCardInfo from "@/components/shared/SmallCardInfo.tsx";
@@ -232,11 +232,23 @@ function DetailAchievement({ achievement }: { achievement: Achievement }) {
 
   let arrowPath = achievement.subAchievements.length === 0 ? "" : (showSubAchievements ? "/ProfileImg/arrow_top.png" : "/ProfileImg/arrow_down.png");
 
+  const achievementIcon = achievement.icon.replace("palamod:", "").replace("item.", "").replace("minecraft:", "").replace("tile.", "").replace("customnpc:", "").replace("guardiangolem:", "")
+
+  const closestItemName = GetAllFileNameInFolder().reduce((acc, curr) => {
+    if (levenshteinDistance(curr, achievement.icon) < levenshteinDistance(acc, achievementIcon)) {
+      return curr;
+    } else {
+      return acc;
+    }
+  });
+
+  console.log(achievement.id, achievement.icon, closestItemName);
+
   return <div onClick={() => achievement.subAchievements.length !== 0 && setShowSubAchievements(!showSubAchievements)}
-              className={cn("border-2 border-secondary-foreground  px-2", achievement.completed && "bg-green-400/50")}>
-    <AchievementInfo title={achievement.name.toUpperCase()}
-                     img={achievement.completed ? safeJoinPaths("/ProfileImg/", `completed.png`) : safeJoinPaths(achievement.imgPath)}
-                     value={achievement.description}
+              className={cn("border-2 border-secondary-foreground  px-2", achievement.completed && "bg-green-400/50 hover:bg-green-500/50")}>
+    <AchievementInfo title={achievementIcon + " --- " + achievement.icon}
+                     img={`/AH_img/${closestItemName}.png`}
+                     value={achievement.id + ":" + `/AH_img/${closestItemName}.png`}
                      className="w-full" unoptimized
                      arrowPath={arrowPath}
 
