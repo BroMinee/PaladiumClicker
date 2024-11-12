@@ -3,7 +3,7 @@ import { Bar, BarChart, LabelList, ResponsiveContainer, XAxis, YAxis } from "rec
 import { useEffect, useRef, useState } from "react";
 import { usePlayerInfoStore } from "@/stores/use-player-info-store.ts";
 import { CardTitle } from "@/components/ui/card.tsx";
-import { formatPrice, GetAllFileNameInFolder, levenshteinDistance, safeJoinPaths } from "@/lib/misc.ts";
+import { formatPrice, safeJoinPaths } from "@/lib/misc.ts";
 import { useTheme } from "next-themes";
 import { Achievement, CategoryEnum } from "@/types";
 import SmallCardInfo from "@/components/shared/SmallCardInfo.tsx";
@@ -204,32 +204,18 @@ export function DisplayAllAchievementInCategory({ category }: { category: Catego
   const allAchivements = playerInfo.achievements.filter(achievement => achievement.category === category && achievement.icon)
   allAchivements.sort((a, b) => a.id.localeCompare(b.id))
 
-  console.log(allAchivements)
 
-  const closestItemNames = allAchivements.map(achievement => {
-    if(!achievement.icon) return "unknown"
-    let achievementIcon = achievement.icon.replace("palamod:", "").replace("item.", "").replace("minecraft:", "").replace("tile.", "").replace("customnpc:", "").replace("guardiangolem:", "")
-
-    return GetAllFileNameInFolder().reduce((acc, curr) => {
-      if (levenshteinDistance(curr, achievementIcon) < levenshteinDistance(acc, achievementIcon)) {
-        return curr;
-      } else {
-        return acc;
-      }
-    });
-  });
 
 
   // TODO: achievement.icon
   return <div className="flex flex-col gap-4">
     {allAchivements.map((achievement, index) => {
-      return <DetailAchievement key={achievement.name + index} achievement={achievement}
-                                closestItemName={closestItemNames[index]}/>
+      return <DetailAchievement key={achievement.name + index} achievement={achievement}/>
     })}
   </div>
 }
 
-function DetailAchievement({ achievement, closestItemName }: { achievement: Achievement, closestItemName: string }) {
+function DetailAchievement({ achievement }: { achievement: Achievement }) {
   const [showSubAchievements, setShowSubAchievements] = useState(false);
   let achievementProgress;
   if (achievement.completed) {
@@ -249,7 +235,7 @@ function DetailAchievement({ achievement, closestItemName }: { achievement: Achi
   return <div onClick={() => achievement.subAchievements.length !== 0 && setShowSubAchievements(!showSubAchievements)}
               className={cn("border-2 border-secondary-foreground  px-2", achievement.completed && "bg-green-400/50")}>
     <AchievementInfo title={achievement.name.toUpperCase()}
-                     img={achievement.completed ? safeJoinPaths("/ProfileImg/", `completed.png`) : safeJoinPaths("/AH_img/", `${closestItemName}.png`)}
+                     img={achievement.completed ? safeJoinPaths("/ProfileImg/", `completed.png`) : safeJoinPaths(achievement.imgPath)}
                      value={achievement.description}
                      className="w-full" unoptimized
                      arrowPath={arrowPath}

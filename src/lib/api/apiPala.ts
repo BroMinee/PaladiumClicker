@@ -4,13 +4,7 @@ import {
   Achievement,
   AhItemHistory,
   AhType,
-  Building,
-  BuildingUpgrade,
   CategoryEnum,
-  CategoryUpgrade,
-  CPS,
-  GlobalUpgrade,
-  ManyUpgrade,
   Metiers,
   MetiersPossiblyUndefined,
   PaladiumAhHistory,
@@ -34,7 +28,6 @@ import { redirect } from "next/navigation";
 import { getInitialPlayerInfo } from "@/lib/misc.ts";
 import { registerPlayerAction } from "@/lib/api/apiServerAction.ts";
 // import { toast } from "sonner";
-
 import constants from "@/lib/constants.ts";
 
 
@@ -355,7 +348,8 @@ export const getPlayerAchievements = async (uuid: string): Promise<Achievement[]
         description: achievement.description,
         amount: achievement.amount,
         icon: achievement.icon,
-        subAchievements: []
+        subAchievements: [],
+        imgPath: "/AH_img/barrier.png"
       }});
 
 

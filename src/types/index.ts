@@ -556,6 +556,7 @@ export type Achievement = {
   description: string,
   amount: number,
   icon: string,
+  imgPath: string,
   subAchievements: Achievement[]
 }
 
