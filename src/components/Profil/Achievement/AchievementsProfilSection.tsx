@@ -1,5 +1,8 @@
 import { Card, CardContent, CardHeader } from "@/components/ui/card.tsx";
-import { AchievementBody, DisplayProgressionGlobal } from "@/components/Profil/AchievementsProfilSectionClient.tsx";
+import {
+  AchievementBody,
+  DisplayProgressionGlobal
+} from "@/components/Profil/Achievement/AchievementsProfilSectionClient.tsx";
 import React from "react";
 
 

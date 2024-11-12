@@ -6,7 +6,7 @@ import FactionInfo from "@/components/Profil/FactionInfo.tsx";
 import { redirect } from "next/navigation";
 import { generateProfilUrl, isProfilSection } from "@/lib/misc.ts";
 import { ProfilSectionEnum } from "@/types";
-import { AchievementsProfilSection } from "@/components/Profil/AchievementsProfilSection.tsx";
+import { AchievementsProfilSection } from "@/components/Profil/Achievement/AchievementsProfilSection.tsx";
 
 export function ProfilSelectorDisplay({ params, searchParams }: {
   params: { username: string },

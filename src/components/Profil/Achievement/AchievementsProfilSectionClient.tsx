@@ -10,6 +10,8 @@ import SmallCardInfo from "@/components/shared/SmallCardInfo.tsx";
 import { cn } from "@/lib/utils.ts";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area.tsx";
 
+import Image from "next/image";
+import AchievementInfo from "@/components/Profil/Achievement/DisplayAchievement.tsx";
 
 export function DisplayProgressionCategory({ category }: { category: CategoryEnum }) {
   const { data: playerInfo } = usePlayerInfoStore();
@@ -17,13 +19,11 @@ export function DisplayProgressionCategory({ category }: { category: CategoryEnu
   if (!playerInfo)
     return null;
 
-  const allAchivements = playerInfo.achievements.filter(achievement => achievement.category === category && achievement.icon);
+  const allAchievements = playerInfo.achievements.filter(achievement => achievement.category === category && achievement.icon);
 
-  console.log("Here", category, allAchivements.toSorted((a,b) => a.id.localeCompare(b.id)))
+  const totalCompleted = allAchievements.filter(achievement => achievement.completed).length;
 
-  const totalCompleted = allAchivements.filter(achievement => achievement.completed).length;
-
-  const total = allAchivements.length
+  const total = allAchievements.length
   const value = totalCompleted * 100 / total;
 
   return (
@@ -223,37 +223,68 @@ export function DisplayAllAchievementInCategory({ category }: { category: Catego
   // TODO: achievement.icon
   return <div className="flex flex-col gap-4">
     {allAchivements.map((achievement, index) => {
-      return <SmallCardInfo key={achievement.name + index} title={achievement.name}
-                            img={safeJoinPaths("/AH_img/", `${closestItemNames[index]}.png`)}
-                            value={achievement.description}
-                            className="w-full" unoptimized>
-        <DisplayProgressionAchievement achievement={achievement}/>
-      </SmallCardInfo>
+      return <DetailAchievement key={achievement.name + index} achievement={achievement}
+                                closestItemName={closestItemNames[index]}/>
     })}
   </div>
 }
 
-export function DisplayProgressionAchievement({ achievement }: { achievement: Achievement }) {
+function DetailAchievement({ achievement, closestItemName }: { achievement: Achievement, closestItemName: string }) {
+  const [showSubAchievements, setShowSubAchievements] = useState(false);
   let achievementProgress;
-  if(achievement.completed)
+  if (achievement.completed) {
     achievementProgress = achievement.subAchievements.length === 0 ? achievement.amount : achievement.subAchievements.length;
+  }
   else if(achievement.subAchievements.length > 0)
     achievementProgress = achievement.subAchievements.reduce((acc, curr) => acc + curr.completed, 0)
   else
     achievementProgress = achievement.progress;
 
-  if(achievement.id === "palamod.craft.luckyhammer")
-  {
-    console.log(achievementProgress, achievement.amount, achievement.subAchievements.length, achievement)
-  }
 
   const amount = achievement.amount === -1 ? achievement.subAchievements.length : achievement.amount;
-
   const value = achievementProgress * 100 / amount;
+
+  let arrowPath = achievement.subAchievements.length === 0 ? "" : (showSubAchievements ? "/ProfileImg/arrow_top.png" : "/ProfileImg/arrow_down.png");
+
+  return <div onClick={() => achievement.subAchievements.length !== 0 && setShowSubAchievements(!showSubAchievements)}
+              className={cn("border-2 border-secondary-foreground  px-2", achievement.completed && "bg-green-400/50")}>
+    <AchievementInfo title={achievement.name.toUpperCase()}
+                     img={achievement.completed ? safeJoinPaths("/ProfileImg/", `completed.png`) : safeJoinPaths("/AH_img/", `${closestItemName}.png`)}
+                     value={achievement.description}
+                     className="w-full" unoptimized
+                     arrowPath={arrowPath}
+
+    >
+      <DisplayProgressionAchievement achievementProgress={achievementProgress} amount={amount} value={value}/>
+    </AchievementInfo>
+
+    {showSubAchievements &&
+      <div className="pb-2">
+        {achievement.subAchievements.map((a) => <SubAchievementDisplay key={a.id} subAchievement={a}/>)}
+      </div>}
+  </div>
+
+}
+
+export function DisplayProgressionAchievement({ achievementProgress, amount, value }: {
+  achievementProgress: number,
+  amount: number,
+  value: number
+}) {
+
 
   return <div className="flex flex-col items-center w-full">
     <div className="w-full h-12 flex flex-row items-center justify-center gap-2">
       {achievementProgress}/{amount}<AchievementsGlobalProgressBar value={value} showText={true}/>
     </div>
+  </div>
+}
+
+function SubAchievementDisplay({ subAchievement }: { subAchievement: Achievement }) {
+  const imgPath = subAchievement.completed ? "/ProfileImg/sub_checked.png" : "/ProfileImg/sub_unchecked.png";
+
+  return <div className="flex flex-row gap-4 items-center pl-10">
+    <Image width={20} height={20} src={imgPath} alt={subAchievement.completed ? "checked" : "unchecked"}/>
+    {subAchievement.name + " : " + subAchievement.description}
   </div>
 }
