@@ -464,7 +464,7 @@ const how_to_xp: HowToXp = {
 const notificationPath: Map<PathValid, [number, string]> = new Map<PathValid, [number, string]>(
   [
     ["/xp-calculator", [new Date("2024-10-16").getTime(), "Ajout des \"fortunes modifiers\" dans les calculs"]],
-    ["/palatime", [new Date("2024-11-04 21:00").getTime(), "Nouvelle édition"]],
+    ["/palatime", [new Date("2024-11-16 18:55").getTime(), "Nouvelle édition"]],
     ["/craft", [new Date("2024-10-16").getTime(), "Nouvel outil"]],
     ["/patchnote", [new Date("2024-10-16").getTime(), "Nouveau patchnote"]],
     ["/pala-animation", [new Date("2024-10-16").getTime(), "Ajout des nouvelles questions"]],
