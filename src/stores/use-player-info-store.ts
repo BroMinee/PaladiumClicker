@@ -22,7 +22,6 @@ type Actions = {
   selectCPS: (index: number) => void;
   buyBuildingByIndex: (index: number) => void;
   setProduction: (value: number) => void;
-  checkVersion: () => void;
   setDefaultProfile: () => void;
 }
 
@@ -211,13 +210,6 @@ export const usePlayerInfoStore = create<State & Actions, [["zustand/persist", S
           building: state.data.building.map((b, i) => i === index ? targettedBuilding : b),
         },
       };
-    }),
-    checkVersion: () => set((state) => {
-      if (state.data && state.version !== constants.version) {
-        return initialState;
-      }
-
-      return state;
     }),
     setDefaultProfile: () => set((state) => {
       state.data = getInitialPlayerInfo();
