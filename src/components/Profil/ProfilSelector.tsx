@@ -1,6 +1,5 @@
 'use client';
 import { useState } from "react";
-import { IoMdArrowDropleft, IoMdArrowDropright } from "react-icons/io";
 import { generateProfilUrl, ProfilSectionValid } from "@/lib/misc.ts";
 import { redirect, useParams, useRouter, useSearchParams } from "next/navigation";
 import { cn } from "@/lib/utils.ts";
@@ -9,7 +8,7 @@ import { cn } from "@/lib/utils.ts";
 export default function ProfilSelector() {
 
   const searchParams = useSearchParams();
-  const [selected, setSelected] = useState(0);
+  const [selected] = useState(0);
 
   const params = useParams();
   const username = params.username;

@@ -3211,10 +3211,14 @@ export const getInitialPlayerInfo = (): PlayerInfo => {
   const terrainUpgrade = terrain_upgrade_json as TerrainUpgrade[];
   return {
     metier: metiers,
+    achievements: [],
+    alliance: "NEUTRAL",
     building: buildings,
     building_upgrade: buildingUpgrade,
     category_upgrade: categoryUpgrade,
     CPS: CPS,
+    currentBanner: "default",
+    description: "",
     global_upgrade: globalUpgrade,
     many_upgrade: manyUpgrade,
     posterior_upgrade: posteriorUpgrade,
@@ -3244,6 +3248,7 @@ export const getInitialPlayerInfo = (): PlayerInfo => {
     ah: { data: [], totalCount: 0, dateUpdated: 0 },
     last_fetch: new Date().getTime(),
     view_count: { count: 0, uuid: "" },
+    version: constants.version,
   };
 }
 
@@ -3254,7 +3259,16 @@ export function reloadProfilNeeded(playerInfoLocal: PlayerInfo | null, username:
   if (username === constants.defaultUsername)
     return false;
 
-  return playerInfoLocal === null || playerInfoLocal.username.toLowerCase() !== username.toLowerCase()
+  if (playerInfoLocal === null)
+    return true;
+
+  if (playerInfoLocal.username !== username)
+    return true;
+
+  if (playerInfoLocal.version === undefined || playerInfoLocal.version !== constants.version)
+    return true;
+
+  return false;
 }
 
 export function createTreeNode(item: OptionType, count: number, checked = false): Tree<NodeType> {

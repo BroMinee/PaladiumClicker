@@ -1,6 +1,6 @@
 import { MetierKey } from "@/types";
 
-const version = 11;
+const version = 0;
 
 const discord = {
   url: "https://discord.gg/WGXUKHcZ3P",

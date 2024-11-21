@@ -124,6 +124,7 @@ export type PlayerInfo = {
   alliance: string,
   currentBanner: string,
   description: string,
+  version?: number,
 }
 
 export type AhType = {

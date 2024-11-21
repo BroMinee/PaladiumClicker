@@ -37,7 +37,7 @@ export function DisplayProgressionCategory({ category }: { category: CategoryEnu
 
 export function AchievementsGlobalProgressBar({ value, showText = true }: { value: number, showText?: boolean }) {
   const textRef = useRef<SVGTextElement>(null);
-  const [viewBoxState, setViewBoxState] = useState({ width: 0, height: 0 });
+  const [viewBoxState] = useState({ width: 0, height: 0 });
 
   useEffect(() => {
     if (textRef !== null && textRef.current !== null && value === 0) {
@@ -222,7 +222,7 @@ function DetailAchievement({ achievement }: { achievement: Achievement }) {
     achievementProgress = achievement.subAchievements.length === 0 ? achievement.amount : achievement.subAchievements.length;
   }
   else if(achievement.subAchievements.length > 0)
-    achievementProgress = achievement.subAchievements.reduce((acc, curr) => acc + curr.completed, 0)
+    achievementProgress = achievement.subAchievements.reduce((acc, curr) => acc + (curr.completed ? 1 : 0), 0)
   else
     achievementProgress = achievement.progress;
 

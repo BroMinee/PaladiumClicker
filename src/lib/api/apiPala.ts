@@ -174,7 +174,7 @@ export const getPlayerInfo = async (pseudo: string): Promise<PlayerInfo> => {
   const p5 = getPaladiumLeaderboardPositionByUUID(paladiumProfil.uuid, paladiumProfil.username);
   const p6 = getFactionInfo(paladiumProfil.faction === "" ? "Wilderness" : paladiumProfil.faction);
   const p7 = getViewsFromUUID(paladiumProfil.uuid, paladiumProfil.username);
-  const p8 = getPlayerAchievements(paladiumProfil.uuid);
+  const p8 = getPlayerAchievements(paladiumProfil.uuid).catch(() => []);
 
 
   const [clickerData, ahInfo, friendList, metiers, leaderboardPosition, paladiumFactionInfo, viewCount, achievements] = await Promise.all([p1, p2, p3, p4, p5, p6, p7, p8]);
@@ -337,7 +337,7 @@ export const getPlayerAchievements = async (uuid: string): Promise<Achievement[]
 
   const allAchievements = await getAllAchievements();
 
-  const achievements= allAchievements.data.map((achievement) => {
+  const achievements = allAchievements.data.map((achievement) => {
       const found = data.find((a) => a.id === achievement.id);
       return {
         id: achievement.id,
@@ -348,7 +348,7 @@ export const getPlayerAchievements = async (uuid: string): Promise<Achievement[]
         description: achievement.description,
         amount: achievement.amount,
         icon: achievement.icon,
-        subAchievements: [],
+        subAchievements: [] as Achievement[],
         imgPath: "/AH_img/barrier.png"
       }});
 
@@ -362,9 +362,9 @@ export const getPlayerAchievements = async (uuid: string): Promise<Achievement[]
 
   categoryAchievements.forEach((achievement) => {
 
-    if(dictIdToSubIds[achievement.id])
+    if (dictIdToSubIds.get(achievement.id))
     {
-      dictIdToSubIds[achievement.id].forEach((subId) => {
+      dictIdToSubIds.get(achievement.id)!.forEach((subId) => {
         const subAchievement = achievements.find((a) => a.id === subId);
         if(subAchievement)
         {
