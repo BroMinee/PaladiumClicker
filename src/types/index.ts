@@ -544,8 +544,7 @@ export type Tree<T> = {
 export enum ProfilSectionEnum {
   "Home" = "Home",
   "Achievements" = "Achievements",
-  "Pet" = "Pet",
-  "Monture" = "Monture",
+  "Pet/Monture" = "Pet/Monture",
 }
 
 export type Achievement = {
@@ -570,3 +569,21 @@ export enum CategoryEnum {
   "ALLIANCE" = "ALLIANCE",
   "OTHERS" = "OTHERS",
 }
+
+export type ModelName =
+  "arty"
+  | "cat"
+  | "dog"
+  | "dragon"
+  | "feng_uang"
+  | "kapio_koi"
+  | "pet_blobfish"
+  | "pet_mini_golem"
+  | "pet_ufo"
+  | "pet_zombie_hand"
+  | "rabbit"
+  | "pet_enderdragon"
+  | "dancarok"
+  | "ravirok"
+  | "tedarok"
+  | "mohiras"; // BOSS DRAGON

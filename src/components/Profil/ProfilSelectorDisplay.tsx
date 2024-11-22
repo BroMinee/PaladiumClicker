@@ -7,6 +7,8 @@ import { redirect } from "next/navigation";
 import { generateProfilUrl, isProfilSection } from "@/lib/misc.ts";
 import { ProfilSectionEnum } from "@/types";
 import { AchievementsProfilSection } from "@/components/Profil/Achievement/AchievementsProfilSection.tsx";
+import { PetCanvas } from "@/components/Profil/Pet/PetMontureCanvas.tsx";
+import { Card, CardContent } from "@/components/ui/card.tsx";
 
 export function ProfilSelectorDisplay({ params, searchParams }: {
   params: { username: string },
@@ -27,10 +29,8 @@ export function ProfilSelectorDisplay({ params, searchParams }: {
       return <HomeProfilSection/>
     case ProfilSectionEnum.Achievements:
       return <AchievementsProfilSection/>
-    case ProfilSectionEnum.Pet:
-      return <PetProfilSection/>
-    case ProfilSectionEnum.Monture:
-      return <MontureProfilSection/>
+    case ProfilSectionEnum["Pet/Monture"]:
+      return <PetMontureProfilSection/>
 
     default:
       return <div>C&apos;est quoi la section ${sectionAsEnum} ?</div>
@@ -47,12 +47,20 @@ function HomeProfilSection() {
   </>
 }
 
-function PetProfilSection() {
-  return <div>Pet TODO</div>
-}
+function PetMontureProfilSection() {
+  return (
+    <Card>
+      <CardContent className="flex flex-grow justify-between">
+        <div style={{ width: "50%" }}>
+          <PetCanvas modelName="feng_uang"/>
+        </div>
+        <div style={{ width: "50%" }}>
+          <PetCanvas modelName="dancarok" monture/>
+        </div>
 
-function MontureProfilSection() {
-  return <div>Monture TODO</div>
+      </CardContent>
+    </Card>
+  )
 }
 
 export default ProfilSelectorDisplay;
