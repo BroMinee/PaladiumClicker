@@ -7,6 +7,7 @@ import {
   CategoryEnum,
   Metiers,
   MetiersPossiblyUndefined,
+  MountInfo,
   PaladiumAhHistory,
   PaladiumAhItemStat,
   PaladiumClickerData,
@@ -15,6 +16,7 @@ import {
   PaladiumFriendInfo,
   PaladiumPlayerInfo,
   PaladiumRanking,
+  PetInfo,
   PlayerInfo,
 } from "@/types";
 
@@ -146,7 +148,6 @@ export const getFriendsList = async (uuid: string): Promise<PaladiumFriendInfo> 
 }
 
 export const getPlayerInfo = async (pseudo: string): Promise<PlayerInfo> => {
-  let initialPlayerInfo = null;
   try {
     if (pseudo === "") {
       throw "Pseudo is empty";
@@ -174,13 +175,15 @@ export const getPlayerInfo = async (pseudo: string): Promise<PlayerInfo> => {
   const p5 = getPaladiumLeaderboardPositionByUUID(paladiumProfil.uuid, paladiumProfil.username);
   const p6 = getFactionInfo(paladiumProfil.faction === "" ? "Wilderness" : paladiumProfil.faction);
   const p7 = getViewsFromUUID(paladiumProfil.uuid, paladiumProfil.username);
-  const p8 = getPlayerAchievements(paladiumProfil.uuid).catch(() => []);
+  const p8 = getPlayerAchievements(paladiumProfil.uuid);
+  const p9 = getPlayerMount(paladiumProfil.uuid)
+  const p10 = getPlayerPet(paladiumProfil.uuid);
 
 
-  const [clickerData, ahInfo, friendList, metiers, leaderboardPosition, paladiumFactionInfo, viewCount, achievements] = await Promise.all([p1, p2, p3, p4, p5, p6, p7, p8]);
+  const [clickerData, ahInfo, friendList, metiers, leaderboardPosition, paladiumFactionInfo, viewCount, achievements, mount, pet] = await Promise.all([p1, p2, p3, p4, p5, p6, p7, p8, p9, p10]);
 
   // NOTE: We use structuredClone to avoid modifying the original JSON by accident (it already happened once oupsy)
-  initialPlayerInfo = structuredClone(getInitialPlayerInfo());
+  let initialPlayerInfo = structuredClone(getInitialPlayerInfo());
 
   const translateBuildingName = translate_building_json as Record<string, number>;
   const translateBuildingUpgradeName = translate_upgrade_json as Record<string, (string | number)[]>;
@@ -227,6 +230,8 @@ export const getPlayerInfo = async (pseudo: string): Promise<PlayerInfo> => {
   initialPlayerInfo.alliance = paladiumProfil.alliance;
   initialPlayerInfo.currentBanner = paladiumProfil.currentBanner;
   initialPlayerInfo.description = paladiumProfil.description;
+  initialPlayerInfo.mount = mount;
+  initialPlayerInfo.pet = pet;
   registerPlayerAction(initialPlayerInfo.uuid, initialPlayerInfo.username);
 
   registerPlayerAction(paladiumProfil.uuid, paladiumProfil.username);
@@ -335,7 +340,9 @@ export const getPlayerAchievements = async (uuid: string): Promise<Achievement[]
   if (data.length !== totalCount)
     redirect(`/error?message=Data length is not equal to totalCount (getPlayerAchievements)`);
 
-  const allAchievements = await getAllAchievements();
+  const allAchievements = await getAllAchievements().catch((e) => {
+    return { data: [], totalCount: 0 }
+  });
 
   const achievements = allAchievements.data.map((achievement) => {
       const found = data.find((a) => a.id === achievement.id);
@@ -413,7 +420,12 @@ type AllAchievementResponse = {
 }
 
 const getAllAchievements = async (): Promise<AllAchievementResponse> => {
-  const response = await fetchWithHeader<AllAchievementResponse>(`${PALADIUM_API_URL}/v1/paladium/achievements?limit=100&offset=0`, 3600);
+  let response: AllAchievementResponse;
+  try {
+    response = await fetchWithHeader<AllAchievementResponse>(`${PALADIUM_API_URL}/v1/paladium/achievements?limit=100&offset=0`, 3600);
+  } catch (e) {
+    return { totalCount: 0, data: [] };
+  }
   const totalCount = response.totalCount;
 
   let data = response.data;
@@ -434,4 +446,20 @@ const getAllAchievements = async (): Promise<AllAchievementResponse> => {
   data = data.filter((achievement) => constants.deprecatedIdAchivement.indexOf(achievement.id) === -1);
 
   return { data: data, totalCount: data.length };
+}
+
+export const getPlayerMount = async (uuid: string): Promise<MountInfo | null> => {
+  return await fetchWithHeader<MountInfo>(`${PALADIUM_API_URL}/v1/paladium/player/profile/${uuid}/mount`).then((mount) => {
+    if (mount.mountType === 0)
+      return null;
+    return mount;
+  }).catch((e: Error) => {
+    return null;
+  })
+}
+
+export const getPlayerPet = async (uuid: string): Promise<PetInfo | null> => {
+  return await fetchWithHeader<PetInfo>(`${PALADIUM_API_URL}/v1/paladium/player/profile/${uuid}/pet`).catch((e: Error) => {
+    return null;
+  })
 }

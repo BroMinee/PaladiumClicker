@@ -21,6 +21,7 @@
     "@radix-ui/react-switch": "^1.1.0",
     "@react-three/drei": "^9.117.3",
     "@react-three/fiber": "^8.17.10",
+    "@react-three/xr": "^6.4.10",
     "@tanstack/react-query": "^5.35.1",
     "@types/react-select": "^5.0.1",
     "axios": "1.6.5",

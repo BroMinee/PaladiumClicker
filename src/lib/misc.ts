@@ -3249,6 +3249,8 @@ export const getInitialPlayerInfo = (): PlayerInfo => {
     last_fetch: new Date().getTime(),
     view_count: { count: 0, uuid: "" },
     version: constants.version,
+    mount: { name: "Dancarok", damage: 0, food: 6000, xp: 0, mountType: 1, sharedXpPercent: 100 },
+    pet: { currentSkin: "dog", experience: 0, happiness: 0, skills: [] },
   };
 }
 
@@ -3262,7 +3264,7 @@ export function reloadProfilNeeded(playerInfoLocal: PlayerInfo | null, username:
   if (playerInfoLocal === null)
     return true;
 
-  if (playerInfoLocal.username !== username)
+  if (playerInfoLocal.username.toLowerCase() !== username.toLowerCase())
     return true;
 
   if (playerInfoLocal.version === undefined || playerInfoLocal.version !== constants.version)
@@ -3338,4 +3340,46 @@ export function computeProgression(playerInfo: PlayerInfo | null) {
     + playerInfo.posterior_upgrade.reduce((acc, posterior) => acc + (posterior.own ? 1 : 0), 0);
 
   return currentUpgrade * 100 / maxUpgrade;
+}
+
+
+export function mountureGetNeededXpForLevel(level: number) {
+  let sum = 0;
+  for (let i = 2; i <= level; i++) {
+    sum += Math.pow(i, 2.5);
+  }
+  return sum;
+}
+
+export function montureGetLevelFromXp(xp: number) {
+  for (let lvl = 0; lvl <= 100; lvl++) {
+    let needed = mountureGetNeededXpForLevel(lvl);
+    if (xp < needed)
+      return lvl;
+  }
+  return 100;
+}
+
+export function montureGetCoef(xp: number, curLevel: number) {
+  let needed = mountureGetNeededXpForLevel(curLevel);
+  return xp / needed;
+}
+
+export function petGetNeededXpForLevel(level: number) : number {
+  if (level === 0)
+    return 0;
+  return (level * level - 1) * (90 / level) + 300 + petGetNeededXpForLevel(level - 1);
+}
+
+export function petGetLevelFromXp(xp: number) {
+  for (let lvl = 0; lvl <= 100; lvl++) {
+    let needed = petGetNeededXpForLevel(lvl);
+    if (xp < needed)
+      return lvl;
+  }
+  return 100;
+}
+
+export function petGetCoef(xp: number, xpNeeded: number) {
+  return xp / xpNeeded;
 }

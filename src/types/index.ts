@@ -124,7 +124,31 @@ export type PlayerInfo = {
   alliance: string,
   currentBanner: string,
   description: string,
+  mount: MountInfo | null,
+  pet: PetInfo | null,
   version?: number,
+}
+
+export type MountInfo = {
+  name: string,
+  damage: number,
+  food: number,
+  xp: number,
+  mountType: number,
+  sharedXpPercent: number,
+}
+
+export type PetInfo = {
+  currentSkin: string,
+  experience: number,
+  happiness: number,
+  skills: PetSkillInfo[],
+}
+
+type PetSkillInfo = {
+  id: string,
+  lastChange: number,
+  nextUse: number,
 }
 
 export type AhType = {
@@ -582,7 +606,7 @@ export type ModelName =
   | "pet_ufo"
   | "pet_zombie_hand"
   | "rabbit"
-  | "pet_enderdragon"
+  | "pet_ender_dragon"
   | "dancarok"
   | "ravirok"
   | "tedarok"
