@@ -48,7 +48,7 @@ export function BuildingInput({ index }: { index: number }) {
 
   if (!playerInfo)
     return <input
-      className="text-white text-center rounded-sm font-mc font-bold text-sm flex items-center justify-center h-9 w-fit px-2 [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+      className="text-white text-center rounded-sm font-mc font-bold text-sm flex items-center justify-center h-9 w-fit px-2"
       type="number"
       min="0"
       step="1"
@@ -61,7 +61,7 @@ export function BuildingInput({ index }: { index: number }) {
     min="0"
     step="1"
     max="100"
-    className="text-white text-center rounded-sm font-mc font-bold text-sm flex items-center justify-center h-9 w-fit px-2 [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+    className="text-white text-center rounded-sm font-mc font-bold text-sm flex items-center justify-center h-9 w-fit px-2 bg-[#2b2a33] [&::-webkit-inner-spin-button]:opacity-100 [&::-webkit-outer-spin-button]:opacity-100"
     onChange={onChangeLevel}
     placeholder={String(count)}
     value={count}/>
