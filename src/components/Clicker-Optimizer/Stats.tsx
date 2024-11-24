@@ -59,7 +59,7 @@ const Stats = () => {
       </div>
 
       {isNextBuildingVisible &&
-        <div className="flex flex-col gap-4 items-center pt-4">
+        <div className="flex flex-col gap-4 items-center pt-4 animate-fade-in">
           <StatList buildingBuyPaths={buildingBuyPaths} showProduction={true}/>
           <Button
             onClick={() => buyBuilding(playerInfo, setPlayerInfo, buildingBuyPaths)}
