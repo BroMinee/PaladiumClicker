@@ -25,15 +25,15 @@ export default function ProfilSelector() {
   const displaySelector = allSelector.slice(selected, Math.min(allSelector.length, selected + 4));
 
   return (
-    <div className="flex flex-row w-full place-items-end">
+    <div className="flex flex-row w-full place-items-end overflow-x-scroll">
       <div className="flex flex-grow justify-start gap-2">
         {displaySelector.map((name, index) => (
           <div key={index}
-               className={cn("flex flex-row bg-card rounded-t-md w-52 justify-center items-center mb-0 mt-3 p-2 ", currentSection === name ? "bg-primary" : "")}
+               className={cn("flex flex-row bg-card rounded-t-md w-fit justify-center items-center mb-0 mt-3 p-2 ", currentSection === name ? "bg-primary border-card border-2 border-b-0" : "")}
                onClick={() => router.push(generateProfilUrl(username as string, name), { scroll: false })}
           >
             <div
-              className={cn("text-primary text-3xl", currentSection === name ? "text-primary-foreground" : "")}>{name}</div>
+              className={cn("font-mc text-primary text-3xl m-2", currentSection === name ? "text-primary-foreground" : "")}>{name}</div>
           </div>)
         )}
         {displaySelector[displaySelector.length - 1] !== ProfilSectionValid[ProfilSectionValid.length - 1] &&
