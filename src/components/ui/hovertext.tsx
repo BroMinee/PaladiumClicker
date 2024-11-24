@@ -29,7 +29,7 @@ export default function HoverText({ text, children }: { text: React.ReactNode, c
       {children}
     </div>
     {showText && (
-      <div style={{ top: position.y, left: position.x, zIndex: 1 }} className="fixed">
+      <div style={{ top: position.y, left: position.x, zIndex: 1 }} className="fixed font-mc">
         {text}
       </div>
     )}
