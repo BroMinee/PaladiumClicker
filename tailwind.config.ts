@@ -33,6 +33,7 @@ const config: Config = {
       },
       fontFamily: {
         sans: ["Inter", "sans-serif"],
+        mc: ["Pixel NES", "sans-serif"],
       },
       colors: {
         dynamic: 'var(--dynamic-color)',
