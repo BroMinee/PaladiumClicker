@@ -18,7 +18,8 @@ const BuildingList = () => {
 
   return (
     <ScrollArea>
-      <div className="max-h-100 md:max-h-120 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-7 gap-2 pr-3">
+      <div
+        className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-7 gap-2 pr-3">
         {BuildingJson.map((building, index) => (
           <Building
             key={building.name + index}
@@ -41,9 +42,13 @@ type BuildingProps = {
 const Building = ({ imgPath, index }: BuildingProps) => {
   return (
     <Card
-      className={"flex flex-col pt-4 pb-2 h-auto w-auto text-sm items-center gap-2"}>
+      className="flex flex-col pt-4 pb-2 h-auto w-auto text-sm items-center gap-4 justify-start">
       <div className="flex flex-col items-center justify-center">
-        <Image width={48} height={48} src={imgPath} alt="Icône" className="object-cover pixelated" unoptimized/>
+        <div className="flex flex-row flex-wrap items-center gap-4 mb-2">
+          <Image width={48} height={48} src={imgPath} alt="Icône" className="object-cover pixelated" unoptimized/>
+          <BuildingInput index={index}/>
+        </div>
+
         <span className="text-primary text-center break-words mx-2">{BuildingJson[index].name}</span>
         <BuildingPrice index={index}/>
       </div>
@@ -55,8 +60,6 @@ const Building = ({ imgPath, index }: BuildingProps) => {
           <span>/s</span>
         </div>
       </div>
-      <BuildingInput index={index}/>
-
     </Card>
   );
 }

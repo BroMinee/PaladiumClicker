@@ -1,16 +1,15 @@
 'use client';
 import { computePrice, formatPrice, scaleCurrentProduction } from "@/lib/misc.ts";
 import { usePlayerInfoStore } from "@/stores/use-player-info-store.ts";
-import { ChangeEvent } from "react";
-import { Input } from "@/components/ui/input.tsx";
+import React, { ChangeEvent } from "react";
 
 export function BuildingRPS({ index }: { index: number }) {
   const { data: playerInfo } = usePlayerInfoStore();
   if (!playerInfo)
-    return <>Prod: 0</>
+    return <>0</>
 
   return <>
-    Prod: {formatPrice(Math.floor(scaleCurrentProduction(playerInfo, index, Number(playerInfo.building[index].own)) * 10) / 10)}
+    {formatPrice(Math.floor(scaleCurrentProduction(playerInfo, index, Number(playerInfo.building[index].own)) * 10) / 10)}
   </>
 }
 
@@ -34,6 +33,7 @@ export function BuildingLvl({ index }: { index: number }) {
 
 export function BuildingInput({ index }: { index: number }) {
   const { data: playerInfo, setBuildingOwn } = usePlayerInfoStore();
+  const count = !playerInfo ? 0 : playerInfo.building[index].own;
 
   function onChangeLevel(event: ChangeEvent<HTMLInputElement>) {
     if (!playerInfo)
@@ -47,8 +47,8 @@ export function BuildingInput({ index }: { index: number }) {
   }
 
   if (!playerInfo)
-    return <Input
-      className="mx-2"
+    return <input
+      className="text-white text-center rounded-sm font-mc font-bold text-sm flex items-center justify-center h-9 w-fit px-2 [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
       type="number"
       min="0"
       step="1"
@@ -56,14 +56,13 @@ export function BuildingInput({ index }: { index: number }) {
       defaultValue={0}
     />
 
-  return <Input
-    className="mx-2 w-fit"
+  return <input
     type="number"
     min="0"
     step="1"
-    max="99"
-    placeholder={String(playerInfo.building[index].own)}
+    max="100"
+    className="text-white text-center rounded-sm font-mc font-bold text-sm flex items-center justify-center h-9 w-fit px-2 [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
     onChange={onChangeLevel}
-    value={playerInfo.building[index].own}
-  />
+    placeholder={String(count)}
+    value={count}/>
 }
