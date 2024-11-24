@@ -340,7 +340,7 @@ export const getPlayerAchievements = async (uuid: string): Promise<Achievement[]
   if (data.length !== totalCount)
     redirect(`/error?message=Data length is not equal to totalCount (getPlayerAchievements)`);
 
-  const allAchievements = await getAllAchievements().catch((e) => {
+  const allAchievements = await getAllAchievements().catch(() => {
     return { data: [], totalCount: 0 }
   });
 
@@ -453,13 +453,13 @@ export const getPlayerMount = async (uuid: string): Promise<MountInfo | null> =>
     if (mount.mountType === 0)
       return null;
     return mount;
-  }).catch((e: Error) => {
+  }).catch(() => {
     return null;
   })
 }
 
 export const getPlayerPet = async (uuid: string): Promise<PetInfo | null> => {
-  return await fetchWithHeader<PetInfo>(`${PALADIUM_API_URL}/v1/paladium/player/profile/${uuid}/pet`).catch((e: Error) => {
+  return await fetchWithHeader<PetInfo>(`${PALADIUM_API_URL}/v1/paladium/player/profile/${uuid}/pet`).catch(() => {
     return null;
   })
 }
