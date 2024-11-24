@@ -17,6 +17,7 @@ import {
   petGetLevelFromXp,
   petGetNeededXpForLevel
 } from "@/lib/misc.ts";
+import { cn } from "@/lib/utils.ts";
 
 
 function convertMontureTypeIdToModelName(montureTypeId: number): ModelName {
@@ -94,21 +95,13 @@ export function PetCanvas({ monture = false }: { monture?: boolean }) {
   }
 
 
+  // noinspection TypeScriptValidateTypes
   const myModel: GLTF = useLoader(GLTFLoader, `/Model3D/${modelName}.gltf`);
   const [mixer, setMixer] = useState<any>(null);
   const [actions, setActions] = useState<any>({});
   const [currentAction, setCurrentAction] = useState<any>(null);
   const [selectedAnimation, setSelectedAnimation] = useState<string>('');
-  // const [isARSupported, setIsARSupported] = useState<boolean>(false);
-  // const [isARMode, setIsARMode] = useState<boolean>(false);
-
-  // useEffect(() => {
-  //   if (navigator.xr) {
-  //     navigator.xr.isSessionSupported('immersive-ar').then((supported) => {
-  //       setIsARSupported(supported);
-  //     });
-  //   }
-  // }, []);
+  const [arAvailable, setArAvailable] = useState<boolean>(false);
 
   useEffect(() => {
     if (myModel.animations.length > 0) {
@@ -170,9 +163,75 @@ export function PetCanvas({ monture = false }: { monture?: boolean }) {
     }
   };
 
-  // const handleARButtonClick = () => {
-  //   setIsARMode(true);
-  // };
+  useEffect(() => {
+    if (navigator.xr && navigator.xr.isSessionSupported) {
+      navigator.xr.isSessionSupported('immersive-ar').then((supported) => {
+        setArAvailable(supported);
+      });
+    }
+  }, []);
+
+  const launchAR = () => {
+    if (navigator.xr && navigator.xr.isSessionSupported) {
+      navigator.xr.isSessionSupported('immersive-ar').then((supported) => {
+        if (supported) {
+          console.log('AR is supported on this device!');
+          const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+          renderer.xr.enabled = true;
+
+          document.body.appendChild(renderer.domElement);
+
+          const scene = new THREE.Scene();
+          const camera = new THREE.PerspectiveCamera(70, window.innerWidth / window.innerHeight, 0.01, 20);
+
+
+          if (monture)
+            myModel.scene.scale.set(0.1, 0.1, 0.1);
+          else
+            myModel.scene.scale.set(0.2, 0.2, 0.2)
+
+          myModel.scene.position.set(0, 0, -0.5); // Place à 50 cm devant la caméra
+          scene.add(myModel.scene);
+
+
+          const arMixer = new THREE.AnimationMixer(myModel.scene);
+          if (myModel.animations.length > 1) {
+            const animationClip = myModel.animations[0];
+            const arAction = arMixer.clipAction(animationClip);
+            arAction.play();
+          }
+
+
+          renderer.xr.setReferenceSpaceType('local');
+
+          // renderer.xr.addEventListener('sessionstart', () => {
+          // });
+
+          renderer.xr.addEventListener('sessionend', () => {
+            document.body.removeChild(renderer.domElement);
+          });
+
+          const animate = () => {
+            renderer.setAnimationLoop(() => {
+              renderer.render(scene, camera);
+            });
+          };
+
+          if (navigator.xr && "requestSession" in navigator.xr) {
+            navigator.xr.requestSession('immersive-ar', {}).then((session) => {
+              renderer.xr.setSession(session);
+              animate();
+            });
+          }
+        } else {
+          alert('AR not supported on this device.');
+        }
+      });
+    } else {
+      alert('WebXR is not available on your browser.');
+    }
+  };
+
 
   if (!playerInfo)
     return null;
@@ -184,41 +243,60 @@ export function PetCanvas({ monture = false }: { monture?: boolean }) {
     return <DisplayEmptyCanvas text="Aucun pet équipé"/>;
 
   return (
-    <div className="flex flex-col gap-2 items-center justify-center mt-5">
-      {/*<Button onClick={handleARButtonClick} disabled={!(isARSupported && !isARMode)}>*/}
-      {/*  {(isARSupported && !isARMode) ? "Activer le mode AR" : "Mode AR non supporté"}*/}
-      {/*</Button>*/}
-      <span style={{ fontFamily: "minecraft" }} className="text-primary">{petName}</span>
-      <span style={{ fontFamily: "minecraft" }}
-            className="text-primary">Level : {petLevel} ({Math.round(petCoef * 100)}%)</span>
-      <span style={{ fontFamily: "minecraft" }}
-            className="text-primary">Xp : {formatPrice(Math.round(petXp))} / {formatPrice(Math.round(xpNeeded))}</span>
-      {/*{isARMode ? (*/}
-      {/*  <Canvas style={{ height: '500px', width: '100%' }}>*/}
-      {/*    <primitive object={myModel.scene} rotation={[0, Math.PI * 3 / 4, 0]} scale={monture ? [1, 1, 1] : [2, 2, 2]}/>*/}
-      {/*  </Canvas>*/}
-      {/*) : (*/}
+    <div className="flex flex-col mt-5">
+      <div className="flex flex-col items-center justify-center gap-2">
+        <span className="font-mc text-primary">{petName}<span/>
+
+        </span>
+        <span className="font-mc text-primary">Level : <span
+          className="text-primary-foreground">{petLevel} ({Math.round(petCoef * 100)}%)</span>
+        </span>
+        <span
+          className="font-mc text-primary">Xp : <span
+          className="text-primary-foreground">{formatPrice(Math.round(petXp))} / {formatPrice(Math.round(xpNeeded))}</span>
+        </span>
+        <Button onClick={launchAR}
+                disabled={!arAvailable}
+                className={cn("font-mc", !arAvailable && "py-6")}>
+          {arAvailable ? "Voir en AR" : <span>AR indisponible<br/>Sur votre appareil</span>}
+        </Button>
+        <DisplayAnimationButtons myModel={myModel} handleAnimationChange={handleAnimationChange}
+                                 selectedAnimation={selectedAnimation} className="flex lg:hidden"/>
+      </div>
+
+
       <Canvas style={{ height: '500px', width: '100%' }}>
         <primitive object={myModel.scene} rotation={[0, Math.PI * 3 / 4, 0]} scale={monture ? [1, 1, 1] : [2, 2, 2]}/>
         <OrbitControls enableDamping={true} target={myModel.scene.position}/>
       </Canvas>
-      {/*)}*/}
-      <div className="flex flex-row gap-2 items-center justify-center">
-        {myModel.animations.map((animation) => (
-          <Button
-            key={animation.name}
-            disabled={selectedAnimation === animation.name}
-            onClick={() => handleAnimationChange(animation.name)}
-            style={{ fontFamily: "Minecraft" }}
-          >
-            {animation.name.split(".")[animation.name.split(".").length - 1]}
-          </Button>
-        ))}
-      </div>
-      {/**/}
-      {/*{isARMode && <ARButton sessionInit={{ optionalFeatures: ['local-floor', 'bounded-floor'] }}/>}*/}
+
+      <DisplayAnimationButtons myModel={myModel} handleAnimationChange={handleAnimationChange}
+                               selectedAnimation={selectedAnimation} className="hidden lg:flex"/>
+
     </div>
   );
+}
+
+function DisplayAnimationButtons({ myModel, handleAnimationChange, selectedAnimation, className }: {
+  myModel: GLTF,
+  handleAnimationChange: (name: string) => void,
+  selectedAnimation: string,
+  className?: string
+}) {
+  return (
+    <div className={cn("flex flex-wrap flex-row gap-2 items-center justify-center", className)}>
+      {myModel.animations.map((animation) => (
+        <Button
+          key={animation.name}
+          disabled={selectedAnimation === animation.name}
+          onClick={() => handleAnimationChange(animation.name)}
+          className="font-mc"
+        >
+          {animation.name.split(".")[animation.name.split(".").length - 1]}
+        </Button>
+      ))}
+    </div>
+  )
 }
 
 function DisplayEmptyCanvas({ text }: { text: string }) {

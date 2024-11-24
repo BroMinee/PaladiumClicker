@@ -50,11 +50,11 @@ function HomeProfilSection() {
 function PetMontureProfilSection() {
   return (
     <Card className="rounded-b-xl rounded-t-none">
-      <CardContent className="flex flex-grow justify-between">
-        <div style={{ width: "50%" }}>
+      <CardContent className="flex flex-grow flex-col lg:flex-row justify-between">
+        <div className="w-full lg:w-1/2">
           <PetCanvas/>
         </div>
-        <div style={{ width: "50%" }}>
+        <div className="w-full lg:w-1/2">
           <PetCanvas monture/>
         </div>
       </CardContent>
