@@ -30,7 +30,7 @@ export function PreconditionDisplay({ index, upgradeType  }: { index: number, up
   } = checkCondition(playerInfo, playerInfo[upgradeType][index].condition, new Date());
 
 
-  const texts: ReactNode[] = ["Précondition non remplie :"];
+  const texts: ReactNode[] = ["Précondition:"];
   if (Number(playerInfo[upgradeType][index].name) === -1)
     texts[0] = "Précondition:";
 
