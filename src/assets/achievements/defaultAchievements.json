@@ -1,0 +1,2800 @@
+{
+  "data": [
+    {
+      "amount": 1,
+      "category": "HOW_TO_START",
+      "description": "Finir le didacticiel",
+      "icon": "1:palamod:item.jumpchest:0#",
+      "id": "ariane.end",
+      "name": "Bien démarrer"
+    },
+    {
+      "amount": 1,
+      "category": "HOW_TO_START",
+      "description": "Rejoindre une faction et faire /f f",
+      "icon": "1:minecraft:chainmail_chestplate:0#",
+      "id": "faction.action.join",
+      "name": "Mes potes et moi"
+    },
+    {
+      "amount": 50000,
+      "category": "FACTION",
+      "description": "Faire gagner 50 000 expérience à votre faction",
+      "icon": "1:palamod:item.compressed_xp_berry:0#",
+      "id": "faction.action.xp.50k",
+      "name": "Expérimentation"
+    },
+    {
+      "amount": 1,
+      "category": "FACTION",
+      "description": "Participer à la quête de faction",
+      "icon": "1:minecraft:diamond_hoe:0#",
+      "id": "faction.action.quest.participate.5p",
+      "name": "Participation hebdomadaire"
+    },
+    {
+      "amount": 1,
+      "category": "FACTION",
+      "description": "Finir dans le top 10 du classement faction",
+      "icon": "1:minecraft:gold_ingot:0#",
+      "id": "faction.action.rank.reach.10",
+      "name": "Réputation grandissante"
+    },
+    {
+      "amount": 1,
+      "category": "FACTION",
+      "description": "Finir dans le 3ème du classement faction",
+      "icon": "1:minecraft:diamond:0#",
+      "id": "faction.action.rank.reach.3",
+      "name": "Réputation importante"
+    },
+    {
+      "amount": 1,
+      "category": "FACTION",
+      "description": "Finir dans le 2ème du classement faction",
+      "icon": "1:minecraft:emerald:0#",
+      "id": "faction.action.rank.reach.2",
+      "name": "Réputation incroyable"
+    },
+    {
+      "amount": 1,
+      "category": "FACTION",
+      "description": "Finir dans 1er du classement faction",
+      "icon": "1:minecraft:nether_star:0#",
+      "id": "faction.action.rank.reach.1",
+      "name": "Réputation légendaire"
+    },
+    {
+      "amount": 1,
+      "category": "HOW_TO_START",
+      "description": "Atteindre mineur niveau 2",
+      "id": "palajobs.reachlevel.multi.1",
+      "name": "I"
+    },
+    {
+      "amount": 1,
+      "category": "HOW_TO_START",
+      "description": "Atteindre hunter niveau 2",
+      "id": "palajobs.reachlevel.multi.2",
+      "name": "II"
+    },
+    {
+      "amount": 1,
+      "category": "HOW_TO_START",
+      "description": "Atteindre alchimiste niveau 2",
+      "id": "palajobs.reachlevel.multi.3",
+      "name": "III"
+    },
+    {
+      "amount": 1,
+      "category": "HOW_TO_START",
+      "description": "Atteindre farmeur niveau 2",
+      "id": "palajobs.reachlevel.multi.4",
+      "name": "IV"
+    },
+    {
+      "amount": -1,
+      "category": "HOW_TO_START",
+      "description": "Atteindre le niveau 2 dans tous vos métiers",
+      "icon": "1:minecraft:stone_hoe:0#",
+      "id": "palajobs.reachlevel.multi.all",
+      "name": "Multitâche"
+    },
+    {
+      "amount": 1,
+      "category": "JOBS",
+      "description": "Atteindre le niveau 10 dans le métier d'alchimiste",
+      "icon": "1:minecraft:potion:0#",
+      "id": "palajobs.reachlevel.alchimist.lvl10",
+      "name": "Alchimiste novice"
+    },
+    {
+      "amount": 1,
+      "category": "JOBS",
+      "description": "Atteindre le niveau 25 dans le métier d'alchimiste",
+      "icon": "1:minecraft:potion:8193#",
+      "id": "palajobs.reachlevel.alchimist.lvl25",
+      "name": "Alchimiste novice"
+    },
+    {
+      "amount": 1,
+      "category": "JOBS",
+      "description": "Atteindre le niveau 100 dans le métier d'alchimiste",
+      "icon": "1:minecraft:potion:8268#",
+      "id": "palajobs.reachlevel.alchimist.lvl100",
+      "name": "Alchimiste expert"
+    },
+    {
+      "amount": 1,
+      "category": "JOBS",
+      "description": "Atteindre le niveau 50 dans le métier d'alchimiste",
+      "icon": "1:minecraft:potion:8261#",
+      "id": "palajobs.reachlevel.alchimist.lvl50",
+      "name": "Alchimiste professionnel"
+    },
+    {
+      "amount": 1,
+      "category": "JOBS",
+      "description": "Atteindre le niveau 75 dans le métier d'alchimiste",
+      "icon": "1:minecraft:potion:8238#",
+      "id": "palajobs.reachlevel.alchimist.lvl75",
+      "name": "Alchimiste spécialiste"
+    },
+    {
+      "amount": 1,
+      "category": "JOBS",
+      "description": "Atteindre le niveau 10 dans le métier de farmeur",
+      "icon": "1:minecraft:wooden_hoe:0#",
+      "id": "palajobs.reachlevel.farmer.lvl10",
+      "name": "Farmeur novice"
+    },
+    {
+      "amount": 1,
+      "category": "JOBS",
+      "description": "Atteindre le niveau 25 dans le métier de farmeur",
+      "icon": "1:minecraft:stone_hoe:0#",
+      "id": "palajobs.reachlevel.farmer.lvl25",
+      "name": "Farmeur novice"
+    },
+    {
+      "amount": 1,
+      "category": "JOBS",
+      "description": "Atteindre le niveau 50 dans le métier de farmeur",
+      "icon": "1:minecraft:iron_hoe:0#",
+      "id": "palajobs.reachlevel.farmer.lvl50",
+      "name": "Farmeur professionnel"
+    },
+    {
+      "amount": 1,
+      "category": "JOBS",
+      "description": "Atteindre le niveau 100 dans le métier de farmeur",
+      "icon": "1:minecraft:diamond_hoe:0#",
+      "id": "palajobs.reachlevel.farmer.lvl100",
+      "name": "Farmeur expert"
+    },
+    {
+      "amount": 1,
+      "category": "JOBS",
+      "description": "Atteindre le niveau 75 dans le métier de farmeur",
+      "icon": "1:minecraft:golden_hoe:0#",
+      "id": "palajobs.reachlevel.farmer.lvl75",
+      "name": "Farmeur spécialiste"
+    },
+    {
+      "amount": 1,
+      "category": "JOBS",
+      "description": "Atteindre le niveau 10 dans le métier de mineur",
+      "icon": "1:minecraft:wooden_pickaxe:0#",
+      "id": "palajobs.reachlevel.miner.lvl10",
+      "name": "Mineur novice"
+    },
+    {
+      "amount": 1,
+      "category": "JOBS",
+      "description": "Atteindre le niveau 25 dans le métier de mineur",
+      "icon": "1:minecraft:stone_pickaxe:0#",
+      "id": "palajobs.reachlevel.miner.lvl25",
+      "name": "Mineur novice"
+    },
+    {
+      "amount": 1,
+      "category": "JOBS",
+      "description": "Atteindre le niveau 75 dans le métier de mineur",
+      "icon": "1:minecraft:golden_pickaxe:0#",
+      "id": "palajobs.reachlevel.miner.lvl75",
+      "name": "Mineur spécialiste"
+    },
+    {
+      "amount": 1,
+      "category": "JOBS",
+      "description": "Atteindre le niveau 50 dans le métier de mineur",
+      "icon": "1:minecraft:iron_pickaxe:0#",
+      "id": "palajobs.reachlevel.miner.lvl50",
+      "name": "Mineur professionnel"
+    },
+    {
+      "amount": 1,
+      "category": "JOBS",
+      "description": "Atteindre le niveau 100 dans le métier de mineur",
+      "icon": "1:minecraft:diamond_pickaxe:0#",
+      "id": "palajobs.reachlevel.miner.lvl100",
+      "name": "Mineur expert"
+    },
+    {
+      "amount": 1,
+      "category": "JOBS",
+      "description": "Atteindre le niveau 10 dans le métier de hunter",
+      "icon": "1:minecraft:wooden_sword:0#",
+      "id": "palajobs.reachlevel.hunter.lvl10",
+      "name": "Hunter novice"
+    },
+    {
+      "amount": 1,
+      "category": "JOBS",
+      "description": "Atteindre le niveau 25 dans le métier de hunter",
+      "icon": "1:minecraft:stone_sword:0#",
+      "id": "palajobs.reachlevel.hunter.lvl25",
+      "name": "Hunter novice"
+    },
+    {
+      "amount": 1,
+      "category": "JOBS",
+      "description": "Atteindre le niveau 50 dans le métier de hunter",
+      "icon": "1:minecraft:iron_sword:0#",
+      "id": "palajobs.reachlevel.hunter.lvl50",
+      "name": "Hunter professionnel"
+    },
+    {
+      "amount": 1,
+      "category": "JOBS",
+      "description": "Atteindre le niveau 75 dans le métier de hunter",
+      "icon": "1:minecraft:golden_sword:0#",
+      "id": "palajobs.reachlevel.hunter.lvl75",
+      "name": "Hunter spécialiste"
+    },
+    {
+      "amount": 1,
+      "category": "JOBS",
+      "description": "Atteindre le niveau 100 dans le métier de hunter",
+      "icon": "1:minecraft:diamond_sword:0#",
+      "id": "palajobs.reachlevel.hunter.lvl100",
+      "name": "Hunter expert"
+    },
+    {
+      "amount": 1,
+      "category": "HOW_TO_START",
+      "description": "Terminer l'achievement \"Mineur expert\"",
+      "id": "palajobs.reachlevel.multi100.1",
+      "name": "I"
+    },
+    {
+      "amount": 1,
+      "category": "HOW_TO_START",
+      "description": "Terminer l'achievement \"Hunter\" expert\"",
+      "id": "palajobs.reachlevel.multi100.2",
+      "name": "II"
+    },
+    {
+      "amount": 1,
+      "category": "HOW_TO_START",
+      "description": "Terminer l'achievement \"Alchimiste\" expert\"",
+      "id": "palajobs.reachlevel.multi100.3",
+      "name": "III"
+    },
+    {
+      "amount": 1,
+      "category": "HOW_TO_START",
+      "description": "Terminer l'achievement \"Farmeur\" expert\"",
+      "id": "palajobs.reachlevel.multi100.4",
+      "name": "IV"
+    },
+    {
+      "amount": -1,
+      "category": "HOW_TO_START",
+      "description": "Terminer ces quatre achievements",
+      "icon": "1:minecraft:diamond:0#",
+      "id": "palajobs.reachlevel.multi100.all",
+      "name": "Expert général"
+    },
+    {
+      "amount": 5000,
+      "category": "JOBS",
+      "description": "Récolter 5 000 plantations",
+      "icon": "1:minecraft:wheat_seeds:0#",
+      "id": "palajobs.farmingplant.5k",
+      "name": "Petite exploitation agricole"
+    },
+    {
+      "amount": 25000,
+      "category": "JOBS",
+      "description": "Récolter 25 000 plantations",
+      "icon": "1:minecraft:dye:3#",
+      "id": "palajobs.farmingplant.25k",
+      "name": "Moyenne exploitation agricole"
+    },
+    {
+      "amount": 150000,
+      "category": "JOBS",
+      "description": "Récolter 150 000 plantations",
+      "icon": "1:minecraft:reeds:0#",
+      "id": "palajobs.farmingplant.150k",
+      "name": "Grande exploitation agricole"
+    },
+    {
+      "amount": 1000000,
+      "category": "JOBS",
+      "description": "Récolter 1 000 000 plantations",
+      "icon": "1:minecraft:nether_wart:0#",
+      "id": "palajobs.farmingplant.1m",
+      "name": "Gigantesque exploitation agricole"
+    },
+    {
+      "amount": 5000,
+      "category": "JOBS",
+      "description": "Transformer 5 000 terre en terre fertilisée",
+      "icon": "1:palajobs:item.paladium_radius_hoe:0#",
+      "id": "palajobs.fertilizeddirthoe.5k",
+      "name": "Un bon fertilisant"
+    },
+    {
+      "amount": 12500,
+      "category": "JOBS",
+      "description": "Casser 12 500 minerais",
+      "icon": "1:minecraft:iron_pickaxe:0#",
+      "id": "palajobs.minerore.12k5",
+      "name": "Moyenne exploitation minière"
+    },
+    {
+      "amount": 2500,
+      "category": "JOBS",
+      "description": "Casser 2 500 minerais",
+      "icon": "1:minecraft:wooden_pickaxe:0#",
+      "id": "palajobs.minerore.2k5",
+      "name": "Petite exploitation minière"
+    },
+    {
+      "amount": 75000,
+      "category": "JOBS",
+      "description": "Casser 75 000 minerais",
+      "icon": "1:minecraft:golden_pickaxe:0#",
+      "id": "palajobs.minerore.75k",
+      "name": "Grande exploitation minière"
+    },
+    {
+      "amount": 500000,
+      "category": "JOBS",
+      "description": "Casser 500 000 minerais",
+      "icon": "1:minecraft:diamond_pickaxe:0#",
+      "id": "palajobs.minerore.500k",
+      "name": "Gigantesque exploitation minière"
+    },
+    {
+      "amount": 37500,
+      "category": "JOBS",
+      "description": "Tuer 37 500 monstres",
+      "icon": "1:palamod:item.titane.sword:0#",
+      "id": "palajobs.hunterkill.37k5",
+      "name": "Moyenne exploitation de chasse"
+    },
+    {
+      "amount": 225000,
+      "category": "JOBS",
+      "description": "Tuer 225 000 monstres",
+      "icon": "1:palamod:item.paladium.sword:0#",
+      "id": "palajobs.hunterkill.225k",
+      "name": "Grande exploitation de chasse"
+    },
+    {
+      "amount": 7500,
+      "category": "JOBS",
+      "description": "Tuer 7 500 monstres",
+      "icon": "1:palamod:item.amethyst.sword:0#",
+      "id": "palajobs.hunterkill.7k5",
+      "name": "Petite exploitation de chasse"
+    },
+    {
+      "amount": 1500000,
+      "category": "JOBS",
+      "description": "Tuer 1 500 000 monstres",
+      "icon": "1:palamod:item.endium.sword:0#",
+      "id": "palajobs.hunterkill.1m5",
+      "name": "Gigantesque exploitation de chasse"
+    },
+    {
+      "amount": 1,
+      "category": "HOW_TO_START",
+      "description": "Crafter une pioche en paladium",
+      "icon": "1:palamod:item.paladium.pickaxe:0#",
+      "id": "palamod.craft.crafttools.1",
+      "name": "Craft I"
+    },
+    {
+      "amount": 1,
+      "category": "HOW_TO_START",
+      "description": "Crafter une pelle en paladium",
+      "icon": "1:palamod:item.paladium.pickaxe:0#",
+      "id": "palamod.craft.crafttools.3",
+      "name": "Craft III"
+    },
+    {
+      "amount": -1,
+      "category": "HOW_TO_START",
+      "description": "Crafter vos premiers outils en paladium",
+      "icon": "1:palamod:item.paladium.pickaxe:0#",
+      "id": "palamod.craft.crafttools",
+      "name": "Outillage"
+    },
+    {
+      "amount": 1,
+      "category": "HOW_TO_START",
+      "description": "Crafter une hache en paladium",
+      "icon": "1:palamod:item.paladium.pickaxe:0#",
+      "id": "palamod.craft.crafttools.2",
+      "name": "Craft II"
+    },
+    {
+      "amount": 1,
+      "category": "HOW_TO_START",
+      "description": "Crafter un casque en paladium",
+      "id": "palamod.craft.craftarmor.1",
+      "name": "Craft I"
+    },
+    {
+      "amount": 1,
+      "category": "HOW_TO_START",
+      "description": "Crafter un plastron en paladium",
+      "id": "palamod.craft.craftarmor.2",
+      "name": "Craft II"
+    },
+    {
+      "amount": 1,
+      "category": "HOW_TO_START",
+      "description": "Crafter une jambière en paladium",
+      "id": "palamod.craft.craftarmor.3",
+      "name": "Craft III"
+    },
+    {
+      "amount": -1,
+      "category": "HOW_TO_START",
+      "description": "Crafter votre première armure en paladium",
+      "icon": "1:palamod:item.paladium.chestplate:0#",
+      "id": "palamod.craft.craftarmor",
+      "name": "Bien s'équiper"
+    },
+    {
+      "amount": 1,
+      "category": "HOW_TO_START",
+      "description": "Egopolis",
+      "id": "palamod.visitservers.allservers.1",
+      "name": "I"
+    },
+    {
+      "amount": 1,
+      "category": "HOW_TO_START",
+      "description": "Crafter des bottes en paladium",
+      "id": "palamod.craft.craftarmor.4",
+      "name": "Craft IV"
+    },
+    {
+      "amount": 1,
+      "category": "HOW_TO_START",
+      "description": "Aeloria",
+      "id": "palamod.visitservers.allservers.2",
+      "name": "II"
+    },
+    {
+      "amount": 1,
+      "category": "HOW_TO_START",
+      "description": "Xanoth",
+      "id": "palamod.visitservers.allservers.3",
+      "name": "III"
+    },
+    {
+      "amount": 1,
+      "category": "HOW_TO_START",
+      "description": "Kilmordra",
+      "id": "palamod.visitservers.allservers.4",
+      "name": "IV"
+    },
+    {
+      "amount": 1,
+      "category": "HOW_TO_START",
+      "description": "Runegard",
+      "id": "palamod.visitservers.allservers.5",
+      "name": "V"
+    },
+    {
+      "amount": 1,
+      "category": "HOW_TO_START",
+      "description": "Manashino",
+      "id": "palamod.visitservers.allservers.7",
+      "name": "VII"
+    },
+    {
+      "amount": 1,
+      "category": "HOW_TO_START",
+      "description": "Neolith",
+      "id": "palamod.visitservers.allservers.8",
+      "name": "VIII"
+    },
+    {
+      "amount": 1,
+      "category": "HOW_TO_START",
+      "description": "Minage",
+      "id": "palamod.visitservers.allservers.6",
+      "name": "VI"
+    },
+    {
+      "amount": 1,
+      "category": "HOW_TO_START",
+      "description": "Minage",
+      "id": "palamod.visitservers.allservers.9",
+      "name": "IX"
+    },
+    {
+      "amount": -1,
+      "category": "HOW_TO_START",
+      "description": "Explorer tous les serveurs",
+      "icon": "1:minecraft:compass:0#",
+      "id": "palamod.visitservers.allservers",
+      "name": "Explorateur dimensionnel"
+    },
+    {
+      "amount": 32,
+      "category": "HOW_TO_START",
+      "description": "Miner 32 minerais de fer",
+      "id": "palamod.breakblock.startrich.1",
+      "name": "I"
+    },
+    {
+      "amount": 5,
+      "category": "HOW_TO_START",
+      "description": "Miner 5 minerais de diamant",
+      "id": "palamod.breakblock.startrich.3",
+      "name": "III"
+    },
+    {
+      "amount": 16,
+      "category": "HOW_TO_START",
+      "description": "Miner 16 minerais d'or",
+      "id": "palamod.breakblock.startrich.2",
+      "name": "II"
+    },
+    {
+      "amount": 20,
+      "category": "HOW_TO_START",
+      "description": "Miner 20 minerais d'améthyste",
+      "id": "palamod.breakblock.startrich.4",
+      "name": "IV"
+    },
+    {
+      "amount": 12,
+      "category": "HOW_TO_START",
+      "description": "Miner 12 minerais de titane",
+      "id": "palamod.breakblock.startrich.5",
+      "name": "V"
+    },
+    {
+      "amount": 2,
+      "category": "HOW_TO_START",
+      "description": "Miner 2 minerais de findium",
+      "id": "palamod.breakblock.startrich.7",
+      "name": "VII"
+    },
+    {
+      "amount": -1,
+      "category": "HOW_TO_START",
+      "description": "Miner les minerais demandés",
+      "icon": "1:palamod:item.paladium.pickaxe:0#",
+      "id": "palamod.breakblock.startrich",
+      "name": "Début de la richesse !"
+    },
+    {
+      "amount": 6,
+      "category": "HOW_TO_START",
+      "description": "Miner 6 minerais de paladium",
+      "id": "palamod.breakblock.startrich.6",
+      "name": "VI"
+    },
+    {
+      "amount": 30000,
+      "category": "HOW_TO_START",
+      "description": "Marcher sur une distance de 30 000 blocs",
+      "icon": "1:palamod:item.travelboots:0#",
+      "id": "palamod.walkdistance.30k",
+      "name": "Longue marche"
+    },
+    {
+      "amount": 1,
+      "category": "HOW_TO_START",
+      "description": "Atteindre le niveau 30",
+      "id": "palamod.enchant.firstenchant.1",
+      "name": "I"
+    },
+    {
+      "amount": 1,
+      "category": "HOW_TO_START",
+      "description": "Enchanter une pioche en paladium",
+      "id": "palamod.enchant.firstenchant.2",
+      "name": "II"
+    },
+    {
+      "amount": 1,
+      "category": "HOW_TO_START",
+      "description": "Crafter un grinder bloc",
+      "id": "palamod.craft.craftgrinder.1",
+      "name": "I"
+    },
+    {
+      "amount": -1,
+      "category": "HOW_TO_START",
+      "description": "Réaliser votre premier enchantement",
+      "icon": "1:minecraft:enchanted_book:0#",
+      "id": "palamod.enchant.firstenchant",
+      "name": "Premier enchantement"
+    },
+    {
+      "amount": 5,
+      "category": "HOW_TO_START",
+      "description": "Crafter 5 grinder casing",
+      "id": "palamod.craft.craftgrinder.2",
+      "name": "II"
+    },
+    {
+      "amount": 20,
+      "category": "HOW_TO_START",
+      "description": "Crafter 20 grinder frame",
+      "id": "palamod.craft.craftgrinder.3",
+      "name": "III"
+    },
+    {
+      "amount": 1,
+      "category": "HOW_TO_START",
+      "description": "Crafter un hammer pattern",
+      "id": "palamod.craft.luckyhammer.1",
+      "name": "I"
+    },
+    {
+      "amount": 1,
+      "category": "HOW_TO_START",
+      "description": "Crafter un hammer head",
+      "id": "palamod.craft.luckyhammer.2",
+      "name": "II"
+    },
+    {
+      "amount": -1,
+      "category": "HOW_TO_START",
+      "description": "Crafter tous les blocs nécessaires pour la création d'un grinder",
+      "icon": "1:palamod:tile.grinder_block:0#",
+      "id": "palamod.craft.craftgrinder",
+      "name": "Etablissement du Grinder"
+    },
+    {
+      "amount": 1,
+      "category": "HOW_TO_START",
+      "description": "Crafter un hammer en paladium",
+      "id": "palamod.craft.luckyhammer.3",
+      "name": "III"
+    },
+    {
+      "amount": 2,
+      "category": "HOW_TO_START",
+      "description": "Appliquer à un hammer en paladium 2 modifieurs de fortune",
+      "id": "palamod.craft.luckyhammer.4",
+      "name": "IV"
+    },
+    {
+      "amount": 1,
+      "category": "HOW_TO_START",
+      "description": "Ecrire un mail depuis la mailbox",
+      "icon": "1:minecraft:writable_book:0#",
+      "id": "palamod.mail.write",
+      "name": "Ecrivain"
+    },
+    {
+      "amount": 5,
+      "category": "HOW_TO_START",
+      "description": "Dupliquer 5 minerais en améthyste",
+      "id": "palamod.hammer.hammerduplicate.1",
+      "name": "I"
+    },
+    {
+      "amount": 1,
+      "category": "HOW_TO_START",
+      "description": "Appliquer à un hammer en paladium 1 modifieur de fusion",
+      "id": "palamod.craft.luckyhammer.5",
+      "name": "V"
+    },
+    {
+      "amount": -1,
+      "category": "HOW_TO_START",
+      "description": "Apprendre à dupliquer légalement",
+      "icon": "1:palamod:item.hammer.paladium:0#",
+      "id": "palamod.craft.luckyhammer",
+      "name": "Marteau de fortune"
+    },
+    {
+      "amount": 5,
+      "category": "HOW_TO_START",
+      "description": "Dupliquer 5 minerais de titane",
+      "id": "palamod.hammer.hammerduplicate.2",
+      "name": "II"
+    },
+    {
+      "amount": -1,
+      "category": "HOW_TO_START",
+      "description": "Dupliquer avec un hammer fortune et smelt les minerais demandés",
+      "icon": "1:palamod:item.hammer.paladium:0#",
+      "id": "palamod.hammer.hammerduplicate",
+      "name": "Duplication en cours"
+    },
+    {
+      "amount": 5,
+      "category": "HOW_TO_START",
+      "description": "Dupliquer 5 minerais de paladium",
+      "id": "palamod.hammer.hammerduplicate.3",
+      "name": "III"
+    },
+    {
+      "amount": 1,
+      "category": "HOW_TO_START",
+      "description": "Effectuer une vente au shop",
+      "id": "palamod.shop.sell.1",
+      "name": "I"
+    },
+    {
+      "amount": -1,
+      "category": "HOW_TO_START",
+      "description": "Utiliser le shop",
+      "icon": "1:customnpcs:npcMoney:0#",
+      "id": "palamod.shop.buysell",
+      "name": "Shoppeur"
+    },
+    {
+      "amount": 1,
+      "category": "ECONOMY",
+      "description": "Mettre en avant un item dans le market",
+      "id": "palamod.hdv.sell.1",
+      "name": "I"
+    },
+    {
+      "amount": 1,
+      "category": "HOW_TO_START",
+      "description": "Effectuer un achat au shop",
+      "id": "palamod.shop.buy.2",
+      "name": "II"
+    },
+    {
+      "amount": 1,
+      "category": "ECONOMY",
+      "description": "Effectuer un achat au /hdv",
+      "id": "palamod.hdv.buy.2",
+      "name": "II"
+    },
+    {
+      "amount": -1,
+      "category": "HOW_TO_START",
+      "description": "Utiliser le market",
+      "icon": "1:factions:tile.townmarket:0#",
+      "id": "palamod.hdv.buysell",
+      "name": "Marketeur"
+    },
+    {
+      "amount": 1,
+      "category": "HOW_TO_START",
+      "description": "Taper le dragon lors du Egg Hunt",
+      "id": "palamod.egg.hurtdragon.1",
+      "name": "I"
+    },
+    {
+      "amount": 1,
+      "category": "HOW_TO_START",
+      "description": "Utiliser le parchemin de dragon pendant une chasse",
+      "id": "palamod.egg.dragonroll.2",
+      "name": "II"
+    },
+    {
+      "amount": -1,
+      "category": "HOW_TO_START",
+      "description": "Participer à un Egg Hunt",
+      "icon": "1:palamod:egg:6#",
+      "id": "palamod.egg.participate",
+      "name": "Une belle omelette"
+    },
+    {
+      "amount": 3,
+      "category": "HOW_TO_START",
+      "description": "Récupérer un oeuf pendant un Egg Hunt",
+      "id": "palamod.egg.take.3",
+      "name": "III"
+    },
+    {
+      "amount": 1,
+      "category": "HOW_TO_START",
+      "description": "Utiliser un sort",
+      "id": "palamod.spell.use.1",
+      "name": "II"
+    },
+    {
+      "amount": 1,
+      "category": "HOW_TO_START",
+      "description": "Combattre un boss dans une arène",
+      "icon": "1:palamod:item.broadsword.paladium:0#{modifiersmax:4,upgradearray:[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,],modifiersammount:0}",
+      "id": "palamod.egg.hurtboss",
+      "name": "C'est qui le boss"
+    },
+    {
+      "amount": 1,
+      "category": "HOW_TO_START",
+      "description": "Dévérrouiller un sort",
+      "id": "palamod.spell.unlock.1",
+      "name": "I"
+    },
+    {
+      "amount": 1,
+      "category": "ECONOMY",
+      "description": "Posséder 10 000 $",
+      "icon": "1:customnpcs:npcMoney:0#",
+      "id": "palamod.cresus.balance.10k",
+      "name": "Le porte-monnaie en sueur"
+    },
+    {
+      "amount": -1,
+      "category": "HOW_TO_START",
+      "description": "Apprendre un sort et l'utiliser",
+      "icon": "1:palamod:egg:6#",
+      "id": "palamod.spell.unlockuser",
+      "name": "Apprenti sorcier"
+    },
+    {
+      "amount": 1,
+      "category": "ECONOMY",
+      "description": "Posséder 100 000 $",
+      "icon": "1:customnpcs:npcMoney:0#",
+      "id": "palamod.cresus.balance.100k",
+      "name": "Money money money"
+    },
+    {
+      "amount": 1,
+      "category": "ECONOMY",
+      "description": "Posséder 500 000 $",
+      "icon": "1:customnpcs:npcMoney:0#",
+      "id": "palamod.cresus.balance.500k",
+      "name": "Je possède des thunes"
+    },
+    {
+      "amount": 1,
+      "category": "ECONOMY",
+      "description": "Posséder 1 000 000 $",
+      "icon": "1:customnpcs:npcMoney:0#",
+      "id": "palamod.cresus.balance.1m",
+      "name": "Millionnaire"
+    },
+    {
+      "amount": 1,
+      "category": "ECONOMY",
+      "description": "Mettre en avant un item dans le market",
+      "icon": "1:palamod:tile.trophy_findium:3#",
+      "id": "palamod.hdv.bet",
+      "name": "Faire la Une"
+    },
+    {
+      "amount": 50000,
+      "category": "ECONOMY",
+      "description": "Vendre pour 50 000 $ de ressources à l'admin shop",
+      "icon": "1:palamod:item.npcMoney:0#",
+      "id": "palamod.shop.sell.50k",
+      "name": "Shoppeur expérimenté"
+    },
+    {
+      "amount": 50,
+      "category": "JOBS",
+      "description": "Crafter 50 extracteurs",
+      "icon": "1:palamod:extractor:0#",
+      "id": "palamod.craft.extractor",
+      "name": "Extraire par ci, par là, partout"
+    },
+    {
+      "amount": 1000,
+      "category": "JOBS",
+      "description": "Crafter 1000 fioles d'alchimiste",
+      "icon": "1:palamod:flask:0#",
+      "id": "palamod.craft.flasks",
+      "name": "Verrier"
+    },
+    {
+      "amount": 5000000,
+      "category": "JOBS",
+      "description": "Extraire 5 000 000 unités de sèves",
+      "icon": "1:palamod:flask:3#",
+      "id": "palamod.seve.count.5m",
+      "name": "Moyenne exploitation de sève"
+    },
+    {
+      "amount": 1000000,
+      "category": "JOBS",
+      "description": "Extraire 1 000 000 unités de sèves",
+      "icon": "1:palamod:flask:1#",
+      "id": "palamod.seve.count.1m",
+      "name": "Petite exploitation de sève"
+    },
+    {
+      "amount": 200000000,
+      "category": "JOBS",
+      "description": "Extraire 200 000 000 unités de sèves",
+      "icon": "1:palamod:flask:6#",
+      "id": "palamod.seve.count.200m",
+      "name": "Gigantesque exploitation de sève"
+    },
+    {
+      "amount": 10,
+      "category": "HOW_TO_START",
+      "description": "Crafter 10 Green Glueball",
+      "id": "palamod.craftcauldron.glueball.1",
+      "name": "I"
+    },
+    {
+      "amount": 30000000,
+      "category": "JOBS",
+      "description": "Extraire 30 000 000 unités de sèves",
+      "icon": "1:palamod:flask:4#",
+      "id": "palamod.seve.count.30m",
+      "name": "Grande exploitation de sève"
+    },
+    {
+      "amount": 10,
+      "category": "HOW_TO_START",
+      "description": "Crafter 10 Blue Glueball",
+      "id": "palamod.craftcauldron.glueball.2",
+      "name": "II"
+    },
+    {
+      "amount": 10,
+      "category": "HOW_TO_START",
+      "description": "Crafter 10 Yellow Glueball",
+      "id": "palamod.craftcauldron.glueball.3",
+      "name": "III"
+    },
+    {
+      "amount": 10,
+      "category": "HOW_TO_START",
+      "description": "Crafter 10 Orange Glueball",
+      "id": "palamod.craftcauldron.glueball.5",
+      "name": "V"
+    },
+    {
+      "amount": 10,
+      "category": "HOW_TO_START",
+      "description": "Crafter 10 Red Glueball",
+      "id": "palamod.craftcauldron.glueball.4",
+      "name": "IV"
+    },
+    {
+      "amount": 10,
+      "category": "HOW_TO_START",
+      "description": "Crafter 10 Gray Glueball",
+      "id": "palamod.craftcauldron.glueball.6",
+      "name": "VI"
+    },
+    {
+      "amount": 10,
+      "category": "HOW_TO_START",
+      "description": "Crafter 10 Purple Glueball",
+      "id": "palamod.craftcauldron.glueball.7",
+      "name": "VII"
+    },
+    {
+      "amount": 10,
+      "category": "HOW_TO_START",
+      "description": "Crafter 10 Green Flash Glueball",
+      "id": "palamod.craftcauldron.glueball.8",
+      "name": "VIII"
+    },
+    {
+      "amount": 10,
+      "category": "HOW_TO_START",
+      "description": "Crafter 10 Green Dark Glueball",
+      "id": "palamod.craftcauldron.glueball.9",
+      "name": "IX"
+    },
+    {
+      "amount": 1,
+      "category": "HOW_TO_START",
+      "description": "Activer le portail de la Dimension mineur",
+      "id": "palamod.dimensionminer.portal.1",
+      "name": "I"
+    },
+    {
+      "amount": 10,
+      "category": "HOW_TO_START",
+      "description": "Crafter 10 Cyan Glueball",
+      "id": "palamod.craftcauldron.glueball.10",
+      "name": "X"
+    },
+    {
+      "amount": -1,
+      "category": "JOBS",
+      "description": "Crafter 10 exemplaires de chaque glueball",
+      "icon": "1:palamod:glueball_pattern:0#",
+      "id": "palamod.craftcauldron.gluballall",
+      "name": "Chewing gum maison"
+    },
+    {
+      "amount": 1,
+      "category": "HOW_TO_START",
+      "description": "Arriver dans la Dimension mineur",
+      "id": "palamod.dimensionminer.goinportal.2",
+      "name": "II"
+    },
+    {
+      "amount": 3,
+      "category": "HOW_TO_START",
+      "description": "Effectuer la commande /dimension",
+      "id": "palamod.dimensionminer.commandimension.3",
+      "name": "III"
+    },
+    {
+      "amount": -1,
+      "category": "HOW_TO_START",
+      "description": "Rentrer dans la Dimension mineur",
+      "icon": "3:palamod:tile.withered_obsidian:0#",
+      "id": "palamod.dimensionminer.all",
+      "name": "Transdimensionnelle"
+    },
+    {
+      "amount": 1,
+      "category": "JOBS",
+      "description": "Récupérer une fiole de sève de jacaranda",
+      "id": "palamod.seve.extract.1",
+      "name": "I"
+    },
+    {
+      "amount": 1,
+      "category": "JOBS",
+      "description": "Récupérer une fiole de sève d'érable",
+      "id": "palamod.seve.extract.3",
+      "name": "III"
+    },
+    {
+      "amount": 1,
+      "category": "JOBS",
+      "description": "Récupérer une fiole de sève de judeecercis",
+      "id": "palamod.seve.extract.2",
+      "name": "II"
+    },
+    {
+      "amount": 1,
+      "category": "JOBS",
+      "description": "Récupérer une fiole de sève de ostrya",
+      "id": "palamod.seve.extract.4",
+      "name": "IV"
+    },
+    {
+      "amount": -1,
+      "category": "JOBS",
+      "description": "Extraire tous les types de sèves",
+      "icon": "1:palamod:flask:6#",
+      "id": "palamod.seve.extractall",
+      "name": "Il y en a pour tous"
+    },
+    {
+      "amount": 1,
+      "category": "JOBS",
+      "description": "Activer un portail en améthyste",
+      "id": "palamod.portal.init.1",
+      "name": "I"
+    },
+    {
+      "amount": 1,
+      "category": "JOBS",
+      "description": "Créer votre chaudron",
+      "icon": "1:palamod:cauldron_core:0#",
+      "id": "palamod.cauldron.init",
+      "name": "Chaudron de sorcier"
+    },
+    {
+      "amount": 1,
+      "category": "ATTACK_DEFENSE",
+      "description": "Utiliser un explorateur de coffre",
+      "icon": "1:palamod:item.chestexplorer:0#",
+      "id": "palamod.use.chestexplorer",
+      "name": "Explorateur de coffre"
+    },
+    {
+      "amount": 1,
+      "category": "JOBS",
+      "description": "Activer un portail en paladium",
+      "id": "palamod.portal.init.3",
+      "name": "III"
+    },
+    {
+      "amount": 1,
+      "category": "JOBS",
+      "description": "Activer un portail en titane",
+      "id": "palamod.portal.init.2",
+      "name": "II"
+    },
+    {
+      "amount": -1,
+      "category": "JOBS",
+      "description": "Activer tous les types de portail",
+      "icon": "1:palamod:endium_portal_key:0#",
+      "id": "palamod.portal.init.all",
+      "name": "Activateur de portail"
+    },
+    {
+      "amount": 1,
+      "category": "JOBS",
+      "description": "Activer un portail en endium",
+      "id": "palamod.portal.init.4",
+      "name": "IV"
+    },
+    {
+      "amount": 1,
+      "category": "HOW_TO_START",
+      "description": "Récupérer un pollen de titane",
+      "id": "palamod.craftcauldron.pollen.2",
+      "name": "II"
+    },
+    {
+      "amount": 1,
+      "category": "HOW_TO_START",
+      "description": "Récupérer un pollen d'améthyste",
+      "id": "palamod.craftcauldron.pollen.1",
+      "name": "I"
+    },
+    {
+      "amount": 1,
+      "category": "HOW_TO_START",
+      "description": "Récupérer un pollen de paladium",
+      "id": "palamod.craftcauldron.pollen.3",
+      "name": "III"
+    },
+    {
+      "amount": -1,
+      "category": "JOBS",
+      "description": "Obtenir tous les types de pollen",
+      "icon": "64:palamod:item.endium_pollen:0#",
+      "id": "palamod.craftcauldron.pollenall",
+      "name": "Pollinisation"
+    },
+    {
+      "amount": 200,
+      "category": "JOBS",
+      "description": "Récupérer 200 âmes",
+      "icon": "1:palamod:tile.empty_mob_spawner:0#",
+      "id": "palamod.useitem.cavernhammer",
+      "name": "Créateur de spawner"
+    },
+    {
+      "amount": 1000,
+      "category": "JOBS",
+      "description": "Alimenter 1 000 fois un totem en paladium",
+      "icon": "1:palamod:tile.totem:0#",
+      "id": "palamod.useitem.totem.fuel",
+      "name": "Totémiste"
+    },
+    {
+      "amount": 2000,
+      "category": "JOBS",
+      "description": "Crafter 2 000 pains",
+      "icon": "1:minecraft:bread:0#",
+      "id": "palamod.craft.bread",
+      "name": "Boulangerie"
+    },
+    {
+      "amount": 1,
+      "category": "HOW_TO_START",
+      "description": "Récupérer un pollen d'endium",
+      "id": "palamod.craftcauldron.pollen.4",
+      "name": "IV"
+    },
+    {
+      "amount": 10,
+      "category": "JOBS",
+      "description": "Casser 10 minerais de charbon",
+      "id": "palamod.breakblock.vanilla.1",
+      "name": "I"
+    },
+    {
+      "amount": 10,
+      "category": "JOBS",
+      "description": "Casser 10 minerais de fer",
+      "id": "palamod.breakblock.vanilla.2",
+      "name": "II"
+    },
+    {
+      "amount": 10,
+      "category": "JOBS",
+      "description": "Casser 10 minerais de lapis lazuli",
+      "id": "palamod.breakblock.vanilla.3",
+      "name": "III"
+    },
+    {
+      "amount": 10,
+      "category": "JOBS",
+      "description": "Casser 10 minerais de redstone",
+      "id": "palamod.breakblock.vanilla.5",
+      "name": "V"
+    },
+    {
+      "amount": 10,
+      "category": "JOBS",
+      "description": "Casser 10 minerais de diamant",
+      "id": "palamod.breakblock.vanilla.4",
+      "name": "IV"
+    },
+    {
+      "amount": 10,
+      "category": "JOBS",
+      "description": "Casser 10 minerais d'améthyste",
+      "id": "palamod.breakblock.modded.1",
+      "name": "I"
+    },
+    {
+      "amount": 10,
+      "category": "JOBS",
+      "description": "Casser 10 minerais d'émeraude",
+      "id": "palamod.breakblock.vanilla.6",
+      "name": "VI"
+    },
+    {
+      "amount": 10,
+      "category": "JOBS",
+      "description": "Casser 10 minerais de titane",
+      "id": "palamod.breakblock.modded.2",
+      "name": "II"
+    },
+    {
+      "amount": -1,
+      "category": "JOBS",
+      "description": "Miner 10 exemplaires de chaque minerai vanilla",
+      "icon": "1:minecraft:iron_ore:0#",
+      "id": "palamod.breakblock.vanilla.all",
+      "name": "Vanilladdict"
+    },
+    {
+      "amount": 10,
+      "category": "JOBS",
+      "description": "Casser 10 minerais de paladium",
+      "id": "palamod.breakblock.modded.3",
+      "name": "III"
+    },
+    {
+      "amount": 10,
+      "category": "JOBS",
+      "description": "Casser 10 minerais de trixium",
+      "id": "palamod.breakblock.modded.5",
+      "name": "V"
+    },
+    {
+      "amount": 10,
+      "category": "JOBS",
+      "description": "Casser 10 minerais de findium",
+      "id": "palamod.breakblock.modded.6",
+      "name": "VI"
+    },
+    {
+      "amount": 10,
+      "category": "JOBS",
+      "description": "Casser 10 minerais de paladium vert",
+      "id": "palamod.breakblock.modded.4",
+      "name": "IV"
+    },
+    {
+      "amount": -1,
+      "category": "JOBS",
+      "description": "Miner 10 exemplaires de chaque minerai moddé",
+      "icon": "64:palamod:tile.paladium.ore:0#",
+      "id": "palamod.breakblock.modded.all",
+      "name": "Minez moddé !"
+    },
+    {
+      "amount": 10,
+      "category": "JOBS",
+      "description": "Crafter 10 graines de citrouilles",
+      "id": "palamod.breakblock.seeds.2",
+      "name": "I"
+    },
+    {
+      "amount": 10,
+      "category": "JOBS",
+      "description": "Crafter 10 graines de melon",
+      "id": "palamod.breakblock.seeds.3",
+      "name": "II"
+    },
+    {
+      "amount": 10,
+      "category": "JOBS",
+      "description": "Obtenir 10 graines de chervil",
+      "id": "palamod.breakblock.seeds.5",
+      "name": "IV"
+    },
+    {
+      "amount": 10,
+      "category": "JOBS",
+      "description": "Obtenir 10 graines d'eggplant",
+      "id": "palamod.breakblock.seeds.4",
+      "name": "III"
+    },
+    {
+      "amount": 10,
+      "category": "JOBS",
+      "description": "Obtenir 10 graines de kiwano",
+      "id": "palamod.breakblock.seeds.6",
+      "name": "V"
+    },
+    {
+      "amount": 10,
+      "category": "JOBS",
+      "description": "Obtenir 10 graines d'orangeblue",
+      "id": "palamod.breakblock.seeds.7",
+      "name": "VI"
+    },
+    {
+      "amount": -1,
+      "category": "JOBS",
+      "description": "Obtenir 10 exemplaires de chaque graine",
+      "icon": "1:palamod:item.seed.orangeblue:0#",
+      "id": "palamod.breakblock.seeds.all",
+      "name": "Qui sème les graines..."
+    },
+    {
+      "amount": 1,
+      "category": "HOW_TO_START",
+      "description": "Crusher des chervils",
+      "id": "palamod.crusher.2",
+      "name": "II"
+    },
+    {
+      "amount": 1,
+      "category": "HOW_TO_START",
+      "description": "Crusher des eggplants",
+      "id": "palamod.crusher.1",
+      "name": "I"
+    },
+    {
+      "amount": 1,
+      "category": "HOW_TO_START",
+      "description": "Crusher des kiwanos",
+      "id": "palamod.crusher.3",
+      "name": "III"
+    },
+    {
+      "amount": 1,
+      "category": "HOW_TO_START",
+      "description": "Crusher des orangeblue",
+      "id": "palamod.crusher.4",
+      "name": "IV"
+    },
+    {
+      "amount": -1,
+      "category": "JOBS",
+      "description": "Broyez des fruits dans le crusher",
+      "icon": "1:palamod:tile.crusher:0#",
+      "id": "palamod.crusher.all",
+      "name": "...crushe les fruits !"
+    },
+    {
+      "amount": 1000,
+      "category": "JOBS",
+      "description": "Utiliser 1 000 fois un outil de construction",
+      "icon": "1:palamod:item.builder_wand:2#",
+      "id": "palamod.useitem.builderwand",
+      "name": "Constructeurs de l'extrême !"
+    },
+    {
+      "amount": 5000,
+      "category": "JOBS",
+      "description": "Récupérer 5 000 particules",
+      "icon": "64:palamod:tile.cobbleBreaker:0#",
+      "id": "palamod.cobblebreaker.particle",
+      "name": "Trésor dans la pierre"
+    },
+    {
+      "amount": 1000000,
+      "category": "JOBS",
+      "description": "Supprimer 1 000 000 de blocs avec une minage voidstone",
+      "icon": "1:palamod:item.voidstone.minage:0#{stone:134,}",
+      "id": "palamod.useitem.voidstone",
+      "name": "Disparition totale"
+    },
+    {
+      "amount": 10,
+      "category": "JOBS",
+      "description": "Utiliser 10 fois un spawner finder",
+      "icon": "1:palamod:item.spawner_finder:0#",
+      "id": "palamod.useitem.spawnerfinder",
+      "name": "Chercheur assisté"
+    },
+    {
+      "amount": 500,
+      "category": "JOBS",
+      "description": "Crafter 500 bouteilles d'XP",
+      "icon": "1:palamod:item.sealed_xp_bottle:0#",
+      "id": "palamod.craft.sealedxp",
+      "name": "Mise en bouteille"
+    },
+    {
+      "amount": 1,
+      "category": "JOBS",
+      "description": "Crafter un backpack en améthyste",
+      "icon": "1:palamod:item.hunter_backpack:0#",
+      "id": "palamod.craft.amethystbackpack",
+      "name": "Transport dominical"
+    },
+    {
+      "amount": 1,
+      "category": "JOBS",
+      "description": "Capturer un zombie",
+      "id": "palamod.capturestone.1",
+      "name": "I"
+    },
+    {
+      "amount": 7500,
+      "category": "JOBS",
+      "description": "Donner 7 500 bambous à des éléphants",
+      "icon": "1:palamod:tile.bamboo_block:0#",
+      "id": "palamod.useitem.bamboo.feed",
+      "name": "Élevage d'éléphants"
+    },
+    {
+      "amount": 1,
+      "category": "JOBS",
+      "description": "Capturer une tortue",
+      "id": "palamod.capturestone.3",
+      "name": "III"
+    },
+    {
+      "amount": 1,
+      "category": "JOBS",
+      "description": "Capturer un creeper",
+      "id": "palamod.capturestone.2",
+      "name": "II"
+    },
+    {
+      "amount": 1,
+      "category": "JOBS",
+      "description": "Capturer un escargot",
+      "id": "palamod.capturestone.5",
+      "name": "V"
+    },
+    {
+      "amount": 1,
+      "category": "JOBS",
+      "description": "Capturer un dauphin",
+      "id": "palamod.capturestone.6",
+      "name": "VI"
+    },
+    {
+      "amount": -1,
+      "category": "JOBS",
+      "description": "Capturer des créatures",
+      "icon": "1:palamod:item.capture_stone:1#",
+      "id": "palamod.capturestone.all",
+      "name": "Zoo original"
+    },
+    {
+      "amount": 1,
+      "category": "JOBS",
+      "description": "Capturer un éléphant",
+      "id": "palamod.capturestone.7",
+      "name": "VII"
+    },
+    {
+      "amount": 1,
+      "category": "JOBS",
+      "description": "Capturer un crabe",
+      "id": "palamod.capturestone.4",
+      "name": "IV"
+    },
+    {
+      "amount": 1,
+      "category": "JOBS",
+      "description": "Vaincre le mini-boss Poulet Fermier",
+      "id": "palamod.miniboss.kill.1",
+      "name": "I"
+    },
+    {
+      "amount": 1,
+      "category": "JOBS",
+      "description": "Vaincre le mini-boss Zombie Caverneux",
+      "id": "palamod.miniboss.kill.2",
+      "name": "II"
+    },
+    {
+      "amount": 1,
+      "category": "JOBS",
+      "description": "Vaincre le mini-boss Méga Creeper",
+      "id": "palamod.miniboss.kill.3",
+      "name": "III"
+    },
+    {
+      "amount": 1,
+      "category": "JOBS",
+      "description": "Vaincre le mini-boss Monstre Fleur",
+      "id": "palamod.miniboss.kill.4",
+      "name": "IV"
+    },
+    {
+      "amount": -1,
+      "category": "JOBS",
+      "description": "Vaincre les quatre mini boss",
+      "icon": "1:palamod:item.hunter_amulet:0#",
+      "id": "palamod.miniboss.killall",
+      "name": "Petite proie, dur combat"
+    },
+    {
+      "amount": 3600,
+      "category": "ATTACK_DEFENSE",
+      "description": "Utiliser pendant 60 min un unclaim finder",
+      "icon": "1:palamod:item.unclaimfinder:20#",
+      "id": "palamod.unclaimfinder.1h",
+      "name": "Chercheur de base débutant"
+    },
+    {
+      "amount": 12000,
+      "category": "ATTACK_DEFENSE",
+      "description": "Utiliser pendant 200 min un unclaim finder",
+      "icon": "1:palamod:item.unclaimfinder_orange:20#",
+      "id": "palamod.unclaimfinder.200mn",
+      "name": "Chercheur de base professionnel"
+    },
+    {
+      "amount": 48000,
+      "category": "ATTACK_DEFENSE",
+      "description": "Utiliser pendant 800 min un unclaim finder",
+      "icon": "1:palamod:item.unclaimfinder_rouge:200#",
+      "id": "palamod.unclaimfinder.800mn",
+      "name": "Chercheur de base expert"
+    },
+    {
+      "amount": 1,
+      "category": "ATTACK_DEFENSE",
+      "description": "Crafter une big obsidienne",
+      "id": "palamod.craft.obsi.1",
+      "name": "I"
+    },
+    {
+      "amount": 1,
+      "category": "ATTACK_DEFENSE",
+      "description": "Crafter une lava obsidienne",
+      "id": "palamod.craft.obsi.2",
+      "name": "II"
+    },
+    {
+      "amount": 1,
+      "category": "ATTACK_DEFENSE",
+      "description": "Crafter une sulfuric obsidienne",
+      "id": "palamod.craft.obsi.3",
+      "name": "III"
+    },
+    {
+      "amount": 1,
+      "category": "ATTACK_DEFENSE",
+      "description": "Crafter une boom obsidienne",
+      "id": "palamod.craft.obsi.4",
+      "name": "IV"
+    },
+    {
+      "amount": 1,
+      "category": "ATTACK_DEFENSE",
+      "description": "Crafter une mega boom obsidienne",
+      "id": "palamod.craft.obsi.5",
+      "name": "V"
+    },
+    {
+      "amount": 1,
+      "category": "ATTACK_DEFENSE",
+      "description": "Crafter une spike (paladium) obsidienne",
+      "id": "palamod.craft.obsi.6",
+      "name": "VI"
+    },
+    {
+      "amount": 1,
+      "category": "ATTACK_DEFENSE",
+      "description": "Crafter une slime obsidienne",
+      "id": "palamod.craft.obsi.7",
+      "name": "VII"
+    },
+    {
+      "amount": 1,
+      "category": "ATTACK_DEFENSE",
+      "description": "Crafter une poison obsidienne",
+      "id": "palamod.craft.obsi.8",
+      "name": "VIII"
+    },
+    {
+      "amount": 1,
+      "category": "ATTACK_DEFENSE",
+      "description": "Crafter une wither obsidienne",
+      "id": "palamod.craft.obsi.9",
+      "name": "IX"
+    },
+    {
+      "amount": -1,
+      "category": "ATTACK_DEFENSE",
+      "description": "Crafter tous les types d'obsidiennes demandés",
+      "icon": "64:palamod:tile.big_obsi:0#",
+      "id": "palamod.craft.obsiall",
+      "name": "Obsidienne de qualité"
+    },
+    {
+      "amount": 1,
+      "category": "ATTACK_DEFENSE",
+      "description": "Crafter une anti aggro obsidienne",
+      "id": "palamod.craft.obsi.11",
+      "name": "XI"
+    },
+    {
+      "amount": 1,
+      "category": "ATTACK_DEFENSE",
+      "description": "Crafter une redstone obsidienne",
+      "id": "palamod.craft.obsi.10",
+      "name": "X"
+    },
+    {
+      "amount": 1,
+      "category": "ATTACK_DEFENSE",
+      "description": "Crafter un spike en bois",
+      "id": "palamod.craft.spike.1",
+      "name": "I"
+    },
+    {
+      "amount": 1,
+      "category": "ATTACK_DEFENSE",
+      "description": "Crafter un spike en diamant",
+      "id": "palamod.craft.spike.4",
+      "name": "IV"
+    },
+    {
+      "amount": 1,
+      "category": "ATTACK_DEFENSE",
+      "description": "Crafter un spike en or",
+      "id": "palamod.craft.spike.3",
+      "name": "III"
+    },
+    {
+      "amount": 1,
+      "category": "ATTACK_DEFENSE",
+      "description": "Crafter un spike en fer",
+      "id": "palamod.craft.spike.2",
+      "name": "II"
+    },
+    {
+      "amount": 1,
+      "category": "ATTACK_DEFENSE",
+      "description": "Crafter un spike en améthyste",
+      "id": "palamod.craft.spike.5",
+      "name": "V"
+    },
+    {
+      "amount": 1,
+      "category": "ATTACK_DEFENSE",
+      "description": "Crafter un spike en titane",
+      "id": "palamod.craft.spike.6",
+      "name": "VI"
+    },
+    {
+      "amount": -1,
+      "category": "ATTACK_DEFENSE",
+      "description": "Crafter tous les types de spike demandés",
+      "icon": "64:palamod:tile.spikepaladium:0#",
+      "id": "palamod.craft.spikeall",
+      "name": "Spike de qualité"
+    },
+    {
+      "amount": 1,
+      "category": "ATTACK_DEFENSE",
+      "description": "Crafter un spike en paladium",
+      "id": "palamod.craft.spike.7",
+      "name": "VII"
+    },
+    {
+      "amount": 10,
+      "category": "ATTACK_DEFENSE",
+      "description": "Tuer 10 fantômes créés par le home remover",
+      "icon": "1:palamod:tile.home_finder:0#",
+      "id": "palamod.use.homeremover.kill",
+      "name": "Extermina-home"
+    },
+    {
+      "amount": 1,
+      "category": "ATTACK_DEFENSE",
+      "description": "Attirer l'attention d'un wither avec une pierre d'agro",
+      "icon": "1:palamod:item.agro_stone:0#",
+      "id": "palamod.use.agrostone",
+      "name": "Viens là"
+    },
+    {
+      "amount": 1000000,
+      "category": "ATTACK_DEFENSE",
+      "description": "Marcher 1 000 000 blocs",
+      "icon": "1:palamod:item.travelboots:0#",
+      "id": "palamod.walkdistance.1m",
+      "name": "Marathon"
+    },
+    {
+      "amount": 1,
+      "category": "OTHERS",
+      "description": "Utiliser l'une des pierre de légende",
+      "icon": "1:palamod:item.LEGENDARYSTONE_RANDOM:0#{LAST_USE:0L,SECURITY:{PLAYER:{POS:{X:-4.9263283336732835d,Y:67.65382134423638d,Z:287.979591758731d,WORLD:\"172.30.0.2\",},SLOT:5,CLASS:\"net.minecraft.entity.player.EntityPlayerMP\",UUID:\"22e46172-d288-4cf3-a2ac-25332b578c2f\",HAND:0b,},ITEM:{SECU_ITEM_CREATE:1670936171894L,SECU_ITEM_UUID:\"6c3c59bf-2161-44bf-8071-d7dd0a1895e6\",},VM_NAME:\"172.30.0.2\",},}",
+      "id": "palamod.useitem.legendarystone",
+      "name": "Wouah une petite pierre"
+    },
+    {
+      "amount": 1,
+      "category": "OTHERS",
+      "description": "Utiliser une pierre de légende de téléportation",
+      "id": "palamod.useitem.legendarystone.multi.2",
+      "name": "II"
+    },
+    {
+      "amount": 1,
+      "category": "OTHERS",
+      "description": "Utiliser une pierre de légende aléatoire",
+      "id": "palamod.useitem.legendarystone.multi.1",
+      "name": "I"
+    },
+    {
+      "amount": 1,
+      "category": "OTHERS",
+      "description": "Utiliser une pierre de légende d'invisibilité",
+      "id": "palamod.useitem.legendarystone.multi.3",
+      "name": "III"
+    },
+    {
+      "amount": 1,
+      "category": "OTHERS",
+      "description": "Utiliser une pierre de légende de pouvoir",
+      "id": "palamod.useitem.legendarystone.multi.5",
+      "name": "V"
+    },
+    {
+      "amount": 1,
+      "category": "OTHERS",
+      "description": "Utiliser une pierre de légende de fortune",
+      "id": "palamod.useitem.legendarystone.multi.4",
+      "name": "IV"
+    },
+    {
+      "amount": -1,
+      "category": "OTHERS",
+      "description": "Utiliser toutes les pierres de légendes",
+      "icon": "1:palamod:item.LEGENDARYSTONE_RANDOM:0#{LAST_USE:0L,SECURITY:{PLAYER:{POS:{X:-4.9263283336732835d,Y:67.65382134423638d,Z:287.979591758731d,WORLD:\"172.30.0.2\",},SLOT:5,CLASS:\"net.minecraft.entity.player.EntityPlayerMP\",UUID:\"22e46172-d288-4cf3-a2ac-25332b578c2f\",HAND:0b,},ITEM:{SECU_ITEM_CREATE:1670936171894L,SECU_ITEM_UUID:\"6c3c59bf-2161-44bf-8071-d7dd0a1895e6\",},VM_NAME:\"172.30.0.2\",},}",
+      "id": "palamod.useitem.legendarystone.multi.all",
+      "name": "Lithophile"
+    },
+    {
+      "amount": 1,
+      "category": "OTHERS",
+      "description": "Utiliser une pierre de légende de chaos",
+      "id": "palamod.useitem.legendarystone.multi.7",
+      "name": "VII"
+    },
+    {
+      "amount": 1,
+      "category": "OTHERS",
+      "description": "Utiliser une pierre de légende de métiers",
+      "id": "palamod.useitem.legendarystone.multi.6",
+      "name": "VI"
+    },
+    {
+      "amount": 100000,
+      "category": "OTHERS",
+      "description": "Déposer 100 000 trixiums",
+      "icon": "1:palamod:item.trixium:0#",
+      "id": "palamod.useitem.trixium.deposit.100k",
+      "name": "Tout pile le bon nombre"
+    },
+    {
+      "amount": 500000,
+      "category": "OTHERS",
+      "description": "Déposer 500 000 trixiums",
+      "icon": "1:palamod:tile.trixium_block:0#",
+      "id": "palamod.useitem.trixium.deposit.500k",
+      "name": "Oula, j'ai beaucoup farm"
+    },
+    {
+      "amount": 1,
+      "category": "OTHERS",
+      "description": "Atteindre la dernière récompense du Palapass",
+      "icon": "1:minecraft:compass:0#",
+      "id": "palapass.reach.9k",
+      "name": "Le Palapass, c'est fini"
+    },
+    {
+      "amount": 100000,
+      "category": "FACTION",
+      "description": "Donner 100 000 ressources pour la quête de faction",
+      "icon": "1:palajobs:item.paladium_radius_hoe:0#",
+      "id": "faction.action.quest.deposit.100k",
+      "name": "Contributeur chevronné"
+    },
+    {
+      "amount": 25000,
+      "category": "FACTION",
+      "description": "Donner 25 000 ressources pour la quête de faction",
+      "icon": "1:palajobs:item.titane_radius_hoe:0#",
+      "id": "faction.action.quest.deposit.25k",
+      "name": "Contributeur Habituel"
+    },
+    {
+      "amount": 10000,
+      "category": "FACTION",
+      "description": "Donner 10 000 ressources pour la quête de faction",
+      "icon": "1:palajobs:item.amethyst_radius_hoe:0#",
+      "id": "faction.action.quest.deposit.10k",
+      "name": "Nouveau Contributeur"
+    },
+    {
+      "amount": 500000,
+      "category": "FACTION",
+      "description": "Donner 500 000 ressources pour la quête de faction",
+      "icon": "1:palajobs:item.endium_radius_hoe:0#",
+      "id": "faction.action.quest.deposit.500k",
+      "name": "Contributeur vétérans"
+    },
+    {
+      "amount": 10000,
+      "category": "ECONOMY",
+      "description": "Dépenser 10 000$",
+      "icon": "1:palamod:item.august_fake_money:0#",
+      "id": "paladium.cresus.withdraw.1",
+      "name": "Acheteur de passage"
+    },
+    {
+      "amount": 1000000,
+      "category": "ECONOMY",
+      "description": "Dépenser 1 000 000$",
+      "icon": "1:palamod:item.august_fake_money:0#",
+      "id": "paladium.cresus.withdraw.4",
+      "name": "Acheteur compulsif"
+    },
+    {
+      "amount": 500000,
+      "category": "ECONOMY",
+      "description": "Dépenser 500 000$",
+      "icon": "1:palamod:item.august_fake_money:0#",
+      "id": "paladium.cresus.withdraw.3",
+      "name": "Acheteur régulier"
+    },
+    {
+      "amount": 10000,
+      "category": "ECONOMY",
+      "description": "Échanger avec d'autre joueur pour 10 000$",
+      "icon": "1:palamod:item.august_fake_money:0#",
+      "id": "paladium.trade.money.1",
+      "name": "Tradeur débutant"
+    },
+    {
+      "amount": 100000,
+      "category": "ECONOMY",
+      "description": "Dépenser 100 000$",
+      "icon": "1:palamod:item.august_fake_money:0#",
+      "id": "paladium.cresus.withdraw.2",
+      "name": "Acheteur modéré"
+    },
+    {
+      "amount": 100000,
+      "category": "ECONOMY",
+      "description": "Échanger avec d'autre joueur pour 100 000$",
+      "icon": "1:palamod:item.august_fake_money:0#",
+      "id": "paladium.trade.money.2",
+      "name": "Tradeur chevronné"
+    },
+    {
+      "amount": 1000000,
+      "category": "ECONOMY",
+      "description": "Échanger avec d'autre joueur pour 1 000 000$",
+      "icon": "1:palamod:item.august_fake_money:0#",
+      "id": "paladium.trade.money.3",
+      "name": "Tradeur vétérans"
+    },
+    {
+      "amount": 50000,
+      "category": "OTHERS",
+      "description": "Dupliquer 50 000 minerais",
+      "icon": "1:palamod:item.hammer.paladium:0#{modifiersmax:3,upgradearray:[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,],modifiersammount:0,}",
+      "id": "paladium.hammer.duplicate.2",
+      "name": "Dupliqueur chevronné"
+    },
+    {
+      "amount": 10000,
+      "category": "OTHERS",
+      "description": "Dupliquer 10 000 minerais",
+      "icon": "1:palamod:item.hammer.paladium:0#{modifiersmax:3,upgradearray:[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,],modifiersammount:0,}",
+      "id": "paladium.hammer.duplicate.1",
+      "name": "Dupliqueur débutant"
+    },
+    {
+      "amount": 100,
+      "category": "ATTACK_DEFENSE",
+      "description": "Poser 100 cave block",
+      "icon": "1:palamod:tile.cave_block:0#",
+      "id": "paladium.block.place.cave.1",
+      "name": "Chercheur de trésors débutant"
+    },
+    {
+      "amount": 100000,
+      "category": "OTHERS",
+      "description": "Dupliquer 100 000 minerais",
+      "icon": "1:palamod:item.hammer.paladium:0#{modifiersmax:3,upgradearray:[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,],modifiersammount:0,}",
+      "id": "paladium.hammer.duplicate.3",
+      "name": "Dupliqueur vétérans"
+    },
+    {
+      "amount": 1,
+      "category": "OTHERS",
+      "description": "Monter niveau 100 son famillier",
+      "icon": "1:palapet:tile.pet_cage:0#",
+      "id": "paladium.pet.reach.level.1",
+      "name": "Le meilleur ami du Paladien"
+    },
+    {
+      "amount": 1,
+      "category": "OTHERS",
+      "description": "Équiper un full endium",
+      "icon": "1:palamod:item.endium.helmet:0#",
+      "id": "paladium.armor.equip.full.endium",
+      "name": "It's over 5000 !"
+    },
+    {
+      "amount": 10,
+      "category": "OTHERS",
+      "description": "Capturer 10 montures",
+      "icon": "1:palamod:item.capture_stone:0#",
+      "id": "paladium.mount.capture.1",
+      "name": "Dresseur débutant"
+    },
+    {
+      "amount": 50,
+      "category": "OTHERS",
+      "description": "Capturer 50 montures",
+      "icon": "1:palamod:item.capture_stone:0#",
+      "id": "paladium.mount.capture.2",
+      "name": "Dresseur chevronné"
+    },
+    {
+      "amount": 100,
+      "category": "OTHERS",
+      "description": "Capturer 100 montures",
+      "icon": "1:palamod:item.capture_stone:0#",
+      "id": "paladium.mount.capture.3",
+      "name": "Dresseur vétérans"
+    },
+    {
+      "amount": 100,
+      "category": "ATTACK_DEFENSE",
+      "description": "Faire spawn 100 withers",
+      "icon": "1:minecraft:skull:1#",
+      "id": "paladium.wither.summon.2",
+      "name": "Exterminateur de base"
+    },
+    {
+      "amount": 1000,
+      "category": "ATTACK_DEFENSE",
+      "description": "Utiliser 1000 dynamites",
+      "icon": "1:palamod:item.dynamite:0#",
+      "id": "palamod.dynamyite.junior",
+      "name": "Dynamiteur junior"
+    },
+    {
+      "amount": 10,
+      "category": "ATTACK_DEFENSE",
+      "description": "Faire spawn 10 withers",
+      "icon": "1:minecraft:skull:1#",
+      "id": "paladium.wither.summon.1",
+      "name": "Destructeur de base"
+    },
+    {
+      "amount": 1,
+      "category": "OTHERS",
+      "description": "Récuprer 1 endium nugget",
+      "icon": "1:palamod:item.endium.nugget:0#",
+      "id": "paladium.pickup.endium.nugget",
+      "name": "Mon précieux !"
+    },
+    {
+      "amount": 3000,
+      "category": "ATTACK_DEFENSE",
+      "description": "Utiliser 3000 dynamites",
+      "icon": "1:palamod:item.dynamite_big:0#",
+      "id": "palamod.dynamyite.confirme",
+      "name": "Dynamiteur confirmé"
+    },
+    {
+      "amount": 60,
+      "category": "ATTACK_DEFENSE",
+      "description": "Mettre une cagoule pendant 60 minutes",
+      "icon": "1:palamod:item.balaclava_helmet:0#",
+      "id": "paladium.equip.balaclava.1",
+      "name": "Apprentis cambrioleur"
+    },
+    {
+      "amount": 500,
+      "category": "ATTACK_DEFENSE",
+      "description": "Poser 500 cave block",
+      "icon": "1:palamod:tile.cave_block:0#",
+      "id": "paladium.block.place.cave.2",
+      "name": "Chercheur de trésors chevronné"
+    },
+    {
+      "amount": 1000,
+      "category": "ATTACK_DEFENSE",
+      "description": "Poser 1000 cave block",
+      "icon": "1:palamod:tile.cave_block:0#",
+      "id": "paladium.block.place.cave.3",
+      "name": "Chercheur de trésors vétérans"
+    },
+    {
+      "amount": 10000,
+      "category": "ATTACK_DEFENSE",
+      "description": "Utiliser 10000 dynamites",
+      "icon": "1:palamod:item.dynamite_endium:0#",
+      "id": "palamod.dynamyite.senior",
+      "name": "Dynamiteur sénior"
+    },
+    {
+      "amount": 180,
+      "category": "ATTACK_DEFENSE",
+      "description": "Mettre une cagoule pendant 180 minutes",
+      "icon": "1:palamod:item.balaclava_helmet:0#",
+      "id": "paladium.equip.balaclava.2",
+      "name": "Cambrioleur expert"
+    },
+    {
+      "amount": 1,
+      "category": "FACTION",
+      "description": "Etre dans une faction de niveau 10",
+      "icon": "1:palamod:tile.spike_obsi:2#",
+      "id": "paladium.faction.level.10",
+      "name": "Faction mineur"
+    },
+    {
+      "amount": 720,
+      "category": "ATTACK_DEFENSE",
+      "description": "Mettre une cagoule pendant 720 minutes",
+      "icon": "1:palamod:item.balaclava_helmet:0#",
+      "id": "paladium.equip.balaclava.3",
+      "name": "Roi des cambrioleurs"
+    },
+    {
+      "amount": 1,
+      "category": "FACTION",
+      "description": "Posseder une base claim",
+      "icon": "1:palamod:tile.mega_boom_obsi:0#",
+      "id": "paladium.faction.own.claim",
+      "name": "On est serré un peu non ?"
+    },
+    {
+      "amount": 1,
+      "category": "FACTION",
+      "description": "Posseder un village de faction",
+      "icon": "1:minecraft:nether_star:0#",
+      "id": "paladium.faction.own.town",
+      "name": "Doux chez soi"
+    },
+    {
+      "amount": 1,
+      "category": "FACTION",
+      "description": "Etre dans une faction de niveau 30",
+      "icon": "1:palamod:tile.spike_obsi:3#",
+      "id": "paladium.faction.level.30",
+      "name": "Faction en développement"
+    },
+    {
+      "amount": 1,
+      "category": "FACTION",
+      "description": "Etre dans une faction de niveau 100",
+      "icon": "1:palamod:tile.spike_obsi:6#",
+      "id": "paladium.faction.level.100",
+      "name": "Faction légendaire"
+    },
+    {
+      "amount": 1,
+      "category": "FACTION",
+      "description": "Atteindre les 3000 points d'elo",
+      "icon": "1:palamod:item.endium.fragment:0#",
+      "id": "paladium.faction.elo.3000",
+      "name": "Gloire éphémère"
+    },
+    {
+      "amount": 1,
+      "category": "FACTION",
+      "description": "Etre dans une faction de niveau 50",
+      "icon": "1:palamod:tile.spike_obsi:4#",
+      "id": "paladium.faction.level.50",
+      "name": "Faction développé"
+    },
+    {
+      "amount": 1,
+      "category": "FACTION",
+      "description": "Etre dans une faction de niveau 70",
+      "icon": "1:palamod:tile.spike_obsi:5#",
+      "id": "paladium.faction.level.70",
+      "name": "Faction majeur"
+    },
+    {
+      "amount": 1,
+      "category": "FACTION",
+      "description": "Atteindre les 6000 points d'elo",
+      "icon": "1:palamod:item.endium.nugget:0#",
+      "id": "paladium.faction.elo.6000",
+      "name": "Gloire persistante"
+    },
+    {
+      "amount": 1,
+      "category": "FACTION",
+      "description": "Atteindre les 10000 points d'elo",
+      "icon": "1:palamod:item.endium.ingot:0#",
+      "id": "paladium.faction.elo.10000",
+      "name": "Gloire éternelle"
+    },
+    {
+      "amount": 100,
+      "category": "ECONOMY",
+      "description": "Mettre en vente 100 items dans le market",
+      "icon": "1:palamod:item.august_fake_money:0#",
+      "id": "palamod.hdv.sell.3",
+      "name": "Vendeur agrégé"
+    },
+    {
+      "amount": 20,
+      "category": "ECONOMY",
+      "description": "Mettre en vente 20 items dans le market",
+      "icon": "1:palamod:item.august_fake_money:0#",
+      "id": "palamod.hdv.sell.2",
+      "name": "Vendeur à la sauvette"
+    },
+    {
+      "amount": 500,
+      "category": "ECONOMY",
+      "description": "Mettre en vente 500 items dans le market",
+      "icon": "1:palamod:item.august_fake_money:0#",
+      "id": "palamod.hdv.sell.4",
+      "name": "Vendeur Officiel"
+    },
+    {
+      "amount": 1000,
+      "category": "ECONOMY",
+      "description": "Mettre en vente 1000 items dans le market",
+      "icon": "1:palamod:item.august_fake_money:0#",
+      "id": "palamod.hdv.sell.5",
+      "name": "Vendeur Professionel"
+    },
+    {
+      "amount": 10,
+      "category": "ECONOMY",
+      "description": "Mettre en vente 10 Lucky Drawer dans le market",
+      "icon": "1:palamod:item.august_fake_money:0#",
+      "id": "palamod.hdv.sell.ld.1",
+      "name": "Vendeur d'espoir"
+    },
+    {
+      "amount": 100,
+      "category": "ECONOMY",
+      "description": "Mettre en vente 100 Lucky Drawer dans le market",
+      "icon": "1:palamod:item.august_fake_money:0#",
+      "id": "palamod.hdv.sell.ld.3",
+      "name": "Vendeur de chance"
+    },
+    {
+      "amount": 50,
+      "category": "ECONOMY",
+      "description": "Mettre en vente 50 Lucky Drawer dans le market",
+      "icon": "1:palamod:item.august_fake_money:0#",
+      "id": "palamod.hdv.sell.ld.2",
+      "name": "Vendeur de rêve"
+    },
+    {
+      "amount": 10000,
+      "category": "ALLIANCE",
+      "description": "Capturez 10 000 chunks",
+      "icon": "1:palamod:item.titane.boots:0#",
+      "id": "alliancemod.capture.1000",
+      "name": "Runner chevronné"
+    },
+    {
+      "amount": 100,
+      "category": "ALLIANCE",
+      "description": "Poser 100 Protecteurs de zones",
+      "icon": "1:alliancemod:tile.protection_block:0#",
+      "id": "alliancemod.place.100",
+      "name": "Protection renforcée"
+    },
+    {
+      "amount": 1,
+      "category": "ALLIANCE",
+      "description": "Détruire 1 Nexus",
+      "icon": "1:palamod:item.paladium.green.sword:0#",
+      "id": "alliancemod.destroy.1",
+      "name": "Destructeur d'espoir"
+    },
+    {
+      "amount": 1000,
+      "category": "ALLIANCE",
+      "description": "Capturez 1 000 chunks",
+      "icon": "1:palamod:item.amethyst.boots:0#",
+      "id": "alliancemod.capture.100",
+      "name": "Runner débutant"
+    },
+    {
+      "amount": 100000,
+      "category": "ALLIANCE",
+      "description": "Capturez 100 000 chunks",
+      "icon": "1:palamod:item.paladium.boots:0#",
+      "id": "alliancemod.capture.10000",
+      "name": "Runner vétérans"
+    },
+    {
+      "amount": 500,
+      "category": "ALLIANCE",
+      "description": "Poser 500 Protecteurs de zones",
+      "icon": "1:alliancemod:tile.protection_block:0#",
+      "id": "alliancemod.place.500",
+      "name": "Protection haute sécurité"
+    },
+    {
+      "amount": 1000,
+      "category": "ALLIANCE",
+      "description": "Poser 1000 Protecteurs de zones",
+      "icon": "1:alliancemod:tile.protection_block:0#",
+      "id": "alliancemod.place.1000",
+      "name": "Protection imprennable"
+    },
+    {
+      "amount": 1,
+      "category": "ALLIANCE",
+      "description": "Boire une potion de neutralité",
+      "icon": "1:alliancemod:item.potion_neutral:0#",
+      "id": "alliancemod.drink.1",
+      "name": "Trahison organisée"
+    },
+    {
+      "amount": 100,
+      "category": "ALLIANCE",
+      "description": "Casser 100 protecteur de zones d'un allignement enemis",
+      "icon": "1:palamod:tile.effect_tnt:0#",
+      "id": "alliancemod.destroy.100",
+      "name": "Elageur débutant"
+    },
+    {
+      "amount": 10,
+      "category": "ALLIANCE",
+      "description": "Crafter 10 goggles of community",
+      "icon": "1:alliancemod:item.potion_neutral:0#",
+      "id": "alliancemod.craft.10",
+      "name": "Scanneur débutant"
+    },
+    {
+      "amount": 500,
+      "category": "ALLIANCE",
+      "description": "Casser 500 protecteur de zones d'un allignement enemis",
+      "icon": "1:palamod:tile.big_tnt:0#",
+      "id": "alliancemod.destroy.500",
+      "name": "Elageur chevronné"
+    },
+    {
+      "amount": 1000,
+      "category": "ALLIANCE",
+      "description": "Casser 1000 protecteur de zones d'un allignement enemis",
+      "icon": "1:palamod:tile.endium_tnt:0#",
+      "id": "alliancemod.destroy.1000",
+      "name": "Elageur vétérans"
+    },
+    {
+      "amount": 50,
+      "category": "ALLIANCE",
+      "description": "Crafter 50 goggles of community",
+      "icon": "1:alliancemod:item.potion_neutral:0#",
+      "id": "alliancemod.craft.50",
+      "name": "Scanneur chevronné"
+    },
+    {
+      "amount": 10,
+      "category": "ALLIANCE",
+      "description": "Récolter 10 nexus shard",
+      "icon": "1:alliancemod:item.nexus_shard_order:0#",
+      "id": "alliancemod.drop.10",
+      "name": "Récolteur de la peur"
+    },
+    {
+      "amount": 200,
+      "category": "ALLIANCE",
+      "description": "Crafter 200 goggles of community",
+      "icon": "1:alliancemod:item.potion_neutral:0#",
+      "id": "alliancemod.craft.200",
+      "name": "Scanneur vétérans"
+    },
+    {
+      "amount": 1000,
+      "category": "ALLIANCE",
+      "description": "Soigner 1000 points de vie du Nexus",
+      "icon": "1:alliancemod:item.magic_glue:0#",
+      "id": "alliancemod.heal.1000",
+      "name": "Soigneur de coeur"
+    },
+    {
+      "amount": 50,
+      "category": "ALLIANCE",
+      "description": "Récolter 50 nexus shard",
+      "icon": "1:alliancemod:item.nexus_shard_order:0#",
+      "id": "alliancemod.drop.50",
+      "name": "Récolteur de l'éffroi"
+    },
+    {
+      "amount": 70,
+      "category": "ALLIANCE",
+      "description": "Controler 70% de la map",
+      "icon": "1:customnpcs:npcCrown:0#",
+      "id": "alliancemod.control.70",
+      "name": "Soif de puissance"
+    },
+    {
+      "amount": 100,
+      "category": "ALLIANCE",
+      "description": "Récolter 100 nexus shard",
+      "icon": "1:alliancemod:item.nexus_shard_order:0#",
+      "id": "alliancemod.drop.100",
+      "name": "Récolteur du desespoir"
+    },
+    {
+      "amount": 1,
+      "category": "ALLIANCE",
+      "description": "Équiper 1 Amulette de communauté sur un Plastron",
+      "icon": "1:palamod:item.paladium.pickaxe:0#",
+      "id": "alliancemod.amulet.1",
+      "name": "Scanneur de chunk"
+    },
+    {
+      "amount": 5,
+      "category": "ATTACK_DEFENSE",
+      "description": "Faire exploser 5 endium TNT",
+      "icon": "1:palamod:tile.endium_tnt:0#",
+      "id": "paladium.explode.endium.tnt",
+      "name": "Pilleur à tout prix"
+    },
+    {
+      "amount": 1,
+      "category": "OTHERS",
+      "description": "Pelle",
+      "id": "palamod.break.shovel.paladium",
+      "name": "Utilisateur régulier II"
+    },
+    {
+      "amount": 1,
+      "category": "OTHERS",
+      "description": "Pioche",
+      "id": "palamod.break.pickaxe.paladium",
+      "name": "Utilisateur régulier I"
+    },
+    {
+      "amount": 1,
+      "category": "OTHERS",
+      "description": "Hache",
+      "id": "palamod.break.axe.paladium",
+      "name": "Utilisateur régulier III"
+    },
+    {
+      "amount": 1,
+      "category": "OTHERS",
+      "description": "Épée",
+      "id": "palamod.break.sword.paladium",
+      "name": "Utilisateur régulier IV"
+    },
+    {
+      "amount": 1,
+      "category": "OTHERS",
+      "description": "Casque",
+      "id": "palamod.break.helmet.paladium",
+      "name": "Utilisateur régulier V"
+    },
+    {
+      "amount": 1,
+      "category": "OTHERS",
+      "description": "Jambières",
+      "id": "palamod.break.leggings.paladium",
+      "name": "Utilisateur régulier VII"
+    },
+    {
+      "amount": 1,
+      "category": "OTHERS",
+      "description": "Bottes",
+      "id": "palamod.break.boots.paladium",
+      "name": "Utilisateur régulier VIII"
+    },
+    {
+      "amount": 1,
+      "category": "OTHERS",
+      "id": "paladium.pickup.secret.chest",
+      "name": "Expert du camouflage XVIII"
+    },
+    {
+      "amount": 1,
+      "category": "OTHERS",
+      "description": "Plastron",
+      "id": "palamod.break.chestplate.paladium",
+      "name": "Utilisateur régulier VI"
+    },
+    {
+      "amount": -1,
+      "category": "OTHERS",
+      "description": "Casser tous les items en Paladium en existants",
+      "icon": "1:palamod:item.paladium.pickaxe:0#",
+      "id": "palamod.break.paladium.multi.all",
+      "name": "Utilisateur régulier"
+    },
+    {
+      "amount": 1,
+      "category": "OTHERS",
+      "description": "Paladium Flower",
+      "id": "paladium.pickup.flower.2",
+      "name": "Fleuriste curieux II"
+    },
+    {
+      "amount": 200,
+      "category": "OTHERS",
+      "description": "Casser 200 spawners en ayant un Spawner Finder dans votre inventaire",
+      "icon": "1:palamod:item.spawner_finder:0#",
+      "id": "paladium.break.spawner",
+      "name": "Chercheur d'âme"
+    },
+    {
+      "amount": 1,
+      "category": "OTHERS",
+      "description": "Lucky Flower",
+      "id": "paladium.pickup.flower.1",
+      "name": "Fleuriste curieux I"
+    },
+    {
+      "amount": 10000,
+      "category": "OTHERS",
+      "description": "Crafter 10 000 glues",
+      "icon": "1:palamod:item.glue:0#",
+      "id": "paladium.craft.glue",
+      "name": "Colleur"
+    },
+    {
+      "amount": 1,
+      "category": "OTHERS",
+      "description": "Endium Flower",
+      "id": "paladium.pickup.flower.3",
+      "name": "Fleuriste curieux III"
+    },
+    {
+      "amount": 1,
+      "category": "OTHERS",
+      "description": "Dandelion",
+      "id": "paladium.pickup.flower.5",
+      "name": "Fleuriste curieux V"
+    },
+    {
+      "amount": 1,
+      "category": "OTHERS",
+      "description": "Poppy",
+      "id": "paladium.pickup.flower.6",
+      "name": "Fleuriste curieux VI"
+    },
+    {
+      "amount": 1,
+      "category": "OTHERS",
+      "description": "Blue Orchid",
+      "id": "paladium.pickup.flower.7",
+      "name": "Fleuriste curieux VII"
+    },
+    {
+      "amount": 1,
+      "category": "OTHERS",
+      "description": "Mineral Flower",
+      "id": "paladium.pickup.flower.4",
+      "name": "Fleuriste curieux IV"
+    },
+    {
+      "amount": 1,
+      "category": "OTHERS",
+      "description": "Allium",
+      "id": "paladium.pickup.flower.8",
+      "name": "Fleuriste curieux VIII"
+    },
+    {
+      "amount": 1,
+      "category": "OTHERS",
+      "description": "Azure Bluet",
+      "id": "paladium.pickup.flower.9",
+      "name": "Fleuriste curieux IX"
+    },
+    {
+      "amount": 1,
+      "category": "OTHERS",
+      "description": "Orange Tulip",
+      "id": "paladium.pickup.flower.11",
+      "name": "Fleuriste curieux XI"
+    },
+    {
+      "amount": 1,
+      "category": "OTHERS",
+      "description": "White Tulip",
+      "id": "paladium.pickup.flower.12",
+      "name": "Fleuriste curieux XII"
+    },
+    {
+      "amount": 1,
+      "category": "OTHERS",
+      "description": "Red Tulip",
+      "id": "paladium.pickup.flower.10",
+      "name": "Fleuriste curieux X"
+    },
+    {
+      "amount": 1,
+      "category": "OTHERS",
+      "description": "Pink Tulip",
+      "id": "paladium.pickup.flower.13",
+      "name": "Fleuriste curieux XIII"
+    },
+    {
+      "amount": 1,
+      "category": "OTHERS",
+      "description": "Sunflower",
+      "id": "paladium.pickup.flower.15",
+      "name": "Fleuriste curieux XV"
+    },
+    {
+      "amount": 1,
+      "category": "OTHERS",
+      "description": "Peony",
+      "id": "paladium.pickup.flower.17",
+      "name": "Fleuriste curieux XVII"
+    },
+    {
+      "amount": 1,
+      "category": "OTHERS",
+      "description": "Rose Bush",
+      "id": "paladium.pickup.flower.16",
+      "name": "Fleuriste curieux XVI"
+    },
+    {
+      "amount": 1,
+      "category": "OTHERS",
+      "description": "Oxeye Daisy",
+      "id": "paladium.pickup.flower.14",
+      "name": "Fleuriste curieux XIV"
+    },
+    {
+      "amount": -1,
+      "category": "OTHERS",
+      "description": "Récupérer tous les types de fleurs possibles",
+      "icon": "1:palamod:tile.flower_endium:0#",
+      "id": "paladium.pickup.flower.multi.all",
+      "name": "Fleuriste curieux"
+    },
+    {
+      "amount": 1,
+      "category": "OTHERS",
+      "description": "One Way Glass",
+      "id": "paladium.pickup.one.way.glass",
+      "name": "Expert du camouflage II"
+    },
+    {
+      "amount": 1,
+      "category": "OTHERS",
+      "description": "Camo Dummy",
+      "id": "paladium.pickup.camo.dummy",
+      "name": "Expert du camouflage IV"
+    },
+    {
+      "amount": 1,
+      "category": "OTHERS",
+      "description": "Torch Lever",
+      "id": "paladium.pickup.torch.lever",
+      "name": "Expert du camouflage I"
+    },
+    {
+      "amount": 1,
+      "category": "OTHERS",
+      "description": "1 Camo Gate",
+      "id": "paladium.pickup.camo.gate",
+      "name": "Expert du camouflage III"
+    },
+    {
+      "amount": 1,
+      "category": "OTHERS",
+      "description": "Secret Trap Door",
+      "id": "paladium.pickup.secret.trapdoor",
+      "name": "Expert du camouflage V"
+    },
+    {
+      "amount": 1,
+      "category": "OTHERS",
+      "description": "Secret Iron Door",
+      "id": "paladium.pickup.secret.iron.door",
+      "name": "Expert du camouflage VII"
+    },
+    {
+      "amount": 1,
+      "category": "OTHERS",
+      "description": "Ghost Block",
+      "id": "paladium.pickup.ghost.block",
+      "name": "Expert du camouflage VIII"
+    },
+    {
+      "amount": 1,
+      "category": "OTHERS",
+      "description": "Secret Camo Lever",
+      "id": "paladium.pickup.secret.camo.lever",
+      "name": "Expert du camouflage IX"
+    },
+    {
+      "amount": 1,
+      "category": "OTHERS",
+      "description": "Secret Wooden Door",
+      "id": "paladium.pickup.secret.wooden.door",
+      "name": "Expert du camouflage VI"
+    },
+    {
+      "amount": 1,
+      "category": "OTHERS",
+      "description": "Secret Camo Redstone",
+      "id": "paladium.pickup.secret.camo.redstone",
+      "name": "Expert du camouflage X"
+    },
+    {
+      "amount": 1,
+      "category": "OTHERS",
+      "description": "1 Secret Pressure Plate",
+      "id": "paladium.pickup.secret.pressure.plate",
+      "name": "Expert du camouflage XIII"
+    },
+    {
+      "amount": 1,
+      "category": "OTHERS",
+      "description": "1 Secret Camo Button",
+      "id": "paladium.pickup.secret.camo.button.1",
+      "name": "Expert du camouflage XII"
+    },
+    {
+      "amount": 1,
+      "category": "OTHERS",
+      "description": "1 Secret Player Plate",
+      "id": "paladium.pickup.secret.player.plate",
+      "name": "Expert du camouflage XIV"
+    },
+    {
+      "amount": 1,
+      "category": "OTHERS",
+      "description": "Secret Camo Button",
+      "id": "paladium.pickup.secret.camo.button",
+      "name": "Expert du camouflage XI"
+    },
+    {
+      "amount": 1,
+      "category": "OTHERS",
+      "description": "Secret Light Plate",
+      "id": "paladium.pickup.secret.light.plate",
+      "name": "Expert du camouflage XV"
+    },
+    {
+      "amount": 1,
+      "category": "OTHERS",
+      "description": "Secret Light Detector",
+      "id": "paladium.pickup.secret.light.detector",
+      "name": "Expert du camouflage XX"
+    },
+    {
+      "amount": 1,
+      "category": "OTHERS",
+      "id": "paladium.pickup.secret.stairs",
+      "name": "Expert du camouflage XVII"
+    },
+    {
+      "amount": 1,
+      "category": "OTHERS",
+      "description": "Secret Trapped Chest",
+      "id": "paladium.pickup.secret.trapped.chest",
+      "name": "Expert du camouflage XIX"
+    },
+    {
+      "amount": 1,
+      "category": "OTHERS",
+      "description": "1 Secret Heavy Plate",
+      "id": "paladium.pickup.secret.heavy.plate",
+      "name": "Expert du camouflage XVI"
+    },
+    {
+      "amount": -1,
+      "category": "OTHERS",
+      "description": "Récupérer tous les types de ghost blocks",
+      "icon": "1:secretroomsmod:CamoflaugePaste:0#",
+      "id": "paladium.pickup.secret.multi.all",
+      "name": "Expert du camouflage"
+    },
+    {
+      "amount": 1000000000,
+      "category": "HOW_TO_START",
+      "description": "Consulter ses say avec /tellraw",
+      "id": "core.command.tellrawddqsd",
+      "name": "Default III"
+    },
+    {
+      "amount": 1000000,
+      "category": "HOW_TO_START",
+      "description": "Consulter ses say avec /tellraw",
+      "id": "core.command.tellrawaaa",
+      "name": "Default III"
+    },
+    {
+      "amount": 1,
+      "category": "HOW_TO_START",
+      "description": "Se téléporter à son home avec /home",
+      "icon": "1:minecraft:wooden_door:0#",
+      "id": "core.command.home",
+      "name": "Home II"
+    },
+    {
+      "amount": 1,
+      "category": "HOW_TO_START",
+      "description": "Consulter ses achievements avec /achievements",
+      "icon": "1:minecraft:fire_charge:0#",
+      "id": "core.command.achievement",
+      "name": "Achievements I"
+    },
+    {
+      "amount": 10000,
+      "category": "HOW_TO_START",
+      "description": "Créer un home avec /tellraw",
+      "icon": "1:minecraft:wheat:0#",
+      "id": "core.command.tellrawdaad",
+      "name": "Tellraw I"
+    },
+    {
+      "amount": 1,
+      "category": "HOW_TO_START",
+      "description": "Consulter ses seed avec /seed",
+      "id": "core.command.seed",
+      "name": "Default I"
+    },
+    {
+      "amount": 1,
+      "category": "HOW_TO_START",
+      "description": "Consulter ses say avec /tellraw",
+      "id": "core.command.tellraw",
+      "name": "Default III"
+    },
+    {
+      "amount": 1,
+      "category": "HOW_TO_START",
+      "description": "Consulter ses me avec /me",
+      "id": "core.command.me2",
+      "name": "Default II"
+    },
+    {
+      "amount": 1,
+      "category": "HOW_TO_START",
+      "description": "Consulter ses say avec /say",
+      "id": "core.command.say",
+      "name": "Default III"
+    },
+    {
+      "amount": 1,
+      "category": "HOW_TO_START",
+      "description": "Consulter ses seed avec /seed",
+      "id": "core.command.seed1111",
+      "name": "Default I"
+    },
+    {
+      "amount": -1,
+      "category": "HOW_TO_START",
+      "description": "Faire les commandes: /seed /me /say",
+      "id": "core.command.default",
+      "name": "Commands I"
+    },
+    {
+      "amount": -1,
+      "category": "HOW_TO_START",
+      "description": "Faire les commandes: /seed /me /say",
+      "id": "core.command.defaultAA",
+      "name": "Commands I"
+    }
+  ],
+  "totalCount": 373
+}

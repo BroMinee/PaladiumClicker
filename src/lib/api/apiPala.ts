@@ -24,6 +24,7 @@ import {
 import translate_building_json from "@/assets/translate_building.json";
 import translate_upgrade_json from "@/assets/translate_upgrade.json";
 import metier_json from "@/assets/metier.json";
+import default_achievements_default from "@/assets/achievements/defaultAchievements.json";
 import { getViewsFromUUID } from "@/lib/api/apiPalaTracker.ts";
 import { fetchWithHeader } from "@/lib/api/misc.ts";
 import { redirect } from "next/navigation";
@@ -341,7 +342,7 @@ export const getPlayerAchievements = async (uuid: string): Promise<Achievement[]
     redirect(`/error?message=Data length is not equal to totalCount (getPlayerAchievements)`);
 
   const allAchievements = await getAllAchievements().catch(() => {
-    return { data: [], totalCount: 0 }
+    return structuredClone(default_achievements_default);
   });
 
   const achievements = allAchievements.data.map((achievement) => {
@@ -424,7 +425,7 @@ const getAllAchievements = async (): Promise<AllAchievementResponse> => {
   try {
     response = await fetchWithHeader<AllAchievementResponse>(`${PALADIUM_API_URL}/v1/paladium/achievements?limit=100&offset=0`, 3600);
   } catch (e) {
-    return { totalCount: 0, data: [] };
+    return Promise.reject(e);
   }
   const totalCount = response.totalCount;
 
@@ -432,7 +433,9 @@ const getAllAchievements = async (): Promise<AllAchievementResponse> => {
   let offset = 100;
   let c = 0;
   while (offset < totalCount && c <= 10) {
-    const response = await fetchWithHeader<AllAchievementResponse>(`${PALADIUM_API_URL}/v1/paladium/achievements?offset=${offset}&limit=100`, 3600)
+    const response = await fetchWithHeader<AllAchievementResponse>(`${PALADIUM_API_URL}/v1/paladium/achievements?offset=${offset}&limit=100`, 3600).catch((e) => {
+      return Promise.reject(e);
+    })
     data = data.concat(response.data);
     offset += 100;
     c++;
