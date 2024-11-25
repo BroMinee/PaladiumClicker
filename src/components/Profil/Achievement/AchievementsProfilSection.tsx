@@ -12,7 +12,7 @@ export function AchievementsProfilSection() {
       <CardHeader className="mx-4 mt-4">
         <DisplayProgressionGlobal/>
       </CardHeader>
-      <CardContent className="mx-4 flex flex-grow max-h-screen">
+      <CardContent className="m-4 flex flex-grow max-w-screen max-h-[calc(100vh-38vh)]">
         <AchievementBody/>
       </CardContent>
     </Card>

@@ -174,22 +174,25 @@ export function AchievementBody() {
   const [selectedCategory, setSelectedCategory] = useState<CategoryEnum>(CategoryEnum.HOW_TO_START);
 
   return <>
-    <div className="pr-4">
-      <h1>Catégorie</h1>
-      {Object.keys(CategoryEnum).map((category, index) => {
-        return <AchievementSelectorCategory key={category + index}
-                                            category={Object.keys(CategoryEnum).find((c) => c === category) as CategoryEnum}
-                                            selectedCategory={selectedCategory}
-                                            setSelectedCategory={setSelectedCategory}/>
-      })}
-    </div>
-    <div className="w-full">
-      <h1>Achievements</h1>
-      <ScrollArea className="h-[calc(100vh-20vh)]">
+    <ScrollArea className="overflow-visible">
+      <ScrollBar orientation="vertical"/>
+      <div className="pr-4">
+        <h1>Catégorie</h1>
+        {Object.keys(CategoryEnum).map((category, index) => {
+          return <AchievementSelectorCategory key={category + index}
+                                              category={Object.keys(CategoryEnum).find((c) => c === category) as CategoryEnum}
+                                              selectedCategory={selectedCategory}
+                                              setSelectedCategory={setSelectedCategory}/>
+        })}
+      </div>
+    </ScrollArea>
+    <ScrollArea className="w-full overflow-visible">
+      <div className="w-full animate-fade-in">
+        <h1>Achievements</h1>
         <DisplayAllAchievementInCategory category={selectedCategory}/>
+      </div>
         <ScrollBar orientation="vertical"/>
-      </ScrollArea>
-    </div>
+    </ScrollArea>
   </>
 }
 
@@ -246,9 +249,9 @@ function DetailAchievement({ achievement }: { achievement: Achievement }) {
 
   return <div onClick={() => achievement.subAchievements.length !== 0 && setShowSubAchievements(!showSubAchievements)}
               className={cn("border-2 border-secondary-foreground  px-2", achievement.completed && "bg-green-400/50 hover:bg-green-500/50")}>
-    <AchievementInfo title={achievementIcon + " --- " + achievement.icon}
+    <AchievementInfo title={achievement.name}
                      img={`/AH_img/${closestItemName}.png`}
-                     value={achievement.id + ":" + `/AH_img/${closestItemName}.png`}
+                     value={achievement.description}
                      className="w-full" unoptimized
                      arrowPath={arrowPath}
 

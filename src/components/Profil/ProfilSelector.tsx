@@ -29,7 +29,7 @@ export default function ProfilSelector() {
       <div className="flex flex-grow justify-start gap-2">
         {displaySelector.map((name, index) => (
           <div key={index}
-               className={cn("flex flex-row bg-card rounded-t-md w-fit justify-center items-center mb-0 mt-3 p-2 ", currentSection === name ? "bg-primary border-card border-2 border-b-0" : "")}
+               className={cn("flex flex-row bg-card rounded-t-md w-fit justify-center items-center mb-0 mt-3 p-2 cursor-pointer", currentSection === name ? "bg-primary border-card border-2 border-b-0" : "")}
                onClick={() => router.push(generateProfilUrl(username as string, name), { scroll: false })}
           >
             <div
