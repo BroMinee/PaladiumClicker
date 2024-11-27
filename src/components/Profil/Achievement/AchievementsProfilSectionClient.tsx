@@ -188,7 +188,7 @@ export function AchievementBody({ itemList }: { itemList: { img: string, value: 
       </div>
     </ScrollArea>
     <ScrollArea className="w-full overflow-visible">
-      <div className="w-full animate-fade-in">
+      <div className="w-full">
         <h1 className="font-mc">Achievements</h1>
         <DisplayAllAchievementInCategory category={selectedCategory} itemList={itemList}/>
       </div>
@@ -251,7 +251,7 @@ function DetailAchievement({ achievement, itemList }: {
     closestItemName = "unknown.png"
 
   return <div onClick={() => achievement.subAchievements.length !== 0 && setShowSubAchievements(!showSubAchievements)}
-              className={cn("border-2 border-secondary-foreground  px-2", achievement.completed && "bg-green-400/50 hover:bg-green-500/50")}>
+              className={cn("border-2 border-secondary-foreground px-2 animate-fade-in", achievement.completed && "bg-green-400/50 hover:bg-green-500/50")}>
     <AchievementInfo title={achievement.name}
                      img={`/AH_img/${closestItemName}`}
                      value={achievement.description}
