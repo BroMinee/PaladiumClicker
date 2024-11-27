@@ -325,14 +325,18 @@ export const getPlayerAchievements = async (uuid: string): Promise<Achievement[]
     totalCount: number,
     data: { id: string, progress: number, completed: boolean }[]
   }
-  const response = await fetchWithHeader<AchievementResponse>(`${PALADIUM_API_URL}/v1/paladium/player/profile/${uuid}/achievements?limit=100&offset=0`);
+  const response = await fetchWithHeader<AchievementResponse>(`${PALADIUM_API_URL}/v1/paladium/player/profile/${uuid}/achievements?limit=100&offset=0`).catch(() => {
+    return { totalCount: 0, data: []  } as AchievementResponse;
+  })
   const totalCount = response.totalCount;
 
   let data = response.data;
   let offset = 100;
   let c = 0;
   while (offset < totalCount && c <= 10) {
-    const response = await fetchWithHeader<AchievementResponse>(`${PALADIUM_API_URL}/v1/paladium/player/profile/${uuid}/achievements?offset=${offset}&limit=100`)
+    const response = await fetchWithHeader<AchievementResponse>(`${PALADIUM_API_URL}/v1/paladium/player/profile/${uuid}/achievements?offset=${offset}&limit=100`).catch(() => {
+      return { totalCount: 0, data: []  } as AchievementResponse;
+    })
     data = data.concat(response.data);
     offset += 100;
     c++;
