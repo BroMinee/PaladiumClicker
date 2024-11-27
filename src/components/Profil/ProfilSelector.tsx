@@ -33,7 +33,7 @@ export default function ProfilSelector() {
                onClick={() => router.push(generateProfilUrl(username as string, name), { scroll: false })}
           >
             <div
-              className={cn("font-mc text-primary text-3xl m-2", currentSection === name ? "text-primary-foreground" : "")}>{name}</div>
+              className={cn("font-mc text-primary text-3xl m-2 select-none", currentSection === name ? "text-primary-foreground" : "")}>{name}</div>
           </div>)
         )}
         {displaySelector[displaySelector.length - 1] !== ProfilSectionValid[ProfilSectionValid.length - 1] &&
