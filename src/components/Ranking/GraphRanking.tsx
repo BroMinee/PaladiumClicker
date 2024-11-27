@@ -16,7 +16,7 @@ export default async function GraphRanking({ rankingType }: { rankingType: Ranki
   const allDateSet = new Set(allDate);
   const allDateArray = Array.from(allDateSet);
   allDateArray.sort();
-  const missingDate = [];
+  const missingDate: Date[] = [];
   for (let i = 0; i < allDateArray.length - 1; i++) {
     const date1 = new Date(allDateArray[i]);
     const date2 = new Date(allDateArray[i + 1]);
@@ -25,7 +25,7 @@ export default async function GraphRanking({ rankingType }: { rankingType: Ranki
     if (diffDays > 1) {
       for (let j = 1; j < diffDays; j++) {
         const newDate = new Date(date1.getTime() + j * 24 * 60 * 60 * 1000);
-        missingDate.push(newDate.toISOString().split('T')[0]);
+        missingDate.push(newDate);
       }
     }
   }
@@ -38,7 +38,7 @@ export default async function GraphRanking({ rankingType }: { rankingType: Ranki
         date: date,
         value: 0,
         position: 1,
-      } as RankingResponse[0]
+      }
     );
   }
 
