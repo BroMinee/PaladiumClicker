@@ -17,7 +17,7 @@ type SmallCardInfoProps = {
 
 const SmallCardInfo = ({ className, title, value, img, unoptimized, count, children }: SmallCardInfoProps) => {
   return (
-    <CardContent className={cn(className, "h-full pt-6 flex items-center gap-4")}>
+    <CardContent className={cn("h-full pt-6 flex items-center gap-4", className)}>
       <div className="relative inline-block">
         <Image src={safeJoinPaths(img)} alt={img}
                className="h-12 w-12 pixelated mr-2 rounded-md" width={48} height={48}

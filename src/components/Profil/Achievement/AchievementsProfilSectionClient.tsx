@@ -6,12 +6,11 @@ import { CardTitle } from "@/components/ui/card.tsx";
 import { formatPrice } from "@/lib/misc.ts";
 import { useTheme } from "next-themes";
 import { Achievement, CategoryEnum } from "@/types";
-import SmallCardInfo from "@/components/shared/SmallCardInfo.tsx";
 import { cn } from "@/lib/utils.ts";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area.tsx";
 
 import Image from "next/image";
-import AchievementInfo from "@/components/Profil/Achievement/DisplayAchievement.tsx";
+import { AchievementInfo, DisplayCategoryCard } from "@/components/Profil/Achievement/DisplayAchievement.tsx";
 import constants from "@/lib/constants.ts";
 
 export function DisplayProgressionCategory({ category }: { category: CategoryEnum }) {
@@ -28,8 +27,8 @@ export function DisplayProgressionCategory({ category }: { category: CategoryEnu
   const value = totalCompleted * 100 / total;
 
   return (
-    <div className="flex flex-col items-center w-full">
-      <div className="w-full h-12 flex flex-row items-center justify-center gap-2 font-mc">
+    <div className="flex-col items-center w-full hidden sm:flex">
+      <div className="w-full h-10 flex flex-row items-center justify-center gap-2 font-mc">
         {totalCompleted}/{total}<AchievementsGlobalProgressBar value={value}/>
       </div>
     </div>
@@ -39,6 +38,8 @@ export function DisplayProgressionCategory({ category }: { category: CategoryEnu
 export function AchievementsGlobalProgressBar({ value, showText = true }: { value: number, showText?: boolean }) {
   const textRef = useRef<SVGTextElement>(null);
   const [viewBoxState] = useState({ width: 0, height: 0 });
+  if (value === 0)
+    value = 0.00001;
 
   useEffect(() => {
     if (textRef !== null && textRef.current !== null && value === 0) {
@@ -110,8 +111,8 @@ export function DisplayProgressionGlobal() {
 
   return (
     <>
-      <CardTitle className="flex flex-row justify-between place-items-end  font-mc">
-        <div className="text-5xl text-primary font-bold">
+      <CardTitle className="flex xl:flex-row flex-col justify-between items-center xl:place-items-end font-mc">
+        <div className="text-3xl sm:text-5xl text-primary font-bold">
           Achievements
         </div>
         <div className="text-xl font-bold">
@@ -134,39 +135,48 @@ function AchievementSelectorCategory({ category, selectedCategory, setSelectedCa
 }) {
 
   let imgPath = "";
+  let displayText = "";
   switch (category) {
     case CategoryEnum.HOW_TO_START:
       imgPath = "AH_img/wood_pickaxe.png";
+      displayText = "Premier pas";
       break;
     case CategoryEnum.JOBS:
       imgPath = "AH_img/stone_pickaxe.png";
+      displayText = "Métiers";
       break;
     case CategoryEnum.FACTION:
       imgPath = "AH_img/diamond_sword.png";
+      displayText = "Faction";
       break;
     case CategoryEnum.ATTACK_DEFENSE:
       imgPath = "AH_img/tnt.png";
+      displayText = "Pillage & Défense";
       break;
     case CategoryEnum.ECONOMY:
       imgPath = "AH_img/gold_ingot.png";
+      displayText = "Economie";
       break;
       case CategoryEnum.ALLIANCE:
       imgPath = "AH_img/goggles_of_community.png";
+        displayText = "Ordre vs Chaos";
       break;
     case CategoryEnum.OTHERS:
       imgPath = "AH_img/ender_pearl.png";
+      displayText = "Divers";
       break
     default:
       imgPath = "unknown.png";
+      displayText = "Inconnu";
       break;
   }
 
   return <button
-    className={cn("flex bg-secondary hover:border-primary/65 hover:border-4 hover:scale-105 duration-100  cursor-pointer", selectedCategory === category && "border-primary border-4 hover:border-primary")}
+    className={cn("flex bg-secondary hover:border-gray-500 border-4 duration-100 cursor-pointer justify-center", selectedCategory === category && "border-primary border-4 hover:border-primary")}
     onClick={() => setSelectedCategory(CategoryEnum[category])}>
-    <SmallCardInfo title={category} img={imgPath} className="w-96" unoptimized>
+    <DisplayCategoryCard title={displayText} img={imgPath} unoptimized>
       <DisplayProgressionCategory category={category}/>
-    </SmallCardInfo>
+    </DisplayCategoryCard>
   </button>
 }
 
@@ -177,18 +187,21 @@ export function AchievementBody({ itemList }: { itemList: { img: string, value: 
   return <>
     <ScrollArea className="overflow-visible">
       <ScrollBar orientation="vertical"/>
-      <div className="pr-4">
+      <div className="pr-3">
         <h1 className="font-mc">Catégorie</h1>
-        {Object.keys(CategoryEnum).map((category, index) => {
-          return <AchievementSelectorCategory key={category + index}
-                                              category={Object.keys(CategoryEnum).find((c) => c === category) as CategoryEnum}
-                                              selectedCategory={selectedCategory}
-                                              setSelectedCategory={setSelectedCategory}/>
-        })}
+        <div className="flex flex-col gap-1">
+          {Object.keys(CategoryEnum).map((category, index) => {
+            return <AchievementSelectorCategory key={category + index}
+                                                category={Object.keys(CategoryEnum).find((c) => c === category) as CategoryEnum}
+                                                selectedCategory={selectedCategory}
+                                                setSelectedCategory={setSelectedCategory}/>
+          })}
+        </div>
+
       </div>
     </ScrollArea>
     <ScrollArea className="w-full overflow-visible">
-      <div className="w-full">
+      <div className="w-full pr-3">
         <h1 className="font-mc">Achievements</h1>
         <DisplayAllAchievementInCategory category={selectedCategory} itemList={itemList}/>
       </div>
@@ -253,9 +266,9 @@ function DetailAchievement({ achievement, itemList }: {
   return <div onClick={() => achievement.subAchievements.length !== 0 && setShowSubAchievements(!showSubAchievements)}
               className={cn("border-2 border-secondary-foreground px-2 animate-fade-in", achievement.completed && "bg-green-400/50 hover:bg-green-500/50")}>
     <AchievementInfo title={achievement.name}
-                     img={`/AH_img/${closestItemName}`}
+                     img={achievement.completed ? "/ProfileImg/completed.png" : `/AH_img/${closestItemName}`}
                      value={achievement.description}
-                     className="w-full p-3" unoptimized
+                     unoptimized
                      arrowPath={arrowPath}
 
     >
@@ -278,8 +291,11 @@ export function DisplayProgressionAchievement({ achievementProgress, amount, val
 
 
   return <div className="flex flex-col items-center w-full">
-    <div className="w-full h-12 flex flex-row items-center justify-center gap-2">
-      {achievementProgress}/{amount}<AchievementsGlobalProgressBar value={value} showText={true}/>
+    <div className="w-full flex flex-row items-center justify-end gap-2">
+      {achievementProgress}/{amount}
+      <div className="xl:w-60 w-32 hidden sm:block h-12">
+        <AchievementsGlobalProgressBar value={value} showText={true}/>
+      </div>
     </div>
   </div>
 }
