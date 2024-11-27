@@ -24,18 +24,21 @@ export default function ProfilInfo() {
 
   return (<><Card className="rounded-b-xl rounded-t-none">
     <CardHeader className="flex flex-row items-center justify-between">
-      <CardTitle className="text-xl">
-        <div className="flex flex-row gap-1 items-center">
+      <CardTitle className="lg:text-xl">
+        <div className="flex flex-row items-center gap-2">
           <ProfilAlliance/>
-          Profil de{" "}
-          <GradientText className="font-extrabold">
-            <ProfilUsernameInfo/>
-          </GradientText>
-          {" - "}
-          <GradientText className="font-extrabold">
-            <FactionNameInfo/>
-          </GradientText>
+          <h3 className="leading-none tracking-tight">
+            Profil de{" "}
+            <GradientText className="font-extrabold">
+              <ProfilUsernameInfo/>
+            </GradientText>
+            {" - "}
+            <GradientText className="font-extrabold">
+              <FactionNameInfo/>
+            </GradientText>
+          </h3>
         </div>
+
 
         <div className="flex flex-row gap-2 items-center mt-1.5">
           <FaEye/>
