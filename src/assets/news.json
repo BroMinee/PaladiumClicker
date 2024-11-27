@@ -11,7 +11,8 @@
       "Amélioration notable de la qualité des images sur la page du clicker",
       "Suppression d'informations redondantes sur les bâtiments",
       "Correction des pages sortant de l'écran sur tablette, provonquant un scroll horizontal",
-      "Correction de fautes lors de la réecriture de texte et de valeur dans le xp-calculator"
+      "Correction de fautes lors de la réecriture de texte et de valeur dans le xp-calculator",
+      "Ajout d'un espace vide dans les classements lorsque les valeurs journalières n'ont pas pu été récupérées"
       ]
   },
   {
