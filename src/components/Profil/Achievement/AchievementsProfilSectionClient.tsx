@@ -3,7 +3,7 @@ import { Bar, BarChart, LabelList, ResponsiveContainer, XAxis, YAxis } from "rec
 import { useEffect, useRef, useState } from "react";
 import { usePlayerInfoStore } from "@/stores/use-player-info-store.ts";
 import { CardTitle } from "@/components/ui/card.tsx";
-import { formatPrice, GetAllFileNameInFolder, levenshteinDistance } from "@/lib/misc.ts";
+import { formatPrice } from "@/lib/misc.ts";
 import { useTheme } from "next-themes";
 import { Achievement, CategoryEnum } from "@/types";
 import SmallCardInfo from "@/components/shared/SmallCardInfo.tsx";
@@ -12,6 +12,7 @@ import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area.tsx";
 
 import Image from "next/image";
 import AchievementInfo from "@/components/Profil/Achievement/DisplayAchievement.tsx";
+import constants from "@/lib/constants.ts";
 
 export function DisplayProgressionCategory({ category }: { category: CategoryEnum }) {
   const { data: playerInfo } = usePlayerInfoStore();
@@ -169,7 +170,7 @@ function AchievementSelectorCategory({ category, selectedCategory, setSelectedCa
   </button>
 }
 
-export function AchievementBody() {
+export function AchievementBody({ itemList }: { itemList: { img: string, value: string }[] }) {
 
   const [selectedCategory, setSelectedCategory] = useState<CategoryEnum>(CategoryEnum.HOW_TO_START);
 
@@ -189,7 +190,7 @@ export function AchievementBody() {
     <ScrollArea className="w-full overflow-visible">
       <div className="w-full animate-fade-in">
         <h1 className="font-mc">Achievements</h1>
-        <DisplayAllAchievementInCategory category={selectedCategory}/>
+        <DisplayAllAchievementInCategory category={selectedCategory} itemList={itemList}/>
       </div>
         <ScrollBar orientation="vertical"/>
     </ScrollArea>
@@ -197,7 +198,10 @@ export function AchievementBody() {
 }
 
 
-export function DisplayAllAchievementInCategory({ category }: { category: CategoryEnum }) {
+export function DisplayAllAchievementInCategory({ category, itemList }: {
+  category: CategoryEnum,
+  itemList: { img: string, value: string }[]
+}) {
   const { data: playerInfo } = usePlayerInfoStore();
 
   if (!playerInfo)
@@ -209,16 +213,18 @@ export function DisplayAllAchievementInCategory({ category }: { category: Catego
 
 
 
-
   // TODO: achievement.icon
   return <div className="flex flex-col gap-4">
     {allAchivements.map((achievement, index) => {
-      return <DetailAchievement key={achievement.name + index} achievement={achievement}/>
+      return <DetailAchievement key={achievement.name + index} achievement={achievement} itemList={itemList}/>
     })}
   </div>
 }
 
-function DetailAchievement({ achievement }: { achievement: Achievement }) {
+function DetailAchievement({ achievement, itemList }: {
+  achievement: Achievement,
+  itemList: { img: string, value: string }[]
+}) {
   const [showSubAchievements, setShowSubAchievements] = useState(false);
   let achievementProgress;
   if (achievement.completed) {
@@ -235,22 +241,19 @@ function DetailAchievement({ achievement }: { achievement: Achievement }) {
 
   let arrowPath = achievement.subAchievements.length === 0 ? "" : (showSubAchievements ? "/ProfileImg/arrow_top.png" : "/ProfileImg/arrow_down.png");
 
-  const achievementIcon = achievement.icon.replace("palamod:", "").replace("item.", "").replace("minecraft:", "").replace("tile.", "").replace("customnpc:", "").replace("guardiangolem:", "")
 
-  const closestItemName = GetAllFileNameInFolder().reduce((acc, curr) => {
-    if (levenshteinDistance(curr, achievement.icon) < levenshteinDistance(acc, achievementIcon)) {
-      return curr;
-    } else {
-      return acc;
-    }
-  });
+  let closestItemName = itemList.find((item) => item.value === constants.dictAchievementIdToIcon.get(achievement.icon))?.img ?? "unknown.png";
 
-  console.log(achievement.id, achievement.icon, closestItemName);
+  if (closestItemName === "unknown.png")
+    console.log("Unknown item : " + achievement.icon)
+
+  if(closestItemName === "barriere.png")
+    closestItemName = "unknown.png"
 
   return <div onClick={() => achievement.subAchievements.length !== 0 && setShowSubAchievements(!showSubAchievements)}
               className={cn("border-2 border-secondary-foreground  px-2", achievement.completed && "bg-green-400/50 hover:bg-green-500/50")}>
     <AchievementInfo title={achievement.name}
-                     img={`/AH_img/${closestItemName}.png`}
+                     img={`/AH_img/${closestItemName}`}
                      value={achievement.description}
                      className="w-full p-3" unoptimized
                      arrowPath={arrowPath}

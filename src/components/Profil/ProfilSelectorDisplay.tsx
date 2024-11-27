@@ -6,9 +6,13 @@ import FactionInfo from "@/components/Profil/FactionInfo.tsx";
 import { redirect } from "next/navigation";
 import { generateProfilUrl, isProfilSection } from "@/lib/misc.ts";
 import { ProfilSectionEnum } from "@/types";
-import { AchievementsProfilSection } from "@/components/Profil/Achievement/AchievementsProfilSection.tsx";
+import {
+  AchievementsProfilSection,
+  AchievementsProfilSectionFallBack
+} from "@/components/Profil/Achievement/AchievementsProfilSection.tsx";
 import { PetCanvas } from "@/components/Profil/Pet/PetMontureCanvas.tsx";
 import { Card, CardContent } from "@/components/ui/card.tsx";
+import React, { Suspense } from "react";
 
 export function ProfilSelectorDisplay({ params, searchParams }: {
   params: { username: string },
@@ -28,7 +32,9 @@ export function ProfilSelectorDisplay({ params, searchParams }: {
     case ProfilSectionEnum.Home:
       return <HomeProfilSection/>
     case ProfilSectionEnum.Achievements:
-      return <AchievementsProfilSection/>
+      return <Suspense fallback={<AchievementsProfilSectionFallBack/>}>
+        <AchievementsProfilSection/>
+      </Suspense>
     case ProfilSectionEnum["Pet/Monture"]:
       return <PetMontureProfilSection/>
 
