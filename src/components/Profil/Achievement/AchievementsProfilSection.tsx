@@ -28,7 +28,7 @@ export async function AchievementsProfilSection() {
       <CardHeader className="mx-4 mt-4">
         <DisplayProgressionGlobal/>
       </CardHeader>
-      <CardContent className="m-4 flex flex-grow max-w-screen md:max-h-[calc(100vh-38vh)] md:flex-row flex-col gap-2">
+      <CardContent className="m-4 flex flex-grow max-w-screen md:max-h-[calc(100vh-42vh)] md:flex-row flex-col gap-2">
         <AchievementBody itemList={itemList}/>
       </CardContent>
     </Card>
