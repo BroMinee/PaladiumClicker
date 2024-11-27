@@ -28,7 +28,7 @@ export function DisplayProgressionCategory({ category }: { category: CategoryEnu
 
   return (
     <div className="flex flex-col items-center w-full">
-      <div className="w-full h-12 flex flex-row items-center justify-center gap-2">
+      <div className="w-full h-12 flex flex-row items-center justify-center gap-2 font-mc">
         {totalCompleted}/{total}<AchievementsGlobalProgressBar value={value}/>
       </div>
     </div>
@@ -67,8 +67,8 @@ export function AchievementsGlobalProgressBar({ value, showText = true }: { valu
     return (
       <text ref={textRef} x={x + newX} y={y + height / 2} fill={theme === "dark" ? "#ffffff" : "#000000"}
             textAnchor="middle" dominantBaseline="middle"
-            className="bg-red-500">
-        {`${formatPrice(Math.floor(value))}%`}
+            className="bg-red-500 font-mc">
+        {`${formatPrice(Math.floor(value))} %`}
       </text>
     );
   };
@@ -109,7 +109,7 @@ export function DisplayProgressionGlobal() {
 
   return (
     <>
-      <CardTitle className="flex flex-row justify-between place-items-end">
+      <CardTitle className="flex flex-row justify-between place-items-end  font-mc">
         <div className="text-5xl text-primary font-bold">
           Achievements
         </div>
@@ -177,7 +177,7 @@ export function AchievementBody() {
     <ScrollArea className="overflow-visible">
       <ScrollBar orientation="vertical"/>
       <div className="pr-4">
-        <h1>Catégorie</h1>
+        <h1 className="font-mc">Catégorie</h1>
         {Object.keys(CategoryEnum).map((category, index) => {
           return <AchievementSelectorCategory key={category + index}
                                               category={Object.keys(CategoryEnum).find((c) => c === category) as CategoryEnum}
@@ -188,7 +188,7 @@ export function AchievementBody() {
     </ScrollArea>
     <ScrollArea className="w-full overflow-visible">
       <div className="w-full animate-fade-in">
-        <h1>Achievements</h1>
+        <h1 className="font-mc">Achievements</h1>
         <DisplayAllAchievementInCategory category={selectedCategory}/>
       </div>
         <ScrollBar orientation="vertical"/>
@@ -252,7 +252,7 @@ function DetailAchievement({ achievement }: { achievement: Achievement }) {
     <AchievementInfo title={achievement.name}
                      img={`/AH_img/${closestItemName}.png`}
                      value={achievement.description}
-                     className="w-full" unoptimized
+                     className="w-full p-3" unoptimized
                      arrowPath={arrowPath}
 
     >
