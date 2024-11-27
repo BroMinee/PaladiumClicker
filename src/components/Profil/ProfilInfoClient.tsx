@@ -24,14 +24,8 @@ export function ProfilDescriptionAndBanner() {
 
   const description = playerInfo?.description === "" ? "Aucune description" : playerInfo?.description;
   let imgPath = "/ProfileImg";
-  switch(playerInfo?.currentBanner) {
-
-    case "shore":
-      imgPath = safeJoinPaths(imgPath,"shore.png");
-      break;
-    case "mine":
-      imgPath = safeJoinPaths(imgPath,"mine.png");
-      break;
+  if(playerInfo?.currentBanner) {
+      imgPath = safeJoinPaths(imgPath,`${playerInfo.currentBanner}.png`);
   }
   return <>
     {description}
