@@ -1,8 +1,10 @@
 import { RankingResponse, RankingType } from "@/types";
 import { redirect } from "next/navigation";
-import { getRankingLeaderboard } from "@/lib/api/apiPalaTracker.ts";
+import { getRankingLeaderboard, getRankingLeaderboardPlayer } from "@/lib/api/apiPalaTracker.ts";
 import PlotRankingChart from "@/components/Ranking/PlotRankingChart.tsx";
 import LoadingSpinner from "@/components/ui/loading-spinner.tsx";
+import { cookies } from "next/headers";
+import React from "react";
 
 export default async function GraphRanking({ rankingType }: { rankingType: RankingType }) {
   let data = [] as RankingResponse;
@@ -11,6 +13,18 @@ export default async function GraphRanking({ rankingType }: { rankingType: Ranki
   } catch (e) {
     redirect("/error?message=Impossible de récupérer les données du classement sélectionné");
   }
+
+  const cookieStore = await cookies()
+  const uuid = cookieStore.get('uuid' as any)?.value;
+  if(uuid === undefined) {
+    return <div>Impossible de récupérer l'identifiant du joueur via les cookies</div>;
+  }
+
+  const dataPlayer = await getRankingLeaderboardPlayer(uuid, rankingType).catch(() => {
+    return [] as RankingResponse;
+  });
+
+  data = data.concat(dataPlayer);
 
   const allDate = data.map((d) => d.date);
   const allDateSet = new Set(allDate);
