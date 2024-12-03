@@ -250,7 +250,7 @@ export type PaladiumFactionInfo = {
   createdAt: number,
   description: string,
   emblem: PaladiumEmblem,
-  level: { level: number, xp: number },
+  level?: { level: number, xp: number },
   players: { group: string, joinedAt: number, username: string, uuid: string }[],
   uuid: string
 }

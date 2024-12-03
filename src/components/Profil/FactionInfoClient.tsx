@@ -50,8 +50,8 @@ export function FactionDetails() {
     return <Suspense fallback={<LoadingData username={undefined}/>}/>
 
   const createdAt = playerInfo.faction.createdAt;
-  const level = playerInfo.faction.level.level;
-  const xp = playerInfo.faction.level.xp;
+  const level = playerInfo.faction.level?.level || -1;
+  const xp = playerInfo.faction.level?.xp || -1;
   const playerList = playerInfo.faction.players;
 
 
