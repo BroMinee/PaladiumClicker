@@ -1,13 +1,10 @@
 import { redirect } from "next/navigation";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card.tsx";
-import GradientText from "@/components/shared/GradientText.tsx";
-import { FaHeart } from "react-icons/fa";
+import { Card } from "@/components/ui/card.tsx";
 import { RankingType } from "@/types";
-import { searchParamsRankingPage } from "@/components/Ranking/RankingSelector.tsx";
+import { RankingSelectorCard, searchParamsRankingPage } from "@/components/Ranking/RankingSelector.tsx";
 import { generateRankingUrl, getImagePathFromRankingType, rankingTypeToUserFriendlyText } from "@/lib/misc.ts";
 import { Suspense } from "react";
 import GraphRanking, { GraphRankingFallback } from "@/components/Ranking/GraphRanking.tsx";
-import { RankingSelectorClient } from "@/components/Ranking/RankingSelectorClient.tsx";
 
 
 export async function generateMetadata(
@@ -59,31 +56,12 @@ export default function Home({ searchParams }: {
 
   return (
     <div className="flex flex-col gap-4">
-      <Card className="flex flex-col gap-4">
-        <CardHeader className="flex flex-row items-center justify-between">
-          <CardTitle>
-            Bienvenue sur le visualisateur du classement{" "}
-            <GradientText className="font-extrabold">{rankingTypeToUserFriendlyText(rankingType)}</GradientText>
-          </CardTitle>
-          <CardDescription>
-            Made with <FaHeart
-            className="text-primary inline-block"/> by <GradientText>BroMine__</GradientText>
-          </CardDescription>
-        </CardHeader>
-        <CardContent className="flex flex-row items-center justify-between gap-2 ">
-          {Object.keys(RankingType).map((key) => {
-            return <RankingSelectorClient key={key} rankingType={key as RankingType}/>
-
-          })}
-        </CardContent>
-      </Card>
-
+      <RankingSelectorCard rankingType={rankingType} rankingPage={true}/>
       <Card className="w-full h-[calc(100vh-30vh)]">
         <Suspense fallback={<GraphRankingFallback/>}>
           <GraphRanking rankingType={rankingType}/>
         </Suspense>
       </Card>
-
     </div>
   )
 }

@@ -1,3 +1,4 @@
+import 'server-only';
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card.tsx";
 import {
   AchievementBody,

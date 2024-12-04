@@ -13,10 +13,13 @@ import {
 import { PetCanvas } from "@/components/Profil/Pet/PetMontureCanvas.tsx";
 import { Card, CardContent } from "@/components/ui/card.tsx";
 import React, { Suspense } from "react";
+import { ProfilRankingSection } from "@/components/Profil/Ranking/ProfilRanking.tsx";
+
+export type searchParamsProfilPage = { section?: string, category?: string }
 
 export function ProfilSelectorDisplay({ params, searchParams }: {
   params: { username: string },
-  searchParams: { section?: string }
+  searchParams: searchParamsProfilPage
 }) {
 
 
@@ -37,7 +40,8 @@ export function ProfilSelectorDisplay({ params, searchParams }: {
       </Suspense>
     case ProfilSectionEnum["Pet/Monture"]:
       return <PetMontureProfilSection/>
-
+    case ProfilSectionEnum.Classement:
+      return <ProfilRankingSection searchParams={searchParams}/>
     default:
       return <div>C&apos;est quoi la section ${sectionAsEnum} ?</div>
   }

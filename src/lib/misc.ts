@@ -3309,11 +3309,12 @@ export function isProfilSection(section?: string): boolean {
   return ProfilSectionValid.includes(section);
 }
 
-export function generateProfilUrl(username: string, item: ProfilSectionEnum | string) {
+export function generateProfilUrl(username: string, item: ProfilSectionEnum | string, ranking?: RankingType) {
   if (!isProfilSection(item))
     throw new Error(`Invalid section given in generateProfilUrl ${item}`);
   const argItem = item ? `section=${item}` : "";
-  const args = [argItem].filter((e) => e).join("&");
+  const argRanking = ranking ? `category=${ranking}` : "";
+  const args = [argItem, argRanking].filter((e) => e).join("&");
   return safeJoinPaths(constants.profilPath, username, `?${args}`);
 }
 

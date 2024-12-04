@@ -78,6 +78,10 @@ export function getRankingLeaderboardPlayer(uuid: string, rankingType: RankingTy
   return fetchWithHeader<RankingResponse>(`${API_PALATRACKER}/v1/ranking/${rankingType}/${uuid}`, 0)
 }
 
+export function getRankingAllLeaderboardPlayer(uuid: string) {
+  return fetchWithHeader<RankingResponse>(`${API_PALATRACKER}/v1/ranking/all/${uuid}`, 0)
+}
+
 export function getAdminShopHistory(item: AdminShopItem) {
   return fetchWithHeader<AdminShopItemDetail[]>(`${API_PALATRACKER}/v1/admin-shop/${item}`, 0)
 }

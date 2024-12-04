@@ -1,30 +1,20 @@
-import { RankingResponse, RankingType } from "@/types";
-import { redirect } from "next/navigation";
-import { getRankingLeaderboard, getRankingLeaderboardPlayer } from "@/lib/api/apiPalaTracker.ts";
-import PlotRankingChart from "@/components/Ranking/PlotRankingChart.tsx";
-import LoadingSpinner from "@/components/ui/loading-spinner.tsx";
-import { cookies } from "next/headers";
+import 'server-only';
 import React from "react";
+import { getRankingLeaderboardPlayer } from "@/lib/api/apiPalaTracker.ts";
+import { RankingResponse, RankingType } from "@/types";
+import PlotRankingChart from "@/components/Ranking/PlotRankingChart.tsx";
+import { cookies } from "next/headers";
 
-export default async function GraphRanking({ rankingType }: { rankingType: RankingType }) {
-  let data = [] as RankingResponse;
-  try {
-    data = await getRankingLeaderboard(rankingType);
-  } catch (e) {
-    redirect("/error?message=Impossible de récupérer les données du classement sélectionné");
-  }
-
+export async function ProfilRankingSectionServer({ rankingType }: { rankingType: RankingType }) {
   const cookieStore = await cookies()
   const uuid = cookieStore.get('uuid' as any)?.value;
-  if(uuid === undefined) {
+  if (uuid === undefined) {
     return <div>Impossible de récupérer l&apos;uuid du joueur via les cookies</div>;
   }
 
-  const dataPlayer = await getRankingLeaderboardPlayer(uuid, rankingType).catch(() => {
+  let data = await getRankingLeaderboardPlayer(uuid, rankingType).catch(() => {
     return [] as RankingResponse;
   });
-
-  data = data.concat(dataPlayer);
 
   const allDate = data.map((d) => d.date);
   const allDateSet = new Set(allDate);
@@ -58,14 +48,6 @@ export default async function GraphRanking({ rankingType }: { rankingType: Ranki
 
   data = data.sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
 
-  return (
-    <PlotRankingChart data={data}/>
-  )
-}
 
-export function GraphRankingFallback() {
-  return <div className="flex flex-row gap-2 m-4 w-96 items-center">
-    <LoadingSpinner size={4}/>
-    <h2 className="font-bold">Chargement du graphique...</h2>
-  </div>
+  return <PlotRankingChart data={data}/>
 }

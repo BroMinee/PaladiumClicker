@@ -569,6 +569,7 @@ export enum ProfilSectionEnum {
   "Home" = "Home",
   "Achievements" = "Achievements",
   "Pet/Monture" = "Pet/Monture",
+  "Classement" = "Classement",
 }
 
 export type Achievement = {
