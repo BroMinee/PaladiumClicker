@@ -2,8 +2,8 @@ import 'server-only';
 import React from "react";
 import { getRankingLeaderboardPlayer } from "@/lib/api/apiPalaTracker.ts";
 import { RankingResponse, RankingType } from "@/types";
-import PlotRankingChart from "@/components/Ranking/PlotRankingChart.tsx";
 import { cookies } from "next/headers";
+import { ZoomableChart } from "@/components/Ranking/zoomable-graph.tsx";
 
 export async function ProfilRankingSectionServer({ rankingType }: { rankingType: RankingType }) {
   const cookieStore = await cookies()
@@ -39,7 +39,7 @@ export async function ProfilRankingSectionServer({ rankingType }: { rankingType:
       {
         uuid: "00000000-0000-0000-0000-000000000000",
         username: "valeur manquante",
-        date: date,
+        date: `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`,
         value: 0,
         position: 1,
       }
@@ -49,5 +49,5 @@ export async function ProfilRankingSectionServer({ rankingType }: { rankingType:
   data = data.sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
 
 
-  return <PlotRankingChart data={data}/>
+  return <ZoomableChart data={data}/>;
 }

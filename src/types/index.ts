@@ -412,10 +412,10 @@ export enum RankingType {
 export type RankingResponse =
   rankingResponseSubType[]
 
-type rankingResponseSubType = {
+export type rankingResponseSubType = {
   uuid: string,
   username: string,
-  date: Date,
+  date: string,
   value: number,
   position: number
 }
