@@ -49,7 +49,7 @@ export default async function GraphRanking({ rankingType }: { rankingType: Ranki
       {
         uuid: "00000000-0000-0000-0000-000000000000",
         username: "valeur manquante",
-        date: date,
+        date: date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate(),
         value: 0,
         position: 1,
       }
