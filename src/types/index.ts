@@ -611,4 +611,5 @@ export type ModelName =
   | "dancarok"
   | "ravirok"
   | "tedarok"
+  | "pet_reindeer"
   | "mohiras"; // BOSS DRAGON
