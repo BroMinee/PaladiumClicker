@@ -14,13 +14,14 @@ import { Button } from "@/components/ui/button.tsx";
 import {
   Area,
   AreaChart,
-  CartesianGrid,
+  CartesianGrid, Legend,
   ReferenceArea,
   ResponsiveContainer,
   XAxis,
   YAxis
 } from "recharts";
 import { RankingResponse, rankingResponseSubType } from "@/types";
+import { usePlayerInfoStore } from "@/stores/use-player-info-store.ts";
 
 type ZoomableChartProps = {
   data: RankingResponse;
@@ -48,19 +49,58 @@ const gradientColors = [
   { "color": "#00d4ff", "color2": "#0657ad" }];
 
 export function ZoomableChart({ data: initialData }: ZoomableChartProps) {
-  const [data, setData] = useState<rankingResponseSubType[]>(initialData || []);
+
+  const {data: playerInfo} = usePlayerInfoStore();
+  const [data, setData] = useState<any[]>(initialData || []);
   const [refAreaLeft, setRefAreaLeft] = useState<string | null>(null);
   const [refAreaRight, setRefAreaRight] = useState<string | null>(null);
   const [startTime, setStartTime] = useState<string | null>(null);
   const [endTime, setEndTime] = useState<string | null>(null);
-  const [originalData, setOriginalData] = useState<rankingResponseSubType[]>(initialData || []);
+  const [originalData, setOriginalData] = useState<any[]>(initialData || []);
   const [isSelecting, setIsSelecting] = useState(false);
   const chartRef = useRef<HTMLDivElement>(null);
 
+  const [uniqueUsernames, setUniqueUsernames] = useState<string[]>([]);
+
+  function getUniqueUsernames(data: RankingResponse) {
+    const usernames = new Set<string>();
+    data.forEach(item => usernames.add(item.username));
+    return Array.from(usernames);
+  }
+
+  interface transformedDataType {
+    [key: string]: { [key: string]: number | string };
+  }
+
+
+
   useEffect(() => {
     if (initialData?.length) {
-      setData(initialData);
-      setOriginalData(initialData);
+
+
+      const transformedData = Object.values(data.reduce((acc, item) => {
+        // format the date to DD-MM-YYYY
+        const date = new Date(item.date.toString()).toISOString();
+        const username = item.username;
+        const value = item.value;
+
+        if (!acc[date]) {
+          acc[date] = { date};
+        }
+
+        acc[date][username] = value;
+        acc[date][`${username}_pos`] = item.position;
+        return acc;
+      }, {} as transformedDataType));
+
+      const uniqueUsernames = getUniqueUsernames(data).sort((a, b) => {
+        const lastDay = transformedData[transformedData.length - 1];
+        return Number(lastDay[`${a}_pos`]) - Number(lastDay[`${b}_pos`]);
+      })
+      setUniqueUsernames(uniqueUsernames);
+
+      setData(transformedData);
+      setOriginalData(transformedData);
       setStartTime(initialData[0].date);
       setEndTime(initialData[initialData.length - 1].date);
     }
@@ -71,8 +111,10 @@ export function ZoomableChart({ data: initialData }: ZoomableChartProps) {
       return data;
     }
 
-    const dataPointsInRange = originalData.filter(
-      (dataPoint) => dataPoint.date >= startTime && dataPoint.date <= endTime
+
+    const dataPointsInRange = originalData
+      .filter(
+      (dataPoint) => startTime <= dataPoint.date && dataPoint.date <= endTime
     );
 
     // Ensure we have at least two data points for the chart to prevent rendering a single dot
@@ -80,15 +122,19 @@ export function ZoomableChart({ data: initialData }: ZoomableChartProps) {
   }, [startTime, endTime, originalData, data]);
 
   const maxValue = useMemo(
-    () => zoomedData.reduce((max, dataPoint) => Math.max(max, dataPoint.value), 0),
+    () => zoomedData.reduce((max, dataPoint) => Math.max(max, dataPoint[playerInfo?.username] || 0), 0),
     [zoomedData]
   )
 
   const minValue = useMemo(
-    () => zoomedData.reduce((min, dataPoint) => Math.min(min, dataPoint.value), Infinity),
+    () => zoomedData.reduce((min, dataPoint) => Math.min(min, dataPoint[playerInfo?.username] || 0), Infinity),
     [zoomedData]
   );
 
+
+  zoomedData.forEach((e) =>
+  {
+  })
 
 
   const DataFormatter = (number: number) => {
@@ -194,6 +240,8 @@ export function ZoomableChart({ data: initialData }: ZoomableChartProps) {
     return date.toLocaleDateString("fr-FR");
   };
 
+
+
   return (
     <Card className="w-full h-full">
       <CardHeader className="flex-col items-stretch space-y-0 border-b p-0 sm:flex-row hidden sm:flex">
@@ -234,7 +282,7 @@ export function ZoomableChart({ data: initialData }: ZoomableChartProps) {
             <div className="flex justify-end my-2 sm:mb-4">
               <Button variant="outline" onClick={handleReset} disabled={!startTime && !endTime}
                       className="text-xs sm:text-sm">
-              Reset
+              Reset Zoom
               </Button>
             </div>
             <ResponsiveContainer width="100%" height="100%">
@@ -259,7 +307,7 @@ export function ZoomableChart({ data: initialData }: ZoomableChartProps) {
                     </linearGradient>
                   ))}
                 </defs>
-                <CartesianGrid vertical={false} />
+                <CartesianGrid strokeDasharray="4"/>
                 <XAxis
                   dataKey="date"
                   tickFormatter={formatXAxis}
@@ -270,33 +318,57 @@ export function ZoomableChart({ data: initialData }: ZoomableChartProps) {
                   style={{ userSelect: 'none' }}
                 />
                 <YAxis
-                  dataKey={'value'}
+                  type="number"
                   tickLine={false}
                   axisLine={false}
                   tickFormatter={DataFormatter}
                   style={{ userSelect: 'none' }}
                   width={45}
                 />
+
+                <Legend layout="horizontal" verticalAlign="bottom" align="center" payload={
+                  uniqueUsernames.map(
+                    (item) => ({
+                      id: item,
+                      type: "line",
+                      value: item,
+                      color: gradientColors[uniqueUsernames.indexOf(item) % gradientColors.length].color2,
+                    })
+                  )
+                }
+                />
+
                 <ChartTooltip
                   cursor={false}
                   content={
                     <ChartTooltipContent
                       className="w-[150px] sm:w-[200px] font-mono text-xs sm:text-sm"
                       nameKey="value"
-                      labelFormatter={(value) => new Date(value).toLocaleDateString()}
+                      labelFormatter={(value) => new Date(value).toLocaleDateString("fr-FR")}
                     />
                   }
                 />
-                <ChartLegend content={<ChartLegendContent />} />
-                <Area
-                  type="monotone"
-                  dataKey="value"
-                  stroke={`url(#top1)`}
-                  strokeWidth={5}
-                  fillOpacity={0}
-                  fill="url(#colorEvents)"
-                  isAnimationActive={false}
-                />
+                <ChartLegend content={<ChartLegendContent/>}/>
+                {/*<Area*/}
+                {/*  type="monotone"*/}
+                {/*  dataKey="value"*/}
+                {/*  stroke={`url(#top1)`}*/}
+                {/*  strokeWidth={5}*/}
+                {/*  fillOpacity={0}*/}
+                {/*  fill="url(#colorEvents)"*/}
+                {/*  isAnimationActive={false}*/}
+                {/*/>*/}
+                {uniqueUsernames.map((username, index) => (
+                  <Area
+                    key={username + index}
+                    dataKey={username}
+                    type="monotone"
+                    stroke={zoomedData.every((a) => a[username] === zoomedData[0][username]) ? gradientColors[index % gradientColors.length].color2 : `url(#top${index + 1})`}
+                    strokeWidth={5}
+                    fillOpacity={0}
+                    opacity={1}
+                  />
+                ))}
                 {refAreaLeft && refAreaRight && (
                   <ReferenceArea
                     x1={refAreaLeft}
