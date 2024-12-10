@@ -49,5 +49,5 @@ export async function ProfilRankingSectionServer({ rankingType }: { rankingType:
   data = data.sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
 
 
-  return <ZoomableChart data={data}/>;
+  return <ZoomableChart data={data} rankingType={rankingType}/>;
 }

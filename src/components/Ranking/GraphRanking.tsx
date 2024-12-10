@@ -5,6 +5,7 @@ import PlotRankingChart from "@/components/Ranking/PlotRankingChart.tsx";
 import LoadingSpinner from "@/components/ui/loading-spinner.tsx";
 import { cookies } from "next/headers";
 import React from "react";
+import { ZoomableChart } from "@/components/Ranking/zoomable-graph.tsx";
 
 export default async function GraphRanking({ rankingType }: { rankingType: RankingType }) {
   let data = [] as RankingResponse;
@@ -59,7 +60,7 @@ export default async function GraphRanking({ rankingType }: { rankingType: Ranki
   data = data.sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
 
   return (
-    <PlotRankingChart data={data}/>
+    <ZoomableChart data={data} rankingType={rankingType}/>
   )
 }
 

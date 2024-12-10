@@ -2,29 +2,28 @@
 
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card.tsx";
-import {
-  ChartConfig,
-  ChartContainer,
-  ChartLegend,
-  ChartLegendContent,
-  ChartTooltip,
-  ChartTooltipContent
-} from "@/components/Ranking/chart-z.tsx";
+import { ChartConfig, ChartContainer, ChartLegend, ChartLegendContent } from "@/components/Ranking/chart-z.tsx";
 import { Button } from "@/components/ui/button.tsx";
 import {
   Area,
   AreaChart,
-  CartesianGrid, Legend,
+  CartesianGrid,
+  Legend,
   ReferenceArea,
   ResponsiveContainer,
+  Tooltip,
   XAxis,
   YAxis
 } from "recharts";
-import { RankingResponse, rankingResponseSubType } from "@/types";
+import { ProfilSectionEnum, RankingResponse, RankingType } from "@/types";
 import { usePlayerInfoStore } from "@/stores/use-player-info-store.ts";
+import { formatPrice, generateProfilUrl } from "@/lib/misc.ts";
+import { Payload } from "recharts/types/component/DefaultLegendContent";
+import { useRouter } from "next/navigation";
 
 type ZoomableChartProps = {
   data: RankingResponse;
+  rankingType?: RankingType
 };
 
 
@@ -48,17 +47,19 @@ const gradientColors = [
   { "color": "#ff0000", "color2": "#c90000" },
   { "color": "#00d4ff", "color2": "#0657ad" }];
 
-export function ZoomableChart({ data: initialData }: ZoomableChartProps) {
-
+export function ZoomableChart({ data: initialData, rankingType }: ZoomableChartProps) {
+  const router = useRouter();
   const {data: playerInfo} = usePlayerInfoStore();
-  const [data, setData] = useState<any[]>(initialData || []);
   const [refAreaLeft, setRefAreaLeft] = useState<string | null>(null);
   const [refAreaRight, setRefAreaRight] = useState<string | null>(null);
   const [startTime, setStartTime] = useState<string | null>(null);
   const [endTime, setEndTime] = useState<string | null>(null);
-  const [originalData, setOriginalData] = useState<any[]>(initialData || []);
+  const [originalData, setOriginalData] = useState<any[]>([]);
   const [isSelecting, setIsSelecting] = useState(false);
   const chartRef = useRef<HTMLDivElement>(null);
+
+  const [opacity, setOpacity] = useState<{ [key: string]: number }>({});
+
 
   const [uniqueUsernames, setUniqueUsernames] = useState<string[]>([]);
 
@@ -67,6 +68,77 @@ export function ZoomableChart({ data: initialData }: ZoomableChartProps) {
     data.forEach(item => usernames.add(item.username));
     return Array.from(usernames);
   }
+
+  useEffect(() => {
+    const opacityInit = uniqueUsernames.reduce((acc, username) => {
+      acc[username] = 1;
+      return acc;
+    }, {} as { [key: string]: number })
+    setOpacity(opacityInit);
+  }, [uniqueUsernames]);
+
+  const CustomTooltip = ({ active, payload, label }: any) => {
+
+    if (!payload || payload.length === 0)
+      return null;
+
+
+    if (active && payload && payload.length) {
+
+      const payloadOrder = payload.sort((a: any, b: any) => a.payload[`${a.name}_pos`] - b.payload[`${b.name}_pos`]);
+      const date = new Date(label);
+
+      return (
+        <div className="bg-secondary rounded-md p-2 ">
+          <p
+            className="text-card-foreground">{`Date : ${date.getDate()}-${date.getMonth() + 1}-${date.getFullYear()}`}</p>
+          {payloadOrder.map((entry: any) => {
+            const index = uniqueUsernames.indexOf(entry.name);
+            const gradientStart = gradientColors[index % gradientColors.length].color;
+            const gradientEnd = gradientColors[index % gradientColors.length].color2;
+            const position = entry.payload[`${entry.name}_pos`];
+            return <div key={`item-${index}`}>
+              <h3 className="bg-clip-text text-transparent drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)]"
+                  style={{ backgroundImage: `linear-gradient(45deg, ${gradientStart} 0%, ${gradientEnd} 100%)` }}>
+                <span>{`Top #${position} -`}{" "}</span>
+                <span className="font-bold">{entry.name}</span>
+                <span className="font-semibold">{` : ${formatPrice(entry.value)}`}</span>
+              </h3>
+            </div>
+          })}
+        </div>
+      );
+    }
+    return null;
+  };
+
+  const handleMouseEnterLegends = (o: Payload) => {
+    const { value } = o;
+    // set op to 0.5 for every other key
+    const copy_op = { ...opacity };
+    for (const key in copy_op) {
+      if (key !== value) {
+        copy_op[key] = 0.1;
+      }
+    }
+
+    setOpacity(copy_op);
+  };
+
+  const handleMouseLeaveLegends = () => {
+    const copy_op = { ...opacity };
+    for (const key in copy_op) {
+      copy_op[key] = 1;
+    }
+
+    setOpacity(copy_op);
+  };
+
+  const handleMouseClickLegends = (o: Payload) => {
+    const { value } = o;
+    if (value !== "valeur manquante")
+      router.push(generateProfilUrl(value, ProfilSectionEnum.Classement, rankingType), { scroll: false });
+  };
 
   interface transformedDataType {
     [key: string]: { [key: string]: number | string };
@@ -77,8 +149,7 @@ export function ZoomableChart({ data: initialData }: ZoomableChartProps) {
   useEffect(() => {
     if (initialData?.length) {
 
-
-      const transformedData = Object.values(data.reduce((acc, item) => {
+      const transformedData = Object.values(initialData.reduce((acc, item) => {
         // format the date to DD-MM-YYYY
         const date = new Date(item.date.toString()).toISOString();
         const username = item.username;
@@ -93,13 +164,11 @@ export function ZoomableChart({ data: initialData }: ZoomableChartProps) {
         return acc;
       }, {} as transformedDataType));
 
-      const uniqueUsernames = getUniqueUsernames(data).sort((a, b) => {
+      const uniqueUsernames = getUniqueUsernames(initialData).sort((a, b) => {
         const lastDay = transformedData[transformedData.length - 1];
         return Number(lastDay[`${a}_pos`]) - Number(lastDay[`${b}_pos`]);
       })
       setUniqueUsernames(uniqueUsernames);
-
-      setData(transformedData);
       setOriginalData(transformedData);
       setStartTime(initialData[0].date);
       setEndTime(initialData[initialData.length - 1].date);
@@ -108,7 +177,7 @@ export function ZoomableChart({ data: initialData }: ZoomableChartProps) {
 
   const zoomedData = useMemo(() => {
     if (!startTime || !endTime) {
-      return data;
+      return originalData;
     }
 
 
@@ -119,7 +188,7 @@ export function ZoomableChart({ data: initialData }: ZoomableChartProps) {
 
     // Ensure we have at least two data points for the chart to prevent rendering a single dot
     return dataPointsInRange.length > 1 ? dataPointsInRange : originalData.slice(0, 2);
-  }, [startTime, endTime, originalData, data]);
+  }, [startTime, endTime, originalData]);
 
   const maxValue = useMemo(
     () => zoomedData.reduce((max, dataPoint) => Math.max(max, dataPoint[playerInfo?.username] || 0), 0),
@@ -188,6 +257,10 @@ export function ZoomableChart({ data: initialData }: ZoomableChartProps) {
     setEndTime(originalData[originalData.length - 1].date);
   };
 
+  const handleSearch = () => {
+    alert("TODO");
+  };
+
   const handleZoom = (e: React.WheelEvent<HTMLDivElement> | React.TouchEvent<HTMLDivElement>) => {
     e.preventDefault();
     if (!originalData.length || !chartRef.current) return;
@@ -245,8 +318,20 @@ export function ZoomableChart({ data: initialData }: ZoomableChartProps) {
   return (
     <Card className="w-full h-full">
       <CardHeader className="flex-col items-stretch space-y-0 border-b p-0 sm:flex-row hidden sm:flex">
-        <div className="flex flex-1 flex-col justify-center gap-1 px-6 py-5 sm:py-6">
-          <CardTitle>Graphique zoomable</CardTitle>
+        <div className="flex flex-1 flex-row justify-start gap-1 px-6 py-5 sm:py-6">
+          <CardTitle className="flex flex-col w-fit gap-2">
+            Graphique zoomable
+            <Button variant="outline" onClick={handleReset} disabled={!startTime && !endTime}>
+              Reset Zoom
+            </Button>
+          </CardTitle>
+          <div>
+            <Button variant="outline" onClick={handleSearch}>
+              Rechercher un pseudo
+            </Button>
+          </div>
+
+
         </div>
         <div className="flex">
           <div
@@ -279,12 +364,6 @@ export function ZoomableChart({ data: initialData }: ZoomableChartProps) {
         >
           <div className="h-full" onWheel={handleZoom} onTouchMove={handleZoom} ref={chartRef}
                style={{ touchAction: 'none' }}>
-            <div className="flex justify-end my-2 sm:mb-4">
-              <Button variant="outline" onClick={handleReset} disabled={!startTime && !endTime}
-                      className="text-xs sm:text-sm">
-              Reset Zoom
-              </Button>
-            </div>
             <ResponsiveContainer width="100%" height="100%">
               <AreaChart
                 data={zoomedData}
@@ -325,8 +404,8 @@ export function ZoomableChart({ data: initialData }: ZoomableChartProps) {
                   style={{ userSelect: 'none' }}
                   width={45}
                 />
-
-                <Legend layout="horizontal" verticalAlign="bottom" align="center" payload={
+                <Tooltip content={<CustomTooltip/>}/>
+                <Legend layout="horizontal" verticalAlign="bottom" align="center" height={45} payload={
                   uniqueUsernames.map(
                     (item) => ({
                       id: item,
@@ -336,18 +415,20 @@ export function ZoomableChart({ data: initialData }: ZoomableChartProps) {
                     })
                   )
                 }
+                        onMouseEnter={handleMouseEnterLegends} onMouseLeave={handleMouseLeaveLegends}
+                        onClick={handleMouseClickLegends}
                 />
 
-                <ChartTooltip
-                  cursor={false}
-                  content={
-                    <ChartTooltipContent
-                      className="w-[150px] sm:w-[200px] font-mono text-xs sm:text-sm"
-                      nameKey="value"
-                      labelFormatter={(value) => new Date(value).toLocaleDateString("fr-FR")}
-                    />
-                  }
-                />
+                {/*<ChartTooltip*/}
+                {/*  cursor={false}*/}
+                {/*  content={*/}
+                {/*    <ChartTooltipContent*/}
+                {/*      className="w-[150px] sm:w-[200px] font-mono text-xs sm:text-sm"*/}
+                {/*      nameKey="value"*/}
+                {/*      labelFormatter={(value) => new Date(value).toLocaleDateString("fr-FR")}*/}
+                {/*    />*/}
+                {/*  }*/}
+                {/*/>*/}
                 <ChartLegend content={<ChartLegendContent/>}/>
                 {/*<Area*/}
                 {/*  type="monotone"*/}
@@ -366,7 +447,7 @@ export function ZoomableChart({ data: initialData }: ZoomableChartProps) {
                     stroke={zoomedData.every((a) => a[username] === zoomedData[0][username]) ? gradientColors[index % gradientColors.length].color2 : `url(#top${index + 1})`}
                     strokeWidth={5}
                     fillOpacity={0}
-                    opacity={1}
+                    opacity={opacity[username] || 1}
                   />
                 ))}
                 {refAreaLeft && refAreaRight && (
