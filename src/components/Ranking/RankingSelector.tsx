@@ -8,6 +8,8 @@ import { cn } from "@/lib/utils.ts";
 
 export type searchParamsRankingPage = {
   category: string,
+  usernames?: string,
+  noUsernames?: string,
 }
 
 export function RankingSelectorCard({ rankingType, rankingPage }: { rankingType: RankingType, rankingPage: boolean }) {

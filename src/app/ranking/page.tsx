@@ -59,7 +59,7 @@ export default function Home({ searchParams }: {
       <RankingSelectorCard rankingType={rankingType} rankingPage={true}/>
       <Card className="w-full h-[calc(100vh-30vh)]">
         <Suspense fallback={<GraphRankingFallback/>}>
-          <GraphRanking rankingType={rankingType}/>
+          <GraphRanking rankingType={rankingType} searchParams={searchParams}/>
         </Suspense>
       </Card>
     </div>

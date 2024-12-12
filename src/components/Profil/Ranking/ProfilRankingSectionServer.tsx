@@ -1,10 +1,10 @@
 import 'server-only';
 import React from "react";
-import {getRankingLeaderboardPlayerUsername, getRankingLeaderboardPlayerUUID} from "@/lib/api/apiPalaTracker.ts";
-import {RankingResponse, RankingType} from "@/types";
-import {cookies} from "next/headers";
-import {ZoomableChart} from "@/components/Ranking/zoomable-graph.tsx";
-import {searchParamsProfilPage} from "@/components/Profil/ProfilSelectorDisplay.tsx";
+import { getRankingLeaderboardPlayerUsername, getRankingLeaderboardPlayerUUID } from "@/lib/api/apiPalaTracker.ts";
+import { RankingResponse, RankingType } from "@/types";
+import { cookies } from "next/headers";
+import { ZoomableChart } from "@/components/Ranking/zoomable-graph.tsx";
+import { searchParamsProfilPage } from "@/components/Profil/ProfilSelectorDisplay.tsx";
 
 export async function ProfilRankingSectionServer({rankingType, searchParams}: {
   rankingType: RankingType,
@@ -64,5 +64,5 @@ export async function ProfilRankingSectionServer({rankingType, searchParams}: {
   data = data.sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
 
 
-  return <ZoomableChart data={data} rankingType={rankingType}/>;
+  return <ZoomableChart data={data} rankingType={rankingType} profil={true}/>;
 }

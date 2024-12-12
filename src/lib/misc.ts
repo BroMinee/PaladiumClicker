@@ -225,9 +225,11 @@ export function generateXpCalculatorUrl(username: string, metier: string | undef
   return safeJoinPaths(constants.calculatorXpPath, username, `?${args}`);
 }
 
-export function generateRankingUrl(category: string | undefined) {
+export function generateRankingUrl(category: string | undefined, usernames?: string[] | undefined, noUsernames?: string[] | undefined) {
   const argCategory = category ? `category=${category}` : "";
-  const args = [argCategory].filter((e) => e).join("&");
+  const argUsernames = usernames ? `usernames=${usernames}` : "";
+  const argNoUsernames = noUsernames ? `noUsernames=${noUsernames}` : "";
+  const args = [argCategory, argUsernames, argNoUsernames].filter((e) => e).join("&");
   return safeJoinPaths("/ranking", `?${args}`);
 }
 

@@ -1,7 +1,7 @@
 'use client';
 
 import React, {FormEvent, useEffect, useMemo, useRef, useState} from "react";
-import {Card, CardContent, CardHeader, CardTitle} from "@/components/ui/card.tsx";
+import {Card, CardContent, CardHeader} from "@/components/ui/card.tsx";
 import {ChartConfig, ChartContainer, ChartLegend, ChartLegendContent} from "@/components/Ranking/chart-z.tsx";
 import {Button} from "@/components/ui/button.tsx";
 import {
@@ -17,15 +17,17 @@ import {
 } from "recharts";
 import {ProfilSectionEnum, RankingResponse, RankingType} from "@/types";
 import {usePlayerInfoStore} from "@/stores/use-player-info-store.ts";
-import {formatPrice, generateProfilUrl} from "@/lib/misc.ts";
+import {formatPrice, generateProfilUrl, generateRankingUrl} from "@/lib/misc.ts";
 import {Payload} from "recharts/types/component/DefaultLegendContent";
 import {useRouter, useSearchParams} from "next/navigation";
 import {Input} from "@/components/ui/input.tsx";
 import {FaSearch} from "react-icons/fa";
+import {ScrollArea, ScrollBar} from "@/components/ui/scroll-area.tsx";
 
 type ZoomableChartProps = {
   data: RankingResponse;
-  rankingType?: RankingType
+  rankingType?: RankingType;
+  profil: boolean;
 };
 
 
@@ -49,7 +51,7 @@ const gradientColors = [
   { "color": "#ff0000", "color2": "#c90000" },
   { "color": "#00d4ff", "color2": "#0657ad" }];
 
-export function ZoomableChart({ data: initialData, rankingType }: ZoomableChartProps) {
+export function ZoomableChart({data: initialData, rankingType, profil}: ZoomableChartProps) {
   const router = useRouter();
   const searchParams = useSearchParams();
 
@@ -62,6 +64,7 @@ export function ZoomableChart({ data: initialData, rankingType }: ZoomableChartP
   const [originalData, setOriginalData] = useState<any[]>([]);
   const [isSelecting, setIsSelecting] = useState(false);
   const chartRef = useRef<HTMLDivElement>(null);
+  const [isAnimated, setIsAnimated] = useState(false);
 
   const [opacity, setOpacity] = useState<{ [key: string]: number }>({});
 
@@ -96,7 +99,21 @@ export function ZoomableChart({ data: initialData, rankingType }: ZoomableChartP
     }
 
     document.getElementById("username")?.setAttribute("innerHTML", "");
-    router.push(generateProfilUrl(playerInfo.username, ProfilSectionEnum.Classement, rankingType, Array.from(usernames).sort()), {scroll: false});
+    if (profil)
+      router.push(generateProfilUrl(playerInfo.username, ProfilSectionEnum.Classement, rankingType, Array.from(usernames).sort()), {scroll: false});
+    else {
+      const searchParamsNoUsername = searchParams.get('noUsernames');
+      const noUsernames: string[] = searchParamsNoUsername ? searchParamsNoUsername.split(",") : [];
+
+      if (u) {
+        const indexToRemove = noUsernames.findIndex((e) => e.toLowerCase() === u.toString().toLowerCase());
+
+        if (indexToRemove !== -1)
+          noUsernames.splice(indexToRemove, 1);
+      }
+
+      router.push(generateRankingUrl(rankingType, Array.from(usernames).sort(), noUsernames), {scroll: false});
+    }
   }
 
   function handleRemoveUsername(username: string) {
@@ -111,8 +128,15 @@ export function ZoomableChart({ data: initialData, rankingType }: ZoomableChartP
       }
     }
 
-    router.push(generateProfilUrl(playerInfo.username, ProfilSectionEnum.Classement, rankingType, Array.from(usernames).filter((e) => e.toLowerCase() !== username.toLowerCase()).sort()), {scroll: false});
+    if (profil)
+      router.push(generateProfilUrl(playerInfo.username, ProfilSectionEnum.Classement, rankingType, Array.from(usernames).filter((e) => e.toLowerCase() !== username.toLowerCase()).sort()), {scroll: false});
+    else {
+      const searchParamsNoUsername = searchParams.get('noUsernames');
+      const noUsernames: string[] = searchParamsNoUsername ? searchParamsNoUsername.split(',') : [];
+      noUsernames.push(username);
+      router.push(generateRankingUrl(rankingType, Array.from(usernames).filter((e) => e.toLowerCase() !== username.toLowerCase()).sort(), noUsernames), {scroll: false});
 
+    }
   }
 
   useEffect(() => {
@@ -235,7 +259,9 @@ export function ZoomableChart({ data: initialData, rankingType }: ZoomableChartP
       setOriginalData(transformedData);
     if (initialData.length > 0) {
       setStartTime(initialData[0].date);
-      setEndTime(initialData[initialData.length - 1].date);
+      const endDate = new Date(initialData[initialData.length - 1].date);
+      endDate.setDate(endDate.getDate() + 1);
+      setEndTime(endDate.toISOString());
     }
   }, [initialData]);
 
@@ -360,6 +386,7 @@ export function ZoomableChart({ data: initialData, rankingType }: ZoomableChartP
     const newEndTime = new Date(currentEndTime - zoomAmount * (1 - mousePercentage));
 
     setStartTime(newStartTime.toISOString());
+    console.log(newEndTime.toISOString());
     setEndTime(newEndTime.toISOString());
   };
 
@@ -374,12 +401,12 @@ export function ZoomableChart({ data: initialData, rankingType }: ZoomableChartP
     <Card className="w-full h-full">
       <CardHeader className="flex-col items-stretch space-y-0 border-b p-0 sm:flex-row hidden sm:flex">
         <div className="flex flex-1 flex-row justify-start gap-1 px-6 py-5 sm:py-6">
-          <CardTitle className="flex flex-col w-fit gap-2">
-            Graphique zoomable
-            <Button variant="outline" onClick={handleReset} disabled={!startTime && !endTime}>
-              Reset Zoom
-            </Button>
-          </CardTitle>
+          <Button variant="outline" onClick={handleReset} disabled={!startTime && !endTime}>
+            Reset Zoom
+          </Button>
+          <Button variant="outline" onClick={() => setIsAnimated(!isAnimated)}>
+            {!isAnimated ? "Activer les animations" : "Désactiver les animations"}
+          </Button>
         </div>
         <div className="flex">
           <div
@@ -496,6 +523,7 @@ export function ZoomableChart({ data: initialData, rankingType }: ZoomableChartP
                         strokeWidth={5}
                         fillOpacity={0}
                         opacity={opacity[username] || 1}
+                        isAnimationActive={isAnimated}
                     />
                 ))}
                 {refAreaLeft && refAreaRight && (
@@ -533,17 +561,22 @@ export function ZoomableChart({ data: initialData, rankingType }: ZoomableChartP
               </Button>
             </div>
           </form>
-          <ul className="mt-2">
-            {uniqueUsernames.map((username) => (
-                <li key={username} className="flex justify-between items-center mb-2">
-                  <span>{username}</span>
-                  <Button variant="outline" size="sm" disabled={username === playerInfo?.username}
-                          onClick={() => handleRemoveUsername(username)}>
-                    Remove
-                  </Button>
-                </li>
-            ))}
-          </ul>
+          <ScrollArea className="h-96">
+            <ul className="mt-2 mr-3">
+              {uniqueUsernames.map((username, index) => (
+                  <li key={username} className="flex justify-between items-center mb-2"
+                      style={{color: gradientColors[index % gradientColors.length].color2}}>
+                    <span>{username}</span>
+                    <Button variant="outline" size="sm"
+                            disabled={profil && username.toLowerCase() === playerInfo?.username.toLowerCase()}
+                            onClick={() => handleRemoveUsername(username)}>
+                      Remove
+                    </Button>
+                  </li>
+              ))}
+            </ul>
+            <ScrollBar orientation="vertical"/>
+          </ScrollArea>
         </div>
       </CardContent>
     </Card>
