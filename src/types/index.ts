@@ -404,7 +404,7 @@ export enum RankingType {
   "boss" = "boss",
   "egghunt" = "egghunt",
   "end" = "end",
-  "chorus" = "chorus",
+  // "chorus" = "chorus",
   "koth" = "koth",
   "clicker" = "clicker",
 }
