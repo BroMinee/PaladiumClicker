@@ -567,9 +567,9 @@ export type Tree<T> = {
 
 export enum ProfilSectionEnum {
   "Home" = "Home",
-  "Achievements" = "Achievements",
-  "Pet/Monture" = "Pet/Monture",
   "Classement" = "Classement",
+  "Pet/Monture" = "Pet/Monture",
+  "Achievements" = "Achievements",
 }
 
 export type Achievement = {

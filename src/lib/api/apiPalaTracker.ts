@@ -74,8 +74,12 @@ export function getRankingLeaderboard(rankingType: RankingType, limit = 10, offs
   return fetchWithHeader<RankingResponse>(`${API_PALATRACKER}/v1/ranking/${rankingType}/all?limit=${limit}&offset=${offset}`, 0);
 }
 
-export function getRankingLeaderboardPlayer(uuid: string, rankingType: RankingType) {
+export function getRankingLeaderboardPlayerUUID(uuid: string, rankingType: RankingType) {
   return fetchWithHeader<RankingResponse>(`${API_PALATRACKER}/v1/ranking/${rankingType}/${uuid}`, 0)
+}
+
+export function getRankingLeaderboardPlayerUsername(username: string, rankingType: RankingType) {
+  return fetchWithHeader<RankingResponse>(`${API_PALATRACKER}/v1/ranking/${rankingType}/username/${username}`, 0)
 }
 
 export function getRankingAllLeaderboardPlayer(uuid: string) {

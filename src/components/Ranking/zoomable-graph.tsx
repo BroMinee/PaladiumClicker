@@ -15,11 +15,13 @@ import {
   XAxis,
   YAxis
 } from "recharts";
-import { ProfilSectionEnum, RankingResponse, RankingType } from "@/types";
-import { usePlayerInfoStore } from "@/stores/use-player-info-store.ts";
-import { formatPrice, generateProfilUrl } from "@/lib/misc.ts";
-import { Payload } from "recharts/types/component/DefaultLegendContent";
-import { useRouter } from "next/navigation";
+import {ProfilSectionEnum, RankingResponse, RankingType} from "@/types";
+import {usePlayerInfoStore} from "@/stores/use-player-info-store.ts";
+import {formatPrice, generateProfilUrl} from "@/lib/misc.ts";
+import {Payload} from "recharts/types/component/DefaultLegendContent";
+import {useRouter, useSearchParams} from "next/navigation";
+import {Input} from "@/components/ui/input.tsx";
+import {FaSearch} from "react-icons/fa";
 
 type ZoomableChartProps = {
   data: RankingResponse;
@@ -49,6 +51,9 @@ const gradientColors = [
 
 export function ZoomableChart({ data: initialData, rankingType }: ZoomableChartProps) {
   const router = useRouter();
+  const searchParams = useSearchParams();
+
+
   const {data: playerInfo} = usePlayerInfoStore();
   const [refAreaLeft, setRefAreaLeft] = useState<string | null>(null);
   const [refAreaRight, setRefAreaRight] = useState<string | null>(null);
@@ -68,6 +73,31 @@ export function ZoomableChart({ data: initialData, rankingType }: ZoomableChartP
     data.forEach(item => usernames.add(item.username));
     return Array.from(usernames);
   }
+
+  async function onSubmit(event: FormEvent<HTMLFormElement>) {
+    if (!playerInfo)
+      return;
+
+    event.preventDefault();
+    const formData = new FormData(event.target as HTMLFormElement);
+
+    let usernames = new Set<string>();
+
+    const u = formData.get("username");
+    if (u) {
+      usernames.add(u.toString());
+    }
+
+    const us = searchParams.get('usernames');
+    if (us) {
+      for (const u of us.split(',')) {
+        usernames.add(u);
+      }
+    }
+
+    router.push(generateProfilUrl(playerInfo.username, ProfilSectionEnum.Classement, rankingType, Array.from(usernames).sort()), {scroll: false});
+  }
+
 
   useEffect(() => {
     const opacityInit = uniqueUsernames.reduce((acc, username) => {
@@ -147,7 +177,6 @@ export function ZoomableChart({ data: initialData, rankingType }: ZoomableChartP
 
 
   useEffect(() => {
-    if (initialData?.length) {
 
       const transformedData = Object.values(initialData.reduce((acc, item) => {
         // format the date to DD-MM-YYYY
@@ -170,6 +199,7 @@ export function ZoomableChart({ data: initialData, rankingType }: ZoomableChartP
       })
       setUniqueUsernames(uniqueUsernames);
       setOriginalData(transformedData);
+    if (initialData.length > 0) {
       setStartTime(initialData[0].date);
       setEndTime(initialData[initialData.length - 1].date);
     }
@@ -257,10 +287,6 @@ export function ZoomableChart({ data: initialData, rankingType }: ZoomableChartP
     setEndTime(originalData[originalData.length - 1].date);
   };
 
-  const handleSearch = () => {
-    alert("TODO");
-  };
-
   const handleZoom = (e: React.WheelEvent<HTMLDivElement> | React.TouchEvent<HTMLDivElement>) => {
     e.preventDefault();
     if (!originalData.length || !chartRef.current) return;
@@ -325,17 +351,34 @@ export function ZoomableChart({ data: initialData, rankingType }: ZoomableChartP
               Reset Zoom
             </Button>
           </CardTitle>
-          <div>
-            <Button variant="outline" onClick={handleSearch}>
-              Rechercher un pseudo
-            </Button>
-          </div>
+          <CardTitle>
+            <form onSubmit={onSubmit}>
+              <div className="relative">
+                <Input
+                    type="text"
+                    id="username"
+                    name="username"
+                    className={"bg-background"}
+                    placeholder={"Entre un pseudo"}
+                />
+                <Button
+                    id="pseudo-submit"
+                    type="submit"
+                    className="absolute right-0 top-0 text-foreground rounded-l-none border-none shadow-none"
+                    variant="ghost"
+                    size="icon"
+                >
+                  <FaSearch/>
+                </Button>
+              </div>
+            </form>
+          </CardTitle>
 
 
         </div>
         <div className="flex">
           <div
-            className="relative z-30 flex flex-1 flex-col justify-center gap-1 border-t px-6 py-4 text-left even:border-l bg-muted/10 sm:border-l sm:border-t-0 sm:px-8 sm:py-6"
+              className="relative z-30 flex flex-1 flex-col justify-center gap-1 border-t px-6 py-4 text-left even:border-l bg-muted/10 sm:border-l sm:border-t-0 sm:px-8 sm:py-6"
           >
                         <span className="text-xs text-muted-foreground">
                             Minimum Local
@@ -345,7 +388,7 @@ export function ZoomableChart({ data: initialData, rankingType }: ZoomableChartP
                         </span>
           </div>
           <div
-            className="relative z-30 flex flex-1 flex-col justify-center gap-1 border-t px-6 py-4 text-left even:border-l bg-muted/10 sm:border-l sm:border-t-0 sm:px-8 sm:py-6"
+              className="relative z-30 flex flex-1 flex-col justify-center gap-1 border-t px-6 py-4 text-left even:border-l bg-muted/10 sm:border-l sm:border-t-0 sm:px-8 sm:py-6"
           >
                         <span className="text-xs text-muted-foreground">
                             Maximum Local

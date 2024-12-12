@@ -15,7 +15,7 @@ import { Card, CardContent } from "@/components/ui/card.tsx";
 import React, { Suspense } from "react";
 import { ProfilRankingSection } from "@/components/Profil/Ranking/ProfilRanking.tsx";
 
-export type searchParamsProfilPage = { section?: string, category?: string }
+export type searchParamsProfilPage = { section?: string, category?: string, usernames?: string }
 
 export function ProfilSelectorDisplay({ params, searchParams }: {
   params: { username: string },

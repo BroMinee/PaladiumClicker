@@ -1,7 +1,6 @@
 import { RankingResponse, RankingType } from "@/types";
 import { redirect } from "next/navigation";
-import { getRankingLeaderboard, getRankingLeaderboardPlayer } from "@/lib/api/apiPalaTracker.ts";
-import PlotRankingChart from "@/components/Ranking/PlotRankingChart.tsx";
+import { getRankingLeaderboard, getRankingLeaderboardPlayerUUID } from "@/lib/api/apiPalaTracker.ts";
 import LoadingSpinner from "@/components/ui/loading-spinner.tsx";
 import { cookies } from "next/headers";
 import React from "react";
@@ -21,7 +20,7 @@ export default async function GraphRanking({ rankingType }: { rankingType: Ranki
     return <div>Impossible de récupérer l&apos;uuid du joueur via les cookies</div>;
   }
 
-  const dataPlayer = await getRankingLeaderboardPlayer(uuid, rankingType).catch(() => {
+  const dataPlayer = await getRankingLeaderboardPlayerUUID(uuid, rankingType).catch(() => {
     return [] as RankingResponse;
   });
 

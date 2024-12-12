@@ -24,7 +24,7 @@ export function ProfilRankingSection({searchParams}: {searchParams: searchParams
       <RankingSelectorCard rankingType={rankingType} rankingPage={false}/>
       <Card className="w-full h-[calc(100vh-30vh)]">
         <Suspense fallback={<ProfilRankingSectionFallBack/>}>
-          <ProfilRankingSectionServer rankingType={rankingType}/>
+          <ProfilRankingSectionServer rankingType={rankingType} searchParams={searchParams}/>
         </Suspense>
       </Card>
     </div>
