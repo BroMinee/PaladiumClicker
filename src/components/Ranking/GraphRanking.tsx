@@ -16,13 +16,14 @@ export default async function GraphRanking({ rankingType }: { rankingType: Ranki
 
   const cookieStore = await cookies()
   const uuid = cookieStore.get('uuid' as any)?.value;
-  if(uuid === undefined) {
-    return <div>Impossible de récupérer l&apos;uuid du joueur via les cookies</div>;
+  let dataPlayer : RankingResponse = [];
+  if(uuid !== undefined) {
+    dataPlayer = await getRankingLeaderboardPlayerUUID(uuid, rankingType).catch(() => {
+      return [] as RankingResponse;
+    });
   }
 
-  const dataPlayer = await getRankingLeaderboardPlayerUUID(uuid, rankingType).catch(() => {
-    return [] as RankingResponse;
-  });
+
 
   data = data.concat(dataPlayer);
 

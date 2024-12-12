@@ -20,9 +20,9 @@ export function ProfilRankingSection({searchParams}: {searchParams: searchParams
   }
 
   return (
-    <div className="flex flex-col gap-4">
+    <div className="flex flex-col gap-2">
       <RankingSelectorCard rankingType={rankingType} rankingPage={false}/>
-      <Card className="w-full h-[calc(100vh-30vh)]">
+      <Card className="w-full h-[calc(100vh-35vh)]">
         <Suspense fallback={<ProfilRankingSectionFallBack/>}>
           <ProfilRankingSectionServer rankingType={rankingType} searchParams={searchParams}/>
         </Suspense>
