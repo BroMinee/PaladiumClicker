@@ -1,22 +1,23 @@
 import {
   convertEpochToDateUTC2,
   formatPrice,
-  GetAllFileNameInFolder,
+  generateAhShopUrl,
   levenshteinDistance,
   safeJoinPaths
 } from "@/lib/misc.ts";
 import { Card, CardContent } from "@/components/ui/card.tsx";
-import { AhItemType } from "@/types";
+import { AhItemType, OptionType } from "@/types";
 import LoadingData from "@/components/LoadingData.tsx";
 import Image from "next/image";
-
+import Link from "next/link";
 
 type AhItemsProps = {
-  item: AhItemType;
+  item: AhItemType,
+  itemNameMatcher: OptionType[];
 }
 
 
-export default function AhItem({ item }: AhItemsProps) {
+export default function AhItem({ item, itemNameMatcher }: AhItemsProps) {
   if (!item["item"])
     return <LoadingData username={undefined}/>;
 
@@ -24,49 +25,43 @@ export default function AhItem({ item }: AhItemsProps) {
   // const createdAt = convertEpochToDateUTC2(item["createdAt"]);
   const expireAt = convertEpochToDateUTC2(item["expireAt"]);
   // const item_meta = item["item"]["meta"];
-  let item_name = item["item"]["name"].replace("palamod:", "").replace("item.", "").replace("minecraft:", "").replace("tile.", "").replace("customnpc:", "").replace("guardiangolem:", "")
-
-  if (item_name === "IronChest:BlockIronChest") {
-    item_name = item["name"];
-  }
+  let item_name = item.item.name;
 
 
-  const quantity = item["item"]["quantity"];
-  const name = item["name"];
-  const price = item["price"];
-  const pricePb = item["pricePb"];
-  const renamed = item["renamed"];
+  const quantity = item.item.quantity;
+  const price = item.price;
+  const pricePb = item.pricePb;
+  const renamed = item.renamed;
+  const name = item.name;
   // const skin = item["skin"];
   // const type = item["type"][0].toUpperCase() + item["type"].slice(1).toLowerCase();
 
-  const closestItemName = GetAllFileNameInFolder().reduce((acc, curr) => {
-    if (levenshteinDistance(curr, item_name) < levenshteinDistance(acc, item_name)) {
-      return curr;
-    } else {
-      return acc;
-    }
+  let closestItemName = itemNameMatcher.find((e) => {
+    return e.value === item_name;
   });
+  if (!closestItemName) {
+    closestItemName = itemNameMatcher.reduce((acc, curr) => {
+      if (levenshteinDistance(renamed ? curr.value : curr.label, renamed ? item_name : name) < levenshteinDistance(renamed ? curr.value : acc.label, renamed ? item_name : name)) {
+        return curr;
+      } else {
+        return acc;
+      }
+    });
+  }
 
-  let displayName = item["item"]["name"];
-  if (item["item"]["name"] === "StorageDrawers:fullDrawers4")
-    displayName = "StorageDrawers 2x2";
-  else if (item["item"]["name"] === "StorageDrawers:fullDrawers2")
-    displayName = "StorageDrawers 1x2";
-  else if (item["item"]["name"] === "StorageDrawers:fullDrawers1")
-    displayName = "StorageDrawers 1x1";
-  else if (item["item"]["name"] === "palamarket:tile.luckydrawer")
-    displayName = "Lucky Drawer";
+  let displayName = closestItemName.label;
 
 
   return (
-    <Card>
+    <Link href={`${generateAhShopUrl(closestItemName)}`}>
+      <Card className="hover:scale-105 duration-300 mt-4 ml-1.5 mr-1.5 cursor-pointer">
       <CardContent className="pt-6 space-y-2">
         <div className="flex flex-col items-center justify-center gap-2">
-          <Image src={safeJoinPaths("/AH_img/", `${closestItemName}.png`)} alt="Icône"
+          <Image src={safeJoinPaths("/AH_img/", `${closestItemName.img}`)} alt="Icône"
                  height={48} width={48}
                  className="object-cover pixelated"/>
           <span
-            className="text-primary text-sm">{quantity}x {renamed ? `${displayName} renommé en ${name}` : `${name}`}</span>
+            className="text-primary text-sm">{quantity}x {renamed ? `${displayName} renommé en ${name}` : `${displayName}`}</span>
         </div>
         <div className="space-y-2">
           <div className="text-sm">
@@ -90,5 +85,6 @@ export default function AhItem({ item }: AhItemsProps) {
         </div>
       </CardContent>
     </Card>
+    </Link>
   )
 }

@@ -2,6 +2,7 @@
 
 import { usePlayerInfoStore } from "@/stores/use-player-info-store.ts";
 import AhItem from "@/components/Profil/AhItem.tsx";
+import { OptionType } from "@/types";
 
 export function AhInfoTitleClient() {
   const { data: playerInfo } = usePlayerInfoStore();
@@ -16,7 +17,7 @@ export function AhInfoTitleClient() {
   </>
 }
 
-export function AhItemClient() {
+export function AhItemClient({ itemNameMatcher }: { itemNameMatcher: OptionType[] }) {
   const { data: playerInfo } = usePlayerInfoStore();
 
   if (!playerInfo || !playerInfo.ah)
@@ -29,7 +30,7 @@ export function AhItemClient() {
   return <>
     {
       playerInfo["ah"]["data"].map((e, index) => {
-        return <AhItem key={index} item={e}/>
+        return <AhItem key={index} item={e} itemNameMatcher={itemNameMatcher}/>
       })
     }
   </>

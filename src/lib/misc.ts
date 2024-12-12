@@ -233,10 +233,16 @@ export function generateRankingUrl(category: string | undefined, usernames?: str
   return safeJoinPaths("/ranking", `?${args}`);
 }
 
+export function generateAhShopUrl(item: OptionType | undefined) {
+  const argItem = item ? `item=${item.value}` : "";
+  const args = [argItem].filter((e) => e).join("&");
+  return safeJoinPaths(constants.ahPath, `?${args}`);
+}
+
 export function generateAdminShopUrl(item: AdminShopItem) {
   const argItem = item ? `item=${item}` : "";
   const args = [argItem].filter((e) => e).join("&");
-  return safeJoinPaths("/admin-shop", `?${args}`);
+  return safeJoinPaths(constants.adminShopPath, `?${args}`);
 }
 
 export function safeJoinPaths(base: string, ...paths: string[]): string {
