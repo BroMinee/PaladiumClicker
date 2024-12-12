@@ -1,5 +1,14 @@
 [
   {
+    "date": "TODO",
+    "events": [
+      "Ajout d'une fonction de recherche dans le classement",
+      "Ajout d'une section 'Classement' dans le profil",
+      "Ajout des la possibilité de zoomer sur les graphiques",
+      "Suppression du classement 'end'"
+    ]
+  },
+  {
     "date": "27/11/2024 - 20h00",
     "events": [
       "Ajout d'un compte à rebours dynamique pour la réimportation du profil de 15 minutes",
