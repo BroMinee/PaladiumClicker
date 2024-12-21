@@ -35,8 +35,7 @@ export function RankingSelectorClient({ rankingType, rankingPage }: {
   );
 
   return (
-    <>
-      <HoverText text={hoverElement}>
+      <HoverText text={hoverElement} className="flex justify-center items-center">
         <button
           className={cn("w-16 h-16 hover:scale-125 duration-300 cursor-pointer hover:bg-secondary-foreground p-4 rounded-2xl hover:grayscale-0", !selected ? "grayscale" : "")}
           onClick={() => router.push(rankingPage ? generateRankingUrl(rankingType, usernames?.split(","), noUsernames?.split(",")) : generateProfilUrl(playerInfo?.username || "undefined", ProfilSectionEnum.Classement, rankingType, usernames ? [usernames] : undefined), { scroll: false })}
@@ -50,6 +49,5 @@ export function RankingSelectorClient({ rankingType, rankingPage }: {
           />
         </button>
       </HoverText>
-    </>
   )
 }

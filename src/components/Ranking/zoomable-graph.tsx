@@ -432,10 +432,10 @@ export function ZoomableChart({data: initialData, rankingType, profil}: Zoomable
 
         </div>
       </CardHeader>
-      <CardContent className="flex flex-row px-2 sm:p-6 h-full sm:h-[calc(100%-100px)]">
+      <CardContent className="sm:flex flex-row px-2 sm:p-6 h-full sm:h-[calc(100%-100px)] hidden">
         <ChartContainer
             config={chartConfig}
-            className="w-full h-full"
+            className=" h-full w-3/4"
         >
           <div className="h-full" onWheel={handleZoom} onTouchMove={handleZoom} ref={chartRef}
                style={{touchAction: 'none'}}>
@@ -579,6 +579,7 @@ export function ZoomableChart({data: initialData, rankingType, profil}: Zoomable
           </ScrollArea>
         </div>
       </CardContent>
+      <CardHeader className="sm:hidden flex">Passe ton écran à l&apos;horizontal</CardHeader>
     </Card>
   )
 }

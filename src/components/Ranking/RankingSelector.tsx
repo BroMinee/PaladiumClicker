@@ -24,7 +24,7 @@ export function RankingSelectorCard({ rankingType, rankingPage }: { rankingType:
         className="text-primary inline-block"/> by <GradientText>BroMine__</GradientText>
       </CardDescription>
     </CardHeader>
-    <CardContent className="flex flex-row items-center justify-between gap-2 ">
+    <CardContent className="grid grid-cols-3 md:flex md:flex-row items-center justify-between gap-2">
       {Object.keys(RankingType).map((key) => {
         return <RankingSelectorClient key={key} rankingType={key as RankingType} rankingPage={rankingPage}/>
 
