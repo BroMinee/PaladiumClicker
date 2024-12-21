@@ -3100,9 +3100,9 @@ export function getImagePathFromRankingType(rankingType: string): string {
     case RankingType.egghunt:
       imgPath = safeJoinPaths("/RankingIcon/", `egghunt.png`);
       break;
-    case RankingType.end:
-      imgPath = safeJoinPaths("/RankingIcon/", `end.png`);
-      break;
+    // case RankingType.end:
+    //   imgPath = safeJoinPaths("/RankingIcon/", `end.png`);
+    //   break;
     // case RankingType.chorus:
     //   imgPath = safeJoinPaths("/RankingIcon/", `chorus.png`);
     //   break;
@@ -3136,8 +3136,8 @@ export function rankingTypeToUserFriendlyText(rankingType: RankingType): string 
       return "Boss";
     case RankingType.egghunt:
       return "EggHunt";
-    case RankingType.end:
-      return "End";
+    // case RankingType.end:
+    //   return "End";
     // case RankingType.chorus:
     //   return "Chorus";
     case RankingType.koth:
