@@ -463,13 +463,13 @@ const how_to_xp: HowToXp = {
 
 const notificationPath: Map<PathValid, [number, string]> = new Map<PathValid, [number, string]>(
   [
-    ["/profil", [new Date("2024-11-27 19:00").getTime(), "Ajout des succès et des montures/pets"]],
+    ["/profil", [new Date("2024-12-21 16:10").getTime(), "Ajout d'une section 'Classement'"]],
     ["/xp-calculator", [new Date("2024-10-16").getTime(), "Ajout des \"fortunes modifiers\" dans les calculs"]],
     ["/clicker-optimizer", [new Date("2024-11-27 19:00").getTime(), "Refonte de la page"]],
     ["/palatime", [new Date("2024-11-16 18:55").getTime(), "Nouvelle édition"]],
     ["/craft", [new Date("2024-10-16").getTime(), "Nouvel outil"]],
-    ["/patchnote", [new Date("2024-11-27 19:00").getTime(), "Nouveau patchnote"]],
-    ["/pala-animation", [new Date("2024-10-16").getTime(), "Ajout des nouvelles questions"]],
+    ["/patchnote", [new Date("2024-12-21 16:10").getTime(), "Nouveau patchnote"]],
+    ["/pala-animation", [new Date("2024-12-21 16:10").getTime(), "Ajout des 174 nouvelles questions"]],
   ]);
 
 const menuPaths: Map<string, PathValid[]> = new Map<string, PathValid[]>([

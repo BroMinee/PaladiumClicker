@@ -2,11 +2,14 @@
   {
     "date": "21/12/2024 - 16h00",
     "events": [
+      "Ajout d'une section 'Classement' dans le profil pour suivre votre évolution face aux autres joueurs",
       "Ajout d'une fonction de recherche par pseudo dans le classement",
-      "Ajout d'une section 'Classement' dans le profil",
       "Ajout des la possibilité de zoomer sur les graphiques",
-      "Suppression des classements 'chorus' et 'end' qui n'étaient plus utilisés par Paladium",
-      "Ajout de 178 nouvelles questions dans le PalaAnimation Trainer"
+      "Ajout de 174 nouvelles questions dans le PalaAnimation Trainer, pour un total de 495 questions",
+      "Ajout du modèle 3D du renne de noël (reindeer)",
+      "Correction des images des objets en vente dans le market du joueur dans le profil",
+      "Correction de la précondition de production ne prenant pas en compte les coins non dépensés",
+      "Suppression des classements 'chorus' et 'end' qui n'étaient plus utilisés par Paladium"
     ]
   },
   {
