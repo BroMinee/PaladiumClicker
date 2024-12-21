@@ -1,11 +1,12 @@
 [
   {
-    "date": "TODO",
+    "date": "21/12/2024 - 16h00",
     "events": [
-      "Ajout d'une fonction de recherche dans le classement",
+      "Ajout d'une fonction de recherche par pseudo dans le classement",
       "Ajout d'une section 'Classement' dans le profil",
       "Ajout des la possibilité de zoomer sur les graphiques",
-      "Suppression du classement 'end'"
+      "Suppression des classements 'chorus' et 'end' qui n'étaient plus utilisés par Paladium",
+      "Ajout de 178 nouvelles questions dans le PalaAnimation Trainer"
     ]
   },
   {

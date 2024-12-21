@@ -403,7 +403,7 @@ export enum RankingType {
   "job.farmer" = "job.farmer",
   "boss" = "boss",
   "egghunt" = "egghunt",
-  "end" = "end",
+  // "end" = "end",
   // "chorus" = "chorus",
   "koth" = "koth",
   "clicker" = "clicker",
