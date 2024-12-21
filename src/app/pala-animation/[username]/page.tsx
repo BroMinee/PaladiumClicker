@@ -77,7 +77,7 @@ export default function PalaAnimationPage({ params }: { params: { username: stri
                   <CardTitle>
                     Le classement est à titre indicatif et n&apos;est pas officiel.
                     <br/>
-                    De plus, nous ne garantissons pas que les temps affichés soient effectué sans triche, ni réalisé par
+                    De plus, nous ne garantissons pas que les temps affichés soient effectués sans triche, ni réalisés par
                     le vrai détenteur du pseudonyme Minecraft.
                   </CardTitle>
                 </CardHeader>
