@@ -1,5 +1,12 @@
 [
   {
+    "date": "TODO",
+    "events": [
+      "Suppression du compte à rebours pour la réimportation du profil (toujours un cache de 15 minutes) mais c'est plus user-friendly",
+      "Ajout d'une popup quand la mise à jour du profil donne des informations antérieures aux informations actuelles"
+    ]
+  },
+  {
     "date": "21/12/2024",
     "events": [
       "Ajout d'une section 'Classement' dans le profil pour suivre votre évolution face aux autres joueurs",

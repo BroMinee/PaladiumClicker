@@ -68,6 +68,7 @@ export const usePlayerInfoStore = create<State & Actions, [["zustand/persist", S
         data: {
           ...state.data,
           metier: newMetier,
+          edited: true,
         },
       };
     }),
@@ -93,6 +94,7 @@ export const usePlayerInfoStore = create<State & Actions, [["zustand/persist", S
         data: {
           ...state.data,
           metier: newMetier,
+          edited: true,
         },
       };
     }),
@@ -121,6 +123,7 @@ export const usePlayerInfoStore = create<State & Actions, [["zustand/persist", S
         data: {
           ...state.data,
           building: state.data.building.map((b) => b.name === name ? targettedBuilding : b),
+          edited: true,
         },
       };
     }),
@@ -141,6 +144,7 @@ export const usePlayerInfoStore = create<State & Actions, [["zustand/persist", S
         data: {
           ...state.data,
           [type]: state.data[type].map((u) => u.name === name ? targetUpgrade : u),
+          edited: true,
         },
       };
     }),
@@ -208,6 +212,7 @@ export const usePlayerInfoStore = create<State & Actions, [["zustand/persist", S
         data: {
           ...state.data,
           building: state.data.building.map((b, i) => i === index ? targettedBuilding : b),
+          edited: true,
         },
       };
     }),

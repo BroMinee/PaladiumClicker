@@ -127,6 +127,7 @@ export type PlayerInfo = {
   mount: MountInfo | null,
   pet: PetInfo | null,
   version?: number,
+  edited?: boolean,
 }
 
 export type MountInfo = {

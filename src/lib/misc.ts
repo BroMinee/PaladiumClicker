@@ -3260,6 +3260,7 @@ export const getInitialPlayerInfo = (): PlayerInfo => {
     version: constants.version,
     mount: { name: "Dancarok", damage: 0, food: 6000, xp: 0, mountType: 1, sharedXpPercent: 100 },
     pet: { currentSkin: "dog", experience: 0, happiness: 0, skills: [] },
+    edited: false,
   };
 }
 
