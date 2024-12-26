@@ -1,4 +1,4 @@
-name: Build
+name: Build on my worker
 
 on:
   push:
@@ -25,4 +25,34 @@ jobs:
         run: npm install
 
       - name: Build the project
+        env:
+          PALADIUM_API_URL: ${{ secrets.PALADIUM_API_URL }}
+          PALADIUM_API_KEY: ${{ secrets.PALADIUM_API_KEY }}
         run: npm run build
+
+      - name: Save build artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-artifact
+          path: ./dist
+
+  deploy:
+    name: Deploy
+    runs-on: ubuntu-latest
+    needs: build
+    if: github.ref == 'refs/heads/master'
+
+    steps:
+      - name: Download artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: build-artifact
+
+      - name: 📂 Sync files
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server:  ${{ secrets.FTP_HOST }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          local-dir: ./
+          server-dir: giju4092_deploy/

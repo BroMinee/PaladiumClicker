@@ -90,7 +90,7 @@ export function getAdminShopHistory(item: AdminShopItem) {
   return fetchWithHeader<AdminShopItemDetail[]>(`${API_PALATRACKER}/v1/admin-shop/${item}`, 0)
 }
 
-export function getStatusPaladium() {
+export async function getStatusPaladium() {
   return fetchWithHeader<ServerPaladiumStatusResponse[]>(`${API_PALATRACKER}/v1/status-history/paladium`, 0);
 }
 
@@ -102,7 +102,7 @@ export function getStatusLauncher() {
   return fetchWithHeader<ServerStatusResponse[]>(`${API_PALATRACKER}/v1/status-history/launcher`, 0);
 }
 
-export function getAllItems(): Promise<OptionType[]> {
+export async function getAllItems(): Promise<OptionType[]> {
   return fetchWithHeader<{
     item_name: string,
     us_trad: string,

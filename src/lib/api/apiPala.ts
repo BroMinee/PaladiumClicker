@@ -34,8 +34,7 @@ import { registerPlayerAction } from "@/lib/api/apiServerAction.ts";
 // import { toast } from "sonner";
 import constants from "@/lib/constants.ts";
 
-
-export const PALADIUM_API_URL = "https://api.paladium.games";
+export const PALADIUM_API_URL = process.env.PALADIUM_API_URL || "https://api.paladium.games";
 
 
 export const isApiDown = async (): Promise<boolean> => {

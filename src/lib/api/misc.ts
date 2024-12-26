@@ -52,7 +52,7 @@ export const fetchWithHeader = async <T>(url: string, cache_duration_in_sec = 15
       throw new Error(url + json.message);
     return json as T;
   } catch (error) {
-    console.error(error, url);
+    console.error(error, url, response?.status);
   }
 
 
