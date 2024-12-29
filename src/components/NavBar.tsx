@@ -13,7 +13,7 @@ import { PiEggCrackBold } from "react-icons/pi";
 import { GiCrenelCrown, GiStoneCrafting } from "react-icons/gi";
 import { TbHandClick } from "react-icons/tb";
 import { ImNewspaper } from "react-icons/im";
-import { IoMdStopwatch } from "react-icons/io";
+import { IoMdInformationCircleOutline, IoMdStopwatch } from "react-icons/io";
 import React from "react";
 import ImportProfil from "@/components/shared/ImportProfil.tsx";
 import { HiOutlineStatusOnline } from "react-icons/hi";
@@ -101,7 +101,7 @@ function NavBarContent() {
             <ImNewspaper size={24}/>
           </LinkClient>
           <LinkClient path={constants.palaAnimationPath}>
-            <IoMdStopwatch size={24}/>
+            <IoMdStopwatch size={32}/>
           </LinkClient>
           <LinkClient path={constants.craftPath}>
             <GiStoneCrafting size={24}/>
@@ -111,6 +111,9 @@ function NavBarContent() {
           </LinkClient>
           <LinkClient path={constants.politiqueDeConfidentialitePath}>
             <FaKey size={24}/>
+          </LinkClient>
+          <LinkClient path={constants.aboutPath}>
+            <IoMdInformationCircleOutline size={24}/>
           </LinkClient>
         </CategorieDisplay>
       </nav>

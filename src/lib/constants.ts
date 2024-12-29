@@ -67,7 +67,7 @@ const adminShopPath: PathValid = "/admin-shop";
 const statusPath: PathValid = "/status";
 const politiqueDeConfidentialitePath: PathValid = "/politique-de-confidentialite";
 const patchnotePath: PathValid = "/patchnote";
-
+const aboutPath: PathValid = "/about";
 
 type LinkInfo = {
   label: LabelValid;
@@ -674,6 +674,7 @@ const constants = {
   statusPath,
   politiqueDeConfidentialitePath,
   patchnotePath,
+  aboutPath,
   SMELT,
   notificationPath,
   MenuPath: menuPaths,
