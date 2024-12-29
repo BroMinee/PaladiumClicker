@@ -17,7 +17,7 @@ export async function generateMetadata(
   { searchParams }: { searchParams: searchParamsAdminShopPage },
 ) {
 
-  let title = "PalaTracker - Admin Shop";
+  let title = "PalaTracker | Admin Shop";
   let itemImgPath = "";
   let defaultImage = "https://palatracker.bromine.fr/PaladiumClicker/favicon.ico";
   if (isShopItem(searchParams.item)) {

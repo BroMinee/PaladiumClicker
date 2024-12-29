@@ -19,9 +19,9 @@ export async function generateMetadata(
 ) {
   let title = "";
   if (searchParams.username)
-    title = `PalaTracker - Pala Animation Trainer - ${searchParams.username}`;
+    title = `PalaTracker | Pala Animation Trainer | ${searchParams.username}`;
   else
-    title = "PalaTracker - Pala Animation Trainer";
+    title = "PalaTracker | Pala Animation Trainer";
   const description = "Viens t'entraîner sur PalaAnimation et compare ton temps avec les autres joueurs ! 🚀"
   return {
     title: title,

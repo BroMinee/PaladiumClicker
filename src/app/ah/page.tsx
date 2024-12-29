@@ -23,17 +23,17 @@ export async function generateMetadata(
 
   if (!item) {
     return {
-      title: "PalaTracker - AH Tracker",
+      title: "PalaTracker | AH Tracker",
       description: "Suivez les historiques de vente de vos items préférés sur Paladium",
       openGraph: {
-        title: "PalaTracker - AH Tracker",
+        title: "PalaTracker | AH Tracker",
         description: "Suivez les historiques de vente de vos items préférés sur Paladium"
       },
     }
   }
 
 
-  const title = `PalaTracker - AH Tracker  - ${item.value}`;
+  const title = `PalaTracker | AH Tracker | ${item.value}`;
   const description = "Suivez les historiques de vente de vos items préférés sur Paladium";
   return {
     title: title,

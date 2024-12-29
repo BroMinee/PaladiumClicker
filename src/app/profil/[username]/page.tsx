@@ -10,10 +10,10 @@ export async function generateMetadata(
   { params }: { params: { username: string } },
 ) {
   return {
-    title: `PalaTracker - Profil - ${params.username}`,
+    title: `PalaTracker | Profil | ${params.username}`,
     description: "📝 Viens consulter ton profil Paladium sur PalaTracker ! 📝",
     openGraph: {
-      title: `PalaTracker - Profil ${params.username}`,
+      title: `PalaTracker | Profil | ${params.username}`,
       description: "📝 Viens consulter ton profil Paladium sur PalaTracker ! 📝"
     },
   }

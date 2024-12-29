@@ -11,7 +11,7 @@ export async function generateMetadata(
   { searchParams }: { searchParams: searchParamsRankingPage },
 ) {
 
-  let title = "PalaTracker - Classement";
+  let title = "PalaTracker | Classement";
   let rankingImgPath = "";
   let defaultImage = "https://palatracker.bromine.fr/PaladiumClicker/favicon.ico";
   if (Object.values(RankingType).includes(searchParams.category as RankingType)) {

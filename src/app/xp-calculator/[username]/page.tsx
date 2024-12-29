@@ -18,7 +18,7 @@ export async function generateMetadata(
 ) {
 
 
-  const title = `Paladium Tracker - Calculateur d'xp de métier - ${params.username}`;
+  const title = `PalaTracker | Calculateur d'xp de métier | ${params.username}`;
   const description = `Renseignez votre pseudo Paladium et le métier que vous souhaitez xp pour obtenir des quantités à farmer pour atteindre le niveau souhaité.`;
   // const defaultImage = "https://brominee.github.io/PaladiumClicker/favicon.ico";
   let imgPath = "Mineur";

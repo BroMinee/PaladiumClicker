@@ -8,7 +8,7 @@ import New from "@/components/News.tsx";
 export async function generateMetadata() {
 
 
-  const title = `PalaTracker - Patchnotes`;
+  const title = `PalaTracker | Patchnotes`;
   const description = `📝 Viens consulter les dernières nouveautés de PalaTracker ! 📝`;
   return {
     title: title,

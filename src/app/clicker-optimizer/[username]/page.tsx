@@ -19,10 +19,10 @@ export async function generateMetadata(
   { params }: { params: { username: string } },
 ) {
   return {
-    title: `PalaTracker - Clicker Optimizer - ${params.username}`,
+    title: `PalaTracker | Clicker Optimizer | ${params.username}`,
     description: "🚀 Tu cherches à optimiser le PalaClicker ? C'est ici que ça se passe !! 📈 Ce site calcule le meilleur achat en fonction de tes métiers, tes améliorations et tes bâtiments.",
     openGraph: {
-      title: `PalaTracker - Clicker Optimizer - ${params.username}`,
+      title: `PalaTracker | Clicker Optimizer | ${params.username}`,
       description: "🚀 Tu cherches à optimiser le PalaClicker ? C'est ici que ça se passe !! 📈 Ce site calcule le meilleur achat en fonction de tes métiers, tes améliorations et tes bâtiments."
     },
   }

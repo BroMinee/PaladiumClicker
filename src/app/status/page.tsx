@@ -8,7 +8,7 @@ import { getPlayerInfo, getPlayerOnlineCount, isApiDown } from "@/lib/api/apiPal
 
 
 export async function generateMetadata() {
-  const title = "PalaTracker - Status du serveur Paladium et de nos services";
+  const title = "PalaTracker | Status du serveur Paladium et de nos services";
   const apiDownPaladium = await isApiDown();
   const apiDownPalaTracker = await isMyApiDown().catch(() => true);
   const apiImportProfil = await getPlayerInfo("BroMine__").then(() => {

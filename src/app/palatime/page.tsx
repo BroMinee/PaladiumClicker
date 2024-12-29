@@ -7,7 +7,7 @@ import FallingClickImagePalaTime from "@/components/PalaTime/FallingClickImage.t
 export async function generateMetadata() {
 
 
-  const title = `PalaTracker - Palatime`;
+  const title = `PalaTracker | Palatime`;
   const description = "📰 Le Palatime est un journal indépendant écrit et publié par 0livierMinecraft le rédacteur en chef et Palatimes le journaliste.\n" +
     "🗓️ Tu y trouveras l'actualité du serveur comme la quête de faction ; des astuces indispensables ; mais surtout un évent communautaire.\n" +
     "🕵️ Que ce soit tirage au sort, énigme, chasse au trésor, loto, etc... Tu vas bien t'amuser.";

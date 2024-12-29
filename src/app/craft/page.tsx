@@ -23,17 +23,17 @@ export async function generateMetadata(
 
   if (!item) {
     return {
-      title: "PalaTracker - Craft Optimizer",
+      title: "PalaTracker | Craft Optimizer",
       description: "Calcule les ressources nécessaires pour tes crafts sur Paladium",
       openGraph: {
-        title: "PalaTracker - Craft Optimizer",
+        title: "PalaTracker | Craft Optimizer",
         description: "Calcule les ressources nécessaires pour tes crafts sur Paladium"
       },
     }
   }
 
 
-  const title = `PalaTracker - Craft Optimizer  - ${item.value}`;
+  const title = `PalaTracker | Craft Optimizer | ${item.value}`;
   const description = "Optimisez vos crafts sur Paladium";
   return {
     title: title,

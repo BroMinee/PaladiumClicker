@@ -13,6 +13,19 @@ import {
 import { Suspense } from "react";
 import ImportProfil from "@/components/shared/ImportProfil.tsx";
 
+export function generateMetadata() {
+  const title = `PalaTracker | Erreur`;
+  const description = `PalaTracker : boostez votre progression et votre clicker sur Paladium comme jamais auparavant !`;
+  return {
+    title: title,
+    description: description,
+    openGraph: {
+      title: title,
+      description: description,
+    },
+  }
+}
+
 export default function Error500Page({ searchParams }: {
   searchParams: { [key: string]: string | string[] | undefined }
 }) {
@@ -27,10 +40,8 @@ export default function Error500Page({ searchParams }: {
       <CardHeader className="flex flex-row gap-2 ">
         <div className="py-8 px-4 mx-auto max-w-screen-xl lg:py-16 lg:px-6">
           <div className="mx-auto max-w-screen-sm text-center">
-            <h1
-              className="mb-4 text-7xl tracking-tight font-extrabold lg:text-9xl text-primary-600 text-primary-500">500</h1>
-            <p className="mb-4 text-3xl tracking-tight font-bold md:text-4xl text-white">Une erreur
-              est survenue.</p>
+            <h1 className="mb-4 text-3xl tracking-tight font-bold md:text-4xl text-white">Une erreur
+              est survenue.</h1>
             <p className="text-primary flex flex-col pb-5 gap-2">
               {searchParams.message}
               {searchParams.detail && <span className="text-red-400"> {searchParams.detail}</span>}
