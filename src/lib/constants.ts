@@ -4,7 +4,7 @@ const version = 0;
 
 const discord = {
   url: "https://discord.gg/WGXUKHcZ3P",
-  name: "Paladium Profile Tracker"
+  name: "PalaTracker"
 };
 
 const defaultUsername = "Profil_vide";

@@ -22,7 +22,8 @@ const Discord = ({ className = "" }: DiscordProps) => {
 
           <div className="flex flex-col gap-2">
             <div className="text-primary">
-              <span className="font-semibold">{constants.discord.name}{" "}</span>
+              <span className="font-semibold">{constants.discord.name}</span>
+              <span className="font-semibold text-foreground">{" - "} </span>
               <span className="text-discord">Discord</span>
             </div>
             <p className="font-bold">
