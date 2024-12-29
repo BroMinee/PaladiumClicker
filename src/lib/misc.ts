@@ -191,6 +191,20 @@ export function getDDHHMMSSOnlyClicker(d: Date) {
   return `${padL(d.getDate())}/${padL(d.getMonth() + 1)}/${d.getFullYear()} à ${padL(d.getHours())}:${padL(d.getMinutes())}:${padL(d.getSeconds())}`;
 }
 
+export function reverseDDHHMMSSOnlyClicker(d: string) {
+  // get the date out of the string (format : DD/MM/YYYY à HH:MM:SS)
+  const date = d.split(" à ")[0];
+  const time = d.split(" à ")[1];
+  const day = date.split("/")[0];
+  const month = date.split("/")[1];
+  const year = date.split("/")[2];
+  const hour = time.split(":")[0];
+  const minute = time.split(":")[1];
+  const second = time.split(":")[2];
+  return new Date(Number(year), Number(month) - 1, Number(day), Number(hour), Number(minute), Number(second));
+}
+
+
 export function getDDHHMMSS(d: Date) {
   const padL = (num: number, chr = `0`) => `${num}`.padStart(2, chr);
 

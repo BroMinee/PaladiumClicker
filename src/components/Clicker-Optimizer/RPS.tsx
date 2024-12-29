@@ -1,5 +1,13 @@
 'use client'
-import { checkCondition, computePrice, computeProgression, computeRPS, formatPrice, safeJoinPaths } from "@/lib/misc";
+import {
+  checkCondition,
+  computePrice,
+  computeProgression,
+  computeRPS,
+  formatPrice,
+  reverseDDHHMMSSOnlyClicker,
+  safeJoinPaths
+} from "@/lib/misc";
 import { buyBuilding, computeXBuildingAhead, DisplayCoinsDormants, Stat } from "./Stats";
 import { bestBuildingInfo, bestPurchaseInfoDetailed, bestUpgradeInfo, buildingPathType, PlayerInfo } from "@/types";
 import { usePlayerInfoStore } from "@/stores/use-player-info-store";
@@ -12,6 +20,7 @@ import { FaBed, FaCoins, FaInfoCircle, FaMedal, FaRandom, FaTachometerAlt } from
 import Image from "next/image";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover.tsx";
 import { GiProgression } from "react-icons/gi";
+import DelayedNotificationButton from "@/components/NotificationButton.tsx";
 
 const RPS = () => {
   const { data: playerInfo, setPlayerInfo } = usePlayerInfoStore();
@@ -60,6 +69,25 @@ const RPS = () => {
                 >
                   Simuler l&apos;achat
                 </Button>
+
+                {
+                  buildingBuyPaths[0].timeToBuy !== "Maintenant" &&
+                  <div className="flex flex-row w-full gap-2">
+                    <DelayedNotificationButton dateOfNotification={reverseDDHHMMSSOnlyClicker(buildingBuyPaths[0].timeToBuy)} username={playerInfo.username} title={`C'est l'heure d'acheter : ${playerInfo[buildingBuyPaths[0].path][buildingBuyPaths[0].index].name}`}/>
+                    <Popover>
+                      <PopoverTrigger asChild>
+                        <Button variant="outline" size="icon">
+                          <FaInfoCircle className="inline-block h-4 w-4"/>
+                        </Button>
+                      </PopoverTrigger>
+                      <PopoverContent className="w-80">
+                        Les notifications peuvent s&apos;afficher même si vous avez fermé l&apos;onglet du site ou si votre navigateur est en arrière-plan. Mais pas si vous fermez complètement votre navigateur.
+                        <br/>
+                        Les notifications apparaissent directement sur votre appareil, sauf si vous êtes en ne pas déranger.
+                      </PopoverContent>
+                    </Popover>
+                  </div>
+                }
               </div>
               :
               <div className="flex flex-col items-center gap-4 justify-center">

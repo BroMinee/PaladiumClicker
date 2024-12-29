@@ -6,6 +6,7 @@ import Navbar from "@/components/NavBar";
 import { Inter } from '@next/font/google';
 import { ThemeProviders } from "@/components/shared/ThemeProvider.tsx";
 import { Toaster } from "@/components/ui/sonner.tsx";
+import ServiceWorkerRegister from "@/components/ServiceWorkerRegister.tsx";
 
 const inter = Inter({
   subsets: ['latin'],  // specify subsets according to your needs
@@ -22,6 +23,7 @@ export default function RootLayout({
   return (
     <html lang="fr" className={inter.className}>
     <body>
+    <ServiceWorkerRegister />
     <ThemeProviders>
       <div className="relative min-h-screen flex flex-col">
         <div className="flex flex-row">
