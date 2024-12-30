@@ -72,9 +72,11 @@ export default function LinkClient({ path, children }: {
         <p className="text-base leading-4 flex-grow">{label}</p>
         {newNotification &&
           <div className="relative inline-block bg-green-400">
-             <span
-               className="absolute right-0 w-6 h-6 text-white bg-red-500  rounded-md text-center"
-               style={{ top: "-18px", right: "-10px" }}>1</span>
+            <span className="animate-ping absolute right-0 w-6 h-6 bg-red-400 opacity-75 rounded-md"
+                  style={{ top: "-18px", right: "-10px" }}></span>
+            <span
+              className="absolute right-0 w-6 h-6 text-white bg-red-500  rounded-md text-center"
+              style={{ top: "-18px", right: "-10px" }}>1</span>
           </div>}
       </Link>
     </HoverText>
@@ -129,12 +131,14 @@ export function CategorieDisplay({ name, children, defaultOpen = false }: {
       {open ? <FaAngleUp size={24}/> : <FaAngleDown size={24}/>}
 
     </button>
-    {!open && newNotification !== 0 && <div className="relative inline-block bg-green-400">
-         <span
-           className="absolute right-0 w-6 h-6 text-white bg-red-500  rounded-md text-center"
-           style={{ bottom: "35px", left: "100px" }}>{newNotification}</span>
+    {!open && newNotification !== 0 && <div className="relative inline-block">
+      <span className="animate-ping absolute right-0 w-6 h-6 bg-red-400 opacity-75 rounded-md"
+            style={{ bottom: "35px", left: "100px" }}></span>
+      <span
+        className=" absolute right-0 w-6 h-6 text-white bg-red-500 rounded-md text-center"
+        style={{ bottom: "35px", left: "100px" }}>{newNotification}</span>
     </div>}
-    <div className={cn("flex justify-start flex-col items-start pb-5 gap-1", !open && "hidden")}>
+    <div className={cn("flex justify-start flex-col items-start pb-5 gap-1 animate-fade-in", !open && "hidden")}>
       {/*className="flex justify-start flex-col w-full md:w-auto items-start pb-1 ">*/}
       {children}
     </div>
