@@ -33,7 +33,7 @@ export async function generateMetadata(
   }
 
 
-  const title = `PalaTracker | AH Tracker | ${item.value}`;
+  const title = `PalaTracker | AH Tracker | ${item.label}`;
   const description = "Suivez les historiques de vente de vos items préférés sur Paladium";
   return {
     title: title,

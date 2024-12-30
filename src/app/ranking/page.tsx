@@ -17,7 +17,7 @@ export async function generateMetadata(
   if (Object.values(RankingType).includes(searchParams.category as RankingType)) {
     rankingImgPath = getImagePathFromRankingType(searchParams.category as RankingType);
     defaultImage = `https://palatracker.bromine.fr/${rankingImgPath}`;
-    title += ` - ${rankingTypeToUserFriendlyText(searchParams.category as RankingType)}`;
+    title += ` | ${rankingTypeToUserFriendlyText(searchParams.category as RankingType)}`;
   }
 
 

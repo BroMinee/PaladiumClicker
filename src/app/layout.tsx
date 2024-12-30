@@ -22,6 +22,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="fr" className={inter.className}>
+    <head>
+      <meta name="theme-color" content="#ff5c00"/>
+    </head>
     <body>
     <ServiceWorkerRegister />
     <ThemeProviders>

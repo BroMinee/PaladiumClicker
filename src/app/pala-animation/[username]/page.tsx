@@ -15,11 +15,11 @@ import ProfileFetcherWrapper from "@/components/ProfileFetcher.tsx";
 import ImportProfil from "@/components/shared/ImportProfil.tsx";
 
 export async function generateMetadata(
-  { searchParams }: { searchParams: { username: string } },
+  { params }: { params: { username: string } },
 ) {
   let title = "";
-  if (searchParams.username)
-    title = `PalaTracker | Pala Animation Trainer | ${searchParams.username}`;
+  if (params.username)
+    title = `PalaTracker | Pala Animation Trainer | ${params.username}`;
   else
     title = "PalaTracker | Pala Animation Trainer";
   const description = "Viens t'entraîner sur PalaAnimation et compare ton temps avec les autres joueurs ! 🚀"

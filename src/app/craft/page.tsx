@@ -33,7 +33,7 @@ export async function generateMetadata(
   }
 
 
-  const title = `PalaTracker | Craft Optimizer | ${item.value}`;
+  const title = `PalaTracker | Craft Optimizer | ${item.label}`;
   const description = "Optimisez vos crafts sur Paladium";
   return {
     title: title,
