@@ -42,7 +42,7 @@ export default function Error500Page({ searchParams }: {
           <div className="mx-auto max-w-screen-sm text-center">
             <h1 className="mb-4 text-3xl tracking-tight font-bold md:text-4xl text-white">Une erreur
               est survenue.</h1>
-            <p className="text-primary flex flex-col pb-5 gap-2">
+            <p className="text-primary flex flex-col pb-5 gap-2 animate-blink">
               {searchParams.message}
               {searchParams.detail && <span className="text-red-400"> {searchParams.detail}</span>}
             </p>

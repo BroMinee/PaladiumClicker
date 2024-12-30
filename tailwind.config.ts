@@ -110,6 +110,10 @@ const config: Config = {
           '0%': { opacity: 1 },
           '100%': { opacity: 0 },
         },
+        blink: {
+          '0%, 100%': { color: '#f87171' },
+          '50%': { color: '#ffffff' },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
@@ -117,6 +121,7 @@ const config: Config = {
         "falling": "falling 3s linear infinite",
         'fade-in': 'fadeIn 0.3s ease-in-out',
         'fade-out': 'fadeOut 0.3s ease-in-out',
+        blink: 'blink 1s infinite',
       },
       addUtilities: {
         '.pixelated': {
