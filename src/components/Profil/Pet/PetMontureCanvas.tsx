@@ -51,6 +51,8 @@ function convertPetSkinToModelName(petSkin: string): ModelName {
       return "pet_blobfish"
     case "pet_mini_golem":
       return "pet_mini_golem"
+    case "pet_penguin":
+      return "pet_penguin"
     case "pet_ufo":
       return "pet_ufo"
     case "pet_zombie_hand":

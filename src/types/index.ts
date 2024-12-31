@@ -605,6 +605,7 @@ export type ModelName =
   | "kapio_koi"
   | "pet_blobfish"
   | "pet_mini_golem"
+  | "pet_penguin"
   | "pet_ufo"
   | "pet_zombie_hand"
   | "rabbit"
