@@ -3,6 +3,16 @@ import { getPlayerInfo, PALADIUM_API_URL } from "@/lib/api/apiPala.ts";
 import { fetchWithHeader } from "@/lib/api/misc.ts";
 import { API_PALATRACKER } from "@/lib/api/apiPalaTracker.ts";
 import { PaladiumAhItemStat, PaladiumAhItemStatResponse } from "@/types";
+import { Event } from "@/types/db_types.ts";
+import {
+  getClosedEventStillClaimable,
+  getNotCloseEvent,
+  getRewards,
+  isRegisteredToEvent,
+  isWinnerNotClaim
+} from "@/lib/database/events_database.ts";
+
+/* The content of this file is not sent to the client*/
 
 export async function getPlayerInfoAction(username: string) {
   return await getPlayerInfo(username)
@@ -29,4 +39,61 @@ export async function getPaladiumAhItemStatsOfAllItemsAction(): Promise<Paladium
 
   console.assert(data.length === totalCount, "Data length is not equal to totalCount");
   return data;
+}
+
+export async function getCurrentEvent()
+{
+  try {
+    const eventDB = await getNotCloseEvent();
+    const rewards = await getRewards(eventDB.id);
+    return { ...eventDB, rewards: rewards };
+  } catch (error) {
+    throw new Error("Failed to fetch events");
+  }
+}
+
+export async function getCurrentEventNotRegistered(username: string) {
+
+  if(!username) throw new Error("No username");
+  if(username.length > 16) throw new Error("Username too long");
+
+  let event: Event | null = null;
+  try {
+    event = await getCurrentEvent();
+  } catch (error) {
+    throw new Error('Failed to fetch events');
+  }
+
+  if (!event) {
+    throw new Error("No active event");
+  }
+  if (isNaN(event.id)) {
+    throw new Error("Event id is not a number");
+  }
+
+  try {
+    const registered = await isRegisteredToEvent(username, event.id);
+    if (!registered) {
+      return event;
+    }
+  } catch (error) {
+    console.error('Error fetching events:', error);
+    throw new Error('Failed to fetch events');
+  }
+  throw new Error("Already registered");
+}
+
+export async function getEventNotClaimed(username: string) {
+  try {
+    const event = await getClosedEventStillClaimable();
+    const event_id = event.id;
+    const description = await isWinnerNotClaim(event_id, username);
+    if (description.description) {
+      return description.description;
+    }
+    return "Not winner";
+  } catch (error) {
+    console.error('Error fetching events:', error);
+    throw new Error("Error fetching events");
+  }
 }

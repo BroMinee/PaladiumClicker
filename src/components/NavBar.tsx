@@ -5,12 +5,12 @@ import { FaBars, FaCalculator, FaClipboardList, FaKey, FaRegUser, FaShoppingBask
 import Setting from "@/components/shared/Setting.tsx";
 import constants from "@/lib/constants.ts";
 import { LogoClient } from "@/components/ui/logoClient.tsx";
-import LinkClient, { CategorieDisplay } from "@/components/NavBarClient.tsx";
+import LinkClient, { CategorieDisplay, GiveawayFakeLink } from "@/components/NavBarClient.tsx";
 import { GrOptimize } from "react-icons/gr";
 import { RiMoneyDollarCircleFill } from "react-icons/ri";
 import { LuShoppingCart, LuSkull } from "react-icons/lu";
 import { PiEggCrackBold } from "react-icons/pi";
-import { GiCrenelCrown, GiStoneCrafting } from "react-icons/gi";
+import { GiCrenelCrown, GiPayMoney, GiStoneCrafting } from "react-icons/gi";
 import { TbHandClick } from "react-icons/tb";
 import { ImNewspaper } from "react-icons/im";
 import { IoMdInformationCircleOutline, IoMdStopwatch } from "react-icons/io";
@@ -109,6 +109,9 @@ function NavBarContent() {
           <LinkClient path={constants.patchnotePath}>
             <FaClipboardList size={24}/>
           </LinkClient>
+          <GiveawayFakeLink>
+            <GiPayMoney size={24}/>
+          </GiveawayFakeLink>
           <LinkClient path={constants.politiqueDeConfidentialitePath}>
             <FaKey size={24}/>
           </LinkClient>

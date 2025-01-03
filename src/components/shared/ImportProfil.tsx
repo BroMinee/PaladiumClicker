@@ -53,7 +53,7 @@ export default function ImportProfil({
     }
   }
 
-  const renderer = ({ minutes, seconds, completed }: {
+  const rendererImportProfil = ({ minutes, seconds, completed }: {
     minutes: number,
     seconds: number,
     completed: boolean
@@ -128,7 +128,7 @@ export default function ImportProfil({
       {showResetButton && !settings.defaultProfile &&
         <Countdown
           date={playerInfo ? new Date(playerInfo.last_fetch + 1000 * 0 * 60) : new Date(new Date().getTime() + 1000 * 0 * 60)}
-          renderer={renderer}/>
+          renderer={rendererImportProfil}/>
       }
       {showResetButton && settings.defaultProfile &&
         <Button onClick={() => {

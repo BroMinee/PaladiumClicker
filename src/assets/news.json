@@ -4,7 +4,8 @@
     "events": [
       "Suppression du compte à rebours pour la réimportation du profil (toujours un cache de 15 minutes) mais c'est plus user-friendly",
       "Ajout d'une popup quand la mise à jour du profil donne des informations antérieures aux informations actuelles",
-      "Ajout d'une système de notification quand il est l'heure d'amélirer son clicker"
+      "Ajout d'une système de notification quand il est l'heure d'amélirer son clicker",
+      "Ajout d'un système de popup pour les giveaways"
     ]
   },
   {
