@@ -466,7 +466,7 @@ const notificationPath: Map<PathValid, [number, string]> = new Map<PathValid, [n
     ["/profil", [new Date("2024-12-21 16:15").getTime(), "Ajout d'une section 'Classement'"]],
     ["/xp-calculator", [new Date("2024-10-16").getTime(), "Ajout des \"fortunes modifiers\" dans les calculs"]],
     ["/clicker-optimizer", [new Date("2024-11-27 19:00").getTime(), "Refonte de la page"]],
-    ["/palatime", [new Date("2024-11-16 18:55").getTime(), "Nouvelle édition"]],
+    ["/palatime", [new Date("2025-01-06 17:25").getTime(), "Nouvelle édition"]],
     ["/craft", [new Date("2024-10-16").getTime(), "Nouvel outil"]],
     ["/patchnote", [new Date("2024-12-21 16:15").getTime(), "Nouveau patchnote"]],
     ["/pala-animation", [new Date("2024-12-21 16:15").getTime(), "Ajout de 174 nouvelles questions"]],
