@@ -33,7 +33,7 @@ export default function RootLayout({
           <header className="h-fit sticky top-0">
             <Navbar/>
           </header>
-          <main className="flex-1 container py-4 pb-16 mx-auto overflow-x-hidden">
+          <main className="flex-1 container py-4 pb-8 mx-auto overflow-x-hidden">
             {children}
             <Toaster/>
           </main>

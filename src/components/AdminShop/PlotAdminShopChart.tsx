@@ -1,9 +1,8 @@
 'use client'
 import dynamic from "next/dynamic";
-import { AdminShopItemDetail } from "@/types";
+import { AdminShopItemDetail, AdminShopPeriode } from "@/types";
 import { Area, Legend, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
 import React from "react";
-import { getDDHHMMSS } from "@/lib/misc.ts";
 
 const AreaChart = dynamic(() => import("recharts").then((mod) => mod.AreaChart), { ssr: false });
 
@@ -28,19 +27,17 @@ const CustomTooltip = ({ active, payload, label }: any) => {
 }
 
 
-const PlotAdminShopChart = ({ data }: { data: AdminShopItemDetail[] }) => {
+const PlotAdminShopChart = ({ data, periode }: { data: AdminShopItemDetail[], periode: AdminShopPeriode }) => {
   // TODO: zoomable chart
   // TODO: daily price and not 15min delta
   // TODO: add a line for the average price
-
 
   // print the date in DD/MM/YYYY - HH:MM:SS
 
   const data_clean = data.map((item) => {
     return {
-      date: getDDHHMMSS(new Date(item.date)),
-      sellPrice: item.sellPrice,
-      buyPrice: item.buyPrice,
+      date: periode === "season" ? new Date(item.date).toLocaleDateString() : new Date(item.date).toLocaleDateString() + " - " + new Date(item.date).toLocaleTimeString(),
+      sellPrice: Math.round(item.sellPrice * 100) / 100,
     }
   });
 
@@ -61,6 +58,7 @@ const PlotAdminShopChart = ({ data }: { data: AdminShopItemDetail[] }) => {
                domain={[(dataMin: number) => parseFloat((dataMin * 0.9).toFixed(2)), (dataMax: number) => parseFloat((dataMax * 1.1).toFixed(2))]}/>
         <Tooltip content={<CustomTooltip/>}/>
         <Area yAxisId="left" type="monotone" dataKey="sellPrice" name="Prix de vente" stroke="#8884d8" fillOpacity={1}
+              isAnimationActive={periode !== "season"}
               fill="url(#colorUv)"/>
       </AreaChart>
     </ResponsiveContainer>

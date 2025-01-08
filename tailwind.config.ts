@@ -26,6 +26,7 @@ const config: Config = {
       gridTemplateColumns: {
         '13': 'repeat(13, minmax(0, 1fr))',
         '16': 'repeat(16, minmax(0, 1fr))',
+        '23': 'repeat(23, minmax(0, 1fr))',
       },
       backgroundImage: {
         'light': "url('/background_light.webp')",

@@ -1,5 +1,6 @@
+'use server';
 import { isRegisteredToEvent, registerUserToEvent } from "@/lib/database/events_database.ts";
-import { getUserId } from "@/lib/database/users_database.tsx";
+import { getUserId } from "@/lib/database/users_database.ts";
 
 
 export async function POST(req: Request) {

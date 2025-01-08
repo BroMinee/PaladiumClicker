@@ -1,5 +1,6 @@
 import {
   AdminShopItem,
+  AdminShopPeriode,
   AnyCondition,
   Building,
   BuildingUpgrade,
@@ -110,7 +111,7 @@ export function checkCondition(playerInfo: PlayerInfo, conditions: AnyCondition,
   const totalCoins = Math.round(spend + Math.max(playerInfo.production - spend, 0));
   const buildingIndex = getBuildingIndexCondition(conditions);
   const buildingNeed = getBuildingCountCondition(conditions);
-  const daySinceStart = (date.getTime() - new Date("2024-09-21").getTime()) / (1000 * 60 * 60 * 24);
+  const daySinceStart = (date.getTime() - constants.startSeason.getTime()) / (1000 * 60 * 60 * 24);
   const buildingCount = buildingIndex === -1 ? -1 : playerInfo.building[buildingIndex].own;
 
   const unlockable = totalCoins >= coinsCondition &&
@@ -254,9 +255,10 @@ export function generateAhShopUrl(item: OptionType | undefined) {
   return safeJoinPaths(constants.ahPath, `?${args}`);
 }
 
-export function generateAdminShopUrl(item: AdminShopItem) {
+export function generateAdminShopUrl(item: AdminShopItem, periode?: AdminShopPeriode) {
   const argItem = item ? `item=${item}` : "";
-  const args = [argItem].filter((e) => e).join("&");
+  const argPeriode = periode ? `periode=${periode}` : "";
+  const args = [argItem, argPeriode].filter((e) => e).join("&");
   return safeJoinPaths(constants.adminShopPath, `?${args}`);
 }
 

@@ -2,15 +2,19 @@ import { redirect } from "next/navigation";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card.tsx";
 import GradientText from "@/components/shared/GradientText.tsx";
 import { FaHeart } from "react-icons/fa";
-import { AdminShopItem, adminShopItemsAvailable, isShopItem } from "@/types";
+import { AdminShopItem, adminShopItemsAvailable, AdminShopPeriode, isShopItem } from "@/types";
 import { adminShopItemToUserFriendlyText, generateAdminShopUrl, getImagePathFromAdminShopType } from "@/lib/misc.ts";
 import { Suspense } from "react";
-import { AdminShopSelectorClient } from "@/components/AdminShop/AdminShopSelectorClient.tsx";
+import {
+  AdminShopSelectorClientItem,
+  AdminShopSelectorClientPeriode
+} from "@/components/AdminShop/AdminShopSelectorClientItem.tsx";
 import GraphAdminShop, { GraphAdminShopFallback } from "@/components/AdminShop/GraphAdminShop.tsx";
 
 
 export type searchParamsAdminShopPage = {
   item: string,
+  periode: string,
 }
 
 export async function generateMetadata(
@@ -23,7 +27,7 @@ export async function generateMetadata(
   if (isShopItem(searchParams.item)) {
     itemImgPath = getImagePathFromAdminShopType(searchParams.item);
     defaultImage = `https://palatracker.bromine.fr/${itemImgPath}`;
-    title += ` - ${adminShopItemToUserFriendlyText(searchParams.item)}`;
+    title += ` | ${adminShopItemToUserFriendlyText(searchParams.item)}`;
   }
 
 
@@ -55,14 +59,24 @@ export default function Home({ searchParams }: {
   if (!isShopItem(searchParams.item)) {
     redirect(generateAdminShopUrl('paladium-ingot'));
   }
+  let periode = searchParams.periode;
+  let periodeEnum = searchParams.periode as AdminShopPeriode;
+
+  if (periode === undefined)
+    periode = "day";
+
+  if (periode !== "day" && periode !== "week" && periode !== "month" && periode !== "season") {
+    redirect(generateAdminShopUrl(searchParams.item, "day"));
+    return null;
+  } else {
+    periodeEnum = periode as AdminShopPeriode;
+  }
 
 
   const adminShopItem = searchParams.item as AdminShopItem;
 
-
   return (
-    <div className="flex flex-col gap-4">
-      <Card className="flex flex-col gap-4">
+    <Card className="flex flex-col gap-2">
         <CardHeader className="flex flex-row items-center justify-between">
           <CardTitle>
             Bienvenue sur le visualisateur d&apos;historique de prix de{" "}
@@ -73,19 +87,23 @@ export default function Home({ searchParams }: {
             className="text-primary inline-block"/> by <GradientText>BroMine__</GradientText>
           </CardDescription>
         </CardHeader>
-        <CardContent className="grid grid-cols-10 items-center justify-between gap-2">
+      <CardContent className="grid grid-cols-6 sm:grid-cols-16 lg:grid-cols-23 items-center justify-between gap-2 pb-2">
           {adminShopItemsAvailable.map((value: AdminShopItem, index: number) => {
-            return <AdminShopSelectorClient key={value + index} item={value}/>
+            return <AdminShopSelectorClientItem key={value + index} item={value} periode={periodeEnum}/>
           })}
         </CardContent>
-      </Card>
 
-      <Card className="w-full h-[calc(100vh-30vh)]">
+      <CardContent className="h-[calc(100vh-37.5vh)] pb-0">
         <Suspense fallback={<GraphAdminShopFallback/>}>
-          <GraphAdminShop item={adminShopItem}/>
+          <GraphAdminShop item={adminShopItem} periode={periodeEnum}/>
         </Suspense>
+      </CardContent>
+      <CardHeader className='w-full flex flex-col sm:flex-row gap-2 justify-center items-center p-0 mb-2'>
+        <AdminShopSelectorClientPeriode item={adminShopItem} periode="day"/>
+        <AdminShopSelectorClientPeriode item={adminShopItem} periode="week"/>
+        <AdminShopSelectorClientPeriode item={adminShopItem} periode="month"/>
+        <AdminShopSelectorClientPeriode item={adminShopItem} periode="season"/>
+      </CardHeader>
       </Card>
-
-    </div>
   )
 }

@@ -7,6 +7,8 @@ const discord = {
   name: "PalaTracker"
 };
 
+const startSeason = new Date("2024-09-21");
+
 const defaultUsername = "Profil_vide";
 
 export type PathValid =
@@ -681,6 +683,7 @@ const constants = {
   deprecatedIdAchivement,
   dictAchievementIdToSubIds,
   dictAchievementIdToIcon,
+  startSeason,
 };
 
 export default constants;

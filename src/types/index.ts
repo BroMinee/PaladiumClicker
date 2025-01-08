@@ -469,6 +469,8 @@ export type AdminShopItem =
   | 'carrot'
   | 'cooked-beef';
 
+export type AdminShopPeriode = 'day' | 'week' | 'month' | 'season';
+
 export const adminShopItemsAvailable: AdminShopItem[] = [
   'feather', 'wool', 'paladium-ingot', 'ender-pearl', 'egg', 'string', 'log', 'red-mushroom', 'soul-sand',
   'glowstone-dust', 'findium', 'titane-ingot', 'apple', 'cobblestone', 'reeds', 'ghast-tear', 'potato',
@@ -484,11 +486,7 @@ export function isShopItem(item: string): item is AdminShopItem {
 
 export type AdminShopItemDetail = {
   date: number
-  name: AdminShopItem,
-  canBuy: boolean,
-  buyPrice: number,
   sellPrice: number,
-  canSell: boolean,
 }
 
 export type StatusType =
