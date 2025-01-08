@@ -120,7 +120,7 @@ export type PlayerInfo = {
   ah: AhType,
   last_fetch: number,
   view_count: ProfilViewType,
-  achievements:  Achievement[],
+  achievements: Achievement[],
   alliance: string,
   currentBanner: string,
   description: string,

@@ -1,7 +1,4 @@
-import {
-  isRegisteredToEvent,
-  registerUserToEvent
-} from "@/lib/database/events_database.ts";
+import { isRegisteredToEvent, registerUserToEvent } from "@/lib/database/events_database.ts";
 import { getUserId } from "@/lib/database/users_database.tsx";
 
 

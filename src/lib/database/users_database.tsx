@@ -5,7 +5,7 @@ export function getUserId(username: string): Promise<number> {
     pool.query(
       'SELECT id FROM users WHERE username = ?;',
       [username],
-      (err, results : any ) => {
+      (err, results: any) => {
         if (err) {
           reject(err);
         } else if (results.length === 0) {

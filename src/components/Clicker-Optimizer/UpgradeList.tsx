@@ -35,17 +35,17 @@ const UpgradeList = ({ upgradeType }: UpgradeListProps) => {
 
   return (
     // <ScrollArea>
-      <div className="grid grid-cols-4 sm:grid-cols-6 md:grid-cols-8 lg:grid-cols-10 xl:grid-cols-16 gap-2">
-        {jsonToUse.map((upgrade, index) => (
-          <Upgrade
-            key={`${upgrade.name}-${index}`}
-            upgradeType={upgradeType}
-            jsonToUse={jsonToUse}
-            index={index}
-            imgPath={getImgPath(index, upgrade.name)}
-          />
-        ))}
-      </div>
+    <div className="grid grid-cols-4 sm:grid-cols-6 md:grid-cols-8 lg:grid-cols-10 xl:grid-cols-16 gap-2">
+      {jsonToUse.map((upgrade, index) => (
+        <Upgrade
+          key={`${upgrade.name}-${index}`}
+          upgradeType={upgradeType}
+          jsonToUse={jsonToUse}
+          index={index}
+          imgPath={getImgPath(index, upgrade.name)}
+        />
+      ))}
+    </div>
     //   <ScrollBar orientation="horizontal"/>
     // </ScrollArea>
   );

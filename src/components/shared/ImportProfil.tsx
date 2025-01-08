@@ -193,103 +193,103 @@ function DisplayDifference({ oldPlayerInfo, newPlayerInfo }: displayDifferencePr
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 justify-items-center">
 
       {oldPlayerInfo.metier.farmer.level > newPlayerInfo.metier.farmer.level &&
-      <SmallCardInfo title={"Metier de farmer"}
-                     value={oldPlayerInfo.metier.farmer.level + " -> " + newPlayerInfo.metier.farmer.level}
-                     img={`/JobsIcon/Fermier.webp`} unoptimized/>
-    }
+        <SmallCardInfo title={"Metier de farmer"}
+                       value={oldPlayerInfo.metier.farmer.level + " -> " + newPlayerInfo.metier.farmer.level}
+                       img={`/JobsIcon/Fermier.webp`} unoptimized/>
+      }
 
       {oldPlayerInfo.metier.miner.level > newPlayerInfo.metier.miner.level &&
-      <SmallCardInfo title={"Metier de mineur"}
-                     value={oldPlayerInfo.metier.miner.level + " -> " + newPlayerInfo.metier.miner.level}
-                     img={`/JobsIcon/Mineur.webp`} unoptimized/>
-    }
+        <SmallCardInfo title={"Metier de mineur"}
+                       value={oldPlayerInfo.metier.miner.level + " -> " + newPlayerInfo.metier.miner.level}
+                       img={`/JobsIcon/Mineur.webp`} unoptimized/>
+      }
 
       {oldPlayerInfo.metier.hunter.level > newPlayerInfo.metier.hunter.level &&
-      <SmallCardInfo title={"Metier de chasseur"}
-                     value={oldPlayerInfo.metier.hunter.level + " -> " + newPlayerInfo.metier.hunter.level}
-                     img={`/JobsIcon/Chasseur.webp`} unoptimized/>
-    }
+        <SmallCardInfo title={"Metier de chasseur"}
+                       value={oldPlayerInfo.metier.hunter.level + " -> " + newPlayerInfo.metier.hunter.level}
+                       img={`/JobsIcon/Chasseur.webp`} unoptimized/>
+      }
 
       {oldPlayerInfo.metier.alchemist.level > newPlayerInfo.metier.alchemist.level &&
-      <SmallCardInfo title={"Metier d'alchimiste"}
-                     value={oldPlayerInfo.metier.alchemist.level + " -> " + newPlayerInfo.metier.alchemist.level}
-                     img={`/JobsIcon/Alchimiste.webp`} unoptimized/>
-    }
+        <SmallCardInfo title={"Metier d'alchimiste"}
+                       value={oldPlayerInfo.metier.alchemist.level + " -> " + newPlayerInfo.metier.alchemist.level}
+                       img={`/JobsIcon/Alchimiste.webp`} unoptimized/>
+      }
 
-    {
-      oldPlayerInfo.building.filter((e, index) => e.own > newPlayerInfo.building[index].own).map((b) => {
-        return <SmallCardInfo title={b.name} key={"building" + b.index}
-                       value={"lvl: " + oldPlayerInfo.building[b.index].own + " -> lvl: " + newPlayerInfo.building[b.index].own}
-                       img={`/BuildingIcon/${b.index}.png`} unoptimized/>
-      })
-    }
+      {
+        oldPlayerInfo.building.filter((e, index) => e.own > newPlayerInfo.building[index].own).map((b) => {
+          return <SmallCardInfo title={b.name} key={"building" + b.index}
+                                value={"lvl: " + oldPlayerInfo.building[b.index].own + " -> lvl: " + newPlayerInfo.building[b.index].own}
+                                img={`/BuildingIcon/${b.index}.png`} unoptimized/>
+        })
+      }
 
-    {
-      oldPlayerInfo.global_upgrade.map((b, index) => {
-        if (b.own && !newPlayerInfo.global_upgrade[index].own)
-          return <SmallCardInfo title={b.name}
-                                key={"global" + index}
-                                value={"✔️ -> ❌"}
-                                img={`/GlobalIcon/${index}.png`} unoptimized/>
-        else return null
-      })
-    }
+      {
+        oldPlayerInfo.global_upgrade.map((b, index) => {
+          if (b.own && !newPlayerInfo.global_upgrade[index].own)
+            return <SmallCardInfo title={b.name}
+                                  key={"global" + index}
+                                  value={"✔️ -> ❌"}
+                                  img={`/GlobalIcon/${index}.png`} unoptimized/>
+          else return null
+        })
+      }
 
-    {
-      oldPlayerInfo.terrain_upgrade.map((b, index) => {
-        if (b.own && !newPlayerInfo.terrain_upgrade[index].own)
-          return <SmallCardInfo title={b.name}
-                                key={"terrain" + index}
-                                value={"✔️ -> ❌"}
-                                img={`/TerrainIcon/${index}.png`} unoptimized/>
-        else return null
-      })
-    }
+      {
+        oldPlayerInfo.terrain_upgrade.map((b, index) => {
+          if (b.own && !newPlayerInfo.terrain_upgrade[index].own)
+            return <SmallCardInfo title={b.name}
+                                  key={"terrain" + index}
+                                  value={"✔️ -> ❌"}
+                                  img={`/TerrainIcon/${index}.png`} unoptimized/>
+          else return null
+        })
+      }
 
-    {
-      oldPlayerInfo.building_upgrade.map((b, index) => {
-        if (b.own && !newPlayerInfo.building_upgrade[index].own)
-          return <SmallCardInfo title={b.name}
-                                key={"building_upgrade" + index}
-                                value={"✔️ -> ❌"}
-                                img={`/BuildingUpgradeIcon/${index <= 15 ? 0 : 1}.png`} unoptimized/>
-        else return null
-      })
-    }
+      {
+        oldPlayerInfo.building_upgrade.map((b, index) => {
+          if (b.own && !newPlayerInfo.building_upgrade[index].own)
+            return <SmallCardInfo title={b.name}
+                                  key={"building_upgrade" + index}
+                                  value={"✔️ -> ❌"}
+                                  img={`/BuildingUpgradeIcon/${index <= 15 ? 0 : 1}.png`} unoptimized/>
+          else return null
+        })
+      }
 
 
-    {
-      oldPlayerInfo.many_upgrade.map((b, index) => {
-        if (b.own && !newPlayerInfo.many_upgrade[index].own)
-          return <SmallCardInfo title={b.name}
-                                key={"many" + index}
-                                value={"✔️ -> ❌"}
-                                img={`/ManyIcon/0.png`} unoptimized/>
-        else return null
-      })
-    }
+      {
+        oldPlayerInfo.many_upgrade.map((b, index) => {
+          if (b.own && !newPlayerInfo.many_upgrade[index].own)
+            return <SmallCardInfo title={b.name}
+                                  key={"many" + index}
+                                  value={"✔️ -> ❌"}
+                                  img={`/ManyIcon/0.png`} unoptimized/>
+          else return null
+        })
+      }
 
-    {
-      oldPlayerInfo.posterior_upgrade.map((b, index) => {
-        if (b.own && !newPlayerInfo.posterior_upgrade[index].own)
-          return <SmallCardInfo title={b.name}
-                                key={"posterior" + index}
-                                value={"✔️ -> ❌"}
-                                img={`/PosteriorIcon/0.png`} unoptimized/>
-        else return null
-      })
-    }
+      {
+        oldPlayerInfo.posterior_upgrade.map((b, index) => {
+          if (b.own && !newPlayerInfo.posterior_upgrade[index].own)
+            return <SmallCardInfo title={b.name}
+                                  key={"posterior" + index}
+                                  value={"✔️ -> ❌"}
+                                  img={`/PosteriorIcon/0.png`} unoptimized/>
+          else return null
+        })
+      }
 
-    {
-      oldPlayerInfo.category_upgrade.map((b, index) => {
-        if (b.own && !newPlayerInfo.category_upgrade[index].own)
-          return <SmallCardInfo title={b.name}
-                                key={"category" + index}
-                                value={"✔️ -> ❌"}
-                                img={`/CategoryIcon/${index}.png`} unoptimized/>
-        else return null
-      })
-    }
+      {
+        oldPlayerInfo.category_upgrade.map((b, index) => {
+          if (b.own && !newPlayerInfo.category_upgrade[index].own)
+            return <SmallCardInfo title={b.name}
+                                  key={"category" + index}
+                                  value={"✔️ -> ❌"}
+                                  img={`/CategoryIcon/${index}.png`} unoptimized/>
+          else return null
+        })
+      }
     </div>
   </>
 

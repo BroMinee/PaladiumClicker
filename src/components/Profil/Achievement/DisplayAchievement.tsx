@@ -14,20 +14,20 @@ type AchievementInfoProps = {
   arrowPath: string;
 }
 export const AchievementInfo = ({
-                           title,
-                           value,
-                           img,
-                           unoptimized,
-                           children,
-                           arrowPath
+                                  title,
+                                  value,
+                                  img,
+                                  unoptimized,
+                                  children,
+                                  arrowPath
                                 }: AchievementInfoProps) => {
 
   return (
     <CardContent className="h-full w-full p-2 flex items-center gap-4 justify-between">
       <div className="flex flex-row gap-2 items-center">
-          <Image src={safeJoinPaths(img)} alt={img}
-                 className="h-12 w-12 pixelated mr-2 rounded-md" width={48} height={48}
-                 unoptimized={unoptimized || img.includes(".gif") || img.includes(".webp")}/>
+        <Image src={safeJoinPaths(img)} alt={img}
+               className="h-12 w-12 pixelated mr-2 rounded-md" width={48} height={48}
+               unoptimized={unoptimized || img.includes(".gif") || img.includes(".webp")}/>
         <div className="flex flex-col w-fit gap-2">
           <span className="font-semibold">{title}</span>
           <span className="font-bold">{value}</span>

@@ -480,7 +480,7 @@ const menuPaths: Map<string, PathValid[]> = new Map<string, PathValid[]>([
 ]);
 
 
-const deprecatedIdAchivement =[
+const deprecatedIdAchivement = [
   "ariane.end",
   "core.command.achievement",
   "core.command.home",
@@ -634,9 +634,9 @@ const dictAchievementIdToIcon = new Map<string, string>([
   ["1:alliancemod:item.magic_glue:0#", "glue"],
   ["1:alliancemod:tile.protection_block:0#", "tile-protection-block"],
   // OTHERS
-  ["1:palamod:item.endium.helmet:0#","air"],
+  ["1:palamod:item.endium.helmet:0#", "air"],
   ["1:palamod:item.spawner_finder:0#", "spawner-finder"],
-  ["1:palamod:item.glue:0#","glue"],
+  ["1:palamod:item.glue:0#", "glue"],
   ["1:palamod:item.hammer.paladium:0#{modifiersmax:3,upgradearray:[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,],modifiersammount:0,}", "hammer-paladium"],
   ["1:palamod:item.capture_stone:0#", "capture-stone"],
   ["1:palapet:tile.pet_cage:0#", "tile-pet-cage"],

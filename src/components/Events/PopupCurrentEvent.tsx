@@ -18,7 +18,11 @@ import { RenderEvent } from "@/components/NavBarClient.tsx";
 import { cn } from "@/lib/utils.ts";
 
 
-export const PopupCurrentEvent = ({event, alreadyRegistered,children} : {event: Event,alreadyRegistered: boolean, children: React.ReactNode}) => {
+export const PopupCurrentEvent = ({ event, alreadyRegistered, children }: {
+  event: Event,
+  alreadyRegistered: boolean,
+  children: React.ReactNode
+}) => {
   const { data: playerInfo } = usePlayerInfoStore();
   const [discordName, setDiscordName] = useState("");
 
@@ -28,8 +32,7 @@ export const PopupCurrentEvent = ({event, alreadyRegistered,children} : {event: 
       console.error('Player info not found')
       return;
     }
-    if(alreadyRegistered)
-    {
+    if (alreadyRegistered) {
       toast.info("Vous êtes déjà inscrit au giveaway !");
       return;
     }
@@ -81,7 +84,7 @@ export const PopupCurrentEvent = ({event, alreadyRegistered,children} : {event: 
                 {event.event_name} - <span
                   className="text-primary-foreground">{event.participants}</span> {adaptPlurial("participant", event.participants)}
                 </span>
-                <span>
+              <span>
                   {event.event_description}
                 </span>
             </CardTitle>
@@ -117,7 +120,8 @@ export const PopupCurrentEvent = ({event, alreadyRegistered,children} : {event: 
               <div>- Si vous êtes ban pendant la période de récupération des lots, alors vous serez automatique retirer
                 des gagnants.
               </div>
-              <div>- Le pseudo discord est optionnel, c&apos;est juste pour me simplifier la vie pour vous contacter.</div>
+              <div>- Le pseudo discord est optionnel, c&apos;est juste pour me simplifier la vie pour vous contacter.
+              </div>
               <div>- Le tirage au sort aura lieu le {new Date(event.event_end_timestamp).toLocaleString()}</div>
             </CardContent>
 
@@ -128,7 +132,8 @@ export const PopupCurrentEvent = ({event, alreadyRegistered,children} : {event: 
             </CardHeader>
             <CardContent>
               Le tirage au sort aura lieu 10 minutes après la fin du compte à rebours.
-              Tant que vous n&apos;avez pas récupérer vos récompenses, une fenêtre s&apos;affichera à chaque chargement de votre
+              Tant que vous n&apos;avez pas récupérer vos récompenses, une fenêtre s&apos;affichera à chaque chargement
+              de votre
               profil.
             </CardContent>
 
@@ -141,18 +146,19 @@ export const PopupCurrentEvent = ({event, alreadyRegistered,children} : {event: 
 
       </ScrollArea>
       <div className="flex flex-row gap-2 pb-2">
-          <div className="relative">
-            <Input
-              type="text"
-              id="discord_name"
-              name="discord_name"
-              className="bg-background border-destructive"
-              value={discordName}
-              onChange={e => setDiscordName(e.target.value)}
-              placeholder={"Pseudo discord (optionnel)"}
-            />
-          </div>
-        <Button onClick={handleConfirm} className={cn("bg-green-500", alreadyRegistered && "bg-red-500")} disabled={alreadyRegistered}>{alreadyRegistered ? `${playerInfo.username} tu es déjà inscrit` : `Participer en tant que ${playerInfo.username}`}</Button>
+        <div className="relative">
+          <Input
+            type="text"
+            id="discord_name"
+            name="discord_name"
+            className="bg-background border-destructive"
+            value={discordName}
+            onChange={e => setDiscordName(e.target.value)}
+            placeholder={"Pseudo discord (optionnel)"}
+          />
+        </div>
+        <Button onClick={handleConfirm} className={cn("bg-green-500", alreadyRegistered && "bg-red-500")}
+                disabled={alreadyRegistered}>{alreadyRegistered ? `${playerInfo.username} tu es déjà inscrit` : `Participer en tant que ${playerInfo.username}`}</Button>
       </div>
     </DialogContent>
   </Dialog>

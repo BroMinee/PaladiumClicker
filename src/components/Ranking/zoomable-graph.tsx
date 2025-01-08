@@ -1,9 +1,9 @@
 'use client';
 
-import React, {FormEvent, useEffect, useMemo, useRef, useState} from "react";
-import {Card, CardContent, CardHeader} from "@/components/ui/card.tsx";
-import {ChartConfig, ChartContainer, ChartLegend, ChartLegendContent} from "@/components/Ranking/chart-z.tsx";
-import {Button} from "@/components/ui/button.tsx";
+import React, { FormEvent, useEffect, useMemo, useRef, useState } from "react";
+import { Card, CardContent, CardHeader } from "@/components/ui/card.tsx";
+import { ChartConfig, ChartContainer, ChartLegend, ChartLegendContent } from "@/components/Ranking/chart-z.tsx";
+import { Button } from "@/components/ui/button.tsx";
 import {
   Area,
   AreaChart,
@@ -15,14 +15,14 @@ import {
   XAxis,
   YAxis
 } from "recharts";
-import {ProfilSectionEnum, RankingResponse, RankingType} from "@/types";
-import {usePlayerInfoStore} from "@/stores/use-player-info-store.ts";
-import {formatPrice, generateProfilUrl, generateRankingUrl} from "@/lib/misc.ts";
-import {Payload} from "recharts/types/component/DefaultLegendContent";
-import {useRouter, useSearchParams} from "next/navigation";
-import {Input} from "@/components/ui/input.tsx";
-import {FaSearch} from "react-icons/fa";
-import {ScrollArea, ScrollBar} from "@/components/ui/scroll-area.tsx";
+import { ProfilSectionEnum, RankingResponse, RankingType } from "@/types";
+import { usePlayerInfoStore } from "@/stores/use-player-info-store.ts";
+import { formatPrice, generateProfilUrl, generateRankingUrl } from "@/lib/misc.ts";
+import { Payload } from "recharts/types/component/DefaultLegendContent";
+import { useRouter, useSearchParams } from "next/navigation";
+import { Input } from "@/components/ui/input.tsx";
+import { FaSearch } from "react-icons/fa";
+import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area.tsx";
 
 type ZoomableChartProps = {
   data: RankingResponse;
@@ -51,12 +51,12 @@ const gradientColors = [
   { "color": "#ff0000", "color2": "#c90000" },
   { "color": "#00d4ff", "color2": "#0657ad" }];
 
-export function ZoomableChart({data: initialData, rankingType, profil}: ZoomableChartProps) {
+export function ZoomableChart({ data: initialData, rankingType, profil }: ZoomableChartProps) {
   const router = useRouter();
   const searchParams = useSearchParams();
 
 
-  const {data: playerInfo} = usePlayerInfoStore();
+  const { data: playerInfo } = usePlayerInfoStore();
   const [refAreaLeft, setRefAreaLeft] = useState<string | null>(null);
   const [refAreaRight, setRefAreaRight] = useState<string | null>(null);
   const [startTime, setStartTime] = useState<string | null>(null);
@@ -100,7 +100,7 @@ export function ZoomableChart({data: initialData, rankingType, profil}: Zoomable
 
     document.getElementById("username")?.setAttribute("innerHTML", "");
     if (profil)
-      router.push(generateProfilUrl(playerInfo.username, ProfilSectionEnum.Classement, rankingType, Array.from(usernames).sort()), {scroll: false});
+      router.push(generateProfilUrl(playerInfo.username, ProfilSectionEnum.Classement, rankingType, Array.from(usernames).sort()), { scroll: false });
     else {
       const searchParamsNoUsername = searchParams.get('noUsernames');
       const noUsernames: string[] = searchParamsNoUsername ? searchParamsNoUsername.split(",") : [];
@@ -112,7 +112,7 @@ export function ZoomableChart({data: initialData, rankingType, profil}: Zoomable
           noUsernames.splice(indexToRemove, 1);
       }
 
-      router.push(generateRankingUrl(rankingType, Array.from(usernames).sort(), noUsernames), {scroll: false});
+      router.push(generateRankingUrl(rankingType, Array.from(usernames).sort(), noUsernames), { scroll: false });
     }
   }
 
@@ -129,12 +129,12 @@ export function ZoomableChart({data: initialData, rankingType, profil}: Zoomable
     }
 
     if (profil)
-      router.push(generateProfilUrl(playerInfo.username, ProfilSectionEnum.Classement, rankingType, Array.from(usernames).filter((e) => e.toLowerCase() !== username.toLowerCase()).sort()), {scroll: false});
+      router.push(generateProfilUrl(playerInfo.username, ProfilSectionEnum.Classement, rankingType, Array.from(usernames).filter((e) => e.toLowerCase() !== username.toLowerCase()).sort()), { scroll: false });
     else {
       const searchParamsNoUsername = searchParams.get('noUsernames');
       const noUsernames: string[] = searchParamsNoUsername ? searchParamsNoUsername.split(',') : [];
       noUsernames.push(username);
-      router.push(generateRankingUrl(rankingType, Array.from(usernames).filter((e) => e.toLowerCase() !== username.toLowerCase()).sort(), noUsernames), {scroll: false});
+      router.push(generateRankingUrl(rankingType, Array.from(usernames).filter((e) => e.toLowerCase() !== username.toLowerCase()).sort(), noUsernames), { scroll: false });
 
     }
   }
@@ -215,28 +215,27 @@ export function ZoomableChart({data: initialData, rankingType, profil}: Zoomable
   }
 
 
-
   useEffect(() => {
 
-      const transformedData = Object.values(initialData.reduce((acc, item) => {
-        // format the date to DD-MM-YYYY
-        const date = new Date(item.date.toString()).toISOString();
-        const username = item.username;
-        const value = item.value;
+    const transformedData = Object.values(initialData.reduce((acc, item) => {
+      // format the date to DD-MM-YYYY
+      const date = new Date(item.date.toString()).toISOString();
+      const username = item.username;
+      const value = item.value;
 
-        if (!acc[date]) {
-          acc[date] = { date};
-        }
+      if (!acc[date]) {
+        acc[date] = { date };
+      }
 
-        acc[date][username] = value;
-        acc[date][`${username}_pos`] = item.position;
-        return acc;
-      }, {} as transformedDataType));
+      acc[date][username] = value;
+      acc[date][`${username}_pos`] = item.position;
+      return acc;
+    }, {} as transformedDataType));
 
-      const uniqueUsernames = getUniqueUsernames(initialData).sort((a, b) => {
-        const lastDay = transformedData[transformedData.length - 1];
-        return Number(lastDay[`${a}_pos`]) - Number(lastDay[`${b}_pos`]);
-      });
+    const uniqueUsernames = getUniqueUsernames(initialData).sort((a, b) => {
+      const lastDay = transformedData[transformedData.length - 1];
+      return Number(lastDay[`${a}_pos`]) - Number(lastDay[`${b}_pos`]);
+    });
 
     let usernames = new Set<string>(uniqueUsernames);
     let usernames_lower = new Set<string>(uniqueUsernames.map((u) => u.toLowerCase()));
@@ -244,8 +243,7 @@ export function ZoomableChart({data: initialData, rankingType, profil}: Zoomable
     const us = searchParams.get('usernames');
     if (us) {
       for (const u of us.split(',')) {
-        if (!usernames_lower.has(u.toLowerCase()))
-        {
+        if (!usernames_lower.has(u.toLowerCase())) {
           usernames_lower.add(u.toLowerCase());
           usernames.add(u);
         }
@@ -256,7 +254,7 @@ export function ZoomableChart({data: initialData, rankingType, profil}: Zoomable
 
 
     setUniqueUsernames(Array.from(usernames));
-      setOriginalData(transformedData);
+    setOriginalData(transformedData);
     if (initialData.length > 0) {
       setStartTime(initialData[0].date);
       const endDate = new Date(initialData[initialData.length - 1].date);
@@ -273,8 +271,8 @@ export function ZoomableChart({data: initialData, rankingType, profil}: Zoomable
 
     const dataPointsInRange = originalData
       .filter(
-      (dataPoint) => startTime <= dataPoint.date && dataPoint.date <= endTime
-    );
+        (dataPoint) => startTime <= dataPoint.date && dataPoint.date <= endTime
+      );
 
     // Ensure we have at least two data points for the chart to prevent rendering a single dot
     return dataPointsInRange.length > 1 ? dataPointsInRange : originalData.slice(0, 2);
@@ -396,7 +394,6 @@ export function ZoomableChart({data: initialData, rankingType, profil}: Zoomable
   };
 
 
-
   return (
     <Card className="w-full h-full">
       <CardHeader className="flex-col items-stretch space-y-0 border-b p-0 sm:flex-row hidden sm:flex">
@@ -410,7 +407,7 @@ export function ZoomableChart({data: initialData, rankingType, profil}: Zoomable
         </div>
         <div className="flex">
           <div
-              className="relative z-30 flex flex-1 flex-col justify-center gap-1 border-t px-6 py-4 text-left even:border-l bg-muted/10 sm:border-l sm:border-t-0 sm:px-8 sm:py-6"
+            className="relative z-30 flex flex-1 flex-col justify-center gap-1 border-t px-6 py-4 text-left even:border-l bg-muted/10 sm:border-l sm:border-t-0 sm:px-8 sm:py-6"
           >
                         <span className="text-xs text-muted-foreground">
                             Minimum Local
@@ -420,7 +417,7 @@ export function ZoomableChart({data: initialData, rankingType, profil}: Zoomable
                         </span>
           </div>
           <div
-              className="relative z-30 flex flex-1 flex-col justify-center gap-1 border-t px-6 py-4 text-left even:border-l bg-muted/10 sm:border-l sm:border-t-0 sm:px-8 sm:py-6"
+            className="relative z-30 flex flex-1 flex-col justify-center gap-1 border-t px-6 py-4 text-left even:border-l bg-muted/10 sm:border-l sm:border-t-0 sm:px-8 sm:py-6"
           >
                         <span className="text-xs text-muted-foreground">
                             Maximum Local
@@ -434,60 +431,60 @@ export function ZoomableChart({data: initialData, rankingType, profil}: Zoomable
       </CardHeader>
       <CardContent className="sm:flex flex-row px-2 sm:p-6 h-full sm:h-[calc(100%-100px)] hidden">
         <ChartContainer
-            config={chartConfig}
-            className=" h-full w-3/4"
+          config={chartConfig}
+          className=" h-full w-3/4"
         >
           <div className="h-full" onWheel={handleZoom} onTouchMove={handleZoom} ref={chartRef}
-               style={{touchAction: 'none'}}>
+               style={{ touchAction: 'none' }}>
             <ResponsiveContainer width="100%" height="100%">
               <AreaChart
-                  data={zoomedData}
-                  margin={{
-                    top: 10,
-                    right: 10,
-                    left: 0,
-                    bottom: 0,
-                  }}
-                  onMouseDown={handleMouseDown}
-                  onMouseMove={handleMouseMove}
-                  onMouseUp={handleMouseUp}
-                  onMouseLeave={handleMouseUp}
+                data={zoomedData}
+                margin={{
+                  top: 10,
+                  right: 10,
+                  left: 0,
+                  bottom: 0,
+                }}
+                onMouseDown={handleMouseDown}
+                onMouseMove={handleMouseMove}
+                onMouseUp={handleMouseUp}
+                onMouseLeave={handleMouseUp}
               >
                 <defs>
                   {gradientColors.map((color, index) => (
-                      <linearGradient key={index} id={`top${index + 1}`} x1="0" y1="0" x2="1" y2="0">
-                        <stop offset="0%" stopColor={color.color}/>
-                        <stop offset="100%" stopColor={color.color2}/>
-                      </linearGradient>
+                    <linearGradient key={index} id={`top${index + 1}`} x1="0" y1="0" x2="1" y2="0">
+                      <stop offset="0%" stopColor={color.color}/>
+                      <stop offset="100%" stopColor={color.color2}/>
+                    </linearGradient>
                   ))}
                 </defs>
                 <CartesianGrid strokeDasharray="4"/>
                 <XAxis
-                    dataKey="date"
-                    tickFormatter={formatXAxis}
-                    tickLine={false}
-                    axisLine={false}
-                    tickMargin={4}
-                    minTickGap={16}
-                    style={{userSelect: 'none'}}
+                  dataKey="date"
+                  tickFormatter={formatXAxis}
+                  tickLine={false}
+                  axisLine={false}
+                  tickMargin={4}
+                  minTickGap={16}
+                  style={{ userSelect: 'none' }}
                 />
                 <YAxis
-                    type="number"
-                    tickLine={false}
-                    axisLine={false}
-                    tickFormatter={DataFormatter}
-                    style={{userSelect: 'none'}}
-                    width={45}
+                  type="number"
+                  tickLine={false}
+                  axisLine={false}
+                  tickFormatter={DataFormatter}
+                  style={{ userSelect: 'none' }}
+                  width={45}
                 />
                 <Tooltip content={<CustomTooltip/>}/>
                 <Legend layout="horizontal" verticalAlign="bottom" align="center" height={45} payload={
                   uniqueUsernames.map(
-                      (item) => ({
-                        id: item,
-                        type: "line",
-                        value: item,
-                        color: gradientColors[uniqueUsernames.indexOf(item) % gradientColors.length].color2,
-                      })
+                    (item) => ({
+                      id: item,
+                      type: "line",
+                      value: item,
+                      color: gradientColors[uniqueUsernames.indexOf(item) % gradientColors.length].color2,
+                    })
                   )
                 }
                         onMouseEnter={handleMouseEnterLegends} onMouseLeave={handleMouseLeaveLegends}
@@ -515,25 +512,25 @@ export function ZoomableChart({data: initialData, rankingType, profil}: Zoomable
                 {/*  isAnimationActive={false}*/}
                 {/*/>*/}
                 {uniqueUsernames.map((username, index) => (
-                    <Area
-                        key={username + index}
-                        dataKey={username}
-                        type="monotone"
-                        stroke={zoomedData.every((a) => a[username] === zoomedData[0][username]) ? gradientColors[index % gradientColors.length].color2 : `url(#top${index + 1})`}
-                        strokeWidth={5}
-                        fillOpacity={0}
-                        opacity={opacity[username] || 1}
-                        isAnimationActive={isAnimated}
-                    />
+                  <Area
+                    key={username + index}
+                    dataKey={username}
+                    type="monotone"
+                    stroke={zoomedData.every((a) => a[username] === zoomedData[0][username]) ? gradientColors[index % gradientColors.length].color2 : `url(#top${index + 1})`}
+                    strokeWidth={5}
+                    fillOpacity={0}
+                    opacity={opacity[username] || 1}
+                    isAnimationActive={isAnimated}
+                  />
                 ))}
                 {refAreaLeft && refAreaRight && (
-                    <ReferenceArea
-                        x1={refAreaLeft}
-                        x2={refAreaRight}
-                        strokeOpacity={0.3}
-                        fill="hsl(var(--foreground))"
-                        fillOpacity={0.25}
-                    />
+                  <ReferenceArea
+                    x1={refAreaLeft}
+                    x2={refAreaRight}
+                    strokeOpacity={0.3}
+                    fill="hsl(var(--foreground))"
+                    fillOpacity={0.25}
+                  />
                 )}
               </AreaChart>
             </ResponsiveContainer>
@@ -544,18 +541,18 @@ export function ZoomableChart({data: initialData, rankingType, profil}: Zoomable
           <form onSubmit={onSubmit}>
             <div className="relative">
               <Input
-                  type="text"
-                  id="username"
-                  name="username"
-                  className={"bg-background"}
-                  placeholder={"Entre un pseudo"}
+                type="text"
+                id="username"
+                name="username"
+                className={"bg-background"}
+                placeholder={"Entre un pseudo"}
               />
               <Button
-                  id="pseudo-submit"
-                  type="submit"
-                  className="absolute right-0 top-0 text-foreground rounded-l-none border-none shadow-none"
-                  variant="ghost"
-                  size="icon"
+                id="pseudo-submit"
+                type="submit"
+                className="absolute right-0 top-0 text-foreground rounded-l-none border-none shadow-none"
+                variant="ghost"
+                size="icon"
               >
                 <FaSearch/>
               </Button>
@@ -564,15 +561,15 @@ export function ZoomableChart({data: initialData, rankingType, profil}: Zoomable
           <ScrollArea className="h-96">
             <ul className="mt-2 mr-3">
               {uniqueUsernames.map((username, index) => (
-                  <li key={username} className="flex justify-between items-center mb-2"
-                      style={{color: gradientColors[index % gradientColors.length].color2}}>
-                    <span>{username}</span>
-                    <Button variant="outline" size="sm"
-                            disabled={profil && username.toLowerCase() === playerInfo?.username.toLowerCase()}
-                            onClick={() => handleRemoveUsername(username)}>
-                      Remove
-                    </Button>
-                  </li>
+                <li key={username} className="flex justify-between items-center mb-2"
+                    style={{ color: gradientColors[index % gradientColors.length].color2 }}>
+                  <span>{username}</span>
+                  <Button variant="outline" size="sm"
+                          disabled={profil && username.toLowerCase() === playerInfo?.username.toLowerCase()}
+                          onClick={() => handleRemoveUsername(username)}>
+                    Remove
+                  </Button>
+                </li>
               ))}
             </ul>
             <ScrollBar orientation="vertical"/>

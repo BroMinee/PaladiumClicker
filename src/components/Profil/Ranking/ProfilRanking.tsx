@@ -6,16 +6,13 @@ import { RankingSelectorCard } from "@/components/Ranking/RankingSelector.tsx";
 import { RankingType } from "@/types";
 import { searchParamsProfilPage } from "@/components/Profil/ProfilSelectorDisplay.tsx";
 
-export function ProfilRankingSection({searchParams}: {searchParams: searchParamsProfilPage})
-{
-  let rankingType  : RankingType | undefined = RankingType.money;
-  if(searchParams.category !== undefined)
-  {
+export function ProfilRankingSection({ searchParams }: { searchParams: searchParamsProfilPage }) {
+  let rankingType: RankingType | undefined = RankingType.money;
+  if (searchParams.category !== undefined) {
     rankingType = searchParams.category as (RankingType | undefined);
   }
 
-  if(rankingType === undefined)
-  {
+  if (rankingType === undefined) {
     rankingType = RankingType.money;
   }
 

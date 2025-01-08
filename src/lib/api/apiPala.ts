@@ -169,8 +169,8 @@ export const getPlayerInfo = async (pseudo: string): Promise<PlayerInfo> => {
   let paladiumProfil = await getPaladiumProfileByPseudo(pseudo)
 
 
-  cookies().set('uuid', paladiumProfil.uuid, {expires: new Date(Date.now() + 1000 * 60 * 60 * 24 * 30)});
-  cookies().set('username', paladiumProfil.username, {expires: new Date(Date.now() + 1000 * 60 * 60 * 24 * 30)});
+  cookies().set('uuid', paladiumProfil.uuid, { expires: new Date(Date.now() + 1000 * 60 * 60 * 24 * 30) });
+  cookies().set('username', paladiumProfil.username, { expires: new Date(Date.now() + 1000 * 60 * 60 * 24 * 30) });
 
   // Do all fetches in parallel to save time
   const p1 = getPaladiumClickerDataByUUID(paladiumProfil.uuid, paladiumProfil.username);
@@ -330,7 +330,7 @@ export const getPlayerAchievements = async (uuid: string): Promise<Achievement[]
     data: { id: string, progress: number, completed: boolean }[]
   }
   const response = await fetchWithHeader<AchievementResponse>(`${PALADIUM_API_URL}/v1/paladium/player/profile/${uuid}/achievements?limit=100&offset=0`).catch(() => {
-    return { totalCount: 0, data: []  } as AchievementResponse;
+    return { totalCount: 0, data: [] } as AchievementResponse;
   })
   const totalCount = response.totalCount;
 
@@ -339,7 +339,7 @@ export const getPlayerAchievements = async (uuid: string): Promise<Achievement[]
   let c = 0;
   while (offset < totalCount && c <= 10) {
     const response = await fetchWithHeader<AchievementResponse>(`${PALADIUM_API_URL}/v1/paladium/player/profile/${uuid}/achievements?offset=${offset}&limit=100`).catch(() => {
-      return { totalCount: 0, data: []  } as AchievementResponse;
+      return { totalCount: 0, data: [] } as AchievementResponse;
     })
     data = data.concat(response.data);
     offset += 100;
@@ -354,37 +354,36 @@ export const getPlayerAchievements = async (uuid: string): Promise<Achievement[]
   });
 
   const achievements = allAchievements.data.map((achievement) => {
-      const found = data.find((a) => a.id === achievement.id);
-      return {
-        id: achievement.id,
-        progress: found ? found.progress : 0,
-        completed: found ? found.completed : false,
-        category: achievement.category,
-        name: achievement.name,
-        description: achievement.description,
-        amount: achievement.amount,
-        icon: achievement.icon,
-        subAchievements: [] as Achievement[],
-        imgPath: "/AH_img/barrier.png"
-      }});
+    const found = data.find((a) => a.id === achievement.id);
+    return {
+      id: achievement.id,
+      progress: found ? found.progress : 0,
+      completed: found ? found.completed : false,
+      category: achievement.category,
+      name: achievement.name,
+      description: achievement.description,
+      amount: achievement.amount,
+      icon: achievement.icon,
+      subAchievements: [] as Achievement[],
+      imgPath: "/AH_img/barrier.png"
+    }
+  });
 
 
   const dictIdToSubIds = constants.dictAchievementIdToSubIds;
 
   const categoryAchievements = achievements.filter(achievement => achievement.amount === -1);
   const nonCategoryAchievements = achievements.filter(achievement => achievement.amount !== -1);
-  const subCategoryAchievements : string[] = [];
+  const subCategoryAchievements: string[] = [];
 
 
   categoryAchievements.forEach((achievement) => {
 
-    if (dictIdToSubIds.get(achievement.id))
-    {
+    if (dictIdToSubIds.get(achievement.id)) {
       dictIdToSubIds.get(achievement.id)!.forEach((subId) => {
         const subAchievement = achievements.find((a) => a.id === subId);
-        if(subAchievement)
-        {
-          if(!subAchievement.completed)
+        if (subAchievement) {
+          if (!subAchievement.completed)
             achievement.completed = false;
           subAchievement.category = achievement.category;
           achievement.subAchievements.push(subAchievement);
@@ -396,23 +395,22 @@ export const getPlayerAchievements = async (uuid: string): Promise<Achievement[]
 
     let id = achievement.id;
 
-    if(id === "palamod.craftcauldron.gluballall")
+    if (id === "palamod.craftcauldron.gluballall")
       id = "palamod.craftcauldron.glueball"
-    else if(id === "paladium.pickup.flower.multi.all")
+    else if (id === "paladium.pickup.flower.multi.all")
       id = "paladium.pickup.flower";
-    else if(id === "paladium.pickup.secret.multi.all")
+    else if (id === "paladium.pickup.secret.multi.all")
       id = "paladium.pickup.secret";
 
-    else if(id.endsWith(".all"))
+    else if (id.endsWith(".all"))
       id = id.slice(0, -4);
-    else if(id.endsWith("all"))
+    else if (id.endsWith("all"))
       id = id.slice(0, -3);
 
     achievements.forEach((a) => {
-      if(a.id.startsWith(id + ".") && a.id !== achievement.id && a.category === achievement.category)
-      {
+      if (a.id.startsWith(id + ".") && a.id !== achievement.id && a.category === achievement.category) {
         a.category = achievement.category;
-        if(!a.completed)
+        if (!a.completed)
           achievement.completed = false;
         achievement.subAchievements.push(a);
         subCategoryAchievements.push(a.id);

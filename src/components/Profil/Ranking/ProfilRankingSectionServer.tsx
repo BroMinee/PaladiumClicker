@@ -6,7 +6,7 @@ import { cookies } from "next/headers";
 import { ZoomableChart } from "@/components/Ranking/zoomable-graph.tsx";
 import { searchParamsProfilPage } from "@/components/Profil/ProfilSelectorDisplay.tsx";
 
-export async function ProfilRankingSectionServer({rankingType, searchParams}: {
+export async function ProfilRankingSectionServer({ rankingType, searchParams }: {
   rankingType: RankingType,
   searchParams: searchParamsProfilPage
 }) {

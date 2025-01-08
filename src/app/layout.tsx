@@ -26,7 +26,7 @@ export default function RootLayout({
       <meta name="theme-color" content="#ff5c00"/>
     </head>
     <body>
-    <ServiceWorkerRegister />
+    <ServiceWorkerRegister/>
     <ThemeProviders>
       <div className="relative min-h-screen flex flex-col">
         <div className="flex flex-row">

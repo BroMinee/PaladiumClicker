@@ -3,7 +3,11 @@
 
 import React, { useState } from "react";
 
-export default function HoverText({ text, children, className }: { text: React.ReactNode, children: React.ReactNode, className?: string }) {
+export default function HoverText({ text, children, className }: {
+  text: React.ReactNode,
+  children: React.ReactNode,
+  className?: string
+}) {
   const [showText, setShowText] = useState(false);
   const [position, setPosition] = useState({ x: 0, y: 0 });
 

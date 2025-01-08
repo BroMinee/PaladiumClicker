@@ -72,8 +72,6 @@ export function PetCanvas({ monture = false }: { monture?: boolean }) {
   const { data: playerInfo } = usePlayerInfoStore();
 
 
-
-
   let modelName: ModelName = "arty";
   let petName: string = "";
   let petLevel: number = 0;

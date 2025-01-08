@@ -6,7 +6,7 @@ import { checkCondition, formatPrice } from "@/lib/misc.ts";
 import { usePlayerInfoStore } from "@/stores/use-player-info-store.ts";
 import { UpgradeKey } from "@/types";
 
-export function PreconditionDisplay({ index, upgradeType  }: { index: number, upgradeType: UpgradeKey | "CPS" }) {
+export function PreconditionDisplay({ index, upgradeType }: { index: number, upgradeType: UpgradeKey | "CPS" }) {
   const { data: playerInfo } = usePlayerInfoStore();
   if (!playerInfo) {
     return null;
@@ -15,7 +15,7 @@ export function PreconditionDisplay({ index, upgradeType  }: { index: number, up
   function GetConditionText(msg: string, condition: boolean): ReactNode {
     return (
       <span className="flex flex-row items-center gap-1">{condition ? <FaCheck color="green"/> :
-        <RiCloseLargeLine  color="red"/>}{msg}</span>
+        <RiCloseLargeLine color="red"/>}{msg}</span>
     )
   }
 
@@ -35,15 +35,14 @@ export function PreconditionDisplay({ index, upgradeType  }: { index: number, up
     texts[0] = "Précondition:";
 
   if (coinsCondition !== -1)
-    texts.push(GetConditionText(`Avoir récolté ${formatPrice(coinsCondition)} coins. Actuellement : ${formatPrice(totalCoins)}`,totalCoins >= coinsCondition));
+    texts.push(GetConditionText(`Avoir récolté ${formatPrice(coinsCondition)} coins. Actuellement : ${formatPrice(totalCoins)}`, totalCoins >= coinsCondition));
   if (dayCondition !== -1) {
     texts.push(GetConditionText(`Saison démarrée depuis ${formatPrice(dayCondition)} jours. Actuellement : ${formatPrice(Math.floor(daySinceStart))} jours`, daySinceStart >= dayCondition));
   }
   if (buildingIndex !== -1)
     texts.push(GetConditionText(`Posséder ${buildingNeed} ${playerInfo?.["building"][buildingIndex]["name"]}. Actuellement : ${buildingCount}`, buildingCount >= buildingNeed));
 
-  if(upgradeType === "CPS" && index !== 0)
-  {
+  if (upgradeType === "CPS" && index !== 0) {
     texts.push(GetConditionText(`Posséder l'amélioration ${playerInfo.CPS[index - 1].name}`, playerInfo.CPS[index - 1].own));
   }
 

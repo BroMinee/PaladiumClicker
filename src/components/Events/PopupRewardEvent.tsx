@@ -7,7 +7,7 @@ import { RenderEvent } from "@/components/NavBarClient.tsx";
 import Discord from "@/components/Discord.tsx";
 
 
-export const PopupRewardEvent = ({winningPrice, children} : {winningPrice: string, children: React.ReactNode}) => {
+export const PopupRewardEvent = ({ winningPrice, children }: { winningPrice: string, children: React.ReactNode }) => {
   return <Dialog>
     <DialogTrigger>
       <RenderEvent newNotification={true}>

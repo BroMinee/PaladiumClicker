@@ -157,9 +157,9 @@ function AchievementSelectorCategory({ category, selectedCategory, setSelectedCa
       imgPath = "AH_img/gold_ingot.png";
       displayText = "Economie";
       break;
-      case CategoryEnum.ALLIANCE:
+    case CategoryEnum.ALLIANCE:
       imgPath = "AH_img/goggles_of_community.png";
-        displayText = "Ordre vs Chaos";
+      displayText = "Ordre vs Chaos";
       break;
     case CategoryEnum.OTHERS:
       imgPath = "AH_img/ender_pearl.png";
@@ -205,7 +205,7 @@ export function AchievementBody({ itemList }: { itemList: { img: string, value: 
         <h1 className="font-mc">Achievements</h1>
         <DisplayAllAchievementInCategory category={selectedCategory} itemList={itemList}/>
       </div>
-        <ScrollBar orientation="vertical"/>
+      <ScrollBar orientation="vertical"/>
     </ScrollArea>
   </>
 }
@@ -225,7 +225,6 @@ export function DisplayAllAchievementInCategory({ category, itemList }: {
   allAchivements.sort((a, b) => a.id.localeCompare(b.id))
 
 
-
   // TODO: achievement.icon
   return <div className="flex flex-col gap-4">
     {allAchivements.map((achievement, index) => {
@@ -242,8 +241,7 @@ function DetailAchievement({ achievement, itemList }: {
   let achievementProgress;
   if (achievement.completed) {
     achievementProgress = achievement.subAchievements.length === 0 ? achievement.amount : achievement.subAchievements.length;
-  }
-  else if(achievement.subAchievements.length > 0)
+  } else if (achievement.subAchievements.length > 0)
     achievementProgress = achievement.subAchievements.reduce((acc, curr) => acc + (curr.completed ? 1 : 0), 0)
   else
     achievementProgress = achievement.progress;
@@ -260,7 +258,7 @@ function DetailAchievement({ achievement, itemList }: {
   if (closestItemName === "unknown.png")
     console.log("Unknown item : " + achievement.icon)
 
-  if(closestItemName === "barriere.png")
+  if (closestItemName === "barriere.png")
     closestItemName = "unknown.png"
 
   return <div onClick={() => achievement.subAchievements.length !== 0 && setShowSubAchievements(!showSubAchievements)}

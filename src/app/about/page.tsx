@@ -35,7 +35,8 @@ const AboutPage = () => {
         </CardHeader>
         <CardContent>
           <p className="p-2">
-            Le site était open source avant l&apos;introduction des clés d&apos;API nécessaires pour récupérer les informations de
+            Le site était open source avant l&apos;introduction des clés d&apos;API nécessaires pour récupérer les
+            informations de
             Paladium. L&apos;ancien repository est disponible à <a
             href="https://github.com/BroMinee/PaladiumClicker"
             target="_blank"

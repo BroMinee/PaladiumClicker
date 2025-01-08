@@ -41,8 +41,7 @@ export async function getPaladiumAhItemStatsOfAllItemsAction(): Promise<Paladium
   return data;
 }
 
-export async function getCurrentEvent()
-{
+export async function getCurrentEvent() {
   try {
     const eventDB = await getNotCloseEvent();
     const rewards = await getRewards(eventDB.id);
@@ -54,8 +53,8 @@ export async function getCurrentEvent()
 
 export async function getCurrentEventNotRegistered(username: string) {
 
-  if(!username) throw new Error("No username");
-  if(username.length > 16) throw new Error("Username too long");
+  if (!username) throw new Error("No username");
+  if (username.length > 16) throw new Error("Username too long");
 
   let event: Event | null = null;
   try {

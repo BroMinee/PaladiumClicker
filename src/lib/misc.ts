@@ -3391,7 +3391,7 @@ export function montureGetCoef(xp: number, curLevel: number) {
   return xp / needed;
 }
 
-export function petGetNeededXpForLevel(level: number) : number {
+export function petGetNeededXpForLevel(level: number): number {
   if (level === 0)
     return 0;
   return (level * level - 1) * (90 / level) + 300 + petGetNeededXpForLevel(level - 1);

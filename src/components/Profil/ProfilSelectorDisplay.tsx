@@ -23,7 +23,7 @@ export function ProfilSelectorDisplay({ params, searchParams }: {
 }) {
 
 
-  if(searchParams.section === undefined)
+  if (searchParams.section === undefined)
     searchParams.section = ProfilSectionEnum.Home;
 
   if (!isProfilSection(searchParams.section)) {

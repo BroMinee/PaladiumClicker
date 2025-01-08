@@ -55,36 +55,36 @@ export default function AhItem({ item, itemNameMatcher }: AhItemsProps) {
   return (
     <Link href={`${generateAhShopUrl(closestItemName)}`}>
       <Card className="hover:scale-105 duration-300 mt-4 ml-1.5 mr-1.5 cursor-pointer">
-      <CardContent className="pt-6 space-y-2">
-        <div className="flex flex-col items-center justify-center gap-2">
-          <Image src={safeJoinPaths("/AH_img/", `${closestItemName.img}`)} alt="Icône"
-                 height={48} width={48}
-                 className="object-cover pixelated"/>
-          <span
-            className="text-primary text-sm">{quantity}x {renamed ? `${displayName} renommé en ${name}` : `${displayName}`}</span>
-        </div>
-        <div className="space-y-2">
-          <div className="text-sm">
-            <Image src={safeJoinPaths("dollar.png")} alt="Icône"
-                   width={40} height={40}
-                   className="object-cover inline-block pixelated mr-2"/>
-            Prix: {formatPrice(price)} $
+        <CardContent className="pt-6 space-y-2">
+          <div className="flex flex-col items-center justify-center gap-2">
+            <Image src={safeJoinPaths("/AH_img/", `${closestItemName.img}`)} alt="Icône"
+                   height={48} width={48}
+                   className="object-cover pixelated"/>
+            <span
+              className="text-primary text-sm">{quantity}x {renamed ? `${displayName} renommé en ${name}` : `${displayName}`}</span>
           </div>
-          <div className="text-sm">
-            <Image src={safeJoinPaths("/pbs.png")} alt="Icône"
-                   width={40} height={40}
-                   className="object-cover pixelated inline-block mr-2"/>
-            Prix en pbs: {formatPrice(pricePb)}
+          <div className="space-y-2">
+            <div className="text-sm">
+              <Image src={safeJoinPaths("dollar.png")} alt="Icône"
+                     width={40} height={40}
+                     className="object-cover inline-block pixelated mr-2"/>
+              Prix: {formatPrice(price)} $
+            </div>
+            <div className="text-sm">
+              <Image src={safeJoinPaths("/pbs.png")} alt="Icône"
+                     width={40} height={40}
+                     className="object-cover pixelated inline-block mr-2"/>
+              Prix en pbs: {formatPrice(pricePb)}
+            </div>
+            <div className="text-sm">
+              <Image src={safeJoinPaths("/clock.gif")} alt="Icône"
+                     width={40} height={40}
+                     className="object-cover pixelated inline-block mr-2"/>
+              Expire le : {expireAt}
+            </div>
           </div>
-          <div className="text-sm">
-            <Image src={safeJoinPaths("/clock.gif")} alt="Icône"
-                   width={40} height={40}
-                   className="object-cover pixelated inline-block mr-2"/>
-            Expire le : {expireAt}
-          </div>
-        </div>
-      </CardContent>
-    </Card>
+        </CardContent>
+      </Card>
     </Link>
   )
 }

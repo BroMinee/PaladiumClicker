@@ -2,7 +2,7 @@
   {
     "date": "TODO",
     "events": [
-      "Suppression du compte à rebours pour la réimportation du profil (toujours un cache de 15 minutes) mais c'est plus user-friendly",
+      "Suppression du compte à rebours pour la réimportation du profil (toujours un cache de 15 minutes mais c'est plus user-friendly)",
       "Ajout d'une popup quand la mise à jour du profil donne des informations antérieures aux informations actuelles",
       "Ajout d'une système de notification quand il est l'heure d'améliorer son clicker",
       "Ajout d'un système de popup pour les giveaways",
@@ -46,7 +46,7 @@
       "Suppression d'informations redondantes sur les bâtiments",
       "Correction des pages sortant de l'écran sur tablette, provonquant un scroll horizontal",
       "Correction de fautes lors de la réecriture de texte et de valeur dans le xp-calculator"
-      ]
+    ]
   },
   {
     "date": "16/10/2024 - 20h40",
