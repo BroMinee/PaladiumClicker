@@ -4,8 +4,12 @@
     "events": [
       "Suppression du compte à rebours pour la réimportation du profil (toujours un cache de 15 minutes) mais c'est plus user-friendly",
       "Ajout d'une popup quand la mise à jour du profil donne des informations antérieures aux informations actuelles",
-      "Ajout d'une système de notification quand il est l'heure d'amélirer son clicker",
-      "Ajout d'un système de popup pour les giveaways"
+      "Ajout d'une système de notification quand il est l'heure d'améliorer son clicker",
+      "Ajout d'un système de popup pour les giveaways",
+      "Ajout d'animations pour une meilleure expérience utilisateur",
+      "Correction de la page 'About' qui n'était pas dans la navbar",
+      "Le message d'erreur clignote maintenant en rouge pour attirer l'attention",
+      "Homogénéisation des titres/descriptions des pages"
     ]
   },
   {
