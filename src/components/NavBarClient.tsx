@@ -236,6 +236,10 @@ export function GiveawayFakeLink({ children }: {
 
   if (event) {
     // there is an event and the player is not registered
+    if(newNotificationText === "")
+    {
+      return <PopupCurrentEvent event={event} alreadyRegistered={!newNotification}>{children}</PopupCurrentEvent>
+    }
     return <HoverText text={hoverElement}>
       <PopupCurrentEvent event={event} alreadyRegistered={!newNotification}>{children}</PopupCurrentEvent>
     </HoverText>
