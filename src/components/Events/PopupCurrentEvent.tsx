@@ -132,9 +132,7 @@ export const PopupCurrentEvent = ({ event, alreadyRegistered, children }: {
             </CardHeader>
             <CardContent>
               Le tirage au sort aura lieu 10 minutes après la fin du compte à rebours.
-              Tant que vous n&apos;avez pas récupérer vos récompenses, une fenêtre s&apos;affichera à chaque chargement
-              de votre
-              profil.
+              Tant que vous n&apos;avez pas récupérer vos récompenses, une notification s&apos;affichera à côté de la section &quot;GiveAway&quot;.
             </CardContent>
 
             <CardContent className="text-primary">
