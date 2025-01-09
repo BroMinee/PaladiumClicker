@@ -36,7 +36,7 @@ const PlotAdminShopChart = ({ data, periode }: { data: AdminShopItemDetail[], pe
 
   const data_clean = data.map((item) => {
     return {
-      date: periode === "season" ? new Date(item.date).toLocaleDateString() : new Date(item.date).toLocaleDateString() + " - " + new Date(item.date).toLocaleTimeString(),
+      date: new Date(item.date).toLocaleDateString() + " - " + new Date(item.date).toLocaleTimeString(),
       sellPrice: Math.round(item.sellPrice * 100) / 100,
     }
   });

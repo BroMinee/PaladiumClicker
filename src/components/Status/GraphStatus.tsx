@@ -1,19 +1,43 @@
-import { ServerPaladiumStatusResponse } from "@/types";
+import { ServerPaladiumStatusResponse, StatusPeriode } from "@/types";
 import { redirect } from "next/navigation";
-import { getStatusPaladium } from "@/lib/api/apiPalaTracker.ts";
 import LoadingSpinner from "@/components/ui/loading-spinner.tsx";
 import PlotStatusChart from "@/components/Status/PlotStatusChart.tsx";
+import {
+  getStatusHistoryDay,
+  getStatusHistoryMonth,
+  getStatusHistorySeason,
+  getStatusHistoryWeek
+} from "@/lib/database/status_database.ts";
 
-export default async function GraphStatus() {
+export type GraphStatusProps = {
+  periode: StatusPeriode,
+}
+
+export default async function GraphStatus({ periode: periode }: GraphStatusProps) {
   let data = [] as ServerPaladiumStatusResponse[];
   try {
-    data = await getStatusPaladium();
+    switch (periode) {
+      case "day":
+        data = await getStatusHistoryDay();
+        break;
+      case "week":
+        data = await getStatusHistoryWeek();
+        break;
+      case "month":
+        data = await getStatusHistoryMonth();
+        break;
+      case "season":
+        data = await getStatusHistorySeason();
+        break;
+      default:
+        data = [];
+    }
   } catch (e) {
     redirect("/error?message=Impossible de récupérer les données de status du serveur");
   }
 
   return (
-    <PlotStatusChart data={data}/>
+    <PlotStatusChart data={data} periode={periode}/>
   )
 }
 

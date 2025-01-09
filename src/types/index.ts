@@ -470,6 +470,7 @@ export type AdminShopItem =
   | 'cooked-beef';
 
 export type AdminShopPeriode = 'day' | 'week' | 'month' | 'season';
+export type StatusPeriode = 'day' | 'week' | 'month' | 'season';
 
 export const adminShopItemsAvailable: AdminShopItem[] = [
   'feather', 'wool', 'paladium-ingot', 'ender-pearl', 'egg', 'string', 'log', 'red-mushroom', 'soul-sand',

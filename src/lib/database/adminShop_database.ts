@@ -24,7 +24,7 @@ export const getItemHistorySeason = (item: string): Promise<AdminShopItemDetail[
         WHERE date > ? 
           AND name = ? 
         ORDER BY date;`,
-        [constants.startSeason,item],
+        [constants.startSeason.getTime(), item],
         (error: any, results: any) => {
           if (error) return reject(error);
           resolve(results);

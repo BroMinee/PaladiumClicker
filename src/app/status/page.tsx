@@ -5,6 +5,10 @@ import { Suspense } from "react";
 import GraphStatus, { GraphStatusFallback } from "@/components/Status/GraphStatus.tsx";
 import { isMyApiDown } from "@/lib/api/apiPalaTracker.ts";
 import { getPlayerInfo, getPlayerOnlineCount, isApiDown } from "@/lib/api/apiPala.ts";
+import { StatusSelectorClientPeriode } from "@/components/Status/StatusSelectorClient.tsx";
+import { redirect } from "next/navigation";
+import { generateStatusUrl } from "@/lib/misc.ts";
+import { AdminShopPeriode } from "@/types";
 
 
 export async function generateMetadata() {
@@ -54,7 +58,28 @@ export async function generateMetadata() {
 
 }
 
-export default function Home() {
+export type searchParamsStatusPage = {
+  periode: string,
+}
+
+export default function Home({ searchParams }: {
+  searchParams: searchParamsStatusPage
+}) {
+  let periode = searchParams.periode;
+  let periodeEnum = searchParams.periode as AdminShopPeriode;
+
+
+  if (periode === undefined)
+    periode = "day";
+
+  if (periode !== "day" && periode !== "week" && periode !== "month" && periode !== "season") {
+    redirect(generateStatusUrl("day"));
+    return null;
+  } else {
+    periodeEnum = periode as AdminShopPeriode;
+  }
+
+
   return (
     <div className="flex flex-col gap-4">
       <Card className="flex flex-col gap-4">
@@ -70,9 +95,15 @@ export default function Home() {
         </CardHeader>
         <CardContent className="flex flex-col items-center justify-between gap-2 h-[calc(100vh-30vh)]">
           <Suspense fallback={<GraphStatusFallback/>}>
-            <GraphStatus/>
+            <GraphStatus periode={periodeEnum}/>
           </Suspense>
         </CardContent>
+        <CardHeader className='w-full flex flex-col sm:flex-row gap-2 justify-center items-center p-0 mb-2'>
+          <StatusSelectorClientPeriode periode="day"/>
+          <StatusSelectorClientPeriode periode="week"/>
+          <StatusSelectorClientPeriode periode="month"/>
+          <StatusSelectorClientPeriode periode="season"/>
+        </CardHeader>
       </Card>
     </div>
   )

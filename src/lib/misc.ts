@@ -16,6 +16,7 @@ import {
   PosteriorUpgrade,
   ProfilSectionEnum,
   RankingType,
+  StatusPeriode,
   TerrainUpgrade,
   Tree,
   UpgradeKey
@@ -261,6 +262,13 @@ export function generateAdminShopUrl(item: AdminShopItem, periode?: AdminShopPer
   const args = [argItem, argPeriode].filter((e) => e).join("&");
   return safeJoinPaths(constants.adminShopPath, `?${args}`);
 }
+
+export function generateStatusUrl(periode?: StatusPeriode) {
+  const argPeriode = periode ? `periode=${periode}` : "";
+  const args = [argPeriode].filter((e) => e).join("&");
+  return safeJoinPaths(constants.statusPath, `?${args}`);
+}
+
 
 export function safeJoinPaths(base: string, ...paths: string[]): string {
   const allPaths = ["/" + base, ...paths];
