@@ -1,16 +1,16 @@
 [
   {
-    "date": "TODO",
+    "date": "09/01/2025",
     "events": [
-      "Suppression du compte à rebours pour la réimportation du profil (toujours un cache de 15 minutes mais c'est plus user-friendly)",
-      "Ajout d'une popup quand la mise à jour du profil donne des informations antérieures aux informations actuelles",
-      "Ajout d'une système de notification quand il est l'heure d'améliorer son clicker",
-      "Ajout d'un système de popup pour les giveaways",
-      "Ajout d'animations pour une meilleure expérience utilisateur",
-      "Correction de la page 'About' qui n'était pas dans la navbar",
-      "Le message d'erreur clignote maintenant en rouge pour attirer l'attention",
-      "Homogénéisation des titres/descriptions des pages",
-      "Ajout de la sélection de la période pour l'admin shop"
+      "Suppression du compte à rebours pour la réimportation du profil (le cache de 15 minutes reste en place, mais c'est désormais plus convivial pour l'utilisateur).",
+      "Ajout d'une popup lorsque la mise à jour du profil renvoie des informations antérieures à celles déjà enregistrées.",
+      "Mise en place d'un système de notification pour rappeler qu'il est temps d'améliorer son clicker.",
+      "Intégration d'un système de popups dédiées aux giveaways.",
+      "Ajout d'animations pour enrichir et fluidifier l'expérience utilisateur.",
+      "Possibilité de sélectionner une période dans l'admin shop.",
+      "Correction de la page \"À propos\" qui était absente de la barre de navigation.",
+      "Les messages d'erreur clignotent désormais en rouge pour attirer plus efficacement l'attention.",
+      "Harmonisation des titres et descriptions sur les différentes pages."
     ]
   },
   {
