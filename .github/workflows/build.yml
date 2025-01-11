@@ -31,6 +31,7 @@ jobs:
         run: npm run build
 
       - name: Save build artifacts
+        if: github.ref == 'refs/heads/master'
         uses: actions/upload-artifact@v4
         with:
           name: build-artifact
