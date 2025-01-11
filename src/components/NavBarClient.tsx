@@ -305,8 +305,8 @@ export function NotificationWebSite() {
     >
       <p className="text-white text-lg font-bold">{msg.title}</p>
       <p
-        className={cn("text-white text-base transition-opacity duration-500",
-          isHovered ? "opacity-100 mx-2 pb-2" : "opacity-0")
+        className={cn("text-white text-base transition-opacity duration-500  pb-2",
+          isHovered ? "opacity-100 mx-2" : "opacity-0")
         }
       >
         {msg.content}
