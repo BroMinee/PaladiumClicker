@@ -5,7 +5,7 @@ import { FaBars, FaCalculator, FaClipboardList, FaKey, FaRegUser, FaShoppingBask
 import Setting from "@/components/shared/Setting.tsx";
 import constants from "@/lib/constants.ts";
 import { LogoClient } from "@/components/ui/logoClient.tsx";
-import LinkClient, { CategorieDisplay, GiveawayFakeLink } from "@/components/NavBarClient.tsx";
+import LinkClient, { CategorieDisplay, GiveawayFakeLink, NotificationWebSite } from "@/components/NavBarClient.tsx";
 import { GrOptimize } from "react-icons/gr";
 import { RiMoneyDollarCircleFill } from "react-icons/ri";
 import { LuShoppingCart, LuSkull } from "react-icons/lu";
@@ -121,6 +121,7 @@ function NavBarContent() {
         </CategorieDisplay>
       </nav>
       <footer>
+        <NotificationWebSite/>
         <div className="flex justify-between flex-row w-full pl-5 pr-5 pb-2 pt-2">
           <ToggleTheme/>
           {/*<div className="flex justify-center items-center  space-x-2">*/}

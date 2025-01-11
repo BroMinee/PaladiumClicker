@@ -11,6 +11,7 @@ import {
   isRegisteredToEvent,
   isWinnerNotClaim
 } from "@/lib/database/events_database.ts";
+import { getCurrentNotification } from "@/lib/database/notificationWebsite_database.ts";
 
 /* The content of this file is not sent to the client*/
 
@@ -91,6 +92,15 @@ export async function getEventNotClaimed(username: string) {
       return description.description;
     }
     return "Not winner";
+  } catch (error) {
+    console.error('Error fetching events:', error);
+    throw new Error("Error fetching events");
+  }
+}
+
+export async function getNotificationWebSite() {
+  try {
+    return await getCurrentNotification();
   } catch (error) {
     console.error('Error fetching events:', error);
     throw new Error("Error fetching events");

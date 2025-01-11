@@ -9,11 +9,17 @@ import constants, { PathValid } from "@/lib/constants.ts";
 import { FaAngleDown, FaAngleUp } from "react-icons/fa";
 import { useNotificationStore } from "@/stores/use-notifications-store.ts";
 import HoverText from "@/components/ui/hovertext.tsx";
-import { getCurrentEvent, getCurrentEventNotRegistered, getEventNotClaimed } from "@/lib/api/apiServerAction.ts";
+import {
+  getCurrentEvent,
+  getCurrentEventNotRegistered,
+  getEventNotClaimed,
+  getNotificationWebSite
+} from "@/lib/api/apiServerAction.ts";
 import { PopupCurrentEvent } from "@/components/Events/PopupCurrentEvent.tsx";
 import { Event } from "@/types/db_types.ts";
 import { PopupRewardEvent } from "@/components/Events/PopupRewardEvent.tsx";
 import { PopupNoRewardEvent } from "@/components/Events/PopupNoRewardEvent.tsx";
+import { NotificationWebSiteResponse } from "@/types";
 
 
 export default function LinkClient({ path, children }: {
@@ -269,4 +275,41 @@ export function RenderEvent({ newNotification, children }: { newNotification: bo
           style={{ top: "-18px", right: "-10px" }}>1</span>
       </div>}
   </div>
+}
+
+export function NotificationWebSite() {
+  const [msg, setMsg] = useState<NotificationWebSiteResponse | null>(null);
+  const [isHovered, setIsHovered] = useState(false);
+
+  useEffect(() => {
+    console.log("Test")
+    getNotificationWebSite().then((msg_) => {
+      if (msg_)
+        setMsg(msg_);
+    })
+  }, []);
+
+  if (!msg)
+    return null;
+
+  return (
+    <div
+      className="w-full text-center overflow-hidden transition-all duration-500 rounded-t-md"
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+      style={{
+        background: '#00A3FF',
+        maxHeight: isHovered ? "200px" : "28px",
+      }}
+    >
+      <p className="text-white text-lg font-bold">{msg.title}</p>
+      <p
+        className={cn("text-white text-base transition-opacity duration-500",
+          isHovered ? "opacity-100 mx-2 pb-2" : "opacity-0")
+        }
+      >
+        {msg.content}
+      </p>
+    </div>
+  );
 }
