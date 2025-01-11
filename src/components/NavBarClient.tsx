@@ -299,6 +299,7 @@ export function NotificationWebSite() {
       onMouseLeave={() => setIsHovered(false)}
       style={{
         background: '#00A3FF',
+        boxShadow: "0 0 10px 0 #00A3FF",
         maxHeight: isHovered ? "200px" : "28px",
       }}
     >
