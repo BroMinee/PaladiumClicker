@@ -1,8 +1,11 @@
 'use client';
-import { AdminShopItem, WebHookType } from "@/types";
+import { EventType, OptionType, WebHookType } from "@/types";
 import { useEffect, useState } from "react";
-import { defaultWebHookContentFromType, defaultWebHookEmbedFromType } from "@/components/WebHooks/WebHookConstant.ts";
-import { adminShopItemToUserFriendlyText } from "@/lib/misc.ts";
+import {
+  defaultWebHookContentFromType,
+  defaultWebHookEmbedFromType, defaultWebhookEmbedImgFromType,
+  defaultWebHookFieldsFromType, defaultWebHookTitleFromType, defaultWebhookTitleUrlFromType
+} from "@/components/WebHooks/WebHookConstant.ts";
 import { GenerateWebHookContent } from "@/components/WebHooks/WebHookMsg.tsx";
 
 export function WebHookInputClientItem({ currentWebHookType }: {
@@ -10,11 +13,26 @@ export function WebHookInputClientItem({ currentWebHookType }: {
 }) {
   const [embed, setEmbed] = useState("");
   const [content, setContent] = useState("");
-
+  const [fields, setFields] = useState<{value: string, name: string, inline?: boolean}[]>([]);
+  const [title, setTitle] = useState("");
+  const [titleUrl, setTitleUrl] = useState("");
+  const [embedImg, setEmbedImg] = useState("");
+  const [itemSelected, setItemSelected] = useState<OptionType | null>({value: "test", label: "testUs", img: "https://palatracker.bromine.fr/AH_img/endium_sword.png", label2: "testFr"});
+  const [eventSelected, setEventSelected] = useState<EventType>("BOSS");
 
   useEffect(() => {
     setContent(defaultWebHookContentFromType[currentWebHookType]);
-    setEmbed(defaultWebHookEmbedFromType[currentWebHookType])
+    setEmbed(defaultWebHookEmbedFromType[currentWebHookType]);
+    setFields(defaultWebHookFieldsFromType[currentWebHookType]);
+    setTitle(defaultWebHookTitleFromType[currentWebHookType]);
+    setTitleUrl(defaultWebhookTitleUrlFromType[currentWebHookType]);
+    setEmbedImg(defaultWebhookEmbedImgFromType[currentWebHookType]);
+    if(currentWebHookType === "Market")
+      setItemSelected({value: "endium_sword", label: "Endium Sword", img: "endium_sword.png", label2: "Épée d'Endium"});
+    else if(currentWebHookType === "QDF")
+      setItemSelected({value: "glue", label: "Glue", img: "glue.png", label2: "Colle"});
+    else
+      setItemSelected(null);
   }, [currentWebHookType]);
 
   return (
@@ -22,7 +40,7 @@ export function WebHookInputClientItem({ currentWebHookType }: {
       <WebHookEditor content={content} embed={embed} currentWebHookType={currentWebHookType} setEmbed={setEmbed}
                      setContent={setContent}/>
       {/*<WebHookRender content={content} embed={embed} currentWebHookType={currentWebHookType}/>*/}
-      <GenerateWebHookContent/>
+      <GenerateWebHookContent content={content} embed={embed} title={title} titleUrl={titleUrl} fields={fields} embedImg={embedImg} currentWebHookType={currentWebHookType} itemSelected={itemSelected} eventSelected={eventSelected}/>
     </div>
   )
 }
@@ -55,74 +73,4 @@ function WebHookEditor({ content, embed, currentWebHookType, setContent, setEmbe
       </div>
     </div>
   )
-}
-
-function WebHookRender({ currentWebHookType, embed, content }: {
-  currentWebHookType: WebHookType,
-  embed: string,
-  content: string
-}) {
-  const [contentDisplay, setContentDisplay] = useState("");
-  const [embedDisplay, setEmbedDisplay] = useState("");
-
-  useEffect(() => {
-    console.log(currentWebHookType);
-    formatContent(content, currentWebHookType, null).then((content) => setContentDisplay(content))
-    formatContent(embed, currentWebHookType, null).then((embed) => setEmbedDisplay(embed))
-  }, [content, embed, currentWebHookType]);
-
-  return (
-    <div>
-      <div>
-        {contentDisplay}
-      </div>
-      <div>
-        {embedDisplay}
-      </div>
-    </div>
-  )
-}
-
-async function formatContent(content: string, currentWebHookType: WebHookType, itemName: AdminShopItem | null) {
-// TODO remove | null on itemName
-  function formatQDF(content: string) {
-    return content;
-  }
-
-  function formatAdminShop(content: string, itemName: AdminShopItem) {
-    console.log(content);
-    let res = content.replaceAll("{item}", adminShopItemToUserFriendlyText(itemName));
-    res = res.replaceAll("{price}", 0.5.toString());
-    res = res.replaceAll("{here}", "@here");
-    res = res.replaceAll("{previousPrice}", 0.4.toString());
-    return res;
-  }
-
-  async function formatMarket(content: string) {
-    return content;
-  }
-
-  function formatEvent(content: string) {
-    return content;
-  }
-
-  function formatServeurStatus(content: string) {
-    return content;
-  }
-
-
-  switch (currentWebHookType) {
-    case WebHookType.QDF:
-      return formatQDF(content);
-    case WebHookType.AdminShop:
-      return formatAdminShop(content, itemName || "feather");
-    case WebHookType.Market:
-      return formatMarket(content);
-    case WebHookType.Event:
-      return formatEvent(content);
-    case WebHookType.ServeurStatus:
-      return formatServeurStatus(content);
-    default:
-      return content;
-  }
 }
