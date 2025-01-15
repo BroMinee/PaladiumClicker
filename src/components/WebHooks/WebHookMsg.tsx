@@ -194,7 +194,7 @@ function GenerateEmbedDescription(embed: string, footer: string, fields: {
              width={16}
              height={16}
              alt=""/>
-        <span>{footer} • {new Date().toLocaleString()}</span>
+        <span suppressHydrationWarning>{footer} • {new Date().toLocaleString()}</span>
       </div>
     </div>
   );
@@ -252,7 +252,7 @@ export function GenerateWebHookContent({
           <div className="header-text">
             <span className="title">PalaTracker Alert</span>
             <span className="app-badge">APP</span>
-            <time className="timestamp" dateTime="2025-01-13T18:54:47.235Z">{new Date().toLocaleString()}</time>
+            <time className="timestamp" dateTime="2025-01-13T18:54:47.235Z" suppressHydrationWarning>{new Date().toLocaleString()}</time>
           </div>
         </div>
         <div className="message-content">
