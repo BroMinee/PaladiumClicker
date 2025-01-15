@@ -631,3 +631,12 @@ export enum WebHookType {
 
 export type EventType =
   'BOSS' | 'A VOS MARQUES' | 'TOTEM' | 'EGGHUNT' | 'KOTH' | 'BLACKMARKET'
+
+export type WebHookThresholdCondition =
+  'increasing'
+  | 'decreasing'
+  | 'aboveThreshold'
+  | 'underThreshold'
+  | 'increasingAboveThreshold'
+  | 'decreaseAboveThreshold'
+  | 'aboveQuantity'

@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import { EventType, OptionType } from "@/types";
+import { AdminShopItem, EventType, OptionType, WebHookThresholdCondition, WebHookType } from "@/types";
 
 type State = {
   embed: string,
@@ -11,6 +11,9 @@ type State = {
   itemSelected: OptionType | null,
   eventSelected: EventType,
   threshold: number,
+  thresholdCondition: WebHookThresholdCondition,
+  adminShopItemSelected: AdminShopItem | null,
+  currentWebHookType: WebHookType
 }
 
 type Actions = {
@@ -23,6 +26,9 @@ type Actions = {
   setItemSelected: (itemSelected: OptionType | null) => void,
   setEventSelected: (eventSelected: EventType) => void,
   setThreshold: (threshold: number) => void,
+  setThresholdCondition: (thresholdCondition: WebHookThresholdCondition) => void,
+  setAdminShopItemSelected: (adminShopItemSelected: AdminShopItem | null) => void,
+  setCurrentWebHookType: (currentWebHookType: WebHookType) => void,
 }
 
 const initialState: State = {
@@ -35,6 +41,9 @@ const initialState: State = {
   itemSelected: null,
   eventSelected: "BOSS",
   threshold: 10,
+  thresholdCondition: "aboveThreshold",
+  adminShopItemSelected: null,
+  currentWebHookType: WebHookType.QDF
 }
 
 export const useWebhookStore = create<State & Actions>(
@@ -49,5 +58,8 @@ export const useWebhookStore = create<State & Actions>(
     setItemSelected: (itemSelected) => set({ itemSelected }),
     setEventSelected: (eventSelected) => set({ eventSelected }),
     setThreshold : (threshold) => set({ threshold }),
+    setThresholdCondition: (thresholdCondition) => set({ thresholdCondition }),
+    setAdminShopItemSelected: (adminShopItemSelected) => set({ adminShopItemSelected }),
+    setCurrentWebHookType: (currentWebHookType) => set({ currentWebHookType }),
   })
 );

@@ -1,13 +1,22 @@
 import "./WebHookMsg.css";
-import { EventType, OptionType, StatusType, WebHookType } from "@/types";
+import { AdminShopItem, EventType, OptionType, StatusType, WebHookThresholdCondition, WebHookType } from "@/types";
 import { defaultWebhookFooterFromType } from "@/components/WebHooks/WebHookConstant.ts";
-import { formatPrice } from "@/lib/misc.ts";
+import { adminShopItemToUserFriendlyText, formatPrice, getImagePathFromAdminShopType } from "@/lib/misc.ts";
 import { useWebhookStore } from "@/stores/use-webhook-store.ts";
 
 
 export function GenerateEmbedPreview(footer: string) {
 
-  const { title, titleUrl, itemSelected, eventSelected } = useWebhookStore();
+  const {
+    title,
+    titleUrl,
+    itemSelected,
+    eventSelected,
+    currentWebHookType,
+    adminShopItemSelected,
+    threshold,
+    thresholdCondition
+  } = useWebhookStore();
 
   const embedNode = GenerateEmbedDescription(footer);
 
@@ -15,13 +24,18 @@ export function GenerateEmbedPreview(footer: string) {
     <div className="embed"
       // style={{ background: "yellow" }}
     >
-      {itemSelected && <div className="top-right">
+      {itemSelected && currentWebHookType === WebHookType.Market && <div className="top-right">
         <img src={`https://palatracker.bromine.fr/AH_img/${itemSelected.img}`} alt="icon"/>
       </div>
       }
+      {adminShopItemSelected && currentWebHookType === WebHookType.AdminShop && <div className="top-right">
+        <img src={`https://palatracker.bromine.fr/${getImagePathFromAdminShopType(adminShopItemSelected)}`} alt="icon"/>
+      </div>
+      }
       <div className="embed-header">
-        <a href={parseUrlFormatting(titleUrl, itemSelected, eventSelected)} target="_blank" className="embed-title">
-          {parseTextFormatting(title, itemSelected, eventSelected)}
+        <a href={parseUrlFormatting(titleUrl, itemSelected, eventSelected, adminShopItemSelected, threshold)}
+           target="_blank" className="embed-title">
+          {parseTextFormatting(title, itemSelected, eventSelected, currentWebHookType, adminShopItemSelected, threshold, thresholdCondition)}
         </a>
       </div>
       {embedNode}
@@ -32,26 +46,55 @@ export function GenerateEmbedPreview(footer: string) {
 export function parseTextFormatting(
   text: string,
   itemSelected: OptionType | null,
-  eventSelected: EventType
+  eventSelected: EventType,
+  currentWebHookType: WebHookType,
+  adminShopItemSelected: AdminShopItem | null,
+  threshold: number,
+  thresholdCondition: WebHookThresholdCondition
 ): JSX.Element {
   const parts = text.split(
-    /(\*\*.*?\*\*|\*.*?\*|__.*?__|~~.*?~~|{here}|{item}|{itemFr}|{itemUs}|{event}|{price}|{previousPrice}|{quantityAvailable}|{quantity}|{earningXp}|{earningMoney}|{start}|{end}|{startRelative}|{rewardElo}|{servers}|{server})/g
+    /(\*\*.*?\*\*|\*.*?\*|__.*?__|~~.*?~~|{here}|{item}|{itemFr}|{itemUs}|{event}|{price}|{previousPrice}|{quantityAvailable}|{quantity}|{earningXp}|{earningMoney}|{start}|{end}|{startRelative}|{rewardElo}|{servers}|{server}|{thresholdCondition})/g
   );
+
+  function getTextFromThresholdCondition(thresholdCondition: WebHookThresholdCondition) {
+    switch (thresholdCondition) {
+      case "aboveThreshold":
+        return "supérieur";
+      case "aboveQuantity":
+        return "supérieur (en quantité)";
+      case "underThreshold":
+        return "inférieur";
+      case "increasingAboveThreshold":
+        return "en hausse et supérieur";
+      case "decreaseAboveThreshold":
+        return "en baisse et supérieur";
+      case "decreasing":
+        return "en baisse";
+      case "increasing":
+        return "en hausse";
+      default:
+        return "Bonne question j'ai pas prévu ce cas";
+    }
+  }
 
   return (
     <>
       {parts.map((part, index) => {
         if (part.startsWith("**") && part.endsWith("**")) {
-          return <strong key={index}>{parseTextFormatting(part.slice(2, -2), itemSelected, eventSelected)}</strong>;
+          return <strong
+            key={index}>{parseTextFormatting(part.slice(2, -2), itemSelected, eventSelected, currentWebHookType, adminShopItemSelected, threshold, thresholdCondition)}</strong>;
         }
         if (part.startsWith("*") && part.endsWith("*")) {
-          return <em key={index}>{parseTextFormatting(part.slice(1, -1), itemSelected, eventSelected)}</em>;
+          return <em
+            key={index}>{parseTextFormatting(part.slice(1, -1), itemSelected, eventSelected, currentWebHookType, adminShopItemSelected, threshold, thresholdCondition)}</em>;
         }
         if (part.startsWith("__") && part.endsWith("__")) {
-          return <u key={index}>{parseTextFormatting(part.slice(2, -2), itemSelected, eventSelected)}</u>;
+          return <u
+            key={index}>{parseTextFormatting(part.slice(2, -2), itemSelected, eventSelected, currentWebHookType, adminShopItemSelected, threshold, thresholdCondition)}</u>;
         }
         if (part.startsWith("~~") && part.endsWith("~~")) {
-          return <s key={index}>{parseTextFormatting(part.slice(2, -2), itemSelected, eventSelected)}</s>;
+          return <s
+            key={index}>{parseTextFormatting(part.slice(2, -2), itemSelected, eventSelected, currentWebHookType, adminShopItemSelected, threshold, thresholdCondition)}</s>;
         }
         if (part === "{here}") {
           return (
@@ -60,10 +103,17 @@ export function parseTextFormatting(
             </span>
           );
         }
+        if (part === "{item}" && currentWebHookType === "Market") {
+          return (
+            <span key={index}>
+              {itemSelected?.value || "undefined market"}
+            </span>
+          );
+        }
         if (part === "{item}") {
           return (
             <span key={index}>
-              {itemSelected?.value || "undefined"}
+              {adminShopItemSelected ? adminShopItemToUserFriendlyText(adminShopItemSelected) : "undefined"}
             </span>
           );
         }
@@ -89,13 +139,17 @@ export function parseTextFormatting(
           );
         }
         if (part === "{price}") {
-          return <span key={index}>{formatPrice(10000)}</span>;
+          return <span key={index}>{formatPrice(threshold)}</span>;
         }
         if (part === "{previousPrice}") {
-          return <span key={index}>{formatPrice(4999)}</span>;
+          let newPrice = threshold;
+          if (thresholdCondition === "increasing" || thresholdCondition === "increasingAboveThreshold" || thresholdCondition === "aboveThreshold") {
+            newPrice = threshold + 1;
+          }
+          return <span key={index}>{formatPrice(threshold - 1)}</span>;
         }
         if (part === "{quantityAvailable}") {
-          return <span key={index}>{16}</span>;
+          return <span key={index}>{Math.floor(Math.random() * 1000)}</span>;
         }
         if (part === "{quantity}") {
           return <span key={index}>{formatPrice(10000)}</span>;
@@ -124,6 +178,9 @@ export function parseTextFormatting(
         if (part === "{server}") {
           return <span key={index}>Minage</span>;
         }
+        if (part === "{thresholdCondition}") {
+          return <span key={index}>{getTextFromThresholdCondition(thresholdCondition)}</span>;
+        }
         return <span key={index}>{part}</span>;
       })}
     </>
@@ -133,7 +190,9 @@ export function parseTextFormatting(
 export function parseUrlFormatting(
   url: string,
   itemSelected: OptionType | null,
-  event: EventType
+  event: EventType,
+  adminShopItemSelected: AdminShopItem | null,
+  threshold: number
 ): string {
 
   function eventTypeToImgName(event: EventType) {
@@ -155,25 +214,41 @@ export function parseUrlFormatting(
     }
   }
 
-  let result = url.replaceAll("{item}", itemSelected?.value || "undefined");
-  result = result.replaceAll("{quantity}", "10000");
+  const itemName = itemSelected ? (itemSelected.value || "undefined") : (adminShopItemSelected ? adminShopItemToUserFriendlyText(adminShopItemSelected) : "undefined");
+
+  let result = url.replaceAll("{item}", itemName);
+  result = result.replaceAll("{quantity}", threshold.toString());
   result = result.replaceAll("{event}", eventTypeToImgName(event));
   return result;
 }
 
 function GenerateEmbedDescription(footer: string): JSX.Element {
-  const { embed, fields, embedImg, itemSelected, eventSelected } = useWebhookStore();
+  const {
+    embed,
+    fields,
+    embedImg,
+    itemSelected,
+    eventSelected,
+    currentWebHookType,
+    adminShopItemSelected,
+    threshold,
+    thresholdCondition
+  } = useWebhookStore();
 
   return (
     <div className="embed-description">
-      <p>{parseTextFormatting(embed, itemSelected, eventSelected)}</p>
+      <p>{parseTextFormatting(embed, itemSelected, eventSelected, currentWebHookType, adminShopItemSelected, threshold, thresholdCondition)}</p>
       {fields.map((field, index) => (
         <div key={index} className={`embed-field ${field.inline ? "inline" : ""}`}>
-          <p className="embed-field-name">{parseTextFormatting(field.name, itemSelected, eventSelected)}</p>
-          <p className="embed-field-value">{parseTextFormatting(field.value, itemSelected, eventSelected)}</p>
+          <p
+            className="embed-field-name">{parseTextFormatting(field.name, itemSelected, eventSelected, currentWebHookType, adminShopItemSelected, threshold, thresholdCondition)}</p>
+          <p
+            className="embed-field-value">{parseTextFormatting(field.value, itemSelected, eventSelected, currentWebHookType, adminShopItemSelected, threshold, thresholdCondition)}</p>
         </div>
       ))}
-      {embedImg && <img src={parseUrlFormatting(embedImg, itemSelected, eventSelected)} alt="Embed Image"
+      {embedImg &&
+        <img src={parseUrlFormatting(embedImg, itemSelected, eventSelected, adminShopItemSelected, threshold)}
+             alt="Embed Image"
                         className="embed-image"/>}
       <p>Plus d'informations sur le site <a href="https://palatracker.bromine.fr/webhooks"
                                             target="_blank">palatracker</a>.</p>
@@ -208,12 +283,16 @@ function getStatusText(status: StatusType) {
   }
 }
 
-export function GenerateWebHookContent({
-                                         currentWebHookType,
-                                       }: {
-  currentWebHookType: WebHookType,
-}) {
-  const { content, itemSelected, eventSelected } = useWebhookStore();
+export function GenerateWebHookContent() {
+  const {
+    content,
+    itemSelected,
+    eventSelected,
+    currentWebHookType,
+    adminShopItemSelected,
+    threshold,
+    thresholdCondition
+  } = useWebhookStore();
   const embedNode = GenerateEmbedPreview(defaultWebhookFooterFromType[currentWebHookType]);
   return (
     <div>
@@ -229,7 +308,7 @@ export function GenerateWebHookContent({
           </div>
         </div>
         <div className="message-content">
-          <p>{parseTextFormatting(content, itemSelected, eventSelected)}</p>
+          <p>{parseTextFormatting(content, itemSelected, eventSelected, currentWebHookType, adminShopItemSelected, threshold, thresholdCondition)}</p>
         </div>
         {embedNode}
       </div>

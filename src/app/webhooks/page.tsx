@@ -31,18 +31,13 @@ export default function WebHooksPage({ searchParams }: {
   searchParams: webHookPageProps
 }) {
 
-  if (searchParams.webhookType === undefined || !Object.values(WebHookType).includes(searchParams.webhookType as WebHookType))
-    redirect(generateWebHookUrl(WebHookType.QDF));
-
-  const currentWebHookType = searchParams.webhookType as WebHookType
-
   return (
     <Card>
       <CardHeader>
-        <WebHookSelectorClientItem currentWebHookType={currentWebHookType}/>
+        <WebHookSelectorClientItem/>
       </CardHeader>
       <CardContent>
-        <WebHookInputClientItem currentWebHookType={currentWebHookType}/>
+        <WebHookInputClientItem/>
       </CardContent>
 
     </Card>

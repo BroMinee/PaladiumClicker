@@ -14,6 +14,7 @@ import HoverText from "@/components/ui/hovertext.tsx";
 import { ReactNode } from "react";
 import { buttonVariants } from "@/components/ui/button.tsx";
 import { Card } from "@/components/ui/card.tsx";
+import { useWebhookStore } from "@/stores/use-webhook-store.ts";
 
 export function AdminShopSelectorClientItem({ item, periode, adminShopPage }: {
   item: AdminShopItem,
@@ -22,6 +23,8 @@ export function AdminShopSelectorClientItem({ item, periode, adminShopPage }: {
 }) {
   const router = useRouter();
   const searchParams = useSearchParams();
+
+  const {setAdminShopItemSelected} = useWebhookStore();
 
 
   let imgPath = getImagePathFromAdminShopType(item);
@@ -37,9 +40,7 @@ export function AdminShopSelectorClientItem({ item, periode, adminShopPage }: {
       <HoverText text={hoverElement}>
         <button
           className={cn("w-16 h-16 hover:scale-125 duration-300 cursor-pointer hover:bg-secondary-foreground p-4 rounded-2xl hover:grayscale-0", !selected ? "grayscale" : "")}
-          onClick={() => router.push(adminShopPage ?  generateAdminShopUrl(item, periode) : generateWebHookUrl(WebHookType.AdminShop, item), { scroll: false })}>
-
-
+          onClick={() => adminShopPage ? router.push(generateAdminShopUrl(item, periode), { scroll: false }) : setAdminShopItemSelected(item)}>
           <Image src={imgPath}
                  alt={searchParams.get("item") || "unknown"}
                  width={64}
