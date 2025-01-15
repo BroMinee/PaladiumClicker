@@ -19,7 +19,7 @@ import {
   StatusPeriode,
   TerrainUpgrade,
   Tree,
-  UpgradeKey
+  UpgradeKey, WebHookType
 } from "@/types";
 import constants, { PathValid } from "@/lib/constants.ts";
 
@@ -269,6 +269,11 @@ export function generateStatusUrl(periode?: StatusPeriode) {
   return safeJoinPaths(constants.statusPath, `?${args}`);
 }
 
+export function generateWebHookUrl(webHookType: WebHookType) {
+  const argWebhookType = webHookType ? `webhookType=${webHookType}` : "";
+  const args = [argWebhookType].filter((e) => e).join("&");
+  return safeJoinPaths(constants.webhooksPath, `?${args}`);
+}
 
 export function safeJoinPaths(base: string, ...paths: string[]): string {
   const allPaths = ["/" + base, ...paths];

@@ -620,3 +620,14 @@ export type NotificationWebSiteResponse =
     title: string,
     content: string
   }
+
+export enum WebHookType {
+  "QDF" = "QDF",
+  "Event" = "Event",
+  "ServeurStatus" = "ServeurStatus",
+  "AdminShop" = "AdminShop",
+  "Market" = "Market",
+}
+
+export type EventType =
+  'BOSS' | 'A VOS MARQUES' | 'TOTEM' | 'EGGHUNT' | 'KOTH' | 'BLACKMARKET'

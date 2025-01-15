@@ -12,6 +12,7 @@ import {
   isWinnerNotClaim
 } from "@/lib/database/events_database.ts";
 import { getCurrentNotification } from "@/lib/database/notificationWebsite_database.ts";
+import { pool } from "@/lib/api/db.ts";
 
 /* The content of this file is not sent to the client*/
 
@@ -105,4 +106,28 @@ export async function getNotificationWebSite() {
     console.error('Error fetching events:', error);
     throw new Error("Error fetching events");
   }
+}
+
+export async function getItemName(itemId: number | null, itemName: string) {
+  if(itemId === null)
+    return new Promise<{fr_trad: string, us_trad: string}>((resolve, reject) => {
+      resolve({fr_trad: itemName, us_trad: itemName});
+    });
+
+
+  return new Promise<{fr_trad: string, us_trad: string}>((resolve, reject) => {
+    try {
+      pool.query(`select fr_trad, us_trad
+                  from items
+                  where id = ?;`, [itemId], (error: any, results: any) => {
+        if (error)
+          return reject(error);
+        if (results.length === 1)
+          return resolve(results[0])
+        return reject("No item id found");
+      });
+    } catch (e) {
+      return reject(e);
+    }
+  })
 }

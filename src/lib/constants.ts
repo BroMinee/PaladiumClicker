@@ -29,7 +29,8 @@ export type PathValid =
   | "/admin-shop"
   | "/status"
   | "/politique-de-confidentialite"
-  | "/patchnote";
+  | "/patchnote"
+  | "/webhooks"
 
 export type LabelValid =
   "Profil"
@@ -49,7 +50,8 @@ export type LabelValid =
   | "Admin Shop"
   | "Status"
   | "Politique de confidentialité"
-  | "Patchnote";
+  | "Patchnote"
+  | "Alertes Discord";
 
 
 const profilPath: PathValid = "/profil";
@@ -70,6 +72,7 @@ const statusPath: PathValid = "/status";
 const politiqueDeConfidentialitePath: PathValid = "/politique-de-confidentialite";
 const patchnotePath: PathValid = "/patchnote";
 const aboutPath: PathValid = "/about";
+const webhooksPath: PathValid = "/webhooks";
 
 type LinkInfo = {
   label: LabelValid;
@@ -99,6 +102,7 @@ const links: LinkList = {
   "/status": { label: "Status", requiredPseudo: false },
   "/politique-de-confidentialite": { label: "Politique de confidentialité", requiredPseudo: false },
   "/patchnote": { label: "Patchnote", requiredPseudo: false },
+  "/webhooks": { label: "Alertes Discord", requiredPseudo: false },
 };
 
 
@@ -684,6 +688,7 @@ const constants = {
   dictAchievementIdToSubIds,
   dictAchievementIdToIcon,
   startSeason,
+  webhooksPath,
 };
 
 export default constants;
