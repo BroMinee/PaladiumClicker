@@ -2,23 +2,14 @@ import "./WebHookMsg.css";
 import { EventType, OptionType, StatusType, WebHookType } from "@/types";
 import { defaultWebhookFooterFromType } from "@/components/WebHooks/WebHookConstant.ts";
 import { formatPrice } from "@/lib/misc.ts";
+import { useWebhookStore } from "@/stores/use-webhook-store.ts";
 
 
-export function GenerateEmbedPreview(titleEmbed: string,
-                                     titleUrl: string,
-                                     content: string,
-                                     embed: string,
-                                     footer: string,
-                                     fields: {
-                                       name: string,
-                                       value: string,
-                                       inline?: boolean
-                                     }[],
-                                     embedImg: string,
-                                     itemSelected: OptionType | null,
-                                     eventSelected: EventType) {
+export function GenerateEmbedPreview(footer: string) {
 
-  const embedNode = GenerateEmbedDescription(embed, footer, fields, embedImg, itemSelected, eventSelected);
+  const { title, titleUrl, itemSelected, eventSelected } = useWebhookStore();
+
+  const embedNode = GenerateEmbedDescription(footer);
 
   return (
     <div className="embed"
@@ -30,7 +21,7 @@ export function GenerateEmbedPreview(titleEmbed: string,
       }
       <div className="embed-header">
         <a href={parseUrlFormatting(titleUrl, itemSelected, eventSelected)} target="_blank" className="embed-title">
-          {parseTextFormatting(titleEmbed, itemSelected, eventSelected)}
+          {parseTextFormatting(title, itemSelected, eventSelected)}
         </a>
       </div>
       {embedNode}
@@ -170,11 +161,9 @@ export function parseUrlFormatting(
   return result;
 }
 
-function GenerateEmbedDescription(embed: string, footer: string, fields: {
-  name: string,
-  value: string,
-  inline?: boolean,
-}[], embedImg: string, itemSelected: OptionType | null, eventSelected: EventType): JSX.Element {
+function GenerateEmbedDescription(footer: string): JSX.Element {
+  const { embed, fields, embedImg, itemSelected, eventSelected } = useWebhookStore();
+
   return (
     <div className="embed-description">
       <p>{parseTextFormatting(embed, itemSelected, eventSelected)}</p>
@@ -220,28 +209,12 @@ function getStatusText(status: StatusType) {
 }
 
 export function GenerateWebHookContent({
-                                         content,
-                                         embed,
-                                         title,
-                                         titleUrl,
-                                         fields,
-                                         embedImg,
                                          currentWebHookType,
-                                         itemSelected,
-                                         eventSelected
                                        }: {
-  content: string,
-  embed: string,
-  title: string,
-  titleUrl: string,
-  fields: { name: string, value: string, inline?: boolean }[],
-  embedImg: string,
   currentWebHookType: WebHookType,
-  itemSelected: OptionType | null,
-  eventSelected: EventType
 }) {
-
-  const embedNode = GenerateEmbedPreview(title, titleUrl, content, embed, defaultWebhookFooterFromType[currentWebHookType], fields, embedImg, itemSelected, eventSelected);
+  const { content, itemSelected, eventSelected } = useWebhookStore();
+  const embedNode = GenerateEmbedPreview(defaultWebhookFooterFromType[currentWebHookType]);
   return (
     <div>
       <div className="alert-container">

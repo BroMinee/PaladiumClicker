@@ -1,9 +1,12 @@
 import { Card, CardContent, CardHeader } from "@/components/ui/card.tsx";
 import { redirect } from "next/navigation";
-import constants from "@/lib/constants.ts";
 import { WebHookType } from "@/types";
 import { WebHookSelectorClientItem } from "@/components/WebHooks/WebHookClientSelector.tsx";
 import { WebHookInputClientItem } from "@/components/WebHooks/WebHookInputClient.tsx";
+import GraphItem from "@/components/AhTracker/GraphItem.tsx";
+import React, { Suspense } from "react";
+import { GraphItemFallback } from "@/app/ah/page.tsx";
+import { generateWebHookUrl } from "@/lib/misc.ts";
 
 export async function generateMetadata() {
   const title = "PalaTracker | Webhook";
@@ -22,12 +25,14 @@ export async function generateMetadata() {
 type webHookPageProps =
   {
     webhookType: string | undefined
+    item: string | undefined
   }
 export default function WebHooksPage({ searchParams }: {
   searchParams: webHookPageProps
 }) {
+
   if (searchParams.webhookType === undefined || !Object.values(WebHookType).includes(searchParams.webhookType as WebHookType))
-    redirect(`${constants.webhooksPath}?webhookType=${WebHookType.QDF}`);
+    redirect(generateWebHookUrl(WebHookType.QDF));
 
   const currentWebHookType = searchParams.webhookType as WebHookType
 

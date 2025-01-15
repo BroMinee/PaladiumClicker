@@ -1,8 +1,13 @@
 'use client'
 
-import { AdminShopItem, AdminShopPeriode, } from "@/types";
+import { AdminShopItem, AdminShopPeriode, WebHookType, } from "@/types";
 import { useRouter, useSearchParams } from "next/navigation";
-import { adminShopItemToUserFriendlyText, generateAdminShopUrl, getImagePathFromAdminShopType, } from "@/lib/misc.ts";
+import {
+  adminShopItemToUserFriendlyText,
+  generateAdminShopUrl,
+  generateWebHookUrl,
+  getImagePathFromAdminShopType,
+} from "@/lib/misc.ts";
 import { cn } from "@/lib/utils.ts";
 import Image from "next/image";
 import HoverText from "@/components/ui/hovertext.tsx";
@@ -10,9 +15,10 @@ import { ReactNode } from "react";
 import { buttonVariants } from "@/components/ui/button.tsx";
 import { Card } from "@/components/ui/card.tsx";
 
-export function AdminShopSelectorClientItem({ item, periode }: {
+export function AdminShopSelectorClientItem({ item, periode, adminShopPage }: {
   item: AdminShopItem,
   periode: AdminShopPeriode,
+  adminShopPage: boolean
 }) {
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -31,7 +37,7 @@ export function AdminShopSelectorClientItem({ item, periode }: {
       <HoverText text={hoverElement}>
         <button
           className={cn("w-16 h-16 hover:scale-125 duration-300 cursor-pointer hover:bg-secondary-foreground p-4 rounded-2xl hover:grayscale-0", !selected ? "grayscale" : "")}
-          onClick={() => router.push(generateAdminShopUrl(item, periode), { scroll: false })}>
+          onClick={() => router.push(adminShopPage ?  generateAdminShopUrl(item, periode) : generateWebHookUrl(WebHookType.AdminShop, item), { scroll: false })}>
 
 
           <Image src={imgPath}

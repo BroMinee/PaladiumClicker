@@ -269,9 +269,10 @@ export function generateStatusUrl(periode?: StatusPeriode) {
   return safeJoinPaths(constants.statusPath, `?${args}`);
 }
 
-export function generateWebHookUrl(webHookType: WebHookType) {
+export function generateWebHookUrl(webHookType: WebHookType, item?: AdminShopItem) {
   const argWebhookType = webHookType ? `webhookType=${webHookType}` : "";
-  const args = [argWebhookType].filter((e) => e).join("&");
+  const argItem = item ? `item=${item}` : "";
+  const args = [argWebhookType, argItem].filter((e) => e).join("&");
   return safeJoinPaths(constants.webhooksPath, `?${args}`);
 }
 

@@ -2,14 +2,14 @@ import { WebHookType } from "@/types";
 
 export const defaultWebHookContentFromType : Record<WebHookType, string> = {
   [WebHookType.QDF]: "{here} C'est l'heure de la nouvelle QDF",
-  [WebHookType.AdminShop]: "{here} C'est le moment de vendre des **{item}**.",
-  [WebHookType.Market]: "{here} Démarre Paladium pour acheter des **{item}**.",
+  [WebHookType.AdminShop]: "{here} C'est le moment de vendre des **{itemFr}**.",
+  [WebHookType.Market]: "{here} Démarre Paladium pour acheter des **{itemFr}**.",
   [WebHookType.Event]: "{here} {event} commence {startRelative}",
   [WebHookType.ServeurStatus]: "{here} Changement dans le status des serveurs",
 }
 
 export const defaultWebHookEmbedFromType : Record<WebHookType, string> = {
-  [WebHookType.QDF]: "La QDF de la semaine est {item} ({itemFr} ou {itemUs}) en {quantity} examplaires pour un total de {earningXp} xp de facet {earningMoney} $.\nElle commence le {start} et termine le {end}",
+  [WebHookType.QDF]: "La QDF de la semaine est {item} ({itemFr} ou {itemUs}) en {quantity} examplaires pour un total de {earningXp} xp de facet {earningMoney} $.\nElle commence le {start} et termine le {end}.",
   [WebHookType.AdminShop]: "Le prix des **{itemFr}** ({itemUs}) sont en train de varier, ils sont maintenant à **{price}**$ donc **{previousPrice}**$ avant.",
   [WebHookType.Market]: "Dépêche  toi d'acheter des **{itemFr}** ({itemUs}) ils sont à un prix moyen de **{price}**$ avant il était à **{previousPrice}**$ et il y a en a **{quantityAvailable}** en vente !",
   [WebHookType.Event]: "Prépare toi à farm {goal} {quantity} {item} sur {server} pour {rewardElo} elo.\nL'event commence le {start} et se termine le {end}.",
@@ -79,10 +79,10 @@ export const defaultWebHookFieldsFromType : Record<WebHookType, {value: string, 
   }
 
 export const defaultWebHookTitleFromType : Record<WebHookType, string> = {
-  [WebHookType.QDF]: "Une nouvelle QDF est disponible, clique pour voir le craft!",
-  [WebHookType.AdminShop]: "C'est l'heure de vendre des {item}!",
+  [WebHookType.QDF]: "Une nouvelle QDF est disponible, clique pour voir le craft !",
+  [WebHookType.AdminShop]: "C'est l'heure de vendre des {item} !",
   [WebHookType.Market]: `Voir l'historique de prix des {itemFr}.`,
-  [WebHookType.Event]: `Event : BOSS commence {startRelative}`,
+  [WebHookType.Event]: `Event : BOSS commence {startRelative} !`,
   [WebHookType.ServeurStatus]: "Voir l'état des serveurs Paladium.",
 }
 

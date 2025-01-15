@@ -2,7 +2,7 @@
 import { getPlayerInfo, PALADIUM_API_URL } from "@/lib/api/apiPala.ts";
 import { fetchWithHeader } from "@/lib/api/misc.ts";
 import { API_PALATRACKER } from "@/lib/api/apiPalaTracker.ts";
-import { PaladiumAhItemStat, PaladiumAhItemStatResponse } from "@/types";
+import { OptionType, PaladiumAhItemStat, PaladiumAhItemStatResponse } from "@/types";
 import { Event } from "@/types/db_types.ts";
 import {
   getClosedEventStillClaimable,
@@ -13,6 +13,7 @@ import {
 } from "@/lib/database/events_database.ts";
 import { getCurrentNotification } from "@/lib/database/notificationWebsite_database.ts";
 import { pool } from "@/lib/api/db.ts";
+import { redirect } from "next/navigation";
 
 /* The content of this file is not sent to the client*/
 
@@ -129,5 +130,25 @@ export async function getItemName(itemId: number | null, itemName: string) {
     } catch (e) {
       return reject(e);
     }
+  })
+}
+
+export async function getAllItemsServerAction() {
+  return fetchWithHeader<{
+    item_name: string,
+    us_trad: string,
+    fr_trad: string,
+    img: string
+  }[]>(`${API_PALATRACKER}/v1/craft/items`, 30 * 60).then((res) => {
+    return res.map((item) => {
+      return {
+        value: item.item_name,
+        label: item.us_trad,
+        label2: item.fr_trad,
+        img: item.img
+      }
+    });
+  }).catch(() => {
+    return [] as OptionType[];
   })
 }
