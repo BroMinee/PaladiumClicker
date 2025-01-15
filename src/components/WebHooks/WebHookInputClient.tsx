@@ -3,6 +3,7 @@ import { AdminShopItem, WebHookType } from "@/types";
 import { useEffect, useState } from "react";
 import { defaultWebHookContentFromType, defaultWebHookEmbedFromType } from "@/components/WebHooks/WebHookConstant.ts";
 import { adminShopItemToUserFriendlyText } from "@/lib/misc.ts";
+import { GenerateWebHookContent } from "@/components/WebHooks/WebHookMsg.tsx";
 
 export function WebHookInputClientItem({ currentWebHookType }: {
   currentWebHookType: WebHookType
@@ -20,7 +21,8 @@ export function WebHookInputClientItem({ currentWebHookType }: {
     <div className="flex flex-row gap-2 justify-between items-center">
       <WebHookEditor content={content} embed={embed} currentWebHookType={currentWebHookType} setEmbed={setEmbed}
                      setContent={setContent}/>
-      <WebHookRender content={content} embed={embed} currentWebHookType={currentWebHookType}/>
+      {/*<WebHookRender content={content} embed={embed} currentWebHookType={currentWebHookType}/>*/}
+      <GenerateWebHookContent/>
     </div>
   )
 }

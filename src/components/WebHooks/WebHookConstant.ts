@@ -2,7 +2,7 @@ import { WebHookType } from "@/types";
 
 export const defaultWebHookContentFromType : Record<WebHookType, string> = {
   [WebHookType.QDF]: "",
-  [WebHookType.AdminShop]: "C'est le moment de vendre {item}.",
+  [WebHookType.AdminShop]: "C'est le moment de vendre des {item}.",
   [WebHookType.Market]: "",
   [WebHookType.Event]: "",
   [WebHookType.ServeurStatus]: "",
