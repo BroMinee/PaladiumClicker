@@ -54,7 +54,7 @@ export function parseTextFormatting(
   thresholdCondition: WebHookThresholdCondition
 ): JSX.Element {
   const parts = text.split(
-    /(\*\*.*?\*\*|\*.*?\*|__.*?__|~~.*?~~|{here}|{item}|{itemFr}|{itemUs}|{event}|{price}|{previousPrice}|{quantityAvailable}|{quantity}|{earningXp}|{earningMoney}|{start}|{end}|{startRelative}|{rewardElo}|{servers}|{server}|{thresholdCondition}|\n|<@&[^>]*>|<@[^>]*>)/g
+    /(\*\*.*?\*\*|\*.*?\*|__.*?__|~~.*?~~|{here}|{item}|{itemFr}|{itemUs}|{event}|{price}|{previousPrice}|{quantityAvailable}|{quantity}|{earningXp}|{earningMoney}|{start}|{end}|{startRelative}|{rewardElo}|{servers}|{server}|{thresholdCondition}|{goal}|\n|<@&[^>]*>|<@[^>]*>)/g
   );
 
   function getTextFromThresholdCondition(thresholdCondition: WebHookThresholdCondition) {
@@ -104,14 +104,14 @@ export function parseTextFormatting(
             </span>
           );
         }
-        if (part === "{item}" && currentWebHookType === "Market") {
+        if (part === "{item}" && (currentWebHookType === WebHookType.Market || currentWebHookType === WebHookType.QDF || (currentWebHookType === WebHookType.Event && eventSelected === "A VOS MARQUES") )) {
           return (
             <span key={index}>
-              {itemSelected?.value || "undefined market"}
+              {itemSelected?.value || "undefined"}
             </span>
           );
         }
-        if (part === "{item}") {
+        if (part === "{item}" && currentWebHookType === WebHookType.AdminShop) {
           return (
             <span key={index}>
               {adminShopItemSelected ? adminShopItemToUserFriendlyText(adminShopItemSelected) : "undefined"}
@@ -179,6 +179,9 @@ export function parseTextFormatting(
         }
         if (part === "{server}") {
           return <span key={index}>Minage</span>;
+        }
+        if (part === "{goal}") {
+          return <span key={index}>fondre</span>;
         }
         if (part === "{thresholdCondition}") {
           return <span key={index}>{getTextFromThresholdCondition(thresholdCondition)}</span>;

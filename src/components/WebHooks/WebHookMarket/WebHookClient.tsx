@@ -8,14 +8,14 @@ import { ThresholdSelector } from "@/components/WebHooks/WebHookThresholdSelecto
 function WebHookMarketClient({ options }: {
   options: OptionType[]
 }) {
-  const { setItemSelected } = useWebhookStore();
+  const { setItemSelected, itemSelected } = useWebhookStore();
 
   return <div className="flex flex-row gap-2 pt-4 justify-center items-center w-full">
     <div className="flex-grow">
       <SelectorItemClient options={options}
                           url={"/error?msg=Heu... BroMine ce message d'erreur ne devrait pas exister..."}
                           setInputValueFunction={setItemSelected}
-                          defaultValue={null}/>
+                          defaultValue={itemSelected}/>
     </div>
   </div>
 }

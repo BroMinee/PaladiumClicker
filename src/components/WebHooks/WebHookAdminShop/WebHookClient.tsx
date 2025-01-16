@@ -1,49 +1,53 @@
-import { Input } from "@/components/ui/input.tsx";
-import { SelectorItemClient } from "@/components/Items/SelectorItemClient.tsx";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useWebhookStore } from "@/stores/use-webhook-store.ts";
-import { AdminShopItem, adminShopItemsAvailable, OptionType } from "@/types";
-import { getAllItemsServerAction } from "@/lib/api/apiServerAction.ts";
+import { AdminShopItem, adminShopItemsAvailable, EventType, WebHookThresholdCondition, WebHookType } from "@/types";
 import { AdminShopSelectorClientItem } from "@/components/AdminShop/AdminShopSelectorClientItem.tsx";
-import {  ThresholdSelector } from "@/components/WebHooks/WebHookThresholdSelector.tsx";
-
-function WebHookAdminShopClient({ options }: {
-  options: OptionType[]
-}) {
-  const { setItemSelected, setThreshold, threshold } = useWebhookStore();
-
-  return <div className="flex flex-row gap-2 pt-4 justify-center items-center w-full">
-    <Input className="w-32" type="number" min="1" step="1"
-           value={Number(threshold || 1)}
-           onChange={(e) => {
-             setThreshold(Number(e.target.value));
-           }}/>
-    <div className="flex-grow">
-      <SelectorItemClient options={options}
-                          url={"/error?msg=Heu... BroMine ce message d'erreur ne devrait pas exister..."}
-                          setInputValueFunction={setItemSelected}
-                          defaultValue={null}/>
-    </div>
-  </div>
-}
-
-function MarketSelectorClient() {
-  const [options, setOptions] = useState<OptionType[]>([]);
+import { ThresholdSelector } from "@/components/WebHooks/WebHookThresholdSelector.tsx";
+import { Button } from "@/components/ui/button.tsx";
 
 
-  useEffect(() => {
-    getAllItemsServerAction().then((items) => {
-      setOptions(items);
-    });
+export function ThreshConditionSelector() {
 
-  }, []);
+  const { setThresholdCondition, thresholdCondition, currentWebHookType } = useWebhookStore();
 
-  if (options.length === 0)
-    return <div>Loading...</div>;
+  function getTextFromThresholdCondition(condition: WebHookThresholdCondition) {
+    switch (condition) {
+      case "aboveThreshold":
+        return 'Supérieur à';
+      case "underThreshold":
+        return 'Inférieur à';
+      case "decreaseAboveThreshold":
+        return 'En baisse et supérieur à';
+      case "increasingAboveThreshold":
+        return 'En hausse et supérieur à';
+      case "increasing":
+        return 'En hausse';
+      case "decreasing":
+        return 'En baisse';
+      case "aboveQuantity":
+        return 'supérieur (en quantité)';
+      default:
+        return 'Event Inconnu';
+    }
+  }
 
+  const validCondition: WebHookThresholdCondition[] = ['underThreshold', 'aboveThreshold', 'decreaseAboveThreshold', 'increasingAboveThreshold', 'decreasing', 'increasing']
+  if (currentWebHookType === WebHookType.Market) // Le Market a une condition supplémentaire par rapport à l'admin shop
+    validCondition.push('aboveQuantity')
 
   return (
-    <WebHookAdminShopClient options={options}/>
+    <div className="grid grid-cols-2 gap-2">
+      {validCondition.map((condition) => (
+        <Button
+          onClick={() => {
+            setThresholdCondition(condition);
+          }}
+          disabled={condition === thresholdCondition}
+        >
+          {getTextFromThresholdCondition(condition)}
+        </Button>))
+      }
+    </div>
   )
 }
 
@@ -60,6 +64,58 @@ export function AdminShopInput() {
         })}
       </div>
       <ThresholdSelector/>
+    </>
+  )
+}
+
+function EventSelector() {
+
+  const { setEventSelected, eventSelected } = useWebhookStore();
+
+  function getTextFromEventType(event: EventType) {
+    switch (event) {
+      case 'BOSS':
+        return 'Boss';
+      case 'A VOS MARQUES':
+        return 'A vos marques';
+      case 'TOTEM':
+        return 'Totem';
+      case 'EGGHUNT':
+        return 'EggHunt';
+      case 'KOTH':
+        return 'KOTH';
+      case 'BLACKMARKET':
+        return 'BlackMarket';
+      default:
+        return 'Event Inconnu';
+    }
+  }
+
+  const validEvents: EventType[] = ['BOSS', 'A VOS MARQUES', 'TOTEM', 'EGGHUNT', 'KOTH', 'BLACKMARKET']
+
+  return (
+    <div className="flex flex-row justify-between">
+      {validEvents.map((event) => (
+        <Button
+          onClick={() => {
+            setEventSelected(event);
+          }}
+          disabled={event === eventSelected}
+        >
+          {getTextFromEventType(event)}
+        </Button>))
+      }
+    </div>
+  )
+}
+
+export function EventInput() {
+  return (
+    <>
+      <span>
+        Choisissez une type d'event
+      </span>
+      <EventSelector/>
     </>
   )
 }

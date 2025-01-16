@@ -6,7 +6,8 @@ import {
   defaultWebhookEmbedImgFromType,
   defaultWebHookFieldsFromType,
   defaultWebHookTitleFromType,
-  defaultWebhookTitleUrlFromType, defaultWebhookValidFormatFromType
+  defaultWebhookTitleUrlFromType,
+  defaultWebhookValidFormatFromType
 } from "@/components/WebHooks/WebHookConstant.ts";
 import { GenerateWebHookContent } from "@/components/WebHooks/WebHookMsg.tsx";
 import { useWebhookStore } from "@/stores/use-webhook-store.ts";
@@ -22,7 +23,7 @@ import {
   RecapServeurStatus
 } from "@/components/WebHooks/WebHookRecap.tsx";
 import { MarketInput } from "@/components/WebHooks/WebHookMarket/WebHookClient.tsx";
-import { AdminShopInput } from "@/components/WebHooks/WebHookAdminShop/WebHookClient.tsx";
+import { AdminShopInput, EventInput } from "@/components/WebHooks/WebHookAdminShop/WebHookClient.tsx";
 
 
 export function WebHookInputClientItem() {
@@ -35,10 +36,24 @@ export function WebHookInputClientItem() {
     setTitleUrl,
     setEmbedImg,
     setItemSelected,
-    setEventSelected,
     setAdminShopItemSelected,
-    currentWebHookType
+    currentWebHookType,
+    thresholdCondition,
+    eventSelected,
+    setThresholdCondition
   } = useWebhookStore();
+
+  useEffect(() => {
+    if(currentWebHookType !== WebHookType.Market &&  thresholdCondition === 'aboveQuantity')
+      setThresholdCondition('aboveThreshold');
+  }, [currentWebHookType]);
+  
+  useEffect(() => {
+    if(currentWebHookType === WebHookType.Event && eventSelected === "A VOS MARQUES")
+    {
+      setItemSelected({value: "beefCooked", label: "Steak", img: "steak.png", label2: "Steak"});
+    }
+  }, [currentWebHookType, eventSelected]);
 
 
   useEffect(() => {
@@ -52,8 +67,6 @@ export function WebHookInputClientItem() {
       setItemSelected({value: "endium_sword", label: "Endium Sword", img: "endium_sword.png", label2: "Épée d'Endium"});
     else if (currentWebHookType === "AdminShop")
       setAdminShopItemSelected("bone");
-    else if (currentWebHookType === "Event")
-      setEventSelected("A VOS MARQUES");
     else if(currentWebHookType === "QDF")
       setItemSelected({value: "glue", label: "Glue", img: "glue.png", label2: "Colle"});
     else
@@ -67,6 +80,10 @@ export function WebHookInputClientItem() {
       <GenerateWebHookContent/>
     </div>
   )
+}
+
+function IsValidWebHookUrl(url: string): boolean {
+  return url.startsWith("https://discord.com/api/webhooks/");
 }
 
 function WebHookEditor() {
@@ -87,7 +104,10 @@ function WebHookEditor() {
       <Recap/>
       <AdaptEditor/>
       <div className="flex flex-col gap-2 w-full">
-        <label htmlFor="url">URL du WebHook</label>
+        <label htmlFor="url">URL du WebHook <span
+          className={cn("text-gray-500", !IsValidWebHookUrl(webHookUrl) && "animate-blink")}>
+          {IsValidWebHookUrl(webHookUrl) ? "URL possiblement valide" : "URL Invalide"}
+                </span></label>
         <div className="flex flex-row gap-2 h-fit">
           <input
             id="url"
@@ -149,11 +169,12 @@ function WebHookEditor() {
       </div>
       <div className="flex flex-col gap-2">
         <label htmlFor="embed">Contenu de l'embed <span
-          className={cn("text-gray-500", embed.length === 4096 && "animate-blink")}>{embed.length}/4096</span></label>
+          className={cn("text-gray-500", embed.length === 4096 && "animate-blink")}>{embed.length}/4096{currentWebHookType === WebHookType.ServeurStatus && " - Désactivé"}</span></label>
         <textarea
           className="message-input"
           id="embed"
           value={embed}
+          disabled={currentWebHookType === WebHookType.ServeurStatus}
           onChange={(e) => setEmbed(e.target.value)}
         />
       </div>
@@ -174,6 +195,10 @@ function AdaptEditor() {
 
   if (currentWebHookType === WebHookType.Market) {
     return <MarketInput/>
+  }
+
+  if (currentWebHookType === WebHookType.Event) {
+    return <EventInput/>
   }
   return null;
 }

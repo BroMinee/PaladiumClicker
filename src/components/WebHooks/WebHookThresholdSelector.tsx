@@ -1,10 +1,14 @@
 'use client';
 import React from "react";
 import { useWebhookStore } from "@/stores/use-webhook-store.ts";
+import { ThreshConditionSelector } from "@/components/WebHooks/WebHookAdminShop/WebHookClient.tsx";
 
 
 export const ThresholdSelector = () => {
-  return <CounterInputWebhook/>;
+  return (<>
+    <ThreshConditionSelector/>
+    <CounterInputWebhook/>
+  </>);
 }
 
 const CounterInputWebhook = ({ min = 0, step = 0.1 }) => {
@@ -35,7 +39,7 @@ const CounterInputWebhook = ({ min = 0, step = 0.1 }) => {
       <button
         onClick={handleDecrease}
         disabled={threshold <= min}
-        className="bg-blue-500 text-white px-4 py-2 rounded-lg text-lg font-medium transition hover:bg-blue-700 disabled:bg-gray-400 disabled:cursor-not-allowed"
+        className="bg-primary text-white px-4 py-2 rounded-lg text-lg font-medium transition hover:bg-primary/70 disabled:bg-gray-400 disabled:cursor-not-allowed"
       >
         -
       </button>
@@ -50,12 +54,12 @@ const CounterInputWebhook = ({ min = 0, step = 0.1 }) => {
           WebkitAppearance: 'none', // Chrome/Safari
         }}
         inputMode="decimal" // Suggère un clavier avec support des décimales
-        className="w-20 h-10 text-center text-lg border border-gray-300 rounded-lg outline-none"
+        className="w-20 h-10 input-number text-center text-lg border border-gray-300 rounded-lg outline-none"
       />
 
       <button
         onClick={handleIncrease}
-        className="bg-blue-500 text-white px-4 py-2 rounded-lg text-lg font-medium transition hover:bg-blue-700 disabled:bg-gray-400 disabled:cursor-not-allowed"
+        className="bg-primary text-white px-4 py-2 rounded-lg text-lg font-medium transition hover:bg-primary/70 disabled:bg-gray-400 disabled:cursor-not-allowed"
       >
         +
       </button>
