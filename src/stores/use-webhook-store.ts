@@ -13,7 +13,9 @@ type State = {
   threshold: number,
   thresholdCondition: WebHookThresholdCondition,
   adminShopItemSelected: AdminShopItem | null,
-  currentWebHookType: WebHookType
+  currentWebHookType: WebHookType,
+  webHookUrl: string,
+  helpFormat: boolean,
 }
 
 type Actions = {
@@ -29,6 +31,8 @@ type Actions = {
   setThresholdCondition: (thresholdCondition: WebHookThresholdCondition) => void,
   setAdminShopItemSelected: (adminShopItemSelected: AdminShopItem | null) => void,
   setCurrentWebHookType: (currentWebHookType: WebHookType) => void,
+  setWebHookUrl: (webHookUrl: string) => void,
+  setHelpFormat: (helpForm: boolean) => void,
 }
 
 const initialState: State = {
@@ -43,16 +47,27 @@ const initialState: State = {
   threshold: 10,
   thresholdCondition: "aboveThreshold",
   adminShopItemSelected: null,
-  currentWebHookType: WebHookType.QDF
+  currentWebHookType: WebHookType.QDF,
+  webHookUrl: "",
+  helpFormat: false,
 }
 
 export const useWebhookStore = create<State & Actions>(
   (set) => ({
     ...initialState,
-    setEmbed: (embed) => set({ embed }),
-    setContent: (content) => set({ content }),
+    setEmbed: (embed) => {
+      if(embed.length <= 4096)
+        set({ embed });
+    },
+    setContent: (content) => {
+      if(content.length <= 2000)
+        set({ content });
+    },
     setFields: (fields) => set({ fields }),
-    setTitle: (title) => set({ title }),
+    setTitle: (title) => {
+      if(title.length <= 256)
+        set({ title });
+    },
     setTitleUrl: (titleUrl) => set({ titleUrl }),
     setEmbedImg: (embedImg) => set({ embedImg }),
     setItemSelected: (itemSelected) => set({ itemSelected }),
@@ -61,5 +76,7 @@ export const useWebhookStore = create<State & Actions>(
     setThresholdCondition: (thresholdCondition) => set({ thresholdCondition }),
     setAdminShopItemSelected: (adminShopItemSelected) => set({ adminShopItemSelected }),
     setCurrentWebHookType: (currentWebHookType) => set({ currentWebHookType }),
+    setWebHookUrl: (webHookUrl) => set({ webHookUrl }),
+    setHelpFormat: (helpFormat) => set({ helpFormat }),
   })
 );

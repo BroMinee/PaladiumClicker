@@ -1,5 +1,4 @@
 'use client';
-import { WebHookType } from "@/types";
 import React, { useEffect } from "react";
 import {
   defaultWebHookContentFromType,
@@ -7,12 +6,14 @@ import {
   defaultWebhookEmbedImgFromType,
   defaultWebHookFieldsFromType,
   defaultWebHookTitleFromType,
-  defaultWebhookTitleUrlFromType
+  defaultWebhookTitleUrlFromType, defaultWebhookValidFormatFromType
 } from "@/components/WebHooks/WebHookConstant.ts";
 import { GenerateWebHookContent } from "@/components/WebHooks/WebHookMsg.tsx";
 import { useWebhookStore } from "@/stores/use-webhook-store.ts";
-import { MarketInput, } from "@/components/WebHooks/WebHookMarket/WebHookClient.tsx";
-import { AdminShopInput } from "@/components/WebHooks/WebHookAdminShop/WebHookClient.tsx";
+import { Button } from "@/components/ui/button.tsx";
+import { cn } from "@/lib/utils.ts";
+import { Checkbox } from "@/components/ui/checkbox.tsx";
+import { WebHookType } from "@/types";
 import {
   RecapAdminShop,
   RecapEvent,
@@ -20,6 +21,8 @@ import {
   RecapQDF,
   RecapServeurStatus
 } from "@/components/WebHooks/WebHookRecap.tsx";
+import { MarketInput } from "@/components/WebHooks/WebHookMarket/WebHookClient.tsx";
+import { AdminShopInput } from "@/components/WebHooks/WebHookAdminShop/WebHookClient.tsx";
 
 
 export function WebHookInputClientItem() {
@@ -58,7 +61,7 @@ export function WebHookInputClientItem() {
   }, [currentWebHookType]);
 
   return (
-    <div className="flex flex-row gap-2 justify-between items-center">
+    <div className="flex flex-row gap-2 justify-between">
       <WebHookEditor/>
       {/*<WebHookRender content={content} embed={embed} currentWebHookType={currentWebHookType}/>*/}
       <GenerateWebHookContent/>
@@ -68,25 +71,87 @@ export function WebHookInputClientItem() {
 
 function WebHookEditor() {
 
-  const { content, embed, setEmbed, setContent } = useWebhookStore();
-
-
+  const {
+    currentWebHookType,
+    webHookUrl,
+    content,
+    embed,
+    setEmbed,
+    setContent,
+    setWebHookUrl,
+    helpFormat,
+    setHelpFormat
+  } = useWebhookStore();
   return (
     <div className="flex flex-col gap-2">
       <Recap/>
       <AdaptEditor/>
-      <div className="flex flex-col gap-2">
-        <label htmlFor="content">Contenu du message</label>
+      <div className="flex flex-col gap-2 w-full">
+        <label htmlFor="url">URL du WebHook</label>
+        <div className="flex flex-row gap-2 h-fit">
+          <input
+            id="url"
+            value={webHookUrl}
+            className="w-full message-input"
+            placeholder={"https://discord.com/api/webhooks/..."}
+            onChange={(e) => setWebHookUrl(e.target.value)}
+          />
+          <Button onClick={() => alert("TODO")} className="h-full">
+            Enregistrer
+          </Button>
+        </div>
+      </div>
+      <div className="flex items-center space-x-2">
+        <Checkbox
+          id="next-building-visibility"
+          className="h-6 w-6"
+          checked={helpFormat}
+          onCheckedChange={() => setHelpFormat(!helpFormat)}
+        />
+        <label htmlFor="next-building-visibility" className="text-primary-foreground">
+          Afficher les formats possibles
+        </label>
+      </div>
+
+      {helpFormat &&
+        <div className="w-full alert-container">
+          <div className="alert-header flex flex-col">
+            <div className="header-text">
+              <span className="title">Vous pouvez utiliser les mentions suivantes:</span>
+            </div>
+            <div className="message-content ml-2">
+              <li>{"<@&roleId> pour mentionner un rôle (aucun effet dans l'embed)"}</li>
+              <li>{"<@userId> pour mentionner un utilisateur (aucun effet dans l'embed)"}
+              </li>
+              <li>{"{here} Pour mentionner toutes personnes dans le channel (aucun effet dans l'embed)"}
+              </li>
+              {defaultWebhookValidFormatFromType[currentWebHookType].map((format, index) => {
+                return <li key={index}>{format}</li>
+              })}
+            </div>
+          </div>
+        </div>
+      }
+
+      <div className="flex flex-col gap-2 w-full">
+        <div className="flex flex-row gap-2 items-center">
+          <label htmlFor="content">Contenu du message <span
+            className={cn("text-gray-500", content.length === 2000 && "animate-blink")}>{content.length}/2000
+                </span>
+          </label>
+        </div>
         <textarea
+          className="message-input"
           id="content"
           value={content}
-          className="w-96"
           onChange={(e) => setContent(e.target.value)}
         />
       </div>
       <div className="flex flex-col gap-2">
-        <label htmlFor="embed">Contenu de l'embed</label>
+        <label htmlFor="embed">Contenu de l'embed <span
+          className={cn("text-gray-500", embed.length === 4096 && "animate-blink")}>{embed.length}/4096</span></label>
         <textarea
+          className="message-input"
           id="embed"
           value={embed}
           onChange={(e) => setEmbed(e.target.value)}

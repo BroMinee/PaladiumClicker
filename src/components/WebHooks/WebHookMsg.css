@@ -7,7 +7,7 @@
     border: 1px solid hsl(var(--primary));
 }
 
-.header {
+.alert-header {
     display: flex;
     align-items: center;
     margin-bottom: 10px;
@@ -164,4 +164,40 @@
 
 .input-number {
     -moz-appearance: textfield;
+}
+
+.message-input {
+    width: 100%;
+    background-color: #2f3136;
+    color: #ffffff;
+    border: 1px solid hsl(var(--primary));
+    border-radius: 8px;
+    padding: 10px;
+    font-size: 14px;
+    line-height: 1.5;
+    resize: vertical;
+}
+
+.message-input::placeholder {
+    color: #b9bbbe;
+}
+
+.message-input {
+    background-color: #2f3136;
+    color: #ffffff;
+    border: 1px solid hsl(var(--primary));
+    border-radius: 8px;
+    font-size: 14px;
+    line-height: 1.5;
+    outline: none;
+    transition: border-color 0.2s ease-in-out;
+}
+
+.message-input::placeholder {
+    color: #b9bbbe;
+}
+
+.message-input:focus {
+    border-color: #5865f2;
+    box-shadow: 0 0 5px #5865f2;
 }

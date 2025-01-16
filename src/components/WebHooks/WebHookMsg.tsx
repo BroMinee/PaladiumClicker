@@ -24,7 +24,8 @@ export function GenerateEmbedPreview(footer: string) {
     <div className="embed"
       // style={{ background: "yellow" }}
     >
-      {itemSelected && currentWebHookType === WebHookType.Market && <div className="top-right">
+      {itemSelected && (currentWebHookType === WebHookType.Market || currentWebHookType === WebHookType.QDF) &&
+        <div className="top-right">
         <img src={`https://palatracker.bromine.fr/AH_img/${itemSelected.img}`} alt="icon"/>
       </div>
       }
@@ -53,7 +54,7 @@ export function parseTextFormatting(
   thresholdCondition: WebHookThresholdCondition
 ): JSX.Element {
   const parts = text.split(
-    /(\*\*.*?\*\*|\*.*?\*|__.*?__|~~.*?~~|{here}|{item}|{itemFr}|{itemUs}|{event}|{price}|{previousPrice}|{quantityAvailable}|{quantity}|{earningXp}|{earningMoney}|{start}|{end}|{startRelative}|{rewardElo}|{servers}|{server}|{thresholdCondition})/g
+    /(\*\*.*?\*\*|\*.*?\*|__.*?__|~~.*?~~|{here}|{item}|{itemFr}|{itemUs}|{event}|{price}|{previousPrice}|{quantityAvailable}|{quantity}|{earningXp}|{earningMoney}|{start}|{end}|{startRelative}|{rewardElo}|{servers}|{server}|{thresholdCondition}|\n|<@&[^>]*>|<@[^>]*>)/g
   );
 
   function getTextFromThresholdCondition(thresholdCondition: WebHookThresholdCondition) {
@@ -142,11 +143,12 @@ export function parseTextFormatting(
           return <span key={index}>{formatPrice(threshold)}</span>;
         }
         if (part === "{previousPrice}") {
-          let newPrice = threshold;
+          let oldPrice = threshold;
           if (thresholdCondition === "increasing" || thresholdCondition === "increasingAboveThreshold" || thresholdCondition === "aboveThreshold") {
-            newPrice = threshold + 1;
-          }
-          return <span key={index}>{formatPrice(threshold - 1)}</span>;
+            oldPrice -= 1;
+          } else
+            oldPrice += 1;
+          return <span key={index}>{formatPrice(oldPrice)}</span>;
         }
         if (part === "{quantityAvailable}") {
           return <span key={index}>{Math.floor(Math.random() * 1000)}</span>;
@@ -180,6 +182,19 @@ export function parseTextFormatting(
         }
         if (part === "{thresholdCondition}") {
           return <span key={index}>{getTextFromThresholdCondition(thresholdCondition)}</span>;
+        }
+        if (part === "\n") {
+          return <br key={index}/>;
+        }
+        if (part.startsWith("<@&") && part.endsWith(">")) {
+          return <span key={index} className="mention-here">
+              @role
+            </span>
+        }
+        if (part.startsWith("<@") && part.endsWith(">")) {
+          return <span key={index} className="mention-here">
+              @user
+            </span>
         }
         return <span key={index}>{part}</span>;
       })}
@@ -246,12 +261,13 @@ function GenerateEmbedDescription(footer: string): JSX.Element {
             className="embed-field-value">{parseTextFormatting(field.value, itemSelected, eventSelected, currentWebHookType, adminShopItemSelected, threshold, thresholdCondition)}</p>
         </div>
       ))}
+      <br/>
+      <p>Plus d'informations sur le site <a href="https://palatracker.bromine.fr/webhooks"
+                                            target="_blank">palatracker</a>.</p>
       {embedImg &&
         <img src={parseUrlFormatting(embedImg, itemSelected, eventSelected, adminShopItemSelected, threshold)}
              alt="Embed Image"
-                        className="embed-image"/>}
-      <p>Plus d'informations sur le site <a href="https://palatracker.bromine.fr/webhooks"
-                                            target="_blank">palatracker</a>.</p>
+             className="embed-image"/>}
       <div className="embed-footer">
         <img className="footer-icon"
              src="https://palatracker.bromine.fr/favicon.png"
@@ -296,10 +312,10 @@ export function GenerateWebHookContent() {
   const embedNode = GenerateEmbedPreview(defaultWebhookFooterFromType[currentWebHookType]);
   return (
     <div>
-      <div className="alert-container">
-        <div className="header">
+      <div className="alert-container  !border-0">
+        <div className="alert-header">
           <img className="avatar"
-               src="https://cdn.discordapp.com/avatars/1326985714629345311/df9807160558a49c4aa45eab94230471.webp?size=80"
+               src="https://palatracker.bromine.fr/stonks_clic.png"
                alt=""/>
           <div className="header-text">
             <span className="title">PalaTracker Alert</span>

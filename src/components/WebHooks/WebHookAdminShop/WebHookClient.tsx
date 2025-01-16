@@ -53,7 +53,7 @@ export function AdminShopInput() {
       <span>
         Choisissez un item de l'admin shop
       </span>
-      <div className="grid grid-cols-6 sm:grid-cols-16 lg:grid-cols-16 items-center justify-between gap-2 pb-2 mt-0">
+      <div className="grid grid-cols-6 sm:grid-cols-16 lg:grid-cols-8 items-center justify-between gap-2 pb-2 mt-0">
         {adminShopItemsAvailable.map((value: AdminShopItem, index: number) => {
           return <AdminShopSelectorClientItem key={value + index} item={value} periode={'day'}
                                               adminShopPage={false}/>

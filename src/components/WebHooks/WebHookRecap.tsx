@@ -16,8 +16,8 @@ export function RecapTemplate({ messages }: { messages: string[] }) {
   } = useWebhookStore();
 
   return (
-    <div className="alert-container">
-      <div className="header">
+    <div className="alert-container !border-0">
+      <div className="alert-header">
         <div className="header-text">
           <span className="title">Récapitulatif</span>
         </div>
