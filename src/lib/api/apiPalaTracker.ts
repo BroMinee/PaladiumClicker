@@ -2,7 +2,7 @@ import 'server-only';
 import {
   AdminShopItem,
   AdminShopItemDetail,
-  CraftingRecipeType,
+  CraftingRecipeType, Item,
   OptionType,
   PalaAnimationLeaderboardGlobal,
   ProfilViewType,
@@ -93,12 +93,7 @@ export function getStatusLauncher() {
 }
 
 export async function getAllItems(): Promise<OptionType[]> {
-  return fetchWithHeader<{
-    item_name: string,
-    us_trad: string,
-    fr_trad: string,
-    img: string
-  }[]>(`${API_PALATRACKER}/v1/item/getAll`, 30 * 60).then((res) => {
+  return fetchWithHeader<Item[]>(`${API_PALATRACKER}/v1/item/getAll`, 30 * 60).then((res) => {
     return res.map((item) => {
       return {
         value: item.item_name,
@@ -118,7 +113,7 @@ export async function getCraft(item_name: string): Promise<CraftingRecipeType> {
     return [] as CraftingRecipeType[];
   })
 
-  const craft = allCraft.find((craft) => craft.item_name === item_name);
+  const craft = allCraft.find((craft) => craft.item.item_name === item_name);
   if (craft === undefined)
     redirect(`/error?message=Impossible de trouver le craft de ${item_name}`);
 

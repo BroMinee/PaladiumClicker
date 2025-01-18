@@ -530,32 +530,39 @@ export type OptionType = {
   img: string
 }
 
+export type Item = {
+  item_name: string,
+  us_trad: string,
+  fr_trad: string,
+  img: string
+}
+
 export type CraftingRecipeType =
   {
-    item_name: string,
+    item: Item,
     table: 'crafting table' | 'furnace' | 'grinder' | 'palamachine' | 'cauldron' | 'alchemy creator',
-    item_name_slot1: string,
-    item_name_slot2: string,
-    item_name_slot3: string,
-    item_name_slot4: string,
-    item_name_slot5: string,
-    item_name_slot6: string,
-    item_name_slot7: string,
-    item_name_slot8: string,
-    item_name_slot9: string,
+    slot1: Item | null,
+    slot2: Item | null,
+    slot3: Item | null,
+    slot4: Item | null,
+    slot5: Item | null,
+    slot6: Item | null,
+    slot7: Item | null,
+    slot8: Item | null,
+    slot9: Item | null,
     count: number
   }
 
 export type CraftingRecipeKey = keyof Pick<CraftingRecipeType,
-  "item_name_slot1" |
-  "item_name_slot2" |
-  "item_name_slot3" |
-  "item_name_slot4" |
-  "item_name_slot5" |
-  "item_name_slot6" |
-  "item_name_slot7" |
-  "item_name_slot8" |
-  "item_name_slot9"
+  "slot1" |
+  "slot2" |
+  "slot3" |
+  "slot4" |
+  "slot5" |
+  "slot6" |
+  "slot7" |
+  "slot8" |
+  "slot9"
 >;
 
 export type NodeType = OptionType & { count: number } & { checked: boolean }

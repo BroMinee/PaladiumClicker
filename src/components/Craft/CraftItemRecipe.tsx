@@ -11,10 +11,10 @@ import { CardContent } from "@/components/ui/card.tsx";
 export async function CraftItemRecipe({ item, options }: { item: OptionType, options: OptionType[] }) {
 
   const craft_recipe = await getCraft(item.value);
-  const slotAvailable: CraftingRecipeKey[] = ['item_name_slot1', 'item_name_slot2', 'item_name_slot3', 'item_name_slot4', 'item_name_slot5', 'item_name_slot6', 'item_name_slot7', 'item_name_slot8', 'item_name_slot9'] as const;
+  const slotAvailable: CraftingRecipeKey[] = ['slot1', 'slot2', 'slot3', 'slot4', 'slot5', 'slot6', 'slot7', 'slot8', 'slot9'] as const;
 
   const slotItemInfo = slotAvailable.map((slot) => {
-    const t = options.find((option) => option.value === craft_recipe[slot]);
+    const t = options.find((option) => option.value === craft_recipe[slot]?.item_name);
     if (t === undefined)
       redirect(`/error?message=${craft_recipe[slot]} not found in the list of all items`);
     return t;
