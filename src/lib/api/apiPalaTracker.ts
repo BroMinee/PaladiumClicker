@@ -1,7 +1,7 @@
 import 'server-only';
 import {
   AdminShopItem,
-  AdminShopItemDetail,
+  AdminShopItemDetail, AdminShopPeriode,
   CraftingRecipeType, Item,
   OptionType,
   PalaAnimationLeaderboardGlobal,
@@ -9,12 +9,10 @@ import {
   RankingResponse,
   RankingType,
   ServerPaladiumStatusResponse,
-  ServerStatusResponse
+  ServerStatusResponse, StatusPeriode
 } from "@/types";
 import { fetchWithHeader } from "@/lib/api/misc.ts";
 import { redirect } from "next/navigation";
-import { pool } from "@/lib/api/db.ts";
-import constants from "@/lib/constants.ts";
 // import { toast } from "sonner";
 
 export const API_PALATRACKER = process.env.PALACLICKER_API_URL || "https://palatracker.bromine.fr"
@@ -72,24 +70,20 @@ export function getRankingLeaderboardPlayerUsername(username: string, rankingTyp
   return fetchWithHeader<RankingResponse>(`${API_PALATRACKER}/v1/ranking/${rankingType}/username/${username}`, 0)
 }
 
-export function getRankingAllLeaderboardPlayer(uuid: string) {
-  return fetchWithHeader<RankingResponse>(`${API_PALATRACKER}/v1/ranking/all/${uuid}`, 0)
-}
-
 export function getAdminShopHistory(item: AdminShopItem) {
   return fetchWithHeader<AdminShopItemDetail[]>(`${API_PALATRACKER}/v1/admin-shop/${item}`, 0)
 }
 
-export async function getStatusPaladium() {
-  return fetchWithHeader<ServerPaladiumStatusResponse[]>(`${API_PALATRACKER}/v1/status-history/paladium`, 0);
+export async function getStatusPaladium(periode: StatusPeriode) {
+  return fetchWithHeader<ServerPaladiumStatusResponse[]>(`${API_PALATRACKER}/v1/status-history/paladium/${periode}`, 0);
 }
 
-export function getStatusFaction() {
-  return fetchWithHeader<ServerStatusResponse[]>(`${API_PALATRACKER}/v1/status-history/faction`, 0);
+export function getStatusFaction(periode: StatusPeriode) {
+  return fetchWithHeader<ServerStatusResponse[]>(`${API_PALATRACKER}/v1/status-history/faction/${periode}`, 0);
 }
 
-export function getStatusLauncher() {
-  return fetchWithHeader<ServerStatusResponse[]>(`${API_PALATRACKER}/v1/status-history/launcher`, 0);
+export function getStatusLauncher(periode: StatusPeriode) {
+  return fetchWithHeader<ServerStatusResponse[]>(`${API_PALATRACKER}/v1/status-history/launcher/${periode}`, 0);
 }
 
 export async function getAllItems(): Promise<OptionType[]> {

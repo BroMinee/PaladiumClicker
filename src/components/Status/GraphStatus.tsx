@@ -2,12 +2,7 @@ import { ServerPaladiumStatusResponse, StatusPeriode } from "@/types";
 import { redirect } from "next/navigation";
 import LoadingSpinner from "@/components/ui/loading-spinner.tsx";
 import PlotStatusChart from "@/components/Status/PlotStatusChart.tsx";
-import {
-  getStatusHistoryDay,
-  getStatusHistoryMonth,
-  getStatusHistorySeason,
-  getStatusHistoryWeek
-} from "@/lib/database/status_database.ts";
+import { getStatusPaladium } from "@/lib/api/apiPalaTracker.ts";
 
 export type GraphStatusProps = {
   periode: StatusPeriode,
@@ -18,16 +13,10 @@ export default async function GraphStatus({ periode: periode }: GraphStatusProps
   try {
     switch (periode) {
       case "day":
-        data = await getStatusHistoryDay();
-        break;
       case "week":
-        data = await getStatusHistoryWeek();
-        break;
       case "month":
-        data = await getStatusHistoryMonth();
-        break;
       case "season":
-        data = await getStatusHistorySeason();
+        data = await getStatusPaladium(periode);
         break;
       default:
         data = [];
