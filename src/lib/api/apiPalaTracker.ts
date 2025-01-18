@@ -70,9 +70,6 @@ export function getRankingLeaderboardPlayerUsername(username: string, rankingTyp
   return fetchWithHeader<RankingResponse>(`${API_PALATRACKER}/v1/ranking/${rankingType}/username/${username}`, 0)
 }
 
-export function getAdminShopHistory(item: AdminShopItem) {
-  return fetchWithHeader<AdminShopItemDetail[]>(`${API_PALATRACKER}/v1/admin-shop/${item}`, 0)
-}
 
 export async function getStatusPaladium(periode: StatusPeriode) {
   return fetchWithHeader<ServerPaladiumStatusResponse[]>(`${API_PALATRACKER}/v1/status-history/paladium/${periode}`, 0);
@@ -114,17 +111,6 @@ export async function getCraft(item_name: string): Promise<CraftingRecipeType> {
   return craft;
 }
 
-export const getItemHistoryDay = (item: string): Promise<AdminShopItemDetail[]> => {
-  return fetchWithHeader<AdminShopItemDetail[]>(`${API_PALATRACKER}/v1/admin-shop/${item}/day`, 0);
-};
-export const getItemHistoryWeek = (item: string): Promise<AdminShopItemDetail[]> => {
-  return fetchWithHeader<AdminShopItemDetail[]>(`${API_PALATRACKER}/v1/admin-shop/${item}/week`, 0);
-};
-
-export const getItemHistoryMonth = (item: string): Promise<AdminShopItemDetail[]> => {
-  return fetchWithHeader<AdminShopItemDetail[]>(`${API_PALATRACKER}/v1/admin-shop/${item}/month`, 0);
-};
-
-export const getItemHistorySeason = (item: string): Promise<AdminShopItemDetail[]> => {
-  return fetchWithHeader<AdminShopItemDetail[]>(`${API_PALATRACKER}/v1/admin-shop/${item}/season`, 0);
+export const getAdminShopHistory = (item: string, periode: AdminShopPeriode): Promise<AdminShopItemDetail[]> => {
+  return fetchWithHeader<AdminShopItemDetail[]>(`${API_PALATRACKER}/v1/admin-shop/${item}/${periode}`, 0);
 };

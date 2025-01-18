@@ -3,12 +3,7 @@ import LoadingSpinner from "@/components/ui/loading-spinner.tsx";
 import PlotAdminShopChart from "@/components/AdminShop/PlotAdminShopChart.tsx";
 
 import { redirect } from "next/navigation";
-import {
-  getItemHistoryDay,
-  getItemHistoryMonth,
-  getItemHistorySeason,
-  getItemHistoryWeek
-} from "@/lib/api/apiPalaTracker.ts";
+import { getAdminShopHistory } from "@/lib/api/apiPalaTracker.ts";
 
 export type GraphAdminShopProps = {
   item: AdminShopItem,
@@ -20,16 +15,10 @@ export default async function GraphAdminShop({ item, periode }: GraphAdminShopPr
   try {
     switch (periode) {
       case "day":
-        data = await getItemHistoryDay(item);
-        break;
       case "week":
-        data = await getItemHistoryWeek(item);
-        break;
       case "month":
-        data = await getItemHistoryMonth(item);
-        break;
       case "season":
-        data = await getItemHistorySeason(item);
+        data = await getAdminShopHistory(item, periode);
         break;
       default:
         data = [];
