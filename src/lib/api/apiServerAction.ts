@@ -139,7 +139,7 @@ export async function getAllItemsServerAction() {
     us_trad: string,
     fr_trad: string,
     img: string
-  }[]>(`${API_PALATRACKER}/v1/craft/items`, 30 * 60).then((res) => {
+  }[]>(`${API_PALATRACKER}/v1/item/getAll`, 30 * 60).then((res) => {
     return res.map((item) => {
       return {
         value: item.item_name,

@@ -13,6 +13,8 @@ import {
 } from "@/types";
 import { fetchWithHeader } from "@/lib/api/misc.ts";
 import { redirect } from "next/navigation";
+import { pool } from "@/lib/api/db.ts";
+import constants from "@/lib/constants.ts";
 // import { toast } from "sonner";
 
 export const API_PALATRACKER = process.env.PALACLICKER_API_URL || "https://palatracker.bromine.fr"
@@ -57,18 +59,6 @@ export const getViewsFromUUID = async (uuid: string, username: string): Promise<
   });
 }
 
-export const pushNewUserEvent = async (username: string): Promise<void> => {
-  await fetchWithHeader(`${API_PALATRACKER}/v1/bromine/event/${username}`)
-  alert("Adapt to new endpoint");
-}
-
-export const getEventUsers = async (): Promise<{ username: string }[]> => {
-  const response = await fetchWithHeader<{ username: string }[]>(`${API_PALATRACKER}/v1/bromine/event/users`)
-  alert("Adapt to new endpoint");
-
-  return response as { username: string }[];
-}
-
 
 export function getRankingLeaderboard(rankingType: RankingType, limit = 10, offset = 0) {
   return fetchWithHeader<RankingResponse>(`${API_PALATRACKER}/v1/ranking/${rankingType}/all?limit=${limit}&offset=${offset}`, 0);
@@ -108,7 +98,7 @@ export async function getAllItems(): Promise<OptionType[]> {
     us_trad: string,
     fr_trad: string,
     img: string
-  }[]>(`${API_PALATRACKER}/v1/craft/items`, 30 * 60).then((res) => {
+  }[]>(`${API_PALATRACKER}/v1/item/getAll`, 30 * 60).then((res) => {
     return res.map((item) => {
       return {
         value: item.item_name,
@@ -123,7 +113,7 @@ export async function getAllItems(): Promise<OptionType[]> {
 }
 
 export async function getCraft(item_name: string): Promise<CraftingRecipeType> {
-  const allCraft = await fetchWithHeader<CraftingRecipeType[]>(`${API_PALATRACKER}/v1/craft/item/all`, 30 * 60).catch(() => {
+  const allCraft = await fetchWithHeader<CraftingRecipeType[]>(`${API_PALATRACKER}/v1/craft/getAll`, 30 * 60).catch(() => {
     redirect(`/error?message=Impossible de charger la totalité des crafts.`);
     return [] as CraftingRecipeType[];
   })
@@ -134,3 +124,18 @@ export async function getCraft(item_name: string): Promise<CraftingRecipeType> {
 
   return craft;
 }
+
+export const getItemHistoryDay = (item: string): Promise<AdminShopItemDetail[]> => {
+  return fetchWithHeader<AdminShopItemDetail[]>(`${API_PALATRACKER}/v1/admin-shop/${item}/day`, 0);
+};
+export const getItemHistoryWeek = (item: string): Promise<AdminShopItemDetail[]> => {
+  return fetchWithHeader<AdminShopItemDetail[]>(`${API_PALATRACKER}/v1/admin-shop/${item}/week`, 0);
+};
+
+export const getItemHistoryMonth = (item: string): Promise<AdminShopItemDetail[]> => {
+  return fetchWithHeader<AdminShopItemDetail[]>(`${API_PALATRACKER}/v1/admin-shop/${item}/month`, 0);
+};
+
+export const getItemHistorySeason = (item: string): Promise<AdminShopItemDetail[]> => {
+  return fetchWithHeader<AdminShopItemDetail[]>(`${API_PALATRACKER}/v1/admin-shop/${item}/season`, 0);
+};
