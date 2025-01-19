@@ -16,6 +16,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card.t
 import Discord from "@/components/Discord.tsx";
 import { RenderEvent } from "@/components/NavBarClient.tsx";
 import { cn } from "@/lib/utils.ts";
+import { registerUserToEvent } from "@/lib/api/apiServerAction.ts";
 
 
 export const PopupCurrentEvent = ({ event, alreadyRegistered, children }: {
@@ -37,23 +38,11 @@ export const PopupCurrentEvent = ({ event, alreadyRegistered, children }: {
       return;
     }
 
-    fetch('/api/giveaway/register', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        username: playerInfo.username,
-        discord_name: discordName,
-        event_id: event.id,
-      }),
-    }).then(res => {
-      if (res.ok) {
+    registerUserToEvent(playerInfo.uuid, discordName).then(res => {
+      if (res.succeeded) {
         toast.info("Vous êtes bien inscrit au giveaway !");
-        console.log('Registered');
       } else {
         toast.error("Erreur lors de l'inscription");
-        console.error('Failed to register');
       }
     });
   }

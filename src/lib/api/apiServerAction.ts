@@ -1,19 +1,10 @@
 'use server';
 import { getPlayerInfo, PALADIUM_API_URL } from "@/lib/api/apiPala.ts";
-import { fetchWithHeader } from "@/lib/api/misc.ts";
+import { fetchPostWithHeader, fetchWithHeader } from "@/lib/api/misc.ts";
 import { API_PALATRACKER } from "@/lib/api/apiPalaTracker.ts";
 import { NotificationWebSiteResponse, OptionType, PaladiumAhItemStat, PaladiumAhItemStatResponse } from "@/types";
 import { Event } from "@/types/db_types.ts";
-import {
-  getClosedEventStillClaimable,
-  getNotCloseEvent,
-  getRewards,
-  isRegisteredToEvent,
-  isWinnerNotClaim
-} from "@/lib/database/events_database.ts";
 
-import { pool } from "@/lib/api/db.ts";
-import { redirect } from "next/navigation";
 
 /* The content of this file is not sent to the client*/
 
@@ -46,50 +37,50 @@ export async function getPaladiumAhItemStatsOfAllItemsAction(): Promise<Paladium
 
 export async function getCurrentEvent() {
   try {
-    const eventDB = await getNotCloseEvent();
-    const rewards = await getRewards(eventDB.id);
-    return { ...eventDB, rewards: rewards };
-  } catch (error) {
-    throw new Error("Failed to fetch events");
-  }
-}
-
-export async function getCurrentEventNotRegistered(username: string) {
-
-  if (!username) throw new Error("No username");
-  if (username.length > 16) throw new Error("Username too long");
-
-  let event: Event | null = null;
-  try {
-    event = await getCurrentEvent();
-  } catch (error) {
-    throw new Error('Failed to fetch events');
-  }
-
-  if (!event) {
-    throw new Error("No active event");
-  }
-  if (isNaN(event.id)) {
-    throw new Error("Event id is not a number");
-  }
-
-  try {
-    const registered = await isRegisteredToEvent(username, event.id);
-    if (!registered) {
-      return event;
+    const event = await getNotCloseEvent();
+    if (event) {
+      console.log("Event found:", event);
+    } else {
+      console.log("No event found")
     }
+    return event;
   } catch (error) {
     console.error('Error fetching events:', error);
-    throw new Error('Failed to fetch events');
+    return null;
   }
-  throw new Error("Already registered");
 }
 
-export async function getEventNotClaimed(username: string) {
+export async function getCurrentEventNotRegistered(uuid: string): Promise<Event | null> {
+  let event: Event | null = await getCurrentEvent();
+
+  if (!event) {
+    return null;
+  }
+  if (isNaN(event.id)) {
+    console.error("Event id is not a number");
+    return null;
+  }
+
+  try {
+    const res = await isRegisteredToEvent(uuid, event.id);
+    if (!res.isRegistered) {
+      return event;
+    }
+    return null;
+  } catch (error) {
+    console.error('Error fetching events:', error);
+  }
+  return null;
+}
+
+export async function getEventNotClaimed(uuid: string) {
   try {
     const event = await getClosedEventStillClaimable();
+    if (!event) {
+      return "Not winner";
+    }
     const event_id = event.id;
-    const description = await isWinnerNotClaim(event_id, username);
+    const description = await isWinnerNotClaim(event_id, uuid);
     if (description.description) {
       return description.description;
     }
@@ -100,6 +91,7 @@ export async function getEventNotClaimed(username: string) {
   }
 }
 
+
 export async function getNotificationWebSite() {
   try {
     return await getCurrentNotification();
@@ -107,30 +99,6 @@ export async function getNotificationWebSite() {
     console.error('Error fetching events:', error);
     throw new Error("Error fetching events");
   }
-}
-
-export async function getItemName(itemId: number | null, itemName: string) {
-  if(itemId === null)
-    return new Promise<{fr_trad: string, us_trad: string}>((resolve, reject) => {
-      resolve({fr_trad: itemName, us_trad: itemName});
-    });
-
-
-  return new Promise<{fr_trad: string, us_trad: string}>((resolve, reject) => {
-    try {
-      pool.query(`select fr_trad, us_trad
-                  from items
-                  where id = ?;`, [itemId], (error: any, results: any) => {
-        if (error)
-          return reject(error);
-        if (results.length === 1)
-          return resolve(results[0])
-        return reject("No item id found");
-      });
-    } catch (e) {
-      return reject(e);
-    }
-  })
 }
 
 export async function getAllItemsServerAction() {
@@ -153,7 +121,37 @@ export async function getAllItemsServerAction() {
   })
 }
 
-export async function getCurrentNotification(): Promise<NotificationWebSiteResponse | null>
-{
+export async function getCurrentNotification(): Promise<NotificationWebSiteResponse | null> {
   return fetchWithHeader<NotificationWebSiteResponse>(`${API_PALATRACKER}/v1/notification/website`, 5 * 60);
+}
+
+const getNotCloseEvent = (): Promise<Event | null> => {
+  return fetchWithHeader<Event | null>(`${API_PALATRACKER}/v1/events/getCurrent`, 0);
+}
+
+function isRegisteredToEvent(uuid: string, event_id: number) {
+  return fetchWithHeader<{
+    isRegistered: boolean
+  }>(`${API_PALATRACKER}/v1/events/isRegistered?uuid=${uuid}&event_id=${event_id}`, 0);
+}
+
+export const getClosedEventStillClaimable = () => {
+  return fetchWithHeader<Event | null>(`${API_PALATRACKER}/v1/events/getClosedEventStillClaimable`, 0);
+}
+
+function isWinnerNotClaim(event_id: number, uuid: string) {
+  return fetchWithHeader<{
+    description: string
+  }>(`${API_PALATRACKER}/v1/events/hasWonAndNotClaim?uuid=${uuid}&event_id=${event_id}`, 0);
+}
+
+export async function registerUserToEvent(uuid: string, discord_name: string | undefined): Promise<{
+  succeeded: boolean
+}> {
+  return fetchPostWithHeader<{
+    succeeded: boolean
+  }>(`${API_PALATRACKER}/v1/events/register`, JSON.stringify({
+    uuid: uuid,
+    discord_name: discord_name,
+  }),0);
 }

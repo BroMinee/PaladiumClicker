@@ -138,7 +138,7 @@ export function CategorieDisplay({ name, children, defaultOpen = false }: {
       setNewNotification(newNotification);
 
       if (name === "Autres") {
-        getCurrentEventNotRegistered(playerInfo.username).then((event) => {
+        getCurrentEventNotRegistered(playerInfo.uuid).then((event) => {
           if (event) {
             setNewNotification(newNotification + 1);
           }
@@ -199,33 +199,33 @@ export function GiveawayFakeLink({ children }: {
   useEffect(() => {
     if (!playerInfo) return;
 
-    getCurrentEvent().then((event_0) => {
-      if (event_0)
-        setEvent(event_0);
-      getCurrentEventNotRegistered(playerInfo.username).then((event) => {
-        if (event) {
-          setNewNotification(true);
-          setNewNotificationText(event.event_name)
-          setEvent(event);
-        }
-      }).catch((e) => {
-        console.error(e);
+    try {
+      getCurrentEvent().then((event_0) => {
+        if (event_0)
+          setEvent(event_0);
+        getCurrentEventNotRegistered(playerInfo.uuid).then((event) => {
+          if (event) {
+            setNewNotification(true);
+            setNewNotificationText(event.event_name)
+            setEvent(event);
+          } else if(event_0 === null) {
+            // No event opened to register
+            // check for rewards
+            getEventNotClaimed(playerInfo.uuid).then(description => {
+              if (description === "Not winner") {
+                setNewNotification(false);
+                setNewNotificationText(description);
+              } else {
+                setNewNotification(true);
+                setNewNotificationText(description);
+              }
+            })
+          }
+        })
       })
-    }).catch(() => {
-      // No event opened to register
-      // check for rewards
-      getEventNotClaimed(playerInfo.username).then(description => {
-        if (description === "Not winner") {
-          setNewNotification(false);
-          setNewNotificationText(description);
-        } else {
-          setNewNotification(true);
-          setNewNotificationText(description);
-        }
-      }).catch((e) => {
-        console.error(e);
-      })
-    })
+    } catch (e) {
+      console.error(e);
+    }
     setMounted(true);
   }, [playerInfo])
 
