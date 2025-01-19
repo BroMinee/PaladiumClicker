@@ -282,7 +282,6 @@ export function NotificationWebSite() {
   const [isHovered, setIsHovered] = useState(false);
 
   useEffect(() => {
-    console.log("Test")
     getNotificationWebSite().then((msg_) => {
       if (msg_)
         setMsg(msg_);

@@ -2,7 +2,7 @@
 import { getPlayerInfo, PALADIUM_API_URL } from "@/lib/api/apiPala.ts";
 import { fetchWithHeader } from "@/lib/api/misc.ts";
 import { API_PALATRACKER } from "@/lib/api/apiPalaTracker.ts";
-import { OptionType, PaladiumAhItemStat, PaladiumAhItemStatResponse } from "@/types";
+import { NotificationWebSiteResponse, OptionType, PaladiumAhItemStat, PaladiumAhItemStatResponse } from "@/types";
 import { Event } from "@/types/db_types.ts";
 import {
   getClosedEventStillClaimable,
@@ -11,7 +11,7 @@ import {
   isRegisteredToEvent,
   isWinnerNotClaim
 } from "@/lib/database/events_database.ts";
-import { getCurrentNotification } from "@/lib/database/notificationWebsite_database.ts";
+
 import { pool } from "@/lib/api/db.ts";
 import { redirect } from "next/navigation";
 
@@ -151,4 +151,9 @@ export async function getAllItemsServerAction() {
   }).catch(() => {
     return [] as OptionType[];
   })
+}
+
+export async function getCurrentNotification(): Promise<NotificationWebSiteResponse | null>
+{
+  return fetchWithHeader<NotificationWebSiteResponse>(`${API_PALATRACKER}/v1/notification/website`, 5 * 60);
 }
