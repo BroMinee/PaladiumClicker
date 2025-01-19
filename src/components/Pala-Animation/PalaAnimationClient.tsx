@@ -286,7 +286,7 @@ export function PalaAnimationClassement({ username }: {
       return;
 
 
-    getLeaderboardPalaAnimation(sessionUuid, username).then(
+    getLeaderboardPalaAnimation(sessionUuid).then(
       (data) => {
         setCurrentLeaderboard(data.slice(0, 10));
         const userPosInfo = data.find((entry) => {

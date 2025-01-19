@@ -356,17 +356,13 @@ export type PalaAnimationLeaderboard = PalaAnimationScore[]
 export type PalaAnimationLeaderboardGlobal = {
   username: string,
   avg_completion_time: number,
-  avg_user_completion_time: number,
   rank_completion_time: number,
-  rank_user_completion_time: number,
 }[]
 
 export type PalaAnimationScore = {
   username: string,
   completion_time: number,
-  user_completion_time: number,
   rank_completion_time: number,
-  rank_user_completion_time: number,
 }
 
 export type ProfilViewType =

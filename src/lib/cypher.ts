@@ -88,7 +88,7 @@ export const getNewQuestionPalaAnimation = async (username: string, lastQuestion
   return await fetchWithHeader<{
     question: string,
     session_uuid: string
-  }>(`${API_PALATRACKER}/v1/palaAnimation/question?username=${username}&last_question=${lastQuestion}`, 0);
+  }>(`${API_PALATRACKER}/v1/pala-animation/question?username=${username}&last_question=${lastQuestion}`, 0);
 }
 
 export const checkAnswerPalaAnimation = async (answer: string, session_uuid: string, keyPressTimestamp: KeyDownTimestampType[], user_time: number): Promise<checkAnswerPalaAnimationType> => {
@@ -100,7 +100,7 @@ export const checkAnswerPalaAnimation = async (answer: string, session_uuid: str
   // }), process.env.VITE_CRYPT_KEY!);
 
 
-  return await fetchPostWithHeader<checkAnswerPalaAnimationType>(`${API_PALATRACKER}/v1/palaAnimation/checkAnswer`, JSON.stringify({
+  return await fetchPostWithHeader<checkAnswerPalaAnimationType>(`${API_PALATRACKER}/v1/pala-animation/checkAnswer`, JSON.stringify({
     answer,
     session_uuid,
     keyPressTimestamp,
