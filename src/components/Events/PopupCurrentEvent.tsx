@@ -14,7 +14,7 @@ import SmallCardInfo from "@/components/shared/SmallCardInfo.tsx";
 import { adaptPlurial } from "@/lib/misc.ts";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card.tsx";
 import Discord from "@/components/Discord.tsx";
-import { RenderEvent } from "@/components/NavBarClient.tsx";
+import { RenderEvent } from "@/components/NavBar/NavBarClient.tsx";
 import { cn } from "@/lib/utils.ts";
 import { registerUserToEvent } from "@/lib/api/apiServerAction.ts";
 

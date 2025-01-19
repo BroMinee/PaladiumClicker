@@ -4,6 +4,7 @@ import { fetchPostWithHeader, fetchWithHeader } from "@/lib/api/misc.ts";
 import { API_PALATRACKER } from "@/lib/api/apiPalaTracker.ts";
 import { NotificationWebSiteResponse, OptionType, PaladiumAhItemStat, PaladiumAhItemStatResponse } from "@/types";
 import { Event } from "@/types/db_types.ts";
+import { cookies } from "next/headers";
 
 
 /* The content of this file is not sent to the client*/
@@ -154,4 +155,24 @@ export async function registerUserToEvent(uuid: string, discord_name: string | u
     uuid: uuid,
     discord_name: discord_name,
   }),0);
+}
+
+export async function isAuthenticate() {
+  const cookieStore = cookies();
+  const allCookies = cookieStore.getAll();
+
+  const cookieHeader = allCookies.map(cookie => `${cookie.name}=${cookie.value}`).join('; ');
+
+  const response = await fetch('http://localhost:3001/v1/auth/user', {
+    headers: {
+      Cookie: cookieHeader,
+    },
+    credentials: 'include',
+  });
+
+  if(response.ok) {
+    return await response.json();
+  }
+
+  return null;
 }

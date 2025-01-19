@@ -1,11 +1,10 @@
 'use client'
 
-import { AdminShopItem, AdminShopPeriode, WebHookType, } from "@/types";
+import { AdminShopItem, AdminShopPeriode } from "@/types";
 import { useRouter, useSearchParams } from "next/navigation";
 import {
   adminShopItemToUserFriendlyText,
   generateAdminShopUrl,
-  generateWebHookUrl,
   getImagePathFromAdminShopType,
 } from "@/lib/misc.ts";
 import { cn } from "@/lib/utils.ts";

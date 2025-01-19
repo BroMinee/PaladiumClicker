@@ -269,13 +269,6 @@ export function generateStatusUrl(periode?: StatusPeriode) {
   return safeJoinPaths(constants.statusPath, `?${args}`);
 }
 
-export function generateWebHookUrl(webHookType: WebHookType, item?: AdminShopItem) {
-  const argWebhookType = webHookType ? `webhookType=${webHookType}` : "";
-  const argItem = item ? `item=${item}` : "";
-  const args = [argWebhookType, argItem].filter((e) => e).join("&");
-  return safeJoinPaths(constants.webhooksPath, `?${args}`);
-}
-
 export function safeJoinPaths(base: string, ...paths: string[]): string {
   const allPaths = ["/" + base, ...paths];
   const result = allPaths.join('/');

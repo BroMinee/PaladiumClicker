@@ -27,7 +27,7 @@
     "axios": "^1.7.9",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
-    "next": "^14.2.20",
+    "next": "^14.2.21",
     "next-themes": "^0.3.0",
     "react": "^18",
     "react-audio-player": "^0.17.0",

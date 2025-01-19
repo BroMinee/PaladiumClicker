@@ -643,3 +643,44 @@ export type WebHookThresholdCondition =
   | 'increasingAboveThreshold'
   | 'decreaseAboveThreshold'
   | 'aboveQuantity'
+
+export type DiscordUser =
+  {
+    id: string,
+    username: string,
+    discriminator: string,
+    public_flags: number,
+    flags?: number,
+    banner?: string,
+    accent_color?: number | null,
+    global_name: string | null,
+    avatar_decoration_data: string,
+    banner_color: string,
+    avatar: string | null,
+    clan: string,
+    primary_guild: string,
+    mfa_enabled?: boolean,
+    locale?: string,
+    premium_type?: number,
+  }
+
+export type WebhookDiscord = {
+  url: string,
+  failedConsecutive: number,
+}
+
+export type WebHookAlert = {
+  webhook: WebhookDiscord;
+  content: string | null;
+  embed: string | null;
+  title: string | null;
+  type: WebHookType;
+  alreadySatisfied: boolean | null;
+  endDate: number | null;
+  enumEvent: EventType | null;
+  item: Item | null;
+  threshold: number | null;
+  thresholdCondition:
+    WebHookThresholdCondition
+    | null;
+}

@@ -2,7 +2,7 @@ import 'server-only';
 import {
   AdminShopItemDetail,
   AdminShopPeriode,
-  CraftingRecipeType,
+  CraftingRecipeType, DiscordUser,
   Item,
   OptionType,
   PalaAnimationLeaderboardGlobal,
@@ -117,3 +117,17 @@ export async function getCraft(item_name: string): Promise<CraftingRecipeType> {
 export const getAdminShopHistory = (item: string, periode: AdminShopPeriode): Promise<AdminShopItemDetail[]> => {
   return fetchWithHeader<AdminShopItemDetail[]>(`${API_PALATRACKER}/v1/admin-shop/${item}/${periode}`, 0);
 };
+
+export const getProfileFromCookies = async () => {
+  return await fetchWithHeader<DiscordUser | null>(`${API_PALATRACKER}/v1/auth/user`, 0).catch((e) => {
+    console.error(e);
+    return null;
+  });
+}
+
+export const getWebHookFromCookies = async () => {
+  return await fetchWithHeader<WebHookAlert[]>(`${API_PALATRACKER}/v1/webhook/getAll`, 0).catch((e) => {
+    console.error(e);
+    return null;
+  });
+}

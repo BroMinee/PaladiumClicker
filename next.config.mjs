@@ -8,6 +8,16 @@ const nextConfig = {
                 hostname: 'crafatar.com',
                 pathname: '/**',
             },
+            {
+                protocol: 'https',
+                hostname: 'cdn.discordapp.com',
+                pathname: '/**',
+            },
+            {
+                protocol: 'https',
+                hostname: 'discord.com',
+                pathname: '/**',
+            }
         ],
     },
     logging: {

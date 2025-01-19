@@ -3,7 +3,6 @@ import { WebHookSelectorClientItem } from "@/components/WebHooks/WebHookClientSe
 import { WebHookInputClientItem } from "@/components/WebHooks/WebHookInputClient.tsx";
 import React from "react";
 import { AuthForceWrapper } from "@/components/Auth/AuthForceWrapper.tsx";
-import { getWebHookFromCookies } from "@/lib/api/apiPalaTracker.ts";
 
 
 export async function generateMetadata() {
@@ -21,19 +20,16 @@ export async function generateMetadata() {
 }
 
 export default async function WebHooksPage() {
-  const r = await getWebHookFromCookies();
-
   return (
     <AuthForceWrapper url={"/webhooks/login"}>
       <Card>
         <CardHeader>
-          Définissez des webhooks discord pour recevoir des notifications en temps réel sur Paladium.
+          <WebHookSelectorClientItem/>
         </CardHeader>
         <CardContent>
-          Test2
+          <WebHookInputClientItem/>
         </CardContent>
       </Card>
-      {JSON.stringify(r)}
     </AuthForceWrapper>
   );
 };

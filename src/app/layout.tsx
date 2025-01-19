@@ -2,7 +2,7 @@ import "@/styles/globals.css"
 import { GoogleAnalytics } from '@next/third-parties/google'
 
 import React from "react";
-import Navbar from "@/components/NavBar";
+import Navbar from "@/components/NavBar/NavBar.tsx";
 import { Inter } from '@next/font/google';
 import { ThemeProviders } from "@/components/shared/ThemeProvider.tsx";
 import { Toaster } from "@/components/ui/sonner.tsx";

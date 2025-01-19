@@ -1,6 +1,7 @@
 import 'server-only';
 import { redirect } from "next/navigation";
 import { PlayerDBApiReponse } from "@/types";
+import { cookies } from "next/headers";
 
 export const fetchWithoutHeader = async <T>(url: string, cache_duration = 15 * 60, username = ""): Promise<T> | never => {
   alert("Refacto like fetchWithHeader");
@@ -37,14 +38,21 @@ export const fetchWithHeader = async <T>(url: string, cache_duration_in_sec = 15
   let response: Response | null = null;
   let json = null;
 
+  const cookieStore = cookies();
+  const allCookies = cookieStore.getAll();
+
+  const cookieHeader = allCookies.map(cookie => `${cookie.name}=${cookie.value}`).join('; ');
+
   try {
     response = await fetch(url,
       {
         next: { revalidate: cache_duration_in_sec, tags: ['playerInfo'] },
         signal: AbortSignal.timeout(4000),
         headers: {
-          'Authorization': `Bearer ${process.env.PALADIUM_API_KEY}`
-        }
+          'Authorization': `Bearer ${process.env.PALADIUM_API_KEY}`,
+          Cookie: cookieHeader,
+        },
+        credentials: 'include',
       })
     json = await response.json();
 

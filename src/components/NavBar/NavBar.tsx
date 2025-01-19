@@ -1,11 +1,11 @@
-import ToggleTheme from "@/components/shared/ToggleTheme";
-import { Button } from "@/components/ui/button";
-import { Sheet, SheetContent, SheetHeader, SheetTrigger } from "@/components/ui/sheet";
+import ToggleTheme from "@/components/shared/ToggleTheme.tsx";
+import { Button } from "@/components/ui/button.tsx";
+import { Sheet, SheetContent, SheetHeader, SheetTrigger } from "@/components/ui/sheet.tsx";
 import { FaBars, FaCalculator, FaClipboardList, FaKey, FaRegUser, FaShoppingBasket } from "react-icons/fa";
 import Setting from "@/components/shared/Setting.tsx";
 import constants from "@/lib/constants.ts";
 import { LogoClient } from "@/components/ui/logoClient.tsx";
-import LinkClient, { CategorieDisplay, GiveawayFakeLink, NotificationWebSite } from "@/components/NavBarClient.tsx";
+import LinkClient, { CategorieDisplay, GiveawayFakeLink, NotificationWebSite } from "@/components/NavBar/NavBarClient.tsx";
 import { GrOptimize } from "react-icons/gr";
 import { RiMoneyDollarCircleFill } from "react-icons/ri";
 import { LuShoppingCart, LuSkull } from "react-icons/lu";
@@ -18,6 +18,8 @@ import React from "react";
 import ImportProfil from "@/components/shared/ImportProfil.tsx";
 import { HiOutlineStatusOnline } from "react-icons/hi";
 import GradientText from "@/components/shared/GradientText.tsx";
+import LoginLogoutDiscord from "@/components/NavBar/LoginLogoutDiscord.tsx";
+import { NavBarProfilInfo } from "@/components/NavBar/NavBarProfilInfo.tsx";
 
 
 const Navbar = () => {
@@ -122,19 +124,7 @@ function NavBarContent() {
       </nav>
       <footer>
         <NotificationWebSite/>
-        <div className="flex justify-between flex-row w-full pl-5 pr-5 pb-2 pt-2">
-          <ToggleTheme/>
-          {/*<div className="flex justify-center items-center  space-x-2">*/}
-          {/*  <div>*/}
-          {/*    <img className="rounded-full" src="https://i.ibb.co/L1LQtBm/Ellipse-1.png" alt="avatar"/>*/}
-          {/*  </div>*/}
-          {/*  <div className="flex justify-start flex-col items-start">*/}
-          {/*    <p className="cursor-pointer text-sm leading-5 text-white">Alexis Enache</p>*/}
-          {/*    <p className="cursor-pointer text-xs leading-3 text-gray-300">alexis81@gmail.com</p>*/}
-          {/*  </div>*/}
-          {/*</div>*/}
-          <Setting/>
-        </div>
+        <NavBarProfilInfo/>
         <div className="p-4 bg-accent text-center w-full border">
           L&apos;application est{" "}
           <span className="font-bold">ni affiliée ni approuvée</span>{" "}

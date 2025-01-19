@@ -3,6 +3,8 @@ import { AdminShopItem, EventType, OptionType, StatusType, WebHookThresholdCondi
 import { defaultWebhookFooterFromType } from "@/components/WebHooks/WebHookConstant.ts";
 import { adminShopItemToUserFriendlyText, formatPrice, getImagePathFromAdminShopType } from "@/lib/misc.ts";
 import { useWebhookStore } from "@/stores/use-webhook-store.ts";
+import { useProfileStore } from "@/stores/use-profile-store.ts";
+import React, { useEffect } from "react";
 
 
 export function GenerateEmbedPreview(footer: string) {

@@ -3,6 +3,8 @@
 
 import { parseTextFormatting } from "@/components/WebHooks/WebHookMsg.tsx";
 import { useWebhookStore } from "@/stores/use-webhook-store.ts";
+import { Button } from "@/components/ui/button.tsx";
+import { API_PALATRACKER } from "@/lib/api/apiPalaTracker.ts";
 
 export function RecapTemplate({ messages }: { messages: string[] }) {
 

@@ -3,7 +3,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from 
 import { ScrollArea } from "@/components/ui/scroll-area.tsx";
 import React from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card.tsx";
-import { RenderEvent } from "@/components/NavBarClient.tsx";
+import { RenderEvent } from "@/components/NavBar/NavBarClient.tsx";
 
 
 export const PopupNoRewardEvent = ({ children }: { children: React.ReactNode }) => {
