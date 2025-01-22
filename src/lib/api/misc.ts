@@ -111,6 +111,10 @@ export const fetchPostWithHeader = async <T>(url: string, body: string, cache_du
   let response: Response | null = null;
   let json = null;
 
+  const cookieStore = cookies();
+  const allCookies = cookieStore.getAll();
+  const cookieHeader = allCookies.map(cookie => `${cookie.name}=${cookie.value}`).join('; ');
+
   try {
     response = await fetch(url,
       {
@@ -119,7 +123,8 @@ export const fetchPostWithHeader = async <T>(url: string, body: string, cache_du
         signal: AbortSignal.timeout(4000),
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${process.env.PALADIUM_API_KEY}`
+          'Authorization': `Bearer ${process.env.PALADIUM_API_KEY}`,
+          Cookie: cookieHeader,
         },
         body: body
       })

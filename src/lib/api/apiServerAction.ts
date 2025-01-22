@@ -2,7 +2,14 @@
 import { getPlayerInfo, PALADIUM_API_URL } from "@/lib/api/apiPala.ts";
 import { fetchPostWithHeader, fetchWithHeader } from "@/lib/api/misc.ts";
 import { API_PALATRACKER } from "@/lib/api/apiPalaTracker.ts";
-import { NotificationWebSiteResponse, OptionType, PaladiumAhItemStat, PaladiumAhItemStatResponse } from "@/types";
+import {
+  NotificationWebSiteResponse,
+  OptionType,
+  PaladiumAhItemStat,
+  PaladiumAhItemStatResponse,
+  WebHookCreate,
+  WebHookType
+} from "@/types";
 import { Event } from "@/types/db_types.ts";
 import { cookies } from "next/headers";
 
@@ -154,7 +161,7 @@ export async function registerUserToEvent(uuid: string, discord_name: string | u
   }>(`${API_PALATRACKER}/v1/events/register`, JSON.stringify({
     uuid: uuid,
     discord_name: discord_name,
-  }),0);
+  }), 0);
 }
 
 export async function isAuthenticate() {
@@ -163,16 +170,48 @@ export async function isAuthenticate() {
 
   const cookieHeader = allCookies.map(cookie => `${cookie.name}=${cookie.value}`).join('; ');
 
-  const response = await fetch('http://localhost:3001/v1/auth/user', {
+  const response = await fetch(`${API_PALATRACKER}/v1/auth/user`, {
     headers: {
       Cookie: cookieHeader,
     },
     credentials: 'include',
   });
 
-  if(response.ok) {
+  if (response.ok) {
     return await response.json();
   }
 
   return null;
+}
+
+export async function createWebHookServerAction(body: WebHookCreate): Promise<[boolean, string]> {
+  if (!await isAuthenticate()) {
+    return [false, "Not authenticated"];
+  }
+  // Check that the request is valid
+  switch (body.type) {
+    case WebHookType.QDF:
+      break;
+    case WebHookType.EventPvp:
+      break;
+    case WebHookType.statusServer:
+      break;
+    case WebHookType.adminShop:
+      break;
+    case WebHookType.market:
+      break;
+    default:
+      return [false, "Type de WebHook inconnu"]
+  }
+
+  console.log("Creating WebHook", body)
+
+  // TODO defined return type
+  const r = await fetchPostWithHeader<{
+    succeeded: boolean,
+    msg: string
+  }>(`http://localhost:3001/v1/webhook/create`, JSON.stringify(body), 0).catch((e) => {
+    return { msg: JSON.stringify(e.message), succeeded: false };
+  })
+  return [r.succeeded, r.msg];
 }

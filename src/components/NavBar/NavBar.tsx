@@ -1,8 +1,6 @@
-import ToggleTheme from "@/components/shared/ToggleTheme.tsx";
 import { Button } from "@/components/ui/button.tsx";
 import { Sheet, SheetContent, SheetHeader, SheetTrigger } from "@/components/ui/sheet.tsx";
 import { FaBars, FaCalculator, FaClipboardList, FaKey, FaRegUser, FaShoppingBasket } from "react-icons/fa";
-import Setting from "@/components/shared/Setting.tsx";
 import constants from "@/lib/constants.ts";
 import { LogoClient } from "@/components/ui/logoClient.tsx";
 import LinkClient, { CategorieDisplay, GiveawayFakeLink, NotificationWebSite } from "@/components/NavBar/NavBarClient.tsx";
@@ -18,7 +16,6 @@ import React from "react";
 import ImportProfil from "@/components/shared/ImportProfil.tsx";
 import { HiOutlineStatusOnline } from "react-icons/hi";
 import GradientText from "@/components/shared/GradientText.tsx";
-import LoginLogoutDiscord from "@/components/NavBar/LoginLogoutDiscord.tsx";
 import { NavBarProfilInfo } from "@/components/NavBar/NavBarProfilInfo.tsx";
 
 

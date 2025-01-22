@@ -40,7 +40,7 @@ function AuthLoading() {
       <Card className="flex flex-col gap-4 font-bold center items-center">
         <CardHeader className="flex flex-row gap-4">
           <LoadingSpinner/>
-          <p>Vérification de l'authentification...</p>
+          <p>{"Vérification de l'authentification..."}</p>
         </CardHeader>
       </Card>
     </div>

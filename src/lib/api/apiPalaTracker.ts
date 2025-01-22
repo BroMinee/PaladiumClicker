@@ -2,7 +2,8 @@ import 'server-only';
 import {
   AdminShopItemDetail,
   AdminShopPeriode,
-  CraftingRecipeType, DiscordUser,
+  CraftingRecipeType,
+  DiscordUser,
   Item,
   OptionType,
   PalaAnimationLeaderboardGlobal,
@@ -11,11 +12,11 @@ import {
   RankingType,
   ServerPaladiumStatusResponse,
   ServerStatusResponse,
-  StatusPeriode
+  StatusPeriode,
+  WebHookAlert
 } from "@/types";
 import { fetchWithHeader } from "@/lib/api/misc.ts";
 import { redirect } from "next/navigation";
-import { Event } from "@/types/db_types.ts";
 // import { toast } from "sonner";
 
 export const API_PALATRACKER = process.env.PALACLICKER_API_URL || "https://palatracker.bromine.fr"
@@ -125,9 +126,9 @@ export const getProfileFromCookies = async () => {
   });
 }
 
-export const getWebHookFromCookies = async () => {
+export const getWebHookFromCookies = async (): Promise<WebHookAlert[]> => {
   return await fetchWithHeader<WebHookAlert[]>(`${API_PALATRACKER}/v1/webhook/getAll`, 0).catch((e) => {
     console.error(e);
-    return null;
+    return [];
   });
 }

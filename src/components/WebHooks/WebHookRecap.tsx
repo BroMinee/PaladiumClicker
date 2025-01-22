@@ -3,8 +3,6 @@
 
 import { parseTextFormatting } from "@/components/WebHooks/WebHookMsg.tsx";
 import { useWebhookStore } from "@/stores/use-webhook-store.ts";
-import { Button } from "@/components/ui/button.tsx";
-import { API_PALATRACKER } from "@/lib/api/apiPalaTracker.ts";
 
 export function RecapTemplate({ messages }: { messages: string[] }) {
 
@@ -60,7 +58,7 @@ export function RecapAdminShop() {
 export function RecapEvent() {
   return (
     <RecapTemplate
-      messages={["Vous allez recevoir un message **15 minutes** avant le debut de l'event : {event}.", "Ce qui fait une moyenne de **{TODO}** message par semaine."]}/>
+      messages={["Vous allez recevoir un message **15 minutes** avant le début de l'event : {event}.", "Ce qui fait une moyenne de **{TODO}** message par semaine."]}/>
   )
 }
 

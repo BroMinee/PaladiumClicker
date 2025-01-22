@@ -1,10 +1,15 @@
 import "./WebHookMsg.css";
-import { AdminShopItem, EventType, OptionType, StatusType, WebHookThresholdCondition, WebHookType } from "@/types";
+import { AdminShopItem, EventType, OptionType, WebHookThresholdCondition, WebHookType } from "@/types";
 import { defaultWebhookFooterFromType } from "@/components/WebHooks/WebHookConstant.ts";
-import { adminShopItemToUserFriendlyText, formatPrice, getImagePathFromAdminShopType } from "@/lib/misc.ts";
+import {
+  adminShopItemToUserFriendlyText,
+  formatPrice,
+  getIconNameFromEventType,
+  getImagePathFromAdminShopType
+} from "@/lib/misc.ts";
 import { useWebhookStore } from "@/stores/use-webhook-store.ts";
-import { useProfileStore } from "@/stores/use-profile-store.ts";
-import React, { useEffect } from "react";
+import React from "react";
+import Image from "next/image";
 
 
 export function GenerateEmbedPreview(footer: string) {
@@ -26,13 +31,20 @@ export function GenerateEmbedPreview(footer: string) {
     <div className="embed"
       // style={{ background: "yellow" }}
     >
-      {itemSelected && (currentWebHookType === WebHookType.Market || currentWebHookType === WebHookType.QDF) &&
+      {itemSelected && (currentWebHookType === WebHookType.market || currentWebHookType === WebHookType.QDF) &&
         <div className="top-right">
-        <img src={`https://palatracker.bromine.fr/AH_img/${itemSelected.img}`} alt="icon"/>
+          <Image src={`https://palatracker.bromine.fr/AH_img/${itemSelected.img}`} alt="icon" height={24} width={24}
+                 unoptimized/>
       </div>
       }
-      {adminShopItemSelected && currentWebHookType === WebHookType.AdminShop && <div className="top-right">
-        <img src={`https://palatracker.bromine.fr/${getImagePathFromAdminShopType(adminShopItemSelected)}`} alt="icon"/>
+      {currentWebHookType === WebHookType.EventPvp && <div className="top-right">
+        <Image src={`https://palatracker.bromine.fr/${getIconNameFromEventType(eventSelected)}`} alt="icon" height={24}
+               width={24} unoptimized/>
+      </div>
+      }
+      {adminShopItemSelected && currentWebHookType === WebHookType.adminShop && <div className="top-right">
+        <Image src={`https://palatracker.bromine.fr/${getImagePathFromAdminShopType(adminShopItemSelected)}`} alt="icon"
+               height={24} width={24} unoptimized/>
       </div>
       }
       <div className="embed-header">
@@ -64,7 +76,7 @@ export function parseTextFormatting(
       case "aboveThreshold":
         return "supérieur";
       case "aboveQuantity":
-        return "supérieur (en quantité)";
+        return "supérieur ou égal (en quantité)";
       case "underThreshold":
         return "inférieur";
       case "increasingAboveThreshold":
@@ -106,14 +118,14 @@ export function parseTextFormatting(
             </span>
           );
         }
-        if (part === "{item}" && (currentWebHookType === WebHookType.Market || currentWebHookType === WebHookType.QDF || (currentWebHookType === WebHookType.Event && eventSelected === "A VOS MARQUES") )) {
+        if (part === "{item}" && (currentWebHookType === WebHookType.market || currentWebHookType === WebHookType.QDF || (currentWebHookType === WebHookType.EventPvp && eventSelected === "A VOS MARQUES"))) {
           return (
             <span key={index}>
               {itemSelected?.value || "undefined"}
             </span>
           );
         }
-        if (part === "{item}" && currentWebHookType === WebHookType.AdminShop) {
+        if (part === "{item}" && currentWebHookType === WebHookType.adminShop) {
           return (
             <span key={index}>
               {adminShopItemSelected ? adminShopItemToUserFriendlyText(adminShopItemSelected) : "undefined"}
@@ -267,41 +279,27 @@ function GenerateEmbedDescription(footer: string): JSX.Element {
         </div>
       ))}
       <br/>
-      <p>Plus d'informations sur le site <a href="https://palatracker.bromine.fr/webhooks"
-                                            target="_blank">palatracker</a>.</p>
+      <p>Plus d&apos;informations sur le site <a href="https://palatracker.bromine.fr/webhooks"
+                                                 target="_blank">palatracker</a>.</p>
       {embedImg &&
-        <img src={parseUrlFormatting(embedImg, itemSelected, eventSelected, adminShopItemSelected, threshold)}
-             alt="Embed Image"
-             className="embed-image"/>}
+        <Image src={parseUrlFormatting(embedImg, itemSelected, eventSelected, adminShopItemSelected, threshold)}
+               alt="Embed Image"
+               width={0}
+               height={0}
+               sizes="100vw"
+               style={{ width: '100%', height: 'auto' }}
+               className="embed-image" unoptimized/>}
       <div className="embed-footer">
-        <img className="footer-icon"
-             src="https://palatracker.bromine.fr/favicon.png"
-             width={16}
-             height={16}
-             alt=""/>
+        <Image className="footer-icon"
+               src="https://palatracker.bromine.fr/favicon.png"
+               width={16}
+               height={16}
+
+               alt="" unoptimized/>
         <span suppressHydrationWarning>{footer} • {new Date().toLocaleString()}</span>
       </div>
     </div>
   );
-}
-
-function getStatusText(status: StatusType) {
-  switch (status) {
-    case "online":
-    case "running":
-    case "whitelist":
-      return ":notepad_spiral: Sous whitelist";
-    case "restart":
-      return "";
-    case "offline":
-      return "";
-    case "starting":
-      return
-    case "stopping":
-      return "";
-    case "unknown":
-      return "";
-  }
 }
 
 export function GenerateWebHookContent() {
@@ -319,9 +317,11 @@ export function GenerateWebHookContent() {
     <div>
       <div className="alert-container  !border-0">
         <div className="alert-header">
-          <img className="avatar"
+          <Image className="avatar"
+                 height={40}
+                 width={40}
                src="https://palatracker.bromine.fr/stonks_clic.png"
-               alt=""/>
+                 alt="" unoptimized/>
           <div className="header-text">
             <span className="title">PalaTracker Alert</span>
             <span className="app-badge">APP</span>

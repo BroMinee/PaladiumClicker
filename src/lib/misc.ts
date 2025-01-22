@@ -6,6 +6,7 @@ import {
   BuildingUpgrade,
   CategoryUpgrade,
   CPS,
+  EventType,
   GlobalUpgrade,
   ManyUpgrade,
   MetierKey,
@@ -19,7 +20,8 @@ import {
   StatusPeriode,
   TerrainUpgrade,
   Tree,
-  UpgradeKey, WebHookType
+  UpgradeKey,
+  WebHookType
 } from "@/types";
 import constants, { PathValid } from "@/lib/constants.ts";
 
@@ -3211,6 +3213,25 @@ export function getImagePathFromAdminShopType(item: AdminShopItem): string {
   return `/AH_img/${item.replaceAll("-", "_")}.png`;
 }
 
+export function getIconNameFromEventType(eventType: EventType) {
+  switch (eventType) {
+    case 'A VOS MARQUES':
+      return "/EventIcon/a_vos_marques.png";
+    case "BOSS":
+      return "/EventIcon/boss.png";
+    case "BLACKMARKET":
+      return "/EventIcon/blackmarket.png";
+    case "EGGHUNT":
+      return "/EventIcon/egghunt.png";
+    case "KOTH":
+      return "/EventIcon/koth.png";
+    case "TOTEM":
+      return "/EventIcon/totem.png";
+    default:
+      return "/EventIcon/unknown.png";
+  }
+}
+
 
 export function getLinkFromUrl(url: string):
   PathValid | undefined {
@@ -3417,4 +3438,21 @@ export function petGetLevelFromXp(xp: number) {
 
 export function petGetCoef(xp: number, xpNeeded: number) {
   return xp / xpNeeded;
+}
+
+export function getTextFromWebHookType(webHookType: WebHookType) {
+  switch (webHookType) {
+    case WebHookType.QDF:
+      return "QDF";
+    case WebHookType.adminShop:
+      return "AdminShop";
+    case WebHookType.market:
+      return "Market";
+    case WebHookType.EventPvp:
+      return "Event";
+    case WebHookType.statusServer:
+      return "Status serveur";
+    default:
+      return `Unknown WebHookType ${webHookType}`;
+  }
 }

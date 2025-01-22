@@ -2,9 +2,7 @@ import { Card, CardContent, CardHeader } from "@/components/ui/card.tsx";
 import { WebHookSelectorClientItem } from "@/components/WebHooks/WebHookClientSelector.tsx";
 import { WebHookInputClientItem } from "@/components/WebHooks/WebHookInputClient.tsx";
 import React from "react";
-import { fetchWithHeader } from "@/lib/api/misc.ts";
-import { API_PALATRACKER, getProfileFromCookies } from "@/lib/api/apiPalaTracker.ts";
-import { DiscordUser } from "@/types";
+import { getProfileFromCookies } from "@/lib/api/apiPalaTracker.ts";
 
 
 
@@ -16,8 +14,6 @@ export default async function WebHooksPage() {
   {
     return "User not authenticated"
   }
-
-
 
   return (
     <Card>

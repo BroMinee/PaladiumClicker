@@ -22,9 +22,9 @@ const CounterInputWebhook = ({ min = 0, step = 0.1 }) => {
     if (threshold - step >= min) setThreshold(parseFloat((threshold - step).toFixed(2)));
   };
 
-  const handleChange = (e) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newValue = e.target.value;
-    if (/^-?\d*\.?\d*$/.test(newValue)) { // Valide uniquement les nombres
+    if (/^-?\d*\.?\d*$/.test(newValue)) {
       const parsedValue = parseFloat(newValue);
       if (!isNaN(parsedValue) && parsedValue >= min) {
         setThreshold(parsedValue);

@@ -1,9 +1,8 @@
 import { Card, CardContent, CardHeader } from "@/components/ui/card.tsx";
-import { WebHookSelectorClientItem } from "@/components/WebHooks/WebHookClientSelector.tsx";
-import { WebHookInputClientItem } from "@/components/WebHooks/WebHookInputClient.tsx";
 import React from "react";
 import { AuthForceWrapper } from "@/components/Auth/AuthForceWrapper.tsx";
 import { getWebHookFromCookies } from "@/lib/api/apiPalaTracker.ts";
+import { WebHookPreview } from "@/components/WebHooks/WebHookPreview.tsx";
 
 
 export async function generateMetadata() {
@@ -29,8 +28,16 @@ export default async function WebHooksPage() {
         <CardHeader>
           Définissez des webhooks discord pour recevoir des notifications en temps réel sur Paladium.
         </CardHeader>
-        <CardContent>
-          Test2
+        <CardContent className="flex flex-col justify-left gap-2">
+          {r.length === 0 &&
+            "Vous n'avez pas de webhooks définis. Créez-en un dès maintenant !"
+          }
+
+          {
+            r.map((webhook, index) => (
+              <WebHookPreview key={`webhook-${index}`} webHookAlert={webhook}/>
+            ))
+          }
         </CardContent>
       </Card>
       {JSON.stringify(r)}

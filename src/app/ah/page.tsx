@@ -142,7 +142,7 @@ function QuantitySelectorDisplayFallBack({ item }: { item: OptionType }) {
   </Card>)
 }
 
-export function GraphItemFallback({ item }: { item: OptionType }) {
+function GraphItemFallback({ item }: { item: OptionType }) {
   return (<Card>
     <CardHeader>
       <CardTitle className="flex flex-row gap-2">

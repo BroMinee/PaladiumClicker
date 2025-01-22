@@ -626,10 +626,10 @@ export type NotificationWebSiteResponse =
 
 export enum WebHookType {
   "QDF" = "QDF",
-  "Event" = "Event",
-  "ServeurStatus" = "ServeurStatus",
-  "AdminShop" = "AdminShop",
-  "Market" = "Market",
+  "EventPvp" = "EventPvp",
+  "statusServer" = "statusServer",
+  "adminShop" = "adminShop",
+  "market" = "market",
 }
 
 export type EventType =
@@ -666,6 +666,8 @@ export type DiscordUser =
 
 export type WebhookDiscord = {
   url: string,
+  guild_id: number,
+  channel_id: number,
   failedConsecutive: number,
 }
 
@@ -679,6 +681,20 @@ export type WebHookAlert = {
   endDate: number | null;
   enumEvent: EventType | null;
   item: Item | null;
+  threshold: number | null;
+  thresholdCondition:
+    WebHookThresholdCondition
+    | null;
+}
+
+export type WebHookCreate = {
+  url: string,
+  content: string | null;
+  embed: string | null;
+  title: string | null;
+  type: WebHookType;
+  enumEvent: EventType | null;
+  itemName: string | null;
   threshold: number | null;
   thresholdCondition:
     WebHookThresholdCondition

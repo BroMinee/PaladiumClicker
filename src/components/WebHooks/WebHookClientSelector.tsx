@@ -3,33 +3,19 @@
 import { WebHookType, } from "@/types";
 import { Button } from "@/components/ui/button.tsx";
 import { useWebhookStore } from "@/stores/use-webhook-store.ts";
+import { getTextFromWebHookType } from "@/lib/misc.ts";
 
-function getTextFromWebHookType(webHookType: WebHookType) {
-  switch (webHookType) {
-    case WebHookType.QDF:
-      return "QDF";
-    case WebHookType["AdminShop"]:
-      return "AdminShop";
-    case WebHookType.Market:
-      return "Market";
-    case WebHookType.Event:
-      return "Event";
-    case WebHookType.ServeurStatus:
-      return "Status serveur";
-    default:
-      return "Unknown WebHookType"
-  }
-}
 
 export function WebHookSelectorClientItem() {
-  const validWebHookType = [WebHookType.QDF, WebHookType["AdminShop"], WebHookType.Market, WebHookType.Event, WebHookType["ServeurStatus"]]
+  const validWebHookType = [WebHookType.QDF, WebHookType["adminShop"], WebHookType.market, WebHookType.EventPvp, WebHookType["statusServer"]]
 
   const { setCurrentWebHookType, currentWebHookType } = useWebhookStore();
 
   return (
     <div className="flex flex-row justify-between">
-      {validWebHookType.map((webhookType) => (
+      {validWebHookType.map((webhookType, index) => (
         <Button
+          key={webhookType+index}
           onClick={() => {
             setCurrentWebHookType(webhookType);
           }}

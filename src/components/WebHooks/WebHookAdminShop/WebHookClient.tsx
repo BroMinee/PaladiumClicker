@@ -25,20 +25,21 @@ export function ThreshConditionSelector() {
       case "decreasing":
         return 'En baisse';
       case "aboveQuantity":
-        return 'supérieur (en quantité)';
+        return 'supérieur ou égal (en quantité)';
       default:
         return 'Event Inconnu';
     }
   }
 
   const validCondition: WebHookThresholdCondition[] = ['underThreshold', 'aboveThreshold', 'decreaseAboveThreshold', 'increasingAboveThreshold', 'decreasing', 'increasing']
-  if (currentWebHookType === WebHookType.Market) // Le Market a une condition supplémentaire par rapport à l'admin shop
+  if (currentWebHookType === WebHookType.market) // Le Market a une condition supplémentaire par rapport à l'admin shop
     validCondition.push('aboveQuantity')
 
   return (
     <div className="grid grid-cols-2 gap-2">
-      {validCondition.map((condition) => (
+      {validCondition.map((condition, index) => (
         <Button
+          key={condition + index}
           onClick={() => {
             setThresholdCondition(condition);
           }}
@@ -55,7 +56,7 @@ export function AdminShopInput() {
   return (
     <>
       <span>
-        Choisissez un item de l'admin shop
+        Choisissez un item de l&apos;admin shop
       </span>
       <div className="grid grid-cols-6 sm:grid-cols-16 lg:grid-cols-8 items-center justify-between gap-2 pb-2 mt-0">
         {adminShopItemsAvailable.map((value: AdminShopItem, index: number) => {
@@ -95,8 +96,9 @@ function EventSelector() {
 
   return (
     <div className="flex flex-row justify-between">
-      {validEvents.map((event) => (
+      {validEvents.map((event, index) => (
         <Button
+          key={event + index}
           onClick={() => {
             setEventSelected(event);
           }}
@@ -113,7 +115,7 @@ export function EventInput() {
   return (
     <>
       <span>
-        Choisissez une type d'event
+        Choisissez une type d&apos;event
       </span>
       <EventSelector/>
     </>

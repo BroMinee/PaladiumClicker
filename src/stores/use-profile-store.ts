@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import { AdminShopItem, DiscordUser, EventType, OptionType, WebHookThresholdCondition, WebHookType } from "@/types";
+import { DiscordUser } from "@/types";
 
 type State = {
   profileInfo: DiscordUser | null,
