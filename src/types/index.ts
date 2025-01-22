@@ -666,9 +666,11 @@ export type DiscordUser =
 
 export type WebhookDiscord = {
   url: string,
-  guild_id: number,
-  channel_id: number,
+  guild_id: string,
+  channel_id: string,
   failedConsecutive: number,
+  server_name: string,
+  channel_name: string,
 }
 
 export type WebHookAlert = {

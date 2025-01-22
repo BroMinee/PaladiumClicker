@@ -7,6 +7,7 @@ import { FiEdit } from "react-icons/fi";
 import React from "react";
 import Image from "next/image";
 import { cn } from "@/lib/utils.ts";
+import { FaTrashCan } from "react-icons/fa6";
 
 export function WebHookPreview({ webHookAlert }: { webHookAlert: WebHookAlert }) {
 
@@ -25,8 +26,11 @@ export function WebHookPreview({ webHookAlert }: { webHookAlert: WebHookAlert })
         }
         <span className="app-badge">{getTextFromWebHookType(webHookAlert.type)}</span>
         <span className="title">{webHookAlert.title}</span>
-        <Button size="icon" className="ml-4" onClick={() => alert("TODO")}>
+        <Button size="icon" onClick={() => alert("TODO")}>
           <FiEdit/>
+        </Button>
+        <Button size="icon" className="bg-red-600" onClick={() => alert("TODO delete")}>
+          <FaTrashCan/>
         </Button>
       </div>
       <span className="embed-footer">
