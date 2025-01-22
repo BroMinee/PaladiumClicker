@@ -13,7 +13,7 @@ import {
   ServerPaladiumStatusResponse,
   ServerStatusResponse,
   StatusPeriode,
-  WebHookAlert
+  WebHookAlert, WebhookDiscord
 } from "@/types";
 import { fetchWithHeader } from "@/lib/api/misc.ts";
 import { redirect } from "next/navigation";
@@ -128,6 +128,13 @@ export const getProfileFromCookies = async () => {
 
 export const getWebHookFromCookies = async (): Promise<WebHookAlert[]> => {
   return await fetchWithHeader<WebHookAlert[]>(`${API_PALATRACKER}/v1/webhook/getAll`, 0).catch((e) => {
+    console.error(e);
+    return [];
+  });
+}
+
+export const getWebHookDiscordFromCookies = async (): Promise<WebhookDiscord[]> => {
+  return await fetchWithHeader<WebhookDiscord[]>(`${API_PALATRACKER}/v1/webhook/getWebhookDiscord`, 0).catch((e) => {
     console.error(e);
     return [];
   });
