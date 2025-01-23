@@ -28,6 +28,43 @@
 // }
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card.tsx";
+import React from "react";
+
+
+function textFormatting(
+  text: string): JSX.Element {
+  const parts = text.split(
+    /(\*\*.*?\*\*|\*.*?\*|__.*?__|~~.*?~~)/g
+  );
+
+
+  return (
+    <>
+      {parts.map((part, index) => {
+        if (part.startsWith("**") && part.endsWith("**")) {
+          return <strong
+            key={index}>{textFormatting(part.slice(2, -2))}</strong>;
+        }
+        if (part.startsWith("*") && part.endsWith("*")) {
+          return <em
+            key={index}>{textFormatting(part.slice(1, -1))}</em>;
+        }
+        if (part.startsWith("__") && part.endsWith("__")) {
+          return <u
+            key={index}>{textFormatting(part.slice(2, -2))}</u>;
+        }
+        if (part.startsWith("~~") && part.endsWith("~~")) {
+          return <s
+            key={index}>{textFormatting(part.slice(2, -2))}</s>;
+        }
+        if (part === "\n") {
+          return <br key={index}/>;
+        }
+        return <span key={index}>{part}</span>;
+      })}
+    </>
+  );
+}
 
 type NewProps = {
   date: string,
@@ -43,7 +80,7 @@ export default function New({ date, events }: NewProps) {
       <CardContent>
         <ul className="list-disc list-inside [&>li]:pl-4">
           {events.map((event, index) => {
-            return <li key={index}>{event}</li>
+            return <li key={index}>{textFormatting(event)}</li>
           })}
         </ul>
       </CardContent>

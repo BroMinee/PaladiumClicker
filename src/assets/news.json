@@ -1,5 +1,21 @@
 [
   {
+    "date": "TODO",
+    "events": [
+      "Ajout d'un système d'authentification avec Discord (OAuth2) (beta)",
+      "Ajout d'une page pour créer des **alertes Discord** pour :",
+      "- Etre notifié quand une nouvelle __QDF__ est disponible",
+      "- Suivre les prix d'un item sur le __market__",
+      "- Suivre les prix d'un item dans __l'admin-shop__",
+      "- Être notifié lorsqu'un __serveur change de status__",
+      "- Recevoir une notification quelques minutes avant un __event PvP__ ou __On Your Marks__",
+      "Refactorisation complète du backend pour une meilleure maintenabilité, notamment via l'utilisation de l'architecture \"**Layered Architecture**\" et de **typeorm**",
+      "Suppression des accès au backend depuis NextJS (server-side/server-action), tout passe par le backend désormais",
+      "Ajout d'un système de notification sur la navbar pour les alertes/informations",
+      "~~Suppression~~Ajout **d'un système** *de markdown* sur les patchnotes (sur le site)"
+    ]
+  },
+  {
     "date": "09/01/2025",
     "events": [
       "Suppression du compte à rebours pour la réimportation du profil (le cache de 15 minutes reste en place, mais c'est désormais plus convivial pour l'utilisateur).",
