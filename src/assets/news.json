@@ -9,6 +9,7 @@
       "- Suivre les prix d'un item dans __l'admin-shop__",
       "- Être notifié lorsqu'un __serveur change de status__",
       "- Recevoir une notification quelques minutes avant un __event PvP__ ou __On Your Marks__",
+      "Suppression de la barre de scroll sur la page de profil (elle était visible uniquement sur la navigateur basé sur Chromium)",
       "Refactorisation complète du backend pour une meilleure maintenabilité, notamment via l'utilisation de l'architecture \"**Layered Architecture**\" et de **typeorm**",
       "Suppression des accès au backend depuis NextJS (server-side/server-action), tout passe par le backend désormais",
       "Ajout d'un système de notification sur la navbar pour les alertes/informations",

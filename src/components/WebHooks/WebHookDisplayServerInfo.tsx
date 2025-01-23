@@ -35,7 +35,7 @@ export function DisplayServerBox({ guildId, channelId, guildIdToServerName, chil
     }
   }
 
-  return (<div className="px-4 border-2 py-2 border-secondary-foreground">
+  return (<div className="px-4 border-2 py-2 border-secondary-foreground rounded-xl">
     <div>
       <div className="flex flex-row gap-2 pb-2">
         <h2 className="font-bold text-xl">Serveur:</h2>
@@ -80,7 +80,7 @@ export function DisplayChannelBox({ channelId, channelIdToChannelName, guildId, 
       toast.error(res.msg);
   }
 
-  return (<div className="px-4 border-2 py-2 mb-2 border-secondary-foreground">
+  return (<div className="px-4 border-2 py-2 mb-2 border-secondary-foreground rounded-xl">
     <div className="flex flex-row gap-2 pb-2">
     <h3 className="font-bold text-l">Channel:</h3>
       <input

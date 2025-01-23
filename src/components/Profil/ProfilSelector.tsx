@@ -1,8 +1,9 @@
 'use client';
-import { useState } from "react";
+import React, { useState } from "react";
 import { generateProfilUrl, ProfilSectionValid } from "@/lib/misc.ts";
 import { redirect, useParams, useRouter, useSearchParams } from "next/navigation";
 import { cn } from "@/lib/utils.ts";
+import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area.tsx";
 
 
 export default function ProfilSelector() {
@@ -25,7 +26,7 @@ export default function ProfilSelector() {
   const displaySelector = allSelector.slice(selected, Math.min(allSelector.length, selected + 4));
 
   return (
-    <div className="flex flex-row w-full place-items-end overflow-x-scroll">
+    <ScrollArea className="flex flex-row w-full place-items-end">
       <div className="flex flex-grow justify-start gap-2">
         {displaySelector.map((name, index) => (
           <div key={index}
@@ -42,6 +43,7 @@ export default function ProfilSelector() {
             <h1 className="text-primary text-3xl">...</h1>
           </div>}
       </div>
-    </div>
+      <ScrollBar orientation="horizontal"/>
+    </ScrollArea>
   )
 }
