@@ -23,11 +23,6 @@ export type PathValid =
   | "/craft"
   | "/about"
   | "/ranking?category=money"
-  | "/ranking?category=job.miner"
-  | "/ranking?category=boss"
-  | "/ranking?category=egghunt"
-  | "/ranking?category=koth"
-  | "/ranking?category=clicker"
   | "/admin-shop"
   | "/status"
   | "/politique-de-confidentialite"
@@ -43,7 +38,7 @@ export type LabelValid =
   | "PalaAnimation Trainer"
   | "Craft Optimizer"
   | "A propos"
-  | "Money"
+  | "Classement"
   | "Métiers"
   | "Boss"
   | "Egg Hunt"
@@ -64,11 +59,6 @@ const palatimePath: PathValid = "/palatime";
 const palaAnimationPath: PathValid = "/pala-animation";
 const craftPath: PathValid = "/craft";
 const moneyRanking: PathValid = "/ranking?category=money";
-const metiersRanking: PathValid = "/ranking?category=job.miner";
-const bossRanking: PathValid = "/ranking?category=boss";
-const eggHuntRanking: PathValid = "/ranking?category=egghunt";
-const kothRanking: PathValid = "/ranking?category=koth";
-const clickerRanking: PathValid = "/ranking?category=clicker";
 const adminShopPath: PathValid = "/admin-shop";
 const statusPath: PathValid = "/status";
 const politiqueDeConfidentialitePath: PathValid = "/politique-de-confidentialite";
@@ -94,12 +84,7 @@ const links: LinkList = {
   "/pala-animation": { label: "PalaAnimation Trainer", requiredPseudo: true },
   "/craft": { label: "Craft Optimizer", requiredPseudo: false },
   "/about": { label: "A propos", requiredPseudo: false },
-  "/ranking?category=money": { label: "Money", requiredPseudo: false },
-  "/ranking?category=job.miner": { label: "Métiers", requiredPseudo: false },
-  "/ranking?category=boss": { label: "Boss", requiredPseudo: false },
-  "/ranking?category=egghunt": { label: "Egg Hunt", requiredPseudo: false },
-  "/ranking?category=koth": { label: "KOTH", requiredPseudo: false },
-  "/ranking?category=clicker": { label: "Clicker", requiredPseudo: false },
+  "/ranking?category=money": { label: "Classement", requiredPseudo: false },
   "/admin-shop": { label: "Admin Shop", requiredPseudo: false },
   "/status": { label: "Status", requiredPseudo: false },
   "/politique-de-confidentialite": { label: "Politique de confidentialité", requiredPseudo: false },
@@ -478,13 +463,13 @@ const notificationPath: Map<PathValid, [number, string]> = new Map<PathValid, [n
     ["/craft", [new Date("2024-10-16").getTime(), "Nouvel outil"]],
     ["/patchnote", [new Date("2024-12-21 16:15").getTime(), "Nouveau patchnote"]],
     ["/pala-animation", [new Date("2024-12-21 16:15").getTime(), "Ajout de 174 nouvelles questions"]],
+    ["/webhook", [new Date("2025-01-23").getTime(), "Nouvel outil"]],
   ]);
 
 const menuPaths: Map<string, PathValid[]> = new Map<string, PathValid[]>([
-  ['Utilisateur', ["/profil", "/xp-calculator", "/clicker-optimizer"]],
-  ['Classement', ["/ranking?category=money", "/ranking?category=job.miner", "/ranking?category=boss", "/ranking?category=egghunt", "/ranking?category=koth", "/ranking?category=clicker"]],
-  ['Statistiques', ["/ah", "/admin-shop"]],
-  ['Autres', ["/status", "/palatime", "/pala-animation", "/patchnote", "/craft", "/politique-de-confidentialite"]],
+  ['Statistiques et données', ["/profil", "/ah", "/admin-shop", "/ranking?category=money"]],
+  ['Outils', ["/clicker-optimizer", "/xp-calculator", "/pala-animation", "/craft", "/webhook"]],
+  ['Informations et gestion', ["/status", "/palatime", "/patchnote", "/politique-de-confidentialite", "/about"]],
 ]);
 
 
@@ -673,11 +658,6 @@ const constants = {
   palaAnimationPath,
   craftPath,
   moneyRanking,
-  metiersRanking,
-  bossRanking,
-  eggHuntRanking,
-  kothRanking,
-  clickerRanking,
   adminShopPath,
   statusPath,
   politiqueDeConfidentialitePath,

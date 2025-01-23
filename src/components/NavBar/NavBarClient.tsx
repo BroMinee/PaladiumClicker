@@ -128,7 +128,7 @@ export function CategorieDisplay({ name, children, defaultOpen = false }: {
   }, [])
 
   useEffect(() => {
-    if (mounted && playerInfo) {
+    if (mounted) {
       const newNotification = subLinks.reduce((acc, path) => {
         if (hasNewNotification(last_visited, path)[0])
           acc += 1;
@@ -137,7 +137,7 @@ export function CategorieDisplay({ name, children, defaultOpen = false }: {
 
       setNewNotification(newNotification);
 
-      if (name === "Autres") {
+      if (name === "Informations et gestion" && playerInfo) {
         getCurrentEventNotRegistered(playerInfo.uuid).then((event) => {
           if (event) {
             setNewNotification(newNotification + 1);
@@ -153,7 +153,7 @@ export function CategorieDisplay({ name, children, defaultOpen = false }: {
   return (<div className="flex flex-col justify-start items-center px-6 border-b border-gray-600 w-full">
     <button onClick={() => setOpen(!open)}
             className="focus:outline-none focus:text-indigo-400  text-card-foreground flex justify-between items-center w-full py-5 space-x-14  ">
-      <p className="text-sm leading-5 uppercase">{name}</p>
+      <p className="text-sm text-left leading-5 uppercase">{name}</p>
       {open ? <FaAngleUp size={24}/> : <FaAngleDown size={24}/>}
 
     </button>
