@@ -17,9 +17,9 @@ export function WebHookSelectorClientItem() {
   return (
 
     <div className="flex flex-row justify-between">
-      <Button onClick={() => router.push("/webhooks")}>
+      <Button onClick={() => router.push("/webhook")}>
         <IoMdArrowRoundBack/>
-        Revenir à la liste des webhooks
+        Revenir à la liste des alertes
       </Button>
       {
         validWebHookType.map((webhookType, index) => (

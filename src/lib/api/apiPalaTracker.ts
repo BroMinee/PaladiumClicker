@@ -17,9 +17,8 @@ import {
 } from "@/types";
 import { fetchWithHeader } from "@/lib/api/misc.ts";
 import { redirect } from "next/navigation";
+import { API_PALATRACKER } from "@/lib/constants.ts";
 // import { toast } from "sonner";
-
-export const API_PALATRACKER = process.env.PALACLICKER_API_URL || "https://palatracker.bromine.fr"
 
 export const isMyApiDown = async (): Promise<boolean> => {
   let response = null;

@@ -21,7 +21,7 @@ export async function generateMetadata() {
 
 export default async function WebHooksPage() {
   return (
-    <AuthForceWrapper url={"/webhooks/login"}>
+    <AuthForceWrapper url={"/webhook/login"}>
       <Card>
         <CardHeader>
           <WebHookSelectorClientItem/>

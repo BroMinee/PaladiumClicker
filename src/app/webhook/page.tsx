@@ -56,7 +56,7 @@ export default async function WebHooksPage() {
   });
 
   return (
-    <AuthForceWrapper url={"/webhooks/login"}>
+    <AuthForceWrapper url={"/webhook/login"}>
       <Card>
         <CardHeader>
           Définissez des webhooks discord pour recevoir des notifications en temps réel sur Paladium.

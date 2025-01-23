@@ -12,6 +12,7 @@ import { useWebhookStore } from "@/stores/use-webhook-store.ts";
 import { useRouter } from "next/navigation";
 import { deleteWebhookServerAction } from "@/lib/api/apiServerAction.ts";
 import { toast } from "sonner";
+import { API_PALATRACKER } from "@/lib/constants.ts";
 
 export function WebHookPreview({ webHookAlert }: { webHookAlert: WebHookAlert }) {
 
@@ -66,7 +67,7 @@ export function WebHookPreview({ webHookAlert }: { webHookAlert: WebHookAlert })
 
     setEdit(true);
 
-    router.push("/webhooks/edit")
+    router.push("/webhook/edit")
   }
 
 
@@ -125,7 +126,7 @@ export function CreateNewWebHookButtonKnowingUrl({ webhookDiscord, text }: {
     }
     setWebHookUrl(webhookDiscord.url);
     setEdit(false);
-    router.push("/webhooks/create")
+    router.push("/webhook/create")
   }
 
   return (
@@ -141,7 +142,7 @@ export function CreateNewWebHookButtonKnowingUrl({ webhookDiscord, text }: {
 export function CreateNewWebHookButtonWithoutKnowing() {
   return (
     <div className="alert-container w-full flex flex-col !border-0 justify-center items-center">
-      <a href="http://localhost:3001/v1/auth/webhook/create">
+      <a href={`${API_PALATRACKER}/v1/auth/webhook/create`}>
         <Button>
           {"Créer une alerte sur un autre serveur ou channel."}
         </Button>

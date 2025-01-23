@@ -127,7 +127,7 @@ function WebHookEditor() {
 
   if (!IsValidWebHookUrl(webHookUrl)) {
     toast.error("L'URL du webhook est invalide");
-    router.push("/webhooks");
+    router.push("/webhook");
   }
 
 

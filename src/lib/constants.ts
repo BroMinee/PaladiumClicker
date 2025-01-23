@@ -7,6 +7,8 @@ const discord = {
   name: "PalaTracker"
 };
 
+export const API_PALATRACKER = process.env.PALACLICKER_API_URL || "https://palatracker.bromine.fr"
+
 const startSeason = new Date("2024-09-21");
 
 const defaultUsername = "Profil_vide";
@@ -30,7 +32,7 @@ export type PathValid =
   | "/status"
   | "/politique-de-confidentialite"
   | "/patchnote"
-  | "/webhooks"
+  | "/webhook"
 
 export type LabelValid =
   "Profil"
@@ -72,7 +74,7 @@ const statusPath: PathValid = "/status";
 const politiqueDeConfidentialitePath: PathValid = "/politique-de-confidentialite";
 const patchnotePath: PathValid = "/patchnote";
 const aboutPath: PathValid = "/about";
-const webhooksPath: PathValid = "/webhooks";
+const webhooksPath: PathValid = "/webhook";
 
 type LinkInfo = {
   label: LabelValid;
@@ -102,7 +104,7 @@ const links: LinkList = {
   "/status": { label: "Status", requiredPseudo: false },
   "/politique-de-confidentialite": { label: "Politique de confidentialité", requiredPseudo: false },
   "/patchnote": { label: "Patchnote", requiredPseudo: false },
-  "/webhooks": { label: "Alertes Discord", requiredPseudo: false },
+  "/webhook": { label: "Alertes Discord", requiredPseudo: false },
 };
 
 

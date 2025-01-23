@@ -1,7 +1,6 @@
 'use server';
 import { getPlayerInfo, PALADIUM_API_URL } from "@/lib/api/apiPala.ts";
 import { fetchPostWithHeader, fetchWithHeader } from "@/lib/api/misc.ts";
-import { API_PALATRACKER } from "@/lib/api/apiPalaTracker.ts";
 import {
   NotificationWebSiteResponse,
   OptionType,
@@ -12,6 +11,7 @@ import {
 } from "@/types";
 import { Event } from "@/types/db_types.ts";
 import { cookies } from "next/headers";
+import { API_PALATRACKER } from "@/lib/constants.ts";
 
 
 /* The content of this file is not sent to the client*/
