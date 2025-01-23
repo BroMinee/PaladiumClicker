@@ -2,8 +2,9 @@
 import { DiscordUser } from "@/types";
 import { useProfileStore } from "@/stores/use-profile-store.ts";
 import { useEffect } from "react";
+import { useRouter } from "next/navigation";
 
-export default function AuthSaveClient({ profileInfo, children }: {
+export function AuthSaveClient({ profileInfo, children }: {
   profileInfo: DiscordUser
   children: React.ReactNode
 }) {
@@ -14,4 +15,12 @@ export default function AuthSaveClient({ profileInfo, children }: {
   }, []);
 
   return children;
+}
+
+export function AuthRedirectClient({ url }: { url: string }) {
+  const router = useRouter();
+  useEffect(() => {
+    router.push(url);
+  }, []);
+  return null;
 }

@@ -170,16 +170,21 @@ export async function isAuthenticate() {
 
   const cookieHeader = allCookies.map(cookie => `${cookie.name}=${cookie.value}`).join('; ');
 
-  const response = await fetch(`${API_PALATRACKER}/v1/auth/user`, {
-    headers: {
-      Cookie: cookieHeader,
-    },
-    credentials: 'include',
-  });
+  try {
+    const response = await fetch(`${API_PALATRACKER}/v1/auth/user`, {
+      headers: {
+        Cookie: cookieHeader,
+      },
+      credentials: 'include',
+    });
 
-  if (response.ok) {
-    return await response.json();
+    if (response.ok) {
+      return await response.json();
+    }
+  } catch (error) {
+    console.error(error);
   }
+
 
   return null;
 }

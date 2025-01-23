@@ -1,10 +1,9 @@
 'use server'
 import React, { Suspense } from "react";
 import { getProfileFromCookies } from "@/lib/api/apiPalaTracker.ts";
-import AuthSaveClient from "@/components/Auth/AuthSaveClient.tsx";
 import { Card, CardHeader } from "@/components/ui/card.tsx";
 import LoadingSpinner from "@/components/ui/loading-spinner.tsx";
-import { redirect } from "next/navigation";
+import { AuthRedirectClient, AuthSaveClient } from "@/components/Auth/AuthSaveClient.tsx";
 
 export async function AuthForceWrapper({ children, url }: {
   children: React.ReactNode,
@@ -30,7 +29,7 @@ async function AuthForce({ children, url }: {
       </AuthSaveClient>
     )
   } else {
-    return redirect(url);
+    return <AuthRedirectClient url={url}/>
   }
 }
 

@@ -279,7 +279,7 @@ function GenerateEmbedDescription(footer: string): JSX.Element {
         </div>
       ))}
       <br/>
-      <p>Plus d&apos;informations sur le site <a href="https://palatracker.bromine.fr/webhooks"
+      <p>Plus d&apos;informations sur le site <a href="https://palatracker.bromine.fr/webhook"
                                                  target="_blank">palatracker</a>.</p>
       {embedImg &&
         <Image src={parseUrlFormatting(embedImg, itemSelected, eventSelected, adminShopItemSelected, threshold)}

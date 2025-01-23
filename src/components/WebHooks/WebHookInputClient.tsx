@@ -28,6 +28,7 @@ import { createWebHookServerAction, editWebHookServerAction } from "@/lib/api/ap
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 
+import constants from "@/lib/constants.ts";
 
 export function WebHookInputClientItem() {
 
@@ -127,7 +128,7 @@ function WebHookEditor() {
 
   if (!IsValidWebHookUrl(webHookUrl)) {
     toast.error("L'URL du webhook est invalide");
-    router.push("/webhook");
+    router.push(constants.webhooksPath);
   }
 
 
@@ -155,6 +156,7 @@ function WebHookEditor() {
     if (!res.succeeded) {
       toast.error(res.msg);
     } else {
+      window.location.href = constants.webhooksPath;
       toast.success(res.msg);
     }
   }

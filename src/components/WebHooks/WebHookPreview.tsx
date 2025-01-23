@@ -4,7 +4,7 @@ import './WebHookMsg.css';
 import { getIconNameFromEventType, getTextFromWebHookType } from "@/lib/misc.ts";
 import { Button } from "@/components/ui/button.tsx";
 import { FiEdit } from "react-icons/fi";
-import React from "react";
+import React, { useState } from "react";
 import Image from "next/image";
 import { cn } from "@/lib/utils.ts";
 import { FaTrashCan } from "react-icons/fa6";
@@ -12,9 +12,66 @@ import { useWebhookStore } from "@/stores/use-webhook-store.ts";
 import { useRouter } from "next/navigation";
 import { deleteWebhookServerAction } from "@/lib/api/apiServerAction.ts";
 import { toast } from "sonner";
-import { API_PALATRACKER } from "@/lib/constants.ts";
+import constants, { API_PALATRACKER } from "@/lib/constants.ts";
+import { DisplayChannelBox, DisplayServerBox } from "@/components/WebHooks/WebHookDisplayServerInfo.tsx";
+import { groupsType } from "@/app/webhook/page.tsx";
 
-export function WebHookPreview({ webHookAlert }: { webHookAlert: WebHookAlert }) {
+export function WebHookPreviewPage({
+                                     groupsArg,
+                                     webHookDiscord,
+                                     guildIdToServerName,
+                                     channelIdToChannelName,
+                                   }:
+                                     {
+                                       groupsArg: groupsType,
+                                       webHookDiscord: WebhookDiscord[],
+                                       guildIdToServerName: Record<string, string>,
+                                       channelIdToChannelName: Record<string, string>,
+                                     }) {
+
+  const [groups, setGroups] = useState(groupsArg);
+
+
+  return (
+    <div className="flex flex-col gap-12">
+      <CreateNewWebHookButtonWithoutKnowing/>
+      {
+        groups && Object.keys(groups).map((guildId, index) => (
+          <DisplayServerBox key={`${guildId}-${index}`} guildId={guildId} guildIdToServerName={guildIdToServerName}
+                            channelId={Object.keys(groups[guildId])[0]}
+          >
+            {
+              Object.keys(groups[guildId]).map((channelId, index) => (
+                <DisplayChannelBox key={`${guildId}-${channelId}-${index}`} channelId={channelId}
+                                   guildId={guildId}
+                                   channelIdToChannelName={channelIdToChannelName}
+                >
+                  {
+                    groups[guildId][channelId] &&
+                    groups[guildId][channelId].sort((w1, w2) => w1.type.localeCompare(w2.type)).map((webhook, index) => (
+                      <WebHookPreview key={`webhook-${index}`} webHookAlert={webhook} groups={groups}
+                                      setGroups={setGroups}/>
+                    ))
+                  }
+                  <CreateNewWebHookButtonKnowingUrl
+                    text={`Créer une alerte sur ce channel.`}
+                    webhookDiscord={webHookDiscord.find(w => w.guild_id === guildId && w.channel_id === channelId)}/>
+                </DisplayChannelBox>
+              ))
+            }
+          </DisplayServerBox>
+        ))
+      }
+    </div>
+  )
+}
+
+
+export function WebHookPreview({ webHookAlert, groups, setGroups }: {
+  webHookAlert: WebHookAlert,
+  groups: groupsType,
+  setGroups: (groups: groupsType) => void
+}) {
 
   const displayIcon = (webHookAlert.type === WebHookType.market || webHookAlert.type === WebHookType.adminShop) || (webHookAlert.type === WebHookType.EventPvp && webHookAlert.enumEvent)
 
@@ -67,7 +124,7 @@ export function WebHookPreview({ webHookAlert }: { webHookAlert: WebHookAlert })
 
     setEdit(true);
 
-    router.push("/webhook/edit")
+    router.push(`${constants.webhooksPath}/edit`)
   }
 
 
@@ -78,6 +135,9 @@ export function WebHookPreview({ webHookAlert }: { webHookAlert: WebHookAlert })
       if (!res.succeeded) {
         toast.error(res.msg);
       } else {
+        let newGroups = { ...groups };
+        newGroups[webHookAlert.webhook.guild_id][webHookAlert.webhook.channel_id] = newGroups[webHookAlert.webhook.guild_id][webHookAlert.webhook.channel_id].filter((w) => w.id !== webHookAlert.id);
+        setGroups(newGroups);
         toast.success(res.msg);
       }
     }
@@ -132,7 +192,7 @@ export function CreateNewWebHookButtonKnowingUrl({ webhookDiscord, text }: {
     }
     setWebHookUrl(webhookDiscord.url);
     setEdit(false);
-    router.push("/webhook/create")
+    router.push(`${constants.webhooksPath}/create`)
   }
 
   return (

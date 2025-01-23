@@ -2,14 +2,9 @@ import { Card, CardContent, CardHeader } from "@/components/ui/card.tsx";
 import React from "react";
 import { AuthForceWrapper } from "@/components/Auth/AuthForceWrapper.tsx";
 import { getWebHookDiscordFromCookies, getWebHookFromCookies } from "@/lib/api/apiPalaTracker.ts";
-import {
-  CreateNewWebHookButtonKnowingUrl,
-  CreateNewWebHookButtonWithoutKnowing,
-  WebHookPreview
-} from "@/components/WebHooks/WebHookPreview.tsx";
+import { WebHookPreviewPage } from "@/components/WebHooks/WebHookPreview.tsx";
 import { WebHookAlert } from "@/types";
-import { DisplayChannelBox, DisplayServerBox } from "@/components/WebHooks/WebHookDisplayServerInfo.tsx";
-
+import constants from "@/lib/constants.ts";
 
 export async function generateMetadata() {
   const title = "PalaTracker | Webhook";
@@ -25,25 +20,30 @@ export async function generateMetadata() {
   }
 }
 
+
+export type subGroupsType = Record<string, WebHookAlert[]>;
+
+export type groupsType = Record<string, subGroupsType>;
+
 export default async function WebHooksPage() {
   let webHookAlerts = await getWebHookFromCookies();
   let webHookDiscord = await getWebHookDiscordFromCookies()
   const guildIdToServerName: Record<string, string> = {};
   const channelIdToChannelName: Record<string, string> = {};
 
-  const groups: Record<string, Record<string, WebHookAlert[]>> = webHookDiscord.reduce((acc, webhook) => {
+  const groups: groupsType = webHookDiscord.reduce((acc, webhook) => {
     guildIdToServerName[webhook.guild_id] = webhook.server_name;
     channelIdToChannelName[webhook.channel_id] = webhook.channel_name;
 
     if (!acc[webhook.guild_id]) {
-      acc[webhook.guild_id] = {} as Record<string, WebHookAlert[]>;
+      acc[webhook.guild_id] = {} as subGroupsType;
     }
 
     if (!acc[webhook.guild_id][webhook.channel_id]) {
       acc[webhook.guild_id][webhook.channel_id] = [];
     }
     return acc;
-  }, {} as Record<string, Record<string, WebHookAlert[]>>);
+  }, {} as groupsType);
 
   webHookAlerts.forEach((webhook) => {
     if (groups[webhook.webhook.guild_id] && groups[webhook.webhook.guild_id][webhook.webhook.channel_id]) {
@@ -56,7 +56,7 @@ export default async function WebHooksPage() {
   });
 
   return (
-    <AuthForceWrapper url={"/webhook/login"}>
+    <AuthForceWrapper url={`${constants.webhooksPath}/login`}>
       <Card>
         <CardHeader>
           Définissez des webhooks discord pour recevoir des notifications en temps réel sur Paladium.
@@ -65,35 +65,8 @@ export default async function WebHooksPage() {
           {webHookAlerts.length === 0 &&
             "Vous n'avez pas de webhooks définis. Créez-en un dès maintenant !"
           }
-          <div className="flex flex-col gap-12">
-            <CreateNewWebHookButtonWithoutKnowing/>
-            {
-              groups && Object.keys(groups).map((guildId, index) => (
-                <DisplayServerBox key={`${guildId}-${index}`} guildId={guildId} guildIdToServerName={guildIdToServerName}
-                                  channelId={Object.keys(groups[guildId])[0]}
-                                  >
-                    {
-                      Object.keys(groups[guildId]).map((channelId, index) => (
-                        <DisplayChannelBox key={`${guildId}-${channelId}-${index}`} channelId={channelId}
-                                           guildId={guildId}
-                                           channelIdToChannelName={channelIdToChannelName}
-                                           >
-                            {
-                              groups[guildId][channelId] &&
-                              groups[guildId][channelId].sort((w1, w2) => w1.type.localeCompare(w2.type)).map((webhook, index) => (
-                                <WebHookPreview key={`webhook-${index}`} webHookAlert={webhook}/>
-                              ))
-                            }
-                          <CreateNewWebHookButtonKnowingUrl
-                            text={`Créer une alerte sur ce channel.`}
-                            webhookDiscord={webHookDiscord.find(w => w.guild_id === guildId && w.channel_id === channelId)}/>
-                        </DisplayChannelBox>
-                      ))
-                    }
-                </DisplayServerBox>
-              ))
-            }
-          </div>
+          <WebHookPreviewPage webHookDiscord={webHookDiscord} channelIdToChannelName={channelIdToChannelName}
+                              guildIdToServerName={guildIdToServerName} groupsArg={groups}/>
         </CardContent>
       </Card>
     </AuthForceWrapper>

@@ -6,7 +6,7 @@ import { useWebhookStore } from "@/stores/use-webhook-store.ts";
 import { getTextFromWebHookType } from "@/lib/misc.ts";
 import { useRouter } from "next/navigation";
 import { IoMdArrowRoundBack } from "react-icons/io";
-
+import constants from "@/lib/constants.ts";
 
 export function WebHookSelectorClientItem() {
   const router = useRouter();
@@ -17,7 +17,7 @@ export function WebHookSelectorClientItem() {
   return (
 
     <div className="flex flex-row justify-between">
-      <Button onClick={() => router.push("/webhook")}>
+      <Button onClick={() => router.push(constants.webhooksPath)}>
         <IoMdArrowRoundBack/>
         Revenir à la liste des alertes
       </Button>

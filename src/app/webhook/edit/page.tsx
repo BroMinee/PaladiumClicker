@@ -4,6 +4,7 @@ import { WebHookInputClientItem } from "@/components/WebHooks/WebHookInputClient
 import React from "react";
 import { AuthForceWrapper } from "@/components/Auth/AuthForceWrapper.tsx";
 
+import constants from "@/lib/constants.ts";
 
 export async function generateMetadata() {
   const title = "PalaTracker | Webhook";
@@ -21,7 +22,7 @@ export async function generateMetadata() {
 
 export default async function WebHooksPage() {
   return (
-    <AuthForceWrapper url={"/webhook/login"}>
+    <AuthForceWrapper url={`${constants.webhooksPath}/login`}>
       <Card>
         <CardHeader>
           <WebHookSelectorClientItem/>

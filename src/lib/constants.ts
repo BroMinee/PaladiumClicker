@@ -7,7 +7,7 @@ const discord = {
   name: "PalaTracker"
 };
 
-export const API_PALATRACKER = process.env.PALACLICKER_API_URL || "https://palatracker.bromine.fr"
+export const API_PALATRACKER = process.env.NEXT_PUBLIC_PALACLICKER_API_URL || "https://palatracker.bromine.fr"
 
 const startSeason = new Date("2024-09-21");
 
