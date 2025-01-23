@@ -2,6 +2,7 @@
 import { getPlayerInfo, PALADIUM_API_URL } from "@/lib/api/apiPala.ts";
 import { fetchPostWithHeader, fetchWithHeader } from "@/lib/api/misc.ts";
 import {
+  DiscordUser,
   NotificationWebSiteResponse,
   OptionType,
   PaladiumAhItemStat,
@@ -164,7 +165,7 @@ export async function registerUserToEvent(uuid: string, discord_name: string | u
   }), 0);
 }
 
-export async function isAuthenticate() {
+export async function isAuthenticate() : Promise<DiscordUser | null> {
   const cookieStore = cookies();
   const allCookies = cookieStore.getAll();
 

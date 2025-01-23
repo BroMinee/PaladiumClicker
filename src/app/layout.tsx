@@ -7,6 +7,7 @@ import { Inter } from '@next/font/google';
 import { ThemeProviders } from "@/components/shared/ThemeProvider.tsx";
 import { Toaster } from "@/components/ui/sonner.tsx";
 import ServiceWorkerRegister from "@/components/ServiceWorkerRegister.tsx";
+import { AuthGetWrapper } from "@/components/Auth/AuthGetWrapper.tsx";
 
 const inter = Inter({
   subsets: ['latin'],  // specify subsets according to your needs
@@ -34,7 +35,8 @@ export default function RootLayout({
             <Navbar/>
           </header>
           <main className="flex-1 container py-4 pb-8 mx-auto overflow-x-hidden">
-            {children}
+            <AuthGetWrapper/>
+              {children}
             <Toaster/>
           </main>
         </div>
