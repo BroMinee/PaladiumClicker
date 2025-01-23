@@ -46,7 +46,7 @@ export default function WebHooksPage() {
         <a href={`${API_PALATRACKER}/v1/auth/login/discord`}>
           <Button variant="ghost" className="flex flex-row items-center gap-2 text-bold text-xl">
             Se connecter via
-            <FaDiscord className="w-8 h-8 p-2 rounded-md bg-discord text-primary-foreground"/>
+            <FaDiscord size={32} className="p-1 rounded-md bg-discord text-primary-foreground"/>
             {/*<TbLogin2 size={28}/>*/}
           </Button>
         </a>
