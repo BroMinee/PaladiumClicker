@@ -28,6 +28,7 @@ jobs:
         env:
           PALADIUM_API_URL: ${{ secrets.PALADIUM_API_URL }}
           PALADIUM_API_KEY: ${{ secrets.PALADIUM_API_KEY }}
+          NEXT_PUBLIC_PALACLICKER_API_URL: https://palatracker.bromine.fr
         run: npm run build
 
       - name: Save build artifacts
