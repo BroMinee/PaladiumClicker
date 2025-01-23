@@ -13,7 +13,8 @@ import {
   ServerPaladiumStatusResponse,
   ServerStatusResponse,
   StatusPeriode,
-  WebHookAlert, WebhookDiscord
+  WebHookAlert,
+  WebhookDiscord
 } from "@/types";
 import { fetchWithHeader } from "@/lib/api/misc.ts";
 import { redirect } from "next/navigation";

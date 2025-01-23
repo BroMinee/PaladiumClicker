@@ -208,7 +208,7 @@ export function GiveawayFakeLink({ children }: {
             setNewNotification(true);
             setNewNotificationText(event.event_name)
             setEvent(event);
-          } else if(event_0 === null) {
+          } else if (event_0 === null) {
             // No event opened to register
             // check for rewards
             getEventNotClaimed(playerInfo.uuid).then(description => {

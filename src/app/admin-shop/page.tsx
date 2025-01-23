@@ -77,21 +77,22 @@ export default function Home({ searchParams }: {
 
   return (
     <Card className="flex flex-col gap-2">
-        <CardHeader className="flex flex-row items-center justify-between">
-          <CardTitle>
-            Bienvenue sur le visualisateur d&apos;historique de prix de{" "}
-            <GradientText className="font-extrabold">{adminShopItemToUserFriendlyText(adminShopItem)}</GradientText>
-          </CardTitle>
-          <CardDescription>
-            Made with <FaHeart
-            className="text-primary inline-block"/> by <GradientText>BroMine__</GradientText>
-          </CardDescription>
-        </CardHeader>
+      <CardHeader className="flex flex-row items-center justify-between">
+        <CardTitle>
+          Bienvenue sur le visualisateur d&apos;historique de prix de{" "}
+          <GradientText className="font-extrabold">{adminShopItemToUserFriendlyText(adminShopItem)}</GradientText>
+        </CardTitle>
+        <CardDescription>
+          Made with <FaHeart
+          className="text-primary inline-block"/> by <GradientText>BroMine__</GradientText>
+        </CardDescription>
+      </CardHeader>
       <CardContent className="grid grid-cols-6 sm:grid-cols-16 lg:grid-cols-23 items-center justify-between gap-2 pb-2">
-          {adminShopItemsAvailable.map((value: AdminShopItem, index: number) => {
-            return <AdminShopSelectorClientItem key={value + index} item={value} periode={periodeEnum} adminShopPage={true}/>
-          })}
-        </CardContent>
+        {adminShopItemsAvailable.map((value: AdminShopItem, index: number) => {
+          return <AdminShopSelectorClientItem key={value + index} item={value} periode={periodeEnum}
+                                              adminShopPage={true}/>
+        })}
+      </CardContent>
 
       <CardContent className="h-[calc(100vh-37.5vh)] pb-0">
         <Suspense fallback={<GraphAdminShopFallback/>}>
@@ -104,6 +105,6 @@ export default function Home({ searchParams }: {
         <AdminShopSelectorClientPeriode item={adminShopItem} periode="month"/>
         <AdminShopSelectorClientPeriode item={adminShopItem} periode="season"/>
       </CardHeader>
-      </Card>
+    </Card>
   )
 }

@@ -6,7 +6,7 @@ type State = {
 }
 
 type Actions = {
-  setProfileInfo: (userInfo: DiscordUser| null) => void,
+  setProfileInfo: (userInfo: DiscordUser | null) => void,
 }
 
 const initialState: State = {

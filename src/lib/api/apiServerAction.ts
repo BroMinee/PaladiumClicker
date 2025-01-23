@@ -165,7 +165,7 @@ export async function registerUserToEvent(uuid: string, discord_name: string | u
   }), 0);
 }
 
-export async function isAuthenticate() : Promise<DiscordUser | null> {
+export async function isAuthenticate(): Promise<DiscordUser | null> {
   const cookieStore = cookies();
   const allCookies = cookieStore.getAll();
 

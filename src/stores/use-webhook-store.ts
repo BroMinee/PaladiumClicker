@@ -62,23 +62,23 @@ export const useWebhookStore = create<State & Actions>(
   (set) => ({
     ...initialState,
     setEmbed: (embed) => {
-      if(embed.length <= 4096)
+      if (embed.length <= 4096)
         set({ embed });
     },
     setContent: (content) => {
-      if(content.length <= 2000)
+      if (content.length <= 2000)
         set({ content });
     },
     setFields: (fields) => set({ fields }),
     setTitle: (title) => {
-      if(title.length <= 256)
+      if (title.length <= 256)
         set({ title });
     },
     setTitleUrl: (titleUrl) => set({ titleUrl }),
     setEmbedImg: (embedImg) => set({ embedImg }),
     setItemSelected: (itemSelected) => set({ itemSelected }),
     setEventSelected: (eventSelected) => set({ eventSelected }),
-    setThreshold : (threshold) => set({ threshold }),
+    setThreshold: (threshold) => set({ threshold }),
     setThresholdCondition: (thresholdCondition) => set({ thresholdCondition }),
     setAdminShopItemSelected: (adminShopItemSelected) => set({ adminShopItemSelected }),
     setCurrentWebHookType: (currentWebHookType) => set({ currentWebHookType }),

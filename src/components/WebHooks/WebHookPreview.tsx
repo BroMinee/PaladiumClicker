@@ -196,9 +196,9 @@ export function CreateNewWebHookButtonKnowingUrl({ webhookDiscord, text }: {
   }
 
   return (
-      <Button onClick={handleNew}>
-        {text}
-      </Button>
+    <Button onClick={handleNew}>
+      {text}
+    </Button>
   )
 }
 

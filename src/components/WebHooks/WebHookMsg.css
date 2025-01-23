@@ -162,8 +162,7 @@
 }
 
 
-.input-number
-{
+.input-number {
     border: 1px solid hsl(var(--primary));
 }
 

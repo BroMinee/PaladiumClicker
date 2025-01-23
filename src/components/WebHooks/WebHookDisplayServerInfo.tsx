@@ -8,7 +8,7 @@ import { toast } from "sonner";
 export function DisplayServerBox({ guildId, channelId, guildIdToServerName, children }:
                                    {
                                      guildId: string,
-                                      channelId: string,
+                                     channelId: string,
                                      guildIdToServerName: Record<string, string>,
                                      children: React.ReactNode
                                    }) {
@@ -22,15 +22,12 @@ export function DisplayServerBox({ guildId, channelId, guildIdToServerName, chil
   }, [])
 
   async function handleEdit() {
-    const res = await editWebhookGuildNameServerAction(guildId, channelId,guildName);
+    const res = await editWebhookGuildNameServerAction(guildId, channelId, guildName);
     console.log(res);
-    if(res.succeeded)
-    {
+    if (res.succeeded) {
       setDefaultName(guildName);
       toast.success(res.msg);
-    }
-    else
-    {
+    } else {
       toast.error(res.msg);
     }
   }
@@ -69,20 +66,18 @@ export function DisplayChannelBox({ channelId, channelIdToChannelName, guildId, 
   }, [])
 
   async function handleEdit() {
-    const res = await editWebhookChannelNameServerAction(guildId,channelId,channelName);
+    const res = await editWebhookChannelNameServerAction(guildId, channelId, channelName);
     console.log(res);
-    if(res.succeeded)
-    {
+    if (res.succeeded) {
       setDefaultName(channelName);
       toast.success(res.msg);
-    }
-    else
+    } else
       toast.error(res.msg);
   }
 
   return (<div className="px-4 border-2 py-2 mb-2 border-secondary-foreground rounded-xl">
     <div className="flex flex-row gap-2 pb-2">
-    <h3 className="font-bold text-l">Channel:</h3>
+      <h3 className="font-bold text-l">Channel:</h3>
       <input
         id="server_name"
         type="text"
@@ -90,7 +85,7 @@ export function DisplayChannelBox({ channelId, channelIdToChannelName, guildId, 
         className="text-left pl-2 rounded-sm font-bold text-sm flex items-center justify-center w-fit [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
         onChange={(e) => setChannelName(e.target.value)}
       />
-      {channelName !== defaultName && <Button size="icon" onClick={handleEdit} ><FaSave size={18}/></Button>}
+      {channelName !== defaultName && <Button size="icon" onClick={handleEdit}><FaSave size={18}/></Button>}
     </div>
     <div className="grid grid-cols-2 gap-2">
       {children}

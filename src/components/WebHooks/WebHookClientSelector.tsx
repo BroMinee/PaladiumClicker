@@ -23,15 +23,15 @@ export function WebHookSelectorClientItem() {
       </Button>
       {
         validWebHookType.map((webhookType, index) => (
-        <Button
-          key={webhookType+index}
-          onClick={() => {
-            setCurrentWebHookType(webhookType);
-          }}
-          disabled={webhookType === currentWebHookType}
-        >
-          {getTextFromWebHookType(webhookType)}
-        </Button>))
+          <Button
+            key={webhookType + index}
+            onClick={() => {
+              setCurrentWebHookType(webhookType);
+            }}
+            disabled={webhookType === currentWebHookType}
+          >
+            {getTextFromWebHookType(webhookType)}
+          </Button>))
       }
     </div>
   )

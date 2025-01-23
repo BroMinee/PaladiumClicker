@@ -3,11 +3,15 @@ import { Sheet, SheetContent, SheetHeader, SheetTrigger } from "@/components/ui/
 import { FaBars, FaCalculator, FaClipboardList, FaKey, FaRegUser, FaShoppingBasket } from "react-icons/fa";
 import constants from "@/lib/constants.ts";
 import { LogoClient } from "@/components/ui/logoClient.tsx";
-import LinkClient, { CategorieDisplay, GiveawayFakeLink, NotificationWebSite } from "@/components/NavBar/NavBarClient.tsx";
+import LinkClient, {
+  CategorieDisplay,
+  GiveawayFakeLink,
+  NotificationWebSite
+} from "@/components/NavBar/NavBarClient.tsx";
 import { GrOptimize } from "react-icons/gr";
 import { LuShoppingCart } from "react-icons/lu";
-import {  PiRankingBold } from "react-icons/pi";
-import {  GiPayMoney, GiStoneCrafting } from "react-icons/gi";
+import { PiRankingBold } from "react-icons/pi";
+import { GiPayMoney, GiStoneCrafting } from "react-icons/gi";
 import { ImNewspaper } from "react-icons/im";
 import { IoMdInformationCircleOutline, IoMdStopwatch } from "react-icons/io";
 import React from "react";
@@ -54,7 +58,7 @@ function NavBarContent() {
             <LuShoppingCart size={24}/>
           </LinkClient>
           <LinkClient path={constants.moneyRanking}>
-            <PiRankingBold  size={24}/>
+            <PiRankingBold size={24}/>
           </LinkClient>
         </CategorieDisplay>
         <CategorieDisplay name={"Outils"} defaultOpen={true}>

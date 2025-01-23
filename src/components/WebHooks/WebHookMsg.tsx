@@ -35,7 +35,7 @@ export function GenerateEmbedPreview(footer: string) {
         <div className="top-right">
           <Image src={`https://palatracker.bromine.fr/AH_img/${itemSelected.img}`} alt="icon" height={24} width={24}
                  unoptimized/>
-      </div>
+        </div>
       }
       {currentWebHookType === WebHookType.EventPvp && <div className="top-right">
         <Image src={`https://palatracker.bromine.fr/${getIconNameFromEventType(eventSelected)}`} alt="icon" height={24}
@@ -320,12 +320,13 @@ export function GenerateWebHookContent() {
           <Image className="avatar"
                  height={40}
                  width={40}
-               src="https://palatracker.bromine.fr/stonks_clic.png"
+                 src="https://palatracker.bromine.fr/stonks_clic.png"
                  alt="" unoptimized/>
           <div className="header-text">
             <span className="title">PalaTracker Alert</span>
             <span className="app-badge">APP</span>
-            <time className="timestamp" dateTime="2025-01-13T18:54:47.235Z" suppressHydrationWarning>{new Date().toLocaleString()}</time>
+            <time className="timestamp" dateTime="2025-01-13T18:54:47.235Z"
+                  suppressHydrationWarning>{new Date().toLocaleString()}</time>
           </div>
         </div>
         <div className="message-content">

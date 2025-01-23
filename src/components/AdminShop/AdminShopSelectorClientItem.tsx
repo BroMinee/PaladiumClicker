@@ -2,11 +2,7 @@
 
 import { AdminShopItem, AdminShopPeriode } from "@/types";
 import { useRouter, useSearchParams } from "next/navigation";
-import {
-  adminShopItemToUserFriendlyText,
-  generateAdminShopUrl,
-  getImagePathFromAdminShopType,
-} from "@/lib/misc.ts";
+import { adminShopItemToUserFriendlyText, generateAdminShopUrl, getImagePathFromAdminShopType, } from "@/lib/misc.ts";
 import { cn } from "@/lib/utils.ts";
 import Image from "next/image";
 import HoverText from "@/components/ui/hovertext.tsx";
@@ -23,7 +19,7 @@ export function AdminShopSelectorClientItem({ item, periode, adminShopPage }: {
   const router = useRouter();
   const searchParams = useSearchParams();
 
-  const {setAdminShopItemSelected} = useWebhookStore();
+  const { setAdminShopItemSelected } = useWebhookStore();
 
 
   let imgPath = getImagePathFromAdminShopType(item);

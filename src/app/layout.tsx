@@ -36,7 +36,7 @@ export default function RootLayout({
           </header>
           <main className="flex-1 container py-4 pb-8 mx-auto overflow-x-hidden">
             <AuthGetWrapper/>
-              {children}
+            {children}
             <Toaster/>
           </main>
         </div>

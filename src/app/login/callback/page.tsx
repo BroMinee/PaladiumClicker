@@ -9,8 +9,7 @@ export default async function WebHooksPage() {
 
   const discordUser = await getProfileFromCookies();
 
-  if(!discordUser)
-  {
+  if (!discordUser) {
     return "User not authenticated"
   }
 
