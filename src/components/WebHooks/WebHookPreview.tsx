@@ -86,23 +86,29 @@ export function WebHookPreview({ webHookAlert }: { webHookAlert: WebHookAlert })
 
   return (
     <div className="alert-container w-full !border-0">
-      <div className={cn("header-text flex flex-row !justify-start", !displayIcon && "ml-[32px]")}>
-        {(webHookAlert.type === WebHookType.market || webHookAlert.type === WebHookType.adminShop) && webHookAlert.item &&
-          <Image src={`/AH_img/${webHookAlert.item.img}`} className="object-cover pixelated" alt="item icon" width={32}
-                 height={32} unoptimized/>
-        }
-        {webHookAlert.type === WebHookType.EventPvp && webHookAlert.enumEvent &&
-          <Image src={`https://palatracker.bromine.fr/${getIconNameFromEventType(webHookAlert.enumEvent)}`} alt="icon"
-                 height={32} width={32} unoptimized/>
-        }
-        <span className="app-badge">{getTextFromWebHookType(webHookAlert.type)}</span>
-        <span className="title">{webHookAlert.title}</span>
-        <Button size="icon" onClick={() => handleEdit(webHookAlert)}>
-          <FiEdit/>
-        </Button>
-        <Button size="icon" className="bg-red-600" onClick={() => handleDelete(webHookAlert)}>
-          <FaTrashCan/>
-        </Button>
+      <div className="header-text flex flex-row">
+        <div className={cn("flex flex-row items-center gap-2 w-full justify-start", !displayIcon && "ml-[40px]")}>
+          {(webHookAlert.type === WebHookType.market || webHookAlert.type === WebHookType.adminShop) && webHookAlert.item &&
+            <Image src={`/AH_img/${webHookAlert.item.img}`} className="object-cover pixelated" alt="item icon"
+                   width={32}
+                   height={32} unoptimized/>
+          }
+          {webHookAlert.type === WebHookType.EventPvp && webHookAlert.enumEvent &&
+            <Image src={`https://palatracker.bromine.fr/${getIconNameFromEventType(webHookAlert.enumEvent)}`} alt="icon"
+                   height={32} width={32} unoptimized/>
+          }
+          <span className="app-badge">{getTextFromWebHookType(webHookAlert.type)}</span>
+          <span className="title">{webHookAlert.title}</span>
+        </div>
+        <div className="flex flex-row gap-1">
+          <Button size="icon" onClick={() => handleEdit(webHookAlert)}>
+            <FiEdit/>
+          </Button>
+          <Button size="icon" className="bg-red-600" onClick={() => handleDelete(webHookAlert)}>
+            <FaTrashCan/>
+          </Button>
+        </div>
+
       </div>
       <span className="embed-footer">
         Serveur id: {webHookAlert.webhook.guild_id} • Channel id: {webHookAlert.webhook.channel_id}
@@ -130,12 +136,9 @@ export function CreateNewWebHookButtonKnowingUrl({ webhookDiscord, text }: {
   }
 
   return (
-    <div className="alert-container w-full flex flex-col !border-0 justify-center items-center">
       <Button onClick={handleNew}>
         {text}
       </Button>
-    </div>
-
   )
 }
 

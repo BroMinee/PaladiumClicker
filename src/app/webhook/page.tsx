@@ -85,7 +85,7 @@ export default async function WebHooksPage() {
                               ))
                             }
                           <CreateNewWebHookButtonKnowingUrl
-                            text={`Créer une alerte sur le channel "${channelIdToChannelName[channelId]}" du serveur "${guildIdToServerName[guildId]}"`}
+                            text={`Créer une alerte sur ce channel.`}
                             webhookDiscord={webHookDiscord.find(w => w.guild_id === guildId && w.channel_id === channelId)}/>
                         </DisplayChannelBox>
                       ))

@@ -37,15 +37,18 @@ export function DisplayServerBox({ guildId, channelId, guildIdToServerName, chil
 
   return (<div className="px-4 border-2 py-2 border-secondary-foreground">
     <div>
-      <h2 className="font-bold text-xl">Serveur:
+      <div className="flex flex-row gap-2 pb-2">
+        <h2 className="font-bold text-xl">Serveur:</h2>
         <input
           id="server_name"
           type="text"
+          className="text-left pl-2 rounded-sm font-bold text-sm flex items-center justify-center w-fit [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
           value={guildName}
           onChange={(e) => setGuildName(e.target.value)}
         />
-        {guildName !== defaultName && <Button size="icon" onClick={handleEdit} ><FaSave/></Button>}
-      </h2>
+        {guildName !== defaultName && <Button size="icon" onClick={handleEdit}><FaSave size={18}/></Button>}
+      </div>
+
       {children}
     </div>
   </div>)
@@ -77,16 +80,18 @@ export function DisplayChannelBox({ channelId, channelIdToChannelName, guildId, 
       toast.error(res.msg);
   }
 
-  return (<div className="px-4 border-2 py-2 mb-2 border-primary">
-    <h3 className="font-bold text-l">Channel:
+  return (<div className="px-4 border-2 py-2 mb-2 border-secondary-foreground">
+    <div className="flex flex-row gap-2 pb-2">
+    <h3 className="font-bold text-l">Channel:</h3>
       <input
         id="server_name"
         type="text"
         value={channelName}
+        className="text-left pl-2 rounded-sm font-bold text-sm flex items-center justify-center w-fit [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
         onChange={(e) => setChannelName(e.target.value)}
       />
-      {channelName !== defaultName && <Button size="icon" onClick={handleEdit} ><FaSave/></Button>}
-    </h3>
+      {channelName !== defaultName && <Button size="icon" onClick={handleEdit} ><FaSave size={18}/></Button>}
+    </div>
     <div className="grid grid-cols-2 gap-2">
       {children}
     </div>
