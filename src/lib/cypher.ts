@@ -1,8 +1,8 @@
 'use server'
 import 'server-only';
 import { checkAnswerPalaAnimationType, KeyDownTimestampType } from "@/types";
-import { API_PALATRACKER } from "@/lib/api/apiPalaTracker.ts";
 import { fetchPostWithHeader, fetchWithHeader } from "@/lib/api/misc.ts";
+import { API_PALATRACKER } from "@/lib/constants.ts";
 
 function base64ToUint8Array(base64String: string): Uint8Array {
   // Decode the base64 string into a binary string
