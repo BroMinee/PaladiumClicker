@@ -184,9 +184,9 @@ export async function isAuthenticate() {
   return null;
 }
 
-export async function createWebHookServerAction(body: WebHookCreate): Promise<[boolean, string]> {
+export async function createWebHookServerAction(body: WebHookCreate): Promise<{ succeeded: boolean, msg: string }> {
   if (!await isAuthenticate()) {
-    return [false, "Not authenticated"];
+    return { succeeded: false, msg: "Not authenticated" };
   }
   // Check that the request is valid
   switch (body.type) {
@@ -201,17 +201,122 @@ export async function createWebHookServerAction(body: WebHookCreate): Promise<[b
     case WebHookType.market:
       break;
     default:
-      return [false, "Type de WebHook inconnu"]
+      return { succeeded: false, msg: "Type de WebHook inconnu" }
   }
 
   console.log("Creating WebHook", body)
 
-  // TODO defined return type
   const r = await fetchPostWithHeader<{
     succeeded: boolean,
     msg: string
-  }>(`http://localhost:3001/v1/webhook/create`, JSON.stringify(body), 0).catch((e) => {
+  }>(`${API_PALATRACKER}/v1/webhook/create`, JSON.stringify(body), 0).catch((e) => {
     return { msg: JSON.stringify(e.message), succeeded: false };
   })
-  return [r.succeeded, r.msg];
+  return { succeeded: r.succeeded, msg: r.msg };
+}
+
+export async function editWebHookServerAction(body: WebHookCreate): Promise<{ succeeded: boolean, msg: string }> {
+  if (!await isAuthenticate()) {
+    return { succeeded: false, msg: "Not authenticated" };
+  }
+  // Check that the request is valid
+  switch (body.type) {
+    case WebHookType.QDF:
+      break;
+    case WebHookType.EventPvp:
+      break;
+    case WebHookType.statusServer:
+      break;
+    case WebHookType.adminShop:
+      break;
+    case WebHookType.market:
+      break;
+    default:
+      return { succeeded: false, msg: "Type de WebHook inconnu" }
+  }
+
+  const r = await fetchPostWithHeader<{
+    succeeded: boolean,
+    msg: string
+  }>(`${API_PALATRACKER}/v1/webhook/edit`, JSON.stringify(body), 0).catch((e) => {
+    return { msg: JSON.stringify(e.message), succeeded: false };
+  })
+  return { succeeded: r.succeeded, msg: r.msg };
+}
+
+export async function deleteWebhookServerAction(webHookAlertId: number): Promise<{ succeeded: boolean, msg: string }> {
+  if (!await isAuthenticate()) {
+    return { succeeded: false, msg: "Not authenticated" };
+  }
+
+
+  const r = await fetchPostWithHeader<{
+    succeeded: boolean,
+    msg: string
+  }>(`${API_PALATRACKER}/v1/webhook/delete`, JSON.stringify({ id: webHookAlertId }), 0).catch((e) => {
+    return { msg: JSON.stringify(e.message), succeeded: false };
+  })
+  return { succeeded: r.succeeded, msg: r.msg };
+}
+
+type WebHookEditChannelName =
+  {
+    channel_id: string,
+    guild_id: string,
+    channel_name: string,
+  }
+
+export async function editWebhookChannelNameServerAction(guild_id: string, channel_id: string, channel_name: string): Promise<{
+  succeeded: boolean,
+  msg: string
+}> {
+  if (!await isAuthenticate()) {
+    return { succeeded: false, msg: "Not authenticated" };
+  }
+
+  const body: WebHookEditChannelName = {
+    channel_id: channel_id,
+    guild_id: guild_id,
+    channel_name: channel_name
+  }
+
+
+  const r = await fetchPostWithHeader<{
+    succeeded: boolean,
+    msg: string
+  }>(`${API_PALATRACKER}/v1/webhook/channel/edit`, JSON.stringify(body), 0).catch((e) => {
+    return { msg: JSON.stringify(e.message), succeeded: false };
+  })
+  return { succeeded: r.succeeded, msg: r.msg };
+}
+
+type WebHookEditGuildName =
+  {
+    channel_id: string,
+    guild_id: string,
+    guild_name: string,
+  }
+
+export async function editWebhookGuildNameServerAction(guild_id: string, channel_id: string, guild_name: string): Promise<{
+  succeeded: boolean,
+  msg: string
+}> {
+  if (!await isAuthenticate()) {
+    return { succeeded: false, msg: "Not authenticated" };
+  }
+
+  const body: WebHookEditGuildName = {
+    channel_id: channel_id,
+    guild_id: guild_id,
+    guild_name: guild_name
+  }
+
+
+  const r = await fetchPostWithHeader<{
+    succeeded: boolean,
+    msg: string
+  }>(`${API_PALATRACKER}/v1/webhook/guild/edit`, JSON.stringify(body), 0).catch((e) => {
+    return { msg: JSON.stringify(e.message), succeeded: false };
+  })
+  return { succeeded: r.succeeded, msg: r.msg };
 }

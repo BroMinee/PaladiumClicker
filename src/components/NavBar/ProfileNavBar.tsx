@@ -14,8 +14,8 @@ export function ProfileNavBar() {
       <Button className="flex justify-center items-center space-x-2" variant="ghost">
         <Image src={ppUrl} alt="profile picture" width={32} height={32} className="rounded-full"/>
         <div className="flex justify-start flex-col items-start">
-          <p className="text-sm leading-5 text-white">{profileInfo.global_name || profileInfo.username}</p>
-          <p className="text-xs leading-3 text-gray-300">TODO username Minecraft</p>
+          <p className="text-sm leading-5">{profileInfo.global_name || profileInfo.username}</p>
+          {/*<p className="text-xs leading-3 text-gray-300">TODO username Minecraft</p>*/}
         </div>
       </Button>
     </a>

@@ -2,8 +2,13 @@ import { Card, CardContent, CardHeader } from "@/components/ui/card.tsx";
 import React from "react";
 import { AuthForceWrapper } from "@/components/Auth/AuthForceWrapper.tsx";
 import { getWebHookDiscordFromCookies, getWebHookFromCookies } from "@/lib/api/apiPalaTracker.ts";
-import { WebHookPreview } from "@/components/WebHooks/WebHookPreview.tsx";
+import {
+  CreateNewWebHookButtonKnowingUrl,
+  CreateNewWebHookButtonWithoutKnowing,
+  WebHookPreview
+} from "@/components/WebHooks/WebHookPreview.tsx";
 import { WebHookAlert } from "@/types";
+import { DisplayChannelBox, DisplayServerBox } from "@/components/WebHooks/WebHookDisplayServerInfo.tsx";
 
 
 export async function generateMetadata() {
@@ -25,9 +30,6 @@ export default async function WebHooksPage() {
   let webHookDiscord = await getWebHookDiscordFromCookies()
   const guildIdToServerName: Record<string, string> = {};
   const channelIdToChannelName: Record<string, string> = {};
-
-  // TODO check that unique key is correctly respected
-
 
   const groups: Record<string, Record<string, WebHookAlert[]>> = webHookDiscord.reduce((acc, webhook) => {
     guildIdToServerName[webhook.guild_id] = webhook.server_name;
@@ -64,13 +66,16 @@ export default async function WebHooksPage() {
             "Vous n'avez pas de webhooks définis. Créez-en un dès maintenant !"
           }
           <div className="flex flex-col gap-12">
+            <CreateNewWebHookButtonWithoutKnowing/>
             {
               groups && Object.keys(groups).map((guildId, index) => (
                 <DisplayServerBox key={`${guildId}-${index}`} guildId={guildId} guildIdToServerName={guildIdToServerName}
+                                  channelId={Object.keys(groups[guildId])[0]}
                                   >
                     {
                       Object.keys(groups[guildId]).map((channelId, index) => (
                         <DisplayChannelBox key={`${guildId}-${channelId}-${index}`} channelId={channelId}
+                                           guildId={guildId}
                                            channelIdToChannelName={channelIdToChannelName}
                                            >
                             {
@@ -79,7 +84,9 @@ export default async function WebHooksPage() {
                                 <WebHookPreview key={`webhook-${index}`} webHookAlert={webhook}/>
                               ))
                             }
-                            Creer un webhook
+                          <CreateNewWebHookButtonKnowingUrl
+                            text={`Créer une alerte sur le channel "${channelIdToChannelName[channelId]}" du serveur "${guildIdToServerName[guildId]}"`}
+                            webhookDiscord={webHookDiscord.find(w => w.guild_id === guildId && w.channel_id === channelId)}/>
                         </DisplayChannelBox>
                       ))
                     }
@@ -93,29 +100,3 @@ export default async function WebHooksPage() {
   );
 };
 
-function DisplayServerBox({ guildId, guildIdToServerName, children }:
-                            {
-                              guildId: string,
-                              guildIdToServerName: Record<string, string>,
-                              children: React.ReactNode
-                            }) {
-  return (<div className="px-4 border-2 py-2 border-secondary-foreground">
-    <div>
-      <h2 className="font-bold text-xl">Serveur: {guildIdToServerName[guildId]}</h2>
-      {children}
-    </div>
-  </div>)
-}
-
-function DisplayChannelBox({ channelId, channelIdToChannelName, children }: {
-  channelId: string,
-  channelIdToChannelName: Record<string, string>,
-  children: React.ReactNode
-}) {
-  return (<div className="px-4 border-2 py-2 mb-2 border-primary">
-    <h3 className="font-bold text-l">Channel: {channelIdToChannelName[channelId]}</h3>
-    <div className="grid grid-cols-2 gap-2">
-      {children}
-    </div>
-  </div>)
-}

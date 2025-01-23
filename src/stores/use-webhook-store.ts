@@ -16,6 +16,8 @@ type State = {
   currentWebHookType: WebHookType,
   webHookUrl: string,
   helpFormat: boolean,
+  edit: boolean,
+  idAlert: number | null,
 }
 
 type Actions = {
@@ -33,6 +35,8 @@ type Actions = {
   setCurrentWebHookType: (currentWebHookType: WebHookType) => void,
   setWebHookUrl: (webHookUrl: string) => void,
   setHelpFormat: (helpForm: boolean) => void,
+  setEdit: (value: boolean) => void,
+  setIdAlert: (idAlert: number | null) => void,
 }
 
 const initialState: State = {
@@ -50,6 +54,8 @@ const initialState: State = {
   currentWebHookType: WebHookType.QDF,
   webHookUrl: "",
   helpFormat: false,
+  edit: false,
+  idAlert: null,
 }
 
 export const useWebhookStore = create<State & Actions>(
@@ -78,5 +84,7 @@ export const useWebhookStore = create<State & Actions>(
     setCurrentWebHookType: (currentWebHookType) => set({ currentWebHookType }),
     setWebHookUrl: (webHookUrl) => set({ webHookUrl }),
     setHelpFormat: (helpFormat) => set({ helpFormat }),
+    setEdit: (edit) => set({ edit }),
+    setIdAlert: (idAlert) => set({ idAlert }),
   })
 );

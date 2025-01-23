@@ -674,6 +674,7 @@ export type WebhookDiscord = {
 }
 
 export type WebHookAlert = {
+  id: number;
   webhook: WebhookDiscord;
   content: string | null;
   embed: string | null;
@@ -690,6 +691,7 @@ export type WebHookAlert = {
 }
 
 export type WebHookCreate = {
+  id: number | null;
   url: string,
   content: string | null;
   embed: string | null;
@@ -702,3 +704,100 @@ export type WebHookCreate = {
     WebHookThresholdCondition
     | null;
 }
+
+export const getItemFromName = (itemName: string) => {
+  switch (itemName) {
+    case 'amethyst-ingot':
+      return 'amethyst-ingot';
+    case 'apple':
+      return 'apple';
+    case 'beefCooked':
+      return 'cooked-beef';
+    case 'blazeRod':
+      return 'blaze-rod';
+    case 'bone':
+      return 'bone';
+    case 'carrots':
+      return 'carrot';
+    case 'coal':
+      return 'coal';
+    case 'diamond':
+      return 'diamond';
+    case 'dyePowder-black':
+      return 'dye';
+    case 'egg':
+      return 'egg';
+    case 'emerald':
+      return 'emerald';
+    case 'enderPearl':
+      return 'ender-pearl';
+    case 'feather':
+      return 'feather';
+    case 'fermentedSpiderEye':
+      return 'fermented-spider-eye';
+    case 'findium':
+      return 'findium';
+    case 'flint':
+      return 'flint';
+    case 'ghastTear':
+      return 'ghast-tear';
+    case 'ingotGold':
+      return 'gold-ingot';
+    case 'ingotIron':
+      return 'iron-ingot';
+    case 'leather':
+      return 'leather';
+    case 'melon':
+      return 'melon';
+    case 'netherquartz':
+      return 'quartz';
+    case 'netherStalkSeeds':
+      return 'nether-wart';
+    case 'paladium-ingot':
+      return 'paladium-ingot';
+    case 'potato':
+      return 'potato';
+    case 'redstone':
+      return 'redstone';
+    case 'reeds':
+      return 'reeds';
+    case 'seeds':
+      return 'wheat-seeds';
+    case 'skull-wither':
+      return 'skull-1';
+    case 'slimeball':
+      return 'slime-ball';
+    case 'spiderEye':
+      return 'spider-eye';
+    case 'string':
+      return 'string';
+    case 'sulphur':
+      return 'gunpowder';
+    case 'tile-cactus':
+      return 'cactus';
+    case 'tile-cloth-white':
+      return 'wool';
+    case 'tile-dirt-default':
+      return 'dirt';
+    case 'tile-hellsand':
+      return 'soul-sand';
+    case 'tile-log-oak':
+      return 'log';
+    case 'tile-mushroom':
+      return 'red-mushroom'; // Assumes red-mushroom by default
+    case 'tile-obsidian':
+      return 'obsidian';
+    case 'tile-sand-default':
+      return 'sand';
+    case 'tile-stonebrick':
+      return 'cobblestone';
+    case 'titane-ingot':
+      return 'titane-ingot';
+    case 'yellowDust':
+      return 'glowstone-dust';
+    case 'tile-passifwither-head':
+      return 'tile-passifwither-head';
+    default:
+      return 'paladium-ingot';
+  }
+};

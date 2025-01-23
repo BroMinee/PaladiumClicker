@@ -5,7 +5,6 @@ import React from "react";
 import { getProfileFromCookies } from "@/lib/api/apiPalaTracker.ts";
 
 
-
 export default async function WebHooksPage() {
 
   const discordUser = await getProfileFromCookies();
@@ -24,6 +23,5 @@ export default async function WebHooksPage() {
         <WebHookInputClientItem/>
       </CardContent>
     </Card>
-  )
-    ;
+  );
 };

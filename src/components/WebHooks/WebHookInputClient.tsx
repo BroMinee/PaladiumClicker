@@ -24,8 +24,9 @@ import {
 } from "@/components/WebHooks/WebHookRecap.tsx";
 import { MarketInput } from "@/components/WebHooks/WebHookMarket/WebHookClient.tsx";
 import { AdminShopInput, EventInput } from "@/components/WebHooks/WebHookAdminShop/WebHookClient.tsx";
-import { createWebHookServerAction } from "@/lib/api/apiServerAction.ts";
+import { createWebHookServerAction, editWebHookServerAction } from "@/lib/api/apiServerAction.ts";
 import { toast } from "sonner";
+import { useRouter } from "next/navigation";
 
 
 export function WebHookInputClientItem() {
@@ -42,6 +43,7 @@ export function WebHookInputClientItem() {
     currentWebHookType,
     thresholdCondition,
     eventSelected,
+    edit,
     setThresholdCondition
   } = useWebhookStore();
 
@@ -58,12 +60,18 @@ export function WebHookInputClientItem() {
 
 
   useEffect(() => {
-    setContent(defaultWebHookContentFromType[currentWebHookType]);
-    setEmbed(defaultWebHookEmbedFromType[currentWebHookType]);
-    setFields(defaultWebHookFieldsFromType[currentWebHookType]);
-    setTitle(defaultWebHookTitleFromType[currentWebHookType]);
     setTitleUrl(defaultWebhookTitleUrlFromType[currentWebHookType]);
     setEmbedImg(defaultWebhookEmbedImgFromType[currentWebHookType]);
+    setFields(defaultWebHookFieldsFromType[currentWebHookType]);
+
+
+    if (edit)
+      return;
+
+
+    setContent(defaultWebHookContentFromType[currentWebHookType]);
+    setEmbed(defaultWebHookEmbedFromType[currentWebHookType]);
+    setTitle(defaultWebHookTitleFromType[currentWebHookType]);
     if (currentWebHookType === "market")
       setItemSelected({
         value: "endium-sword",
@@ -106,16 +114,26 @@ function WebHookEditor() {
     thresholdCondition,
     title,
     adminShopItemSelected,
+    edit,
+    idAlert,
     setEmbed,
     setContent,
-    setWebHookUrl,
+    setTitle,
     helpFormat,
-    setHelpFormat
+    setHelpFormat,
   } = useWebhookStore();
+
+  const router = useRouter();
+
+  if (!IsValidWebHookUrl(webHookUrl)) {
+    toast.error("L'URL du webhook est invalide");
+    router.push("/webhooks");
+  }
 
 
   async function createWebHook() {
     const body: WebHookCreate = {
+      id: edit ? idAlert : null,
       url: webHookUrl,
       content: content,
       embed: embed,
@@ -126,13 +144,19 @@ function WebHookEditor() {
       title: title,
       type: currentWebHookType,
     }
-    const [b, msg] = await createWebHookServerAction(body);
-    if (!b) {
-      toast.error(msg);
+
+    let res: { succeeded: boolean, msg: string };
+    if (edit) {
+      res = await editWebHookServerAction(body);
     } else {
-      toast.success("WebHook créé avec succès");
+      res = await createWebHookServerAction(body);
     }
 
+    if (!res.succeeded) {
+      toast.error(res.msg);
+    } else {
+      toast.success(res.msg);
+    }
   }
 
   return (
@@ -140,20 +164,17 @@ function WebHookEditor() {
       <Recap/>
       <AdaptEditor/>
       <div className="flex flex-col gap-2 w-full">
-        <label htmlFor="url">URL du WebHook <span
-          className={cn("text-gray-500", !IsValidWebHookUrl(webHookUrl) && "animate-blink")}>
-          {IsValidWebHookUrl(webHookUrl) ? "URL possiblement valide" : "URL Invalide"}
-                </span></label>
+        <label htmlFor="url">URL du WebHook</label>
         <div className="flex flex-row gap-2 h-fit">
           <input
             id="url"
-            value={webHookUrl}
+            value={webHookUrl.slice(0, 60) + "..."}
             className="w-full message-input"
-            placeholder={"https://discord.com/api/webhooks/..."}
-            onChange={(e) => setWebHookUrl(e.target.value)}
+            placeholder={"Ceci ne devrait pas être vide :/"}
+            disabled={true}
           />
           <Button onClick={createWebHook} className="h-full">
-            Enregistrer
+            {edit ? "Enregister les modifications" : "Créer"}
           </Button>
         </div>
       </div>
@@ -189,6 +210,7 @@ function WebHookEditor() {
         </div>
       }
 
+
       <div className="flex flex-col gap-2 w-full">
         <div className="flex flex-row gap-2 items-center">
           <label htmlFor="content">Contenu du message <span
@@ -204,13 +226,22 @@ function WebHookEditor() {
         />
       </div>
       <div className="flex flex-col gap-2">
+        <label htmlFor="embed">Contenu du titre{" "}<span
+          className={cn("text-gray-500", title.length === 256 && "animate-blink")}>{title.length}/256</span></label>
+        <textarea
+          className="message-input"
+          id="title"
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+        />
+      </div>
+      <div className="flex flex-col gap-2">
         <label htmlFor="embed">Contenu de l&apos;embed <span
-          className={cn("text-gray-500", embed.length === 4096 && "animate-blink")}>{embed.length}/4096{currentWebHookType === WebHookType.statusServer && " - Désactivé"}</span></label>
+          className={cn("text-gray-500", embed.length === 4096 && "animate-blink")}>{embed.length}/4096</span></label>
         <textarea
           className="message-input"
           id="embed"
           value={embed}
-          disabled={currentWebHookType === WebHookType.statusServer}
           onChange={(e) => setEmbed(e.target.value)}
         />
       </div>
