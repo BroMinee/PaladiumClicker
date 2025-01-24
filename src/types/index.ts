@@ -621,7 +621,8 @@ export type ModelName =
 export type NotificationWebSiteResponse =
   {
     title: string,
-    content: string
+    content: string,
+    url: string,
   }
 
 export enum WebHookType {

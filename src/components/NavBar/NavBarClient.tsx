@@ -4,7 +4,7 @@ import { getLinkFromUrl, safeJoinPaths } from "@/lib/misc.ts";
 import { cn } from "@/lib/utils.ts";
 import { usePlayerInfoStore } from "@/stores/use-player-info-store.ts";
 import React, { ReactNode, useEffect, useState } from "react";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import constants, { PathValid } from "@/lib/constants.ts";
 import { FaAngleDown, FaAngleUp } from "react-icons/fa";
 import { useNotificationStore } from "@/stores/use-notifications-store.ts";
@@ -278,38 +278,50 @@ export function RenderEvent({ newNotification, children }: { newNotification: bo
 }
 
 export function NotificationWebSite() {
-  const [msg, setMsg] = useState<NotificationWebSiteResponse | null>(null);
+  const [notif, setNotif] = useState<NotificationWebSiteResponse | null>(null);
   const [isHovered, setIsHovered] = useState(false);
+
+  const router = useRouter();
 
   useEffect(() => {
     getNotificationWebSite().then((msg_) => {
       if (msg_)
-        setMsg(msg_);
+        setNotif(msg_);
     })
   }, []);
 
-  if (!msg)
+  function onClick() {
+    if (notif && notif.url !== "") {
+      router.push(notif.url);
+    }
+  }
+
+  if (!notif)
     return null;
 
   return (
-    <div
-      className="w-full text-center overflow-hidden transition-all duration-500 rounded-t-md"
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-      style={{
-        background: '#00A3FF',
-        boxShadow: "0 0 10px 0 #00A3FF",
-        maxHeight: isHovered ? "200px" : "28px",
-      }}
-    >
-      <p className="text-white text-lg font-bold">{msg.title}</p>
-      <p
-        className={cn("text-white text-base transition-opacity duration-500  pb-2",
-          isHovered ? "opacity-100 mx-2" : "opacity-0")
-        }
+    <div className="relative">
+      <div
+        className={cn("absolute left-0 bottom-0 w-full text-center overflow-hidden transition-all duration-500 rounded-t-md", isHovered ? "z-10" : "z-0")}
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
+        onClick={onClick}
+        style={{
+          background: '#00A3FF',
+          boxShadow: "0 0 10px 0 #00A3FF",
+          maxHeight: isHovered ? "200px" : "28px",
+        }}
       >
-        {msg.content}
-      </p>
+        <p className="text-white text-lg font-bold">{notif.title}</p>
+        <p
+          className={cn("text-white text-base transition-opacity duration-500 pb-2",
+            isHovered ? "opacity-100 mx-2" : "opacity-0")
+          }
+        >
+          {notif.content}
+        </p>
+      </div>
     </div>
+
   );
 }
