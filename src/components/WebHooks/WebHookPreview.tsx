@@ -144,7 +144,7 @@ export function WebHookPreview({ webHookAlert, groups, setGroups }: {
   return (
     <div className="alert-container w-full !border-0">
       <div className="header-text flex flex-row">
-        <div className="flex flex-row items-center gap-2 w-full justify-start">
+        <div className="flex flex-col sm:flex-row items-center gap-2 w-full justify-start">
           {(webHookAlert.type === WebHookType.market || webHookAlert.type === WebHookType.adminShop) && webHookAlert.item &&
             <Image src={`/AH_img/${webHookAlert.item.img}`} className="object-cover pixelated" alt="item icon"
                    width={32}
@@ -165,7 +165,7 @@ export function WebHookPreview({ webHookAlert, groups, setGroups }: {
           <span className="app-badge">{getTextFromWebHookType(webHookAlert.type)}</span>
           <span className="title">{webHookAlert.title}</span>
         </div>
-        <div className="flex flex-row gap-1">
+        <div className="flex flex-col sm:flex-row gap-1">
           <Button size="icon" onClick={() => handleEdit(webHookAlert)}>
             <FiEdit/>
           </Button>

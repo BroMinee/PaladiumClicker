@@ -16,11 +16,12 @@ export function WebHookSelectorClientItem() {
 
   return (
 
-    <div className="flex flex-row justify-between">
-      <Button onClick={() => router.push(constants.webhooksPath)}>
+    <div className="flex flex-col gap-4">
+      <Button onClick={() => router.push(constants.webhooksPath)} className="bg-red-500 w-fit">
         <IoMdArrowRoundBack/>
         Revenir à la liste des alertes
       </Button>
+      <div className="flex flex-wrap justify-center items-center w-full gap-2">
       {
         validWebHookType.map((webhookType, index) => (
           <Button
@@ -33,6 +34,8 @@ export function WebHookSelectorClientItem() {
             {getTextFromWebHookType(webhookType)}
           </Button>))
       }
+      </div>
+
     </div>
   )
 }

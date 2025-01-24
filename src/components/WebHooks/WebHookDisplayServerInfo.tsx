@@ -87,7 +87,7 @@ export function DisplayChannelBox({ channelId, channelIdToChannelName, guildId, 
       />
       {channelName !== defaultName && <Button size="icon" onClick={handleEdit}><FaSave size={18}/></Button>}
     </div>
-    <div className="grid grid-cols-2 gap-2">
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
       {children}
     </div>
   </div>)

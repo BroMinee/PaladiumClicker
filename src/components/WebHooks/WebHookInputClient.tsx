@@ -96,7 +96,7 @@ export function WebHookInputClientItem() {
   }, [currentWebHookType]);
 
   return (
-    <div className="flex flex-row gap-2 justify-between">
+    <div className="flex flex-col xl:flex-row gap-2 justify-between">
       <WebHookEditor/>
       {/*<WebHookRender content={content} embed={embed} currentWebHookType={currentWebHookType}/>*/}
       <div className="flex flex-col gap-2 h-full">
