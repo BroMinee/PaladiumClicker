@@ -1,6 +1,6 @@
 [
   {
-    "date": "TODO",
+    "date": "24/01/2025",
     "events": [
       "Ajout d'un système d'authentification avec [Discord (OAuth2) (beta)](https://palatracker.bromine.fr/v1/auth/login/discord)",
       "Ajout d'une [page](https://palatracker.bromine.fr/webhook) pour créer des **alertes Discord** pour :",
