@@ -34,7 +34,7 @@ import React from "react";
 function textFormatting(
   text: string): JSX.Element {
   const parts = text.split(
-    /(\*\*.*?\*\*|\*.*?\*|__.*?__|~~.*?~~)/g
+    /(\*\*.*?\*\*|\*.*?\*|__.*?__|~~.*?~~|\[.*?\]\(.*?\)|\n)/g
   );
 
 
@@ -56,6 +56,20 @@ function textFormatting(
         if (part.startsWith("~~") && part.endsWith("~~")) {
           return <s
             key={index}>{textFormatting(part.slice(2, -2))}</s>;
+        }
+        const linkMatch = part.match(/^\[(.*?)\]\((https?:\/\/.*?)\)$/);
+        if (linkMatch) {
+          const [, linkText, linkUrl] = linkMatch;
+          return (
+            <strong key={index+"strong"}><a key={index+"href"} href={linkUrl}
+               target="_blank"
+               rel="noopener noreferrer"
+               className="text-primary hover:text-orange-700 transition-colors duration-300"
+            >
+              {linkText}
+            </a>
+            </strong>
+          );
         }
         if (part === "\n") {
           return <br key={index}/>;
