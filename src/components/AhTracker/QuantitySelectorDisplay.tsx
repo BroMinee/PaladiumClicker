@@ -20,14 +20,15 @@ export default async function QuantitySelectorDisplay({ item }: { item: OptionTy
     redirect(`/error?message=Impossible de récupérer les données actuelles de ${item.label}`)
 
   return (
-    <div className="flex flex-row justify-evenly gap-3 pb-4">
-      <Card>
-        <SmallCardInfo title={item.label || "Not Found"}
-                       value={item.label2 || "Not Found"}
-                       img={`AH_img/${item.img}`} unoptimized/>
-      </Card>
-      <Card>
-        <CardContent className="h-full pt-6 flex items-center gap-4">
+    <div className="flex flex-col lg:flex-row justify-evenly gap-3 pb-4">
+      {/*<Card className="flex justify-center items-center">*/}
+      {/*  <SmallCardInfo title={item.label || "Not Found"}*/}
+      {/*                 value={item.label2 || "Not Found"}*/}
+      {/*                 className="py-2 h-fit w-fit"*/}
+      {/*                 img={`AH_img/${item.img}`} unoptimized/>*/}
+      {/*</Card>*/}
+      <Card className="flex justify-center items-center">
+        <CardContent className="pt-6 flex items-center gap-4 py-2 h-fit">
           <FaBoxOpen className="size-12 mr-2"/>
           <div className="flex flex-col gap-2">
             <span className="font-semibold">Quantité en vente actuellement</span>
@@ -39,9 +40,10 @@ export default async function QuantitySelectorDisplay({ item }: { item: OptionTy
           </div>
         </CardContent>
       </Card>
-      <Card>
+      <Card className="flex justify-center items-center">
         <SmallCardInfo title="Prix moyen actuellement en vente"
                        value={`${formatPrice(Math.round((itemInfo.priceSum / (itemInfo.countListings === 0 ? 1 : itemInfo.countListings)) * 100) / 100)} $`}
+                       className="py-2 h-fit"
                        img="dollar.png"/>
       </Card>
     </div>

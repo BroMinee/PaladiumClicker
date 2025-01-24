@@ -1,8 +1,9 @@
 'use client'
 import dynamic from "next/dynamic";
 import { AhItemHistory } from "@/types";
-import { Area, Legend, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
+import { Area, Legend, ReferenceLine, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
 import React from "react";
+import { useWebhookStore } from "@/stores/use-webhook-store.ts";
 
 const AreaChart = dynamic(() => import("recharts").then((mod) => mod.AreaChart), { ssr: false });
 
@@ -26,7 +27,7 @@ const CustomTooltip = ({ active, payload, label }: any) => {
   }
 }
 
-const Charts = ({ data }: { data: AhItemHistory[] }) => {
+export const PlotHistoricChart = ({ data, webhook = false }: { data: AhItemHistory[], webhook?: boolean }) => {
   const data_clean = data.map((item) => {
     return {
       date: item.date,
@@ -34,8 +35,9 @@ const Charts = ({ data }: { data: AhItemHistory[] }) => {
       quantity: item.quantity
     }
   });
+  const { threshold, thresholdCondition } = useWebhookStore();
   return (
-    <ResponsiveContainer width="95%" height={400}>
+    <ResponsiveContainer width="100%" height="100%">
       <AreaChart data={data_clean}
                  margin={{ top: 30, right: 30, left: 30, bottom: 10 }}>
         <defs>
@@ -52,13 +54,29 @@ const Charts = ({ data }: { data: AhItemHistory[] }) => {
         <XAxis dataKey="date"/>
         <YAxis yAxisId="left"
                domain={[(dataMin: number) => Math.round(dataMin * 0.9), (dataMax: number) => Math.round(dataMax * 1.1)]}/>
-        <YAxis yAxisId="right" orientation="right"
+        <YAxis yAxisId="right" orientation={(!webhook || thresholdCondition !== "aboveQuantity") ? "right" : "left"}
                domain={[(dataMin: number) => Math.round(dataMin * 0.9), (dataMax: number) => Math.round(dataMax * 1.1)]}/>
         <Tooltip content={<CustomTooltip/>}/>
-        <Area yAxisId="left" type="monotone" dataKey="price" stroke="#8884d8" fillOpacity={1} fill="url(#colorUv)"/>
-        <Area yAxisId="right" type="monotone" dataKey="quantity" stroke="#82ca9d" fillOpacity={1} fill="url(#colorPv)"/>
+        {(!webhook || thresholdCondition !== "aboveQuantity") &&
+          <Area yAxisId="left" type="monotone" dataKey="price" stroke="#8884d8" fillOpacity={1} fill="url(#colorUv)"/>}
+        {(!webhook || thresholdCondition === "aboveQuantity") &&
+          <Area yAxisId="right" type="monotone" dataKey="quantity" stroke="#82ca9d" fillOpacity={1}
+                fill="url(#colorPv)"/>}
+        {
+          webhook && <ReferenceLine
+            y={threshold}
+            yAxisId={thresholdCondition === "aboveQuantity" ? "right" : "left"}
+            stroke="red"
+            strokeWidth={2}
+            strokeDasharray="3 3"
+            label={{
+              value: `Alerte`,
+              position: "left",
+              fill: "red",
+            }}
+          />
+        }
       </AreaChart>
     </ResponsiveContainer>
   );
 };
-export default Charts;

@@ -1,5 +1,5 @@
 'use client';
-import React from "react";
+import React, { useEffect } from "react";
 import { useWebhookStore } from "@/stores/use-webhook-store.ts";
 import { ThreshConditionSelector } from "@/components/WebHooks/WebHookAdminShop/WebHookClient.tsx";
 
@@ -11,15 +11,26 @@ export const ThresholdSelector = () => {
   </>);
 }
 
-const CounterInputWebhook = ({ min = 0, step = 0.1 }) => {
+const CounterInputWebhook = ({ min = 0, step = 0.01 }) => {
   const { threshold, setThreshold } = useWebhookStore();
+  const [currentValue, setCurrentValue] = React.useState(threshold.toString());
+
+  useEffect(() => {
+    if (/^-?\d*\.?\d*$/.test(currentValue)) {
+      setThreshold(parseFloat(parseFloat(currentValue).toFixed(2)));
+    }
+  }, [currentValue]);
+
+  useEffect(() => {
+    setCurrentValue(threshold.toString());
+  }, [threshold]);
 
   const handleIncrease = () => {
-    setThreshold(parseFloat((threshold + step).toFixed(2)));
+    setCurrentValue((parseFloat(currentValue) + step).toFixed(2));
   };
 
   const handleDecrease = () => {
-    if (threshold - step >= min) setThreshold(parseFloat((threshold - step).toFixed(2)));
+    if (parseFloat(currentValue) - step >= min) setCurrentValue((parseFloat(currentValue) - step).toFixed(2));
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -27,9 +38,9 @@ const CounterInputWebhook = ({ min = 0, step = 0.1 }) => {
     if (/^-?\d*\.?\d*$/.test(newValue)) {
       const parsedValue = parseFloat(newValue);
       if (!isNaN(parsedValue) && parsedValue >= min) {
-        setThreshold(parsedValue);
+        setCurrentValue(newValue);
       } else if (newValue === '') {
-        setThreshold(0);
+        setCurrentValue("0");
       }
     }
   };
@@ -45,15 +56,15 @@ const CounterInputWebhook = ({ min = 0, step = 0.1 }) => {
       </button>
 
       <input
-        type="text" // Utilisation de "text" pour autoriser la virgule
-        value={threshold}
+        type="text"
+        value={currentValue}
         onChange={handleChange}
         style={{
-          appearance: 'none', // Cross-browser désactivation
-          MozAppearance: 'textfield', // Firefox
-          WebkitAppearance: 'none', // Chrome/Safari
+          appearance: 'none',
+          MozAppearance: 'textfield',
+          WebkitAppearance: 'none',
         }}
-        inputMode="decimal" // Suggère un clavier avec support des décimales
+        inputMode="decimal"
         className="w-20 h-10 input-number text-center text-lg border border-gray-300 rounded-lg outline-none"
       />
 

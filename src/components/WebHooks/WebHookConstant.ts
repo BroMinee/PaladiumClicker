@@ -10,7 +10,7 @@ export const defaultWebHookContentFromType: Record<WebHookType, string> = {
 
 export const defaultWebHookEmbedFromType: Record<WebHookType, string> = {
   [WebHookType.QDF]: "La QDF de la semaine est {item} ({itemFr} ou {itemUs}) en {quantity} examplaires pour un total de {earningXp} xp de fac et {earningMoney} $.\nElle commence le {start} et termine le {end}.",
-  [WebHookType.adminShop]: "Le prix des **{item}** sont en train de varier, ils sont maintenant à **{price}**$ donc **{previousPrice}**$ avant.",
+  [WebHookType.adminShop]: "Le prix des **{item}** sont en train de varier, ils sont maintenant à **{price}**$ contre **{previousPrice}**$ avant.",
   [WebHookType.market]: "Dépêche toi d'acheter des **{itemFr}** ({itemUs}) ils sont à un prix moyen de **{price}**$ avant il était à **{previousPrice}**$ et il y a en a **{quantityAvailable}** en vente !",
   [WebHookType.EventPvp]: "Prépare toi à farm !\n- {goal} {quantity} {item} sur {server} pour {rewardElo} elo.\nL'event commence le {start} et se termine le {end}.",
   [WebHookType.statusServer]: "",

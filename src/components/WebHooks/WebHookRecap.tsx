@@ -37,21 +37,21 @@ export function RecapTemplate({ messages }: { messages: string[] }) {
 export function RecapQDF() {
   return (
     <RecapTemplate
-      messages={["Vous allez récevoir un message quand une **nouvelle QDF** est disponible (+/- 15 minutes).", "Ce qui fait **1** message par semaine."]}/>
+      messages={["Vous allez récevoir un message quand une **nouvelle QDF** est disponible (+/- 15 minutes).", "Ce qui fait **{TODO}** message par semaine."]}/>
   )
 }
 
 export function RecapMarket() {
   return (
     <RecapTemplate
-      messages={["Vous allez recevoir un message quand le prix moyen au __**market**__ des **{itemFr}** est **{thresholdCondition}** à **{price}** $. (+/- 15 minutes)", "Ce qui fait une moyenne de **{TODO}** message par semaine."]}/>
+      messages={["Vous allez recevoir un message quand le prix moyen au __**market**__ des **{itemFr}** est **{thresholdCondition}** à **{price}** $. (+/- 15 minutes)", "Se référer au graphique pour savoir le nombre de notification."]}/>
   )
 }
 
 export function RecapAdminShop() {
   return (
     <RecapTemplate
-      messages={["Vous allez recevoir un message quand le prix moyen à l'__**admin shop**__ des **{item}** est **{thresholdCondition}** à **{price}** $. (+/- 15 minutes)", "Ce qui fait une moyenne de **{TODO}** message par semaine."]}/>
+      messages={["Vous allez recevoir un message quand le prix moyen à l'__**admin shop**__ des **{item}** est **{thresholdCondition}** à **{price}** $. (+/- 15 minutes)", "Se référer au graphique pour savoir le nombre de notification."]}/>
   )
 }
 
@@ -65,6 +65,6 @@ export function RecapEvent() {
 export function RecapServeurStatus() {
   return (
     <RecapTemplate
-      messages={["Vous allez recevoir un message quand un serveur **à un soucis** ET quand il **revient à la normale**. (+/- 15 minutes)", "Ce qui fait une moyenne de **0 ou 2** message par semaine."]}/>
+      messages={["Vous allez recevoir un message quand un serveur **à un soucis** ET quand il **revient à la normale**. (+/- 15 minutes)", "Ce qui fait une moyenne de **{TODO}** message par semaine."]}/>
   )
 }

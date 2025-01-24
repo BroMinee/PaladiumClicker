@@ -68,7 +68,7 @@ export function parseTextFormatting(
   thresholdCondition: WebHookThresholdCondition
 ): JSX.Element {
   const parts = text.split(
-    /(\*\*.*?\*\*|\*.*?\*|__.*?__|~~.*?~~|{here}|{item}|{itemFr}|{itemUs}|{event}|{price}|{previousPrice}|{quantityAvailable}|{quantity}|{earningXp}|{earningMoney}|{start}|{end}|{startRelative}|{rewardElo}|{servers}|{server}|{thresholdCondition}|{goal}|\n|<@&[^>]*>|<@[^>]*>)/g
+    /(\*\*.*?\*\*|\*.*?\*|__.*?__|~~.*?~~|{here}|{item}|{itemFr}|{itemUs}|{event}|{price}|{previousPrice}|{quantityAvailable}|{quantity}|{earningXp}|{earningMoney}|{start}|{end}|{startRelative}|{rewardElo}|{servers}|{server}|{thresholdCondition}|{goal}|\n|<@&[^>]*>|<@[^>]*>|{TODO})/g
   );
 
   function getTextFromThresholdCondition(thresholdCondition: WebHookThresholdCondition) {
@@ -89,6 +89,39 @@ export function parseTextFormatting(
         return "en hausse";
       default:
         return "Bonne question j'ai pas prévu ce cas";
+    }
+  }
+
+  function getTodoCount(): string | number {
+    switch (currentWebHookType) {
+      case WebHookType.market:
+        return -1;
+      case WebHookType.QDF:
+        return 1;
+      case WebHookType.adminShop:
+        return -1;
+      case WebHookType.EventPvp:
+        switch (eventSelected) {
+          case "BOSS":
+            return 4 * 7;
+          case "A VOS MARQUES":
+            return 7;
+          case "TOTEM":
+            return 1;
+          case "EGGHUNT":
+            return 7;
+          case "KOTH":
+            return 1;
+          case "BLACKMARKET":
+            return 3 * 7;
+          default:
+            return -1;
+        }
+
+      case WebHookType.statusServer:
+        return "0 ou 2";
+      default:
+        return -1;
     }
   }
 
@@ -212,6 +245,9 @@ export function parseTextFormatting(
           return <span key={index} className="mention-here">
               @user
             </span>
+        }
+        if (part === "{TODO}") {
+          return <span key={index}>{getTodoCount()}</span>;
         }
         return <span key={index}>{part}</span>;
       })}

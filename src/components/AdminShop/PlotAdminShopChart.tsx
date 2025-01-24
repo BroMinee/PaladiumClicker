@@ -1,8 +1,9 @@
 'use client'
 import dynamic from "next/dynamic";
 import { AdminShopItemDetail, AdminShopPeriode } from "@/types";
-import { Area, Legend, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
+import { Area, Legend, ReferenceLine, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
 import React from "react";
+import { useWebhookStore } from "@/stores/use-webhook-store.ts";
 
 const AreaChart = dynamic(() => import("recharts").then((mod) => mod.AreaChart), { ssr: false });
 
@@ -27,10 +28,15 @@ const CustomTooltip = ({ active, payload, label }: any) => {
 }
 
 
-const PlotAdminShopChart = ({ data, periode }: { data: AdminShopItemDetail[], periode: AdminShopPeriode }) => {
+const PlotAdminShopChart = ({ data, periode, webhook = false }: {
+  data: AdminShopItemDetail[],
+  webhook?: boolean,
+  periode: AdminShopPeriode
+}) => {
   // TODO: zoomable chart
   // TODO: daily price and not 15min delta
   // TODO: add a line for the average price
+  const { threshold } = useWebhookStore();
 
   // print the date in DD/MM/YYYY - HH:MM:SS
 
@@ -60,6 +66,20 @@ const PlotAdminShopChart = ({ data, periode }: { data: AdminShopItemDetail[], pe
         <Area yAxisId="left" type="monotone" dataKey="sellPrice" name="Prix de vente" stroke="#8884d8" fillOpacity={1}
               isAnimationActive={periode !== "season"}
               fill="url(#colorUv)"/>
+        {
+          webhook && <ReferenceLine
+            y={threshold}
+            yAxisId="left"
+            stroke="red"
+            strokeWidth={2}
+            strokeDasharray="3 3"
+            label={{
+              value: `Alerte`,
+              position: "left",
+              fill: "red",
+            }}
+          />
+        }
       </AreaChart>
     </ResponsiveContainer>
   )

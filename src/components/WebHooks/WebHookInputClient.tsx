@@ -14,7 +14,7 @@ import { useWebhookStore } from "@/stores/use-webhook-store.ts";
 import { Button } from "@/components/ui/button.tsx";
 import { cn } from "@/lib/utils.ts";
 import { Checkbox } from "@/components/ui/checkbox.tsx";
-import { WebHookCreate, WebHookType } from "@/types";
+import { AdminShopItemDetail, AhItemHistory, WebHookCreate, WebHookType } from "@/types";
 import {
   RecapAdminShop,
   RecapEvent,
@@ -24,11 +24,18 @@ import {
 } from "@/components/WebHooks/WebHookRecap.tsx";
 import { MarketInput } from "@/components/WebHooks/WebHookMarket/WebHookClient.tsx";
 import { AdminShopInput, EventInput } from "@/components/WebHooks/WebHookAdminShop/WebHookClient.tsx";
-import { createWebHookServerAction, editWebHookServerAction } from "@/lib/api/apiServerAction.ts";
+import {
+  createWebHookServerAction,
+  editWebHookServerAction,
+  getAdminShopHistoryServerAction,
+  getMarketHistoryServerAction
+} from "@/lib/api/apiServerAction.ts";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 
 import constants from "@/lib/constants.ts";
+import PlotAdminShopChart from "@/components/AdminShop/PlotAdminShopChart.tsx";
+import { PlotHistoricChart } from "@/components/AhTracker/PlotHistoricChart.tsx";
 
 export function WebHookInputClientItem() {
 
@@ -92,7 +99,11 @@ export function WebHookInputClientItem() {
     <div className="flex flex-row gap-2 justify-between">
       <WebHookEditor/>
       {/*<WebHookRender content={content} embed={embed} currentWebHookType={currentWebHookType}/>*/}
-      <GenerateWebHookContent/>
+      <div className="flex flex-col gap-2 h-full">
+        <GenerateWebHookContent/>
+        <AdaptEditorFooter/>
+      </div>
+
     </div>
   )
 }
@@ -272,6 +283,27 @@ function AdaptEditor() {
   return null;
 }
 
+function AdaptEditorFooter() {
+  const { currentWebHookType, itemSelected, adminShopItemSelected } = useWebhookStore();
+  if (currentWebHookType === WebHookType.QDF)
+    return null;
+  if (currentWebHookType === WebHookType.statusServer)
+    return null;
+
+  if (currentWebHookType === WebHookType.adminShop && adminShopItemSelected) {
+    return <AdminShopGraphClient/>
+  }
+
+  if (currentWebHookType === WebHookType.market && itemSelected) {
+    return <MarketGraphClient/>
+  }
+
+  if (currentWebHookType === WebHookType.EventPvp) {
+    return null;
+  }
+  return null;
+}
+
 export function Recap() {
   const { currentWebHookType } = useWebhookStore();
   switch (currentWebHookType) {
@@ -288,4 +320,50 @@ export function Recap() {
     default:
       return null;
   }
+}
+
+export function AdminShopGraphClient() {
+  const { adminShopItemSelected } = useWebhookStore();
+  const [data, setData] = React.useState<AdminShopItemDetail[]>([]);
+
+  useEffect(() => {
+    if (!adminShopItemSelected)
+      return;
+    try {
+      getAdminShopHistoryServerAction(adminShopItemSelected, "month").then((res) => {
+        setData(res);
+      })
+    } catch (error) {
+      console.error(error);
+    }
+  }, [adminShopItemSelected])
+
+  return (
+    <div className="h-[100vh] pb-0">
+      <PlotAdminShopChart data={data} periode={"month"} webhook/>
+    </div>
+  )
+}
+
+export function MarketGraphClient() {
+  const { itemSelected } = useWebhookStore();
+  const [data, setData] = React.useState<AhItemHistory[]>([]);
+
+  useEffect(() => {
+    if (!itemSelected)
+      return;
+    try {
+      getMarketHistoryServerAction(itemSelected.value).then((res) => {
+        setData(res);
+      })
+    } catch (error) {
+      console.error(error);
+    }
+  }, [itemSelected])
+
+  return (
+    <div className="h-[100vh] pb-0">
+      <PlotHistoricChart data={data} webhook/>
+    </div>
+  )
 }

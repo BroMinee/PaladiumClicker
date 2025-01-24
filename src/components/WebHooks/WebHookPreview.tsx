@@ -6,7 +6,6 @@ import { Button } from "@/components/ui/button.tsx";
 import { FiEdit } from "react-icons/fi";
 import React, { useState } from "react";
 import Image from "next/image";
-import { cn } from "@/lib/utils.ts";
 import { FaTrashCan } from "react-icons/fa6";
 import { useWebhookStore } from "@/stores/use-webhook-store.ts";
 import { useRouter } from "next/navigation";
@@ -72,8 +71,6 @@ export function WebHookPreview({ webHookAlert, groups, setGroups }: {
   groups: groupsType,
   setGroups: (groups: groupsType) => void
 }) {
-
-  const displayIcon = (webHookAlert.type === WebHookType.market || webHookAlert.type === WebHookType.adminShop) || (webHookAlert.type === WebHookType.EventPvp && webHookAlert.enumEvent)
 
   const {
     setCurrentWebHookType,
@@ -147,7 +144,7 @@ export function WebHookPreview({ webHookAlert, groups, setGroups }: {
   return (
     <div className="alert-container w-full !border-0">
       <div className="header-text flex flex-row">
-        <div className={cn("flex flex-row items-center gap-2 w-full justify-start", !displayIcon && "ml-[40px]")}>
+        <div className="flex flex-row items-center gap-2 w-full justify-start">
           {(webHookAlert.type === WebHookType.market || webHookAlert.type === WebHookType.adminShop) && webHookAlert.item &&
             <Image src={`/AH_img/${webHookAlert.item.img}`} className="object-cover pixelated" alt="item icon"
                    width={32}
@@ -155,6 +152,14 @@ export function WebHookPreview({ webHookAlert, groups, setGroups }: {
           }
           {webHookAlert.type === WebHookType.EventPvp && webHookAlert.enumEvent &&
             <Image src={`https://palatracker.bromine.fr/${getIconNameFromEventType(webHookAlert.enumEvent)}`} alt="icon"
+                   height={32} width={32} unoptimized/>
+          }
+          {webHookAlert.type === WebHookType.QDF &&
+            <Image src={`https://palatracker.bromine.fr/EventIcon/qdf.png`} alt="icon"
+                   height={32} width={32} unoptimized/>
+          }
+          {webHookAlert.type === WebHookType.statusServer &&
+            <Image src={`https://palatracker.bromine.fr/EventIcon/status.png`} alt="icon"
                    height={32} width={32} unoptimized/>
           }
           <span className="app-badge">{getTextFromWebHookType(webHookAlert.type)}</span>

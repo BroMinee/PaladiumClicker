@@ -2,9 +2,14 @@
 import { getPlayerInfo, PALADIUM_API_URL } from "@/lib/api/apiPala.ts";
 import { fetchPostWithHeader, fetchWithHeader } from "@/lib/api/misc.ts";
 import {
+  AdminShopItem,
+  AdminShopItemDetail,
+  AdminShopPeriode,
+  AhItemHistory,
   DiscordUser,
   NotificationWebSiteResponse,
   OptionType,
+  PaladiumAhHistory,
   PaladiumAhItemStat,
   PaladiumAhItemStatResponse,
   WebHookCreate,
@@ -13,6 +18,7 @@ import {
 import { Event } from "@/types/db_types.ts";
 import { cookies } from "next/headers";
 import { API_PALATRACKER } from "@/lib/constants.ts";
+import { redirect } from "next/navigation";
 
 
 /* The content of this file is not sent to the client*/
@@ -325,4 +331,28 @@ export async function editWebhookGuildNameServerAction(guild_id: string, channel
     return { msg: JSON.stringify(e.message), succeeded: false };
   })
   return { succeeded: r.succeeded, msg: r.msg };
+}
+
+export async function getAdminShopHistoryServerAction(item: AdminShopItem, periode: AdminShopPeriode): Promise<AdminShopItemDetail[]> {
+  return fetchWithHeader<AdminShopItemDetail[]>(`${API_PALATRACKER}/v1/admin-shop/${item}/${periode}`, 0);
+}
+
+export const getMarketHistoryServerAction = async (itemId: string): Promise<AhItemHistory[]> => {
+  const response = await fetchWithHeader<PaladiumAhHistory>(`${PALADIUM_API_URL}/v1/paladium/shop/market/items/${itemId}/history?limit=100&offset=0`);
+  const totalCount = response.totalCount;
+
+  let data = response.data;
+  let offset = 100;
+  let c = 0;
+  while (offset < totalCount && c <= 10) {
+    const response = await fetchWithHeader<PaladiumAhHistory>(`${PALADIUM_API_URL}/v1/paladium/shop/market/items/${itemId}/history?offset=${offset}&limit=100`)
+    data = data.concat(response.data);
+    offset += 100;
+    c++;
+  }
+
+  if (data.length !== totalCount)
+    redirect(`/error?message=Data length is not equal to totalCount (getPaladiumAhItemFullHistory)`);
+
+  return data;
 }
