@@ -1,8 +1,8 @@
 # https://palatracker.bromine.fr
 
 # Note
-Il s'agit de l'ancien repo du projet, un nouveau repo privé a été créé au moment de l'introduction des clés API de Paladium.
-Ce repo n'est donc plus à jour.
+**Il s'agit de l'ancien repo du projet, un nouveau repo privé a été créé au moment de l'introduction des clés API de Paladium.
+Ce repo n'est donc plus à jour.**
 
 Site web développé par BroMine__ pour optimiser le [Clicker de Paladium.](https://wiki.paladium-pvp.fr/gameplay/le-clicker)
 
