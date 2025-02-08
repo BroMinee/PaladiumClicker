@@ -23,7 +23,7 @@ export default function WebHooksPage() {
             {"Qu'est ce que je donne comme accès exactement ?"}
           </h2>
           <span>
-            - {"Vous avons un droit de lecture sur ton pseudo discord, ton avatar et ta bannière discord et c'est tout."}
+            - {"Nous aurons un droit de lecture sur ton pseudo discord, ton avatar et ta bannière discord et c'est tout."}
             <br/>
             - {"En revanche, si tu décides de créer des alertes on aura accès à id du serveur discord et l'id du channel discord. Mais nous ne pouvons pas retrouver leurs noms. On peut uniquement envoyer des messages sur le channel sélectionné."}
         </span>
