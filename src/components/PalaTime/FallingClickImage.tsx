@@ -5,14 +5,18 @@ import GradientText from "@/components/shared/GradientText.tsx";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog.tsx";
 import { ScrollArea } from "@/components/ui/scroll-area.tsx";
 import { safeJoinPaths } from "@/lib/misc.ts";
+import { useSettingsStore } from "@/stores/use-settings-store.ts";
 
 
 const FallingClickImagePalaTime = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const [openEvent, setOpenEvent] = useState(false);
-
+  const { settings } = useSettingsStore();
 
   useEffect(() => {
+    if (!settings.fallingImage)
+      return;
+
     setTimeout(() => {
       const interval = setInterval(() => {
 
@@ -57,7 +61,10 @@ const FallingClickImagePalaTime = () => {
         clearInterval(interval);
       }
     }, Math.random() * 1000);
-  }, []);
+  }, [settings.fallingImage]);
+
+  if (!settings.fallingImage)
+    return false;
 
 
   return (<div ref={containerRef} className="z-[-1]">
