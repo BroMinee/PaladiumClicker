@@ -3,15 +3,15 @@ import { GoogleAnalytics } from '@next/third-parties/google'
 
 import React from "react";
 import Navbar from "@/components/NavBar/NavBar.tsx";
-import { Inter } from '@next/font/google';
+import { Montserrat } from '@next/font/google';
 import { ThemeProviders } from "@/components/shared/ThemeProvider.tsx";
 import { Toaster } from "@/components/ui/sonner.tsx";
 import ServiceWorkerRegister from "@/components/ServiceWorkerRegister.tsx";
 import { AuthGetWrapper } from "@/components/Auth/AuthGetWrapper.tsx";
 
-const inter = Inter({
+const montserrat = Montserrat({
   subsets: ['latin'],  // specify subsets according to your needs
-  variable: '--font-inter', // optional variable to use in CSS
+  variable: '--font-montserrat', // optional variable to use in CSS
 });
 
 export default function RootLayout({
@@ -22,7 +22,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="fr" className={inter.className}>
+    <html lang="fr" className={montserrat.className}>
     <head>
       <meta name="theme-color" content="#ff5c00"/>
     </head>

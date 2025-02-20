@@ -33,7 +33,7 @@ const config: Config = {
         'dark': "url('/img/background_dark.webp')",
       },
       fontFamily: {
-        sans: ["Inter", "sans-serif"],
+        sans: ["Montserrat", "sans-serif"],
         mc: ["Pixel NES", "sans-serif"],
       },
       colors: {
