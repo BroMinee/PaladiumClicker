@@ -68,7 +68,7 @@ export function parseTextFormatting(
   thresholdCondition: WebHookThresholdCondition
 ): JSX.Element {
   const parts = text.split(
-    /(\*\*.*?\*\*|\*.*?\*|__.*?__|~~.*?~~|{here}|{item}|{itemFr}|{itemUs}|{event}|{price}|{previousPrice}|{quantityAvailable}|{quantity}|{earningXp}|{earningMoney}|{start}|{end}|{startRelative}|{rewardElo}|{servers}|{server}|{thresholdCondition}|{goal}|\n|<@&[^>]*>|<@[^>]*>|{TODO})/g
+    /(\*\*.*?\*\*|\*.*?\*|__.*?__|~~.*?~~|{here}|{item}|{itemFr}|{itemUs}|{event}|{price}|{previousPrice}|{quantityAvailable}|{quantity}|{earningXp}|{earningMoney}|{seller}|{start}|{end}|{startRelative}|{rewardElo}|{servers}|{server}|{thresholdCondition}|{goal}|\n|<@&[^>]*>|<@[^>]*>|{TODO})/g
   );
 
   function getTextFromThresholdCondition(thresholdCondition: WebHookThresholdCondition) {
@@ -208,6 +208,9 @@ export function parseTextFormatting(
         }
         if (part === "{earningMoney}") {
           return <span key={index}>{formatPrice(200000)}</span>;
+        }
+        if(part === "{seller}" && currentWebHookType === WebHookType.market) {
+          return <span key={index}>LeVraiFuze</span>;
         }
         if (part === "{start}") {
           return <span key={index}>{new Date().toLocaleString()}</span>;

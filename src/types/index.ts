@@ -299,7 +299,7 @@ export type MarketListedItem = MarketItemOffer[]
 
 
 export type MarketItemOffer = {
-  seller: string,
+  seller: string, // uuid of the seller
   name: string, // Display name of the item
   renamed: boolean,
   quantity: number, // The remaining quantity of the item currenlty listed

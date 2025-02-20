@@ -11,7 +11,7 @@ export const defaultWebHookContentFromType: Record<WebHookType, string> = {
 export const defaultWebHookEmbedFromType: Record<WebHookType, string> = {
   [WebHookType.QDF]: "La QDF de la semaine est {item} ({itemFr} ou {itemUs}) en {quantity} examplaires pour un total de {earningXp} xp de fac et {earningMoney} $.\nElle commence le {start} et termine le {end}.",
   [WebHookType.adminShop]: "Le prix des **{item}** sont en train de varier, ils sont maintenant à **{price}**$ contre **{previousPrice}**$ avant.",
-  [WebHookType.market]: "Dépêche toi d'acheter des **{itemFr}** ({itemUs}) ils sont à un prix moyen de **{price}**$ avant il était à **{previousPrice}**$ et il y a en a **{quantityAvailable}** en vente !",
+  [WebHookType.market]: "Dépêche toi d'acheter des **{itemFr}** ({itemUs}) la meilleur offre a un prix de **{price}**$ avant il était à **{previousPrice}**$ et il y a en a **{quantityAvailable}** en vente.\nVa voir le market de @p:**{seller}** !",
   [WebHookType.EventPvp]: "Prépare toi à farm !\n- {goal} {quantity} {item} sur {server} pour {rewardElo} elo.\nL'event commence le {start} et se termine le {end}.",
   [WebHookType.statusServer]: "",
 }
@@ -112,7 +112,7 @@ export const defaultWebhookFooterFromType: Record<WebHookType, string> = {
 export const defaultWebhookValidFormatFromType: Record<WebHookType, string[]> = {
   [WebHookType.QDF]: ["{item} Nom de l'item dans l'API", "{itemFr} Nom de l'item en français", "{itemUs} Nom de l'item en anglais", "{quantity} Quantité de l'item à farm", "{earningXp} XP de fac a gagné", "{earningMoney} argent a gagné", "{start} Date de début de la QDF", "{end} Date de fin de lq QDF"],
   [WebHookType.adminShop]: ["{item} Nom de l'item dans l'API", "{price} Prix actuel de l'item", "{previousPrice} Prix précédent de l'item", "{threshold} Valeur seuil", "{thresholdCondition} Condition de notification"],
-  [WebHookType.market]: ["{item} Nom de l'item dans l'API", "{itemFr} Nom de l'item en français", "{itemUs} Nom de l'item en anglais", "{price} Prix actuel de l'item", "{previousPrice} Prix précédent de l'item", "{quantityAvailable} Quantité en vente", "{threshold} Valeur seuil", "{thresholdCondition} Condition de notification"],
+  [WebHookType.market]: ["{item} Nom de l'item dans l'API", "{itemFr} Nom de l'item en français", "{itemUs} Nom de l'item en anglais", "{price} Prix actuel de l'item", "{previousPrice} Prix précédent de l'item", "{quantityAvailable} Quantité en vente", "{threshold} Valeur seuil", "{thresholdCondition} Condition de notification", "{seller} Pseudo du vendeur"],
   [WebHookType.EventPvp]: ["{item}: Nom de l'item dans l'API (OnYourMark uniquement)", "{goal} action a effectué (OnYourMark uniquement)", "{quantity} Quantité de l'item à farm (OnYourMark uniquement)", "{server} Serveur sur lequel farm (OnYourMark uniquement)", "{rewardElo} Récompense en elo (OnYourMark uniquement)", "{start} Date de début de l'event", "{end} Date de fin de l'event", "{startRelative} Date de début de l'event en relatif"],
   [WebHookType.statusServer]: []
 }

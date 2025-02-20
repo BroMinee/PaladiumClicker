@@ -44,7 +44,7 @@ export function RecapQDF() {
 export function RecapMarket() {
   return (
     <RecapTemplate
-      messages={["Vous allez recevoir un message quand le prix moyen au __**market**__ des **{itemFr}** est **{thresholdCondition}** à **{price}** $. (+/- 15 minutes)", "Se référer au graphique pour savoir le nombre de notification."]}/>
+      messages={["Vous allez recevoir un message quand la meilleur offre des **{itemFr}** au __**market**__ aura un prix **{thresholdCondition}** à **{price}** $. (+/- 15 minutes)", "Se référer au graphique pour savoir le nombre de notification."]}/>
   )
 }
 
