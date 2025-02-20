@@ -4,7 +4,7 @@ import { useEffect, useRef } from "react";
 import { usePlayerInfoStore } from "@/stores/use-player-info-store";
 import { useSettingsStore } from "@/stores/use-settings-store";
 import { safeJoinPaths } from "@/lib/misc.ts";
-
+import constants from "@/lib/constants.ts";
 
 const FallingClickImage = () => {
 
@@ -38,9 +38,9 @@ const FallingClickImage = () => {
         image.classList.add("animate-falling", "h-auto", "w-32", "object-cover");
 
         if (selectedCPS === 24) {
-          image.src = safeJoinPaths(`/CPSIcon/${selectedCPS}.webp`);
+          image.src = safeJoinPaths(constants.imgPathClicker,`/CPSIcon/${selectedCPS}.webp`);
         } else {
-          image.src = safeJoinPaths(`/CPSIcon/${selectedCPS}.png`);
+          image.src = safeJoinPaths(constants.imgPathClicker,`/CPSIcon/${selectedCPS}.png`);
         }
 
         image.alt = 'Click';
