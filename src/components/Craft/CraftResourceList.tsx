@@ -2,7 +2,6 @@
 
 import { NodeType, PaladiumAhItemStat } from "@/types";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card.tsx";
-import SmallCardInfo from "@/components/shared/SmallCardInfo.tsx";
 import React, { useEffect, useState } from "react";
 import { adaptPlurial, formatPrice } from "@/lib/misc.ts";
 import LoadingSpinner from "@/components/ui/loading-spinner.tsx";
@@ -90,7 +89,7 @@ export function CraftResourceList({ list }: { list: NodeType[] }) {
           {listState !== null && listState.length > 0 && listState.map((slot, index) =>
             <DisplayItemProduce key={slot.value + index + "-needed"} title={"x" + slot.count + " " + slot.label}
                            value={`${Math.floor(slot.count / 64)} ${adaptPlurial("stack", Math.floor(slot.count / 64))} et ${slot.count - Math.floor(slot.count / 64) * 64}`}
-                           img={`/AH_img/${slot.img}`} count={slot.count} slot={slot}/>
+                           count={slot.count} slot={slot}/>
           )}
           {listState !== null && listState.length === 0 &&
             <span

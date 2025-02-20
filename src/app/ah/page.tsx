@@ -120,21 +120,6 @@ export default async function AhTrackerPage({ searchParams }: { searchParams: { 
     </div>)
 }
 
-
-function QuantitySelectorDisplayFallBack({ item }: { item: OptionType }) {
-  return (<Card>
-    <CardHeader>
-      <CardTitle className="flex flex-row gap-2">
-        <LoadingSpinner size={4}/>
-        Chargement des informations de :{" "}
-        <GradientText
-          className="font-extrabold">{item.label}
-        </GradientText>
-      </CardTitle>
-    </CardHeader>
-  </Card>)
-}
-
 function GraphItemFallback({ item }: { item: OptionType }) {
   return (<Card>
     <CardHeader>

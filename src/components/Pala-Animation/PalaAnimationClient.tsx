@@ -58,8 +58,6 @@ export function PalaAnimationBody() {
   const [isChecking, setIsChecking] = useState(false);
   const [startingTime, setStartingTime] = useState(0);
 
-  const { profileInfo } = useProfileStore();
-
   function clearUserAnswer() {
     // reset input field with id user_answer
     setInputValue("");
@@ -335,7 +333,6 @@ export function PalaAnimationClassementGlobal() {
   const { profileInfo } = useProfileStore();
 
   const [globalLeaderboard, setGlobalLeaderboard] = useState([] as PalaAnimationLeaderboardGlobal);
-  const { sessionUuid } = useSessionContext();
 
   useEffect(() => {
     getGlobalLeaderboard().then(
