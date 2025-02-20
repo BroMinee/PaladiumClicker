@@ -37,7 +37,7 @@ export default function Home() {
           </CardDescription>
         </CardHeader>
         <CardContent>
-          <h2 className="text-primary">Plus d&apos;informations techniques sur le discord</h2>
+          <h2 className="text-primary font-black">Plus d&apos;informations techniques sur le discord</h2>
           <Discord className="mt-4"/>
         </CardContent>
       </Card>
