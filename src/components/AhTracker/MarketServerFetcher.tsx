@@ -29,7 +29,7 @@ export async function MarketServerFetcher({ item }: { item: OptionType }) {
       <Card className="h-[calc(100vh-55vh)]">
         <PlotHistoricChart data={data}/>
       </Card>
-      <Card className="mt-2">
+      <Card className="mt-2 bg-card/80">
         <QuantitySelectorDisplay itemInfo={itemInfo}/>
         <DetailedMarketOfferList listing={itemInfo?.listing ?? []} item={item}/>
       </Card>

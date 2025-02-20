@@ -4,7 +4,7 @@ import { formatPrice } from "@/lib/misc.ts";
 
 export default async function QuantitySelectorDisplay({ itemInfo }: { itemInfo: PaladiumAhItemStat | null }) {
   return (
-    <div className="flex flex-col lg:flex-row justify-evenly gap-3 pb-4 pt-3 py-2">
+    <div className="flex flex-col lg:flex-row justify-evenly gap-3 pb-4 pt-3 py-2 pl-4 lg:pl-0">
       <p className="font-bold text-[20px]">
         <span className="font-bold text-[20px]">Quantité en vente actuellement: </span>
         <span
