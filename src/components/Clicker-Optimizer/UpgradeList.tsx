@@ -1,5 +1,5 @@
 // import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
-import { formatPrice, getJsonToUseForUpgrade } from "@/lib/misc";
+import { formatPrice, getJsonToUseForUpgrade, safeJoinPaths } from "@/lib/misc";
 import type { UpgradeKey } from "@/types";
 
 import { redirect } from "next/navigation";
@@ -8,6 +8,7 @@ import Image from "next/image";
 import { ReactNode } from "react";
 import HoverText from "@/components/ui/hovertext.tsx";
 import { PreconditionDisplay } from "@/lib/PreconditionDisplay.tsx";
+import constants from "@/lib/constants.ts";
 
 type UpgradeListProps = {
   upgradeType: UpgradeKey;
@@ -22,11 +23,11 @@ const UpgradeList = ({ upgradeType }: UpgradeListProps) => {
     if (Number(name) === -1)
       return "/unknown.png";
     else if (nameShort === "Building")
-      return `/BuildingUpgradeIcon/${index <= 15 ? 0 : 1}.png`;
+      return safeJoinPaths(constants.imgPathClicker,`/BuildingUpgradeIcon/${index <= 15 ? 0 : 1}.png`);
     else if (upgradeWithOnlyOne.includes(nameShort))
-      return `/${nameShort}Icon/0.png`;
+      return safeJoinPaths(constants.imgPathClicker,`/${nameShort}Icon/0.png`);
     else
-      return `/${nameShort}Icon/${index}.png`;
+      return safeJoinPaths(constants.imgPathClicker,`/${nameShort}Icon/${index}.png`);
   }
 
   let jsonToUse = getJsonToUseForUpgrade(upgradeType);

@@ -1,4 +1,6 @@
 import { NoPseudoPage } from "@/components/NoPseudoPage.tsx";
+import { safeJoinPaths } from "@/lib/misc.ts";
+import constants from "@/lib/constants.ts";
 
 export async function generateMetadata() {
 
@@ -7,7 +9,7 @@ export async function generateMetadata() {
   const description = `Renseignez votre pseudo Paladium et le métier que vous souhaitez xp pour obtenir des quantités à farmer pour atteindre le niveau souhaité.`;
   // const defaultImage = "https://brominee.github.io/PaladiumClicker/favicon.ico";
   let imgPath = "Mineur";
-  let image = `https://palatracker.bromine.fr/JobsIcon/${imgPath}.webp`;
+  let image = safeJoinPaths("https://palatracker.bromine.fr/",constants.imgPathProfile, "/JobsIcon/", imgPath,".webp");
   return {
     title: title,
     description: description,

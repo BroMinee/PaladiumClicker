@@ -8,7 +8,7 @@ import { safeJoinPaths } from "@/lib/misc.ts";
 
 
 import metierJson from "@/assets/metier.json";
-
+import constants from "@/lib/constants.ts";
 type MetierListProps = {
   editable?: boolean;
 };
@@ -62,7 +62,8 @@ export const MetierComponentWrapper = ({
   return (
     <>
       <div className="relative">
-        <Image src={safeJoinPaths("/JobsIcon/", `${metierName}.webp`)} alt="image"
+        <Image src={safeJoinPaths(constants.imgPathProfile,"/JobsIcon/", `${metierName}.webp`)} alt="image"
+               unoptimized
                style={{ position: "inherit", zIndex: 2 }} width={256} height={256}/>
         <div className="progress-bar">
           {/* BroMine.... Please, never touch this code again. It works !*/}

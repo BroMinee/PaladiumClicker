@@ -11,6 +11,8 @@ import {
 } from "@/components/Xp-Calculator/MetierSelectorClient.tsx";
 import { MetierKey } from "@/types";
 import { HowToXp, searchParamsXpBonusPage, XpBonus } from "@/components/Xp-Calculator/XpCalculator.tsx";
+import constants from "@/lib/constants.ts";
+import { safeJoinPaths } from "@/lib/misc.ts";
 
 
 export async function generateMetadata(
@@ -40,7 +42,7 @@ export async function generateMetadata(
         imgPath = "Mineur";
         break;
     }
-  let image = `https://palatracker.bromine.fr/JobsIcon/${imgPath}.webp`;
+  let image = safeJoinPaths("https://palatracker.bromine.fr/",constants.imgPathProfile, "/JobsIcon/", imgPath,".webp");
   return {
     title: title,
     description: description,

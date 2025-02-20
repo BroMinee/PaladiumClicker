@@ -54,12 +54,13 @@ export function MetierSelectorClient({ username, metier, selected, searchParams 
       break;
   }
   return (
-    <Image src={safeJoinPaths("/JobsIcon/", `${imgPath}.webp`)}
+    <Image src={safeJoinPaths(constants.imgPathProfile,"/JobsIcon/", `${imgPath}.webp`)}
            width={144} height={144}
            alt={metier}
            className={cn("object-cover pixelated hover:scale-105 duration-300 cursor-pointer",
              !selected ? "grayscale" : "")}
            onClick={() => router.push(generateXpCalculatorUrl(username, metier, searchParams.level, searchParams.double, searchParams.dailyBonus, searchParams.f2, searchParams.f3), { scroll: false })}
+          unoptimized
     />
   )
 }
@@ -85,7 +86,8 @@ export const MetierToReachWrapper = ({
   return (
     <>
       <div className="relative">
-        <Image src={safeJoinPaths("/JobsIcon/", `${metierName}.webp`)} alt="image"
+        <Image src={safeJoinPaths(constants.imgPathProfile, "/JobsIcon/", `${metierName}.webp`)} alt="image"
+               unoptimized
                style={{ position: "inherit", zIndex: 2 }} width={256} height={256}/>
         <div className="progress-bar">
           {/* BroMine.... Please, never touch this code again. It works !*/}

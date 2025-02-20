@@ -195,32 +195,32 @@ function DisplayDifference({ oldPlayerInfo, newPlayerInfo }: displayDifferencePr
       {oldPlayerInfo.metier.farmer.level > newPlayerInfo.metier.farmer.level &&
         <SmallCardInfo title={"Metier de farmer"}
                        value={oldPlayerInfo.metier.farmer.level + " -> " + newPlayerInfo.metier.farmer.level}
-                       img={`/JobsIcon/Fermier.webp`} unoptimized/>
+                       img={safeJoinPaths(constants.imgPathProfile, `/JobsIcon/Fermier.webp`)} unoptimized/>
       }
 
       {oldPlayerInfo.metier.miner.level > newPlayerInfo.metier.miner.level &&
         <SmallCardInfo title={"Metier de mineur"}
                        value={oldPlayerInfo.metier.miner.level + " -> " + newPlayerInfo.metier.miner.level}
-                       img={`/JobsIcon/Mineur.webp`} unoptimized/>
+                       img={safeJoinPaths(constants.imgPathProfile, `/JobsIcon/Mineur.webp`)} unoptimized/>
       }
 
       {oldPlayerInfo.metier.hunter.level > newPlayerInfo.metier.hunter.level &&
         <SmallCardInfo title={"Metier de chasseur"}
                        value={oldPlayerInfo.metier.hunter.level + " -> " + newPlayerInfo.metier.hunter.level}
-                       img={`/JobsIcon/Chasseur.webp`} unoptimized/>
+                       img={safeJoinPaths(constants.imgPathProfile, `/JobsIcon/Chasseur.webp`)} unoptimized/>
       }
 
       {oldPlayerInfo.metier.alchemist.level > newPlayerInfo.metier.alchemist.level &&
         <SmallCardInfo title={"Metier d'alchimiste"}
                        value={oldPlayerInfo.metier.alchemist.level + " -> " + newPlayerInfo.metier.alchemist.level}
-                       img={`/JobsIcon/Alchimiste.webp`} unoptimized/>
+                       img={safeJoinPaths(constants.imgPathProfile, `/JobsIcon/Alchimiste.webp`)} unoptimized/>
       }
 
       {
         oldPlayerInfo.building.filter((e, index) => e.own > newPlayerInfo.building[index].own).map((b) => {
           return <SmallCardInfo title={b.name} key={"building" + b.index}
                                 value={"lvl: " + oldPlayerInfo.building[b.index].own + " -> lvl: " + newPlayerInfo.building[b.index].own}
-                                img={`/BuildingIcon/${b.index}.png`} unoptimized/>
+                                img={safeJoinPaths(constants.imgPathClicker, `/BuildingIcon/${b.index}.png`)} unoptimized/>
         })
       }
 
@@ -230,7 +230,7 @@ function DisplayDifference({ oldPlayerInfo, newPlayerInfo }: displayDifferencePr
             return <SmallCardInfo title={b.name}
                                   key={"global" + index}
                                   value={"✔️ -> ❌"}
-                                  img={`/GlobalIcon/${index}.png`} unoptimized/>
+                                  img={safeJoinPaths(constants.imgPathClicker, `/GlobalIcon/${index}.png`)} unoptimized/>
           else return null
         })
       }
@@ -241,7 +241,7 @@ function DisplayDifference({ oldPlayerInfo, newPlayerInfo }: displayDifferencePr
             return <SmallCardInfo title={b.name}
                                   key={"terrain" + index}
                                   value={"✔️ -> ❌"}
-                                  img={`/TerrainIcon/${index}.png`} unoptimized/>
+                                  img={safeJoinPaths(constants.imgPathClicker, `/TerrainIcon/${index}.png`)} unoptimized/>
           else return null
         })
       }
@@ -252,7 +252,7 @@ function DisplayDifference({ oldPlayerInfo, newPlayerInfo }: displayDifferencePr
             return <SmallCardInfo title={b.name}
                                   key={"building_upgrade" + index}
                                   value={"✔️ -> ❌"}
-                                  img={`/BuildingUpgradeIcon/${index <= 15 ? 0 : 1}.png`} unoptimized/>
+                                  img={safeJoinPaths(constants.imgPathClicker, `/BuildingUpgradeIcon/${index <= 15 ? 0 : 1}.png`)} unoptimized/>
           else return null
         })
       }
@@ -264,7 +264,7 @@ function DisplayDifference({ oldPlayerInfo, newPlayerInfo }: displayDifferencePr
             return <SmallCardInfo title={b.name}
                                   key={"many" + index}
                                   value={"✔️ -> ❌"}
-                                  img={`/ManyIcon/0.png`} unoptimized/>
+                                  img={safeJoinPaths(constants.imgPathClicker, `/ManyIcon/0.png`)} unoptimized/>
           else return null
         })
       }
@@ -275,7 +275,7 @@ function DisplayDifference({ oldPlayerInfo, newPlayerInfo }: displayDifferencePr
             return <SmallCardInfo title={b.name}
                                   key={"posterior" + index}
                                   value={"✔️ -> ❌"}
-                                  img={`/PosteriorIcon/0.png`} unoptimized/>
+                                  img={safeJoinPaths(constants.imgPathClicker, `/PosteriorIcon/0.png`)} unoptimized/>
           else return null
         })
       }
@@ -286,7 +286,7 @@ function DisplayDifference({ oldPlayerInfo, newPlayerInfo }: displayDifferencePr
             return <SmallCardInfo title={b.name}
                                   key={"category" + index}
                                   value={"✔️ -> ❌"}
-                                  img={`/CategoryIcon/${index}.png`} unoptimized/>
+                                  img={safeJoinPaths(constants.imgPathClicker, `/CategoryIcon/${index}.png`)} unoptimized/>
           else return null
         })
       }

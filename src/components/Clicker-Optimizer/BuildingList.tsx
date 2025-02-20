@@ -7,13 +7,13 @@ import BuildingJson from "@/assets/building.json"
 import { BuildingInput, BuildingPrice, BuildingRPS } from "@/components/Clicker-Optimizer/BuildingListClient.tsx";
 import Image from "next/image";
 import React from "react";
-
+import constants from "@/lib/constants.ts";
 const BuildingList = () => {
   function getImgPath(index: number, price: number) {
     if (price === -1)
       return "/unknown.png";
     else
-      return "/BuildingIcon/" + index + ".png";
+      return safeJoinPaths(constants.imgPathClicker,"/BuildingIcon/" + index + ".png");
   }
 
   return (
@@ -23,7 +23,7 @@ const BuildingList = () => {
         {BuildingJson.map((building, index) => (
           <Building
             key={building.name + index}
-            imgPath={safeJoinPaths(getImgPath(index, Number(building.price) ?? -1))}
+            imgPath={getImgPath(index, Number(building.price) ?? -1)}
             index={index}
           />
         ))

@@ -156,22 +156,22 @@ export function computePrice(priceLevel0: number, level: number) {
 export function getPathImg(bestListName: string, bestUpgradeIndex: number) {
   switch (bestListName) {
     case "building":
-      return safeJoinPaths("/BuildingIcon/", `${bestUpgradeIndex}.png`);
+      return safeJoinPaths(constants.imgPathClicker,"/BuildingIcon/", `${bestUpgradeIndex}.png`);
     case "building_upgrade":
-      return safeJoinPaths("/BuildingUpgradeIcon/", (bestUpgradeIndex < 16 ? "0" : "1") + ".png");
+      return safeJoinPaths(constants.imgPathClicker,"/BuildingUpgradeIcon/", (bestUpgradeIndex < 16 ? "0" : "1") + ".png");
     case "category_upgrade":
-      return safeJoinPaths("/CategoryIcon/", `${bestUpgradeIndex}.png`);
+      return safeJoinPaths(constants.imgPathClicker,"/CategoryIcon/", `${bestUpgradeIndex}.png`);
     case "global_upgrade":
-      return safeJoinPaths("/GlobalIcon/", `${bestUpgradeIndex}.png`);
+      return safeJoinPaths(constants.imgPathClicker,"/GlobalIcon/", `${bestUpgradeIndex}.png`);
     case "many_upgrade":
-      return safeJoinPaths("/ManyIcon/0.png");
+      return safeJoinPaths(constants.imgPathClicker,"/ManyIcon/0.png");
     case "terrain_upgrade":
-      return safeJoinPaths("/TerrainIcon/", `${bestUpgradeIndex}.png`);
+      return safeJoinPaths(constants.imgPathClicker,"/TerrainIcon/", `${bestUpgradeIndex}.png`);
     case "posterior_upgrade":
-      return safeJoinPaths("/PosteriorIcon/0.png");
+      return safeJoinPaths(constants.imgPathClicker,"/PosteriorIcon/0.png");
     default:
       alert("Error in bestListName");
-      return safeJoinPaths("/BuildingUpgradeIcon/0.png");
+      return safeJoinPaths(constants.imgPathClicker,"/BuildingUpgradeIcon/0.png");
   }
 }
 

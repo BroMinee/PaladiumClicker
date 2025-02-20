@@ -7,22 +7,23 @@ import Image from "next/image";
 import HoverText from "@/components/ui/hovertext.tsx";
 import { ReactNode } from "react";
 import { PreconditionDisplay } from "@/lib/PreconditionDisplay.tsx";
+import constants from "@/lib/constants.ts";
 
 const ClickList = () => {
   function getImgPath(index: number, price: string) {
     if (Number(price) === -1)
       return "/unknown.png";
     else if (index === 24)
-      return "/CPSIcon/" + index + ".webp";
+      return safeJoinPaths(constants.imgPathClicker, "/CPSIcon/" + index + ".webp");
     else
-      return "/CPSIcon/" + index + ".png";
+      return safeJoinPaths(constants.imgPathClicker,"/CPSIcon/" + index + ".png");
   }
 
   return (
     <ScrollArea>
       <div className="grid grid-cols-4 sm:grid-cols-6 md:grid-cols-8 lg:grid-cols-10 xl:grid-cols-13 gap-2">
         {CPSJson.map((cps, index) => (
-          <CPS key={cps.name + index} imgPath={safeJoinPaths(getImgPath(index, cps.name))} index={index}/>
+          <CPS key={cps.name + index} imgPath={getImgPath(index, cps.name)} index={index}/>
         ))}
       </div>
       <ScrollBar orientation="horizontal"/>
