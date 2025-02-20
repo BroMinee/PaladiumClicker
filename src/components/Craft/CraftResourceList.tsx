@@ -9,6 +9,7 @@ import LoadingSpinner from "@/components/ui/loading-spinner.tsx";
 import GradientText from "@/components/shared/GradientText.tsx";
 import { getPaladiumAhItemStatsOfAllItemsAction } from "@/lib/api/apiServerAction.ts";
 import { redirect } from "next/navigation";
+import { DisplayItemProduce } from "@/components/Craft/CraftingDisplayItem.tsx";
 
 export function CraftResourceList({ list }: { list: NodeType[] }) {
   const [listState, setListState] = useState<NodeType[] | null>(null);
@@ -30,7 +31,6 @@ export function CraftResourceList({ list }: { list: NodeType[] }) {
     if (mounted && listState !== null) {
       getPaladiumAhItemStatsOfAllItemsAction().then((res) => {
         const listStateFlatten = listState.map((node) => node.value);
-        console.warn("res", res, listStateFlatten, res.filter((el) => listStateFlatten.includes(el.name)))
         setAhItems(res.filter((el) => listStateFlatten.includes(el.name)));
       }).catch((e) => {
         console.error(e);
@@ -41,15 +41,14 @@ export function CraftResourceList({ list }: { list: NodeType[] }) {
 
   useEffect(() => {
     if (listState !== null && ahItems.length !== 0) {
-      let newSubTotalPrice = [];
-      listState.forEach((slot) => {
+      let newSubTotalPrice = new Array(listState.length).fill(0);
+      listState.forEach((slot, slotIndex) => {
         const found = ahItems.find((el) => el.name === slot.value);
         if (found === undefined) {
           console.error(`Item ${slot.value} not found in ahItems`, ahItems);
           return;
         }
         const listing = found.listing.toSorted((a, b) => a.price - b.price);
-        console.log(listing, slot.value, slot.count, found.priceAverage, found.quantityAvailable)
         let sum = 0;
         let remaining = slot.count;
         for (let i = 0; i < listing.length; i++) {
@@ -69,7 +68,7 @@ export function CraftResourceList({ list }: { list: NodeType[] }) {
         if (remaining > 0) {
           console.error(`Not enough quantity for ${slot.value} in the market using average price instead.`);
         }
-        newSubTotalPrice.push(sum);
+        newSubTotalPrice[slotIndex] = sum;
         return sum;
       });
 
@@ -89,10 +88,9 @@ export function CraftResourceList({ list }: { list: NodeType[] }) {
         </CardHeader>
         <CardContent className="pt-2 gap-1 grid grid-cols-3">
           {listState !== null && listState.length > 0 && listState.map((slot, index) =>
-            <SmallCardInfo key={slot.value + index + "-needed"} title={"x" + slot.count + " " + slot.label}
-                           className="bg-secondary/50 rounded-md px-2"
+            <DisplayItemProduce key={slot.value + index + "-needed"} title={"x" + slot.count + " " + slot.label}
                            value={`${Math.floor(slot.count / 64)} ${adaptPlurial("stack", Math.floor(slot.count / 64))} et ${slot.count - Math.floor(slot.count / 64) * 64}`}
-                           img={`/AH_img/${slot.img}`} unoptimized count={slot.count}/>
+                           img={`/AH_img/${slot.img}`} count={slot.count} slot={slot}/>
           )}
           {listState !== null && listState.length === 0 &&
             <span
@@ -111,24 +109,21 @@ export function CraftResourceList({ list }: { list: NodeType[] }) {
               const found = ahItems.find((el) => el.name === slot.value);
               if (found === undefined) {
                 console.error(`Item ${slot.value} not found in ahItems`, ahItems);
-                return <SmallCardInfo key={slot.value + index + "-needed-dollar"} title={"⚠️ " + slot.label}
-                                      className="bg-secondary/50 rounded-md p-2"
+                return <DisplayItemProduce key={slot.value + index + "-needed-dollar"} title={"⚠️ " + slot.label}
                                       value={"Pas en vente actuellement au market"}
-                                      img={`/AH_img/${slot.img}`} unoptimized count={slot.count}/>
+                                      count={slot.count} slot={slot}/>
               }
 
               if (found.quantityAvailable < slot.count) {
-                return <SmallCardInfo key={slot.value + index + "-needed-dollar"}
+                return <DisplayItemProduce key={slot.value + index + "-needed-dollar"}
                                       title={"⚠️ " + slot.label + ` - Quantité insuffisante au market il en manquera ${slot.count - found.quantityAvailable}`}
-                                      className="bg-secondary/50 rounded-md p-2"
                                       value={`Total de : ${formatPrice(subTotalPrice[index])} $`}
-                                      img={`/AH_img/${slot.img}`} unoptimized count={slot.count}/>
+                                      count={slot.count} slot={slot}/>
               }
 
-              return <SmallCardInfo key={slot.value + index + "-needed-dollar"} title={slot.label}
-                                    className="bg-secondary/50 rounded-md p-2"
+              return <DisplayItemProduce key={slot.value + index + "-needed-dollar"} title={slot.label}
                                     value={`Total de : ${formatPrice(subTotalPrice[index])} $`}
-                                    img={`/AH_img/${slot.img}`} unoptimized count={slot.count}/>
+                                    count={slot.count} slot={slot}/>
             }
           )}
           {listState !== null && listState.length === 0 &&

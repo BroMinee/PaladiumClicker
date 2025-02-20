@@ -156,7 +156,7 @@ export function isSameTree(node1: MyTreeNode, node2: Tree<NodeType>): boolean {
 
 export function displayNode(node: NodeType) {
   return <div className="inline-flex gap-2 justify-center items-center m-2">
-    <Image src={`/AH_img/${node.img}`} alt="Node 1" width={40} height={40} className="pixelated"/>
+    <Image src={`/AH_img/${node.img}`} alt="Node 1" width={40} height={40} className="pixelated" unoptimized/>
     <span className="text-xl">{node.count}x {node.label}</span>
   </div>;
 }
