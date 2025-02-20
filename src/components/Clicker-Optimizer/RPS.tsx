@@ -21,6 +21,7 @@ import Image from "next/image";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover.tsx";
 import { GiProgression } from "react-icons/gi";
 import DelayedNotificationButton from "@/components/Clicker-Optimizer/NotificationButton.tsx";
+import constants from "@/lib/constants.ts";
 
 const RPS = () => {
   const { data: playerInfo, setPlayerInfo } = usePlayerInfoStore();
@@ -96,7 +97,7 @@ const RPS = () => {
             </div>
             :
             <div className="flex flex-col items-center gap-4 justify-center">
-              <Image width={128} height={128} src={safeJoinPaths("/arty_chocbar.webp")}
+              <Image width={128} height={128} src={safeJoinPaths(constants.imgPathError, "arty_chocbar.webp")}
                      className="h-auto object-contain"
                      alt="Arty"/>
               <p className="text-sm text-center">Bravo tu as tout acheté, va prendre une douche
@@ -111,7 +112,7 @@ const RPS = () => {
       <Card>
         <CardContent className="h-full pt-6 flex items-center gap-4">
           {rps < 0 ?
-            <Image width={48} height={48} src={safeJoinPaths("/arty_chocbar.webp")}
+            <Image width={48} height={48} src={safeJoinPaths(constants.imgPathError, "/arty_chocbar.webp")}
                    className="h-auto object-contain"
                    alt="Arty"/> :
             <FaCoins className="w-12 h-12"/>

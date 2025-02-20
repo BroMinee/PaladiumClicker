@@ -2,6 +2,7 @@
 import Image from "next/image";
 import { Card, CardContent, CardHeader } from "@/components/ui/card.tsx";
 import { safeJoinPaths } from "@/lib/misc.ts";
+import constants from "@/lib/constants.ts";
 
 export default function ErrorBoundary({ error }: { error: Error }) {
 
@@ -14,10 +15,10 @@ export default function ErrorBoundary({ error }: { error: Error }) {
       <div className="py-8 px-4 mx-auto max-w-screen-xl lg:py-16 lg:px-6">
         <div className="mx-auto max-w-screen-sm text-center">
           <div className="flex flex-row items-center justify-center gap-2">
-            <Image src={safeJoinPaths("/arty_decu_right.webp")} alt="arty" width={128} height={92}/>
+            <Image src={safeJoinPaths(constants.imgPathError, "/arty_decu_right.webp")} alt="arty" width={128} height={92}/>
             <p className="mb-4 text-3xl tracking-tight font-bold md:text-4xl text-white">Une erreur
               est survenue.</p>
-            <Image src={safeJoinPaths("/arty_decu_left.webp")} alt="arty" width={128} height={92}/>
+            <Image src={safeJoinPaths(constants.imgPathError, "/arty_decu_left.webp")} alt="arty" width={128} height={92}/>
           </div>
           <p className="mb-4 text-2xl tracking-tight font-bold md:text-4xl text-red-500">{error.message}</p>
           <p className="mb-4 text-lg font-light text-gray-400">Si le problème persiste merci d&apos;envoyer une capture

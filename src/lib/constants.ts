@@ -646,7 +646,7 @@ const imgPathMarket = "/img/MarketUI/";
 const imgPathRanking = "/img/Ranking/";
 const imgPathClicker = "/img/Clicker/";
 const imgPathCraft = "/img/Craft/";
-
+const imgPathError = "/img/Error/";
 
 const constants = {
   defaultUsername,
@@ -682,6 +682,7 @@ const constants = {
   imgPathRanking,
   imgPathClicker,
   imgPathCraft,
+  imgPathError,
 };
 
 export default constants;
