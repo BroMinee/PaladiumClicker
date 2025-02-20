@@ -5,7 +5,8 @@
       "Ajout du détail des offres dans le [market](https://palatracker.bromine.fr/ah)",
       "Le prix de fabrication prend maintenant en compte les offres les moins chères au lieu du prix moyen dans le calcul : [Craft Optimizer](https://palatracker.bromine.fr/craft)",
       "Ajout des nouveaux grades dans le [profil](https://palatracker.bromine.fr/profil/BroMine__)",
-      "Ajout de la grinder, alchemy creator, furnace, grinder et palamachine dans le [craft](https://palatracker.bromine.fr/craft?count=1&item=hammer-paladium)"
+      "Ajout de la grinder, alchemy creator, furnace, grinder et palamachine dans le [craft](https://palatracker.bromine.fr/craft?count=1&item=hammer-paladium)",
+      "Suppression des temps du [pala-animation](https://palatracker.bromine.fr/pala-animation) car maintenant il faut s'authentifier avec Discord pour pouvoir s'entrainer, ca permet de s'assurer que les temps réalisés avec un pseudo sont bien ceux du joueur"
     ]
   },
   {
