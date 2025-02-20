@@ -19,7 +19,8 @@ import { PopupCurrentEvent } from "@/components/Events/PopupCurrentEvent.tsx";
 import { Event } from "@/types/db_types.ts";
 import { PopupRewardEvent } from "@/components/Events/PopupRewardEvent.tsx";
 import { PopupNoRewardEvent } from "@/components/Events/PopupNoRewardEvent.tsx";
-import { NotificationWebSiteResponse } from "@/types";
+import { NavBarCategory, NotificationWebSiteResponse } from "@/types";
+import { useNavbarStore } from "@/stores/use-navbar-store.ts";
 
 
 export default function LinkClient({ path, children }: {
@@ -110,14 +111,14 @@ export default function LinkClient({ path, children }: {
   );
 }
 
-export function CategorieDisplay({ name, children, defaultOpen = false }: {
-  name: string,
+export function CategorieDisplay({ name, children }: {
+  name: NavBarCategory,
   children: React.ReactNode,
-  defaultOpen?: boolean
 }) {
   const { data: playerInfo } = usePlayerInfoStore();
 
-  const [open, setOpen] = useState(defaultOpen);
+  const [open, setOpen] = useState(false);
+  const { opened, setToggleOpen } = useNavbarStore();
   const { last_visited } = useNotificationStore();
   let subLinks: PathValid[] = constants.MenuPath.get(name) || [];
   const [mounted, setMounted] = useState(false);
@@ -126,6 +127,17 @@ export function CategorieDisplay({ name, children, defaultOpen = false }: {
   useEffect(() => {
     setMounted(true);
   }, [])
+
+  useEffect(() => {
+    if (!mounted)
+      return;
+    setOpen(opened.includes(name));
+  }, [mounted, opened]);
+
+  function toggleOpen() {
+    setOpen(!open)
+    setToggleOpen(name);
+  }
 
   useEffect(() => {
     if (mounted) {
@@ -151,7 +163,7 @@ export function CategorieDisplay({ name, children, defaultOpen = false }: {
 
 
   return (<div className="flex flex-col justify-start items-center px-6 border-b border-gray-600 w-full">
-    <button onClick={() => setOpen(!open)}
+    <button onClick={toggleOpen}
             className="focus:outline-none focus:text-indigo-400  text-card-foreground flex justify-between items-center w-full py-5 space-x-14  ">
       <p className="text-sm text-left leading-5 uppercase">{name}</p>
       {open ? <FaAngleUp size={24}/> : <FaAngleDown size={24}/>}

@@ -724,6 +724,8 @@ export type WebHookCreate = {
     | null;
 }
 
+export type NavBarCategory = "Statistiques et données" | "Outils" | "Informations et gestion";
+
 export const getItemFromName = (itemName: string) => {
   switch (itemName) {
     case 'amethyst-ingot':

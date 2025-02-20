@@ -47,7 +47,7 @@ function NavBarContent() {
         <div className="flex justify-center w-full border-gray-600 border-b space-y-3 pb-5 ">
           <ImportProfil showResetButton navBar/>
         </div>
-        <CategorieDisplay name={"Statistiques et données"} defaultOpen={true}>
+        <CategorieDisplay name={"Statistiques et données"}>
           <LinkClient path={constants.profilPath}>
             <FaRegUser size={24}/>
           </LinkClient>
@@ -61,7 +61,7 @@ function NavBarContent() {
             <PiRankingBold size={24}/>
           </LinkClient>
         </CategorieDisplay>
-        <CategorieDisplay name={"Outils"} defaultOpen={true}>
+        <CategorieDisplay name={"Outils"}>
           <LinkClient path={constants.optimizerClickerPath}>
             <GrOptimize size={24}/>
           </LinkClient>

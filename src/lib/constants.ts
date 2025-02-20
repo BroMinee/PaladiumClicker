@@ -1,4 +1,4 @@
-import { MetierKey } from "@/types";
+import { MetierKey, NavBarCategory } from "@/types";
 
 const version = 0;
 
@@ -466,7 +466,7 @@ const notificationPath: Map<PathValid, [number, string]> = new Map<PathValid, [n
     ["/webhook", [new Date("2025-01-24").getTime(), "Nouvel outil"]],
   ]);
 
-const menuPaths: Map<string, PathValid[]> = new Map<string, PathValid[]>([
+const menuPaths: Map<NavBarCategory, PathValid[]> = new Map<NavBarCategory, PathValid[]>([
   ['Statistiques et données', ["/profil", "/ah", "/admin-shop", "/ranking?category=money"]],
   ['Outils', ["/clicker-optimizer", "/xp-calculator", "/pala-animation", "/craft", "/webhook"]],
   ['Informations et gestion', ["/status", "/palatime", "/patchnote", "/politique-de-confidentialite", "/about"]],
