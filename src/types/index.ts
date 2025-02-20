@@ -301,7 +301,7 @@ export type MarketListedItem = MarketItemOffer[]
 export type MarketItemOffer = {
   seller: string,
   name: string, // Display name of the item
-  rename: boolean,
+  renamed: boolean,
   quantity: number, // The remaining quantity of the item currenlty listed
   price: number, // The price of the item in ($)
   pricePb: number, // The price of the item in pb

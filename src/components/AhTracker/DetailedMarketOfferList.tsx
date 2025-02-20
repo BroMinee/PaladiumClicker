@@ -42,6 +42,12 @@ export function DetailedMarketOffer({ itemSelected, offer }: { itemSelected: Opt
     </div>
   );
 
+  const hoverElementName: ReactNode = (
+    <div className="flex flex-col items-center justify-center border-black border-2 rounded-xl p-2 bg-secondary">
+      {`${itemSelected.label}`}
+    </div>
+  );
+
   const overlayNames = ["amethyst_overlay.png", "candy_overlay.png", "cavern_overlay.png", "diamond_overlay.png", "emerald_overlay.png", "eruption_overlay.png", "gold_overlay.png", "great_tree_overlay.png", "iron_overlay.png", "lapis_lazuli_overlay.png", "plain_overlay.png", "redstone_overlay.png", "snow_overlay.png"]
   const overlayName = overlayNames[Math.floor(Math.random() * overlayNames.length)]
 
@@ -54,9 +60,15 @@ export function DetailedMarketOffer({ itemSelected, offer }: { itemSelected: Opt
              className="h-[50%] w-[50%] pixelated absolute"/>
     </div>
     <div className="flex flex-row items-center w-[20%] ml-4 justify-around">
-      <p className="font-bold text-[25px]">
-        {offer.rename ? textFormatting(offer.name) : offer.name}
+      {offer.renamed ? <HoverText text={hoverElementName}>
+          <p className="font-bold text-[25px]">
+            {textFormatting(`*${offer.name}*`)}
+          </p>
+        </HoverText> :
+        <p className="font-bold text-[25px]">
+          {offer.name}
       </p>
+      }
       <p className="font-bold text-[25px]">
         X{offer.quantity}
       </p>
