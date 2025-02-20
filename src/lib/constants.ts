@@ -641,6 +641,9 @@ const dictAchievementIdToIcon = new Map<string, string>([
   ["1:palamod:tile.trixium_block:0#", "tile-trixium-block"],
 ]);
 
+const imgPathProfile = "/img/Profile/";
+const imgPathMarket = "/img/MarketUI/";
+
 
 const constants = {
   defaultUsername,
@@ -671,6 +674,8 @@ const constants = {
   dictAchievementIdToIcon,
   startSeason,
   webhooksPath,
+  imgPathProfile,
+  imgPathMarket,
 };
 
 export default constants;

@@ -288,28 +288,28 @@ export function safeJoinPaths(base: string, ...paths: string[]): string {
 
 export function getRankImg(rank: string) {
   if (rank === "Default") {
-    return "/img/Rank/dirt.png";
+    return safeJoinPaths(constants.imgPathProfile,"dirt.png");
   } else if (rank === "Titan") {
-    return "/img/Rank/titan.png";
+    return safeJoinPaths(constants.imgPathProfile,"titan.png");
   } else if (rank === "Paladin") {
-    return "/img/Rank/paladin.png";
+    return safeJoinPaths(constants.imgPathProfile,"paladin.png");
   } else if (rank === "Endium") {
-    return "/img/Rank/endium.png";
+    return safeJoinPaths(constants.imgPathProfile,"endium.png");
   } else if (rank === "Trixium") {
-    return "/img/Rank/trixium.png";
+    return safeJoinPaths(constants.imgPathProfile,"trixium.png");
   } else if (rank === "Trixium+") {
-    return "/img/Rank/trixium+.png";
+    return safeJoinPaths(constants.imgPathProfile,"trixium+.png");
   } else if (rank === "Youtuber") {
-    return "/img/Rank/youtuber.png";
+    return safeJoinPaths(constants.imgPathProfile,"youtuber.png");
   } // New rank v10.5
   else if (rank === "Heros") {
-    return "/img/Rank/heros.png";
+    return safeJoinPaths(constants.imgPathProfile,"heros.png");
   }else if (rank === "Divinity") {
-    return "/img/Rank/divinity.png";
+    return safeJoinPaths(constants.imgPathProfile,"divinity.png");
   }else if (rank === "Legend") {
-    return "/img/Rank/legend.png";
+    return safeJoinPaths(constants.imgPathProfile,"legend.png");
   }else if (rank === "Premium") {
-    return "/img/Rank/premium.png";
+    return safeJoinPaths(constants.imgPathProfile,"premium.png");
   }
   else {
     return "unknown.png"

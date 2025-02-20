@@ -10,6 +10,7 @@ import { AhItemType, OptionType } from "@/types";
 import LoadingData from "@/components/LoadingData.tsx";
 import Image from "next/image";
 import Link from "next/link";
+import constants from "@/lib/constants.ts";
 
 type AhItemsProps = {
   item: AhItemType,
@@ -65,19 +66,19 @@ export default function AhItem({ item, itemNameMatcher }: AhItemsProps) {
           </div>
           <div className="space-y-2">
             <div className="text-sm">
-              <Image src={safeJoinPaths("dollar.png")} alt="Icône"
+              <Image src={safeJoinPaths(constants.imgPathProfile, "dollar.png")} alt="dollar"
                      width={40} height={40}
                      className="object-cover inline-block pixelated mr-2"/>
               Prix: {formatPrice(price)} $
             </div>
             <div className="text-sm">
-              <Image src={safeJoinPaths("/pbs.png")} alt="Icône"
+              <Image src={safeJoinPaths(constants.imgPathMarket,"pb_icon.png")} alt="pb_icon"
                      width={40} height={40}
                      className="object-cover pixelated inline-block mr-2"/>
               Prix en pbs: {formatPrice(pricePb)}
             </div>
             <div className="text-sm">
-              <Image src={safeJoinPaths("/clock.gif")} alt="Icône"
+              <Image src={safeJoinPaths(constants.imgPathProfile,"/clock.gif")} alt="clock"
                      width={40} height={40}
                      className="object-cover pixelated inline-block mr-2"/>
               Expire le : {expireAt}

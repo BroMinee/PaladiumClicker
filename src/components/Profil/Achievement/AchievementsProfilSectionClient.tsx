@@ -3,7 +3,7 @@ import { Bar, BarChart, LabelList, ResponsiveContainer, XAxis, YAxis } from "rec
 import { useEffect, useRef, useState } from "react";
 import { usePlayerInfoStore } from "@/stores/use-player-info-store.ts";
 import { CardTitle } from "@/components/ui/card.tsx";
-import { formatPrice } from "@/lib/misc.ts";
+import { formatPrice, safeJoinPaths } from "@/lib/misc.ts";
 import { useTheme } from "next-themes";
 import { Achievement, CategoryEnum } from "@/types";
 import { cn } from "@/lib/utils.ts";
@@ -250,7 +250,7 @@ function DetailAchievement({ achievement, itemList }: {
   const amount = achievement.amount === -1 ? achievement.subAchievements.length : achievement.amount;
   const value = achievementProgress * 100 / amount;
 
-  let arrowPath = achievement.subAchievements.length === 0 ? "" : (showSubAchievements ? "/ProfileImg/arrow_top.png" : "/ProfileImg/arrow_down.png");
+  let arrowPath = achievement.subAchievements.length === 0 ? "" : (showSubAchievements ? safeJoinPaths(constants.imgPathProfile, "/arrow_top.png") : safeJoinPaths(constants.imgPathProfile,"/arrow_down.png"));
 
 
   let closestItemName = itemList.find((item) => item.value === constants.dictAchievementIdToIcon.get(achievement.icon))?.img ?? "unknown.png";
@@ -264,7 +264,7 @@ function DetailAchievement({ achievement, itemList }: {
   return <div onClick={() => achievement.subAchievements.length !== 0 && setShowSubAchievements(!showSubAchievements)}
               className={cn("border-2 border-secondary-foreground px-2 animate-fade-in", achievement.completed && "bg-green-400/50 hover:bg-green-500/50")}>
     <AchievementInfo title={achievement.name}
-                     img={achievement.completed ? "/ProfileImg/completed.png" : `/AH_img/${closestItemName}`}
+                     img={achievement.completed ? safeJoinPaths(constants.imgPathProfile,"completed.png") : `/AH_img/${closestItemName}`}
                      value={achievement.description}
                      unoptimized
                      arrowPath={arrowPath}
@@ -299,7 +299,7 @@ export function DisplayProgressionAchievement({ achievementProgress, amount, val
 }
 
 function SubAchievementDisplay({ subAchievement }: { subAchievement: Achievement }) {
-  const imgPath = subAchievement.completed ? "/ProfileImg/sub_checked.png" : "/ProfileImg/sub_unchecked.png";
+  const imgPath = subAchievement.completed ? safeJoinPaths(constants.imgPathProfile, "sub_checked.png") : safeJoinPaths(constants.imgPathProfile,"sub_unchecked.png");
 
   return <div className="flex flex-row gap-4 items-center pl-10">
     <Image width={20} height={20} src={imgPath} alt={subAchievement.completed ? "checked" : "unchecked"}/>

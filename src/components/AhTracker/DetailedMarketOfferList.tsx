@@ -1,11 +1,12 @@
 import { MarketItemOffer, MarketListedItem, OptionType } from "@/types";
-import { formatPrice, formatPriceWithUnit } from "@/lib/misc.ts";
+import { formatPrice, formatPriceWithUnit, safeJoinPaths } from "@/lib/misc.ts";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area.tsx";
 import React, { ReactNode } from "react";
 import Image from "next/image";
 import { SellNameMarket } from "@/components/AhTracker/DetailedMarketOfferClient.tsx";
 import { textFormatting } from "@/components/News.tsx";
 import HoverText from "@/components/ui/hovertext.tsx";
+import constants from "@/lib/constants.ts";
 
 
 export default async function DetailedMarketOfferList({ listing, item }: {
@@ -58,7 +59,7 @@ export function DetailedMarketOffer({ itemSelected, offer }: { itemSelected: Opt
   return <div className="grid grid-cols-2 md:flex md:flex-row items-center m-2 bg-card/65 pr-4 pb-2 text-card-foreground">
     <div className="col-span-2 flex flex-row gap-8 md:w-[35%] w-full">
       <div className="flex relative min-w-28 w-28 h-28 items-center justify-center">
-        <Image src={`/img/MarketUI/${overlayName}`} width={0} height={0} alt={itemSelected.label} unoptimized={true}
+        <Image src={safeJoinPaths(constants.imgPathMarket,overlayName)} width={0} height={0} alt={itemSelected.label} unoptimized={true}
                className="h-full w-full pixelated absolute"/>
         <Image src={`/AH_img/${itemSelected.img}`} width={0} height={0} alt={itemSelected.label} unoptimized={true}
                className="h-[50%] w-[50%] pixelated absolute"/>
@@ -92,7 +93,7 @@ export function DetailedMarketOffer({ itemSelected, offer }: { itemSelected: Opt
       {offer.pricePb &&
         <HoverText text={hoverElementPricePb}
                    className="flex flex-row w-full xl:w-[45%] gap-8 justify-between bg-card py-3 px-2 items-center">
-          <Image src={`/img/MarketUI/pb_icon.png`}
+          <Image src={safeJoinPaths(constants.imgPathMarket,"pb_icon.png")}
                  className="w-fit h-7 pixelated"
                  alt={`pb_icon`} width={0} height={0}
                  unoptimized={true}
@@ -105,7 +106,7 @@ export function DetailedMarketOffer({ itemSelected, offer }: { itemSelected: Opt
       }
       <HoverText text={hoverElementPrice}
                  className="flex flex-row w-full xl:w-[65%] gap-8 justify-between bg-card py-3 px-2 items-center">
-        <Image src={`/img/MarketUI/money_icon.png`}
+        <Image src={safeJoinPaths(constants.imgPathMarket,"money_icon.png")}
                className="w-fit h-7 pixelated"
                alt={`money_icon`} width={0} height={0}
                unoptimized={true}

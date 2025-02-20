@@ -23,7 +23,7 @@ export function ProfilDescriptionAndBanner() {
   const { data: playerInfo } = usePlayerInfoStore();
 
   const description = playerInfo?.description === "" ? "Aucune description" : playerInfo?.description;
-  let imgPath = "/ProfileImg";
+  let imgPath = constants.imgPathProfile;
   if (playerInfo?.currentBanner) {
     imgPath = safeJoinPaths(imgPath, `${playerInfo.currentBanner}.png`);
   }
@@ -51,7 +51,7 @@ export function ProfilAlliance() {
     return null;
   }
 
-  const logo = safeJoinPaths(`/ProfileImg/logo_${playerInfo.alliance.toLowerCase()}.png`);
+  const logo = safeJoinPaths(constants.imgPathProfile, `/logo_${playerInfo.alliance.toLowerCase()}.png`);
 
   return <Image src={logo} alt="Chaos" width={32} height={32}
                 unoptimized={true}/>
@@ -69,7 +69,7 @@ export function PlayerMoney() {
   const { data: playerInfo } = usePlayerInfoStore();
   return <>
     <SmallCardInfo title="Argent actuel" value={`${formatPrice(Math.round(playerInfo?.money || 0))} $`}
-                   img="dollar.png" unoptimized/>
+                   img={safeJoinPaths(constants.imgPathProfile,"dollar.png")} unoptimized/>
   </>
 }
 
@@ -110,13 +110,13 @@ export function PlayerRank() {
 export function PlayerTimePlayed() {
   const { data: playerInfo } = usePlayerInfoStore();
   return <SmallCardInfo title="Temps de jeu" value={computeTimePlayed(playerInfo?.timePlayed || 0)}
-                        img="clock.gif"/>
+                        img={safeJoinPaths(constants.imgPathProfile,"clock.gif")}/>
 }
 
 export function PlayerFirstConnection() {
   const { data: playerInfo } = usePlayerInfoStore();
   return <SmallCardInfo title="Première connexion" value={convertEpochToDateUTC2(playerInfo?.firstJoin || 1)}
-                        img="clock.gif"/>
+                        img={safeJoinPaths(constants.imgPathProfile,"clock.gif")}/>
 }
 
 export function PlayerFriendsCount() {
@@ -139,7 +139,7 @@ export function PlayerFriends() {
     <>
       {
         playerInfo.friends?.data?.map((player) => (
-          <a href={`${constants.profilPath}/${player.name}`} key={player.uuid}>
+          <a href={safeJoinPaths(constants.profilPath, player.name)} key={player.uuid}>
             <Card className="hover:scale-105 duration-300 mt-4 ml-1.5 mr-1.5 cursor-pointer">
               <CardContent className="md:pt-6 space-y-2">
                 <div className="flex flex-col items-center justify-center gap-2">
