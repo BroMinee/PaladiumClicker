@@ -137,6 +137,7 @@ export function HowToXp({ searchParams }: {
           <div className="flex flex-row items-center gap-4">
             <Image src={safeJoinPaths(`/AH_img/glass_bottle.png`)} alt="glass_bottle.png"
                    width={48} height={48}
+                   unoptimized={true}
                    className="object-cover pixelated"/>
             <div className="flex flex-col">
                         <span className="font-semibold">

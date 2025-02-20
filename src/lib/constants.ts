@@ -645,6 +645,7 @@ const imgPathProfile = "/img/Profile/";
 const imgPathMarket = "/img/MarketUI/";
 const imgPathRanking = "/img/Ranking/";
 const imgPathClicker = "/img/Clicker/";
+const imgPathCraft = "/img/Craft/";
 
 
 const constants = {
@@ -680,6 +681,7 @@ const constants = {
   imgPathMarket,
   imgPathRanking,
   imgPathClicker,
+  imgPathCraft,
 };
 
 export default constants;

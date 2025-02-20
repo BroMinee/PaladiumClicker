@@ -29,8 +29,8 @@ const config: Config = {
         '23': 'repeat(23, minmax(0, 1fr))',
       },
       backgroundImage: {
-        'light': "url('/background_light.webp')",
-        'dark': "url('/background_dark.webp')",
+        'light': "url('/img/background_light.webp')",
+        'dark': "url('/img/background_dark.webp')",
       },
       fontFamily: {
         sans: ["Inter", "sans-serif"],
