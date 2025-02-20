@@ -3124,37 +3124,37 @@ export function getImagePathFromRankingType(rankingType: string): string {
   let imgPath: string;
   switch (rankingType) {
     case RankingType.money:
-      imgPath = safeJoinPaths("/RankingIcon/", `money.png`);
+      imgPath = safeJoinPaths(constants.imgPathRanking, `money.png`);
       break;
     case RankingType["job.alchemist"]:
-      imgPath = safeJoinPaths("/RankingIcon/", `alchimiste.png`);
+      imgPath = safeJoinPaths(constants.imgPathRanking, `alchimiste.png`);
       break;
     case RankingType["job.farmer"]:
-      imgPath = safeJoinPaths("/RankingIcon/", `farmeur.png`);
+      imgPath = safeJoinPaths(constants.imgPathRanking, `farmeur.png`);
       break;
     case RankingType["job.hunter"]:
-      imgPath = safeJoinPaths("/RankingIcon/", `hunter.png`);
+      imgPath = safeJoinPaths(constants.imgPathRanking, `hunter.png`);
       break;
     case RankingType["job.miner"]:
-      imgPath = safeJoinPaths("/RankingIcon/", `mineur.png`);
+      imgPath = safeJoinPaths(constants.imgPathRanking, `mineur.png`);
       break;
     case RankingType.boss:
-      imgPath = safeJoinPaths("/RankingIcon/", `boss.png`);
+      imgPath = safeJoinPaths(constants.imgPathRanking, `boss.png`);
       break;
     case RankingType.egghunt:
-      imgPath = safeJoinPaths("/RankingIcon/", `egghunt.png`);
+      imgPath = safeJoinPaths(constants.imgPathRanking, `egghunt.png`);
       break;
     // case RankingType.end:
-    //   imgPath = safeJoinPaths("/RankingIcon/", `end.png`);
+    //   imgPath = safeJoinPaths(constants.imgPathRanking, `end.png`);
     //   break;
     // case RankingType.chorus:
-    //   imgPath = safeJoinPaths("/RankingIcon/", `chorus.png`);
+    //   imgPath = safeJoinPaths(constants.imgPathRanking, `chorus.png`);
     //   break;
     case RankingType.koth:
-      imgPath = safeJoinPaths("/RankingIcon/", `koth.png`);
+      imgPath = safeJoinPaths(constants.imgPathRanking, `koth.png`);
       break;
     case RankingType.clicker:
-      imgPath = safeJoinPaths("/RankingIcon/", `clicker.png`);
+      imgPath = safeJoinPaths(constants.imgPathRanking, `clicker.png`);
       break;
     default:
       imgPath = safeJoinPaths("/unknown.png");

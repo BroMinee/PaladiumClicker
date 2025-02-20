@@ -643,6 +643,7 @@ const dictAchievementIdToIcon = new Map<string, string>([
 
 const imgPathProfile = "/img/Profile/";
 const imgPathMarket = "/img/MarketUI/";
+const imgPathRanking = "/img/Ranking/";
 
 
 const constants = {
@@ -676,6 +677,7 @@ const constants = {
   webhooksPath,
   imgPathProfile,
   imgPathMarket,
+  imgPathRanking,
 };
 
 export default constants;
