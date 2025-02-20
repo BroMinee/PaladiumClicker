@@ -372,13 +372,13 @@ export interface NetworkError extends Error {
 export type PalaAnimationLeaderboard = PalaAnimationScore[]
 
 export type PalaAnimationLeaderboardGlobal = {
-  username: string,
+  global_name: string,
   avg_completion_time: number,
   rank_completion_time: number,
 }[]
 
 export type PalaAnimationScore = {
-  username: string,
+  global_name: string,
   completion_time: number,
   rank_completion_time: number,
 }

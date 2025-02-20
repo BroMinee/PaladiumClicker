@@ -6,7 +6,6 @@ import {
   DiscordUser,
   Item,
   OptionType,
-  PalaAnimationLeaderboardGlobal,
   ProfilViewType,
   RankingResponse,
   RankingType,
@@ -42,11 +41,6 @@ export const isMyApiDown = async (): Promise<boolean> => {
   }
 
   return !(json && json.backend_status === "OK" && json.db_status === "OK");
-}
-
-
-export const getGlobalLeaderboard = async (): Promise<PalaAnimationLeaderboardGlobal> => {
-  return await fetchWithHeader<PalaAnimationLeaderboardGlobal>(`${API_PALATRACKER}/v1/pala-animation/leaderboard/global`, 0)
 }
 
 

@@ -1,17 +1,69 @@
-import { NoPseudoPage } from "@/components/NoPseudoPage.tsx";
+// 'use client';
+import GradientText from "@/components/shared/GradientText.tsx";
+import { Card, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card.tsx";
+import { FaHeart } from "react-icons/fa";
 
-export function generateMetadata() {
+import {
+  PalaAnimationBody,
+  PalaAnimationClassement,
+  PalaAnimationClassementGlobal,
+  TestBot
+} from "@/components/Pala-Animation/PalaAnimationClient.tsx";
+import SessionProvider from "@/components/Pala-Animation/SessionContextProvider.tsx";
+import constants from "@/lib/constants.ts";
+import { AuthForceWrapper } from "@/components/Auth/AuthForceWrapper.tsx";
+
+export async function generateMetadata() {
+  let title = `PalaTracker | Pala Animation Trainer`;
+
+  const description = "Viens t'entraîner sur PalaAnimation et compare ton temps avec les autres joueurs ! 🚀"
   return {
-    title: "PalaTracker | Pala Animation Trainer",
-    description: "Viens t'entraîner sur PalaAnimation et compare ton temps avec les autres joueurs ! 🚀",
+    title: title,
+    description: description,
     openGraph: {
-      title: "PalaTracker | Pala Animation Trainer",
-      description: "Viens t'entraîner sur PalaAnimation et compare ton temps avec les autres joueurs ! 🚀"
+      title: title,
+      description: description,
     },
   }
 }
 
-export default function HomeProfilWithoutUsername() {
-  return <NoPseudoPage noBoldText="la zone d'entraînement du" boldText="PalaAnimation"/>
+export default function PalaAnimationPage() {
+  return (
+    <>
+      <AuthForceWrapper url={`${constants.palaAnimationPath}/login`}>
+        <TestBot/>
+        <SessionProvider>
+          <div className="flex flex-col gap-4">
+            <Card>
+              <CardHeader className="flex flex-row items-center justify-between">
+                <CardTitle>
+                  Bienvenue dans la zone d&apos;entraînement du{" "}
+                  <GradientText className="font-extrabold">PalaAnimation</GradientText>
+                </CardTitle>
+                <CardDescription>
+                  Made with <FaHeart
+                  className="text-primary inline-block"/> by <GradientText>BroMine__</GradientText>
+                </CardDescription>
+              </CardHeader>
+              <CardFooter className="flex flex-col gap-2 items-start">
+                Le classement est à titre indicatif et n&apos;est pas officiel à Paladium.
+              </CardFooter>
+            </Card>
+
+            <div className="grid grid-cols-2 md:grid-cols-3 grid-rows-1 gap-4">
+              <Card className="col-span-2">
+                <CardHeader>
+                  <PalaAnimationBody/>
+                </CardHeader>
+              </Card>
+              <PalaAnimationClassement/>
+            </div>
+            <PalaAnimationClassementGlobal/>
+          </div>
+        </SessionProvider>
+      </AuthForceWrapper>
+    </>
+
+  );
 }
 

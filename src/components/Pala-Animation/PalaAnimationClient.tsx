@@ -2,12 +2,19 @@
 
 import { FormEvent, useEffect, useState } from "react";
 import { load } from "@fingerprintjs/botd";
-import { KeyDownTimestampType, PalaAnimationLeaderboard, PalaAnimationScore, userAnswerType } from "@/types";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card.tsx";
+import {
+  KeyDownTimestampType,
+  PalaAnimationLeaderboard,
+  PalaAnimationLeaderboardGlobal,
+  PalaAnimationScore,
+  userAnswerType
+} from "@/types";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card.tsx";
 import { adaptPlurial } from "@/lib/misc.ts";
 import { toast } from "sonner";
 import {
   getAnswerPalaAnimation,
+  getGlobalLeaderboard,
   getLeaderboardPalaAnimation
 } from "@/components/Pala-Animation/PalaAnimationActions.tsx";
 import { AxiosError } from "axios";
@@ -18,6 +25,7 @@ import { useSessionContext } from "@/components/Pala-Animation/SessionContextPro
 import { Button } from "@/components/ui/button.tsx";
 import { checkAnswerPalaAnimation, getNewQuestionPalaAnimation } from "@/lib/cypher.ts";
 import { useRouter } from "next/navigation";
+import { useProfileStore } from "@/stores/use-profile-store.ts";
 
 
 export function TestBot() {
@@ -38,11 +46,7 @@ export function TestBot() {
 }
 
 
-type PalaAnimationBodyType = {
-  username: string
-}
-
-export function PalaAnimationBody({ username }: PalaAnimationBodyType) {
+export function PalaAnimationBody() {
 
   const { sessionUuid, question, setQuestion, setSessionUuid } = useSessionContext();
 
@@ -53,6 +57,8 @@ export function PalaAnimationBody({ username }: PalaAnimationBodyType) {
   const [keyPressTimestamp, setKeyPressTimestamp] = useState([] as KeyDownTimestampType[]);
   const [isChecking, setIsChecking] = useState(false);
   const [startingTime, setStartingTime] = useState(0);
+
+  const { profileInfo } = useProfileStore();
 
   function clearUserAnswer() {
     // reset input field with id user_answer
@@ -71,10 +77,6 @@ export function PalaAnimationBody({ username }: PalaAnimationBodyType) {
   async function checkAnswer(userAnswer = "", legitCheck = true) {
     if (isChecking)
       return;
-    if (username === "") {
-      console.error("No player info");
-      return;
-    }
     if (sessionUuid === undefined) {
       console.error("No session uuid");
       return;
@@ -148,14 +150,9 @@ export function PalaAnimationBody({ username }: PalaAnimationBodyType) {
   }
 
   useEffect(() => {
-    if (username === "") {
-      console.error("No player info");
-      return;
-    }
-
     if (!reroll)
       return
-    getNewQuestionPalaAnimation(username, question).then(
+    getNewQuestionPalaAnimation(question).then(
       (data) => {
         setQuestion(data.question);
         setSessionUuid(data.session_uuid);
@@ -163,6 +160,7 @@ export function PalaAnimationBody({ username }: PalaAnimationBodyType) {
     ).catch(
       (error) => {
         console.error("Error while fetching new question", error);
+        toast.error("Erreur lors de la récupération de la question.");
       }
     ).finally(() => {
       setIsChecking(false);
@@ -206,10 +204,6 @@ export function PalaAnimationBody({ username }: PalaAnimationBodyType) {
       setKeyPressTimestamp([...keyPressTimestamp, { key: lastChar, timestamp: new Date().getTime() }]);
     }
   }, [inputValue]);
-
-
-  if (username === "")
-    return null;
 
   return (
     <div className="flex flex-col gap-2 items-center">
@@ -272,17 +266,17 @@ export function PalaAnimationBody({ username }: PalaAnimationBodyType) {
   );
 }
 
-export function PalaAnimationClassement({ username }: {
-  username: string
-}) {
+export function PalaAnimationClassement() {
+  const { profileInfo } = useProfileStore();
+
 
   const { sessionUuid } = useSessionContext();
 
   const [currentLeaderboard, setCurrentLeaderboard] = useState([] as PalaAnimationLeaderboard);
-  const [userScore, setUserScore] = useState({ username: "" } as PalaAnimationScore);
+  const [userScore, setUserScore] = useState({ global_name: "" } as PalaAnimationScore);
 
   async function updateLeaderboardUI() {
-    if (username === "" || sessionUuid === undefined || sessionUuid === "")
+    if (!profileInfo || sessionUuid === undefined || sessionUuid === "")
       return;
 
 
@@ -290,14 +284,15 @@ export function PalaAnimationClassement({ username }: {
       (data) => {
         setCurrentLeaderboard(data.slice(0, 10));
         const userPosInfo = data.find((entry) => {
-          if (entry.username === username) {
+          console.log(entry, profileInfo.global_name, profileInfo.username)
+          if (entry.global_name === profileInfo.global_name || entry.global_name === profileInfo.username) {
             return entry;
           }
         })
         if (userPosInfo)
           setUserScore(userPosInfo);
         else
-          setUserScore({ username: "" } as PalaAnimationScore)
+          setUserScore({ global_name: "" } as PalaAnimationScore)
       }
     ).catch(
       (error) => {
@@ -316,7 +311,7 @@ export function PalaAnimationClassement({ username }: {
   return (
     <Card className="md:col-span-1 md:col-start-3 col-span-2 col-start-1">
       <CardHeader className="flex">
-        <CardTitle>Classement</CardTitle>
+        <CardTitle>Classement de cette question</CardTitle>
       </CardHeader>
       <CardContent className="flex gap-2 flex-col">
         {currentLeaderboard.length === 0 ? "Aucun classement pour le moment" : ""}
@@ -324,14 +319,63 @@ export function PalaAnimationClassement({ username }: {
           <div>
             {currentLeaderboard.map((entry, i) => {
               return <p key={i}
-                        className={entry.username === username ? "text-blue-400" : ""}>{i + 1}. {entry.username} - {entry.completion_time / 1000} {adaptPlurial("seconde", entry.completion_time / 1000)}</p>
+                        className={(entry.global_name === profileInfo?.global_name || entry.global_name === profileInfo?.username) ? "text-blue-400" : ""}>{i + 1}. {entry.global_name} - {entry.completion_time / 1000} {adaptPlurial("seconde", entry.completion_time / 1000)}</p>
             })}
           </div>
           : ""
         }
-        {userScore.username === "" || userScore.rank_completion_time <= currentLeaderboard.length ? "" :
+        {userScore.global_name === "" || userScore.rank_completion_time <= currentLeaderboard.length ? "" :
           <p
-            className="text-blue-400">{userScore.rank_completion_time}. {username} - {userScore.completion_time / 1000} {adaptPlurial("seconde", userScore.completion_time / 1000)}</p>}
+            className="text-blue-400">{userScore.rank_completion_time}. {profileInfo?.username} - {userScore.completion_time / 1000} {adaptPlurial("seconde", userScore.completion_time / 1000)}</p>}
+      </CardContent>
+    </Card>)
+}
+
+export function PalaAnimationClassementGlobal() {
+  const { profileInfo } = useProfileStore();
+
+  const [globalLeaderboard, setGlobalLeaderboard] = useState([] as PalaAnimationLeaderboardGlobal);
+  const { sessionUuid } = useSessionContext();
+
+  useEffect(() => {
+    getGlobalLeaderboard().then(
+      (data) => {
+        setGlobalLeaderboard(data);
+      }
+    ).catch(
+      (error) => {
+        console.error("Error while fetching global leaderboard", error);
+        toast.error("Erreur lors de la récupération du classement global")
+      }
+    );
+
+  }, [profileInfo]);
+
+
+  const userPosition = globalLeaderboard.findIndex((entry) => (entry.global_name === profileInfo?.global_name || entry.global_name === profileInfo?.username));
+
+  return (
+    <Card>
+      <CardHeader className="flex">
+        <CardTitle>Classement Général</CardTitle>
+        <CardDescription>Vous devez faire un minimum de 20 réponses différentes ayant un temps inférieur à 10 secondes
+          pour apparaître dans le
+          classement.<br/>
+          Recharge la page pour actualiser le classement.</CardDescription>
+      </CardHeader>
+      <CardContent className="flex gap-2 flex-col">
+        {globalLeaderboard.length === 0 ? "Aucun classement pour le moment" : ""}
+        {globalLeaderboard.length > 0 ?
+          <div>
+            {globalLeaderboard.slice(0, 10).map((entry, i) => {
+              return <p key={i}
+                        className={(entry.global_name === profileInfo?.global_name || entry.global_name === profileInfo?.username) ? "text-blue-400" : ""}>{i + 1}. {entry.global_name} - {Math.round(entry.avg_completion_time) / 1000} {adaptPlurial("seconde", Math.round(entry.avg_completion_time) / 1000)}</p>
+            })}
+          </div>
+          : ""
+        }
+        {userPosition > 10 ? <p
+          className="text-blue-400">{userPosition + 1}. {profileInfo?.global_name || profileInfo?.username} - {Math.round(globalLeaderboard[userPosition].avg_completion_time) / 1000} {adaptPlurial("seconde", Math.round(globalLeaderboard[userPosition].avg_completion_time) / 1000)}</p> : ""}
       </CardContent>
     </Card>)
 }

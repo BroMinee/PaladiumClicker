@@ -81,7 +81,7 @@ const links: LinkList = {
   "/xp-calculator": { label: "Calculateur d'xp", requiredPseudo: true },
   "/clicker-optimizer": { label: "PalaClicker Optimizer", requiredPseudo: true },
   "/palatime": { label: "Palatime", requiredPseudo: false },
-  "/pala-animation": { label: "PalaAnimation Trainer", requiredPseudo: true },
+  "/pala-animation": { label: "PalaAnimation Trainer", requiredPseudo: false },
   "/craft": { label: "Craft Optimizer", requiredPseudo: false },
   "/about": { label: "A propos", requiredPseudo: false },
   "/ranking?category=money": { label: "Classement", requiredPseudo: false },
