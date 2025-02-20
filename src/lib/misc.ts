@@ -288,20 +288,30 @@ export function safeJoinPaths(base: string, ...paths: string[]): string {
 
 export function getRankImg(rank: string) {
   if (rank === "Default") {
-    return "dirt.png";
+    return "/img/Rank/dirt.png";
   } else if (rank === "Titan") {
-    return "titan.png";
+    return "/img/Rank/titan.png";
   } else if (rank === "Paladin") {
-    return "paladin.png";
+    return "/img/Rank/paladin.png";
   } else if (rank === "Endium") {
-    return "endium.png";
+    return "/img/Rank/endium.png";
   } else if (rank === "Trixium") {
-    return "trixium.png";
+    return "/img/Rank/trixium.png";
   } else if (rank === "Trixium+") {
-    return "trixium+.png";
+    return "/img/Rank/trixium+.png";
   } else if (rank === "Youtuber") {
-    return "youtuber.png";
-  } else {
+    return "/img/Rank/youtuber.png";
+  } // New rank v10.5
+  else if (rank === "Heros") {
+    return "/img/Rank/heros.png";
+  }else if (rank === "Divinity") {
+    return "/img/Rank/divinity.png";
+  }else if (rank === "Legend") {
+    return "/img/Rank/legend.png";
+  }else if (rank === "Premium") {
+    return "/img/Rank/premium.png";
+  }
+  else {
     return "unknown.png"
   }
 }

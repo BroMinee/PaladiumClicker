@@ -3,7 +3,8 @@
     "date": "TOTO",
     "events": [
       "Ajout du détail des offres dans le [market](https://palatracker.bromine.fr/ah)",
-      "Le prix de fabrication prend maintenant en compte les offres les moins chères au lieu du prix moyen dans le calcul : [Craft Optimizer](https://palatracker.bromine.fr/craft)"
+      "Le prix de fabrication prend maintenant en compte les offres les moins chères au lieu du prix moyen dans le calcul : [Craft Optimizer](https://palatracker.bromine.fr/craft)",
+      "Ajout des nouveaux grades dans le [profil](https://palatracker.bromine.fr/profil/BroMine__)"
     ]
   },
   {

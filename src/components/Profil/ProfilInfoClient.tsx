@@ -69,7 +69,7 @@ export function PlayerMoney() {
   const { data: playerInfo } = usePlayerInfoStore();
   return <>
     <SmallCardInfo title="Argent actuel" value={`${formatPrice(Math.round(playerInfo?.money || 0))} $`}
-                   img="dollar.png"/>
+                   img="dollar.png" unoptimized/>
   </>
 }
 
@@ -102,7 +102,9 @@ export function PlayerRank() {
   if (playerInfo)
     rank = playerInfo.rank[0].toUpperCase() + playerInfo.rank.slice(1);
 
-  return <SmallCardInfo title="Rang en jeu" value={rank} img={getRankImg(rank)}/>
+  return <SmallCardInfo title="Rang en jeu" value={rank} img={getRankImg(rank)}
+                        imgClassName="w-fit"
+                        unoptimized/>
 }
 
 export function PlayerTimePlayed() {
