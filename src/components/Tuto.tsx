@@ -16,7 +16,7 @@ const Tuto = () => {
       <DialogHeader className="px-6">
         <DialogTitle className="text-primary">Comment utiliser l&apos;outil ?</DialogTitle>
       </DialogHeader>
-      <ScrollArea className="h-[80dvh] px-6 border-t">
+      <ScrollArea className="h-fit px-6 border-t">
         <div className="py-2">
           <h3>Version textuelle:</h3>
           <ul className="list-disc list-inside pb-4 [&>li]:pl-4 [&>li]:text-sm">
@@ -27,12 +27,7 @@ const Tuto = () => {
             <li>Reimport ton données de temps en temps pour ne pas être désynchronisé avec Paladium.</li>
             <li>Les informations importées depuis Paladium ne sont pas en temps réelle ! Il est donc inutile
               de
-              reimporter ses informations toutes les 5 minutes.
-            </li>
-            <li>Le site te propose un historique quotidien du top 14.</li>
-            <li>Il est mis à jour régulièrement avec les nouvelles améliorations</li>
-            <li>Les patchnotes s&apos;affichent automatiquement s&apos;il y a eu un changement depuis la dernière
-              fois
+              reimporter ses informations toutes les 5 minutes. De toute façon il y a un système de cache sur les données.
             </li>
           </ul>
           <h3>Version musicale:</h3>
