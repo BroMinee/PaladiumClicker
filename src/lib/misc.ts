@@ -16,6 +16,7 @@ import {
   PlayerInfo,
   PosteriorUpgrade,
   ProfilSectionEnum,
+  RankingResponse,
   RankingType,
   StatusPeriode,
   TerrainUpgrade,
@@ -3474,4 +3475,49 @@ export function getTextFromWebHookType(webHookType: WebHookType) {
     default:
       return `Unknown WebHookType ${webHookType}`;
   }
+}
+
+export function addMissingDate(data: RankingResponse) {
+  const filledData: RankingResponse = [];
+  const groupedByUser: Record<string, RankingResponse> = {};
+
+  data.forEach((entry) => {
+    if (!groupedByUser[entry.username]) {
+      groupedByUser[entry.username] = [];
+    }
+    groupedByUser[entry.username].push(entry);
+  });
+
+  Object.values(groupedByUser).forEach((userEntries) => {
+    userEntries.sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
+
+    for (let i = 0; i < userEntries.length; i++) {
+      filledData.push(userEntries[i]);
+
+      if (i > 0) {
+        const prevEntry = userEntries[i - 1];
+        const currEntry = userEntries[i];
+
+        let prevDate = new Date(prevEntry.date);
+        let currDate = new Date(currEntry.date);
+        let nextDate = new Date(prevDate);
+        nextDate.setDate(prevDate.getDate() + 1);
+
+        while (nextDate < currDate) {
+          filledData.push({
+            uuid: prevEntry.uuid,
+            username: prevEntry.username,
+            date: nextDate.toISOString().split("T")[0],
+            value: prevEntry.value,
+            position: prevEntry.position,
+          });
+
+          nextDate.setDate(nextDate.getDate() + 1);
+        }
+      }
+    }
+  });
+
+  return filledData.sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
+
 }
