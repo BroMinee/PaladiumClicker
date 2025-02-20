@@ -1,15 +1,14 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card.tsx";
 import { FaHeart } from "react-icons/fa";
 import GradientText from "@/components/shared/GradientText.tsx";
-import GraphItem from "@/components/AhTracker/GraphItem.tsx";
 import React, { Suspense } from "react";
 
 import LoadingSpinner from "@/components/ui/loading-spinner.tsx";
 import MarketSelector from "@/components/AhTracker/MarketSelector.tsx";
-import QuantitySelectorDisplay from "@/components/AhTracker/QuantitySelectorDisplay.tsx";
 import { getAllItems } from "@/lib/api/apiPalaTracker.ts";
 import { OptionType } from "@/types";
 import constants from "@/lib/constants";
+import { MarketServerFetcher } from "@/components/AhTracker/MarketServerFetcher.tsx";
 
 export async function generateMetadata(
   { searchParams }: { searchParams: { item: string | undefined } },
@@ -100,20 +99,14 @@ export default async function AhTrackerPage({ searchParams }: { searchParams: { 
             Sélection un item à pour voir son historique de vente
           </CardTitle>
         </CardHeader>
-        <CardContent className="gap-2 flex flex-col pt-4 py-2">
+        <CardContent className="gap-2 flex flex-col pt-4">
           <MarketSelector url={`${constants.ahPath}?item=`} item={item || null}/>
         </CardContent>
-        {item ?
-          <Suspense fallback={<QuantitySelectorDisplayFallBack item={item}/>}>
-            <QuantitySelectorDisplay item={item}/>
-          </Suspense>
-          :
-          null}
       </Card>
       <div className="w-full">
         {item ?
           <Suspense fallback={<GraphItemFallback item={item}/>}>
-            <GraphItem item={item}/>
+            <MarketServerFetcher item={item}/>
           </Suspense>
           :
           <Card className="col-start-1 col-span-4 w-full">

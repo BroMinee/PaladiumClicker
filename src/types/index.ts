@@ -295,9 +295,27 @@ export type PaladiumAhHistory = {
   totalCount: number
 }
 
+export type MarketListedItem = MarketItemOffer[]
+
+
+export type MarketItemOffer = {
+  seller: string,
+  name: string, // Display name of the item
+  rename: boolean,
+  quantity: number, // The remaining quantity of the item currenlty listed
+  price: number, // The price of the item in ($)
+  pricePb: number, // The price of the item in pb
+  durability: number, // Durability of the item
+  skin: number, // Skin ID of the item
+  slot: number, // Slot of the item in the market
+  createdAt: number, // Date of the listing
+  expireAt: number, // Date of the expiration of the listing
+}
+
 export type PaladiumAhItemStat = {
   name: string,
   countListings: number,
+  listing: MarketListedItem,
   quantityAvailable: number,
   quantitySoldTotal: number,
   priceSum: number,
@@ -516,7 +534,7 @@ export type ServerPaladiumStatusResponse = ServerStatusResponse & {
 
 export type PlayerDBApiReponse =
   {
-    data: { player: { id: string } }
+    data: { player: { id: string, username: string } }
   }
 
 export type OptionType = {

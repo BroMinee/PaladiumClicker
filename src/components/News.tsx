@@ -31,7 +31,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card.t
 import React from "react";
 
 
-function textFormatting(
+export function textFormatting(
   text: string): JSX.Element {
   const parts = text.split(
     /(\*\*.*?\*\*|\*.*?\*|__.*?__|~~.*?~~|\[.*?\]\(.*?\)|\n)/g

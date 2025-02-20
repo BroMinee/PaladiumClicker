@@ -68,7 +68,7 @@ export const fetchWithHeader = async <T>(url: string, cache_duration_in_sec = 15
     let uuid = "";
     try {
       const playerdbAPI = await fetch(`https://playerdb.co/api/player/minecraft/${username}`, {
-        next: { revalidate: 0, tags: ['playerInfo'] },
+        next: { revalidate: 15 * 60, tags: ['playerInfo'] },
         signal: AbortSignal.timeout(4000),
       })
       const playerdbAPIJson = await playerdbAPI.json();

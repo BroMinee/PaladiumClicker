@@ -1,51 +1,20 @@
-import { Card, CardContent } from "@/components/ui/card.tsx";
-import { FaBoxOpen } from "react-icons/fa";
-import { getPaladiumAhItemStats } from "@/lib/api/apiPala.ts";
-import { OptionType, PaladiumAhItemStat } from "@/types";
-import { redirect } from "next/navigation";
-import GradientText from "@/components/shared/GradientText.tsx";
+import { PaladiumAhItemStat } from "@/types";
 import { formatPrice } from "@/lib/misc.ts";
-import SmallCardInfo from "@/components/shared/SmallCardInfo.tsx";
 
 
-export default async function QuantitySelectorDisplay({ item }: { item: OptionType }) {
-  let itemInfo = null as PaladiumAhItemStat | null;
-  try {
-    itemInfo = await getPaladiumAhItemStats(item.value);
-  } catch (e) {
-    console.error(e);
-  }
-
-  if (!itemInfo)
-    redirect(`/error?message=Impossible de récupérer les données actuelles de ${item.label}`)
-
+export default async function QuantitySelectorDisplay({ itemInfo }: { itemInfo: PaladiumAhItemStat | null }) {
   return (
-    <div className="flex flex-col lg:flex-row justify-evenly gap-3 pb-4">
-      {/*<Card className="flex justify-center items-center">*/}
-      {/*  <SmallCardInfo title={item.label || "Not Found"}*/}
-      {/*                 value={item.label2 || "Not Found"}*/}
-      {/*                 className="py-2 h-fit w-fit"*/}
-      {/*                 img={`AH_img/${item.img}`} unoptimized/>*/}
-      {/*</Card>*/}
-      <Card className="flex justify-center items-center">
-        <CardContent className="pt-6 flex items-center gap-4 py-2 h-fit">
-          <FaBoxOpen className="size-12 mr-2"/>
-          <div className="flex flex-col gap-2">
-            <span className="font-semibold">Quantité en vente actuellement</span>
-            <div className="flex gap-2 items-center">
-              <GradientText className="font-bold">
-                {`x${formatPrice(itemInfo.quantityAvailable)}`}
-              </GradientText>
-            </div>
-          </div>
-        </CardContent>
-      </Card>
-      <Card className="flex justify-center items-center">
-        <SmallCardInfo title="Prix moyen actuellement en vente"
-                       value={`${formatPrice(Math.round((itemInfo.priceSum / (itemInfo.countListings === 0 ? 1 : itemInfo.countListings)) * 100) / 100)} $`}
-                       className="py-2 h-fit"
-                       img="dollar.png"/>
-      </Card>
+    <div className="flex flex-col lg:flex-row justify-evenly gap-3 pb-4 pt-3 py-2">
+      <p className="font-bold text-[20px]">
+        <span className="font-bold text-[20px]">Quantité en vente actuellement: </span>
+        <span
+          className="font-bold text-[20px] text-primary">{`x${formatPrice(itemInfo?.quantityAvailable || 0)}`}</span>
+      </p>
+      <p className="font-bold text-[20px]">
+        <span className="font-bold text-[20px]">Prix moyen actuellement en vente: </span>
+        <span
+          className="font-bold text-[20px] text-primary">{`${itemInfo ? formatPrice(Math.round((itemInfo.priceSum / (itemInfo.countListings === 0 ? 1 : itemInfo.countListings)) * 100) / 100) : 0} $`}</span>
+      </p>
     </div>
   )
 }

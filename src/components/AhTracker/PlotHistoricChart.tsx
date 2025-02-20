@@ -28,13 +28,13 @@ const CustomTooltip = ({ active, payload, label }: any) => {
 }
 
 export const PlotHistoricChart = ({ data, webhook = false }: { data: AhItemHistory[], webhook?: boolean }) => {
-  const data_clean = data.map((item) => {
+  const data_clean = data.length !== 0 ? data.map((item) => {
     return {
       date: item.date,
       price: item.price / item.sells,
       quantity: item.quantity
     }
-  });
+  }) : [{ date: "Cette item n'a pas encore été vendu de la saison", price: 0, quantity: 0 }];
   const { threshold, thresholdCondition } = useWebhookStore();
   return (
     <ResponsiveContainer width="100%" height="100%">

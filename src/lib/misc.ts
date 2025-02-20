@@ -140,6 +140,15 @@ export function formatPrice(price: number | undefined) {
   return numberFormatter.format(price);
 }
 
+export function formatPriceWithUnit(price: number): string {
+  if (price < 1000)
+    return price.toString();
+  if (price < 1000000)
+    return (price / 1000).toFixed(1) + "k";
+
+  return (price / 1000000).toFixed(1) + "M";
+}
+
 export function computePrice(priceLevel0: number, level: number) {
   return Math.round(priceLevel0 * Math.pow(1.100000023841858, level));
 }
