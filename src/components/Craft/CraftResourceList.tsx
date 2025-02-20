@@ -15,6 +15,7 @@ export function CraftResourceList({ list }: { list: NodeType[] }) {
   const [mounted, setMounted] = useState(false);
   const [ahItems, setAhItems] = useState<PaladiumAhItemStat[]>([]);
   const [totalPrice, setTotalPrice] = useState(0);
+  const [subTotalPrice, setSubTotalPrice] = useState<number[]>([]);
 
   useEffect(() => {
     setMounted(true);
@@ -28,7 +29,8 @@ export function CraftResourceList({ list }: { list: NodeType[] }) {
   useEffect(() => {
     if (mounted && listState !== null) {
       getPaladiumAhItemStatsOfAllItemsAction().then((res) => {
-        const listStateFlatten = listState.map((el) => el.value);
+        const listStateFlatten = listState.map((node) => node.value);
+        console.warn("res", res, listStateFlatten, res.filter((el) => listStateFlatten.includes(el.name)))
         setAhItems(res.filter((el) => listStateFlatten.includes(el.name)));
       }).catch((e) => {
         console.error(e);
@@ -39,13 +41,43 @@ export function CraftResourceList({ list }: { list: NodeType[] }) {
 
   useEffect(() => {
     if (listState !== null && ahItems.length !== 0) {
-      setTotalPrice(listState.reduce((acc, slot) => {
+      let newSubTotalPrice = [];
+      listState.forEach((slot) => {
         const found = ahItems.find((el) => el.name === slot.value);
         if (found === undefined) {
-          return acc;
+          console.error(`Item ${slot.value} not found in ahItems`, ahItems);
+          return;
         }
-        return acc + Math.ceil((found.priceSum / found.countListings) * slot.count);
-      }, 0));
+        const listing = found.listing.toSorted((a, b) => a.price - b.price);
+        console.log(listing, slot.value, slot.count, found.priceAverage, found.quantityAvailable)
+        let sum = 0;
+        let remaining = slot.count;
+        for (let i = 0; i < listing.length; i++) {
+          if (remaining === 0)
+            break;
+
+          if (listing[i].quantity >= remaining) {
+            sum += listing[i].price * remaining;
+            remaining = 0;
+
+          } else {
+            sum += listing[i].price * listing[i].quantity;
+            remaining -= listing[i].quantity;
+          }
+        }
+
+        if (remaining > 0) {
+          console.error(`Not enough quantity for ${slot.value} in the market using average price instead.`);
+        }
+        newSubTotalPrice.push(sum);
+        return sum;
+      });
+
+      setSubTotalPrice(newSubTotalPrice);
+      setTotalPrice(newSubTotalPrice.reduce((acc, cur) => acc + cur, 0));
+    } else {
+      setTotalPrice(-1);
+      setSubTotalPrice([]);
     }
   }, [ahItems]);
 
@@ -58,7 +90,7 @@ export function CraftResourceList({ list }: { list: NodeType[] }) {
         <CardContent className="pt-2 gap-1 grid grid-cols-3">
           {listState !== null && listState.length > 0 && listState.map((slot, index) =>
             <SmallCardInfo key={slot.value + index + "-needed"} title={"x" + slot.count + " " + slot.label}
-                           className="bg-secondary/50 rounded-md"
+                           className="bg-secondary/50 rounded-md px-2"
                            value={`${Math.floor(slot.count / 64)} ${adaptPlurial("stack", Math.floor(slot.count / 64))} et ${slot.count - Math.floor(slot.count / 64) * 64}`}
                            img={`/AH_img/${slot.img}`} unoptimized count={slot.count}/>
           )}
@@ -79,8 +111,8 @@ export function CraftResourceList({ list }: { list: NodeType[] }) {
               const found = ahItems.find((el) => el.name === slot.value);
               if (found === undefined) {
                 console.error(`Item ${slot.value} not found in ahItems`, ahItems);
-                return <SmallCardInfo key={slot.value + index + "-needed-dollar"} title={slot.label}
-                                      className="bg-secondary/50 rounded-md"
+                return <SmallCardInfo key={slot.value + index + "-needed-dollar"} title={"⚠️ " + slot.label}
+                                      className="bg-secondary/50 rounded-md p-2"
                                       value={"Pas en vente actuellement au market"}
                                       img={`/AH_img/${slot.img}`} unoptimized count={slot.count}/>
               }
@@ -88,14 +120,14 @@ export function CraftResourceList({ list }: { list: NodeType[] }) {
               if (found.quantityAvailable < slot.count) {
                 return <SmallCardInfo key={slot.value + index + "-needed-dollar"}
                                       title={"⚠️ " + slot.label + ` - Quantité insuffisante au market il en manquera ${slot.count - found.quantityAvailable}`}
-                                      className="bg-secondary/50"
-                                      value={`Total de : ${formatPrice(Math.ceil((found.priceSum / found.countListings) * slot.count))} $`}
+                                      className="bg-secondary/50 rounded-md p-2"
+                                      value={`Total de : ${formatPrice(subTotalPrice[index])} $`}
                                       img={`/AH_img/${slot.img}`} unoptimized count={slot.count}/>
               }
 
               return <SmallCardInfo key={slot.value + index + "-needed-dollar"} title={slot.label}
-                                    className="bg-secondary/50 rounded-md"
-                                    value={`Total de : ${formatPrice(Math.ceil((found.priceSum / found.countListings) * slot.count))} $`}
+                                    className="bg-secondary/50 rounded-md p-2"
+                                    value={`Total de : ${formatPrice(subTotalPrice[index])} $`}
                                     img={`/AH_img/${slot.img}`} unoptimized count={slot.count}/>
             }
           )}
