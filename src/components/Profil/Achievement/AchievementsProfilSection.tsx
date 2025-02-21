@@ -46,3 +46,14 @@ export function AchievementsProfilSectionFallBack() {
     </CardHeader>
   </Card>)
 }
+
+export function MarketProfilSectionFallBack() {
+  return (<Card>
+    <CardHeader>
+      <CardTitle className="flex flex-row gap-2">
+        <LoadingSpinner size={4}/>
+        Chargement des items...
+      </CardTitle>
+    </CardHeader>
+  </Card>)
+}

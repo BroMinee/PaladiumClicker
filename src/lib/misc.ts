@@ -1,6 +1,7 @@
 import {
   AdminShopItem,
   AdminShopPeriode,
+  AhItemType,
   AnyCondition,
   Building,
   BuildingUpgrade,
@@ -9,6 +10,7 @@ import {
   EventType,
   GlobalUpgrade,
   ManyUpgrade,
+  MarketItemOffer,
   MetierKey,
   Metiers,
   NodeType,
@@ -174,27 +176,6 @@ export function getPathImg(bestListName: string, bestUpgradeIndex: number) {
       alert("Error in bestListName");
       return safeJoinPaths(constants.imgPathClicker,"/BuildingUpgradeIcon/0.png");
   }
-}
-
-
-export function levenshteinDistance(a: string, b: string) {
-  const distance = [];
-  for (let i = 0; i <= a.length; i++) {
-    distance[i] = [i];
-  }
-  for (let j = 0; j <= b.length; j++) {
-    distance[0][j] = j;
-  }
-  for (let i = 1; i <= a.length; i++) {
-    for (let j = 1; j <= b.length; j++) {
-      distance[i][j] = Math.min(
-        distance[i - 1][j] + 1,
-        distance[i][j - 1] + 1,
-        distance[i - 1][j - 1] + (a[i - 1] !== b[j - 1] ? 1 : 0)
-      );
-    }
-  }
-  return distance[a.length][b.length];
 }
 
 export function getDDHHMMSSOnlyClicker(d: Date) {
@@ -3232,6 +3213,23 @@ export function getImagePathFromAdminShopType(item: AdminShopItem): string {
 
   return `/AH_img/${item.replaceAll("-", "_")}.png`;
 }
+
+export function convertAhItemTypeToMarketItemOffer(item: AhItemType, seller: string): MarketItemOffer {
+  return {
+    seller: seller, // uuid of the seller
+    name: item.name, // Display name of the item
+    renamed: item.renamed,
+    quantity: item.item.quantity, // The remaining quantity of the item currenlty listed
+    price: item.price, // The price of the item in ($)
+    pricePb: item.pricePb, // The price of the item in pb
+    durability: item.durability, // Durability of the item
+    skin: item.skin, // Skin ID of the item
+    slot: item.slot, // Slot of the item in the market
+    createdAt: item.createdAt, // Date of the listing
+    expireAt: item.expireAt, // Date of the expiration of the listing
+  }
+}
+
 
 export function getIconNameFromEventType(eventType: EventType) {
   switch (eventType) {
