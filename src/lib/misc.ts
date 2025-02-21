@@ -3319,7 +3319,7 @@ export const getInitialPlayerInfo = (): PlayerInfo => {
     timePlayed: 0,
     username: constants.defaultUsername,
     uuid: "",
-    rank: "Default",
+    rank: "default",
     leaderboard: "Unranked",
     ah: { data: [], totalCount: 0, dateUpdated: 0 },
     last_fetch: new Date().getTime(),

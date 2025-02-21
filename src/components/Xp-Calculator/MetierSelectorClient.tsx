@@ -259,7 +259,7 @@ export function DisplayXpNeededWithDouble({ searchParams, xp, element }: {
     fortuneBonus = 1;
   }
 
-  const bonusXpRank = getBonusRank(playerInfo);
+  const bonusXpRank = getBonusRank(playerInfo?.rank);
   const bonusXpWithoutDouble = bonusXpRank + (searchParams.dailyBonus || 0);
   const bonusXpDouble = bonusXpWithoutDouble + (searchParams.double ? 100 : 0);
   const xpNeededWithDoubleXP = (xpNeeded / fortuneBonus) / ((100 + bonusXpDouble) / 100);
@@ -272,7 +272,7 @@ export function DisplayXpNeededWithBottle({ searchParams }: { searchParams: sear
   const xpNeeded = getXpDiff(playerInfo, searchParams);
 
 
-  const bonusXpRank = getBonusRank(playerInfo);
+  const bonusXpRank = getBonusRank(playerInfo?.rank);
   const bonusXpWithoutDouble = bonusXpRank + (searchParams.dailyBonus || 0);
   const xpNeededWithoutDoubleXP = xpNeeded / ((100 + bonusXpWithoutDouble) / 100);
   return <>{formatPrice(Math.ceil(xpNeededWithoutDoubleXP / 1000))} fois</>

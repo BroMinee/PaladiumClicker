@@ -211,7 +211,7 @@ export type PaladiumPlayerInfo = {
   timePlayed: number,
   username: string,
   uuid: string,
-  rank: string,
+  rank: PlayerRank,
   alliance: string,
   currentBanner: string,
   description: string,

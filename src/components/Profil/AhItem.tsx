@@ -20,9 +20,11 @@ export default function AhItem({ item, allItemsInfo, uuid_seller }: AhItemsProps
   let air = allItemsInfo.find((e) => e.value === "air");
 
   if (!closestItem && air)
-    return <DetailedMarketOffer itemSelected={air} offer={itemOffer}/>
+    return <div className="w-[95%] hover:scale-105 duration-300 cursor-pointer">
+      <DetailedMarketOffer itemSelected={air} offer={itemOffer}/>
+    </div>
   if (!closestItem)
-    return "Unkonwn item";
+    return "Unknown item";
 
 
   return (
