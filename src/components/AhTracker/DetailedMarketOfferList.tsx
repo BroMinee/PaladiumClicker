@@ -90,8 +90,8 @@ export function DetailedMarketOffer({ itemSelected, offer }: { itemSelected: Opt
       <SellNameMarket uuid={offer.seller}/>
     </div>
     <div className="flex flex-col xl:flex-row gap-4 w-full md:w-[35%]">
-      {offer.pricePb &&
-        <HoverText text={hoverElementPricePb}
+
+      <HoverText text={hoverElementPricePb}
                    className="flex flex-row w-full xl:w-[45%] gap-8 justify-between bg-card py-3 px-2 items-center">
           <Image src={safeJoinPaths(constants.imgPathMarket,"pb_icon.png")}
                  className="w-fit h-7 pixelated"
@@ -103,7 +103,7 @@ export function DetailedMarketOffer({ itemSelected, offer }: { itemSelected: Opt
             {`${formatPriceWithUnit(offer.pricePb)} PB`}
           </p>
         </HoverText>
-      }
+
       <HoverText text={hoverElementPrice}
                  className="flex flex-row w-full xl:w-[65%] gap-8 justify-between bg-card py-3 px-2 items-center">
         <Image src={safeJoinPaths(constants.imgPathMarket,"money_icon.png")}
