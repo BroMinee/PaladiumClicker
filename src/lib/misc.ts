@@ -3138,8 +3138,8 @@ export function getImagePathFromRankingType(rankingType: string): string {
     case RankingType.clicker:
       imgPath = safeJoinPaths(constants.imgPathRanking, `clicker.png`);
       break;
-    case RankingType.alignement:
-      imgPath = safeJoinPaths(constants.imgPathRanking, `alignement.png`);
+    case RankingType.alliance:
+      imgPath = safeJoinPaths(constants.imgPathRanking, `alliance.png`);
       break;
     default:
       imgPath = safeJoinPaths("/unknown.png");
@@ -3173,7 +3173,7 @@ export function rankingTypeToUserFriendlyText(rankingType: RankingType): string 
       return "KOTH";
     case RankingType.clicker:
       return "Clicker";
-    case RankingType.alignement:
+    case RankingType.alliance:
       return "Alignement";
     default:
       return "Inconnu";
