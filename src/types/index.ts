@@ -96,6 +96,7 @@ export type MetiersPossiblyUndefined = {
   miner?: Metier,
 }
 
+export type PlayerRank = "default" | "titan" | "paladin" | "endium" | "trixium" | "trixium+"|  "youtuber" | "heros" | "divinity" | "legend"| "premium";
 
 export type PlayerInfo = {
   metier: Metiers
@@ -115,7 +116,7 @@ export type PlayerInfo = {
   timePlayed: number,
   username: string,
   uuid: string,
-  rank: string,
+  rank: PlayerRank,
   leaderboard: string,
   ah: AhType,
   last_fetch: number,

@@ -1,7 +1,7 @@
 'use client';
 import { formatPrice, generateXpCalculatorUrl, safeJoinPaths } from "@/lib/misc.ts";
 import { cn } from "@/lib/utils.ts";
-import { MetierKey, PlayerInfo } from "@/types";
+import { MetierKey, PlayerInfo, PlayerRank } from "@/types";
 import { useRouter } from "next/navigation";
 import { usePlayerInfoStore } from "@/stores/use-player-info-store.ts";
 import metierJson from "@/assets/metier.json";
@@ -183,40 +183,42 @@ export function InputDailyBonus({ params, searchParams }: {
                 }/>
 }
 
-function getBonusRank(playerInfo: PlayerInfo | null) {
-  if (!playerInfo)
+function getBonusRank(playerRank: PlayerRank | undefined) {
+  if (!playerRank)
     return 0;
 
-  let bonusXpRank = 0;
-  if (playerInfo) {
-    switch (playerInfo.rank) {
-      case "titane":
-        bonusXpRank = 5;
-        break;
-      case "paladin":
-        bonusXpRank = 10;
-        break;
+
+  switch (playerRank) {
+    case "titan":
+    case "heros":
+      return 5;
+    case "paladin":
+    case "legend":
+      return 10;
       case "endium":
       case "trixium":
       case "trixium+":
-        bonusXpRank = 15;
-        break;
-    }
+    case "divinity":
+        return 15;
+    case "premium": // premium add 5% (don't know how it's represented in the API) always place the condition at the end
+      return 5;
+    default:
+      return 0;
   }
-  return bonusXpRank;
+
 }
 
 export function DisplayDailyDoubleRank({ dailyBonus, doubleXp }: { dailyBonus: number, doubleXp: number }) {
   const { data: playerInfo } = usePlayerInfoStore();
 
-  let bonusXpRank = getBonusRank(playerInfo);
+  let bonusXpRank = getBonusRank(playerInfo?.rank);
   return <>{dailyBonus + doubleXp + bonusXpRank}%</>
 }
 
 export function DisplayXpBonus() {
   const { data: playerInfo } = usePlayerInfoStore();
 
-  let bonusXpRank = getBonusRank(playerInfo);
+  let bonusXpRank = getBonusRank(playerInfo?.rank);
   return <>{bonusXpRank}%</>
 }
 
