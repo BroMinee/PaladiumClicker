@@ -423,6 +423,7 @@ export enum RankingType {
   // "chorus" = "chorus",
   "koth" = "koth",
   "clicker" = "clicker",
+  "alignement" = "alignement",
 }
 
 export type RankingResponse =
