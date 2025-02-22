@@ -3313,7 +3313,7 @@ export const getInitialPlayerInfo = (): PlayerInfo => {
         iconId: 0,
       }, level: { level: 1, xp: 0 }, name: "Wilderness", players: [], uuid: "00000000-0000-0000-0000-000000000000"
     },
-    firstJoin: 0,
+    firstSeen: 0,
     friends: { data: [], totalCount: 0 },
     money: 0,
     timePlayed: 0,

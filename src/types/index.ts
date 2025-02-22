@@ -110,7 +110,7 @@ export type PlayerInfo = {
   terrain_upgrade: TerrainUpgrade[],
   production: number,
   faction: PaladiumFactionInfo,
-  firstJoin: number,
+  firstSeen: number,
   friends: PaladiumFriendInfo,
   money: number,
   timePlayed: number,
@@ -206,7 +206,7 @@ export type AnyCondition = ConditionWithCoins | ConditionWithIndex | ConditionWi
 
 export type PaladiumPlayerInfo = {
   faction: string,
-  firstJoin: number,
+  firstSeen: number,
   money: number,
   timePlayed: number,
   username: string,

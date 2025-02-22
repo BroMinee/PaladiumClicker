@@ -115,7 +115,7 @@ export function PlayerTimePlayed() {
 
 export function PlayerFirstConnection() {
   const { data: playerInfo } = usePlayerInfoStore();
-  return <SmallCardInfo title="Première connexion" value={convertEpochToDateUTC2(playerInfo?.firstJoin || 1)}
+  return <SmallCardInfo title="Première connexion" value={convertEpochToDateUTC2(playerInfo?.firstSeen || 1)}
                         img={safeJoinPaths(constants.imgPathProfile,"clock.gif")}/>
 }
 

@@ -220,7 +220,7 @@ export const getPlayerInfo = async (pseudo: string): Promise<PlayerInfo> => {
 
   const friendsList = friendList;
 
-  initialPlayerInfo.firstJoin = paladiumProfil.firstJoin;
+  initialPlayerInfo.firstSeen = paladiumProfil.firstSeen;
   initialPlayerInfo.friends = friendsList;
   initialPlayerInfo.money = paladiumProfil.money;
   initialPlayerInfo.timePlayed = paladiumProfil.timePlayed;
