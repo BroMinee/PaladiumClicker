@@ -156,10 +156,6 @@ export const getPlayerInfo = async (pseudo: string): Promise<PlayerInfo> => {
       throw "Pseudo contains space";
     } else if (!/^[a-zA-Z0-9_]+$/.test(pseudo)) {
       throw "Pseudo doit contenir que des lettres ou des chiffres";
-    } else if (pseudo.length <= 3) {
-      throw "Pseudo trop court";
-    } else if (pseudo.length > 16) {
-      throw "Pseudo trop long";
     }
   } catch (error) {
     redirect(`/error?message=${error}&username=${pseudo}`);
