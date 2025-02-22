@@ -9,7 +9,7 @@ const discord = {
 
 export const API_PALATRACKER = process.env.NEXT_PUBLIC_PALACLICKER_API_URL || "https://palatracker.bromine.fr"
 
-const startSeason = new Date("2025-02-22");
+const startSeason = new Date("2025-02-21");
 
 const defaultUsername = "Profil_vide";
 
