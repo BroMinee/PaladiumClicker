@@ -362,7 +362,7 @@ export async function getPlayerUsernameFromUUID(uuid: string): Promise<string> {
   let pseudo = "";
   try {
     const playerdbAPI = await fetch(`https://playerdb.co/api/player/minecraft/${uuid}`, {
-      next: { revalidate: 15 * 60, tags: ['playerInfo'] },
+      next: { revalidate: 15 * 60 },
       signal: AbortSignal.timeout(4000),
     })
     const playerdbAPIJson = await playerdbAPI.json();

@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
 import { usePlayerInfoStore } from "@/stores/use-player-info-store";
-import React, { FormEvent, useState } from "react";
+import React, { FormEvent, useEffect, useState } from "react";
 import { FaSearch } from "react-icons/fa";
 import constants from "@/lib/constants.ts";
 import { getInitialPlayerInfo, getLinkFromUrl, safeJoinPaths } from "@/lib/misc.ts";
@@ -11,11 +11,11 @@ import { navigate } from '@/components/actions'
 import { useSettingsStore } from "@/stores/use-settings-store.ts";
 import { getPlayerInfoAction, registerPlayerAction } from "@/lib/api/apiServerAction.ts";
 import { toast } from "sonner";
-import Countdown from "react-countdown";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog.tsx";
 import { PlayerInfo } from "@/types";
 import { ScrollArea } from "@/components/ui/scroll-area.tsx";
 import SmallCardInfo from "@/components/shared/SmallCardInfo.tsx";
+import LoadingSpinner from "@/components/ui/loading-spinner.tsx";
 
 type ImportProfilProps = {
   showResetButton?: boolean,
@@ -35,6 +35,7 @@ export default function ImportProfil({
   const { settings } = useSettingsStore();
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [newPlayerInfo, setNewPlayerInfo] = useState<PlayerInfo | null>(null);
+  const [update, setUpdate] = useState(false);
 
   async function onSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -53,47 +54,8 @@ export default function ImportProfil({
     }
   }
 
-  const rendererImportProfil = ({ minutes, seconds, completed }: {
-    minutes: number,
-    seconds: number,
-    completed: boolean
-  }) => {
-    if (completed) {
-      return <Button
-        onClick={async () => {
-          if (playerInfo === null) return;
-          getPlayerInfoAction(playerInfo.username).then((data) => {
-            setNewPlayerInfo(data);
-            if (playerInfo.edited && hasDifference(playerInfo, data)) {
-              setIsPopupOpen(true);
-            } else {
-              handleConfirmReplacement();
-            }
-
-          }).catch((e) => {
-            console.error(e);
-            toast.error(`Erreur lors du chargement du profil de ${playerInfo.username}`);
-          });
-        }}>
-        <span>Mettre à jour</span>
-      </Button>;
-    } else {
-
-      return <Button className="flex flex-col" disabled={true}>
-        <span>Mise à jour disponible dans :</span>
-        <span>{minutes < 10 ? `0${minutes}` : minutes}:{seconds < 10 ? `0${seconds}` : seconds}
-        </span>
-      </Button>;
-    }
-  };
-
   const handleConfirmReplacement = () => {
-    if (newPlayerInfo) {
-      toast.success(`Profil de ${newPlayerInfo.username} chargé`);
-      registerPlayerAction(newPlayerInfo.uuid, newPlayerInfo.username);
-      setPlayerInfo(newPlayerInfo);
-      setIsPopupOpen(false);
-    }
+    setUpdate(true);
   };
 
   const handleCancelReplacement = () => {
@@ -102,6 +64,20 @@ export default function ImportProfil({
   };
   // if (playerInfo !== null)
   // alert(`${new Date(playerInfo.last_fetch + 1000 * 15 * 60)}, ${new Date()} ${new Date(playerInfo.last_fetch + 1000 * 15 * 60) <= new Date()}`)
+
+
+  useEffect(() => {
+    if (newPlayerInfo) {
+      toast.success(`Profil de ${newPlayerInfo.username} chargé`);
+      registerPlayerAction(newPlayerInfo.uuid, newPlayerInfo.username);
+      setPlayerInfo(newPlayerInfo);
+      setIsPopupOpen(false);
+      setUpdate(false);
+    }
+    else {
+      console.error("newPlayerInfo is null")
+    }
+  }, [update]);
 
   return (
     <div className={cn("flex gap-2", navBar ? "flex-col" : "")}>
@@ -126,9 +102,7 @@ export default function ImportProfil({
         </div>
       </form>
       {showResetButton && !settings.defaultProfile &&
-        <Countdown
-          date={playerInfo ? new Date(playerInfo.last_fetch + 1000 * 0 * 60) : new Date(new Date().getTime() + 1000 * 0 * 60)}
-          renderer={rendererImportProfil}/>
+        <UpdateProfilButton setNewPlayerInfo={setNewPlayerInfo} handleConfirmReplacement={handleConfirmReplacement} setIsPopupOpen={setIsPopupOpen}/>
       }
       {showResetButton && settings.defaultProfile &&
         <Button onClick={() => {
@@ -155,6 +129,41 @@ export default function ImportProfil({
       </Dialog>
     </div>
   );
+}
+
+function UpdateProfilButton({
+                              setNewPlayerInfo,
+                              setIsPopupOpen,
+                              handleConfirmReplacement
+                            }: {
+  setNewPlayerInfo: (playerInfo: PlayerInfo) => void,
+  setIsPopupOpen: (isOpen: boolean) => void,
+  handleConfirmReplacement: () => void,
+}) {
+  const { data: playerInfo } = usePlayerInfoStore();
+
+  const [fetching, setFetching] = useState(false);
+
+  return <Button
+    className="flex flex-row gap-2"
+    onClick={async () => {
+      if (playerInfo === null) return;
+      setFetching(true);
+      getPlayerInfoAction(playerInfo.username).then((data) => {
+        setNewPlayerInfo(data);
+        setFetching(false);
+        if (playerInfo.edited && hasDifference(playerInfo, data)) {
+          setIsPopupOpen(true);
+        } else {
+          handleConfirmReplacement();
+        }
+      }).catch(() => {
+        toast.error(`Erreur lors du chargement du profil de ${playerInfo.username}`);
+      });
+    }}>
+    <span>Mettre à jour</span>
+    {fetching && <LoadingSpinner size={4}/> }
+  </Button>;
 }
 
 

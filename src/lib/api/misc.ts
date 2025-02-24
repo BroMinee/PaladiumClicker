@@ -10,7 +10,7 @@ export const fetchWithoutHeader = async <T>(url: string, cache_duration = 15 * 6
   try {
     response = await fetch(url,
       {
-        next: { revalidate: cache_duration, tags: ['playerInfo'] },
+        next: { revalidate: cache_duration },
         signal: AbortSignal.timeout(4000)
       })
     json = await response.json();
@@ -46,7 +46,7 @@ export const fetchWithHeader = async <T>(url: string, cache_duration_in_sec = 15
   try {
     response = await fetch(url,
       {
-        next: { revalidate: cache_duration_in_sec, tags: ['playerInfo'] },
+        next: { revalidate: cache_duration_in_sec },
         signal: AbortSignal.timeout(4000),
         headers: {
           'Authorization': `Bearer ${process.env.PALADIUM_API_KEY}`,
@@ -68,7 +68,7 @@ export const fetchWithHeader = async <T>(url: string, cache_duration_in_sec = 15
     let uuid = "";
     try {
       const playerdbAPI = await fetch(`https://playerdb.co/api/player/minecraft/${username}`, {
-        next: { revalidate: 15 * 60, tags: ['playerInfo'] },
+        next: { revalidate: 15 * 60 },
         signal: AbortSignal.timeout(4000),
       })
       const playerdbAPIJson = await playerdbAPI.json();
@@ -81,7 +81,7 @@ export const fetchWithHeader = async <T>(url: string, cache_duration_in_sec = 15
       try {
         response = await fetch(`https://api.paladium.games/v1/paladium/player/profile/${uuid}`,
           {
-            next: { revalidate: cache_duration_in_sec, tags: ['playerInfo'] },
+            next: { revalidate: cache_duration_in_sec },
             signal: AbortSignal.timeout(4000),
             headers: {
               'Authorization': `Bearer ${process.env.PALADIUM_API_KEY}`
