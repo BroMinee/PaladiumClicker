@@ -34,7 +34,7 @@ export default async function AhInfo() {
             <PopoverContent className="w-80">
               Somme d&apos;argent que vous gagneriez si vous vendiez tous vos objets en vente.
               <br/>
-              Par du principe que vous n&apos;avez pas encore vendu de Lucky Drawer.
+              Ne prend pas en compte les lucky drawers.
             </PopoverContent>
           </Popover>
         </CardTitle>

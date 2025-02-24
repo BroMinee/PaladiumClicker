@@ -30,7 +30,7 @@ export function AhInfoGetTotalBenefice() {
   if (!playerInfo || !playerInfo.ah)
     return null;
 
-  const totalCount = playerInfo.ah.data.reduce((acc, e) => acc + e.price * e.item.quantity, 0);
+  const totalCount = playerInfo.ah.data.reduce((acc, e) => e.item.name === "tile-luckydrawer" ? acc : acc + e.price * e.item.quantity, 0);
   return <span className="text-primary">
     {formatPrice(totalCount)}{" $"}
   </span>
