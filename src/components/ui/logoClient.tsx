@@ -7,13 +7,10 @@ import React from "react";
 
 export const LogoClient = ({ menu = false }: { menu?: boolean }) => {
 
-  const { reset } = usePlayerInfoStore();
-
   return (
     <div
       className="flex flex-row items-center justify-start p-6 pb-3 space-x-3 hover:scale-110 duration-300 cursor-pointer"
       onClick={async () => {
-        reset();
         await navigate("/");
       }}
     >
