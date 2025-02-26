@@ -1,9 +1,6 @@
 name: Check Build on dev
 
 on:
-  push:
-    branches:
-      - dev
   pull_request:
     branches:
       - dev
