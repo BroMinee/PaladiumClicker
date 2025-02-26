@@ -1,7 +1,6 @@
 'use client';
 import { safeJoinPaths } from "@/lib/misc.ts";
 import Image from "next/image";
-import { usePlayerInfoStore } from "@/stores/use-player-info-store.ts";
 import { navigate } from "@/components/actions.ts";
 import React from "react";
 
