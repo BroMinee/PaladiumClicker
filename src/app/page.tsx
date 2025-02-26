@@ -1,8 +1,8 @@
 import { NoPseudoPage } from "@/components/NoPseudoPage.tsx";
 
 export function generateMetadata() {
-  const title = `PalaTracker`;
-  const description = `PalaTracker : boostez votre progression et votre clicker sur Paladium comme jamais auparavant !`;
+  const title = `PalaTracker | Accueil`;
+  const description = `Boostez votre progression et votre clicker sur Paladium comme jamais auparavant !`;
   return {
     title: title,
     description: description,
@@ -14,6 +14,7 @@ export function generateMetadata() {
 }
 
 export default function Home() {
-  return (<NoPseudoPage noBoldText="sur " boldText="PalaTracker"/>
+  return (
+    <NoPseudoPage texth1={"Améliore ton °clicker°, consulte les °statistiques° et booste ta °progression° sur Paladium."} texth2={"Commence par saisir ton pseudo °Minecraft°"}/>
   );
 }

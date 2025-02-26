@@ -12,5 +12,5 @@ export function generateMetadata() {
 }
 
 export default function HomeProfilWithoutUsername() {
-  return <NoPseudoPage noBoldText="sur l'optimiseur du" boldText="PalaClicker"/>
+  return <NoPseudoPage texth1="Optimise ton °PalaClicker°" texth2="Commence par saisir ton pseudo °Minecraft°"/>
 }
