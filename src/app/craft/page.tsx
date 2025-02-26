@@ -3,13 +3,13 @@ import { FaHeart } from "react-icons/fa";
 import GradientText from "@/components/shared/GradientText.tsx";
 import React, { Suspense } from "react";
 
-import LoadingSpinner from "@/components/ui/loading-spinner.tsx";
 import MarketSelector from "@/components/AhTracker/MarketSelector.tsx";
 import { getAllItems } from "@/lib/api/apiPalaTracker.ts";
 import { OptionType } from "@/types";
 import constants from "@/lib/constants.ts";
 import CraftingInformationFetcher from "@/components/Craft/CraftingInformationFetcher.tsx";
 import { CountSelector } from "@/components/Craft/CountSelector.tsx";
+import LoadingSpinner from "@/components/ui/loading-spinner.tsx";
 
 export async function generateMetadata(
   { searchParams }: { searchParams: { item: string | undefined } },
@@ -112,7 +112,7 @@ export default async function AhTrackerPage({ searchParams }: {
       </Card>
       <div className="grid grid-cols-2 gap-2 w-full">
         {item &&
-          <Suspense fallback={<CraftRecipeFallback item={item}/>}>
+          <Suspense fallback={<CraftRecipeFallback label={item.label}/>}>
             <CraftingInformationFetcher item={item} options={options} count={count}/>
           </Suspense>
         }
@@ -130,14 +130,14 @@ export default async function AhTrackerPage({ searchParams }: {
     </div>)
 }
 
-export function CraftRecipeFallback({ item }: { item: OptionType }) {
+function CraftRecipeFallback({ label }: { label: string }) {
   return (<Card>
     <CardHeader>
       <CardTitle className="flex flex-row gap-2">
         <LoadingSpinner size={4}/>
         Chargement des crafts de l&apos;item :{" "}
         <GradientText
-          className="font-extrabold">{item.label || "Not Found"}
+          className="font-extrabold">{label || "Not Found"}
         </GradientText>
       </CardTitle>
     </CardHeader>

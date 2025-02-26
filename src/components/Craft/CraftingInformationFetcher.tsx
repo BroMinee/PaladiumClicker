@@ -1,12 +1,11 @@
 'use server';
 
 import { CraftingRecipeKey, CraftingRecipeType, NodeType, OptionType, Tree } from "@/types";
-import React, { Suspense } from "react";
+import React from "react";
 import { getCraft } from "@/lib/api/apiPalaTracker.ts";
 import { CraftingInformationClient } from "@/components/Craft/CraftingInformation.tsx";
 import { addChildrenToTree, createNodeType, createTreeNode, getInternalNode } from "@/lib/misc.ts";
 import { CraftItemRecipe } from "@/components/Craft/CraftItemRecipe.tsx";
-import { CraftRecipeFallback } from "@/app/craft/page.tsx";
 import { Card, CardHeader, CardTitle } from "@/components/ui/card.tsx";
 import { redirect } from "next/navigation";
 
@@ -27,7 +26,6 @@ export default async function CraftingInformationFetcher({ item, options, count 
 
   return (
     <>
-      <Suspense fallback={<CraftRecipeFallback item={item}/>}>
         <Card className="row-start-3">
           <CardHeader>
             <CardTitle>
@@ -39,7 +37,6 @@ export default async function CraftingInformationFetcher({ item, options, count 
             return <CraftItemRecipe key={el.value + index + "-craft"} item={el} options={options}/>
           })}
         </Card>
-      </Suspense>
 
       <CraftingInformationClient
         root={root}>
