@@ -47,3 +47,4 @@ next-env.d.ts
 *.sln
 *.sw?
 /combined.log
+.env
