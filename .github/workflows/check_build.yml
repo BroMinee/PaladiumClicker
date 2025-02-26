@@ -1,4 +1,4 @@
-name: Build master
+name: Check Build on master
 
 on:
   push:

@@ -1,4 +1,4 @@
-name: Build dev
+name: Check Build on dev
 
 on:
   push:
