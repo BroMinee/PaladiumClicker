@@ -1,0 +1,28 @@
+name: Block Direct Commits on Main
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  block_direct_commits:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check if commit is from a PR
+        run: |
+          if [[ "${{ github.event_name }}" == "push" && "${{ github.ref }}" == "refs/heads/main" && "${{ github.actor }}" != "dependabot[bot]" ]]; then
+            echo "Direct commits to main are not allowed. Use a Pull Request instead."
+            exit 1
+          fi
+
+  block_workflow_changes:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check modified files
+        run: |
+          CHANGED_FILES=$(git diff --name-only HEAD^ HEAD)
+          if echo "$CHANGED_FILES" | grep -q ".github/workflows/protect-main.yml"; then
+            echo "Modification of the workflow file is not allowed!"
+            exit 1
+          fi
