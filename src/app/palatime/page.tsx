@@ -103,8 +103,8 @@ export default function PalatimePage() {
             loto, etc... Tu vas bien t&apos;amuser.
           </CardContent>
         </Card>
-        <div className="flex flex-row w-full">
-          <div className="flex-grow md:block hidden">
+        <div className="flex flex-row w-full justify-center">
+          <div className="flex-grow md:block hidden fallingPapers">
             <FallingClickImagePalaTime/>
           </div>
 
@@ -119,11 +119,12 @@ export default function PalatimePage() {
               }
             </CardContent>
           </Card>
-          <div className="flex-grow">
+          <div className="flex-grow md:block hidden fallingPapers">
             <FallingClickImagePalaTime/>
           </div>
         </div>
       </div>
+
     </>
   )
 }
