@@ -7,7 +7,6 @@ import { ScrollArea } from "@/components/ui/scroll-area.tsx";
 import { safeJoinPaths } from "@/lib/misc.ts";
 import { useSettingsStore } from "@/stores/use-settings-store.ts";
 
-
 const FallingClickImagePalaTime = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const [openEvent, setOpenEvent] = useState(false);
@@ -35,7 +34,8 @@ const FallingClickImagePalaTime = () => {
 
         const image = document.createElement('img');
         image.classList.add("animate-falling", "h-auto", "w-32", "object-cover");
-
+        image.draggable = false;
+        image.ondragstart = (e) => {e.preventDefault();}
 
         image.src = safeJoinPaths(`/AH_img/paper.png`);
 
