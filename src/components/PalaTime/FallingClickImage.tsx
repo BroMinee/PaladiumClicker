@@ -36,6 +36,9 @@ const FallingClickImagePalaTime = () => {
         image.classList.add("animate-falling", "h-auto", "w-32", "object-cover");
         image.draggable = false;
         image.ondragstart = (e) => {e.preventDefault();}
+        image.style.imageRendering = "pixelated";
+        image.style.imageRendering = "crisp-edges";
+
 
         image.src = safeJoinPaths(`/AH_img/paper.png`);
 
