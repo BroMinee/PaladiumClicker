@@ -45,11 +45,16 @@ const FallingClickImagePalaTime = () => {
           setOpenEvent(true);
         }
 
-        const randomX = Math.random() * (rightTop.x - leftTop.x - image.width) + leftTop.x;
-        const randomY = leftTop.y + image.height;
-        image.style.top = randomY + 'px';
-        image.style.left = randomX + 'px';
         image.classList.add("absolute");
+        image.style.display = "none";
+        image.onload = () => {
+          image.style.display = "block"
+          const randomX = Math.random() * (rightTop.x - leftTop.x - image.width) + leftTop.x;
+          const randomY = leftTop.y + image.height;
+
+          image.style.top = randomY + 'px';
+          image.style.left = randomX + 'px';
+        };
 
         containerRef.current.appendChild(image);
         setTimeout(() => {
