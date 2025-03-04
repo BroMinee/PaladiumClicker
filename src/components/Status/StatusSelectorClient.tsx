@@ -13,7 +13,7 @@ export function StatusSelectorClientPeriode({ periode }: {
   const router = useRouter();
   const searchParams = useSearchParams();
 
-  const selected = periode === searchParams.get("periode");
+  const selected = periode === (searchParams.get("periode") || (periode === "day" ? periode : undefined));
 
 
   const converter = (periode: string) => {

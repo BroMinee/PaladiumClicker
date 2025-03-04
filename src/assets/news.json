@@ -1,5 +1,12 @@
 [
   {
+    "date": "TODO",
+    "events": [
+      "Correction du bouton \"24h\" sur les graphiques qui n'était pas sélectionner par défaut",
+      ""
+    ]
+  },
+  {
     "date": "22/02/2025",
     "events": [
       "Ajout du détail des offres dans le [market](https://palatracker.bromine.fr/ah)",
