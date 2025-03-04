@@ -637,6 +637,7 @@ export type ModelName =
   | "ravirok"
   | "tedarok"
   | "pet_reindeer"
+  | "pet_chameleon"
   | "mohiras"; // BOSS DRAGON
 
 export type NotificationWebSiteResponse =

@@ -63,6 +63,8 @@ function convertPetSkinToModelName(petSkin: string): ModelName {
       return "pet_ender_dragon"
     case "pet_reindeer":
       return "pet_reindeer"
+    case "pet_chameleon":
+      return "pet_chameleon"
     default:
       return "arty";
   }
