@@ -9,6 +9,8 @@ import { StatusSelectorClientPeriode } from "@/components/Status/StatusSelectorC
 import { redirect } from "next/navigation";
 import { generateStatusUrl } from "@/lib/misc.ts";
 import { AdminShopPeriode } from "@/types";
+import GraphPlayerCount from "@/components/Status/GraphPlayerCount.tsx";
+import GraphMoneySum from "@/components/Status/GraphMoneySum.tsx";
 
 
 export async function generateMetadata() {
@@ -104,6 +106,16 @@ export default function Home({ searchParams }: {
           <StatusSelectorClientPeriode periode="month"/>
           <StatusSelectorClientPeriode periode="season"/>
         </CardHeader>
+      </Card>
+      <Card className="flex flex-col gap-4">
+        <CardContent className="flex flex-col items-center justify-between gap-2 h-[calc(100vh-30vh)] w-full">
+          <Suspense fallback={<GraphStatusFallback/>}>
+            <GraphPlayerCount />
+          </Suspense>
+          <Suspense fallback={<GraphStatusFallback/>}>
+            <GraphMoneySum />
+          </Suspense>
+        </CardContent>
       </Card>
     </div>
   )

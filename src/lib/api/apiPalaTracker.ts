@@ -4,8 +4,8 @@ import {
   AdminShopPeriode,
   CraftingRecipeType,
   DiscordUser,
-  Item,
-  OptionType,
+  Item, MoneySumHistory,
+  OptionType, PlayerCountHistory,
   ProfilViewType,
   RankingResponse,
   RankingType,
@@ -132,4 +132,12 @@ export const getWebHookDiscordFromCookies = async (): Promise<WebhookDiscord[]> 
     console.error(e);
     return [];
   });
+}
+
+export async function getPlayerCountHistoryPaladium() {
+  return fetchWithHeader<PlayerCountHistory>(`${API_PALATRACKER}/v1/status-history/paladium/player/count-history`, 0);
+}
+
+export async function getMoneySumHistoryPaladium() {
+  return fetchWithHeader<MoneySumHistory>(`${API_PALATRACKER}/v1/status-history/paladium/money/count-history`, 0);
 }

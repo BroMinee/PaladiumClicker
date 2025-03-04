@@ -3,7 +3,7 @@
     "date": "TODO",
     "events": [
       "Correction du bouton \"24h\" sur les graphiques qui n'était pas sélectionner par défaut",
-      ""
+      "Ajout des graphiques du nombre de joueurs uniques et quantité d'argent en circulation"
     ]
   },
   {
