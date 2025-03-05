@@ -3,7 +3,8 @@
     "date": "TODO",
     "events": [
       "Correction du bouton \"24h\" sur les graphiques qui n'était pas sélectionner par défaut",
-      "Ajout des graphiques du nombre de joueurs uniques et quantité d'argent en circulation"
+      "Ajout des graphiques du nombre de joueurs uniques et quantité d'argent en circulation",
+      "Correction de l'expérience obtenue par une Kiwano Seed (200->50) et la pêche d'un Bass (150->225)"
     ]
   },
   {

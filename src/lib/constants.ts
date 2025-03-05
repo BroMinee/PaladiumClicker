@@ -367,7 +367,7 @@ const how_to_xp: HowToXp = {
     { type: "Titane Ingot", "action": CRUSH, "xp": 4.5, imgPath: "titane_ingot.png" },
     { type: "Chervil", "action": BREAK, "xp": 20, imgPath: "chervil.png" },
     { type: "Paladium Ingot", "action": CRUSH, "xp": 6, imgPath: "paladium_ingot.png" },
-    { type: "Kiwano", "action": BREAK, "xp": 200, imgPath: "kiwano.png" },
+    { type: "Kiwano", "action": BREAK, "xp": 50, imgPath: "kiwano.png" },
   ],
   "hunter": [
     { type: "Snow Golem", "action": KILL, "xp": 1, imgPath: "snow_golem.png" },
@@ -392,7 +392,7 @@ const how_to_xp: HowToXp = {
     { type: "Wither", "action": KILL, "xp": 1000, imgPath: "wither.png" },
     { type: "Goat", "action": KILL, "xp": 20, imgPath: "goat.png" },
     { type: "Carp", "action": FISH, "xp": 150, imgPath: "carp.png" },
-    { type: "Bass", "action": FISH, "xp": 150, imgPath: "bass.png" },
+    { type: "Bass", "action": FISH, "xp": 225, imgPath: "bass.png" },
     { type: "Manta Ray", "action": FISH, "xp": 300, imgPath: "manta_ray.png" },
     { type: "Snail", "action": KILL, "xp": 25, imgPath: "snail.png" },
     { type: "Red Tuna", "action": FISH, "xp": 450, imgPath: "red_tuna.png" },
