@@ -234,7 +234,6 @@ export const getPlayerInfo = async (pseudo: string): Promise<PlayerInfo> => {
   initialPlayerInfo.description = paladiumProfil.description;
   initialPlayerInfo.mount = mount;
   initialPlayerInfo.pet = pet;
-  registerPlayerAction(initialPlayerInfo.uuid, initialPlayerInfo.username);
 
   registerPlayerAction(paladiumProfil.uuid, paladiumProfil.username);
 
