@@ -2,28 +2,30 @@ import { Card, CardContent, CardHeader } from "@/components/ui/card.tsx";
 import { getAllUsersLinked, getRole } from "@/lib/api/apiPalaTracker.ts";
 import Image from "next/image";
 import EditRole from "@/components/Admin-Panel/AdminPanelRoleEdition.tsx";
+import { Role } from "@/types";
+import React from "react";
+
+
+const mapPermission = new Map<Role, React.FC[]>(
+  [
+    ["Admin", [EditRolePanel, PalaAnimationPanel, ReportBugPanel, AccessBetaPanel, PalatimePanel]],
+    ["Moderator", [PalaAnimationPanel]],
+    ["Bug Hunter", [ReportBugPanel]],
+    ["Beta Tester", [AccessBetaPanel]],
+    ["Palatime", [PalatimePanel]],
+    ["Classic", [NotPermissionPanel]]
+  ]);
 
 export async function AdminPanelRoleDispatch() {
   const role = await getRole();
 
-  switch (role) {
-    case "Admin":
-      return <AdminPanelRoleAdmin/>;
-    case "Moderator":
-      return <AdminPanelRoleModerator/>;
-    case "Bug Hunter":
-      return <AdminPanelBugHunter/>;
-    case "Beta Tester":
-      return <AdminPanelBetaTester/>;
-    case "Palatime":
-      return <AdminPanelPalatime/>;
-    default:
-      return <AdminPanelRoleDefault/>;
-
-  }
+  const page = mapPermission.get(role) || [NotPermissionPanel];
+  return <div className="flex flex-col gap-2">
+    {page.map((Component, i) => <Component key={i}/>)}
+  </div>
 }
 
-async function AdminPanelRoleAdmin() {
+async function EditRolePanel() {
   const allUsers = await getAllUsersLinked();
 
   return (
@@ -52,59 +54,60 @@ async function AdminPanelRoleAdmin() {
   )
 }
 
-function AdminPanelRoleModerator() {
+function PalaAnimationPanel() {
   return (
     <Card>
       <CardHeader>
-        <p>Moderator</p>
+        <p>PalaAnimation panel</p>
       </CardHeader>
       <CardContent>
-        <p>Moderator content</p>
+        <p>Remove PalaAnimation individualy of all the answer of a user. Ask twice in both case</p>
       </CardContent>
     </Card>
   )
 }
 
-function AdminPanelBugHunter() {
+function ReportBugPanel() {
   return (
     <Card>
       <CardHeader>
         <p>Bug Hunter</p>
       </CardHeader>
       <CardContent>
-        <p>Bug Hunter content</p>
+        <p>Report a bug</p>
       </CardContent>
     </Card>
   )
 }
 
-function AdminPanelBetaTester() {
+function AccessBetaPanel() {
   return (
     <Card>
       <CardHeader>
-        <p>Beta Tester</p>
+        <p>Beta Panel</p>
       </CardHeader>
       <CardContent>
-        <p>Beta Tester content</p>
+        <p>Link to the beta url</p>
       </CardContent>
     </Card>
   )
 }
 
-function AdminPanelPalatime() {
+function PalatimePanel() {
   return (
     <Card>
       <CardHeader>
         <p>Palatime</p>
       </CardHeader>
       <CardContent>
-        <p>Palatime content</p>
+        <p>Edit palatime</p>
       </CardContent>
     </Card>
   )
 }
 
-function AdminPanelRoleDefault() {
+function NotPermissionPanel() {
+  // TODO auto redirect to home page
   return (
     <Card>
       <CardHeader>
