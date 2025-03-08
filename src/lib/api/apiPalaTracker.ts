@@ -4,11 +4,15 @@ import {
   AdminShopPeriode,
   CraftingRecipeType,
   DiscordUser,
-  Item, MoneySumHistory,
-  OptionType, PlayerCountHistory,
+  Item,
+  MoneySumHistory,
+  OptionType,
+  PlayerCountHistory,
   ProfilViewType,
   RankingResponse,
   RankingType,
+  Role,
+  RoleResponse,
   ServerPaladiumStatusResponse,
   ServerStatusResponse,
   StatusPeriode,
@@ -140,4 +144,21 @@ export async function getPlayerCountHistoryPaladium() {
 
 export async function getMoneySumHistoryPaladium() {
   return fetchWithHeader<MoneySumHistory>(`${API_PALATRACKER}/v1/status-history/paladium/money/count-history`, 0);
+}
+
+export async function getAllUsersLinked() {
+  return fetchWithHeader<RoleResponse[]>(`${API_PALATRACKER}/v1/role/getAllUsersRole`, 0);
+}
+
+export async function getRole(): Promise<Role> {
+  const res = await fetchWithHeader<{ role: Role }>(`${API_PALATRACKER}/v1/role/getRole`, 0).catch(() => {
+    return { role: 'Classic' as Role };
+  });
+  return res.role;
+}
+
+export async function isAdmin() {
+  return fetchWithHeader<boolean>(`${API_PALATRACKER}/v1/role/isAdmin`, 0).catch(() => {
+    return false;
+  });
 }

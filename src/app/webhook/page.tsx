@@ -1,4 +1,4 @@
-import { Card, CardContent, CardHeader } from "@/components/ui/card.tsx";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card.tsx";
 import React from "react";
 import { AuthForceWrapper } from "@/components/Auth/AuthForceWrapper.tsx";
 import { getWebHookDiscordFromCookies, getWebHookFromCookies } from "@/lib/api/apiPalaTracker.ts";
@@ -25,7 +25,22 @@ export type subGroupsType = Record<string, WebHookAlert[]>;
 
 export type groupsType = Record<string, subGroupsType>;
 
-export default async function WebHooksPage() {
+
+export default async function WebHooksMainPage() {
+  return (
+    <AuthForceWrapper url={`${constants.webhooksPath}/login`}>
+      <Card>
+        <CardHeader>
+          Définissez des webhooks discord pour recevoir des notifications en temps réel sur Paladium.
+        </CardHeader>
+        <WebHooksPage/>
+      </Card>
+    </AuthForceWrapper>
+  );
+};
+
+
+export async function WebHooksPage() {
     let webHookAlerts = await getWebHookFromCookies();
     let webHookDiscord = await getWebHookDiscordFromCookies()
     const guildIdToServerName: Record<string, string> = {};
@@ -54,20 +69,14 @@ export default async function WebHooksPage() {
     });
 
     return (
-        <AuthForceWrapper url={`${constants.webhooksPath}/login`}>
-            <Card>
-                <CardHeader>
-                    Définissez des webhooks discord pour recevoir des notifications en temps réel sur Paladium.
-                </CardHeader>
-                <CardContent className="flex flex-col justify-left gap-2">
-                    {webHookAlerts.length === 0 &&
-                        "Vous n'avez pas de webhooks définis. Créez-en un dès maintenant !"
-                    }
-                    <WebHookPreviewPage webHookDiscord={webHookDiscord} channelIdToChannelName={channelIdToChannelName}
-                                        guildIdToServerName={guildIdToServerName} groupsArg={groups}/>
-                </CardContent>
-            </Card>
-        </AuthForceWrapper>
+      <CardContent className="flex flex-col justify-left gap-2">
+        {webHookAlerts.length === 0 &&
+          <CardTitle>Vous n&apos;avez pas de webhooks définis. Créez-en un dès maintenant !
+          </CardTitle>
+        }
+        <WebHookPreviewPage webHookDiscord={webHookDiscord} channelIdToChannelName={channelIdToChannelName}
+                            guildIdToServerName={guildIdToServerName} groupsArg={groups}/>
+      </CardContent>
     );
-};
+}
 

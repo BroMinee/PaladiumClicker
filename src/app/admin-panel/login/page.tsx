@@ -1,7 +1,8 @@
 import { Card, CardContent, CardHeader } from "@/components/ui/card.tsx";
 import React from "react";
-import { LoginButton } from "@/components/Login/LoginButton.tsx";
 import { API_PALATRACKER } from "@/lib/constants.ts";
+import { LoginButton } from "@/components/Login/LoginButton.tsx";
+
 
 export default function WebHooksPage() {
   return (
@@ -12,7 +13,7 @@ export default function WebHooksPage() {
             Pourquoi se connecter avec Discord pour accéder à cette page?
           </h2>
           <span>
-          - {"Ca permet d'associé les notifications à un utilisateur en particulier, ce qui permet de t'assurer que tu es le seul à pouvoir voir et modifier les alertes que tu as créé."}
+          - {"Pour pouvoir accéder au pannel admin il te faut te connecter avec discord."}
         </span>
 
         </div>
@@ -22,8 +23,6 @@ export default function WebHooksPage() {
           </h2>
           <span>
             - {"Nous aurons un droit de lecture sur ton pseudo discord, ton avatar et ta bannière discord et c'est tout."}
-            <br/>
-            - {"En revanche, si tu décides de créer des alertes on aura accès à id du serveur discord et l'id du channel discord. Mais nous ne pouvons pas retrouver leurs noms. On peut uniquement envoyer des messages sur le channel sélectionné."}
         </span>
         </div>
 
@@ -41,7 +40,7 @@ export default function WebHooksPage() {
 
       </CardHeader>
       <CardContent className="flex justify-center">
-        <LoginButton href={`${API_PALATRACKER}/v1/auth/login/discord`} redirectUrl={"/webhook"}/>
+        <LoginButton href={`${API_PALATRACKER}/v1/auth/login/discord`} redirectUrl={"/admin-panel"}/>
       </CardContent>
     </Card>
   )

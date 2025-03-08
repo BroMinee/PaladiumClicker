@@ -679,7 +679,7 @@ export type DiscordUser =
     global_name: string | null,
     avatar_decoration_data: string,
     banner_color: string,
-    avatar: string | null,
+    avatar: string,
     clan: string,
     primary_guild: string,
     mfa_enabled?: boolean,
@@ -840,4 +840,29 @@ export type PlayerCountHistory = {
 export type MoneySumHistory = {
   date: string,
   money_sum: number
+}[]
+
+
+export type Role =
+  | 'Admin'
+  | 'Moderator'
+  | 'Bug Hunter'
+  | 'Beta Tester'
+  | 'Palatime'
+  | 'Classic'
+
+export type RoleResponse =
+  {
+    user_id: string,
+    global_name: string,
+    username: string,
+    role: Role,
+    avatar: string,
+  }
+
+export type AllPalaAnimationStats = {
+  question: string,
+  completion_time: number,
+  rank_completion_time: number,
+  total_players: number
 }[]

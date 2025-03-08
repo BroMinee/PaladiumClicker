@@ -1,8 +1,7 @@
 import { Card, CardContent, CardHeader } from "@/components/ui/card.tsx";
 import React from "react";
 import { API_PALATRACKER } from "@/lib/constants.ts";
-import { Button } from "@/components/ui/button.tsx";
-import { FaDiscord } from "react-icons/fa";
+import { LoginButton } from "@/components/Login/LoginButton.tsx";
 
 
 export default function WebHooksPage() {
@@ -41,13 +40,7 @@ export default function WebHooksPage() {
 
       </CardHeader>
       <CardContent className="flex justify-center">
-        <a href={`${API_PALATRACKER}/v1/auth/login/discord/pala-animation`}>
-          <Button variant="ghost" className="flex flex-row items-center gap-2 text-bold text-xl">
-            Se connecter via
-            <FaDiscord size={32} className="p-1 rounded-md bg-discord text-primary-foreground"/>
-            {/*<TbLogin2 size={28}/>*/}
-          </Button>
-        </a>
+        <LoginButton href={`${API_PALATRACKER}/v1/auth/login/discord`} redirectUrl={"/pala-animation"}/>
       </CardContent>
     </Card>
   )

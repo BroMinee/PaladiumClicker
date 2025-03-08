@@ -6,6 +6,7 @@ import {
   AdminShopItemDetail,
   AdminShopPeriode,
   AhItemHistory,
+  AllPalaAnimationStats,
   DiscordUser,
   NotificationWebSiteResponse,
   OptionType,
@@ -13,6 +14,7 @@ import {
   PaladiumAhItemStat,
   PaladiumAhItemStatResponse,
   PlayerDBApiReponse,
+  Role,
   WebHookCreate,
   WebHookType
 } from "@/types";
@@ -371,4 +373,34 @@ export async function getPlayerUsernameFromUUID(uuid: string): Promise<string> {
     console.error("Using the other API " + error);
   }
   return pseudo;
+}
+
+export async function setCookies(name: string, value: string, maxAge: number) {
+  const cookieStore = cookies();
+  cookieStore.set(name as any, value as any, {
+    maxAge: maxAge,
+  } as any);
+}
+
+export async function getAllPalaAnimationTime() {
+  return fetchWithHeader<AllPalaAnimationStats>(`${API_PALATRACKER}/v1/pala-animation/my-time/getAll`, 5 * 60).catch(() => []);
+}
+
+export async function editRoleSubmit(discord_id: string, role: Role): Promise<{
+  succeeded: boolean
+}> {
+
+  if (!discord_id) {
+    return { succeeded: false };
+  }
+  if (!role) {
+    return { succeeded: false };
+  }
+
+  return fetchPostWithHeader<{
+    succeeded: boolean
+  }>(`${API_PALATRACKER}/v1/role/setRole`, JSON.stringify({
+    discord_user_id: discord_id,
+    role: role,
+  }), 0);
 }

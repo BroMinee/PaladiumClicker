@@ -19,6 +19,7 @@ import {
   PaladiumRanking,
   PetInfo,
   PlayerInfo,
+  Role,
 } from "@/types";
 
 
@@ -32,7 +33,7 @@ import { redirect } from "next/navigation";
 import { getInitialPlayerInfo } from "@/lib/misc.ts";
 import { registerPlayerAction } from "@/lib/api/apiServerAction.ts";
 // import { toast } from "sonner";
-import constants from "@/lib/constants.ts";
+import constants, { API_PALATRACKER } from "@/lib/constants.ts";
 
 export const PALADIUM_API_URL = process.env.PALADIUM_API_URL || "https://api.paladium.games";
 
@@ -467,4 +468,8 @@ export const getPlayerPet = async (uuid: string): Promise<PetInfo | null> => {
   return await fetchWithHeader<PetInfo>(`${PALADIUM_API_URL}/v1/paladium/player/profile/${uuid}/pet`).catch(() => {
     return null;
   })
+}
+
+export async function getPlayerRole(): Promise<Role> {
+  return fetchWithHeader<Role>(`${API_PALATRACKER}/v1/role/getRole`, 5 * 60).catch(() => "Classic");
 }

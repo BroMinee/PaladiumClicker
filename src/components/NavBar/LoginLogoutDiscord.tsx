@@ -1,18 +1,15 @@
 'use client'
 import React from 'react';
-import { TbLogin2, TbLogout2 } from "react-icons/tb";
+import { TbLogout2 } from "react-icons/tb";
 import { Button } from "@/components/ui/button.tsx";
 import { ProfileNavBar } from "@/components/NavBar/ProfileNavBar.tsx";
 import { API_PALATRACKER } from "@/lib/constants.ts";
+import { SmallLoginButton } from "@/components/Login/LoginButton.tsx";
 
 
 export const LoginDiscord = () => {
   return <div>
-    <a href={`${API_PALATRACKER}/v1/auth/login/discord`}>
-      <Button size="icon" variant="ghost">
-        <TbLogin2 size={28}/>
-      </Button>
-    </a>
+    <SmallLoginButton href={`${API_PALATRACKER}/v1/auth/login/discord`} redirectUrl={"/account"}/>
   </div>
 };
 
