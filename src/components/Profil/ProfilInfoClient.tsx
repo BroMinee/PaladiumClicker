@@ -102,6 +102,11 @@ export function PlayerRank() {
   if (playerInfo)
     rank = playerInfo.rank[0].toUpperCase() + playerInfo.rank.slice(1);
 
+  if(playerInfo?.uuid === "b6e136eb-75cb-48bd-9ff5-dd9bfb64b869")
+    return <SmallCardInfo title="Rang en jeu" value="Blackhole" img={safeJoinPaths(constants.imgPathProfile,"blackhole.png")}
+                          imgClassName="w-fit"
+                          unoptimized/>
+
   return <SmallCardInfo title="Rang en jeu" value={rank} img={getRankImg(rank)}
                         imgClassName="w-fit"
                         unoptimized/>
