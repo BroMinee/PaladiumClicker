@@ -1,14 +1,15 @@
 [
   {
-    "date": "TODO",
+    "date": "11/03/2025",
     "events": [
-      "Correction du bouton \"24h\" sur les graphiques qui n'était pas sélectionner par défaut",
-      "Ajout des graphiques du nombre de joueurs uniques et quantité d'argent en circulation",
-      "Correction de l'expérience obtenue par une Kiwano Seed (200->50) et la pêche d'un Bass (150->225)",
-      "Amélioration du SEO des pages suivants : [home page](https://palatracker.bromine.fr/), [profil](https://palatracker.bromine.fr/profil/), [xp-calculator](https://palatracker.bromine.fr/xp-calculator/) et [clicker-optimizer](https://palatracker.bromine.fr/clicker-optimizer/)",
-      "Ajout de la page [account](https://palatracker.bromine.fr/account) disponible uniquement quand vous êtes connecté avec discord **(beta)**",
-      "Correction de votre image discord qui ne chargeait pas quand vous etiez connecté",
-      "Les alertes de changement de status de serveur sont maintenant actualisées toutes les 1 minutes au lieu de 15 minutes"
+      "Merci [omega_7711](https://github.com/omega7711) ✨, pour les divers correctifs sur les images du [Palatime](https://palatracker.bromine.fr/palatime)",
+      "Ajout des graphiques affichant le nombre de joueurs uniques et de la quantité d'argent en circulation dans la page [status](https://palatracker.bromine.fr/status).",
+      "Correction du bouton \"24h\" sur les graphiques, qui n'était pas sélectionné par défaut.",
+      "Ajustement de l'expérience obtenue : casser une **Kiwano Seed (200 → 50)** et pêche d'un **Bass (150 → 225)**.",
+      "Amélioration du SEO des pages suivantes :  [Home page](https://palatracker.bromine.fr/), [Profil](https://palatracker.bromine.fr/profil/), [XP Calculator](https://palatracker.bromine.fr/xp-calculator/) et [Clicker Optimizer](https://palatracker.bromine.fr/clicker-optimizer/)",
+      "Ajout de la page [Account](https://palatracker.bromine.fr/account) accessible uniquement lorsque vous êtes connecté avec Discord **(bêta)**.",
+      "Correction du problème empêchant l'affichage de votre image Discord lors de la connexion.",
+      "Les alertes de changement de statut du serveur sont désormais actualisées toutes les minutes au lieu de toutes les 15 minutes."
     ]
   },
   {
