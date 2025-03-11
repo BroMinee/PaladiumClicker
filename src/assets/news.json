@@ -5,7 +5,10 @@
       "Correction du bouton \"24h\" sur les graphiques qui n'était pas sélectionner par défaut",
       "Ajout des graphiques du nombre de joueurs uniques et quantité d'argent en circulation",
       "Correction de l'expérience obtenue par une Kiwano Seed (200->50) et la pêche d'un Bass (150->225)",
-      "Amélioration du SEO des pages suivants : [home page](https://palatracker.bromine.fr/), [profil](https://palatracker.bromine.fr/profil/), [xp-calculator](https://palatracker.bromine.fr/xp-calculator/) et [clicker-optimizer](https://palatracker.bromine.fr/clicker-optimizer/)"
+      "Amélioration du SEO des pages suivants : [home page](https://palatracker.bromine.fr/), [profil](https://palatracker.bromine.fr/profil/), [xp-calculator](https://palatracker.bromine.fr/xp-calculator/) et [clicker-optimizer](https://palatracker.bromine.fr/clicker-optimizer/)",
+      "Ajout de la page [account](https://palatracker.bromine.fr/account) disponible uniquement quand vous êtes connecté avec discord **(beta)**",
+      "Correction de votre image discord qui ne chargeait pas quand vous etiez connecté",
+      "Les alertes de changement de status de serveur sont maintenant actualisées toutes les 1 minutes au lieu de 15 minutes"
     ]
   },
   {

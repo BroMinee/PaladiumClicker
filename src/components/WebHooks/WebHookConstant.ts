@@ -107,7 +107,7 @@ export const defaultWebhookFooterFromType: Record<WebHookType, string> = {
   [WebHookType.adminShop]: "PalaTracker | Les prix de l'admin shop sont mises à jour toutes les 15 minutes.",
   [WebHookType.market]: "PalaTracker | Les prix du market sont mises à jour toutes les 15 minutes.",
   [WebHookType.EventPvp]: "PalaTracker | Les events sont mises à jour toutes les 15 minutes.",
-  [WebHookType.statusServer]: "PalaTracker | Les status des serveurs sont mises à jour toutes les 15 minutes.",
+  [WebHookType.statusServer]: "PalaTracker | Les status des serveurs sont mises à jour toutes les minutes.",
 }
 export const defaultWebhookValidFormatFromType: Record<WebHookType, string[]> = {
   [WebHookType.QDF]: ["{item} Nom de l'item dans l'API", "{itemFr} Nom de l'item en français", "{itemUs} Nom de l'item en anglais", "{quantity} Quantité de l'item à farm", "{earningXp} XP de fac a gagné", "{earningMoney} argent a gagné", "{start} Date de début de la QDF", "{end} Date de fin de lq QDF"],
