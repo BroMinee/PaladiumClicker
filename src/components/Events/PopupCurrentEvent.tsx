@@ -89,7 +89,7 @@ export const PopupCurrentEvent = ({ event, alreadyRegistered, children }: {
             <CardContent>
               {
                 event.rewards.map((reward, index) => {
-                  return <SmallCardInfo key={"reward-" + index} title={reward.description} img={'/AH_img/money.png'}
+                  return <SmallCardInfo key={"reward-" + index} title={reward.description} img={'/img/MarketUI/pb_icon.png'}
                                         value={reward.count + " gagnants différents"}/>
                 })
               }
@@ -106,7 +106,7 @@ export const PopupCurrentEvent = ({ event, alreadyRegistered, children }: {
               <div>- Double compte et inscription de vos potes autorisés</div>
               <div>- Le /trade se fera uniquement sur le pseudo gagnant</div>
               <div>- Vous aurez alors 7 jours à partir du tirage au sort pour réclamer vos gains.</div>
-              <div>- Si vous êtes ban pendant la période de récupération des lots, alors vous serez automatique retirer
+              <div>- Si vous êtes ban pendant la période de récupération des lots, alors vous serez automatiquement retirer
                 des gagnants.
               </div>
               <div>- Le pseudo discord est optionnel, c&apos;est juste pour me simplifier la vie pour vous contacter.

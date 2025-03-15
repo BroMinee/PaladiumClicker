@@ -25,8 +25,10 @@
     "@tanstack/react-query": "^5.35.1",
     "@types/react-select": "^5.0.1",
     "axios": "^1.7.9",
+    "canvas-confetti": "^1.9.3",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
+    "gsap": "^3.12.7",
     "next": "^14.2.21",
     "next-themes": "^0.3.0",
     "react": "^18",
@@ -48,6 +50,7 @@
     "zustand": "^4.5.2"
   },
   "devDependencies": {
+    "@types/canvas-confetti": "^1.9.0",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
