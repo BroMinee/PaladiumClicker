@@ -108,7 +108,7 @@ export default function Home({ searchParams }: {
         </CardHeader>
       </Card>
       <Card className="flex flex-col gap-4">
-        <CardContent className="flex flex-col items-center justify-between gap-2 min-h-[calc(100vh-30vh)] w-full">
+        <CardContent className="flex flex-col items-center justify-between gap-2 h-[calc(100vh-30vh)] min-h-[calc(100vh-30vh)] w-full">
           <Suspense fallback={<GraphStatusFallback/>}>
             <GraphPlayerCount />
           </Suspense>
