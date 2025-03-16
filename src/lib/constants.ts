@@ -469,7 +469,7 @@ const notificationPath: Map<PathValid, [number, string]> = new Map<PathValid, [n
     ["/clicker-optimizer", [new Date("2024-11-27 19:00").getTime(), "Refonte de la page"]],
     ["/ranking?category=money", [new Date("2025-02-22 01:00").getTime(), "Ajout du classement l'alignement"]],
     ["/ah", [new Date("2025-02-22 01:00").getTime(), "Ajout du détail des offres"]],
-    ["/palatime", [new Date("2025-03-08 23:00").getTime(), "Nouvelle édition"]],
+    ["/palatime", [new Date("2025-03-16 15:00").getTime(), "Nouvelle édition"]],
     ["/craft", [new Date("2025-02-22 01:00").getTime(), "Refonte graphique de la page"]],
     ["/patchnote", [new Date("2024-03-11").getTime(), "Nouveau patchnote"]],
     ["/pala-animation", [new Date("2024-12-21 16:15").getTime(), "Ajout de 174 nouvelles questions"]],
