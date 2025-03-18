@@ -96,7 +96,7 @@ export default async function AhTrackerPage({ searchParams }: { searchParams: { 
       <Card className="md:col-start-1 md:col-span-2 md:row-start-1 md:row-span-3 row-span-3">
         <CardHeader className="pb-2">
           <CardTitle>
-            Sélection un item à pour voir son historique de vente
+            Sélection un item pour voir son historique de vente
           </CardTitle>
         </CardHeader>
         <CardContent className="gap-2 flex flex-col pt-4">

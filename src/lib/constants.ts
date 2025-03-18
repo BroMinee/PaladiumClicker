@@ -47,7 +47,7 @@ export type LabelValid =
   | "KOTH"
   | "Clicker"
   | "Admin Shop"
-  | "Status"
+  | "Statut"
   | "Politique de confidentialité"
   | "Patchnote"
   | "Alertes Discord"
@@ -92,7 +92,7 @@ const links: LinkList = {
   "/about": { label: "A propos", requiredPseudo: false },
   "/ranking?category=money": { label: "Classement", requiredPseudo: false },
   "/admin-shop": { label: "Admin Shop", requiredPseudo: false },
-  "/status": { label: "Status", requiredPseudo: false },
+  "/status": { label: "Statut", requiredPseudo: false },
   "/politique-de-confidentialite": { label: "Politique de confidentialité", requiredPseudo: false },
   "/patchnote": { label: "Patchnote", requiredPseudo: false },
   "/webhook": { label: "Alertes Discord", requiredPseudo: false },

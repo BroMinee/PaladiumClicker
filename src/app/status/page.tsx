@@ -88,7 +88,7 @@ export default function Home({ searchParams }: {
         <CardHeader className="flex flex-row items-center justify-between">
           <CardTitle>
             Bienvenue sur le visualisateur du{" "}
-            <GradientText className="font-extrabold">Status</GradientText>
+            <GradientText className="font-extrabold">Statut</GradientText>
           </CardTitle>
           <CardDescription>
             Made with <FaHeart

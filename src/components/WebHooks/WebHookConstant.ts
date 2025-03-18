@@ -5,7 +5,7 @@ export const defaultWebHookContentFromType: Record<WebHookType, string> = {
   [WebHookType.adminShop]: "{here} C'est le moment de vendre des **{item}**.",
   [WebHookType.market]: "{here} Démarre Paladium pour acheter des **{itemFr}**.",
   [WebHookType.EventPvp]: "{here} {event} commence {startRelative}.",
-  [WebHookType.statusServer]: "{here} Changement dans le status des serveurs.",
+  [WebHookType.statusServer]: "{here} Changement dans le statut des serveurs.",
 }
 
 export const defaultWebHookEmbedFromType: Record<WebHookType, string> = {
