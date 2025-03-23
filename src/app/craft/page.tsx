@@ -4,12 +4,14 @@ import GradientText from "@/components/shared/GradientText.tsx";
 import React, { Suspense } from "react";
 
 import MarketSelector from "@/components/AhTracker/MarketSelector.tsx";
-import { getAllItems } from "@/lib/api/apiPalaTracker.ts";
+import { getAllItems, getItemAlias } from "@/lib/api/apiPalaTracker.ts";
 import { OptionType } from "@/types";
 import constants from "@/lib/constants.ts";
 import CraftingInformationFetcher from "@/components/Craft/CraftingInformationFetcher.tsx";
 import { CountSelector } from "@/components/Craft/CountSelector.tsx";
 import LoadingSpinner from "@/components/ui/loading-spinner.tsx";
+import { generateCraftUrl } from "@/lib/misc.ts";
+import { redirect } from "next/navigation";
 
 export async function generateMetadata(
   { searchParams }: { searchParams: { item: string | undefined } },
@@ -57,11 +59,16 @@ export default async function AhTrackerPage({ searchParams }: {
 }) {
   const options = await getAllItems();
 
+
   const item = options.find((item) => item.value === searchParams.item);
   const count = searchParams.count || 1;
 
 
   if (item === undefined && searchParams.item !== undefined) {
+    const aliasName = await getItemAlias(searchParams.item);
+    if (aliasName !== null) {
+      redirect(generateCraftUrl(aliasName, count))
+    }
     return <div>
       <Card className="bg-red-700">
         <CardHeader>

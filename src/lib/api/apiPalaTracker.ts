@@ -162,3 +162,13 @@ export async function isAdmin() {
     return false;
   });
 }
+
+export async function getItemAlias(item_name: string | undefined): Promise<string | null> {
+  if (item_name === undefined)
+    return null;
+
+  return fetchWithHeader<string | null>(`${API_PALATRACKER}/v1/item/getAlias/${item_name}`, 30 * 60).catch(() => {
+    console.error("Impossible de charger récupérer l'alias de l'item");
+    return null;
+  })
+}

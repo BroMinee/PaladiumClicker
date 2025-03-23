@@ -263,6 +263,13 @@ export function generateStatusUrl(periode?: StatusPeriode) {
   return safeJoinPaths(constants.statusPath, `?${args}`);
 }
 
+export function generateCraftUrl(item: string, count: number) {
+  const argItem = item ? `item=${item}` : "";
+  const argCount = count ? `count=${count}` : "";
+  const args = [argItem, argCount].filter((e) => e).join("&");
+  return safeJoinPaths(constants.craftPath, `?${args}`);
+}
+
 export function safeJoinPaths(base: string, ...paths: string[]): string {
   const allPaths = ["/" + base, ...paths];
   const result = allPaths.join('/');
