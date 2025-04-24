@@ -1,4 +1,4 @@
-import { Card, CardContent, CardHeader } from "@/components/ui/card.tsx";
+import { Card, CardContent, CardHeader, CardTitleH1 } from "@/components/ui/card.tsx";
 import Contributors from "@/components/Contributors.tsx";
 import Discord from "@/components/Discord.tsx";
 
@@ -21,7 +21,7 @@ const AboutPage = () => {
     <div className="flex flex-col gap-4 ">
       <Card className="flex flex-col gap-4 font-bold center">
         <CardHeader className="flex flex-row">
-          <p>
+          <CardTitleH1>
             Ce site a été développé principalement par{" "}
             <a
               href="https://github.com/BroMinee"
@@ -31,7 +31,7 @@ const AboutPage = () => {
             >
               BroMine__
             </a>.
-          </p>
+          </CardTitleH1>
         </CardHeader>
         <CardContent>
           <p className="p-2">

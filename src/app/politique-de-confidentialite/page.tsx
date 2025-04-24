@@ -1,4 +1,4 @@
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card.tsx";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle, CardTitleH1 } from "@/components/ui/card.tsx";
 import GradientText from "@/components/shared/GradientText.tsx";
 import constants from "@/lib/constants.ts";
 import React from "react";
@@ -25,10 +25,10 @@ export default function Home() {
     <div className="flex flex-col gap-4">
       <Card className="flex flex-col gap-4">
         <CardHeader className="flex flex-row items-center justify-between">
-          <CardTitle className="text-primary">
+          <CardTitleH1 className="text-primary">
             Politique de confidentialité de{" "}
             <GradientText className="font-extrabold">PalaTracker</GradientText>
-          </CardTitle>
+          </CardTitleH1>
           <CardDescription>
             Dernière mise à jour : 09/09/2024
           </CardDescription>

@@ -26,17 +26,17 @@ export async function generateMetadata(
   if (!item) {
     return {
       title: "PalaTracker | Craft Optimizer",
-      description: "Calcule les ressources nécessaires pour tes crafts sur Paladium",
+      description: "Calcule les ressources nécessaires pour tes crafts sur Paladium, en fonction de tes besoins, obtient une évoluation du prix avec le market en temps réel.",
       openGraph: {
         title: "PalaTracker | Craft Optimizer",
-        description: "Calcule les ressources nécessaires pour tes crafts sur Paladium"
+        description: "Calcule les ressources nécessaires pour tes crafts sur Paladium, en fonction de tes besoins, obtient une évoluation du prix avec le market en temps réel."
       },
     }
   }
 
 
   const title = `PalaTracker | Craft Optimizer | ${item.label}`;
-  const description = "Optimisez vos crafts sur Paladium";
+  const description = "Calcule les ressources nécessaires pour tes crafts sur Paladium, en fonction de tes besoins, obtient une évoluation du prix avec le market en temps réel.";
   return {
     title: title,
     description: description,
@@ -93,9 +93,11 @@ export default async function AhTrackerPage({ searchParams }: {
           </CardDescription>
         </CardHeader>
         <CardContent>
-          Cet outil permet de lister les ressources nécessaires pour fabriquer un item en fonction de la quantité.
-          <br/>
-          Il permet également d&apos;avoir une indication du prix de fabrication de l&apos;item.
+          <h1>
+            Cet outil permet de lister les ressources nécessaires pour fabriquer un item en fonction de la quantité.
+            <br/>
+            Il permet également d&apos;avoir une indication du prix de fabrication de l&apos;item.
+          </h1>
         </CardContent>
       </Card>
       <Card className="md:col-start-1 md:col-span-2 md:row-start-1 md:row-span-3 row-span-3">
