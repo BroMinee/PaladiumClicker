@@ -7,7 +7,7 @@ import MarketSelector from "@/components/AhTracker/MarketSelector.tsx";
 import { getAllItems, getItemAlias } from "@/lib/api/apiPalaTracker.ts";
 import { OptionType } from "@/types";
 import constants from "@/lib/constants.ts";
-import CraftingInformationFetcher from "@/components/Craft/CraftingInformationFetcher.tsx";
+import { CraftingInformationFetcher } from "@/components/Craft/CraftingInformationFetcher.tsx";
 import { CountSelector } from "@/components/Craft/CountSelector.tsx";
 import LoadingSpinner from "@/components/ui/loading-spinner.tsx";
 import { generateCraftUrl } from "@/lib/misc.ts";

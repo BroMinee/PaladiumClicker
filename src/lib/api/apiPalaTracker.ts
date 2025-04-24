@@ -6,6 +6,7 @@ import {
   DiscordUser,
   Item,
   MoneySumHistory,
+  NodeType,
   OptionType,
   PlayerCountHistory,
   ProfilViewType,
@@ -16,6 +17,7 @@ import {
   ServerPaladiumStatusResponse,
   ServerStatusResponse,
   StatusPeriode,
+  Tree,
   WebHookAlert,
   WebhookDiscord
 } from "@/types";
@@ -170,5 +172,11 @@ export async function getItemAlias(item_name: string | undefined): Promise<strin
   return fetchWithHeader<string | null>(`${API_PALATRACKER}/v1/item/getAlias/${item_name}`, 30 * 60).catch(() => {
     console.error("Impossible de charger récupérer l'alias de l'item");
     return null;
+  })
+}
+
+export async function getCraftRecipe(item_name: string, count: number): Promise<Tree<NodeType>> {
+  return fetchWithHeader<Tree<NodeType>>(`${API_PALATRACKER}/v1/craft/get?item=${item_name}&count=${count}`, 30 * 60).catch(() => {
+    redirect(`/error?message=Impossible de charger la recette de ce craft.`);
   })
 }
