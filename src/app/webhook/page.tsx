@@ -1,4 +1,4 @@
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card.tsx";
+import { Card, CardContent, CardHeader, CardTitleH1 } from "@/components/ui/card.tsx";
 import React from "react";
 import { AuthForceWrapper } from "@/components/Auth/AuthForceWrapper.tsx";
 import { getWebHookDiscordFromCookies, getWebHookFromCookies } from "@/lib/api/apiPalaTracker.ts";
@@ -31,7 +31,9 @@ export default async function WebHooksMainPage() {
     <AuthForceWrapper url={`${constants.webhooksPath}/login`}>
       <Card>
         <CardHeader>
-          Définissez des webhooks discord pour recevoir des notifications en temps réel sur Paladium.
+          <CardTitleH1>
+            Définissez des webhooks discord pour recevoir des notifications en temps réel sur Paladium.
+          </CardTitleH1>
         </CardHeader>
         <WebHooksPage/>
       </Card>
@@ -71,8 +73,8 @@ export async function WebHooksPage() {
     return (
       <CardContent className="flex flex-col justify-left gap-2">
         {webHookAlerts.length === 0 &&
-          <CardTitle>Vous n&apos;avez pas de webhooks définis. Créez-en un dès maintenant !
-          </CardTitle>
+          <CardTitleH1>Vous n&apos;avez pas de webhooks définis. Créez-en un dès maintenant !
+          </CardTitleH1>
         }
         <WebHookPreviewPage webHookDiscord={webHookDiscord} channelIdToChannelName={channelIdToChannelName}
                             guildIdToServerName={guildIdToServerName} groupsArg={groups}/>

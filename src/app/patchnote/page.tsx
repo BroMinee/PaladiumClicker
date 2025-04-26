@@ -1,4 +1,4 @@
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card.tsx";
+import { Card, CardContent, CardDescription, CardHeader, CardTitleH1 } from "@/components/ui/card.tsx";
 import GradientText from "@/components/shared/GradientText.tsx";
 import { FaHeart } from "react-icons/fa";
 import Discord from "@/components/Discord.tsx";
@@ -27,10 +27,10 @@ export default function Home() {
     <div className="flex flex-col gap-4">
       <Card className="flex flex-col gap-4">
         <CardHeader className="flex flex-row items-center justify-between">
-          <CardTitle>
+          <CardTitleH1>
             Bienvenue sur la liste des patchnotes du{" "}
             <GradientText className="font-extrabold">PalaTracker</GradientText>
-          </CardTitle>
+          </CardTitleH1>
           <CardDescription>
             Made with <FaHeart
             className="text-primary inline-block"/> by <GradientText>BroMine__</GradientText>

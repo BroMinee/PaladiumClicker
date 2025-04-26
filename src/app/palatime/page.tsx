@@ -1,5 +1,5 @@
 import GradientText from "@/components/shared/GradientText";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardDescription, CardHeader, CardTitleH1 } from "@/components/ui/card";
 import { FaHeart } from "react-icons/fa";
 import FallingClickImagePalaTime from "@/components/PalaTime/FallingClickImage.tsx";
 
@@ -84,10 +84,10 @@ export default function PalatimePage() {
       <div className="flex flex-col gap-4">
         <Card>
           <CardHeader className="flex flex-row items-center justify-between">
-            <CardTitle>
+            <CardTitleH1>
               Bienvenue sur le{" "}
               <GradientText className="font-extrabold">Palatime</GradientText>
-            </CardTitle>
+            </CardTitleH1>
             <CardDescription>
               Made with <FaHeart
               className="text-primary inline-block"/> by <GradientText>0livierMinecraft</GradientText>

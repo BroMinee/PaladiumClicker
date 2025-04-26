@@ -15,8 +15,8 @@ export function AccountDetail() {
     <Card className="flex flex-col justify-center items-center">
       <CardContent className="flex justify-start flex-col items-start gap-2 py-2">
         <div className="flex flex-row justify-center items-center gap-2">
-          <h2 className="font-bold text-3xl">Bonjour, <span
-            className="text-primary">{profileInfo.global_name || profileInfo.username}</span></h2>
+          <h1 className="font-bold text-3xl">Bonjour, <span
+            className="text-primary">{profileInfo.global_name || profileInfo.username}</span></h1>
           <Image src={ppUrl} alt="profile picture" width={32} height={32} className="rounded-full" unoptimized/>
         </div>
       </CardContent>

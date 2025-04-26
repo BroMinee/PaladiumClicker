@@ -147,7 +147,7 @@
       "Ajout des intégrations discord : title, description, etc sur toutes les pages",
       "Ajout d'un bouton pour copier le lien de la page dans le presse-papier",
       "Amélioration des graphiques du classement clicker",
-      "Ajout d'une [page 404](https://palatracker.bromine.fr/unknown-page) personnalisée",
+      "Ajout d'une page 404 personnalisée",
       "Passage du repository en privé, notamment pour garder notre clé d'API privée et ne pas mettre à disposition notre backend a tout le monde",
       "Ajout d'une page de chargement du profil",
       "On peut maintenant remettre à zéro les bâtiments",

@@ -1,6 +1,6 @@
 // 'use client';
 import GradientText from "@/components/shared/GradientText.tsx";
-import { Card, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card.tsx";
+import { Card, CardDescription, CardFooter, CardHeader, CardTitleH1 } from "@/components/ui/card.tsx";
 import { FaHeart } from "react-icons/fa";
 
 import {
@@ -36,10 +36,10 @@ export default function PalaAnimationPage() {
           <div className="flex flex-col gap-4">
             <Card>
               <CardHeader className="flex flex-row items-center justify-between">
-                <CardTitle>
+                <CardTitleH1>
                   Bienvenue dans la zone d&apos;entraînement du{" "}
                   <GradientText className="font-extrabold">PalaAnimation</GradientText>
-                </CardTitle>
+                </CardTitleH1>
                 <CardDescription>
                   Made with <FaHeart
                   className="text-primary inline-block"/> by <GradientText>BroMine__</GradientText>

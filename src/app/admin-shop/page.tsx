@@ -1,5 +1,5 @@
 import { redirect } from "next/navigation";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card.tsx";
+import { Card, CardContent, CardDescription, CardHeader, CardTitleH1 } from "@/components/ui/card.tsx";
 import GradientText from "@/components/shared/GradientText.tsx";
 import { FaHeart } from "react-icons/fa";
 import { AdminShopItem, adminShopItemsAvailable, AdminShopPeriode, isShopItem } from "@/types";
@@ -78,10 +78,10 @@ export default function Home({ searchParams }: {
   return (
     <Card className="flex flex-col gap-2">
       <CardHeader className="flex flex-row items-center justify-between">
-        <CardTitle>
+        <CardTitleH1>
           Bienvenue sur le visualisateur d&apos;historique de prix de{" "}
           <GradientText className="font-extrabold">{adminShopItemToUserFriendlyText(adminShopItem)}</GradientText>
-        </CardTitle>
+        </CardTitleH1>
         <CardDescription>
           Made with <FaHeart
           className="text-primary inline-block"/> by <GradientText>BroMine__</GradientText>
