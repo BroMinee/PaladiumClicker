@@ -14,10 +14,11 @@ export default async function AhInfo() {
     <Card className="rounded-b-xl rounded-t-none">
       <CardHeader>
         <CardTitle className="flex flex-row items-center">
-          <p>
+          <h1><p>
             Hôtel de vente - {" "}
             <AhInfoTitleClient/>
           </p>
+          </h1>
 
         </CardTitle>
         <CardTitle className="flex flex-row items-center gap-2">

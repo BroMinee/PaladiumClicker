@@ -27,7 +27,7 @@ export default function ProfilInfo() {
       <CardTitle className="lg:text-xl">
         <div className="flex flex-row items-center gap-2">
           <ProfilAlliance/>
-          <h3 className="leading-none tracking-tight">
+          <h1 className="leading-none tracking-tight">
             Profil de{" "}
             <GradientText className="font-extrabold">
               <ProfilUsernameInfo/>
@@ -36,7 +36,7 @@ export default function ProfilInfo() {
             <GradientText className="font-extrabold">
               <FactionNameInfo/>
             </GradientText>
-          </h3>
+          </h1>
         </div>
 
 

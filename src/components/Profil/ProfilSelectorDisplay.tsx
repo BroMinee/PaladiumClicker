@@ -11,7 +11,7 @@ import {
   MarketProfilSectionFallBack
 } from "@/components/Profil/Achievement/AchievementsProfilSection.tsx";
 import { PetCanvas } from "@/components/Profil/Pet/PetMontureCanvas.tsx";
-import { Card, CardContent } from "@/components/ui/card.tsx";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card.tsx";
 import React, { Suspense } from "react";
 import { ProfilRankingSection } from "@/components/Profil/Ranking/ProfilRanking.tsx";
 import AhInfo from "@/components/Profil/AhInfo.tsx";
@@ -64,6 +64,11 @@ function HomeProfilSection() {
 function PetMontureProfilSection() {
   return (
     <Card className="rounded-b-xl rounded-t-none">
+      <CardHeader className="flex flex-row items-center justify-between">
+        <CardTitle>
+          Voici vos animaux de compagnie et montures favoris
+        </CardTitle>
+      </CardHeader>
       <CardContent className="flex flex-grow flex-col lg:flex-row justify-between">
         <div className="w-full lg:w-1/2">
           <PetCanvas/>

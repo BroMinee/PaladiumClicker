@@ -112,9 +112,9 @@ export function DisplayProgressionGlobal() {
   return (
     <>
       <CardTitle className="flex xl:flex-row flex-col justify-between items-center xl:place-items-end font-mc">
-        <div className="text-3xl sm:text-5xl text-primary font-bold">
+        <h1 className="text-3xl sm:text-5xl text-primary font-bold">
           Achievements
-        </div>
+        </h1>
         <div className="text-xl font-bold">
           Progression Globale : {totalCompleted} / {total}
         </div>
@@ -188,7 +188,7 @@ export function AchievementBody({ itemList }: { itemList: { img: string, value: 
     <ScrollArea className="overflow-visible">
       <ScrollBar orientation="vertical"/>
       <div className="pr-3">
-        <h1 className="font-mc">Catégorie</h1>
+        <h3 className="font-mc">Catégorie</h3>
         <div className="flex flex-col gap-1">
           {Object.keys(CategoryEnum).map((category, index) => {
             return <AchievementSelectorCategory key={category + index}
@@ -202,7 +202,7 @@ export function AchievementBody({ itemList }: { itemList: { img: string, value: 
     </ScrollArea>
     <ScrollArea className="w-full overflow-visible">
       <div className="w-full pr-3">
-        <h1 className="font-mc">Achievements</h1>
+        <h3 className="font-mc">Achievements</h3>
         <DisplayAllAchievementInCategory category={selectedCategory} itemList={itemList}/>
       </div>
       <ScrollBar orientation="vertical"/>

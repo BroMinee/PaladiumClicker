@@ -8,7 +8,7 @@ import { BestPalaAnimationTime } from "@/components/Account/BestPalaAnimationTim
 
 export async function generateMetadata() {
   const title = "PalaTracker | Account";
-  const description = "";
+  const description = "Consultez tes informations de compte sur PalaTracker ! Modifie, supprime, ajoute des alertes discord, et consulte tes temps au pala-animation au même endroit.";
 
   return {
     title: title,

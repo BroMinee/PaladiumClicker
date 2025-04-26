@@ -1,4 +1,4 @@
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card.tsx";
+import { Card, CardContent, CardDescription, CardHeader, CardTitleH1 } from "@/components/ui/card.tsx";
 import GradientText from "@/components/shared/GradientText.tsx";
 import { rankingTypeToUserFriendlyText } from "@/lib/misc.ts";
 import { FaHeart } from "react-icons/fa";
@@ -15,10 +15,10 @@ export type searchParamsRankingPage = {
 export function RankingSelectorCard({ rankingType, rankingPage }: { rankingType: RankingType, rankingPage: boolean }) {
   return <Card className={cn("flex flex-col gap-4", !rankingPage && "rounded-b-xl rounded-t-none")}>
     <CardHeader className="flex flex-row items-center justify-between">
-      <CardTitle>
+      <CardTitleH1>
         Bienvenue sur le visualisateur du classement{" "}
         <GradientText className="font-extrabold">{rankingTypeToUserFriendlyText(rankingType)}</GradientText>
-      </CardTitle>
+      </CardTitleH1>
       <CardDescription>
         Made with <FaHeart
         className="text-primary inline-block"/> by <GradientText>BroMine__</GradientText>

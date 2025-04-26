@@ -1,7 +1,7 @@
 import ProfileFetcherWrapper from "@/components/ProfileFetcher.tsx";
 import { MetierComponentWrapper } from "@/components/MetierList.tsx";
 import { redirect } from "next/navigation";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card.tsx";
+import { Card, CardContent, CardDescription, CardHeader, CardTitleH1 } from "@/components/ui/card.tsx";
 import GradientText from "@/components/shared/GradientText.tsx";
 import { FaHeart } from "react-icons/fa";
 import {
@@ -84,10 +84,10 @@ export default function Home({ params, searchParams }: {
       <div className="flex flex-col gap-4">
         <Card>
           <CardHeader className="flex flex-row items-center justify-between">
-            <CardTitle>
+            <CardTitleH1>
               Bienvenue sur le calculateur{" "}
               <GradientText className="font-extrabold">d&apos;xp de métier</GradientText>
-            </CardTitle>
+            </CardTitleH1>
             <CardDescription>
               Made with <FaHeart
               className="text-primary inline-block"/> by <GradientText>BroMine__</GradientText>
@@ -118,7 +118,7 @@ export default function Home({ params, searchParams }: {
         <div className="grid grid-cols-2 grid-rows-1 gap-4">
           <Card className="pt-6 flex flex-col items-center justify-center gap-2">
             <CardHeader>
-              <h1>Niveau actuel</h1>
+              <h3>Niveau actuel</h3>
             </CardHeader>
             <CardContent>
               <MetierComponentWrapper editable={false} metierKey={metierSelected}/>
@@ -127,7 +127,7 @@ export default function Home({ params, searchParams }: {
 
           <Card className="pt-6 flex flex-col items-center justify-center gap-2">
             <CardHeader>
-              <h1>Niveau à atteindre</h1>
+              <h3>Niveau à atteindre</h3>
             </CardHeader>
             <CardContent>
               <MetierToReachWrapper metierKey={metierSelected} searchParams={searchParams}/>

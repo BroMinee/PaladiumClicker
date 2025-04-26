@@ -1,4 +1,4 @@
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card.tsx";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle, CardTitleH1 } from "@/components/ui/card.tsx";
 import { FaHeart } from "react-icons/fa";
 import GradientText from "@/components/shared/GradientText.tsx";
 import React, { Suspense } from "react";
@@ -72,10 +72,10 @@ export default async function AhTrackerPage({ searchParams }: { searchParams: { 
     <div className="flex flex-col gap-4">
       <Card>
         <CardHeader className="flex flex-row items-center justify-between">
-          <CardTitle>
+          <CardTitleH1>
             Bienvenue sur{" "}
             <GradientText className="font-extrabold">l&apos;AH Tracker</GradientText>
-          </CardTitle>
+          </CardTitleH1>
           <CardDescription>
             Made with <FaHeart className="text-primary inline-block"/> by <GradientText>BroMine__</GradientText>
           </CardDescription>
@@ -84,12 +84,11 @@ export default async function AhTrackerPage({ searchParams }: { searchParams: { 
       <Card className="bg-red-700">
         <CardHeader>
           <CardTitle className="text-primary-foreground">
-            Le prix de vente en $ journalier est inexact, il est calculé en divisant la somme des prix de vente
-            en $ par
-            le nombre de ventes journalières, or le nombre de ventes journalières contient aussi les ventes en pbs.
-            Il y a
-            donc une surévaluation du vrai prix.
-            Cela sera corrigé après une mise à jour de l&apos;API de Paladium.
+            Le prix de vente en $ et en pb journalier n&apos;est pas identique à celui de Paladium car il y a une erreur
+            dans la formule utilisée dans le Market Stats de Paladium.
+            Ils considèrent une vente en plus journalière ce qui fait reduire le prix de vente moyen surtout lors que
+            l&apos;objet est vendu en très faible quantité.
+            Le bug a été reporté à Paladium et sera corrigé dans une prochaine mise à jour.
           </CardTitle>
         </CardHeader>
       </Card>
