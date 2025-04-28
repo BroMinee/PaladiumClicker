@@ -1,5 +1,11 @@
 [
   {
+    "date": "28/04/2025",
+    "events": [
+      "Ajout des blocs sous la forme de modèle 3D au lieu d'image 2D"
+    ]
+  },
+  {
     "date": "11/03/2025",
     "events": [
       "Merci [omega_7711](https://github.com/omega7711) ✨, pour les divers correctifs sur les images du [Palatime](https://palatracker.bromine.fr/palatime)",
