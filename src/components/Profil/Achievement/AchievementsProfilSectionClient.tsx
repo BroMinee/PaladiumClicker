@@ -138,35 +138,35 @@ function AchievementSelectorCategory({ category, selectedCategory, setSelectedCa
   let displayText = "";
   switch (category) {
     case CategoryEnum.HOW_TO_START:
-      imgPath = "AH_img/wood_pickaxe.png";
+      imgPath = "AH_img/wood_pickaxe.webp";
       displayText = "Premier pas";
       break;
     case CategoryEnum.JOBS:
-      imgPath = "AH_img/stone_pickaxe.png";
+      imgPath = "AH_img/stone_pickaxe.webp";
       displayText = "Métiers";
       break;
     case CategoryEnum.FACTION:
-      imgPath = "AH_img/diamond_sword.png";
+      imgPath = "AH_img/diamond_sword.webp";
       displayText = "Faction";
       break;
     case CategoryEnum.ATTACK_DEFENSE:
-      imgPath = "AH_img/tnt.png";
+      imgPath = "AH_img/tnt.webp";
       displayText = "Pillage & Défense";
       break;
     case CategoryEnum.ECONOMY:
-      imgPath = "AH_img/gold_ingot.png";
+      imgPath = "AH_img/gold_ingot.webp";
       displayText = "Economie";
       break;
     case CategoryEnum.ALLIANCE:
-      imgPath = "AH_img/goggles_of_community.png";
+      imgPath = "AH_img/goggles_of_community.webp";
       displayText = "Ordre vs Chaos";
       break;
     case CategoryEnum.OTHERS:
-      imgPath = "AH_img/ender_pearl.png";
+      imgPath = "AH_img/ender_pearl.webp";
       displayText = "Divers";
       break
     default:
-      imgPath = "unknown.png";
+      imgPath = "unknown.webp";
       displayText = "Inconnu";
       break;
   }
@@ -253,13 +253,13 @@ function DetailAchievement({ achievement, itemList }: {
   let arrowPath = achievement.subAchievements.length === 0 ? "" : (showSubAchievements ? safeJoinPaths(constants.imgPathProfile, "/arrow_top.png") : safeJoinPaths(constants.imgPathProfile,"/arrow_down.png"));
 
 
-  let closestItemName = itemList.find((item) => item.value === constants.dictAchievementIdToIcon.get(achievement.icon))?.img ?? "unknown.png";
+  let closestItemName = itemList.find((item) => item.value === constants.dictAchievementIdToIcon.get(achievement.icon))?.img ?? "unknown.webp";
 
-  if (closestItemName === "unknown.png")
+  if (closestItemName === "unknown.webp")
     console.log("Unknown item : " + achievement.icon)
 
-  if (closestItemName === "barriere.png")
-    closestItemName = "unknown.png"
+  if (closestItemName === "barriere.webp")
+    closestItemName = "unknown.webp"
 
   return <div onClick={() => achievement.subAchievements.length !== 0 && setShowSubAchievements(!showSubAchievements)}
               className={cn("border-2 border-secondary-foreground px-2 animate-fade-in", achievement.completed && "bg-green-400/50 hover:bg-green-500/50")}>
