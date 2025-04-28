@@ -3221,10 +3221,10 @@ export function getImagePathFromAdminShopType(item: AdminShopItem): string {
     "fermented-spider-eye": "spider_eye_fermented",
   }
   if (translateTable[item]) {
-    return `/AH_img/${translateTable[item]}.png`;
+    return `/AH_img/${translateTable[item]}.webp`;
   }
 
-  return `/AH_img/${item.replaceAll("-", "_")}.png`;
+  return `/AH_img/${item.replaceAll("-", "_")}.webp`;
 }
 
 export function convertAhItemTypeToMarketItemOffer(item: AhItemType, seller: string): MarketItemOffer {
