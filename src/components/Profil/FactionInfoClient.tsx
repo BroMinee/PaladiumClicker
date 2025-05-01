@@ -62,7 +62,7 @@ export function FactionDetails() {
                        img={safeJoinPaths(constants.imgPathProfile, "ExperienceOrb.webp")} unoptimized/>
       </Card>
       <Card>
-        <SmallCardInfo title="Date de création" value={convertEpochToDateUTC2(createdAt)} img={safeJoinPaths(constants.imgPathProfile, "clock.gif")}/>
+        <SmallCardInfo title="Date de création" value={convertEpochToDateUTC2(createdAt)} img={safeJoinPaths(constants.imgPathProfile, "clock.gif")} unoptimized/>
       </Card>
       <ScrollArea className="md:col-span-3">
         <div className="flex gap-4 pb-3">
@@ -88,7 +88,7 @@ export function FactionDetails() {
                       <div className="text-sm">
                         <Image src={safeJoinPaths(constants.imgPathProfile,"clock.gif")} alt="Icône"
                                width={16} height={16}
-                               className="object-cover inline-block pixelated mr-2"/>
+                               className="object-cover inline-block pixelated mr-2" unoptimized/>
                         Rejoint le: {convertEpochToDateUTC2(player.joinedAt)}
                       </div>
                     </div>

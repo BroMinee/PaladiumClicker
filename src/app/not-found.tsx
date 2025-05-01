@@ -16,7 +16,7 @@ export default function NotFound() {
                 className="mb-4 tracking-tight font-extrabold text-9xl text-primary-600 text-primary-500"
               > 4
               </div>
-              <Image width={112} height={112} alt="pedro gif" src={safeJoinPaths("/pedro.gif")}/>
+              <Image width={112} height={112} alt="pedro gif" src={safeJoinPaths("/pedro.gif")} unoptimized/>
               <div
                 className="mb-4 tracking-tight font-extrabold text-9xl text-primary-600 text-primary-500"
               > 4

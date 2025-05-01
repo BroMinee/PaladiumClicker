@@ -115,13 +115,13 @@ export function PlayerRank() {
 export function PlayerTimePlayed() {
   const { data: playerInfo } = usePlayerInfoStore();
   return <SmallCardInfo title="Temps de jeu" value={computeTimePlayed(playerInfo?.timePlayed || 0)}
-                        img={safeJoinPaths(constants.imgPathProfile,"clock.gif")}/>
+                        img={safeJoinPaths(constants.imgPathProfile,"clock.gif")} unoptimized/>
 }
 
 export function PlayerFirstConnection() {
   const { data: playerInfo } = usePlayerInfoStore();
   return <SmallCardInfo title="Première connexion" value={convertEpochToDateUTC2(playerInfo?.firstSeen || 1)}
-                        img={safeJoinPaths(constants.imgPathProfile,"clock.gif")}/>
+                        img={safeJoinPaths(constants.imgPathProfile,"clock.gif")} unoptimized/>
 }
 
 export function PlayerFriendsCount() {
