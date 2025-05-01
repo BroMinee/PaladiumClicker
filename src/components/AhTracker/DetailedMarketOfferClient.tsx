@@ -1,7 +1,7 @@
 'use client';
 import React, { useEffect, useState } from "react";
-import { getPlayerUsernameFromUUID } from "@/lib/api/apiServerAction.ts";
 import LoadingSpinner from "@/components/ui/loading-spinner.tsx";
+import { getPlayerUsernameFromUUID } from "@/lib/api/apiClient.ts";
 
 export function SellNameMarket({ uuid }: { uuid: string }) {
   const [username, setUsername] = useState<string>("");
