@@ -2,7 +2,10 @@
   {
     "date": "28/04/2025",
     "events": [
-      "Ajout des blocs sous la forme de modèle 3D au lieu d'image 2D"
+      "Correction d'un bug ralentissant l'affichage des graphiques sur la page [ah](https://palatracker.bromine.fr/ah?item=paladium-ingot)",
+      "Ajout des blocs sous la forme de modèle 3D au lieu d'image 2D",
+      "Ajout des 41 nouveaux crafts dans le [craft](https://palatracker.bromine.fr/craft)",
+      "Correction de l'association de certaines images dans la liste des [succès](https://palatracker.bromine.fr/profil/BroMine__?section=Achievements)"
     ]
   },
   {
