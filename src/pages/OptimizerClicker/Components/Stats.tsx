@@ -260,7 +260,10 @@ function getBestUpgrade(copyPlayerInfo: PlayerInfo): bestPurchaseInfo {
   };
 }
 
-
+/**
+ * This algorithm is the original one. It has been copied many times, but none have ever matched its quality. :)
+ * You are probably wondering why it has been copied — well, it was the first of its kind, and people just wanted a piece of the cake.
+ */
 export function computeXBuildingAhead(playerInfo: PlayerInfo, achatCount: number, rps: number) {
   // Path, index, own, timeToBuy (string), pathImg, newRps, price
 
