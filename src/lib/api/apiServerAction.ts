@@ -13,7 +13,6 @@ import {
   PaladiumAhHistory,
   PaladiumAhItemStat,
   PaladiumAhItemStatResponse,
-  PlayerDBApiReponse,
   Role,
   WebHookCreate,
   WebHookType
