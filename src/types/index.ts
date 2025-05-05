@@ -366,6 +366,14 @@ export type bestPurchaseInfoDetailed =
     price: number
   }
 
+export type bestPurchaseInfoDetailedDebug =
+  bestPurchaseInfo &
+  {
+    timeToBuy: number,
+    newRps: number,
+    price: number
+  }
+
 export interface NetworkError extends Error {
   code?: string;
 }

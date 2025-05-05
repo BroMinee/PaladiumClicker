@@ -4,6 +4,7 @@ import Image from "next/image";
 import EditRole from "@/components/Admin-Panel/AdminPanelRoleEdition.tsx";
 import { Role } from "@/types";
 import React from "react";
+import { ClickerOptimizerDebug } from "@/components/Clicker-Optimizer-Debug/page.tsx";
 
 
 const mapPermission = new Map<Role, React.FC[]>(
@@ -95,14 +96,18 @@ function AccessBetaPanel() {
 
 function PalatimePanel() {
   return (
-    <Card>
-      <CardHeader>
-        <p>Palatime</p>
-      </CardHeader>
-      <CardContent>
-        <p>Edit palatime</p>
-      </CardContent>
-    </Card>
+    <>
+      <ClickerOptimizerDebug params={{username: "0livierMinecraft"}}/>
+      <Card>
+        <CardHeader>
+          <p>Palatime</p>
+        </CardHeader>
+        <CardContent>
+          <p>Edit palatime : Pas encore implem</p>
+        </CardContent>
+      </Card>
+    </>
+
   )
 }
 
