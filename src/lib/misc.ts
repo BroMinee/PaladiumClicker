@@ -7,6 +7,8 @@ import {
   BuildingUpgrade,
   CategoryUpgrade,
   CPS,
+  CraftPrice,
+  CraftSectionEnum,
   EventType,
   GlobalUpgrade,
   ManyUpgrade,
@@ -44,6 +46,7 @@ import category_upgrade_json from "@/assets/category_upgrade.json";
 import metier_json from "@/assets/metier.json";
 import building_json from "@/assets/building.json";
 import CPS_json from "@/assets/CPS.json";
+import { redirect } from "next/navigation";
 
 export function getTotalSpend(playerInfo: PlayerInfo) {
   let total = 0;
@@ -263,11 +266,25 @@ export function generateStatusUrl(periode?: StatusPeriode) {
   return safeJoinPaths(constants.statusPath, `?${args}`);
 }
 
-export function generateCraftUrl(item: string, count: number) {
-  const argItem = item ? `item=${item}` : "";
-  const argCount = count ? `count=${count}` : "";
-  const args = [argItem, argCount].filter((e) => e).join("&");
-  return safeJoinPaths(constants.craftPath, `?${args}`);
+export function generateCraftUrl(item: string | null, count: number | null, section: CraftSectionEnum) {
+  switch(section)
+  {
+    case  CraftSectionEnum.recipe:
+    {
+      const argItem = item ? `item=${item}` : "";
+      const argCount = count ? `count=${count}` : "";
+      const argSection = `section=${section}`;
+      const args = [argItem, argCount, argSection].filter((e) => e).join("&");
+      return safeJoinPaths(constants.craftPath, `?${args}`);
+    }
+    case CraftSectionEnum.optimizer:
+      const argSection = `section=${section}`;
+      const args = [argSection].filter((e) => e).join("&");
+      return safeJoinPaths(constants.craftPath, `?${args}`);
+    default:
+      return redirect("/error?message=Section inconnu");
+  }
+
 }
 
 export function safeJoinPaths(base: string, ...paths: string[]): string {
@@ -3550,4 +3567,55 @@ export function getRoleColor(role: Role) {
     default:
       return "#8B5CF6";
   }
+}
+
+export const CraftSectionValid = Object.values(CraftSectionEnum) as string[];
+
+export function parseMessageCraftPrice(message: any) : {type: "update" | "other", data: CraftPrice[]}
+{
+
+  function isCraftPrice(item: any): boolean {
+    return (
+      typeof item === 'object' &&
+      item !== null &&
+      typeof item.created_at === 'string' &&
+        typeof item.item === 'object' && typeof item.item.item_name === 'string' && typeof item.item.us_trad === 'string' && typeof item.item.fr_trad === 'string' && typeof item.item.img === 'string' &&
+      typeof item.priceToCraft === 'number' &&
+      typeof item.currentPrice === 'number' &&
+      typeof item.averagePrice === 'number' &&
+      typeof item.totalSold === 'number'
+    );
+  }
+
+  try {
+    const json = JSON.parse(message);
+    if (json.type === "update" && Array.isArray(json.data)) {
+      const r : CraftPrice[] = json.data.map((item: any) => {
+        if(isCraftPrice(item))
+        {
+          return {
+            created_at: item.created_at,
+            item: {
+              item_name: item.item.item_name,
+              us_trad: item.item.us_trad,
+              fr_trad: item.item.fr_trad,
+              img: item.item.img
+            },
+            priceToCraft: Number(item.priceToCraft),
+            currentPrice: Number(item.currentPrice),
+            averagePrice: Number(item.averagePrice),
+            totalSold: Number(item.totalSold)
+          };
+        }
+        else {
+          throw new Error(`Invalid item format: ${JSON.stringify(item)}`);
+        }
+      });
+      return {type: "update", data: r};
+    }
+  } catch (error) {
+    console.error("Error parsing JSON:", error);
+    return {type: "other", data: []};
+  }
+  return {type: "other", data: []};
 }

@@ -20,8 +20,8 @@ export default async function DetailedMarketOfferList({ listing, item }: {
   return (
     <ScrollArea>
       <div className="flex flex-col justify-evenly gap-6 md:gap-3 pb-4 w-full px-2">
-        {listing
-          .toSorted((offer1, offer2) => offer1.price - offer2.price)
+        {[...listing]
+          .sort((offer1, offer2) => offer1.price - offer2.price)
           .map((offer, index) => (
             <DetailedMarketOffer key={"offer-" + index} offer={offer} itemSelected={item}/>
           ))}

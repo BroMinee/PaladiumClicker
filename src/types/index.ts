@@ -874,3 +874,23 @@ export type AllPalaAnimationStats = {
   rank_completion_time: number,
   total_players: number
 }[]
+
+export enum CraftSectionEnum {
+  "recipe" = "recipe",
+  "optimizer" = "optimizer",
+}
+
+export interface searchParamsCraftPage {
+  item?: string,
+  count?: number,
+  section?: string
+}
+
+export interface CraftPrice {
+  created_at: string,
+  item: Item,
+  priceToCraft: number,
+  currentPrice: number,
+  averagePrice: number,
+  totalSold: number,
+}

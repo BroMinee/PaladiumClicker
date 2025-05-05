@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "lib": [
-      "ES2020",
+      "ES2022",
       "dom",
       "dom.iterable",
       "esnext"
@@ -22,7 +22,7 @@
         "name": "next"
       }
     ],
-    "target": "ES2020",
+    "target": "ES2022",
     "useDefineForClassFields": true,
     /* Bundler mode */
     "allowImportingTsExtensions": true,

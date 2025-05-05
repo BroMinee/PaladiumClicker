@@ -118,7 +118,7 @@ export async function getNotificationWebSite() {
   }
 }
 
-export async function getAllItemsServerAction() {
+export async function getAllItemsServerAction() : Promise<OptionType[]> {
   return fetchWithHeader<{
     item_name: string,
     us_trad: string,
@@ -134,7 +134,7 @@ export async function getAllItemsServerAction() {
       }
     });
   }).catch(() => {
-    return [] as OptionType[];
+    return [];
   })
 }
 

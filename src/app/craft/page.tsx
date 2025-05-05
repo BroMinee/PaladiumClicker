@@ -1,20 +1,18 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card.tsx";
 import { FaHeart } from "react-icons/fa";
 import GradientText from "@/components/shared/GradientText.tsx";
-import React, { Suspense } from "react";
+import React from "react";
 
-import MarketSelector from "@/components/AhTracker/MarketSelector.tsx";
-import { getAllItems, getItemAlias } from "@/lib/api/apiPalaTracker.ts";
-import { OptionType } from "@/types";
-import constants from "@/lib/constants.ts";
-import { CraftingInformationFetcher } from "@/components/Craft/CraftingInformationFetcher.tsx";
-import { CountSelector } from "@/components/Craft/CountSelector.tsx";
-import LoadingSpinner from "@/components/ui/loading-spinner.tsx";
+import { getAllItems } from "@/lib/api/apiPalaTracker.ts";
+import { CraftSectionEnum, OptionType, searchParamsCraftPage } from "@/types";
 import { generateCraftUrl } from "@/lib/misc.ts";
 import { redirect } from "next/navigation";
+import { CraftingSectionSelector } from "@/components/Craft/CraftingSectionSelector.tsx";
+import { CraftRecipeDisplay } from "@/components/Craft/CraftRecipeDisplay.tsx";
+import { CraftOptimizerDisplay } from "@/components/Craft/CraftOptimizerDisplay.tsx";
 
 export async function generateMetadata(
-  { searchParams }: { searchParams: { item: string | undefined } },
+  { searchParams }: { searchParams: searchParamsCraftPage },
 ) {
 
   const itemListJson = await getAllItems().catch(() => {
@@ -54,34 +52,26 @@ export async function generateMetadata(
   }
 }
 
-export default async function AhTrackerPage({ searchParams }: {
-  searchParams: { item: string | undefined, count: number | undefined }
-}) {
-  const options = await getAllItems();
 
+export default async function Home({ searchParams }: { searchParams: searchParamsCraftPage }) {
 
-  const item = options.find((item) => item.value === searchParams.item);
-  const count = searchParams.count || 1;
-
-
-  if (item === undefined && searchParams.item !== undefined) {
-    const aliasName = await getItemAlias(searchParams.item);
-    if (aliasName !== null) {
-      redirect(generateCraftUrl(aliasName, count))
-    }
-    return <div>
-      <Card className="bg-red-700">
-        <CardHeader>
-          <CardTitle className="text-primary-foreground">
-            L&apos;item sélectionné n&apos;existe pas
-          </CardTitle>
-        </CardHeader>
-      </Card>
-    </div>
+  if (searchParams.section === undefined) {
+    return redirect(generateCraftUrl(searchParams.item as string, searchParams.count || 1, CraftSectionEnum.recipe))
   }
 
+  switch (searchParams.section) {
+    case CraftSectionEnum.recipe:
+      return <BodyPage><CraftRecipeDisplay searchParams={searchParams}/></BodyPage>
+    case CraftSectionEnum.optimizer:
+      return <BodyPage><CraftOptimizerDisplay/></BodyPage>
+    default:
+      return redirect(generateCraftUrl(searchParams.item as string, searchParams.count || 1, CraftSectionEnum.recipe))
+  }
+}
+
+function BodyPage({ children }: { children: React.ReactNode }) {
   return (
-    <div className="flex flex-col gap-4">
+    <>
       <Card>
         <CardHeader className="flex flex-row items-center justify-between">
           <CardTitle>
@@ -97,58 +87,15 @@ export default async function AhTrackerPage({ searchParams }: {
             Cet outil permet de lister les ressources nécessaires pour fabriquer un item en fonction de la quantité.
             <br/>
             Il permet également d&apos;avoir une indication du prix de fabrication de l&apos;item.
+            <br/>
+            Mais également de lister les craft les plus rentables du moment pour optimiser vos crafts.
           </h1>
         </CardContent>
       </Card>
-      <Card className="md:col-start-1 md:col-span-2 md:row-start-1 md:row-span-3 row-span-3">
-        <CardHeader>
-          <CardTitle>
-            Sélection un item à crafter
-          </CardTitle>
-        </CardHeader>
-        <CardContent className="flex flex-row gap-2 pt-4 justify-center items-center w-full">
-          <CountSelector item={item} count={count}/>
-          <div className="flex-grow">
-            <MarketSelector url={`${constants.craftPath}?count=${count || 1}&item=`} item={item || null}/>
-          </div>
-        </CardContent>
-        {/*{item ?*/}
-        {/*  <Suspense fallback={<QuantitySelectorDisplayFallBack item={item}/>}>*/}
-        {/*    <QuantitySelectorDisplay item={item}/>*/}
-        {/*  </Suspense>*/}
-        {/*  :*/}
-        {/*  null}*/}
-      </Card>
-      <div className="grid grid-cols-2 gap-2 w-full">
-        {item &&
-          <Suspense fallback={<CraftRecipeFallback label={item.label}/>}>
-            <CraftingInformationFetcher item={item} options={options} count={count}/>
-          </Suspense>
-        }
-        {/*{item &&*/}
-        {/*  <Suspense fallback={<CraftRecipeFallback item={item}/>}>*/}
-        {/*    <CraftItemRecipe item={item} options={options}/>*/}
-        {/*  </Suspense>*/}
-        {/*}*/}
-        {/*{item &&*/}
-        {/*  <MyTreeView/>*/}
-        {/*}*/}
-        {/*<CraftResourceList list={itemList}/>*/}
-      </div>
-
-    </div>)
+      <CraftingSectionSelector/>
+      {children}
+    </>
+  );
 }
 
-function CraftRecipeFallback({ label }: { label: string }) {
-  return (<Card>
-    <CardHeader>
-      <CardTitle className="flex flex-row gap-2">
-        <LoadingSpinner size={4}/>
-        Chargement des crafts de l&apos;item :{" "}
-        <GradientText
-          className="font-extrabold">{label || "Not Found"}
-        </GradientText>
-      </CardTitle>
-    </CardHeader>
-  </Card>)
-}
+
