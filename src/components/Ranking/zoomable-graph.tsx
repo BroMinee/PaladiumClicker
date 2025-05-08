@@ -78,8 +78,6 @@ export function ZoomableChart({ data: initialData, rankingType, profil }: Zoomab
   }
 
   async function onSubmit(event: FormEvent<HTMLFormElement>) {
-    if (!playerInfo)
-      return;
 
     event.preventDefault();
     const formData = new FormData(event.target as HTMLFormElement);
@@ -99,8 +97,10 @@ export function ZoomableChart({ data: initialData, rankingType, profil }: Zoomab
     }
 
     document.getElementById("username")?.setAttribute("innerHTML", "");
-    if (profil)
-      router.push(generateProfilUrl(playerInfo.username, ProfilSectionEnum.Classement, rankingType, Array.from(usernames).sort()), { scroll: false });
+    if (profil) {
+      if (playerInfo)
+        router.push(generateProfilUrl(playerInfo.username, ProfilSectionEnum.Classement, rankingType, Array.from(usernames).sort()), { scroll: false });
+    }
     else {
       const searchParamsNoUsername = searchParams.get('noUsernames');
       const noUsernames: string[] = searchParamsNoUsername ? searchParamsNoUsername.split(",") : [];
@@ -117,8 +117,6 @@ export function ZoomableChart({ data: initialData, rankingType, profil }: Zoomab
   }
 
   function handleRemoveUsername(username: string) {
-    if (!playerInfo)
-      return;
     let usernames = new Set<string>();
 
     const us = searchParams.get('usernames');
@@ -128,9 +126,10 @@ export function ZoomableChart({ data: initialData, rankingType, profil }: Zoomab
       }
     }
 
-    if (profil)
-      router.push(generateProfilUrl(playerInfo.username, ProfilSectionEnum.Classement, rankingType, Array.from(usernames).filter((e) => e.toLowerCase() !== username.toLowerCase()).sort()), { scroll: false });
-    else {
+    if (profil) {
+      if (playerInfo)
+        router.push(generateProfilUrl(playerInfo.username, ProfilSectionEnum.Classement, rankingType, Array.from(usernames).filter((e) => e.toLowerCase() !== username.toLowerCase()).sort()), { scroll: false });
+    } else {
       const searchParamsNoUsername = searchParams.get('noUsernames');
       const noUsernames: string[] = searchParamsNoUsername ? searchParamsNoUsername.split(',') : [];
       noUsernames.push(username);
