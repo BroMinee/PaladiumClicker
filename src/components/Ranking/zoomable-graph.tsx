@@ -278,12 +278,16 @@ export function ZoomableChart({ data: initialData, rankingType, profil }: Zoomab
   }, [startTime, endTime, originalData]);
 
   const maxValue = useMemo(
-    () => zoomedData.reduce((max, dataPoint) => Math.max(max, dataPoint[playerInfo?.username || "0"] || 0), 0),
+    () => zoomedData.reduce((max, dataPoint) => {
+      return Math.max(max, Math.max(...uniqueUsernames.map(username => Number(dataPoint[username])).filter(e => isFinite(e))));
+    }, -Infinity),
     [zoomedData]
   )
 
   const minValue = useMemo(
-    () => zoomedData.reduce((min, dataPoint) => Math.min(min, dataPoint[playerInfo?.username || "0"] || 0), Infinity),
+    () => zoomedData.reduce((min, dataPoint) => {
+      return Math.min(min, Math.min(...uniqueUsernames.map(username => Number(dataPoint[username])).filter(e => isFinite(e))));
+    }, Infinity),
     [zoomedData]
   );
 
