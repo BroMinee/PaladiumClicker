@@ -161,7 +161,7 @@ function CraftPriceCard({ data, index, cardRefs, sortMode }: {
 
   return (
     <a
-      className="text-card-foreground dark:bg-gray-800 duration-300 dark:hover:bg-gray-700 bg-gray-200 hover:bg-gray-300 rounded-2xl shadow-lg p-4 w-80 flex flex-col items-center text-white  transition flex-1"
+      className="text-card-foreground dark:bg-gray-800 duration-300 dark:hover:bg-gray-700 bg-gray-200 hover:bg-gray-300 rounded-2xl shadow-lg p-4 flex flex-col items-center text-white  transition flex-1"
       ref={el => cardRefs.current[index] = (el ?? undefined as any)}
       href={generateCraftUrl(data.item.item_name, 1, CraftSectionEnum.recipe)}
     >
@@ -184,7 +184,7 @@ function CraftPriceCard({ data, index, cardRefs, sortMode }: {
 
       <div className="flex flex-wrap justify-center gap-1 mt-2">
         {getBadges().map((b, i) => (
-          <span key={i} className={`text-xs text-white px-2 py-0.5 rounded-full ${b.color}`}>
+          <span key={i} className={`text-xs text-center text-white px-2 py-0.5 rounded-full ${b.color}`}>
             {b.label}
           </span>
         ))}
