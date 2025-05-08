@@ -9,13 +9,14 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { formatPrice, generateCraftUrl, getDDHHMMSS, parseMessageCraftPrice } from "@/lib/misc.ts";
 import gsap from "gsap";
 import { API_PALATRACKER_WS } from "@/lib/constants.ts";
+import { toast } from "sonner";
 
 type SortMode = "profit" | "margin" | "speed" | "score";
 type CraftPriceWithComputed = CraftPrice & {
   profit: number,
   margin: number,
-  speed: number,
-  score: number
+  totalSold: number,
+  score: number,
 }
 
 export function CraftOptimizerDisplay() {
@@ -62,12 +63,10 @@ export function CraftOptimizerDisplay() {
   }, [setCraftingList]);
 
   useEffect(() => {
-    const craftingListFiltered = craftingList.filter(c => c.priceToCraft > 0 && c.totalSold > 0);//.filter(c => !(c.priceToCraft > c.currentPrice && c.priceToCraft > c.averagePrice));
+    const craftingListFiltered = craftingList.filter(c => c.priceToCraft > 0 && c.totalSold > 0 && c.item.item_name !== 'tile-empty-mob-spawner');//.filter(c => !(c.priceToCraft > c.currentPrice && c.priceToCraft > c.averagePrice));
 
     // const craftingListFiltered = craftingList.filter(c => c.priceToCraft > 0 && c.totalSold > 0).filter(c => !(c.priceToCraft > c.currentPrice && c.priceToCraft > c.averagePrice));
-    const minTotalSold = Math.min(...craftingListFiltered.filter(c => c.totalSold).map(c => c.totalSold));
-    const maxTotalSold = Math.max(...craftingListFiltered.filter(c => c.totalSold).map(c => c.totalSold));
-    const sortedList = craftingListFiltered.map(e => computeSortValue(e, minTotalSold, maxTotalSold))
+    const sortedList = craftingListFiltered.map(e => computeSortValue(e))
       .sort((a, b) => getSortValue(b, sortMode) - getSortValue(a, sortMode));
     setTopCraft(sortedList.slice(0, 100));
     if (craftingList.length === 0)
@@ -101,13 +100,11 @@ export function CraftOptimizerDisplay() {
               <SelectValue placeholder="Méthode de tri"/>
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="score" title="ratio = 0.3 × (profit / priceToCraft) + 0.7 × speed">Score
-                pondérée</SelectItem>
+              <SelectItem value="score" title="ratio = profit × totalSold">Profit brut pondéré par le volume de ventes</SelectItem>
               <SelectItem value="profit" title="ratio = currentPrice - priceToCraft">Profit brut</SelectItem>
               <SelectItem value="margin" title="ratio = (currentPrice - priceToCraft) / priceToCraft">Marge
                 %</SelectItem>
-              <SelectItem value="speed" title="ratio = 1 - [(totalSoldNorm) × (0.6 × probaPrice + 0.4 × probaAverage)]">Prob.
-                vente rapide</SelectItem>
+              <SelectItem value="speed" title="ratio = totalSold">Nombre de vente</SelectItem>
             </SelectContent>
           </Select>
         </CardHeader>
@@ -204,37 +201,28 @@ function CraftPriceCard({ data, index, cardRefs, sortMode }: {
 }
 
 
-function computeSortValue(item: CraftPrice, minTotalSold: number, maxTotalSold: number): CraftPriceWithComputed {
+function computeSortValue(item: CraftPrice): CraftPriceWithComputed {
   const { priceToCraft, currentPrice, averagePrice, totalSold } = item;
   if (priceToCraft <= 0 || currentPrice <= 0) {
     return {
       ...item,
       profit: -Infinity,
       margin: -Infinity,
-      speed: -Infinity,
-      score: -Infinity
+      totalSold: -Infinity,
+      score: -Infinity,
     }
   }
 
   const profit = currentPrice - priceToCraft;
   const margin = profit / priceToCraft;
+  const  score = profit * totalSold;
 
-  const probaVenteTotalSold = (totalSold - minTotalSold) / (maxTotalSold - minTotalSold);
-  const probaVentePrice = (currentPrice - priceToCraft) / currentPrice;
-  const probaVenteAverage = (averagePrice - priceToCraft) / averagePrice;
-
-  let speed = -Infinity;
-  if (priceToCraft < currentPrice) {
-    speed = 1 - (probaVenteTotalSold * (0.6 * probaVentePrice + 0.4 * probaVenteAverage));
-  }
-
-  const score = 0.3 * margin + 0.7 * speed;
   return {
     ...item,
     profit,
     margin,
-    speed,
-    score
+    totalSold,
+    score,
   };
 }
 
@@ -245,8 +233,11 @@ function getSortValue(item: CraftPriceWithComputed, mode: SortMode): number {
     case "margin":
       return item.margin;
     case "speed":
-      return item.speed;
+      return item.totalSold;
     case "score":
+      return item.score;
+    default:
+      toast.error("Unknown sort mode: " + mode);
       return item.score;
   }
 }
