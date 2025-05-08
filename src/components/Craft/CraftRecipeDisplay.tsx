@@ -47,7 +47,7 @@ export async function CraftRecipeDisplay({ searchParams }: { searchParams: searc
         <CardContent className="flex flex-row gap-2 pt-4 justify-center items-center w-full">
           <CountSelector item={item} count={count}/>
           <div className="flex-grow">
-            <MarketSelector url={`${constants.craftPath}?count=${count || 1}&item=`} item={item || null}/>
+            <MarketSelector url={`${constants.craftPath}?section=recipe&count=${count ?? 1}&item=`} item={item ?? null}/>
           </div>
         </CardContent>
       </Card>

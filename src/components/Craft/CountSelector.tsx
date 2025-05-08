@@ -1,29 +1,44 @@
 'use client';
 
-import { OptionType } from "@/types";
+import { CraftSectionEnum, OptionType } from "@/types";
 import { useRouter } from "next/navigation";
 import { Input } from "@/components/ui/input.tsx";
+import { useEffect, useMemo, useState } from "react";
+import { debounce } from "debounce";
+import { generateCraftUrl } from "@/lib/misc.ts";
+
 
 export function CountSelector({ item, count }: { item: OptionType | undefined, count: number | undefined }) {
-
   const router = useRouter();
+  const [inputValue, setInputValue] = useState(String(count || 1));
 
-  if (count !== undefined && count <= 0) {
-    if (item)
-      router.push(`/craft?item=${item.value}&count=1`, { scroll: false });
-    else
-      router.push(`/craft?count=1`, { scroll: false });
-  }
+  useEffect(() => {
+    setInputValue(String(count ?? 1));
+  }, [count]);
+
+  const debouncedPush = useMemo(() =>
+      debounce((val: string) => {
+        const newCount = Math.max(Number(val) ?? 1, 1);
+        if (item)
+          router.push(generateCraftUrl(item.value, newCount,CraftSectionEnum.recipe), { scroll: false });
+        else
+          router.push(generateCraftUrl(null, newCount,CraftSectionEnum.recipe), { scroll: false });
+      }, 250),
+    [item, router]
+  );
 
   return (
-    <Input className="w-32" type="number" min="1" step="1"
-           value={Number(count || 1)}
-           onChange={(e) => {
-             if (item)
-               router.push(`/craft?item=${item.value}&count=${Number(e.target.value)}`, { scroll: false });
-             else
-               router.push(`/craft?count=${Number(e.target.value)}`, { scroll: false });
-           }
-           }/>
+    <Input
+      className="w-32"
+      type="number"
+      min="1"
+      step="1"
+      value={inputValue}
+      onChange={(e) => {
+        const val = e.target.value;
+        setInputValue(val);
+        debouncedPush(val);
+      }}
+    />
   );
 }
