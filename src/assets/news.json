@@ -2,15 +2,17 @@
   {
     "date": "11/04/2025",
     "events": [
-      "Migration vers un nouvel hébergeur pour le site.",
       "Ajout d'un nouvel outil : [Craft Optimizer](https://palatracker.bromine.fr/craft?section=optimizer) permettant de trouver le craft le plus rentable du moment.",
-      "La navbar sur téléphone disparaît automatiquement lorsque l'on clique sur une section.",
-      "Correction du thème clair sur certains éléments de la page [clicker-optimizer](https://palatracker.bromine.fr/clicker-optimizer/BroMine__)",
+      "Migration vers un nouvel hébergeur pour le site.",
+      "Ajout d'un synchronisation automatique avec les rôles [discord](https://discord.gg/WGXUKHcZ3P) pour les utilisateurs connectés avec [Discord](https://discord.gg/WGXUKHcZ3P).",
+      "Correction du minimum local et maximum local sur les graphiques de la page [Classement](https://palatracker.bromine.fr/ranking?category=money) et [Profil](https://palatracker.bromine.fr/profil/BroMine__?section=Classement)",
+      "Correction, la navbar sur téléphone disparaît automatiquement lorsque l'on clique sur une section.",
       "Correction, le menu burger est maintenant toujours au premier plan.",
       "Correction, le menu burger sur téléphone ne disparaît plus lorsque l'on scrolle sur firefox.",
+      "Correction du thème clair sur certains éléments de la page [clicker-optimizer](https://palatracker.bromine.fr/clicker-optimizer/BroMine__)",
       "Correction d'un bug empêchant l'ajout d'un pseudo dans le [classement](https://palatracker.bromine.fr/ranking?category=money) lorsqu'aucun profil n'avait été chargé auparavant.",
       "Correction d'un bug ralentissant l'affichage des graphiques sur la page [ah](https://palatracker.bromine.fr/ah?item=paladium-ingot)",
-      "Vous trouvez les blocs plus jolis qu’avant ? C’est normal : toutes les interfaces utilisent maintenant un rendu 3D pour les blocs plein comme dans l’inventaire Paladium.",
+      "Vous trouvez les blocs plus jolis qu’avant ? C'est normal : toutes les interfaces utilisent maintenant un rendu 3D pour les blocs plein comme dans l'inventaire Paladium.",
       "Ajout des 41 nouveaux crafts dans le [craft](https://palatracker.bromine.fr/craft?item=tile-giver&count=1&section=recipe)",
       "Correction de l'association de certaines images dans la liste des [succès](https://palatracker.bromine.fr/profil/BroMine__?section=Achievements)"
     ]
