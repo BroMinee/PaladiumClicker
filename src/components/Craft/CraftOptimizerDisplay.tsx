@@ -197,7 +197,7 @@ function CraftPriceCard({ data, index, cardRefs, sortMode }: {
         {sortMode === "profit" &&
           <p>Profit : <span className="text-green-400">{formatPrice(getSortValue(data, sortMode))} $</span></p>}
         {sortMode === "margin" &&
-          <p>Marge : <span className="text-green-400">{formatPrice(getSortValue(data, sortMode))} $</span></p>}
+          <p>Marge : <span className="text-green-400">{formatPrice(Math.round(getSortValue(data, sortMode)*100))} %</span></p>}
       </div>
     </a>
   );
