@@ -39,6 +39,19 @@ export default function LinkClient({ path, children }: {
   const [isActive, setIsActive] = useState(false);
   const pathname = usePathname();
 
+  function handleClick() {
+    if (mounted) {
+      const sheet = document.querySelector("#mobile-sheet-content");
+      if (sheet) {
+        const srOnly = sheet.querySelector('.sr-only');
+        const closeButton = srOnly?.closest('button');
+        if (closeButton instanceof HTMLElement) {
+          closeButton.click();
+        }
+      }
+      setLastVisited(path);
+    }
+  }
 
   useEffect(() => {
     setMounted(true)
@@ -77,7 +90,7 @@ export default function LinkClient({ path, children }: {
   if (newNotification) {
     return <HoverText text={hoverElement}>
       <Link
-        onClick={() => setLastVisited(path)}
+        onClick={handleClick}
         className={cn("font-medium flex justify-start items-center space-x-6 focus:bg-gray-700 focus:text-white hover:bg-accent text-card-foreground rounded px-3 py-2 w-56", isActive && "underline bg-accent")}
         href={href}>
         {children}
@@ -96,7 +109,7 @@ export default function LinkClient({ path, children }: {
 
   return (
     <Link
-      onClick={() => setLastVisited(path)}
+      onClick={handleClick}
       className={cn("font-medium flex justify-start items-center space-x-6 focus:bg-gray-700 focus:text-white hover:bg-accent text-card-foreground rounded px-3 py-2 w-56", isActive && "underline bg-accent")}
       href={href}>
       {children}
