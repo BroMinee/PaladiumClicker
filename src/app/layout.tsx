@@ -31,7 +31,7 @@ export default function RootLayout({
     <ThemeProviders>
       <div className="relative min-h-screen flex flex-col">
         <div className="flex flex-row">
-          <header className="h-fit sticky top-0">
+          <header className="h-fit sticky top-0 z-[100]">
             <Navbar/>
           </header>
           <main className="flex-1 container py-4 pb-8 mx-auto overflow-x-hidden">

@@ -31,7 +31,7 @@ const Navbar = () => {
       </div>
 
 
-      <div className="fixed items-center p-1 m-2 bg-primary rounded-md">
+      <div className="fixed top-0 left-0 p-1 m-2 bg-primary rounded-md lg:hidden">
         <MobileNav/>
       </div>
 
@@ -131,7 +131,7 @@ const MobileNav = () => {
           <FaBars className="h-4 w-4"/>
         </Button>
       </SheetTrigger>
-      <SheetContent side="left" className="w-72 overflow-auto no-scrollbar">
+      <SheetContent side="left" className="w-72 overflow-auto no-scrollbar z-[101]" id="mobile-sheet-content">
         <SheetHeader>
           <NavBarContent/>
         </SheetHeader>
