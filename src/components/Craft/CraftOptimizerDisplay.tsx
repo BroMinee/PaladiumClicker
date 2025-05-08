@@ -202,8 +202,10 @@ function CraftPriceCard({ data, index, cardRefs, sortMode }: {
 
 
 function computeSortValue(item: CraftPrice): CraftPriceWithComputed {
-  const { priceToCraft, currentPrice, averagePrice, totalSold } = item;
-  if (priceToCraft <= 0 || currentPrice <= 0) {
+  const { priceToCraft, averagePrice, totalSold } = item;
+  let { currentPrice } = item;
+  currentPrice = currentPrice <= 0 ? averagePrice : currentPrice;
+  if (priceToCraft <= 0) {
     return {
       ...item,
       profit: -Infinity,
@@ -215,7 +217,7 @@ function computeSortValue(item: CraftPrice): CraftPriceWithComputed {
 
   const profit = currentPrice - priceToCraft;
   const margin = profit / priceToCraft;
-  const  score = profit * totalSold;
+  const score = profit * totalSold;
 
   return {
     ...item,
