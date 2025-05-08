@@ -135,7 +135,7 @@ export function HowToXp({ searchParams }: {
       <CardContent>
         <div className={`grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4 items-center`}>
           <div className="flex flex-row items-center gap-4">
-            <Image src={safeJoinPaths(`/AH_img/glass_bottle.png`)} alt="glass_bottle.png"
+            <Image src={safeJoinPaths(`/AH_img/glass_bottle.webp`)} alt="glass_bottle.webp"
                    width={48} height={48}
                    unoptimized={true}
                    className="object-cover pixelated"/>
