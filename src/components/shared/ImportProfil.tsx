@@ -36,8 +36,12 @@ export default function ImportProfil({
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [newPlayerInfo, setNewPlayerInfo] = useState<PlayerInfo | null>(null);
   const [update, setUpdate] = useState(false);
+  const [fetching, setFetching] = useState(false);
 
   async function onSubmit(event: FormEvent<HTMLFormElement>) {
+    if (fetching)
+      return;
+
     event.preventDefault();
     const formData = new FormData(event.target as HTMLFormElement);
 
@@ -47,10 +51,36 @@ export default function ImportProfil({
     }
 
     const trouvaille = getLinkFromUrl(window.location.pathname);
+    let pseudoEnter = String(formData.get("pseudo"));
+    if (pseudoEnter === "" || pseudoEnter === undefined) {
+      pseudoEnter = playerInfo?.username ?? "";
+    }
+    if (pseudoEnter === "") {
+      toast.warning("Veuillez entrer un pseudo");
+      return;
+    }
+    console.log(trouvaille);
+    if (pseudoEnter.toLowerCase() === playerInfo?.username.toLowerCase()) {
+      setFetching(true);
+      try {
+        const data = await getPlayerInfoAction(playerInfo.username);
+        setNewPlayerInfo(data);
+        setFetching(false);
+        if (playerInfo.edited && hasDifference(playerInfo, data)) {
+          setIsPopupOpen(true);
+        } else {
+          handleConfirmReplacement();
+        }
+      } catch (e) {
+        setFetching(false);
+        toast.error(`Erreur lors du chargement du profil de ${playerInfo.username}`);
+      }
+    }
+
     if (trouvaille !== undefined && constants.links[trouvaille].requiredPseudo) {
-      await navigate(safeJoinPaths(trouvaille, String(formData.get("pseudo"))));
+      await navigate(safeJoinPaths(trouvaille, pseudoEnter));
     } else {
-      await navigate(safeJoinPaths(constants.profilPath, String(formData.get("pseudo"))));
+      await navigate(safeJoinPaths(constants.profilPath, pseudoEnter));
     }
   }
 
@@ -81,7 +111,7 @@ export default function ImportProfil({
 
   return (
     <div className={cn("flex gap-2", navBar ? "flex-col" : "")}>
-      <form onSubmit={onSubmit}>
+      <form onSubmit={onSubmit} id="submit-pseudo">
         <div className="relative">
           <Input
             type="text"
@@ -102,7 +132,7 @@ export default function ImportProfil({
         </div>
       </form>
       {showResetButton && !settings.defaultProfile &&
-        <UpdateProfilButton setNewPlayerInfo={setNewPlayerInfo} handleConfirmReplacement={handleConfirmReplacement} setIsPopupOpen={setIsPopupOpen}/>
+        <UpdateProfilButton fetching={fetching}/>
       }
       {showResetButton && settings.defaultProfile &&
         <Button onClick={() => {
@@ -132,35 +162,15 @@ export default function ImportProfil({
 }
 
 function UpdateProfilButton({
-                              setNewPlayerInfo,
-                              setIsPopupOpen,
-                              handleConfirmReplacement
+                              fetching
                             }: {
-  setNewPlayerInfo: (playerInfo: PlayerInfo) => void,
-  setIsPopupOpen: (isOpen: boolean) => void,
-  handleConfirmReplacement: () => void,
+  fetching: boolean,
 }) {
-  const { data: playerInfo } = usePlayerInfoStore();
-
-  const [fetching, setFetching] = useState(false);
-
   return <Button
+    type="submit"
+    form="submit-pseudo"
     className="flex flex-row gap-2"
-    onClick={async () => {
-      if (playerInfo === null) return;
-      setFetching(true);
-      getPlayerInfoAction(playerInfo.username).then((data) => {
-        setNewPlayerInfo(data);
-        setFetching(false);
-        if (playerInfo.edited && hasDifference(playerInfo, data)) {
-          setIsPopupOpen(true);
-        } else {
-          handleConfirmReplacement();
-        }
-      }).catch(() => {
-        toast.error(`Erreur lors du chargement du profil de ${playerInfo.username}`);
-      });
-    }}>
+  >
     <span>Mettre à jour</span>
     {fetching && <LoadingSpinner size={4}/> }
   </Button>;
