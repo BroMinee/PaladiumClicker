@@ -100,7 +100,7 @@ export function CraftResourceList({ list }: { list: NodeType[] }) {
       </Card>
       <Card className="row-start-2 col-span-2">
         <CardHeader>
-          <CardTitle><span className="text-primary-foreground font-semibold">Vous avez besoin d&apos;un total de : <span
+          <CardTitle><span className="text-card-foreground font-semibold">Vous avez besoin d&apos;un total de : <span
             className="text-primary">{formatPrice(totalPrice)} $</span></span></CardTitle>
         </CardHeader>
         <CardContent className="pt-2 gap-1 grid grid-cols-3">
