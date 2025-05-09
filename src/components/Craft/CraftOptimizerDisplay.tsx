@@ -68,7 +68,8 @@ export function CraftOptimizerDisplay() {
     // const craftingListFiltered = craftingList.filter(c => c.priceToCraft > 0 && c.totalSold > 0).filter(c => !(c.priceToCraft > c.currentPrice && c.priceToCraft > c.averagePrice));
     const sortedList = craftingListFiltered.map(e => computeSortValue(e))
       .sort((a, b) => getSortValue(b, sortMode) - getSortValue(a, sortMode));
-    setTopCraft(sortedList.slice(0, 100));
+    // setTopCraft(sortedList.slice(0, 100));
+    setTopCraft(sortedList);
     if (craftingList.length === 0)
       return;
     setLastUpdate(new Date(craftingList[0].created_at));
