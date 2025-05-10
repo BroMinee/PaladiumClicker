@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "nodemon",
+    "dev": "next dev --turbo",
     "build": "next build && tsc --project tsconfig.server.json",
     "start": "node dist/server.js",
     "test": "jest --detectOpenHandles"

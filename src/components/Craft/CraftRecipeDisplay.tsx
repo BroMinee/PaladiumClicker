@@ -47,7 +47,9 @@ export async function CraftRecipeDisplay({ searchParams }: { searchParams: searc
         <CardContent className="flex flex-row gap-2 pt-4 justify-center items-center w-full">
           <CountSelector item={item} count={count}/>
           <div className="flex-grow">
-            <MarketSelector url={`${constants.craftPath}?section=recipe&count=${count ?? 1}&item=`} item={item ?? null}/>
+            <Suspense fallback={<MarketSelectFallback/>}>
+              <MarketSelector url={`${constants.craftPath}?section=recipe&count=${count ?? 1}&item=`} item={item ?? null}/>
+            </Suspense>
           </div>
         </CardContent>
       </Card>
@@ -59,6 +61,14 @@ export async function CraftRecipeDisplay({ searchParams }: { searchParams: searc
         }
       </div>
     </div>)
+}
+
+export function MarketSelectFallback()
+{
+  return <div className="flex flex-row gap-2 m-4 w-96 items-center">
+    <LoadingSpinner size={4}/>
+    <h2 className="font-bold">Chargement des items...</h2>
+  </div>
 }
 
 function CraftRecipeFallback({ label }: { label: string }) {
