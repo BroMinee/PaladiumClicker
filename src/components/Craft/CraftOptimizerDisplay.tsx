@@ -190,7 +190,16 @@ function CraftPriceCard({ data, index, cardRefs, sortMode }: {
 
       <div className="flex flex-col mt-2 text-sm text-card-foreground space-y-1 items-center justify-center">
         <p>Prix de craft : <span className="text-green-400">{priceToCraft <= 0 ? "Pas craftable" : formatPrice(Math.max(0, priceToCraft))} $</span></p>
-        <p>Prix actuel : <span className="text-blue-400">{currentPrice <= 0 ? "Pas en vente" : formatPrice(Math.max(0, currentPrice))} $</span></p>
+        <p>Prix actuel : <span className="text-blue-400">{currentPrice <= 0
+            ? "Pas en vente"
+            : (
+              <>
+                {formatPrice(Math.max(0, currentPrice))} $
+              </>
+            )
+          }
+        </span>
+        </p>
         <p>Prix moyen : <span className="text-yellow-400">{averagePrice <= 0 ? "Pas vendu depuis 7 jours" : formatPrice(Math.max(0, averagePrice))} $</span></p>
         {sortMode === "profit" &&
           <p>Profit : <span className="text-green-400">{formatPrice(getSortValue(data, sortMode))} $</span></p>}
