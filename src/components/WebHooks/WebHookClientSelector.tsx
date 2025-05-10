@@ -10,7 +10,7 @@ import constants from "@/lib/constants.ts";
 
 export function WebHookSelectorClientItem() {
   const router = useRouter();
-  const validWebHookType = [WebHookType.QDF, WebHookType["adminShop"], WebHookType.market, WebHookType.EventPvp, WebHookType["statusServer"]]
+  const validWebHookType = [WebHookType.QDF, WebHookType.adminShop, WebHookType.market, WebHookType.EventPvp, WebHookType.statusServer, WebHookType.vote]
 
   const { setCurrentWebHookType, currentWebHookType } = useWebhookStore();
 

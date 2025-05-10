@@ -4,6 +4,8 @@ import { AdminShopItem, adminShopItemsAvailable, EventType, WebHookThresholdCond
 import { AdminShopSelectorClientItem } from "@/components/AdminShop/AdminShopSelectorClientItem.tsx";
 import { ThresholdSelector } from "@/components/WebHooks/WebHookThresholdSelector.tsx";
 import { Button } from "@/components/ui/button.tsx";
+import { cn } from "@/lib/utils.ts";
+import { Input } from "@/components/ui/input.tsx";
 
 
 export function ThreshConditionSelector() {
@@ -119,6 +121,28 @@ export function EventInput() {
       </span>
       <EventSelector/>
     </>
+  )
+}
+
+
+export function VoteInput() {
+  const { username, setUsername } = useWebhookStore();
+
+
+  return (
+    <div className="flex flex-row justify-between">
+      <span>Veuillez choisir un pseudo</span>
+      <Input
+        type="text"
+        id="pseudo"
+        name="pseudo"
+        onChange={(e) => {
+          setUsername(e.target.value);
+        }}
+        className={cn("bg-background")}
+        placeholder={username !== "" ? username : "Entre ton pseudo"}
+      />
+    </div>
   )
 }
 

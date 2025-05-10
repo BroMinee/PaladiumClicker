@@ -3500,6 +3500,8 @@ export function getTextFromWebHookType(webHookType: WebHookType) {
       return "Event";
     case WebHookType.statusServer:
       return "Status serveur";
+    case WebHookType.vote:
+      return "Vote";
     default:
       return `Unknown WebHookType ${webHookType}`;
   }

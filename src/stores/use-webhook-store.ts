@@ -18,6 +18,7 @@ type State = {
   helpFormat: boolean,
   edit: boolean,
   idAlert: number | null,
+  username: string,
 }
 
 type Actions = {
@@ -37,6 +38,7 @@ type Actions = {
   setHelpFormat: (helpForm: boolean) => void,
   setEdit: (value: boolean) => void,
   setIdAlert: (idAlert: number | null) => void,
+  setUsername: (username: string) => void,
 }
 
 const initialState: State = {
@@ -56,6 +58,7 @@ const initialState: State = {
   helpFormat: false,
   edit: false,
   idAlert: null,
+  username: "",
 }
 
 export const useWebhookStore = create<State & Actions>(
@@ -86,5 +89,6 @@ export const useWebhookStore = create<State & Actions>(
     setHelpFormat: (helpFormat) => set({ helpFormat }),
     setEdit: (edit) => set({ edit }),
     setIdAlert: (idAlert) => set({ idAlert }),
+    setUsername: (username) => set({ username }),
   })
 );

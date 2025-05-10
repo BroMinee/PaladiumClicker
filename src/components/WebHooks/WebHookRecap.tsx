@@ -65,6 +65,13 @@ export function RecapEvent() {
 export function RecapServeurStatus() {
   return (
     <RecapTemplate
-      messages={["Vous allez recevoir un message quand un serveur **à un soucis** ET quand il **revient à la normale**. (+/- 15 minutes)", "Ce qui fait une moyenne de **{TODO}** message par semaine."]}/>
+      messages={["Vous allez recevoir un message quand un serveur **à un soucis** ET quand il **revient à la normale**. (+/- 1 minutes)", "Ce qui fait une moyenne de **{TODO}** message par semaine."]}/>
+  )
+}
+
+export function RecapVote() {
+  return (
+    <RecapTemplate
+      messages={["Vous allez recevoir un message quand il sera l'heure de voter. (+/- 1 minutes)"]}/>
   )
 }

@@ -84,7 +84,8 @@ export function WebHookPreview({ webHookAlert, groups, setGroups }: {
     setThresholdCondition,
     setThreshold,
     setEdit,
-    setIdAlert
+    setIdAlert,
+    setUsername,
   } = useWebhookStore();
   const router = useRouter();
 
@@ -92,6 +93,7 @@ export function WebHookPreview({ webHookAlert, groups, setGroups }: {
   function handleEdit(webHookAlert: WebHookAlert) {
     setCurrentWebHookType(webHookAlert.type);
     setWebHookUrl(webHookAlert.webhook.url);
+    setUsername(webHookAlert.username ?? "");
     if (webHookAlert.title)
       setTitle(webHookAlert.title);
     if (webHookAlert.item && webHookAlert.type === WebHookType.market)
@@ -160,6 +162,10 @@ export function WebHookPreview({ webHookAlert, groups, setGroups }: {
           }
           {webHookAlert.type === WebHookType.statusServer &&
             <Image src={`https://palatracker.bromine.fr/EventIcon/status.png`} alt="icon"
+                   height={32} width={32} unoptimized/>
+          }
+          {webHookAlert.type === WebHookType.vote &&
+            <Image src={`https://palatracker.bromine.fr/img/MarketUI/pb_icon.png`} alt="icon"
                    height={32} width={32} unoptimized/>
           }
           <span className="app-badge">{getTextFromWebHookType(webHookAlert.type)}</span>

@@ -661,6 +661,7 @@ export enum WebHookType {
   "statusServer" = "statusServer",
   "adminShop" = "adminShop",
   "market" = "market",
+  "vote" = "vote",
 }
 
 export type EventType =
@@ -719,6 +720,7 @@ export type WebHookAlert = {
   thresholdCondition:
     WebHookThresholdCondition
     | null;
+  username: string | null,
 }
 
 export type WebHookCreate = {
@@ -734,6 +736,7 @@ export type WebHookCreate = {
   thresholdCondition:
     WebHookThresholdCondition
     | null;
+  username: string;
 }
 
 export type NavBarCategory = "Statistiques et données" | "Outils" | "Informations et gestion";

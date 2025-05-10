@@ -20,10 +20,11 @@ import {
   RecapEvent,
   RecapMarket,
   RecapQDF,
-  RecapServeurStatus
+  RecapServeurStatus,
+  RecapVote
 } from "@/components/WebHooks/WebHookRecap.tsx";
 import { MarketInput } from "@/components/WebHooks/WebHookMarket/WebHookClient.tsx";
-import { AdminShopInput, EventInput } from "@/components/WebHooks/WebHookAdminShop/WebHookClient.tsx";
+import { AdminShopInput, EventInput, VoteInput } from "@/components/WebHooks/WebHookAdminShop/WebHookClient.tsx";
 import {
   createWebHookServerAction,
   editWebHookServerAction,
@@ -84,13 +85,13 @@ export function WebHookInputClientItem() {
       setItemSelected({
         value: "endium-sword",
         label: "Endium Sword",
-        img: "endium_sword.png",
+        img: "endium_sword.webp",
         label2: "Épée d'Endium"
       });
     else if (currentWebHookType === "adminShop")
       setAdminShopItemSelected("bone");
     else if (currentWebHookType === "QDF")
-      setItemSelected({ value: "glue", label: "Glue", img: "glue.png", label2: "Colle" });
+      setItemSelected({ value: "glue", label: "Glue", img: "glue.webp", label2: "Colle" });
     else
       setItemSelected(null);
   }, [currentWebHookType]);
@@ -128,6 +129,7 @@ function WebHookEditor() {
     adminShopItemSelected,
     edit,
     idAlert,
+    username,
     setEmbed,
     setContent,
     setTitle,
@@ -155,6 +157,7 @@ function WebHookEditor() {
       thresholdCondition: thresholdCondition,
       title: title,
       type: currentWebHookType,
+      username: currentWebHookType === WebHookType.vote ? username : "",
     }
 
     let res: { succeeded: boolean, msg: string };
@@ -280,6 +283,10 @@ function AdaptEditor() {
   if (currentWebHookType === WebHookType.EventPvp) {
     return <EventInput/>
   }
+
+  if (currentWebHookType === WebHookType.vote) {
+    return <VoteInput/>
+  }
   return null;
 }
 
@@ -317,6 +324,8 @@ export function Recap() {
       return <RecapEvent/>
     case WebHookType.statusServer:
       return <RecapServeurStatus/>
+    case WebHookType.vote:
+      return <RecapVote/>;
     default:
       return null;
   }

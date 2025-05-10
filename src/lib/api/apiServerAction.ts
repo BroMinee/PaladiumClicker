@@ -214,6 +214,8 @@ export async function createWebHookServerAction(body: WebHookCreate): Promise<{ 
       break;
     case WebHookType.market:
       break;
+    case WebHookType.vote:
+      break;
     default:
       return { succeeded: false, msg: "Type de WebHook inconnu" }
   }
@@ -244,6 +246,8 @@ export async function editWebHookServerAction(body: WebHookCreate): Promise<{ su
     case WebHookType.adminShop:
       break;
     case WebHookType.market:
+      break;
+    case WebHookType.vote:
       break;
     default:
       return { succeeded: false, msg: "Type de WebHook inconnu" }

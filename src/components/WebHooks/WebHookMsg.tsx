@@ -68,7 +68,7 @@ export function parseTextFormatting(
   thresholdCondition: WebHookThresholdCondition
 ): JSX.Element {
   const parts = text.split(
-    /(\*\*.*?\*\*|\*.*?\*|__.*?__|~~.*?~~|{here}|{item}|{itemFr}|{itemUs}|{event}|{price}|{previousPrice}|{quantityAvailable}|{quantity}|{earningXp}|{earningMoney}|{seller}|{start}|{end}|{startRelative}|{rewardElo}|{servers}|{server}|{thresholdCondition}|{goal}|\n|<@&[^>]*>|<@[^>]*>|{TODO})/g
+    /(\*\*.*?\*\*|\*.*?\*|__.*?__|~~.*?~~|{here}|{item}|{itemFr}|{itemUs}|{event}|{price}|{previousPrice}|{quantityAvailable}|{quantity}|{earningXp}|{earningMoney}|{seller}|{start}|{end}|{startRelative}|{rewardElo}|{servers}|{server}|{thresholdCondition}|{goal}|\n|<@&[^>]*>|<@[^>]*>|{TODO}|{username})/g
   );
 
   function getTextFromThresholdCondition(thresholdCondition: WebHookThresholdCondition) {
@@ -251,6 +251,9 @@ export function parseTextFormatting(
         }
         if (part === "{TODO}") {
           return <span key={index}>{getTodoCount()}</span>;
+        }
+        if (part === "{username}") {
+          return <span key={index}>LeVraiFuze</span>;
         }
         return <span key={index}>{part}</span>;
       })}
