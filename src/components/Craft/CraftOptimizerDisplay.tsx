@@ -132,11 +132,11 @@ function CraftPriceCard({ data, index, cardRefs, sortMode }: {
 
   const getBadges = () => {
     const badges = [];
-    if (priceToCraft === -1) badges.push({ label: "Non craftable", color: "bg-red-700" }); // this should not happen (filter)
-    if (currentPrice === -1) badges.push({ label: "Pas de vente en cours", color: "bg-green-500" }); // this should not happen (filter)
+    if (priceToCraft === -1) badges.push({ label: "Non craftable", color: "bg-red-700" });
+    if (currentPrice === -1) badges.push({ label: "Pas de vente en cours", color: "bg-red-700" });
     if (averagePrice === -1) badges.push({ label: "Prix inconnu", color: "bg-yellow-500" });
-    if (priceToCraft > averagePrice) badges.push({ label: "Prix de craft supérieur au prix moyen", color: "bg-orange-500" });
-    if (priceToCraft > currentPrice) badges.push({ label: "Prix de craft supérieur au prix actuel", color: "bg-orange-500" });
+    if (priceToCraft > 0 && averagePrice > 0 && priceToCraft > averagePrice) badges.push({ label: "Prix de craft supérieur au prix moyen", color: "bg-orange-500" });
+    if (priceToCraft > 0 && currentPrice > 0 && priceToCraft > currentPrice) badges.push({ label: "Prix de craft supérieur au prix actuel", color: "bg-orange-500" });
     if (totalSold <= 0) badges.push({ label: "Jamais vendu", color: "bg-red-700" });
     else if (totalSold < 10) badges.push({
       label: `Très rarement vendu: ${totalSold} ventes en 7 jours`,
@@ -189,9 +189,9 @@ function CraftPriceCard({ data, index, cardRefs, sortMode }: {
       </div>
 
       <div className="flex flex-col mt-2 text-sm text-card-foreground space-y-1 items-center justify-center">
-        <p>Prix de craft : <span className="text-green-400">{formatPrice(Math.max(0, priceToCraft))} $</span></p>
-        <p>Prix actuel : <span className="text-blue-400">{formatPrice(Math.max(0, currentPrice))} $</span></p>
-        <p>Prix moyen : <span className="text-yellow-400">{formatPrice(Math.max(0, averagePrice))} $</span></p>
+        <p>Prix de craft : <span className="text-green-400">{priceToCraft <= 0 ? "Pas craftable" : formatPrice(Math.max(0, priceToCraft))} $</span></p>
+        <p>Prix actuel : <span className="text-blue-400">{currentPrice <= 0 ? "Pas en vente" : formatPrice(Math.max(0, currentPrice))} $</span></p>
+        <p>Prix moyen : <span className="text-yellow-400">{averagePrice <= 0 ? "Pas vendu depuis 7 jours" : formatPrice(Math.max(0, averagePrice))} $</span></p>
         {sortMode === "profit" &&
           <p>Profit : <span className="text-green-400">{formatPrice(getSortValue(data, sortMode))} $</span></p>}
         {sortMode === "margin" &&
