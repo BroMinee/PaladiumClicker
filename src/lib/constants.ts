@@ -379,7 +379,7 @@ const how_to_xp: HowToXp = {
     { type: "Kiwano", "action": BREAK, "xp": 50, imgPath: "kiwano.webp" },
   ],
   "hunter": [
-    { type: "Snow Golem", "action": KILL, "xp": 1, imgPath: "snow_golem.webp" },
+    { type: "Snow Golem", "action": KILL, "xp": 1, imgPath: "snow_golem_hunter.webp" },
     { type: "Squid", "action": KILL, "xp": 10, imgPath: "squid.webp" },
     { type: "Cooked Porkchop", "action": SMELT, "xp": 10, imgPath: "porkchop_cooked.webp" },
     { type: "Cooked Chicken", "action": SMELT, "xp": 10, imgPath: "chicken_cooked.webp" },
