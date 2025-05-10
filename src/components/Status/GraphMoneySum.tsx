@@ -18,6 +18,6 @@ export default async function GraphMoneySum() {
     }});
 
   return (
-    <PlotSingleValueChart data={d} labelName={"$ en jeu"}/>
+    <PlotSingleValueChart data={d} labelName={"$ en jeu"} className={"h-[calc(100vh-60vh)] min-h-[calc(100vh-60vh)]"}/>
   )
 }

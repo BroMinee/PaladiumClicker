@@ -25,7 +25,7 @@ const CustomTooltip = ({ active, payload, label }: any) => {
   }
 }
 
-export const PlotSingleValueChart = ({ data, labelName }: { data: ValueHistory, labelName: string }) => {
+export const PlotSingleValueChart = ({ data, labelName, className }: { data: ValueHistory, labelName: string, className?: string }) => {
   const data_clean = data.map((item) => {
     return {
       date: new Date(item.date).toLocaleDateString(),
@@ -34,7 +34,7 @@ export const PlotSingleValueChart = ({ data, labelName }: { data: ValueHistory, 
   });
 
   return (
-    <ResponsiveContainer width="100%" height="100%">
+    <ResponsiveContainer width="100%" height="100%" className={className ?? ""}>
       <AreaChart data={data_clean}
                  margin={{ top: 30, right: 30, left: 30, bottom: 10 }}>
         <defs>
