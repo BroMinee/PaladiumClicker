@@ -3,30 +3,30 @@
     "date": "11/04/2025",
     "changes": {
       "additions": [
-        "Ajout d'un nouvel outil : [Craft Optimizer](https://palatracker.bromine.fr/craft?section=optimizer) permettant de trouver le craft le plus rentable du moment.",
-        "Ajout d'une synchronisation automatique avec les rôles [Discord](https://discord.gg/WGXUKHcZ3P) pour les utilisateurs connectés avec [Discord](https://discord.gg/WGXUKHcZ3P).",
-        "Ajout d'un nouveau type d'alerte : les alertes [vote](https://palatracker.bromine.fr/webhook/login).",
-        "Ajout des 41 nouveaux crafts dans le [craft](https://palatracker.bromine.fr/craft?item=tile-giver&count=1&section=recipe)."
+        "Ajout d'un nouvel outil : [Craft Optimizer](https://palatracker.bromine.fr/craft?section=optimizer), permettant de trouver le craft le plus rentable du moment.",
+        "Ajout d'une synchronisation automatique avec des rôles [Discord](https://discord.gg/WGXUKHcZ3P) pour les utilisateurs connectés avec [Discord](https://discord.gg/WGXUKHcZ3P).",
+        "Ajout d'un nouveau type d'alerte : les alertes de [vote](https://palatracker.bromine.fr/webhook/login).",
+        "Ajout des 41 nouveaux crafts dans l'outil de [craft](https://palatracker.bromine.fr/craft?item=tile-giver&count=1&section=recipe)."
       ],
       "migrations": [
-        "Migration vers un nouvel hébergeur pour le site."
+        "Migration du site vers un nouvel hébergeur."
       ],
       "redesigns": [
-        "Refonte de la [page de login des alertes](https://palatracker.bromine.fr/webhook/login)."
+        "Refonte de la [page de connexion aux alertes](https://palatracker.bromine.fr/webhook/login)."
       ],
       "corrections": [
-        "Correction de l'authentification via Discord qui crashait.",
-        "Correction du minimum local et maximum local sur les graphiques de la page [Classement](https://palatracker.bromine.fr/ranking?category=money) et [Profil](https://palatracker.bromine.fr/profil/BroMine__?section=Classement).",
-        "Correction, la navbar sur téléphone disparaît automatiquement lorsque l'on clique sur une section.",
-        "Correction, le menu burger est maintenant toujours au premier plan.",
-        "Correction, le menu burger sur téléphone ne disparaît plus lorsque l'on scrolle sur Firefox.",
-        "Correction du thème clair sur certains éléments de la page [clicker-optimizer](https://palatracker.bromine.fr/clicker-optimizer/BroMine__).",
-        "Correction d'un bug empêchant l'ajout d'un pseudo dans le [classement](https://palatracker.bromine.fr/ranking?category=money) lorsqu'aucun profil n'avait été chargé auparavant.",
-        "Correction d'un bug ralentissant l'affichage des graphiques sur la page [ah](https://palatracker.bromine.fr/ah?item=paladium-ingot).",
-        "Correction de l'association de certaines images dans la liste des [succès](https://palatracker.bromine.fr/profil/BroMine__?section=Achievements)."
+        "Correction d'un crash lors de l'authentification via Discord.",
+        "Correction des valeurs minimale et maximale locales sur les graphiques des pages [Classement](https://palatracker.bromine.fr/ranking?category=money) et [Profil](https://palatracker.bromine.fr/profil/BroMine__?section=Classement).",
+        "Correction : le menu burger est maintenant toujours au premier plan sur téléphone.",
+        "Correction : sur mobile, le menu burger ne disparaît plus lors du scroll.",
+        "Correction de l'affichage en thème clair sur certains éléments de la page [clicker-optimizer](https://palatracker.bromine.fr/clicker-optimizer/BroMine__).",
+        "Correction d'un bug empêchant l'ajout d'un pseudo au [classement](https://palatracker.bromine.fr/ranking?category=money) lorsqu'aucun profil n'avait encore été chargé.",
+        "Correction d'un bug qui ralentissait l'affichage des graphiques sur la page [ah](https://palatracker.bromine.fr/ah?item=paladium-ingot).",
+        "Correction d'un problème d'association d'images dans la liste des [succès](https://palatracker.bromine.fr/profil/BroMine__?section=Achievements)."
       ],
-      "improvements": [
-        "Toutes les interfaces utilisent maintenant un rendu 3D pour les blocs plein comme dans l'inventaire Paladium."
+      "améliorations": [
+        "Toutes les interfaces utilisent désormais un rendu 3D pour les blocs pleins, comme dans l'inventaire de Paladium.",
+        "La navbar sur téléphone disparaît automatiquement lorsque l'on clique sur une section."
       ]
     }
   },

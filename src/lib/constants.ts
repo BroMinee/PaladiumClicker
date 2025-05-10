@@ -471,10 +471,10 @@ const notificationPath: Map<PathValid, [number, string]> = new Map<PathValid, [n
     ["/ranking?category=money", [new Date("2025-02-22 01:00").getTime(), "Ajout du classement l'alignement"]],
     ["/ah", [new Date("2025-02-22 01:00").getTime(), "Ajout du détail des offres"]],
     ["/palatime", [new Date("2025-03-23 23:40").getTime(), "Nouvelle édition"]],
-    ["/craft", [new Date("2025-02-22 01:00").getTime(), "Refonte graphique de la page"]],
-    ["/patchnote", [new Date("2024-03-11").getTime(), "Nouveau patchnote"]],
+    ["/craft", [new Date("2025-05-11 10:00").getTime(), "Ajout d'un nouvel outil pour faire un max de d'argent"]],
+    ["/patchnote", [new Date("2025-05-11 10:00").getTime(), "Nouveau patchnote"]],
     ["/pala-animation", [new Date("2024-12-21 16:15").getTime(), "Ajout de 174 nouvelles questions"]],
-    ["/webhook", [new Date("2025-01-24").getTime(), "Nouvel outil"]],
+    ["/webhook", [new Date("2025-05-11 10:00").getTime(), "Ajout des alertes de vote"]],
   ]);
 
 const menuPaths: Map<NavBarCategory, PathValid[]> = new Map<NavBarCategory, PathValid[]>([
