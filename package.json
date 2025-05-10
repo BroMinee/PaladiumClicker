@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev --turbo",
+    "dev": "next dev",
     "build": "next build && tsc --project tsconfig.server.json",
     "start": "node dist/server.js",
     "test": "jest --detectOpenHandles"
