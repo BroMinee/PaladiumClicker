@@ -1,28 +1,39 @@
 [
   {
     "date": "11/04/2025",
-    "events": [
-      "Ajout d'un nouvel outil : [Craft Optimizer](https://palatracker.bromine.fr/craft?section=optimizer) permettant de trouver le craft le plus rentable du moment.",
-      "Migration vers un nouvel hébergeur pour le site.",
-      "Ajout d'un synchronisation automatique avec les rôles [discord](https://discord.gg/WGXUKHcZ3P) pour les utilisateurs connectés avec [Discord](https://discord.gg/WGXUKHcZ3P).",
-      "Ajout d'un nouveau type d'alerte : les alertes [vote](https://palatracker.bromine.fr/webhook/login)",
-      "Refonte de la page de login des [alertes](https://palatracker.bromine.fr/webhook/login)",
-      "Correction de l'authentification via discord qui crashait",
-      "Correction du minimum local et maximum local sur les graphiques de la page [Classement](https://palatracker.bromine.fr/ranking?category=money) et [Profil](https://palatracker.bromine.fr/profil/BroMine__?section=Classement)",
-      "Correction, la navbar sur téléphone disparaît automatiquement lorsque l'on clique sur une section.",
-      "Correction, le menu burger est maintenant toujours au premier plan.",
-      "Correction, le menu burger sur téléphone ne disparaît plus lorsque l'on scrolle sur firefox.",
-      "Correction du thème clair sur certains éléments de la page [clicker-optimizer](https://palatracker.bromine.fr/clicker-optimizer/BroMine__)",
-      "Correction d'un bug empêchant l'ajout d'un pseudo dans le [classement](https://palatracker.bromine.fr/ranking?category=money) lorsqu'aucun profil n'avait été chargé auparavant.",
-      "Correction d'un bug ralentissant l'affichage des graphiques sur la page [ah](https://palatracker.bromine.fr/ah?item=paladium-ingot)",
-      "Vous trouvez les blocs plus jolis qu’avant ? C'est normal : toutes les interfaces utilisent maintenant un rendu 3D pour les blocs plein comme dans l'inventaire Paladium.",
-      "Ajout des 41 nouveaux crafts dans le [craft](https://palatracker.bromine.fr/craft?item=tile-giver&count=1&section=recipe)",
-      "Correction de l'association de certaines images dans la liste des [succès](https://palatracker.bromine.fr/profil/BroMine__?section=Achievements)"
-    ]
+    "changes": {
+      "additions": [
+        "Ajout d'un nouvel outil : [Craft Optimizer](https://palatracker.bromine.fr/craft?section=optimizer) permettant de trouver le craft le plus rentable du moment.",
+        "Ajout d'une synchronisation automatique avec les rôles [Discord](https://discord.gg/WGXUKHcZ3P) pour les utilisateurs connectés avec [Discord](https://discord.gg/WGXUKHcZ3P).",
+        "Ajout d'un nouveau type d'alerte : les alertes [vote](https://palatracker.bromine.fr/webhook/login).",
+        "Ajout des 41 nouveaux crafts dans le [craft](https://palatracker.bromine.fr/craft?item=tile-giver&count=1&section=recipe)."
+      ],
+      "migrations": [
+        "Migration vers un nouvel hébergeur pour le site."
+      ],
+      "redesigns": [
+        "Refonte de la [page de login des alertes](https://palatracker.bromine.fr/webhook/login)."
+      ],
+      "corrections": [
+        "Correction de l'authentification via Discord qui crashait.",
+        "Correction du minimum local et maximum local sur les graphiques de la page [Classement](https://palatracker.bromine.fr/ranking?category=money) et [Profil](https://palatracker.bromine.fr/profil/BroMine__?section=Classement).",
+        "Correction, la navbar sur téléphone disparaît automatiquement lorsque l'on clique sur une section.",
+        "Correction, le menu burger est maintenant toujours au premier plan.",
+        "Correction, le menu burger sur téléphone ne disparaît plus lorsque l'on scrolle sur Firefox.",
+        "Correction du thème clair sur certains éléments de la page [clicker-optimizer](https://palatracker.bromine.fr/clicker-optimizer/BroMine__).",
+        "Correction d'un bug empêchant l'ajout d'un pseudo dans le [classement](https://palatracker.bromine.fr/ranking?category=money) lorsqu'aucun profil n'avait été chargé auparavant.",
+        "Correction d'un bug ralentissant l'affichage des graphiques sur la page [ah](https://palatracker.bromine.fr/ah?item=paladium-ingot).",
+        "Correction de l'association de certaines images dans la liste des [succès](https://palatracker.bromine.fr/profil/BroMine__?section=Achievements)."
+      ],
+      "improvements": [
+        "Toutes les interfaces utilisent maintenant un rendu 3D pour les blocs plein comme dans l'inventaire Paladium."
+      ]
+    }
   },
   {
     "date": "11/03/2025",
-    "events": [
+    "changes": {
+      "changements": [
       "Merci [omega_7711](https://github.com/omega7711) ✨, pour les divers correctifs sur les images du [Palatime](https://palatracker.bromine.fr/palatime)",
       "Ajout des graphiques affichant le nombre de joueurs uniques et de la quantité d'argent en circulation dans la page [status](https://palatracker.bromine.fr/status).",
       "Correction du bouton \"24h\" sur les graphiques, qui n'était pas sélectionné par défaut.",
@@ -31,11 +42,13 @@
       "Ajout de la page [Account](https://palatracker.bromine.fr/account) accessible uniquement lorsque vous êtes connecté avec Discord **(bêta)**.",
       "Correction du problème empêchant l'affichage de votre image Discord lors de la connexion.",
       "Les alertes de changement de statut du serveur sont désormais actualisées toutes les minutes au lieu de toutes les 15 minutes."
-    ]
+      ]
+    }
   },
   {
     "date": "22/02/2025",
-    "events": [
+    "changes": {
+      "changements": [
       "Ajout du détail des offres dans le [market](https://palatracker.bromine.fr/ah)",
       "Refonte de l'affichage du market du joueur [market](https://palatracker.bromine.fr/profil/BroMine?section=Market)",
       "Le prix de fabrication prend maintenant en compte les offres les moins chères au lieu du prix moyen dans le calcul : [Craft Optimizer](https://palatracker.bromine.fr/craft)",
@@ -45,11 +58,13 @@
       "Suppression des temps du [pala-animation](https://palatracker.bromine.fr/pala-animation) car maintenant il faut s'authentifier avec Discord pour pouvoir s'entrainer, ca permet de s'assurer que les temps réalisés avec un pseudo sont bien ceux du joueur",
       "Remplissage des graphiques avec la valeur du jour précédent lorsque les données n'ont pas pu être sauvegardées en le [profil](https://palatracker.bromine.fr/profil/BroMine__?section=Classement) et [ranking](https://palatracker.bromine.fr/ranking?category=money)",
       "Sauvegarde de l'état de la navbar dans le cache du navigateur"
-    ]
+      ]
+    }
   },
   {
     "date": "24/01/2025",
-    "events": [
+    "changes": {
+      "changements": [
       "Ajout d'un système d'authentification avec [Discord (OAuth2) (beta)](https://palatracker.bromine.fr/v1/auth/login/discord)",
       "Ajout d'une [page](https://palatracker.bromine.fr/webhook) pour créer des **alertes Discord** pour :",
       "- Etre notifié quand une nouvelle __QDF__ est disponible",
@@ -63,11 +78,13 @@
       "Ajout d'un système de notification sur la navbar pour les alertes/informations",
       "~~Suppression~~Ajout **d'un système** *de markdown* sur les patchnotes (sur le site)",
       "Amélioration du responsive sur la page de [/ah](https://palatracker.bromine.fr/ah)"
-    ]
+      ]
+    }
   },
   {
     "date": "09/01/2025",
-    "events": [
+    "changes": {
+      "changements": [
       "Suppression du compte à rebours pour la réimportation du profil (le cache de 15 minutes reste en place, mais c'est désormais plus convivial pour l'utilisateur).",
       "Ajout d'une popup lorsque la mise à jour du profil renvoie des informations antérieures à celles déjà enregistrées.",
       "Mise en place d'un système de notification pour rappeler qu'il est temps d'améliorer son clicker.",
@@ -77,11 +94,13 @@
       "Correction de la page [À propos](https://palatracker.bromine.fr/about) qui était absente de la barre de navigation.",
       "Les [messages d'erreur](https://palatracker.bromine.fr/error?message=Exemple%20de%20message%20d%27erreur) clignotent désormais en rouge pour attirer plus efficacement l'attention.",
       "Harmonisation des titres et descriptions sur les différentes pages."
-    ]
+      ]
+    }
   },
   {
     "date": "21/12/2024",
-    "events": [
+    "changes": {
+      "changements": [
       "Ajout d'une section 'Classement' dans le [profil](https://palatracker.bromine.fr/profil/BroMine__?section=Classement) pour suivre votre évolution face aux autres joueurs",
       "Ajout d'une fonction de recherche par pseudo dans le [classement](https://palatracker.bromine.fr/ranking?category=money)",
       "Ajout des la possibilité de zoomer sur les graphiques",
@@ -90,11 +109,13 @@
       "Correction des images des objets en vente dans le market du joueur dans le profil",
       "Correction de la précondition de production ne prenant pas en compte les coins non dépensés",
       "Suppression des classements 'chorus' et 'end' qui n'étaient plus utilisés par Paladium"
-    ]
+      ]
+    }
   },
   {
     "date": "27/11/2024 - 20h00",
-    "events": [
+    "changes": {
+      "changements": [
       "Ajout d'un compte à rebours dynamique pour la réimportation du profil de 15 minutes",
       "Ajout de la cape et du nametag sur le visuel du joueur",
       "Ajout d'un espace vide dans les classements lorsque les valeurs journalières n'ont pas pu été récupérées",
@@ -113,39 +134,47 @@
       "Suppression d'informations redondantes sur les bâtiments",
       "Correction des pages sortant de l'écran sur tablette, provonquant un scroll horizontal",
       "Correction de fautes lors de la réecriture de texte et de valeur dans le [xp-calculator](https://palatracker.bromine.fr/xp-calculator/BroMine__?metier=miner&level=100)"
-    ]
+      ]
+    }
   },
   {
     "date": "16/10/2024 - 20h40",
-    "events": [
+    "changes": {
+      "changements": [
       "Ajout d'une nouvelle page [/craft](https://palatracker.bromine.fr/craft) pour calculer les quantités de ressources nécessaires et leurs prix en matière première",
       "Ajout des nouvelles questions de la V10 au [PalaAnimation Trainer](https://palatracker.bromine.fr/pala-animation)",
       "Ajout d'un système de notification dans la navbar lors de correction de bug majeur ou d'ajout de fonctionnalité",
       "Correction d'un crash client lorsque l'API du market d'un joueur est down",
       "Correction de l'association du nom d'un item avec son image png",
       "Persistance de la donnée sélectionnée dans le [market](https://palatracker.bromine.fr/ah) lors de l'actualisation de la page"
-    ]
+      ]
+    }
   },
   {
     "date": "04/10/2024 - 12h34",
-    "events": [
+    "changes": {
+      "changements": [
       "Ajout des fortunes F2 et F3 dans le [calculateur d'xp](https://palatracker.bromine.fr/xp-calculator/BroMine__?metier=miner&level=100). Note : Il s'agit d'une estimation car les fortunes sont aléatoires, environ 1.5 pour le F2 et 1.65 pour le F3",
       "Ajout du bouton d'actualisation du profil dans la navbar"
-    ]
+      ]
+    }
   },
   {
     "date": "02/10/2024 - 20h50",
-    "events": [
+    "changes": {
+      "changements": [
       "Ajout de messages beaucoup plus explicites pour les erreurs, ajout également du pseudo dans le message pour un débogage plus facile",
       "Changement des balises <img> en <Image> de NextJS pour une meilleure performance, au détriment d'une légère perte de qualité de l'image",
       "Ajout d'une barre de recherche de pseudo dans la page d'erreur pour pouvoir réessayer plus rapidement",
       "Correction du clic sur les préconditions d'achat provoquant l'achat accidentel de l'amélioration",
       "Réactivation de l'API du market de Paladium"
-    ]
+      ]
+    }
   },
   {
     "date": "29/09/2024 - 21h00",
-    "events": [
+    "changes": {
+      "changements": [
       "Réactivation de l'API",
       "Ajout de la possibilité de charger un profil vide dans les paramètres pour que les joueurs ayant désactivé l'accès à certains ressources nécessaires au site puisse quand même utiliser le site",
       "Amélioration de la gestion des erreurs",
@@ -156,11 +185,13 @@
       "Correction de faute de frappe",
       "Récupération du UUID via une API externe à Paladium lorsque le joueur n'est pas encore présent dans la base de donnée de Paladium",
       "Réinitialisation du nombre de vue pour tout les profils"
-    ]
+      ]
+    }
   },
   {
     "date": "21/09/2024 - 19h00",
-    "events": [
+    "changes": {
+      "changements": [
       "Changement du mode de rendu de la page pour une meilleure performance",
       "Refactorisation du code en [NextJS](https://nextjs.org/)",
       "Amélioration de la gestion des erreurs",
@@ -175,17 +206,21 @@
       "Correction d'une erreur de calcule dans le meilleur bâtiment, merci à 0livierMinecraft",
       "Ajout de la possibilité de modifier les métiers directement au clavier",
       "Ajout de la possibitité de modifier les coins dormants directement au clavier"
-    ]
+      ]
+    }
   },
   {
     "date": "21-08-2024 - 1h43",
-    "events": [
+    "changes": {
+      "changements": [
       "Changement des endpoints de l'API de Paladium, peut potentiellement rendre impossible l'importation des données en cas de forte charge"
-    ]
+      ]
+    }
   },
   {
     "date": "10-07-2024 - 16h44",
-    "events": [
+    "changes": {
+      "changements": [
       "Ajout d'un classement général pour le [PalaAnimation](https://palatracker.bromine.fr/pala-animation)",
       "Ajout d'une popup journalière",
       "Ajout du nombre de vues totale dans la section profil",
@@ -198,35 +233,43 @@
       "Correction du prix dans le l'amélioration 'Suppression des taxes douanières' 114 000$ -> 99 750$",
       "Changement du texte dans le [AH Tracker](https://palatracker.bromine.fr/ah) pour éviter la confusion 'Vente journalière' -> 'Lots vendus ce jour'",
       "Ajout d'une coding style pour le typescript pour réduire les conflits pendant les merges"
-    ]
+      ]
+    }
   },
   {
     "date": "15-06-2024 - 21h40",
-    "events": [
+    "changes": {
+      "changements": [
       "Ajout d'un classement dans le [PalaAnimation](https://palatracker.bromine.fr/pala-animation)"
-    ]
+      ]
+    }
   },
   {
     "date": "07-06-2024 - 23h29",
-    "events": [
+    "changes": {
+      "changements": [
       "Ajout du [AH Tracker](https://palatracker.bromine.fr/ah) pour avoir des informations à propos des items en vente (beta)",
       "Correction de la couleur du texte à l'intérieur des inputs dans le thème blanc",
       "Correction de la page [Profil](https://palatracker.bromine.fr/profil/BroMine__) suite à une modification de l'API de Paladium",
       "Correction de l'ordre des Métiers qui changeait lors de l'augmentation manuelle de ces derniers"
-    ]
+      ]
+    }
   },
   {
     "date": "25-05-2024 - 20h45",
-    "events": [
+    "changes": {
+      "changements": [
       "Correction du calcul de la production actuelle du PalaClicker",
       "Ajout du [classement](https://palatracker.bromine.fr/ranking?category=money) du jour",
       "Correction de l'ordre d'affichage des métiers",
       "Correction des bâtiments pouvant dépasser le niveau 99 lors du spam du bouton"
-    ]
+      ]
+    }
   },
   {
     "date": "24-05-2024 - 21h20",
-    "events": [
+    "changes": {
+      "changements": [
       "Changement de l'interface, ainsi qu'une prise en charge du responsive (pour les mobiles)",
       "Merci [Riveur](https://github.com/riveur) ✨, pour avoir initié la refactorisation du code de JavaScript à TypeScript, pour une meilleure maintenabilité",
       "Merci [Riveur](https://github.com/riveur) ✨, pour le refactorisation du CSS avec TailwindCSS",
@@ -234,36 +277,44 @@
       "Ajout de la librairie react-query (gestion des requêtes API avec du cache) et zustand (state manager)",
       "Amélioration de la synchronisation des informations utilisateurs dans le cache",
       "Correction du prix de l'amélioration 'Combinaison d'apiculteur' qui était à 6 007 500 au lieu de 607 500"
-    ]
+      ]
+    }
   },
   {
     "date": "11-05-2024 - 20h23",
-    "events": [
+    "changes": {
+      "changements": [
       "Correction des lags sur la page du [PalaClicker Optimizer](https://palatracker.bromine.fr/clicker-optimizer/BroMine__)",
       "Ajout de l'[XP Calculator](https://palatracker.bromine.fr/xp-calculator/BroMine__?metier=miner&level=100) pour les métiers (beta)",
       "Correction de la popup des news qui était impossible à fermer",
       "Modification des informations des bâtiments pour une meilleure cohérence dans l'interface",
       "Ajout du leaderboard jusqu'à la position de Fuze"
-    ]
+      ]
+    }
   },
   {
     "date": "10-05-2024 - 02h14",
-    "events": [
+    "changes": {
+      "changements": [
       "Ajout d'un footer",
       "Amélioration de la gestion d'erreur",
       "Correction de certaines images du [AH](https://palatracker.bromine.fr/ah)"
-    ]
+      ]
+    }
   },
   {
     "date": "09-05-2024 - 06h49",
-    "events": [
+    "changes": {
+      "changements": [
       "Correction temporaire du lag sur la page du [PalaClicker Optimizer](https://palatracker.bromine.fr/clicker-optimizer/BroMine__) (sur firefox ça marchait déjà super bien)",
       "Ajout des images pour les items dans le AH du joueur (beta)"
-    ]
+      ]
+    }
   },
   {
     "date": "08-05-2024 - 19h00",
-    "events": [
+    "changes": {
+      "changements": [
       "Ajout de la nouvelle interface utilisateur. Trop hype d'avoir vos retours !",
       "Création d'un [discord](https://discord.gg/WGXUKHcZ3P) pour discuter de la suite du projet, URL disponible dans la section 'A propos'",
       "Ajout des contributeurs dans la section [A propos](https://palatracker.bromine.fr/about)",
@@ -274,158 +325,201 @@
       "Amélioration des balises dans le code pour un meilleur référencement (même si le site est déjà premier sur Google avec 'PalaClicker' :D)",
       "Amélioration de la page sur mobile (mais c'est pas encore ça désolé au 12% de personne sur mobile)",
       "De façon générale, amélioration du site pour une meilleure expérience utilisateur"
-    ]
+      ]
+    }
   },
   {
     "date": "05-05-2024 - 22h27",
-    "events": [
+    "changes": {
+      "changements": [
       "Giga refacto du code pour une amélioration de la lisibilité et de la maintenabilité",
       "Préparation de la mise en place du nouvel UI"
-    ]
+      ]
+    }
   },
   {
     "date": "05-05-2024 - 01h30",
-    "events": [
+    "changes": {
+      "changements": [
       "Ajout de la beta du [profil](https://palatracker.bromine.fr/profil/BroMine__) Paladium, il s'agit d'un beta, l'affichage va nettement changer dans les prochains jours",
       "Ajout du 'steak clic'"
-    ]
+      ]
+    }
   },
   {
     "date": "01-05-2024 - 15h34",
-    "events": [
+    "changes": {
+      "changements": [
       "Correction de fautes de frappe",
       "Ajout du [classement](https://palatracker.bromine.fr/ranking?category=money) du jour"
-    ]
+      ]
+    }
   },
   {
     "date": "29-04-2024 - 19h09",
-    "events": [
+    "changes": {
+      "changements": [
       "Ajout des préconditions pour les améliorations de clic"
-    ]
+      ]
+    }
   },
   {
     "date": "29-04-2024 - 01h52",
-    "events": [
+    "changes": {
+      "changements": [
       "Correction du changement dans l'API de Paladium (encore)",
       "Ajout du prix et du niveau des améliorations à acheter",
       "Ajout du [classement](https://palatracker.bromine.fr/ranking?category=money) du jour"
-    ]
+      ]
+    }
   },
   {
     "date": "28-04-2024 - 21h43",
-    "events": [
+    "changes": {
+      "changements": [
       "Correction du changement dans l'API de Paladium"
-    ]
+      ]
+    }
   },
   {
     "date": "27-04-2024 - 15h15",
-    "events": [
+    "changes": {
+      "changements": [
       "Ajout du 'Côtelette Clic'"
-    ]
+      ]
+    }
   },
   {
     "date": "24-04-2024 - 23h18",
-    "events": [
+    "changes": {
+      "changements": [
       "Ajout du [PalaAnimation training](https://palatracker.bromine.fr/pala-animation) !"
-    ]
+      ]
+    }
   },
   {
     "date": "24-04-2024 - 00h51",
-    "events": [
+    "changes": {
+      "changements": [
       "Ajout d'une navbar",
       "Teasing de la prochaine mise à jour",
       "Correction d'un bug d'affichage sur les métiers"
-    ]
+      ]
+    }
   },
   {
     "date": "22-04-2024 - 18h51",
-    "events": [
+    "changes": {
+      "changements": [
       "Ajout de la section 'Statistiques'",
       "Ajout de la date quand la prochaine amélioration sera disponible",
       "Il est maintenant possible de voir les 20 prochaines améliorations",
       "Changement du design des métiers",
       "Optimisation du code"
-    ]
+      ]
+    }
   },
   {
     "date": "19-04-2024 - 19h43",
-    "events": [
+    "changes": {
+      "changements": [
       "Il est maintenant possible d'importer les informations directement de Paladium via un pseudo !",
       "Ajout du click gâteau",
       "Ajout d'une barre de progression autour des métiers"
-    ]
+      ]
+    }
   },
   {
     "date": "18-04-2024 - 00h41",
-    "events": [
+    "changes": {
+      "changements": [
       "Ajout du classement des 2 derniers jours",
       "Correction de quelques fautes d'orthographe",
       "Changement de la description du site pour un meilleur rendu sur discord"
-    ]
+      ]
+    }
   },
   {
     "date": "15-04-2024 - 23h40",
-    "events": [
+    "changes": {
+      "changements": [
       "Correction de la précondition du 'Portail en Paladium'",
       "Ajout du classement des 2 derniers jours"
-    ]
+      ]
+    }
   },
   {
     "date": "14-04-2024 - 01h26",
-    "events": [
+    "changes": {
+      "changements": [
       "Ajout de 'Tarte Clic'",
       "Ajout du [classement](https://palatracker.bromine.fr/ranking?category=clicker) des 3 derniers jours"
-    ]
+      ]
+    }
   },
   {
     "date": "11-04-2024 - 15h32",
-    "events": [
+    "changes": {
+      "changements": [
       "Ajout du dernier bâtiment"
-    ]
+      ]
+    }
   },
   {
     "date": "08-04-2024 - 02h54",
-    "events": [
+    "changes": {
+      "changements": [
       "Ajout des prix d'achat pour les améliorations",
       "Nouvelle façon de calculer la prochaine amélioration : les améliorations sont maintenant prises en considération",
       "Ajout des conditions pour débloquer les améliorations des bâtiments",
       "Ajout des dernières données du [classement clicker](https://palatracker.bromine.fr/ranking?category=clicker), j'ai oublié le 06/04 :("
-    ]
+      ]
+    }
   },
   {
     "date": "05-04-2024 - 00h54",
-    "events": [
+    "changes": {
+      "changements": [
       "Ajout des dernières données du [classement clicker](https://palatracker.bromine.fr/ranking?category=clicker) et les données entre le 12/03 et 21/03.",
       "Meilleur prise en charge des popups sur mobile"
-    ]
+      ]
+    }
   },
   {
     "date": "03-04-2024 - 00h41",
-    "events": [
+    "changes": {
+      "changements": [
       "Ajout d'un graphique pour le [classement clicker](https://palatracker.bromine.fr/ranking?category=clicker)",
       "Changement de la charte graphique"
-    ]
+      ]
+    }
   },
   {
     "date": "02-04-2024 - 20h43",
-    "events": [
+    "changes": {
+      "changements": [
       "Ajout du bâtiment 'clicker.building.Great_Ancients_Pantheon'",
       "Amélioration du système de cache : les données sont conservées après modification de la base de données",
       "Ajout d'un bouton pour réinitialiser les buildings (clear le cache)"
-    ]
+      ]
+    }
   },
   {
     "date": "02-04-2024 - 00h15",
-    "events": [
+    "changes": {
+      "changements": [
       "Ajout d'un système de cache permettant de ne pas devoir reconfigurer le système à chaque recharge de la page",
       "Ajout du building 'Altantis' dans la liste des buildings",
       "Ajout des améliorations 'Corde en fibre de carbone (x100)' et 'Production postérieur - Gouffre sans fond'"
-    ]
+      ]
+    }
   },
   {
     "date": "01-04-2024",
-    "events": [
+    "changes": {
+      "changements": [
       "Correction de l'importation/exportation des données pour les améliorations 'Many' et 'Posterior'"
-    ]
+      ]
+    }
   }
 ]

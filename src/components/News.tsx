@@ -1,35 +1,6 @@
-// const News = () => {
-//   return (
-//     <Dialog>
-//       <DialogTrigger asChild>
-//         <Button variant="outline">
-//           Voir les nouvelles fonctionnalités
-//         </Button>
-//       </DialogTrigger>
-//       <DialogContent className="px-0 pb-0 max-w-4xl">
-//         <DialogHeader className="px-6">
-//           <DialogTitle className="text-primary">News depuis la dernière fois</DialogTitle>
-//         </DialogHeader>
-//         <ScrollArea className="h-[80dvh] px-6 border-t">
-//           <Discord className="mt-4"/>
-//           <div className="py-2">
-//             {newsJson.map((element, index) => (
-//               <New
-//                 date={element.date}
-//                 events={element.events}
-//                 key={index}
-//               />
-//             ))}
-//           </div>
-//         </ScrollArea>
-//       </DialogContent>
-//     </Dialog>
-//   );
-// }
-
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card.tsx";
 import React from "react";
-
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card.tsx";
+import { ChangeLogs, ChangeLogsChanges } from "@/types";
 
 export function textFormatting(
   text: string): JSX.Element {
@@ -86,28 +57,65 @@ export function textFormatting(
   );
 }
 
-type NewProps = {
-  date: string,
-  events: string[],
+type ChangeCategoryProps = {
+  title: string,
+  changes?: Array<string>,
+  events? : Array<string>
 }
 
-export default function New({ date, events }: NewProps) {
+function ChangeCategory({ title, changes, events }: ChangeCategoryProps) {
+  const capitalizedTitle = title.charAt(0).toUpperCase() + title.slice(1);
+  return (
+    <div className="mb-4">
+      <h3 className="font-bold text-lg mb-2">{capitalizedTitle}</h3>
+      <ul className="list-disc list-inside [&>li]:pl-4">
+        {changes && changes.map((change, index) => (
+          <li key={"changes-"+index}>
+            {textFormatting(change)}
+          </li>
+        ))}
+        { events && events.map((event, index) => (
+          <li key={"event-"+index}>
+            {textFormatting(event)}
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+
+type UpdateProps = {
+  date: string,
+  changes?: ChangeLogsChanges,
+}
+
+function Update({ date, changes }: UpdateProps) {
   return (
     <Card className="pb-2" id={date}>
       <CardHeader>
         <CardTitle className="text-primary font-bold">{date}</CardTitle>
       </CardHeader>
       <CardContent>
-        <ul className="list-disc list-inside [&>li]:pl-4">
-          {events.map((event, index) => {
-            return <li key={index}>{textFormatting(event)}</li>
-          })}
-        </ul>
+        {changes &&
+          Object.entries(changes).map(([key, items]) =>
+            items.length > 0 ? (
+              <ChangeCategory key={date + key} title={key} changes={items} />
+            ) : null
+          )}
       </CardContent>
     </Card>
   );
 }
 
+interface NewsProps {
+  update: ChangeLogs,
+}
 
-
-
+export const News = ({ update }: NewsProps) => {
+  return (
+    <Update
+      date={update.date}
+      changes={update.changes}
+    />
+  );
+}

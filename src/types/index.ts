@@ -897,3 +897,12 @@ export interface CraftPrice {
   averagePrice: number,
   totalSold: number,
 }
+
+export interface ChangeLogs {
+  date: string,
+  changes?: ChangeLogsChanges,
+}
+
+export interface ChangeLogsChanges {
+  [key: string]: Array<string>;
+}

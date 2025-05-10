@@ -3,7 +3,8 @@ import GradientText from "@/components/shared/GradientText.tsx";
 import { FaHeart } from "react-icons/fa";
 import Discord from "@/components/Discord.tsx";
 import newsJson from "@/assets/news.json";
-import New from "@/components/News.tsx";
+import { News } from "@/components/News.tsx";
+import { ChangeLogs } from "@/types";
 
 export async function generateMetadata() {
 
@@ -22,6 +23,7 @@ export async function generateMetadata() {
 }
 
 export default function Home() {
+  const json : ChangeLogs[] = newsJson;
 
   return (
     <div className="flex flex-col gap-4">
@@ -42,11 +44,10 @@ export default function Home() {
         </CardContent>
       </Card>
       <div className="py-2 gap-2 flex flex-col">
-        {newsJson.map((element, index) => (
-          <New
+        {json.map((element, index) => (
+          <News
             key={index}
-            date={element.date}
-            events={element.events}
+            update={element}
           />
         ))}
       </div>
