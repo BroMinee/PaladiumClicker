@@ -98,7 +98,7 @@ function Update({ date, changes }: UpdateProps) {
       <CardContent>
         {changes &&
           Object.entries(changes).map(([key, items]) =>
-            items.length > 0 ? (
+            items && items.length > 0 ? (
               <ChangeCategory key={date + key} title={key} changes={items} />
             ) : null
           )}

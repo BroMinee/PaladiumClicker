@@ -40,7 +40,7 @@ const FallingClickImagePalaTime = () => {
         image.style.imageRendering = "crisp-edges";
 
 
-        image.src = safeJoinPaths(`/AH_img/paper.png`);
+        image.src = safeJoinPaths(`/AH_img/paper.webp`);
 
 
         image.alt = 'Click';

@@ -900,9 +900,9 @@ export interface CraftPrice {
 
 export interface ChangeLogs {
   date: string,
-  changes?: ChangeLogsChanges,
+  changes: ChangeLogsChanges,
 }
 
 export interface ChangeLogsChanges {
-  [key: string]: Array<string>;
+  [key: string]: Array<string> | undefined;
 }
