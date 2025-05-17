@@ -3166,6 +3166,9 @@ export function getImagePathFromRankingType(rankingType: string): string {
     case RankingType.alliance:
       imgPath = safeJoinPaths(constants.imgPathRanking, `alliance.png`);
       break;
+    case RankingType.vote:
+      imgPath = safeJoinPaths(constants.imgPathRanking, `vote.png`);
+      break;
     default:
       imgPath = safeJoinPaths("/unknown.png");
       break;
@@ -3200,6 +3203,8 @@ export function rankingTypeToUserFriendlyText(rankingType: RankingType): string 
       return "Clicker";
     case RankingType.alliance:
       return "Alignement";
+    case RankingType.vote:
+      return "Vote";
     default:
       return "Inconnu";
   }

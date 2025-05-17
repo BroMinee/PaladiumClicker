@@ -432,6 +432,7 @@ export enum RankingType {
   "koth" = "koth",
   "clicker" = "clicker",
   "alliance" = "alliance",
+  "vote" = "vote",
 }
 
 export type RankingResponse =

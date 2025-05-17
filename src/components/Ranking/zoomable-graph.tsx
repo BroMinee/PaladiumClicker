@@ -157,10 +157,15 @@ export function ZoomableChart({ data: initialData, rankingType, profil }: Zoomab
       const payloadOrder = payload.sort((a: any, b: any) => a.payload[`${a.name}_pos`] - b.payload[`${b.name}_pos`]);
       const date = new Date(label);
 
+      const dateDDMMYYYY = `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`;
+      const hours = date.getHours();
+      const minutes = date.getMinutes();
+      const dateDDMMYYYYHHMM = `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()} ${hours < 10 ? `0${hours}` : hours}h${minutes < 10 ? `0${minutes}` : minutes}`;
+
       return (
         <div className="bg-secondary rounded-md p-2 ">
           <p
-            className="text-card-foreground">{`Date : ${date.getDate()}-${date.getMonth() + 1}-${date.getFullYear()}`}</p>
+            className="text-card-foreground">{`Date : ${rankingType !== RankingType.vote ? dateDDMMYYYY : dateDDMMYYYYHHMM }`}</p>
           {payloadOrder.map((entry: any) => {
             const index = uniqueUsernames.indexOf(entry.name);
             const gradientStart = gradientColors[index % gradientColors.length].color;
@@ -218,7 +223,7 @@ export function ZoomableChart({ data: initialData, rankingType, profil }: Zoomab
 
     const transformedData = Object.values(initialData.reduce((acc, item) => {
       // format the date to DD-MM-YYYY
-      const date = new Date(item.date.toString()).toISOString();
+      const date = rankingType !== RankingType.vote ? new Date(item.date.toString()).toISOString() : item.date;
       const username = item.username;
       const value = item.value;
 
@@ -281,14 +286,14 @@ export function ZoomableChart({ data: initialData, rankingType, profil }: Zoomab
     () => zoomedData.reduce((max, dataPoint) => {
       return Math.max(max, Math.max(...uniqueUsernames.map(username => Number(dataPoint[username])).filter(e => isFinite(e))));
     }, -Infinity),
-    [zoomedData]
+    [uniqueUsernames, zoomedData]
   )
 
   const minValue = useMemo(
     () => zoomedData.reduce((min, dataPoint) => {
       return Math.min(min, Math.min(...uniqueUsernames.map(username => Number(dataPoint[username])).filter(e => isFinite(e))));
     }, Infinity),
-    [zoomedData]
+    [uniqueUsernames, zoomedData]
   );
 
 
@@ -371,8 +376,8 @@ export function ZoomableChart({ data: initialData, rankingType, profil }: Zoomab
       return;
     }
 
-    const currentRange = new Date(endTime || originalData[originalData.length - 1].date).getTime() -
-      new Date(startTime || originalData[0].date).getTime();
+    const currentRange = new Date(endTime ?? originalData[originalData.length - 1].date).getTime() -
+      new Date(startTime ?? originalData[0].date).getTime();
     const zoomAmount = currentRange * zoomFactor * direction;
 
     const chartRect = chartRef.current.getBoundingClientRect();
@@ -380,20 +385,22 @@ export function ZoomableChart({ data: initialData, rankingType, profil }: Zoomab
     const chartWidth = chartRect.width;
     const mousePercentage = mouseX / chartWidth;
 
-    const currentStartTime = new Date(startTime || originalData[0].date).getTime();
-    const currentEndTime = new Date(endTime || originalData[originalData.length - 1].date).getTime();
+    const currentStartTime = new Date(startTime ?? originalData[0].date).getTime();
+    const currentEndTime = new Date(endTime ?? originalData[originalData.length - 1].date).getTime();
 
     const newStartTime = new Date(currentStartTime + zoomAmount * mousePercentage);
     const newEndTime = new Date(currentEndTime - zoomAmount * (1 - mousePercentage));
 
     setStartTime(newStartTime.toISOString());
-    console.log(newEndTime.toISOString());
     setEndTime(newEndTime.toISOString());
   };
 
   const formatXAxis = (tickItem: string) => {
     const date = new Date(tickItem);
-    return date.toLocaleDateString("fr-FR");
+    const hours = date.getHours();
+    const minutes = date.getMinutes();
+    const dateDDMMYYYYHHMM = `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()} ${hours < 10 ? `0${hours}` : hours}h${minutes < 10 ? `0${minutes}` : minutes}`;
+    return rankingType !== RankingType.vote ? date.toLocaleDateString("fr-FR") : dateDDMMYYYYHHMM;
   };
 
 
@@ -477,6 +484,7 @@ export function ZoomableChart({ data: initialData, rankingType, profil }: Zoomab
                   axisLine={false}
                   tickFormatter={DataFormatter}
                   style={{ userSelect: 'none' }}
+                  domain={[minValue, maxValue]}
                   width={45}
                 />
                 <Tooltip content={<CustomTooltip/>}/>
@@ -522,7 +530,7 @@ export function ZoomableChart({ data: initialData, rankingType, profil }: Zoomab
                     stroke={zoomedData.every((a) => a[username] === zoomedData[0][username]) ? gradientColors[index % gradientColors.length].color2 : `url(#top${index + 1})`}
                     strokeWidth={5}
                     fillOpacity={0}
-                    opacity={opacity[username] || 1}
+                    opacity={opacity[username] ?? 1}
                     isAnimationActive={isAnimated}
                   />
                 ))}
