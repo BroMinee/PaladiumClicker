@@ -14,6 +14,8 @@ import { toast } from "sonner";
 import constants, { API_PALATRACKER } from "@/lib/constants.ts";
 import { DisplayChannelBox, DisplayServerBox } from "@/components/WebHooks/WebHookDisplayServerInfo.tsx";
 import { groupsType } from "@/app/webhook/page.tsx";
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog.tsx";
+import { ScrollArea } from "@/components/ui/scroll-area.tsx";
 
 export function WebHookPreviewPage({
                                      groupsArg,
@@ -72,6 +74,8 @@ export function WebHookPreview({ webHookAlert, groups, setGroups }: {
   setGroups: (groups: groupsType) => void
 }) {
 
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
+
   const {
     setCurrentWebHookType,
     setWebHookUrl,
@@ -128,19 +132,21 @@ export function WebHookPreview({ webHookAlert, groups, setGroups }: {
 
 
   async function handleDelete(webHookAlert: WebHookAlert) {
-    const confirm = window.confirm("Etes-vous sûr de vouloir supprimer cette alerte ?");
-    if (confirm) {
-      const res = await deleteWebhookServerAction(webHookAlert.id);
-      if (!res.succeeded) {
-        toast.error(res.msg);
-      } else {
-        let newGroups = { ...groups };
-        newGroups[webHookAlert.webhook.guild_id][webHookAlert.webhook.channel_id] = newGroups[webHookAlert.webhook.guild_id][webHookAlert.webhook.channel_id].filter((w) => w.id !== webHookAlert.id);
-        setGroups(newGroups);
-        toast.success(res.msg);
-      }
+    const res = await deleteWebhookServerAction(webHookAlert.id);
+    if (!res.succeeded) {
+      toast.error(res.msg);
+    } else {
+      let newGroups = { ...groups };
+      newGroups[webHookAlert.webhook.guild_id][webHookAlert.webhook.channel_id] = newGroups[webHookAlert.webhook.guild_id][webHookAlert.webhook.channel_id].filter((w) => w.id !== webHookAlert.id);
+      setGroups(newGroups);
+      toast.success(res.msg);
     }
   }
+
+  const handleCancelReplacement = () => {
+    setIsPopupOpen(false);
+    toast.success(`Suppression annulée`);
+  };
 
 
   return (
@@ -175,9 +181,23 @@ export function WebHookPreview({ webHookAlert, groups, setGroups }: {
           <Button size="icon" onClick={() => handleEdit(webHookAlert)}>
             <FiEdit/>
           </Button>
-          <Button size="icon" className="bg-red-600" onClick={() => handleDelete(webHookAlert)}>
+          <Button size="icon" className="bg-red-600" onClick={() => setIsPopupOpen(true)}>
             <FaTrashCan/>
           </Button>
+          <Dialog open={isPopupOpen} onOpenChange={handleCancelReplacement}>
+            <DialogContent className="px-0 pb-0 max-w-4xl justify-items-center">
+              <DialogHeader className="px-6">
+                <DialogTitle className="text-primary">Confirmer la suppression l&apos;alerte</DialogTitle>
+              </DialogHeader>
+              <ScrollArea className="h-fit h-max-[80dvh] px-6 border-t">
+                Etes vous sûr de vouloir supprimer cette notification ?
+              </ScrollArea>
+              <div className="flex flex-row gap-2 pb-2">
+                <Button onClick={() => handleDelete(webHookAlert)} className="bg-green-500">Oui</Button>
+                <Button onClick={handleCancelReplacement} className="bg-red-500">Non</Button>
+              </div>
+            </DialogContent>
+          </Dialog>
         </div>
 
       </div>

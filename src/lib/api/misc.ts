@@ -34,7 +34,7 @@ export const fetchWithoutHeader = async <T>(url: string, cache_duration = 15 * 6
 }
 
 
-export const fetchWithHeader = async <T>(url: string, cache_duration_in_sec = 15 * 60, username = ""): Promise<T> => {
+export const fetchWithHeader = async <T>(url: string, cache_duration_in_sec = 15 * 60, username = "", timeout = 4000): Promise<T> => {
   let response: Response | null = null;
   let json = null;
 
@@ -47,7 +47,7 @@ export const fetchWithHeader = async <T>(url: string, cache_duration_in_sec = 15
     response = await fetch(url,
       {
         next: { revalidate: cache_duration_in_sec },
-        signal: AbortSignal.timeout(4000),
+        signal: AbortSignal.timeout(timeout),
         headers: {
           'Authorization': `Bearer ${process.env.PALADIUM_API_KEY}`,
           Cookie: cookieHeader,

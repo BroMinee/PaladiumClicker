@@ -277,6 +277,40 @@ export async function deleteWebhookServerAction(webHookAlertId: number): Promise
   return { succeeded: r.succeeded, msg: r.msg };
 }
 
+export async function deleteWebhookGuildServerAction(guildId: string): Promise<{ succeeded: boolean, msg: string }> {
+  if (!await isAuthenticate()) {
+    return { succeeded: false, msg: "Not authenticated" };
+  }
+
+  const r = await fetchPostWithHeader<{
+    succeeded: boolean,
+    msg: string
+  }>(`${API_PALATRACKER}/v1/webhook/guild/delete`, JSON.stringify({ id: guildId }), 0).catch((e) => {
+    return { msg: JSON.stringify(e.message), succeeded: false };
+  })
+  return { succeeded: r.succeeded, msg: r.msg };
+}
+
+export async function deleteWebhookChannelServerAction(guildId: string, channelId: string): Promise<{
+  succeeded: boolean,
+  msg: string
+}> {
+  if (!await isAuthenticate()) {
+    return { succeeded: false, msg: "Not authenticated" };
+  }
+
+  const r = await fetchPostWithHeader<{
+    succeeded: boolean,
+    msg: string
+  }>(`${API_PALATRACKER}/v1/webhook/channel/delete`, JSON.stringify({
+    guildId: guildId,
+    channelId: channelId
+  }), 0).catch((e) => {
+    return { msg: JSON.stringify(e.message), succeeded: false };
+  })
+  return { succeeded: r.succeeded, msg: r.msg };
+}
+
 type WebHookEditChannelName =
   {
     channel_id: string,
