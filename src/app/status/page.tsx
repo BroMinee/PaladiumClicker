@@ -10,7 +10,6 @@ import { redirect } from "next/navigation";
 import { generateStatusUrl } from "@/lib/misc.ts";
 import { AdminShopPeriode } from "@/types";
 import GraphPlayerCount from "@/components/Status/GraphPlayerCount.tsx";
-import GraphMoneySum from "@/components/Status/GraphMoneySum.tsx";
 
 
 export async function generateMetadata() {
@@ -112,9 +111,9 @@ export default function Home({ searchParams }: {
           <Suspense fallback={<GraphStatusFallback/>}>
             <GraphPlayerCount />
           </Suspense>
-          <Suspense fallback={<GraphStatusFallback/>}>
-            <GraphMoneySum />
-          </Suspense>
+          {/*<Suspense fallback={<GraphStatusFallback/>}>*/}
+          {/*  <GraphMoneySum />*/}
+          {/*</Suspense>*/}
         </CardContent>
       </Card>
     </div>
