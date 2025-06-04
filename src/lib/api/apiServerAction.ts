@@ -143,7 +143,7 @@ export async function getCurrentNotification(): Promise<NotificationWebSiteRespo
 }
 
 const getNotCloseEvent = (): Promise<Event | null> => {
-  return fetchWithHeader<Event | null>(`${API_PALATRACKER}/v1/events/getCurrent`, 0);
+  return fetchWithHeader<Event | null>(`${API_PALATRACKER}/v1/events/getCurrent`, 60);
 }
 
 function isRegisteredToEvent(uuid: string, event_id: number) {
@@ -153,7 +153,7 @@ function isRegisteredToEvent(uuid: string, event_id: number) {
 }
 
 export const getClosedEventStillClaimable = () => {
-  return fetchWithHeader<Event | null>(`${API_PALATRACKER}/v1/events/getClosedEventStillClaimable`, 0);
+  return fetchWithHeader<Event | null>(`${API_PALATRACKER}/v1/events/getClosedEventStillClaimable`, 60);
 }
 
 function isWinnerNotClaim(event_id: number, uuid: string) {
