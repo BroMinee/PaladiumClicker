@@ -63,15 +63,15 @@ export const getViewsFromUUID = async (uuid: string, username: string): Promise<
 
 
 export function getRankingLeaderboard(rankingType: RankingType, limit = 10, offset = 0) {
-  return fetchWithHeader<RankingResponse>(`${API_PALATRACKER}/v1/ranking/${rankingType}/all?limit=${limit}&offset=${offset}`, 0, "", 10000);
+  return fetchWithHeader<RankingResponse>(`${API_PALATRACKER}/v1/ranking/${rankingType}/all?limit=${limit}&offset=${offset}`, 60*60, "", 10000);
 }
 
 export function getRankingLeaderboardPlayerUUID(uuid: string, rankingType: RankingType) {
-  return fetchWithHeader<RankingResponse>(`${API_PALATRACKER}/v1/ranking/${rankingType}/${uuid}`, 0)
+  return fetchWithHeader<RankingResponse>(`${API_PALATRACKER}/v1/ranking/${rankingType}/${uuid}`, 60*60);
 }
 
 export function getRankingLeaderboardPlayerUsername(username: string, rankingType: RankingType) {
-  return fetchWithHeader<RankingResponse>(`${API_PALATRACKER}/v1/ranking/${rankingType}/username/${username}`, 0)
+  return fetchWithHeader<RankingResponse>(`${API_PALATRACKER}/v1/ranking/${rankingType}/username/${username}`, 60*60);
 }
 
 
