@@ -3,6 +3,8 @@ import { redirect } from "next/navigation";
 import { PlayerDBApiReponse } from "@/types";
 import { cookies } from "next/headers";
 
+const apiPala = process.env.NEXT_PUBLIC_PALACLICKER_API_URL ?? "https://palatracker.bromine.fr"
+
 export const fetchWithoutHeader = async <T>(url: string, cache_duration = 15 * 60, username = ""): Promise<T> | never => {
   alert("Refacto like fetchWithHeader");
   let response = null;
@@ -64,7 +66,7 @@ export const fetchWithHeader = async <T>(url: string, cache_duration_in_sec = 15
   }
 
 
-  if (username !== "" && url === "https://api.paladium.games/v1/paladium/player/profile/" + username && response && response.status === 404) {
+  if (username !== "" && url === `${apiPala}/v1/paladium/player/profile/` + username && response && response.status === 404) {
     let uuid = "";
     try {
       const playerdbAPI = await fetch(`https://playerdb.co/api/player/minecraft/${username}`, {
@@ -79,7 +81,7 @@ export const fetchWithHeader = async <T>(url: string, cache_duration_in_sec = 15
 
     if (uuid !== "") {
       try {
-        response = await fetch(`https://api.paladium.games/v1/paladium/player/profile/${uuid}`,
+        response = await fetch(`${apiPala}/v1/paladium/player/profile/${uuid}`,
           {
             next: { revalidate: cache_duration_in_sec },
             signal: AbortSignal.timeout(4000),
