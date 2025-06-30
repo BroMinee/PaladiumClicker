@@ -1,5 +1,25 @@
 [
   {
+    "date": "30/06/2025",
+    "changes": {
+      "additions": [
+        "Ajout d'un classement de [vote](https://palatracker.bromine.fr/ranking?category=vote)",
+        "Ajout d'un avertissement dans les webhooks pour inciter l'utilisateur à changer le nom du channel et du serveur.",
+        "Ajout de la possibilité de supprimer tous les webhooks d'un serveur et d'un channel.",
+        "Ajout d'un bouton pour charger un profil vide par défaut sur la page d'[erreur](https://palatracker.bromine.fr/error?message=Coucou)"
+      ],
+      "suppression": [
+        "Le graphique du total d'argent en jeu a été supprimé en raison de son manque de pertinence et de son coût de calcul élevé."
+      ],
+      "redesigns": [
+        "L'architecture a été revue pour faire transiter l'ensemble du trafic via un proxy, permettant une collecte plus précise des métriques d'infrastructure."
+      ],
+      "corrections": [
+        "Correction d'un bug empêchant la mise en cache de certaines requêtes."
+      ]
+    }
+  },
+  {
     "date": "11/05/2025",
     "changes": {
       "additions": [

@@ -13,6 +13,7 @@ import {
 import { Suspense } from "react";
 import ImportProfil from "@/components/shared/ImportProfil.tsx";
 import ImportProfilPretty from "@/components/shared/ImportProfilPretty.tsx";
+import ImportOfflineProfil from "@/components/shared/ImportOfflineProfil.tsx";
 
 export function generateMetadata() {
   const title = `PalaTracker | Erreur`;
@@ -50,8 +51,9 @@ export default function Error500Page({ searchParams }: {
             <p className="mb-4 text-lg font-light text-gray-400">Si le problème persiste merci de
               contacter un développeur</p>
           </div>
-          <div className="flex justify-center">
+            <div className="flex flex-col gap-2 items-center justify-center">
             <ImportProfilPretty/>
+            <ImportOfflineProfil/>
           </div>
         </div>
       </CardHeader>
