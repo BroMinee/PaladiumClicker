@@ -212,7 +212,8 @@ export function DisplayDailyDoubleRank({ dailyBonus, doubleXp }: { dailyBonus: n
   const { data: playerInfo } = usePlayerInfoStore();
 
   let bonusXpRank = getBonusRank(playerInfo?.rank);
-  return <>{dailyBonus + doubleXp + bonusXpRank}%</>
+  const bonusSummerRush = 300;
+  return <>{dailyBonus + doubleXp + bonusXpRank + bonusSummerRush}%</>
 }
 
 export function DisplayXpBonus() {
@@ -260,7 +261,8 @@ export function DisplayXpNeededWithDouble({ searchParams, xp, element }: {
   }
 
   const bonusXpRank = getBonusRank(playerInfo?.rank);
-  const bonusXpWithoutDouble = bonusXpRank + (searchParams.dailyBonus || 0);
+  const bonusSummerRush = 300;
+  const bonusXpWithoutDouble = bonusSummerRush + bonusXpRank + (searchParams.dailyBonus || 0);
   const bonusXpDouble = bonusXpWithoutDouble + (searchParams.double ? 100 : 0);
   const xpNeededWithDoubleXP = (xpNeeded / fortuneBonus) / ((100 + bonusXpDouble) / 100);
 
@@ -273,7 +275,8 @@ export function DisplayXpNeededWithBottle({ searchParams }: { searchParams: sear
 
 
   const bonusXpRank = getBonusRank(playerInfo?.rank);
-  const bonusXpWithoutDouble = bonusXpRank + (searchParams.dailyBonus || 0);
+  const bonusSummerRush = 300;
+  const bonusXpWithoutDouble = bonusSummerRush + bonusXpRank + (searchParams.dailyBonus || 0);
   const xpNeededWithoutDoubleXP = xpNeeded / ((100 + bonusXpWithoutDouble) / 100);
   return <>{formatPrice(Math.ceil(xpNeededWithoutDoubleXP / 1000))} fois</>
 }

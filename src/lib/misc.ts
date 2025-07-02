@@ -387,8 +387,9 @@ export const getColorByMetierName = (name: MetierKey) => {
 export function scaleCurrentProduction(playerInfo: PlayerInfo, buildingIndex: number, level: number) {
   if (level === 0 || level === -1)
     return 0;
-  const newBaseProduction = scaleBaseProduction(playerInfo, buildingIndex)
-  return newBaseProduction * level;
+  const newBaseProduction = scaleBaseProduction(playerInfo, buildingIndex);
+  const bonusSummerRush = 3;
+  return newBaseProduction * level * bonusSummerRush;
 }
 
 function scaleBaseProduction(playerInfo: PlayerInfo, buildingIndex: number) {
