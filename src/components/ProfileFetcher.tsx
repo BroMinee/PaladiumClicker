@@ -4,8 +4,10 @@ import { usePlayerInfoStore } from "@/stores/use-player-info-store.ts";
 import { getPlayerInfoAction } from "@/lib/api/apiServerAction.ts";
 import LoadingData from "@/components/LoadingData.tsx";
 import { useSettingsStore } from "@/stores/use-settings-store.ts";
-import { reloadProfilNeeded } from "@/lib/misc.ts";
+import { reloadProfilNeeded, safeJoinPaths } from "@/lib/misc.ts";
 import { toast } from "sonner";
+import { navigate } from "@/components/actions.ts";
+
 
 
 export default function ProfileFetcherWrapper({ username, children }: {
@@ -31,6 +33,7 @@ export default function ProfileFetcherWrapper({ username, children }: {
       }).catch((e) => {
         console.error(e);
         toast.error(`Erreur lors du chargement du profil de ${username}`);
+        navigate(`/error?message=${encodeURIComponent(`Impossible de charger le profil de ${username}`)}&username=${encodeURIComponent(username)}`);
       });
     }
 
