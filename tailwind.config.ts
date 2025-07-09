@@ -115,6 +115,11 @@ const config: Config = {
           '0%, 100%': { color: '#f87171' },
           '50%': { color: '#ffffff' },
         },
+        "blink-orange": {
+          '0%, 100%': { color: 'hsl(var(--primary))' },
+          '50%': { color: "hsl(var(--secondary-foreground))" },
+        }
+
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
@@ -123,6 +128,7 @@ const config: Config = {
         'fade-in': 'fadeIn 0.3s ease-in-out',
         'fade-out': 'fadeOut 0.3s ease-in-out',
         blink: 'blink 1s infinite',
+        "blink-orange": 'blink-orange 1s infinite'
       },
       addUtilities: {
         '.pixelated': {

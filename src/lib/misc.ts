@@ -3622,10 +3622,9 @@ export function parseMessageCraftPrice(message: any) : {type: "update" | "other"
   return {type: "other", data: []};
 }
 
-export function debounce<F extends (...args: any[]) => void>(func: F, wait: number) {
-  let timeout: ReturnType<typeof setTimeout>;
-  return (...args: Parameters<F>) => {
-    clearTimeout(timeout);
-    timeout = setTimeout(() => func(...args), wait);
-  };
+export function getHeadUrl(uuid: string | undefined)
+{
+  if(!uuid || uuid === "")
+    return "/img/palatracker_head.png"; // palatracker skin
+  return `https://crafatar.com/avatars/${uuid}?size=8&overlay`
 }

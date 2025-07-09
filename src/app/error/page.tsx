@@ -12,6 +12,7 @@ import {
 } from "@/components/ui/TestApiOnError.tsx";
 import { Suspense } from "react";
 import ImportProfil from "@/components/shared/ImportProfil.tsx";
+import ImportProfilPretty from "@/components/shared/ImportProfilPretty.tsx";
 
 export function generateMetadata() {
   const title = `PalaTracker | Erreur`;
@@ -36,7 +37,7 @@ export default function Error500Page({ searchParams }: {
   }
 
   return (
-    <Card className="flex flex-col gap-4 font-bold center bg-no-repeat bg-center bg-cover text-white bg-black">
+    <Card className="flex flex-col gap-4 font-bold center bg-no-repeat bg-center bg-cover text-white bg-card/90">
       <CardHeader className="flex flex-row gap-2 ">
         <div className="py-8 px-4 mx-auto max-w-screen-xl lg:py-16 lg:px-6">
           <div className="mx-auto max-w-screen-sm text-center">
@@ -50,7 +51,7 @@ export default function Error500Page({ searchParams }: {
               contacter un développeur</p>
           </div>
           <div className="flex justify-center">
-            <ImportProfil/>
+            <ImportProfilPretty/>
           </div>
         </div>
       </CardHeader>
