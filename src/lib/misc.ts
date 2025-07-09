@@ -317,6 +317,8 @@ export function getRankImg(rank: string) {
     return safeJoinPaths(constants.imgPathProfile,"legend.png");
   }else if (rank === "Premium") {
     return safeJoinPaths(constants.imgPathProfile,"premium.png");
+  } else if(rank === "Rusher") {
+    return safeJoinPaths(constants.imgPathProfile,"rusher.png");
   }
   else {
     return "unknown.png"

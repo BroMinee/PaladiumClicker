@@ -196,6 +196,8 @@ export function CategorieDisplay({ name, children }: {
 }
 
 function hasNewNotification(last_visited: { [T in PathValid]: number }, path: PathValid): [boolean, string] {
+  // Disable notification because it was not working and not very usefull
+  return [false, ""];
   if (!constants.notificationPath.has(path)) {
     return [false, ""];
   } else if (!last_visited.hasOwnProperty(path)) {

@@ -199,6 +199,7 @@ function getBonusRank(playerRank: PlayerRank | undefined) {
       case "trixium":
       case "trixium+":
     case "divinity":
+    case "rusher":
         return 15;
     case "premium": // premium add 5% (don't know how it's represented in the API) always place the condition at the end
       return 5;
