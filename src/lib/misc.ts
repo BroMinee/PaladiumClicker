@@ -390,8 +390,7 @@ export function scaleCurrentProduction(playerInfo: PlayerInfo, buildingIndex: nu
   if (level === 0 || level === -1)
     return 0;
   const newBaseProduction = scaleBaseProduction(playerInfo, buildingIndex);
-  const bonusSummerRush = 3;
-  return newBaseProduction * level * bonusSummerRush;
+  return newBaseProduction * level;
 }
 
 function scaleBaseProduction(playerInfo: PlayerInfo, buildingIndex: number) {
