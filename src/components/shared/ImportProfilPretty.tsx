@@ -41,7 +41,7 @@ export default function ImportProfilPretty({
   const handleButtonClick = () => {
     setIsEditing(true);
     setTimeout(() => {
-      inputRef.current.focus();
+      (inputRef as any).current.focus();
     }, 0);
   };
 
@@ -117,7 +117,7 @@ export default function ImportProfilPretty({
     }
   }, [newPlayerInfo, setPlayerInfo, update]);
 
-  const handleBlur = (event) => {
+  const handleBlur = (event : any) => {
     if (event.relatedTarget !== buttonSubmitRef.current) {
       setIsEditing(false);
     }

@@ -18,7 +18,7 @@ export function NoPseudoPage({ texth1, texth2 }: { texth1: string, texth2: strin
           <h2 className="text-xl md:text-2xl text-center font-bold">
             {textFormatting(texth2)}
           </h2>
-          <ImportProfilPretty classNameInput="w-40 sm:w-96"/>
+          <ImportProfilPretty/>
           <CardDescription>
             Made with <FaHeart
             className="text-primary inline-block"/> by <GradientText>BroMine__</GradientText>

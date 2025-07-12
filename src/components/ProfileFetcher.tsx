@@ -4,7 +4,7 @@ import { usePlayerInfoStore } from "@/stores/use-player-info-store.ts";
 import { getPlayerInfoAction } from "@/lib/api/apiServerAction.ts";
 import LoadingData from "@/components/LoadingData.tsx";
 import { useSettingsStore } from "@/stores/use-settings-store.ts";
-import { reloadProfilNeeded, safeJoinPaths } from "@/lib/misc.ts";
+import { reloadProfilNeeded } from "@/lib/misc.ts";
 import { toast } from "sonner";
 import { navigate } from "@/components/actions.ts";
 

@@ -1,7 +1,12 @@
 [
   {
-    "date": "30/06/2025",
+    "date": "12/07/2025",
     "changes": {
+      "summer rush": [
+        "Modification de l'expérience bonus pour le Summer Rush",
+        "Modification du nombre de clic rapporté par un clic dans le clicker",
+        "Ajout du rank Rusher dans le [profil](https://palatracker.bromine.fr/profil/BroMine__?section=Classement) du joueur"
+      ],
       "additions": [
         "Ajout d'un classement de [vote](https://palatracker.bromine.fr/ranking?category=vote)",
         "Ajout d'un avertissement dans les webhooks pour inciter l'utilisateur à changer le nom du channel et du serveur.",
@@ -9,7 +14,8 @@
         "Ajout d'un bouton pour charger un profil vide par défaut sur la page d'[erreur](https://palatracker.bromine.fr/error?message=Coucou)"
       ],
       "suppression": [
-        "Le graphique du total d'argent en jeu a été supprimé en raison de son manque de pertinence et de son coût de calcul élevé."
+        "Le graphique du total d'argent en jeu a été supprimé en raison de son manque de pertinence et de son coût de calcul élevé.",
+        "Suppression du système de notification dans la navbar, car non pertinent, trop intrusif et trop buggé."
       ],
       "redesigns": [
         "L'architecture a été revue pour faire transiter l'ensemble du trafic via un proxy, permettant une collecte plus précise des métriques d'infrastructure."

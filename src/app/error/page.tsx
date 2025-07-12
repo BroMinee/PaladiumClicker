@@ -11,7 +11,6 @@ import {
   TestMyApiFetching
 } from "@/components/ui/TestApiOnError.tsx";
 import { Suspense } from "react";
-import ImportProfil from "@/components/shared/ImportProfil.tsx";
 import ImportProfilPretty from "@/components/shared/ImportProfilPretty.tsx";
 import ImportOfflineProfil from "@/components/shared/ImportOfflineProfil.tsx";
 
