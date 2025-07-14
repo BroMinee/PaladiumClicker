@@ -342,8 +342,8 @@ export const getPlayerAchievements = async (uuid: string): Promise<Achievement[]
     c++;
   }
 
-  if (data.length !== totalCount)
-    redirect(`/error?message=Data length is not equal to totalCount (getPlayerAchievements)`);
+  // if (data.length !== totalCount)
+  //   redirect(`/error?message=Data length is not equal to totalCount (getPlayerAchievements)`);
 
   const allAchievements = await getAllAchievements().catch(() => {
     return structuredClone(default_achievements_default as AllAchievementResponse);
