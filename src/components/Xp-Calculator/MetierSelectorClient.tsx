@@ -25,8 +25,6 @@ export function SetLevelInUrl({ selected, params, searchParams }: {
   if (levelToReach === undefined)
     levelToReach = playerInfo.metier[selected].level + 1;
 
-  levelToReach = Math.min(levelToReach, 100);
-
   router.push(generateXpCalculatorUrl(params.username, selected, levelToReach, searchParams.double, searchParams.dailyBonus, searchParams.f2, searchParams.f3), { scroll: false });
   return null;
 }
@@ -235,9 +233,13 @@ function getXpDiff(playerInfo: PlayerInfo | null, searchParams: searchParamsXpBo
   return res;
 }
 
-function getTotalXPForLevel(level: number) {
-  return constants.metier_palier[level - 1];
+export function getTotalXPForLevel(level: number) {
 
+  if (level - 1 >= constants.metier_palier.length) {
+    return constants.metier_palier[99] + (level - constants.metier_palier.length) * constants.metier_xp[constants.metier_xp.length -1];
+  }
+
+  return constants.metier_palier[level - 1];
 }
 
 export function DisplayXpNeeded({ searchParams }: { searchParams: searchParamsXpBonusPage }) {

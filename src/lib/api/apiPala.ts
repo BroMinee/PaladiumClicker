@@ -212,8 +212,29 @@ export const getPlayerInfo = async (pseudo: string): Promise<PlayerInfo> => {
     }
   });
 
+  function getTotalXPForLevel(level: number) {
+
+    if (level - 1 >= constants.metier_palier.length) {
+      return constants.metier_palier[99] + (level - constants.metier_palier.length) * constants.metier_xp[constants.metier_xp.length -1];
+    }
+
+    return constants.metier_palier[level - 1];
+  }
 
   initialPlayerInfo.metier = metiers;
+  const keys : Array<keyof Metiers> = ['farmer', 'hunter', 'miner', 'alchemist'];
+  for (const key of keys) {
+    if(initialPlayerInfo.metier[key].xp > getTotalXPForLevel(100)) {
+      for(let i = 100; i < 1000; i++){
+        const xp = getTotalXPForLevel(i);
+        if(xp < initialPlayerInfo.metier[key].xp)
+          continue;
+        initialPlayerInfo.metier[key].level = i -1;
+        break;
+      }
+    }
+  }
+
 
   const friendsList = friendList;
 

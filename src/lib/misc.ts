@@ -353,10 +353,13 @@ export function convertEpochToDateUTC2(epoch: number | undefined) {
 }
 
 export function getXpCoef(level: number, currentXp: number) {
-  if (level === 100)
-    return 1;
+  // if (level === 100)
+  //   return 1;
   if (currentXp === 0)
     return 0;
+  if(level >= 100) {
+    return (currentXp - constants.metier_palier[99] - constants.metier_xp[99] * (level - 100)) / constants.metier_xp[99];
+  }
   return (currentXp - constants.metier_palier[level - 1]) / constants.metier_xp[level];
 }
 

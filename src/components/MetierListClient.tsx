@@ -49,7 +49,7 @@ export function MetierDisplayLvl({ metierKey, lvlToReach, searchParams }:
       let value = Number(event.target.value);
       if (!isNaN(value)) {
         value = Math.floor(value);
-        value = Math.max(1, Math.min(100, value));
+        value = Math.max(1, value);
         if (value <= playerInfo.metier[metierKey].level)
           decreaseMetierLevel(metierKey, playerInfo.metier[metierKey].level - value);
         else if (value > playerInfo.metier[metierKey].level)
@@ -62,9 +62,9 @@ export function MetierDisplayLvl({ metierKey, lvlToReach, searchParams }:
 
       if (!isNaN(value)) {
         value = Math.floor(value);
-        value = Math.max(0, Math.min(100, value));
+        value = Math.max(0, value);
         const newLevel = value;
-        router.push(generateXpCalculatorUrl(playerInfo.username || "undefined", metierKey, Math.min(newLevel, 100), searchParams?.double, searchParams?.dailyBonus, searchParams?.f2, searchParams?.f3), { scroll: false })
+        router.push(generateXpCalculatorUrl(playerInfo.username || "undefined", metierKey, newLevel, searchParams?.double, searchParams?.dailyBonus, searchParams?.f2, searchParams?.f3), { scroll: false })
       }
     }
   }
@@ -120,7 +120,7 @@ export function MetierIncrease({ metierKey, searchParams, username }: {
     router.push(`/error?message=MetierIncrease: searchParams.level and username must be both defined or both undefined but not only one of them.`)
   if (searchParams?.level !== undefined && username !== undefined)
     return <Button variant="outline" size="icon"
-                   onClick={() => router.push(generateXpCalculatorUrl(username || "undefined", metierKey, Math.min((searchParams?.level || 0) + 1, 100), searchParams?.double, searchParams?.dailyBonus, searchParams?.f2, searchParams?.f3), { scroll: false })}>
+                   onClick={() => router.push(generateXpCalculatorUrl(username || "undefined", metierKey, (searchParams?.level ?? 0) + 1, searchParams?.double, searchParams?.dailyBonus, searchParams?.f2, searchParams?.f3), { scroll: false })}>
       <FaArrowUp className="h-4 w-4"/>
     </Button>
 
