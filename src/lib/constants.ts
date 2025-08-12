@@ -108,6 +108,7 @@ const OBTAIN_FROM_COBBLEBREAKER = "Obtain from CobbleBreaker";
 const KILL = "Kill";
 const FISH = "Fish";
 const CRAFT = "Craft";
+const EAT = "Eat";
 const EXTRACT_FROM_SAP = "Extract from Sap";
 const THROW_IN_A_CAULDRON = "Throw in a Cauldron";
 const CRAFT_IN_PORTAL = "Craft in Portal";
@@ -333,6 +334,8 @@ type HowToXp = {
 
 const how_to_xp: HowToXp = {
   "miner": [
+    { type: "Bonbon Jaune", "action": EAT, "xp": 50000, imgPath: "candy_YELLOW.webp" },
+    { type: "Bonbon Multicolor", "action": EAT, "xp": 50000, imgPath: "candy_RAINBOW.webp" },
     { type: "Nether brick", "action": SMELT, "xp": 0.1, imgPath: "nether_brick.webp" },
     { type: "Stone", "action": BREAK, "xp": 0.5, imgPath: "stone.webp" },
     { type: "Charcoal", "action": SMELT, "xp": 1, imgPath: "charcoal.webp" },
@@ -362,6 +365,8 @@ const how_to_xp: HowToXp = {
     { type: "Paladium Green Ingot", "action": SMELT, "xp": 200, imgPath: "paladium_green_ingot.webp" },
   ],
   "farmer": [
+    { type: "Bonbon Vert", "action": EAT, "xp": 50000, imgPath: "candy_GREEN.webp" },
+    { type: "Bonbon Multicolor", "action": EAT, "xp": 50000, imgPath: "candy_RAINBOW.webp" },
     { type: "Bread", "action": CRAFT, "xp": 1, imgPath: "bread.webp" },
     { type: "Seed", "action": BREAK, "xp": 1.5, imgPath: "seeds_wheat.webp" },
     { type: "Baked Potato", "action": SMELT, "xp": 1, imgPath: "potato_baked.webp" },
@@ -379,6 +384,8 @@ const how_to_xp: HowToXp = {
     { type: "Kiwano", "action": BREAK, "xp": 50, imgPath: "kiwano.webp" },
   ],
   "hunter": [
+    { type: "Bonbon Bleu", "action": EAT, "xp": 50000, imgPath: "candy_BLUE.webp" },
+    { type: "Bonbon Multicolor", "action": EAT, "xp": 50000, imgPath: "candy_RAINBOW.webp" },
     { type: "Snow Golem", "action": KILL, "xp": 1, imgPath: "snow_golem_hunter.webp" },
     { type: "Squid", "action": KILL, "xp": 10, imgPath: "squid.webp" },
     { type: "Cooked Porkchop", "action": SMELT, "xp": 10, imgPath: "porkchop_cooked.webp" },
@@ -426,6 +433,8 @@ const how_to_xp: HowToXp = {
     { type: "Jelly Fish", "action": KILL, "xp": 150, imgPath: "jelly_fish.webp" },
   ],
   "alchemist": [
+    { type: "Bonbon Mauve", "action": EAT, "xp": 50000, imgPath: "candy_PINK.webp" },
+    { type: "Bonbon Multicolor", "action": EAT, "xp": 50000, imgPath: "candy_RAINBOW.webp" },
     { type: "Empty Flask", "action": CRAFT, "xp": 0.2, imgPath: "empty_flask.webp" },
     { type: "Jacaranda Log", "action": BREAK, "xp": 10, imgPath: "jacaranda_log.webp" },
     { type: "Judeecercis Log", "action": BREAK, "xp": 10, imgPath: "judeecercis_log.webp" },
