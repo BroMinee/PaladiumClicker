@@ -63,10 +63,10 @@ export const usePlayerInfoStore = create<State & Actions, [["zustand/persist", S
       newMetier[metierKey] = {
         ...targettedMetier,
         level: targettedMetier.level + value,
-        xp: constants.metier_palier[targettedMetier.level + value - 1],
+        xp: constants.metier_palier[Math.min(constants.metier_xp.length -1,targettedMetier.level + value - 1)],
       };
       if (targettedMetier.level + value - 1 >= constants.metier_palier.length) {
-        newMetier[metierKey].xp += (targettedMetier.level + value - 1 - constants.metier_palier.length) * constants.metier_xp[constants.metier_xp.length -1];
+        newMetier[metierKey].xp += (targettedMetier.level + value - constants.metier_palier.length) * constants.metier_xp[constants.metier_xp.length -1];
       }
 
       return {
@@ -91,8 +91,11 @@ export const usePlayerInfoStore = create<State & Actions, [["zustand/persist", S
       newMetier[metierKey] = {
         ...targettedMetier,
         level: targettedMetier.level - value,
-        xp: constants.metier_palier[targettedMetier.level - value - 1],
+        xp: constants.metier_palier[Math.min(constants.metier_xp.length -1,targettedMetier.level - value - 1)],
       };
+      if (targettedMetier.level - value - 1 >= constants.metier_palier.length) {
+        newMetier[metierKey].xp += (targettedMetier.level - value - constants.metier_palier.length) * constants.metier_xp[constants.metier_xp.length -1];
+      }
 
       return {
         ...state,
