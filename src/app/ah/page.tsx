@@ -9,6 +9,7 @@ import { getAllItems } from "@/lib/api/apiPalaTracker.ts";
 import { OptionType } from "@/types";
 import constants from "@/lib/constants";
 import { MarketServerFetcher } from "@/components/AhTracker/MarketServerFetcher.tsx";
+import { redirect } from "next/navigation";
 
 export async function generateMetadata(
   { searchParams }: { searchParams: { item: string | undefined } },
@@ -52,7 +53,9 @@ export async function generateMetadata(
 }
 
 export default async function AhTrackerPage({ searchParams }: { searchParams: { item: string | undefined } }) {
-  const options = await getAllItems();
+  const options = await getAllItems().catch(() => {
+    return redirect("/error?message=Impossible de charger la liste des items");
+  });
 
   const item = options.find((item) => item.value === searchParams.item);
 

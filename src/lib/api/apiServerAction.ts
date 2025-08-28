@@ -26,7 +26,7 @@ import { redirect } from "next/navigation";
 /* The content of this file is not sent to the client*/
 
 export async function getPlayerInfoAction(username: string) {
-  return await getPlayerInfo(username)
+  return await getPlayerInfo(username);
 }
 
 export async function registerPlayerAction(uuid: string, username: string) {
@@ -119,7 +119,7 @@ export async function getNotificationWebSite() {
 }
 
 export async function getAllItemsServerAction() : Promise<OptionType[]> {
-  return fetchWithHeader<{
+  return await fetchWithHeader<{
     item_name: string,
     us_trad: string,
     fr_trad: string,
@@ -139,25 +139,25 @@ export async function getAllItemsServerAction() : Promise<OptionType[]> {
 }
 
 export async function getCurrentNotification(): Promise<NotificationWebSiteResponse | null> {
-  return fetchWithHeader<NotificationWebSiteResponse>(`${API_PALATRACKER}/v1/notification/website`, 5 * 60);
+  return await fetchWithHeader<NotificationWebSiteResponse>(`${API_PALATRACKER}/v1/notification/website`, 5 * 60);
 }
 
-const getNotCloseEvent = (): Promise<Event | null> => {
-  return fetchWithHeader<Event | null>(`${API_PALATRACKER}/v1/events/getCurrent`, 60);
+export async function getNotCloseEvent(): Promise<Event | null> {
+  return await fetchWithHeader<Event | null>(`${API_PALATRACKER}/v1/events/getCurrent`, 60);
 }
 
-function isRegisteredToEvent(uuid: string, event_id: number) {
-  return fetchWithHeader<{
+async function isRegisteredToEvent(uuid: string, event_id: number) {
+  return await fetchWithHeader<{
     isRegistered: boolean
   }>(`${API_PALATRACKER}/v1/events/isRegistered?uuid=${uuid}&event_id=${event_id}`, 0);
 }
 
-export const getClosedEventStillClaimable = () => {
-  return fetchWithHeader<Event | null>(`${API_PALATRACKER}/v1/events/getClosedEventStillClaimable`, 60);
+export async function getClosedEventStillClaimable() {
+  return await fetchWithHeader<Event | null>(`${API_PALATRACKER}/v1/events/getClosedEventStillClaimable`, 60);
 }
 
-function isWinnerNotClaim(event_id: number, uuid: string) {
-  return fetchWithHeader<{
+async function isWinnerNotClaim(event_id: number, uuid: string) {
+  return await fetchWithHeader<{
     description: string
   }>(`${API_PALATRACKER}/v1/events/hasWonAndNotClaim?uuid=${uuid}&event_id=${event_id}`, 0);
 }
@@ -374,7 +374,7 @@ export async function editWebhookGuildNameServerAction(guild_id: string, channel
 }
 
 export async function getAdminShopHistoryServerAction(item: AdminShopItem, periode: AdminShopPeriode): Promise<AdminShopItemDetail[]> {
-  return fetchWithHeader<AdminShopItemDetail[]>(`${API_PALATRACKER}/v1/admin-shop/${item}/${periode}`, 0);
+  return await fetchWithHeader<AdminShopItemDetail[]>(`${API_PALATRACKER}/v1/admin-shop/${item}/${periode}`, 0);
 }
 
 export const getMarketHistoryServerAction = async (itemId: string): Promise<AhItemHistory[]> => {
@@ -397,7 +397,7 @@ export const getMarketHistoryServerAction = async (itemId: string): Promise<AhIt
   return data;
 }
 
-export async function setCookies(name: string, value: string, maxAge: number) {
+export async function setCookies(name: string, value: string, maxAge: number = 60 * 60 * 24 * 30) {
   const cookieStore = cookies();
   cookieStore.set(name as any, value as any, {
     maxAge: maxAge,
@@ -405,7 +405,7 @@ export async function setCookies(name: string, value: string, maxAge: number) {
 }
 
 export async function getAllPalaAnimationTime() {
-  return fetchWithHeader<AllPalaAnimationStats>(`${API_PALATRACKER}/v1/pala-animation/my-time/getAll`, 5 * 60).catch(() => []);
+  return await fetchWithHeader<AllPalaAnimationStats>(`${API_PALATRACKER}/v1/pala-animation/my-time/getAll`, 5 * 60).catch(() => []);
 }
 
 export async function editRoleSubmit(discord_id: string, role: Role): Promise<{

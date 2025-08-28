@@ -12,6 +12,9 @@
         "Correction d'un problème qui réinitialisait le stockage local quand l'option « profil vide » était activée.",
         "Le niveau désiré dans le calculateur d'xp est maintenant redéfini au niveau actuel + 1 s'il était inférieur au niveau actuel.",
         "Dans le [calculateur d'xp](https://palatracker.bromine.fr/xp-calculator), les entrées rapides sont désormais mieux gérées pour éviter les comportements indésirables."
+      ],
+      "redesigns": [
+        "Refonte de la gestion des erreurs pour donner plus d'informations lors d'un problème de chargement du profil."
       ]
     }
   },

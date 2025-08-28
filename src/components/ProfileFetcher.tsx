@@ -28,10 +28,14 @@ export default function ProfileFetcherWrapper({ username, children }: {
 
     if (reloadProfilNeeded(playerInfo, username, settings.defaultProfile)) {
       getPlayerInfoAction(username).then((data) => {
+        if (!data)
+          return;
         toast.success(`Profil de ${data.username} chargé`);
         setPlayerInfo(data);
       }).catch((e) => {
-        console.error(e);
+        if (e.digest && e.digest.startsWith('NEXT_REDIRECT')) {
+          throw e;
+        }
         toast.error(`Erreur lors du chargement du profil de ${username}`);
         navigate(`/error?message=${encodeURIComponent(`Impossible de charger le profil de ${username}`)}&username=${encodeURIComponent(username)}`);
       });

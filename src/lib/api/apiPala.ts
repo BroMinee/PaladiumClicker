@@ -150,15 +150,15 @@ export const getFriendsList = async (uuid: string): Promise<PaladiumFriendInfo> 
 }
 
 export const getPlayerInfo = async (pseudo: string): Promise<PlayerInfo> => {
-  try {
-    if (pseudo === "") {
-      throw "Pseudo is empty";
-    } else if (pseudo.includes(" ")) {
-      throw "Pseudo contains space";
-    } else if (!/^[a-zA-Z0-9_]+$/.test(pseudo)) {
-      throw "Pseudo doit contenir que des lettres ou des chiffres";
-    }
-  } catch (error) {
+  let error = "";
+  if (pseudo === "") {
+    error = "Pseudo is empty";
+  } else if (pseudo.includes(" ")) {
+    error = "Pseudo contains space";
+  } else if (!/^[a-zA-Z0-9_]+$/.test(pseudo)) {
+    error = "Pseudo doit contenir que des lettres ou des chiffres";
+  }
+  if(error !== "") {
     redirect(`/error?message=${error}&username=${pseudo}`);
   }
 
@@ -363,12 +363,12 @@ export const getPlayerAchievements = async (uuid: string): Promise<Achievement[]
     c++;
   }
 
-  // if (data.length !== totalCount)
-  //   redirect(`/error?message=Data length is not equal to totalCount (getPlayerAchievements)`);
 
-  const allAchievements = await getAllAchievements().catch(() => {
-    return structuredClone(default_achievements_default as AllAchievementResponse);
-  });
+  // Reactivate if for some reason it works again
+  const allAchievements = structuredClone(default_achievements_default as AllAchievementResponse)
+  // const allAchievements = await getAllAchievements().catch(() => {
+    // return structuredClone(default_achievements_default as AllAchievementResponse);
+  // });
 
   const achievements = allAchievements.data.map((achievement) => {
     const found = data.find((a) => a.id === achievement.id);
@@ -443,6 +443,7 @@ type AllAchievementResponse = {
   data: { id: string, category: CategoryEnum, name: string, description: string, amount: number, icon: string }[]
 }
 
+/*
 const getAllAchievements = async (): Promise<AllAchievementResponse> => {
   let response: AllAchievementResponse;
   try {
@@ -473,6 +474,7 @@ const getAllAchievements = async (): Promise<AllAchievementResponse> => {
 
   return { data: data, totalCount: data.length };
 }
+*/
 
 export const getPlayerMount = async (uuid: string): Promise<MountInfo | null> => {
   return await fetchWithHeader<MountInfo>(`${PALADIUM_API_URL}/v1/paladium/player/profile/${uuid}/mount`).then((mount) => {
@@ -491,5 +493,5 @@ export const getPlayerPet = async (uuid: string): Promise<PetInfo | null> => {
 }
 
 export async function getPlayerRole(): Promise<Role> {
-  return fetchWithHeader<Role>(`${API_PALATRACKER}/v1/role/getRole`, 5 * 60).catch(() => "Classic");
+  return await fetchWithHeader<Role>(`${API_PALATRACKER}/v1/role/getRole`, 5 * 60).catch(() => "Classic");
 }
