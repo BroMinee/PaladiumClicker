@@ -12,7 +12,6 @@ import { GrOptimize } from "react-icons/gr";
 import { LuShoppingCart } from "react-icons/lu";
 import { PiRankingBold } from "react-icons/pi";
 import { GiPayMoney, GiStoneCrafting } from "react-icons/gi";
-import { ImNewspaper } from "react-icons/im";
 import { IoMdInformationCircleOutline, IoMdStopwatch } from "react-icons/io";
 import React from "react";
 import ImportProfil from "@/components/shared/ImportProfil.tsx";
@@ -81,9 +80,6 @@ function NavBarContent() {
         <CategorieDisplay name={"Informations et gestion"}>
           <LinkClient path={constants.statusPath}>
             <HiOutlineStatusOnline size={24}/>
-          </LinkClient>
-          <LinkClient path={constants.palatimePath}>
-            <ImNewspaper size={24}/>
           </LinkClient>
           <LinkClient path={constants.patchnotePath}>
             <FaClipboardList size={24}/>

@@ -19,7 +19,6 @@ export type PathValid =
   | "/ah"
   | "/xp-calculator"
   | "/clicker-optimizer"
-  | "/palatime"
   | "/pala-animation"
   | "/craft"
   | "/about"
@@ -60,7 +59,6 @@ const profilPath: PathValid = "/profil";
 const ahPath: PathValid = "/ah";
 const calculatorXpPath: PathValid = "/xp-calculator";
 const optimizerClickerPath: PathValid = "/clicker-optimizer";
-const palatimePath: PathValid = "/palatime";
 const palaAnimationPath: PathValid = "/pala-animation";
 const craftPath: PathValid = "/craft";
 const moneyRanking: PathValid = "/ranking?category=money";
@@ -87,7 +85,6 @@ const links: LinkList = {
   "/ah": { label: "Market", requiredPseudo: false },
   "/xp-calculator": { label: "Calculateur d'xp", requiredPseudo: true },
   "/clicker-optimizer": { label: "PalaClicker Optimizer", requiredPseudo: true },
-  "/palatime": { label: "Palatime", requiredPseudo: false },
   "/pala-animation": { label: "PalaAnimation Trainer", requiredPseudo: false },
   "/craft": { label: "Craft Optimizer", requiredPseudo: false },
   "/about": { label: "A propos", requiredPseudo: false },
@@ -480,7 +477,6 @@ const notificationPath: Map<PathValid, [number, string]> = new Map<PathValid, [n
     ["/clicker-optimizer", [new Date("2024-11-27 19:00").getTime(), "Refonte de la page"]],
     ["/ranking?category=money", [new Date("2025-02-22 01:00").getTime(), "Ajout du classement l'alignement"]],
     ["/ah", [new Date("2025-02-22 01:00").getTime(), "Ajout du détail des offres"]],
-    ["/palatime", [new Date("2025-03-23 23:40").getTime(), "Nouvelle édition"]],
     ["/craft", [new Date("2025-05-11 10:00").getTime(), "Ajout d'un nouvel outil pour faire un max de d'argent"]],
     ["/patchnote", [new Date("2025-05-11 10:00").getTime(), "Nouveau patchnote"]],
     ["/pala-animation", [new Date("2024-12-21 16:15").getTime(), "Ajout de 174 nouvelles questions"]],
@@ -490,7 +486,7 @@ const notificationPath: Map<PathValid, [number, string]> = new Map<PathValid, [n
 const menuPaths: Map<NavBarCategory, PathValid[]> = new Map<NavBarCategory, PathValid[]>([
   ['Statistiques et données', ["/profil", "/ah", "/admin-shop", "/ranking?category=money"]],
   ['Outils', ["/clicker-optimizer", "/xp-calculator", "/pala-animation", "/craft", "/webhook"]],
-  ['Informations et gestion', ["/status", "/palatime", "/patchnote", "/politique-de-confidentialite", "/about"]],
+  ['Informations et gestion', ["/status", "/patchnote", "/politique-de-confidentialite", "/about"]],
 ]);
 
 
@@ -678,7 +674,6 @@ const constants = {
   calculatorXpPath,
   profilPath,
   ahPath,
-  palatimePath,
   optimizerClickerPath,
   palaAnimationPath,
   craftPath,

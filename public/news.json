@@ -13,6 +13,9 @@
         "Le niveau désiré dans le calculateur d'xp est maintenant redéfini au niveau actuel + 1 s'il était inférieur au niveau actuel.",
         "Dans le [calculateur d'xp](https://palatracker.bromine.fr/xp-calculator), les entrées rapides sont désormais mieux gérées pour éviter les comportements indésirables."
       ],
+      "suppression": [
+        "Suppression de la page du **palatime** car 0livierMinecraft ne fait plus d'édition de son journal."
+      ],
       "redesigns": [
         "Refonte de la gestion des erreurs pour donner plus d'informations lors d'un problème de chargement du profil."
       ]
