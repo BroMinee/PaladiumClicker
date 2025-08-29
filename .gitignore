@@ -48,3 +48,10 @@ next-env.d.ts
 *.sw?
 /combined.log
 .env
+
+# Playwright
+node_modules/
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/

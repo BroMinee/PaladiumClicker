@@ -4,9 +4,10 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build && tsc --project tsconfig.server.json",
-    "start": "node dist/server.js",
-    "test": "jest --detectOpenHandles"
+    "build": "next build",
+    "start": "next start",
+    "test:playwright": "npx playwright test",
+    "test:jest": "npx jest"
   },
   "dependencies": {
     "@fingerprintjs/botd": "^1.9.1",
@@ -54,6 +55,7 @@
     "zustand": "^4.5.2"
   },
   "devDependencies": {
+    "@playwright/test": "^1.55.0",
     "@types/canvas-confetti": "^1.9.0",
     "@types/jest": "^29.5.14",
     "@types/node": "^20",

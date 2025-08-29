@@ -1,0 +1,141 @@
+name: CI Pipeline
+
+on:
+  push:
+    branches: [ main, dev ]
+  pull_request:
+    branches: [ main, dev ]
+
+jobs:
+  install:
+    name: Install Dependencies
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: lts/*
+
+      - name: Cache npm dependencies
+        uses: actions/cache@v4
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
+      - name: Install dependencies
+        run: npm ci
+
+  build:
+    name: Build Project
+    runs-on: ubuntu-latest
+    needs: install
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Cache npm dependencies
+        uses: actions/cache@v4
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Set environment variables
+        run: |
+          if [[ "${{ github.ref }}" == "refs/heads/main" ]]; then
+            echo "PALADIUM_API_URL=https://palatracker.bromine.fr" >> $GITHUB_ENV
+            echo "NEXT_PUBLIC_PALACLICKER_API_URL=https://palatracker.bromine.fr" >> $GITHUB_ENV
+            echo "NEXT_PUBLIC_PALACLICKER_API_WS=wss://palatracker.bromine.fr/ws" >> $GITHUB_ENV
+            echo "PALADIUM_API_KEY=${{ secrets.PALADIUM_API_KEY_PROD }}" >> $GITHUB_ENV
+          elif [[ "${{ github.ref }}" == "refs/heads/dev" ]]; then
+            echo "PALADIUM_API_URL=https://dev.bromine.fr" >> $GITHUB_ENV
+            echo "NEXT_PUBLIC_PALACLICKER_API_URL=https://dev.bromine.fr" >> $GITHUB_ENV
+            echo "NEXT_PUBLIC_PALACLICKER_API_WS=wss://dev.bromine.fr/ws" >> $GITHUB_ENV
+            echo "PALADIUM_API_KEY=${{ secrets.PALADIUM_API_KEY_DEV }}" >> $GITHUB_ENV
+          else
+            echo "Unsupported branch: ${{ github.ref }}"
+            exit 1
+          fi
+
+      - name: Build the project
+        run: npm run build
+
+      - name: Cache build output (dist)
+        uses: actions/cache@v4
+        with:
+          path: dist
+          key: ${{ runner.os }}-dist-${{ github.sha }}
+
+
+  tests:
+    name: Run Unit and E2E Tests
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: lts/*
+
+      - name: Cache npm dependencies
+        uses: actions/cache@v4
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Restore build output (dist)
+        uses: actions/cache@v4
+        with:
+          path: dist
+          key: ${{ runner.os }}-dist-${{ github.sha }}
+
+      - name: Install Playwright Browsers
+        run: npx playwright install --with-deps
+
+      - name: Set environment variables
+        run: |
+          if [[ "${{ github.ref }}" == "refs/heads/main" ]]; then
+            echo "PALADIUM_API_URL=https://palatracker.bromine.fr" >> $GITHUB_ENV
+            echo "NEXT_PUBLIC_PALACLICKER_API_URL=https://palatracker.bromine.fr" >> $GITHUB_ENV
+            echo "NEXT_PUBLIC_PALACLICKER_API_WS=wss://palatracker.bromine.fr/ws" >> $GITHUB_ENV
+            echo "PALADIUM_API_KEY=${{ secrets.PALADIUM_API_KEY_PROD }}" >> $GITHUB_ENV
+          elif [[ "${{ github.ref }}" == "refs/heads/dev" ]]; then
+            echo "PALADIUM_API_URL=https://dev.bromine.fr" >> $GITHUB_ENV
+            echo "NEXT_PUBLIC_PALACLICKER_API_URL=https://dev.bromine.fr" >> $GITHUB_ENV
+            echo "NEXT_PUBLIC_PALACLICKER_API_WS=wss://dev.bromine.fr/ws" >> $GITHUB_ENV
+            echo "PALADIUM_API_KEY=${{ secrets.PALADIUM_API_KEY_DEV }}" >> $GITHUB_ENV
+          else
+            echo "Unsupported branch: ${{ github.ref }}"
+            exit 1
+          fi
+
+      - name: Run Jest unit tests
+        run: npm run test:jest
+
+      - name: Run Playwright tests
+        run: npx playwright test
+
+      - uses: actions/upload-artifact@v4
+        if: ${{ !cancelled() }}
+        with:
+          name: playwright-report
+          path: playwright-report/
+          retention-days: 30
