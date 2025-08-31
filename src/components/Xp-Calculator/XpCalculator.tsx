@@ -7,10 +7,10 @@ import {
   ButtonUseF2,
   ButtonUseF3,
   DisplayDailyDoubleRank,
+  DisplayItem,
   DisplayXpBonus,
   DisplayXpNeeded,
   DisplayXpNeededWithBottle,
-  DisplayXpNeededWithDouble,
   InputDailyBonus
 } from "@/components/Xp-Calculator/MetierSelectorClient.tsx";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover.tsx";
@@ -152,24 +152,12 @@ export function HowToXp({ searchParams }: {
             </div>
           </div>
           {
-            searchParams.metier && constants.how_to_xp[searchParams.metier as MetierKey].map((e, index) => {
-              return (
-                <div key={index} className="flex flex-row items-center gap-4">
-                  <Image src={safeJoinPaths(`/AH_img/${e["imgPath"]}`)}
-                         alt={e.imgPath}
-                         width={64} height={64}
-                         unoptimized={true}
-                         className="object-cover pixelated"/>
-                  <div className="flex flex-col">
-                        <span className="font-semibold">
-                          {e.action}
-                        </span>
-                    <GradientText className="font-bold">
-                      <DisplayXpNeededWithDouble searchParams={searchParams} xp={e.xp} element={e}/>
-                    </GradientText>
-                    <span className="font-semibold">{e.type}</span>
-                  </div>
-                </div>)
+            searchParams.metier && constants.how_to_xp[searchParams.metier as MetierKey].filter((e) => {
+              if (e.level === undefined)
+                return true;
+              return (e.level && searchParams && searchParams.level && searchParams.level > e.level);
+            }).map((e, index) => {
+              return <DisplayItem key={e.imgPath + index} item={e} searchParams={searchParams} index={index}></DisplayItem>
             })
           }
         </div>

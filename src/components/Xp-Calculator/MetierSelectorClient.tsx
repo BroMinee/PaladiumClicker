@@ -1,5 +1,5 @@
 'use client';
-import { formatPrice, generateXpCalculatorUrl, safeJoinPaths } from "@/lib/misc.ts";
+import { formatPrice, generateXpCalculatorUrl, getColorByMetierName, safeJoinPaths } from "@/lib/misc.ts";
 import { cn } from "@/lib/utils.ts";
 import { MetierKey, PlayerInfo, PlayerRank } from "@/types";
 import { useRouter } from "next/navigation";
@@ -11,6 +11,7 @@ import { Button } from "@/components/ui/button.tsx";
 import { Input } from "@/components/ui/input.tsx";
 import { searchParamsXpBonusPage } from "@/components/Xp-Calculator/XpCalculator.tsx";
 import constants, { HowToXpElement } from "@/lib/constants.ts";
+import GradientText from "../shared/GradientText";
 
 export function SetLevelInUrl({ selected, params, searchParams }: {
   selected: MetierKey,
@@ -246,6 +247,40 @@ export function DisplayXpNeeded({ searchParams }: { searchParams: searchParamsXp
   const { data: playerInfo } = usePlayerInfoStore();
   const xpNeeded = getXpDiff(playerInfo, searchParams);
   return <>{formatPrice(Math.ceil(xpNeeded))} xp</>
+}
+
+export function DisplayItem({searchParams, item, index} : {searchParams: searchParamsXpBonusPage, item: HowToXpElement, index: number}) {
+
+  const { data: playerInfo } = usePlayerInfoStore();
+  if (!playerInfo || !playerInfo?.metier || searchParams.level === undefined || !searchParams.metier)
+    return null;
+
+
+  const colors = getColorByMetierName(searchParams.metier as MetierKey);
+
+  return (
+    <div key={index} className="relative flex flex-row items-center gap-4">
+      {item.level !== undefined && item.level > playerInfo.metier[searchParams.metier as MetierKey].level && (
+        <div className="absolute top-0 right-0 text-xs font-bold bg-white bg-opacity-80 px-2 py-0.5 rounded-bl"
+        style={{ backgroundColor: `rgb(${colors.bgColor[0]},${colors.bgColor[1]},${colors.bgColor[2]})` }}>
+          niv {item.level}
+        </div>
+      )}
+      <Image src={safeJoinPaths(`/AH_img/${item.imgPath}`)}
+             alt={item.imgPath}
+             width={64} height={64}
+             unoptimized={true}
+             className="object-cover pixelated"/>
+      <div className="flex flex-col">
+            <span className="font-semibold">
+              {item.action}
+            </span>
+        <GradientText className="font-bold">
+          <DisplayXpNeededWithDouble searchParams={searchParams} xp={item.xp} element={item}/>
+        </GradientText>
+        <span className="font-semibold">{item.type}</span>
+      </div>
+    </div>)
 }
 
 export function DisplayXpNeededWithDouble({ searchParams, xp, element }: {
