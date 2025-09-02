@@ -22,7 +22,7 @@ export default function ProfilSelector() {
 
   return (
     <ScrollArea className="flex flex-row w-full place-items-end">
-      <div className="flex flex-grow justify-start gap-2">
+      <div className="flex flex-grow justify-start gap-2" id="profil-selector">
         {ProfilSectionValid.map((name, index) => (
           <div key={index}
                className={cn("flex flex-row bg-card rounded-t-md w-fit justify-center items-center mb-0 mt-3 p-2 cursor-pointer", currentSection === name ? "bg-primary border-card border-2 border-b-0" : "")}

@@ -62,7 +62,7 @@ export const MetierComponentWrapper = ({
   return (
     <>
       <div className="relative">
-        <Image src={safeJoinPaths(constants.imgPathProfile,"/JobsIcon/", `${metierName}.webp`)} alt="image"
+        <Image src={safeJoinPaths(constants.imgPathProfile,"/JobsIcon/", `${metierName}.webp`)} alt="jobsImage"
                unoptimized
                style={{ position: "inherit", zIndex: 2 }} width={256} height={256}/>
         <div className="progress-bar">

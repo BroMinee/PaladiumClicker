@@ -423,7 +423,7 @@ export function ZoomableChart({ data: initialData, rankingType, profil }: Zoomab
                             Minimum Local
                         </span>
             <span className="text-lg font-bold leading-none sm:text-3xl">
-                            {minValue.toLocaleString()}
+                            {formatPrice(minValue)}
                         </span>
           </div>
           <div
@@ -433,7 +433,7 @@ export function ZoomableChart({ data: initialData, rankingType, profil }: Zoomab
                             Maximum Local
                         </span>
             <span className="text-lg font-bold leading-none sm:text-3xl">
-                            {maxValue.toLocaleString()}
+                            {formatPrice(maxValue)}
                         </span>
           </div>
 

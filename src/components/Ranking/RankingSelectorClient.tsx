@@ -41,7 +41,7 @@ export function RankingSelectorClient({ rankingType, rankingPage }: {
         onClick={() => router.push(rankingPage ? generateRankingUrl(rankingType, usernames?.split(","), noUsernames?.split(",")) : generateProfilUrl(playerInfo?.username || "undefined", ProfilSectionEnum.Classement, rankingType, usernames ? [usernames] : undefined), { scroll: false })}
       >
         <Image src={imgPath}
-               alt={searchParams.get("category") || "unknown"}
+               alt={rankingTypeToUserFriendlyText(rankingType)}
                width={64}
                height={64}
                unoptimized={true}

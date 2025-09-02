@@ -15,6 +15,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card.t
 import React, { Suspense } from "react";
 import { ProfilRankingSection } from "@/components/Profil/Ranking/ProfilRanking.tsx";
 import AhInfo from "@/components/Profil/AhInfo.tsx";
+import { ErrorBoundary } from "@/components/Profil/ErrorProfilErrorBoundary";
 
 export type searchParamsProfilPage = { section?: string, category?: string, usernames?: string }
 
@@ -71,14 +72,36 @@ function PetMontureProfilSection() {
       </CardHeader>
       <CardContent className="flex flex-grow flex-col lg:flex-row justify-between">
         <div className="w-full lg:w-1/2">
-          <PetCanvas/>
+          <ErrorBoundary fallback={<PetCanvasFallback/>} >
+            <PetCanvas/>
+          </ErrorBoundary>
         </div>
         <div className="w-full lg:w-1/2">
-          <PetCanvas monture/>
+        <ErrorBoundary fallback={<MontureCanvasFallback/>} >
+            <PetCanvas monture/>
+          </ErrorBoundary>
         </div>
       </CardContent>
     </Card>
   )
+}
+
+function PetCanvasFallback() {
+  return (
+    <div className="w-full h-full flex items-center justify-center p-4 border rounded-md bg-muted text-muted-foreground">
+      Erreur lors rendu du pet.
+      <canvas hidden></canvas>
+    </div>
+  );
+}
+
+function MontureCanvasFallback() {
+  return (
+    <div className="w-full h-full flex items-center justify-center p-4 border rounded-md bg-muted text-muted-foreground">
+      Erreur lors rendu de la monture.
+      <canvas hidden></canvas>
+    </div>
+  );
 }
 
 export default ProfilSelectorDisplay;
