@@ -1,5 +1,17 @@
 [
   {
+    "date": "TODO",
+    "changes": {
+      "additions": [
+        "Ajout de tests E2E"
+      ],
+      "corrections": [
+        "Correction d'un crash client lorsque WebGL ne pouvait pas être initialisé",
+        "Correction de la CI"
+      ]
+    }
+  },
+  {
     "date": "12/07/2025",
     "changes": {
       "summer rush": [
