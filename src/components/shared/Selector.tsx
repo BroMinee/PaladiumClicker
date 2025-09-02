@@ -83,6 +83,7 @@ const Selector = ({ options, defaultValue, setInputValue }: SelectorProps) => {
   }
 
   return <Select
+    id="selector"
     options={options}
     components={{ ...animatedComponents, DropdownIndicator, IndicatorSeparator }}
     styles={customStyles}

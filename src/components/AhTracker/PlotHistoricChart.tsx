@@ -37,7 +37,7 @@ export const PlotHistoricChart = ({ data, webhook = false }: { data: AhItemHisto
   }) : [{ date: "Cette item n'a pas encore été vendu de la saison", price: 0, quantity: 0 }];
   const { threshold, thresholdCondition } = useWebhookStore();
   return (
-    <ResponsiveContainer width="100%" height="100%">
+    <ResponsiveContainer width="100%" height="100%" id="graph-historic-plot">
       <AreaChart data={data_clean}
                  margin={{ top: 30, right: 30, left: 30, bottom: 10 }}>
         <defs>
@@ -58,12 +58,14 @@ export const PlotHistoricChart = ({ data, webhook = false }: { data: AhItemHisto
                domain={[(dataMin: number) => Math.round(dataMin * 0.9), (dataMax: number) => Math.round(dataMax * 1.1)]}/>
         <Tooltip content={<CustomTooltip/>}/>
         {(!webhook || thresholdCondition !== "aboveQuantity") &&
-          <Area yAxisId="left" type="monotone" dataKey="price" stroke="#8884d8" fillOpacity={1} fill="url(#colorUv)"/>}
+          <Area yAxisId="left" type="monotone" dataKey="price" stroke="#8884d8" fillOpacity={1} fill="url(#colorUv)" id="curve-price"/>}
         {(!webhook || thresholdCondition === "aboveQuantity") &&
           <Area yAxisId="right" type="monotone" dataKey="quantity" stroke="#82ca9d" fillOpacity={1}
+          id="curve-quantity"
                 fill="url(#colorPv)"/>}
         {
           webhook && <ReferenceLine
+            id="line-threshold"
             y={threshold}
             yAxisId={thresholdCondition === "aboveQuantity" ? "right" : "left"}
             stroke="red"
