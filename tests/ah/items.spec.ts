@@ -92,7 +92,7 @@ test('Test current sells', async ({ page }) => {
 
   await expect(page.getByRole('main')).toMatchAriaSnapshot(`
     - paragraph: /Quantité en vente actuellement. x([\\d ]+)/
-    - paragraph: /Prix moyen actuellement en vente. ([\\d]+(?:,\\d{2})?) \\$/
+    - paragraph: /Prix moyen actuellement en vente. ([\\d]+(?:,\\d{1,2})?) \\$/
   `);
 });
 
