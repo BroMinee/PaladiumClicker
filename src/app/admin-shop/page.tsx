@@ -87,7 +87,7 @@ export default function Home({ searchParams }: {
           className="text-primary inline-block"/> by <GradientText>BroMine__</GradientText>
         </CardDescription>
       </CardHeader>
-      <CardContent className="grid grid-cols-6 sm:grid-cols-16 lg:grid-cols-23 items-center justify-between gap-2 pb-2">
+      <CardContent className="grid grid-cols-6 sm:grid-cols-16 lg:grid-cols-23 items-center justify-between gap-2 pb-2" id="admin-selector">
         {adminShopItemsAvailable.map((value: AdminShopItem, index: number) => {
           return <AdminShopSelectorClientItem key={value + index} item={value} periode={periodeEnum}
                                               adminShopPage={true}/>

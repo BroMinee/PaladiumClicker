@@ -7,6 +7,7 @@
     "build": "next build",
     "start": "next start",
     "test:playwright": "npx playwright test",
+    "test:report": "npx playwright show-report",
     "test:jest": "npx jest"
   },
   "dependencies": {

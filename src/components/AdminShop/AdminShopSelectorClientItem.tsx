@@ -37,7 +37,7 @@ export function AdminShopSelectorClientItem({ item, periode, adminShopPage }: {
           className={cn("w-16 h-16 hover:scale-125 duration-300 cursor-pointer hover:bg-secondary-foreground p-4 rounded-2xl hover:grayscale-0", !selected ? "grayscale" : "")}
           onClick={() => adminShopPage ? router.push(generateAdminShopUrl(item, periode), { scroll: false }) : setAdminShopItemSelected(item)}>
           <Image src={imgPath}
-                 alt={searchParams.get("item") || "unknown"}
+                 alt={item}
                  width={64}
                  height={64}
                  className="object-cover pixelated w-64"
@@ -70,6 +70,7 @@ export function AdminShopSelectorClientPeriode({ item, periode }: {
 
   return (
     <Card
+      id={`admin-shop-periode-selector-${periode}`}
       className={cn(
         buttonVariants({ variant: "card" }),
         "p-3 h-auto w-fit mt-2 font-mc text-sm",

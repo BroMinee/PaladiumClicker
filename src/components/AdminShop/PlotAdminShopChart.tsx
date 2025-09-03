@@ -48,7 +48,9 @@ const PlotAdminShopChart = ({ data, periode, webhook = false }: {
   });
 
   return (
-    <ResponsiveContainer width="100%" height="100%">
+    <ResponsiveContainer width="100%" height="100%"
+      id="graph-adminshop-plot"
+    >
       <AreaChart data={data_clean}
                  margin={{ top: 30, right: 30, left: 30, bottom: 10 }}>
         <defs>
@@ -65,7 +67,9 @@ const PlotAdminShopChart = ({ data, periode, webhook = false }: {
         <Tooltip content={<CustomTooltip/>}/>
         <Area yAxisId="left" type="monotone" dataKey="sellPrice" name="Prix de vente" stroke="#8884d8" fillOpacity={1}
               isAnimationActive={periode !== "season"}
-              fill="url(#colorUv)"/>
+              fill="url(#colorUv)"
+              id="curve-price-adminshop"
+              />
         {
           webhook && <ReferenceLine
             y={threshold}
