@@ -72,11 +72,11 @@ jobs:
       - name: Build the project
         run: npm run build
 
-      - name: Cache build output (dist)
+      - name: Cache build output (.next)
         uses: actions/cache@v4
         with:
-          path: dist
-          key: ${{ runner.os }}-dist-${{ github.sha }}
+          path: .next
+          key: ${{ runner.os }}-next-${{ github.sha }}
 
 
   tests:
@@ -101,11 +101,11 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Restore build output (dist)
+      - name: Restore build output (.next)
         uses: actions/cache@v4
         with:
-          path: dist
-          key: ${{ runner.os }}-dist-${{ github.sha }}
+          path: .next
+          key: ${{ runner.os }}-next-${{ github.sha }}
 
       - name: Install Playwright Browsers
         run: npx playwright install --with-deps
@@ -139,3 +139,32 @@ jobs:
           name: playwright-report
           path: playwright-report/
           retention-days: 7
+  docker-release:
+    name: Build Docker image and publish it
+    needs: tests
+    runs-on: ubuntu-latest
+    if: github.event_name != 'pull_request'
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build final production image
+        run: |
+          echo ${{ secrets.GH_PAT }} | docker login ghcr.io -u BroMinee --password-stdin
+          if [[ "${{ github.ref }}" == "refs/heads/main" ]]; then
+            docker build --build-arg PALADIUM_API_KEY=${{ secrets.PALADIUM_API_KEY_PROD }} \
+                      --build-arg NEXT_PUBLIC_PALACLICKER_API_URL=https://palatracker.bromine.fr\
+                      --build-arg NEXT_PUBLIC_PALACLICKER_API_WS=wss://palatracker.bromine.fr/\
+                      --build-arg PALADIUM_API_URL=https://palatracker.bromine.fr\
+                      -t ghcr.io/brominecorp/frontend:latest .
+            docker push ghcr.io/brominecorp/frontend:latest
+          elif [[ "${{ github.ref }}" == "refs/heads/dev" ]]; then
+            docker build --build-arg PALADIUM_API_KEY=${{ secrets.PALADIUM_API_KEY_DEV }} \
+                      --build-arg NEXT_PUBLIC_PALACLICKER_API_URL=https://dev.bromine.fr\
+                      --build-arg NEXT_PUBLIC_PALACLICKER_API_WS=wss://dev.bromine.fr/\
+                      --build-arg PALADIUM_API_URL=https://dev.bromine.fr\
+                      -t ghcr.io/brominecorp/frontend-dev:latest .
+            docker push ghcr.io/brominecorp/frontend-dev:latest
+          else
+            echo "Unsupported branch: ${{ github.ref }}"
+            exit 1
+          fi
