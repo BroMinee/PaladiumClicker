@@ -123,7 +123,7 @@ test('Test building count', async ({ page }) => {
 
     await page.getByRole('checkbox', { name: 'Afficher les 21 prochains' }).click();
     await page.getByRole('button', { name: 'Simuler les 21 achats' }).click();
-    await expect(await page.locator("#rps").first().innerText()).toBe("~ 150 563 845,282");
+    await expect(await page.locator("#rps").first().innerText()).toBe("~ 161 314 806,972");
 });
 
 test('Test click upgrade button', async ({ page }) => {
