@@ -34,7 +34,7 @@ export const PlotSingleValueChart = ({ data, labelName, className }: { data: Val
   });
 
   return (
-    <ResponsiveContainer width="100%" height="100%" className={className ?? ""}>
+    <ResponsiveContainer width="100%" height="100%" className={className ?? ""} id={`graph-${labelName.replaceAll(" ", "-").toLowerCase()}-plot`}>
       <AreaChart data={data_clean}
                  margin={{ top: 30, right: 30, left: 30, bottom: 10 }}>
         <defs>

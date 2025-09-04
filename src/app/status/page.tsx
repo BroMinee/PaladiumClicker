@@ -13,7 +13,7 @@ import GraphPlayerCount from "@/components/Status/GraphPlayerCount.tsx";
 
 
 export async function generateMetadata() {
-  const title = "PalaTracker | Status";
+  const title = "PalaTracker | Statut";
   const apiDownPaladium = await isApiDown();
   const apiDownPalaTracker = await isMyApiDown().catch(() => true);
   const apiImportProfil = await getPlayerInfo("BroMine__").then(() => {

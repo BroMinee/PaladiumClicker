@@ -58,7 +58,7 @@ const PlotStatusChart = ({ data, periode }: { data: ServerPaladiumStatusResponse
   const moyenneText = convert(periode);
 
   return (
-    <ResponsiveContainer width="100%" height="100%">
+    <ResponsiveContainer width="100%" height="100%" id="graph-status-plot">
       <AreaChart data={data_clean}
                  margin={{ top: 30, right: 30, left: 30, bottom: 10 }}>
         <defs>

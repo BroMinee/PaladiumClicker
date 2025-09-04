@@ -26,6 +26,7 @@ export function StatusSelectorClientPeriode({ periode }: {
 
   return (
     <Card
+    id={`status-periode-selector-${periode}`}
       className={cn(
         buttonVariants({ variant: "card" }),
         "p-3 h-auto w-fit mt-2 font-mc text-sm",
