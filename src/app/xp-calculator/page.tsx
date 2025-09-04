@@ -5,7 +5,7 @@ import constants from "@/lib/constants.ts";
 export async function generateMetadata() {
 
 
-  const title = `PalaTracker | Calculateur d'xp de métier`;
+  const title = `PalaTracker | Calculateur d'xp`;
   const description = `Renseignez votre pseudo Paladium et le métier que vous souhaitez xp pour obtenir des quantités à farmer pour atteindre le niveau souhaité.`;
   // const defaultImage = "https://brominee.github.io/PaladiumClicker/favicon.ico";
   let imgPath = "Mineur";

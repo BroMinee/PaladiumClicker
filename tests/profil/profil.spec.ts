@@ -37,7 +37,7 @@ test('Navigate using NavBar without profil', async ({ page }) => {
 
 test('Navigate using NavBar with profil', async ({ page }) => {
   await page.goto('http://localhost:3000/profil/BroMine__');
-  await expect(page.locator('h1')).toContainText('Profil de BroMine__');
+  await expect(page.locator('h1')).toContainText('Profil de BroMine__', { timeout: 5000 });
 
   await page.goto('http://localhost:3000/ah');
   await page.getByRole('link', { name: 'Profil' }).click();

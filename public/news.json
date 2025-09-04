@@ -3,12 +3,15 @@
     "date": "TODO",
     "changes": {
       "additions": [
-        "Ajout de tests E2E"
+        "Amélioration globale du site grâce à de nouveaux tests automatisés (E2E).",
+        "Développement d'un outil interne pour déployer automatiquement plus facilement."
       ],
       "corrections": [
-        "Correction d'un crash client lorsque WebGL ne pouvait pas être initialisé",
-        "Correction de la CI",
-        "Correction d'un bug réinitialisant le local storage lorsque l'option 'profil vide' est activée"
+        "Correction d'un plantage des pages quand WebGL ne pouvait pas s'initialiser.",
+        "Stabilisation du système de build et déployement (CI).",
+        "Correction d'un problème qui réinitialisait le stockage local quand l'option « profil vide » était activée.",
+        "Le niveau désiré dans le calculateur d'xp est maintenant redéfini au niveau actuel + 1 s'il était inférieur au niveau actuel.",
+        "Dans le [calculateur d'xp](https://palatracker.bromine.fr/xp-calculator), les entrées rapides sont désormais mieux gérées pour éviter les comportements indésirables."
       ]
     }
   },

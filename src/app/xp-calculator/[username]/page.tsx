@@ -20,7 +20,7 @@ export async function generateMetadata(
 ) {
 
 
-  const title = `PalaTracker | Calculateur d'xp de métier | ${params.username}`;
+  const title = `PalaTracker | Calculateur d'xp | ${params.username}`;
   const description = `Renseignez votre pseudo Paladium et le métier que vous souhaitez xp pour obtenir des quantités à farmer pour atteindre le niveau souhaité.`;
   // const defaultImage = "https://brominee.github.io/PaladiumClicker/favicon.ico";
   let imgPath = "Mineur";
@@ -42,7 +42,7 @@ export async function generateMetadata(
         imgPath = "Mineur";
         break;
     }
-  let image = safeJoinPaths("https://palatracker.bromine.fr/",constants.imgPathProfile, "/JobsIcon/", imgPath,".webp");
+  let image = safeJoinPaths("https://palatracker.bromine.fr/", constants.imgPathProfile, "/JobsIcon/", imgPath, ".webp");
   return {
     title: title,
     description: description,
@@ -90,25 +90,16 @@ export default function Home({ params, searchParams }: {
             </CardTitleH1>
             <CardDescription>
               Made with <FaHeart
-              className="text-primary inline-block"/> by <GradientText>BroMine__</GradientText>
+                className="text-primary inline-block" /> by <GradientText>BroMine__</GradientText>
             </CardDescription>
           </CardHeader>
           <CardContent className="flex justify-evenly">
-            <SetLevelInUrl selected={metierSelected} searchParams={searchParams} params={params}/>
-            {/*<select onChange={(e) => {*/}
-            {/*  setMetierSelected(e.target.value)*/}
-            {/*}}>*/}
-            {/*  {playerInfo["metier"].map((e, index) => {*/}
-            {/*        return <option key={index}*/}
-            {/*                       value={e["name"]}>{e["name"][0].toUpperCase() + e["name"].slice(1)}</option>*/}
-            {/*      }*/}
-            {/*  )}*/}
-            {/*</select>*/}
+            <SetLevelInUrl selected={metierSelected} searchParams={searchParams} params={params} />
             <div className="grid-cols-2 grid sm:grid-cols-4">
               {metierAvailable.map((e, index) => {
                 return (
                   <MetierSelectorClient key={index} metier={e} username={params.username}
-                                        selected={searchParams.metier === e} searchParams={searchParams}/>
+                    selected={searchParams.metier === e} searchParams={searchParams} />
                 )
               })
               }
@@ -120,8 +111,8 @@ export default function Home({ params, searchParams }: {
             <CardHeader>
               <h3>Niveau actuel</h3>
             </CardHeader>
-            <CardContent>
-              <MetierComponentWrapper editable={false} metierKey={metierSelected}/>
+            <CardContent id="metier-current-level">
+              <MetierComponentWrapper editable={false} metierKey={metierSelected} />
             </CardContent>
           </Card>
 
@@ -129,13 +120,13 @@ export default function Home({ params, searchParams }: {
             <CardHeader>
               <h3>Niveau à atteindre</h3>
             </CardHeader>
-            <CardContent>
-              <MetierToReachWrapper metierKey={metierSelected} searchParams={searchParams}/>
+            <CardContent id="metier-target-level">
+              <MetierToReachWrapper metierKey={metierSelected} searchParams={searchParams} />
             </CardContent>
           </Card>
         </div>
-        <XpBonus params={params} searchParams={searchParams}/>
-        <HowToXp searchParams={searchParams}/>
+        <XpBonus params={params} searchParams={searchParams} />
+        <HowToXp searchParams={searchParams} />
       </div>
     </ProfileFetcherWrapper>
   )
