@@ -2,7 +2,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitleH1 } from "@/c
 import GradientText from "@/components/shared/GradientText.tsx";
 import { FaHeart } from "react-icons/fa";
 import Discord from "@/components/Discord.tsx";
-import newsJson from "@/assets/news.json";
+import newsJson from "@/public/news.json";
 import { News } from "@/components/News.tsx";
 import { ChangeLogs } from "@/types";
 
