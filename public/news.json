@@ -7,7 +7,8 @@
       ],
       "corrections": [
         "Correction d'un crash client lorsque WebGL ne pouvait pas être initialisé",
-        "Correction de la CI"
+        "Correction de la CI",
+        "Correction d'un bug réinitialisant le local storage lorsque l'option 'profil vide' est activée"
       ]
     }
   },

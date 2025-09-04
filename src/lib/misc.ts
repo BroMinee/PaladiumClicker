@@ -3308,18 +3308,18 @@ export function getLinkFromUrl(url: string):
 
 export const getInitialPlayerInfo = (): PlayerInfo => {
 
-  const metiers = metier_json as Metiers;
-  const buildings = building_json as Building[];
+  const metiers = structuredClone(metier_json) as Metiers;
+  const buildings = structuredClone(building_json) as Building[];
   for (let i = 0; i < buildings.length; i++) {
     buildings[i].base_production = String(0.10000000149011612 * Math.pow(1.7999999523162842, i));
   }
-  const buildingUpgrade = building_upgrade_json as BuildingUpgrade[];
-  const categoryUpgrade = category_upgrade_json as CategoryUpgrade[];
+  const buildingUpgrade = structuredClone(building_upgrade_json) as BuildingUpgrade[];
+  const categoryUpgrade = structuredClone(category_upgrade_json) as CategoryUpgrade[];
   const CPS = CPS_json as CPS[];
-  const globalUpgrade = global_upgrade_json as GlobalUpgrade[];
-  const manyUpgrade = many_upgrade_json as ManyUpgrade[];
-  const posteriorUpgrade = posterior_upgrade_json as PosteriorUpgrade[];
-  const terrainUpgrade = terrain_upgrade_json as TerrainUpgrade[];
+  const globalUpgrade = structuredClone(global_upgrade_json) as GlobalUpgrade[];
+  const manyUpgrade = structuredClone(many_upgrade_json) as ManyUpgrade[];
+  const posteriorUpgrade = structuredClone(posterior_upgrade_json) as PosteriorUpgrade[];
+  const terrainUpgrade = structuredClone(terrain_upgrade_json) as TerrainUpgrade[];
   return {
     metier: metiers,
     achievements: [],

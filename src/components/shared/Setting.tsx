@@ -1,5 +1,6 @@
 'use client';
 import { IoSettings } from "react-icons/io5";
+import constants from "@/lib/constants.ts";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -18,11 +19,12 @@ import { useEffect } from "react";
 export default function Setting() {
 
   const { settings, setFallingImage, setDefaultProfile } = useSettingsStore();
-  const { setDefaultProfile: setDefaultProfileLocal } = usePlayerInfoStore();
+  const { setDefaultProfile: setDefaultProfileLocal, data: playerInfo } = usePlayerInfoStore();
 
   useEffect(() => {
-    if (settings.defaultProfile)
+    if (settings.defaultProfile && playerInfo?.username !== constants.defaultUsername) {
       setDefaultProfileLocal();
+    }
   }, [settings.defaultProfile]);
 
   return (

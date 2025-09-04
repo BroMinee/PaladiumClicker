@@ -29,10 +29,19 @@ test('Test profil section selector', async ({ page }) => {
   }
 });
 
-test('Navigate using NavBar', async ({ page }) => {
+test('Navigate using NavBar without profil', async ({ page }) => {
   await page.goto('http://localhost:3000/');
   await page.getByRole('link', { name: 'Profil' }).click();
   await expect(page).toHaveTitle("PalaTracker | Profil");
+});
+
+test('Navigate using NavBar with profil', async ({ page }) => {
+  await page.goto('http://localhost:3000/profil/BroMine__');
+  await expect(page.locator('h1')).toContainText('Profil de BroMine__');
+
+  await page.goto('http://localhost:3000/ah');
+  await page.getByRole('link', { name: 'Profil' }).click();
+  await expect(page).toHaveTitle("PalaTracker | Profil | BroMine__");
 });
 
 test('Check Home page element', async ({ page }) => {

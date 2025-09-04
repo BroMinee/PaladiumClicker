@@ -19,6 +19,7 @@ export function BuildingPrice({ index }: { index: number }) {
   const price = !playerInfo ? 0 : formatPrice(computePrice(Number(playerInfo.building[index].price), Number(playerInfo.building[index].own)));
 
   return <div
+    id={`building-price-${index}`}
     className="text-primary font-bold text-center text-nowrap mx-2">{price} $
   </div>
 }
@@ -48,6 +49,7 @@ export function BuildingInput({ index }: { index: number }) {
 
   if (!playerInfo)
     return <input
+      id={`building-input-${index}`}
       className="text-white text-center rounded-sm font-mc font-bold text-sm flex items-center justify-center h-9 w-fit px-2"
       type="number"
       min="0"
@@ -57,6 +59,7 @@ export function BuildingInput({ index }: { index: number }) {
     />
 
   return <input
+    id={`building-input-${index}`}
     type="number"
     min="0"
     step="1"

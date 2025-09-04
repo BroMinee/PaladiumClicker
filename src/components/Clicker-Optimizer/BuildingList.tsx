@@ -54,7 +54,7 @@ const Building = ({ imgPath, index }: BuildingProps) => {
       </div>
 
       <div className="space-y-2">
-        <div className="flex flex-row items-center gap-1">
+        <div className="flex flex-row items-center gap-1" id={`building-rps-${index}`}>
           <BuildingRPS index={index}/>
           <Image src={safeJoinPaths("/coin.png")} height={16} width={16} alt="Coin"/>
           <span>/s</span>

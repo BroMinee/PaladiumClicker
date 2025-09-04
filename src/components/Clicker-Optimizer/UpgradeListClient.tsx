@@ -81,6 +81,7 @@ export function ButtonUpgrade({ index, upgradeType, children }: {
 
   return (
     <Card
+      id={`upgrade-${upgradeType}-${index}`}
       className={cn(
         buttonVariants({ variant: "card" }),
         "p-3 h-auto",

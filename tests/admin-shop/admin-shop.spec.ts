@@ -3,7 +3,7 @@ import { test, expect } from '@playwright/test';
 test('Navigate using NavBar', async ({ page }) => {
   await page.goto('http://localhost:3000/');
   await page.getByRole('link', { name: 'Admin Shop' }).click();
-  await expect(page).toHaveTitle("PalaTracker | Admin Shop");
+  await expect(page).toHaveTitle("PalaTracker | Admin Shop | Paladium Ingot");
 });
 
 test('Check Home page element', async ({ page }) => {

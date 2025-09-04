@@ -185,7 +185,7 @@ export const getPlayerInfo = async (pseudo: string): Promise<PlayerInfo> => {
   const [clickerData, ahInfo, friendList, metiers, leaderboardPosition, paladiumFactionInfo, viewCount, achievements, mount, pet] = await Promise.all([p1, p2, p3, p4, p5, p6, p7, p8, p9, p10]);
 
   // NOTE: We use structuredClone to avoid modifying the original JSON by accident (it already happened once oupsy)
-  let initialPlayerInfo = structuredClone(getInitialPlayerInfo());
+  let initialPlayerInfo = getInitialPlayerInfo();
 
   const translateBuildingName = translate_building_json as Record<string, number>;
   const translateBuildingUpgradeName = translate_upgrade_json as Record<string, (string | number)[]>;

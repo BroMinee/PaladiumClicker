@@ -19,6 +19,7 @@ export function ButtonCPS({ index, children }: { index: number, children: ReactN
 
   return (
     <Card
+      id={`upgrade-click-${index}`}
       className={cn(
         buttonVariants({ variant: "card" }),
         "p-4 h-auto w-fit",

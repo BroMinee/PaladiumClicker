@@ -120,7 +120,7 @@ const RPS = () => {
           <div className="flex flex-col gap-2">
             <span className="font-semibold">Production actuelle par seconde</span>
             <div className="flex items-center gap-2">
-              <GradientText className="font-bold">{'~ ' + formatPrice(rps)}</GradientText>
+              <GradientText className="font-bold" id="rps">{'~ ' + formatPrice(rps)}</GradientText>
               <Image width={24} height={24} src={safeJoinPaths("/coin.png")} alt="Coin"/>
             </div>
           </div>
