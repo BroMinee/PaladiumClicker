@@ -14,7 +14,7 @@ import constants from "@/lib/constants.ts";
 import { AuthForceWrapper } from "@/components/Auth/AuthForceWrapper.tsx";
 
 export async function generateMetadata() {
-  let title = `PalaTracker | Pala Animation Trainer`;
+  let title = `PalaTracker | PalaAnimation Trainer`;
 
   const description = "Viens t'entraîner sur PalaAnimation et compare ton temps avec les autres joueurs ! 🚀"
   return {
