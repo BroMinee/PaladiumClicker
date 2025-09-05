@@ -91,7 +91,7 @@ export default function LinkClient({ path, children }: {
     return <HoverText text={hoverElement}>
       <Link
         onClick={handleClick}
-        className={cn("font-medium flex justify-start items-center space-x-6 focus:bg-gray-700 focus:text-white hover:bg-accent text-card-foreground rounded px-3 py-2 w-56", isActive && "underline bg-accent")}
+        className={cn("font-medium flex justify-start items-center space-x-6 focus:bg-gray-700 focus:text-white hover:bg-accent text-card-foreground rounded px-3 py-2 w-56 transition-colors duration-300 ease-out motion-reduce:transition-none", isActive && "underline bg-accent")}
         href={href}>
         {children}
         <p className="text-base leading-4 flex-grow text-left">{label}</p>
@@ -110,7 +110,7 @@ export default function LinkClient({ path, children }: {
   return (
     <Link
       onClick={handleClick}
-      className={cn("font-medium flex justify-start items-center space-x-6 focus:bg-gray-700 focus:text-white hover:bg-accent text-card-foreground rounded px-3 py-2 w-56", isActive && "underline bg-accent")}
+      className={cn("font-medium flex justify-start items-center space-x-6 focus:bg-gray-700 focus:text-white hover:bg-accent text-card-foreground rounded px-3 py-2 w-56 transition-colors duration-300 ease-out motion-reduce:transition-none", isActive && "underline bg-accent")}
       href={href}>
       {children}
       <p className="text-base leading-4 flex-grow text-left">{label}</p>
@@ -136,6 +136,9 @@ export function CategorieDisplay({ name, children }: {
   let subLinks: PathValid[] = constants.MenuPath.get(name) || [];
   const [mounted, setMounted] = useState(false);
   const [newNotification, setNewNotification] = useState(0);
+
+  const contentRef = React.useRef<HTMLDivElement | null>(null);
+  const [maxHeight, setMaxHeight] = useState<string>("0px");
 
   useEffect(() => {
     setMounted(true);
@@ -175,11 +178,30 @@ export function CategorieDisplay({ name, children }: {
   }, [mounted, playerInfo]);
 
 
+  useEffect(() => {
+    const el = contentRef.current;
+    if (!el) return;
+    const update = () => {
+      setMaxHeight(open ? `${el.scrollHeight}px` : "0px");
+    };
+    update();
+    const ro = typeof ResizeObserver !== 'undefined' ? new ResizeObserver(update) : null;
+    if (ro) ro.observe(el);
+    window.addEventListener('resize', update);
+    return () => {
+      if (ro) ro.disconnect();
+      window.removeEventListener('resize', update);
+    };
+  }, [open, mounted, subLinks.length]);
+
   return (<div className="flex flex-col justify-start items-center px-6 border-b border-gray-600 w-full">
     <button onClick={toggleOpen}
-            className="focus:outline-none focus:text-indigo-400  text-card-foreground flex justify-between items-center w-full py-5 space-x-14  ">
+            className="focus:outline-none focus:text-indigo-400 text-card-foreground flex justify-between items-center w-full py-5 space-x-14 transition-colors duration-200">
       <p className="text-sm text-left leading-5 uppercase">{name}</p>
-      {open ? <FaAngleUp size={24}/> : <FaAngleDown size={24}/>}
+      <FaAngleDown size={24} className={cn(
+        "transition-transform duration-300 ease-in-out transform-gpu",
+        open ? "rotate-180" : "rotate-0"
+      )} />
 
     </button>
     {!open && newNotification !== 0 && <div className="relative inline-block">
@@ -189,7 +211,13 @@ export function CategorieDisplay({ name, children }: {
         className=" absolute right-0 w-6 h-6 text-white bg-red-500 rounded-md text-center"
         style={{ bottom: "35px", left: "100px" }}>{newNotification}</span>
     </div>}
-    <div className={cn("flex justify-start flex-col items-start pb-5 gap-1 animate-fade-in", !open && "hidden")}>
+    <div
+      ref={contentRef}
+      style={{ maxHeight: maxHeight, opacity: open ? 1 : 0 }}
+      className={cn(
+        "flex justify-start flex-col items-start pb-5 gap-1 overflow-hidden transition-all duration-300 ease-in-out"
+      )}
+    >
       {children}
     </div>
   </div>)

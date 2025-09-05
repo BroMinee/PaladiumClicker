@@ -104,7 +104,7 @@ export async function getEventNotClaimed(uuid: string) {
     return "Not winner";
   } catch (error) {
     console.error('Error fetching events:', error);
-    throw new Error("Error fetching events");
+    return "Not winner";
   }
 }
 
@@ -114,7 +114,7 @@ export async function getNotificationWebSite() {
     return await getCurrentNotification();
   } catch (error) {
     console.error('Error fetching events:', error);
-    throw new Error("Error fetching events");
+    return null;
   }
 }
 

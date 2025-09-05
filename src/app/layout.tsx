@@ -3,11 +3,12 @@ import { GoogleAnalytics } from '@next/third-parties/google'
 
 import React from "react";
 import Navbar from "@/components/NavBar/NavBar.tsx";
-import { Montserrat } from '@next/font/google';
+import { Montserrat } from 'next/font/google';
 import { ThemeProviders } from "@/components/shared/ThemeProvider.tsx";
 import { Toaster } from "@/components/ui/sonner.tsx";
 import ServiceWorkerRegister from "@/components/ServiceWorkerRegister.tsx";
 import { AuthGetWrapper } from "@/components/Auth/AuthGetWrapper.tsx";
+import PageTransition from "@/components/shared/PageTransition.tsx";
 
 const montserrat = Montserrat({
   subsets: ['latin'],  // specify subsets according to your needs
@@ -36,7 +37,11 @@ export default function RootLayout({
           </header>
           <main className="flex-1 container py-4 pb-8 mx-auto overflow-x-hidden">
             <AuthGetWrapper/>
-            {children}
+            <div className="relative">
+              <PageTransition>
+                {children}
+              </PageTransition>
+            </div>
             <Toaster/>
           </main>
         </div>
