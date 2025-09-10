@@ -311,5 +311,5 @@ test('Check wrong username', async ({ page }) => {
   await page.goto('http://localhost:3000/clicker-optimizer/zzzzzzzzzzzzzzzzzz');
   await page.waitForTimeout(3000);
   await expect(page).toHaveTitle("PalaTracker | Erreur");
-  await expect(page).toHaveURL("http://localhost:3000/error?message=Impossible%20de%20charger%20le%20profil%20de%20zzzzzzzzzzzzzzzzzz&username=zzzzzzzzzzzzzzzzzz");
+  await expect(page).toHaveURL("http://localhost:3000/error?message=Impossible%20de%20r%C3%83%C2%A9cup%C3%83%C2%A9rer%20les%20donn%C3%83%C2%A9es%20de%20zzzzzzzzzzzzzzzzzz,%20v%C3%83%C2%A9rifie%20que%20tu%20as%20bien%20%C3%83%C2%A9crit%20ton%20pseudo.&detail=Le%20pseudo%20zzzzzzzzzzzzzzzzzz%20n%27existe%20pas%20sur%20Minecraft.&username=zzzzzzzzzzzzzzzzzz");
 });

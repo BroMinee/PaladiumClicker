@@ -15,7 +15,7 @@ test('Check Classement page', async ({ page }) => {
   await expect(page.getByRole('main')).toMatchAriaSnapshot(`
     - button "Reset Zoom"
     - button "Activer les animations"
-    - text: /Minimum Local (∞|\\d+ \\d+) Maximum Local (-∞|\\d+ \\d+)/
+    - text: /Minimum Local (∞|\\d+( \\d+)*) Maximum Local (-∞|\\d+( \\d+)*)/
     - heading "Usernames" [level=3]
     - textbox "Entre un pseudo"
     - button:
