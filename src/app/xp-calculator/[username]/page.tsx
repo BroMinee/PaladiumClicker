@@ -1,6 +1,5 @@
 import ProfileFetcherWrapper from "@/components/ProfileFetcher.tsx";
 import { MetierComponentWrapper } from "@/components/MetierList.tsx";
-import { redirect } from "next/navigation";
 import { Card, CardContent, CardDescription, CardHeader, CardTitleH1 } from "@/components/ui/card.tsx";
 import GradientText from "@/components/shared/GradientText.tsx";
 import { FaHeart } from "react-icons/fa";
@@ -18,8 +17,6 @@ import { safeJoinPaths } from "@/lib/misc.ts";
 export async function generateMetadata(
   { params, searchParams }: { params: { username: string }, searchParams: searchParamsXpBonusPage },
 ) {
-
-
   const title = `PalaTracker | Calculateur d'xp | ${params.username}`;
   const description = `Renseignez votre pseudo Paladium et le métier que vous souhaitez xp pour obtenir des quantités à farmer pour atteindre le niveau souhaité.`;
   // const defaultImage = "https://brominee.github.io/PaladiumClicker/favicon.ico";
@@ -65,17 +62,13 @@ export default function Home({ params, searchParams }: {
   params: { username: string },
   searchParams: searchParamsXpBonusPage
 }) {
-  if (searchParams.metier === undefined)
-    redirect(`/xp-calculator/${params.username}?metier=miner`);
-
+  const metierAvailable: MetierKey[] = ["miner", "farmer", "hunter", "alchemist"]
+  if (searchParams.metier === undefined || !metierAvailable.includes(searchParams.metier as MetierKey)) {
+    return <SetLevelInUrl selected="miner" searchParams={searchParams} params={params} />
+  }
   searchParams.metier = searchParams.metier?.toLowerCase();
   searchParams.dailyBonus = searchParams.dailyBonus !== undefined ? Number(searchParams.dailyBonus) : undefined;
   searchParams.level = searchParams.level !== undefined ? Number(searchParams.level) : undefined;
-
-
-  const metierAvailable: MetierKey[] = ["miner", "farmer", "hunter", "alchemist"]
-  if (!metierAvailable.includes(searchParams.metier as MetierKey))
-    redirect(`/xp-calculator/${params.username}?metier=miner`);
 
   const metierSelected = searchParams.metier as MetierKey;
 

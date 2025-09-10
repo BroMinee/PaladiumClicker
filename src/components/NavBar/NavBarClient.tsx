@@ -6,7 +6,7 @@ import { usePlayerInfoStore } from "@/stores/use-player-info-store.ts";
 import React, { ReactNode, useEffect, useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import constants, { PathValid } from "@/lib/constants.ts";
-import { FaAngleDown, FaAngleUp } from "react-icons/fa";
+import { FaAngleDown } from "react-icons/fa";
 import { useNotificationStore } from "@/stores/use-notifications-store.ts";
 import HoverText from "@/components/ui/hovertext.tsx";
 import {

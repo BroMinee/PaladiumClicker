@@ -10,6 +10,7 @@ export type AnimatedButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> 
 export function AnimatedButton({ className, children, ...props }: AnimatedButtonProps) {
   const reduce = useReducedMotion();
   return (
+    /* @ts-ignore */
     <motion.button
       whileHover={reduce ? undefined : { y: -1, scale: 1.02 }}
       whileTap={reduce ? undefined : { scale: 0.98 }}

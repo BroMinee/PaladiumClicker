@@ -155,10 +155,12 @@ test('Check Item selector', async ({ page }) => {
 
   
   await page.getByRole('button', { name: 'feather' }).click();
+  await page.waitForTimeout(5000);
   await expect(page.getByRole('heading')).toContainText("Bienvenue sur le visualisateur d'historique de prix de Feather");
   await expect(page).toHaveTitle("PalaTracker | Admin Shop | Feather");
 
   await page.getByRole('button', { name: 'findium' }).click();
+  await page.waitForTimeout(5000);
   await expect(page.getByRole('heading')).toContainText("Bienvenue sur le visualisateur d'historique de prix de Findium");
   await expect(page).toHaveTitle("PalaTracker | Admin Shop | Findium");
 });
