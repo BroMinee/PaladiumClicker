@@ -1,23 +1,26 @@
 [
   {
-    "date": "TODO",
+    "date": "14/07/2025",
     "changes": {
+      "redesigns": [
+        "Refonte de la gestion des erreurs pour donner plus d'informations lors d'un problème de chargement du profil.",
+        "Merci à [mido](https://github.com/vcdf4497) pour les animations du site !"
+      ],
       "additions": [
-        "Amélioration globale du site grâce à de nouveaux tests automatisés (E2E).",
-        "Développement d'un outil interne pour déployer automatiquement plus facilement."
+        "Amélioration de la stabilité du site grâce à des tests automatisés (E2E).",
+        "Développement d'un outil interne pour faciliter le déploiement automatique.",
+        "Ajout d'un indicateur visuel dans le [calculateur d'xp](https://palatracker.bromine.fr/xp-calculator) pour indiquer si la méthode d'xp est accessible ou non."
       ],
       "corrections": [
         "Correction d'un plantage des pages quand WebGL ne pouvait pas s'initialiser.",
-        "Stabilisation du système de build et déployement (CI).",
+        "Stabilisation du système de build et déploiement (CI).",
         "Correction d'un problème qui réinitialisait le stockage local quand l'option « profil vide » était activée.",
-        "Le niveau désiré dans le calculateur d'xp est maintenant redéfini au niveau actuel + 1 s'il était inférieur au niveau actuel.",
+        "Le niveau désiré dans le calculateur d'xp est maintenant redéfini au niveau actuel +1 s'il était inférieur au niveau actuel.",
         "Dans le [calculateur d'xp](https://palatracker.bromine.fr/xp-calculator), les entrées rapides sont désormais mieux gérées pour éviter les comportements indésirables."
       ],
       "suppression": [
-        "Suppression de la page du **palatime** car 0livierMinecraft ne fait plus d'édition de son journal."
-      ],
-      "redesigns": [
-        "Refonte de la gestion des erreurs pour donner plus d'informations lors d'un problème de chargement du profil."
+        "Suppression de la page du **palatime** car 0livierMinecraft ne fait plus d'édition de son journal.",
+        "Suppression des leaderboards stockés en base de données depuis la v9.5. Cela devrait grandement améliorer le chargement des pages de classement."
       ]
     }
   },
