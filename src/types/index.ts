@@ -469,7 +469,6 @@ export type AdminShopItem =
   | 'melon'
   | 'obsidian'
   | 'slime-ball'
-  | 'skull-1'
   | 'spider-eye'
   | 'dirt'
   | 'quartz'
@@ -500,7 +499,7 @@ export type StatusPeriode = 'day' | 'week' | 'month' | 'season';
 export const adminShopItemsAvailable: AdminShopItem[] = [
   'feather', 'wool', 'paladium-ingot', 'ender-pearl', 'egg', 'string', 'log', 'red-mushroom', 'soul-sand',
   'glowstone-dust', 'findium', 'titane-ingot', 'apple', 'cobblestone', 'reeds', 'ghast-tear', 'potato',
-  'tile-passifwither-head', 'cactus', 'melon', 'obsidian', 'slime-ball', 'skull-1', 'spider-eye', 'dirt',
+  'tile-passifwither-head', 'cactus', 'melon', 'obsidian', 'slime-ball', 'spider-eye', 'dirt',
   'quartz', 'bone', 'nether-wart', 'wheat-seeds', 'gunpowder', 'iron-ingot', 'fermented-spider-eye', 'leather',
   'sand', 'dye', 'diamond', 'gold-ingot', 'flint', 'coal', 'redstone', 'emerald', 'brown-mushroom', 'blaze-rod',
   'amethyst-ingot', 'carrot', 'cooked-beef'
@@ -800,8 +799,6 @@ export const getItemFromName = (itemName: string) => {
       return 'reeds';
     case 'seeds':
       return 'wheat-seeds';
-    case 'skull-wither':
-      return 'skull-1';
     case 'slimeball':
       return 'slime-ball';
     case 'spiderEye':

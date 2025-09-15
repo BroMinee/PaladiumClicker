@@ -54,8 +54,6 @@ test('Check Home page element', async ({ page }) => {
       - img "obsidian"
     - button "slime-ball":
       - img "slime-ball"
-    - button "skull-1":
-      - img "skull-1"
     - button "spider-eye":
       - img "spider-eye"
     - button "dirt":

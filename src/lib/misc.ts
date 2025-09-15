@@ -606,8 +606,6 @@ export function adminShopItemToUserFriendlyText(item: AdminShopItem): string {
       return "Sugar Cane"
     case "dye":
       return "Ink Sack"
-    case "skull-1":
-      return "Wither Skull"
   }
 
   return item.replaceAll('tile', '').split('-')
@@ -624,7 +622,6 @@ export function getImagePathFromAdminShopType(item: AdminShopItem): string {
     "red-mushroom": "mushroom_red",
     "brown-mushroom": "mushroom_brown",
     "cactus": "cactus_side",
-    "skull-1": "skull_wither",
     "wheat-seeds": "seeds",
     "dye": "dye_powder_black",
     "redstone": "redstone_dust",
