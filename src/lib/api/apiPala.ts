@@ -163,7 +163,10 @@ export const getPlayerInfo = async (pseudo: string): Promise<PlayerInfo> => {
   }
 
 
-  let paladiumProfil = await getPaladiumProfileByPseudo(pseudo)
+  let paladiumProfil = await getPaladiumProfileByPseudo(pseudo);
+  if (paladiumProfil.uuid === "e7fc2422-e3bc-4c7b-b4f6-a96c6b35f702") {
+    paladiumProfil = await getPaladiumProfileByPseudo("249eedd6-6ef4-4b15-8a4e-3e30df147876");
+  }
 
 
   cookies().set('uuid', paladiumProfil.uuid, { expires: new Date(Date.now() + 1000 * 60 * 60 * 24 * 30) });
