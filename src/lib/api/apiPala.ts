@@ -84,7 +84,7 @@ export const getPaladiumLeaderboardPositionByUUID = async (uuid: string, usernam
 }
 
 const getPaladiumClickerDataByUUID = async (uuid: string, username: string): Promise<PaladiumClickerData> => {
-  return await fetchWithHeader<PaladiumClickerData>(`${PALADIUM_API_URL}/v1/paladium/player/profile/${uuid}/clicker`).catch((error: Error) => {
+  return await fetchWithHeader<PaladiumClickerData>(`${PALADIUM_API_URL}/v1/paladium/player/profile/${uuid}/clicker`, 0).catch((error: Error) => {
     const message = error.message;
     return redirect(`/error?message=Impossible de récupérer les données du clicker, vérifie que tu ne les as pas désactivées sur ton profil Paladium via la commande /profil.&detail=${message}&username=${username}`);
   })
@@ -311,7 +311,7 @@ export const getPaladiumAhItemStats = async (itemId: string): Promise<PaladiumAh
 }
 
 export const getJobsFromUUID = async (uuid: string, username: string): Promise<Metiers> => {
-  const response = await fetchWithHeader<MetiersPossiblyUndefined>(`${PALADIUM_API_URL}/v1/paladium/player/profile/${uuid}/jobs`).catch((e: Error) => {
+  const response = await fetchWithHeader<MetiersPossiblyUndefined>(`${PALADIUM_API_URL}/v1/paladium/player/profile/${uuid}/jobs`, 0).catch((e: Error) => {
     const message = e.message;
     return redirect(`/error?message=Impossible de récupérer tes données de métiers, vérifie que tu ne les as pas désactivées sur ton profil Paladium via la commande /profil.&detail=${message}&username=${username}`);
   })
