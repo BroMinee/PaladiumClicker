@@ -600,7 +600,7 @@ export function rankingTypeToUserFriendlyText(rankingType: RankingType): string 
 
 export function adminShopItemToUserFriendlyText(item: AdminShopItem): string {
   switch (item) {
-    case "tile-passifwither-head":
+    case "passive-wither-head":
       return "Passif Wither Head";
     case "reeds":
       return "Sugar Cane"
@@ -616,7 +616,7 @@ export function adminShopItemToUserFriendlyText(item: AdminShopItem): string {
 export function getImagePathFromAdminShopType(item: AdminShopItem): string {
   const translateTable: Record<string, string> = {
     "wool": `wool_colored_white`,
-    "tile-passifwither-head": "passifwither_head",
+    "passive-wither-head": "passifwither_head",
     "slime-ball": "slimeball",
     "log": "log_oak",
     "red-mushroom": "mushroom_red",

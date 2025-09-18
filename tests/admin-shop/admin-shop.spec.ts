@@ -44,8 +44,8 @@ test('Check Home page element', async ({ page }) => {
       - img "ghast-tear"
     - button "potato":
       - img "potato"
-    - button "tile-passifwither-head":
-      - img "tile-passifwither-head"
+    - button "passive-wither-head":
+      - img "passive-wither-head"
     - button "cactus":
       - img "cactus"
     - button "melon":

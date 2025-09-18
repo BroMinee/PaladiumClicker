@@ -464,7 +464,7 @@ export type AdminShopItem =
   | 'reeds'
   | 'ghast-tear'
   | 'potato'
-  | 'tile-passifwither-head'
+  | 'passive-wither-head'
   | 'cactus'
   | 'melon'
   | 'obsidian'
@@ -499,7 +499,7 @@ export type StatusPeriode = 'day' | 'week' | 'month' | 'season';
 export const adminShopItemsAvailable: AdminShopItem[] = [
   'feather', 'wool', 'paladium-ingot', 'ender-pearl', 'egg', 'string', 'log', 'red-mushroom', 'soul-sand',
   'glowstone-dust', 'findium', 'titane-ingot', 'apple', 'cobblestone', 'reeds', 'ghast-tear', 'potato',
-  'tile-passifwither-head', 'cactus', 'melon', 'obsidian', 'slime-ball', 'spider-eye', 'dirt',
+  'passive-wither-head', 'cactus', 'melon', 'obsidian', 'slime-ball', 'spider-eye', 'dirt',
   'quartz', 'bone', 'nether-wart', 'wheat-seeds', 'gunpowder', 'iron-ingot', 'fermented-spider-eye', 'leather',
   'sand', 'dye', 'diamond', 'gold-ingot', 'flint', 'coal', 'redstone', 'emerald', 'brown-mushroom', 'blaze-rod',
   'amethyst-ingot', 'carrot', 'cooked-beef'
@@ -829,8 +829,8 @@ export const getItemFromName = (itemName: string) => {
       return 'titane-ingot';
     case 'yellowDust':
       return 'glowstone-dust';
-    case 'tile-passifwither-head':
-      return 'tile-passifwither-head';
+    case 'passive-wither-head':
+      return 'passive-wither-head';
     default:
       return 'paladium-ingot';
   }

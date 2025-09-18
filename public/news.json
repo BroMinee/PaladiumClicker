@@ -1,6 +1,6 @@
 [
   {
-    "date": "14/07/2025",
+    "date": "14/09/2025",
     "changes": {
       "redesigns": [
         "Refonte de la gestion des erreurs pour donner plus d'informations lors d'un problème de chargement du profil.",
