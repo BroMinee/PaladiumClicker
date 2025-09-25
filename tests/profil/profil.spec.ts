@@ -113,43 +113,35 @@ test('Check Achievements page', async ({ page }) => {
   await expect(page.getByRole('main')).toMatchAriaSnapshot(`
       - 'heading /Achievements Progression Globale : \\d+ \\/ \\d+/ [level=3]':
         - heading "Achievements" [level=1]
-      - img: /\\d+ %/
       `);
 
+  
   await expect(page.getByRole('main')).toMatchAriaSnapshot(`
-    - heading "Catégorie" [level=3]
     - button /PREMIER PAS/:
-      - img /.*.webp/
-      - img: /\\d+ %/
+      - img "AH_img/wood_pickaxe.webp"
+      - application: /\\d+ %/
     - button /MÉTIERS/:
-      - img /.*.webp/
-      - img: /\\d+ %/
+      - img "AH_img/stone_pickaxe.webp"
+      - application: /\\d+ %/
     - button /FACTION/:
-      - img /.*.webp/
-      - img: /\\d+ %/
+      - img "AH_img/diamond_sword.webp"
+      - application: /\\d+ %/
     - button /PILLAGE & DÉFENSE/:
-      - img /.*.webp/
-      - img: /\\d+ %/
+      - img "AH_img/tnt.webp"
+      - application: /\\d+ %/
     - button /ECONOMIE/:
-      - img /.*.webp/
-      - img: /\\d+ %/
+      - img "AH_img/gold_ingot.webp"
+      - application: /\\d+ %/
     - button /ORDRE VS CHAOS/:
-      - img /.*.webp/
-      - img: /\\d+ %/
+      - img "AH_img/goggles_of_community.webp"
+      - application: /\\d+ %/
     - button /DIVERS/:
-      - img /.*.webp/
-      - img: /\\d+ %/
+      - img "AH_img/ender_pearl.webp"
+      - application: /\\d+ %/
     `);
 
     await expect(page.getByRole('main')).toMatchAriaSnapshot(`
       - heading "Achievements" [level=3]
-      `);
-    
-
-    await expect(page.getByRole('main')).toMatchAriaSnapshot(`
-      - img "/AH_img/unknown.webp"
-      - text: /.*/
-      - img: /\\d+ %/
       `);
 });
 

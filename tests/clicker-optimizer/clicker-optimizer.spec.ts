@@ -18,7 +18,7 @@ test('Test building count', async ({ page }) => {
   test.slow(); // Easy way to triple the default timeout
   await page.goto('http://localhost:3000/');
 
-  await page.locator('[id="radix-:Reiqkq:"]').click();
+  await page.locator('#settings-button').click();
   await page.getByRole('menuitem', { name: 'Utiliser un profil vide' }).getByRole('switch').click();
   await page.locator('html').click();
   await page.getByRole('link', { name: 'PalaClicker Optimizer' }).click();
@@ -130,7 +130,7 @@ test('Test click upgrade button', async ({ page }) => {
   test.slow();
   await page.goto('http://localhost:3000/');
 
-  await page.locator('[id="radix-:Reiqkq:"]').click();
+  await page.locator('#settings-button').click();
   await page.getByRole('menuitem', { name: 'Utiliser un profil vide' }).getByRole('switch').click();
   await page.locator('html').click();
   await page.getByRole('link', { name: 'PalaClicker Optimizer' }).click();
@@ -150,7 +150,7 @@ test('Test global upgrade button', async ({ page }) => {
   test.slow();
   await page.goto('http://localhost:3000/');
 
-  await page.locator('[id="radix-:Reiqkq:"]').click();
+  await page.locator('#settings-button').click();
   await page.getByRole('menuitem', { name: 'Utiliser un profil vide' }).getByRole('switch').click();
   await page.locator('html').click();
   await page.getByRole('link', { name: 'PalaClicker Optimizer' }).click();
@@ -172,7 +172,7 @@ test('Test building upgrade button', async ({ page }) => {
   test.slow();
   await page.goto('http://localhost:3000/');
 
-  await page.locator('[id="radix-:Reiqkq:"]').click();
+  await page.locator('#settings-button').click();
   await page.getByRole('menuitem', { name: 'Utiliser un profil vide' }).getByRole('switch').click();
   await page.locator('html').click();
   await page.getByRole('link', { name: 'PalaClicker Optimizer' }).click();
@@ -196,7 +196,7 @@ test('Test building many button', async ({ page }) => {
   test.slow();
   await page.goto('http://localhost:3000/');
 
-  await page.locator('[id="radix-:Reiqkq:"]').click();
+  await page.locator('#settings-button').click();
   await page.getByRole('menuitem', { name: 'Utiliser un profil vide' }).getByRole('switch').click();
   await page.locator('html').click();
   await page.getByRole('link', { name: 'PalaClicker Optimizer' }).click();
@@ -222,7 +222,7 @@ test('Test building posterior button', async ({ page }) => {
   test.slow();
   await page.goto('http://localhost:3000/');
 
-  await page.locator('[id="radix-:Reiqkq:"]').click();
+  await page.locator('#settings-button').click();
   await page.getByRole('menuitem', { name: 'Utiliser un profil vide' }).getByRole('switch').click();
   await page.locator('html').click();
   await page.getByRole('link', { name: 'PalaClicker Optimizer' }).click();
@@ -248,7 +248,7 @@ test('Test building category button', async ({ page }) => {
   test.slow();
   await page.goto('http://localhost:3000/');
 
-  await page.locator('[id="radix-:Reiqkq:"]').click();
+  await page.locator('#settings-button').click();
   await page.getByRole('menuitem', { name: 'Utiliser un profil vide' }).getByRole('switch').click();
   await page.locator('html').click();
   await page.getByRole('link', { name: 'PalaClicker Optimizer' }).click();
@@ -273,7 +273,7 @@ test('Test building category button', async ({ page }) => {
 test('Check that localstorage is working', async ({ page }) => {
   await page.goto('http://localhost:3000/');
 
-  await page.locator('[id="radix-:Reiqkq:"]').click();
+  await page.locator('#settings-button').click();
   await page.getByRole('menuitem', { name: 'Utiliser un profil vide' }).getByRole('switch').click();
   await page.locator('html').click();
   await page.getByRole('link', { name: 'PalaClicker Optimizer' }).click();
@@ -291,7 +291,7 @@ test('Check that localstorage is working', async ({ page }) => {
 test('Check that reset button works', async ({ page }) => {
   await page.goto('http://localhost:3000/');
 
-  await page.locator('[id="radix-:Reiqkq:"]').click();
+  await page.locator('#settings-button').click();
   await page.getByRole('menuitem', { name: 'Utiliser un profil vide' }).getByRole('switch').click();
   await page.locator('html').click();
   await page.getByRole('link', { name: 'PalaClicker Optimizer' }).click();

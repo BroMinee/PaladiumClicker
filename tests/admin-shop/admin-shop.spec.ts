@@ -145,7 +145,7 @@ test('Check selector highlight', async ({ page }) => {
 
 test('Check svg graph', async ({ page }) => {
   await page.goto('http://localhost:3000/admin-shop?item=paladium-ingot');
-  await expect(page.locator("#graph-adminshop-plot .recharts-wrapper > svg:nth-child(1)")).toBeVisible();
+  await expect(page.locator("#graph-adminshop-plot .recharts-wrapper svg:nth-child(3)")).toBeVisible();
 });
 
 test('Check Item selector', async ({ page }) => {

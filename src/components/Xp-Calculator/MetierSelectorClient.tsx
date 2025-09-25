@@ -32,6 +32,14 @@ export function SetLevelInUrl({ selected, params, searchParams }: {
       levelToReach = playerInfo.metier[selected].level + 1;
     }
 
+    if(searchParams.metier === selected && searchParams.level === levelToReach
+      && ((searchParams.double === true) === (searchParams.double === true))
+      && ((searchParams.f2 === true) === (searchParams.f2 === true))
+      && ((searchParams.f3 === true) === (searchParams.f3 === true))
+      && ((Number(searchParams.dailyBonus || 0)) === (Number(searchParams.dailyBonus || 0)))
+    )
+      return;
+
     router.push(generateXpCalculatorUrl(params.username, selected, levelToReach, searchParams.double, searchParams.dailyBonus, searchParams.f2, searchParams.f3), { scroll: false });
 
   }, [playerInfo, searchParams]);

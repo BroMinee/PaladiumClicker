@@ -30,7 +30,7 @@ export default function Setting() {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button size="icon" variant="ghost">
+        <Button size="icon" variant="ghost" id="settings-button">
           <IoSettings/>
         </Button>
       </DropdownMenuTrigger>

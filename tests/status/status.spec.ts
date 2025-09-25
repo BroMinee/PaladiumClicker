@@ -47,6 +47,6 @@ test('Check wrong section name redirection', async ({ page }) => {
 
 test('Check svg graph', async ({ page }) => {
   await page.goto('http://localhost:3000/status');
-  await expect(page.locator("#graph-status-plot .recharts-wrapper > svg:nth-child(1)")).toBeVisible();
-  await expect(page.locator("#graph-joueurs-uniques-plot .recharts-wrapper > svg:nth-child(1)")).toBeVisible();
+  await expect(page.locator("#graph-status-plot .recharts-wrapper svg:nth-child(3)")).toBeVisible();
+  await expect(page.locator("#graph-joueurs-uniques-plot .recharts-wrapper svg:nth-child(3)")).toBeVisible();
 });

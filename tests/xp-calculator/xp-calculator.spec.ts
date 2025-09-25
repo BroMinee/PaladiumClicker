@@ -18,7 +18,7 @@ test('Test Body page', async ({ page }) => {
   test.slow(); // Easy way to triple the default timeout
   await page.goto('http://localhost:3000/');
 
-  await page.locator('[id="radix-:Reiqkq:"]').click();
+  await page.locator('#settings-button').click();
   await page.getByRole('menuitem', { name: 'Utiliser un profil vide' }).getByRole('switch').click();
   await page.locator('html').click();
   await page.getByRole('link', { name: "Calculateur d'xp" }).click();
@@ -92,7 +92,7 @@ test('Test Body page', async ({ page }) => {
 test('Check that target-level move accordingly', async ({ page }) => {
   await page.goto('http://localhost:3000/');
 
-  await page.locator('[id="radix-:Reiqkq:"]').click();
+  await page.locator('#settings-button').click();
   await page.getByRole('menuitem', { name: 'Utiliser un profil vide' }).getByRole('switch').click();
   await page.locator('html').click();
   await page.getByRole('link', { name: "Calculateur d'xp" }).click();
@@ -122,7 +122,7 @@ test('Check that target-level move accordingly', async ({ page }) => {
 test('Check that target-level do not go under source', async ({ page }) => {
   await page.goto('http://localhost:3000/');
 
-  await page.locator('[id="radix-:Reiqkq:"]').click();
+  await page.locator('#settings-button').click();
   await page.getByRole('menuitem', { name: 'Utiliser un profil vide' }).getByRole('switch').click();
   await page.locator('html').click();
   await page.getByRole('link', { name: "Calculateur d'xp" }).click();
@@ -154,7 +154,7 @@ test('Check that target-level do not go under source', async ({ page }) => {
 test('Check increase decrease button', async ({ page }) => {
   await page.goto('http://localhost:3000/');
 
-  await page.locator('[id="radix-:Reiqkq:"]').click();
+  await page.locator('#settings-button').click();
   await page.getByRole('menuitem', { name: 'Utiliser un profil vide' }).getByRole('switch').click();
   await page.locator('html').click();
   await page.getByRole('link', { name: "Calculateur d'xp" }).click();
@@ -187,7 +187,7 @@ test('Check increase decrease button', async ({ page }) => {
 test('Check that target-level move accordingly when switching jobs', async ({ page }) => {
   await page.goto('http://localhost:3000/');
 
-  await page.locator('[id="radix-:Reiqkq:"]').click();
+  await page.locator('#settings-button').click();
   await page.getByRole('menuitem', { name: 'Utiliser un profil vide' }).getByRole('switch').click();
   await page.locator('html').click();
   await page.getByRole('link', { name: "Calculateur d'xp" }).click();
@@ -215,7 +215,7 @@ test('Check that target-level move accordingly when switching jobs', async ({ pa
 test('Check that localstorage is working', async ({ page }) => {
   await page.goto('http://localhost:3000/');
 
-  await page.locator('[id="radix-:Reiqkq:"]').click();
+  await page.locator('#settings-button').click();
   await page.getByRole('menuitem', { name: 'Utiliser un profil vide' }).getByRole('switch').click();
   await page.locator('html').click();
   await page.getByRole('link', { name: "Calculateur d'xp" }).click();
@@ -239,7 +239,7 @@ test('Check that localstorage is working', async ({ page }) => {
 test('Check that reset button works', async ({ page }) => {
   await page.goto('http://localhost:3000/');
 
-  await page.locator('[id="radix-:Reiqkq:"]').click();
+  await page.locator('#settings-button').click();
   await page.getByRole('menuitem', { name: 'Utiliser un profil vide' }).getByRole('switch').click();
   await page.locator('html').click();
   await page.getByRole('link', { name: "Calculateur d'xp" }).click();
@@ -269,7 +269,7 @@ test('Check wrong username', async ({ page }) => {
 test('Check that the user can input a number that seems lower at first but is not', async ({ page }) => {
   await page.goto('http://localhost:3000/');
 
-  await page.locator('[id="radix-:Reiqkq:"]').click();
+  await page.locator('#settings-button').click();
   await page.getByRole('menuitem', { name: 'Utiliser un profil vide' }).getByRole('switch').click();
   await page.locator('html').click();
   await page.getByRole('link', { name: "Calculateur d'xp" }).click();
@@ -292,7 +292,7 @@ test('Check that the user can input a number that seems lower at first but is no
 test('Check current level cannot go under 0', async ({ page }) => {
   await page.goto('http://localhost:3000/');
 
-  await page.locator('[id="radix-:Reiqkq:"]').click();
+  await page.locator('#settings-button').click();
   await page.getByRole('menuitem', { name: 'Utiliser un profil vide' }).getByRole('switch').click();
   await page.locator('html').click();
   await page.getByRole('link', { name: "Calculateur d'xp" }).click();
@@ -311,7 +311,7 @@ test('Check current level cannot go under 0', async ({ page }) => {
 test('Check that level indicator is present', async ({ page }) => {
   await page.goto('http://localhost:3000/');
 
-  await page.locator('[id="radix-:Reiqkq:"]').click();
+  await page.locator('#settings-button').click();
   await page.getByRole('menuitem', { name: 'Utiliser un profil vide' }).getByRole('switch').click();
   await page.locator('html').click();
   await page.getByRole('link', { name: "Calculateur d'xp" }).click();
