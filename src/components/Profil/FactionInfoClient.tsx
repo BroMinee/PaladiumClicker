@@ -1,4 +1,4 @@
-'use client';
+"use client";
 import { usePlayerInfoStore } from "@/stores/use-player-info-store.ts";
 import GradientText from "@/components/shared/GradientText.tsx";
 import { convertEpochToDateUTC2, formatPrice, safeJoinPaths } from "@/lib/misc.ts";

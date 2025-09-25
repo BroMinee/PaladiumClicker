@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import ToggleTheme from "@/components/shared/ToggleTheme.tsx";
 import Setting from "@/components/shared/Setting.tsx";

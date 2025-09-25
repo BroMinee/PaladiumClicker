@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import { generateXpCalculatorUrl, getColorByMetierName, getXpCoef } from "@/lib/misc.ts";
 import { MetierKey } from "@/types";
@@ -123,7 +123,7 @@ export function MetierDecrease({ minLevel, metierKey, searchParams, username }: 
 
   const router = useRouter();
   if ((searchParams?.level !== undefined && username === undefined) || (username !== undefined && searchParams?.level === undefined)) {
-    router.push(`/error?message=MetierDecrease: searchParams.level and username must be both defined or both undefined but not only one of them.`);
+    router.push("/error?message=MetierDecrease: searchParams.level and username must be both defined or both undefined but not only one of them.");
   }
   if (searchParams?.level !== undefined && username !== undefined) {
     return <Button variant="outline" size="icon"
@@ -149,7 +149,7 @@ export function MetierIncrease({ metierKey, searchParams, username }: {
 
   const router = useRouter();
   if ((searchParams?.level !== undefined && username === undefined) || (username !== undefined && searchParams?.level === undefined)) {
-    router.push(`/error?message=MetierIncrease: searchParams.level and username must be both defined or both undefined but not only one of them.`);
+    router.push("/error?message=MetierIncrease: searchParams.level and username must be both defined or both undefined but not only one of them.");
   }
   if (searchParams?.level !== undefined && username !== undefined) {
     return <Button variant="outline" size="icon"

@@ -1,4 +1,4 @@
-import winston from 'winston';
+import winston from "winston";
 
 export const logger = winston.createLogger({
   format: winston.format.combine(
@@ -9,6 +9,6 @@ export const logger = winston.createLogger({
   ),
   transports: [
     new winston.transports.Console(),
-    new winston.transports.File({ filename: 'combined.log' })
+    new winston.transports.File({ filename: "combined.log" })
   ],
 });

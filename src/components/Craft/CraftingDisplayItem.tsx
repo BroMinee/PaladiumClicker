@@ -1,4 +1,4 @@
-'use client';
+"use client";
 import Image from "next/image";
 import { safeJoinPaths } from "@/lib/misc.ts";
 import constants from "@/lib/constants.ts";
@@ -20,7 +20,7 @@ export function DisplayItem({ slot, className }: { slot: OptionType, className?:
           className="h-full w-full pixelated absolute rounded-sm"/>
         <div className="absolute grid justify-center items-center w-16 h-16">
           {
-            slot.value !== 'air' && <Image src={`/AH_img/${slot.img}`} alt={slot.value}
+            slot.value !== "air" && <Image src={`/AH_img/${slot.img}`} alt={slot.value}
               className="h-12 w-12 pixelated m-2 rounded-sm hover:scale-125 duration-300"
               width={48} height={48}
               unoptimized={true}/>

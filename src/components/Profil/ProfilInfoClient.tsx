@@ -1,4 +1,4 @@
-'use client';
+"use client";
 import { usePlayerInfoStore } from "@/stores/use-player-info-store.ts";
 import SmallCardInfo from "@/components/shared/SmallCardInfo.tsx";
 import { computeTimePlayed, convertEpochToDateUTC2, formatPrice, getRankImg, safeJoinPaths } from "@/lib/misc.ts";
@@ -94,7 +94,7 @@ export function PlayerSkin() {
       options={{
         nameTag: new NameTagObject(`${playerInfo?.username}`, {
           textStyle: "#ff5c00",
-          backgroundStyle: 'rgba(0,0,0,0)',
+          backgroundStyle: "rgba(0,0,0,0)",
           font: "48px Minecraft"
         }), zoom: 0.75
       }}

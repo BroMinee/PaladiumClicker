@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import React, { MutableRefObject, useEffect, useRef, useState } from "react";
@@ -64,7 +64,7 @@ export function CraftOptimizerDisplay() {
   }, [setCraftingList]);
 
   useEffect(() => {
-    const craftingListFiltered = craftingList.filter(c => c.priceToCraft > 0 && c.totalSold > 0 && c.item.item_name !== 'tile-empty-mob-spawner');//.filter(c => !(c.priceToCraft > c.currentPrice && c.priceToCraft > c.averagePrice));
+    const craftingListFiltered = craftingList.filter(c => c.priceToCraft > 0 && c.totalSold > 0 && c.item.item_name !== "tile-empty-mob-spawner");//.filter(c => !(c.priceToCraft > c.currentPrice && c.priceToCraft > c.averagePrice));
 
     // const craftingListFiltered = craftingList.filter(c => c.priceToCraft > 0 && c.totalSold > 0).filter(c => !(c.priceToCraft > c.currentPrice && c.priceToCraft > c.averagePrice));
     const sortedList = craftingListFiltered.map(e => computeSortValue(e))

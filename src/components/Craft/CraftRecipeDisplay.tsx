@@ -1,4 +1,4 @@
-import 'server-only';
+import "server-only";
 import { getAllItems, getItemAlias } from "@/lib/api/apiPalaTracker.ts";
 import { redirect } from "next/navigation";
 import { generateCraftUrl } from "@/lib/misc.ts";

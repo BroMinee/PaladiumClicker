@@ -1,8 +1,8 @@
-'use client';
-import React, { useEffect, useState } from 'react';
-import * as THREE from 'three';
-import { Mesh } from 'three';
-import { OrbitControls, Text } from '@react-three/drei';
+"use client";
+import React, { useEffect, useState } from "react";
+import * as THREE from "three";
+import { Mesh } from "three";
+import { OrbitControls, Text } from "@react-three/drei";
 import { Canvas, useLoader } from "@react-three/fiber";
 import { Button } from "@/components/ui/button.tsx";
 import { GLTF, GLTFLoader } from "three-stdlib";
@@ -101,7 +101,7 @@ export function PetCanvas({ monture = false }: { monture?: boolean }) {
   const [mixer, setMixer] = useState<any>(null);
   const [actions, setActions] = useState<any>({});
   const [currentAction, setCurrentAction] = useState<any>(null);
-  const [selectedAnimation, setSelectedAnimation] = useState<string>('');
+  const [selectedAnimation, setSelectedAnimation] = useState<string>("");
   const [arAvailable, setArAvailable] = useState<boolean>(false);
 
   useEffect(() => {
@@ -166,7 +166,7 @@ export function PetCanvas({ monture = false }: { monture?: boolean }) {
 
   useEffect(() => {
     if (navigator.xr && navigator.xr.isSessionSupported) {
-      navigator.xr.isSessionSupported('immersive-ar').then((supported) => {
+      navigator.xr.isSessionSupported("immersive-ar").then((supported) => {
         setArAvailable(supported);
       });
     }
@@ -174,9 +174,9 @@ export function PetCanvas({ monture = false }: { monture?: boolean }) {
 
   const launchAR = () => {
     if (navigator.xr && navigator.xr.isSessionSupported) {
-      navigator.xr.isSessionSupported('immersive-ar').then((supported) => {
+      navigator.xr.isSessionSupported("immersive-ar").then((supported) => {
         if (supported) {
-          console.log('AR is supported on this device!');
+          console.log("AR is supported on this device!");
           const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
           renderer.xr.enabled = true;
 
@@ -201,12 +201,12 @@ export function PetCanvas({ monture = false }: { monture?: boolean }) {
             arAction.play();
           }
 
-          renderer.xr.setReferenceSpaceType('local');
+          renderer.xr.setReferenceSpaceType("local");
 
           // renderer.xr.addEventListener('sessionstart', () => {
           // });
 
-          renderer.xr.addEventListener('sessionend', () => {
+          renderer.xr.addEventListener("sessionend", () => {
             document.body.removeChild(renderer.domElement);
           });
 
@@ -217,17 +217,17 @@ export function PetCanvas({ monture = false }: { monture?: boolean }) {
           };
 
           if (navigator.xr && "requestSession" in navigator.xr) {
-            navigator.xr.requestSession('immersive-ar', {}).then((session) => {
+            navigator.xr.requestSession("immersive-ar", {}).then((session) => {
               renderer.xr.setSession(session);
               animate();
             });
           }
         } else {
-          alert('AR not supported on this device.');
+          alert("AR not supported on this device.");
         }
       });
     } else {
-      alert('WebXR is not available on your browser.');
+      alert("WebXR is not available on your browser.");
     }
   };
 
@@ -265,7 +265,7 @@ export function PetCanvas({ monture = false }: { monture?: boolean }) {
           selectedAnimation={selectedAnimation} className="flex lg:hidden"/>
       </div>
 
-      <Canvas style={{ height: '500px', width: '100%' }}>
+      <Canvas style={{ height: "500px", width: "100%" }}>
         <primitive object={myModel.scene} rotation={[0, Math.PI * 3 / 4, 0]} scale={monture ? [1, 1, 1] : [2, 2, 2]}/>
         <OrbitControls enableDamping={true} target={myModel.scene.position}/>
       </Canvas>
@@ -302,7 +302,7 @@ function DisplayAnimationButtons({ myModel, handleAnimationChange, selectedAnima
 function DisplayEmptyCanvas({ text }: { text: string }) {
   return (
     <div className="flex flex-col gap-2 items-center justify-center mt-5">
-      <Canvas style={{ height: '500px', width: '100%' }}>
+      <Canvas style={{ height: "500px", width: "100%" }}>
         <Text fontSize={0.75} color="#DE5000">{text}</Text>
         <OrbitControls enableDamping={true}/>
       </Canvas>

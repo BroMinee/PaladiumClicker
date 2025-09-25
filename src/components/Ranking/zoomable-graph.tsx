@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import React, { FormEvent, useEffect, useMemo, useRef, useState } from "react";
 import { Card, CardContent, CardHeader } from "@/components/ui/card.tsx";
@@ -85,9 +85,9 @@ export function ZoomableChart({ data: initialData, rankingType, profil }: Zoomab
       usernames.add(u.toString());
     }
 
-    const us = searchParams.get('usernames');
+    const us = searchParams.get("usernames");
     if (us) {
-      for (const u of us.split(',')) {
+      for (const u of us.split(",")) {
         usernames.add(u);
       }
     }
@@ -98,7 +98,7 @@ export function ZoomableChart({ data: initialData, rankingType, profil }: Zoomab
         router.push(generateProfilUrl(playerInfo.username, ProfilSectionEnum.Classement, rankingType, Array.from(usernames).sort()), { scroll: false });
       }
     } else {
-      const searchParamsNoUsername = searchParams.get('noUsernames');
+      const searchParamsNoUsername = searchParams.get("noUsernames");
       const noUsernames: string[] = searchParamsNoUsername ? searchParamsNoUsername.split(",") : [];
 
       if (u) {
@@ -116,9 +116,9 @@ export function ZoomableChart({ data: initialData, rankingType, profil }: Zoomab
   function handleRemoveUsername(username: string) {
     let usernames = new Set<string>();
 
-    const us = searchParams.get('usernames');
+    const us = searchParams.get("usernames");
     if (us) {
-      for (const u of us.split(',')) {
+      for (const u of us.split(",")) {
         usernames.add(u);
       }
     }
@@ -128,8 +128,8 @@ export function ZoomableChart({ data: initialData, rankingType, profil }: Zoomab
         router.push(generateProfilUrl(playerInfo.username, ProfilSectionEnum.Classement, rankingType, Array.from(usernames).filter((e) => e.toLowerCase() !== username.toLowerCase()).sort()), { scroll: false });
       }
     } else {
-      const searchParamsNoUsername = searchParams.get('noUsernames');
-      const noUsernames: string[] = searchParamsNoUsername ? searchParamsNoUsername.split(',') : [];
+      const searchParamsNoUsername = searchParams.get("noUsernames");
+      const noUsernames: string[] = searchParamsNoUsername ? searchParamsNoUsername.split(",") : [];
       noUsernames.push(username);
       router.push(generateRankingUrl(rankingType, Array.from(usernames).filter((e) => e.toLowerCase() !== username.toLowerCase()).sort(), noUsernames), { scroll: false });
 
@@ -242,9 +242,9 @@ export function ZoomableChart({ data: initialData, rankingType, profil }: Zoomab
     let usernames = new Set<string>(uniqueUsernames);
     let usernames_lower = new Set<string>(uniqueUsernames.map((u) => u.toLowerCase()));
 
-    const us = searchParams.get('usernames');
+    const us = searchParams.get("usernames");
     if (us) {
-      for (const u of us.split(',')) {
+      for (const u of us.split(",")) {
         if (!usernames_lower.has(u.toLowerCase())) {
           usernames_lower.add(u.toLowerCase());
           usernames.add(u);
@@ -294,21 +294,21 @@ export function ZoomableChart({ data: initialData, rankingType, profil }: Zoomab
 
   const DataFormatter = (number: number) => {
     if (number > 1000000000000000000000000) {
-      return (Math.floor(number / 1000000000000000000000000)).toString() + 'Y';
+      return (Math.floor(number / 1000000000000000000000000)).toString() + "Y";
     } else if (number > 1000000000000000000000) {
-      return (Math.floor(number / 1000000000000000000000)).toString() + 'Z';
+      return (Math.floor(number / 1000000000000000000000)).toString() + "Z";
     } else if (number > 1000000000000000000) {
-      return (Math.floor(number / 1000000000000000000)).toString() + 'E';
+      return (Math.floor(number / 1000000000000000000)).toString() + "E";
     } else if (number > 1000000000000000) {
-      return (Math.floor(number / 1000000000000000)).toString() + 'P';
+      return (Math.floor(number / 1000000000000000)).toString() + "P";
     } else if (number > 1000000000000) {
-      return (Math.floor(number / 1000000000000)).toString() + 'T';
+      return (Math.floor(number / 1000000000000)).toString() + "T";
     } else if (number > 1000000000) {
-      return (Math.floor(number / 1000000000)).toString() + 'G';
+      return (Math.floor(number / 1000000000)).toString() + "G";
     } else if (number > 1000000) {
-      return (Math.floor(number / 1000000)).toString() + 'M';
+      return (Math.floor(number / 1000000)).toString() + "M";
     } else if (number > 1000) {
-      return (Math.floor(number / 1000)).toString() + 'k';
+      return (Math.floor(number / 1000)).toString() + "k";
     } else {
       return number.toString();
     }
@@ -353,7 +353,7 @@ export function ZoomableChart({ data: initialData, rankingType, profil }: Zoomab
     let direction = 0;
     let clientX = 0;
 
-    if ('deltaY' in e) {
+    if ("deltaY" in e) {
       // Mouse wheel event
       direction = e.deltaY < 0 ? 1 : -1;
       clientX = e.clientX;
@@ -441,7 +441,7 @@ export function ZoomableChart({ data: initialData, rankingType, profil }: Zoomab
           className=" h-full w-3/4"
         >
           <div className="h-full" onWheel={handleZoom} onTouchMove={handleZoom} ref={chartRef}
-            style={{ touchAction: 'none' }}>
+            style={{ touchAction: "none" }}>
             <ResponsiveContainer width="100%" height="100%">
               <AreaChart
                 data={zoomedData}
@@ -472,14 +472,14 @@ export function ZoomableChart({ data: initialData, rankingType, profil }: Zoomab
                   axisLine={false}
                   tickMargin={4}
                   minTickGap={16}
-                  style={{ userSelect: 'none' }}
+                  style={{ userSelect: "none" }}
                 />
                 <YAxis
                   type="number"
                   tickLine={false}
                   axisLine={false}
                   tickFormatter={DataFormatter}
-                  style={{ userSelect: 'none' }}
+                  style={{ userSelect: "none" }}
                   domain={[minValue, maxValue]}
                   width={45}
                 />

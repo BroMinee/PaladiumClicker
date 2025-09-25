@@ -1,14 +1,14 @@
-'use client';
-import React, { useEffect, useState } from 'react';
-import CheckboxTree from 'react-checkbox-tree';
-import 'react-checkbox-tree/lib/react-checkbox-tree.css';
-import { FaCheckSquare, FaChevronDown, FaChevronRight, FaSquare } from 'react-icons/fa';
-import Image from 'next/image';
+"use client";
+import React, { useEffect, useState } from "react";
+import CheckboxTree from "react-checkbox-tree";
+import "react-checkbox-tree/lib/react-checkbox-tree.css";
+import { FaCheckSquare, FaChevronDown, FaChevronRight, FaSquare } from "react-icons/fa";
+import Image from "next/image";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card.tsx";
 import { NodeType, Tree } from "@/types";
 import { getValueTree } from "@/lib/misc.ts";
 
-import '@/styles/MyTreeView.css';
+import "@/styles/MyTreeView.css";
 import GradientText from "@/components/shared/GradientText.tsx";
 import LoadingSpinner from "@/components/ui/loading-spinner.tsx";
 

@@ -1,4 +1,4 @@
-'use client';
+"use client";
 import { generateProfilUrl, ProfilSectionValid } from "@/lib/misc.ts";
 import { redirect, useParams, useRouter, useSearchParams } from "next/navigation";
 import { cn } from "@/lib/utils.ts";

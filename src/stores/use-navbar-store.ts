@@ -1,4 +1,4 @@
-'use client';
+"use client";
 import {  NavBarCategory } from "@/types";
 import { create } from "zustand";
 import { createJSONStorage, persist } from "zustand/middleware";
@@ -11,7 +11,7 @@ type Actions = {
   setToggleOpen: (category: NavBarCategory) => void,
 }
 
-const storageKey = 'navbar';
+const storageKey = "navbar";
 const initialState: State = {
   opened: ["Statistiques et données", "Outils"],
 };

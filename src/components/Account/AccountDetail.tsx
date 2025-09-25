@@ -1,4 +1,4 @@
-'use client';
+"use client";
 import { useProfileStore } from "@/stores/use-profile-store.ts";
 import Image from "next/image";
 import { Card, CardContent } from "@/components/ui/card.tsx";

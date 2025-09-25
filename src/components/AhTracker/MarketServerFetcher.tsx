@@ -1,4 +1,4 @@
-import 'server-only';
+import "server-only";
 
 import { AhItemHistory, OptionType, PaladiumAhItemStat } from "@/types";
 import { getPaladiumAhItemFullHistory, getPaladiumAhItemStats } from "@/lib/api/apiPala.ts";

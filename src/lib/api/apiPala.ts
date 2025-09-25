@@ -1,5 +1,5 @@
-import 'server-only';
-import { cookies } from 'next/headers';
+import "server-only";
+import { cookies } from "next/headers";
 
 import {
   Achievement,
@@ -41,8 +41,8 @@ export const isApiDown = async (): Promise<boolean> => {
 
   try {
     response = await fetch(`${PALADIUM_API_URL}/v1/status`, {
-      cache: 'no-cache', signal: AbortSignal.timeout(4000), headers: {
-        'Authorization': `Bearer ${process.env.PALADIUM_API_KEY}`
+      cache: "no-cache", signal: AbortSignal.timeout(4000), headers: {
+        "Authorization": `Bearer ${process.env.PALADIUM_API_KEY}`
       }
     });
     await response.json();
@@ -168,8 +168,8 @@ export const getPlayerInfo = async (pseudo: string): Promise<PlayerInfo> => {
     paladiumProfil = await getPaladiumProfileByPseudo("249eedd6-6ef4-4b15-8a4e-3e30df147876");
   }
 
-  (await cookies()).set('uuid', paladiumProfil.uuid, { expires: new Date(Date.now() + 1000 * 60 * 60 * 24 * 30) });
-  (await cookies()).set('username', paladiumProfil.username, { expires: new Date(Date.now() + 1000 * 60 * 60 * 24 * 30) });
+  (await cookies()).set("uuid", paladiumProfil.uuid, { expires: new Date(Date.now() + 1000 * 60 * 60 * 24 * 30) });
+  (await cookies()).set("username", paladiumProfil.username, { expires: new Date(Date.now() + 1000 * 60 * 60 * 24 * 30) });
 
   // Do all fetches in parallel to save time
   const p1 = getPaladiumClickerDataByUUID(paladiumProfil.uuid, paladiumProfil.username);
@@ -224,7 +224,7 @@ export const getPlayerInfo = async (pseudo: string): Promise<PlayerInfo> => {
   }
 
   initialPlayerInfo.metier = metiers;
-  const keys : Array<keyof Metiers> = ['farmer', 'hunter', 'miner', 'alchemist'];
+  const keys : Array<keyof Metiers> = ["farmer", "hunter", "miner", "alchemist"];
   for (const key of keys) {
     if(initialPlayerInfo.metier[key].xp > getTotalXPForLevel(100)) {
       for(let i = 100; i < 2048; i++){
@@ -297,7 +297,7 @@ export const getPaladiumAhItemFullHistory = async (itemId: string): Promise<AhIt
   }
 
   if (data.length !== totalCount) {
-    redirect(`/error?message=Data length is not equal to totalCount (getPaladiumAhItemFullHistory)`);
+    redirect("/error?message=Data length is not equal to totalCount (getPaladiumAhItemFullHistory)");
   }
 
   return data;

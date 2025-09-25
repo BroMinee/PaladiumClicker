@@ -1,5 +1,5 @@
 export type Metier = {
-  name: 'Alchimiste' | 'Fermier' | 'Mineur' | 'Chasseur',
+  name: "Alchimiste" | "Fermier" | "Mineur" | "Chasseur",
   level: number,
   xp: number
 }
@@ -182,25 +182,25 @@ export type UpgradeKey = keyof Pick<PlayerInfo,
   "posterior_upgrade" |
   "terrain_upgrade">;
 
-export type ConditionWithCoins = CPS['condition'] | GlobalUpgrade['condition'];
+export type ConditionWithCoins = CPS["condition"] | GlobalUpgrade["condition"];
 
-export type ConditionWithIndex = ManyUpgrade['condition'] |
-  PosteriorUpgrade['condition'] |
-  CategoryUpgrade['condition'] |
-  BuildingUpgrade['condition'] |
-  TerrainUpgrade['condition'];
+export type ConditionWithIndex = ManyUpgrade["condition"] |
+  PosteriorUpgrade["condition"] |
+  CategoryUpgrade["condition"] |
+  BuildingUpgrade["condition"] |
+  TerrainUpgrade["condition"];
 
-export type ConditionWithOwn = BuildingUpgrade['condition'] |
-  ManyUpgrade['condition'] |
-  PosteriorUpgrade['condition'] |
-  CategoryUpgrade['condition'];
+export type ConditionWithOwn = BuildingUpgrade["condition"] |
+  ManyUpgrade["condition"] |
+  PosteriorUpgrade["condition"] |
+  CategoryUpgrade["condition"];
 
-export type ConditionWithDay = ManyUpgrade['condition'] |
-  PosteriorUpgrade['condition'] |
-  TerrainUpgrade['condition'] |
-  GlobalUpgrade['condition'] |
-  CPS['condition'] |
-  CategoryUpgrade['condition'];
+export type ConditionWithDay = ManyUpgrade["condition"] |
+  PosteriorUpgrade["condition"] |
+  TerrainUpgrade["condition"] |
+  GlobalUpgrade["condition"] |
+  CPS["condition"] |
+  CategoryUpgrade["condition"];
 
 export type AnyCondition = ConditionWithCoins | ConditionWithIndex | ConditionWithOwn | ConditionWithDay;
 
@@ -444,62 +444,62 @@ export type rankingResponseSubType = {
 }
 
 export type AdminShopItem =
-  'feather'
-  | 'wool'
-  | 'paladium-ingot'
-  | 'ender-pearl'
-  | 'egg'
-  | 'string'
-  | 'log'
-  | 'red-mushroom'
-  | 'soul-sand'
-  | 'glowstone-dust'
-  | 'findium'
-  | 'titane-ingot'
-  | 'apple'
-  | 'cobblestone'
-  | 'reeds'
-  | 'ghast-tear'
-  | 'potato'
-  | 'passive-wither-head'
-  | 'cactus'
-  | 'melon'
-  | 'obsidian'
-  | 'slime-ball'
-  | 'spider-eye'
-  | 'dirt'
-  | 'quartz'
-  | 'bone'
-  | 'nether-wart'
-  | 'wheat-seeds'
-  | 'gunpowder'
-  | 'iron-ingot'
-  | 'fermented-spider-eye'
-  | 'leather'
-  | 'sand'
-  | 'dye'
-  | 'diamond'
-  | 'gold-ingot'
-  | 'flint'
-  | 'coal'
-  | 'redstone'
-  | 'emerald'
-  | 'brown-mushroom'
-  | 'blaze-rod'
-  | 'amethyst-ingot'
-  | 'carrot'
-  | 'cooked-beef';
+  "feather"
+  | "wool"
+  | "paladium-ingot"
+  | "ender-pearl"
+  | "egg"
+  | "string"
+  | "log"
+  | "red-mushroom"
+  | "soul-sand"
+  | "glowstone-dust"
+  | "findium"
+  | "titane-ingot"
+  | "apple"
+  | "cobblestone"
+  | "reeds"
+  | "ghast-tear"
+  | "potato"
+  | "passive-wither-head"
+  | "cactus"
+  | "melon"
+  | "obsidian"
+  | "slime-ball"
+  | "spider-eye"
+  | "dirt"
+  | "quartz"
+  | "bone"
+  | "nether-wart"
+  | "wheat-seeds"
+  | "gunpowder"
+  | "iron-ingot"
+  | "fermented-spider-eye"
+  | "leather"
+  | "sand"
+  | "dye"
+  | "diamond"
+  | "gold-ingot"
+  | "flint"
+  | "coal"
+  | "redstone"
+  | "emerald"
+  | "brown-mushroom"
+  | "blaze-rod"
+  | "amethyst-ingot"
+  | "carrot"
+  | "cooked-beef";
 
-export type AdminShopPeriode = 'day' | 'week' | 'month' | 'season';
-export type StatusPeriode = 'day' | 'week' | 'month' | 'season';
+export type AdminShopPeriode = "day" | "week" | "month" | "season";
+export type StatusPeriode = "day" | "week" | "month" | "season";
 
 export const adminShopItemsAvailable: AdminShopItem[] = [
-  'feather', 'wool', 'paladium-ingot', 'ender-pearl', 'egg', 'string', 'log', 'red-mushroom', 'soul-sand',
-  'glowstone-dust', 'findium', 'titane-ingot', 'apple', 'cobblestone', 'reeds', 'ghast-tear', 'potato',
-  'passive-wither-head', 'cactus', 'melon', 'obsidian', 'slime-ball', 'spider-eye', 'dirt',
-  'quartz', 'bone', 'nether-wart', 'wheat-seeds', 'gunpowder', 'iron-ingot', 'fermented-spider-eye', 'leather',
-  'sand', 'dye', 'diamond', 'gold-ingot', 'flint', 'coal', 'redstone', 'emerald', 'brown-mushroom', 'blaze-rod',
-  'amethyst-ingot', 'carrot', 'cooked-beef'
+  "feather", "wool", "paladium-ingot", "ender-pearl", "egg", "string", "log", "red-mushroom", "soul-sand",
+  "glowstone-dust", "findium", "titane-ingot", "apple", "cobblestone", "reeds", "ghast-tear", "potato",
+  "passive-wither-head", "cactus", "melon", "obsidian", "slime-ball", "spider-eye", "dirt",
+  "quartz", "bone", "nether-wart", "wheat-seeds", "gunpowder", "iron-ingot", "fermented-spider-eye", "leather",
+  "sand", "dye", "diamond", "gold-ingot", "flint", "coal", "redstone", "emerald", "brown-mushroom", "blaze-rod",
+  "amethyst-ingot", "carrot", "cooked-beef"
 ];
 
 export function isShopItem(item: string): item is AdminShopItem {
@@ -512,20 +512,20 @@ export type AdminShopItemDetail = {
 }
 
 export type StatusType =
-  'online' | 'offline' | 'maintenance' | 'unknown' | 'starting' | 'running' | 'restart' | 'stopping' | 'whitelist'
+  "online" | "offline" | "maintenance" | "unknown" | "starting" | "running" | "restart" | "stopping" | "whitelist"
 
 export type ServerName =
-  'Soleratl'
-  | 'Muzdan'
-  | 'Manashino'
-  | 'Event'
-  | 'Luccento'
-  | 'Imbali'
-  | 'Keltis'
-  | 'Neolith'
-  | 'Untaa'
-  | 'Launcher'
-  | 'Paladium';
+  "Soleratl"
+  | "Muzdan"
+  | "Manashino"
+  | "Event"
+  | "Luccento"
+  | "Imbali"
+  | "Keltis"
+  | "Neolith"
+  | "Untaa"
+  | "Launcher"
+  | "Paladium";
 
 export type ServerStatusResponse =
   {
@@ -560,7 +560,7 @@ export type Item = {
 export type CraftingRecipeType =
   {
     item: Item,
-    table: 'crafting table' | 'furnace' | 'grinder' | 'palamachine' | 'cauldron' | 'alchemy creator',
+    table: "crafting table" | "furnace" | "grinder" | "palamachine" | "cauldron" | "alchemy creator",
     slot1: Item | null,
     slot2: Item | null,
     slot3: Item | null,
@@ -661,16 +661,16 @@ export enum WebHookType {
 }
 
 export type EventType =
-  'BOSS' | 'A VOS MARQUES' | 'TOTEM' | 'EGGHUNT' | 'KOTH' | 'BLACKMARKET'
+  "BOSS" | "A VOS MARQUES" | "TOTEM" | "EGGHUNT" | "KOTH" | "BLACKMARKET"
 
 export type WebHookThresholdCondition =
-  'increasing'
-  | 'decreasing'
-  | 'aboveThreshold'
-  | 'underThreshold'
-  | 'increasingAboveThreshold'
-  | 'decreaseAboveThreshold'
-  | 'aboveQuantity'
+  "increasing"
+  | "decreasing"
+  | "aboveThreshold"
+  | "underThreshold"
+  | "increasingAboveThreshold"
+  | "decreaseAboveThreshold"
+  | "aboveQuantity"
 
 export type DiscordUser =
   {
@@ -739,96 +739,96 @@ export type NavBarCategory = "Statistiques et données" | "Outils" | "Informatio
 
 export const getItemFromName = (itemName: string) => {
   switch (itemName) {
-  case 'amethyst-ingot':
-    return 'amethyst-ingot';
-  case 'apple':
-    return 'apple';
-  case 'beefCooked':
-    return 'cooked-beef';
-  case 'blazeRod':
-    return 'blaze-rod';
-  case 'bone':
-    return 'bone';
-  case 'carrots':
-    return 'carrot';
-  case 'coal':
-    return 'coal';
-  case 'diamond':
-    return 'diamond';
-  case 'dyePowder-black':
-    return 'dye';
-  case 'egg':
-    return 'egg';
-  case 'emerald':
-    return 'emerald';
-  case 'enderPearl':
-    return 'ender-pearl';
-  case 'feather':
-    return 'feather';
-  case 'fermentedSpiderEye':
-    return 'fermented-spider-eye';
-  case 'findium':
-    return 'findium';
-  case 'flint':
-    return 'flint';
-  case 'ghastTear':
-    return 'ghast-tear';
-  case 'ingotGold':
-    return 'gold-ingot';
-  case 'ingotIron':
-    return 'iron-ingot';
-  case 'leather':
-    return 'leather';
-  case 'melon':
-    return 'melon';
-  case 'netherquartz':
-    return 'quartz';
-  case 'netherStalkSeeds':
-    return 'nether-wart';
-  case 'paladium-ingot':
-    return 'paladium-ingot';
-  case 'potato':
-    return 'potato';
-  case 'redstone':
-    return 'redstone';
-  case 'reeds':
-    return 'reeds';
-  case 'seeds':
-    return 'wheat-seeds';
-  case 'slimeball':
-    return 'slime-ball';
-  case 'spiderEye':
-    return 'spider-eye';
-  case 'string':
-    return 'string';
-  case 'sulphur':
-    return 'gunpowder';
-  case 'tile-cactus':
-    return 'cactus';
-  case 'tile-cloth-white':
-    return 'wool';
-  case 'tile-dirt-default':
-    return 'dirt';
-  case 'tile-hellsand':
-    return 'soul-sand';
-  case 'tile-log-oak':
-    return 'log';
-  case 'tile-mushroom':
-    return 'red-mushroom'; // Assumes red-mushroom by default
-  case 'tile-obsidian':
-    return 'obsidian';
-  case 'tile-sand-default':
-    return 'sand';
-  case 'tile-stonebrick':
-    return 'cobblestone';
-  case 'titane-ingot':
-    return 'titane-ingot';
-  case 'yellowDust':
-    return 'glowstone-dust';
-  case 'passive-wither-head':
-    return 'passive-wither-head';
+  case "amethyst-ingot":
+    return "amethyst-ingot";
+  case "apple":
+    return "apple";
+  case "beefCooked":
+    return "cooked-beef";
+  case "blazeRod":
+    return "blaze-rod";
+  case "bone":
+    return "bone";
+  case "carrots":
+    return "carrot";
+  case "coal":
+    return "coal";
+  case "diamond":
+    return "diamond";
+  case "dyePowder-black":
+    return "dye";
+  case "egg":
+    return "egg";
+  case "emerald":
+    return "emerald";
+  case "enderPearl":
+    return "ender-pearl";
+  case "feather":
+    return "feather";
+  case "fermentedSpiderEye":
+    return "fermented-spider-eye";
+  case "findium":
+    return "findium";
+  case "flint":
+    return "flint";
+  case "ghastTear":
+    return "ghast-tear";
+  case "ingotGold":
+    return "gold-ingot";
+  case "ingotIron":
+    return "iron-ingot";
+  case "leather":
+    return "leather";
+  case "melon":
+    return "melon";
+  case "netherquartz":
+    return "quartz";
+  case "netherStalkSeeds":
+    return "nether-wart";
+  case "paladium-ingot":
+    return "paladium-ingot";
+  case "potato":
+    return "potato";
+  case "redstone":
+    return "redstone";
+  case "reeds":
+    return "reeds";
+  case "seeds":
+    return "wheat-seeds";
+  case "slimeball":
+    return "slime-ball";
+  case "spiderEye":
+    return "spider-eye";
+  case "string":
+    return "string";
+  case "sulphur":
+    return "gunpowder";
+  case "tile-cactus":
+    return "cactus";
+  case "tile-cloth-white":
+    return "wool";
+  case "tile-dirt-default":
+    return "dirt";
+  case "tile-hellsand":
+    return "soul-sand";
+  case "tile-log-oak":
+    return "log";
+  case "tile-mushroom":
+    return "red-mushroom"; // Assumes red-mushroom by default
+  case "tile-obsidian":
+    return "obsidian";
+  case "tile-sand-default":
+    return "sand";
+  case "tile-stonebrick":
+    return "cobblestone";
+  case "titane-ingot":
+    return "titane-ingot";
+  case "yellowDust":
+    return "glowstone-dust";
+  case "passive-wither-head":
+    return "passive-wither-head";
   default:
-    return 'paladium-ingot';
+    return "paladium-ingot";
   }
 };
 
@@ -848,12 +848,12 @@ export type MoneySumHistory = {
 }[]
 
 export type Role =
-  | 'Admin'
-  | 'Moderator'
-  | 'Bug Hunter'
-  | 'Beta Tester'
-  | 'Palatime'
-  | 'Classic'
+  | "Admin"
+  | "Moderator"
+  | "Bug Hunter"
+  | "Beta Tester"
+  | "Palatime"
+  | "Classic"
 
 export type RoleResponse =
   {

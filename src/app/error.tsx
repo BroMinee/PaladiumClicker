@@ -31,7 +31,7 @@ export default function ErrorBoundary({ error }: { error: Error }) {
       <CardContent>
         <div className="flex flex-wrap gap-2">
           <MotionStaggerList className="flex flex-col gap-2" gap={0.03}>
-            {error.stack?.split('\n').map((line, index) => (
+            {error.stack?.split("\n").map((line, index) => (
               <div key={line + index} className="flex md:flex-row flex-col gap-2">
                 <div>
                   {line}

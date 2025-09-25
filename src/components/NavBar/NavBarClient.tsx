@@ -1,4 +1,4 @@
-'use client';
+"use client";
 import Link from "next/link";
 import { getLinkFromUrl, safeJoinPaths } from "@/lib/misc.ts";
 import { cn } from "@/lib/utils.ts";
@@ -42,8 +42,8 @@ export default function LinkClient({ path, children }: {
     if (mounted) {
       const sheet = document.querySelector("#mobile-sheet-content");
       if (sheet) {
-        const srOnly = sheet.querySelector('.sr-only');
-        const closeButton = srOnly?.closest('button');
+        const srOnly = sheet.querySelector(".sr-only");
+        const closeButton = srOnly?.closest("button");
         if (closeButton instanceof HTMLElement) {
           closeButton.click();
         }
@@ -55,7 +55,7 @@ export default function LinkClient({ path, children }: {
   useEffect(() => {
     setMounted(true);
     let link: PathValid | undefined;
-    if (typeof window !== 'undefined') {
+    if (typeof window !== "undefined") {
       link = getLinkFromUrl(window.location.pathname);
     }
     if (!link) {
@@ -186,16 +186,16 @@ export function CategorieDisplay({ name, children }: {
       setMaxHeight(open ? `${el.scrollHeight}px` : "0px");
     };
     update();
-    const ro = typeof ResizeObserver !== 'undefined' ? new ResizeObserver(update) : null;
+    const ro = typeof ResizeObserver !== "undefined" ? new ResizeObserver(update) : null;
     if (ro) {
       ro.observe(el);
     }
-    window.addEventListener('resize', update);
+    window.addEventListener("resize", update);
     return () => {
       if (ro) {
         ro.disconnect();
       }
-      window.removeEventListener('resize', update);
+      window.removeEventListener("resize", update);
     };
   }, [open, mounted, subLinks.length]);
 
@@ -372,7 +372,7 @@ export function NotificationWebSite() {
         onMouseLeave={() => setIsHovered(false)}
         onClick={onClick}
         style={{
-          background: '#00A3FF',
+          background: "#00A3FF",
           boxShadow: "0 0 10px 0 #00A3FF",
           maxHeight: isHovered ? "200px" : "28px",
         }}

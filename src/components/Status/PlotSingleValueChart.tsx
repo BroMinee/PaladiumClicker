@@ -1,4 +1,4 @@
-'use client';
+"use client";
 import { ValueHistory } from "@/types";
 import { Area, AreaChart, Legend, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
 import React from "react";

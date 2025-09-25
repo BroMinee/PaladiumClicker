@@ -19,7 +19,7 @@ export async function generateMetadata(
   const searchParams = await props.searchParams;
   const params = await props.params;
   const title = `PalaTracker | Calculateur d'xp | ${params.username}`;
-  const description = `Renseignez votre pseudo Paladium et le métier que vous souhaitez xp pour obtenir des quantités à farmer pour atteindre le niveau souhaité.`;
+  const description = "Renseignez votre pseudo Paladium et le métier que vous souhaitez xp pour obtenir des quantités à farmer pour atteindre le niveau souhaité.";
   // const defaultImage = "https://brominee.github.io/PaladiumClicker/favicon.ico";
   let imgPath = "Mineur";
   if (searchParams.metier !== undefined) {

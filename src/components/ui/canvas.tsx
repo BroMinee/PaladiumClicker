@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef } from "react";
 import { useTheme } from "next-themes";
 
 interface CanvasWithTextProps {
@@ -19,7 +19,7 @@ const CanvasWithText: React.FC<CanvasWithTextProps> = ({ text, className, height
       return;
     }
 
-    const context = canvas.getContext('2d');
+    const context = canvas.getContext("2d");
     if (!context) {
       return;
     }
@@ -45,16 +45,16 @@ const CanvasWithText: React.FC<CanvasWithTextProps> = ({ text, className, height
       // Si la taille de la police atteint 10 et que le texte ne tient toujours pas, on doit gérer les retours à la ligne
       const lines = [];
       if (fontSize === minFontSize && context.measureText(text).width > maxWidth) {
-        let words = text.split(' ');
-        let currentLine = '';
+        let words = text.split(" ");
+        let currentLine = "";
 
         for (let word of words) {
-          let testLine = currentLine + word + ' ';
+          let testLine = currentLine + word + " ";
           let testWidth = context.measureText(testLine).width;
 
           if (testWidth > maxWidth) {
             lines.push(currentLine.trim());
-            currentLine = word + ' ';
+            currentLine = word + " ";
           } else {
             currentLine = testLine;
           }
@@ -66,9 +66,9 @@ const CanvasWithText: React.FC<CanvasWithTextProps> = ({ text, className, height
 
       // Dessiner le texte ligne par ligne
       context.clearRect(0, 0, canvas.width, canvas.height);
-      context.textAlign = 'center';
-      context.textBaseline = 'middle';
-      context.fillStyle = theme === "dark" ? 'white' : 'black';
+      context.textAlign = "center";
+      context.textBaseline = "middle";
+      context.fillStyle = theme === "dark" ? "white" : "black";
 
       const lineHeight = fontSize * 1.2;
       const totalTextHeight = lines.length * lineHeight;
@@ -84,9 +84,9 @@ const CanvasWithText: React.FC<CanvasWithTextProps> = ({ text, className, height
     // Mettre à jour la taille du canvas initialement et sur redimensionnement
     fitTextToCanvas();
 
-    window.addEventListener('resize', fitTextToCanvas);
+    window.addEventListener("resize", fitTextToCanvas);
     return () => {
-      window.removeEventListener('resize', fitTextToCanvas);
+      window.removeEventListener("resize", fitTextToCanvas);
     };
   }, [text, theme, height, width]);
 

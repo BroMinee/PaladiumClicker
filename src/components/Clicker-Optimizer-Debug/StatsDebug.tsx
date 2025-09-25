@@ -1,4 +1,4 @@
-'use client';
+"use client";
 import GradientText from "@/components/shared/GradientText";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -25,7 +25,7 @@ function getCoinsCondition(conditions: AnyCondition | undefined) {
     return 0;
   }
 
-  const r = conditions.find(c => typeof c !== 'undefined' && "coins" in c) as { coins: number } | undefined;
+  const r = conditions.find(c => typeof c !== "undefined" && "coins" in c) as { coins: number } | undefined;
   return r ? r.coins : -1;
 }
 
@@ -33,7 +33,7 @@ function getBuildingIndexCondition(conditions: AnyCondition | undefined) {
   if (conditions === undefined) {
     return 0;
   }
-  const r = conditions.find(c => typeof c !== 'undefined' && "index" in c) as { index: number } | undefined;
+  const r = conditions.find(c => typeof c !== "undefined" && "index" in c) as { index: number } | undefined;
   return r ? r.index : -1;
 }
 
@@ -41,7 +41,7 @@ function getBuildingCountCondition(conditions: AnyCondition | undefined) {
   if (conditions === undefined) {
     return 0;
   }
-  const r = conditions.find(c => typeof c !== 'undefined' && "own" in c) as { own: number } | undefined;
+  const r = conditions.find(c => typeof c !== "undefined" && "own" in c) as { own: number } | undefined;
   return r ? r.own : -1;
 }
 
@@ -49,7 +49,7 @@ function getDayCondition(conditions: AnyCondition | undefined) {
   if (conditions === undefined) {
     return 0;
   }
-  const r = conditions.find(c => typeof c !== 'undefined' && "day" in c) as { day: number } | undefined;
+  const r = conditions.find(c => typeof c !== "undefined" && "day" in c) as { day: number } | undefined;
   return r ? r.day : -1;
 }
 
@@ -177,12 +177,12 @@ const StatsDebug = () => {
     }));
 
     const json = JSON.stringify(download_content, null, 2);
-    const blob = new Blob([json], { type: 'application/json' });
+    const blob = new Blob([json], { type: "application/json" });
     const url = URL.createObjectURL(blob);
 
-    const link = document.createElement('a');
+    const link = document.createElement("a");
     link.href = url;
-    link.download = 'ElementList.json';
+    link.download = "ElementList.json";
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
@@ -230,7 +230,7 @@ const StatsDebug = () => {
         <input
           id="start-season-input"
           type="date"
-          value={startSeason.toISOString().split('T')[0]}
+          value={startSeason.toISOString().split("T")[0]}
           onChange={(e) => setStartSeason(new Date(e.target.value))}
           className="w-32 text-center border border-gray-300 rounded-md"/>
 

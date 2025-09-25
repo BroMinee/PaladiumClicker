@@ -1,4 +1,4 @@
-'use client';
+"use client";
 import { Bar, BarChart, LabelList, ResponsiveContainer, XAxis, YAxis } from "recharts";
 import { useEffect, useRef, useState } from "react";
 import { usePlayerInfoStore } from "@/stores/use-player-info-store.ts";
@@ -90,7 +90,7 @@ export function AchievementsGlobalProgressBar({ value, showText = true }: { valu
       >
         <XAxis type="number" domain={[0, 100]} hide/>
         <YAxis type="category" dataKey="name" hide/>
-        <Bar dataKey="value" fill="#26E251" background={{ fill: theme === "dark" ? '#323232' : "#A2A2A2" }}>
+        <Bar dataKey="value" fill="#26E251" background={{ fill: theme === "dark" ? "#323232" : "#A2A2A2" }}>
           {showText && <LabelList dataKey="value" content={renderCustomizedLabel}/>}
         </Bar>
       </BarChart>

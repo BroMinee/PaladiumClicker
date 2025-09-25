@@ -1,4 +1,4 @@
-'use client';
+"use client";
 import React, { useEffect } from "react";
 import {
   defaultWebHookContentFromType,
@@ -57,8 +57,8 @@ export function WebHookInputClientItem() {
   } = useWebhookStore();
 
   useEffect(() => {
-    if (currentWebHookType !== WebHookType.market && thresholdCondition === 'aboveQuantity') {
-      setThresholdCondition('aboveThreshold');
+    if (currentWebHookType !== WebHookType.market && thresholdCondition === "aboveQuantity") {
+      setThresholdCondition("aboveThreshold");
     }
   }, [currentWebHookType, thresholdCondition, setThresholdCondition]);
 

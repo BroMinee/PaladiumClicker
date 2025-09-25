@@ -1,4 +1,4 @@
-'use client';
+"use client";
 import React, { useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -162,7 +162,7 @@ const Timeline = () => {
             src="/coin.png"
             unoptimized={true}
             onClick={() => handleScrollTo(index)}
-            className={`w-5 h-5 pixelated cursor-pointer ${index === currentIndex ? 'scale-[150%]' : 'grayscale'} ${index - 1 === currentIndex || index + 1 === currentIndex && 'scale-[115%]'} ${index - 2 === currentIndex || index + 2 === currentIndex && 'scale-[105%]'} transition-transform duration-300`} />
+            className={`w-5 h-5 pixelated cursor-pointer ${index === currentIndex ? "scale-[150%]" : "grayscale"} ${index - 1 === currentIndex || index + 1 === currentIndex && "scale-[115%]"} ${index - 2 === currentIndex || index + 2 === currentIndex && "scale-[105%]"} transition-transform duration-300`} />
         ))}
       </div>
       <div ref={containerRef} className="flex flex-col items-center gap-20 py-20">

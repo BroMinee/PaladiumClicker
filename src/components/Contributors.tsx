@@ -12,14 +12,14 @@ const Contributors = () => {
       uuid: "10b887ce-133b-4d5e-8b54-41376b832536",
       description: "Développeur Frontend et Backend",
       url: "https://github.com/BroMinee",
-      urlImg: `https://crafatar.com/avatars/10b887ce-133b-4d5e-8b54-41376b832536?size=8&overlay`,
+      urlImg: "https://crafatar.com/avatars/10b887ce-133b-4d5e-8b54-41376b832536?size=8&overlay",
     },
     {
       pseudo: "Riveur",
       uuid: "93db5a60-1a6d-407f-afc8-b41803efe5fa",
       description: "Refactorisation du code en TS et TailwindCSS",
       url: "https://github.com/riveur",
-      urlImg: `https://crafatar.com/avatars/93db5a60-1a6d-407f-afc8-b41803efe5fa?size=8&overlay`,
+      urlImg: "https://crafatar.com/avatars/93db5a60-1a6d-407f-afc8-b41803efe5fa?size=8&overlay",
       lastContribution: "13-08-2024"
     },
     {
@@ -27,7 +27,7 @@ const Contributors = () => {
       uuid: "2f570125-bde4-4838-8c32-ca122f6e14a0",
       description: "Contributeur du backend",
       url: "https://github.com/berchbrown/",
-      urlImg: `https://crafatar.com/avatars/2f570125-bde4-4838-8c32-ca122f6e14a0?size=8&overlay`,
+      urlImg: "https://crafatar.com/avatars/2f570125-bde4-4838-8c32-ca122f6e14a0?size=8&overlay",
       lastContribution: "20-08-2024"
     },
     {
@@ -35,7 +35,7 @@ const Contributors = () => {
       uuid: "108352f9-373e-4800-9f54-d55b0a35e520",
       description: "Optimisateur mathématique du PalaClicker",
       url: safeJoinPaths("/", constants.profilPath, "0livierMinecraft"),
-      urlImg: `https://crafatar.com/avatars/108352f9-373e-4800-9f54-d55b0a35e520?size=8&overlay`,
+      urlImg: "https://crafatar.com/avatars/108352f9-373e-4800-9f54-d55b0a35e520?size=8&overlay",
       lastContribution: "30-12-2024"
     }
   ];

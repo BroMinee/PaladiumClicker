@@ -7,7 +7,7 @@ export default function NotFound() {
   return (
     <Card
       className="flex flex-col gap-4 font-bold center bg-no-repeat bg-center bg-cover text-white bg-black justify-center items-center"
-      style={{ height: '70vh' }}>
+      style={{ height: "70vh" }}>
       <CardHeader className="flex flex-row gap-2 ">
         <div className="py-8 px-4 mx-auto max-w-screen-xl lg:py-16 lg:px-6">
           <div className="mx-auto max-w-screen-sm text-center">

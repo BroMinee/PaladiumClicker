@@ -1,5 +1,5 @@
-'use server';
-import 'server-only';
+"use server";
+import "server-only";
 import { PalaAnimationLeaderboard, PalaAnimationLeaderboardGlobal } from "@/types";
 import { fetchWithHeader } from "@/lib/api/misc.ts";
 import { API_PALATRACKER } from "@/lib/constants.ts";

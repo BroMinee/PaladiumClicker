@@ -1,4 +1,4 @@
-'use client';
+"use client";
 import { DiscordUser } from "@/types";
 import { useProfileStore } from "@/stores/use-profile-store.ts";
 import { useEffect } from "react";

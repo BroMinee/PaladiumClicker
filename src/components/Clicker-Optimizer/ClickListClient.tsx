@@ -1,4 +1,4 @@
-'use client';
+"use client";
 import { cn } from "@/lib/utils.ts";
 import { buttonVariants } from "@/components/ui/button.tsx";
 import { usePlayerInfoStore } from "@/stores/use-player-info-store.ts";

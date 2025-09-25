@@ -1,5 +1,5 @@
-'use client';
-import React, { createContext, useState } from 'react';
+"use client";
+import React, { createContext, useState } from "react";
 
 export type SessionContextType = {
   sessionUuid: string | undefined;
@@ -11,8 +11,8 @@ export type SessionContextType = {
 const SessionContext = createContext({} as SessionContextType);
 
 export const SessionContextProvider = ({ children }: { children: React.ReactNode }) => {
-  const [session_uuid, setSession_uuid] = useState('');
-  const [question, setQuestion] = useState('');
+  const [session_uuid, setSession_uuid] = useState("");
+  const [question, setQuestion] = useState("");
 
   return (
     <SessionContext.Provider

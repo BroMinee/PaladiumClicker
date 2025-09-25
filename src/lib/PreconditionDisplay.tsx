@@ -1,4 +1,4 @@
-'use client';
+"use client";
 import React, { ReactNode } from "react";
 import { FaCheck } from "react-icons/fa";
 import { RiCloseLargeLine } from "react-icons/ri";

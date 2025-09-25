@@ -1,4 +1,4 @@
-'use server';
+"use server";
 import { getPlayerInfo, PALADIUM_API_URL } from "@/lib/api/apiPala.ts";
 import { fetchPostWithHeader, fetchWithHeader } from "@/lib/api/misc.ts";
 import {
@@ -35,7 +35,7 @@ export async function registerPlayerAction(uuid: string, username: string) {
 }
 
 export async function getPaladiumAhItemStatsOfAllItemsAction(): Promise<PaladiumAhItemStat[]> {
-  'use server';
+  "use server";
   const response = await fetchWithHeader<PaladiumAhItemStatResponse>(`${PALADIUM_API_URL}/v1/paladium/shop/market/items?limit=100&offset=0`, 5 * 60);
   const totalCount = response.totalCount;
 
@@ -63,7 +63,7 @@ export async function getCurrentEvent() {
     }
     return event;
   } catch (error) {
-    console.error('Error fetching events:', error);
+    console.error("Error fetching events:", error);
     return null;
   }
 }
@@ -86,7 +86,7 @@ export async function getCurrentEventNotRegistered(uuid: string): Promise<Event 
     }
     return null;
   } catch (error) {
-    console.error('Error fetching events:', error);
+    console.error("Error fetching events:", error);
   }
   return null;
 }
@@ -104,7 +104,7 @@ export async function getEventNotClaimed(uuid: string) {
     }
     return "Not winner";
   } catch (error) {
-    console.error('Error fetching events:', error);
+    console.error("Error fetching events:", error);
     return "Not winner";
   }
 }
@@ -113,7 +113,7 @@ export async function getNotificationWebSite() {
   try {
     return await getCurrentNotification();
   } catch (error) {
-    console.error('Error fetching events:', error);
+    console.error("Error fetching events:", error);
     return null;
   }
 }
@@ -177,14 +177,14 @@ export async function isAuthenticate(): Promise<DiscordUser | null> {
   const cookieStore = await cookies();
   const allCookies = cookieStore.getAll();
 
-  const cookieHeader = allCookies.map(cookie => `${cookie.name}=${cookie.value}`).join('; ');
+  const cookieHeader = allCookies.map(cookie => `${cookie.name}=${cookie.value}`).join("; ");
 
   try {
     const response = await fetch(`${API_PALATRACKER}/v1/auth/user`, {
       headers: {
         Cookie: cookieHeader,
       },
-      credentials: 'include',
+      credentials: "include",
     });
 
     if (response.ok) {
@@ -388,7 +388,7 @@ export const getMarketHistoryServerAction = async (itemId: string): Promise<AhIt
   }
 
   if (data.length !== totalCount) {
-    redirect(`/error?message=Data length is not equal to totalCount (getPaladiumAhItemFullHistory)`);
+    redirect("/error?message=Data length is not equal to totalCount (getPaladiumAhItemFullHistory)");
   }
 
   return data;

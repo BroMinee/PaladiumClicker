@@ -1,7 +1,7 @@
-'use client';
+"use client";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog.tsx";
 
-import Countdown from 'react-countdown';
+import Countdown from "react-countdown";
 import { renderer } from "@/components/ui/countdown.tsx";
 import { Button } from "@/components/ui/button.tsx";
 import { ScrollArea } from "@/components/ui/scroll-area.tsx";
@@ -28,7 +28,7 @@ export const PopupCurrentEvent = ({ event, alreadyRegistered, children }: {
 
   function handleConfirm() {
     if (!playerInfo) {
-      console.error('Player info not found');
+      console.error("Player info not found");
       return;
     }
     if (alreadyRegistered) {
@@ -87,7 +87,7 @@ export const PopupCurrentEvent = ({ event, alreadyRegistered, children }: {
             <CardContent>
               {
                 event.rewards.map((reward, index) => {
-                  return <SmallCardInfo key={"reward-" + index} title={reward.description} img={'/img/MarketUI/pb_icon.png'}
+                  return <SmallCardInfo key={"reward-" + index} title={reward.description} img={"/img/MarketUI/pb_icon.png"}
                     value={reward.count + " gagnants différents"}/>;
                 })
               }

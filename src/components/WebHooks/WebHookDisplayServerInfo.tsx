@@ -1,4 +1,4 @@
-'use client';
+"use client";
 import React, { ReactNode, useEffect, useState } from "react";
 import { Button } from "@/components/ui/button.tsx";
 import { FaSave } from "react-icons/fa";
@@ -57,7 +57,7 @@ export function DisplayServerBox({ guildId, channelId, guildIdToServerName, chil
 
   const handleCancelReplacement = () => {
     setIsPopupOpen(false);
-    toast.success(`Suppression annulée`);
+    toast.success("Suppression annulée");
   };
 
   if (deleted) {
@@ -153,7 +153,7 @@ export function DisplayChannelBox({ channelId, channelIdToChannelName, guildId, 
 
   const handleCancelReplacement = () => {
     setIsPopupOpen(false);
-    toast.success(`Suppression annulée`);
+    toast.success("Suppression annulée");
   };
 
   const hoverElement: ReactNode = (

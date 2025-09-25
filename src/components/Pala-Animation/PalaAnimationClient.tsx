@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import { FormEvent, useEffect, useState } from "react";
 import { load } from "@fingerprintjs/botd";
@@ -221,7 +221,7 @@ export function PalaAnimationBody() {
         <div className="flex flex-col items-center">
           <span>
             {timer.split(":")[0]}
-            <span className={(timer.includes("lent") ? 'text-red-400' : 'text-green-400')}>{timer.split(":")[1]}</span>
+            <span className={(timer.includes("lent") ? "text-red-400" : "text-green-400")}>{timer.split(":")[1]}</span>
           </span>
 
         </div>

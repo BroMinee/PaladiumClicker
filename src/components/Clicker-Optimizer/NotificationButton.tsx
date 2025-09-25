@@ -1,4 +1,4 @@
-'use client';
+"use client";
 import constants from "@/lib/constants.ts";
 
 import { safeJoinPaths } from "@/lib/misc.ts";

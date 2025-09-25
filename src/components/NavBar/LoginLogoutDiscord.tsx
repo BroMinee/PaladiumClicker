@@ -1,5 +1,5 @@
-'use client';
-import React from 'react';
+"use client";
+import React from "react";
 import { TbLogout2 } from "react-icons/tb";
 import { Button } from "@/components/ui/button.tsx";
 import { ProfileNavBar } from "@/components/NavBar/ProfileNavBar.tsx";

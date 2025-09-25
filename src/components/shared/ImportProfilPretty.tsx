@@ -1,4 +1,4 @@
-'use client';
+"use client";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { usePlayerInfoStore } from "@/stores/use-player-info-store";
@@ -6,7 +6,7 @@ import React, { FormEvent, useEffect, useRef, useState } from "react";
 import { FaSearch } from "react-icons/fa";
 import constants from "@/lib/constants.ts";
 import { getHeadUrl, getInitialPlayerInfo, getLinkFromUrl, safeJoinPaths } from "@/lib/misc.ts";
-import { navigate } from '@/components/actions';
+import { navigate } from "@/components/actions";
 import { useSettingsStore } from "@/stores/use-settings-store.ts";
 import { getPlayerInfoAction, registerPlayerAction } from "@/lib/api/apiServerAction.ts";
 import { toast } from "sonner";
@@ -98,7 +98,7 @@ export default function ImportProfilPretty({
 
   const handleCancelReplacement = () => {
     setIsPopupOpen(false);
-    toast.success(`Mise à jour annulée`);
+    toast.success("Mise à jour annulée");
   };
   // if (playerInfo !== null)
   // alert(`${new Date(playerInfo.last_fetch + 1000 * 15 * 60)}, ${new Date()} ${new Date(playerInfo.last_fetch + 1000 * 15 * 60) <= new Date()}`)
@@ -131,7 +131,7 @@ export default function ImportProfilPretty({
         <Image
           src={getHeadUrl(playerInfo?.uuid)}
           className={cn("w-12 h-12 pixelated rounded-sm hidden sm:flex", navBar && "invisible absolute")}
-          alt={`palatracker_head`}
+          alt={"palatracker_head"}
           width={0}
           height={0}
           unoptimized={true}
@@ -282,25 +282,25 @@ function DisplayDifference({ oldPlayerInfo, newPlayerInfo }: displayDifferencePr
       {oldPlayerInfo.metier.farmer.level > newPlayerInfo.metier.farmer.level &&
         <SmallCardInfo title={"Metier de farmer"}
                        value={oldPlayerInfo.metier.farmer.level + " -> " + newPlayerInfo.metier.farmer.level}
-                       img={safeJoinPaths(constants.imgPathProfile, `/JobsIcon/Fermier.webp`)} unoptimized/>
+                       img={safeJoinPaths(constants.imgPathProfile, "/JobsIcon/Fermier.webp")} unoptimized/>
       }
 
       {oldPlayerInfo.metier.miner.level > newPlayerInfo.metier.miner.level &&
         <SmallCardInfo title={"Metier de mineur"}
                        value={oldPlayerInfo.metier.miner.level + " -> " + newPlayerInfo.metier.miner.level}
-                       img={safeJoinPaths(constants.imgPathProfile, `/JobsIcon/Mineur.webp`)} unoptimized/>
+                       img={safeJoinPaths(constants.imgPathProfile, "/JobsIcon/Mineur.webp")} unoptimized/>
       }
 
       {oldPlayerInfo.metier.hunter.level > newPlayerInfo.metier.hunter.level &&
         <SmallCardInfo title={"Metier de chasseur"}
                        value={oldPlayerInfo.metier.hunter.level + " -> " + newPlayerInfo.metier.hunter.level}
-                       img={safeJoinPaths(constants.imgPathProfile, `/JobsIcon/Chasseur.webp`)} unoptimized/>
+                       img={safeJoinPaths(constants.imgPathProfile, "/JobsIcon/Chasseur.webp")} unoptimized/>
       }
 
       {oldPlayerInfo.metier.alchemist.level > newPlayerInfo.metier.alchemist.level &&
         <SmallCardInfo title={"Metier d'alchimiste"}
                        value={oldPlayerInfo.metier.alchemist.level + " -> " + newPlayerInfo.metier.alchemist.level}
-                       img={safeJoinPaths(constants.imgPathProfile, `/JobsIcon/Alchimiste.webp`)} unoptimized/>
+                       img={safeJoinPaths(constants.imgPathProfile, "/JobsIcon/Alchimiste.webp")} unoptimized/>
       }
 
       {
@@ -356,7 +356,7 @@ return null;
 return <SmallCardInfo title={b.name}
                                   key={"many" + index}
                                   value={"✔️ -> ❌"}
-                                  img={safeJoinPaths(constants.imgPathClicker, `/ManyIcon/0.png`)} unoptimized/>;
+                                  img={safeJoinPaths(constants.imgPathClicker, "/ManyIcon/0.png")} unoptimized/>;
 } else {
 return null;
 }
@@ -369,7 +369,7 @@ return null;
 return <SmallCardInfo title={b.name}
                                   key={"posterior" + index}
                                   value={"✔️ -> ❌"}
-                                  img={safeJoinPaths(constants.imgPathClicker, `/PosteriorIcon/0.png`)} unoptimized/>;
+                                  img={safeJoinPaths(constants.imgPathClicker, "/PosteriorIcon/0.png")} unoptimized/>;
 } else {
 return null;
 }

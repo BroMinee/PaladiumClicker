@@ -1,4 +1,4 @@
-'use client';
+"use client";
 import { computePrice, formatPrice, scaleCurrentProduction } from "@/lib/misc.ts";
 import { usePlayerInfoStore } from "@/stores/use-player-info-store.ts";
 import React, { ChangeEvent } from "react";

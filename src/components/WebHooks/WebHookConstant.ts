@@ -101,14 +101,14 @@ export const defaultWebHookFieldsFromType: Record<WebHookType, { value: string, 
 export const defaultWebHookTitleFromType: Record<WebHookType, string> = {
   [WebHookType.QDF]: "Une nouvelle QDF est disponible, clique pour voir le craft !",
   [WebHookType.adminShop]: "C'est l'heure de vendre des {item} !",
-  [WebHookType.market]: `Voir l'historique de prix des {itemFr}.`,
-  [WebHookType.EventPvp]: `Event : {event} commence {startRelative} !`,
+  [WebHookType.market]: "Voir l'historique de prix des {itemFr}.",
+  [WebHookType.EventPvp]: "Event : {event} commence {startRelative} !",
   [WebHookType.statusServer]: "Voir l'état des serveurs Paladium.",
   [WebHookType.vote]: "Voici la liste des sites de vote :",
 };
 
 export const defaultWebhookTitleUrlFromType: Record<WebHookType, string> = {
-  [WebHookType.QDF]: `https://palatracker.bromine.fr/craft?item={item}&count={quantity}`,
+  [WebHookType.QDF]: "https://palatracker.bromine.fr/craft?item={item}&count={quantity}",
   [WebHookType.adminShop]: "https://palatracker.bromine.fr/admin-shop?item={item}",
   [WebHookType.market]: "https://palatracker.bromine.fr/ah?item={item}",
   [WebHookType.EventPvp]: "https://wiki.paladium-pvp.fr/mecaniques-et-events/evenements/{event}",

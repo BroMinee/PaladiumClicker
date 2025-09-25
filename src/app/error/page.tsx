@@ -15,8 +15,8 @@ import ImportProfilPretty from "@/components/shared/ImportProfilPretty.tsx";
 import ImportOfflineProfil from "@/components/shared/ImportOfflineProfil.tsx";
 
 export function generateMetadata() {
-  const title = `PalaTracker | Erreur`;
-  const description = `PalaTracker : boostez votre progression et votre clicker sur Paladium comme jamais auparavant !`;
+  const title = "PalaTracker | Erreur";
+  const description = "PalaTracker : boostez votre progression et votre clicker sur Paladium comme jamais auparavant !";
   return {
     title: title,
     description: description,

@@ -1,6 +1,6 @@
-'use client';
+"use client";
 import { getItemFromName, WebHookAlert, WebhookDiscord, WebHookType } from "@/types";
-import './WebHookMsg.css';
+import "./WebHookMsg.css";
 import { getIconNameFromEventType, getTextFromWebHookType } from "@/lib/misc.ts";
 import { Button } from "@/components/ui/button.tsx";
 import { FiEdit } from "react-icons/fi";
@@ -54,7 +54,7 @@ export function WebHookPreviewPage({
                     ))
                   }
                   <CreateNewWebHookButtonKnowingUrl
-                    text={`Créer une alerte sur ce channel.`}
+                    text={"Créer une alerte sur ce channel."}
                     webhookDiscord={webHookDiscord.find(w => w.guild_id === guildId && w.channel_id === channelId)}/>
                 </DisplayChannelBox>
               ))
@@ -149,7 +149,7 @@ export function WebHookPreview({ webHookAlert, groups, setGroups }: {
 
   const handleCancelReplacement = () => {
     setIsPopupOpen(false);
-    toast.success(`Suppression annulée`);
+    toast.success("Suppression annulée");
   };
 
   return (
@@ -166,15 +166,15 @@ export function WebHookPreview({ webHookAlert, groups, setGroups }: {
               height={32} width={32} unoptimized/>
           }
           {webHookAlert.type === WebHookType.QDF &&
-            <Image src={`https://palatracker.bromine.fr/EventIcon/qdf.png`} alt="icon"
+            <Image src={"https://palatracker.bromine.fr/EventIcon/qdf.png"} alt="icon"
               height={32} width={32} unoptimized/>
           }
           {webHookAlert.type === WebHookType.statusServer &&
-            <Image src={`https://palatracker.bromine.fr/EventIcon/status.png`} alt="icon"
+            <Image src={"https://palatracker.bromine.fr/EventIcon/status.png"} alt="icon"
               height={32} width={32} unoptimized/>
           }
           {webHookAlert.type === WebHookType.vote &&
-            <Image src={`https://palatracker.bromine.fr/img/MarketUI/pb_icon.png`} alt="icon"
+            <Image src={"https://palatracker.bromine.fr/img/MarketUI/pb_icon.png"} alt="icon"
               height={32} width={32} unoptimized/>
           }
           <span className="app-badge">{getTextFromWebHookType(webHookAlert.type)}</span>

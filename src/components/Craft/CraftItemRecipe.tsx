@@ -9,7 +9,7 @@ import { DisplayItem, DisplayItemProduce } from "@/components/Craft/CraftingDisp
 export async function CraftItemRecipe({ item, options }: { item: OptionType, options: OptionType[] }) {
 
   const craft_recipe = await getCraft(item.value);
-  const slotAvailable: CraftingRecipeKey[] = ['slot1', 'slot2', 'slot3', 'slot4', 'slot5', 'slot6', 'slot7', 'slot8', 'slot9'] as const;
+  const slotAvailable: CraftingRecipeKey[] = ["slot1", "slot2", "slot3", "slot4", "slot5", "slot6", "slot7", "slot8", "slot9"] as const;
 
   const slotItemInfo = slotAvailable.map((slot) => {
     const t = options.find((option) => option.value === craft_recipe[slot]?.item_name);
@@ -32,17 +32,17 @@ function ShowCraftDispatcher({ craft_recipe, slotItemInfo }: {
 }) {
 
   switch (craft_recipe.table) {
-  case 'crafting table':
+  case "crafting table":
     return <ShowCraftingTable slotItemInfo={slotItemInfo}/>;
-  case 'furnace':
+  case "furnace":
     return <ShowFurnace slotItemInfo={slotItemInfo}/>;
-  case 'grinder':
+  case "grinder":
     return <ShowGrinder slotItemInfo={slotItemInfo}/>;
   case "palamachine":
     return <ShowPalamachine slotItemInfo={slotItemInfo}/>;
-  case 'cauldron':
+  case "cauldron":
     return <ShowCauldron slotItemInfo={slotItemInfo}/>;
-  case 'alchemy creator':
+  case "alchemy creator":
     return <ShowAlchemyCreator slotItemInfo={slotItemInfo}/>;
   default:
     return <ShowCraftingTable slotItemInfo={slotItemInfo}/>;
@@ -56,17 +56,17 @@ function ShowCraft({ item, craft_recipe, slotItemInfo }: {
 }) {
   function tableTypeToName(table: string) {
     switch (table) {
-    case 'crafting table':
+    case "crafting table":
       return "Crafting Table";
-    case 'furnace':
+    case "furnace":
       return "Furnace";
-    case 'grinder':
+    case "grinder":
       return "Grinder";
     case "palamachine":
       return "Palamachine";
-    case 'cauldron':
+    case "cauldron":
       return "Cauldron";
-    case 'alchemy creator':
+    case "alchemy creator":
       return "Alchemy Creator";
     default:
       return table;

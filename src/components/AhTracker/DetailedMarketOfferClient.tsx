@@ -1,4 +1,4 @@
-'use client';
+"use client";
 import React, { useEffect, useState } from "react";
 import LoadingSpinner from "@/components/ui/loading-spinner.tsx";
 import { getPlayerUsernameFromUUID } from "@/lib/api/apiClient.ts";

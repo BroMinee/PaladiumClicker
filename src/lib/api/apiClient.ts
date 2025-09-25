@@ -1,4 +1,4 @@
-'use client';
+"use client";
 import { PlayerDBApiReponse } from "@/types";
 
 export async function getPlayerUsernameFromUUID(uuid: string): Promise<string> {

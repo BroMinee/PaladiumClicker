@@ -1,4 +1,4 @@
-'use client';
+"use client";
 import dynamic from "next/dynamic";
 import { AhItemHistory } from "@/types";
 import { Area, Legend, ReferenceLine, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
@@ -73,7 +73,7 @@ export const PlotHistoricChart = ({ data, webhook = false }: { data: AhItemHisto
             strokeWidth={2}
             strokeDasharray="3 3"
             label={{
-              value: `Alerte`,
+              value: "Alerte",
               position: "left",
               fill: "red",
             }}

@@ -1,6 +1,6 @@
-'use client';
+"use client";
 import Select, { StylesConfig } from "react-select";
-import makeAnimated from 'react-select/animated';
+import makeAnimated from "react-select/animated";
 import React, { useEffect, useState } from "react";
 
 import Image from "next/image";
@@ -10,24 +10,24 @@ import LoadingSpinner from "@/components/ui/loading-spinner.tsx";
 const customStyles: StylesConfig<OptionType, false> = {
   control: (provided, state) => ({
     ...provided,
-    backgroundColor: 'white',
-    borderColor: state.isFocused ? 'blue' : 'gray',
-    boxShadow: state.isFocused ? '0 0 0 1px blue' : 'none',
-    cursor: 'text',
-    '&:hover': {
-      borderColor: state.isFocused ? 'blue' : 'gray',
+    backgroundColor: "white",
+    borderColor: state.isFocused ? "blue" : "gray",
+    boxShadow: state.isFocused ? "0 0 0 1px blue" : "none",
+    cursor: "text",
+    "&:hover": {
+      borderColor: state.isFocused ? "blue" : "gray",
     },
-    padding: '0.5rem',
+    padding: "0.5rem",
   }),
   option: (provided, state) => ({
     ...provided,
-    backgroundColor: state.isFocused ? 'lightgray' : 'white',
-    color: 'black',
-    padding: '0.5rem',
+    backgroundColor: state.isFocused ? "lightgray" : "white",
+    color: "black",
+    padding: "0.5rem",
   }),
   menu: (provided) => ({
     ...provided,
-    padding: '0.5rem',
+    padding: "0.5rem",
   }),
 };
 
@@ -92,7 +92,7 @@ const Selector = ({ options, defaultValue, setInputValue }: SelectorProps) => {
     placeholder="Entre 3 lettres pour rechercher un item"
     onChange={(selectedOptions) => {
       if (selectedOptions === null) {
-        setInputValue('');
+        setInputValue("");
       } else {
         setInputValue(selectedOptions.value);
       }

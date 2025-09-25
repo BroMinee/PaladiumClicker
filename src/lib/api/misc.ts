@@ -1,4 +1,4 @@
-import 'server-only';
+import "server-only";
 import { redirect } from "next/navigation";
 import { PlayerDBApiReponse } from "@/types";
 import { cookies } from "next/headers";
@@ -45,7 +45,7 @@ export const fetchWithHeader = async <T>(url: string, cache_duration_in_sec = 15
   const cookieStore = await cookies();
   const allCookies = cookieStore.getAll();
 
-  const cookieHeader = allCookies.map(cookie => `${cookie.name}=${cookie.value}`).join('; ');
+  const cookieHeader = allCookies.map(cookie => `${cookie.name}=${cookie.value}`).join("; ");
 
   try {
     response = await fetch(url,
@@ -53,10 +53,10 @@ export const fetchWithHeader = async <T>(url: string, cache_duration_in_sec = 15
         next: { revalidate: cache_duration_in_sec },
         signal: AbortSignal.timeout(timeout),
         headers: {
-          'Authorization': `Bearer ${process.env.PALADIUM_API_KEY}`,
+          "Authorization": `Bearer ${process.env.PALADIUM_API_KEY}`,
           Cookie: cookieHeader,
         },
-        credentials: 'include',
+        credentials: "include",
       });
     json = await response.json();
 
@@ -88,7 +88,7 @@ export const fetchWithHeader = async <T>(url: string, cache_duration_in_sec = 15
             next: { revalidate: cache_duration_in_sec },
             signal: AbortSignal.timeout(4000),
             headers: {
-              'Authorization': `Bearer ${process.env.PALADIUM_API_KEY}`
+              "Authorization": `Bearer ${process.env.PALADIUM_API_KEY}`
             }
           });
         json = await response.json();
@@ -118,17 +118,17 @@ export const fetchPostWithHeader = async <T>(url: string, body: string, cache_du
 
   const cookieStore = await cookies();
   const allCookies = cookieStore.getAll();
-  const cookieHeader = allCookies.map(cookie => `${cookie.name}=${cookie.value}`).join('; ');
+  const cookieHeader = allCookies.map(cookie => `${cookie.name}=${cookie.value}`).join("; ");
 
   try {
     response = await fetch(url,
       {
-        method: 'POST',
+        method: "POST",
         next: { revalidate: cache_duration_in_sec },
         signal: AbortSignal.timeout(4000),
         headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${process.env.PALADIUM_API_KEY}`,
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${process.env.PALADIUM_API_KEY}`,
           Cookie: cookieHeader,
         },
         body: body

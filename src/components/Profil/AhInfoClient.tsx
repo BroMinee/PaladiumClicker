@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import { usePlayerInfoStore } from "@/stores/use-player-info-store.ts";
 import AhItem from "@/components/Profil/AhItem.tsx";

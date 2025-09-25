@@ -1,4 +1,4 @@
-'use client';
+"use client";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog.tsx";
 import { ScrollArea } from "@/components/ui/scroll-area.tsx";
 import React from "react";

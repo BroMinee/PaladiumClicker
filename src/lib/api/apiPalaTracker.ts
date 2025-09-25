@@ -1,4 +1,4 @@
-import 'server-only';
+import "server-only";
 import {
   AdminShopItemDetail,
   AdminShopPeriode,
@@ -32,10 +32,10 @@ export const isMyApiDown = async (): Promise<boolean> => {
   try {
     response = await fetch(`${API_PALATRACKER}/v1/other/status`,
       {
-        cache: 'no-cache',
+        cache: "no-cache",
         signal: AbortSignal.timeout(4000),
         headers: {
-          'Authorization': `Bearer ${process.env.PALADIUM_API_KEY}`
+          "Authorization": `Bearer ${process.env.PALADIUM_API_KEY}`
         }
       });
     json = await response.json() as { backend_status: string, db_status: string } | null;
@@ -96,13 +96,13 @@ export async function getAllItems(): Promise<OptionType[]> {
       };
     });
   }).catch(() => {
-    return redirect(`/error?message=Impossible de charger la liste des items`);
+    return redirect("/error?message=Impossible de charger la liste des items");
   });
 }
 
 export async function getCraft(item_name: string): Promise<CraftingRecipeType> {
   const allCraft = await fetchWithHeader<CraftingRecipeType[]>(`${API_PALATRACKER}/v1/craft/getAll`, 30 * 60).catch(() => {
-    return redirect(`/error?message=Impossible de charger la totalité des crafts.`);
+    return redirect("/error?message=Impossible de charger la totalité des crafts.");
   });
 
   const craft = allCraft.find((craft) => craft.item.item_name === item_name);
@@ -152,7 +152,7 @@ export async function getAllUsersLinked() {
 
 export async function getRole(): Promise<Role> {
   const res = await fetchWithHeader<{ role: Role }>(`${API_PALATRACKER}/v1/role/getRole`, 0).catch(() => {
-    return { role: 'Classic' as Role };
+    return { role: "Classic" as Role };
   });
   return res.role;
 }
@@ -176,6 +176,6 @@ export async function getItemAlias(item_name: string | undefined): Promise<strin
 
 export async function getCraftRecipe(item_name: string, count: number): Promise<Tree<NodeType>> {
   return await fetchWithHeader<Tree<NodeType>>(`${API_PALATRACKER}/v1/craft/get?item=${item_name}&count=${count}`, 30 * 60).catch(() => {
-    return redirect(`/error?message=Impossible de charger la recette de ce craft.`);
+    return redirect("/error?message=Impossible de charger la recette de ce craft.");
   });
 }

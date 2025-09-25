@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import { useEffect, useRef } from "react";
 import { usePlayerInfoStore } from "@/stores/use-player-info-store";
@@ -33,7 +33,7 @@ const FallingClickImage = () => {
           y: containerRef.current.offsetTop
         };
 
-        const image = document.createElement('img');
+        const image = document.createElement("img");
         image.classList.add("animate-falling", "h-auto", "w-32", "object-cover");
 
         if (selectedCPS === 24) {
@@ -42,12 +42,12 @@ const FallingClickImage = () => {
           image.src = safeJoinPaths(constants.imgPathClicker,`/CPSIcon/${selectedCPS}.png`);
         }
 
-        image.alt = 'Click';
+        image.alt = "Click";
 
         const randomX = Math.random() * (rightTop.x - leftTop.x - image.width) + leftTop.x;
         const randomY = leftTop.y + image.height;
-        image.style.top = randomY + 'px';
-        image.style.left = randomX + 'px';
+        image.style.top = randomY + "px";
+        image.style.left = randomX + "px";
         image.classList.add("absolute");
 
         containerRef.current.appendChild(image);

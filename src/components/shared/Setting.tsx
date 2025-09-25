@@ -1,4 +1,4 @@
-'use client';
+"use client";
 import { IoSettings } from "react-icons/io5";
 import constants from "@/lib/constants.ts";
 

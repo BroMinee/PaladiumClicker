@@ -1,4 +1,4 @@
-'use client';
+"use client";
 import constants from "@/lib/constants";
 import { MetierKey, PlayerInfo, UpgradeKey } from "@/types";
 import { create } from "zustand";
@@ -24,7 +24,7 @@ type Actions = {
   setDefaultProfile: () => void;
 }
 
-const storageKey = 'player-info';
+const storageKey = "player-info";
 const initialState: State = {
   data: null,
   selectedCPS: -1,

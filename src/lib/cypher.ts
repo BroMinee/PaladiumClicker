@@ -1,5 +1,5 @@
-'use server';
-import 'server-only';
+"use server";
+import "server-only";
 import { checkAnswerPalaAnimationType, KeyDownTimestampType } from "@/types";
 import { fetchPostWithHeader, fetchWithHeader } from "@/lib/api/misc.ts";
 import { API_PALATRACKER } from "@/lib/constants.ts";

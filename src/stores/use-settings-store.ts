@@ -13,7 +13,7 @@ type Actions = {
   setDefaultProfile: (value: boolean) => void
 }
 
-const storageKey = 'settings';
+const storageKey = "settings";
 
 const initialState: State = {
   settings: {

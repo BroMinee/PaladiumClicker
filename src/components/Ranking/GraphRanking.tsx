@@ -18,8 +18,8 @@ export default async function GraphRanking({ rankingType, searchParams }: {
     redirect("/error?message=Impossible de récupérer les données du classement sélectionné");
   }
 
-  let usernames = searchParams.usernames ? searchParams.usernames.split(',') : [];
-  let noUsernames = searchParams.noUsernames ? searchParams.noUsernames.toLowerCase().split(',') : [];
+  let usernames = searchParams.usernames ? searchParams.usernames.split(",") : [];
+  let noUsernames = searchParams.noUsernames ? searchParams.noUsernames.toLowerCase().split(",") : [];
   usernames = usernames.filter((username) => !noUsernames.includes(username.toLowerCase()));
 
   for (let i = 0; i < usernames.length; i++) {

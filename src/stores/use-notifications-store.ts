@@ -10,7 +10,7 @@ type Actions = {
   setLastVisited: (url: PathValid) => void,
 }
 
-const storageKey = 'notifications';
+const storageKey = "notifications";
 
 const initialState: State = {
   last_visited: {} as { [T in PathValid]: number }

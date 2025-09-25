@@ -1,4 +1,4 @@
-'use client';
+"use client";
 import dynamic from "next/dynamic";
 import { AdminShopItemDetail, AdminShopPeriode } from "@/types";
 import { Area, Legend, ReferenceLine, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
@@ -78,7 +78,7 @@ const PlotAdminShopChart = ({ data, periode, webhook = false }: {
             strokeWidth={2}
             strokeDasharray="3 3"
             label={{
-              value: `Alerte`,
+              value: "Alerte",
               position: "left",
               fill: "red",
             }}

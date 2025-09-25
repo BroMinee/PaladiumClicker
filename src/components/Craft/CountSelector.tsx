@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import { CraftSectionEnum, OptionType } from "@/types";
 import { useRouter } from "next/navigation";

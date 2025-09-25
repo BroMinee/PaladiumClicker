@@ -56,7 +56,7 @@ export default async function Home(
 
   // test if the searchParams.category is a RankingType
   if (!isShopItem(searchParams.item)) {
-    redirect(generateAdminShopUrl('paladium-ingot'));
+    redirect(generateAdminShopUrl("paladium-ingot"));
   }
   let periode = searchParams.periode;
   let periodeEnum = searchParams.periode as AdminShopPeriode;

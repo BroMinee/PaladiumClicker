@@ -1,4 +1,4 @@
-'use client';
+"use client";
 import dynamic from "next/dynamic";
 import { ServerPaladiumStatusResponse, StatusPeriode } from "@/types";
 import { Area, Legend, ReferenceLine, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
@@ -75,7 +75,7 @@ const PlotStatusChart = ({ data, periode }: { data: ServerPaladiumStatusResponse
           isAnimationActive={periode !== "season"}
           fill="url(#colorUv)" name="Joueurs"/>
         <ReferenceLine yAxisId="left" type="linear" y={average} stroke="gray" strokeDasharray="3, 3"
-          label={{ position: 'top', value: `Moyenne ${moyenneText}` }}/>
+          label={{ position: "top", value: `Moyenne ${moyenneText}` }}/>
       </AreaChart>
     </ResponsiveContainer>
   );

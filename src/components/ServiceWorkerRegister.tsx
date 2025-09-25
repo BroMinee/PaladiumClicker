@@ -1,4 +1,4 @@
-'use client';
+"use client";
 // components/ServiceWorkerRegister.js
 import { useEffect } from "react";
 

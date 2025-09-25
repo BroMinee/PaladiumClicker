@@ -82,7 +82,7 @@ export function DetailedMarketOffer({ itemSelected, offer }: { itemSelected: Opt
     <div className="md:ml-4 flex md:w-[35%] flex-col xl:flex-row items-center gap-4">
       <Image src={`https://crafatar.com/avatars/${offer.seller}?size=8&overlay`}
         className="w-12 h-12 pixelated rounded-md"
-        alt={`Skin`} width={0} height={0}
+        alt={"Skin"} width={0} height={0}
         unoptimized={true}
       />
       <SellNameMarket uuid={offer.seller}/>
@@ -93,7 +93,7 @@ export function DetailedMarketOffer({ itemSelected, offer }: { itemSelected: Opt
         className="flex flex-row w-full xl:w-[45%] gap-8 justify-between bg-card py-3 px-2 items-center">
         <Image src={safeJoinPaths(constants.imgPathMarket,"pb_icon.png")}
           className="w-fit h-7 pixelated"
-          alt={`pb_icon`} width={0} height={0}
+          alt={"pb_icon"} width={0} height={0}
           unoptimized={true}
         />
         <p className="font-bold text-[20px]">
@@ -106,7 +106,7 @@ export function DetailedMarketOffer({ itemSelected, offer }: { itemSelected: Opt
         className="flex flex-row w-full xl:w-[65%] gap-8 justify-between bg-card py-3 px-2 items-center">
         <Image src={safeJoinPaths(constants.imgPathMarket,"money_icon.png")}
           className="w-fit h-7 pixelated"
-          alt={`money_icon`} width={0} height={0}
+          alt={"money_icon"} width={0} height={0}
           unoptimized={true}
         />
         <p className="font-bold text-[20px]">

@@ -5,7 +5,7 @@ import React from "react";
 
 export async function generateMetadata() {
 
-  const title = `PalaTracker | Politique de confidentialité`;
+  const title = "PalaTracker | Politique de confidentialité";
   const description = "Politique de confidentialité de PalaTracker, un site web permettant de suivre sa progression sur Paladium.";
   return {
     title: title,

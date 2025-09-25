@@ -329,7 +329,7 @@ function GenerateEmbedDescription(footer: string): React.JSX.Element {
           width={0}
           height={0}
           sizes="100vw"
-          style={{ width: '100%', height: 'auto' }}
+          style={{ width: "100%", height: "auto" }}
           className="embed-image" unoptimized/>}
       <div className="embed-footer">
         <Image className="footer-icon"

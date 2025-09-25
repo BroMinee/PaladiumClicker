@@ -1,4 +1,4 @@
-'use client';
+"use client";
 import { useEffect } from "react";
 import { useProfileStore } from "@/stores/use-profile-store.ts";
 import { isAuthenticate } from "@/lib/api/apiServerAction.ts";

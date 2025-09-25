@@ -14,28 +14,28 @@ export function ThreshConditionSelector() {
   function getTextFromThresholdCondition(condition: WebHookThresholdCondition) {
     switch (condition) {
     case "aboveThreshold":
-      return 'Supérieur à';
+      return "Supérieur à";
     case "underThreshold":
-      return 'Inférieur à';
+      return "Inférieur à";
     case "decreaseAboveThreshold":
-      return 'En baisse et supérieur à';
+      return "En baisse et supérieur à";
     case "increasingAboveThreshold":
-      return 'En hausse et supérieur à';
+      return "En hausse et supérieur à";
     case "increasing":
-      return 'En hausse';
+      return "En hausse";
     case "decreasing":
-      return 'En baisse';
+      return "En baisse";
     case "aboveQuantity":
-      return 'supérieur ou égal (en quantité)';
+      return "supérieur ou égal (en quantité)";
     default:
-      return 'Event Inconnu';
+      return "Event Inconnu";
     }
   }
 
-  const validCondition: WebHookThresholdCondition[] = ['underThreshold', 'aboveThreshold', 'decreaseAboveThreshold', 'increasingAboveThreshold', 'decreasing', 'increasing'];
+  const validCondition: WebHookThresholdCondition[] = ["underThreshold", "aboveThreshold", "decreaseAboveThreshold", "increasingAboveThreshold", "decreasing", "increasing"];
   if (currentWebHookType === WebHookType.market) {
     // Le Market a une condition supplémentaire par rapport à l'admin shop
-    validCondition.push('aboveQuantity');
+    validCondition.push("aboveQuantity");
   }
 
   return (
@@ -63,7 +63,7 @@ export function AdminShopInput() {
       </span>
       <div className="grid grid-cols-6 sm:grid-cols-16 lg:grid-cols-8 items-center justify-between gap-2 pb-2 mt-0">
         {adminShopItemsAvailable.map((value: AdminShopItem, index: number) => {
-          return <AdminShopSelectorClientItem key={value + index} item={value} periode={'day'}
+          return <AdminShopSelectorClientItem key={value + index} item={value} periode={"day"}
                                               adminShopPage={false}/>;
         })}
       </div>
@@ -78,24 +78,24 @@ function EventSelector() {
 
   function getTextFromEventType(event: EventType) {
     switch (event) {
-    case 'BOSS':
-      return 'Boss';
-    case 'A VOS MARQUES':
-      return 'A vos marques';
-    case 'TOTEM':
-      return 'Totem';
-    case 'EGGHUNT':
-      return 'EggHunt';
-    case 'KOTH':
-      return 'KOTH';
-    case 'BLACKMARKET':
-      return 'BlackMarket';
+    case "BOSS":
+      return "Boss";
+    case "A VOS MARQUES":
+      return "A vos marques";
+    case "TOTEM":
+      return "Totem";
+    case "EGGHUNT":
+      return "EggHunt";
+    case "KOTH":
+      return "KOTH";
+    case "BLACKMARKET":
+      return "BlackMarket";
     default:
-      return 'Event Inconnu';
+      return "Event Inconnu";
     }
   }
 
-  const validEvents: EventType[] = ['BOSS', 'A VOS MARQUES', 'TOTEM', 'EGGHUNT', 'KOTH', 'BLACKMARKET'];
+  const validEvents: EventType[] = ["BOSS", "A VOS MARQUES", "TOTEM", "EGGHUNT", "KOTH", "BLACKMARKET"];
 
   return (
     <div className="flex flex-row justify-between">

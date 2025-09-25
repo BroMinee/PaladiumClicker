@@ -3,7 +3,7 @@ import LoadingSpinner from "@/components/ui/loading-spinner.tsx";
 
 export default function LoadingData({ username }: { username: string | undefined }) {
   return (
-    <div className="flex justify-center items-center" style={{ height: '70vh' }}>
+    <div className="flex justify-center items-center" style={{ height: "70vh" }}>
       <Card className="flex flex-col gap-4 font-bold center items-center transition-all duration-300 ease-out motion-reduce:transition-none">
         <CardHeader className="flex flex-row gap-4">
           <LoadingSpinner/>

@@ -1,4 +1,4 @@
-'use server';
+"use server";
 import { getAllItems } from "@/lib/api/apiPalaTracker.ts";
 import { SelectorItemClient } from "@/components/Items/SelectorItemClient.tsx";
 import { OptionType } from "@/types";

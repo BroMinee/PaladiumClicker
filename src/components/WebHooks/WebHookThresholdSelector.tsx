@@ -1,4 +1,4 @@
-'use client';
+"use client";
 import React, { useEffect } from "react";
 import { useWebhookStore } from "@/stores/use-webhook-store.ts";
 import { ThreshConditionSelector } from "@/components/WebHooks/WebHookAdminShop/WebHookClient.tsx";
@@ -40,7 +40,7 @@ const CounterInputWebhook = ({ min = 0, step = 0.01 }) => {
       const parsedValue = parseFloat(newValue);
       if (!isNaN(parsedValue) && parsedValue >= min) {
         setCurrentValue(newValue);
-      } else if (newValue === '') {
+      } else if (newValue === "") {
         setCurrentValue("0");
       }
     }
@@ -61,9 +61,9 @@ const CounterInputWebhook = ({ min = 0, step = 0.01 }) => {
         value={currentValue}
         onChange={handleChange}
         style={{
-          appearance: 'none',
-          MozAppearance: 'textfield',
-          WebkitAppearance: 'none',
+          appearance: "none",
+          MozAppearance: "textfield",
+          WebkitAppearance: "none",
         }}
         inputMode="decimal"
         className="w-20 h-10 input-number text-center text-lg border border-gray-300 rounded-lg outline-none"

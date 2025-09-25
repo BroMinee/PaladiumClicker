@@ -1,4 +1,4 @@
-'use client';
+"use client";
 import { usePlayerInfoStore } from "@/stores/use-player-info-store.ts";
 import { checkCondition } from "@/lib/misc.ts";
 import { BuildingUpgrade, CategoryUpgrade, GlobalUpgrade, TerrainUpgrade, UpgradeKey } from "@/types";

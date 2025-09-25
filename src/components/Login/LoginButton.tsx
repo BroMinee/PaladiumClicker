@@ -1,4 +1,4 @@
-'use client';
+"use client";
 import { FaDiscord } from "react-icons/fa";
 import { Button } from "@/components/ui/button.tsx";
 import React from "react";

@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import { AdminShopItem, AdminShopPeriode } from "@/types";
 import { useRouter, useSearchParams } from "next/navigation";

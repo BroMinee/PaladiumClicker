@@ -1,4 +1,4 @@
-import 'server-only';
+import "server-only";
 import React from "react";
 import { getRankingLeaderboardPlayerUsername, getRankingLeaderboardPlayerUUID } from "@/lib/api/apiPalaTracker.ts";
 import { RankingResponse, RankingType } from "@/types";
@@ -12,7 +12,7 @@ export async function ProfilRankingSectionServer({ rankingType, searchParams }: 
   searchParams: searchParamsProfilPage
 }) {
   const cookieStore = await cookies();
-  const uuid = cookieStore.get('uuid' as any)?.value || "10b887ce-133b-4d5e-8b54-41376b832536";
+  const uuid = cookieStore.get("uuid" as any)?.value || "10b887ce-133b-4d5e-8b54-41376b832536";
   if (uuid === undefined) {
     return <div>Impossible de récupérer l&apos;uuid du joueur via les cookies</div>;
   }
@@ -21,7 +21,7 @@ export async function ProfilRankingSectionServer({ rankingType, searchParams }: 
     return [] as RankingResponse;
   });
 
-  let usernames = searchParams.usernames ? searchParams.usernames.split(',') : [];
+  let usernames = searchParams.usernames ? searchParams.usernames.split(",") : [];
 
   for (let i = 0; i < usernames.length; i++) {
     let dataUser = await getRankingLeaderboardPlayerUsername(usernames[i], rankingType).catch(() => {

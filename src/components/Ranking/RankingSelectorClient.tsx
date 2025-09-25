@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import { ProfilSectionEnum, RankingType } from "@/types";
 import { useRouter, useSearchParams } from "next/navigation";

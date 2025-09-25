@@ -1,4 +1,4 @@
-'use client';
+"use client";
 import { AllPalaAnimationStats } from "@/types";
 import { useEffect, useState } from "react";
 import { getAllPalaAnimationTime } from "@/lib/api/apiServerAction.ts";

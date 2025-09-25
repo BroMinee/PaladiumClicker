@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import { NodeType, PaladiumAhItemStat } from "@/types";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card.tsx";
@@ -32,7 +32,7 @@ export function CraftResourceList({ list }: { list: NodeType[] }) {
         setAhItems(res.filter((el) => listStateFlatten.includes(el.name)));
       }).catch((e) => {
         console.error(e);
-        redirect(`/error?message=Une erreur est survenue lors de la récupération des données de toutes les ressources nécessaires au craft.`);
+        redirect("/error?message=Une erreur est survenue lors de la récupération des données de toutes les ressources nécessaires au craft.");
       });
     }
   }, [mounted, listState]);

@@ -9,6 +9,7 @@
     "brace-style": ["error", "1tbs", { "allowSingleLine": false }],
     "indent": ["error", 2, {
       "ignoredNodes": ["JSXFragment", "JSXFragment *"]
-    }]
+    }],
+    "quotes": ["error", "double"]
   }
 }

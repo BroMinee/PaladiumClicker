@@ -1,4 +1,4 @@
-'use client';
+"use client";
 import { safeJoinPaths } from "@/lib/misc.ts";
 import Image from "next/image";
 import { navigate } from "@/components/actions.ts";

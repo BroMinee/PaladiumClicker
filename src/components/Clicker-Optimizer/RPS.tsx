@@ -1,4 +1,4 @@
-'use client';
+"use client";
 import {
   checkCondition,
   computePrice,
@@ -123,7 +123,7 @@ const RPS = () => {
           <div className="flex flex-col gap-2">
             <span className="font-semibold">Production actuelle par seconde</span>
             <div className="flex items-center gap-2">
-              <GradientText className="font-bold" id="rps">{'~ ' + formatPrice(rps)}</GradientText>
+              <GradientText className="font-bold" id="rps">{"~ " + formatPrice(rps)}</GradientText>
               <Image width={24} height={24} src={safeJoinPaths("/coin.png")} alt="Coin"/>
             </div>
           </div>
@@ -136,7 +136,7 @@ const RPS = () => {
             <span className="font-semibold">Production estimée après achat</span>
             <div className="flex items-center gap-2">
               <GradientText className="font-bold">
-                {'~ ' + formatPrice(estimatedRPS)}{" "}
+                {"~ " + formatPrice(estimatedRPS)}{" "}
                 ({estimatedRPS > rps ? "+" : ""}{(((estimatedRPS - rps) / (rps) * 100)).toFixed(2)}%)
               </GradientText>
               <Image src={safeJoinPaths("/coin.png")} height={24} width={24} alt="Coin"/>

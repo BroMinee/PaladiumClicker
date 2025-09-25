@@ -89,7 +89,7 @@ function getCoinsCondition(conditions: AnyCondition | undefined) {
     return 0;
   }
 
-  const r = conditions.find(c => typeof c !== 'undefined' && "coins" in c) as { coins: number } | undefined;
+  const r = conditions.find(c => typeof c !== "undefined" && "coins" in c) as { coins: number } | undefined;
   return r ? r.coins : -1;
 }
 
@@ -97,7 +97,7 @@ function getBuildingIndexCondition(conditions: AnyCondition | undefined) {
   if (conditions === undefined) {
     return 0;
   }
-  const r = conditions.find(c => typeof c !== 'undefined' && "index" in c) as { index: number } | undefined;
+  const r = conditions.find(c => typeof c !== "undefined" && "index" in c) as { index: number } | undefined;
   return r ? r.index : -1;
 }
 
@@ -105,7 +105,7 @@ function getBuildingCountCondition(conditions: AnyCondition | undefined) {
   if (conditions === undefined) {
     return 0;
   }
-  const r = conditions.find(c => typeof c !== 'undefined' && "own" in c) as { own: number } | undefined;
+  const r = conditions.find(c => typeof c !== "undefined" && "own" in c) as { own: number } | undefined;
   return r ? r.own : -1;
 }
 
@@ -113,7 +113,7 @@ function getDayCondition(conditions: AnyCondition | undefined) {
   if (conditions === undefined) {
     return 0;
   }
-  const r = conditions.find(c => typeof c !== 'undefined' && "day" in c) as { day: number } | undefined;
+  const r = conditions.find(c => typeof c !== "undefined" && "day" in c) as { day: number } | undefined;
   return r ? r.day : -1;
 }
 
@@ -193,7 +193,7 @@ export function getDDHHMMSSOnlyClicker(d: Date) {
   if (new Date() > d) {
     return "Maintenant";
   }
-  const padL = (num: number, chr = `0`) => `${num}`.padStart(2, chr);
+  const padL = (num: number, chr = "0") => `${num}`.padStart(2, chr);
 
   return `${padL(d.getDate())}/${padL(d.getMonth() + 1)}/${d.getFullYear()} à ${padL(d.getHours())}:${padL(d.getMinutes())}:${padL(d.getSeconds())}`;
 }
@@ -212,19 +212,19 @@ export function reverseDDHHMMSSOnlyClicker(d: string) {
 }
 
 export function getDDHHMMSS(d: Date) {
-  const padL = (num: number, chr = `0`) => `${num}`.padStart(2, chr);
+  const padL = (num: number, chr = "0") => `${num}`.padStart(2, chr);
 
   return `${padL(d.getDate())}/${padL(d.getMonth() + 1)}/${d.getFullYear()} à ${padL(d.getHours())}:${padL(d.getMinutes())}:${padL(d.getSeconds())}`;
 }
 
 export function getHHMMSS(d: Date) {
-  const padL = (num: number, chr = `0`) => `${num}`.padStart(2, chr);
+  const padL = (num: number, chr = "0") => `${num}`.padStart(2, chr);
 
   return `${padL(d.getHours())}:${padL(d.getMinutes())}:${padL(d.getSeconds())}`;
 }
 
 export function getHHMM(d: Date) {
-  const padL = (num: number, chr = `0`) => `${num}`.padStart(2, chr);
+  const padL = (num: number, chr = "0") => `${num}`.padStart(2, chr);
 
   return `${padL(d.getHours())}:${padL(d.getMinutes())}`;
 }
@@ -296,8 +296,8 @@ export function generateCraftUrl(item: string | null, count: number | null, sect
 
 export function safeJoinPaths(base: string, ...paths: string[]): string {
   const allPaths = ["/" + base, ...paths];
-  const result = allPaths.join('/');
-  return result.replace(/\/+/g, '/');
+  const result = allPaths.join("/");
+  return result.replace(/\/+/g, "/");
 }
 
 export function getRankImg(rank: string) {
@@ -500,7 +500,7 @@ function convertToFloat(str: string | number) {
     return str;
   }
 
-  return parseFloat(str.replace(/,/g, '.'));
+  return parseFloat(str.replace(/,/g, "."));
 }
 
 export function computeRPS(playerInfo: PlayerInfo) {
@@ -537,25 +537,25 @@ export function getImagePathFromRankingType(rankingType: string): string {
   let imgPath: string;
   switch (rankingType) {
   case RankingType.money:
-    imgPath = safeJoinPaths(constants.imgPathRanking, `money.png`);
+    imgPath = safeJoinPaths(constants.imgPathRanking, "money.png");
     break;
   case RankingType["job.alchemist"]:
-    imgPath = safeJoinPaths(constants.imgPathRanking, `alchimiste.png`);
+    imgPath = safeJoinPaths(constants.imgPathRanking, "alchimiste.png");
     break;
   case RankingType["job.farmer"]:
-    imgPath = safeJoinPaths(constants.imgPathRanking, `farmeur.png`);
+    imgPath = safeJoinPaths(constants.imgPathRanking, "farmeur.png");
     break;
   case RankingType["job.hunter"]:
-    imgPath = safeJoinPaths(constants.imgPathRanking, `hunter.png`);
+    imgPath = safeJoinPaths(constants.imgPathRanking, "hunter.png");
     break;
   case RankingType["job.miner"]:
-    imgPath = safeJoinPaths(constants.imgPathRanking, `mineur.png`);
+    imgPath = safeJoinPaths(constants.imgPathRanking, "mineur.png");
     break;
   case RankingType.boss:
-    imgPath = safeJoinPaths(constants.imgPathRanking, `boss.png`);
+    imgPath = safeJoinPaths(constants.imgPathRanking, "boss.png");
     break;
   case RankingType.egghunt:
-    imgPath = safeJoinPaths(constants.imgPathRanking, `egghunt.png`);
+    imgPath = safeJoinPaths(constants.imgPathRanking, "egghunt.png");
     break;
     // case RankingType.end:
     //   imgPath = safeJoinPaths(constants.imgPathRanking, `end.png`);
@@ -564,16 +564,16 @@ export function getImagePathFromRankingType(rankingType: string): string {
     //   imgPath = safeJoinPaths(constants.imgPathRanking, `chorus.png`);
     //   break;
   case RankingType.koth:
-    imgPath = safeJoinPaths(constants.imgPathRanking, `koth.png`);
+    imgPath = safeJoinPaths(constants.imgPathRanking, "koth.png");
     break;
   case RankingType.clicker:
-    imgPath = safeJoinPaths(constants.imgPathRanking, `clicker.png`);
+    imgPath = safeJoinPaths(constants.imgPathRanking, "clicker.png");
     break;
   case RankingType.alliance:
-    imgPath = safeJoinPaths(constants.imgPathRanking, `alliance.png`);
+    imgPath = safeJoinPaths(constants.imgPathRanking, "alliance.png");
     break;
   case RankingType.vote:
-    imgPath = safeJoinPaths(constants.imgPathRanking, `vote.png`);
+    imgPath = safeJoinPaths(constants.imgPathRanking, "vote.png");
     break;
   default:
     imgPath = safeJoinPaths("/unknown.png");
@@ -625,14 +625,14 @@ export function adminShopItemToUserFriendlyText(item: AdminShopItem): string {
     return "Ink Sack";
   }
 
-  return item.replaceAll('tile', '').split('-')
+  return item.replaceAll("tile", "").split("-")
     .map(word => word.charAt(0).toUpperCase() + word.slice(1))
-    .join(' ');
+    .join(" ");
 }
 
 export function getImagePathFromAdminShopType(item: AdminShopItem): string {
   const translateTable: Record<string, string> = {
-    "wool": `wool_colored_white`,
+    "wool": "wool_colored_white",
     "passive-wither-head": "passifwither_head",
     "slime-ball": "slimeball",
     "log": "log_oak",
@@ -669,7 +669,7 @@ export function convertAhItemTypeToMarketItemOffer(item: AhItemType, seller: str
 
 export function getIconNameFromEventType(eventType: EventType) {
   switch (eventType) {
-  case 'A VOS MARQUES':
+  case "A VOS MARQUES":
     return "/EventIcon/a_vos_marques.png";
   case "BOSS":
     return "/EventIcon/boss.png";
@@ -996,14 +996,14 @@ export function parseMessageCraftPrice(message: any) : {type: "update" | "other"
 
   function isCraftPrice(item: any): boolean {
     return (
-      typeof item === 'object' &&
+      typeof item === "object" &&
       item !== null &&
-      typeof item.created_at === 'string' &&
-        typeof item.item === 'object' && typeof item.item.item_name === 'string' && typeof item.item.us_trad === 'string' && typeof item.item.fr_trad === 'string' && typeof item.item.img === 'string' &&
-      typeof item.priceToCraft === 'number' &&
-      typeof item.currentPrice === 'number' &&
-      typeof item.averagePrice === 'number' &&
-      typeof item.totalSold === 'number'
+      typeof item.created_at === "string" &&
+        typeof item.item === "object" && typeof item.item.item_name === "string" && typeof item.item.us_trad === "string" && typeof item.item.fr_trad === "string" && typeof item.item.img === "string" &&
+      typeof item.priceToCraft === "number" &&
+      typeof item.currentPrice === "number" &&
+      typeof item.averagePrice === "number" &&
+      typeof item.totalSold === "number"
     );
   }
 

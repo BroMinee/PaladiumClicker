@@ -1,4 +1,4 @@
-'use client';
+"use client";
 import { useEffect, useRef, useState } from "react";
 
 import GradientText from "@/components/shared/GradientText.tsx";
@@ -33,7 +33,7 @@ const FallingClickImagePalaTime = () => {
           y: containerRef.current.offsetTop
         };
 
-        const image = document.createElement('img');
+        const image = document.createElement("img");
         image.classList.add("animate-falling", "h-auto", "w-32", "object-cover");
         image.draggable = false;
         image.ondragstart = (e) => {
@@ -42,9 +42,9 @@ const FallingClickImagePalaTime = () => {
         image.style.imageRendering = "pixelated";
         image.style.imageRendering = "crisp-edges";
 
-        image.src = safeJoinPaths(`/AH_img/paper.webp`);
+        image.src = safeJoinPaths("/AH_img/paper.webp");
 
-        image.alt = 'Click';
+        image.alt = "Click";
         image.onclick = () => {
           setOpenEvent(true);
         };
@@ -56,8 +56,8 @@ const FallingClickImagePalaTime = () => {
           const randomX = Math.random() * (rightTop.x - leftTop.x - image.width) + leftTop.x;
           const randomY = leftTop.y + image.height;
 
-          image.style.top = randomY + 'px';
-          image.style.left = randomX + 'px';
+          image.style.top = randomY + "px";
+          image.style.left = randomX + "px";
         };
 
         containerRef.current.appendChild(image);

@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import { Button } from "@/components/ui/button.tsx";
 import { FaShareAlt } from "react-icons/fa";

@@ -1,4 +1,4 @@
-'use client';
+"use client";
 import { CraftSectionValid, generateCraftUrl } from "@/lib/misc.ts";
 import { useRouter, useSearchParams } from "next/navigation";
 import { cn } from "@/lib/utils.ts";

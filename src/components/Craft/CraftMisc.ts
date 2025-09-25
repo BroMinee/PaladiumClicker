@@ -17,13 +17,13 @@ export async function BuildTreeRecursively(el: NodeType, options: OptionType[], 
 
   valueToRes.set(el.value, craft_recipe);
 
-  const slotAvailable: CraftingRecipeKey[] = ['slot1', 'slot2', 'slot3', 'slot4', 'slot5', 'slot6', 'slot7', 'slot8', 'slot9'] as const;
+  const slotAvailable: CraftingRecipeKey[] = ["slot1", "slot2", "slot3", "slot4", "slot5", "slot6", "slot7", "slot8", "slot9"] as const;
   const childrenOrNull = slotAvailable.map((slot) => {
     const itemAtSlot = craft_recipe[slot];
     if (!itemAtSlot) {
       return redirect(`/error?message=Le craft de ${el.value} n'existe pas dans la base de donnée. Il sera ajouté prochainement.`);
     }
-    if (itemAtSlot.item_name === 'air') {
+    if (itemAtSlot.item_name === "air") {
       return null;
     }
     const t = options.find((option) => option.value === itemAtSlot.item_name);

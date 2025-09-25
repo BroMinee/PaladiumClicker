@@ -1,4 +1,4 @@
-'use client';
+"use client";
 import { formatPrice, generateXpCalculatorUrl, getColorByMetierName, safeJoinPaths } from "@/lib/misc.ts";
 import { cn } from "@/lib/utils.ts";
 import { MetierKey, PlayerInfo, PlayerRank } from "@/types";
@@ -287,7 +287,7 @@ export function DisplayItem({ searchParams, item, index }: { searchParams: searc
   return (
     <div key={index} className="relative flex flex-row items-center gap-4">
       {item.level !== undefined && item.level > playerInfo.metier[searchParams.metier as MetierKey].level && (
-        <div className={cn("absolute top-0 right-0 text-xs font-bold bg-white bg-opacity-80 px-2 py-0.5 rounded-bl", searchParams.metier === 'farmer' ? "text-black" : "")}
+        <div className={cn("absolute top-0 right-0 text-xs font-bold bg-white bg-opacity-80 px-2 py-0.5 rounded-bl", searchParams.metier === "farmer" ? "text-black" : "")}
           style={{ backgroundColor: `rgb(${colors.bgColor[0]},${colors.bgColor[1]},${colors.bgColor[2]})` }}>
           niv {item.level}
         </div>

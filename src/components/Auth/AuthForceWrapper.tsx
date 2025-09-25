@@ -1,4 +1,4 @@
-'use server';
+"use server";
 import React, { Suspense } from "react";
 import { getProfileFromCookies } from "@/lib/api/apiPalaTracker.ts";
 import { Card, CardHeader } from "@/components/ui/card.tsx";
@@ -35,7 +35,7 @@ async function AuthForce({ children, url }: {
 
 function AuthLoading() {
   return (
-    <div className="flex justify-center items-center" style={{ height: '70vh' }}>
+    <div className="flex justify-center items-center" style={{ height: "70vh" }}>
       <Card className="flex flex-col gap-4 font-bold center items-center">
         <CardHeader className="flex flex-row gap-4">
           <LoadingSpinner/>

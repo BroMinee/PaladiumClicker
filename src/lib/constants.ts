@@ -482,9 +482,9 @@ const notificationPath: Map<PathValid, [number, string]> = new Map<PathValid, [n
   ]);
 
 const menuPaths: Map<NavBarCategory, PathValid[]> = new Map<NavBarCategory, PathValid[]>([
-  ['Statistiques et données', ["/profil", "/ah", "/admin-shop", "/ranking?category=money"]],
-  ['Outils', ["/clicker-optimizer", "/xp-calculator", "/pala-animation", "/craft", "/webhook"]],
-  ['Informations et gestion', ["/status", "/patchnote", "/politique-de-confidentialite", "/about"]],
+  ["Statistiques et données", ["/profil", "/ah", "/admin-shop", "/ranking?category=money"]],
+  ["Outils", ["/clicker-optimizer", "/xp-calculator", "/pala-animation", "/craft", "/webhook"]],
+  ["Informations et gestion", ["/status", "/patchnote", "/politique-de-confidentialite", "/about"]],
 ]);
 
 const deprecatedIdAchivement = [

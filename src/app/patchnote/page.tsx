@@ -8,8 +8,8 @@ import { ChangeLogs } from "@/types";
 
 export async function generateMetadata() {
 
-  const title = `PalaTracker | Patchnotes`;
-  const description = `📝 Viens consulter les dernières nouveautés de PalaTracker ! 📝`;
+  const title = "PalaTracker | Patchnotes";
+  const description = "📝 Viens consulter les dernières nouveautés de PalaTracker ! 📝";
   return {
     title: title,
     description: description,

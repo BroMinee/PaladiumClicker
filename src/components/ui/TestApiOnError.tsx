@@ -1,4 +1,4 @@
-import 'server-only';
+import "server-only";
 import { getPlayerInfo, isApiDown } from "@/lib/api/apiPala.ts";
 import LoadingSpinner from "@/components/ui/loading-spinner.tsx";
 import { isMyApiDown } from "@/lib/api/apiPalaTracker.ts";
