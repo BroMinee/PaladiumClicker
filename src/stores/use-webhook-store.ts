@@ -59,7 +59,7 @@ const initialState: State = {
   edit: false,
   idAlert: null,
   username: "",
-}
+};
 
 export const useWebhookStore = create<State & Actions>(
   (set) => ({

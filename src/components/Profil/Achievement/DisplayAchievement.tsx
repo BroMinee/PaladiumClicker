@@ -44,7 +44,7 @@ export const AchievementInfo = ({
         }
       </div>
     </CardContent>);
-}
+};
 
 
 type DisplayCategoryCardProps = {
@@ -69,4 +69,4 @@ export const DisplayCategoryCard = ({ title, value, img, unoptimized, children }
         </GradientText>
       </div>
     </CardContent>);
-}
+};

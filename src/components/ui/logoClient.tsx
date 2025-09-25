@@ -23,5 +23,5 @@ export const LogoClient = ({ menu = false }: { menu?: boolean }) => {
       {menu && <span className="text-xl font-bold">Menu</span>}
     </div>
 
-  )
-}
+  );
+};

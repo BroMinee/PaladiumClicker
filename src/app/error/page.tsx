@@ -24,7 +24,7 @@ export function generateMetadata() {
       title: title,
       description: description,
     },
-  }
+  };
 }
 
 export default async function Error500Page(
@@ -36,7 +36,7 @@ export default async function Error500Page(
   if (Array.isArray(searchParams.username)) {
     return (<Card>
       Pourquoi tu donnes une array en query params ?
-    </Card>)
+    </Card>);
   }
 
   return (

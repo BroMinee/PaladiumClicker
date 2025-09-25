@@ -1,4 +1,4 @@
-'use client'
+'use client';
 import { Role } from "@/types";
 import { Button } from "@/components/ui/button.tsx";
 import { FormEvent, useState } from "react";
@@ -38,12 +38,12 @@ export default function EditRole({ defaultValue, discord_id }: { defaultValue: R
       >
         {
           ["Admin", "Bug Hunter", "Beta Tester", "Palatime", "Classic"].map((role, index) => {
-            return <option key={index} value={role} selected={role === defaultValue}>{role}</option>
+            return <option key={index} value={role} selected={role === defaultValue}>{role}</option>;
           })
         }
       </select>
       <Button type="submit">Submit</Button>
       {isPending && <LoadingSpinner/>}
     </form>
-  )
+  );
 }

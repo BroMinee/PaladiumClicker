@@ -1,4 +1,4 @@
-'use client'
+'use client';
 import React from 'react';
 import { TbLogout2 } from "react-icons/tb";
 import { Button } from "@/components/ui/button.tsx";
@@ -10,7 +10,7 @@ import { SmallLoginButton } from "@/components/Login/LoginButton.tsx";
 export const LoginDiscord = () => {
   return <div>
     <SmallLoginButton href={`${API_PALATRACKER}/v1/auth/login/discord`} redirectUrl={"/account"}/>
-  </div>
+  </div>;
 };
 
 export const LogoutDiscord = () => {
@@ -24,5 +24,5 @@ export const LogoutDiscord = () => {
       </a>
     </div>
   );
-}
+};
 

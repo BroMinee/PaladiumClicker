@@ -12,6 +12,6 @@ const GradientText = ({ children, className, ...props }: GradientTextProps) => {
       {children}
     </span>
   );
-}
+};
 
 export default GradientText;

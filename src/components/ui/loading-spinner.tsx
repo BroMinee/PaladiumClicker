@@ -1,7 +1,7 @@
 import { cn } from "@/lib/utils.ts";
 
 const LoadingSpinner = ({ size = 10 }) => {
-  const className = `w-${size} h-${size}`
+  const className = `w-${size} h-${size}`;
   return (
     <div className="text-center">
       <div role="status">
@@ -18,6 +18,6 @@ const LoadingSpinner = ({ size = 10 }) => {
       </div>
     </div>
   );
-}
+};
 
 export default LoadingSpinner;

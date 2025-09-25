@@ -1,4 +1,4 @@
-'use client'
+'use client';
 import { ValueHistory } from "@/types";
 import { Area, AreaChart, Legend, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
 import React from "react";
@@ -18,19 +18,19 @@ const CustomTooltip = ({ active, payload, label }: any) => {
           {payload.map((entry: any, index: number) => {
             return <li key={index} style={{ color: entry.color }}>
               {entry.name}: {formatPrice(entry.value)}
-            </li>
+            </li>;
           })}
         </ul>
-      </div>)
+      </div>);
   }
-}
+};
 
 export const PlotSingleValueChart = ({ data, labelName, className }: { data: ValueHistory, labelName: string, className?: string }) => {
   const data_clean = data.map((item) => {
     return {
       date: new Date(item.date).toLocaleDateString(),
       value: item.value,
-    }
+    };
   });
 
   return (
@@ -50,5 +50,5 @@ export const PlotSingleValueChart = ({ data, labelName, className }: { data: Val
         <Area yAxisId="left" type="monotone" dataKey="value" stroke="#fe6212" fillOpacity={1}
               fill="url(#colorUv)" name={labelName}/>
       </AreaChart>
-    </ResponsiveContainer>)
+    </ResponsiveContainer>);
 };

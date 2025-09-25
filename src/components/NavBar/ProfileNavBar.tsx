@@ -24,5 +24,5 @@ export function ProfileNavBar() {
       </Button>
     </a>
 
-  )
+  );
 }

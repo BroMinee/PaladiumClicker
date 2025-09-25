@@ -44,7 +44,7 @@ export const usePlayerInfoStore = create<State & Actions, [["zustand/persist", S
       };
     }),
     reset: () => {
-      set(initialState)
+      set(initialState);
     },
     increaseMetierLevel: (metierKey: MetierKey, value: number) => set((state) => {
       if (!state.data) {
@@ -192,7 +192,7 @@ export const usePlayerInfoStore = create<State & Actions, [["zustand/persist", S
         return state;
       }
 
-      console.log(`Setting Production to :${value}`)
+      console.log(`Setting Production to :${value}`);
 
       return {
         data: {
@@ -233,4 +233,4 @@ export const usePlayerInfoStore = create<State & Actions, [["zustand/persist", S
     name: storageKey,
     storage: createJSONStorage(() => localStorage)
   },
-))
+));

@@ -46,25 +46,25 @@ function convertPetSkinToModelName(petSkin: string): ModelName {
     case "feng_uang":
       return "feng_uang";
     case "kapio_koi":
-      return "kapio_koi"
+      return "kapio_koi";
     case "pet_blobfish":
-      return "pet_blobfish"
+      return "pet_blobfish";
     case "pet_mini_golem":
-      return "pet_mini_golem"
+      return "pet_mini_golem";
     case "pet_penguin":
-      return "pet_penguin"
+      return "pet_penguin";
     case "pet_ufo":
-      return "pet_ufo"
+      return "pet_ufo";
     case "pet_zombie_hand":
-      return "pet_zombie_hand"
+      return "pet_zombie_hand";
     case "rabbit":
-      return "rabbit"
+      return "rabbit";
     case "pet_ender_dragon":
-      return "pet_ender_dragon"
+      return "pet_ender_dragon";
     case "pet_reindeer":
-      return "pet_reindeer"
+      return "pet_reindeer";
     case "pet_chameleon":
-      return "pet_chameleon"
+      return "pet_chameleon";
     default:
       return "arty";
   }
@@ -192,7 +192,7 @@ export function PetCanvas({ monture = false }: { monture?: boolean }) {
           if (monture)
             myModel.scene.scale.set(0.1, 0.1, 0.1);
           else
-            myModel.scene.scale.set(0.2, 0.2, 0.2)
+            myModel.scene.scale.set(0.2, 0.2, 0.2);
 
           myModel.scene.position.set(0, 0, -0.5); // Place à 50 cm devant la caméra
           scene.add(myModel.scene);
@@ -300,7 +300,7 @@ function DisplayAnimationButtons({ myModel, handleAnimationChange, selectedAnima
         </Button>
       ))}
     </div>
-  )
+  );
 }
 
 function DisplayEmptyCanvas({ text }: { text: string }) {
@@ -311,5 +311,5 @@ function DisplayEmptyCanvas({ text }: { text: string }) {
         <OrbitControls enableDamping={true}/>
       </Canvas>
     </div>
-  )
+  );
 }

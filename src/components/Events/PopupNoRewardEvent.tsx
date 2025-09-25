@@ -30,5 +30,5 @@ export const PopupNoRewardEvent = ({ children }: { children: React.ReactNode }) 
         </Card>
       </ScrollArea>
     </DialogContent>
-  </Dialog>
-}
+  </Dialog>;
+};

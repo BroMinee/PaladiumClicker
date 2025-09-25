@@ -1,4 +1,4 @@
-'use client'
+'use client';
 import React, { createContext, useState } from 'react';
 
 export type SessionContextType = {
@@ -20,14 +20,14 @@ export const SessionContextProvider = ({ children }: { children: React.ReactNode
       {children}
     </SessionContext.Provider>
   );
-}
+};
 
 export const useSessionContext = () => {
   return React.useContext(SessionContext);
-}
+};
 
 export default function SessionProvider({ children }: { children: React.ReactNode }) {
   return <SessionContextProvider>
     {children}
-  </SessionContextProvider>
+  </SessionContextProvider>;
 }

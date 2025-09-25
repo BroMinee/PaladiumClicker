@@ -7,8 +7,8 @@ const discord = {
   name: "PalaTracker"
 };
 
-export const API_PALATRACKER = process.env.NEXT_PUBLIC_PALACLICKER_API_URL || "https://palatracker.bromine.fr"
-export const API_PALATRACKER_WS = process.env.NEXT_PUBLIC_PALACLICKER_API_WS || "wss://palatracker.bromine.fr"
+export const API_PALATRACKER = process.env.NEXT_PUBLIC_PALACLICKER_API_URL || "https://palatracker.bromine.fr";
+export const API_PALATRACKER_WS = process.env.NEXT_PUBLIC_PALACLICKER_API_WS || "wss://palatracker.bromine.fr";
 
 const startSeason = new Date("2025-07-12");
 
@@ -213,7 +213,7 @@ const metier_xp = [
   1037683,
   1061297,
   1085210
-]
+];
 
 const metier_palier = [
   0,
@@ -316,7 +316,7 @@ const metier_palier = [
   32458325,
   33519622,
   34604832
-]
+];
 
 export type HowToXpElement = {
   type: string;
@@ -468,7 +468,7 @@ const how_to_xp: HowToXp = {
     { type: "Erable Log", "action": EXTRACT_FROM_SAP, "xp": 80, imgPath: "erable_log.webp", level: 50 },
     { type: "Paladium Flower", "action": THROW_IN_A_CAULDRON, "xp": 100, imgPath: "flower_paladium.webp", level: 80 },
   ]
-}
+};
 
 const notificationPath: Map<PathValid, [number, string]> = new Map<PathValid, [number, string]>(
   [
@@ -500,7 +500,7 @@ const deprecatedIdAchivement = [
   "palamod.visitservers.allservers.9",
   "core.command.default",
   "core.command.defaultAA"
-]
+];
 
 const dictAchievementIdToSubIds = new Map<string, string[]>([
 

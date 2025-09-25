@@ -3,7 +3,7 @@ import { redirect } from "next/navigation";
 import { PlayerDBApiReponse } from "@/types";
 import { cookies } from "next/headers";
 
-const apiPala = process.env.NEXT_PUBLIC_PALACLICKER_API_URL ?? "https://palatracker.bromine.fr"
+const apiPala = process.env.NEXT_PUBLIC_PALACLICKER_API_URL ?? "https://palatracker.bromine.fr";
 
 export const fetchWithoutHeader = async <T>(url: string, cache_duration = 15 * 60, username = ""): Promise<T> | never => {
   alert("Refacto like fetchWithHeader");
@@ -14,7 +14,7 @@ export const fetchWithoutHeader = async <T>(url: string, cache_duration = 15 * 6
       {
         next: { revalidate: cache_duration },
         signal: AbortSignal.timeout(4000)
-      })
+      });
     json = await response.json();
 
     if (!response.ok)
@@ -33,7 +33,7 @@ export const fetchWithoutHeader = async <T>(url: string, cache_duration = 15 * 6
     return redirect(`/error?message=Impossible de récupérer les données actuelles de ${url}&username=${username}`);
   else
     return redirect(`/error?message=Impossible de récupérer les données actuelles de ${url}`);
-}
+};
 
 
 export const fetchWithHeader = async <T>(url: string, cache_duration_in_sec = 15 * 60, username = "", timeout = 4000): Promise<T> => {
@@ -55,7 +55,7 @@ export const fetchWithHeader = async <T>(url: string, cache_duration_in_sec = 15
           Cookie: cookieHeader,
         },
         credentials: 'include',
-      })
+      });
     json = await response.json();
 
     if (!response.ok)
@@ -72,7 +72,7 @@ export const fetchWithHeader = async <T>(url: string, cache_duration_in_sec = 15
       const playerdbAPI = await fetch(`https://playerdb.co/api/player/minecraft/${username}`, {
         next: { revalidate: 15 * 60 },
         signal: AbortSignal.timeout(4000),
-      })
+      });
       const playerdbAPIJson = await playerdbAPI.json();
       uuid = (playerdbAPIJson as PlayerDBApiReponse).data.player.id;
     } catch (error) {
@@ -88,7 +88,7 @@ export const fetchWithHeader = async <T>(url: string, cache_duration_in_sec = 15
             headers: {
               'Authorization': `Bearer ${process.env.PALADIUM_API_KEY}`
             }
-          })
+          });
         json = await response.json();
 
         if (!response.ok)
@@ -106,7 +106,7 @@ export const fetchWithHeader = async <T>(url: string, cache_duration_in_sec = 15
     throw new Error(json.message);
   else
     throw new Error(`Impossible de récupérer les données actuelles de ${url}`);
-}
+};
 
 
 export const fetchPostWithHeader = async <T>(url: string, body: string, cache_duration_in_sec = 15 * 60): Promise<T> => {
@@ -129,7 +129,7 @@ export const fetchPostWithHeader = async <T>(url: string, body: string, cache_du
           Cookie: cookieHeader,
         },
         body: body
-      })
+      });
     json = await response.json();
 
     if (!response.ok)
@@ -143,4 +143,4 @@ export const fetchPostWithHeader = async <T>(url: string, body: string, cache_du
     throw new Error(json.message);
   else
     throw new Error(`Impossible de récupérer les données actuelles de ${url}`);
-}
+};

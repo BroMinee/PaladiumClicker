@@ -70,9 +70,9 @@ const Contributors = () => {
         </Card>
       </a>
     ))}
-  </div>
+  </div>;
 
 
-}
+};
 
 export default Contributors;

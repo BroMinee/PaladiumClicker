@@ -242,12 +242,12 @@ export function parseTextFormatting(
         if (part.startsWith("<@&") && part.endsWith(">")) {
           return <span key={index} className="mention-here">
               @role
-            </span>
+            </span>;
         }
         if (part.startsWith("<@") && part.endsWith(">")) {
           return <span key={index} className="mention-here">
               @user
-            </span>
+            </span>;
         }
         if (part === "{TODO}") {
           return <span key={index}>{getTodoCount()}</span>;

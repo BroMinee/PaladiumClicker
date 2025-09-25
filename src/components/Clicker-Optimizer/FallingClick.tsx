@@ -59,7 +59,7 @@ const FallingClickImage = () => {
 
       return () => {
         clearInterval(interval);
-      }
+      };
     }, Math.random() * 1000);
   }, [selectedCPS, playerInfo, settings.fallingImage]);
 
@@ -67,6 +67,6 @@ const FallingClickImage = () => {
     return null;
 
   return (<div ref={containerRef} className="fixed inset-0 z-[-1]"/>);
-}
+};
 
 export default FallingClickImage;

@@ -35,7 +35,7 @@ const FallingClickImagePalaTime = () => {
         const image = document.createElement('img');
         image.classList.add("animate-falling", "h-auto", "w-32", "object-cover");
         image.draggable = false;
-        image.ondragstart = (e) => {e.preventDefault();}
+        image.ondragstart = (e) => {e.preventDefault();};
         image.style.imageRendering = "pixelated";
         image.style.imageRendering = "crisp-edges";
 
@@ -46,12 +46,12 @@ const FallingClickImagePalaTime = () => {
         image.alt = 'Click';
         image.onclick = () => {
           setOpenEvent(true);
-        }
+        };
 
         image.classList.add("absolute");
         image.style.display = "none";
         image.onload = () => {
-          image.style.display = "block"
+          image.style.display = "block";
           const randomX = Math.random() * (rightTop.x - leftTop.x - image.width) + leftTop.x;
           const randomY = leftTop.y + image.height;
 
@@ -67,7 +67,7 @@ const FallingClickImagePalaTime = () => {
 
       return () => {
         clearInterval(interval);
-      }
+      };
     }, Math.random() * 1000);
   }, [settings.fallingImage]);
 
@@ -93,6 +93,6 @@ const FallingClickImagePalaTime = () => {
       </DialogContent>
     </Dialog>
   </div>);
-}
+};
 
 export default FallingClickImagePalaTime;

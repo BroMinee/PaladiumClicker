@@ -59,7 +59,7 @@ export default function FactionInfo() {
       </Card>
       <FactionDetails/>
     </div>
-  )
+  );
 }
 
 async function FactionClassement() {
@@ -67,5 +67,5 @@ async function FactionClassement() {
 
   return <>
     <FactionClassementClient factionLeaderboard={factionLeaderboard}/>
-  </>
+  </>;
 }

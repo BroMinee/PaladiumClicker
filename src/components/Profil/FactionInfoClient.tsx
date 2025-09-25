@@ -18,7 +18,7 @@ export function FactionNameInfo() {
   if (playerInfo === null)
     return null;
 
-  return <>{playerInfo.faction.name}</>
+  return <>{playerInfo.faction.name}</>;
 }
 
 export function FactionInfoDescription() {
@@ -26,7 +26,7 @@ export function FactionInfoDescription() {
   if (playerInfo === null)
     return null;
 
-  return <>{playerInfo.faction.name}</>
+  return <>{playerInfo.faction.name}</>;
 }
 
 
@@ -47,7 +47,7 @@ export function FactionDetails() {
   const { data: playerInfo } = usePlayerInfoStore();
 
   if (!playerInfo)
-    return <Suspense fallback={<LoadingData username={undefined}/>}/>
+    return <Suspense fallback={<LoadingData username={undefined}/>}/>;
 
   const createdAt = playerInfo.faction.createdAt;
   const level = playerInfo.faction.level?.level || -1;
@@ -100,7 +100,7 @@ export function FactionDetails() {
         </div>
         <ScrollBar orientation="horizontal"/>
       </ScrollArea>
-    </>)
+    </>);
 }
 
 export function FactionClassementClient({ factionLeaderboard }: { factionLeaderboard: PaladiumFactionLeaderboard }) {
@@ -113,5 +113,5 @@ export function FactionClassementClient({ factionLeaderboard }: { factionLeaderb
     <>
       {factionIndex}
     </>
-  )
+  );
 }

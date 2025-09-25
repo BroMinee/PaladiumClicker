@@ -35,7 +35,7 @@ const Navbar = () => {
       </div>
 
     </>);
-}
+};
 
 function NavBarContent() {
   return (
@@ -114,7 +114,7 @@ function NavBarContent() {
         </div>
       </footer>
     </>
-  )
+  );
 }
 
 export default Navbar;
@@ -134,7 +134,7 @@ const MobileNav = () => {
       </SheetContent>
     </Sheet>
   );
-}
+};
 
 // function JobIcon() {
 //   return <svg stroke="currentColor" fill="rgb(156 163 175 / var(--tw-text-opacity))" strokeWidth={12} height="24px"

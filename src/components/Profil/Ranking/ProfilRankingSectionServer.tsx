@@ -11,7 +11,7 @@ export async function ProfilRankingSectionServer({ rankingType, searchParams }: 
   rankingType: RankingType,
   searchParams: searchParamsProfilPage
 }) {
-  const cookieStore = await cookies()
+  const cookieStore = await cookies();
   const uuid = cookieStore.get('uuid' as any)?.value || "10b887ce-133b-4d5e-8b54-41376b832536";
   if (uuid === undefined) {
     return <div>Impossible de récupérer l&apos;uuid du joueur via les cookies</div>;

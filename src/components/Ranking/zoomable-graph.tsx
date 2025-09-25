@@ -36,7 +36,7 @@ const chartConfig = {
     label: "value",
     color: "hsl(var(--primary))",
   },
-} satisfies ChartConfig
+} satisfies ChartConfig;
 
 
 const gradientColors = [
@@ -142,7 +142,7 @@ export function ZoomableChart({ data: initialData, rankingType, profil }: Zoomab
     const opacityInit = uniqueUsernames.reduce((acc, username) => {
       acc[username] = 1;
       return acc;
-    }, {} as { [key: string]: number })
+    }, {} as { [key: string]: number });
     setOpacity(opacityInit);
   }, [uniqueUsernames]);
 
@@ -178,7 +178,7 @@ export function ZoomableChart({ data: initialData, rankingType, profil }: Zoomab
                 <span className="font-bold">{entry.name}</span>
                 <span className="font-semibold">{` : ${formatPrice(entry.value)}`}</span>
               </h3>
-            </div>
+            </div>;
           })}
         </div>
       );
@@ -287,7 +287,7 @@ export function ZoomableChart({ data: initialData, rankingType, profil }: Zoomab
       return Math.max(max, Math.max(...uniqueUsernames.map(username => Number(dataPoint[username])).filter(e => isFinite(e))));
     }, -Infinity),
     [uniqueUsernames, zoomedData]
-  )
+  );
 
   const minValue = useMemo(
     () => zoomedData.reduce((min, dataPoint) => {
@@ -317,7 +317,7 @@ export function ZoomableChart({ data: initialData, rankingType, profil }: Zoomab
     } else {
       return number.toString();
     }
-  }
+  };
 
   const handleMouseDown = (e: any) => {
     if (e.activeLabel) {
@@ -580,5 +580,5 @@ export function ZoomableChart({ data: initialData, rankingType, profil }: Zoomab
       </CardContent>
       <CardHeader className="sm:hidden flex">Passe ton écran à l&apos;horizontal</CardHeader>
     </Card>
-  )
+  );
 }

@@ -36,7 +36,7 @@ export function TestBot() {
     load()
       .then((botd) => botd.detect())
       .then((result) => setBot(result.bot))
-      .catch((error) => console.error(error))
+      .catch((error) => console.error(error));
   }, []);
 
   if (bot) {
@@ -51,7 +51,7 @@ export function PalaAnimationBody() {
   const { sessionUuid, question, setQuestion, setSessionUuid } = useSessionContext();
 
   const [reroll, setReroll] = useState(false);
-  const [oldAnswer, setOldAnswer] = useState([] as userAnswerType[][])
+  const [oldAnswer, setOldAnswer] = useState([] as userAnswerType[][]);
   const [timer, setTimer] = useState("");
   const [inputValue, setInputValue] = useState("");
   const [keyPressTimestamp, setKeyPressTimestamp] = useState([] as KeyDownTimestampType[]);
@@ -102,7 +102,7 @@ export function PalaAnimationBody() {
         }
       }).catch(
         (error) => {
-          console.error(error)
+          console.error(error);
           const message = error instanceof AxiosError ?
             error.response?.data.message ?? error.message :
             typeof error === "string" ?
@@ -112,10 +112,10 @@ export function PalaAnimationBody() {
             setReroll(true);
           }, 500);
           setTimer(message);
-        }).finally(() => {setIsChecking(false);})
+        }).finally(() => {setIsChecking(false);});
     } else {
       newEntryOldAnswer = userAnswer.split("").map((c) => {
-        return { c, color: "text-gray-400" }
+        return { c, color: "text-gray-400" };
       });
     }
 
@@ -149,7 +149,7 @@ export function PalaAnimationBody() {
 
   useEffect(() => {
     if (!reroll)
-      return
+      return;
     getNewQuestionPalaAnimation(question).then(
       (data) => {
         setQuestion(data.question);
@@ -235,15 +235,15 @@ export function PalaAnimationBody() {
             return (<div key={i1}>
               {old.map((e, i2) => {
                 if (e.color === "text-green-700")
-                  return <span key={i2} className="text-green-700">{e.c}</span>
+                  return <span key={i2} className="text-green-700">{e.c}</span>;
                 else if (e.color === "text-red-700")
-                  return <span key={i2} className="text-red-700">{e.c}</span>
+                  return <span key={i2} className="text-red-700">{e.c}</span>;
                 else if (e.color === "text-gray-400")
-                  return <span key={i2} className="text-gray-400">{e.c}</span>
+                  return <span key={i2} className="text-gray-400">{e.c}</span>;
                 else
-                  return <span key={i2} className={e.color.toString()}>{e.c}</span>
+                  return <span key={i2} className={e.color.toString()}>{e.c}</span>;
               })}
-            </div>)
+            </div>);
           })
         }
       </div>
@@ -255,7 +255,7 @@ export function PalaAnimationBody() {
           setIsChecking(true);
           clearUserAnswer();
           document.getElementById("user_answer")?.focus();
-          setReroll(true)
+          setReroll(true);
         }}
                 disabled={isChecking}
         >Nouvelle question</Button>
@@ -283,19 +283,19 @@ export function PalaAnimationClassement() {
       (data) => {
         setCurrentLeaderboard(data.slice(0, 10));
         const userPosInfo = data.find((entry) => {
-          console.log(entry, profileInfo.global_name, profileInfo.username)
+          console.log(entry, profileInfo.global_name, profileInfo.username);
           if (entry.global_name === profileInfo.global_name || entry.global_name === profileInfo.username) {
             return entry;
           }
-        })
+        });
         if (userPosInfo)
           setUserScore(userPosInfo);
         else
-          setUserScore({ global_name: "" } as PalaAnimationScore)
+          setUserScore({ global_name: "" } as PalaAnimationScore);
       }
     ).catch(
       (error) => {
-        toast.error("Error while updating leaderboard", error)
+        toast.error("Error while updating leaderboard", error);
       }
     );
   }, [sessionUuid, profileInfo, setCurrentLeaderboard, setUserScore]);
@@ -312,7 +312,7 @@ export function PalaAnimationClassement() {
           <div>
             {currentLeaderboard.map((entry, i) => {
               return <p key={i}
-                        className={(entry.global_name === profileInfo?.global_name || entry.global_name === profileInfo?.username) ? "text-blue-400" : ""}>{i + 1}. {entry.global_name} - {entry.completion_time / 1000} {adaptPlurial("seconde", entry.completion_time / 1000)}</p>
+                        className={(entry.global_name === profileInfo?.global_name || entry.global_name === profileInfo?.username) ? "text-blue-400" : ""}>{i + 1}. {entry.global_name} - {entry.completion_time / 1000} {adaptPlurial("seconde", entry.completion_time / 1000)}</p>;
             })}
           </div>
           : ""
@@ -321,7 +321,7 @@ export function PalaAnimationClassement() {
           <p
             className="text-blue-400">{userScore.rank_completion_time}. {profileInfo?.username} - {userScore.completion_time / 1000} {adaptPlurial("seconde", userScore.completion_time / 1000)}</p>}
       </CardContent>
-    </Card>)
+    </Card>);
 }
 
 export function PalaAnimationClassementGlobal() {
@@ -337,7 +337,7 @@ export function PalaAnimationClassementGlobal() {
     ).catch(
       (error) => {
         console.error("Error while fetching global leaderboard", error);
-        toast.error("Erreur lors de la récupération du classement global")
+        toast.error("Erreur lors de la récupération du classement global");
       }
     );
 
@@ -361,7 +361,7 @@ export function PalaAnimationClassementGlobal() {
           <div>
             {globalLeaderboard.slice(0, 10).map((entry, i) => {
               return <p key={i}
-                        className={(entry.global_name === profileInfo?.global_name || entry.global_name === profileInfo?.username) ? "text-blue-400" : ""}>{i + 1}. {entry.global_name} - {Math.round(entry.avg_completion_time) / 1000} {adaptPlurial("seconde", Math.round(entry.avg_completion_time) / 1000)}</p>
+                        className={(entry.global_name === profileInfo?.global_name || entry.global_name === profileInfo?.username) ? "text-blue-400" : ""}>{i + 1}. {entry.global_name} - {Math.round(entry.avg_completion_time) / 1000} {adaptPlurial("seconde", Math.round(entry.avg_completion_time) / 1000)}</p>;
             })}
           </div>
           : ""
@@ -369,5 +369,5 @@ export function PalaAnimationClassementGlobal() {
         {userPosition > 10 ? <p
           className="text-blue-400">{userPosition + 1}. {profileInfo?.global_name || profileInfo?.username} - {Math.round(globalLeaderboard[userPosition].avg_completion_time) / 1000} {adaptPlurial("seconde", Math.round(globalLeaderboard[userPosition].avg_completion_time) / 1000)}</p> : ""}
       </CardContent>
-    </Card>)
+    </Card>);
 }

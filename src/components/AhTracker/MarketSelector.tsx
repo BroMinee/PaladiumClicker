@@ -6,5 +6,5 @@ import { OptionType } from "@/types";
 export default async function MarketSelector({ url, item }: { url: string, item: OptionType | null }) {
   const options = await getAllItems();
 
-  return <SelectorItemClient options={options} url={url} defaultValue={item}/>
+  return <SelectorItemClient options={options} url={url} defaultValue={item}/>;
 }

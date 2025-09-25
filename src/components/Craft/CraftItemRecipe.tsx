@@ -90,7 +90,7 @@ function ShowCraft({ item, craft_recipe, slotItemInfo }: {
       </div>
 
     </>
-  )
+  );
 }
 
 
@@ -103,10 +103,10 @@ function ShowCraftingTable({ slotItemInfo }: {
       {slotItemInfo.map((slot, index) => {
         return (
           <DisplayItem key={slot.value + index + "-craft"} slot={slot}/>
-        )
+        );
       })}
     </div>
-  )
+  );
 }
 
 function ShowPalamachine({ slotItemInfo }: {
@@ -131,7 +131,7 @@ function ShowPalamachine({ slotItemInfo }: {
       </div>
     </div>
 
-  )
+  );
 }
 
 function ShowFurnace({ slotItemInfo }: {
@@ -144,7 +144,7 @@ function ShowFurnace({ slotItemInfo }: {
       </div>
     </div>
 
-  )
+  );
 }
 
 function ShowGrinder({ slotItemInfo }: {
@@ -160,7 +160,7 @@ function ShowGrinder({ slotItemInfo }: {
       </div>
     </div>
 
-  )
+  );
 }
 
 function ShowCauldron({ slotItemInfo }: {
@@ -176,7 +176,7 @@ function ShowCauldron({ slotItemInfo }: {
       </div>
     </div>
 
-  )
+  );
 }
 
 function ShowAlchemyCreator({ slotItemInfo }: {
@@ -190,5 +190,5 @@ function ShowAlchemyCreator({ slotItemInfo }: {
       <DisplayItem slot={slotItemInfo[2]}/>
       <DisplayItem slot={slotItemInfo[3]} className="col-start-2"/>
     </div>
-  )
+  );
 }

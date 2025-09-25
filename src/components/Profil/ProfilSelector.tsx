@@ -35,5 +35,5 @@ export default function ProfilSelector() {
       </div>
       <ScrollBar orientation="horizontal"/>
     </ScrollArea>
-  )
+  );
 }

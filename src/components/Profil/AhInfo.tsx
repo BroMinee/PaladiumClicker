@@ -49,5 +49,5 @@ export default async function AhInfo() {
         </ScrollArea>
       </CardContent>
     </Card>
-  )
+  );
 }

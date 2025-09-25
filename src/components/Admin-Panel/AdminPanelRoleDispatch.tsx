@@ -23,7 +23,7 @@ export async function AdminPanelRoleDispatch() {
   const page = mapPermission.get(role) || [NotPermissionPanel];
   return <div className="flex flex-col gap-2">
     {page.map((Component, i) => <Component key={i}/>)}
-  </div>
+  </div>;
 }
 
 async function EditRolePanel() {
@@ -48,11 +48,11 @@ async function EditRolePanel() {
                 <EditRole defaultValue={user.role} discord_id={user.user_id}/>
               </div>
             </div>
-          )
+          );
         })}
       </CardContent>
     </Card>
-  )
+  );
 }
 
 function PalaAnimationPanel() {
@@ -65,7 +65,7 @@ function PalaAnimationPanel() {
         <p>Remove PalaAnimation individualy of all the answer of a user. Ask twice in both case</p>
       </CardContent>
     </Card>
-  )
+  );
 }
 
 function ReportBugPanel() {
@@ -78,7 +78,7 @@ function ReportBugPanel() {
         <p>Report a bug</p>
       </CardContent>
     </Card>
-  )
+  );
 }
 
 function AccessBetaPanel() {
@@ -91,7 +91,7 @@ function AccessBetaPanel() {
         <p>Link to the beta url</p>
       </CardContent>
     </Card>
-  )
+  );
 }
 
 function PalatimePanel() {
@@ -108,7 +108,7 @@ function PalatimePanel() {
       </Card>
     </>
 
-  )
+  );
 }
 
 function NotPermissionPanel() {
@@ -119,6 +119,6 @@ function NotPermissionPanel() {
         <p>Your are not allowed to acces this page</p>
       </CardHeader>
     </Card>
-  )
+  );
 }
 

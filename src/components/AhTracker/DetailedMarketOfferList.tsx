@@ -14,7 +14,7 @@ export default async function DetailedMarketOfferList({ listing, item }: {
   item: OptionType
 }) {
   if (listing.length === 0) {
-    return <p className="text-3xl font-bold text-center">Aucune offre disponible pour cet item</p>
+    return <p className="text-3xl font-bold text-center">Aucune offre disponible pour cet item</p>;
   }
 
   return (
@@ -29,7 +29,7 @@ export default async function DetailedMarketOfferList({ listing, item }: {
       </div>
 
     </ScrollArea>
-  )
+  );
 }
 
 export function DetailedMarketOffer({ itemSelected, offer }: { itemSelected: OptionType, offer: MarketItemOffer }) {
@@ -52,8 +52,8 @@ export function DetailedMarketOffer({ itemSelected, offer }: { itemSelected: Opt
     </div>
   );
 
-  const overlayNames = ["amethyst_overlay.png", "candy_overlay.png", "cavern_overlay.png", "diamond_overlay.png", "emerald_overlay.png", "eruption_overlay.png", "gold_overlay.png", "great_tree_overlay.png", "iron_overlay.png", "lapis_lazuli_overlay.png", "plain_overlay.png", "redstone_overlay.png", "snow_overlay.png"]
-  const overlayName = overlayNames[Math.floor(Math.random() * overlayNames.length)]
+  const overlayNames = ["amethyst_overlay.png", "candy_overlay.png", "cavern_overlay.png", "diamond_overlay.png", "emerald_overlay.png", "eruption_overlay.png", "gold_overlay.png", "great_tree_overlay.png", "iron_overlay.png", "lapis_lazuli_overlay.png", "plain_overlay.png", "redstone_overlay.png", "snow_overlay.png"];
+  const overlayName = overlayNames[Math.floor(Math.random() * overlayNames.length)];
 
 
   return <div className="grid grid-cols-2 md:flex md:flex-row items-center m-2 bg-card/65 pr-4 pb-2 text-card-foreground">
@@ -116,5 +116,5 @@ export function DetailedMarketOffer({ itemSelected, offer }: { itemSelected: Opt
         </p>
       </HoverText>
     </div>
-  </div>
+  </div>;
 }

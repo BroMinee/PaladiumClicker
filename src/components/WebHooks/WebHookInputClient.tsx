@@ -106,7 +106,7 @@ export function WebHookInputClientItem() {
       </div>
 
     </div>
-  )
+  );
 }
 
 function IsValidWebHookUrl(url: string): boolean {
@@ -158,7 +158,7 @@ function WebHookEditor() {
       title: title,
       type: currentWebHookType,
       username: currentWebHookType === WebHookType.vote ? username : "",
-    }
+    };
 
     let res: { succeeded: boolean, msg: string };
     if (edit) {
@@ -219,7 +219,7 @@ function WebHookEditor() {
               <li>{"{here} Pour mentionner toutes personnes dans le channel (aucun effet dans l'embed)"}
               </li>
               {defaultWebhookValidFormatFromType[currentWebHookType].map((format, index) => {
-                return <li key={index}>{format}</li>
+                return <li key={index}>{format}</li>;
               })}
             </div>
           </div>
@@ -262,7 +262,7 @@ function WebHookEditor() {
         />
       </div>
     </div>
-  )
+  );
 }
 
 function AdaptEditor() {
@@ -273,19 +273,19 @@ function AdaptEditor() {
     return null;
 
   if (currentWebHookType === WebHookType.adminShop) {
-    return <AdminShopInput/>
+    return <AdminShopInput/>;
   }
 
   if (currentWebHookType === WebHookType.market) {
-    return <MarketInput/>
+    return <MarketInput/>;
   }
 
   if (currentWebHookType === WebHookType.EventPvp) {
-    return <EventInput/>
+    return <EventInput/>;
   }
 
   if (currentWebHookType === WebHookType.vote) {
-    return <VoteInput/>
+    return <VoteInput/>;
   }
   return null;
 }
@@ -298,11 +298,11 @@ function AdaptEditorFooter() {
     return null;
 
   if (currentWebHookType === WebHookType.adminShop && adminShopItemSelected) {
-    return <AdminShopGraphClient/>
+    return <AdminShopGraphClient/>;
   }
 
   if (currentWebHookType === WebHookType.market && itemSelected) {
-    return <MarketGraphClient/>
+    return <MarketGraphClient/>;
   }
 
   if (currentWebHookType === WebHookType.EventPvp) {
@@ -317,13 +317,13 @@ export function Recap() {
     case WebHookType.QDF:
       return <RecapQDF/>;
     case WebHookType.market:
-      return <RecapMarket/>
+      return <RecapMarket/>;
     case WebHookType.adminShop:
-      return <RecapAdminShop/>
+      return <RecapAdminShop/>;
     case WebHookType.EventPvp:
-      return <RecapEvent/>
+      return <RecapEvent/>;
     case WebHookType.statusServer:
-      return <RecapServeurStatus/>
+      return <RecapServeurStatus/>;
     case WebHookType.vote:
       return <RecapVote/>;
     default:
@@ -341,17 +341,17 @@ export function AdminShopGraphClient() {
     try {
       getAdminShopHistoryServerAction(adminShopItemSelected, "month").then((res) => {
         setData(res);
-      })
+      });
     } catch (error) {
       console.error(error);
     }
-  }, [adminShopItemSelected])
+  }, [adminShopItemSelected]);
 
   return (
     <div className="h-[100vh] pb-0">
       <PlotAdminShopChart data={data} periode={"month"} webhook/>
     </div>
-  )
+  );
 }
 
 export function MarketGraphClient() {
@@ -364,15 +364,15 @@ export function MarketGraphClient() {
     try {
       getMarketHistoryServerAction(itemSelected.value).then((res) => {
         setData(res);
-      })
+      });
     } catch (error) {
       console.error(error);
     }
-  }, [itemSelected])
+  }, [itemSelected]);
 
   return (
     <div className="h-[100vh] pb-0">
       <PlotHistoricChart data={data} webhook/>
     </div>
-  )
+  );
 }

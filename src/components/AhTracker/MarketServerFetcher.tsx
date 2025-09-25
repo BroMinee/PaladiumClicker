@@ -1,4 +1,4 @@
-import 'server-only'
+import 'server-only';
 
 import { AhItemHistory, OptionType, PaladiumAhItemStat } from "@/types";
 import { getPaladiumAhItemFullHistory, getPaladiumAhItemStats } from "@/lib/api/apiPala.ts";
@@ -34,5 +34,5 @@ export async function MarketServerFetcher({ item }: { item: OptionType }) {
         <DetailedMarketOfferList listing={itemInfo?.listing ?? []} item={item}/>
       </Card>
     </>
-  )
+  );
 }

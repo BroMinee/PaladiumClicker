@@ -57,7 +57,7 @@ export default function DelayedNotificationButton({ title, dateOfNotification, u
         } else {
           toast.error("Les notifications ne sont toujours pas autorisées.");
         }
-      })
+      });
 
     } else {
       toast.error("Les notifications ne sont pas supportés sur ton navigateur.");

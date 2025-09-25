@@ -46,7 +46,7 @@ export const isApiDown = async (): Promise<boolean> => {
       cache: 'no-cache', signal: AbortSignal.timeout(4000), headers: {
         'Authorization': `Bearer ${process.env.PALADIUM_API_KEY}`
       }
-    })
+    });
     await response.json();
 
     if (!response.ok) return true;
@@ -54,7 +54,7 @@ export const isApiDown = async (): Promise<boolean> => {
     return true;
   }
   return false;
-}
+};
 
 export const getPlayerOnlineCount = async (): Promise<number> => {
   const response = await fetchWithHeader<{
@@ -63,16 +63,16 @@ export const getPlayerOnlineCount = async (): Promise<number> => {
         players: number;
       }
     }
-  }>(`${PALADIUM_API_URL}/v1/status`, 0).catch(() => { return { java: { global: { players: -1 } } } });
+  }>(`${PALADIUM_API_URL}/v1/status`, 0).catch(() => { return { java: { global: { players: -1 } } }; });
   return response.java.global.players;
-}
+};
 
 
 export const getPaladiumProfileByPseudo = async (pseudo: string): Promise<PaladiumPlayerInfo> => {
   return await fetchWithHeader<PaladiumPlayerInfo>(`${PALADIUM_API_URL}/v1/paladium/player/profile/${pseudo}`, 15 * 60, pseudo).catch((error: Error) => {
-    return redirect(`/error?message=Impossible de récupérer les données de ${pseudo}, vérifie que tu as bien écrit ton pseudo.&detail=${error.message}&username=${pseudo}`)
+    return redirect(`/error?message=Impossible de récupérer les données de ${pseudo}, vérifie que tu as bien écrit ton pseudo.&detail=${error.message}&username=${pseudo}`);
   });
-}
+};
 
 
 export const getPaladiumLeaderboardPositionByUUID = async (uuid: string, username: string): Promise<string> => {
@@ -81,14 +81,14 @@ export const getPaladiumLeaderboardPositionByUUID = async (uuid: string, usernam
     return redirect(`/error?message=Impossible de récupérer ta position dans le classement. : ${message}&username=${username}`);
   });
   return response.ranked ? response.position.toString() : "Unranked";
-}
+};
 
 const getPaladiumClickerDataByUUID = async (uuid: string, username: string): Promise<PaladiumClickerData> => {
   return await fetchWithHeader<PaladiumClickerData>(`${PALADIUM_API_URL}/v1/paladium/player/profile/${uuid}/clicker`, 0).catch((error: Error) => {
     const message = error.message;
     return redirect(`/error?message=Impossible de récupérer les données du clicker, vérifie que tu ne les as pas désactivées sur ton profil Paladium via la commande /profil.&detail=${message}&username=${username}`);
-  })
-}
+  });
+};
 
 export const getFactionInfo = async (factionName: string): Promise<PaladiumFactionInfo> => {
   if (factionName === "")
@@ -117,14 +117,14 @@ export const getFactionInfo = async (factionName: string): Promise<PaladiumFacti
       uuid: "00000000-0000-0000-0000-000000000000"
     };
   });
-}
+};
 
 export const getFactionLeaderboard = async (): Promise<PaladiumFactionLeaderboard> => {
   return await fetchWithHeader<PaladiumFactionLeaderboard>(`${PALADIUM_API_URL}/v1/paladium/faction/leaderboard`).catch((e) => {
     console.error(e);
-    return []
+    return [];
   });
-}
+};
 
 export const getAuctionHouseInfo = async (uuid: string, username: string): Promise<AhType> => {
 
@@ -132,10 +132,10 @@ export const getAuctionHouseInfo = async (uuid: string, username: string): Promi
     const message = error.message;
     console.error(message, username);
     return { data: [], totalCount: 0, dateUpdated: new Date().getTime() };
-  })
+  });
   response.dateUpdated = new Date().getTime();
   return response;
-}
+};
 
 export const getFriendsList = async (uuid: string): Promise<PaladiumFriendInfo> => {
   try {
@@ -145,9 +145,9 @@ export const getFriendsList = async (uuid: string): Promise<PaladiumFriendInfo> 
     return {
       data: [],
       totalCount: 0
-    }
+    };
   }
-}
+};
 
 export const getPlayerInfo = async (pseudo: string): Promise<PlayerInfo> => {
   let error = "";
@@ -181,7 +181,7 @@ export const getPlayerInfo = async (pseudo: string): Promise<PlayerInfo> => {
   const p6 = getFactionInfo(paladiumProfil.faction === "" ? "Wilderness" : paladiumProfil.faction);
   const p7 = getViewsFromUUID(paladiumProfil.uuid, paladiumProfil.username);
   const p8 = getPlayerAchievements(paladiumProfil.uuid);
-  const p9 = getPlayerMount(paladiumProfil.uuid)
+  const p9 = getPlayerMount(paladiumProfil.uuid);
   const p10 = getPlayerPet(paladiumProfil.uuid);
 
 
@@ -200,7 +200,7 @@ export const getPlayerInfo = async (pseudo: string): Promise<PlayerInfo> => {
       throw `Unknown building name : '${building["name"]}', please contact the developer to fix it`;
     initialPlayerInfo["building"][buildingIndex].own = building["quantity"];
     initialPlayerInfo["production"] += building["production"];
-  })
+  });
   clickerData.upgrades.forEach((upgrade) => {
     const pathToFollow = translateBuildingUpgradeName[upgrade];
     if (pathToFollow === undefined)
@@ -264,7 +264,7 @@ export const getPlayerInfo = async (pseudo: string): Promise<PlayerInfo> => {
 
   return initialPlayerInfo;
 
-}
+};
 
 
 // export const getGraphData = async () => {
@@ -294,7 +294,7 @@ export const getPaladiumAhItemFullHistory = async (itemId: string): Promise<AhIt
   let offset = 100;
   let c = 0;
   while (offset < totalCount && c <= 10) {
-    const response = await fetchWithHeader<PaladiumAhHistory>(`${PALADIUM_API_URL}/v1/paladium/shop/market/items/${itemId}/history?offset=${offset}&limit=100`)
+    const response = await fetchWithHeader<PaladiumAhHistory>(`${PALADIUM_API_URL}/v1/paladium/shop/market/items/${itemId}/history?offset=${offset}&limit=100`);
     data = data.concat(response.data);
     offset += 100;
     c++;
@@ -304,17 +304,17 @@ export const getPaladiumAhItemFullHistory = async (itemId: string): Promise<AhIt
     redirect(`/error?message=Data length is not equal to totalCount (getPaladiumAhItemFullHistory)`);
 
   return data;
-}
+};
 
 export const getPaladiumAhItemStats = async (itemId: string): Promise<PaladiumAhItemStat> => {
-  return await fetchWithHeader<PaladiumAhItemStat>(`${PALADIUM_API_URL}/v1/paladium/shop/market/items/${itemId}`)
-}
+  return await fetchWithHeader<PaladiumAhItemStat>(`${PALADIUM_API_URL}/v1/paladium/shop/market/items/${itemId}`);
+};
 
 export const getJobsFromUUID = async (uuid: string, username: string): Promise<Metiers> => {
   const response = await fetchWithHeader<MetiersPossiblyUndefined>(`${PALADIUM_API_URL}/v1/paladium/player/profile/${uuid}/jobs`, 0).catch((e: Error) => {
     const message = e.message;
     return redirect(`/error?message=Impossible de récupérer tes données de métiers, vérifie que tu ne les as pas désactivées sur ton profil Paladium via la commande /profil.&detail=${message}&username=${username}`);
-  })
+  });
 
 
   // NOTE we take the original JSON to have name easily modifiable (for example response.farmer.name witch is not in the response JSON)
@@ -341,7 +341,7 @@ export const getJobsFromUUID = async (uuid: string, username: string): Promise<M
   }
 
   return initialMetierJson;
-}
+};
 
 
 export const getPlayerAchievements = async (uuid: string): Promise<Achievement[]> => {
@@ -351,7 +351,7 @@ export const getPlayerAchievements = async (uuid: string): Promise<Achievement[]
   }
   const response = await fetchWithHeader<AchievementResponse>(`${PALADIUM_API_URL}/v1/paladium/player/profile/${uuid}/achievements?limit=100&offset=0`).catch(() => {
     return { totalCount: 0, data: [] } as AchievementResponse;
-  })
+  });
   const totalCount = response.totalCount;
 
   let data = response.data;
@@ -360,7 +360,7 @@ export const getPlayerAchievements = async (uuid: string): Promise<Achievement[]
   while (offset < totalCount && c <= 10) {
     const response = await fetchWithHeader<AchievementResponse>(`${PALADIUM_API_URL}/v1/paladium/player/profile/${uuid}/achievements?offset=${offset}&limit=100`).catch(() => {
       return { totalCount: 0, data: [] } as AchievementResponse;
-    })
+    });
     data = data.concat(response.data);
     offset += 100;
     c++;
@@ -368,7 +368,7 @@ export const getPlayerAchievements = async (uuid: string): Promise<Achievement[]
 
 
   // Reactivate if for some reason it works again
-  const allAchievements = structuredClone(default_achievements_default as AllAchievementResponse)
+  const allAchievements = structuredClone(default_achievements_default as AllAchievementResponse);
   // const allAchievements = await getAllAchievements().catch(() => {
     // return structuredClone(default_achievements_default as AllAchievementResponse);
   // });
@@ -386,7 +386,7 @@ export const getPlayerAchievements = async (uuid: string): Promise<Achievement[]
       icon: achievement.icon,
       subAchievements: [] as Achievement[],
       imgPath: "/AH_img/barrier.png"
-    }
+    };
   });
 
 
@@ -409,14 +409,14 @@ export const getPlayerAchievements = async (uuid: string): Promise<Achievement[]
           achievement.subAchievements.push(subAchievement);
           subCategoryAchievements.push(subId);
         }
-      })
+      });
     }
 
 
     let id = achievement.id;
 
     if (id === "palamod.craftcauldron.gluballall")
-      id = "palamod.craftcauldron.glueball"
+      id = "palamod.craftcauldron.glueball";
     else if (id === "paladium.pickup.flower.multi.all")
       id = "paladium.pickup.flower";
     else if (id === "paladium.pickup.secret.multi.all")
@@ -435,11 +435,11 @@ export const getPlayerAchievements = async (uuid: string): Promise<Achievement[]
         achievement.subAchievements.push(a);
         subCategoryAchievements.push(a.id);
       }
-    })
-  })
+    });
+  });
 
   return categoryAchievements.concat(nonCategoryAchievements.filter((a) => subCategoryAchievements.indexOf(a.id) === -1));
-}
+};
 
 type AllAchievementResponse = {
   totalCount: number,
@@ -486,14 +486,14 @@ export const getPlayerMount = async (uuid: string): Promise<MountInfo | null> =>
     return mount;
   }).catch(() => {
     return null;
-  })
-}
+  });
+};
 
 export const getPlayerPet = async (uuid: string): Promise<PetInfo | null> => {
   return await fetchWithHeader<PetInfo>(`${PALADIUM_API_URL}/v1/paladium/player/profile/${uuid}/pet`).catch(() => {
     return null;
-  })
-}
+  });
+};
 
 export async function getPlayerRole(): Promise<Role> {
   return await fetchWithHeader<Role>(`${API_PALATRACKER}/v1/role/getRole`, 5 * 60).catch(() => "Classic");

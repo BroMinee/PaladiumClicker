@@ -37,7 +37,7 @@ export const isMyApiDown = async (): Promise<boolean> => {
         headers: {
           'Authorization': `Bearer ${process.env.PALADIUM_API_KEY}`
         }
-      })
+      });
     json = await response.json() as { backend_status: string, db_status: string } | null;
 
     if (!response.ok)
@@ -47,7 +47,7 @@ export const isMyApiDown = async (): Promise<boolean> => {
   }
 
   return !(json && json.backend_status === "OK" && json.db_status === "OK");
-}
+};
 
 
 export const getViewsFromUUID = async (uuid: string, username: string): Promise<ProfilViewType> => {
@@ -57,9 +57,9 @@ export const getViewsFromUUID = async (uuid: string, username: string): Promise<
     return {
       uuid,
       count: 0
-    }
+    };
   });
-}
+};
 
 
 export async function getRankingLeaderboard(rankingType: RankingType, limit = 10, offset = 0): Promise<RankingResponse> {
@@ -95,17 +95,17 @@ export async function getAllItems(): Promise<OptionType[]> {
       label: item.us_trad,
       label2: item.fr_trad,
       img: item.img
-    }
+    };
   });
   }).catch(() => {
     return redirect(`/error?message=Impossible de charger la liste des items`);
-  })
+  });
 }
 
 export async function getCraft(item_name: string): Promise<CraftingRecipeType> {
   const allCraft = await fetchWithHeader<CraftingRecipeType[]>(`${API_PALATRACKER}/v1/craft/getAll`, 30 * 60).catch(() => {
     return redirect(`/error?message=Impossible de charger la totalité des crafts.`);
-  })
+  });
 
   const craft = allCraft.find((craft) => craft.item.item_name === item_name);
   if (craft === undefined) {
@@ -172,11 +172,11 @@ export async function getItemAlias(item_name: string | undefined): Promise<strin
   return await fetchWithHeader<string | null>(`${API_PALATRACKER}/v1/item/getAlias/${item_name}`, 30 * 60).catch(() => {
     console.error("Impossible de charger récupérer l'alias de l'item");
     return null;
-  })
+  });
 }
 
 export async function getCraftRecipe(item_name: string, count: number): Promise<Tree<NodeType>> {
   return await fetchWithHeader<Tree<NodeType>>(`${API_PALATRACKER}/v1/craft/get?item=${item_name}&count=${count}`, 30 * 60).catch(() => {
     return redirect(`/error?message=Impossible de charger la recette de ce craft.`);
-  })
+  });
 }

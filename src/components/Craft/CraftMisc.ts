@@ -9,7 +9,7 @@ export async function BuildTreeRecursively(el: NodeType, options: OptionType[], 
   await new Promise(resolve => setTimeout(resolve, 250));
 
   if (depth > 10) {
-    redirect("/error?message=Il semblerait que le craft soit trop complexe pour être affiché. Contactez un administrateur pour plus d'informations.")
+    redirect("/error?message=Il semblerait que le craft soit trop complexe pour être affiché. Contactez un administrateur pour plus d'informations.");
   }
 
 
@@ -22,14 +22,14 @@ export async function BuildTreeRecursively(el: NodeType, options: OptionType[], 
   const childrenOrNull = slotAvailable.map((slot) => {
     const itemAtSlot = craft_recipe[slot];
     if (!itemAtSlot)
-      return redirect(`/error?message=Le craft de ${el.value} n'existe pas dans la base de donnée. Il sera ajouté prochainement.`)
+      return redirect(`/error?message=Le craft de ${el.value} n'existe pas dans la base de donnée. Il sera ajouté prochainement.`);
     if (itemAtSlot.item_name === 'air')
       return null;
     const t = options.find((option) => option.value === itemAtSlot.item_name);
     if (t === undefined) {
       if (testCompilation)
         return null;
-      redirect(`/error?message=Le craft de ${el.value} n'existe pas dans la base de donnée. Il sera ajouté prochainement.`)
+      redirect(`/error?message=Le craft de ${el.value} n'existe pas dans la base de donnée. Il sera ajouté prochainement.`);
     }
     return t;
   });

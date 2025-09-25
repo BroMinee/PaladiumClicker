@@ -10,7 +10,7 @@ export function TestApiFetching() {
   return <li className="flex items-center gap-2">
     <LoadingSpinner size={4}/>
     Test de l&apos;API de Paladium en cours...
-  </li>
+  </li>;
 }
 
 export async function TestApi() {
@@ -35,7 +35,7 @@ export function TestMyApiFetching() {
   return <li className="flex items-center gap-2">
     <LoadingSpinner size={4}/>
     Test de notre API en cours...
-  </li>
+  </li>;
 }
 
 export async function TestMyApi() {
@@ -60,7 +60,7 @@ export function TestImportProfileFetching() {
   return <li className="flex items-center gap-2">
     <LoadingSpinner size={4}/>
     Test de l&apos;importation de profil en cours...
-  </li>
+  </li>;
 }
 
 export async function TestImportProfile({ pseudoParams = "BroMine__" }: {
@@ -78,7 +78,7 @@ export async function TestImportProfile({ pseudoParams = "BroMine__" }: {
         error :
         `Une erreur est survenue dans l'importation du profil de ${pseudoParams ?? "BroMine__"}`;
     return [true, message];
-  })
+  });
 
   if (!apiDown) return (
     <li className="flex items-center gap-2">

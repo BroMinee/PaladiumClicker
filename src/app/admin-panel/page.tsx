@@ -5,7 +5,7 @@ import { AdminPanelRoleDispatch } from "@/components/Admin-Panel/AdminPanelRoleD
 
 export async function generateMetadata() {
   const title = "PalaTracker | Admin Panel";
-  const description = "Admin Panel"
+  const description = "Admin Panel";
   return {
     title: title,
     description: description,
@@ -13,7 +13,7 @@ export async function generateMetadata() {
       title: title,
       description: description,
     },
-  }
+  };
 }
 
 

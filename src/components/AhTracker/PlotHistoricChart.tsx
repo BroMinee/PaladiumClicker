@@ -1,4 +1,4 @@
-'use client'
+'use client';
 import dynamic from "next/dynamic";
 import { AhItemHistory } from "@/types";
 import { Area, Legend, ReferenceLine, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
@@ -20,12 +20,12 @@ const CustomTooltip = ({ active, payload, label }: any) => {
           {payload.map((entry: any, index: number) => {
             return <li key={index} style={{ color: entry.color }}>
               {entry.name}: {Math.round(entry.value)}
-            </li>
+            </li>;
           })}
         </ul>
-      </div>)
+      </div>);
   }
-}
+};
 
 export const PlotHistoricChart = ({ data, webhook = false }: { data: AhItemHistory[], webhook?: boolean }) => {
   const data_clean = data.length !== 0 ? data.map((item) => {
@@ -33,7 +33,7 @@ export const PlotHistoricChart = ({ data, webhook = false }: { data: AhItemHisto
       date: item.date,
       price: item.price / item.sells,
       quantity: item.quantity
-    }
+    };
   }) : [{ date: "Cette item n'a pas encore été vendu de la saison", price: 0, quantity: 0 }];
   const { threshold, thresholdCondition } = useWebhookStore();
   return (

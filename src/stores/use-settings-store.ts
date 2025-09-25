@@ -40,4 +40,4 @@ export const useSettingsStore = create<State & Actions, [["zustand/persist", Sta
     name: storageKey,
     storage: createJSONStorage(() => localStorage)
   },
-))
+));

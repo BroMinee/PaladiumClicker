@@ -1,4 +1,4 @@
-'use client'
+'use client';
 import { Bar, BarChart, LabelList, ResponsiveContainer, XAxis, YAxis } from "recharts";
 import { useEffect, useRef, useState } from "react";
 import { usePlayerInfoStore } from "@/stores/use-player-info-store.ts";
@@ -23,7 +23,7 @@ export function DisplayProgressionCategory({ category }: { category: CategoryEnu
 
   const totalCompleted = allAchievements.filter(achievement => achievement.completed).length;
 
-  const total = allAchievements.length
+  const total = allAchievements.length;
   const value = totalCompleted * 100 / total;
 
   return (
@@ -164,7 +164,7 @@ function AchievementSelectorCategory({ category, selectedCategory, setSelectedCa
     case CategoryEnum.OTHERS:
       imgPath = "AH_img/ender_pearl.webp";
       displayText = "Divers";
-      break
+      break;
     default:
       imgPath = "unknown.webp";
       displayText = "Inconnu";
@@ -177,7 +177,7 @@ function AchievementSelectorCategory({ category, selectedCategory, setSelectedCa
     <DisplayCategoryCard title={displayText} img={imgPath} unoptimized>
       <DisplayProgressionCategory category={category}/>
     </DisplayCategoryCard>
-  </button>
+  </button>;
 }
 
 export function AchievementBody({ itemList }: { itemList: { img: string, value: string }[] }) {
@@ -194,7 +194,7 @@ export function AchievementBody({ itemList }: { itemList: { img: string, value: 
             return <AchievementSelectorCategory key={category + index}
                                                 category={Object.keys(CategoryEnum).find((c) => c === category) as CategoryEnum}
                                                 selectedCategory={selectedCategory}
-                                                setSelectedCategory={setSelectedCategory}/>
+                                                setSelectedCategory={setSelectedCategory}/>;
           })}
         </div>
 
@@ -207,7 +207,7 @@ export function AchievementBody({ itemList }: { itemList: { img: string, value: 
       </div>
       <ScrollBar orientation="vertical"/>
     </ScrollArea>
-  </>
+  </>;
 }
 
 
@@ -221,16 +221,16 @@ export function DisplayAllAchievementInCategory({ category, itemList }: {
     return null;
 
 
-  const allAchivements = playerInfo.achievements.filter(achievement => achievement.category === category && achievement.icon)
-  allAchivements.sort((a, b) => a.id.localeCompare(b.id))
+  const allAchivements = playerInfo.achievements.filter(achievement => achievement.category === category && achievement.icon);
+  allAchivements.sort((a, b) => a.id.localeCompare(b.id));
 
 
   // TODO: achievement.icon
   return <div className="flex flex-col gap-4">
     {allAchivements.map((achievement, index) => {
-      return <DetailAchievement key={achievement.name + index} achievement={achievement} itemList={itemList}/>
+      return <DetailAchievement key={achievement.name + index} achievement={achievement} itemList={itemList}/>;
     })}
-  </div>
+  </div>;
 }
 
 function DetailAchievement({ achievement, itemList }: {
@@ -242,7 +242,7 @@ function DetailAchievement({ achievement, itemList }: {
   if (achievement.completed) {
     achievementProgress = achievement.subAchievements.length === 0 ? achievement.amount : achievement.subAchievements.length;
   } else if (achievement.subAchievements.length > 0)
-    achievementProgress = achievement.subAchievements.reduce((acc, curr) => acc + (curr.completed ? 1 : 0), 0)
+    achievementProgress = achievement.subAchievements.reduce((acc, curr) => acc + (curr.completed ? 1 : 0), 0);
   else
     achievementProgress = achievement.progress;
 
@@ -256,10 +256,10 @@ function DetailAchievement({ achievement, itemList }: {
   let closestItemName = itemList.find((item) => item.value === constants.dictAchievementIdToIcon.get(achievement.icon))?.img ?? "unknown.webp";
 
   if (closestItemName === "unknown.webp")
-    console.log("Unknown item : " + achievement.icon)
+    console.log("Unknown item : " + achievement.icon);
 
   if (closestItemName === "barriere.webp")
-    closestItemName = "unknown.webp"
+    closestItemName = "unknown.webp";
 
   return <div onClick={() => achievement.subAchievements.length !== 0 && setShowSubAchievements(!showSubAchievements)}
               className={cn("border-2 border-secondary-foreground px-2 animate-fade-in", achievement.completed && "bg-green-400/50 hover:bg-green-500/50")}>
@@ -277,7 +277,7 @@ function DetailAchievement({ achievement, itemList }: {
       <div className="pb-2">
         {achievement.subAchievements.map((a) => <SubAchievementDisplay key={a.id} subAchievement={a}/>)}
       </div>}
-  </div>
+  </div>;
 
 }
 
@@ -295,7 +295,7 @@ export function DisplayProgressionAchievement({ achievementProgress, amount, val
         <AchievementsGlobalProgressBar value={value} showText={true}/>
       </div>
     </div>
-  </div>
+  </div>;
 }
 
 function SubAchievementDisplay({ subAchievement }: { subAchievement: Achievement }) {
@@ -304,5 +304,5 @@ function SubAchievementDisplay({ subAchievement }: { subAchievement: Achievement
   return <div className="flex flex-row gap-4 items-center pl-10">
     <Image width={20} height={20} src={imgPath} alt={subAchievement.completed ? "checked" : "unchecked"}/>
     {subAchievement.name + " : " + subAchievement.description}
-  </div>
+  </div>;
 }

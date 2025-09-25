@@ -81,7 +81,7 @@ export function MetierSelectorClient({ username, metier, selected, searchParams 
       onClick={() => router.push(generateXpCalculatorUrl(username, metier, undefined, searchParams.double, searchParams.dailyBonus, searchParams.f2, searchParams.f3), { scroll: false })}
       unoptimized
     />
-  )
+  );
 }
 
 type MetierProps = {
@@ -126,7 +126,7 @@ export const MetierToReachWrapper = ({
       </div>
     </>
   );
-}
+};
 
 export function ButtonTakeDoubleXp({ params, searchParams, doubleXp, children }: {
   params: { username: string },
@@ -139,13 +139,13 @@ export function ButtonTakeDoubleXp({ params, searchParams, doubleXp, children }:
   return <Button className={doubleXp === 100 ? "bg-red-500" : "bg-green-500"}
     onClick={() => {
       if (doubleXp === 0)
-        router.push(generateXpCalculatorUrl(params.username, searchParams.metier, searchParams.level, true, searchParams.dailyBonus, searchParams.f2, searchParams.f3), { scroll: false })
+        router.push(generateXpCalculatorUrl(params.username, searchParams.metier, searchParams.level, true, searchParams.dailyBonus, searchParams.f2, searchParams.f3), { scroll: false });
       else
-        router.push(generateXpCalculatorUrl(params.username, searchParams.metier, searchParams.level, false, searchParams.dailyBonus, searchParams.f2, searchParams.f3), { scroll: false })
+        router.push(generateXpCalculatorUrl(params.username, searchParams.metier, searchParams.level, false, searchParams.dailyBonus, searchParams.f2, searchParams.f3), { scroll: false });
     }}
   >
     {children}
-  </Button>
+  </Button>;
 }
 
 export function ButtonUseF2({ params, searchParams, F2, children }: {
@@ -159,13 +159,13 @@ export function ButtonUseF2({ params, searchParams, F2, children }: {
   return <Button className={F2 ? "bg-red-500" : "bg-green-500"}
     onClick={() => {
       if (F2 === false)
-        router.push(generateXpCalculatorUrl(params.username, searchParams.metier, searchParams.level, searchParams.double, searchParams.dailyBonus, true, undefined), { scroll: false })
+        router.push(generateXpCalculatorUrl(params.username, searchParams.metier, searchParams.level, searchParams.double, searchParams.dailyBonus, true, undefined), { scroll: false });
       else
-        router.push(generateXpCalculatorUrl(params.username, searchParams.metier, searchParams.level, searchParams.double, searchParams.dailyBonus, false, undefined), { scroll: false })
+        router.push(generateXpCalculatorUrl(params.username, searchParams.metier, searchParams.level, searchParams.double, searchParams.dailyBonus, false, undefined), { scroll: false });
     }}
   >
     {children}
-  </Button>
+  </Button>;
 }
 
 export function ButtonUseF3({ params, searchParams, F3, children }: {
@@ -179,13 +179,13 @@ export function ButtonUseF3({ params, searchParams, F3, children }: {
   return <Button className={F3 ? "bg-red-500" : "bg-green-500"}
     onClick={() => {
       if (F3 === false)
-        router.push(generateXpCalculatorUrl(params.username, searchParams.metier, searchParams.level, searchParams.double, searchParams.dailyBonus, searchParams.f2, true), { scroll: false })
+        router.push(generateXpCalculatorUrl(params.username, searchParams.metier, searchParams.level, searchParams.double, searchParams.dailyBonus, searchParams.f2, true), { scroll: false });
       else
-        router.push(generateXpCalculatorUrl(params.username, searchParams.metier, searchParams.level, searchParams.double, searchParams.dailyBonus, searchParams.f2, false), { scroll: false })
+        router.push(generateXpCalculatorUrl(params.username, searchParams.metier, searchParams.level, searchParams.double, searchParams.dailyBonus, searchParams.f2, false), { scroll: false });
     }}
   >
     {children}
-  </Button>
+  </Button>;
 }
 
 
@@ -199,7 +199,7 @@ export function InputDailyBonus({ params, searchParams }: {
     onChange={(e) => {
       router.push(generateXpCalculatorUrl(params.username, searchParams.metier, searchParams.level, searchParams.double, Number(e.target.value), searchParams.f2, searchParams.f3), { scroll: false });
     }
-    } />
+    } />;
 }
 
 function getBonusRank(playerRank: PlayerRank | undefined) {
@@ -233,14 +233,14 @@ export function DisplayDailyDoubleRank({ dailyBonus, doubleXp }: { dailyBonus: n
 
   let bonusXpRank = getBonusRank(playerInfo?.rank);
   const bonusSummerRush = 300;
-  return <>{dailyBonus + doubleXp + bonusXpRank + bonusSummerRush}%</>
+  return <>{dailyBonus + doubleXp + bonusXpRank + bonusSummerRush}%</>;
 }
 
 export function DisplayXpBonus() {
   const { data: playerInfo } = usePlayerInfoStore();
 
   let bonusXpRank = getBonusRank(playerInfo?.rank);
-  return <>{bonusXpRank}%</>
+  return <>{bonusXpRank}%</>;
 }
 
 function getXpDiff(playerInfo: PlayerInfo | null, searchParams: searchParamsXpBonusPage) {
@@ -266,7 +266,7 @@ export function getTotalXPForLevel(level: number) {
 export function DisplayXpNeeded({ searchParams }: { searchParams: searchParamsXpBonusPage }) {
   const { data: playerInfo } = usePlayerInfoStore();
   const xpNeeded = getXpDiff(playerInfo, searchParams);
-  return <>{formatPrice(Math.ceil(xpNeeded))} xp</>
+  return <>{formatPrice(Math.ceil(xpNeeded))} xp</>;
 }
 
 export function DisplayItem({ searchParams, item, index }: { searchParams: searchParamsXpBonusPage, item: HowToXpElement, index: number }) {
@@ -300,7 +300,7 @@ export function DisplayItem({ searchParams, item, index }: { searchParams: searc
         </GradientText>
         <span className="font-semibold">{item.type}</span>
       </div>
-    </div>)
+    </div>);
 }
 
 export function DisplayXpNeededWithDouble({ searchParams, xp, element }: {
@@ -324,7 +324,7 @@ export function DisplayXpNeededWithDouble({ searchParams, xp, element }: {
   const bonusXpDouble = bonusXpWithoutDouble + (searchParams.double ? 100 : 0);
   const xpNeededWithDoubleXP = (xpNeeded / fortuneBonus) / ((100 + bonusXpDouble) / 100);
 
-  return <>{fortuneBonus !== 1 && "~ "}{formatPrice(Math.ceil(xpNeededWithDoubleXP / xp))} fois</>
+  return <>{fortuneBonus !== 1 && "~ "}{formatPrice(Math.ceil(xpNeededWithDoubleXP / xp))} fois</>;
 }
 
 export function DisplayXpNeededWithBottle({ searchParams }: { searchParams: searchParamsXpBonusPage }) {
@@ -336,5 +336,5 @@ export function DisplayXpNeededWithBottle({ searchParams }: { searchParams: sear
   const bonusSummerRush = 300;
   const bonusXpWithoutDouble = bonusSummerRush + bonusXpRank + (searchParams.dailyBonus || 0);
   const xpNeededWithoutDoubleXP = xpNeeded / ((100 + bonusXpWithoutDouble) / 100);
-  return <>{formatPrice(Math.ceil(xpNeededWithoutDoubleXP / 1000))} fois</>
+  return <>{formatPrice(Math.ceil(xpNeededWithoutDoubleXP / 1000))} fois</>;
 }

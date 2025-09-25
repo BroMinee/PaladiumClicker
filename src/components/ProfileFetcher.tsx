@@ -1,4 +1,4 @@
-'use client'
+'use client';
 import React, { useEffect } from "react";
 import { usePlayerInfoStore } from "@/stores/use-player-info-store.ts";
 import { getPlayerInfoAction } from "@/lib/api/apiServerAction.ts";
@@ -50,7 +50,7 @@ export default function ProfileFetcherWrapper({ username, children }: {
   return (<>
       {children}
     </>
-  )
+  );
 }
 
 

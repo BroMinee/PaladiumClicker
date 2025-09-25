@@ -24,7 +24,7 @@ export async function generateMetadata(props: { params: Promise<{ username: stri
       title: `PalaTracker | Clicker Optimizer | ${params.username}`,
       description: "🚀 Tu cherches à optimiser le PalaClicker ? C'est ici que ça se passe !! 📈 Ce site calcule le meilleur achat en fonction de tes métiers, tes améliorations et tes bâtiments."
     },
-  }
+  };
 }
 
 
@@ -112,5 +112,5 @@ export default async function Home(props: { params: Promise<{ username: string }
       </ProfileFetcherWrapper>
       <FallingClickImage/>
     </>
-  )
+  );
 }

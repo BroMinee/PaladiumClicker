@@ -1,5 +1,5 @@
-import "@/styles/globals.css"
-import { GoogleAnalytics } from '@next/third-parties/google'
+import "@/styles/globals.css";
+import { GoogleAnalytics } from '@next/third-parties/google';
 
 import React from "react";
 import Navbar from "@/components/NavBar/NavBar.tsx";

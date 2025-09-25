@@ -1,4 +1,4 @@
-'use client'
+'use client';
 
 import { WebHookType, } from "@/types";
 import { Button } from "@/components/ui/button.tsx";
@@ -10,7 +10,7 @@ import constants from "@/lib/constants.ts";
 
 export function WebHookSelectorClientItem() {
   const router = useRouter();
-  const validWebHookType = [WebHookType.QDF, WebHookType.adminShop, WebHookType.market, WebHookType.EventPvp, WebHookType.statusServer, WebHookType.vote]
+  const validWebHookType = [WebHookType.QDF, WebHookType.adminShop, WebHookType.market, WebHookType.EventPvp, WebHookType.statusServer, WebHookType.vote];
 
   const { setCurrentWebHookType, currentWebHookType } = useWebhookStore();
 
@@ -37,5 +37,5 @@ export function WebHookSelectorClientItem() {
       </div>
 
     </div>
-  )
+  );
 }

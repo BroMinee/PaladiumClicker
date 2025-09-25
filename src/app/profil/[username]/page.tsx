@@ -15,7 +15,7 @@ export async function generateMetadata(props: { params: Promise<{ username: stri
       title: `PalaTracker | Profil | ${params.username}`,
       description: "📝 Viens consulter ton profil Paladium sur PalaTracker ! 📝"
     },
-  }
+  };
 }
 
 export type searchParamsProfilPage = {
@@ -41,5 +41,5 @@ export default async function Home(
         <ProfilSelectorDisplay params={params} searchParams={searchParams}/>
       </div>
     </ProfileFetcherWrapper>
-  )
+  );
 }

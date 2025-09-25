@@ -10,7 +10,7 @@ type Actions = {
 
 const initialState: State = {
   rps: 0,
-}
+};
 
 export const useRpsStore = create<State & Actions>(
   (set) => ({

@@ -37,4 +37,4 @@ export const useNavbarStore = create<State & Actions, [["zustand/persist", State
     name: storageKey,
     storage: createJSONStorage(() => localStorage)
   },
-))
+));

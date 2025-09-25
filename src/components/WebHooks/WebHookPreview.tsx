@@ -64,7 +64,7 @@ export function WebHookPreviewPage({
         ))
       }
     </div>
-  )
+  );
 }
 
 
@@ -127,7 +127,7 @@ export function WebHookPreview({ webHookAlert, groups, setGroups }: {
 
     setEdit(true);
 
-    router.push(`${constants.webhooksPath}/edit`)
+    router.push(`${constants.webhooksPath}/edit`);
   }
 
 
@@ -223,14 +223,14 @@ export function CreateNewWebHookButtonKnowingUrl({ webhookDiscord, text }: {
     }
     setWebHookUrl(webhookDiscord.url);
     setEdit(false);
-    router.push(`${constants.webhooksPath}/create`)
+    router.push(`${constants.webhooksPath}/create`);
   }
 
   return (
     <Button onClick={handleNew}>
       {text}
     </Button>
-  )
+  );
 }
 
 export function CreateNewWebHookButtonWithoutKnowing() {
@@ -242,5 +242,5 @@ export function CreateNewWebHookButtonWithoutKnowing() {
         </Button>
       </a>
     </div>
-  )
+  );
 }

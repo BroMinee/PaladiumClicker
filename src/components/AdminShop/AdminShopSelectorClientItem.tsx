@@ -1,4 +1,4 @@
-'use client'
+'use client';
 
 import { AdminShopItem, AdminShopPeriode } from "@/types";
 import { useRouter, useSearchParams } from "next/navigation";
@@ -47,7 +47,7 @@ export function AdminShopSelectorClientItem({ item, periode, adminShopPage }: {
       </HoverText>
     </>
 
-  )
+  );
 }
 
 export function AdminShopSelectorClientPeriode({ item, periode }: {
@@ -61,11 +61,11 @@ export function AdminShopSelectorClientPeriode({ item, periode }: {
 
 
   const converter = (periode: string) => {
-    if (periode === "day") return "24 heures"
-    if (periode === "week") return "1 semaine"
-    if (periode === "month") return "1 mois"
-    if (periode === "season") return "1 saison"
-  }
+    if (periode === "day") return "24 heures";
+    if (periode === "week") return "1 semaine";
+    if (periode === "month") return "1 mois";
+    if (periode === "season") return "1 saison";
+  };
 
 
   return (
@@ -93,5 +93,5 @@ export function AdminShopSelectorClientPeriode({ item, periode }: {
     </Card>
 
 
-  )
+  );
 }

@@ -17,7 +17,7 @@ export async function CraftingInformationFetcher({ item, options, count }: {
 
   const root = await getCraftRecipe(item.value, count);
 
-  const internalNodeNameUnique = getInternalNode(root).map((el) => { return el.value }).reduce((acc, el) => {
+  const internalNodeNameUnique = getInternalNode(root).map((el) => { return el.value; }).reduce((acc, el) => {
     if (acc.findIndex((el2) => el2.value === el.value) === -1)
       return [...acc, el];
     return acc;
@@ -33,7 +33,7 @@ export async function CraftingInformationFetcher({ item, options, count }: {
           </CardHeader>
 
           {internalNodeNameUnique.map((el, index) => {
-            return <CraftItemRecipe key={el.value + index + "-craft"} item={el} options={options}/>
+            return <CraftItemRecipe key={el.value + index + "-craft"} item={el} options={options}/>;
           })}
         </Card>
 

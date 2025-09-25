@@ -30,12 +30,12 @@ export default async function GraphAdminShop({ item, periode }: GraphAdminShopPr
 
   return (
     <PlotAdminShopChart data={data} periode={periode}/>
-  )
+  );
 }
 
 export function GraphAdminShopFallback() {
   return <div className="flex flex-row gap-2 m-4 w-96 items-center">
     <LoadingSpinner size={4}/>
     <h2 className="font-bold">Chargement du graphique...</h2>
-  </div>
+  </div>;
 }

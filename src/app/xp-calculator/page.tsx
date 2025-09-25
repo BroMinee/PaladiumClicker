@@ -24,10 +24,10 @@ export async function generateMetadata() {
         }
       ]
     },
-  }
+  };
 
 }
 
 export default function HomeProfilWithoutUsername() {
-  return <NoPseudoPage texth1="Calcule l'xp nécessaire pour °level up° tes métiers" texth2="Commence par saisir ton pseudo °Minecraft°"/>
+  return <NoPseudoPage texth1="Calcule l'xp nécessaire pour °level up° tes métiers" texth2="Commence par saisir ton pseudo °Minecraft°"/>;
 }

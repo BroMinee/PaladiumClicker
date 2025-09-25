@@ -16,7 +16,7 @@ import { AuthForceWrapper } from "@/components/Auth/AuthForceWrapper.tsx";
 export async function generateMetadata() {
   let title = `PalaTracker | PalaAnimation Trainer`;
 
-  const description = "Viens t'entraîner sur PalaAnimation et compare ton temps avec les autres joueurs ! 🚀"
+  const description = "Viens t'entraîner sur PalaAnimation et compare ton temps avec les autres joueurs ! 🚀";
   return {
     title: title,
     description: description,
@@ -24,7 +24,7 @@ export async function generateMetadata() {
       title: title,
       description: description,
     },
-  }
+  };
 }
 
 export default function PalaAnimationPage() {

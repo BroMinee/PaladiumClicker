@@ -6,7 +6,7 @@ import { LoginButton } from "@/components/Login/LoginButton.tsx";
 export async function generateMetadata() {
   let title = `PalaTracker | PalaAnimation Trainer | Login`;
 
-  const description = "Viens t'entraîner sur PalaAnimation et compare ton temps avec les autres joueurs ! 🚀"
+  const description = "Viens t'entraîner sur PalaAnimation et compare ton temps avec les autres joueurs ! 🚀";
   return {
     title: title,
     description: description,
@@ -14,7 +14,7 @@ export async function generateMetadata() {
       title: title,
       description: description,
     },
-  }
+  };
 }
 
 
@@ -57,5 +57,5 @@ export default function WebHooksPage() {
         <LoginButton href={`${API_PALATRACKER}/v1/auth/login/discord`} redirectUrl={"/pala-animation"}/>
       </CardContent>
     </Card>
-  )
+  );
 }

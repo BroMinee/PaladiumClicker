@@ -45,5 +45,5 @@ export const PopupRewardEvent = ({ winningPrice, children }: { winningPrice: str
         </div>
       </ScrollArea>
     </DialogContent>
-  </Dialog>
-}
+  </Dialog>;
+};

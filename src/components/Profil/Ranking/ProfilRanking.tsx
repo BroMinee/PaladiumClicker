@@ -25,7 +25,7 @@ export function ProfilRankingSection({ searchParams }: { searchParams: searchPar
         </Suspense>
       </Card>
     </div>
-  )
+  );
 }
 
 export function ProfilRankingSectionFallBack() {
@@ -36,6 +36,6 @@ export function ProfilRankingSectionFallBack() {
         Chargement de l&apos;historique du joueur...
       </CardTitle>
     </CardHeader>
-  </Card>)
+  </Card>);
 }
 

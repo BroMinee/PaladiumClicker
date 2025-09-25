@@ -16,7 +16,7 @@ export function PreconditionDisplay({ index, upgradeType }: { index: number, upg
     return (
       <span className="flex flex-row items-center gap-1">{condition ? <FaCheck color="green"/> :
         <RiCloseLargeLine color="red"/>}{msg}</span>
-    )
+    );
   }
 
   const {
@@ -59,7 +59,7 @@ export function PreconditionDisplay({ index, upgradeType }: { index: number, upg
         <p key={index} className={index !== 0 ? "ml-2" : ""}>{text}</p>
       ))}
     </div>
-  )
+  );
 
 }
 

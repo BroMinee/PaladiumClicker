@@ -17,7 +17,7 @@ export async function generateMetadata() {
             title: title,
             description: description,
         },
-    }
+    };
 }
 
 
@@ -44,7 +44,7 @@ export default async function WebHooksMainPage() {
 
 export async function WebHooksPage() {
     let webHookAlerts = await getWebHookFromCookies();
-    let webHookDiscord = await getWebHookDiscordFromCookies()
+    let webHookDiscord = await getWebHookDiscordFromCookies();
     const guildIdToServerName: Record<string, string> = {};
     const channelIdToChannelName: Record<string, string> = {};
 

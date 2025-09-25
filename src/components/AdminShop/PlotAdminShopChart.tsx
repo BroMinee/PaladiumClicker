@@ -1,4 +1,4 @@
-'use client'
+'use client';
 import dynamic from "next/dynamic";
 import { AdminShopItemDetail, AdminShopPeriode } from "@/types";
 import { Area, Legend, ReferenceLine, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
@@ -20,12 +20,12 @@ const CustomTooltip = ({ active, payload, label }: any) => {
           {payload.map((entry: any, index: number) => {
             return <li key={index} style={{ color: entry.color }}>
               {entry.name}: {entry.value}
-            </li>
+            </li>;
           })}
         </ul>
-      </div>)
+      </div>);
   }
-}
+};
 
 
 const PlotAdminShopChart = ({ data, periode, webhook = false }: {
@@ -44,7 +44,7 @@ const PlotAdminShopChart = ({ data, periode, webhook = false }: {
     return {
       date: new Date(item.date).toLocaleDateString() + " - " + new Date(item.date).toLocaleTimeString(),
       sellPrice: Math.round(item.sellPrice * 100) / 100,
-    }
+    };
   });
 
   return (

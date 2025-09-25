@@ -41,7 +41,7 @@ const MetierList = ({ editable = true }: MetierListProps) => {
       </Card>
     </div>
   );
-}
+};
 
 
 type MetierProps = {
@@ -82,7 +82,7 @@ export const MetierComponentWrapper = ({
       </div>
     </>
   );
-}
+};
 
 
 export default MetierList;

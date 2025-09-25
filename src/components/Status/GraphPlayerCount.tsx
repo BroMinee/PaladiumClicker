@@ -15,9 +15,9 @@ export default async function GraphPlayerCount() {
     return {
       date: el.date,
       value: el.player_count
-    }});
+    };});
 
   return (
     <PlotSingleValueChart data={d} labelName={"Joueurs uniques"} className={"h-[calc(100vh-80vh)] min-h-[calc(100vh-60vh)]"}/>
-  )
+  );
 }

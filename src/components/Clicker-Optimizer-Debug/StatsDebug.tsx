@@ -1,4 +1,4 @@
-'use client'
+'use client';
 import GradientText from "@/components/shared/GradientText";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -88,7 +88,7 @@ export function findBestUpgradeDebug(playerInfo: PlayerInfo, date: Date, startSe
     bestCoef: 0,
     bestUpgradeIndex: -1,
     bestListName: "building_upgrade"
-  }
+  };
 
   const buildingUpgradeUnlockable = playerInfo["building_upgrade"].filter((building) => !building["own"] && checkConditionDebug(playerInfo, building["condition"], date, startSeason).unlockable);
   const categoryUpgradeUnlockable = playerInfo["category_upgrade"].filter((building) => !building["own"] && checkConditionDebug(playerInfo, building["condition"], date, startSeason).unlockable);
@@ -111,8 +111,8 @@ export function findBestUpgradeDebug(playerInfo: PlayerInfo, date: Date, startSe
 
   function getBestIndex(list: typeListTmp, nameList: buildingPathType) {
     for (let index = 0; index < list.length; index++) {
-      const copy = structuredClone(playerInfo)
-      const name = list[index]["name"]
+      const copy = structuredClone(playerInfo);
+      const name = list[index]["name"];
 
       if (!Object.keys(playerInfo).includes(nameList)) {
         return;
@@ -159,7 +159,7 @@ const StatsDebug = () => {
     }
 
     setIsNextBuildingVisible(value);
-  }
+  };
 
   const onCountChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const value = parseInt(event.target.value, 10);
@@ -253,7 +253,7 @@ const StatsDebug = () => {
       }
     </>
   );
-}
+};
 
 const BuildingName = ({ name, level }: { name: string, level: number | boolean }) => {
   return (
@@ -262,7 +262,7 @@ const BuildingName = ({ name, level }: { name: string, level: number | boolean }
       {typeof level === "number" ? <span className="text-xs text-center">Level {level}</span> : ""}
     </div>
   );
-}
+};
 
 type StatsListProps = {
   buildingBuyPaths: bestPurchaseInfoDetailed[],
@@ -296,8 +296,8 @@ export const StatList = ({ buildingBuyPaths, showProduction }: StatsListProps) =
         ))
       }
     </div>
-  )
-}
+  );
+};
 
 type StatProps = {
   buildingName: string,
@@ -322,7 +322,7 @@ export const Stat = ({ buildingName, buildingPath, showProduction }: StatProps) 
       }
     </div>
   );
-}
+};
 
 export default StatsDebug;
 
@@ -406,7 +406,7 @@ export function computeXBuildingAheadDebug(playerInfo: PlayerInfo, achatCount: n
         timeToBuy: timeToBuy,
         newCoins: newCoins
       } = computeTimeToBuy(price, bestPurchase.own, currentCoins, copyRps, date);
-      currentCoins = Math.max(newCoins, 0)
+      currentCoins = Math.max(newCoins, 0);
       date = timeToBuy;
       const own = copy[bestPurchase.path][bestPurchase.index].own;
 
@@ -484,14 +484,14 @@ function computeTimeToBuy(price: number, own: boolean | number, coinsDormants: n
     return {
       timeToBuy: curTime,
       newCoins: coinsDormants - priceToBuy
-    }
+    };
 
   const nbSec = (priceToBuy - coinsDormants) * factorLagServer / rps;
 
   return {
     timeToBuy: new Date(curTime.getTime() + nbSec * 1000),
     newCoins: 0
-  }
+  };
 }
 
 
@@ -518,7 +518,7 @@ export function DisplayCoinsDormants() {
       const production = value + totalSpend;
       setProduction(production);
     }
-  }
+  };
 
   return <div className="flex flex-row items-center">
     ~ <input
@@ -530,5 +530,5 @@ export function DisplayCoinsDormants() {
     placeholder={String(coinsDormants)}
     onChange={onChangeCoinsDormants}
     value={formatPrice(Math.round(coinsDormants))}/>
-  </div>
+  </div>;
 }

@@ -19,8 +19,8 @@ export async function AchievementsProfilSection() {
       return {
         value: item.value,
         img: item.img,
-      }
-    })
+      };
+    });
   });
 
 
@@ -33,7 +33,7 @@ export async function AchievementsProfilSection() {
         <AchievementBody itemList={itemList}/>
       </CardContent>
     </Card>
-  </>
+  </>;
 }
 
 export function AchievementsProfilSectionFallBack() {
@@ -44,7 +44,7 @@ export function AchievementsProfilSectionFallBack() {
         Chargement des informations des images...
       </CardTitle>
     </CardHeader>
-  </Card>)
+  </Card>);
 }
 
 export function MarketProfilSectionFallBack() {
@@ -55,5 +55,5 @@ export function MarketProfilSectionFallBack() {
         Chargement des items...
       </CardTitle>
     </CardHeader>
-  </Card>)
+  </Card>);
 }

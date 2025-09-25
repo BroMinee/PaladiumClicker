@@ -9,7 +9,7 @@ export const ThresholdSelector = () => {
     <ThreshConditionSelector/>
     <CounterInputWebhook/>
   </>);
-}
+};
 
 const CounterInputWebhook = ({ min = 0, step = 0.01 }) => {
   const { threshold, setThreshold } = useWebhookStore();

@@ -29,7 +29,7 @@ export function DisplayItem({ slot, className }: { slot: OptionType, className?:
       </div>
 
     </a>
-  )
+  );
 }
 
 export function DisplayItemProduce({ slot, title, value, count }: {

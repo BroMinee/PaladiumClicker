@@ -8,7 +8,7 @@ export function AuthGetWrapper() {
   useEffect(() => {
     isAuthenticate().then((profileInfo) => {
       setProfileInfo(profileInfo);
-    })
+    });
   }, [setProfileInfo]);
   return null;
 }

@@ -1,4 +1,4 @@
-'use server'
+'use server';
 import 'server-only';
 import { checkAnswerPalaAnimationType, KeyDownTimestampType } from "@/types";
 import { fetchPostWithHeader, fetchWithHeader } from "@/lib/api/misc.ts";
@@ -94,7 +94,7 @@ export const getNewQuestionPalaAnimation = async (lastQuestion: string | undefin
     question: string,
     session_uuid: string
   }>(`${API_PALATRACKER}/v1/pala-animation/question?last_question=${lastQuestion}`, 0);
-}
+};
 
 export const checkAnswerPalaAnimation = async (answer: string, session_uuid: string, keyPressTimestamp: KeyDownTimestampType[], user_time: number): Promise<checkAnswerPalaAnimationType> => {
   if (!await isAuthenticate()) {
@@ -107,5 +107,5 @@ export const checkAnswerPalaAnimation = async (answer: string, session_uuid: str
     keyPressTimestamp,
     user_time
   }), 0);
-}
+};
 

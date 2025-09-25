@@ -30,11 +30,11 @@ export async function getPlayerInfoAction(username: string) {
 }
 
 export async function registerPlayerAction(uuid: string, username: string) {
-  return await fetchWithHeader(`${API_PALATRACKER}/v1/user/register/${uuid}/${username}`, 5 * 60).catch((e) => { console.error(e) });
+  return await fetchWithHeader(`${API_PALATRACKER}/v1/user/register/${uuid}/${username}`, 5 * 60).catch((e) => { console.error(e); });
 }
 
 export async function getPaladiumAhItemStatsOfAllItemsAction(): Promise<PaladiumAhItemStat[]> {
-  'use server'
+  'use server';
   const response = await fetchWithHeader<PaladiumAhItemStatResponse>(`${PALADIUM_API_URL}/v1/paladium/shop/market/items?limit=100&offset=0`, 5 * 60);
   const totalCount = response.totalCount;
 
@@ -42,7 +42,7 @@ export async function getPaladiumAhItemStatsOfAllItemsAction(): Promise<Paladium
   let offset = 100;
   let c = 0;
   while (offset < totalCount && c <= 10) {
-    const response = await fetchWithHeader<PaladiumAhItemStatResponse>(`${PALADIUM_API_URL}/v1/paladium/shop/market/items?offset=${offset}&limit=100`, 5 * 60)
+    const response = await fetchWithHeader<PaladiumAhItemStatResponse>(`${PALADIUM_API_URL}/v1/paladium/shop/market/items?offset=${offset}&limit=100`, 5 * 60);
     data = data.concat(response.data);
     offset += 100;
     c++;
@@ -58,7 +58,7 @@ export async function getCurrentEvent() {
     if (event) {
       console.log("Event found:", event);
     } else {
-      console.log("No event found")
+      console.log("No event found");
     }
     return event;
   } catch (error) {
@@ -131,11 +131,11 @@ export async function getAllItemsServerAction() : Promise<OptionType[]> {
         label: item.us_trad,
         label2: item.fr_trad,
         img: item.img
-      }
+      };
     });
   }).catch(() => {
     return [];
-  })
+  });
 }
 
 export async function getCurrentNotification(): Promise<NotificationWebSiteResponse | null> {
@@ -217,17 +217,17 @@ export async function createWebHookServerAction(body: WebHookCreate): Promise<{ 
     case WebHookType.vote:
       break;
     default:
-      return { succeeded: false, msg: "Type de WebHook inconnu" }
+      return { succeeded: false, msg: "Type de WebHook inconnu" };
   }
 
-  console.log("Creating WebHook", body)
+  console.log("Creating WebHook", body);
 
   const r = await fetchPostWithHeader<{
     succeeded: boolean,
     msg: string
   }>(`${API_PALATRACKER}/v1/webhook/create`, JSON.stringify(body), 0).catch((e) => {
     return { msg: JSON.stringify(e.message), succeeded: false };
-  })
+  });
   return { succeeded: r.succeeded, msg: r.msg };
 }
 
@@ -250,7 +250,7 @@ export async function editWebHookServerAction(body: WebHookCreate): Promise<{ su
     case WebHookType.vote:
       break;
     default:
-      return { succeeded: false, msg: "Type de WebHook inconnu" }
+      return { succeeded: false, msg: "Type de WebHook inconnu" };
   }
 
   const r = await fetchPostWithHeader<{
@@ -258,7 +258,7 @@ export async function editWebHookServerAction(body: WebHookCreate): Promise<{ su
     msg: string
   }>(`${API_PALATRACKER}/v1/webhook/edit`, JSON.stringify(body), 0).catch((e) => {
     return { msg: JSON.stringify(e.message), succeeded: false };
-  })
+  });
   return { succeeded: r.succeeded, msg: r.msg };
 }
 
@@ -273,7 +273,7 @@ export async function deleteWebhookServerAction(webHookAlertId: number): Promise
     msg: string
   }>(`${API_PALATRACKER}/v1/webhook/delete`, JSON.stringify({ id: webHookAlertId }), 0).catch((e) => {
     return { msg: JSON.stringify(e.message), succeeded: false };
-  })
+  });
   return { succeeded: r.succeeded, msg: r.msg };
 }
 
@@ -287,7 +287,7 @@ export async function deleteWebhookGuildServerAction(guildId: string): Promise<{
     msg: string
   }>(`${API_PALATRACKER}/v1/webhook/guild/delete`, JSON.stringify({ id: guildId }), 0).catch((e) => {
     return { msg: JSON.stringify(e.message), succeeded: false };
-  })
+  });
   return { succeeded: r.succeeded, msg: r.msg };
 }
 
@@ -307,7 +307,7 @@ export async function deleteWebhookChannelServerAction(guildId: string, channelI
     channelId: channelId
   }), 0).catch((e) => {
     return { msg: JSON.stringify(e.message), succeeded: false };
-  })
+  });
   return { succeeded: r.succeeded, msg: r.msg };
 }
 
@@ -330,7 +330,7 @@ export async function editWebhookChannelNameServerAction(guild_id: string, chann
     channel_id: channel_id,
     guild_id: guild_id,
     channel_name: channel_name
-  }
+  };
 
 
   const r = await fetchPostWithHeader<{
@@ -338,7 +338,7 @@ export async function editWebhookChannelNameServerAction(guild_id: string, chann
     msg: string
   }>(`${API_PALATRACKER}/v1/webhook/channel/edit`, JSON.stringify(body), 0).catch((e) => {
     return { msg: JSON.stringify(e.message), succeeded: false };
-  })
+  });
   return { succeeded: r.succeeded, msg: r.msg };
 }
 
@@ -361,7 +361,7 @@ export async function editWebhookGuildNameServerAction(guild_id: string, channel
     channel_id: channel_id,
     guild_id: guild_id,
     guild_name: guild_name
-  }
+  };
 
 
   const r = await fetchPostWithHeader<{
@@ -369,7 +369,7 @@ export async function editWebhookGuildNameServerAction(guild_id: string, channel
     msg: string
   }>(`${API_PALATRACKER}/v1/webhook/guild/edit`, JSON.stringify(body), 0).catch((e) => {
     return { msg: JSON.stringify(e.message), succeeded: false };
-  })
+  });
   return { succeeded: r.succeeded, msg: r.msg };
 }
 
@@ -385,7 +385,7 @@ export const getMarketHistoryServerAction = async (itemId: string): Promise<AhIt
   let offset = 100;
   let c = 0;
   while (offset < totalCount && c <= 10) {
-    const response = await fetchWithHeader<PaladiumAhHistory>(`${PALADIUM_API_URL}/v1/paladium/shop/market/items/${itemId}/history?offset=${offset}&limit=100`)
+    const response = await fetchWithHeader<PaladiumAhHistory>(`${PALADIUM_API_URL}/v1/paladium/shop/market/items/${itemId}/history?offset=${offset}&limit=100`);
     data = data.concat(response.data);
     offset += 100;
     c++;
@@ -395,7 +395,7 @@ export const getMarketHistoryServerAction = async (itemId: string): Promise<AhIt
     redirect(`/error?message=Data length is not equal to totalCount (getPaladiumAhItemFullHistory)`);
 
   return data;
-}
+};
 
 export async function setCookies(name: string, value: string, maxAge: number = 60 * 60 * 24 * 30) {
   const cookieStore = await cookies();

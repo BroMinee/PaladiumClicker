@@ -1,6 +1,8 @@
 {
   "extends": ["next/core-web-vitals", "plugin:react-hooks/recommended"],
   "rules": {
-    "react-hooks/exhaustive-deps": "error"
+    "react-hooks/exhaustive-deps": "error",
+    "semi-style": ["error", "last"],
+    "semi": ["error", "always"]
   }
 }

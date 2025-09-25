@@ -1,4 +1,4 @@
-'use server'
+'use server';
 import React, { Suspense } from "react";
 import { getProfileFromCookies } from "@/lib/api/apiPalaTracker.ts";
 import { Card, CardHeader } from "@/components/ui/card.tsx";
@@ -13,7 +13,7 @@ export async function AuthForceWrapper({ children, url }: {
     <Suspense fallback={<AuthLoading/>}>
       <AuthForce url={url}>{children}</AuthForce>
     </Suspense>
-  )
+  );
 }
 
 async function AuthForce({ children, url }: {
@@ -27,9 +27,9 @@ async function AuthForce({ children, url }: {
       <AuthSaveClient profileInfo={profileInfo}>
         {children}
       </AuthSaveClient>
-    )
+    );
   } else {
-    return <AuthRedirectClient url={url}/>
+    return <AuthRedirectClient url={url}/>;
   }
 }
 
@@ -43,5 +43,5 @@ function AuthLoading() {
         </CardHeader>
       </Card>
     </div>
-  )
+  );
 }

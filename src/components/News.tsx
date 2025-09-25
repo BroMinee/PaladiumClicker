@@ -19,7 +19,7 @@ export function textFormatting(
         if (part.startsWith("°") && part.endsWith("°")) {
           return <span key={index + "orange"} className="text-primary">
             {textFormatting(part.slice(1, -1))}
-          </span>
+          </span>;
         }
         if (part.startsWith("*") && part.endsWith("*")) {
           return <em
@@ -118,4 +118,4 @@ export const News = ({ update }: NewsProps) => {
       changes={update.changes}
     />
   );
-}
+};

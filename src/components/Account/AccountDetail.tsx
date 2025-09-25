@@ -21,5 +21,5 @@ export function AccountDetail() {
         </div>
       </CardContent>
     </Card>
-  )
+  );
 }

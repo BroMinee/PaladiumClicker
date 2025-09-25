@@ -34,7 +34,7 @@ export function CraftResourceList({ list }: { list: NodeType[] }) {
       }).catch((e) => {
         console.error(e);
         redirect(`/error?message=Une erreur est survenue lors de la récupération des données de toutes les ressources nécessaires au craft.`);
-      })
+      });
     }
   }, [mounted, listState]);
 
@@ -110,19 +110,19 @@ export function CraftResourceList({ list }: { list: NodeType[] }) {
                 console.error(`Item ${slot.value} not found in ahItems`, ahItems);
                 return <DisplayItemProduce key={slot.value + index + "-needed-dollar"} title={"⚠️ " + slot.label}
                                       value={"Pas en vente actuellement au market"}
-                                      count={slot.count} slot={slot}/>
+                                      count={slot.count} slot={slot}/>;
               }
 
               if (found.quantityAvailable < slot.count) {
                 return <DisplayItemProduce key={slot.value + index + "-needed-dollar"}
                                       title={"⚠️ " + slot.label + ` - Quantité insuffisante au market il en manquera ${slot.count - found.quantityAvailable}`}
                                       value={`Total de : ${formatPrice(subTotalPrice[index])} $`}
-                                      count={slot.count} slot={slot}/>
+                                      count={slot.count} slot={slot}/>;
               }
 
               return <DisplayItemProduce key={slot.value + index + "-needed-dollar"} title={slot.label}
                                     value={`Total de : ${formatPrice(subTotalPrice[index])} $`}
-                                    count={slot.count} slot={slot}/>
+                                    count={slot.count} slot={slot}/>;
             }
           )}
           {listState !== null && listState.length === 0 &&
@@ -145,7 +145,7 @@ function CraftResourceListWaiting() {
         className="font-extrabold">Calcul des ressources nécessaire en cours...
       </GradientText>
     </div>
-  )
+  );
 }
 
 function CraftResourceListPriceWaiting() {
@@ -156,5 +156,5 @@ function CraftResourceListPriceWaiting() {
         className="font-extrabold">Calcul du prix de craft en cours...
       </GradientText>
     </div>
-  )
+  );
 }

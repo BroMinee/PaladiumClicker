@@ -43,5 +43,5 @@ export default function WebHooksPage() {
         <LoginButton href={`${API_PALATRACKER}/v1/auth/login/discord`} redirectUrl={"/admin-panel"}/>
       </CardContent>
     </Card>
-  )
+  );
 }

@@ -1,7 +1,7 @@
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 import { formatPrice, safeJoinPaths } from "@/lib/misc";
 
-import CPSJson from "@/assets/CPS.json"
+import CPSJson from "@/assets/CPS.json";
 import { ButtonCPS } from "@/components/Clicker-Optimizer/ClickListClient.tsx";
 import Image from "next/image";
 import HoverText from "@/components/ui/hovertext.tsx";
@@ -28,8 +28,8 @@ const ClickList = () => {
       </div>
       <ScrollBar orientation="horizontal"/>
     </ScrollArea>
-  )
-}
+  );
+};
 
 type CPSProps = {
   index: number;
@@ -61,6 +61,6 @@ const CPS = ({ index, imgPath }: CPSProps) => {
     </HoverText>
 
   );
-}
+};
 
 export default ClickList;

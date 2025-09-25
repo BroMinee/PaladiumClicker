@@ -16,7 +16,7 @@ type UpgradeListProps = {
 
 const UpgradeList = ({ upgradeType }: UpgradeListProps) => {
   function getImgPath(index: number, name: string) {
-    const majUpgradeName = upgradeType[0].toUpperCase() + upgradeType.slice(1)
+    const majUpgradeName = upgradeType[0].toUpperCase() + upgradeType.slice(1);
     const nameShort = majUpgradeName.split("_")[0];
     const upgradeWithOnlyOne = ["Many", "Posterior"];
 
@@ -50,7 +50,7 @@ const UpgradeList = ({ upgradeType }: UpgradeListProps) => {
     //   <ScrollBar orientation="horizontal"/>
     // </ScrollArea>
   );
-}
+};
 
 interface UpgradeProps {
   upgradeType: UpgradeKey;

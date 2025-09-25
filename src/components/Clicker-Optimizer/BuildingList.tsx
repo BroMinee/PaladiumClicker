@@ -3,7 +3,7 @@ import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 import { safeJoinPaths } from "@/lib/misc";
 
 
-import BuildingJson from "@/assets/building.json"
+import BuildingJson from "@/assets/building.json";
 import { BuildingInput, BuildingPrice, BuildingRPS } from "@/components/Clicker-Optimizer/BuildingListClient.tsx";
 import Image from "next/image";
 import React from "react";
@@ -32,7 +32,7 @@ const BuildingList = () => {
       <ScrollBar orientation="vertical"/>
     </ScrollArea>
   );
-}
+};
 
 type BuildingProps = {
   imgPath: string;
@@ -62,6 +62,6 @@ const Building = ({ imgPath, index }: BuildingProps) => {
       </div>
     </Card>
   );
-}
+};
 
 export default BuildingList;

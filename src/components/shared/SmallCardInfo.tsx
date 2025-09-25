@@ -36,5 +36,5 @@ const SmallCardInfo = ({ className, title, value, img, unoptimized, count, child
         </div>
       </div>
     </CardContent>);
-}
+};
 export default SmallCardInfo;

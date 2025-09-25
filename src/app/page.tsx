@@ -10,7 +10,7 @@ export function generateMetadata() {
       title: title,
       description: description,
     },
-  }
+  };
 }
 
 export default function Home() {

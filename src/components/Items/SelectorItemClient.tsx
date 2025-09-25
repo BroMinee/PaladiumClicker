@@ -23,10 +23,10 @@ export function SelectorItemClient({
     } else {
       router.push(`${url}` + value, { scroll: false });
     }
-  }
+  };
 
   return (
     <Selector options={options} setInputValue={setInputValue}
               defaultValue={defaultValue}/>
-  )
+  );
 }

@@ -30,7 +30,7 @@ export const PopupCurrentEvent = ({ event, alreadyRegistered, children }: {
 
   function handleConfirm() {
     if (!playerInfo) {
-      console.error('Player info not found')
+      console.error('Player info not found');
       return;
     }
     if (alreadyRegistered) {
@@ -90,7 +90,7 @@ export const PopupCurrentEvent = ({ event, alreadyRegistered, children }: {
               {
                 event.rewards.map((reward, index) => {
                   return <SmallCardInfo key={"reward-" + index} title={reward.description} img={'/img/MarketUI/pb_icon.png'}
-                                        value={reward.count + " gagnants différents"}/>
+                                        value={reward.count + " gagnants différents"}/>;
                 })
               }
             </CardContent>
@@ -149,5 +149,5 @@ export const PopupCurrentEvent = ({ event, alreadyRegistered, children }: {
                 disabled={alreadyRegistered}>{alreadyRegistered ? `${playerInfo.username} tu es déjà inscrit` : `Participer en tant que ${playerInfo.username}`}</Button>
       </div>
     </DialogContent>
-  </Dialog>
-}
+  </Dialog>;
+};

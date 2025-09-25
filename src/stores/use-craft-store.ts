@@ -13,7 +13,7 @@ type Actions = {
 
 const initialState: State = {
   craftingList: [],
-}
+};
 
 export const useCraftStore = create<State & Actions>(
   (set) => ({

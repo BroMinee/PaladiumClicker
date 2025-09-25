@@ -35,21 +35,21 @@ export function ProfilSelectorDisplay({ params, searchParams }: {
   const sectionAsEnum = searchParams.section as ProfilSectionEnum;
   switch (sectionAsEnum) {
     case ProfilSectionEnum.Home:
-      return <HomeProfilSection/>
+      return <HomeProfilSection/>;
     case ProfilSectionEnum.Achievements:
       return <Suspense fallback={<AchievementsProfilSectionFallBack/>}>
         <AchievementsProfilSection/>
-      </Suspense>
+      </Suspense>;
     case ProfilSectionEnum.Market:
       return <Suspense fallback={<MarketProfilSectionFallBack/>}>
         <AhInfo/>
-      </Suspense>
+      </Suspense>;
     case ProfilSectionEnum["Pet/Monture"]:
-      return <PetMontureProfilSection/>
+      return <PetMontureProfilSection/>;
     case ProfilSectionEnum.Classement:
-      return <ProfilRankingSection searchParams={searchParams}/>
+      return <ProfilRankingSection searchParams={searchParams}/>;
     default:
-      return <div>C&apos;est quoi la section ${sectionAsEnum} ?</div>
+      return <div>C&apos;est quoi la section ${sectionAsEnum} ?</div>;
   }
 }
 
@@ -59,7 +59,7 @@ function HomeProfilSection() {
     <MetierList editable={false}/>
     <HeadingSection>Informations de faction</HeadingSection>
     <FactionInfo/>
-  </>
+  </>;
 }
 
 function PetMontureProfilSection() {
@@ -83,7 +83,7 @@ function PetMontureProfilSection() {
         </div>
       </CardContent>
     </Card>
-  )
+  );
 }
 
 function PetCanvasFallback() {

@@ -2,7 +2,7 @@
 import React from "react";
 import constants from "@/lib/constants.ts";
 import { safeJoinPaths } from "@/lib/misc.ts";
-import { navigate } from '@/components/actions'
+import { navigate } from '@/components/actions';
 import { useSettingsStore } from "@/stores/use-settings-store.ts";
 import { Switch } from "@/components/ui/switch.tsx";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover.tsx";
@@ -16,7 +16,7 @@ export default function ImportOfflineProfil() {
     if (checked) {
       navigate(safeJoinPaths(constants.optimizerClickerPath, "Profil_vide"));
     }
-  }
+  };
 
   const { settings, setDefaultProfile } = useSettingsStore();
   return (

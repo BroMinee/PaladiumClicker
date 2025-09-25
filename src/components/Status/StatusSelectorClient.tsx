@@ -1,4 +1,4 @@
-'use client'
+'use client';
 
 import { AdminShopPeriode, } from "@/types";
 import { useRouter, useSearchParams } from "next/navigation";
@@ -17,11 +17,11 @@ export function StatusSelectorClientPeriode({ periode }: {
 
 
   const converter = (periode: string) => {
-    if (periode === "day") return "24 heures"
-    if (periode === "week") return "1 semaine"
-    if (periode === "month") return "1 mois"
-    if (periode === "season") return "1 saison"
-  }
+    if (periode === "day") return "24 heures";
+    if (periode === "week") return "1 semaine";
+    if (periode === "month") return "1 mois";
+    if (periode === "season") return "1 saison";
+  };
 
 
   return (
@@ -39,5 +39,5 @@ export function StatusSelectorClientPeriode({ periode }: {
     </Card>
 
 
-  )
+  );
 }

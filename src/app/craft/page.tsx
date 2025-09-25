@@ -16,7 +16,7 @@ export async function generateMetadata(props: { searchParams: Promise<searchPara
 
   const itemListJson = await getAllItems().catch(() => {
     return [] as OptionType[];
-  })
+  });
 
   const item = itemListJson.find((item) => item.value === searchParams.item);
 
@@ -28,7 +28,7 @@ export async function generateMetadata(props: { searchParams: Promise<searchPara
         title: "PalaTracker | Craft Optimizer",
         description: "Calcule les ressources nécessaires pour tes crafts sur Paladium, en fonction de tes besoins, obtient une évoluation du prix avec le market en temps réel."
       },
-    }
+    };
   }
 
 
@@ -48,7 +48,7 @@ export async function generateMetadata(props: { searchParams: Promise<searchPara
         }
       ]
     },
-  }
+  };
 }
 
 
@@ -56,16 +56,16 @@ export default async function Home(props: { searchParams: Promise<searchParamsCr
   const searchParams = await props.searchParams;
 
   if (searchParams.section === undefined) {
-    return redirect(generateCraftUrl(searchParams.item as string, searchParams.count || 1, CraftSectionEnum.recipe))
+    return redirect(generateCraftUrl(searchParams.item as string, searchParams.count || 1, CraftSectionEnum.recipe));
   }
 
   switch (searchParams.section) {
     case CraftSectionEnum.recipe:
-      return <BodyPage><CraftRecipeDisplay searchParams={searchParams}/></BodyPage>
+      return <BodyPage><CraftRecipeDisplay searchParams={searchParams}/></BodyPage>;
     case CraftSectionEnum.optimizer:
-      return <BodyPage><CraftOptimizerDisplay/></BodyPage>
+      return <BodyPage><CraftOptimizerDisplay/></BodyPage>;
     default:
-      return redirect(generateCraftUrl(searchParams.item as string, searchParams.count || 1, CraftSectionEnum.recipe))
+      return redirect(generateCraftUrl(searchParams.item as string, searchParams.count || 1, CraftSectionEnum.recipe));
   }
 }
 

@@ -13,7 +13,7 @@ export async function generateMetadata() {
       title: title,
       description: description,
     },
-  }
+  };
 }
 
 const AboutPage = () => {

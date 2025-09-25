@@ -96,12 +96,12 @@ const Selector = ({ options, defaultValue, setInputValue }: SelectorProps) => {
       if (selectedOptions === null) {
         setInputValue('');
       } else {
-        setInputValue(selectedOptions.value)
+        setInputValue(selectedOptions.value);
       }
     }}
     defaultValue={defaultValue}
-  />
+  />;
 
-}
+};
 
 export default Selector;

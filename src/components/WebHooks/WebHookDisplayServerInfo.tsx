@@ -32,7 +32,7 @@ export function DisplayServerBox({ guildId, channelId, guildIdToServerName, chil
   useEffect(() => {
     setDefaultName(guildIdToServerName[guildId]);
     setGuildName(guildIdToServerName[guildId]);
-  }, [guildId, guildIdToServerName])
+  }, [guildId, guildIdToServerName]);
 
   async function handleEdit() {
     const res = await editWebhookGuildNameServerAction(guildId, channelId, guildName);
@@ -109,7 +109,7 @@ export function DisplayServerBox({ guildId, channelId, guildIdToServerName, chil
       </div>
       {children}
     </div>
-  </div>)
+  </div>);
 }
 
 export function DisplayChannelBox({ channelId, channelIdToChannelName, guildId, children }: {
@@ -127,7 +127,7 @@ export function DisplayChannelBox({ channelId, channelIdToChannelName, guildId, 
   useEffect(() => {
     setDefaultName(channelIdToChannelName[channelId]);
     setChannelName(channelIdToChannelName[channelId]);
-  }, [channelId, channelIdToChannelName])
+  }, [channelId, channelIdToChannelName]);
 
   async function handleEdit() {
     const res = await editWebhookChannelNameServerAction(guildId, channelId, channelName);
@@ -203,5 +203,5 @@ export function DisplayChannelBox({ channelId, channelIdToChannelName, guildId, 
     <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
       {children}
     </div>
-  </div>)
+  </div>);
 }

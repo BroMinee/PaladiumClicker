@@ -106,7 +106,7 @@ const MyTreeView = ({ root, setRoot }: MyTreeViewProps) => {
           checked={checked}
           expanded={expanded}
           onCheck={(checked) => {
-            setChecked(checked)
+            setChecked(checked);
           }}
           onExpand={(expanded) => setExpanded(expanded)}
           icons={{
@@ -130,7 +130,7 @@ export function createNode(root: Tree<NodeType>, depth = 0, childSuffix = ""): M
     return {
       value: root.value.value + "-" + depth + "-" + childSuffix,
       label: displayNode(getValueTree(root)),
-    }
+    };
   }
 
   return {
@@ -180,7 +180,7 @@ function MyTreeWaiting() {
         className="font-extrabold">Calcul des ressources nécessaire en cours...
       </GradientText>
     </div>
-  )
+  );
 }
 
 export default MyTreeView;

@@ -99,5 +99,5 @@ export function ClickerOptimizerDebug({ params }: { params: { username: string }
       </ProfileFetcherWrapper>
       <FallingClickImage/>
     </>
-  )
+  );
 }

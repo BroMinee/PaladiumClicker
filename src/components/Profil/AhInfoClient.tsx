@@ -21,7 +21,7 @@ export function AhInfoTitleClient() {
     </span>
     {" "}{adaptPlurial("vente", totalCount) + " en cours"}
 
-  </>
+  </>;
 }
 
 export function AhInfoGetTotalBenefice() {
@@ -33,7 +33,7 @@ export function AhInfoGetTotalBenefice() {
   const totalCount = playerInfo.ah.data.reduce((acc, e) => e.item.name === "tile-luckydrawer" ? acc : acc + e.price * e.item.quantity, 0);
   return <span className="text-primary">
     {formatPrice(totalCount)}{" $"}
-  </span>
+  </span>;
 }
 
 export function AhItemClient({ allItemsInfo }: { allItemsInfo: OptionType[] }) {
@@ -59,17 +59,17 @@ export function AhItemClient({ allItemsInfo }: { allItemsInfo: OptionType[] }) {
             </span>
             ne vends rien pour l&apos;instant.
           </p></h3>
-      </>)
+      </>);
   }
 
 
   return <>
     {
       playerInfo.ah.data.map((e, index) => {
-        return <AhItem key={index} item={e} allItemsInfo={allItemsInfo} uuid_seller={playerInfo.uuid}/>
+        return <AhItem key={index} item={e} allItemsInfo={allItemsInfo} uuid_seller={playerInfo.uuid}/>;
       })
     }
-  </>
+  </>;
 }
 
 

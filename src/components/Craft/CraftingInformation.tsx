@@ -1,4 +1,4 @@
-'use client'
+'use client';
 import { NodeType, Tree } from "@/types";
 import React, { useEffect, useState } from "react";
 import MyTreeView from "@/components/Craft/MyTreeView.tsx";
@@ -33,9 +33,9 @@ export function CraftingInformationClient({ root }: { root: Tree<NodeType> }) {
       }
       alreadyVisitedValue.add(value.value);
       return [...acc, createTreeNode(value, value.checked ? 0 : value.count, value.checked)];
-    }, [] as Tree<NodeType>[])
+    }, [] as Tree<NodeType>[]);
 
-    const newLeaves = groupedLeaves.map((el) => { return getValueTree<NodeType>(el) }).filter((el) => el.count > 0);
+    const newLeaves = groupedLeaves.map((el) => { return getValueTree<NodeType>(el); }).filter((el) => el.count > 0);
     setLeavesList(newLeaves);
 
 
@@ -45,6 +45,6 @@ export function CraftingInformationClient({ root }: { root: Tree<NodeType> }) {
   return <>
     <MyTreeView root={tree} setRoot={setTree}/>
     <CraftResourceList list={leavesList}/>
-  </>
+  </>;
 
 }

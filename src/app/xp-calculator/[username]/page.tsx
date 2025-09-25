@@ -56,7 +56,7 @@ export async function generateMetadata(
         }
       ]
     },
-  }
+  };
 }
 
 export default async function Home(
@@ -67,9 +67,9 @@ export default async function Home(
 ) {
   const searchParams = await props.searchParams;
   const params = await props.params;
-  const metierAvailable: MetierKey[] = ["miner", "farmer", "hunter", "alchemist"]
+  const metierAvailable: MetierKey[] = ["miner", "farmer", "hunter", "alchemist"];
   if (searchParams.metier === undefined || !metierAvailable.includes(searchParams.metier as MetierKey)) {
-    return <SetLevelInUrl selected="miner" searchParams={searchParams} params={params} />
+    return <SetLevelInUrl selected="miner" searchParams={searchParams} params={params} />;
   }
   searchParams.metier = searchParams.metier?.toLowerCase();
   searchParams.dailyBonus = searchParams.dailyBonus !== undefined ? Number(searchParams.dailyBonus) : undefined;
@@ -98,7 +98,7 @@ export default async function Home(
                 return (
                   <MetierSelectorClient key={index} metier={e} username={params.username}
                     selected={searchParams.metier === e} searchParams={searchParams} />
-                )
+                );
               })
               }
             </div>
@@ -127,5 +127,5 @@ export default async function Home(
         <HowToXp searchParams={searchParams} />
       </div>
     </ProfileFetcherWrapper>
-  )
+  );
 }

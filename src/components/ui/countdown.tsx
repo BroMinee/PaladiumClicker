@@ -24,7 +24,7 @@ export const renderer = ({ days, hours, minutes, seconds, completed }: renderTyp
   } else {
     // Render a countdown
     return <span
-      className="text-secondary-foreground">{print2digits(hours + days * 24)}:{print2digits(minutes)}:{print2digits(seconds)}</span>
+      className="text-secondary-foreground">{print2digits(hours + days * 24)}:{print2digits(minutes)}:{print2digits(seconds)}</span>;
   }
 };
 

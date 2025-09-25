@@ -52,7 +52,7 @@ export function CraftOptimizerDisplay() {
     });
     socket.addEventListener("close", (e) => {
       setIsConnected(false);
-      console.log(`WebSocket fermé à ${new Date().toLocaleTimeString()}`, e)
+      console.log(`WebSocket fermé à ${new Date().toLocaleTimeString()}`, e);
     });
     socket.addEventListener("error", (error) => console.error("WebSocket error:", error));
 
@@ -222,7 +222,7 @@ function computeSortValue(item: CraftPrice): CraftPriceWithComputed {
       margin: -Infinity,
       totalSold: -Infinity,
       score: -Infinity,
-    }
+    };
   }
 
   const profit = currentPrice - priceToCraft;

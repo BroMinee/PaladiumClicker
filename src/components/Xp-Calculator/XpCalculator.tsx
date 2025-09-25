@@ -114,7 +114,7 @@ export function XpBonus({ params, searchParams }: {
         </CardContent>
 
       </Card>
-    </div>)
+    </div>);
 }
 
 export function HowToXp({ searchParams }: {
@@ -157,11 +157,11 @@ export function HowToXp({ searchParams }: {
                 return true;
               return (e.level && searchParams && searchParams.level && searchParams.level > e.level);
             }).map((e, index) => {
-              return <DisplayItem key={e.imgPath + index} item={e} searchParams={searchParams} index={index}></DisplayItem>
+              return <DisplayItem key={e.imgPath + index} item={e} searchParams={searchParams} index={index}></DisplayItem>;
             })
           }
         </div>
       </CardContent>
     </Card>
-  )
+  );
 }

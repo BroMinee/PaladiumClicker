@@ -17,8 +17,8 @@ export async function generateMetadata() {
   const apiDownPaladium = await isApiDown();
   const apiDownPalaTracker = await isMyApiDown().catch(() => true);
   const apiImportProfil = await getPlayerInfo("BroMine__").then(() => {
-    return false
-  }).catch(() => { return true });
+    return false;
+  }).catch(() => { return true; });
   let description = `${await getPlayerOnlineCount()} joueurs connectés sur Paladium.\n\n`;
 
   if (apiDownPaladium)
@@ -45,7 +45,7 @@ export async function generateMetadata() {
         title: title,
         description: description,
       },
-    }
+    };
   } catch (error) {
     return {
       title: title,
@@ -54,7 +54,7 @@ export async function generateMetadata() {
         title: title,
         description: "Une erreur est survenue lors de la génération des métadonnées.",
       },
-    }
+    };
   }
 
 }
@@ -120,5 +120,5 @@ export default async function Home(
         </CardContent>
       </Card>
     </div>
-  )
+  );
 }

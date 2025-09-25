@@ -27,12 +27,12 @@ export default async function GraphStatus({ periode: periode }: GraphStatusProps
 
   return (
     <PlotStatusChart data={data} periode={periode}/>
-  )
+  );
 }
 
 export function GraphStatusFallback() {
   return <div className="flex flex-row gap-2 m-4 w-96 items-center">
     <LoadingSpinner size={4}/>
     <h2 className="font-bold">Chargement du graphique...</h2>
-  </div>
+  </div>;
 }

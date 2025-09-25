@@ -35,12 +35,12 @@ export default async function GraphRanking({ rankingType, searchParams }: {
   data = addMissingDate(data);
   return (
     <ZoomableChart data={data} rankingType={rankingType} profil={false}/>
-  )
+  );
 }
 
 export function GraphRankingFallback() {
   return <div className="flex flex-row gap-2 m-4 w-96 items-center">
     <LoadingSpinner size={4}/>
     <h2 className="font-bold">Chargement du graphique...</h2>
-  </div>
+  </div>;
 }

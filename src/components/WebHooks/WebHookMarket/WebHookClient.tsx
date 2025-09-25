@@ -17,7 +17,7 @@ function WebHookMarketClient({ options }: {
                           setInputValueFunction={setItemSelected}
                           defaultValue={itemSelected}/>
     </div>
-  </div>
+  </div>;
 }
 
 function MarketSelectorClient() {
@@ -37,7 +37,7 @@ function MarketSelectorClient() {
 
   return (
     <WebHookMarketClient options={options}/>
-  )
+  );
 }
 
 export function MarketInput() {
@@ -49,5 +49,5 @@ export function MarketInput() {
       <MarketSelectorClient/>
       <ThresholdSelector/>
     </>
-  )
+  );
 }

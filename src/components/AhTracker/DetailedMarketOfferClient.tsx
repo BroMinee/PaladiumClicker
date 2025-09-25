@@ -8,7 +8,7 @@ export function SellNameMarket({ uuid }: { uuid: string }) {
   useEffect(() => {
     getPlayerUsernameFromUUID(uuid).then((username) => setUsername(username)).catch(() =>
     {
-      setUsername("Username not found")
+      setUsername("Username not found");
     });
   }, [uuid]);
 
@@ -23,12 +23,12 @@ export function SellNameMarket({ uuid }: { uuid: string }) {
         </p>
       }
     </a>
-  )
+  );
 }
 
 function UserNameFallBack() {
   return <div className="flex flex-row gap-2 items-center">
     <LoadingSpinner size={8}/>
     <p className="font-bold text-[25px]">Chargement du pseudo...</p>
-  </div>
+  </div>;
 }

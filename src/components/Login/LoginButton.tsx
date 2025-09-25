@@ -15,7 +15,7 @@ export function LoginButton({href, redirectUrl }: {href: string, redirectUrl: st
           toast.error(e);
           console.error(e);
         }
-      )
+      );
   }
 
   return <Button variant="ghost" className="flex flex-row items-center gap-2 text-bold text-xl"
@@ -23,7 +23,7 @@ export function LoginButton({href, redirectUrl }: {href: string, redirectUrl: st
   >
     Se connecter via
     <FaDiscord size={32} className="p-1 rounded-md bg-discord text-primary-foreground"/>
-  </Button>
+  </Button>;
 }
 
 export function SmallLoginButton({href, redirectUrl }: {href: string, redirectUrl: string }) {
@@ -35,11 +35,11 @@ export function SmallLoginButton({href, redirectUrl }: {href: string, redirectUr
           toast.error(e);
           console.error(e);
         }
-      )
+      );
   }
 
   return <Button size="icon" variant="ghost" onClick={handleLogin}>
     <TbLogin2 size={28}/>
-  </Button>
+  </Button>;
 }
 

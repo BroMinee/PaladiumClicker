@@ -1,4 +1,4 @@
-'use client'
+'use client';
 import {
   checkCondition,
   computePrice,
@@ -50,7 +50,7 @@ const RPS = () => {
   }, [playerInfo, rps]);
 
   if (!playerInfo) {
-    return <div>Loading...</div>
+    return <div>Loading...</div>;
   }
 
   return (
@@ -221,7 +221,7 @@ const RPS = () => {
 
     </div>
   );
-}
+};
 
 
 export function computeBestBuildingUpgrade(playerInfo: PlayerInfo): bestBuildingInfo {
@@ -268,7 +268,7 @@ export function findBestUpgrade(playerInfo: PlayerInfo, date: Date): bestUpgrade
     bestCoef: 0,
     bestUpgradeIndex: -1,
     bestListName: "building_upgrade"
-  }
+  };
 
   const buildingUpgradeUnlockable = playerInfo["building_upgrade"].filter((building) => !building["own"] && checkCondition(playerInfo, building["condition"], date).unlockable);
   const categoryUpgradeUnlockable = playerInfo["category_upgrade"].filter((building) => !building["own"] && checkCondition(playerInfo, building["condition"], date).unlockable);
@@ -291,8 +291,8 @@ export function findBestUpgrade(playerInfo: PlayerInfo, date: Date): bestUpgrade
 
   function getBestIndex(list: typeListTmp, nameList: buildingPathType) {
     for (let index = 0; index < list.length; index++) {
-      const copy = structuredClone(playerInfo)
-      const name = list[index]["name"]
+      const copy = structuredClone(playerInfo);
+      const name = list[index]["name"];
 
       if (!Object.keys(playerInfo).includes(nameList)) {
         return;

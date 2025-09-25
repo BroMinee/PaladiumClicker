@@ -1,4 +1,4 @@
-'use client'
+'use client';
 import { usePlayerInfoStore } from "@/stores/use-player-info-store.ts";
 import SmallCardInfo from "@/components/shared/SmallCardInfo.tsx";
 import { computeTimePlayed, convertEpochToDateUTC2, formatPrice, getRankImg, safeJoinPaths } from "@/lib/misc.ts";
@@ -22,7 +22,7 @@ export function ProfilUsernameInfo() {
 
   return <>
     {playerInfo?.username}
-  </>
+  </>;
 }
 
 export function ProfilDescriptionAndBanner() {
@@ -44,7 +44,7 @@ export function ProfilDescriptionAndBanner() {
         className="w-full h-full"
         alt="banner">
       </Image>}
-  </>
+  </>;
 }
 
 export function ProfilAlliance() {
@@ -60,7 +60,7 @@ export function ProfilAlliance() {
   const logo = safeJoinPaths(constants.imgPathProfile, `/logo_${playerInfo.alliance.toLowerCase()}.png`);
 
   return <Image src={logo} alt="Chaos" width={32} height={32}
-                unoptimized={true}/>
+                unoptimized={true}/>;
 
 }
 
@@ -68,7 +68,7 @@ export function PlayerViewCount() {
   const { data: playerInfo } = usePlayerInfoStore();
   return <>
     {playerInfo?.view_count?.count || -1} vues
-  </>
+  </>;
 }
 
 export function PlayerMoney() {
@@ -76,7 +76,7 @@ export function PlayerMoney() {
   return <>
     <SmallCardInfo title="Argent actuel" value={`${formatPrice(Math.round(playerInfo?.money || 0))} $`}
                    img={safeJoinPaths(constants.imgPathProfile,"dollar.png")} unoptimized/>
-  </>
+  </>;
 }
 
 export function PlayerSkin() {
@@ -99,7 +99,7 @@ export function PlayerSkin() {
                               }), zoom: 0.75
                             }}
     />
-  </ErrorBoundary>
+  </ErrorBoundary>;
 }
 
 export function PlayerRank() {
@@ -112,23 +112,23 @@ export function PlayerRank() {
   if(playerInfo?.uuid === "b6e136eb-75cb-48bd-9ff5-dd9bfb64b869")
     return <SmallCardInfo title="Rang en jeu" value="Blackhole" img={safeJoinPaths(constants.imgPathProfile,"blackhole.png")}
                           imgClassName="w-fit"
-                          unoptimized/>
+                          unoptimized/>;
 
   return <SmallCardInfo title="Rang en jeu" value={rank} img={getRankImg(rank)}
                         imgClassName="w-fit"
-                        unoptimized/>
+                        unoptimized/>;
 }
 
 export function PlayerTimePlayed() {
   const { data: playerInfo } = usePlayerInfoStore();
   return <SmallCardInfo title="Temps de jeu" value={computeTimePlayed(playerInfo?.timePlayed || 0)}
-                        img={safeJoinPaths(constants.imgPathProfile,"clock.gif")} unoptimized/>
+                        img={safeJoinPaths(constants.imgPathProfile,"clock.gif")} unoptimized/>;
 }
 
 export function PlayerFirstConnection() {
   const { data: playerInfo } = usePlayerInfoStore();
   return <SmallCardInfo title="Première connexion" value={convertEpochToDateUTC2(playerInfo?.firstSeen || 1)}
-                        img={safeJoinPaths(constants.imgPathProfile,"clock.gif")} unoptimized/>
+                        img={safeJoinPaths(constants.imgPathProfile,"clock.gif")} unoptimized/>;
 }
 
 export function PlayerFriendsCount() {
@@ -139,13 +139,13 @@ export function PlayerFriendsCount() {
 
   return <>
     Liste d&apos;amis: {friendCount}
-  </>
+  </>;
 }
 
 export function PlayerFriends() {
   const { data: playerInfo } = usePlayerInfoStore();
   if (!playerInfo)
-    return null
+    return null;
 
   return (
     <>
@@ -169,7 +169,7 @@ export function PlayerFriends() {
         ))
       }
     </>
-  )
+  );
 }
 
 function SkinFallback() {

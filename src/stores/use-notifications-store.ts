@@ -29,4 +29,4 @@ export const useNotificationStore = create<State & Actions, [["zustand/persist",
     name: storageKey,
     storage: createJSONStorage(() => localStorage)
   },
-))
+));

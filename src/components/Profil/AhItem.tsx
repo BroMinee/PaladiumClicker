@@ -22,7 +22,7 @@ export default function AhItem({ item, allItemsInfo, uuid_seller }: AhItemsProps
   if (!closestItem && air)
     return <div className="w-[95%] hover:scale-105 duration-300 cursor-pointer">
       <DetailedMarketOffer itemSelected={air} offer={itemOffer}/>
-    </div>
+    </div>;
   if (!closestItem)
     return "Unknown item";
 
@@ -31,5 +31,5 @@ export default function AhItem({ item, allItemsInfo, uuid_seller }: AhItemsProps
     <Link href={`${generateAhShopUrl(closestItem)}`} className="w-[95%] hover:scale-105 duration-300 cursor-pointer">
       <DetailedMarketOffer itemSelected={closestItem} offer={itemOffer}/>
     </Link>
-  )
+  );
 }

@@ -29,7 +29,7 @@ export function MetierOutline({ metierKey, metierToReach = false }: { metierKey:
     style={{
       strokeDashoffset: 2160 * (1 - (coefXp)),
       stroke: `rgb(${colors.color[0]},${colors.color[1]},${colors.color[2]})`,
-    }} />
+    }} />;
 }
 
 export function MetierDisplayLvl({ metierKey, lvlToReach, searchParams }:
@@ -47,7 +47,7 @@ export function MetierDisplayLvl({ metierKey, lvlToReach, searchParams }:
 
   useEffect(() => {
     setInputValue(lvlToReach ? lvlToReach : playerInfo?.metier[metierKey].level);
-  }, [lvlToReach, playerInfo, metierKey])
+  }, [lvlToReach, playerInfo, metierKey]);
 
   const debouncedRedirect = useMemo(
     () => {
@@ -82,7 +82,7 @@ export function MetierDisplayLvl({ metierKey, lvlToReach, searchParams }:
             { scroll: false }
           );
         }
-      }, 1000)
+      }, 1000);
   },
     [metierKey, lvlToReach, playerInfo, searchParams, router, decreaseMetierLevel, increaseMetierLevel]
   );
@@ -125,18 +125,18 @@ export function MetierDecrease({ minLevel, metierKey, searchParams, username }: 
 
   const router = useRouter();
   if ((searchParams?.level !== undefined && username === undefined) || (username !== undefined && searchParams?.level === undefined))
-    router.push(`/error?message=MetierDecrease: searchParams.level and username must be both defined or both undefined but not only one of them.`)
+    router.push(`/error?message=MetierDecrease: searchParams.level and username must be both defined or both undefined but not only one of them.`);
   if (searchParams?.level !== undefined && username !== undefined)
     return <Button variant="outline" size="icon"
       onClick={() => router.push(generateXpCalculatorUrl(username || "undefined", metierKey, Math.max((searchParams?.level || 1) - 1, (playerInfo?.metier[metierKey].level || 1) + 1), searchParams?.double, searchParams?.dailyBonus, searchParams?.f2, searchParams?.f3), { scroll: false })
       }>
       <FaArrowDown className="h-4 w-4" />
-    </Button>
+    </Button>;
 
   return <Button variant="outline" size="icon"
     onClick={() => decreaseMetierLevel(metierKey, 1, minLevel)}>
     <FaArrowDown className="h-4 w-4" />
-  </Button>
+  </Button>;
 }
 
 export function MetierIncrease({ metierKey, searchParams, username }: {
@@ -149,14 +149,14 @@ export function MetierIncrease({ metierKey, searchParams, username }: {
 
   const router = useRouter();
   if ((searchParams?.level !== undefined && username === undefined) || (username !== undefined && searchParams?.level === undefined))
-    router.push(`/error?message=MetierIncrease: searchParams.level and username must be both defined or both undefined but not only one of them.`)
+    router.push(`/error?message=MetierIncrease: searchParams.level and username must be both defined or both undefined but not only one of them.`);
   if (searchParams?.level !== undefined && username !== undefined)
     return <Button variant="outline" size="icon"
       onClick={() => router.push(generateXpCalculatorUrl(username || "undefined", metierKey, (searchParams?.level ?? 0) + 1, searchParams?.double, searchParams?.dailyBonus, searchParams?.f2, searchParams?.f3), { scroll: false })}>
       <FaArrowUp className="h-4 w-4" />
-    </Button>
+    </Button>;
 
   return <Button variant="outline" size="icon" onClick={() => increaseMetierLevel(metierKey, 1)}>
     <FaArrowUp className="h-4 w-4" />
-  </Button>
+  </Button>;
 }

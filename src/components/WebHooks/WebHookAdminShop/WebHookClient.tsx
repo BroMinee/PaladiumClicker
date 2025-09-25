@@ -33,9 +33,9 @@ export function ThreshConditionSelector() {
     }
   }
 
-  const validCondition: WebHookThresholdCondition[] = ['underThreshold', 'aboveThreshold', 'decreaseAboveThreshold', 'increasingAboveThreshold', 'decreasing', 'increasing']
+  const validCondition: WebHookThresholdCondition[] = ['underThreshold', 'aboveThreshold', 'decreaseAboveThreshold', 'increasingAboveThreshold', 'decreasing', 'increasing'];
   if (currentWebHookType === WebHookType.market) // Le Market a une condition supplémentaire par rapport à l'admin shop
-    validCondition.push('aboveQuantity')
+    validCondition.push('aboveQuantity');
 
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
@@ -51,7 +51,7 @@ export function ThreshConditionSelector() {
         </Button>))
       }
     </div>
-  )
+  );
 }
 
 export function AdminShopInput() {
@@ -63,12 +63,12 @@ export function AdminShopInput() {
       <div className="grid grid-cols-6 sm:grid-cols-16 lg:grid-cols-8 items-center justify-between gap-2 pb-2 mt-0">
         {adminShopItemsAvailable.map((value: AdminShopItem, index: number) => {
           return <AdminShopSelectorClientItem key={value + index} item={value} periode={'day'}
-                                              adminShopPage={false}/>
+                                              adminShopPage={false}/>;
         })}
       </div>
       <ThresholdSelector/>
     </>
-  )
+  );
 }
 
 function EventSelector() {
@@ -94,7 +94,7 @@ function EventSelector() {
     }
   }
 
-  const validEvents: EventType[] = ['BOSS', 'A VOS MARQUES', 'TOTEM', 'EGGHUNT', 'KOTH', 'BLACKMARKET']
+  const validEvents: EventType[] = ['BOSS', 'A VOS MARQUES', 'TOTEM', 'EGGHUNT', 'KOTH', 'BLACKMARKET'];
 
   return (
     <div className="flex flex-row justify-between">
@@ -110,7 +110,7 @@ function EventSelector() {
         </Button>))
       }
     </div>
-  )
+  );
 }
 
 export function EventInput() {
@@ -121,7 +121,7 @@ export function EventInput() {
       </span>
       <EventSelector/>
     </>
-  )
+  );
 }
 
 
@@ -143,7 +143,7 @@ export function VoteInput() {
         placeholder={username !== "" ? username : "Entre ton pseudo"}
       />
     </div>
-  )
+  );
 }
 
 

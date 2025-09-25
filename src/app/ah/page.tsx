@@ -16,7 +16,7 @@ export async function generateMetadata(props: { searchParams: Promise<{ item: st
 
   const itemListJson = await getAllItems().catch(() => {
     return [] as OptionType[];
-  })
+  });
 
   const item = itemListJson.find((item) => item.value === searchParams.item);
 
@@ -28,7 +28,7 @@ export async function generateMetadata(props: { searchParams: Promise<{ item: st
         title: "PalaTracker | AH Tracker",
         description: "Suivez les historiques de vente de vos items préférés sur Paladium"
       },
-    }
+    };
   }
 
 
@@ -48,7 +48,7 @@ export async function generateMetadata(props: { searchParams: Promise<{ item: st
         }
       ]
     },
-  }
+  };
 }
 
 export default async function AhTrackerPage(props: { searchParams: Promise<{ item: string | undefined }> }) {
@@ -68,7 +68,7 @@ export default async function AhTrackerPage(props: { searchParams: Promise<{ ite
           </CardTitle>
         </CardHeader>
       </Card>
-    </div>
+    </div>;
   }
 
   return (
@@ -119,7 +119,7 @@ export default async function AhTrackerPage(props: { searchParams: Promise<{ ite
             </CardHeader>
           </Card>}
       </div>
-    </div>)
+    </div>);
 }
 
 function GraphItemFallback({ item }: { item: OptionType }) {
@@ -133,5 +133,5 @@ function GraphItemFallback({ item }: { item: OptionType }) {
         </GradientText>
       </CardTitle>
     </CardHeader>
-  </Card>)
+  </Card>);
 }

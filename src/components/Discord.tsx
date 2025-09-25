@@ -34,6 +34,6 @@ const Discord = ({ className = "" }: DiscordProps) => {
       </a>
     </Card>
   );
-}
+};
 
 export default Discord;

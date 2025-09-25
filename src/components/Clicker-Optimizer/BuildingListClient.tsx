@@ -6,11 +6,11 @@ import React, { ChangeEvent } from "react";
 export function BuildingRPS({ index }: { index: number }) {
   const { data: playerInfo } = usePlayerInfoStore();
   if (!playerInfo)
-    return <>0</>
+    return <>0</>;
 
   return <>
     {formatPrice(Math.floor(scaleCurrentProduction(playerInfo, index, Number(playerInfo.building[index].own)) * 10) / 10)}
-  </>
+  </>;
 }
 
 export function BuildingPrice({ index }: { index: number }) {
@@ -21,15 +21,15 @@ export function BuildingPrice({ index }: { index: number }) {
   return <div
     id={`building-price-${index}`}
     className="text-primary font-bold text-center text-nowrap mx-2">{price} $
-  </div>
+  </div>;
 }
 
 export function BuildingLvl({ index }: { index: number }) {
   const { data: playerInfo } = usePlayerInfoStore();
   if (!playerInfo)
-    return <>0</>
+    return <>0</>;
 
-  return <>Level: {playerInfo.building[index].own}</>
+  return <>Level: {playerInfo.building[index].own}</>;
 }
 
 export function BuildingInput({ index }: { index: number }) {
@@ -56,7 +56,7 @@ export function BuildingInput({ index }: { index: number }) {
       step="1"
       max="99"
       defaultValue={0}
-    />
+    />;
 
   return <input
     id={`building-input-${index}`}
@@ -67,5 +67,5 @@ export function BuildingInput({ index }: { index: number }) {
     className="text-card-foreground text-center rounded-sm font-mc font-bold text-sm flex items-center justify-center h-9 w-fit px-2 dark:bg-[#2b2a33] bg-gray-300 [&::-webkit-inner-spin-button]:opacity-100 [&::-webkit-outer-spin-button]:opacity-100"
     onChange={onChangeLevel}
     placeholder={String(count)}
-    value={count}/>
+    value={count}/>;
 }

@@ -1,4 +1,4 @@
-'use client'
+'use client';
 import Link from "next/link";
 import { getLinkFromUrl, safeJoinPaths } from "@/lib/misc.ts";
 import { cn } from "@/lib/utils.ts";
@@ -35,7 +35,7 @@ export default function LinkClient({ path, children }: {
   const label = constants.links[path].label;
   const requiredPseudo = constants.links[path].requiredPseudo;
 
-  const [mounted, setMounted] = useState(false)
+  const [mounted, setMounted] = useState(false);
   const [isActive, setIsActive] = useState(false);
   const pathname = usePathname();
 
@@ -54,7 +54,7 @@ export default function LinkClient({ path, children }: {
   }
 
   useEffect(() => {
-    setMounted(true)
+    setMounted(true);
     let link: PathValid | undefined;
     if (typeof window !== 'undefined') {
       link = getLinkFromUrl(window.location.pathname);
@@ -79,7 +79,7 @@ export default function LinkClient({ path, children }: {
       href={path}>
       {children}
       <p className="text-base leading-4 text-left">{label}</p>
-    </Link>
+    </Link>;
 
   const href = requiredPseudo && playerInfo?.username ? safeJoinPaths("/", path, playerInfo.username) : path;
   const hoverElement: ReactNode = (
@@ -104,7 +104,7 @@ export default function LinkClient({ path, children }: {
               style={{ top: "-18px", right: "-10px" }}>1</span>
           </div>}
       </Link>
-    </HoverText>
+    </HoverText>;
   }
 
   return (
@@ -142,7 +142,7 @@ export function CategorieDisplay({ name, children }: {
 
   useEffect(() => {
     setMounted(true);
-  }, [])
+  }, []);
 
   useEffect(() => {
     if (!mounted)
@@ -151,7 +151,7 @@ export function CategorieDisplay({ name, children }: {
   }, [name, mounted, opened]);
 
   function toggleOpen() {
-    setOpen(!open)
+    setOpen(!open);
     setToggleOpen(name);
   }
 
@@ -172,7 +172,7 @@ export function CategorieDisplay({ name, children }: {
           }
         }).catch((e) => {
           console.error(e);
-        })
+        });
       }
     }
   }, [mounted, playerInfo, last_visited, name, subLinks]);
@@ -220,7 +220,7 @@ export function CategorieDisplay({ name, children }: {
     >
       {children}
     </div>
-  </div>)
+  </div>);
 }
 
 function hasNewNotification(last_visited: { [T in PathValid]: number }, path: PathValid): [boolean, string] {
@@ -261,7 +261,7 @@ export function GiveawayFakeLink({ children }: {
         getCurrentEventNotRegistered(playerInfo.uuid).then((event) => {
           if (event) {
             setNewNotification(true);
-            setNewNotificationText(event.event_name)
+            setNewNotificationText(event.event_name);
             setEvent(event);
           } else if (event_0 === null) {
             // No event opened to register
@@ -274,22 +274,22 @@ export function GiveawayFakeLink({ children }: {
                 setNewNotification(true);
                 setNewNotificationText(description);
               }
-            })
+            });
           }
-        })
-      })
+        });
+      });
     } catch (e) {
       console.error(e);
     }
     setMounted(true);
-  }, [playerInfo])
+  }, [playerInfo]);
 
   if (!mounted)
     return (
       <RenderEvent newNotification={false}>
         {children}
       </RenderEvent>
-    )
+    );
 
   const hoverElement: ReactNode = (
     <div className="bg-primary rounded-md p-2 font-bold">{newNotificationText}</div>
@@ -298,20 +298,20 @@ export function GiveawayFakeLink({ children }: {
   if (event) {
     // there is an event and the player is not registered
     if (newNotificationText === "") {
-      return <PopupCurrentEvent event={event} alreadyRegistered={!newNotification}>{children}</PopupCurrentEvent>
+      return <PopupCurrentEvent event={event} alreadyRegistered={!newNotification}>{children}</PopupCurrentEvent>;
     }
     return <HoverText text={hoverElement}>
       <PopupCurrentEvent event={event} alreadyRegistered={!newNotification}>{children}</PopupCurrentEvent>
-    </HoverText>
+    </HoverText>;
   } else {
     if (newNotificationText !== "Not winner" && newNotificationText !== "") {
       // You have won a prize
       return <HoverText text={hoverElement}>
         <PopupRewardEvent winningPrice={newNotificationText}>{children}</PopupRewardEvent>
-      </HoverText>
+      </HoverText>;
     } else {
       // You have NOT won a prize
-      return <PopupNoRewardEvent>{children}</PopupNoRewardEvent>
+      return <PopupNoRewardEvent>{children}</PopupNoRewardEvent>;
     }
   }
 }
@@ -329,7 +329,7 @@ export function RenderEvent({ newNotification, children }: { newNotification: bo
           className="absolute right-0 w-6 h-6 text-white bg-red-500  rounded-md text-center"
           style={{ top: "-18px", right: "-10px" }}>1</span>
       </div>}
-  </div>
+  </div>;
 }
 
 export function NotificationWebSite() {
@@ -342,7 +342,7 @@ export function NotificationWebSite() {
     getNotificationWebSite().then((msg_) => {
       if (msg_)
         setNotif(msg_);
-    })
+    });
   }, []);
 
   function onClick() {

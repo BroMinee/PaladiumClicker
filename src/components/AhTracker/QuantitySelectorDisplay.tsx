@@ -16,5 +16,5 @@ export default async function QuantitySelectorDisplay({ itemInfo }: { itemInfo: 
           className="font-bold text-[20px] text-primary">{`${itemInfo ? formatPrice(Math.round((itemInfo.priceSum / (itemInfo.countListings === 0 ? 1 : itemInfo.countListings)) * 100) / 100) : 0} $`}</span>
       </p>
     </div>
-  )
+  );
 }

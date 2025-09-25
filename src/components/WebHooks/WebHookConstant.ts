@@ -7,7 +7,7 @@ export const defaultWebHookContentFromType: Record<WebHookType, string> = {
   [WebHookType.EventPvp]: "{here} {event} commence {startRelative}.",
   [WebHookType.statusServer]: "{here} Changement dans le statut des serveurs.",
   [WebHookType.vote]: "{here} {username}, c'est l'heure de voter pour Paladium !",
-}
+};
 
 export const defaultWebHookEmbedFromType: Record<WebHookType, string> = {
   [WebHookType.QDF]: "La QDF de la semaine est {item} ({itemFr} ou {itemUs}) en {quantity} examplaires pour un total de {earningXp} xp de fac et {earningMoney} $.\nElle commence le {start} et termine le {end}.",
@@ -16,7 +16,7 @@ export const defaultWebHookEmbedFromType: Record<WebHookType, string> = {
   [WebHookType.EventPvp]: "Prépare toi à farm !\n- {goal} {quantity} {item} sur {server} pour {rewardElo} elo.\nL'event commence le {start} et se termine le {end}.",
   [WebHookType.statusServer]: "",
   [WebHookType.vote]: "",
-}
+};
 
 export const defaultWebHookFieldsFromType: Record<WebHookType, { value: string, name: string, inline?: boolean }[]> =
   {
@@ -96,7 +96,7 @@ export const defaultWebHookFieldsFromType: Record<WebHookType, { value: string, 
         value: "**Clique pour voter**",
       }
     ],
-  }
+  };
 
 export const defaultWebHookTitleFromType: Record<WebHookType, string> = {
   [WebHookType.QDF]: "Une nouvelle QDF est disponible, clique pour voir le craft !",
@@ -105,7 +105,7 @@ export const defaultWebHookTitleFromType: Record<WebHookType, string> = {
   [WebHookType.EventPvp]: `Event : {event} commence {startRelative} !`,
   [WebHookType.statusServer]: "Voir l'état des serveurs Paladium.",
   [WebHookType.vote]: "Voici la liste des sites de vote :",
-}
+};
 
 export const defaultWebhookTitleUrlFromType: Record<WebHookType, string> = {
   [WebHookType.QDF]: `https://palatracker.bromine.fr/craft?item={item}&count={quantity}`,
@@ -114,7 +114,7 @@ export const defaultWebhookTitleUrlFromType: Record<WebHookType, string> = {
   [WebHookType.EventPvp]: "https://wiki.paladium-pvp.fr/mecaniques-et-events/evenements/{event}",
   [WebHookType.statusServer]: "https://palatracker.bromine.fr/status",
   [WebHookType.vote]: "https://paladium-pvp.fr/vote",
-}
+};
 
 export const defaultWebhookEmbedImgFromType: Record<WebHookType, string> = {
   [WebHookType.QDF]: "",
@@ -123,7 +123,7 @@ export const defaultWebhookEmbedImgFromType: Record<WebHookType, string> = {
   [WebHookType.EventPvp]: "https://palatracker.bromine.fr/EventBanner/{event}.png",
   [WebHookType.statusServer]: "",
   [WebHookType.vote]: "",
-}
+};
 
 export const defaultWebhookFooterFromType: Record<WebHookType, string> = {
   [WebHookType.QDF]: "PalaTracker | La QDF est mise à jour toutes les 15 minutes.",
@@ -132,7 +132,7 @@ export const defaultWebhookFooterFromType: Record<WebHookType, string> = {
   [WebHookType.EventPvp]: "PalaTracker | Les events sont mises à jour toutes les 15 minutes.",
   [WebHookType.statusServer]: "PalaTracker | Les status des serveurs sont mises à jour toutes les minutes.",
   [WebHookType.vote]: "PalaTracker | Les votes sont mises à jour toutes les 2 minutes.",
-}
+};
 export const defaultWebhookValidFormatFromType: Record<WebHookType, string[]> = {
   [WebHookType.QDF]: ["{item} Nom de l'item dans l'API", "{itemFr} Nom de l'item en français", "{itemUs} Nom de l'item en anglais", "{quantity} Quantité de l'item à farm", "{earningXp} XP de fac a gagné", "{earningMoney} argent a gagné", "{start} Date de début de la QDF", "{end} Date de fin de lq QDF"],
   [WebHookType.adminShop]: ["{item} Nom de l'item dans l'API", "{price} Prix actuel de l'item", "{previousPrice} Prix précédent de l'item", "{threshold} Valeur seuil", "{thresholdCondition} Condition de notification"],
@@ -140,4 +140,4 @@ export const defaultWebhookValidFormatFromType: Record<WebHookType, string[]> = 
   [WebHookType.EventPvp]: ["{item}: Nom de l'item dans l'API (OnYourMark uniquement)", "{goal} action a effectué (OnYourMark uniquement)", "{quantity} Quantité de l'item à farm (OnYourMark uniquement)", "{server} Serveur sur lequel farm (OnYourMark uniquement)", "{rewardElo} Récompense en elo (OnYourMark uniquement)", "{start} Date de début de l'event", "{end} Date de fin de l'event", "{startRelative} Date de début de l'event en relatif"],
   [WebHookType.statusServer]: [],
   [WebHookType.vote]: ["{username} Pseudo du joueur"],
-}
+};

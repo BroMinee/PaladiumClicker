@@ -1,4 +1,4 @@
-'use client'
+'use client';
 
 import Image from "next/image";
 import { useTheme } from "next-themes";
@@ -15,5 +15,5 @@ export function CraftingArrow() {
     setImagePath(safeJoinPaths(constants.imgPathCraft, theme === "dark" ? "/arrow_white.png" : "/arrow_dark.png"));
   }, [theme]);
 
-  return <Image src={imagePath} alt="Arrow crafting" width={90} height={58 / 2} className="pixelated"/>
+  return <Image src={imagePath} alt="Arrow crafting" width={90} height={58 / 2} className="pixelated"/>;
 }

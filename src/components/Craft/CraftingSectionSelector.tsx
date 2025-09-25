@@ -32,5 +32,5 @@ export function CraftingSectionSelector() {
       </div>
       <ScrollBar orientation="horizontal"/>
     </ScrollArea>
-  )
+  );
 }

@@ -1,4 +1,4 @@
-'use client'
+'use client';
 import dynamic from "next/dynamic";
 import { ServerPaladiumStatusResponse, StatusPeriode } from "@/types";
 import { Area, Legend, ReferenceLine, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
@@ -19,12 +19,12 @@ const CustomTooltip = ({ active, payload, label }: any) => {
           {payload.map((entry: any, index: number) => {
             return <li key={index} style={{ color: entry.color }}>
               {entry.name}: {entry.value}
-            </li>
+            </li>;
           })}
         </ul>
-      </div>)
+      </div>);
   }
-}
+};
 
 
 const PlotStatusChart = ({ data, periode }: { data: ServerPaladiumStatusResponse[], periode: StatusPeriode }) => {
@@ -40,7 +40,7 @@ const PlotStatusChart = ({ data, periode }: { data: ServerPaladiumStatusResponse
       players: item.players,
       average: average
 
-    }
+    };
   });
 
   const convert = (periode: StatusPeriode) => {
@@ -52,9 +52,9 @@ const PlotStatusChart = ({ data, periode }: { data: ServerPaladiumStatusResponse
       case "month":
         return "du mois";
       case "season":
-        return "de la saison"
+        return "de la saison";
     }
-  }
+  };
   const moyenneText = convert(periode);
 
   return (

@@ -65,7 +65,7 @@ export function getTotalSpend(playerInfo: PlayerInfo) {
   for (const key in playerInfo) {
 
     if (validKeys.includes(key as typeof validKeys[number])) {
-      let target = playerInfo[key as typeof validKeys[number]]
+      let target = playerInfo[key as typeof validKeys[number]];
       for (const element of target) {
         if (
           ("price" in element) &&
@@ -321,7 +321,7 @@ export function getRankImg(rank: string) {
     return safeJoinPaths(constants.imgPathProfile,"rusher.png");
   }
   else {
-    return "unknown.png"
+    return "unknown.png";
   }
 }
 
@@ -387,7 +387,7 @@ export const getColorByMetierName = (name: MetierKey) => {
   }
 
   return { color, bgColor };
-}
+};
 
 export function scaleCurrentProduction(playerInfo: PlayerInfo, buildingIndex: number, level: number) {
   if (level === 0 || level === -1)
@@ -397,8 +397,8 @@ export function scaleCurrentProduction(playerInfo: PlayerInfo, buildingIndex: nu
 }
 
 function scaleBaseProduction(playerInfo: PlayerInfo, buildingIndex: number) {
-  const baseProduction = convertToFloat(playerInfo.building?.[buildingIndex].base_production || 0)
-  const pourcentageBonus = getPourcentageBonus(playerInfo, buildingIndex)
+  const baseProduction = convertToFloat(playerInfo.building?.[buildingIndex].base_production || 0);
+  const pourcentageBonus = getPourcentageBonus(playerInfo, buildingIndex);
   return (baseProduction * pourcentageBonus);
 }
 
@@ -433,7 +433,7 @@ function getPourcentageBonus(playerInfo: PlayerInfo, buildingIndex: number) {
 
   function getBonusFromCategory() {
     const categoryUpgrades = playerInfo.category_upgrade
-      .filter((category) => category.own && category.active_list_index.includes(buildingIndex))
+      .filter((category) => category.own && category.active_list_index.includes(buildingIndex));
     return categoryUpgrades.reduce((total, category) => total + category.pourcentage, 0);
   }
 
@@ -453,7 +453,7 @@ function getPourcentageBonus(playerInfo: PlayerInfo, buildingIndex: number) {
       .filter((building) => building.own && building.active_index === buildingIndex);
     const targetedBuilding = playerInfo.building[buildingIndex];
     if (buildingUpgrades.length > 2)
-      alert(`Error in getBonusFromBuild function : more than one/two bonus from building for ${targetedBuilding.name}`)
+      alert(`Error in getBonusFromBuild function : more than one/two bonus from building for ${targetedBuilding.name}`);
 
     return buildingUpgrades.length;
   }
@@ -463,7 +463,7 @@ function getPourcentageBonus(playerInfo: PlayerInfo, buildingIndex: number) {
       .filter((posterior) => posterior.own && posterior.active_index === buildingIndex);
     const targetedBuilding = playerInfo.building[buildingIndex];
     if (posteriorUpgrades.length > 1)
-      alert(`Error in getBonusFromPosterior function : more than one bonus from posterior for ${targetedBuilding.name}`)
+      alert(`Error in getBonusFromPosterior function : more than one bonus from posterior for ${targetedBuilding.name}`);
     if (posteriorUpgrades.length === 1) {
       return Number(playerInfo.building[posteriorUpgrades[0].previous_index].own) * 0.01;
     }
@@ -498,7 +498,7 @@ export function computeRPS(playerInfo: PlayerInfo) {
         rps += scaleCurrentProduction(playerInfo, index, Number(building.own));
       }
     }
-  )
+  );
   return rps;
 }
 
@@ -603,9 +603,9 @@ export function adminShopItemToUserFriendlyText(item: AdminShopItem): string {
     case "passive-wither-head":
       return "Passif Wither Head";
     case "reeds":
-      return "Sugar Cane"
+      return "Sugar Cane";
     case "dye":
-      return "Ink Sack"
+      return "Ink Sack";
   }
 
   return item.replaceAll('tile', '').split('-')
@@ -626,7 +626,7 @@ export function getImagePathFromAdminShopType(item: AdminShopItem): string {
     "dye": "dye_powder_black",
     "redstone": "redstone_dust",
     "fermented-spider-eye": "spider_eye_fermented",
-  }
+  };
   if (translateTable[item]) {
     return `/AH_img/${translateTable[item]}.webp`;
   }
@@ -647,7 +647,7 @@ export function convertAhItemTypeToMarketItemOffer(item: AhItemType, seller: str
     slot: item.slot, // Slot of the item in the market
     createdAt: item.createdAt, // Date of the listing
     expireAt: item.expireAt, // Date of the expiration of the listing
-  }
+  };
 }
 
 
@@ -676,7 +676,7 @@ export function getLinkFromUrl(url: string):
   const urlArray = url.split("/");
   let trouvaille: PathValid | undefined = undefined;
   while (urlArray.length > 0 && urlArray[urlArray.length - 1] !== "") {
-    trouvaille = Object.keys(constants.links).find((key) => { return key.includes(urlArray[urlArray.length - 1])}) as PathValid | undefined;
+    trouvaille = Object.keys(constants.links).find((key) => { return key.includes(urlArray[urlArray.length - 1]);}) as PathValid | undefined;
     if (trouvaille !== undefined) {
       break;
     } else {
@@ -744,7 +744,7 @@ export const getInitialPlayerInfo = (): PlayerInfo => {
     pet: { currentSkin: "dog", experience: 0, happiness: 0, skills: [] },
     edited: false,
   };
-}
+};
 
 export function reloadProfilNeeded(playerInfoLocal: PlayerInfo | null, username: string, defaultProfile: boolean) {
   if (defaultProfile)
@@ -1016,5 +1016,5 @@ export function getHeadUrl(uuid: string | undefined)
 {
   if(!uuid || uuid === "")
     return "/img/palatracker_head.png"; // palatracker skin
-  return `https://crafatar.com/avatars/${uuid}?size=8&overlay`
+  return `https://crafatar.com/avatars/${uuid}?size=8&overlay`;
 }

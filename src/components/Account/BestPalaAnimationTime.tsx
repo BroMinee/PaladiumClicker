@@ -47,11 +47,11 @@ export function BestPalaAnimationTime() {
                 <span className="text-blue-400">
                 top {entry.rank_completion_time} / {entry.total_players}
                 </span>
-              </p>
+              </p>;
             })}
           </div>
         }
       </CardContent>
-    </Card>)
+    </Card>);
 
 }

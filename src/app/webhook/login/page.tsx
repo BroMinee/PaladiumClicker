@@ -17,7 +17,7 @@ export async function generateMetadata() {
             title: title,
             description: description,
         },
-    }
+    };
 }
 
 export default function WebHooksPage() {
@@ -77,5 +77,5 @@ export default function WebHooksPage() {
         <LoginButton href={`${API_PALATRACKER}/v1/auth/login/discord`} redirectUrl={"/webhook"}/>
       </CardContent>
     </Card>
-  )
+  );
 }

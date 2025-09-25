@@ -11,7 +11,7 @@ type Actions = {
 
 const initialState: State = {
   profileInfo: null,
-}
+};
 
 export const useProfileStore = create<State & Actions>(
   (set) => ({

@@ -41,5 +41,5 @@ export default function ErrorBoundary({ error }: { error: Error }) {
         </div>
       </CardContent>
     </Card>
-  </MotionFadeIn>
+  </MotionFadeIn>;
 }
