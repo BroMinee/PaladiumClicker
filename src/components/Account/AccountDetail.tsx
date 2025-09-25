@@ -8,7 +8,6 @@ export function AccountDetail() {
   if (!profileInfo)
     return null;
 
-
   const ppUrl = profileInfo.avatar;
 
   return (

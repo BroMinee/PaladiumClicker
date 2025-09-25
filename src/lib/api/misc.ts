@@ -35,7 +35,6 @@ export const fetchWithoutHeader = async <T>(url: string, cache_duration = 15 * 6
     return redirect(`/error?message=Impossible de récupérer les données actuelles de ${url}`);
 };
 
-
 export const fetchWithHeader = async <T>(url: string, cache_duration_in_sec = 15 * 60, username = "", timeout = 4000): Promise<T> => {
   let response: Response | null = null;
   let json = null;
@@ -64,7 +63,6 @@ export const fetchWithHeader = async <T>(url: string, cache_duration_in_sec = 15
   } catch (error) {
     console.error(error, url, response?.status);
   }
-
 
   if (username !== "" && url === `${apiPala}/v1/paladium/player/profile/` + username && response && response.status === 404) {
     let uuid = "";
@@ -107,7 +105,6 @@ export const fetchWithHeader = async <T>(url: string, cache_duration_in_sec = 15
   else
     throw new Error(`Impossible de récupérer les données actuelles de ${url}`);
 };
-
 
 export const fetchPostWithHeader = async <T>(url: string, body: string, cache_duration_in_sec = 15 * 60): Promise<T> => {
   let response: Response | null = null;

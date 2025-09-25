@@ -6,7 +6,6 @@ import { generateRankingUrl, getImagePathFromRankingType, rankingTypeToUserFrien
 import { Suspense } from "react";
 import GraphRanking, { GraphRankingFallback } from "@/components/Ranking/GraphRanking.tsx";
 
-
 export async function generateMetadata(props: { searchParams: Promise<searchParamsRankingPage> }) {
   const searchParams = await props.searchParams;
 
@@ -18,7 +17,6 @@ export async function generateMetadata(props: { searchParams: Promise<searchPara
     defaultImage = `https://palatracker.bromine.fr/${rankingImgPath}`;
     title += ` | ${rankingTypeToUserFriendlyText(searchParams.category as RankingType)}`;
   }
-
 
   const description = "📈 Visualisez le classement des joueurs Paladium ainsi que l'historique d'évolution !";
   return {
@@ -51,9 +49,7 @@ export default async function Home(
     redirect(generateRankingUrl(RankingType.money));
   }
 
-
   const rankingType = searchParams.category as RankingType;
-
 
   return (
     <div className="flex flex-col gap-4">

@@ -1,6 +1,5 @@
 'use client';
 
-
 import React, { useState } from "react";
 
 export default function HoverText({ text, children, className }: {
@@ -22,7 +21,6 @@ export default function HoverText({ text, children, className }: {
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     setPosition({ x: e.clientX + 10, y: e.clientY - 30 });
   };
-
 
   return (<>
     <div

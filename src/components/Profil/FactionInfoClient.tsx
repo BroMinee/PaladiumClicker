@@ -29,7 +29,6 @@ export function FactionInfoDescription() {
   return <>{playerInfo.faction.name}</>;
 }
 
-
 export function FactionInfoMembersInfo() {
   const { data: playerInfo } = usePlayerInfoStore();
   let playerList = playerInfo ? playerInfo.faction.players : [];
@@ -53,7 +52,6 @@ export function FactionDetails() {
   const level = playerInfo.faction.level?.level || -1;
   const xp = playerInfo.faction.level?.xp || -1;
   const playerList = playerInfo.faction.players;
-
 
   return (
     <>

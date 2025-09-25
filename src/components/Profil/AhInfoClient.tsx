@@ -62,7 +62,6 @@ export function AhItemClient({ allItemsInfo }: { allItemsInfo: OptionType[] }) {
       </>);
   }
 
-
   return <>
     {
       playerInfo.ah.data.map((e, index) => {
@@ -71,5 +70,3 @@ export function AhItemClient({ allItemsInfo }: { allItemsInfo: OptionType[] }) {
     }
   </>;
 }
-
-

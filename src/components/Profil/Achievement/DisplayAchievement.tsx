@@ -46,7 +46,6 @@ export const AchievementInfo = ({
     </CardContent>);
 };
 
-
 type DisplayCategoryCardProps = {
   title: string;
   value?: string;

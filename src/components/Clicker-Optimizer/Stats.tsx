@@ -38,11 +38,9 @@ const Stats = () => {
     setBuildingBuyPaths(computeXBuildingAhead(playerInfo, PROCHAIN_ACHAT_COUNT, rps));
   }, [playerInfo, isNextBuildingVisible, rps]);
 
-
   if (!playerInfo) {
     return null;
   }
-
 
   return (
     <>
@@ -144,7 +142,6 @@ export const Stat = ({ buildingName, buildingPath, showProduction }: StatProps) 
 
 export default Stats;
 
-
 /**
  * @param {PlayerInfo} copyPlayerInfo
  * @param {Date} date
@@ -156,7 +153,6 @@ function getBestUpgrade(copyPlayerInfo: PlayerInfo, date: Date): bestPurchaseInf
 
   const bestBuildingInfo = computeBestBuildingUpgrade(structuredClone(copyPlayerInfo));
   const bestUpgradeInfo = findBestUpgrade(structuredClone(copyPlayerInfo), date);
-
 
   let bestPurchase = {} as (bestUpgradeInfo | bestBuildingInfo);
   if (bestBuildingInfo.bestUpgradeIndex === -1 && bestUpgradeInfo.bestUpgradeIndex === -1)
@@ -183,7 +179,6 @@ function getBestUpgrade(copyPlayerInfo: PlayerInfo, date: Date): bestPurchaseInf
     copyPlayerInfo[bestPurchase.bestListName][bestPurchase.bestUpgradeIndex].own = own + 1;
   else
     alert("Error in getBestUpgrade");
-
 
   return {
     path: bestPurchase.bestListName,
@@ -229,7 +224,6 @@ export function computeXBuildingAhead(playerInfo: PlayerInfo, achatCount: number
       }
 
       copyRps = computeRPS(copy);
-
 
       buildingBuyPaths.push(
         {
@@ -279,7 +273,6 @@ function computeTimeToBuy(price: number, own: boolean | number, coinsDormants: n
     priceToBuy = computePrice(price, own - 1);
   }
 
-
   const factorLagServer = 1.33;
   if (coinsDormants >= priceToBuy)
     return {
@@ -295,14 +288,12 @@ function computeTimeToBuy(price: number, own: boolean | number, coinsDormants: n
   };
 }
 
-
 export function DisplayCoinsDormants() {
   const { data: playerInfo, setProduction } = usePlayerInfoStore();
 
   if (!playerInfo) {
     return 0;
   }
-
 
   const totalSpend = getTotalSpend(playerInfo);
   let coinsDormants = Math.max(playerInfo.production - totalSpend, 0);

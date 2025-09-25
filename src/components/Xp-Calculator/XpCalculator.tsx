@@ -123,7 +123,6 @@ export function HowToXp({ searchParams }: {
   if (searchParams.metier === undefined)
     return null;
 
-
   return (
     <Card>
       <CardHeader className="flex items-center">

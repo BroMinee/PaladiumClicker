@@ -9,7 +9,6 @@ import { getAllItems } from "@/lib/api/apiPalaTracker.ts";
 import { OptionType } from "@/types";
 import LoadingSpinner from "@/components/ui/loading-spinner.tsx";
 
-
 export async function AchievementsProfilSection() {
 
   const itemList = await getAllItems().catch(() => {
@@ -22,7 +21,6 @@ export async function AchievementsProfilSection() {
       };
     });
   });
-
 
   return <>
     <Card className="rounded-b-xl rounded-t-none">

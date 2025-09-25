@@ -49,7 +49,6 @@ export const isMyApiDown = async (): Promise<boolean> => {
   return !(json && json.backend_status === "OK" && json.db_status === "OK");
 };
 
-
 export const getViewsFromUUID = async (uuid: string, username: string): Promise<ProfilViewType> => {
   username.toLowerCase();
   return await fetchWithHeader<ProfilViewType>(`${API_PALATRACKER}/v1/user/getUser/${uuid}`, 10 * 60).catch(() => {
@@ -60,7 +59,6 @@ export const getViewsFromUUID = async (uuid: string, username: string): Promise<
     };
   });
 };
-
 
 export async function getRankingLeaderboard(rankingType: RankingType, limit = 10, offset = 0): Promise<RankingResponse> {
   return await fetchWithHeader<RankingResponse>(`${API_PALATRACKER}/v1/ranking/${rankingType}/all?limit=${limit}&offset=${offset}`, 60*60, "", 10000);
@@ -73,7 +71,6 @@ export async function getRankingLeaderboardPlayerUUID(uuid: string, rankingType:
 export async function getRankingLeaderboardPlayerUsername(username: string, rankingType: RankingType): Promise<RankingResponse> {
   return await fetchWithHeader<RankingResponse>(`${API_PALATRACKER}/v1/ranking/${rankingType}/username/${username}`, 60*60);
 }
-
 
 export async function getStatusPaladium(periode: StatusPeriode): Promise<ServerPaladiumStatusResponse[]> {
   return await fetchWithHeader<ServerPaladiumStatusResponse[]>(`${API_PALATRACKER}/v1/status-history/paladium/${periode}`, 0);

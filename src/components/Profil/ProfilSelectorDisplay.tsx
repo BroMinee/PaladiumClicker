@@ -24,7 +24,6 @@ export function ProfilSelectorDisplay({ params, searchParams }: {
   searchParams: searchParamsProfilPage
 }) {
 
-
   if (searchParams.section === undefined)
     searchParams.section = ProfilSectionEnum.Home;
 

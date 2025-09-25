@@ -67,16 +67,13 @@ export function WebHookInputClientItem() {
     }
   }, [currentWebHookType, eventSelected, setItemSelected]);
 
-
   useEffect(() => {
     setTitleUrl(defaultWebhookTitleUrlFromType[currentWebHookType]);
     setEmbedImg(defaultWebhookEmbedImgFromType[currentWebHookType]);
     setFields(defaultWebHookFieldsFromType[currentWebHookType]);
 
-
     if (edit)
       return;
-
 
     setContent(defaultWebHookContentFromType[currentWebHookType]);
     setEmbed(defaultWebHookEmbedFromType[currentWebHookType]);
@@ -115,7 +112,6 @@ function IsValidWebHookUrl(url: string): boolean {
 
 function WebHookEditor() {
 
-
   const {
     currentWebHookType,
     webHookUrl,
@@ -143,7 +139,6 @@ function WebHookEditor() {
     toast.error("L'URL du webhook est invalide");
     router.push(constants.webhooksPath);
   }
-
 
   async function createWebHook() {
     const body: WebHookCreate = {
@@ -225,7 +220,6 @@ function WebHookEditor() {
           </div>
         </div>
       }
-
 
       <div className="flex flex-col gap-2 w-full">
         <div className="flex flex-row gap-2 items-center">

@@ -11,7 +11,6 @@ import {
 } from "@/components/AdminShop/AdminShopSelectorClientItem.tsx";
 import GraphAdminShop, { GraphAdminShopFallback } from "@/components/AdminShop/GraphAdminShop.tsx";
 
-
 export type searchParamsAdminShopPage = {
   item: string,
   periode: string,
@@ -28,7 +27,6 @@ export async function generateMetadata(props: { searchParams: Promise<searchPara
     defaultImage = `https://palatracker.bromine.fr/${itemImgPath}`;
     title += ` | ${adminShopItemToUserFriendlyText(searchParams.item)}`;
   }
-
 
   const description = "📈 Visualisez l'historique du prix des items de l'admin-shop !";
   return {
@@ -72,7 +70,6 @@ export default async function Home(
   } else {
     periodeEnum = periode as AdminShopPeriode;
   }
-
 
   const adminShopItem = searchParams.item as AdminShopItem;
 

@@ -27,10 +27,8 @@ export async function generateMetadata(props: { params: Promise<{ username: stri
   };
 }
 
-
 export default async function Home(props: { params: Promise<{ username: string }> }) {
   const params = await props.params;
-
 
   const upgrades: Array<{ title: string, upgradeType: UpgradeKey }> = [
     { title: "Global", upgradeType: "global_upgrade" },
@@ -40,7 +38,6 @@ export default async function Home(props: { params: Promise<{ username: string }
     { title: "Postérieur", upgradeType: "posterior_upgrade" },
     { title: "Catégorie", upgradeType: "category_upgrade" },
   ];
-
 
   return (
     <>

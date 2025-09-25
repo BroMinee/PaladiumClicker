@@ -223,7 +223,6 @@ const RPS = () => {
   );
 };
 
-
 export function computeBestBuildingUpgrade(playerInfo: PlayerInfo): bestBuildingInfo {
   let buildingOwned = playerInfo.building.filter((building) => Number(building.own) > 0).length;
   if (buildingOwned !== playerInfo.building.length && Number(playerInfo.building[buildingOwned]["name"]) !== -1) {
@@ -255,7 +254,6 @@ export function computeBestBuildingUpgrade(playerInfo: PlayerInfo): bestBuilding
   };
 }
 
-
 export function findBestUpgrade(playerInfo: PlayerInfo, date: Date): bestUpgradeInfo {
 
   // building_upgrade
@@ -277,9 +275,7 @@ export function findBestUpgrade(playerInfo: PlayerInfo, date: Date): bestUpgrade
   const terrainUpgradeUnlockable = playerInfo["terrain_upgrade"].filter((building) => !building["own"] && checkCondition(playerInfo, building["condition"], date).unlockable);
   const posteriorUpgradeUnlockable = playerInfo["posterior_upgrade"].filter((building) => !building["own"] && checkCondition(playerInfo, building["condition"], date).unlockable);
 
-
   const currentRPS = computeRPS(playerInfo);
-
 
   type typeListTmp =
     typeof buildingUpgradeUnlockable
@@ -297,7 +293,6 @@ export function findBestUpgrade(playerInfo: PlayerInfo, date: Date): bestUpgrade
       if (!Object.keys(playerInfo).includes(nameList)) {
         return;
       }
-
 
       const indexInBuilding = playerInfo[nameList].findIndex((building) => building["name"] === name);
       copy[nameList][indexInBuilding]["own"] = true;
@@ -321,6 +316,5 @@ export function findBestUpgrade(playerInfo: PlayerInfo, date: Date): bestUpgrade
 
   return bestUpgradeRes;
 }
-
 
 export default RPS;

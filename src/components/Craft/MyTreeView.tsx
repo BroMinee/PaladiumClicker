@@ -43,7 +43,6 @@ const MyTreeView = ({ root, setRoot }: MyTreeViewProps) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps -- root is modified in setRoot
   }, [checked, setRoot]);
 
-
   useEffect(() => {
     if (node) {
       const allNodeValues = getAllValues(node).filter((el) => !checked.includes(el));
@@ -89,7 +88,6 @@ const MyTreeView = ({ root, setRoot }: MyTreeViewProps) => {
   //     <div>Node 2</div>
   //   </div>,
   // },
-
 
   return (
     <Card className="row-start-3">

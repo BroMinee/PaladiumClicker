@@ -25,7 +25,6 @@ export function CraftResourceList({ list }: { list: NodeType[] }) {
     setListState(list);
   }, [list]);
 
-
   useEffect(() => {
     if (mounted && listState !== null) {
       getPaladiumAhItemStatsOfAllItemsAction().then((res) => {

@@ -8,8 +8,6 @@ import { reloadProfilNeeded } from "@/lib/misc.ts";
 import { toast } from "sonner";
 import { navigate } from "@/components/actions.ts";
 
-
-
 export default function ProfileFetcherWrapper({ username, children }: {
   username: string,
   children: React.ReactNode
@@ -43,7 +41,6 @@ export default function ProfileFetcherWrapper({ username, children }: {
 
   }, [username, setPlayerInfo, settings, playerInfo, isFirstRender]);
 
-
   if (reloadProfilNeeded(playerInfo, username, settings.defaultProfile))
     return <LoadingData username={username}/>;
 
@@ -52,5 +49,3 @@ export default function ProfileFetcherWrapper({ username, children }: {
     </>
   );
 }
-
-

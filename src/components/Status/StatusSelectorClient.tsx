@@ -15,14 +15,12 @@ export function StatusSelectorClientPeriode({ periode }: {
 
   const selected = periode === (searchParams.get("periode") || (periode === "day" ? periode : undefined));
 
-
   const converter = (periode: string) => {
     if (periode === "day") return "24 heures";
     if (periode === "week") return "1 semaine";
     if (periode === "month") return "1 mois";
     if (periode === "season") return "1 saison";
   };
-
 
   return (
     <Card
@@ -37,7 +35,6 @@ export function StatusSelectorClientPeriode({ periode }: {
     >
       {converter(periode)}
     </Card>
-
 
   );
 }

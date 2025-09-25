@@ -19,7 +19,6 @@ import {
 } from "@/lib/misc.ts";
 import { cn } from "@/lib/utils.ts";
 
-
 function convertMontureTypeIdToModelName(montureTypeId: number): ModelName {
   switch (montureTypeId) {
     case 1:
@@ -73,7 +72,6 @@ function convertPetSkinToModelName(petSkin: string): ModelName {
 export function PetCanvas({ monture = false }: { monture?: boolean }) {
   const { data: playerInfo } = usePlayerInfoStore();
 
-
   let modelName: ModelName = "arty";
   let petName: string = "";
   let petLevel: number = 0;
@@ -97,7 +95,6 @@ export function PetCanvas({ monture = false }: { monture?: boolean }) {
     xpNeeded = petLevel === 100 ? 100 : petGetNeededXpForLevel(petLevel) - petGetNeededXpForLevel(petLevel - 1);
     petCoef = petGetCoef(petXp, xpNeeded);
   }
-
 
   // noinspection TypeScriptValidateTypes
   const myModel: GLTF = useLoader(GLTFLoader, `/Model3D/${modelName}.gltf`);
@@ -188,7 +185,6 @@ export function PetCanvas({ monture = false }: { monture?: boolean }) {
           const scene = new THREE.Scene();
           const camera = new THREE.PerspectiveCamera(70, window.innerWidth / window.innerHeight, 0.01, 20);
 
-
           if (monture)
             myModel.scene.scale.set(0.1, 0.1, 0.1);
           else
@@ -197,14 +193,12 @@ export function PetCanvas({ monture = false }: { monture?: boolean }) {
           myModel.scene.position.set(0, 0, -0.5); // Place à 50 cm devant la caméra
           scene.add(myModel.scene);
 
-
           const arMixer = new THREE.AnimationMixer(myModel.scene);
           if (myModel.animations.length > 1) {
             const animationClip = myModel.animations[0];
             const arAction = arMixer.clipAction(animationClip);
             arAction.play();
           }
-
 
           renderer.xr.setReferenceSpaceType('local');
 
@@ -236,7 +230,6 @@ export function PetCanvas({ monture = false }: { monture?: boolean }) {
     }
   };
 
-
   if (!playerInfo)
     return null;
 
@@ -267,7 +260,6 @@ export function PetCanvas({ monture = false }: { monture?: boolean }) {
         <DisplayAnimationButtons myModel={myModel} handleAnimationChange={handleAnimationChange}
                                  selectedAnimation={selectedAnimation} className="flex lg:hidden"/>
       </div>
-
 
       <Canvas style={{ height: '500px', width: '100%' }}>
         <primitive object={myModel.scene} rotation={[0, Math.PI * 3 / 4, 0]} scale={monture ? [1, 1, 1] : [2, 2, 2]}/>

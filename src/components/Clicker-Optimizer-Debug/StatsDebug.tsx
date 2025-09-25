@@ -75,7 +75,6 @@ export function checkConditionDebug(playerInfo: PlayerInfo, conditions: AnyCondi
   };
 }
 
-
 export function findBestUpgradeDebug(playerInfo: PlayerInfo, date: Date, startSeason: Date): bestUpgradeInfo {
 
   // building_upgrade
@@ -97,9 +96,7 @@ export function findBestUpgradeDebug(playerInfo: PlayerInfo, date: Date, startSe
   const terrainUpgradeUnlockable = playerInfo["terrain_upgrade"].filter((building) => !building["own"] && checkConditionDebug(playerInfo, building["condition"], date, startSeason).unlockable);
   const posteriorUpgradeUnlockable = playerInfo["posterior_upgrade"].filter((building) => !building["own"] && checkConditionDebug(playerInfo, building["condition"], date, startSeason).unlockable);
 
-
   const currentRPS = computeRPS(playerInfo);
-
 
   type typeListTmp =
     typeof buildingUpgradeUnlockable
@@ -117,7 +114,6 @@ export function findBestUpgradeDebug(playerInfo: PlayerInfo, date: Date, startSe
       if (!Object.keys(playerInfo).includes(nameList)) {
         return;
       }
-
 
       const indexInBuilding = playerInfo[nameList].findIndex((building) => building["name"] === name);
       copy[nameList][indexInBuilding]["own"] = true;
@@ -141,7 +137,6 @@ export function findBestUpgradeDebug(playerInfo: PlayerInfo, date: Date, startSe
 
   return bestUpgradeRes;
 }
-
 
 const StatsDebug = () => {
   const { data: playerInfo, setPlayerInfo } = usePlayerInfoStore();
@@ -203,11 +198,9 @@ const StatsDebug = () => {
     setBuildingBuyPaths(normal);
   }, [playerInfo, isNextBuildingVisible, count,startSeason, rps]);
 
-
   if (!playerInfo) {
     return null;
   }
-
 
   return (
     <>
@@ -326,7 +319,6 @@ export const Stat = ({ buildingName, buildingPath, showProduction }: StatProps) 
 
 export default StatsDebug;
 
-
 /**
  * @param {PlayerInfo} copyPlayerInfo
  * @param {Date} date
@@ -338,7 +330,6 @@ function getBestUpgrade(copyPlayerInfo: PlayerInfo, date: Date, startSeason: Dat
 
   const bestBuildingInfo = computeBestBuildingUpgrade(structuredClone(copyPlayerInfo));
   const bestUpgradeInfo = findBestUpgradeDebug(structuredClone(copyPlayerInfo), date, startSeason);
-
 
   let bestPurchase = {} as (bestUpgradeInfo | bestBuildingInfo);
   if (bestBuildingInfo.bestUpgradeIndex === -1 && bestUpgradeInfo.bestUpgradeIndex === -1)
@@ -365,7 +356,6 @@ function getBestUpgrade(copyPlayerInfo: PlayerInfo, date: Date, startSeason: Dat
     copyPlayerInfo[bestPurchase.bestListName][bestPurchase.bestUpgradeIndex].own = own + 1;
   else
     alert("Error in getBestUpgrade");
-
 
   return {
     path: bestPurchase.bestListName,
@@ -416,7 +406,6 @@ export function computeXBuildingAheadDebug(playerInfo: PlayerInfo, achatCount: n
 
       copyRps = computeRPS(copy);
 
-
       buildingBuyPaths.push(
         {
           path: bestPurchase.path,
@@ -444,7 +433,6 @@ export function computeXBuildingAheadDebug(playerInfo: PlayerInfo, achatCount: n
   }
   return { normal: buildingBuyPaths, debug: buildingBuyPathsDebug };
 }
-
 
 export function buyBuilding(playerInfo: PlayerInfo | null, setPlayerInfo: (arg0: PlayerInfo) => (void), buildingPaths: bestPurchaseInfoDetailed[]) {
   if (!playerInfo) {
@@ -478,7 +466,6 @@ function computeTimeToBuy(price: number, own: boolean | number, coinsDormants: n
     priceToBuy = computePrice(price, own - 1);
   }
 
-
   const factorLagServer = 1.33;
   if (coinsDormants >= priceToBuy)
     return {
@@ -494,14 +481,12 @@ function computeTimeToBuy(price: number, own: boolean | number, coinsDormants: n
   };
 }
 
-
 export function DisplayCoinsDormants() {
   const { data: playerInfo, setProduction } = usePlayerInfoStore();
 
   if (!playerInfo) {
     return 0;
   }
-
 
   const totalSpend = getTotalSpend(playerInfo);
   let coinsDormants = Math.max(playerInfo.production - totalSpend, 0);

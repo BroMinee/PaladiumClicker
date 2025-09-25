@@ -27,7 +27,6 @@ import { checkAnswerPalaAnimation, getNewQuestionPalaAnimation } from "@/lib/cyp
 import { useRouter } from "next/navigation";
 import { useProfileStore } from "@/stores/use-profile-store.ts";
 
-
 export function TestBot() {
   const [bot, setBot] = useState(false);
   const router = useRouter();
@@ -44,7 +43,6 @@ export function TestBot() {
   }
   return null;
 }
-
 
 export function PalaAnimationBody() {
 
@@ -70,7 +68,6 @@ export function PalaAnimationBody() {
     return true;
   }
 
-
   // legitCheck = false if the button "Révéler la solution" is clicked
   async function checkAnswer(userAnswer = "", legitCheck = true) {
     if (isChecking)
@@ -79,7 +76,6 @@ export function PalaAnimationBody() {
       console.error("No session uuid");
       return;
     }
-
 
     let correct = false;
 
@@ -130,7 +126,6 @@ export function PalaAnimationBody() {
     clearUserAnswer();
   }
 
-
   function reveal() {
     if (isChecking || sessionUuid === undefined)
       return;
@@ -168,7 +163,6 @@ export function PalaAnimationBody() {
 
   useEffect(() => {
 
-
     setTimer("");
     setReroll(false);
     setOldAnswer([]);
@@ -178,7 +172,6 @@ export function PalaAnimationBody() {
   useEffect(() => {
     setKeyPressTimestamp([{ key: " ", timestamp: startingTime }]);
   }, [startingTime]);
-
 
   useEffect(() => {
     setReroll(true);
@@ -194,7 +187,6 @@ export function PalaAnimationBody() {
       }
       return;
     }
-
 
     if (keyPressTimestamp.length - 1 > inputValue.length) {
       setKeyPressTimestamp(keyPressTimestamp.slice(0, inputValue.length + 1));
@@ -267,13 +259,10 @@ export function PalaAnimationBody() {
 export function PalaAnimationClassement() {
   const { profileInfo } = useProfileStore();
 
-
   const { sessionUuid } = useSessionContext();
 
   const [currentLeaderboard, setCurrentLeaderboard] = useState([] as PalaAnimationLeaderboard);
   const [userScore, setUserScore] = useState({ global_name: "" } as PalaAnimationScore);
-
-  
 
   useEffect(() => {
     if (!profileInfo || sessionUuid === undefined || sessionUuid === "")
@@ -299,7 +288,6 @@ export function PalaAnimationClassement() {
       }
     );
   }, [sessionUuid, profileInfo, setCurrentLeaderboard, setUserScore]);
-
 
   return (
     <Card className="md:col-span-1 md:col-start-3 col-span-2 col-start-1">
@@ -342,7 +330,6 @@ export function PalaAnimationClassementGlobal() {
     );
 
   }, [profileInfo]);
-
 
   const userPosition = globalLeaderboard.findIndex((entry) => (entry.global_name === profileInfo?.global_name || entry.global_name === profileInfo?.username));
 

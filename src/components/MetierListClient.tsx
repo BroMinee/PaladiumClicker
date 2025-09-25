@@ -24,7 +24,6 @@ export function MetierOutline({ metierKey, metierToReach = false }: { metierKey:
     coefXp = getXpCoef(metier.level, metier?.xp || 0);
   }
 
-
   return <path className="fill" d="M723 314L543 625.77 183 625.77 3 314 183 2.23 543 2.23 723 314z"
     style={{
       strokeDashoffset: 2160 * (1 - (coefXp)),

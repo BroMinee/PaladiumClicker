@@ -4,7 +4,6 @@ import { WebHookInputClientItem } from "@/components/WebHooks/WebHookInputClient
 import React from "react";
 import { getProfileFromCookies } from "@/lib/api/apiPalaTracker.ts";
 
-
 export default async function WebHooksPage() {
 
   const discordUser = await getProfileFromCookies();

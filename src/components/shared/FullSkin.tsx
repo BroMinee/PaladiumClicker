@@ -3,7 +3,6 @@ import Image from "next/image";
 import { usePlayerInfoStore } from "@/stores/use-player-info-store.ts";
 import { cn } from "@/lib/utils.ts";
 
-
 export default function FullSkin({ className = "" }) {
 
   const { data: playerInfo } = usePlayerInfoStore();

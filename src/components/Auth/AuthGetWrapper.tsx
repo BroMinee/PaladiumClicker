@@ -12,4 +12,3 @@ export function AuthGetWrapper() {
   }, [setProfileInfo]);
   return null;
 }
-

@@ -7,7 +7,6 @@ import { Button } from "@/components/ui/button.tsx";
 import { cn } from "@/lib/utils.ts";
 import { Input } from "@/components/ui/input.tsx";
 
-
 export function ThreshConditionSelector() {
 
   const { setThresholdCondition, thresholdCondition, currentWebHookType } = useWebhookStore();
@@ -124,10 +123,8 @@ export function EventInput() {
   );
 }
 
-
 export function VoteInput() {
   const { username, setUsername } = useWebhookStore();
-
 
   return (
     <div className="flex flex-row justify-between">
@@ -145,5 +142,3 @@ export function VoteInput() {
     </div>
   );
 }
-
-

@@ -39,9 +39,7 @@ const FallingClickImagePalaTime = () => {
         image.style.imageRendering = "pixelated";
         image.style.imageRendering = "crisp-edges";
 
-
         image.src = safeJoinPaths(`/AH_img/paper.webp`);
-
 
         image.alt = 'Click';
         image.onclick = () => {
@@ -73,7 +71,6 @@ const FallingClickImagePalaTime = () => {
 
   if (!settings.fallingImage)
     return false;
-
 
   return (<div ref={containerRef} className="z-[-1]">
     <Dialog open={openEvent} onOpenChange={() => setOpenEvent(false)}>

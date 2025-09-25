@@ -29,7 +29,6 @@ export function PreconditionDisplay({ index, upgradeType }: { index: number, upg
     buildingCount
   } = checkCondition(playerInfo, playerInfo[upgradeType][index].condition, new Date());
 
-
   const texts: ReactNode[] = ["Précondition:"];
   if (Number(playerInfo[upgradeType][index].name) === -1)
     texts[0] = "Précondition:";
@@ -46,7 +45,6 @@ export function PreconditionDisplay({ index, upgradeType }: { index: number, upg
     texts.push(GetConditionText(`Posséder l'amélioration ${playerInfo.CPS[index - 1].name}`, playerInfo.CPS[index - 1].own));
   }
 
-
   if (texts.length !== 2)
     texts[0] = "Préconditions:";
 
@@ -62,4 +60,3 @@ export function PreconditionDisplay({ index, upgradeType }: { index: number, upg
   );
 
 }
-

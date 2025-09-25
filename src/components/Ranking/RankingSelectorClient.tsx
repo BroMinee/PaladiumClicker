@@ -24,11 +24,9 @@ export function RankingSelectorClient({ rankingType, rankingPage }: {
   let imgPath = getImagePathFromRankingType(rankingType);
   const { data: playerInfo } = usePlayerInfoStore();
 
-
   const selected = rankingType === (searchParams.get("category") || RankingType.money);
   const usernames = searchParams.get("usernames");
   const noUsernames = searchParams.get("noUsernames");
-
 
   const hoverElement: ReactNode = (
     <div className="bg-primary rounded-md p-2 font-bold">{rankingTypeToUserFriendlyText(rankingType)}</div>

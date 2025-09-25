@@ -36,7 +36,6 @@ type CPSProps = {
   imgPath: string;
 }
 
-
 const CPS = ({ index, imgPath }: CPSProps) => {
   // NOTE price here can be server side since it's not variable
 

@@ -8,7 +8,6 @@ import { getInternalNode } from "@/lib/misc.ts";
 import { CraftItemRecipe } from "@/components/Craft/CraftItemRecipe.tsx";
 import { Card, CardHeader, CardTitle } from "@/components/ui/card.tsx";
 
-
 export async function CraftingInformationFetcher({ item, options, count }: {
   item: OptionType,
   options: OptionType[],
@@ -43,4 +42,3 @@ export async function CraftingInformationFetcher({ item, options, count }: {
     </>
   );
 }
-

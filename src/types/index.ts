@@ -276,7 +276,6 @@ export type New = {
   events: string[]
 }
 
-
 export type AhPaladium = {
   value: string,
   label: string,
@@ -297,7 +296,6 @@ export type PaladiumAhHistory = {
 }
 
 export type MarketListedItem = MarketItemOffer[]
-
 
 export type MarketItemOffer = {
   seller: string, // uuid of the seller
@@ -409,7 +407,6 @@ export type userAnswerType =
     c: string,
     color: string
   }
-
 
 export type checkAnswerPalaAnimationType =
   {
@@ -540,7 +537,6 @@ export type ServerStatusResponse =
 export type ServerPaladiumStatusResponse = ServerStatusResponse & {
   players: number
 }
-
 
 export type PlayerDBApiReponse =
   {
@@ -850,7 +846,6 @@ export type MoneySumHistory = {
   date: string,
   money_sum: number
 }[]
-
 
 export type Role =
   | 'Admin'

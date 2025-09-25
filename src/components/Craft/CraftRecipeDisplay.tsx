@@ -15,10 +15,8 @@ import GradientText from "@/components/shared/GradientText.tsx";
 export async function CraftRecipeDisplay({ searchParams }: { searchParams: searchParamsCraftPage }) {
   const options = await getAllItems();
 
-
   const item = options.find((item) => item.value === searchParams.item);
   const count = searchParams.count || 1;
-
 
   if (item === undefined && searchParams.item !== undefined) {
     const aliasName = await getItemAlias(searchParams.item);

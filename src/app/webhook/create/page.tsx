@@ -5,7 +5,6 @@ import React from "react";
 import { AuthForceWrapper } from "@/components/Auth/AuthForceWrapper.tsx";
 import constants from "@/lib/constants.ts";
 
-
 export async function generateMetadata() {
     const title = "PalaTracker | Webhook | Create";
     const description = "Définissez des webhooks discord pour recevoir des notifications en temps réel sur Paladium.";

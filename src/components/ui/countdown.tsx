@@ -27,4 +27,3 @@ export const renderer = ({ days, hours, minutes, seconds, completed }: renderTyp
       className="text-secondary-foreground">{print2digits(hours + days * 24)}:{print2digits(minutes)}:{print2digits(seconds)}</span>;
   }
 };
-

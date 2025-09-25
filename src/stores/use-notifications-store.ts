@@ -6,7 +6,6 @@ type State = {
   last_visited: { [T in PathValid]: number }
 }
 
-
 type Actions = {
   setLastVisited: (url: PathValid) => void,
 }

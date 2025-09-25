@@ -210,7 +210,6 @@ function CraftPriceCard({ data, index, cardRefs, sortMode }: {
   );
 }
 
-
 function computeSortValue(item: CraftPrice): CraftPriceWithComputed {
   const { priceToCraft, averagePrice, totalSold } = item;
   let { currentPrice } = item;

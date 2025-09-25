@@ -22,7 +22,6 @@ import {
   Role,
 } from "@/types";
 
-
 import translate_building_json from "@/assets/translate_building.json";
 import translate_upgrade_json from "@/assets/translate_upgrade.json";
 import metier_json from "@/assets/metier.json";
@@ -36,7 +35,6 @@ import { registerPlayerAction } from "@/lib/api/apiServerAction.ts";
 import constants, { API_PALATRACKER } from "@/lib/constants.ts";
 
 export const PALADIUM_API_URL = process.env.PALADIUM_API_URL || "https://api.paladium.games";
-
 
 export const isApiDown = async (): Promise<boolean> => {
   let response = null;
@@ -67,13 +65,11 @@ export const getPlayerOnlineCount = async (): Promise<number> => {
   return response.java.global.players;
 };
 
-
 export const getPaladiumProfileByPseudo = async (pseudo: string): Promise<PaladiumPlayerInfo> => {
   return await fetchWithHeader<PaladiumPlayerInfo>(`${PALADIUM_API_URL}/v1/paladium/player/profile/${pseudo}`, 15 * 60, pseudo).catch((error: Error) => {
     return redirect(`/error?message=Impossible de récupérer les données de ${pseudo}, vérifie que tu as bien écrit ton pseudo.&detail=${error.message}&username=${pseudo}`);
   });
 };
-
 
 export const getPaladiumLeaderboardPositionByUUID = async (uuid: string, username: string): Promise<string> => {
   const response = await fetchWithHeader<PaladiumRanking>(`${PALADIUM_API_URL}/v1/paladium/ranking/position/clicker/${uuid}`).catch((e: Error) => {
@@ -162,12 +158,10 @@ export const getPlayerInfo = async (pseudo: string): Promise<PlayerInfo> => {
     redirect(`/error?message=${error}&username=${pseudo}`);
   }
 
-
   let paladiumProfil = await getPaladiumProfileByPseudo(pseudo);
   if (paladiumProfil.uuid === "e7fc2422-e3bc-4c7b-b4f6-a96c6b35f702") {
     paladiumProfil = await getPaladiumProfileByPseudo("249eedd6-6ef4-4b15-8a4e-3e30df147876");
   }
-
 
   (await cookies()).set('uuid', paladiumProfil.uuid, { expires: new Date(Date.now() + 1000 * 60 * 60 * 24 * 30) });
   (await cookies()).set('username', paladiumProfil.username, { expires: new Date(Date.now() + 1000 * 60 * 60 * 24 * 30) });
@@ -184,7 +178,6 @@ export const getPlayerInfo = async (pseudo: string): Promise<PlayerInfo> => {
   const p9 = getPlayerMount(paladiumProfil.uuid);
   const p10 = getPlayerPet(paladiumProfil.uuid);
 
-
   const [clickerData, ahInfo, friendList, metiers, leaderboardPosition, paladiumFactionInfo, viewCount, achievements, mount, pet] = await Promise.all([p1, p2, p3, p4, p5, p6, p7, p8, p9, p10]);
 
   // NOTE: We use structuredClone to avoid modifying the original JSON by accident (it already happened once oupsy)
@@ -192,7 +185,6 @@ export const getPlayerInfo = async (pseudo: string): Promise<PlayerInfo> => {
 
   const translateBuildingName = translate_building_json as Record<string, number>;
   const translateBuildingUpgradeName = translate_upgrade_json as Record<string, (string | number)[]>;
-
 
   clickerData.buildings.forEach((building) => {
     const buildingIndex = translateBuildingName[building["name"]];
@@ -238,7 +230,6 @@ export const getPlayerInfo = async (pseudo: string): Promise<PlayerInfo> => {
     }
   }
 
-
   const friendsList = friendList;
 
   initialPlayerInfo.firstSeen = paladiumProfil.firstSeen;
@@ -261,11 +252,9 @@ export const getPlayerInfo = async (pseudo: string): Promise<PlayerInfo> => {
 
   registerPlayerAction(paladiumProfil.uuid, paladiumProfil.username);
 
-
   return initialPlayerInfo;
 
 };
-
 
 // export const getGraphData = async () => {
 //   const parsedCsv = await fetchLocal<string>("/graph.csv").then(parseCsv);
@@ -284,7 +273,6 @@ export const getPlayerInfo = async (pseudo: string): Promise<PlayerInfo> => {
 //   return data;
 // }
 //
-
 
 export const getPaladiumAhItemFullHistory = async (itemId: string): Promise<AhItemHistory[]> => {
   const response = await fetchWithHeader<PaladiumAhHistory>(`${PALADIUM_API_URL}/v1/paladium/shop/market/items/${itemId}/history?limit=100&offset=0`);
@@ -316,10 +304,8 @@ export const getJobsFromUUID = async (uuid: string, username: string): Promise<M
     return redirect(`/error?message=Impossible de récupérer tes données de métiers, vérifie que tu ne les as pas désactivées sur ton profil Paladium via la commande /profil.&detail=${message}&username=${username}`);
   });
 
-
   // NOTE we take the original JSON to have name easily modifiable (for example response.farmer.name witch is not in the response JSON)
   const initialMetierJson = structuredClone(metier_json as Metiers);
-
 
   if (response.farmer) {
     initialMetierJson.farmer.level = response.farmer.level;
@@ -343,7 +329,6 @@ export const getJobsFromUUID = async (uuid: string, username: string): Promise<M
   return initialMetierJson;
 };
 
-
 export const getPlayerAchievements = async (uuid: string): Promise<Achievement[]> => {
   type AchievementResponse = {
     totalCount: number,
@@ -365,7 +350,6 @@ export const getPlayerAchievements = async (uuid: string): Promise<Achievement[]
     offset += 100;
     c++;
   }
-
 
   // Reactivate if for some reason it works again
   const allAchievements = structuredClone(default_achievements_default as AllAchievementResponse);
@@ -389,13 +373,11 @@ export const getPlayerAchievements = async (uuid: string): Promise<Achievement[]
     };
   });
 
-
   const dictIdToSubIds = constants.dictAchievementIdToSubIds;
 
   const categoryAchievements = achievements.filter(achievement => achievement.amount === -1);
   const nonCategoryAchievements = achievements.filter(achievement => achievement.amount !== -1);
   const subCategoryAchievements: string[] = [];
-
 
   categoryAchievements.forEach((achievement) => {
 
@@ -411,7 +393,6 @@ export const getPlayerAchievements = async (uuid: string): Promise<Achievement[]
         }
       });
     }
-
 
     let id = achievement.id;
 
@@ -470,7 +451,6 @@ const getAllAchievements = async (): Promise<AllAchievementResponse> => {
 
   if (data.length !== totalCount)
     redirect(`/error?message=Data length is not equal to totalCount (getAllAchievements)`);
-
 
   // some achivement are deprecated, we remove them
   data = data.filter((achievement) => constants.deprecatedIdAchivement.indexOf(achievement.id) === -1);

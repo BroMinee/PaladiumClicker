@@ -188,7 +188,6 @@ export function ButtonUseF3({ params, searchParams, F3, children }: {
   </Button>;
 }
 
-
 export function InputDailyBonus({ params, searchParams }: {
   params: { username: string },
   searchParams: searchParamsXpBonusPage,
@@ -205,7 +204,6 @@ export function InputDailyBonus({ params, searchParams }: {
 function getBonusRank(playerRank: PlayerRank | undefined) {
   if (!playerRank)
     return 0;
-
 
   switch (playerRank) {
     case "titan":
@@ -275,7 +273,6 @@ export function DisplayItem({ searchParams, item, index }: { searchParams: searc
   if (!playerInfo || !playerInfo?.metier || searchParams.level === undefined || !searchParams.metier)
     return null;
 
-
   const colors = getColorByMetierName(searchParams.metier as MetierKey);
 
   return (
@@ -311,7 +308,6 @@ export function DisplayXpNeededWithDouble({ searchParams, xp, element }: {
   const { data: playerInfo } = usePlayerInfoStore();
   const xpNeeded = getXpDiff(playerInfo, searchParams);
 
-
   let fortuneBonus = searchParams.f2 ? 1.5 : 1;
   fortuneBonus = searchParams.f3 ? 1.65 : fortuneBonus;
   if (searchParams.metier !== "miner" || element.action !== constants.SMELT) {
@@ -330,7 +326,6 @@ export function DisplayXpNeededWithDouble({ searchParams, xp, element }: {
 export function DisplayXpNeededWithBottle({ searchParams }: { searchParams: searchParamsXpBonusPage }) {
   const { data: playerInfo } = usePlayerInfoStore();
   const xpNeeded = getXpDiff(playerInfo, searchParams);
-
 
   const bonusXpRank = getBonusRank(playerInfo?.rank);
   const bonusSummerRush = 300;

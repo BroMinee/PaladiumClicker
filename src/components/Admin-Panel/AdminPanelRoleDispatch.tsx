@@ -6,7 +6,6 @@ import { Role } from "@/types";
 import React from "react";
 import { ClickerOptimizerDebug } from "@/components/Clicker-Optimizer-Debug/page.tsx";
 
-
 const mapPermission = new Map<Role, React.FC[]>(
   [
     ["Admin", [EditRolePanel, PalaAnimationPanel, ReportBugPanel, AccessBetaPanel, PalatimePanel]],
@@ -121,4 +120,3 @@ function NotPermissionPanel() {
     </Card>
   );
 }
-

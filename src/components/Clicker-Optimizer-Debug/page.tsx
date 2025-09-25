@@ -15,9 +15,7 @@ import FallingClickImage from "@/components/Clicker-Optimizer/FallingClick.tsx";
 import { PlayerSkin } from "@/components/Profil/ProfilInfoClient.tsx";
 import StatsDebug from "@/components/Clicker-Optimizer-Debug/StatsDebug.tsx";
 
-
 export function ClickerOptimizerDebug({ params }: { params: { username: string } }) {
-
 
   const upgrades: Array<{ title: string, upgradeType: UpgradeKey }> = [
     { title: "Global", upgradeType: "global_upgrade" },
@@ -27,7 +25,6 @@ export function ClickerOptimizerDebug({ params }: { params: { username: string }
     { title: "Postérieur", upgradeType: "posterior_upgrade" },
     { title: "Catégorie", upgradeType: "category_upgrade" },
   ];
-
 
   return (
     <>

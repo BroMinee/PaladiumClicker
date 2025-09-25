@@ -61,7 +61,6 @@ export function getTotalSpend(playerInfo: PlayerInfo) {
     "CPS"
   ] as const;
 
-
   for (const key in playerInfo) {
 
     if (validKeys.includes(key as typeof validKeys[number])) {
@@ -111,7 +110,6 @@ function getDayCondition(conditions: AnyCondition | undefined) {
   const r = conditions.find(c => typeof c !== 'undefined' && "day" in c) as { day: number } | undefined;
   return r ? r.day : -1;
 }
-
 
 // unlockable, coins, totalCoins, day, daySinceStart, buildingIndex, buildingNeed, buildingCount
 export function checkCondition(playerInfo: PlayerInfo, conditions: AnyCondition, date: Date) {
@@ -202,7 +200,6 @@ export function reverseDDHHMMSSOnlyClicker(d: string) {
   const second = time.split(":")[2];
   return new Date(Number(year), Number(month) - 1, Number(day), Number(hour), Number(minute), Number(second));
 }
-
 
 export function getDDHHMMSS(d: Date) {
   const padL = (num: number, chr = `0`) => `${num}`.padStart(2, chr);
@@ -325,7 +322,6 @@ export function getRankImg(rank: string) {
   }
 }
 
-
 export function computeTimePlayed(timeInMinutes: number) {
   if (timeInMinutes === -1)
     return "Indisponible";
@@ -362,7 +358,6 @@ export function getXpCoef(level: number, currentXp: number) {
   }
   return (currentXp - constants.metier_palier[level - 1]) / constants.metier_xp[level];
 }
-
 
 export const getColorByMetierName = (name: MetierKey) => {
   let color = [0, 150, 0];
@@ -483,7 +478,6 @@ function getPourcentageBonus(playerInfo: PlayerInfo, buildingIndex: number) {
 
 }
 
-
 function convertToFloat(str: string | number) {
   if (typeof str === "number")
     return str;
@@ -501,7 +495,6 @@ export function computeRPS(playerInfo: PlayerInfo) {
   );
   return rps;
 }
-
 
 export function getJsonToUseForUpgrade(upgradeType: UpgradeKey) {
   let jsonToUse = null;
@@ -563,7 +556,6 @@ export function getImagePathFromRankingType(rankingType: string): string {
   }
   return imgPath;
 }
-
 
 export function rankingTypeToUserFriendlyText(rankingType: RankingType): string {
   switch (rankingType) {
@@ -650,7 +642,6 @@ export function convertAhItemTypeToMarketItemOffer(item: AhItemType, seller: str
   };
 }
 
-
 export function getIconNameFromEventType(eventType: EventType) {
   switch (eventType) {
     case 'A VOS MARQUES':
@@ -669,7 +660,6 @@ export function getIconNameFromEventType(eventType: EventType) {
       return "/EventIcon/unknown.png";
   }
 }
-
 
 export function getLinkFromUrl(url: string):
   PathValid | undefined {
@@ -815,7 +805,6 @@ export function computeProgression(playerInfo: PlayerInfo | null) {
   if (!playerInfo)
     return 0;
 
-
   const maxUpgrade =
     playerInfo.building.length * 99
     + playerInfo.CPS.length
@@ -835,7 +824,6 @@ export function computeProgression(playerInfo: PlayerInfo | null) {
 
   return currentUpgrade * 100 / maxUpgrade;
 }
-
 
 export function mountureGetNeededXpForLevel(level: number) {
   let sum = 0;

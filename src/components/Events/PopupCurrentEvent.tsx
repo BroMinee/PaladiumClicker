@@ -18,7 +18,6 @@ import { RenderEvent } from "@/components/NavBar/NavBarClient.tsx";
 import { cn } from "@/lib/utils.ts";
 import { registerUserToEvent } from "@/lib/api/apiServerAction.ts";
 
-
 export const PopupCurrentEvent = ({ event, alreadyRegistered, children }: {
   event: Event,
   alreadyRegistered: boolean,
@@ -26,7 +25,6 @@ export const PopupCurrentEvent = ({ event, alreadyRegistered, children }: {
 }) => {
   const { data: playerInfo } = usePlayerInfoStore();
   const [discordName, setDiscordName] = useState("");
-
 
   function handleConfirm() {
     if (!playerInfo) {
@@ -47,9 +45,7 @@ export const PopupCurrentEvent = ({ event, alreadyRegistered, children }: {
     });
   }
 
-
   if (!event || !playerInfo) return null;
-
 
   return <Dialog>
     <DialogTrigger>

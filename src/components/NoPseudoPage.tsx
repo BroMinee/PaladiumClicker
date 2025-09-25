@@ -6,7 +6,6 @@ import Discord from "@/components/Discord.tsx";
 import { textFormatting } from "@/components/News.tsx";
 import ImportProfilPretty from "@/components/shared/ImportProfilPretty.tsx";
 
-
 export function NoPseudoPage({ texth1, texth2 }: { texth1: string, texth2: string }) {
   return (
     <div className="flex flex-col gap-4">

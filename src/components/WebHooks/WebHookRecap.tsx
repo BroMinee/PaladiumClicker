@@ -1,6 +1,5 @@
 'use client';
 
-
 import { parseTextFormatting } from "@/components/WebHooks/WebHookMsg.tsx";
 import { useWebhookStore } from "@/stores/use-webhook-store.ts";
 

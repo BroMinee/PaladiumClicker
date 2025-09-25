@@ -4,7 +4,6 @@ import { Area, AreaChart, Legend, ResponsiveContainer, Tooltip, XAxis, YAxis } f
 import React from "react";
 import { formatPrice } from "@/lib/misc.ts";
 
-
 const CustomTooltip = ({ active, payload, label }: any) => {
 
   if (!payload || payload.length === 0)

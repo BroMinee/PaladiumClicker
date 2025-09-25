@@ -5,7 +5,6 @@ import React from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card.tsx";
 import { RenderEvent } from "@/components/NavBar/NavBarClient.tsx";
 
-
 export const PopupNoRewardEvent = ({ children }: { children: React.ReactNode }) => {
   return <Dialog>
     <DialogTrigger>

@@ -16,7 +16,6 @@ const ReactSkinview3d = dynamic(() => import("react-skinview3d").then(mod => mod
   </div>,
 });
 
-
 export function ProfilUsernameInfo() {
   const { data: playerInfo } = usePlayerInfoStore();
 

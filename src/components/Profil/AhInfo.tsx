@@ -6,7 +6,6 @@ import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover
 import { Button } from "@/components/ui/button.tsx";
 import { FaInfoCircle } from "react-icons/fa";
 
-
 export default async function AhInfo() {
   const allItemsInfo = await getAllItems();
 

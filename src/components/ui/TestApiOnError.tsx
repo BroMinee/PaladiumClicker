@@ -67,7 +67,6 @@ export async function TestImportProfile({ pseudoParams = "BroMine__" }: {
   pseudoParams?: string | undefined
 }) {
 
-
   const [apiDown, msgError] = await getPlayerInfo(pseudoParams ?? "BroMine__").then(() => {
     return [false, ""];
   }).catch((error) => {

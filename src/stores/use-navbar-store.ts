@@ -7,17 +7,14 @@ type State = {
   opened: NavBarCategory[],
 }
 
-
 type Actions = {
   setToggleOpen: (category: NavBarCategory) => void,
 }
-
 
 const storageKey = 'navbar';
 const initialState: State = {
   opened: ["Statistiques et données", "Outils"],
 };
-
 
 export const useNavbarStore = create<State & Actions, [["zustand/persist", State & Actions]]>(persist<State & Actions>(
   (set) => ({

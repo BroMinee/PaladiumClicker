@@ -8,7 +8,6 @@ import DetailedMarketOfferList from "@/components/AhTracker/DetailedMarketOfferL
 import React from "react";
 import QuantitySelectorDisplay from "@/components/AhTracker/QuantitySelectorDisplay.tsx";
 
-
 export async function MarketServerFetcher({ item }: { item: OptionType }) {
   let data = [] as AhItemHistory[];
   let itemInfo = null as PaladiumAhItemStat | null;

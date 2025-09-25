@@ -11,7 +11,6 @@ import { generateStatusUrl } from "@/lib/misc.ts";
 import { AdminShopPeriode } from "@/types";
 import GraphPlayerCount from "@/components/Status/GraphPlayerCount.tsx";
 
-
 export async function generateMetadata() {
   const title = "PalaTracker | Statut";
   const apiDownPaladium = await isApiDown();
@@ -35,7 +34,6 @@ export async function generateMetadata() {
     description += "🚨 L'import de profil est actuellement hors service.\n";
   else
     description += "🟢 L'import de profil est actuellement en ligne.\n";
-
 
   try {
     return {
@@ -72,7 +70,6 @@ export default async function Home(
   let periode = searchParams.periode;
   let periodeEnum = searchParams.periode as AdminShopPeriode;
 
-
   if (periode === undefined)
     periode = "day";
 
@@ -82,7 +79,6 @@ export default async function Home(
   } else {
     periodeEnum = periode as AdminShopPeriode;
   }
-
 
   return (
     <div className="flex flex-col gap-4">

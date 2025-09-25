@@ -1,7 +1,6 @@
 import { Card, CardHeader } from "@/components/ui/card.tsx";
 import LoadingSpinner from "@/components/ui/loading-spinner.tsx";
 
-
 export default function LoadingData({ username }: { username: string | undefined }) {
   return (
     <div className="flex justify-center items-center" style={{ height: '70vh' }}>

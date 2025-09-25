@@ -8,7 +8,6 @@ export function textFormatting(
     /(\*\*.*?\*\*|\*.*?\*|__.*?__|~~.*?~~|°.*?°|\[.*?\]\(.*?\)|\n)/g
   );
 
-
   return (
     <>
       {parts.map((part, index) => {

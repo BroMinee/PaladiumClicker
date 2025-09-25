@@ -27,7 +27,6 @@ const CustomTooltip = ({ active, payload, label }: any) => {
   }
 };
 
-
 const PlotAdminShopChart = ({ data, periode, webhook = false }: {
   data: AdminShopItemDetail[],
   webhook?: boolean,

@@ -20,11 +20,9 @@ export async function generateMetadata() {
     };
 }
 
-
 export type subGroupsType = Record<string, WebHookAlert[]>;
 
 export type groupsType = Record<string, subGroupsType>;
-
 
 export default async function WebHooksMainPage() {
   return (
@@ -40,7 +38,6 @@ export default async function WebHooksMainPage() {
     </AuthForceWrapper>
   );
 };
-
 
 export async function WebHooksPage() {
     let webHookAlerts = await getWebHookFromCookies();
@@ -81,4 +78,3 @@ export async function WebHooksPage() {
       </CardContent>
     );
 }
-

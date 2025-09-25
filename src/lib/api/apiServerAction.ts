@@ -22,7 +22,6 @@ import { cookies } from "next/headers";
 import { API_PALATRACKER } from "@/lib/constants.ts";
 import { redirect } from "next/navigation";
 
-
 /* The content of this file is not sent to the client*/
 
 export async function getPlayerInfoAction(username: string) {
@@ -107,7 +106,6 @@ export async function getEventNotClaimed(uuid: string) {
     return "Not winner";
   }
 }
-
 
 export async function getNotificationWebSite() {
   try {
@@ -194,7 +192,6 @@ export async function isAuthenticate(): Promise<DiscordUser | null> {
     console.error(error);
   }
 
-
   return null;
 }
 
@@ -267,7 +264,6 @@ export async function deleteWebhookServerAction(webHookAlertId: number): Promise
     return { succeeded: false, msg: "Not authenticated" };
   }
 
-
   const r = await fetchPostWithHeader<{
     succeeded: boolean,
     msg: string
@@ -332,7 +328,6 @@ export async function editWebhookChannelNameServerAction(guild_id: string, chann
     channel_name: channel_name
   };
 
-
   const r = await fetchPostWithHeader<{
     succeeded: boolean,
     msg: string
@@ -362,7 +357,6 @@ export async function editWebhookGuildNameServerAction(guild_id: string, channel
     guild_id: guild_id,
     guild_name: guild_name
   };
-
 
   const r = await fetchPostWithHeader<{
     succeeded: boolean,

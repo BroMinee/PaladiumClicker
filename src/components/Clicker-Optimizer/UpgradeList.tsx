@@ -81,5 +81,4 @@ function Upgrade({ upgradeType, index, imgPath, jsonToUse }: UpgradeProps) {
   );
 }
 
-
 export default UpgradeList;

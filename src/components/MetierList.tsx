@@ -6,7 +6,6 @@ import { MetierDecrease, MetierDisplayLvl, MetierIncrease, MetierOutline } from 
 import Image from "next/image";
 import { safeJoinPaths } from "@/lib/misc.ts";
 
-
 import metierJson from "@/assets/metier.json";
 import constants from "@/lib/constants.ts";
 type MetierListProps = {
@@ -43,7 +42,6 @@ const MetierList = ({ editable = true }: MetierListProps) => {
   );
 };
 
-
 type MetierProps = {
   editable?: boolean;
   minLevel?: number;
@@ -57,7 +55,6 @@ export const MetierComponentWrapper = ({
                                        }: MetierProps) => {
 
   const metierName = structuredClone(metierJson[metierKey].name as MetierKey);
-
 
   return (
     <>
@@ -83,6 +80,5 @@ export const MetierComponentWrapper = ({
     </>
   );
 };
-
 
 export default MetierList;

@@ -5,7 +5,6 @@ import { ProfilSectionEnum } from "@/types";
 import { redirect } from "next/navigation";
 import ProfilSelectorDisplay from "@/components/Profil/ProfilSelectorDisplay.tsx";
 
-
 export async function generateMetadata(props: { params: Promise<{ username: string }> }) {
   const params = await props.params;
   return {

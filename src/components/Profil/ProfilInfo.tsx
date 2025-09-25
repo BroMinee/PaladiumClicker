@@ -18,9 +18,7 @@ import {
 import { FactionNameInfo } from "@/components/Profil/FactionInfoClient.tsx";
 import ImportProfil from "@/components/shared/ImportProfil.tsx";
 
-
 export default function ProfilInfo() {
-
 
   return (<><Card className="rounded-b-xl rounded-t-none">
     <CardHeader className="flex flex-row items-center justify-between">
@@ -38,7 +36,6 @@ export default function ProfilInfo() {
             </GradientText>
           </h1>
         </div>
-
 
         <div className="flex flex-row gap-2 items-center mt-1.5">
           <FaEye/>

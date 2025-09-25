@@ -42,4 +42,3 @@ export function SmallLoginButton({href, redirectUrl }: {href: string, redirectUr
     <TbLogin2 size={28}/>
   </Button>;
 }
-

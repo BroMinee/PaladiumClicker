@@ -8,7 +8,6 @@ type State = {
   }
 }
 
-
 type Actions = {
   setFallingImage: (value: boolean) => void
   setDefaultProfile: (value: boolean) => void

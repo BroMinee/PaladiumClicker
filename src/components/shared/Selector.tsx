@@ -31,7 +31,6 @@ const customStyles: StylesConfig<OptionType, false> = {
   }),
 };
 
-
 type SelectorProps = {
   options: OptionType[]
   defaultValue: OptionType | null
@@ -59,7 +58,6 @@ const Selector = ({ options, defaultValue, setInputValue }: SelectorProps) => {
       setMenuIsOpen(false);
     }
   };
-
 
   const formatOptionLabel = ({ label, label2, img }: OptionType) => (
     <div className="flex items-center">

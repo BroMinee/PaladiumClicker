@@ -32,4 +32,3 @@ export function RankingSelectorCard({ rankingType, rankingPage }: { rankingType:
     </CardContent>
   </Card>;
 }
-

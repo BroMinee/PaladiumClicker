@@ -32,7 +32,6 @@ export function WebHookPreviewPage({
 
   const [groups, setGroups] = useState(groupsArg);
 
-
   return (
     <div className="flex flex-col gap-12">
       <CreateNewWebHookButtonWithoutKnowing/>
@@ -67,7 +66,6 @@ export function WebHookPreviewPage({
   );
 }
 
-
 export function WebHookPreview({ webHookAlert, groups, setGroups }: {
   webHookAlert: WebHookAlert,
   groups: groupsType,
@@ -92,7 +90,6 @@ export function WebHookPreview({ webHookAlert, groups, setGroups }: {
     setUsername,
   } = useWebhookStore();
   const router = useRouter();
-
 
   function handleEdit(webHookAlert: WebHookAlert) {
     setCurrentWebHookType(webHookAlert.type);
@@ -130,7 +127,6 @@ export function WebHookPreview({ webHookAlert, groups, setGroups }: {
     router.push(`${constants.webhooksPath}/edit`);
   }
 
-
   async function handleDelete(webHookAlert: WebHookAlert) {
     const res = await deleteWebhookServerAction(webHookAlert.id);
     if (!res.succeeded) {
@@ -147,7 +143,6 @@ export function WebHookPreview({ webHookAlert, groups, setGroups }: {
     setIsPopupOpen(false);
     toast.success(`Suppression annulée`);
   };
-
 
   return (
     <div className="alert-container w-full !border-0">

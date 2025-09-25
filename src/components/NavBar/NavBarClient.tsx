@@ -22,7 +22,6 @@ import { PopupNoRewardEvent } from "@/components/Events/PopupNoRewardEvent.tsx";
 import { NavBarCategory, NotificationWebSiteResponse } from "@/types";
 import { useNavbarStore } from "@/stores/use-navbar-store.ts";
 
-
 export default function LinkClient({ path, children }: {
   path: PathValid,
   children: React.ReactNode
@@ -62,7 +61,6 @@ export default function LinkClient({ path, children }: {
     if (!link)
       return;
 
-
     setIsActive(link === path);
   }, [pathname, path]);
 
@@ -71,7 +69,6 @@ export default function LinkClient({ path, children }: {
   if (mounted) {
     [newNotification, newNotificationText] = hasNewNotification(last_visited, path);
   }
-
 
   if (!mounted)
     return <Link
@@ -85,7 +82,6 @@ export default function LinkClient({ path, children }: {
   const hoverElement: ReactNode = (
     <div className="bg-primary rounded-md p-2 font-bold">{newNotificationText}</div>
   );
-
 
   if (newNotification) {
     return <HoverText text={hoverElement}>
@@ -177,7 +173,6 @@ export function CategorieDisplay({ name, children }: {
     }
   }, [mounted, playerInfo, last_visited, name, subLinks]);
 
-
   useEffect(() => {
     const el = contentRef.current;
     if (!el) return;
@@ -249,7 +244,6 @@ export function GiveawayFakeLink({ children }: {
    *   event === null && description !== "" -> PopUpRewardEvent (because has win)
    *   event === null && description === "" -> PopUpRewardEvent (not win recently)
    * */
-
 
   useEffect(() => {
     if (!playerInfo) return;

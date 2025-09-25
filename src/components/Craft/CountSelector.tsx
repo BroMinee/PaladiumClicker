@@ -7,7 +7,6 @@ import { useEffect, useMemo, useState } from "react";
 import { generateCraftUrl } from "@/lib/misc.ts";
 import debounce from "debounce";
 
-
 export function CountSelector({ item, count }: { item: OptionType | undefined, count: number | undefined }) {
   const router = useRouter();
   const [inputValue, setInputValue] = useState(String(count || 1));

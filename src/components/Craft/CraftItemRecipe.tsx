@@ -93,7 +93,6 @@ function ShowCraft({ item, craft_recipe, slotItemInfo }: {
   );
 }
 
-
 function ShowCraftingTable({ slotItemInfo }: {
   slotItemInfo: OptionType[]
 }) {

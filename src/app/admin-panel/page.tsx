@@ -16,7 +16,6 @@ export async function generateMetadata() {
   };
 }
 
-
 export default async function AdminPanelPage() {
   return (
     <AuthForceWrapper url={`${constants.adminPanelPath}/login`}>

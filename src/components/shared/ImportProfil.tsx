@@ -95,7 +95,6 @@ export default function ImportProfil({
   // if (playerInfo !== null)
   // alert(`${new Date(playerInfo.last_fetch + 1000 * 15 * 60)}, ${new Date()} ${new Date(playerInfo.last_fetch + 1000 * 15 * 60) <= new Date()}`)
 
-
   useEffect(() => {
     if (newPlayerInfo) {
       toast.success(`Profil de ${newPlayerInfo.username} chargé`);
@@ -175,7 +174,6 @@ function UpdateProfilButton({
     {fetching && <LoadingSpinner size={4}/> }
   </Button>;
 }
-
 
 function hasDifference(oldPlayerInfo: PlayerInfo, newPlayerInfo: PlayerInfo): boolean {
   if (oldPlayerInfo.metier.farmer.level > newPlayerInfo.metier.farmer.level) return true;
@@ -275,7 +273,6 @@ function DisplayDifference({ oldPlayerInfo, newPlayerInfo }: displayDifferencePr
           else return null;
         })
       }
-
 
       {
         oldPlayerInfo.many_upgrade.map((b, index) => {

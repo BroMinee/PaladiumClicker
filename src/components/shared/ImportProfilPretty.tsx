@@ -45,7 +45,6 @@ export default function ImportProfilPretty({
     }, 0);
   };
 
-
   async function onSubmit(event: FormEvent<HTMLFormElement>) {
     if (fetching)
       return;
@@ -102,7 +101,6 @@ export default function ImportProfilPretty({
   };
   // if (playerInfo !== null)
   // alert(`${new Date(playerInfo.last_fetch + 1000 * 15 * 60)}, ${new Date()} ${new Date(playerInfo.last_fetch + 1000 * 15 * 60) <= new Date()}`)
-
 
   useEffect(() => {
     if (newPlayerInfo) {
@@ -225,7 +223,6 @@ function UpdateProfilButton({
   </Button>;
 }
 
-
 function hasDifference(oldPlayerInfo: PlayerInfo, newPlayerInfo: PlayerInfo): boolean {
   if (oldPlayerInfo.metier.farmer.level > newPlayerInfo.metier.farmer.level) return true;
   if (oldPlayerInfo.metier.miner.level > newPlayerInfo.metier.miner.level) return true;
@@ -324,7 +321,6 @@ function DisplayDifference({ oldPlayerInfo, newPlayerInfo }: displayDifferencePr
           else return null;
         })
       }
-
 
       {
         oldPlayerInfo.many_upgrade.map((b, index) => {

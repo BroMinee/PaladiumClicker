@@ -10,7 +10,6 @@ type AhItemsProps = {
   uuid_seller: string;
 }
 
-
 export default function AhItem({ item, allItemsInfo, uuid_seller }: AhItemsProps) {
   if (!item["item"])
     return <LoadingData username={undefined}/>;
@@ -25,7 +24,6 @@ export default function AhItem({ item, allItemsInfo, uuid_seller }: AhItemsProps
     </div>;
   if (!closestItem)
     return "Unknown item";
-
 
   return (
     <Link href={`${generateAhShopUrl(closestItem)}`} className="w-[95%] hover:scale-105 duration-300 cursor-pointer">

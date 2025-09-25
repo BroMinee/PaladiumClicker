@@ -11,7 +11,6 @@ type State = {
   version: number;
 }
 
-
 type Actions = {
   setPlayerInfo: (playerInfo: PlayerInfo | null) => void;
   reset: () => void;
@@ -25,14 +24,12 @@ type Actions = {
   setDefaultProfile: () => void;
 }
 
-
 const storageKey = 'player-info';
 const initialState: State = {
   data: null,
   selectedCPS: -1,
   version: constants.version,
 };
-
 
 export const usePlayerInfoStore = create<State & Actions, [["zustand/persist", State & Actions]]>(persist<State & Actions>(
   (set) => ({
@@ -178,7 +175,6 @@ export const usePlayerInfoStore = create<State & Actions, [["zustand/persist", S
         }
       }
 
-
       return {
         selectedCPS: index,
         data: {
@@ -214,7 +210,6 @@ export const usePlayerInfoStore = create<State & Actions, [["zustand/persist", S
       }
 
       targettedBuilding.own += 1;
-
 
       return {
         data: {

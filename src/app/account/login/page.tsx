@@ -3,7 +3,6 @@ import React from "react";
 import { API_PALATRACKER } from "@/lib/constants.ts";
 import { LoginButton } from "@/components/Login/LoginButton.tsx";
 
-
 export default function WebHooksPage() {
   return (
     <Card>
@@ -36,7 +35,6 @@ export default function WebHooksPage() {
             - Les access tokens et refresh tokens sont chiffrés et stockés dans notre base de données.
         </span>
         </div>
-
 
       </CardHeader>
       <CardContent className="flex justify-center">

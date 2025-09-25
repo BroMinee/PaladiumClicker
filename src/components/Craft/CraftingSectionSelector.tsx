@@ -5,7 +5,6 @@ import { cn } from "@/lib/utils.ts";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area.tsx";
 import { CraftSectionEnum } from "@/types";
 
-
 export function CraftingSectionSelector() {
 
   const searchParams = useSearchParams();

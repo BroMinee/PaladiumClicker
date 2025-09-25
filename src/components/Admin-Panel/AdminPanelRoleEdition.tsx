@@ -7,7 +7,6 @@ import { editRoleSubmit } from "@/lib/api/apiServerAction.ts";
 import { toast } from "sonner";
 import LoadingSpinner from "@/components/ui/loading-spinner.tsx";
 
-
 export default function EditRole({ defaultValue, discord_id }: { defaultValue: Role, discord_id: string }) {
 
   const [role, setRole] = useState<Role>(defaultValue);

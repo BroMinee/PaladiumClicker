@@ -6,7 +6,6 @@ import { ProfileNavBar } from "@/components/NavBar/ProfileNavBar.tsx";
 import { API_PALATRACKER } from "@/lib/constants.ts";
 import { SmallLoginButton } from "@/components/Login/LoginButton.tsx";
 
-
 export const LoginDiscord = () => {
   return <div>
     <SmallLoginButton href={`${API_PALATRACKER}/v1/auth/login/discord`} redirectUrl={"/account"}/>
@@ -25,4 +24,3 @@ export const LogoutDiscord = () => {
     </div>
   );
 };
-

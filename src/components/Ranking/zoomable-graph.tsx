@@ -30,14 +30,12 @@ type ZoomableChartProps = {
   profil: boolean;
 };
 
-
 const chartConfig = {
   events: {
     label: "value",
     color: "hsl(var(--primary))",
   },
 } satisfies ChartConfig;
-
 
 const gradientColors = [
   { "color": "#ff9090", "color2": "#ff0000" },
@@ -55,7 +53,6 @@ export function ZoomableChart({ data: initialData, rankingType, profil }: Zoomab
   const router = useRouter();
   const searchParams = useSearchParams();
 
-
   const { data: playerInfo } = usePlayerInfoStore();
   const [refAreaLeft, setRefAreaLeft] = useState<string | null>(null);
   const [refAreaRight, setRefAreaRight] = useState<string | null>(null);
@@ -67,7 +64,6 @@ export function ZoomableChart({ data: initialData, rankingType, profil }: Zoomab
   const [isAnimated, setIsAnimated] = useState(false);
 
   const [opacity, setOpacity] = useState<{ [key: string]: number }>({});
-
 
   const [uniqueUsernames, setUniqueUsernames] = useState<string[]>([]);
 
@@ -151,7 +147,6 @@ export function ZoomableChart({ data: initialData, rankingType, profil }: Zoomab
     if (!payload || payload.length === 0)
       return null;
 
-
     if (active && payload && payload.length) {
 
       const payloadOrder = payload.sort((a: any, b: any) => a.payload[`${a.name}_pos`] - b.payload[`${b.name}_pos`]);
@@ -218,7 +213,6 @@ export function ZoomableChart({ data: initialData, rankingType, profil }: Zoomab
     [key: string]: { [key: string]: number | string };
   }
 
-
   useEffect(() => {
 
     const transformedData = Object.values(initialData.reduce((acc, item) => {
@@ -256,7 +250,6 @@ export function ZoomableChart({ data: initialData, rankingType, profil }: Zoomab
 
     usernames.delete("valeur manquante");
 
-
     setUniqueUsernames(Array.from(usernames));
     setOriginalData(transformedData);
     if (initialData.length > 0) {
@@ -271,7 +264,6 @@ export function ZoomableChart({ data: initialData, rankingType, profil }: Zoomab
     if (!startTime || !endTime) {
       return originalData;
     }
-
 
     const dataPointsInRange = originalData
       .filter(
@@ -295,7 +287,6 @@ export function ZoomableChart({ data: initialData, rankingType, profil }: Zoomab
     }, Infinity),
     [uniqueUsernames, zoomedData]
   );
-
 
   const DataFormatter = (number: number) => {
     if (number > 1000000000000000000000000)
@@ -402,7 +393,6 @@ export function ZoomableChart({ data: initialData, rankingType, profil }: Zoomab
     const dateDDMMYYYYHHMM = `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()} ${hours < 10 ? `0${hours}` : hours}h${minutes < 10 ? `0${minutes}` : minutes}`;
     return rankingType !== RankingType.vote ? date.toLocaleDateString("fr-FR") : dateDDMMYYYYHHMM;
   };
-
 
   return (
     <Card className="w-full h-full">

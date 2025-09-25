@@ -31,7 +31,6 @@ export async function generateMetadata(props: { searchParams: Promise<{ item: st
     };
   }
 
-
   const title = `PalaTracker | AH Tracker | ${item.label}`;
   const description = "Suivez les historiques de vente de vos items préférés sur Paladium";
   return {

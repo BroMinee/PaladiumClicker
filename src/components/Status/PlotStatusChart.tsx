@@ -26,7 +26,6 @@ const CustomTooltip = ({ active, payload, label }: any) => {
   }
 };
 
-
 const PlotStatusChart = ({ data, periode }: { data: ServerPaladiumStatusResponse[], periode: StatusPeriode }) => {
   // TODO: zoomable chart
   // TODO: daily price and not 15min delta

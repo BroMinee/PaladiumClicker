@@ -13,7 +13,6 @@ import { HowToXp, searchParamsXpBonusPage, XpBonus } from "@/components/Xp-Calcu
 import constants from "@/lib/constants.ts";
 import { safeJoinPaths } from "@/lib/misc.ts";
 
-
 export async function generateMetadata(
   props: { params: Promise<{ username: string }>, searchParams: Promise<searchParamsXpBonusPage> }
 ) {

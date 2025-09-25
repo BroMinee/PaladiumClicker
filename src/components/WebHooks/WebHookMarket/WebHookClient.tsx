@@ -23,7 +23,6 @@ function WebHookMarketClient({ options }: {
 function MarketSelectorClient() {
   const [options, setOptions] = useState<OptionType[]>([]);
 
-
   useEffect(() => {
     getAllItemsServerAction().then((items) => {
       setOptions(items);
@@ -33,7 +32,6 @@ function MarketSelectorClient() {
 
   if (options.length === 0)
     return <div>Loading...</div>;
-
 
   return (
     <WebHookMarketClient options={options}/>

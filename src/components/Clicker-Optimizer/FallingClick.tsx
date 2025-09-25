@@ -12,14 +12,12 @@ const FallingClickImage = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const { settings } = useSettingsStore();
 
-
   useEffect(() => {
     if (!playerInfo || !settings.fallingImage)
       return;
 
     setTimeout(() => {
       const interval = setInterval(() => {
-
 
         if (containerRef?.current === null) {
           return;

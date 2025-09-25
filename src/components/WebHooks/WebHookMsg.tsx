@@ -11,7 +11,6 @@ import { useWebhookStore } from "@/stores/use-webhook-store.ts";
 import React from "react";
 import Image from "next/image";
 
-
 export function GenerateEmbedPreview(footer: string) {
 
   const {

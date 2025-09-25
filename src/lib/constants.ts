@@ -54,7 +54,6 @@ export type LabelValid =
   | "Account"
   | "Admin Panel";
 
-
 const profilPath: PathValid = "/profil";
 const ahPath: PathValid = "/ah";
 const calculatorXpPath: PathValid = "/xp-calculator";
@@ -97,7 +96,6 @@ const links: LinkList = {
   "/account": { label: "Account", requiredPseudo: false },
   "/admin-panel": { label: "Admin Panel", requiredPseudo: false }
 };
-
 
 const SMELT = "Smelt";
 const BREAK = "Break";
@@ -489,7 +487,6 @@ const menuPaths: Map<NavBarCategory, PathValid[]> = new Map<NavBarCategory, Path
   ['Informations et gestion', ["/status", "/patchnote", "/politique-de-confidentialite", "/about"]],
 ]);
 
-
 const deprecatedIdAchivement = [
   "ariane.end",
   "core.command.achievement",
@@ -515,7 +512,6 @@ const dictAchievementIdToSubIds = new Map<string, string[]>([
 
   ]
 ]);
-
 
 const dictAchievementIdToIcon = new Map<string, string>([
   // HOW_TO_START
@@ -702,6 +698,3 @@ const constants = {
 };
 
 export default constants;
-
-
-

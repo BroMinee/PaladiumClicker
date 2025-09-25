@@ -4,7 +4,6 @@ import { redirect, useParams, useRouter, useSearchParams } from "next/navigation
 import { cn } from "@/lib/utils.ts";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area.tsx";
 
-
 export default function ProfilSelector() {
 
   const searchParams = useSearchParams();
@@ -16,7 +15,6 @@ export default function ProfilSelector() {
   }
 
   const currentSection = searchParams.get("section") || "Home";
-
 
   const router = useRouter();
 

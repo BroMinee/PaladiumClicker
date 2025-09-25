@@ -14,7 +14,6 @@ export function CraftingInformationClient({ root }: { root: Tree<NodeType> }) {
     setTree(root);
   }, [root]);
 
-
   useEffect(() => {
 
     const alreadyVisitedValue = new Set<string>();
@@ -38,9 +37,7 @@ export function CraftingInformationClient({ root }: { root: Tree<NodeType> }) {
     const newLeaves = groupedLeaves.map((el) => { return getValueTree<NodeType>(el); }).filter((el) => el.count > 0);
     setLeavesList(newLeaves);
 
-
   }, [tree]);
-
 
   return <>
     <MyTreeView root={tree} setRoot={setTree}/>

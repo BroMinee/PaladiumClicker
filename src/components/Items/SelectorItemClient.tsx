@@ -3,7 +3,6 @@ import { useRouter } from "next/navigation";
 import Selector from "@/components/shared/Selector.tsx";
 import { OptionType } from "@/types";
 
-
 export function SelectorItemClient({
                                      options, url, defaultValue,
                                      setInputValueFunction

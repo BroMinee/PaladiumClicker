@@ -31,7 +31,6 @@ export async function generateMetadata(props: { searchParams: Promise<searchPara
     };
   }
 
-
   const title = `PalaTracker | Craft Optimizer | ${item.label}`;
   const description = "Calcule les ressources nécessaires pour tes crafts sur Paladium, en fonction de tes besoins, obtient une évoluation du prix avec le market en temps réel.";
   return {
@@ -50,7 +49,6 @@ export async function generateMetadata(props: { searchParams: Promise<searchPara
     },
   };
 }
-
 
 export default async function Home(props: { searchParams: Promise<searchParamsCraftPage> }) {
   const searchParams = await props.searchParams;
@@ -97,5 +95,3 @@ function BodyPage({ children }: { children: React.ReactNode }) {
     </>
   );
 }
-
-

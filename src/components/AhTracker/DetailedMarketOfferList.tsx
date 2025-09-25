@@ -8,7 +8,6 @@ import { textFormatting } from "@/components/News.tsx";
 import HoverText from "@/components/ui/hovertext.tsx";
 import constants from "@/lib/constants.ts";
 
-
 export default async function DetailedMarketOfferList({ listing, item }: {
   listing: MarketListedItem,
   item: OptionType
@@ -54,7 +53,6 @@ export function DetailedMarketOffer({ itemSelected, offer }: { itemSelected: Opt
 
   const overlayNames = ["amethyst_overlay.png", "candy_overlay.png", "cavern_overlay.png", "diamond_overlay.png", "emerald_overlay.png", "eruption_overlay.png", "gold_overlay.png", "great_tree_overlay.png", "iron_overlay.png", "lapis_lazuli_overlay.png", "plain_overlay.png", "redstone_overlay.png", "snow_overlay.png"];
   const overlayName = overlayNames[Math.floor(Math.random() * overlayNames.length)];
-
 
   return <div className="grid grid-cols-2 md:flex md:flex-row items-center m-2 bg-card/65 pr-4 pb-2 text-card-foreground">
     <div className="col-span-2 flex flex-row gap-8 md:w-[35%] w-full">

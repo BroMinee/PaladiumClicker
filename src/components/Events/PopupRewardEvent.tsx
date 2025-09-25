@@ -6,7 +6,6 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card.t
 import { RenderEvent } from "@/components/NavBar/NavBarClient.tsx";
 import Discord from "@/components/Discord.tsx";
 
-
 export const PopupRewardEvent = ({ winningPrice, children }: { winningPrice: string, children: React.ReactNode }) => {
   return <Dialog>
     <DialogTrigger>

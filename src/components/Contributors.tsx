@@ -40,7 +40,6 @@ const Contributors = () => {
     }
   ];
 
-
   return <div className="grid grid-cols-1 grid-rows-1 md:grid-cols-2 md:grid-rows-2 gap-6">
     {contributeurs.map((contributeur, index) => (
       <a href={contributeur["url"]} key={contributeur.pseudo + contributeur.uuid} className="h-full">
@@ -71,7 +70,6 @@ const Contributors = () => {
       </a>
     ))}
   </div>;
-
 
 };
 

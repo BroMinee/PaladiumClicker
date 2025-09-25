@@ -56,7 +56,6 @@ export async function decryptAES256(encryptedText: string, key: string): Promise
 
   const iv = encryptedDataWithIv.slice(0, 16);
 
-
   const encryptedData = encryptedDataWithIv.slice(16);
 
   const cryptoKey = await crypto.subtle.importKey(
@@ -108,4 +107,3 @@ export const checkAnswerPalaAnimation = async (answer: string, session_uuid: str
     user_time
   }), 0);
 };
-

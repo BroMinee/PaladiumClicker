@@ -21,7 +21,6 @@ export async function ProfilRankingSectionServer({ rankingType, searchParams }: 
     return [] as RankingResponse;
   });
 
-
   let usernames = searchParams.usernames ? searchParams.usernames.split(',') : [];
 
   for (let i = 0; i < usernames.length; i++) {
@@ -32,7 +31,6 @@ export async function ProfilRankingSectionServer({ rankingType, searchParams }: 
   }
 
   data = addMissingDate(data);
-
 
   return <ZoomableChart data={data} rankingType={rankingType} profil={true}/>;
 }

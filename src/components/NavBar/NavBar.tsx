@@ -20,7 +20,6 @@ import GradientText from "@/components/shared/GradientText.tsx";
 import { NavBarProfilInfo } from "@/components/NavBar/NavBarProfilInfo.tsx";
 import { MdOutlineWebhook } from "react-icons/md";
 
-
 const Navbar = () => {
   return (
     <>
@@ -28,7 +27,6 @@ const Navbar = () => {
         className="h-screen overflow-auto no-scrollbar bg-card hidden lg:flex flex-col w-64 border-r border-gray-600">
         <NavBarContent/>
       </div>
-
 
       <div className="fixed top-0 left-0 p-1 m-2 bg-primary rounded-md lg:hidden">
         <MobileNav/>
