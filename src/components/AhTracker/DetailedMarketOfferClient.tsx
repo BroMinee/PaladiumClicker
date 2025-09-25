@@ -8,9 +8,9 @@ export function SellNameMarket({ uuid }: { uuid: string }) {
   useEffect(() => {
     getPlayerUsernameFromUUID(uuid).then((username) => setUsername(username)).catch(() =>
     {
-      setUsername("Player not found")
+      setUsername("Username not found")
     });
-  }, []);
+  }, [uuid]);
 
   return (
     <a href={`/profil/${username}`}

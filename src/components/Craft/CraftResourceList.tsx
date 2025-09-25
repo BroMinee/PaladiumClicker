@@ -77,7 +77,7 @@ export function CraftResourceList({ list }: { list: NodeType[] }) {
       setTotalPrice(-1);
       setSubTotalPrice([]);
     }
-  }, [ahItems]);
+  }, [ahItems, listState]);
 
   return (
     <>

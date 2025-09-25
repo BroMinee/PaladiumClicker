@@ -41,7 +41,7 @@ export default function ProfileFetcherWrapper({ username, children }: {
       });
     }
 
-  }, [playerInfo, isFirstRender]);
+  }, [username, setPlayerInfo, settings, playerInfo, isFirstRender]);
 
 
   if (reloadProfilNeeded(playerInfo, username, settings.defaultProfile))

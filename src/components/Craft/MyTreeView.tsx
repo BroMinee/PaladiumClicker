@@ -40,7 +40,8 @@ const MyTreeView = ({ root, setRoot }: MyTreeViewProps) => {
       updateNodeCheck(node, root);
     }
     setRoot({ ...root });
-  }, [checked]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- root is modified in setRoot
+  }, [checked, setRoot]);
 
 
   useEffect(() => {
@@ -48,7 +49,7 @@ const MyTreeView = ({ root, setRoot }: MyTreeViewProps) => {
       const allNodeValues = getAllValues(node).filter((el) => !checked.includes(el));
       setExpanded(allNodeValues);
     }
-  }, [node]);
+  }, [node, checked]);
 
   useEffect(() => {
     const newNode = createNode(root);

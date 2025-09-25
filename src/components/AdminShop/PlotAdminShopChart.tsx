@@ -86,7 +86,6 @@ const PlotAdminShopChart = ({ data, periode, webhook = false }: {
         }
       </AreaChart>
     </ResponsiveContainer>
-  )
-    ;
+  );
 };
 export default PlotAdminShopChart;

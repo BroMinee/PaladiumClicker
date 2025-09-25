@@ -9,7 +9,7 @@ export function AuthGetWrapper() {
     isAuthenticate().then((profileInfo) => {
       setProfileInfo(profileInfo);
     })
-  }, []);
+  }, [setProfileInfo]);
   return null;
 }
 

@@ -107,7 +107,7 @@ export default function ImportProfil({
     else {
       console.error("newPlayerInfo is null")
     }
-  }, [update]);
+  }, [update, newPlayerInfo, setPlayerInfo]);
 
   return (
     <div className={cn("flex gap-2", navBar ? "flex-col" : "")}>

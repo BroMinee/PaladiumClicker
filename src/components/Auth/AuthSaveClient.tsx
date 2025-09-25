@@ -12,7 +12,7 @@ export function AuthSaveClient({ profileInfo, children }: {
   const { setProfileInfo } = useProfileStore();
   useEffect(() => {
     setProfileInfo(profileInfo);
-  }, []);
+  }, [setProfileInfo, profileInfo]);
 
   return children;
 }
@@ -21,6 +21,6 @@ export function AuthRedirectClient({ url }: { url: string }) {
   const router = useRouter();
   useEffect(() => {
     router.push(url);
-  }, []);
+  }, [url, router]);
   return null;
 }

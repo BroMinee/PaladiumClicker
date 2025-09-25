@@ -78,7 +78,6 @@ const PlotStatusChart = ({ data, periode }: { data: ServerPaladiumStatusResponse
                        label={{ position: 'top', value: `Moyenne ${moyenneText}` }}/>
       </AreaChart>
     </ResponsiveContainer>
-  )
-    ;
+  );
 };
 export default PlotStatusChart;

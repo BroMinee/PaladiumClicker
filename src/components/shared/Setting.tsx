@@ -25,7 +25,7 @@ export default function Setting() {
     if (settings.defaultProfile && playerInfo?.username !== constants.defaultUsername) {
       setDefaultProfileLocal();
     }
-  }, [settings.defaultProfile]);
+  }, [settings.defaultProfile, playerInfo, setDefaultProfileLocal]);
 
   return (
     <DropdownMenu>

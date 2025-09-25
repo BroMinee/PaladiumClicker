@@ -42,7 +42,7 @@ export function SetLevelInUrl({ selected, params, searchParams }: {
 
     router.push(generateXpCalculatorUrl(params.username, selected, levelToReach, searchParams.double, searchParams.dailyBonus, searchParams.f2, searchParams.f3), { scroll: false });
 
-  }, [playerInfo, searchParams]);
+  }, [playerInfo, searchParams, selected, params.username, router]);
 
   if (!playerInfo)
     return;

@@ -265,7 +265,7 @@ export function ZoomableChart({ data: initialData, rankingType, profil }: Zoomab
       endDate.setDate(endDate.getDate() + 1);
       setEndTime(endDate.toISOString());
     }
-  }, [initialData]);
+  }, [initialData, rankingType, searchParams]);
 
   const zoomedData = useMemo(() => {
     if (!startTime || !endTime) {

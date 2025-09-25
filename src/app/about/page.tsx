@@ -64,7 +64,6 @@ const AboutPage = () => {
       <Contributors/>
 
     </div>
-  )
-    ;
+  );
 };
 export default AboutPage;

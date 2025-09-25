@@ -163,8 +163,8 @@ export function PalaAnimationBody() {
     ).finally(() => {
       setIsChecking(false);
     });
-
-  }, [reroll]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps -- question is modified in setQuestion
+  }, [reroll, setQuestion, setSessionUuid]);
 
   useEffect(() => {
 
@@ -201,7 +201,7 @@ export function PalaAnimationBody() {
     } else {
       setKeyPressTimestamp([...keyPressTimestamp, { key: lastChar, timestamp: new Date().getTime() }]);
     }
-  }, [inputValue]);
+  }, [inputValue, setKeyPressTimestamp, keyPressTimestamp]);
 
   return (
     <div className="flex flex-col gap-2 items-center">
@@ -273,10 +273,11 @@ export function PalaAnimationClassement() {
   const [currentLeaderboard, setCurrentLeaderboard] = useState([] as PalaAnimationLeaderboard);
   const [userScore, setUserScore] = useState({ global_name: "" } as PalaAnimationScore);
 
-  async function updateLeaderboardUI() {
-    if (!profileInfo || sessionUuid === undefined || sessionUuid === "")
-      return;
+  
 
+  useEffect(() => {
+    if (!profileInfo || sessionUuid === undefined || sessionUuid === "")
+        return;
 
     getLeaderboardPalaAnimation(sessionUuid).then(
       (data) => {
@@ -294,16 +295,10 @@ export function PalaAnimationClassement() {
       }
     ).catch(
       (error) => {
-        console.error("Error while fetching leaderboard", error);
+        toast.error("Error while updating leaderboard", error)
       }
     );
-  }
-
-  useEffect(() => {
-    if (sessionUuid === undefined)
-      return;
-    updateLeaderboardUI().catch((error) => toast.error("Error while updating leaderboard", error));
-  }, [sessionUuid]);
+  }, [sessionUuid, profileInfo, setCurrentLeaderboard, setUserScore]);
 
 
   return (

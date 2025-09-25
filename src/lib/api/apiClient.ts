@@ -12,6 +12,7 @@ export async function getPlayerUsernameFromUUID(uuid: string): Promise<string> {
     pseudo = (playerdbAPIJson as PlayerDBApiReponse).data.player.username;
   } catch (error) {
     console.error("Using the other API " + error);
+    throw error;
   }
   return pseudo;
 }

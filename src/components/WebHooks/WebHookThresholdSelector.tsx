@@ -19,7 +19,7 @@ const CounterInputWebhook = ({ min = 0, step = 0.01 }) => {
     if (/^-?\d*\.?\d*$/.test(currentValue)) {
       setThreshold(parseFloat(parseFloat(currentValue).toFixed(2)));
     }
-  }, [currentValue]);
+  }, [currentValue, setThreshold]);
 
   useEffect(() => {
     setCurrentValue(threshold.toString());

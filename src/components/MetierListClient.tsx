@@ -7,7 +7,7 @@ import { FaArrowDown, FaArrowUp } from "react-icons/fa";
 import { Button } from "@/components/ui/button.tsx";
 import { useRouter } from "next/navigation";
 import { searchParamsXpBonusPage } from "@/components/Xp-Calculator/XpCalculator.tsx";
-import { ChangeEvent, useCallback, useEffect, useState } from "react";
+import { ChangeEvent, useEffect, useMemo, useState } from "react";
 import debounce from "debounce";
 
 export function MetierOutline({ metierKey, metierToReach = false }: { metierKey: MetierKey, metierToReach?: boolean }) {
@@ -49,40 +49,42 @@ export function MetierDisplayLvl({ metierKey, lvlToReach, searchParams }:
     setInputValue(lvlToReach ? lvlToReach : playerInfo?.metier[metierKey].level);
   }, [lvlToReach, playerInfo, metierKey])
 
-  const debouncedRedirect = useCallback(
-    debounce((value: number) => {
-      if (lvlToReach === undefined) {
-        if (!playerInfo) {
-          return;
+  const debouncedRedirect = useMemo(
+    () => {
+      return debounce((value: number) => {
+        if (lvlToReach === undefined) {
+          if (!playerInfo) {
+            return;
+          }
+          value = Math.floor(value);
+          value = Math.max(1, value);
+          if (value <= playerInfo.metier[metierKey].level) {
+            decreaseMetierLevel(metierKey, playerInfo.metier[metierKey].level - value);
+          }
+          else if (value > playerInfo.metier[metierKey].level) {
+            increaseMetierLevel(metierKey, value - playerInfo.metier[metierKey].level);
+          }
+        } else {
+          if (!playerInfo) {
+            return;
+          }
+          const newLevel = value;
+          router.push(
+            generateXpCalculatorUrl(
+              playerInfo.username || "undefined",
+              metierKey,
+              newLevel,
+              searchParams?.double,
+              searchParams?.dailyBonus,
+              searchParams?.f2,
+              searchParams?.f3
+            ),
+            { scroll: false }
+          );
         }
-        value = Math.floor(value);
-        value = Math.max(1, value);
-        if (value <= playerInfo.metier[metierKey].level) {
-          decreaseMetierLevel(metierKey, playerInfo.metier[metierKey].level - value);
-        }
-        else if (value > playerInfo.metier[metierKey].level) {
-          increaseMetierLevel(metierKey, value - playerInfo.metier[metierKey].level);
-        }
-      } else {
-        if (!playerInfo) {
-          return;
-        }
-        const newLevel = value;
-        router.push(
-          generateXpCalculatorUrl(
-            playerInfo.username || "undefined",
-            metierKey,
-            newLevel,
-            searchParams?.double,
-            searchParams?.dailyBonus,
-            searchParams?.f2,
-            searchParams?.f3
-          ),
-          { scroll: false }
-        );
-      }
-    }, 1000),
-    [metierKey, lvlToReach, playerInfo, searchParams, router]
+      }, 1000)
+  },
+    [metierKey, lvlToReach, playerInfo, searchParams, router, decreaseMetierLevel, increaseMetierLevel]
   );
 
   useEffect(() => {

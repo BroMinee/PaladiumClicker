@@ -56,7 +56,7 @@ export function AchievementsGlobalProgressBar({ value, showText = true }: { valu
       textRef.current.setAttribute("x", `${newX}`);
       textRef.current.setAttribute("y", `${newY}`);
     }
-  }, [viewBoxState]);
+  }, [viewBoxState, value]);
 
   const renderCustomizedLabel = (props: any) => {
     const { x, y, height, value, viewBox } = props;

@@ -36,7 +36,7 @@ const Stats = () => {
       return;
 
     setBuildingBuyPaths(computeXBuildingAhead(playerInfo, PROCHAIN_ACHAT_COUNT, rps));
-  }, [playerInfo, isNextBuildingVisible]);
+  }, [playerInfo, isNextBuildingVisible, rps]);
 
 
   if (!playerInfo) {

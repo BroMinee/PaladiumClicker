@@ -201,7 +201,7 @@ const StatsDebug = () => {
     const { normal, debug } = computeXBuildingAheadDebug(playerInfo, count, rps, new Date().getTime() < startSeason.getTime() ? new Date() : startSeason);
     setBuildingBuyPathsDebug(debug);
     setBuildingBuyPaths(normal);
-  }, [playerInfo, isNextBuildingVisible, count,startSeason]);
+  }, [playerInfo, isNextBuildingVisible, count,startSeason, rps]);
 
 
   if (!playerInfo) {

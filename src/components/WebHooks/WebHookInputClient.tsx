@@ -59,13 +59,13 @@ export function WebHookInputClientItem() {
   useEffect(() => {
     if (currentWebHookType !== WebHookType.market && thresholdCondition === 'aboveQuantity')
       setThresholdCondition('aboveThreshold');
-  }, [currentWebHookType]);
+  }, [currentWebHookType, thresholdCondition, setThresholdCondition]);
 
   useEffect(() => {
     if (currentWebHookType === WebHookType.EventPvp && eventSelected === "A VOS MARQUES") {
       setItemSelected({ value: "beefCooked", label: "Steak", img: "steak.png", label2: "Steak" });
     }
-  }, [currentWebHookType, eventSelected]);
+  }, [currentWebHookType, eventSelected, setItemSelected]);
 
 
   useEffect(() => {
@@ -94,7 +94,7 @@ export function WebHookInputClientItem() {
       setItemSelected({ value: "glue", label: "Glue", img: "glue.webp", label2: "Colle" });
     else
       setItemSelected(null);
-  }, [currentWebHookType]);
+  }, [currentWebHookType, edit, setEmbed, setContent, setTitle, setItemSelected, setAdminShopItemSelected, setFields, setTitleUrl, setEmbedImg]);
 
   return (
     <div className="flex flex-col xl:flex-row gap-2 justify-between">

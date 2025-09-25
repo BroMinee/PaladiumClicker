@@ -3,7 +3,7 @@ import Link from "next/link";
 import { getLinkFromUrl, safeJoinPaths } from "@/lib/misc.ts";
 import { cn } from "@/lib/utils.ts";
 import { usePlayerInfoStore } from "@/stores/use-player-info-store.ts";
-import React, { ReactNode, useEffect, useState } from "react";
+import React, { ReactNode, useEffect, useMemo, useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import constants, { PathValid } from "@/lib/constants.ts";
 import { FaAngleDown } from "react-icons/fa";
@@ -64,7 +64,7 @@ export default function LinkClient({ path, children }: {
 
 
     setIsActive(link === path);
-  }, [pathname])
+  }, [pathname, path]);
 
   let newNotification = false;
   let newNotificationText = "";
@@ -133,7 +133,7 @@ export function CategorieDisplay({ name, children }: {
   const [open, setOpen] = useState(false);
   const { opened, setToggleOpen } = useNavbarStore();
   const { last_visited } = useNotificationStore();
-  let subLinks: PathValid[] = constants.MenuPath.get(name) || [];
+  let subLinks: PathValid[] = useMemo(() => constants.MenuPath.get(name) || [], [name]);
   const [mounted, setMounted] = useState(false);
   const [newNotification, setNewNotification] = useState(0);
 
@@ -148,7 +148,7 @@ export function CategorieDisplay({ name, children }: {
     if (!mounted)
       return;
     setOpen(opened.includes(name));
-  }, [mounted, opened]);
+  }, [name, mounted, opened]);
 
   function toggleOpen() {
     setOpen(!open)
@@ -175,7 +175,7 @@ export function CategorieDisplay({ name, children }: {
         })
       }
     }
-  }, [mounted, playerInfo]);
+  }, [mounted, playerInfo, last_visited, name, subLinks]);
 
 
   useEffect(() => {

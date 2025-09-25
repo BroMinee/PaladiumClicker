@@ -61,7 +61,7 @@ const FallingClickImage = () => {
         clearInterval(interval);
       }
     }, Math.random() * 1000);
-  }, [selectedCPS]);
+  }, [selectedCPS, playerInfo, settings.fallingImage]);
 
   if (!settings.fallingImage)
     return null;
