@@ -16,8 +16,9 @@ import constants from "@/lib/constants.ts";
 export function DisplayProgressionCategory({ category }: { category: CategoryEnum }) {
   const { data: playerInfo } = usePlayerInfoStore();
 
-  if (!playerInfo)
+  if (!playerInfo) {
     return null;
+  }
 
   const allAchievements = playerInfo.achievements.filter(achievement => achievement.category === category && achievement.icon);
 
@@ -38,8 +39,9 @@ export function DisplayProgressionCategory({ category }: { category: CategoryEnu
 export function AchievementsGlobalProgressBar({ value, showText = true }: { value: number, showText?: boolean }) {
   const textRef = useRef<SVGTextElement>(null);
   const [viewBoxState] = useState({ width: 0, height: 0 });
-  if (value === 0)
+  if (value === 0) {
     value = 0.00001;
+  }
 
   useEffect(() => {
     if (textRef !== null && textRef.current !== null && value === 0) {
@@ -47,8 +49,9 @@ export function AchievementsGlobalProgressBar({ value, showText = true }: { valu
       const textHeight = textRef.current.getBoundingClientRect().height;
 
       let newX = 0;
-      if (value === 0)
+      if (value === 0) {
         newX = textWidth / 2 + 5;
+      }
 
       let newY = textHeight + (viewBoxState.height - textHeight) / 2;
 
@@ -61,13 +64,14 @@ export function AchievementsGlobalProgressBar({ value, showText = true }: { valu
     const { x, y, height, value, viewBox } = props;
 
     let newX = 0;
-    if (value !== 0)
+    if (value !== 0) {
       newX = (viewBox.width / value) * 50;
+    }
 
     return (
       <text ref={textRef} x={x + newX} y={y + height / 2} fill={theme === "dark" ? "#ffffff" : "#000000"}
-            textAnchor="middle" dominantBaseline="middle"
-            className="bg-red-500 font-mc">
+        textAnchor="middle" dominantBaseline="middle"
+        className="bg-red-500 font-mc">
         {`${formatPrice(Math.floor(value))} %`}
       </text>
     );
@@ -97,8 +101,9 @@ export function AchievementsGlobalProgressBar({ value, showText = true }: { valu
 export function DisplayProgressionGlobal() {
   const { data: playerInfo } = usePlayerInfoStore();
 
-  if (!playerInfo)
+  if (!playerInfo) {
     return null;
+  }
 
   const totalCompleted = playerInfo.achievements.filter(achievement => achievement.completed).length;
   const total = playerInfo.achievements.filter((achievement) => achievement.icon).length;
@@ -133,38 +138,38 @@ function AchievementSelectorCategory({ category, selectedCategory, setSelectedCa
   let imgPath = "";
   let displayText = "";
   switch (category) {
-    case CategoryEnum.HOW_TO_START:
-      imgPath = "AH_img/wood_pickaxe.webp";
-      displayText = "Premier pas";
-      break;
-    case CategoryEnum.JOBS:
-      imgPath = "AH_img/stone_pickaxe.webp";
-      displayText = "Métiers";
-      break;
-    case CategoryEnum.FACTION:
-      imgPath = "AH_img/diamond_sword.webp";
-      displayText = "Faction";
-      break;
-    case CategoryEnum.ATTACK_DEFENSE:
-      imgPath = "AH_img/tnt.webp";
-      displayText = "Pillage & Défense";
-      break;
-    case CategoryEnum.ECONOMY:
-      imgPath = "AH_img/gold_ingot.webp";
-      displayText = "Economie";
-      break;
-    case CategoryEnum.ALLIANCE:
-      imgPath = "AH_img/goggles_of_community.webp";
-      displayText = "Ordre vs Chaos";
-      break;
-    case CategoryEnum.OTHERS:
-      imgPath = "AH_img/ender_pearl.webp";
-      displayText = "Divers";
-      break;
-    default:
-      imgPath = "unknown.webp";
-      displayText = "Inconnu";
-      break;
+  case CategoryEnum.HOW_TO_START:
+    imgPath = "AH_img/wood_pickaxe.webp";
+    displayText = "Premier pas";
+    break;
+  case CategoryEnum.JOBS:
+    imgPath = "AH_img/stone_pickaxe.webp";
+    displayText = "Métiers";
+    break;
+  case CategoryEnum.FACTION:
+    imgPath = "AH_img/diamond_sword.webp";
+    displayText = "Faction";
+    break;
+  case CategoryEnum.ATTACK_DEFENSE:
+    imgPath = "AH_img/tnt.webp";
+    displayText = "Pillage & Défense";
+    break;
+  case CategoryEnum.ECONOMY:
+    imgPath = "AH_img/gold_ingot.webp";
+    displayText = "Economie";
+    break;
+  case CategoryEnum.ALLIANCE:
+    imgPath = "AH_img/goggles_of_community.webp";
+    displayText = "Ordre vs Chaos";
+    break;
+  case CategoryEnum.OTHERS:
+    imgPath = "AH_img/ender_pearl.webp";
+    displayText = "Divers";
+    break;
+  default:
+    imgPath = "unknown.webp";
+    displayText = "Inconnu";
+    break;
   }
 
   return <button
@@ -212,8 +217,9 @@ export function DisplayAllAchievementInCategory({ category, itemList }: {
 }) {
   const { data: playerInfo } = usePlayerInfoStore();
 
-  if (!playerInfo)
+  if (!playerInfo) {
     return null;
+  }
 
   const allAchivements = playerInfo.achievements.filter(achievement => achievement.category === category && achievement.icon);
   allAchivements.sort((a, b) => a.id.localeCompare(b.id));
@@ -234,10 +240,11 @@ function DetailAchievement({ achievement, itemList }: {
   let achievementProgress;
   if (achievement.completed) {
     achievementProgress = achievement.subAchievements.length === 0 ? achievement.amount : achievement.subAchievements.length;
-  } else if (achievement.subAchievements.length > 0)
+  } else if (achievement.subAchievements.length > 0) {
     achievementProgress = achievement.subAchievements.reduce((acc, curr) => acc + (curr.completed ? 1 : 0), 0);
-  else
+  } else {
     achievementProgress = achievement.progress;
+  }
 
   const amount = achievement.amount === -1 ? achievement.subAchievements.length : achievement.amount;
   const value = achievementProgress * 100 / amount;
@@ -246,19 +253,21 @@ function DetailAchievement({ achievement, itemList }: {
 
   let closestItemName = itemList.find((item) => item.value === constants.dictAchievementIdToIcon.get(achievement.icon))?.img ?? "unknown.webp";
 
-  if (closestItemName === "unknown.webp")
+  if (closestItemName === "unknown.webp") {
     console.log("Unknown item : " + achievement.icon);
+  }
 
-  if (closestItemName === "barriere.webp")
+  if (closestItemName === "barriere.webp") {
     closestItemName = "unknown.webp";
+  }
 
   return <div onClick={() => achievement.subAchievements.length !== 0 && setShowSubAchievements(!showSubAchievements)}
-              className={cn("border-2 border-secondary-foreground px-2 animate-fade-in", achievement.completed && "bg-green-400/50 hover:bg-green-500/50")}>
+    className={cn("border-2 border-secondary-foreground px-2 animate-fade-in", achievement.completed && "bg-green-400/50 hover:bg-green-500/50")}>
     <AchievementInfo title={achievement.name}
-                     img={achievement.completed ? safeJoinPaths(constants.imgPathProfile,"completed.png") : `/AH_img/${closestItemName}`}
-                     value={achievement.description}
-                     unoptimized
-                     arrowPath={arrowPath}
+      img={achievement.completed ? safeJoinPaths(constants.imgPathProfile,"completed.png") : `/AH_img/${closestItemName}`}
+      value={achievement.description}
+      unoptimized
+      arrowPath={arrowPath}
 
     >
       <DisplayProgressionAchievement achievementProgress={achievementProgress} amount={amount} value={value}/>

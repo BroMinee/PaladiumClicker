@@ -47,7 +47,9 @@ export const isApiDown = async (): Promise<boolean> => {
     });
     await response.json();
 
-    if (!response.ok) return true;
+    if (!response.ok) {
+      return true;
+    }
   } catch (error) {
     return true;
   }
@@ -61,7 +63,9 @@ export const getPlayerOnlineCount = async (): Promise<number> => {
         players: number;
       }
     }
-  }>(`${PALADIUM_API_URL}/v1/status`, 0).catch(() => { return { java: { global: { players: -1 } } }; });
+  }>(`${PALADIUM_API_URL}/v1/status`, 0).catch(() => {
+    return { java: { global: { players: -1 } } }; 
+  });
   return response.java.global.players;
 };
 
@@ -87,8 +91,9 @@ const getPaladiumClickerDataByUUID = async (uuid: string, username: string): Pro
 };
 
 export const getFactionInfo = async (factionName: string): Promise<PaladiumFactionInfo> => {
-  if (factionName === "")
+  if (factionName === "") {
     factionName = "Wilderness";
+  }
 
   return await fetchWithHeader<PaladiumFactionInfo>(`${PALADIUM_API_URL}/v1/paladium/faction/profile/${factionName}`).catch(() => {
     // toast.info("Impossible de récupérer les données de la faction, c'est le cas quand elle vient de changer de nom ou a été supprimée.");
@@ -188,15 +193,17 @@ export const getPlayerInfo = async (pseudo: string): Promise<PlayerInfo> => {
 
   clickerData.buildings.forEach((building) => {
     const buildingIndex = translateBuildingName[building["name"]];
-    if (buildingIndex === undefined)
+    if (buildingIndex === undefined) {
       throw `Unknown building name : '${building["name"]}', please contact the developer to fix it`;
+    }
     initialPlayerInfo["building"][buildingIndex].own = building["quantity"];
     initialPlayerInfo["production"] += building["production"];
   });
   clickerData.upgrades.forEach((upgrade) => {
     const pathToFollow = translateBuildingUpgradeName[upgrade];
-    if (pathToFollow === undefined)
+    if (pathToFollow === undefined) {
       throw `Unknown upgrade name : '${upgrade}', please contact the developer to fix it`;
+    }
 
     const [translatedUpgrade, translatedPosition] = pathToFollow;
 
@@ -222,8 +229,9 @@ export const getPlayerInfo = async (pseudo: string): Promise<PlayerInfo> => {
     if(initialPlayerInfo.metier[key].xp > getTotalXPForLevel(100)) {
       for(let i = 100; i < 2048; i++){
         const xp = getTotalXPForLevel(i);
-        if(xp < initialPlayerInfo.metier[key].xp)
+        if(xp < initialPlayerInfo.metier[key].xp) {
           continue;
+        }
         initialPlayerInfo.metier[key].level = i -1;
         break;
       }
@@ -288,8 +296,9 @@ export const getPaladiumAhItemFullHistory = async (itemId: string): Promise<AhIt
     c++;
   }
 
-  if (data.length !== totalCount)
+  if (data.length !== totalCount) {
     redirect(`/error?message=Data length is not equal to totalCount (getPaladiumAhItemFullHistory)`);
+  }
 
   return data;
 };
@@ -354,7 +363,7 @@ export const getPlayerAchievements = async (uuid: string): Promise<Achievement[]
   // Reactivate if for some reason it works again
   const allAchievements = structuredClone(default_achievements_default as AllAchievementResponse);
   // const allAchievements = await getAllAchievements().catch(() => {
-    // return structuredClone(default_achievements_default as AllAchievementResponse);
+  // return structuredClone(default_achievements_default as AllAchievementResponse);
   // });
 
   const achievements = allAchievements.data.map((achievement) => {
@@ -385,8 +394,9 @@ export const getPlayerAchievements = async (uuid: string): Promise<Achievement[]
       dictIdToSubIds.get(achievement.id)!.forEach((subId) => {
         const subAchievement = achievements.find((a) => a.id === subId);
         if (subAchievement) {
-          if (!subAchievement.completed)
+          if (!subAchievement.completed) {
             achievement.completed = false;
+          }
           subAchievement.category = achievement.category;
           achievement.subAchievements.push(subAchievement);
           subCategoryAchievements.push(subId);
@@ -396,23 +406,24 @@ export const getPlayerAchievements = async (uuid: string): Promise<Achievement[]
 
     let id = achievement.id;
 
-    if (id === "palamod.craftcauldron.gluballall")
+    if (id === "palamod.craftcauldron.gluballall") {
       id = "palamod.craftcauldron.glueball";
-    else if (id === "paladium.pickup.flower.multi.all")
+    } else if (id === "paladium.pickup.flower.multi.all") {
       id = "paladium.pickup.flower";
-    else if (id === "paladium.pickup.secret.multi.all")
+    } else if (id === "paladium.pickup.secret.multi.all") {
       id = "paladium.pickup.secret";
-
-    else if (id.endsWith(".all"))
+    } else if (id.endsWith(".all")) {
       id = id.slice(0, -4);
-    else if (id.endsWith("all"))
+    } else if (id.endsWith("all")) {
       id = id.slice(0, -3);
+    }
 
     achievements.forEach((a) => {
       if (a.id.startsWith(id + ".") && a.id !== achievement.id && a.category === achievement.category) {
         a.category = achievement.category;
-        if (!a.completed)
+        if (!a.completed) {
           achievement.completed = false;
+        }
         achievement.subAchievements.push(a);
         subCategoryAchievements.push(a.id);
       }
@@ -461,8 +472,9 @@ const getAllAchievements = async (): Promise<AllAchievementResponse> => {
 
 export const getPlayerMount = async (uuid: string): Promise<MountInfo | null> => {
   return await fetchWithHeader<MountInfo>(`${PALADIUM_API_URL}/v1/paladium/player/profile/${uuid}/mount`).then((mount) => {
-    if (mount.mountType === 0)
+    if (mount.mountType === 0) {
       return null;
+    }
     return mount;
   }).catch(() => {
     return null;

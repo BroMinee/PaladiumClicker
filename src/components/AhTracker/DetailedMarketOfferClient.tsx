@@ -6,16 +6,15 @@ import { getPlayerUsernameFromUUID } from "@/lib/api/apiClient.ts";
 export function SellNameMarket({ uuid }: { uuid: string }) {
   const [username, setUsername] = useState<string>("");
   useEffect(() => {
-    getPlayerUsernameFromUUID(uuid).then((username) => setUsername(username)).catch(() =>
-    {
+    getPlayerUsernameFromUUID(uuid).then((username) => setUsername(username)).catch(() => {
       setUsername("Username not found");
     });
   }, [uuid]);
 
   return (
     <a href={`/profil/${username}`}
-       rel="noopener noreferrer"
-       className="text-primary hover:text-orange-700 transform transition-transform ease-in-out duration-500 hover:scale-[1.15] active:scale-95"
+      rel="noopener noreferrer"
+      className="text-primary hover:text-orange-700 transform transition-transform ease-in-out duration-500 hover:scale-[1.15] active:scale-95"
     >
       {username === "" ? <UserNameFallBack/> :
         <p className="font-bold text-[25px]">

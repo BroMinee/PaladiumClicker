@@ -15,10 +15,14 @@ const CanvasWithText: React.FC<CanvasWithTextProps> = ({ text, className, height
 
   useEffect(() => {
     const canvas = canvasRef.current;
-    if (!canvas) return;
+    if (!canvas) {
+      return;
+    }
 
     const context = canvas.getContext('2d');
-    if (!context) return;
+    if (!context) {
+      return;
+    }
 
     const fitTextToCanvas = () => {
       // Mettre à jour la largeur et la hauteur du canvas en fonction du parent ou des props

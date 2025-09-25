@@ -9,10 +9,11 @@ import React from "react";
 import constants from "@/lib/constants.ts";
 const BuildingList = () => {
   function getImgPath(index: number, price: number) {
-    if (price === -1)
+    if (price === -1) {
       return "/unknown.png";
-    else
+    } else {
       return safeJoinPaths(constants.imgPathClicker,"/BuildingIcon/" + index + ".png");
+    }
   }
 
   return (

@@ -31,13 +31,15 @@ const RPS = () => {
   const [buildingBuyPaths, setBuildingBuyPaths] = useState([] as bestPurchaseInfoDetailed[]);
 
   useEffect(() => {
-    if (playerInfo)
+    if (playerInfo) {
       setRPS(computeRPS(playerInfo));
+    }
   }, [playerInfo, setRPS]);
 
   useEffect(() => {
-    if (buildingBuyPaths.length !== 0)
+    if (buildingBuyPaths.length !== 0) {
       setEstimatedRPS(buildingBuyPaths[0].newRps);
+    }
   }, [setEstimatedRPS, buildingBuyPaths]);
 
   useEffect(() => {
@@ -45,8 +47,9 @@ const RPS = () => {
       return;
     }
 
-    if (rps !== 0)
+    if (rps !== 0) {
       setBuildingBuyPaths(computeXBuildingAhead(playerInfo, 1, rps));
+    }
   }, [playerInfo, rps]);
 
   if (!playerInfo) {
@@ -98,8 +101,8 @@ const RPS = () => {
             :
             <div className="flex flex-col items-center gap-4 justify-center">
               <Image width={128} height={128} src={safeJoinPaths(constants.imgPathError, "arty_chocbar.webp")}
-                     className="h-auto object-contain"
-                     alt="Arty"/>
+                className="h-auto object-contain"
+                alt="Arty"/>
               <p className="text-sm text-center">Bravo tu as tout acheté, va prendre une douche
                 maintenant.</p>
               <Button>
@@ -113,8 +116,8 @@ const RPS = () => {
         <CardContent className="h-full pt-6 flex items-center gap-4">
           {rps < 0 ?
             <Image width={48} height={48} src={safeJoinPaths(constants.imgPathError, "/arty_chocbar.webp")}
-                   className="h-auto object-contain"
-                   alt="Arty"/> :
+              className="h-auto object-contain"
+              alt="Arty"/> :
             <FaCoins className="w-12 h-12"/>
           }
           <div className="flex flex-col gap-2">
@@ -145,23 +148,23 @@ const RPS = () => {
         <CardContent className="h-full pt-6 flex items-center gap-4">
           <FaBed className="w-12 h-12"/>
           <div className="flex flex-col gap-2 justify">
-                    <span className="font-semibold flex items-center gap-2">Coins dormants
-                    <Popover>
-                      <PopoverTrigger asChild>
-                        <Button variant="outline" size="icon">
-                          <FaInfoCircle className="inline-block h-4 w-4"/>
-                        </Button>
-                      </PopoverTrigger>
-                      <PopoverContent className="w-80">
+            <span className="font-semibold flex items-center gap-2">Coins dormants
+              <Popover>
+                <PopoverTrigger asChild>
+                  <Button variant="outline" size="icon">
+                    <FaInfoCircle className="inline-block h-4 w-4"/>
+                  </Button>
+                </PopoverTrigger>
+                <PopoverContent className="w-80">
                         Coins que vous avez sur votre clicker in-game, mais que vous n&apos;avez pas encore dépensés.
-                      </PopoverContent>
-                    </Popover></span>
+                </PopoverContent>
+              </Popover></span>
             <div className="flex gap-2 items-center">
               <GradientText className="font-bold">
                 <DisplayCoinsDormants/>
               </GradientText>
               <Image src={safeJoinPaths("/coin.png")} width={24} height={24}
-                     alt="Coin"/>
+                alt="Coin"/>
             </div>
           </div>
         </CardContent>
@@ -170,24 +173,24 @@ const RPS = () => {
         <CardContent className="h-full pt-6 flex items-center gap-4">
           <FaTachometerAlt className="w-12 h-12"/>
           <div className="flex flex-col gap-2">
-              <span className="font-semibold flex items-center gap-2">Production totale
-                  <Popover>
-                      <PopoverTrigger asChild>
-                        <Button variant="outline" size="icon">
-                          <FaInfoCircle className="inline-block h-4 w-4"/>
-                        </Button>
-                      </PopoverTrigger>
-                      <PopoverContent className="w-80">
+            <span className="font-semibold flex items-center gap-2">Production totale
+              <Popover>
+                <PopoverTrigger asChild>
+                  <Button variant="outline" size="icon">
+                    <FaInfoCircle className="inline-block h-4 w-4"/>
+                  </Button>
+                </PopoverTrigger>
+                <PopoverContent className="w-80">
                         Ne prends pas en compte la production des cliques manuels.
-                      </PopoverContent>
-                    </Popover>
-                  </span>
+                </PopoverContent>
+              </Popover>
+            </span>
             <div className="flex gap-2 items-center">
               <GradientText className="font-bold">
                 {(formatPrice(Math.round(playerInfo["production"])))}
               </GradientText>
               <Image width={24} height={24} src={safeJoinPaths("/coin.png")}
-                     alt="Coin"/>
+                alt="Coin"/>
             </div>
           </div>
         </CardContent>

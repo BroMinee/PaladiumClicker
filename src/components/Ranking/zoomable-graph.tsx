@@ -94,18 +94,19 @@ export function ZoomableChart({ data: initialData, rankingType, profil }: Zoomab
 
     document.getElementById("username")?.setAttribute("innerHTML", "");
     if (profil) {
-      if (playerInfo)
+      if (playerInfo) {
         router.push(generateProfilUrl(playerInfo.username, ProfilSectionEnum.Classement, rankingType, Array.from(usernames).sort()), { scroll: false });
-    }
-    else {
+      }
+    } else {
       const searchParamsNoUsername = searchParams.get('noUsernames');
       const noUsernames: string[] = searchParamsNoUsername ? searchParamsNoUsername.split(",") : [];
 
       if (u) {
         const indexToRemove = noUsernames.findIndex((e) => e.toLowerCase() === u.toString().toLowerCase());
 
-        if (indexToRemove !== -1)
+        if (indexToRemove !== -1) {
           noUsernames.splice(indexToRemove, 1);
+        }
       }
 
       router.push(generateRankingUrl(rankingType, Array.from(usernames).sort(), noUsernames), { scroll: false });
@@ -123,8 +124,9 @@ export function ZoomableChart({ data: initialData, rankingType, profil }: Zoomab
     }
 
     if (profil) {
-      if (playerInfo)
+      if (playerInfo) {
         router.push(generateProfilUrl(playerInfo.username, ProfilSectionEnum.Classement, rankingType, Array.from(usernames).filter((e) => e.toLowerCase() !== username.toLowerCase()).sort()), { scroll: false });
+      }
     } else {
       const searchParamsNoUsername = searchParams.get('noUsernames');
       const noUsernames: string[] = searchParamsNoUsername ? searchParamsNoUsername.split(',') : [];
@@ -144,8 +146,9 @@ export function ZoomableChart({ data: initialData, rankingType, profil }: Zoomab
 
   const CustomTooltip = ({ active, payload, label }: any) => {
 
-    if (!payload || payload.length === 0)
+    if (!payload || payload.length === 0) {
       return null;
+    }
 
     if (active && payload && payload.length) {
 
@@ -168,7 +171,7 @@ export function ZoomableChart({ data: initialData, rankingType, profil }: Zoomab
             const position = entry.payload[`${entry.name}_pos`];
             return <div key={`item-${index}`}>
               <h3 className="bg-clip-text text-transparent drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)]"
-                  style={{ backgroundImage: `linear-gradient(45deg, ${gradientStart} 0%, ${gradientEnd} 100%)` }}>
+                style={{ backgroundImage: `linear-gradient(45deg, ${gradientStart} 0%, ${gradientEnd} 100%)` }}>
                 <span>{`Top #${position} -`}{" "}</span>
                 <span className="font-bold">{entry.name}</span>
                 <span className="font-semibold">{` : ${formatPrice(entry.value)}`}</span>
@@ -205,8 +208,9 @@ export function ZoomableChart({ data: initialData, rankingType, profil }: Zoomab
 
   const handleMouseClickLegends = (o: LegendPayload) => {
     const { value } = o;
-    if (value !== undefined && value !== "valeur manquante")
+    if (value !== undefined && value !== "valeur manquante") {
       router.push(generateProfilUrl(value, ProfilSectionEnum.Classement, rankingType), { scroll: false });
+    }
   };
 
   interface transformedDataType {
@@ -289,15 +293,15 @@ export function ZoomableChart({ data: initialData, rankingType, profil }: Zoomab
   );
 
   const DataFormatter = (number: number) => {
-    if (number > 1000000000000000000000000)
+    if (number > 1000000000000000000000000) {
       return (Math.floor(number / 1000000000000000000000000)).toString() + 'Y';
-    else if (number > 1000000000000000000000)
+    } else if (number > 1000000000000000000000) {
       return (Math.floor(number / 1000000000000000000000)).toString() + 'Z';
-    else if (number > 1000000000000000000)
+    } else if (number > 1000000000000000000) {
       return (Math.floor(number / 1000000000000000000)).toString() + 'E';
-    else if (number > 1000000000000000)
+    } else if (number > 1000000000000000) {
       return (Math.floor(number / 1000000000000000)).toString() + 'P';
-    else if (number > 1000000000000) {
+    } else if (number > 1000000000000) {
       return (Math.floor(number / 1000000000000)).toString() + 'T';
     } else if (number > 1000000000) {
       return (Math.floor(number / 1000000000)).toString() + 'G';
@@ -341,7 +345,9 @@ export function ZoomableChart({ data: initialData, rankingType, profil }: Zoomab
 
   const handleZoom = (e: React.WheelEvent<HTMLDivElement> | React.TouchEvent<HTMLDivElement>) => {
     e.preventDefault();
-    if (!originalData.length || !chartRef.current) return;
+    if (!originalData.length || !chartRef.current) {
+      return;
+    }
 
     let zoomFactor = 0.1;
     let direction = 0;
@@ -409,22 +415,22 @@ export function ZoomableChart({ data: initialData, rankingType, profil }: Zoomab
           <div
             className="relative z-30 flex flex-1 flex-col justify-center gap-1 border-t px-6 py-4 text-left even:border-l bg-muted/10 sm:border-l sm:border-t-0 sm:px-8 sm:py-6"
           >
-                        <span className="text-xs text-muted-foreground">
+            <span className="text-xs text-muted-foreground">
                             Minimum Local
-                        </span>
+            </span>
             <span className="text-lg font-bold leading-none sm:text-3xl">
-                            {formatPrice(minValue)}
-                        </span>
+              {formatPrice(minValue)}
+            </span>
           </div>
           <div
             className="relative z-30 flex flex-1 flex-col justify-center gap-1 border-t px-6 py-4 text-left even:border-l bg-muted/10 sm:border-l sm:border-t-0 sm:px-8 sm:py-6"
           >
-                        <span className="text-xs text-muted-foreground">
+            <span className="text-xs text-muted-foreground">
                             Maximum Local
-                        </span>
+            </span>
             <span className="text-lg font-bold leading-none sm:text-3xl">
-                            {formatPrice(maxValue)}
-                        </span>
+              {formatPrice(maxValue)}
+            </span>
           </div>
 
         </div>
@@ -435,7 +441,7 @@ export function ZoomableChart({ data: initialData, rankingType, profil }: Zoomab
           className=" h-full w-3/4"
         >
           <div className="h-full" onWheel={handleZoom} onTouchMove={handleZoom} ref={chartRef}
-               style={{ touchAction: 'none' }}>
+            style={{ touchAction: 'none' }}>
             <ResponsiveContainer width="100%" height="100%">
               <AreaChart
                 data={zoomedData}
@@ -479,8 +485,8 @@ export function ZoomableChart({ data: initialData, rankingType, profil }: Zoomab
                 />
                 <Tooltip content={<CustomTooltip/>}/>
                 <Legend layout="horizontal" verticalAlign="bottom" align="center" wrapperStyle={{ bottom: -20 }}
-                        onMouseEnter={handleMouseEnterLegends} onMouseLeave={handleMouseLeaveLegends}
-                        onClick={handleMouseClickLegends}
+                  onMouseEnter={handleMouseEnterLegends} onMouseLeave={handleMouseLeaveLegends}
+                  onClick={handleMouseClickLegends}
                 />
 
                 {/*<ChartTooltip*/}
@@ -554,11 +560,11 @@ export function ZoomableChart({ data: initialData, rankingType, profil }: Zoomab
             <ul className="mt-2 mr-3">
               {uniqueUsernames.map((username, index) => (
                 <li key={username} className="flex justify-between items-center mb-2"
-                    style={{ color: gradientColors[index % gradientColors.length].color2 }}>
+                  style={{ color: gradientColors[index % gradientColors.length].color2 }}>
                   <span>{username}</span>
                   <Button variant="outline" size="sm"
-                          disabled={profil && username.toLowerCase() === playerInfo?.username.toLowerCase()}
-                          onClick={() => handleRemoveUsername(username)}>
+                    disabled={profil && username.toLowerCase() === playerInfo?.username.toLowerCase()}
+                    onClick={() => handleRemoveUsername(username)}>
                     Remove
                   </Button>
                 </li>

@@ -61,8 +61,9 @@ export default async function Home(
   let periode = searchParams.periode;
   let periodeEnum = searchParams.periode as AdminShopPeriode;
 
-  if (periode === undefined)
+  if (periode === undefined) {
     periode = "day";
+  }
 
   if (periode !== "day" && periode !== "week" && periode !== "month" && periode !== "season") {
     redirect(generateAdminShopUrl(searchParams.item, "day"));
@@ -82,13 +83,13 @@ export default async function Home(
         </CardTitleH1>
         <CardDescription>
           Made with <FaHeart
-          className="text-primary inline-block"/> by <GradientText>BroMine__</GradientText>
+            className="text-primary inline-block"/> by <GradientText>BroMine__</GradientText>
         </CardDescription>
       </CardHeader>
       <CardContent className="grid grid-cols-6 sm:grid-cols-16 lg:grid-cols-23 items-center justify-between gap-2 pb-2" id="admin-selector">
         {adminShopItemsAvailable.map((value: AdminShopItem, index: number) => {
           return <AdminShopSelectorClientItem key={value + index} item={value} periode={periodeEnum}
-                                              adminShopPage={true}/>;
+            adminShopPage={true}/>;
         })}
       </CardContent>
 

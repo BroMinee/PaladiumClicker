@@ -62,7 +62,7 @@ const Selector = ({ options, defaultValue, setInputValue }: SelectorProps) => {
   const formatOptionLabel = ({ label, label2, img }: OptionType) => (
     <div className="flex items-center">
       <Image src={`/AH_img/${img}`} alt="label" width={48} height={48} unoptimized={true}
-             className="h-12 w-12 pixelated mr-2 rounded-md"/>
+        className="h-12 w-12 pixelated mr-2 rounded-md"/>
       <div className="flex flex-col gap-1">
         <span className="ml-2 font-bold">{label}</span>
         <span className="ml-2 text-gray-500">{label2}</span>

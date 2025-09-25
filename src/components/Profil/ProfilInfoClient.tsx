@@ -49,8 +49,9 @@ export function ProfilDescriptionAndBanner() {
 export function ProfilAlliance() {
   const { data: playerInfo } = usePlayerInfoStore();
 
-  if (!playerInfo)
+  if (!playerInfo) {
     return null;
+  }
 
   if (playerInfo.alliance === "NEUTRAL") {
     return null;
@@ -59,7 +60,7 @@ export function ProfilAlliance() {
   const logo = safeJoinPaths(constants.imgPathProfile, `/logo_${playerInfo.alliance.toLowerCase()}.png`);
 
   return <Image src={logo} alt="Chaos" width={32} height={32}
-                unoptimized={true}/>;
+    unoptimized={true}/>;
 
 }
 
@@ -86,17 +87,17 @@ export function PlayerSkin() {
   const capeUrl = `https://crafatar.com/capes/${playerInfo?.uuid}`;
   return <ErrorBoundary fallback={<SkinFallback/>}> 
     <ReactSkinview3d className="!w-full !h-full rounded-md"
-                            skinUrl={skinUrl}
-                            capeUrl={capeUrl}
-                            height="400"
-                            width="400"
-                            options={{
-                              nameTag: new NameTagObject(`${playerInfo?.username}`, {
-                                textStyle: "#ff5c00",
-                                backgroundStyle: 'rgba(0,0,0,0)',
-                                font: "48px Minecraft"
-                              }), zoom: 0.75
-                            }}
+      skinUrl={skinUrl}
+      capeUrl={capeUrl}
+      height="400"
+      width="400"
+      options={{
+        nameTag: new NameTagObject(`${playerInfo?.username}`, {
+          textStyle: "#ff5c00",
+          backgroundStyle: 'rgba(0,0,0,0)',
+          font: "48px Minecraft"
+        }), zoom: 0.75
+      }}
     />
   </ErrorBoundary>;
 }
@@ -105,36 +106,39 @@ export function PlayerRank() {
   const { data: playerInfo } = usePlayerInfoStore();
   let rank = "Default";
 
-  if (playerInfo)
+  if (playerInfo) {
     rank = playerInfo.rank[0].toUpperCase() + playerInfo.rank.slice(1);
+  }
 
-  if(playerInfo?.uuid === "b6e136eb-75cb-48bd-9ff5-dd9bfb64b869")
+  if(playerInfo?.uuid === "b6e136eb-75cb-48bd-9ff5-dd9bfb64b869") {
     return <SmallCardInfo title="Rang en jeu" value="Blackhole" img={safeJoinPaths(constants.imgPathProfile,"blackhole.png")}
-                          imgClassName="w-fit"
-                          unoptimized/>;
+      imgClassName="w-fit"
+      unoptimized/>;
+  }
 
   return <SmallCardInfo title="Rang en jeu" value={rank} img={getRankImg(rank)}
-                        imgClassName="w-fit"
-                        unoptimized/>;
+    imgClassName="w-fit"
+    unoptimized/>;
 }
 
 export function PlayerTimePlayed() {
   const { data: playerInfo } = usePlayerInfoStore();
   return <SmallCardInfo title="Temps de jeu" value={computeTimePlayed(playerInfo?.timePlayed || 0)}
-                        img={safeJoinPaths(constants.imgPathProfile,"clock.gif")} unoptimized/>;
+    img={safeJoinPaths(constants.imgPathProfile,"clock.gif")} unoptimized/>;
 }
 
 export function PlayerFirstConnection() {
   const { data: playerInfo } = usePlayerInfoStore();
   return <SmallCardInfo title="Première connexion" value={convertEpochToDateUTC2(playerInfo?.firstSeen || 1)}
-                        img={safeJoinPaths(constants.imgPathProfile,"clock.gif")} unoptimized/>;
+    img={safeJoinPaths(constants.imgPathProfile,"clock.gif")} unoptimized/>;
 }
 
 export function PlayerFriendsCount() {
   const { data: playerInfo } = usePlayerInfoStore();
   let friendCount = -1;
-  if (playerInfo)
+  if (playerInfo) {
     friendCount = playerInfo.friends.totalCount;
+  }
 
   return <>
     Liste d&apos;amis: {friendCount}
@@ -143,8 +147,9 @@ export function PlayerFriendsCount() {
 
 export function PlayerFriends() {
   const { data: playerInfo } = usePlayerInfoStore();
-  if (!playerInfo)
+  if (!playerInfo) {
     return null;
+  }
 
   return (
     <>

@@ -33,22 +33,22 @@ export function GenerateEmbedPreview(footer: string) {
       {itemSelected && (currentWebHookType === WebHookType.market || currentWebHookType === WebHookType.QDF) &&
         <div className="top-right">
           <Image src={`https://palatracker.bromine.fr/AH_img/${itemSelected.img}`} alt="icon" height={24} width={24}
-                 unoptimized/>
+            unoptimized/>
         </div>
       }
       {currentWebHookType === WebHookType.EventPvp && <div className="top-right">
         <Image src={`https://palatracker.bromine.fr/${getIconNameFromEventType(eventSelected)}`} alt="icon" height={24}
-               width={24} unoptimized/>
+          width={24} unoptimized/>
       </div>
       }
       {adminShopItemSelected && currentWebHookType === WebHookType.adminShop && <div className="top-right">
         <Image src={`https://palatracker.bromine.fr/${getImagePathFromAdminShopType(adminShopItemSelected)}`} alt="icon"
-               height={24} width={24} unoptimized/>
+          height={24} width={24} unoptimized/>
       </div>
       }
       <div className="embed-header">
         <a href={parseUrlFormatting(titleUrl, itemSelected, eventSelected, adminShopItemSelected, threshold)}
-           target="_blank" className="embed-title">
+          target="_blank" className="embed-title">
           {parseTextFormatting(title, itemSelected, eventSelected, currentWebHookType, adminShopItemSelected, threshold, thresholdCondition)}
         </a>
       </div>
@@ -72,55 +72,55 @@ export function parseTextFormatting(
 
   function getTextFromThresholdCondition(thresholdCondition: WebHookThresholdCondition) {
     switch (thresholdCondition) {
-      case "aboveThreshold":
-        return "supérieur";
-      case "aboveQuantity":
-        return "supérieur ou égal (en quantité)";
-      case "underThreshold":
-        return "inférieur";
-      case "increasingAboveThreshold":
-        return "en hausse et supérieur";
-      case "decreaseAboveThreshold":
-        return "en baisse et supérieur";
-      case "decreasing":
-        return "en baisse";
-      case "increasing":
-        return "en hausse";
-      default:
-        return "Bonne question j'ai pas prévu ce cas";
+    case "aboveThreshold":
+      return "supérieur";
+    case "aboveQuantity":
+      return "supérieur ou égal (en quantité)";
+    case "underThreshold":
+      return "inférieur";
+    case "increasingAboveThreshold":
+      return "en hausse et supérieur";
+    case "decreaseAboveThreshold":
+      return "en baisse et supérieur";
+    case "decreasing":
+      return "en baisse";
+    case "increasing":
+      return "en hausse";
+    default:
+      return "Bonne question j'ai pas prévu ce cas";
     }
   }
 
   function getTodoCount(): string | number {
     switch (currentWebHookType) {
-      case WebHookType.market:
-        return -1;
-      case WebHookType.QDF:
+    case WebHookType.market:
+      return -1;
+    case WebHookType.QDF:
+      return 1;
+    case WebHookType.adminShop:
+      return -1;
+    case WebHookType.EventPvp:
+      switch (eventSelected) {
+      case "BOSS":
+        return 4 * 7;
+      case "A VOS MARQUES":
+        return 7;
+      case "TOTEM":
         return 1;
-      case WebHookType.adminShop:
-        return -1;
-      case WebHookType.EventPvp:
-        switch (eventSelected) {
-          case "BOSS":
-            return 4 * 7;
-          case "A VOS MARQUES":
-            return 7;
-          case "TOTEM":
-            return 1;
-          case "EGGHUNT":
-            return 7;
-          case "KOTH":
-            return 1;
-          case "BLACKMARKET":
-            return 3 * 7;
-          default:
-            return -1;
-        }
-
-      case WebHookType.statusServer:
-        return "0 ou 2";
+      case "EGGHUNT":
+        return 7;
+      case "KOTH":
+        return 1;
+      case "BLACKMARKET":
+        return 3 * 7;
       default:
         return -1;
+      }
+
+    case WebHookType.statusServer:
+      return "0 ou 2";
+    default:
+      return -1;
     }
   }
 
@@ -192,8 +192,9 @@ export function parseTextFormatting(
           let oldPrice = threshold;
           if (thresholdCondition === "increasing" || thresholdCondition === "increasingAboveThreshold" || thresholdCondition === "aboveThreshold") {
             oldPrice -= 1;
-          } else
-            oldPrice += 1;
+          } else {
+oldPrice += 1;
+}
           return <span key={index}>{formatPrice(oldPrice)}</span>;
         }
         if (part === "{quantityAvailable}") {
@@ -270,20 +271,20 @@ export function parseUrlFormatting(
 
   function eventTypeToImgName(event: EventType) {
     switch (event) {
-      case "BOSS":
-        return "boss";
-      case "TOTEM":
-        return "totem";
-      case "EGGHUNT":
-        return "egg";
-      case "A VOS MARQUES":
-        return "avm";
-      case "KOTH":
-        return "koth";
-      case "BLACKMARKET":
-        return "blackmarket";
-      default:
-        return "undefined";
+    case "BOSS":
+      return "boss";
+    case "TOTEM":
+      return "totem";
+    case "EGGHUNT":
+      return "egg";
+    case "A VOS MARQUES":
+      return "avm";
+    case "KOTH":
+      return "koth";
+    case "BLACKMARKET":
+      return "blackmarket";
+    default:
+      return "undefined";
     }
   }
 
@@ -321,22 +322,22 @@ function GenerateEmbedDescription(footer: string): React.JSX.Element {
       ))}
       <br/>
       <p>Plus d&apos;informations sur le site <a href="https://palatracker.bromine.fr/webhook"
-                                                 target="_blank">palatracker</a>.</p>
+        target="_blank">palatracker</a>.</p>
       {embedImg &&
         <Image src={parseUrlFormatting(embedImg, itemSelected, eventSelected, adminShopItemSelected, threshold)}
-               alt="Embed Image"
-               width={0}
-               height={0}
-               sizes="100vw"
-               style={{ width: '100%', height: 'auto' }}
-               className="embed-image" unoptimized/>}
+          alt="Embed Image"
+          width={0}
+          height={0}
+          sizes="100vw"
+          style={{ width: '100%', height: 'auto' }}
+          className="embed-image" unoptimized/>}
       <div className="embed-footer">
         <Image className="footer-icon"
-               src="https://palatracker.bromine.fr/favicon.png"
-               width={16}
-               height={16}
+          src="https://palatracker.bromine.fr/favicon.png"
+          width={16}
+          height={16}
 
-               alt="" unoptimized/>
+          alt="" unoptimized/>
         <span suppressHydrationWarning>{footer} • {new Date().toLocaleString()}</span>
       </div>
     </div>
@@ -359,15 +360,15 @@ export function GenerateWebHookContent() {
       <div className="alert-container  !border-0">
         <div className="alert-header">
           <Image className="avatar"
-                 height={40}
-                 width={40}
-                 src="https://palatracker.bromine.fr/stonks_clic.png"
-                 alt="" unoptimized/>
+            height={40}
+            width={40}
+            src="https://palatracker.bromine.fr/stonks_clic.png"
+            alt="" unoptimized/>
           <div className="header-text">
             <span className="title">PalaTracker Alert</span>
             <span className="app-badge">APP</span>
             <time className="timestamp" dateTime="2025-01-13T18:54:47.235Z"
-                  suppressHydrationWarning>{new Date().toLocaleString()}</time>
+              suppressHydrationWarning>{new Date().toLocaleString()}</time>
           </div>
         </div>
         <div className="message-content">

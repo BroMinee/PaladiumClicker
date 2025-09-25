@@ -20,19 +20,21 @@ const UpgradeList = ({ upgradeType }: UpgradeListProps) => {
     const nameShort = majUpgradeName.split("_")[0];
     const upgradeWithOnlyOne = ["Many", "Posterior"];
 
-    if (Number(name) === -1)
+    if (Number(name) === -1) {
       return "/unknown.png";
-    else if (nameShort === "Building")
+    } else if (nameShort === "Building") {
       return safeJoinPaths(constants.imgPathClicker,`/BuildingUpgradeIcon/${index <= 15 ? 0 : 1}.png`);
-    else if (upgradeWithOnlyOne.includes(nameShort))
+    } else if (upgradeWithOnlyOne.includes(nameShort)) {
       return safeJoinPaths(constants.imgPathClicker,`/${nameShort}Icon/0.png`);
-    else
+    } else {
       return safeJoinPaths(constants.imgPathClicker,`/${nameShort}Icon/${index}.png`);
+    }
   }
 
   let jsonToUse = getJsonToUseForUpgrade(upgradeType);
-  if (!jsonToUse)
+  if (!jsonToUse) {
     redirect("/error?message=UpgradeType%20not%20found");
+  }
 
   return (
     // <ScrollArea>

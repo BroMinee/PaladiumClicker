@@ -16,12 +16,14 @@ export function TestApiFetching() {
 export async function TestApi() {
   const apiDown = await isApiDown();
 
-  if (!apiDown) return (
-    <li className="flex items-center gap-2">
-      <FaCheck className="text-green-400"/>
+  if (!apiDown) {
+    return (
+      <li className="flex items-center gap-2">
+        <FaCheck className="text-green-400"/>
       L&apos;API de Paladium est fonctionnelle
-    </li>
-  );
+      </li>
+    );
+  }
 
   return (
     <li className="flex items-center gap-2">
@@ -41,12 +43,14 @@ export function TestMyApiFetching() {
 export async function TestMyApi() {
   const apiDown = await isMyApiDown().catch(() => true);
 
-  if (!apiDown) return (
-    <li className="flex items-center gap-2">
-      <FaCheck className="text-green-400"/>
+  if (!apiDown) {
+    return (
+      <li className="flex items-center gap-2">
+        <FaCheck className="text-green-400"/>
       Notre API est fonctionnelle
-    </li>
-  );
+      </li>
+    );
+  }
 
   return (
     <li className="flex items-center gap-2">
@@ -79,12 +83,14 @@ export async function TestImportProfile({ pseudoParams = "BroMine__" }: {
     return [true, message];
   });
 
-  if (!apiDown) return (
-    <li className="flex items-center gap-2">
-      <FaCheck className="text-green-400"/>
+  if (!apiDown) {
+    return (
+      <li className="flex items-center gap-2">
+        <FaCheck className="text-green-400"/>
       L&apos;importation de profil est fonctionnelle
-    </li>
-  );
+      </li>
+    );
+  }
 
   return (
     <>

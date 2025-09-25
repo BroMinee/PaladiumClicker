@@ -29,7 +29,9 @@ const CounterInputWebhook = ({ min = 0, step = 0.01 }) => {
   };
 
   const handleDecrease = () => {
-    if (parseFloat(currentValue) - step >= min) setCurrentValue((parseFloat(currentValue) - step).toFixed(2));
+    if (parseFloat(currentValue) - step >= min) {
+      setCurrentValue((parseFloat(currentValue) - step).toFixed(2));
+    }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {

@@ -20,7 +20,7 @@ export function NoPseudoPage({ texth1, texth2 }: { texth1: string, texth2: strin
           <ImportProfilPretty/>
           <CardDescription>
             Made with <FaHeart
-            className="text-primary inline-block"/> by <GradientText>BroMine__</GradientText>
+              className="text-primary inline-block"/> by <GradientText>BroMine__</GradientText>
           </CardDescription>
         </CardContent>
       </Card>

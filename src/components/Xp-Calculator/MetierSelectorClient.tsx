@@ -37,15 +37,17 @@ export function SetLevelInUrl({ selected, params, searchParams }: {
       && ((searchParams.f2 === true) === (searchParams.f2 === true))
       && ((searchParams.f3 === true) === (searchParams.f3 === true))
       && ((Number(searchParams.dailyBonus || 0)) === (Number(searchParams.dailyBonus || 0)))
-    )
+    ) {
       return;
+    }
 
     router.push(generateXpCalculatorUrl(params.username, selected, levelToReach, searchParams.double, searchParams.dailyBonus, searchParams.f2, searchParams.f3), { scroll: false });
 
   }, [playerInfo, searchParams, selected, params.username, router]);
 
-  if (!playerInfo)
+  if (!playerInfo) {
     return;
+  }
 
   return null;
 }
@@ -59,18 +61,18 @@ export function MetierSelectorClient({ username, metier, selected, searchParams 
   const router = useRouter();
   let imgPath = "";
   switch (metier) {
-    case "miner":
-      imgPath = "Mineur";
-      break;
-    case "farmer":
-      imgPath = "Fermier";
-      break;
-    case "hunter":
-      imgPath = "Chasseur";
-      break;
-    case "alchemist":
-      imgPath = "Alchimiste";
-      break;
+  case "miner":
+    imgPath = "Mineur";
+    break;
+  case "farmer":
+    imgPath = "Fermier";
+    break;
+  case "hunter":
+    imgPath = "Chasseur";
+    break;
+  case "alchemist":
+    imgPath = "Alchimiste";
+    break;
   }
   return (
     <Image src={safeJoinPaths(constants.imgPathProfile, "/JobsIcon/", `${imgPath}.webp`)}
@@ -98,8 +100,9 @@ export const MetierToReachWrapper = ({
   const metierName = structuredClone(metierJson[metierKey].name as MetierKey);
 
   const { data: playerInfo } = usePlayerInfoStore();
-  if (!playerInfo || searchParams.level === undefined)
+  if (!playerInfo || searchParams.level === undefined) {
     return;
+  }
 
   const minLevel = Math.min(playerInfo.metier[metierKey].level + 1, 100);
   return (
@@ -138,10 +141,11 @@ export function ButtonTakeDoubleXp({ params, searchParams, doubleXp, children }:
 
   return <Button className={doubleXp === 100 ? "bg-red-500" : "bg-green-500"}
     onClick={() => {
-      if (doubleXp === 0)
+      if (doubleXp === 0) {
         router.push(generateXpCalculatorUrl(params.username, searchParams.metier, searchParams.level, true, searchParams.dailyBonus, searchParams.f2, searchParams.f3), { scroll: false });
-      else
+      } else {
         router.push(generateXpCalculatorUrl(params.username, searchParams.metier, searchParams.level, false, searchParams.dailyBonus, searchParams.f2, searchParams.f3), { scroll: false });
+      }
     }}
   >
     {children}
@@ -158,10 +162,11 @@ export function ButtonUseF2({ params, searchParams, F2, children }: {
 
   return <Button className={F2 ? "bg-red-500" : "bg-green-500"}
     onClick={() => {
-      if (F2 === false)
+      if (F2 === false) {
         router.push(generateXpCalculatorUrl(params.username, searchParams.metier, searchParams.level, searchParams.double, searchParams.dailyBonus, true, undefined), { scroll: false });
-      else
+      } else {
         router.push(generateXpCalculatorUrl(params.username, searchParams.metier, searchParams.level, searchParams.double, searchParams.dailyBonus, false, undefined), { scroll: false });
+      }
     }}
   >
     {children}
@@ -178,10 +183,11 @@ export function ButtonUseF3({ params, searchParams, F3, children }: {
 
   return <Button className={F3 ? "bg-red-500" : "bg-green-500"}
     onClick={() => {
-      if (F3 === false)
+      if (F3 === false) {
         router.push(generateXpCalculatorUrl(params.username, searchParams.metier, searchParams.level, searchParams.double, searchParams.dailyBonus, searchParams.f2, true), { scroll: false });
-      else
+      } else {
         router.push(generateXpCalculatorUrl(params.username, searchParams.metier, searchParams.level, searchParams.double, searchParams.dailyBonus, searchParams.f2, false), { scroll: false });
+      }
     }}
   >
     {children}
@@ -202,26 +208,27 @@ export function InputDailyBonus({ params, searchParams }: {
 }
 
 function getBonusRank(playerRank: PlayerRank | undefined) {
-  if (!playerRank)
+  if (!playerRank) {
     return 0;
+  }
 
   switch (playerRank) {
-    case "titan":
-    case "heros":
-      return 5;
-    case "paladin":
-    case "legend":
-      return 10;
-    case "endium":
-    case "trixium":
-    case "trixium+":
-    case "divinity":
-    case "rusher":
-      return 15;
-    case "premium": // premium add 5% (don't know how it's represented in the API) always place the condition at the end
-      return 5;
-    default:
-      return 0;
+  case "titan":
+  case "heros":
+    return 5;
+  case "paladin":
+  case "legend":
+    return 10;
+  case "endium":
+  case "trixium":
+  case "trixium+":
+  case "divinity":
+  case "rusher":
+    return 15;
+  case "premium": // premium add 5% (don't know how it's represented in the API) always place the condition at the end
+    return 5;
+  default:
+    return 0;
   }
 
 }
@@ -242,8 +249,9 @@ export function DisplayXpBonus() {
 }
 
 function getXpDiff(playerInfo: PlayerInfo | null, searchParams: searchParamsXpBonusPage) {
-  if (!playerInfo || !playerInfo?.metier || searchParams.level === undefined || !searchParams.metier)
+  if (!playerInfo || !playerInfo?.metier || searchParams.level === undefined || !searchParams.metier) {
     return 0;
+  }
   const higherLevel = searchParams.level;
   const res = getTotalXPForLevel(higherLevel) - playerInfo.metier[searchParams.metier as MetierKey].xp;
   if (res < 0) {
@@ -270,8 +278,9 @@ export function DisplayXpNeeded({ searchParams }: { searchParams: searchParamsXp
 export function DisplayItem({ searchParams, item, index }: { searchParams: searchParamsXpBonusPage, item: HowToXpElement, index: number }) {
 
   const { data: playerInfo } = usePlayerInfoStore();
-  if (!playerInfo || !playerInfo?.metier || searchParams.level === undefined || !searchParams.metier)
+  if (!playerInfo || !playerInfo?.metier || searchParams.level === undefined || !searchParams.metier) {
     return null;
+  }
 
   const colors = getColorByMetierName(searchParams.metier as MetierKey);
 

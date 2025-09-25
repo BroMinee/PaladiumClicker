@@ -16,40 +16,40 @@ const montserrat = Montserrat({
 });
 
 export default function RootLayout({
-                                     // Layouts must accept a children prop.
-                                     // This will be populated with nested layouts or pages
-                                     children
-                                   }: {
+  // Layouts must accept a children prop.
+  // This will be populated with nested layouts or pages
+  children
+}: {
   children: React.ReactNode
 }) {
   return (
     <html lang="fr" className={montserrat.className}>
-    <head>
-      <meta name="theme-color" content="#ff5c00"/>
-    </head>
-    <body>
-    <ServiceWorkerRegister/>
-    <ThemeProviders>
-      <div className="relative min-h-screen flex flex-col">
-        <div className="flex flex-row">
-          <header className="h-fit sticky top-0 z-[100]">
-            <Navbar/>
-          </header>
-          <main className="flex-1 container py-4 pb-8 mx-auto overflow-x-hidden">
-            <AuthGetWrapper/>
-            <div className="relative">
-              <PageTransition>
-                {children}
-              </PageTransition>
+      <head>
+        <meta name="theme-color" content="#ff5c00"/>
+      </head>
+      <body>
+        <ServiceWorkerRegister/>
+        <ThemeProviders>
+          <div className="relative min-h-screen flex flex-col">
+            <div className="flex flex-row">
+              <header className="h-fit sticky top-0 z-[100]">
+                <Navbar/>
+              </header>
+              <main className="flex-1 container py-4 pb-8 mx-auto overflow-x-hidden">
+                <AuthGetWrapper/>
+                <div className="relative">
+                  <PageTransition>
+                    {children}
+                  </PageTransition>
+                </div>
+                <Toaster/>
+              </main>
             </div>
-            <Toaster/>
-          </main>
-        </div>
-      </div>
+          </div>
 
-    </ThemeProviders>
-    </body>
-    <GoogleAnalytics gaId="G-XR5BQZPZBD"/>
+        </ThemeProviders>
+      </body>
+      <GoogleAnalytics gaId="G-XR5BQZPZBD"/>
     </html>
   );
 }

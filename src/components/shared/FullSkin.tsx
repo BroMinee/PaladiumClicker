@@ -13,7 +13,7 @@ export default function FullSkin({ className = "" }) {
   const urlImg = `https://crafatar.com/renders/body/${playerInfo.uuid}?size=4&default=MHF_Steve&overlay`;
 
   return <Image src={urlImg} className={cn("w-fit object-contain pixelated rounded-md", className)}
-                alt={`Skin de ${playerInfo.username}`} width={128} height={128}
-                unoptimized={true}
+    alt={`Skin de ${playerInfo.username}`} width={128} height={128}
+    unoptimized={true}
   />;
 }

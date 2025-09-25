@@ -30,26 +30,31 @@ export function PreconditionDisplay({ index, upgradeType }: { index: number, upg
   } = checkCondition(playerInfo, playerInfo[upgradeType][index].condition, new Date());
 
   const texts: ReactNode[] = ["Précondition:"];
-  if (Number(playerInfo[upgradeType][index].name) === -1)
+  if (Number(playerInfo[upgradeType][index].name) === -1) {
     texts[0] = "Précondition:";
+  }
 
-  if (coinsCondition !== -1)
+  if (coinsCondition !== -1) {
     texts.push(GetConditionText(`Avoir récolté ${formatPrice(coinsCondition)} coins. Actuellement : ${formatPrice(totalCoins)}`, totalCoins >= coinsCondition));
+  }
   if (dayCondition !== -1) {
     texts.push(GetConditionText(`Saison démarrée depuis ${formatPrice(dayCondition)} jours. Actuellement : ${formatPrice(Math.floor(daySinceStart))} jours`, daySinceStart >= dayCondition));
   }
-  if (buildingIndex !== -1)
+  if (buildingIndex !== -1) {
     texts.push(GetConditionText(`Posséder ${buildingNeed} ${playerInfo?.["building"][buildingIndex]["name"]}. Actuellement : ${buildingCount}`, buildingCount >= buildingNeed));
+  }
 
   if (upgradeType === "CPS" && index !== 0) {
     texts.push(GetConditionText(`Posséder l'amélioration ${playerInfo.CPS[index - 1].name}`, playerInfo.CPS[index - 1].own));
   }
 
-  if (texts.length !== 2)
+  if (texts.length !== 2) {
     texts[0] = "Préconditions:";
+  }
 
-  if (texts.length === 1)
+  if (texts.length === 1) {
     return null;
+  }
 
   return (
     <div>

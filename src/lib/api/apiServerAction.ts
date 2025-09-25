@@ -29,7 +29,9 @@ export async function getPlayerInfoAction(username: string) {
 }
 
 export async function registerPlayerAction(uuid: string, username: string) {
-  return await fetchWithHeader(`${API_PALATRACKER}/v1/user/register/${uuid}/${username}`, 5 * 60).catch((e) => { console.error(e); });
+  return await fetchWithHeader(`${API_PALATRACKER}/v1/user/register/${uuid}/${username}`, 5 * 60).catch((e) => {
+    console.error(e); 
+  });
 }
 
 export async function getPaladiumAhItemStatsOfAllItemsAction(): Promise<PaladiumAhItemStat[]> {
@@ -201,20 +203,20 @@ export async function createWebHookServerAction(body: WebHookCreate): Promise<{ 
   }
   // Check that the request is valid
   switch (body.type) {
-    case WebHookType.QDF:
-      break;
-    case WebHookType.EventPvp:
-      break;
-    case WebHookType.statusServer:
-      break;
-    case WebHookType.adminShop:
-      break;
-    case WebHookType.market:
-      break;
-    case WebHookType.vote:
-      break;
-    default:
-      return { succeeded: false, msg: "Type de WebHook inconnu" };
+  case WebHookType.QDF:
+    break;
+  case WebHookType.EventPvp:
+    break;
+  case WebHookType.statusServer:
+    break;
+  case WebHookType.adminShop:
+    break;
+  case WebHookType.market:
+    break;
+  case WebHookType.vote:
+    break;
+  default:
+    return { succeeded: false, msg: "Type de WebHook inconnu" };
   }
 
   console.log("Creating WebHook", body);
@@ -234,20 +236,20 @@ export async function editWebHookServerAction(body: WebHookCreate): Promise<{ su
   }
   // Check that the request is valid
   switch (body.type) {
-    case WebHookType.QDF:
-      break;
-    case WebHookType.EventPvp:
-      break;
-    case WebHookType.statusServer:
-      break;
-    case WebHookType.adminShop:
-      break;
-    case WebHookType.market:
-      break;
-    case WebHookType.vote:
-      break;
-    default:
-      return { succeeded: false, msg: "Type de WebHook inconnu" };
+  case WebHookType.QDF:
+    break;
+  case WebHookType.EventPvp:
+    break;
+  case WebHookType.statusServer:
+    break;
+  case WebHookType.adminShop:
+    break;
+  case WebHookType.market:
+    break;
+  case WebHookType.vote:
+    break;
+  default:
+    return { succeeded: false, msg: "Type de WebHook inconnu" };
   }
 
   const r = await fetchPostWithHeader<{
@@ -385,8 +387,9 @@ export const getMarketHistoryServerAction = async (itemId: string): Promise<AhIt
     c++;
   }
 
-  if (data.length !== totalCount)
+  if (data.length !== totalCount) {
     redirect(`/error?message=Data length is not equal to totalCount (getPaladiumAhItemFullHistory)`);
+  }
 
   return data;
 };

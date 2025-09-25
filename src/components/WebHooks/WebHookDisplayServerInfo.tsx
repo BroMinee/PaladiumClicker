@@ -60,8 +60,9 @@ export function DisplayServerBox({ guildId, channelId, guildIdToServerName, chil
     toast.success(`Suppression annulée`);
   };
 
-  if (deleted)
+  if (deleted) {
     return null;
+  }
 
   const hoverElement: ReactNode = (
     <p className="flex flex-col items-center justify-center border-black border-2 rounded-xl p-2 bg-primary">
@@ -135,8 +136,9 @@ export function DisplayChannelBox({ channelId, channelIdToChannelName, guildId, 
     if (res.succeeded) {
       setDefaultName(channelName);
       toast.success(res.msg);
-    } else
+    } else {
       toast.error(res.msg);
+    }
   }
 
   async function handleDelete() {
@@ -160,21 +162,22 @@ export function DisplayChannelBox({ channelId, channelIdToChannelName, guildId, 
     </p>
   );
 
-  if (deleted)
+  if (deleted) {
     return null;
+  }
 
   return (<div className="px-4 border-2 py-2 mb-2 border-secondary-foreground rounded-xl">
     <div className="flex flex-row gap-2 pb-2 items-center">
       <h3 className="font-bold text-l">Channel:</h3>
       <div className="flex flex-row gap-2">
-      <input
-        id="server_name"
-        type="text"
-        value={channelName}
-        className="text-left pl-2 rounded-sm font-bold text-sm flex items-center justify-center w-fit [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
-        onChange={(e) => setChannelName(e.target.value)}
-      />
-      {channelName !== defaultName && <Button size="icon" onClick={handleEdit}><FaSave size={18}/></Button>}
+        <input
+          id="server_name"
+          type="text"
+          value={channelName}
+          className="text-left pl-2 rounded-sm font-bold text-sm flex items-center justify-center w-fit [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+          onChange={(e) => setChannelName(e.target.value)}
+        />
+        {channelName !== defaultName && <Button size="icon" onClick={handleEdit}><FaSave size={18}/></Button>}
         {defaultName.startsWith("channel-") &&
           <HoverText text={hoverElement} className="rounded-sm h-9 w-9 bg-yellow-600">
             <IoIosWarning size="icon"/>

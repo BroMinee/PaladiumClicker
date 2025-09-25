@@ -21,8 +21,8 @@ export function CraftingSectionSelector() {
       <div className="flex flex-grow justify-start gap-2">
         {CraftSectionValid.map((name, index) => (
           <div key={index}
-               className={cn("flex flex-row bg-card rounded-t-md w-fit justify-center items-center mb-0 mt-3 p-2 cursor-pointer", currentSection === name ? "bg-primary border-card border-2 border-b-0" : "")}
-               onClick={() => router.push(generateCraftUrl(item,count_number, name as CraftSectionEnum), { scroll: false })}
+            className={cn("flex flex-row bg-card rounded-t-md w-fit justify-center items-center mb-0 mt-3 p-2 cursor-pointer", currentSection === name ? "bg-primary border-card border-2 border-b-0" : "")}
+            onClick={() => router.push(generateCraftUrl(item,count_number, name as CraftSectionEnum), { scroll: false })}
           >
             <div
               className={cn("font-mc text-primary text-3xl m-2 select-none", currentSection === name ? "text-primary-foreground" : "")}>{name}</div>

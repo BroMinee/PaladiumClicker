@@ -21,7 +21,7 @@ export function RankingSelectorCard({ rankingType, rankingPage }: { rankingType:
       </CardTitleH1>
       <CardDescription>
         Made with <FaHeart
-        className="text-primary inline-block"/> by <GradientText>BroMine__</GradientText>
+          className="text-primary inline-block"/> by <GradientText>BroMine__</GradientText>
       </CardDescription>
     </CardHeader>
     <CardContent className="grid grid-cols-3 md:flex md:flex-row items-center justify-between gap-2" id="ranking-selector">

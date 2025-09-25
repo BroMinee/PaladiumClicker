@@ -5,8 +5,9 @@ import React, { ChangeEvent } from "react";
 
 export function BuildingRPS({ index }: { index: number }) {
   const { data: playerInfo } = usePlayerInfoStore();
-  if (!playerInfo)
+  if (!playerInfo) {
     return <>0</>;
+  }
 
   return <>
     {formatPrice(Math.floor(scaleCurrentProduction(playerInfo, index, Number(playerInfo.building[index].own)) * 10) / 10)}
@@ -26,8 +27,9 @@ export function BuildingPrice({ index }: { index: number }) {
 
 export function BuildingLvl({ index }: { index: number }) {
   const { data: playerInfo } = usePlayerInfoStore();
-  if (!playerInfo)
+  if (!playerInfo) {
     return <>0</>;
+  }
 
   return <>Level: {playerInfo.building[index].own}</>;
 }
@@ -37,8 +39,9 @@ export function BuildingInput({ index }: { index: number }) {
   const count = !playerInfo ? 0 : playerInfo.building[index].own;
 
   function onChangeLevel(event: ChangeEvent<HTMLInputElement>) {
-    if (!playerInfo)
+    if (!playerInfo) {
       return;
+    }
 
     let value = Number(event.target.value);
     if (!isNaN(value)) {
@@ -47,7 +50,7 @@ export function BuildingInput({ index }: { index: number }) {
     }
   }
 
-  if (!playerInfo)
+  if (!playerInfo) {
     return <input
       id={`building-input-${index}`}
       className="text-white text-center rounded-sm font-mc font-bold text-sm flex items-center justify-center h-9 w-fit px-2"
@@ -57,6 +60,7 @@ export function BuildingInput({ index }: { index: number }) {
       max="99"
       defaultValue={0}
     />;
+  }
 
   return <input
     id={`building-input-${index}`}

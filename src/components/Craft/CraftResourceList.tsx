@@ -50,8 +50,9 @@ export function CraftResourceList({ list }: { list: NodeType[] }) {
         let sum = 0;
         let remaining = slot.count;
         for (let i = 0; i < listing.length; i++) {
-          if (remaining === 0)
+          if (remaining === 0) {
             break;
+          }
 
           if (listing[i].quantity >= remaining) {
             sum += listing[i].price * remaining;

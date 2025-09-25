@@ -9,8 +9,9 @@ const AreaChart = dynamic(() => import("recharts").then((mod) => mod.AreaChart),
 
 const CustomTooltip = ({ active, payload, label }: any) => {
 
-  if (!payload || payload.length === 0)
+  if (!payload || payload.length === 0) {
     return null;
+  }
 
   if (active && payload && payload.length) {
     return (
@@ -51,7 +52,7 @@ const PlotAdminShopChart = ({ data, periode, webhook = false }: {
       id="graph-adminshop-plot"
     >
       <AreaChart data={data_clean}
-                 margin={{ top: 30, right: 30, left: 30, bottom: 10 }}>
+        margin={{ top: 30, right: 30, left: 30, bottom: 10 }}>
         <defs>
           <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
             <stop offset="5%" stopColor="#8884d8" stopOpacity={0.8}/>
@@ -62,13 +63,13 @@ const PlotAdminShopChart = ({ data, periode, webhook = false }: {
         <Legend layout="horizontal" verticalAlign="top" align="center"/>
         <XAxis dataKey="date"/>
         <YAxis yAxisId="left"
-               domain={[(dataMin: number) => parseFloat((dataMin * 0.9).toFixed(2)), (dataMax: number) => parseFloat((dataMax * 1.1).toFixed(2))]}/>
+          domain={[(dataMin: number) => parseFloat((dataMin * 0.9).toFixed(2)), (dataMax: number) => parseFloat((dataMax * 1.1).toFixed(2))]}/>
         <Tooltip content={<CustomTooltip/>}/>
         <Area yAxisId="left" type="monotone" dataKey="sellPrice" name="Prix de vente" stroke="#8884d8" fillOpacity={1}
-              isAnimationActive={periode !== "season"}
-              fill="url(#colorUv)"
-              id="curve-price-adminshop"
-              />
+          isAnimationActive={periode !== "season"}
+          fill="url(#colorUv)"
+          id="curve-price-adminshop"
+        />
         {
           webhook && <ReferenceLine
             y={threshold}

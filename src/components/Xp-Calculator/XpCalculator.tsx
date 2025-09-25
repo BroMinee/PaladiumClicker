@@ -120,8 +120,9 @@ export function XpBonus({ params, searchParams }: {
 export function HowToXp({ searchParams }: {
   searchParams: searchParamsXpBonusPage
 }) {
-  if (searchParams.metier === undefined)
+  if (searchParams.metier === undefined) {
     return null;
+  }
 
   return (
     <Card>
@@ -137,23 +138,24 @@ export function HowToXp({ searchParams }: {
         <div className={`grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4 items-center`}>
           <div className="flex flex-row items-center gap-4">
             <Image src={safeJoinPaths(`/AH_img/glass_bottle.webp`)} alt="glass_bottle.webp"
-                   width={48} height={48}
-                   unoptimized={true}
-                   className="object-cover pixelated"/>
+              width={48} height={48}
+              unoptimized={true}
+              className="object-cover pixelated"/>
             <div className="flex flex-col">
-                        <span className="font-semibold">
-                          {"Consume"}{" "}
-                          <GradientText className="font-bold">
-                            <DisplayXpNeededWithBottle searchParams={searchParams}/>
-                        </GradientText>
-                        </span>
+              <span className="font-semibold">
+                {"Consume"}{" "}
+                <GradientText className="font-bold">
+                  <DisplayXpNeededWithBottle searchParams={searchParams}/>
+                </GradientText>
+              </span>
               <span className="font-semibold">Expérience de {searchParams.metier} [+1000]</span>
             </div>
           </div>
           {
             searchParams.metier && constants.how_to_xp[searchParams.metier as MetierKey].filter((e) => {
-              if (e.level === undefined)
+              if (e.level === undefined) {
                 return true;
+              }
               return (e.level && searchParams && searchParams.level && searchParams.level > e.level);
             }).map((e, index) => {
               return <DisplayItem key={e.imgPath + index} item={e} searchParams={searchParams} index={index}></DisplayItem>;

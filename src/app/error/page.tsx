@@ -53,7 +53,7 @@ export default async function Error500Page(
             <p className="mb-4 text-lg font-light text-gray-400">Si le problème persiste merci de
               contacter un développeur</p>
           </div>
-            <div className="flex flex-col gap-2 items-center justify-center">
+          <div className="flex flex-col gap-2 items-center justify-center">
             <ImportProfilPretty/>
             <ImportOfflineProfil/>
           </div>

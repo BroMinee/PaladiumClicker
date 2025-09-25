@@ -17,23 +17,28 @@ export async function generateMetadata() {
   const apiDownPalaTracker = await isMyApiDown().catch(() => true);
   const apiImportProfil = await getPlayerInfo("BroMine__").then(() => {
     return false;
-  }).catch(() => { return true; });
+  }).catch(() => {
+    return true; 
+  });
   let description = `${await getPlayerOnlineCount()} joueurs connectés sur Paladium.\n\n`;
 
-  if (apiDownPaladium)
+  if (apiDownPaladium) {
     description += "🚨 L'API de Paladium est actuellement hors service.\n";
-  else
+  } else {
     description += "🟢 L'API de Paladium est actuellement en ligne.\n";
+  }
 
-  if (apiDownPalaTracker)
+  if (apiDownPalaTracker) {
     description += "🚨 Notre API est actuellement hors service.\n";
-  else
+  } else {
     description += "🟢 Notre API est actuellement en ligne.\n";
+  }
 
-  if (apiImportProfil)
+  if (apiImportProfil) {
     description += "🚨 L'import de profil est actuellement hors service.\n";
-  else
+  } else {
     description += "🟢 L'import de profil est actuellement en ligne.\n";
+  }
 
   try {
     return {
@@ -70,8 +75,9 @@ export default async function Home(
   let periode = searchParams.periode;
   let periodeEnum = searchParams.periode as AdminShopPeriode;
 
-  if (periode === undefined)
+  if (periode === undefined) {
     periode = "day";
+  }
 
   if (periode !== "day" && periode !== "week" && periode !== "month" && periode !== "season") {
     redirect(generateStatusUrl("day"));
@@ -90,7 +96,7 @@ export default async function Home(
           </CardTitleH1>
           <CardDescription>
             Made with <FaHeart
-            className="text-primary inline-block"/> by <GradientText>BroMine__</GradientText>
+              className="text-primary inline-block"/> by <GradientText>BroMine__</GradientText>
           </CardDescription>
         </CardHeader>
         <CardContent className="flex flex-col items-center justify-between gap-2 h-[calc(100vh-30vh)]">

@@ -7,17 +7,17 @@ import { API_PALATRACKER } from "@/lib/constants.ts";
 import { textFormatting } from "@/components/News.tsx";
 
 export async function generateMetadata() {
-    const title = "PalaTracker | Webhook | Login";
-    const description = "Définissez des webhooks discord pour recevoir des notifications en temps réel sur Paladium.";
+  const title = "PalaTracker | Webhook | Login";
+  const description = "Définissez des webhooks discord pour recevoir des notifications en temps réel sur Paladium.";
 
-    return {
-        title: title,
-        description: description,
-        openGraph: {
-            title: title,
-            description: description,
-        },
-    };
+  return {
+    title: title,
+    description: description,
+    openGraph: {
+      title: title,
+      description: description,
+    },
+  };
 }
 
 export default function WebHooksPage() {

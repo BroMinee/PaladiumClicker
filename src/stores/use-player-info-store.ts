@@ -158,18 +158,20 @@ export const usePlayerInfoStore = create<State & Actions, [["zustand/persist", S
         return state;
       }
 
-      if (index < 0 || index >= state.data.CPS.length)
+      if (index < 0 || index >= state.data.CPS.length) {
         return state;
+      }
 
       const playerCps = [...state.data.CPS];
 
       for (let i = 0; i < state.data.CPS.length; i++) {
-        if (i < index)
+        if (i < index) {
           playerCps[i].own = true;
-        else if (i === index) {
+        } else if (i === index) {
           playerCps[i].own = !playerCps[i].own;
-          if (state.data.CPS[index].own === true)
+          if (state.data.CPS[index].own === true) {
             break;
+          }
         } else if (i > index) {
           playerCps[i].own = false;
         }

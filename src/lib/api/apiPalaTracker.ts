@@ -40,8 +40,9 @@ export const isMyApiDown = async (): Promise<boolean> => {
       });
     json = await response.json() as { backend_status: string, db_status: string } | null;
 
-    if (!response.ok)
+    if (!response.ok) {
       return true;
+    }
   } catch (error) {
     return true;
   }
@@ -86,14 +87,14 @@ export async function getStatusLauncher(periode: StatusPeriode): Promise<ServerS
 
 export async function getAllItems(): Promise<OptionType[]> {
   return await fetchWithHeader<Item[]>(`${API_PALATRACKER}/v1/item/getAll`, 30 * 60).then((res) => {
-  return res.map((item) => {
-    return {
-      value: item.item_name,
-      label: item.us_trad,
-      label2: item.fr_trad,
-      img: item.img
-    };
-  });
+    return res.map((item) => {
+      return {
+        value: item.item_name,
+        label: item.us_trad,
+        label2: item.fr_trad,
+        img: item.img
+      };
+    });
   }).catch(() => {
     return redirect(`/error?message=Impossible de charger la liste des items`);
   });
@@ -163,8 +164,9 @@ export async function isAdmin() {
 }
 
 export async function getItemAlias(item_name: string | undefined): Promise<string | null> {
-  if (item_name === undefined)
+  if (item_name === undefined) {
     return null;
+  }
 
   return await fetchWithHeader<string | null>(`${API_PALATRACKER}/v1/item/getAlias/${item_name}`, 30 * 60).catch(() => {
     console.error("Impossible de charger récupérer l'alias de l'item");

@@ -18,23 +18,27 @@ export function CraftingInformationClient({ root }: { root: Tree<NodeType> }) {
 
     const alreadyVisitedValue = new Set<string>();
     let leaves = getAllLeaves(tree);
-    if (leaves.length === 1 && leaves[0].value.value === tree.value.value)
+    if (leaves.length === 1 && leaves[0].value.value === tree.value.value) {
       leaves = [];
+    }
 
     // group the same leafs together and sum their count
     let groupedLeaves = leaves.reduce((acc, leaf) => {
       const value = getValueTree(leaf);
       if (alreadyVisitedValue.has(value.value)) {
         const findIndex = acc.findIndex((el) => el.value.value === value.value);
-        if (!value.checked && findIndex !== -1)
+        if (!value.checked && findIndex !== -1) {
           acc[findIndex].value.count += value.count;
+        }
         return acc;
       }
       alreadyVisitedValue.add(value.value);
       return [...acc, createTreeNode(value, value.checked ? 0 : value.count, value.checked)];
     }, [] as Tree<NodeType>[]);
 
-    const newLeaves = groupedLeaves.map((el) => { return getValueTree<NodeType>(el); }).filter((el) => el.count > 0);
+    const newLeaves = groupedLeaves.map((el) => {
+      return getValueTree<NodeType>(el); 
+    }).filter((el) => el.count > 0);
     setLeavesList(newLeaves);
 
   }, [tree]);

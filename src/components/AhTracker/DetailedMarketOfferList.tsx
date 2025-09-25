@@ -58,16 +58,16 @@ export function DetailedMarketOffer({ itemSelected, offer }: { itemSelected: Opt
     <div className="col-span-2 flex flex-row gap-8 md:w-[35%] w-full">
       <div className="flex relative min-w-28 w-28 h-28 items-center justify-center">
         <Image src={safeJoinPaths(constants.imgPathMarket,overlayName)} width={0} height={0} alt={itemSelected.label} unoptimized={true}
-               className="h-full w-full pixelated absolute"/>
+          className="h-full w-full pixelated absolute"/>
         <Image src={`/AH_img/${itemSelected.img}`} width={0} height={0} alt={itemSelected.label} unoptimized={true}
-               className="h-[50%] w-[50%] pixelated absolute"/>
+          className="h-[50%] w-[50%] pixelated absolute"/>
       </div>
       <div className="flex flex-row items-center w-[35%]">
         {offer.renamed ? <HoverText text={hoverElementName}>
-            <p className="font-bold text-[25px]">
-              {textFormatting(`*${offer.name}*`)}
-            </p>
-          </HoverText> :
+          <p className="font-bold text-[25px]">
+            {textFormatting(`*${offer.name}*`)}
+          </p>
+        </HoverText> :
           <p className="font-bold text-[25px]">
             {offer.name}
           </p>
@@ -81,33 +81,33 @@ export function DetailedMarketOffer({ itemSelected, offer }: { itemSelected: Opt
     </div>
     <div className="md:ml-4 flex md:w-[35%] flex-col xl:flex-row items-center gap-4">
       <Image src={`https://crafatar.com/avatars/${offer.seller}?size=8&overlay`}
-             className="w-12 h-12 pixelated rounded-md"
-             alt={`Skin`} width={0} height={0}
-             unoptimized={true}
+        className="w-12 h-12 pixelated rounded-md"
+        alt={`Skin`} width={0} height={0}
+        unoptimized={true}
       />
       <SellNameMarket uuid={offer.seller}/>
     </div>
     <div className="flex flex-col xl:flex-row gap-4 w-full md:w-[35%]">
 
       <HoverText text={hoverElementPricePb}
-                   className="flex flex-row w-full xl:w-[45%] gap-8 justify-between bg-card py-3 px-2 items-center">
-          <Image src={safeJoinPaths(constants.imgPathMarket,"pb_icon.png")}
-                 className="w-fit h-7 pixelated"
-                 alt={`pb_icon`} width={0} height={0}
-                 unoptimized={true}
-          />
-          <p className="font-bold text-[20px]">
+        className="flex flex-row w-full xl:w-[45%] gap-8 justify-between bg-card py-3 px-2 items-center">
+        <Image src={safeJoinPaths(constants.imgPathMarket,"pb_icon.png")}
+          className="w-fit h-7 pixelated"
+          alt={`pb_icon`} width={0} height={0}
+          unoptimized={true}
+        />
+        <p className="font-bold text-[20px]">
 
-            {`${formatPriceWithUnit(offer.pricePb)} PB`}
-          </p>
-        </HoverText>
+          {`${formatPriceWithUnit(offer.pricePb)} PB`}
+        </p>
+      </HoverText>
 
       <HoverText text={hoverElementPrice}
-                 className="flex flex-row w-full xl:w-[65%] gap-8 justify-between bg-card py-3 px-2 items-center">
+        className="flex flex-row w-full xl:w-[65%] gap-8 justify-between bg-card py-3 px-2 items-center">
         <Image src={safeJoinPaths(constants.imgPathMarket,"money_icon.png")}
-               className="w-fit h-7 pixelated"
-               alt={`money_icon`} width={0} height={0}
-               unoptimized={true}
+          className="w-fit h-7 pixelated"
+          alt={`money_icon`} width={0} height={0}
+          unoptimized={true}
         />
         <p className="font-bold text-[20px]">
           {`${formatPriceWithUnit(offer.price)} $`}

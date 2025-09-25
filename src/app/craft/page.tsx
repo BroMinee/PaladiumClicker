@@ -58,12 +58,12 @@ export default async function Home(props: { searchParams: Promise<searchParamsCr
   }
 
   switch (searchParams.section) {
-    case CraftSectionEnum.recipe:
-      return <BodyPage><CraftRecipeDisplay searchParams={searchParams}/></BodyPage>;
-    case CraftSectionEnum.optimizer:
-      return <BodyPage><CraftOptimizerDisplay/></BodyPage>;
-    default:
-      return redirect(generateCraftUrl(searchParams.item as string, searchParams.count || 1, CraftSectionEnum.recipe));
+  case CraftSectionEnum.recipe:
+    return <BodyPage><CraftRecipeDisplay searchParams={searchParams}/></BodyPage>;
+  case CraftSectionEnum.optimizer:
+    return <BodyPage><CraftOptimizerDisplay/></BodyPage>;
+  default:
+    return redirect(generateCraftUrl(searchParams.item as string, searchParams.count || 1, CraftSectionEnum.recipe));
   }
 }
 

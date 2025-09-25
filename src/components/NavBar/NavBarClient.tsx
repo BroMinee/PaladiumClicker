@@ -58,8 +58,9 @@ export default function LinkClient({ path, children }: {
     if (typeof window !== 'undefined') {
       link = getLinkFromUrl(window.location.pathname);
     }
-    if (!link)
+    if (!link) {
       return;
+    }
 
     setIsActive(link === path);
   }, [pathname, path]);
@@ -70,13 +71,14 @@ export default function LinkClient({ path, children }: {
     [newNotification, newNotificationText] = hasNewNotification(last_visited, path);
   }
 
-  if (!mounted)
+  if (!mounted) {
     return <Link
       className="font-medium flex justify-start items-center space-x-6 focus:bg-gray-700 focus:text-white hover:bg-accent text-card-foreground rounded px-3 py-2 w-56"
       href={path}>
       {children}
       <p className="text-base leading-4 text-left">{label}</p>
     </Link>;
+  }
 
   const href = requiredPseudo && playerInfo?.username ? safeJoinPaths("/", path, playerInfo.username) : path;
   const hoverElement: ReactNode = (
@@ -94,7 +96,7 @@ export default function LinkClient({ path, children }: {
         {newNotification &&
           <div className="relative inline-block bg-green-400">
             <span className="animate-ping absolute right-0 w-6 h-6 bg-red-400 opacity-75 rounded-md"
-                  style={{ top: "-18px", right: "-10px" }}></span>
+              style={{ top: "-18px", right: "-10px" }}></span>
             <span
               className="absolute right-0 w-6 h-6 text-white bg-red-500  rounded-md text-center"
               style={{ top: "-18px", right: "-10px" }}>1</span>
@@ -112,9 +114,9 @@ export default function LinkClient({ path, children }: {
       <p className="text-base leading-4 flex-grow text-left">{label}</p>
       {newNotification &&
         <div className="relative inline-block bg-green-400">
-             <span
-               className="absolute right-0 w-6 h-6 text-white bg-red-500  rounded-md text-center"
-               style={{ top: "-18px", right: "-10px" }}>1</span>
+          <span
+            className="absolute right-0 w-6 h-6 text-white bg-red-500  rounded-md text-center"
+            style={{ top: "-18px", right: "-10px" }}>1</span>
         </div>}
     </Link>
   );
@@ -141,8 +143,9 @@ export function CategorieDisplay({ name, children }: {
   }, []);
 
   useEffect(() => {
-    if (!mounted)
+    if (!mounted) {
       return;
+    }
     setOpen(opened.includes(name));
   }, [name, mounted, opened]);
 
@@ -154,8 +157,9 @@ export function CategorieDisplay({ name, children }: {
   useEffect(() => {
     if (mounted) {
       const newNotification = subLinks.reduce((acc, path) => {
-        if (hasNewNotification(last_visited, path)[0])
+        if (hasNewNotification(last_visited, path)[0]) {
           acc += 1;
+        }
         return acc;
       }, 0);
 
@@ -175,23 +179,29 @@ export function CategorieDisplay({ name, children }: {
 
   useEffect(() => {
     const el = contentRef.current;
-    if (!el) return;
+    if (!el) {
+      return;
+    }
     const update = () => {
       setMaxHeight(open ? `${el.scrollHeight}px` : "0px");
     };
     update();
     const ro = typeof ResizeObserver !== 'undefined' ? new ResizeObserver(update) : null;
-    if (ro) ro.observe(el);
+    if (ro) {
+      ro.observe(el);
+    }
     window.addEventListener('resize', update);
     return () => {
-      if (ro) ro.disconnect();
+      if (ro) {
+        ro.disconnect();
+      }
       window.removeEventListener('resize', update);
     };
   }, [open, mounted, subLinks.length]);
 
   return (<div className="flex flex-col justify-start items-center px-6 border-b border-gray-600 w-full">
     <button onClick={toggleOpen}
-            className="focus:outline-none focus:text-indigo-400 text-card-foreground flex justify-between items-center w-full py-5 space-x-14 transition-colors duration-200">
+      className="focus:outline-none focus:text-indigo-400 text-card-foreground flex justify-between items-center w-full py-5 space-x-14 transition-colors duration-200">
       <p className="text-sm text-left leading-5 uppercase">{name}</p>
       <FaAngleDown size={24} className={cn(
         "transition-transform duration-300 ease-in-out transform-gpu",
@@ -201,7 +211,7 @@ export function CategorieDisplay({ name, children }: {
     </button>
     {!open && newNotification !== 0 && <div className="relative inline-block">
       <span className="animate-ping absolute right-0 w-6 h-6 bg-red-400 opacity-75 rounded-md"
-            style={{ bottom: "35px", left: "100px" }}></span>
+        style={{ bottom: "35px", left: "100px" }}></span>
       <span
         className=" absolute right-0 w-6 h-6 text-white bg-red-500 rounded-md text-center"
         style={{ bottom: "35px", left: "100px" }}>{newNotification}</span>
@@ -246,12 +256,15 @@ export function GiveawayFakeLink({ children }: {
    * */
 
   useEffect(() => {
-    if (!playerInfo) return;
+    if (!playerInfo) {
+      return;
+    }
 
     try {
       getCurrentEvent().then((event_0) => {
-        if (event_0)
+        if (event_0) {
           setEvent(event_0);
+        }
         getCurrentEventNotRegistered(playerInfo.uuid).then((event) => {
           if (event) {
             setNewNotification(true);
@@ -278,12 +291,13 @@ export function GiveawayFakeLink({ children }: {
     setMounted(true);
   }, [playerInfo]);
 
-  if (!mounted)
+  if (!mounted) {
     return (
       <RenderEvent newNotification={false}>
         {children}
       </RenderEvent>
     );
+  }
 
   const hoverElement: ReactNode = (
     <div className="bg-primary rounded-md p-2 font-bold">{newNotificationText}</div>
@@ -317,8 +331,8 @@ export function RenderEvent({ newNotification, children }: { newNotification: bo
     <p className="text-base leading-4 flex-grow text-left">GiveAway</p>
     {newNotification &&
       <div className="relative inline-block bg-green-400">
-            <span className="animate-ping absolute right-0 w-6 h-6 bg-red-400 opacity-75 rounded-md"
-                  style={{ top: "-18px", right: "-10px" }}></span>
+        <span className="animate-ping absolute right-0 w-6 h-6 bg-red-400 opacity-75 rounded-md"
+          style={{ top: "-18px", right: "-10px" }}></span>
         <span
           className="absolute right-0 w-6 h-6 text-white bg-red-500  rounded-md text-center"
           style={{ top: "-18px", right: "-10px" }}>1</span>
@@ -334,8 +348,9 @@ export function NotificationWebSite() {
 
   useEffect(() => {
     getNotificationWebSite().then((msg_) => {
-      if (msg_)
+      if (msg_) {
         setNotif(msg_);
+      }
     });
   }, []);
 
@@ -345,8 +360,9 @@ export function NotificationWebSite() {
     }
   }
 
-  if (!notif)
+  if (!notif) {
     return null;
+  }
 
   return (
     <div className="relative">

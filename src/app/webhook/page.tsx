@@ -7,17 +7,17 @@ import { WebHookAlert } from "@/types";
 import constants from "@/lib/constants.ts";
 
 export async function generateMetadata() {
-    const title = "PalaTracker | Webhook";
-    const description = "Définissez des webhooks discord pour recevoir des notifications en temps réel sur Paladium.";
+  const title = "PalaTracker | Webhook";
+  const description = "Définissez des webhooks discord pour recevoir des notifications en temps réel sur Paladium.";
 
-    return {
-        title: title,
-        description: description,
-        openGraph: {
-            title: title,
-            description: description,
-        },
-    };
+  return {
+    title: title,
+    description: description,
+    openGraph: {
+      title: title,
+      description: description,
+    },
+  };
 }
 
 export type subGroupsType = Record<string, WebHookAlert[]>;
@@ -40,41 +40,41 @@ export default async function WebHooksMainPage() {
 };
 
 export async function WebHooksPage() {
-    let webHookAlerts = await getWebHookFromCookies();
-    let webHookDiscord = await getWebHookDiscordFromCookies();
-    const guildIdToServerName: Record<string, string> = {};
-    const channelIdToChannelName: Record<string, string> = {};
+  let webHookAlerts = await getWebHookFromCookies();
+  let webHookDiscord = await getWebHookDiscordFromCookies();
+  const guildIdToServerName: Record<string, string> = {};
+  const channelIdToChannelName: Record<string, string> = {};
 
-    const groups: groupsType = webHookDiscord.reduce((acc, webhook) => {
-        guildIdToServerName[webhook.guild_id] = webhook.server_name;
-        channelIdToChannelName[webhook.channel_id] = webhook.channel_name;
+  const groups: groupsType = webHookDiscord.reduce((acc, webhook) => {
+    guildIdToServerName[webhook.guild_id] = webhook.server_name;
+    channelIdToChannelName[webhook.channel_id] = webhook.channel_name;
 
-        if (!acc[webhook.guild_id]) {
-            acc[webhook.guild_id] = {} as subGroupsType;
-        }
+    if (!acc[webhook.guild_id]) {
+      acc[webhook.guild_id] = {} as subGroupsType;
+    }
 
-        if (!acc[webhook.guild_id][webhook.channel_id]) {
-            acc[webhook.guild_id][webhook.channel_id] = [];
-        }
-        return acc;
-    }, {} as groupsType);
+    if (!acc[webhook.guild_id][webhook.channel_id]) {
+      acc[webhook.guild_id][webhook.channel_id] = [];
+    }
+    return acc;
+  }, {} as groupsType);
 
-    webHookAlerts.forEach((webhook) => {
-        if (groups[webhook.webhook.guild_id] && groups[webhook.webhook.guild_id][webhook.webhook.channel_id]) {
-            groups[webhook.webhook.guild_id][webhook.webhook.channel_id].push(webhook);
-        } else {
-            throw new Error(`Webhook not found in groups ${webhook.webhook} ${groups}`);
-        }
-    });
+  webHookAlerts.forEach((webhook) => {
+    if (groups[webhook.webhook.guild_id] && groups[webhook.webhook.guild_id][webhook.webhook.channel_id]) {
+      groups[webhook.webhook.guild_id][webhook.webhook.channel_id].push(webhook);
+    } else {
+      throw new Error(`Webhook not found in groups ${webhook.webhook} ${groups}`);
+    }
+  });
 
-    return (
-      <CardContent className="flex flex-col justify-left gap-2">
-        {webHookAlerts.length === 0 &&
+  return (
+    <CardContent className="flex flex-col justify-left gap-2">
+      {webHookAlerts.length === 0 &&
           <CardTitleH1>Vous n&apos;avez pas de webhooks définis. Créez-en un dès maintenant !
           </CardTitleH1>
-        }
-        <WebHookPreviewPage webHookDiscord={webHookDiscord} channelIdToChannelName={channelIdToChannelName}
-                            guildIdToServerName={guildIdToServerName} groupsArg={groups}/>
-      </CardContent>
-    );
+      }
+      <WebHookPreviewPage webHookDiscord={webHookDiscord} channelIdToChannelName={channelIdToChannelName}
+        guildIdToServerName={guildIdToServerName} groupsArg={groups}/>
+    </CardContent>
+  );
 }

@@ -52,8 +52,9 @@ const MyTreeView = ({ root, setRoot }: MyTreeViewProps) => {
 
   useEffect(() => {
     const newNode = createNode(root);
-    if(root && isSameTree(newNode, root))
+    if(root && isSameTree(newNode, root)) {
       return;
+    }
     setNode(newNode);
   }, [root]);
 
@@ -139,14 +140,26 @@ export function createNode(root: Tree<NodeType>, depth = 0, childSuffix = ""): M
 }
 
 export function isSameTree(node1: MyTreeNode, node2: Tree<NodeType>): boolean {
-  if (node1.value !== node2.value.value) return false;
-  if (node1.children === undefined && node2.children.length === 0) return true;
-  if (node1.children === undefined && node2.children.length !== 0) return false;
-  if (node1.children !== undefined && node2.children.length === 0) return false;
+  if (node1.value !== node2.value.value) {
+    return false;
+  }
+  if (node1.children === undefined && node2.children.length === 0) {
+    return true;
+  }
+  if (node1.children === undefined && node2.children.length !== 0) {
+    return false;
+  }
+  if (node1.children !== undefined && node2.children.length === 0) {
+    return false;
+  }
   if (node1.children !== undefined && node2.children.length !== 0) {
-    if (node1.children.length !== node2.children.length) return false;
+    if (node1.children.length !== node2.children.length) {
+      return false;
+    }
     for (let i = 0; i < node1.children.length; i++) {
-      if (!isSameTree(node1.children[i], node2.children[i])) return false;
+      if (!isSameTree(node1.children[i], node2.children[i])) {
+        return false;
+      }
     }
   }
   return true;

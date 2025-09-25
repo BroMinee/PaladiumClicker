@@ -14,14 +14,14 @@ export default async function GraphAdminShop({ item, periode }: GraphAdminShopPr
   let data = [] as AdminShopItemDetail[];
   try {
     switch (periode) {
-      case "day":
-      case "week":
-      case "month":
-      case "season":
-        data = await getAdminShopHistory(item, periode);
-        break;
-      default:
-        data = [];
+    case "day":
+    case "week":
+    case "month":
+    case "season":
+      data = await getAdminShopHistory(item, periode);
+      break;
+    default:
+      data = [];
     }
   } catch (error) {
     console.error("Error getting item history:", error);

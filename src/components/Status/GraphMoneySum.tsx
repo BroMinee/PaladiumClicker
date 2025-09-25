@@ -15,7 +15,8 @@ export default async function GraphMoneySum() {
     return {
       date: el.date,
       value: el.money_sum
-    };});
+    };
+  });
 
   return (
     <PlotSingleValueChart data={d} labelName={"$ en jeu"} className={"h-[calc(100vh-60vh)] min-h-[calc(100vh-60vh)]"}/>

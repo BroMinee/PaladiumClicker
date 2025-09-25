@@ -12,14 +12,14 @@ export function LoginButton({href, redirectUrl }: {href: string, redirectUrl: st
       window.location.href = href;
     })
       .catch((e) => {
-          toast.error(e);
-          console.error(e);
-        }
+        toast.error(e);
+        console.error(e);
+      }
       );
   }
 
   return <Button variant="ghost" className="flex flex-row items-center gap-2 text-bold text-xl"
-                 onClick={handleLogin}
+    onClick={handleLogin}
   >
     Se connecter via
     <FaDiscord size={32} className="p-1 rounded-md bg-discord text-primary-foreground"/>
@@ -32,9 +32,9 @@ export function SmallLoginButton({href, redirectUrl }: {href: string, redirectUr
       window.location.href = href;
     })
       .catch((e) => {
-          toast.error(e);
-          console.error(e);
-        }
+        toast.error(e);
+        console.error(e);
+      }
       );
   }
 

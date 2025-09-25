@@ -25,11 +25,11 @@ type ImportProfilProps = {
 }
 
 export default function ImportProfil({
-                                       showResetButton = false,
-                                       withBackground = true,
-                                       navBar = false,
-                                       classNameInput
-                                     }: ImportProfilProps) {
+  showResetButton = false,
+  withBackground = true,
+  navBar = false,
+  classNameInput
+}: ImportProfilProps) {
 
   const { data: playerInfo, setPlayerInfo } = usePlayerInfoStore();
   const { settings } = useSettingsStore();
@@ -39,8 +39,9 @@ export default function ImportProfil({
   const [fetching, setFetching] = useState(false);
 
   async function onSubmit(event: FormEvent<HTMLFormElement>) {
-    if (fetching)
+    if (fetching) {
       return;
+    }
 
     event.preventDefault();
     const formData = new FormData(event.target as HTMLFormElement);
@@ -102,8 +103,7 @@ export default function ImportProfil({
       setPlayerInfo(newPlayerInfo);
       setIsPopupOpen(false);
       setUpdate(false);
-    }
-    else {
+    } else {
       console.error("newPlayerInfo is null");
     }
   }, [update, newPlayerInfo, setPlayerInfo]);
@@ -161,8 +161,8 @@ export default function ImportProfil({
 }
 
 function UpdateProfilButton({
-                              fetching
-                            }: {
+  fetching
+}: {
   fetching: boolean,
 }) {
   return <Button
@@ -176,24 +176,46 @@ function UpdateProfilButton({
 }
 
 function hasDifference(oldPlayerInfo: PlayerInfo, newPlayerInfo: PlayerInfo): boolean {
-  if (oldPlayerInfo.metier.farmer.level > newPlayerInfo.metier.farmer.level) return true;
-  if (oldPlayerInfo.metier.miner.level > newPlayerInfo.metier.miner.level) return true;
-  if (oldPlayerInfo.metier.hunter.level > newPlayerInfo.metier.hunter.level) return true;
-  if (oldPlayerInfo.metier.alchemist.level > newPlayerInfo.metier.alchemist.level) return true;
+  if (oldPlayerInfo.metier.farmer.level > newPlayerInfo.metier.farmer.level) {
+    return true;
+  }
+  if (oldPlayerInfo.metier.miner.level > newPlayerInfo.metier.miner.level) {
+    return true;
+  }
+  if (oldPlayerInfo.metier.hunter.level > newPlayerInfo.metier.hunter.level) {
+    return true;
+  }
+  if (oldPlayerInfo.metier.alchemist.level > newPlayerInfo.metier.alchemist.level) {
+    return true;
+  }
 
-  if (oldPlayerInfo.building.some((e, index) => e.own > newPlayerInfo.building[index].own)) return true;
+  if (oldPlayerInfo.building.some((e, index) => e.own > newPlayerInfo.building[index].own)) {
+    return true;
+  }
 
-  if (oldPlayerInfo.global_upgrade.some((b, index) => b.own && !newPlayerInfo.global_upgrade[index].own)) return true;
+  if (oldPlayerInfo.global_upgrade.some((b, index) => b.own && !newPlayerInfo.global_upgrade[index].own)) {
+    return true;
+  }
 
-  if (oldPlayerInfo.terrain_upgrade.some((b, index) => b.own && !newPlayerInfo.terrain_upgrade[index].own)) return true;
+  if (oldPlayerInfo.terrain_upgrade.some((b, index) => b.own && !newPlayerInfo.terrain_upgrade[index].own)) {
+    return true;
+  }
 
-  if (oldPlayerInfo.building_upgrade.some((b, index) => b.own && !newPlayerInfo.building_upgrade[index].own)) return true;
+  if (oldPlayerInfo.building_upgrade.some((b, index) => b.own && !newPlayerInfo.building_upgrade[index].own)) {
+    return true;
+  }
 
-  if (oldPlayerInfo.many_upgrade.some((b, index) => b.own && !newPlayerInfo.many_upgrade[index].own)) return true;
+  if (oldPlayerInfo.many_upgrade.some((b, index) => b.own && !newPlayerInfo.many_upgrade[index].own)) {
+    return true;
+  }
 
-  if (oldPlayerInfo.terrain_upgrade.some((b, index) => b.own && !newPlayerInfo.terrain_upgrade[index].own)) return true;
+  if (oldPlayerInfo.terrain_upgrade.some((b, index) => b.own && !newPlayerInfo.terrain_upgrade[index].own)) {
+    return true;
+  }
 
-  if (oldPlayerInfo.posterior_upgrade.some((b, index) => b.own && !newPlayerInfo.posterior_upgrade[index].own)) return true;
+  if (oldPlayerInfo.posterior_upgrade.some((b, index) => b.own && !newPlayerInfo.posterior_upgrade[index].own)) {
+    return true;
+  }
 
   return false;
 }
@@ -243,67 +265,79 @@ function DisplayDifference({ oldPlayerInfo, newPlayerInfo }: displayDifferencePr
 
       {
         oldPlayerInfo.global_upgrade.map((b, index) => {
-          if (b.own && !newPlayerInfo.global_upgrade[index].own)
-            return <SmallCardInfo title={b.name}
+          if (b.own && !newPlayerInfo.global_upgrade[index].own) {
+return <SmallCardInfo title={b.name}
                                   key={"global" + index}
                                   value={"✔️ -> ❌"}
                                   img={safeJoinPaths(constants.imgPathClicker, `/GlobalIcon/${index}.png`)} unoptimized/>;
-          else return null;
+} else {
+return null;
+}
         })
       }
 
       {
         oldPlayerInfo.terrain_upgrade.map((b, index) => {
-          if (b.own && !newPlayerInfo.terrain_upgrade[index].own)
-            return <SmallCardInfo title={b.name}
+          if (b.own && !newPlayerInfo.terrain_upgrade[index].own) {
+return <SmallCardInfo title={b.name}
                                   key={"terrain" + index}
                                   value={"✔️ -> ❌"}
                                   img={safeJoinPaths(constants.imgPathClicker, `/TerrainIcon/${index}.png`)} unoptimized/>;
-          else return null;
+} else {
+return null;
+}
         })
       }
 
       {
         oldPlayerInfo.building_upgrade.map((b, index) => {
-          if (b.own && !newPlayerInfo.building_upgrade[index].own)
-            return <SmallCardInfo title={b.name}
+          if (b.own && !newPlayerInfo.building_upgrade[index].own) {
+return <SmallCardInfo title={b.name}
                                   key={"building_upgrade" + index}
                                   value={"✔️ -> ❌"}
                                   img={safeJoinPaths(constants.imgPathClicker, `/BuildingUpgradeIcon/${index <= 15 ? 0 : 1}.png`)} unoptimized/>;
-          else return null;
+} else {
+return null;
+}
         })
       }
 
       {
         oldPlayerInfo.many_upgrade.map((b, index) => {
-          if (b.own && !newPlayerInfo.many_upgrade[index].own)
-            return <SmallCardInfo title={b.name}
+          if (b.own && !newPlayerInfo.many_upgrade[index].own) {
+return <SmallCardInfo title={b.name}
                                   key={"many" + index}
                                   value={"✔️ -> ❌"}
                                   img={safeJoinPaths(constants.imgPathClicker, `/ManyIcon/0.png`)} unoptimized/>;
-          else return null;
+} else {
+return null;
+}
         })
       }
 
       {
         oldPlayerInfo.posterior_upgrade.map((b, index) => {
-          if (b.own && !newPlayerInfo.posterior_upgrade[index].own)
-            return <SmallCardInfo title={b.name}
+          if (b.own && !newPlayerInfo.posterior_upgrade[index].own) {
+return <SmallCardInfo title={b.name}
                                   key={"posterior" + index}
                                   value={"✔️ -> ❌"}
                                   img={safeJoinPaths(constants.imgPathClicker, `/PosteriorIcon/0.png`)} unoptimized/>;
-          else return null;
+} else {
+return null;
+}
         })
       }
 
       {
         oldPlayerInfo.category_upgrade.map((b, index) => {
-          if (b.own && !newPlayerInfo.category_upgrade[index].own)
-            return <SmallCardInfo title={b.name}
+          if (b.own && !newPlayerInfo.category_upgrade[index].own) {
+return <SmallCardInfo title={b.name}
                                   key={"category" + index}
                                   value={"✔️ -> ❌"}
                                   img={safeJoinPaths(constants.imgPathClicker, `/CategoryIcon/${index}.png`)} unoptimized/>;
-          else return null;
+} else {
+return null;
+}
         })
       }
     </div>

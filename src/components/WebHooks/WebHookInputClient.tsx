@@ -57,8 +57,9 @@ export function WebHookInputClientItem() {
   } = useWebhookStore();
 
   useEffect(() => {
-    if (currentWebHookType !== WebHookType.market && thresholdCondition === 'aboveQuantity')
+    if (currentWebHookType !== WebHookType.market && thresholdCondition === 'aboveQuantity') {
       setThresholdCondition('aboveThreshold');
+    }
   }, [currentWebHookType, thresholdCondition, setThresholdCondition]);
 
   useEffect(() => {
@@ -72,25 +73,27 @@ export function WebHookInputClientItem() {
     setEmbedImg(defaultWebhookEmbedImgFromType[currentWebHookType]);
     setFields(defaultWebHookFieldsFromType[currentWebHookType]);
 
-    if (edit)
+    if (edit) {
       return;
+    }
 
     setContent(defaultWebHookContentFromType[currentWebHookType]);
     setEmbed(defaultWebHookEmbedFromType[currentWebHookType]);
     setTitle(defaultWebHookTitleFromType[currentWebHookType]);
-    if (currentWebHookType === "market")
+    if (currentWebHookType === "market") {
       setItemSelected({
         value: "endium-sword",
         label: "Endium Sword",
         img: "endium_sword.webp",
         label2: "Épée d'Endium"
       });
-    else if (currentWebHookType === "adminShop")
+    } else if (currentWebHookType === "adminShop") {
       setAdminShopItemSelected("bone");
-    else if (currentWebHookType === "QDF")
+    } else if (currentWebHookType === "QDF") {
       setItemSelected({ value: "glue", label: "Glue", img: "glue.webp", label2: "Colle" });
-    else
+    } else {
       setItemSelected(null);
+    }
   }, [currentWebHookType, edit, setEmbed, setContent, setTitle, setItemSelected, setAdminShopItemSelected, setFields, setTitleUrl, setEmbedImg]);
 
   return (
@@ -225,7 +228,7 @@ function WebHookEditor() {
         <div className="flex flex-row gap-2 items-center">
           <label htmlFor="content">Contenu du message <span
             className={cn("text-gray-500", content.length === 2000 && "animate-blink")}>{content.length}/2000
-                </span>
+          </span>
           </label>
         </div>
         <textarea
@@ -261,10 +264,12 @@ function WebHookEditor() {
 
 function AdaptEditor() {
   const { currentWebHookType } = useWebhookStore();
-  if (currentWebHookType === WebHookType.QDF)
+  if (currentWebHookType === WebHookType.QDF) {
     return null;
-  if (currentWebHookType === WebHookType.statusServer)
+  }
+  if (currentWebHookType === WebHookType.statusServer) {
     return null;
+  }
 
   if (currentWebHookType === WebHookType.adminShop) {
     return <AdminShopInput/>;
@@ -286,10 +291,12 @@ function AdaptEditor() {
 
 function AdaptEditorFooter() {
   const { currentWebHookType, itemSelected, adminShopItemSelected } = useWebhookStore();
-  if (currentWebHookType === WebHookType.QDF)
+  if (currentWebHookType === WebHookType.QDF) {
     return null;
-  if (currentWebHookType === WebHookType.statusServer)
+  }
+  if (currentWebHookType === WebHookType.statusServer) {
     return null;
+  }
 
   if (currentWebHookType === WebHookType.adminShop && adminShopItemSelected) {
     return <AdminShopGraphClient/>;
@@ -308,20 +315,20 @@ function AdaptEditorFooter() {
 export function Recap() {
   const { currentWebHookType } = useWebhookStore();
   switch (currentWebHookType) {
-    case WebHookType.QDF:
-      return <RecapQDF/>;
-    case WebHookType.market:
-      return <RecapMarket/>;
-    case WebHookType.adminShop:
-      return <RecapAdminShop/>;
-    case WebHookType.EventPvp:
-      return <RecapEvent/>;
-    case WebHookType.statusServer:
-      return <RecapServeurStatus/>;
-    case WebHookType.vote:
-      return <RecapVote/>;
-    default:
-      return null;
+  case WebHookType.QDF:
+    return <RecapQDF/>;
+  case WebHookType.market:
+    return <RecapMarket/>;
+  case WebHookType.adminShop:
+    return <RecapAdminShop/>;
+  case WebHookType.EventPvp:
+    return <RecapEvent/>;
+  case WebHookType.statusServer:
+    return <RecapServeurStatus/>;
+  case WebHookType.vote:
+    return <RecapVote/>;
+  default:
+    return null;
   }
 }
 
@@ -330,8 +337,9 @@ export function AdminShopGraphClient() {
   const [data, setData] = React.useState<AdminShopItemDetail[]>([]);
 
   useEffect(() => {
-    if (!adminShopItemSelected)
+    if (!adminShopItemSelected) {
       return;
+    }
     try {
       getAdminShopHistoryServerAction(adminShopItemSelected, "month").then((res) => {
         setData(res);
@@ -353,8 +361,9 @@ export function MarketGraphClient() {
   const [data, setData] = React.useState<AhItemHistory[]>([]);
 
   useEffect(() => {
-    if (!itemSelected)
+    if (!itemSelected) {
       return;
+    }
     try {
       getMarketHistoryServerAction(itemSelected.value).then((res) => {
         setData(res);

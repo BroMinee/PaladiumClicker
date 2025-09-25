@@ -7,8 +7,9 @@ import MotionFadeIn from "@/components/shared/MotionFadeIn.tsx";
 import MotionStaggerList from "@/components/shared/MotionStaggerList.tsx";
 
 export default function ErrorBoundary({ error }: { error: Error }) {
-  if (typeof window !== "undefined")
+  if (typeof window !== "undefined") {
     localStorage.clear();
+  }
 
   return <MotionFadeIn y={12}>
     <Card className="flex flex-col gap-4 font-bold text-white bg-black">

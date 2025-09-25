@@ -23,8 +23,7 @@ export const useNavbarStore = create<State & Actions, [["zustand/persist", State
     setToggleOpen: (category) => set((state) => {
       if(state.opened.includes(category)) {
         state.opened = state.opened.filter((c) => c !== category);
-      }
-      else {
+      } else {
         state.opened.push(category);
       }
       return { ...state };

@@ -4,9 +4,9 @@ import Selector from "@/components/shared/Selector.tsx";
 import { OptionType } from "@/types";
 
 export function SelectorItemClient({
-                                     options, url, defaultValue,
-                                     setInputValueFunction
-                                   }: {
+  options, url, defaultValue,
+  setInputValueFunction
+}: {
   options: OptionType[],
   url: string,
   defaultValue: OptionType | null
@@ -17,8 +17,9 @@ export function SelectorItemClient({
   const setInputValue = (value: string) => {
     if (setInputValueFunction) {
       const find = options.find((option) => option.value === value);
-      if (find)
+      if (find) {
         setInputValueFunction(find);
+      }
     } else {
       router.push(`${url}` + value, { scroll: false });
     }
@@ -26,6 +27,6 @@ export function SelectorItemClient({
 
   return (
     <Selector options={options} setInputValue={setInputValue}
-              defaultValue={defaultValue}/>
+      defaultValue={defaultValue}/>
   );
 }

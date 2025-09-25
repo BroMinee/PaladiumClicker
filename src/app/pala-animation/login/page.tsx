@@ -27,7 +27,7 @@ export default function WebHooksPage() {
           </h2>
           <span>
           - {"Ca permet d'associer les temps à un utilisateur en particulier, ce qui te permet de t'assurer que tu es le seul à jouer sur ce compte et que personne d'autre ne peut pourrir tes statistiques."}
-        </span>
+          </span>
 
         </div>
         <div>
@@ -36,7 +36,7 @@ export default function WebHooksPage() {
           </h2>
           <span>
             - {"Nous aurons un droit de lecture sur ton pseudo discord, ton avatar et ta bannière discord et c'est tout."}
-        </span>
+          </span>
         </div>
 
         <div>
@@ -47,7 +47,7 @@ export default function WebHooksPage() {
             - Les informations sont stockées dans une base de données sécurisée et ne sont pas partagées avec des tiers.
             <br/>
             - Les access tokens et refresh tokens sont chiffrés et stockés dans notre base de données.
-        </span>
+          </span>
         </div>
 
       </CardHeader>

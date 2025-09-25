@@ -38,7 +38,7 @@ async function EditRolePanel() {
           return (
             <div key={`user-${i}`} className="flex justify-center items-center space-x-2 w-grow">
               <Image src={user.avatar} alt="profile picture" width={32} height={32} className="rounded-full"
-                     unoptimized/>
+                unoptimized/>
               <div className="flex justify-start flex-row items-start gap-2">
                 <p className="text-sm leading-5">{user.global_name || user.username}</p>
                 {/*  <p style={{ backgroundColor:  getRoleColor(user.role)}}>{user.role}</p>*/}

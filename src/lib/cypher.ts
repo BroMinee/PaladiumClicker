@@ -86,8 +86,9 @@ export const getNewQuestionPalaAnimation = async (lastQuestion: string | undefin
     throw new Error("User is not authenticated");
   }
 
-  if (lastQuestion === undefined || lastQuestion === "")
+  if (lastQuestion === undefined || lastQuestion === "") {
     lastQuestion = "0";
+  }
   // const decrypted = await decryptAES256(response.data, process.env.VITE_CRYPT_KEY!);
   return await fetchWithHeader<{
     question: string,

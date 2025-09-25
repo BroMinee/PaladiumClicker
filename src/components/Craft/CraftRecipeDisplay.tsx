@@ -61,8 +61,7 @@ export async function CraftRecipeDisplay({ searchParams }: { searchParams: searc
     </div>);
 }
 
-export function MarketSelectFallback()
-{
+export function MarketSelectFallback() {
   return <div className="flex flex-row gap-2 m-4 w-96 items-center">
     <LoadingSpinner size={4}/>
     <h2 className="font-bold">Chargement des items...</h2>

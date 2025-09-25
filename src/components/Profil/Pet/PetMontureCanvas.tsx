@@ -21,51 +21,51 @@ import { cn } from "@/lib/utils.ts";
 
 function convertMontureTypeIdToModelName(montureTypeId: number): ModelName {
   switch (montureTypeId) {
-    case 1:
-      return "dancarok";
-    case 2:
-      return "ravirok";
-    case 3:
-      return "tedarok";
-    default:
-      return "dancarok";
+  case 1:
+    return "dancarok";
+  case 2:
+    return "ravirok";
+  case 3:
+    return "tedarok";
+  default:
+    return "dancarok";
   }
 }
 
 function convertPetSkinToModelName(petSkin: string): ModelName {
   switch (petSkin) {
-    case "arty":
-      return "arty";
-    case "cat":
-      return "cat";
-    case "dog":
-      return "dog";
-    case "dragon":
-      return "dragon";
-    case "feng_uang":
-      return "feng_uang";
-    case "kapio_koi":
-      return "kapio_koi";
-    case "pet_blobfish":
-      return "pet_blobfish";
-    case "pet_mini_golem":
-      return "pet_mini_golem";
-    case "pet_penguin":
-      return "pet_penguin";
-    case "pet_ufo":
-      return "pet_ufo";
-    case "pet_zombie_hand":
-      return "pet_zombie_hand";
-    case "rabbit":
-      return "rabbit";
-    case "pet_ender_dragon":
-      return "pet_ender_dragon";
-    case "pet_reindeer":
-      return "pet_reindeer";
-    case "pet_chameleon":
-      return "pet_chameleon";
-    default:
-      return "arty";
+  case "arty":
+    return "arty";
+  case "cat":
+    return "cat";
+  case "dog":
+    return "dog";
+  case "dragon":
+    return "dragon";
+  case "feng_uang":
+    return "feng_uang";
+  case "kapio_koi":
+    return "kapio_koi";
+  case "pet_blobfish":
+    return "pet_blobfish";
+  case "pet_mini_golem":
+    return "pet_mini_golem";
+  case "pet_penguin":
+    return "pet_penguin";
+  case "pet_ufo":
+    return "pet_ufo";
+  case "pet_zombie_hand":
+    return "pet_zombie_hand";
+  case "rabbit":
+    return "rabbit";
+  case "pet_ender_dragon":
+    return "pet_ender_dragon";
+  case "pet_reindeer":
+    return "pet_reindeer";
+  case "pet_chameleon":
+    return "pet_chameleon";
+  default:
+    return "arty";
   }
 }
 
@@ -185,10 +185,11 @@ export function PetCanvas({ monture = false }: { monture?: boolean }) {
           const scene = new THREE.Scene();
           const camera = new THREE.PerspectiveCamera(70, window.innerWidth / window.innerHeight, 0.01, 20);
 
-          if (monture)
+          if (monture) {
             myModel.scene.scale.set(0.1, 0.1, 0.1);
-          else
+          } else {
             myModel.scene.scale.set(0.2, 0.2, 0.2);
+          }
 
           myModel.scene.position.set(0, 0, -0.5); // Place à 50 cm devant la caméra
           scene.add(myModel.scene);
@@ -230,14 +231,17 @@ export function PetCanvas({ monture = false }: { monture?: boolean }) {
     }
   };
 
-  if (!playerInfo)
+  if (!playerInfo) {
     return null;
+  }
 
-  if (monture && !playerInfo.mount)
+  if (monture && !playerInfo.mount) {
     return <DisplayEmptyCanvas text="Aucune monture équipée"/>;
+  }
 
-  if (!monture && !playerInfo.pet)
+  if (!monture && !playerInfo.pet) {
     return <DisplayEmptyCanvas text="Aucun pet équipé"/>;
+  }
 
   return (
     <div className="flex flex-col mt-5">
@@ -250,15 +254,15 @@ export function PetCanvas({ monture = false }: { monture?: boolean }) {
         </span>
         <span
           className="font-mc text-primary">Xp : <span
-          className="text-primary-foreground">{formatPrice(Math.round(petXp))} / {formatPrice(Math.round(xpNeeded))}</span>
+            className="text-primary-foreground">{formatPrice(Math.round(petXp))} / {formatPrice(Math.round(xpNeeded))}</span>
         </span>
         <Button onClick={launchAR}
-                disabled={!arAvailable}
-                className={cn("font-mc", !arAvailable && "py-6")}>
+          disabled={!arAvailable}
+          className={cn("font-mc", !arAvailable && "py-6")}>
           {arAvailable ? "Voir en AR" : <span>AR indisponible<br/>Sur votre appareil</span>}
         </Button>
         <DisplayAnimationButtons myModel={myModel} handleAnimationChange={handleAnimationChange}
-                                 selectedAnimation={selectedAnimation} className="flex lg:hidden"/>
+          selectedAnimation={selectedAnimation} className="flex lg:hidden"/>
       </div>
 
       <Canvas style={{ height: '500px', width: '100%' }}>
@@ -267,7 +271,7 @@ export function PetCanvas({ monture = false }: { monture?: boolean }) {
       </Canvas>
 
       <DisplayAnimationButtons myModel={myModel} handleAnimationChange={handleAnimationChange}
-                               selectedAnimation={selectedAnimation} className="hidden lg:flex"/>
+        selectedAnimation={selectedAnimation} className="hidden lg:flex"/>
 
     </div>
   );

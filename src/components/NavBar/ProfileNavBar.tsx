@@ -4,8 +4,9 @@ import { Button } from "@/components/ui/button.tsx";
 
 export function ProfileNavBar() {
   const { profileInfo } = useProfileStore();
-  if (!profileInfo)
+  if (!profileInfo) {
     return null;
+  }
 
   const ppUrl = profileInfo.avatar;
 

@@ -4,6 +4,11 @@
     "react-hooks/exhaustive-deps": "error",
     "semi-style": ["error", "last"],
     "semi": ["error", "always"],
-    "no-multiple-empty-lines": ["error", { "max": 1, "maxEOF": 1 }]
+    "no-multiple-empty-lines": ["error", { "max": 1, "maxEOF": 1 }],
+    "curly": ["error", "all"],
+    "brace-style": ["error", "1tbs", { "allowSingleLine": false }],
+    "indent": ["error", 2, {
+      "ignoredNodes": ["JSXFragment", "JSXFragment *"]
+    }]
   }
 }

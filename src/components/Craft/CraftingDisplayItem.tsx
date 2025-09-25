@@ -11,19 +11,19 @@ export function DisplayItem({ slot, className }: { slot: OptionType, className?:
   const [isHovered, setIsHovered] = useState(false);
   return (
     <a href={constants.craftPath + `?item=${slot.value}`} className={className}
-       onMouseEnter={() => setIsHovered(true)}
-       onMouseLeave={() => setIsHovered(false)}>
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}>
       <div className="flex relative min-w-16 w-16 h-16 items-center justify-center">
         <Image src={safeJoinPaths(constants.imgPathCraft, isHovered ? "selected.png" : "texture.png")} width={0}
-               height={0} alt={"selected"}
-               unoptimized
-               className="h-full w-full pixelated absolute rounded-sm"/>
+          height={0} alt={"selected"}
+          unoptimized
+          className="h-full w-full pixelated absolute rounded-sm"/>
         <div className="absolute grid justify-center items-center w-16 h-16">
           {
             slot.value !== 'air' && <Image src={`/AH_img/${slot.img}`} alt={slot.value}
-                                           className="h-12 w-12 pixelated m-2 rounded-sm hover:scale-125 duration-300"
-                                           width={48} height={48}
-                                           unoptimized={true}/>
+              className="h-12 w-12 pixelated m-2 rounded-sm hover:scale-125 duration-300"
+              width={48} height={48}
+              unoptimized={true}/>
           }
         </div>
       </div>

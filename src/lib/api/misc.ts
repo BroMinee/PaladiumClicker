@@ -17,22 +17,25 @@ export const fetchWithoutHeader = async <T>(url: string, cache_duration = 15 * 6
       });
     json = await response.json();
 
-    if (!response.ok)
+    if (!response.ok) {
       throw new Error(json.message);
+    }
     return json;
   } catch (error) {
     console.error(error);
   }
 
-  if (json)
-    if (username !== "")
+  if (json) {
+    if (username !== "") {
       return redirect(`/error?message=${json.message}&username=${username}`);
-    else
+    } else {
       return redirect(`/error?message=${json.message}`);
-  else if (username !== "")
+    }
+  } else if (username !== "") {
     return redirect(`/error?message=Impossible de récupérer les données actuelles de ${url}&username=${username}`);
-  else
+  } else {
     return redirect(`/error?message=Impossible de récupérer les données actuelles de ${url}`);
+  }
 };
 
 export const fetchWithHeader = async <T>(url: string, cache_duration_in_sec = 15 * 60, username = "", timeout = 4000): Promise<T> => {
@@ -57,8 +60,9 @@ export const fetchWithHeader = async <T>(url: string, cache_duration_in_sec = 15
       });
     json = await response.json();
 
-    if (!response.ok)
+    if (!response.ok) {
       throw new Error(url + json.message);
+    }
     return json as T;
   } catch (error) {
     console.error(error, url, response?.status);
@@ -89,8 +93,9 @@ export const fetchWithHeader = async <T>(url: string, cache_duration_in_sec = 15
           });
         json = await response.json();
 
-        if (!response.ok)
+        if (!response.ok) {
           throw new Error(url + json.message);
+        }
         return json as T;
       } catch (error) {
         console.error(error, url);
@@ -100,10 +105,11 @@ export const fetchWithHeader = async <T>(url: string, cache_duration_in_sec = 15
     }
   }
 
-  if (json)
+  if (json) {
     throw new Error(json.message);
-  else
+  } else {
     throw new Error(`Impossible de récupérer les données actuelles de ${url}`);
+  }
 };
 
 export const fetchPostWithHeader = async <T>(url: string, body: string, cache_duration_in_sec = 15 * 60): Promise<T> => {
@@ -129,15 +135,17 @@ export const fetchPostWithHeader = async <T>(url: string, body: string, cache_du
       });
     json = await response.json();
 
-    if (!response.ok)
+    if (!response.ok) {
       throw new Error(url + json.message);
+    }
     return json as T;
   } catch (error) {
     console.error(error, url);
   }
 
-  if (json)
+  if (json) {
     throw new Error(json.message);
-  else
+  } else {
     throw new Error(`Impossible de récupérer les données actuelles de ${url}`);
+  }
 };

@@ -70,8 +70,9 @@ export function PalaAnimationBody() {
 
   // legitCheck = false if the button "Révéler la solution" is clicked
   async function checkAnswer(userAnswer = "", legitCheck = true) {
-    if (isChecking)
+    if (isChecking) {
       return;
+    }
     if (sessionUuid === undefined) {
       console.error("No session uuid");
       return;
@@ -108,7 +109,9 @@ export function PalaAnimationBody() {
             setReroll(true);
           }, 500);
           setTimer(message);
-        }).finally(() => {setIsChecking(false);});
+        }).finally(() => {
+        setIsChecking(false);
+      });
     } else {
       newEntryOldAnswer = userAnswer.split("").map((c) => {
         return { c, color: "text-gray-400" };
@@ -127,8 +130,9 @@ export function PalaAnimationBody() {
   }
 
   function reveal() {
-    if (isChecking || sessionUuid === undefined)
+    if (isChecking || sessionUuid === undefined) {
       return;
+    }
     setIsChecking(true);
     document.getElementById("user_answer")?.focus();
 
@@ -143,8 +147,9 @@ export function PalaAnimationBody() {
   }
 
   useEffect(() => {
-    if (!reroll)
+    if (!reroll) {
       return;
+    }
     getNewQuestionPalaAnimation(question).then(
       (data) => {
         setQuestion(data.question);
@@ -226,14 +231,15 @@ export function PalaAnimationBody() {
           oldAnswer.map((old, i1) => {
             return (<div key={i1}>
               {old.map((e, i2) => {
-                if (e.color === "text-green-700")
+                if (e.color === "text-green-700") {
                   return <span key={i2} className="text-green-700">{e.c}</span>;
-                else if (e.color === "text-red-700")
+                } else if (e.color === "text-red-700") {
                   return <span key={i2} className="text-red-700">{e.c}</span>;
-                else if (e.color === "text-gray-400")
+                } else if (e.color === "text-gray-400") {
                   return <span key={i2} className="text-gray-400">{e.c}</span>;
-                else
+                } else {
                   return <span key={i2} className={e.color.toString()}>{e.c}</span>;
+                }
               })}
             </div>);
           })
@@ -242,14 +248,15 @@ export function PalaAnimationBody() {
       <div className="flex flex-wrap gap-2 justify-center">
         <Button onClick={reveal} variant="outline" disabled={isChecking}>Révéler la solution</Button>
         <Button onClick={() => {
-          if (isChecking)
+          if (isChecking) {
             return;
+          }
           setIsChecking(true);
           clearUserAnswer();
           document.getElementById("user_answer")?.focus();
           setReroll(true);
         }}
-                disabled={isChecking}
+        disabled={isChecking}
         >Nouvelle question</Button>
       </div>
     </div>
@@ -265,8 +272,9 @@ export function PalaAnimationClassement() {
   const [userScore, setUserScore] = useState({ global_name: "" } as PalaAnimationScore);
 
   useEffect(() => {
-    if (!profileInfo || sessionUuid === undefined || sessionUuid === "")
-        return;
+    if (!profileInfo || sessionUuid === undefined || sessionUuid === "") {
+      return;
+    }
 
     getLeaderboardPalaAnimation(sessionUuid).then(
       (data) => {
@@ -277,10 +285,11 @@ export function PalaAnimationClassement() {
             return entry;
           }
         });
-        if (userPosInfo)
+        if (userPosInfo) {
           setUserScore(userPosInfo);
-        else
+        } else {
           setUserScore({ global_name: "" } as PalaAnimationScore);
+        }
       }
     ).catch(
       (error) => {
@@ -300,7 +309,7 @@ export function PalaAnimationClassement() {
           <div>
             {currentLeaderboard.map((entry, i) => {
               return <p key={i}
-                        className={(entry.global_name === profileInfo?.global_name || entry.global_name === profileInfo?.username) ? "text-blue-400" : ""}>{i + 1}. {entry.global_name} - {entry.completion_time / 1000} {adaptPlurial("seconde", entry.completion_time / 1000)}</p>;
+                className={(entry.global_name === profileInfo?.global_name || entry.global_name === profileInfo?.username) ? "text-blue-400" : ""}>{i + 1}. {entry.global_name} - {entry.completion_time / 1000} {adaptPlurial("seconde", entry.completion_time / 1000)}</p>;
             })}
           </div>
           : ""
@@ -348,7 +357,7 @@ export function PalaAnimationClassementGlobal() {
           <div>
             {globalLeaderboard.slice(0, 10).map((entry, i) => {
               return <p key={i}
-                        className={(entry.global_name === profileInfo?.global_name || entry.global_name === profileInfo?.username) ? "text-blue-400" : ""}>{i + 1}. {entry.global_name} - {Math.round(entry.avg_completion_time) / 1000} {adaptPlurial("seconde", Math.round(entry.avg_completion_time) / 1000)}</p>;
+                className={(entry.global_name === profileInfo?.global_name || entry.global_name === profileInfo?.username) ? "text-blue-400" : ""}>{i + 1}. {entry.global_name} - {Math.round(entry.avg_completion_time) / 1000} {adaptPlurial("seconde", Math.round(entry.avg_completion_time) / 1000)}</p>;
             })}
           </div>
           : ""

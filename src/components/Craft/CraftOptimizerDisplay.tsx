@@ -46,8 +46,9 @@ export function CraftOptimizerDisplay() {
     });
     socket.addEventListener("message", (event) => {
       const message = parseMessageCraftPrice(event.data);
-      if (message.type !== "update")
+      if (message.type !== "update") {
         return;
+      }
       setCraftingList(message.data);
     });
     socket.addEventListener("close", (e) => {
@@ -70,8 +71,9 @@ export function CraftOptimizerDisplay() {
       .sort((a, b) => getSortValue(b, sortMode) - getSortValue(a, sortMode));
     // setTopCraft(sortedList.slice(0, 100));
     setTopCraft(sortedList);
-    if (craftingList.length === 0)
+    if (craftingList.length === 0) {
       return;
+    }
     setLastUpdate(new Date(craftingList[0].created_at));
   }, [craftingList, sortMode]);
 
@@ -132,28 +134,44 @@ function CraftPriceCard({ data, index, cardRefs, sortMode }: {
 
   const getBadges = () => {
     const badges = [];
-    if (priceToCraft === -1) badges.push({ label: "Non craftable", color: "bg-red-700" });
-    if (currentPrice === -1) badges.push({ label: "Pas de vente en cours", color: "bg-red-700" });
-    if (averagePrice === -1) badges.push({ label: "Prix inconnu", color: "bg-yellow-500" });
-    if (priceToCraft > 0 && averagePrice > 0 && priceToCraft > averagePrice) badges.push({ label: "Prix de craft supérieur au prix moyen", color: "bg-orange-500" });
-    if (priceToCraft > 0 && currentPrice > 0 && priceToCraft > currentPrice) badges.push({ label: "Prix de craft supérieur au prix actuel", color: "bg-orange-500" });
-    if (totalSold <= 0) badges.push({ label: "Jamais vendu", color: "bg-red-700" });
-    else if (totalSold < 10) badges.push({
-      label: `Très rarement vendu: ${totalSold} ventes en 7 jours`,
-      color: "bg-red-600"
-    });
-    else if (totalSold < 30) badges.push({
-      label: `Rarement vendu: ${totalSold} ventes en 7 jours`,
-      color: "bg-yellow-500"
-    });
-    else if (totalSold < 100) badges.push({
-      label: `Demande normale: ${totalSold} ventes en 7 jours`,
-      color: "bg-blue-600"
-    });
-    else badges.push({
+    if (priceToCraft === -1) {
+      badges.push({ label: "Non craftable", color: "bg-red-700" });
+    }
+    if (currentPrice === -1) {
+      badges.push({ label: "Pas de vente en cours", color: "bg-red-700" });
+    }
+    if (averagePrice === -1) {
+      badges.push({ label: "Prix inconnu", color: "bg-yellow-500" });
+    }
+    if (priceToCraft > 0 && averagePrice > 0 && priceToCraft > averagePrice) {
+      badges.push({ label: "Prix de craft supérieur au prix moyen", color: "bg-orange-500" });
+    }
+    if (priceToCraft > 0 && currentPrice > 0 && priceToCraft > currentPrice) {
+      badges.push({ label: "Prix de craft supérieur au prix actuel", color: "bg-orange-500" });
+    }
+    if (totalSold <= 0) {
+      badges.push({ label: "Jamais vendu", color: "bg-red-700" });
+    } else if (totalSold < 10) {
+      badges.push({
+        label: `Très rarement vendu: ${totalSold} ventes en 7 jours`,
+        color: "bg-red-600"
+      });
+    } else if (totalSold < 30) {
+      badges.push({
+        label: `Rarement vendu: ${totalSold} ventes en 7 jours`,
+        color: "bg-yellow-500"
+      });
+    } else if (totalSold < 100) {
+      badges.push({
+        label: `Demande normale: ${totalSold} ventes en 7 jours`,
+        color: "bg-blue-600"
+      });
+    } else {
+      badges.push({
         label: `Très demandé ${totalSold} ventes en 7 jours`,
         color: "bg-green-600"
       });
+    }
     return badges;
   };
 
@@ -191,13 +209,13 @@ function CraftPriceCard({ data, index, cardRefs, sortMode }: {
       <div className="flex flex-col mt-2 text-sm text-card-foreground space-y-1 items-center justify-center">
         <p>Prix de craft : <span className="text-green-400">{priceToCraft <= 0 ? "Pas craftable" : formatPrice(Math.max(0, priceToCraft))} $</span></p>
         <p>Prix actuel : <span className="text-blue-400">{currentPrice <= 0
-            ? "Pas en vente"
-            : (
+          ? "Pas en vente"
+          : (
               <>
                 {formatPrice(Math.max(0, currentPrice))} $
               </>
-            )
-          }
+          )
+        }
         </span>
         </p>
         <p>Prix moyen : <span className="text-yellow-400">{averagePrice <= 0 ? "Pas vendu depuis 7 jours" : formatPrice(Math.max(0, averagePrice))} $</span></p>
@@ -239,16 +257,16 @@ function computeSortValue(item: CraftPrice): CraftPriceWithComputed {
 
 function getSortValue(item: CraftPriceWithComputed, mode: SortMode): number {
   switch (mode) {
-    case "profit":
-      return item.profit;
-    case "margin":
-      return item.margin;
-    case "speed":
-      return item.totalSold;
-    case "score":
-      return item.score;
-    default:
-      toast.error("Unknown sort mode: " + mode);
-      return item.score;
+  case "profit":
+    return item.profit;
+  case "margin":
+    return item.margin;
+  case "speed":
+    return item.totalSold;
+  case "score":
+    return item.score;
+  default:
+    toast.error("Unknown sort mode: " + mode);
+    return item.score;
   }
 }

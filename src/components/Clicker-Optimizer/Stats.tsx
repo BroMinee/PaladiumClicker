@@ -32,8 +32,9 @@ const Stats = () => {
     if (!playerInfo) {
       return;
     }
-    if (!isNextBuildingVisible)
+    if (!isNextBuildingVisible) {
       return;
+    }
 
     setBuildingBuyPaths(computeXBuildingAhead(playerInfo, PROCHAIN_ACHAT_COUNT, rps));
   }, [playerInfo, isNextBuildingVisible, rps]);
@@ -88,8 +89,9 @@ export const StatList = ({ buildingBuyPaths, showProduction }: StatsListProps) =
 
   const { data: playerInfo } = usePlayerInfoStore();
 
-  if (!playerInfo)
+  if (!playerInfo) {
     return "Loading";
+  }
 
   // List of list [path, index, own, timeToBuy, pathImg]
 
@@ -155,30 +157,31 @@ function getBestUpgrade(copyPlayerInfo: PlayerInfo, date: Date): bestPurchaseInf
   const bestUpgradeInfo = findBestUpgrade(structuredClone(copyPlayerInfo), date);
 
   let bestPurchase = {} as (bestUpgradeInfo | bestBuildingInfo);
-  if (bestBuildingInfo.bestUpgradeIndex === -1 && bestUpgradeInfo.bestUpgradeIndex === -1)
+  if (bestBuildingInfo.bestUpgradeIndex === -1 && bestUpgradeInfo.bestUpgradeIndex === -1) {
     return {
       path: "building",
       index: -1,
       own: -1,
       pathImg: "",
     };
-
-  else if (bestBuildingInfo.bestUpgradeIndex === -1)
+  } else if (bestBuildingInfo.bestUpgradeIndex === -1) {
     bestPurchase = bestUpgradeInfo;
-  else if (bestUpgradeInfo.bestUpgradeIndex === -1)
+  } else if (bestUpgradeInfo.bestUpgradeIndex === -1) {
     bestPurchase = bestBuildingInfo;
-  else
+  } else {
     bestPurchase = bestBuildingInfo.bestCoef > bestUpgradeInfo.bestCoef ? bestBuildingInfo : bestUpgradeInfo;
+  }
 
   const own = copyPlayerInfo[bestPurchase.bestListName][bestPurchase.bestUpgradeIndex].own;
-  if (typeof own === "boolean" && own === true)
+  if (typeof own === "boolean" && own === true) {
     alert("Error in getBestUpgrade true");
-  else if (typeof own === "boolean" && own === false)
+  } else if (typeof own === "boolean" && own === false) {
     copyPlayerInfo[bestPurchase.bestListName][bestPurchase.bestUpgradeIndex].own = true;
-  else if (typeof own === "number")
+  } else if (typeof own === "number") {
     copyPlayerInfo[bestPurchase.bestListName][bestPurchase.bestUpgradeIndex].own = own + 1;
-  else
+  } else {
     alert("Error in getBestUpgrade");
+  }
 
   return {
     path: bestPurchase.bestListName,
@@ -204,8 +207,9 @@ export function computeXBuildingAhead(playerInfo: PlayerInfo, achatCount: number
 
     const bestPurchase: bestPurchaseInfo = getBestUpgrade(copy, date);
     // own already updated
-    if (bestPurchase.index === -1)
+    if (bestPurchase.index === -1) {
       break;
+    }
 
     //let [path, index, own, pathImg] = getBestUpgrade(copy);
 
@@ -265,20 +269,21 @@ function computeTimeToBuy(price: number, own: boolean | number, coinsDormants: n
   // return date when you can buy the building and the new currentCoins
 
   let priceToBuy = -1;
-  if (typeof own === "boolean" && own === true)
+  if (typeof own === "boolean" && own === true) {
     priceToBuy = price;
-  else if (typeof own === "boolean" && own === false)
+  } else if (typeof own === "boolean" && own === false) {
     alert("Error in computeTimeToBuy false");
-  else {
+  } else {
     priceToBuy = computePrice(price, own - 1);
   }
 
   const factorLagServer = 1.33;
-  if (coinsDormants >= priceToBuy)
+  if (coinsDormants >= priceToBuy) {
     return {
       timeToBuy: curTime,
       newCoins: coinsDormants - priceToBuy
     };
+  }
 
   const nbSec = (priceToBuy - coinsDormants) * factorLagServer / rps;
 
@@ -314,13 +319,13 @@ export function DisplayCoinsDormants() {
 
   return <div className="flex flex-row items-center">
     ~ <input
-    type="text"
-    min="0"
-    step="1"
-    max="100"
-    className="bg-clip-text text-transparent bg-gradient-to-tr from-primary to-destructive/85 text-center rounded-sm font-bold w-32 md:w-48 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
-    placeholder={String(coinsDormants)}
-    onChange={onChangeCoinsDormants}
-    value={formatPrice(Math.round(coinsDormants))}/>
+      type="text"
+      min="0"
+      step="1"
+      max="100"
+      className="bg-clip-text text-transparent bg-gradient-to-tr from-primary to-destructive/85 text-center rounded-sm font-bold w-32 md:w-48 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+      placeholder={String(coinsDormants)}
+      onChange={onChangeCoinsDormants}
+      value={formatPrice(Math.round(coinsDormants))}/>
   </div>;
 }

@@ -13,8 +13,9 @@ const FallingClickImagePalaTime = () => {
   const { settings } = useSettingsStore();
 
   useEffect(() => {
-    if (!settings.fallingImage)
+    if (!settings.fallingImage) {
       return;
+    }
 
     setTimeout(() => {
       const interval = setInterval(() => {
@@ -35,7 +36,9 @@ const FallingClickImagePalaTime = () => {
         const image = document.createElement('img');
         image.classList.add("animate-falling", "h-auto", "w-32", "object-cover");
         image.draggable = false;
-        image.ondragstart = (e) => {e.preventDefault();};
+        image.ondragstart = (e) => {
+          e.preventDefault();
+        };
         image.style.imageRendering = "pixelated";
         image.style.imageRendering = "crisp-edges";
 
@@ -69,8 +72,9 @@ const FallingClickImagePalaTime = () => {
     }, Math.random() * 1000);
   }, [settings.fallingImage]);
 
-  if (!settings.fallingImage)
+  if (!settings.fallingImage) {
     return false;
+  }
 
   return (<div ref={containerRef} className="z-[-1]">
     <Dialog open={openEvent} onOpenChange={() => setOpenEvent(false)}>

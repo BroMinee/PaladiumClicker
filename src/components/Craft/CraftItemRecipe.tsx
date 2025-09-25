@@ -13,8 +13,9 @@ export async function CraftItemRecipe({ item, options }: { item: OptionType, opt
 
   const slotItemInfo = slotAvailable.map((slot) => {
     const t = options.find((option) => option.value === craft_recipe[slot]?.item_name);
-    if (t === undefined)
+    if (t === undefined) {
       redirect(`/error?message=${craft_recipe[slot]} not found in the list of all items`);
+    }
     return t;
   });
 
@@ -31,20 +32,20 @@ function ShowCraftDispatcher({ craft_recipe, slotItemInfo }: {
 }) {
 
   switch (craft_recipe.table) {
-    case 'crafting table':
-      return <ShowCraftingTable slotItemInfo={slotItemInfo}/>;
-    case 'furnace':
-      return <ShowFurnace slotItemInfo={slotItemInfo}/>;
-    case 'grinder':
-      return <ShowGrinder slotItemInfo={slotItemInfo}/>;
-    case "palamachine":
-      return <ShowPalamachine slotItemInfo={slotItemInfo}/>;
-    case 'cauldron':
-      return <ShowCauldron slotItemInfo={slotItemInfo}/>;
-    case 'alchemy creator':
-      return <ShowAlchemyCreator slotItemInfo={slotItemInfo}/>;
-    default:
-      return <ShowCraftingTable slotItemInfo={slotItemInfo}/>;
+  case 'crafting table':
+    return <ShowCraftingTable slotItemInfo={slotItemInfo}/>;
+  case 'furnace':
+    return <ShowFurnace slotItemInfo={slotItemInfo}/>;
+  case 'grinder':
+    return <ShowGrinder slotItemInfo={slotItemInfo}/>;
+  case "palamachine":
+    return <ShowPalamachine slotItemInfo={slotItemInfo}/>;
+  case 'cauldron':
+    return <ShowCauldron slotItemInfo={slotItemInfo}/>;
+  case 'alchemy creator':
+    return <ShowAlchemyCreator slotItemInfo={slotItemInfo}/>;
+  default:
+    return <ShowCraftingTable slotItemInfo={slotItemInfo}/>;
   }
 }
 
@@ -55,20 +56,20 @@ function ShowCraft({ item, craft_recipe, slotItemInfo }: {
 }) {
   function tableTypeToName(table: string) {
     switch (table) {
-      case 'crafting table':
-        return "Crafting Table";
-      case 'furnace':
-        return "Furnace";
-      case 'grinder':
-        return "Grinder";
-      case "palamachine":
-        return "Palamachine";
-      case 'cauldron':
-        return "Cauldron";
-      case 'alchemy creator':
-        return "Alchemy Creator";
-      default:
-        return table;
+    case 'crafting table':
+      return "Crafting Table";
+    case 'furnace':
+      return "Furnace";
+    case 'grinder':
+      return "Grinder";
+    case "palamachine":
+      return "Palamachine";
+    case 'cauldron':
+      return "Cauldron";
+    case 'alchemy creator':
+      return "Alchemy Creator";
+    default:
+      return table;
     }
   }
 

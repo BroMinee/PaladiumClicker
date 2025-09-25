@@ -16,14 +16,15 @@ export function CountSelector({ item, count }: { item: OptionType | undefined, c
   }, [count]);
 
   const debouncedPush = useMemo(() =>
-      debounce((val: string) => {
-        const newCount = Math.max(Number(val) ?? 1, 1);
-        if (item)
-          router.push(generateCraftUrl(item.value, newCount,CraftSectionEnum.recipe), { scroll: false });
-        else
-          router.push(generateCraftUrl(null, newCount,CraftSectionEnum.recipe), { scroll: false });
-      }, 250),
-    [item, router]
+    debounce((val: string) => {
+      const newCount = Math.max(Number(val) ?? 1, 1);
+      if (item) {
+        router.push(generateCraftUrl(item.value, newCount,CraftSectionEnum.recipe), { scroll: false });
+      } else {
+        router.push(generateCraftUrl(null, newCount,CraftSectionEnum.recipe), { scroll: false });
+      }
+    }, 250),
+  [item, router]
   );
 
   return (

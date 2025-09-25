@@ -22,24 +22,25 @@ export async function generateMetadata(
   const description = `Renseignez votre pseudo Paladium et le métier que vous souhaitez xp pour obtenir des quantités à farmer pour atteindre le niveau souhaité.`;
   // const defaultImage = "https://brominee.github.io/PaladiumClicker/favicon.ico";
   let imgPath = "Mineur";
-  if (searchParams.metier !== undefined)
+  if (searchParams.metier !== undefined) {
     switch (searchParams.metier) {
-      case "miner":
-        imgPath = "Mineur";
-        break;
-      case "farmer":
-        imgPath = "Fermier";
-        break;
-      case "hunter":
-        imgPath = "Chasseur";
-        break;
-      case "alchemist":
-        imgPath = "Alchimiste";
-        break;
-      default:
-        imgPath = "Mineur";
-        break;
+    case "miner":
+      imgPath = "Mineur";
+      break;
+    case "farmer":
+      imgPath = "Fermier";
+      break;
+    case "hunter":
+      imgPath = "Chasseur";
+      break;
+    case "alchemist":
+      imgPath = "Alchimiste";
+      break;
+    default:
+      imgPath = "Mineur";
+      break;
     }
+  }
   let image = safeJoinPaths("https://palatracker.bromine.fr/", constants.imgPathProfile, "/JobsIcon/", imgPath, ".webp");
   return {
     title: title,

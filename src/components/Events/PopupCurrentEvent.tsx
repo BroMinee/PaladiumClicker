@@ -45,7 +45,9 @@ export const PopupCurrentEvent = ({ event, alreadyRegistered, children }: {
     });
   }
 
-  if (!event || !playerInfo) return null;
+  if (!event || !playerInfo) {
+    return null;
+  }
 
   return <Dialog>
     <DialogTrigger>
@@ -65,13 +67,13 @@ export const PopupCurrentEvent = ({ event, alreadyRegistered, children }: {
         <Card className="flex flex-col justify-center items-center text-center gap-2 mt-8 font-mc mb-4">
           <CardHeader className="flex flex-row items-center justify-between">
             <CardTitle className="flex flex-col gap-2">
-                <span className="font-bold text-primary">
+              <span className="font-bold text-primary">
                 {event.event_name} - <span
                   className="text-primary-foreground">{event.participants}</span> {adaptPlurial("participant", event.participants)}
-                </span>
+              </span>
               <span>
-                  {event.event_description}
-                </span>
+                {event.event_description}
+              </span>
             </CardTitle>
           </CardHeader>
         </Card>
@@ -86,7 +88,7 @@ export const PopupCurrentEvent = ({ event, alreadyRegistered, children }: {
               {
                 event.rewards.map((reward, index) => {
                   return <SmallCardInfo key={"reward-" + index} title={reward.description} img={'/img/MarketUI/pb_icon.png'}
-                                        value={reward.count + " gagnants différents"}/>;
+                    value={reward.count + " gagnants différents"}/>;
                 })
               }
             </CardContent>
@@ -142,7 +144,7 @@ export const PopupCurrentEvent = ({ event, alreadyRegistered, children }: {
           />
         </div>
         <Button onClick={handleConfirm} className={cn("bg-green-500", alreadyRegistered && "bg-red-500")}
-                disabled={alreadyRegistered}>{alreadyRegistered ? `${playerInfo.username} tu es déjà inscrit` : `Participer en tant que ${playerInfo.username}`}</Button>
+          disabled={alreadyRegistered}>{alreadyRegistered ? `${playerInfo.username} tu es déjà inscrit` : `Participer en tant que ${playerInfo.username}`}</Button>
       </div>
     </DialogContent>
   </Dialog>;

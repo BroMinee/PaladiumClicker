@@ -49,10 +49,10 @@ type MetierProps = {
 };
 
 export const MetierComponentWrapper = ({
-                                         editable = false,
-                                         minLevel = 1,
-                                         metierKey
-                                       }: MetierProps) => {
+  editable = false,
+  minLevel = 1,
+  metierKey
+}: MetierProps) => {
 
   const metierName = structuredClone(metierJson[metierKey].name as MetierKey);
 

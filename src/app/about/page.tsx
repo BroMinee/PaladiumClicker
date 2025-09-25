@@ -38,22 +38,22 @@ const AboutPage = () => {
             Le site était open source avant l&apos;introduction des clés d&apos;API nécessaires pour récupérer les
             informations de
             Paladium. L&apos;ancien repository est disponible à <a
-            href="https://github.com/BroMinee/PaladiumClicker"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-primary hover:text-orange-700 transition-colors duration-300"
-          >
+              href="https://github.com/BroMinee/PaladiumClicker"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-primary hover:text-orange-700 transition-colors duration-300"
+            >
             cette
             addresse
-          </a>.
+            </a>.
             Si vous souhaitez contribuer au projet, vous trouverez davantage d&apos;informations <a
-            href="https://github.com/BroMineCorp"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-primary hover:text-orange-700 transition-colors duration-300"
-          >
+              href="https://github.com/BroMineCorp"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-primary hover:text-orange-700 transition-colors duration-300"
+            >
             ici
-          </a> ou sur le discord ci-dessous.
+            </a> ou sur le discord ci-dessous.
 
           </p>
         </CardContent>

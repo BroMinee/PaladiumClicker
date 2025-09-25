@@ -156,13 +156,13 @@ const Timeline = () => {
       <div className="fixed right-10 top-1/2 transform -translate-y-1/2 flex flex-col items-center space-y-4">
         {timelineData.map((_, index) => (
           <Image key={index}
-                 width={0}
-                 height={0}
-                 alt={"clic"}
-                 src="/coin.png"
-                 unoptimized={true}
-               onClick={() => handleScrollTo(index)}
-               className={`w-5 h-5 pixelated cursor-pointer ${index === currentIndex ? 'scale-[150%]' : 'grayscale'} ${index - 1 === currentIndex || index + 1 === currentIndex && 'scale-[115%]'} ${index - 2 === currentIndex || index + 2 === currentIndex && 'scale-[105%]'} transition-transform duration-300`} />
+            width={0}
+            height={0}
+            alt={"clic"}
+            src="/coin.png"
+            unoptimized={true}
+            onClick={() => handleScrollTo(index)}
+            className={`w-5 h-5 pixelated cursor-pointer ${index === currentIndex ? 'scale-[150%]' : 'grayscale'} ${index - 1 === currentIndex || index + 1 === currentIndex && 'scale-[115%]'} ${index - 2 === currentIndex || index + 2 === currentIndex && 'scale-[105%]'} transition-transform duration-300`} />
         ))}
       </div>
       <div ref={containerRef} className="flex flex-col items-center gap-20 py-20">

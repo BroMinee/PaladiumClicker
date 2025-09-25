@@ -16,15 +16,23 @@ export function StatusSelectorClientPeriode({ periode }: {
   const selected = periode === (searchParams.get("periode") || (periode === "day" ? periode : undefined));
 
   const converter = (periode: string) => {
-    if (periode === "day") return "24 heures";
-    if (periode === "week") return "1 semaine";
-    if (periode === "month") return "1 mois";
-    if (periode === "season") return "1 saison";
+    if (periode === "day") {
+      return "24 heures";
+    }
+    if (periode === "week") {
+      return "1 semaine";
+    }
+    if (periode === "month") {
+      return "1 mois";
+    }
+    if (periode === "season") {
+      return "1 saison";
+    }
   };
 
   return (
     <Card
-    id={`status-periode-selector-${periode}`}
+      id={`status-periode-selector-${periode}`}
       className={cn(
         buttonVariants({ variant: "card" }),
         "p-3 h-auto w-fit mt-2 font-mc text-sm",

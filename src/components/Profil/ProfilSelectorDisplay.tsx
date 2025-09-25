@@ -24,8 +24,9 @@ export function ProfilSelectorDisplay({ params, searchParams }: {
   searchParams: searchParamsProfilPage
 }) {
 
-  if (searchParams.section === undefined)
+  if (searchParams.section === undefined) {
     searchParams.section = ProfilSectionEnum.Home;
+  }
 
   if (!isProfilSection(searchParams.section)) {
     redirect(generateProfilUrl(params.username as string, ProfilSectionEnum.Home));
@@ -33,22 +34,22 @@ export function ProfilSelectorDisplay({ params, searchParams }: {
 
   const sectionAsEnum = searchParams.section as ProfilSectionEnum;
   switch (sectionAsEnum) {
-    case ProfilSectionEnum.Home:
-      return <HomeProfilSection/>;
-    case ProfilSectionEnum.Achievements:
-      return <Suspense fallback={<AchievementsProfilSectionFallBack/>}>
-        <AchievementsProfilSection/>
-      </Suspense>;
-    case ProfilSectionEnum.Market:
-      return <Suspense fallback={<MarketProfilSectionFallBack/>}>
-        <AhInfo/>
-      </Suspense>;
-    case ProfilSectionEnum["Pet/Monture"]:
-      return <PetMontureProfilSection/>;
-    case ProfilSectionEnum.Classement:
-      return <ProfilRankingSection searchParams={searchParams}/>;
-    default:
-      return <div>C&apos;est quoi la section ${sectionAsEnum} ?</div>;
+  case ProfilSectionEnum.Home:
+    return <HomeProfilSection/>;
+  case ProfilSectionEnum.Achievements:
+    return <Suspense fallback={<AchievementsProfilSectionFallBack/>}>
+      <AchievementsProfilSection/>
+    </Suspense>;
+  case ProfilSectionEnum.Market:
+    return <Suspense fallback={<MarketProfilSectionFallBack/>}>
+      <AhInfo/>
+    </Suspense>;
+  case ProfilSectionEnum["Pet/Monture"]:
+    return <PetMontureProfilSection/>;
+  case ProfilSectionEnum.Classement:
+    return <ProfilRankingSection searchParams={searchParams}/>;
+  default:
+    return <div>C&apos;est quoi la section ${sectionAsEnum} ?</div>;
   }
 }
 
@@ -76,7 +77,7 @@ function PetMontureProfilSection() {
           </ErrorBoundary>
         </div>
         <div className="w-full lg:w-1/2">
-        <ErrorBoundary fallback={<MontureCanvasFallback/>} >
+          <ErrorBoundary fallback={<MontureCanvasFallback/>} >
             <PetCanvas monture/>
           </ErrorBoundary>
         </div>

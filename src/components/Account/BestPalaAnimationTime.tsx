@@ -26,9 +26,9 @@ export function BestPalaAnimationTime() {
           <p>
             Moyenne de vos meilleurs temps :{" "}
             <span className="text-blue-400">
-            {Math.round(bestPalaAnimationTime.reduce((acc, entry) => acc + entry.completion_time, 0) / bestPalaAnimationTime.length) / 1000}
+              {Math.round(bestPalaAnimationTime.reduce((acc, entry) => acc + entry.completion_time, 0) / bestPalaAnimationTime.length) / 1000}
               {" "}seconde{bestPalaAnimationTime.length > 1 ? "s" : ""}.
-          </span>
+            </span>
           </p>
 
         }
@@ -39,7 +39,7 @@ export function BestPalaAnimationTime() {
               return <p key={"best-time" + i}
               >
                 <span className="text-blue-400">
-                {Math.round(entry.completion_time) / 1000} {adaptPlurial("seconde", Math.round(entry.completion_time) / 1000)}
+                  {Math.round(entry.completion_time) / 1000} {adaptPlurial("seconde", Math.round(entry.completion_time) / 1000)}
                 </span>
                 <span>
                   {" "}{entry.question}{" "}

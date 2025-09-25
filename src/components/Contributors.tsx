@@ -47,8 +47,8 @@ const Contributors = () => {
           <CardContent className="h-full pt-6 flex items-center gap-4">
             <div className="flex flex-col items-center gap-4">
               <Image src={contributeur.urlImg} className="w-16 h-16 object-contain pixelated rounded-md"
-                     alt={`Skin de ${contributeur.pseudo}`} width={128} height={128}
-                     unoptimized={true}
+                alt={`Skin de ${contributeur.pseudo}`} width={128} height={128}
+                unoptimized={true}
               />
             </div>
             <div className="flex flex-col gap-2">
@@ -56,8 +56,8 @@ const Contributors = () => {
                 {contributeur.pseudo}
               </div>
               <span className="font-semibold">
-              {contributeur.description}
-            </span>
+                {contributeur.description}
+              </span>
               {
                 contributeur["lastContribution"] &&
                 <span className="text-gray-500">

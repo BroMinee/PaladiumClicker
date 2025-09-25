@@ -13,28 +13,30 @@ export function ThreshConditionSelector() {
 
   function getTextFromThresholdCondition(condition: WebHookThresholdCondition) {
     switch (condition) {
-      case "aboveThreshold":
-        return 'Supérieur à';
-      case "underThreshold":
-        return 'Inférieur à';
-      case "decreaseAboveThreshold":
-        return 'En baisse et supérieur à';
-      case "increasingAboveThreshold":
-        return 'En hausse et supérieur à';
-      case "increasing":
-        return 'En hausse';
-      case "decreasing":
-        return 'En baisse';
-      case "aboveQuantity":
-        return 'supérieur ou égal (en quantité)';
-      default:
-        return 'Event Inconnu';
+    case "aboveThreshold":
+      return 'Supérieur à';
+    case "underThreshold":
+      return 'Inférieur à';
+    case "decreaseAboveThreshold":
+      return 'En baisse et supérieur à';
+    case "increasingAboveThreshold":
+      return 'En hausse et supérieur à';
+    case "increasing":
+      return 'En hausse';
+    case "decreasing":
+      return 'En baisse';
+    case "aboveQuantity":
+      return 'supérieur ou égal (en quantité)';
+    default:
+      return 'Event Inconnu';
     }
   }
 
   const validCondition: WebHookThresholdCondition[] = ['underThreshold', 'aboveThreshold', 'decreaseAboveThreshold', 'increasingAboveThreshold', 'decreasing', 'increasing'];
-  if (currentWebHookType === WebHookType.market) // Le Market a une condition supplémentaire par rapport à l'admin shop
+  if (currentWebHookType === WebHookType.market) {
+    // Le Market a une condition supplémentaire par rapport à l'admin shop
     validCondition.push('aboveQuantity');
+  }
 
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
@@ -76,20 +78,20 @@ function EventSelector() {
 
   function getTextFromEventType(event: EventType) {
     switch (event) {
-      case 'BOSS':
-        return 'Boss';
-      case 'A VOS MARQUES':
-        return 'A vos marques';
-      case 'TOTEM':
-        return 'Totem';
-      case 'EGGHUNT':
-        return 'EggHunt';
-      case 'KOTH':
-        return 'KOTH';
-      case 'BLACKMARKET':
-        return 'BlackMarket';
-      default:
-        return 'Event Inconnu';
+    case 'BOSS':
+      return 'Boss';
+    case 'A VOS MARQUES':
+      return 'A vos marques';
+    case 'TOTEM':
+      return 'Totem';
+    case 'EGGHUNT':
+      return 'EggHunt';
+    case 'KOTH':
+      return 'KOTH';
+    case 'BLACKMARKET':
+      return 'BlackMarket';
+    default:
+      return 'Event Inconnu';
     }
   }
 

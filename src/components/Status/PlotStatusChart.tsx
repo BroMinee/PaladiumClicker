@@ -8,8 +8,9 @@ const AreaChart = dynamic(() => import("recharts").then((mod) => mod.AreaChart),
 
 const CustomTooltip = ({ active, payload, label }: any) => {
 
-  if (!payload || payload.length === 0)
+  if (!payload || payload.length === 0) {
     return null;
+  }
 
   if (active && payload && payload.length) {
     return (
@@ -44,14 +45,14 @@ const PlotStatusChart = ({ data, periode }: { data: ServerPaladiumStatusResponse
 
   const convert = (periode: StatusPeriode) => {
     switch (periode) {
-      case "day":
-        return "du jour";
-      case "week":
-        return "de la semaine";
-      case "month":
-        return "du mois";
-      case "season":
-        return "de la saison";
+    case "day":
+      return "du jour";
+    case "week":
+      return "de la semaine";
+    case "month":
+      return "du mois";
+    case "season":
+      return "de la saison";
     }
   };
   const moyenneText = convert(periode);
@@ -59,7 +60,7 @@ const PlotStatusChart = ({ data, periode }: { data: ServerPaladiumStatusResponse
   return (
     <ResponsiveContainer width="100%" height="100%" id="graph-status-plot">
       <AreaChart data={data_clean}
-                 margin={{ top: 30, right: 30, left: 30, bottom: 10 }}>
+        margin={{ top: 30, right: 30, left: 30, bottom: 10 }}>
         <defs>
           <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
             <stop offset="5%" stopColor="#fe6212" stopOpacity={0.8}/>
@@ -71,10 +72,10 @@ const PlotStatusChart = ({ data, periode }: { data: ServerPaladiumStatusResponse
         <YAxis yAxisId="left" domain={[0, (dataMax: number) => Math.round(dataMax * 1.1)]}/>
         <Tooltip content={<CustomTooltip/>}/>
         <Area yAxisId="left" type="monotone" dataKey="players" stroke="#fe6212" fillOpacity={1}
-              isAnimationActive={periode !== "season"}
-              fill="url(#colorUv)" name="Joueurs"/>
+          isAnimationActive={periode !== "season"}
+          fill="url(#colorUv)" name="Joueurs"/>
         <ReferenceLine yAxisId="left" type="linear" y={average} stroke="gray" strokeDasharray="3, 3"
-                       label={{ position: 'top', value: `Moyenne ${moyenneText}` }}/>
+          label={{ position: 'top', value: `Moyenne ${moyenneText}` }}/>
       </AreaChart>
     </ResponsiveContainer>
   );

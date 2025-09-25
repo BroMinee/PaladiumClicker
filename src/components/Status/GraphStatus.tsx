@@ -12,14 +12,14 @@ export default async function GraphStatus({ periode: periode }: GraphStatusProps
   let data = [] as ServerPaladiumStatusResponse[];
   try {
     switch (periode) {
-      case "day":
-      case "week":
-      case "month":
-      case "season":
-        data = await getStatusPaladium(periode);
-        break;
-      default:
-        data = [];
+    case "day":
+    case "week":
+    case "month":
+    case "season":
+      data = await getStatusPaladium(periode);
+      break;
+    default:
+      data = [];
     }
   } catch (e) {
     redirect("/error?message=Impossible de récupérer les données de status du serveur");

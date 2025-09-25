@@ -11,12 +11,13 @@ import constants from "@/lib/constants.ts";
 
 const ClickList = () => {
   function getImgPath(index: number, price: string) {
-    if (Number(price) === -1)
+    if (Number(price) === -1) {
       return "/unknown.png";
-    else if (index === 24)
+    } else if (index === 24) {
       return safeJoinPaths(constants.imgPathClicker, "/CPSIcon/" + index + ".webp");
-    else
+    } else {
       return safeJoinPaths(constants.imgPathClicker,"/CPSIcon/" + index + ".png");
+    }
   }
 
   return (

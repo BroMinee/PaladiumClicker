@@ -26,8 +26,9 @@ export default function ProfileFetcherWrapper({ username, children }: {
 
     if (reloadProfilNeeded(playerInfo, username, settings.defaultProfile)) {
       getPlayerInfoAction(username).then((data) => {
-        if (!data)
+        if (!data) {
           return;
+        }
         toast.success(`Profil de ${data.username} chargé`);
         setPlayerInfo(data);
       }).catch((e) => {
@@ -41,8 +42,9 @@ export default function ProfileFetcherWrapper({ username, children }: {
 
   }, [username, setPlayerInfo, settings, playerInfo, isFirstRender]);
 
-  if (reloadProfilNeeded(playerInfo, username, settings.defaultProfile))
+  if (reloadProfilNeeded(playerInfo, username, settings.defaultProfile)) {
     return <LoadingData username={username}/>;
+  }
 
   return (<>
       {children}

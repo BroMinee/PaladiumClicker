@@ -5,8 +5,9 @@ import { Card, CardContent } from "@/components/ui/card.tsx";
 
 export function AccountDetail() {
   const { profileInfo } = useProfileStore();
-  if (!profileInfo)
+  if (!profileInfo) {
     return null;
+  }
 
   const ppUrl = profileInfo.avatar;
 

@@ -18,11 +18,11 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/u
 import { ScrollArea } from "@/components/ui/scroll-area.tsx";
 
 export function WebHookPreviewPage({
-                                     groupsArg,
-                                     webHookDiscord,
-                                     guildIdToServerName,
-                                     channelIdToChannelName,
-                                   }:
+  groupsArg,
+  webHookDiscord,
+  guildIdToServerName,
+  channelIdToChannelName,
+}:
                                      {
                                        groupsArg: groupsType,
                                        webHookDiscord: WebhookDiscord[],
@@ -38,19 +38,19 @@ export function WebHookPreviewPage({
       {
         groups && Object.keys(groups).map((guildId, index) => (
           <DisplayServerBox key={`${guildId}-${index}`} guildId={guildId} guildIdToServerName={guildIdToServerName}
-                            channelId={Object.keys(groups[guildId])[0]}
+            channelId={Object.keys(groups[guildId])[0]}
           >
             {
               Object.keys(groups[guildId]).map((channelId, index) => (
                 <DisplayChannelBox key={`${guildId}-${channelId}-${index}`} channelId={channelId}
-                                   guildId={guildId}
-                                   channelIdToChannelName={channelIdToChannelName}
+                  guildId={guildId}
+                  channelIdToChannelName={channelIdToChannelName}
                 >
                   {
                     groups[guildId][channelId] &&
                     groups[guildId][channelId].sort((w1, w2) => w1.type.localeCompare(w2.type)).map((webhook, index) => (
                       <WebHookPreview key={`webhook-${index}`} webHookAlert={webhook} groups={groups}
-                                      setGroups={setGroups}/>
+                        setGroups={setGroups}/>
                     ))
                   }
                   <CreateNewWebHookButtonKnowingUrl
@@ -95,29 +95,37 @@ export function WebHookPreview({ webHookAlert, groups, setGroups }: {
     setCurrentWebHookType(webHookAlert.type);
     setWebHookUrl(webHookAlert.webhook.url);
     setUsername(webHookAlert.username ?? "");
-    if (webHookAlert.title)
+    if (webHookAlert.title) {
       setTitle(webHookAlert.title);
-    if (webHookAlert.item && webHookAlert.type === WebHookType.market)
+    }
+    if (webHookAlert.item && webHookAlert.type === WebHookType.market) {
       setItemSelected({
         value: webHookAlert.item.item_name,
         img: webHookAlert.item.img,
         label: webHookAlert.item.us_trad,
         label2: webHookAlert.item.fr_trad
       });
+    }
 
-    if (webHookAlert.embed)
+    if (webHookAlert.embed) {
       setEmbed(webHookAlert.embed);
-    if (webHookAlert.item && webHookAlert.type === WebHookType.adminShop)
+    }
+    if (webHookAlert.item && webHookAlert.type === WebHookType.adminShop) {
       setAdminShopItemSelected(getItemFromName(webHookAlert.item.item_name));
-    if (webHookAlert.type === WebHookType.EventPvp && webHookAlert.enumEvent)
+    }
+    if (webHookAlert.type === WebHookType.EventPvp && webHookAlert.enumEvent) {
       setEventSelected(webHookAlert.enumEvent);
-    if (webHookAlert.content)
+    }
+    if (webHookAlert.content) {
       setContent(webHookAlert.content);
+    }
     if ((webHookAlert.type === WebHookType.adminShop || webHookAlert.type === WebHookType.market)) {
-      if (webHookAlert.thresholdCondition)
+      if (webHookAlert.thresholdCondition) {
         setThresholdCondition(webHookAlert.thresholdCondition);
-      if (webHookAlert.threshold)
+      }
+      if (webHookAlert.threshold) {
         setThreshold(webHookAlert.threshold);
+      }
     }
 
     setIdAlert(webHookAlert.id);
@@ -150,24 +158,24 @@ export function WebHookPreview({ webHookAlert, groups, setGroups }: {
         <div className="flex flex-col sm:flex-row items-center gap-2 w-full justify-start">
           {(webHookAlert.type === WebHookType.market || webHookAlert.type === WebHookType.adminShop) && webHookAlert.item &&
             <Image src={`/AH_img/${webHookAlert.item.img}`} className="object-cover pixelated" alt="item icon"
-                   width={32}
-                   height={32} unoptimized/>
+              width={32}
+              height={32} unoptimized/>
           }
           {webHookAlert.type === WebHookType.EventPvp && webHookAlert.enumEvent &&
             <Image src={`https://palatracker.bromine.fr/${getIconNameFromEventType(webHookAlert.enumEvent)}`} alt="icon"
-                   height={32} width={32} unoptimized/>
+              height={32} width={32} unoptimized/>
           }
           {webHookAlert.type === WebHookType.QDF &&
             <Image src={`https://palatracker.bromine.fr/EventIcon/qdf.png`} alt="icon"
-                   height={32} width={32} unoptimized/>
+              height={32} width={32} unoptimized/>
           }
           {webHookAlert.type === WebHookType.statusServer &&
             <Image src={`https://palatracker.bromine.fr/EventIcon/status.png`} alt="icon"
-                   height={32} width={32} unoptimized/>
+              height={32} width={32} unoptimized/>
           }
           {webHookAlert.type === WebHookType.vote &&
             <Image src={`https://palatracker.bromine.fr/img/MarketUI/pb_icon.png`} alt="icon"
-                   height={32} width={32} unoptimized/>
+              height={32} width={32} unoptimized/>
           }
           <span className="app-badge">{getTextFromWebHookType(webHookAlert.type)}</span>
           <span className="title">{webHookAlert.title}</span>

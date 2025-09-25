@@ -22,18 +22,18 @@ export function WebHookSelectorClientItem() {
         Revenir à la liste des alertes
       </Button>
       <div className="flex flex-wrap justify-center items-center w-full gap-2">
-      {
-        validWebHookType.map((webhookType, index) => (
-          <Button
-            key={webhookType + index}
-            onClick={() => {
-              setCurrentWebHookType(webhookType);
-            }}
-            disabled={webhookType === currentWebHookType}
-          >
-            {getTextFromWebHookType(webhookType)}
-          </Button>))
-      }
+        {
+          validWebHookType.map((webhookType, index) => (
+            <Button
+              key={webhookType + index}
+              onClick={() => {
+                setCurrentWebHookType(webhookType);
+              }}
+              disabled={webhookType === currentWebHookType}
+            >
+              {getTextFromWebHookType(webhookType)}
+            </Button>))
+        }
       </div>
 
     </div>

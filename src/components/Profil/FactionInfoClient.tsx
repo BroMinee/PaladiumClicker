@@ -15,16 +15,18 @@ import Image from "next/image";
 
 export function FactionNameInfo() {
   const { data: playerInfo } = usePlayerInfoStore();
-  if (playerInfo === null)
+  if (playerInfo === null) {
     return null;
+  }
 
   return <>{playerInfo.faction.name}</>;
 }
 
 export function FactionInfoDescription() {
   const { data: playerInfo } = usePlayerInfoStore();
-  if (playerInfo === null)
+  if (playerInfo === null) {
     return null;
+  }
 
   return <>{playerInfo.faction.name}</>;
 }
@@ -45,8 +47,9 @@ export function FactionInfoMembersInfo() {
 export function FactionDetails() {
   const { data: playerInfo } = usePlayerInfoStore();
 
-  if (!playerInfo)
+  if (!playerInfo) {
     return <Suspense fallback={<LoadingData username={undefined}/>}/>;
+  }
 
   const createdAt = playerInfo.faction.createdAt;
   const level = playerInfo.faction.level?.level || -1;
@@ -104,8 +107,9 @@ export function FactionDetails() {
 export function FactionClassementClient({ factionLeaderboard }: { factionLeaderboard: PaladiumFactionLeaderboard }) {
   const { data: playerInfo } = usePlayerInfoStore();
   let factionIndex = -1;
-  if (playerInfo && factionLeaderboard.length > 0)
+  if (playerInfo && factionLeaderboard.length > 0) {
     factionIndex = factionLeaderboard.findIndex((faction) => faction["name"] === playerInfo.faction.name) + 1;
+  }
 
   return (
     <>

@@ -28,21 +28,21 @@ export default function EditRole({ defaultValue, discord_id }: { defaultValue: R
   }
 
   return (<form className="max-w-sm mx-auto flex flex-row gap-2 items-center" onSubmit={handleSubmit}>
-      <select id="role"
-              name="role"
-              defaultValue={defaultValue}
-              onChange={(event) => setRole(event.target.value as Role)}
-              className={"bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"}
-              style={{ backgroundColor:  getRoleColor(role)}}
-      >
-        {
-          ["Admin", "Bug Hunter", "Beta Tester", "Palatime", "Classic"].map((role, index) => {
-            return <option key={index} value={role} selected={role === defaultValue}>{role}</option>;
-          })
-        }
-      </select>
-      <Button type="submit">Submit</Button>
-      {isPending && <LoadingSpinner/>}
-    </form>
+    <select id="role"
+      name="role"
+      defaultValue={defaultValue}
+      onChange={(event) => setRole(event.target.value as Role)}
+      className={"bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"}
+      style={{ backgroundColor:  getRoleColor(role)}}
+    >
+      {
+        ["Admin", "Bug Hunter", "Beta Tester", "Palatime", "Classic"].map((role, index) => {
+          return <option key={index} value={role} selected={role === defaultValue}>{role}</option>;
+        })
+      }
+    </select>
+    <Button type="submit">Submit</Button>
+    {isPending && <LoadingSpinner/>}
+  </form>
   );
 }

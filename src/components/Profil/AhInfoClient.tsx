@@ -11,8 +11,9 @@ import Image from "next/image";
 export function AhInfoTitleClient() {
   const { data: playerInfo } = usePlayerInfoStore();
 
-  if (!playerInfo || !playerInfo.ah)
+  if (!playerInfo || !playerInfo.ah) {
     return null;
+  }
 
   const totalCount = playerInfo.ah.totalCount;
   return <>
@@ -27,8 +28,9 @@ export function AhInfoTitleClient() {
 export function AhInfoGetTotalBenefice() {
   const { data: playerInfo } = usePlayerInfoStore();
 
-  if (!playerInfo || !playerInfo.ah)
+  if (!playerInfo || !playerInfo.ah) {
     return null;
+  }
 
   const totalCount = playerInfo.ah.data.reduce((acc, e) => e.item.name === "tile-luckydrawer" ? acc : acc + e.price * e.item.quantity, 0);
   return <span className="text-primary">
@@ -39,8 +41,9 @@ export function AhInfoGetTotalBenefice() {
 export function AhItemClient({ allItemsInfo }: { allItemsInfo: OptionType[] }) {
   const { data: playerInfo } = usePlayerInfoStore();
 
-  if (!playerInfo || !playerInfo.ah)
+  if (!playerInfo || !playerInfo.ah) {
     return null;
+  }
 
   const totalCount = playerInfo.ah.totalCount;
   if (totalCount !== playerInfo.ah.data.length) {

@@ -50,21 +50,21 @@ export default function Home() {
         </CardHeader>
         <CardContent>
           Nous collectons des données sur les utilisateurs de PalaTracker à partir de l&apos;<a
-          href="https://api.paladium.games/docs"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="text-primary hover:text-orange-700 transition-colors duration-300"
-        >
+            href="https://api.paladium.games/docs"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-primary hover:text-orange-700 transition-colors duration-300"
+          >
           API de Paladium
-        </a>, conformément
+          </a>, conformément
           à <a
-          href="https://paladium-pvp.fr/pages/tos"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="text-primary hover:text-orange-700 transition-colors duration-300"
-        >
+            href="https://paladium-pvp.fr/pages/tos"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-primary hover:text-orange-700 transition-colors duration-300"
+          >
           leur politique de confidentialité.
-        </a> Les données collectées incluent des informations telles que la faction,
+          </a> Les données collectées incluent des informations telles que la faction,
           les niveaux de métiers, la place dans les différents classements, etc. Ces données sont
           stockées une fois
           par jour sur nos serveurs à conditions que votre pseudo Minecraft ait été cherché une fois.
@@ -91,13 +91,13 @@ export default function Home() {
         <CardContent>
           Les données collectées sont stockées sur nos serveurs pour une durée indéterminée. Vous pouvez à tout moment
           demander la suppression de vos données en nous contactant via notre <a
-          href={constants.discord.url}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="text-primary hover:text-orange-700 transition-colors duration-300"
-        >
+            href={constants.discord.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-primary hover:text-orange-700 transition-colors duration-300"
+          >
           discord
-        </a>.
+          </a>.
         </CardContent>
       </Card>
 
@@ -120,13 +120,13 @@ export default function Home() {
           Si vous avez des questions ou des préoccupations concernant notre politique de confidentialité, n&apos;hésitez
           pas
           à nous contacter via notre <a
-          href={constants.discord.url}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="text-primary hover:text-orange-700 transition-colors duration-300"
-        >
+            href={constants.discord.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-primary hover:text-orange-700 transition-colors duration-300"
+          >
           discord
-        </a>.<br/><br/>
+          </a>.<br/><br/>
           Merci de votre confiance.<br/>
           L&apos;équipe de PalaTracker.
         </CardContent>

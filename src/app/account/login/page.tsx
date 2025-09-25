@@ -13,7 +13,7 @@ export default function WebHooksPage() {
           </h2>
           <span>
           - {"Pour pouvoir accéder à ta page account il te faut te connecter avec discord."}
-        </span>
+          </span>
 
         </div>
         <div>
@@ -22,7 +22,7 @@ export default function WebHooksPage() {
           </h2>
           <span>
             - {"Nous aurons un droit de lecture sur ton pseudo discord, ton avatar et ta bannière discord et c'est tout."}
-        </span>
+          </span>
         </div>
 
         <div>
@@ -33,7 +33,7 @@ export default function WebHooksPage() {
             - Les informations sont stockées dans une base de données sécurisée et ne sont pas partagées avec des tiers.
             <br/>
             - Les access tokens et refresh tokens sont chiffrés et stockés dans notre base de données.
-        </span>
+          </span>
         </div>
 
       </CardHeader>

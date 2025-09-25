@@ -13,8 +13,9 @@ const FallingClickImage = () => {
   const { settings } = useSettingsStore();
 
   useEffect(() => {
-    if (!playerInfo || !settings.fallingImage)
+    if (!playerInfo || !settings.fallingImage) {
       return;
+    }
 
     setTimeout(() => {
       const interval = setInterval(() => {
@@ -61,8 +62,9 @@ const FallingClickImage = () => {
     }, Math.random() * 1000);
   }, [selectedCPS, playerInfo, settings.fallingImage]);
 
-  if (!settings.fallingImage)
+  if (!settings.fallingImage) {
     return null;
+  }
 
   return (<div ref={containerRef} className="fixed inset-0 z-[-1]"/>);
 };
