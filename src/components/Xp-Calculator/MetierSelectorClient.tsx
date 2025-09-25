@@ -236,7 +236,7 @@ function getBonusRank(playerRank: PlayerRank | undefined) {
 export function DisplayDailyDoubleRank({ dailyBonus, doubleXp }: { dailyBonus: number, doubleXp: number }) {
   const { data: playerInfo } = usePlayerInfoStore();
 
-  let bonusXpRank = getBonusRank(playerInfo?.rank);
+  const bonusXpRank = getBonusRank(playerInfo?.rank);
   const bonusSummerRush = 300;
   return <>{dailyBonus + doubleXp + bonusXpRank + bonusSummerRush}%</>;
 }
@@ -244,7 +244,7 @@ export function DisplayDailyDoubleRank({ dailyBonus, doubleXp }: { dailyBonus: n
 export function DisplayXpBonus() {
   const { data: playerInfo } = usePlayerInfoStore();
 
-  let bonusXpRank = getBonusRank(playerInfo?.rank);
+  const bonusXpRank = getBonusRank(playerInfo?.rank);
   return <>{bonusXpRank}%</>;
 }
 

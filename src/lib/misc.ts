@@ -64,7 +64,7 @@ export function getTotalSpend(playerInfo: PlayerInfo) {
   for (const key in playerInfo) {
 
     if (validKeys.includes(key as typeof validKeys[number])) {
-      let target = playerInfo[key as typeof validKeys[number]];
+      const target = playerInfo[key as typeof validKeys[number]];
       for (const element of target) {
         if (
           ("price" in element) &&
@@ -515,7 +515,7 @@ export function computeRPS(playerInfo: PlayerInfo) {
 }
 
 export function getJsonToUseForUpgrade(upgradeType: UpgradeKey) {
-  let jsonToUse = null;
+  const jsonToUse = null;
   if (upgradeType === "global_upgrade") {
     return globalUpgradeJson;
   } else if (upgradeType === "building_upgrade") {
@@ -852,7 +852,7 @@ export function computeProgression(playerInfo: PlayerInfo | null) {
     + playerInfo.many_upgrade.length
     + playerInfo.posterior_upgrade.length;
 
-  let currentUpgrade = playerInfo.building.reduce((acc, building) => acc + building.own, 0)
+  const currentUpgrade = playerInfo.building.reduce((acc, building) => acc + building.own, 0)
     + playerInfo.CPS.reduce((acc, cps) => acc + (cps.own ? 1 : 0), 0)
     + playerInfo.global_upgrade.reduce((acc, global) => acc + (global.own ? 1 : 0), 0)
     + playerInfo.terrain_upgrade.reduce((acc, terrain) => acc + (terrain.own ? 1 : 0), 0)
@@ -873,7 +873,7 @@ export function mountureGetNeededXpForLevel(level: number) {
 
 export function montureGetLevelFromXp(xp: number) {
   for (let lvl = 0; lvl <= 100; lvl++) {
-    let needed = mountureGetNeededXpForLevel(lvl);
+    const needed = mountureGetNeededXpForLevel(lvl);
     if (xp < needed) {
       return lvl;
     }
@@ -882,7 +882,7 @@ export function montureGetLevelFromXp(xp: number) {
 }
 
 export function montureGetCoef(xp: number, curLevel: number) {
-  let needed = mountureGetNeededXpForLevel(curLevel);
+  const needed = mountureGetNeededXpForLevel(curLevel);
   return xp / needed;
 }
 
@@ -895,7 +895,7 @@ export function petGetNeededXpForLevel(level: number): number {
 
 export function petGetLevelFromXp(xp: number) {
   for (let lvl = 0; lvl <= 100; lvl++) {
-    let needed = petGetNeededXpForLevel(lvl);
+    const needed = petGetNeededXpForLevel(lvl);
     if (xp < needed) {
       return lvl;
     }
@@ -947,9 +947,9 @@ export function addMissingDate(data: RankingResponse) {
         const prevEntry = userEntries[i - 1];
         const currEntry = userEntries[i];
 
-        let prevDate = new Date(prevEntry.date);
-        let currDate = new Date(currEntry.date);
-        let nextDate = new Date(prevDate);
+        const prevDate = new Date(prevEntry.date);
+        const currDate = new Date(currEntry.date);
+        const nextDate = new Date(prevDate);
         nextDate.setDate(prevDate.getDate() + 1);
 
         while (nextDate < currDate) {

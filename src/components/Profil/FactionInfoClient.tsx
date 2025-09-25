@@ -33,7 +33,7 @@ export function FactionInfoDescription() {
 
 export function FactionInfoMembersInfo() {
   const { data: playerInfo } = usePlayerInfoStore();
-  let playerList = playerInfo ? playerInfo.faction.players : [];
+  const playerList = playerInfo ? playerInfo.faction.players : [];
 
   return (
     <>

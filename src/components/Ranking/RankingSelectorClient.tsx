@@ -21,7 +21,7 @@ export function RankingSelectorClient({ rankingType, rankingPage }: {
   const router = useRouter();
   const searchParams = useSearchParams();
 
-  let imgPath = getImagePathFromRankingType(rankingType);
+  const imgPath = getImagePathFromRankingType(rankingType);
   const { data: playerInfo } = usePlayerInfoStore();
 
   const selected = rankingType === (searchParams.get("category") || RankingType.money);

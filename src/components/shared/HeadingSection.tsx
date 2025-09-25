@@ -1,9 +1,6 @@
 import { cn } from "@/lib/utils";
 
-interface HeadingSectionProps extends React.HTMLAttributes<HTMLHeadingElement> {
-}
-
-const HeadingSection = ({ className, ...props }: HeadingSectionProps) => {
+const HeadingSection = ({ className, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => {
   return (
     <h2 className={cn("font-semibold text-xl text-primary-foreground", className)} {...props} />
   );

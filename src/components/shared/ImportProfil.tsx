@@ -72,7 +72,7 @@ export default function ImportProfil({
         } else {
           handleConfirmReplacement();
         }
-      } catch (e) {
+      } catch (_) {
         setFetching(false);
         toast.error(`Erreur lors du chargement du profil de ${playerInfo.username}`);
       }

@@ -21,7 +21,7 @@ export function AdminShopSelectorClientItem({ item, periode, adminShopPage }: {
 
   const { setAdminShopItemSelected } = useWebhookStore();
 
-  let imgPath = getImagePathFromAdminShopType(item);
+  const imgPath = getImagePathFromAdminShopType(item);
 
   const selected = item === searchParams.get("item");
 

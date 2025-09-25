@@ -49,7 +49,7 @@ export async function generateMetadata() {
         description: description,
       },
     };
-  } catch (error) {
+  } catch (_) {
     return {
       title: title,
       description: "Une erreur est survenue lors de la génération des métadonnées.",

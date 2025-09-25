@@ -41,7 +41,7 @@ export async function generateMetadata(
       break;
     }
   }
-  let image = safeJoinPaths("https://palatracker.bromine.fr/", constants.imgPathProfile, "/JobsIcon/", imgPath, ".webp");
+  const image = safeJoinPaths("https://palatracker.bromine.fr/", constants.imgPathProfile, "/JobsIcon/", imgPath, ".webp");
   return {
     title: title,
     description: description,

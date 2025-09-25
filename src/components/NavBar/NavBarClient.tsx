@@ -131,7 +131,7 @@ export function CategorieDisplay({ name, children }: {
   const [open, setOpen] = useState(false);
   const { opened, setToggleOpen } = useNavbarStore();
   const { last_visited } = useNotificationStore();
-  let subLinks: PathValid[] = useMemo(() => constants.MenuPath.get(name) || [], [name]);
+  const subLinks: PathValid[] = useMemo(() => constants.MenuPath.get(name) || [], [name]);
   const [mounted, setMounted] = useState(false);
   const [newNotification, setNewNotification] = useState(0);
 

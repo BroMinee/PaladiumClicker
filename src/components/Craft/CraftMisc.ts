@@ -12,8 +12,8 @@ export async function BuildTreeRecursively(el: NodeType, options: OptionType[], 
     redirect("/error?message=Il semblerait que le craft soit trop complexe pour être affiché. Contactez un administrateur pour plus d'informations.");
   }
 
-  let craft_recipe = valueToRes.get(el.value) || await getCraft(el.value);
-  let countChildrenResource = Math.ceil(el.count / craft_recipe.count);
+  const craft_recipe = valueToRes.get(el.value) || await getCraft(el.value);
+  const countChildrenResource = Math.ceil(el.count / craft_recipe.count);
 
   valueToRes.set(el.value, craft_recipe);
 

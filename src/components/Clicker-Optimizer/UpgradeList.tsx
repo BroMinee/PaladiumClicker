@@ -31,7 +31,7 @@ const UpgradeList = ({ upgradeType }: UpgradeListProps) => {
     }
   }
 
-  let jsonToUse = getJsonToUseForUpgrade(upgradeType);
+  const jsonToUse = getJsonToUseForUpgrade(upgradeType);
   if (!jsonToUse) {
     redirect("/error?message=UpgradeType%20not%20found");
   }

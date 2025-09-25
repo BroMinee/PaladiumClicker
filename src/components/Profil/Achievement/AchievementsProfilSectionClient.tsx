@@ -53,7 +53,7 @@ export function AchievementsGlobalProgressBar({ value, showText = true }: { valu
         newX = textWidth / 2 + 5;
       }
 
-      let newY = textHeight + (viewBoxState.height - textHeight) / 2;
+      const newY = textHeight + (viewBoxState.height - textHeight) / 2;
 
       textRef.current.setAttribute("x", `${newX}`);
       textRef.current.setAttribute("y", `${newY}`);
@@ -249,7 +249,7 @@ function DetailAchievement({ achievement, itemList }: {
   const amount = achievement.amount === -1 ? achievement.subAchievements.length : achievement.amount;
   const value = achievementProgress * 100 / amount;
 
-  let arrowPath = achievement.subAchievements.length === 0 ? "" : (showSubAchievements ? safeJoinPaths(constants.imgPathProfile, "/arrow_top.png") : safeJoinPaths(constants.imgPathProfile,"/arrow_down.png"));
+  const arrowPath = achievement.subAchievements.length === 0 ? "" : (showSubAchievements ? safeJoinPaths(constants.imgPathProfile, "/arrow_top.png") : safeJoinPaths(constants.imgPathProfile,"/arrow_down.png"));
 
   let closestItemName = itemList.find((item) => item.value === constants.dictAchievementIdToIcon.get(achievement.icon))?.img ?? "unknown.webp";
 

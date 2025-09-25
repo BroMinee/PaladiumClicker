@@ -21,7 +21,7 @@ export default async function GraphStatus({ periode: periode }: GraphStatusProps
     default:
       data = [];
     }
-  } catch (e) {
+  } catch (_) {
     redirect("/error?message=Impossible de récupérer les données de status du serveur");
   }
 

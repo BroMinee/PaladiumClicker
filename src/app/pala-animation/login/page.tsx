@@ -4,7 +4,7 @@ import { API_PALATRACKER } from "@/lib/constants.ts";
 import { LoginButton } from "@/components/Login/LoginButton.tsx";
 
 export async function generateMetadata() {
-  let title = "PalaTracker | PalaAnimation Trainer | Login";
+  const title = "PalaTracker | PalaAnimation Trainer | Login";
 
   const description = "Viens t'entraîner sur PalaAnimation et compare ton temps avec les autres joueurs ! 🚀";
   return {

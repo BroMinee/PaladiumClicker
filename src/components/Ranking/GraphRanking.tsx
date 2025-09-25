@@ -14,16 +14,16 @@ export default async function GraphRanking({ rankingType, searchParams }: {
   let data = [] as RankingResponse;
   try {
     data = await getRankingLeaderboard(rankingType);
-  } catch (e) {
+  } catch (_) {
     redirect("/error?message=Impossible de récupérer les données du classement sélectionné");
   }
 
   let usernames = searchParams.usernames ? searchParams.usernames.split(",") : [];
-  let noUsernames = searchParams.noUsernames ? searchParams.noUsernames.toLowerCase().split(",") : [];
+  const noUsernames = searchParams.noUsernames ? searchParams.noUsernames.toLowerCase().split(",") : [];
   usernames = usernames.filter((username) => !noUsernames.includes(username.toLowerCase()));
 
   for (let i = 0; i < usernames.length; i++) {
-    let dataUser = await getRankingLeaderboardPlayerUsername(usernames[i], rankingType).catch(() => {
+    const dataUser = await getRankingLeaderboardPlayerUsername(usernames[i], rankingType).catch(() => {
       return [] as RankingResponse;
     });
     data = data.concat(dataUser);

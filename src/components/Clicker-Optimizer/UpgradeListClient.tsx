@@ -72,7 +72,7 @@ export function ButtonUpgrade({ index, upgradeType, children }: {
     return null;
   }
 
-  let upgrade: BuildingUpgrade | CategoryUpgrade | GlobalUpgrade | TerrainUpgrade | {
+  const upgrade: BuildingUpgrade | CategoryUpgrade | GlobalUpgrade | TerrainUpgrade | {
     own: false;
     name: string
   } = playerInfo ? playerInfo[upgradeType][index] : { own: false, name: "uninitialized" };

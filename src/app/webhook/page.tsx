@@ -40,8 +40,8 @@ export default async function WebHooksMainPage() {
 };
 
 export async function WebHooksPage() {
-  let webHookAlerts = await getWebHookFromCookies();
-  let webHookDiscord = await getWebHookDiscordFromCookies();
+  const webHookAlerts = await getWebHookFromCookies();
+  const webHookDiscord = await getWebHookDiscordFromCookies();
   const guildIdToServerName: Record<string, string> = {};
   const channelIdToChannelName: Record<string, string> = {};
 

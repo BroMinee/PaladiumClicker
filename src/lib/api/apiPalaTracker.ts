@@ -43,7 +43,7 @@ export const isMyApiDown = async (): Promise<boolean> => {
     if (!response.ok) {
       return true;
     }
-  } catch (error) {
+  } catch (_) {
     return true;
   }
 

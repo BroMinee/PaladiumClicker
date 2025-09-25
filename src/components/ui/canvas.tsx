@@ -45,12 +45,12 @@ const CanvasWithText: React.FC<CanvasWithTextProps> = ({ text, className, height
       // Si la taille de la police atteint 10 et que le texte ne tient toujours pas, on doit gérer les retours à la ligne
       const lines = [];
       if (fontSize === minFontSize && context.measureText(text).width > maxWidth) {
-        let words = text.split(" ");
+        const words = text.split(" ");
         let currentLine = "";
 
-        for (let word of words) {
-          let testLine = currentLine + word + " ";
-          let testWidth = context.measureText(testLine).width;
+        for (const word of words) {
+          const testLine = currentLine + word + " ";
+          const testWidth = context.measureText(testLine).width;
 
           if (testWidth > maxWidth) {
             lines.push(currentLine.trim());

@@ -21,10 +21,10 @@ export async function ProfilRankingSectionServer({ rankingType, searchParams }: 
     return [] as RankingResponse;
   });
 
-  let usernames = searchParams.usernames ? searchParams.usernames.split(",") : [];
+  const usernames = searchParams.usernames ? searchParams.usernames.split(",") : [];
 
   for (let i = 0; i < usernames.length; i++) {
-    let dataUser = await getRankingLeaderboardPlayerUsername(usernames[i], rankingType).catch(() => {
+    const dataUser = await getRankingLeaderboardPlayerUsername(usernames[i], rankingType).catch(() => {
       return [] as RankingResponse;
     });
     data = data.concat(dataUser);

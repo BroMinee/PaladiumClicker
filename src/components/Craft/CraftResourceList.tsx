@@ -39,7 +39,7 @@ export function CraftResourceList({ list }: { list: NodeType[] }) {
 
   useEffect(() => {
     if (listState !== null && ahItems.length !== 0) {
-      let newSubTotalPrice = new Array(listState.length).fill(0);
+      const newSubTotalPrice = new Array(listState.length).fill(0);
       listState.forEach((slot, slotIndex) => {
         const found = ahItems.find((el) => el.name === slot.value);
         if (found === undefined) {

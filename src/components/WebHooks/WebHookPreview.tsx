@@ -140,7 +140,7 @@ export function WebHookPreview({ webHookAlert, groups, setGroups }: {
     if (!res.succeeded) {
       toast.error(res.msg);
     } else {
-      let newGroups = { ...groups };
+      const newGroups = { ...groups };
       newGroups[webHookAlert.webhook.guild_id][webHookAlert.webhook.channel_id] = newGroups[webHookAlert.webhook.guild_id][webHookAlert.webhook.channel_id].filter((w) => w.id !== webHookAlert.id);
       setGroups(newGroups);
       toast.success(res.msg);

@@ -78,7 +78,7 @@ export function ZoomableChart({ data: initialData, rankingType, profil }: Zoomab
     event.preventDefault();
     const formData = new FormData(event.target as HTMLFormElement);
 
-    let usernames = new Set<string>();
+    const usernames = new Set<string>();
 
     const u = formData.get("username");
     if (u) {
@@ -114,7 +114,7 @@ export function ZoomableChart({ data: initialData, rankingType, profil }: Zoomab
   }
 
   function handleRemoveUsername(username: string) {
-    let usernames = new Set<string>();
+    const usernames = new Set<string>();
 
     const us = searchParams.get("usernames");
     if (us) {
@@ -239,8 +239,8 @@ export function ZoomableChart({ data: initialData, rankingType, profil }: Zoomab
       return Number(lastDay[`${a}_pos`]) - Number(lastDay[`${b}_pos`]);
     });
 
-    let usernames = new Set<string>(uniqueUsernames);
-    let usernames_lower = new Set<string>(uniqueUsernames.map((u) => u.toLowerCase()));
+    const usernames = new Set<string>(uniqueUsernames);
+    const usernames_lower = new Set<string>(uniqueUsernames.map((u) => u.toLowerCase()));
 
     const us = searchParams.get("usernames");
     if (us) {
@@ -349,7 +349,7 @@ export function ZoomableChart({ data: initialData, rankingType, profil }: Zoomab
       return;
     }
 
-    let zoomFactor = 0.1;
+    const zoomFactor = 0.1;
     let direction = 0;
     let clientX = 0;
 

@@ -16,8 +16,8 @@ export default function AhItem({ item, allItemsInfo, uuid_seller }: AhItemsProps
   }
 
   const itemOffer = convertAhItemTypeToMarketItemOffer(item, uuid_seller);
-  let closestItem = allItemsInfo.find((e) => e.value === item.item.name);
-  let air = allItemsInfo.find((e) => e.value === "air");
+  const closestItem = allItemsInfo.find((e) => e.value === item.item.name);
+  const air = allItemsInfo.find((e) => e.value === "air");
 
   if (!closestItem && air) {
     return <div className="w-[95%] hover:scale-105 duration-300 cursor-pointer">

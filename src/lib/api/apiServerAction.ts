@@ -69,7 +69,7 @@ export async function getCurrentEvent() {
 }
 
 export async function getCurrentEventNotRegistered(uuid: string): Promise<Event | null> {
-  let event: Event | null = await getCurrentEvent();
+  const event: Event | null = await getCurrentEvent();
 
   if (!event) {
     return null;

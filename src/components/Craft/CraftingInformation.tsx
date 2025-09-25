@@ -23,7 +23,7 @@ export function CraftingInformationClient({ root }: { root: Tree<NodeType> }) {
     }
 
     // group the same leafs together and sum their count
-    let groupedLeaves = leaves.reduce((acc, leaf) => {
+    const groupedLeaves = leaves.reduce((acc, leaf) => {
       const value = getValueTree(leaf);
       if (alreadyVisitedValue.has(value.value)) {
         const findIndex = acc.findIndex((el) => el.value.value === value.value);
