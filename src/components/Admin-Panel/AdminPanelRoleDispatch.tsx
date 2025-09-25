@@ -19,7 +19,7 @@ const mapPermission = new Map<Role, React.FC[]>(
 export async function AdminPanelRoleDispatch() {
   const role = await getRole();
 
-  const page = mapPermission.get(role) || [NotPermissionPanel];
+  const page = mapPermission.get(role) ?? [NotPermissionPanel];
   return <div className="flex flex-col gap-2">
     {page.map((Component, i) => <Component key={i}/>)}
   </div>;
@@ -40,7 +40,7 @@ async function EditRolePanel() {
               <Image src={user.avatar} alt="profile picture" width={32} height={32} className="rounded-full"
                 unoptimized/>
               <div className="flex justify-start flex-row items-start gap-2">
-                <p className="text-sm leading-5">{user.global_name || user.username}</p>
+                <p className="text-sm leading-5">{user.global_name ?? user.username}</p>
                 {/*  <p style={{ backgroundColor:  getRoleColor(user.role)}}>{user.role}</p>*/}
               </div>
               <div className="w-fit">

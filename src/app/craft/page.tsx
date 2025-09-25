@@ -54,7 +54,7 @@ export default async function Home(props: { searchParams: Promise<searchParamsCr
   const searchParams = await props.searchParams;
 
   if (searchParams.section === undefined) {
-    return redirect(generateCraftUrl(searchParams.item as string, searchParams.count || 1, CraftSectionEnum.recipe));
+    return redirect(generateCraftUrl(searchParams.item as string, searchParams.count ?? 1, CraftSectionEnum.recipe));
   }
 
   switch (searchParams.section) {
@@ -63,7 +63,7 @@ export default async function Home(props: { searchParams: Promise<searchParamsCr
   case CraftSectionEnum.optimizer:
     return <BodyPage><CraftOptimizerDisplay/></BodyPage>;
   default:
-    return redirect(generateCraftUrl(searchParams.item as string, searchParams.count || 1, CraftSectionEnum.recipe));
+    return redirect(generateCraftUrl(searchParams.item as string, searchParams.count ?? 1, CraftSectionEnum.recipe));
   }
 }
 

@@ -150,7 +150,7 @@ function WebHookEditor() {
       content: content,
       embed: embed,
       enumEvent: eventSelected,
-      itemName: currentWebHookType === WebHookType.market ? itemSelected?.value || null : (currentWebHookType === WebHookType.adminShop ? adminShopItemSelected : null),
+      itemName: currentWebHookType === WebHookType.market ? itemSelected?.value ?? null : (currentWebHookType === WebHookType.adminShop ? adminShopItemSelected : null),
       threshold: threshold,
       thresholdCondition: thresholdCondition,
       title: title,

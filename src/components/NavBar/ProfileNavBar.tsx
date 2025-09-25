@@ -19,7 +19,7 @@ export function ProfileNavBar() {
       <Button className="flex justify-center items-center space-x-2 w-grow" variant="ghost">
         <Image src={ppUrl} alt="profile picture" width={32} height={32} className="rounded-full" unoptimized/>
         <div className="flex justify-start flex-col items-start">
-          <p className="text-sm leading-5">{profileInfo.global_name || profileInfo.username}</p>
+          <p className="text-sm leading-5">{profileInfo.global_name ?? profileInfo.username}</p>
           <p className="text-xs leading-3 text-gray-300">{randomQuote}</p>
         </div>
       </Button>

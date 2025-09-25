@@ -16,7 +16,7 @@ export async function CraftRecipeDisplay({ searchParams }: { searchParams: searc
   const options = await getAllItems();
 
   const item = options.find((item) => item.value === searchParams.item);
-  const count = searchParams.count || 1;
+  const count = searchParams.count ?? 1;
 
   if (item === undefined && searchParams.item !== undefined) {
     const aliasName = await getItemAlias(searchParams.item);
@@ -75,7 +75,7 @@ function CraftRecipeFallback({ label }: { label: string }) {
         <LoadingSpinner size={4}/>
         Chargement des crafts de l&apos;item :{" "}
         <GradientText
-          className="font-extrabold">{label || "Not Found"}
+          className="font-extrabold">{label ?? "Not Found"}
         </GradientText>
       </CardTitle>
     </CardHeader>

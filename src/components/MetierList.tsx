@@ -73,7 +73,7 @@ export const MetierComponentWrapper = ({
         </div>
       </div>
       <div className="flex items-center justify-center gap-2">
-        {editable && <MetierDecrease minLevel={minLevel || 1} metierKey={metierKey}/>}
+        {editable && <MetierDecrease minLevel={minLevel ?? 1} metierKey={metierKey}/>}
         <MetierDisplayLvl metierKey={metierKey}/>
         {editable && <MetierIncrease metierKey={metierKey}/>}
       </div>

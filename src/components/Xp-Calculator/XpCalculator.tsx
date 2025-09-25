@@ -33,9 +33,9 @@ export function XpBonus({ params, searchParams }: {
   searchParams: searchParamsXpBonusPage
 }) {
   const doubleXp = searchParams.double ? 100 : 0;
-  const F2 = searchParams.f2 || false;
-  const F3 = searchParams.f3 || false;
-  const dailyBonus = searchParams.dailyBonus || 0;
+  const F2 = searchParams.f2 ?? false;
+  const F3 = searchParams.f3 ?? false;
+  const dailyBonus = searchParams.dailyBonus ?? 0;
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">

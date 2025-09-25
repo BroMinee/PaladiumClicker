@@ -7,7 +7,7 @@ export default async function QuantitySelectorDisplay({ itemInfo }: { itemInfo: 
       <p className="font-bold text-[20px]">
         <span className="font-bold text-[20px]">Quantité en vente actuellement: </span>
         <span
-          className="font-bold text-[20px] text-primary">{`x${formatPrice(itemInfo?.quantityAvailable || 0)}`}</span>
+          className="font-bold text-[20px] text-primary">{`x${formatPrice(itemInfo?.quantityAvailable ?? 0)}`}</span>
       </p>
       <p className="font-bold text-[20px]">
         <span className="font-bold text-[20px]">Prix moyen actuellement en vente: </span>

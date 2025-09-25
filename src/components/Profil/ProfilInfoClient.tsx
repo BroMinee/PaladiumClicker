@@ -67,14 +67,14 @@ export function ProfilAlliance() {
 export function PlayerViewCount() {
   const { data: playerInfo } = usePlayerInfoStore();
   return <>
-    {playerInfo?.view_count?.count || -1} vues
+    {playerInfo?.view_count?.count ?? -1} vues
   </>;
 }
 
 export function PlayerMoney() {
   const { data: playerInfo } = usePlayerInfoStore();
   return <>
-    <SmallCardInfo title="Argent actuel" value={`${formatPrice(Math.round(playerInfo?.money || 0))} $`}
+    <SmallCardInfo title="Argent actuel" value={`${formatPrice(Math.round(playerInfo?.money ?? 0))} $`}
                    img={safeJoinPaths(constants.imgPathProfile,"dollar.png")} unoptimized/>
   </>;
 }
@@ -123,13 +123,13 @@ export function PlayerRank() {
 
 export function PlayerTimePlayed() {
   const { data: playerInfo } = usePlayerInfoStore();
-  return <SmallCardInfo title="Temps de jeu" value={computeTimePlayed(playerInfo?.timePlayed || 0)}
+  return <SmallCardInfo title="Temps de jeu" value={computeTimePlayed(playerInfo?.timePlayed ?? 0)}
     img={safeJoinPaths(constants.imgPathProfile,"clock.gif")} unoptimized/>;
 }
 
 export function PlayerFirstConnection() {
   const { data: playerInfo } = usePlayerInfoStore();
-  return <SmallCardInfo title="Première connexion" value={convertEpochToDateUTC2(playerInfo?.firstSeen || 1)}
+  return <SmallCardInfo title="Première connexion" value={convertEpochToDateUTC2(playerInfo?.firstSeen ?? 1)}
     img={safeJoinPaths(constants.imgPathProfile,"clock.gif")} unoptimized/>;
 }
 

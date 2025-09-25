@@ -36,7 +36,7 @@ export function SetLevelInUrl({ selected, params, searchParams }: {
       && ((searchParams.double === true) === (searchParams.double === true))
       && ((searchParams.f2 === true) === (searchParams.f2 === true))
       && ((searchParams.f3 === true) === (searchParams.f3 === true))
-      && ((Number(searchParams.dailyBonus || 0)) === (Number(searchParams.dailyBonus || 0)))
+      && ((Number(searchParams.dailyBonus ?? 0)) === (Number(searchParams.dailyBonus ?? 0)))
     ) {
       return;
     }
@@ -200,7 +200,7 @@ export function InputDailyBonus({ params, searchParams }: {
 }) {
   const router = useRouter();
   return <Input className="w-auto" type="number" min="0" step="0.1" max="99"
-    value={Number(searchParams.dailyBonus || 0)}
+    value={Number(searchParams.dailyBonus ?? 0)}
     onChange={(e) => {
       router.push(generateXpCalculatorUrl(params.username, searchParams.metier, searchParams.level, searchParams.double, Number(e.target.value), searchParams.f2, searchParams.f3), { scroll: false });
     }
@@ -325,7 +325,7 @@ export function DisplayXpNeededWithDouble({ searchParams, xp, element }: {
 
   const bonusXpRank = getBonusRank(playerInfo?.rank);
   const bonusSummerRush = 300;
-  const bonusXpWithoutDouble = bonusSummerRush + bonusXpRank + (searchParams.dailyBonus || 0);
+  const bonusXpWithoutDouble = bonusSummerRush + bonusXpRank + (searchParams.dailyBonus ?? 0);
   const bonusXpDouble = bonusXpWithoutDouble + (searchParams.double ? 100 : 0);
   const xpNeededWithDoubleXP = (xpNeeded / fortuneBonus) / ((100 + bonusXpDouble) / 100);
 
@@ -338,7 +338,7 @@ export function DisplayXpNeededWithBottle({ searchParams }: { searchParams: sear
 
   const bonusXpRank = getBonusRank(playerInfo?.rank);
   const bonusSummerRush = 300;
-  const bonusXpWithoutDouble = bonusSummerRush + bonusXpRank + (searchParams.dailyBonus || 0);
+  const bonusXpWithoutDouble = bonusSummerRush + bonusXpRank + (searchParams.dailyBonus ?? 0);
   const xpNeededWithoutDoubleXP = xpNeeded / ((100 + bonusXpWithoutDouble) / 100);
   return <>{formatPrice(Math.ceil(xpNeededWithoutDoubleXP / 1000))} fois</>;
 }

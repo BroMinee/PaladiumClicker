@@ -9,7 +9,7 @@ import debounce from "debounce";
 
 export function CountSelector({ item, count }: { item: OptionType | undefined, count: number | undefined }) {
   const router = useRouter();
-  const [inputValue, setInputValue] = useState(String(count || 1));
+  const [inputValue, setInputValue] = useState(String(count ?? 1));
 
   useEffect(() => {
     setInputValue(String(count ?? 1));

@@ -101,7 +101,7 @@ export default async function AhTrackerPage(props: { searchParams: Promise<{ ite
           </CardTitle>
         </CardHeader>
         <CardContent className="gap-2 flex flex-col pt-4">
-          <MarketSelector url={`${constants.ahPath}?item=`} item={item || null}/>
+          <MarketSelector url={`${constants.ahPath}?item=`} item={item ?? null}/>
         </CardContent>
       </Card>
       <div className="w-full">
@@ -128,7 +128,7 @@ function GraphItemFallback({ item }: { item: OptionType }) {
         <LoadingSpinner size={4}/>
         Chargement du graphique de prix de :{" "}
         <GradientText
-          className="font-extrabold">{item.label || "Not Found"}
+          className="font-extrabold">{item.label ?? "Not Found"}
         </GradientText>
       </CardTitle>
     </CardHeader>

@@ -153,7 +153,7 @@ export function parseTextFormatting(
         if (part === "{item}" && (currentWebHookType === WebHookType.market || currentWebHookType === WebHookType.QDF || (currentWebHookType === WebHookType.EventPvp && eventSelected === "A VOS MARQUES"))) {
           return (
             <span key={index}>
-              {itemSelected?.value || "undefined"}
+              {itemSelected?.value ?? "undefined"}
             </span>
           );
         }
@@ -167,14 +167,14 @@ export function parseTextFormatting(
         if (part === "{itemFr}") {
           return (
             <span key={index}>
-              {itemSelected?.label || "undefined"}
+              {itemSelected?.label ?? "undefined"}
             </span>
           );
         }
         if (part === "{itemUs}") {
           return (
             <span key={index}>
-              {itemSelected?.label2 || "undefined"}
+              {itemSelected?.label2 ?? "undefined"}
             </span>
           );
         }
@@ -288,7 +288,7 @@ export function parseUrlFormatting(
     }
   }
 
-  const itemName = itemSelected ? (itemSelected.value || "undefined") : (adminShopItemSelected ? adminShopItemToUserFriendlyText(adminShopItemSelected) : "undefined");
+  const itemName = itemSelected ? (itemSelected.value ?? "undefined") : (adminShopItemSelected ? adminShopItemToUserFriendlyText(adminShopItemSelected) : "undefined");
 
   let result = url.replaceAll("{item}", itemName);
   result = result.replaceAll("{quantity}", threshold.toString());

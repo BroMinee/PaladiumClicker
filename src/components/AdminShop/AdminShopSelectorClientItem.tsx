@@ -55,7 +55,7 @@ export function AdminShopSelectorClientPeriode({ item, periode }: {
   const router = useRouter();
   const searchParams = useSearchParams();
 
-  const selected = periode === (searchParams.get("periode") || (periode === "day" ? periode : undefined));
+  const selected = periode === (searchParams.get("periode") ?? (periode === "day" ? periode : undefined));
 
   const converter = (periode: string) => {
     if (periode === "day") {

@@ -363,7 +363,7 @@ export function PalaAnimationClassementGlobal() {
           : ""
         }
         {userPosition > 10 ? <p
-          className="text-blue-400">{userPosition + 1}. {profileInfo?.global_name || profileInfo?.username} - {Math.round(globalLeaderboard[userPosition].avg_completion_time) / 1000} {adaptPlurial("seconde", Math.round(globalLeaderboard[userPosition].avg_completion_time) / 1000)}</p> : ""}
+          className="text-blue-400">{userPosition + 1}. {profileInfo?.global_name ?? profileInfo?.username} - {Math.round(globalLeaderboard[userPosition].avg_completion_time) / 1000} {adaptPlurial("seconde", Math.round(globalLeaderboard[userPosition].avg_completion_time) / 1000)}</p> : ""}
       </CardContent>
     </Card>);
 }

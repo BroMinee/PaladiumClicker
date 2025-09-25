@@ -14,7 +14,7 @@ export default function ProfilSelector() {
     redirect("/error?message=Username is undefined");
   }
 
-  const currentSection = searchParams.get("section") || "Home";
+  const currentSection = searchParams.get("section") ?? "Home";
 
   const router = useRouter();
 

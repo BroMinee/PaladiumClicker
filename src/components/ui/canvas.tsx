@@ -26,8 +26,8 @@ const CanvasWithText: React.FC<CanvasWithTextProps> = ({ text, className, height
 
     const fitTextToCanvas = () => {
       // Mettre à jour la largeur et la hauteur du canvas en fonction du parent ou des props
-      canvas.width = width || canvas.parentElement?.clientWidth || 0;
-      canvas.height = height || canvas.parentElement?.clientHeight || 0;
+      canvas.width = width ?? canvas.parentElement?.clientWidth ?? 0;
+      canvas.height = height ?? canvas.parentElement?.clientHeight ?? 0;
 
       const maxWidth = canvas.width - 20; // Margins
 

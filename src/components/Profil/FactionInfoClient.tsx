@@ -52,8 +52,8 @@ export function FactionDetails() {
   }
 
   const createdAt = playerInfo.faction.createdAt;
-  const level = playerInfo.faction.level?.level || -1;
-  const xp = playerInfo.faction.level?.xp || -1;
+  const level = playerInfo.faction.level?.level ?? -1;
+  const xp = playerInfo.faction.level?.xp ?? -1;
   const playerList = playerInfo.faction.players;
 
   return (
