@@ -63,9 +63,12 @@ export type searchParamsStatusPage = {
   periode: string,
 }
 
-export default function Home({ searchParams }: {
-  searchParams: searchParamsStatusPage
-}) {
+export default async function Home(
+  props: {
+    searchParams: Promise<searchParamsStatusPage>
+  }
+) {
+  const searchParams = await props.searchParams;
   let periode = searchParams.periode;
   let periodeEnum = searchParams.periode as AdminShopPeriode;
 

@@ -15,9 +15,8 @@ import UpgradeList from "@/components/Clicker-Optimizer/UpgradeList.tsx";
 import FallingClickImage from "@/components/Clicker-Optimizer/FallingClick.tsx";
 import { PlayerSkin } from "@/components/Profil/ProfilInfoClient.tsx";
 
-export async function generateMetadata(
-  { params }: { params: { username: string } },
-) {
+export async function generateMetadata(props: { params: Promise<{ username: string }> }) {
+  const params = await props.params;
   return {
     title: `PalaTracker | Clicker Optimizer | ${params.username}`,
     description: "🚀 Tu cherches à optimiser le PalaClicker ? C'est ici que ça se passe !! 📈 Ce site calcule le meilleur achat en fonction de tes métiers, tes améliorations et tes bâtiments.",
@@ -26,11 +25,11 @@ export async function generateMetadata(
       description: "🚀 Tu cherches à optimiser le PalaClicker ? C'est ici que ça se passe !! 📈 Ce site calcule le meilleur achat en fonction de tes métiers, tes améliorations et tes bâtiments."
     },
   }
-
 }
 
 
-export default function Home({ params }: { params: { username: string } }) {
+export default async function Home(props: { params: Promise<{ username: string }> }) {
+  const params = await props.params;
 
 
   const upgrades: Array<{ title: string, upgradeType: UpgradeKey }> = [

@@ -17,9 +17,8 @@ export type searchParamsAdminShopPage = {
   periode: string,
 }
 
-export async function generateMetadata(
-  { searchParams }: { searchParams: searchParamsAdminShopPage },
-) {
+export async function generateMetadata(props: { searchParams: Promise<searchParamsAdminShopPage> }) {
+  const searchParams = await props.searchParams;
 
   let title = "PalaTracker | Admin Shop";
   let itemImgPath = "";
@@ -47,13 +46,15 @@ export async function generateMetadata(
       ]
     },
   }
-
 }
 
-export default function Home({ searchParams }: {
-  params: { username: string },
-  searchParams: searchParamsAdminShopPage
-}) {
+export default async function Home(
+  props: {
+    params: Promise<{ username: string }>,
+    searchParams: Promise<searchParamsAdminShopPage>
+  }
+) {
+  const searchParams = await props.searchParams;
 
   // test if the searchParams.category is a RankingType
   if (!isShopItem(searchParams.item)) {

@@ -174,7 +174,7 @@ export async function registerUserToEvent(uuid: string, discord_name: string | u
 }
 
 export async function isAuthenticate(): Promise<DiscordUser | null> {
-  const cookieStore = cookies();
+  const cookieStore = await cookies();
   const allCookies = cookieStore.getAll();
 
   const cookieHeader = allCookies.map(cookie => `${cookie.name}=${cookie.value}`).join('; ');
@@ -199,7 +199,7 @@ export async function isAuthenticate(): Promise<DiscordUser | null> {
 }
 
 export async function createWebHookServerAction(body: WebHookCreate): Promise<{ succeeded: boolean, msg: string }> {
-  if (!await isAuthenticate()) {
+  if (!(await isAuthenticate())) {
     return { succeeded: false, msg: "Not authenticated" };
   }
   // Check that the request is valid
@@ -232,7 +232,7 @@ export async function createWebHookServerAction(body: WebHookCreate): Promise<{ 
 }
 
 export async function editWebHookServerAction(body: WebHookCreate): Promise<{ succeeded: boolean, msg: string }> {
-  if (!await isAuthenticate()) {
+  if (!(await isAuthenticate())) {
     return { succeeded: false, msg: "Not authenticated" };
   }
   // Check that the request is valid
@@ -263,7 +263,7 @@ export async function editWebHookServerAction(body: WebHookCreate): Promise<{ su
 }
 
 export async function deleteWebhookServerAction(webHookAlertId: number): Promise<{ succeeded: boolean, msg: string }> {
-  if (!await isAuthenticate()) {
+  if (!(await isAuthenticate())) {
     return { succeeded: false, msg: "Not authenticated" };
   }
 
@@ -278,7 +278,7 @@ export async function deleteWebhookServerAction(webHookAlertId: number): Promise
 }
 
 export async function deleteWebhookGuildServerAction(guildId: string): Promise<{ succeeded: boolean, msg: string }> {
-  if (!await isAuthenticate()) {
+  if (!(await isAuthenticate())) {
     return { succeeded: false, msg: "Not authenticated" };
   }
 
@@ -295,7 +295,7 @@ export async function deleteWebhookChannelServerAction(guildId: string, channelI
   succeeded: boolean,
   msg: string
 }> {
-  if (!await isAuthenticate()) {
+  if (!(await isAuthenticate())) {
     return { succeeded: false, msg: "Not authenticated" };
   }
 
@@ -322,7 +322,7 @@ export async function editWebhookChannelNameServerAction(guild_id: string, chann
   succeeded: boolean,
   msg: string
 }> {
-  if (!await isAuthenticate()) {
+  if (!(await isAuthenticate())) {
     return { succeeded: false, msg: "Not authenticated" };
   }
 
@@ -353,7 +353,7 @@ export async function editWebhookGuildNameServerAction(guild_id: string, channel
   succeeded: boolean,
   msg: string
 }> {
-  if (!await isAuthenticate()) {
+  if (!(await isAuthenticate())) {
     return { succeeded: false, msg: "Not authenticated" };
   }
 
@@ -398,7 +398,7 @@ export const getMarketHistoryServerAction = async (itemId: string): Promise<AhIt
 }
 
 export async function setCookies(name: string, value: string, maxAge: number = 60 * 60 * 24 * 30) {
-  const cookieStore = cookies();
+  const cookieStore = await cookies();
   cookieStore.set(name as any, value as any, {
     maxAge: maxAge,
   } as any);

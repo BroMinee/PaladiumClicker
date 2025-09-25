@@ -15,8 +15,10 @@ import { safeJoinPaths } from "@/lib/misc.ts";
 
 
 export async function generateMetadata(
-  { params, searchParams }: { params: { username: string }, searchParams: searchParamsXpBonusPage },
+  props: { params: Promise<{ username: string }>, searchParams: Promise<searchParamsXpBonusPage> }
 ) {
+  const searchParams = await props.searchParams;
+  const params = await props.params;
   const title = `PalaTracker | Calculateur d'xp | ${params.username}`;
   const description = `Renseignez votre pseudo Paladium et le métier que vous souhaitez xp pour obtenir des quantités à farmer pour atteindre le niveau souhaité.`;
   // const defaultImage = "https://brominee.github.io/PaladiumClicker/favicon.ico";
@@ -55,13 +57,16 @@ export async function generateMetadata(
       ]
     },
   }
-
 }
 
-export default function Home({ params, searchParams }: {
-  params: { username: string },
-  searchParams: searchParamsXpBonusPage
-}) {
+export default async function Home(
+  props: {
+    params: Promise<{ username: string }>,
+    searchParams: Promise<searchParamsXpBonusPage>
+  }
+) {
+  const searchParams = await props.searchParams;
+  const params = await props.params;
   const metierAvailable: MetierKey[] = ["miner", "farmer", "hunter", "alchemist"]
   if (searchParams.metier === undefined || !metierAvailable.includes(searchParams.metier as MetierKey)) {
     return <SetLevelInUrl selected="miner" searchParams={searchParams} params={params} />

@@ -66,7 +66,7 @@ export function parseTextFormatting(
   adminShopItemSelected: AdminShopItem | null,
   threshold: number,
   thresholdCondition: WebHookThresholdCondition
-): JSX.Element {
+): React.JSX.Element {
   const parts = text.split(
     /(\*\*.*?\*\*|\*.*?\*|__.*?__|~~.*?~~|{here}|{item}|{itemFr}|{itemUs}|{event}|{price}|{previousPrice}|{quantityAvailable}|{quantity}|{earningXp}|{earningMoney}|{seller}|{start}|{end}|{startRelative}|{rewardElo}|{servers}|{server}|{thresholdCondition}|{goal}|\n|<@&[^>]*>|<@[^>]*>|{TODO}|{username})/g
   );
@@ -296,7 +296,7 @@ export function parseUrlFormatting(
   return result;
 }
 
-function GenerateEmbedDescription(footer: string): JSX.Element {
+function GenerateEmbedDescription(footer: string): React.JSX.Element {
   const {
     embed,
     fields,

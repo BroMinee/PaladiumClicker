@@ -40,7 +40,7 @@ export const fetchWithHeader = async <T>(url: string, cache_duration_in_sec = 15
   let response: Response | null = null;
   let json = null;
 
-  const cookieStore = cookies();
+  const cookieStore = await cookies();
   const allCookies = cookieStore.getAll();
 
   const cookieHeader = allCookies.map(cookie => `${cookie.name}=${cookie.value}`).join('; ');
@@ -113,7 +113,7 @@ export const fetchPostWithHeader = async <T>(url: string, body: string, cache_du
   let response: Response | null = null;
   let json = null;
 
-  const cookieStore = cookies();
+  const cookieStore = await cookies();
   const allCookies = cookieStore.getAll();
   const cookieHeader = allCookies.map(cookie => `${cookie.name}=${cookie.value}`).join('; ');
 

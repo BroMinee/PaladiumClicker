@@ -7,9 +7,8 @@ import { Suspense } from "react";
 import GraphRanking, { GraphRankingFallback } from "@/components/Ranking/GraphRanking.tsx";
 
 
-export async function generateMetadata(
-  { searchParams }: { searchParams: searchParamsRankingPage },
-) {
+export async function generateMetadata(props: { searchParams: Promise<searchParamsRankingPage> }) {
+  const searchParams = await props.searchParams;
 
   let title = "PalaTracker | Classement";
   let rankingImgPath = "";
@@ -37,13 +36,15 @@ export async function generateMetadata(
       ]
     },
   }
-
 }
 
-export default function Home({ searchParams }: {
-  params: { username: string },
-  searchParams: searchParamsRankingPage
-}) {
+export default async function Home(
+  props: {
+    params: Promise<{ username: string }>,
+    searchParams: Promise<searchParamsRankingPage>
+  }
+) {
+  const searchParams = await props.searchParams;
 
   // test if the searchParams.category is a RankingType
   if (!Object.values(RankingType).includes(searchParams.category as RankingType)) {

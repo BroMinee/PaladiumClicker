@@ -6,9 +6,8 @@ import { redirect } from "next/navigation";
 import ProfilSelectorDisplay from "@/components/Profil/ProfilSelectorDisplay.tsx";
 
 
-export async function generateMetadata(
-  { params }: { params: { username: string } },
-) {
+export async function generateMetadata(props: { params: Promise<{ username: string }> }) {
+  const params = await props.params;
   return {
     title: `PalaTracker | Profil | ${params.username}`,
     description: "📝 Viens consulter ton profil Paladium sur PalaTracker ! 📝",
@@ -23,10 +22,14 @@ export type searchParamsProfilPage = {
   section?: string,
 }
 
-export default function Home({ params, searchParams }: {
-  params: { username: string },
-  searchParams: searchParamsProfilPage
-}) {
+export default async function Home(
+  props: {
+    params: Promise<{ username: string }>,
+    searchParams: Promise<searchParamsProfilPage>
+  }
+) {
+  const searchParams = await props.searchParams;
+  const params = await props.params;
   if (!isProfilSection(searchParams.section)) {
     redirect(generateProfilUrl(params.username, ProfilSectionEnum.Home));
   }

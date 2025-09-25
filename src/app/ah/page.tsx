@@ -11,9 +11,8 @@ import constants from "@/lib/constants";
 import { MarketServerFetcher } from "@/components/AhTracker/MarketServerFetcher.tsx";
 import { redirect } from "next/navigation";
 
-export async function generateMetadata(
-  { searchParams }: { searchParams: { item: string | undefined } },
-) {
+export async function generateMetadata(props: { searchParams: Promise<{ item: string | undefined }> }) {
+  const searchParams = await props.searchParams;
 
   const itemListJson = await getAllItems().catch(() => {
     return [] as OptionType[];
@@ -52,7 +51,8 @@ export async function generateMetadata(
   }
 }
 
-export default async function AhTrackerPage({ searchParams }: { searchParams: { item: string | undefined } }) {
+export default async function AhTrackerPage(props: { searchParams: Promise<{ item: string | undefined }> }) {
+  const searchParams = await props.searchParams;
   const options = await getAllItems().catch(() => {
     return redirect("/error?message=Impossible de charger la liste des items");
   });

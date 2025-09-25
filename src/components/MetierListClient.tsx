@@ -8,7 +8,7 @@ import { Button } from "@/components/ui/button.tsx";
 import { useRouter } from "next/navigation";
 import { searchParamsXpBonusPage } from "@/components/Xp-Calculator/XpCalculator.tsx";
 import { ChangeEvent, useCallback, useEffect, useState } from "react";
-import { debounce } from "debounce";
+import debounce from "debounce";
 
 export function MetierOutline({ metierKey, metierToReach = false }: { metierKey: MetierKey, metierToReach?: boolean }) {
 

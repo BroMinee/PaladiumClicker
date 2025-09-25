@@ -3,7 +3,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card.t
 import { ChangeLogs, ChangeLogsChanges } from "@/types";
 
 export function textFormatting(
-  text: string): JSX.Element {
+  text: string): React.JSX.Element {
   const parts = text.split(
     /(\*\*.*?\*\*|\*.*?\*|__.*?__|~~.*?~~|°.*?°|\[.*?\]\(.*?\)|\n)/g
   );

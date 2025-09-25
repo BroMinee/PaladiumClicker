@@ -4,8 +4,8 @@ import { CraftSectionEnum, OptionType } from "@/types";
 import { useRouter } from "next/navigation";
 import { Input } from "@/components/ui/input.tsx";
 import { useEffect, useMemo, useState } from "react";
-import { debounce } from "debounce";
 import { generateCraftUrl } from "@/lib/misc.ts";
+import debounce from "debounce";
 
 
 export function CountSelector({ item, count }: { item: OptionType | undefined, count: number | undefined }) {

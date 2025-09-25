@@ -169,8 +169,8 @@ export const getPlayerInfo = async (pseudo: string): Promise<PlayerInfo> => {
   }
 
 
-  cookies().set('uuid', paladiumProfil.uuid, { expires: new Date(Date.now() + 1000 * 60 * 60 * 24 * 30) });
-  cookies().set('username', paladiumProfil.username, { expires: new Date(Date.now() + 1000 * 60 * 60 * 24 * 30) });
+  (await cookies()).set('uuid', paladiumProfil.uuid, { expires: new Date(Date.now() + 1000 * 60 * 60 * 24 * 30) });
+  (await cookies()).set('username', paladiumProfil.username, { expires: new Date(Date.now() + 1000 * 60 * 60 * 24 * 30) });
 
   // Do all fetches in parallel to save time
   const p1 = getPaladiumClickerDataByUUID(paladiumProfil.uuid, paladiumProfil.username);

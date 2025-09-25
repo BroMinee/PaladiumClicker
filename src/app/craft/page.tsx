@@ -11,9 +11,8 @@ import { CraftingSectionSelector } from "@/components/Craft/CraftingSectionSelec
 import { CraftRecipeDisplay } from "@/components/Craft/CraftRecipeDisplay.tsx";
 import { CraftOptimizerDisplay } from "@/components/Craft/CraftOptimizerDisplay.tsx";
 
-export async function generateMetadata(
-  { searchParams }: { searchParams: searchParamsCraftPage },
-) {
+export async function generateMetadata(props: { searchParams: Promise<searchParamsCraftPage> }) {
+  const searchParams = await props.searchParams;
 
   const itemListJson = await getAllItems().catch(() => {
     return [] as OptionType[];
@@ -53,7 +52,8 @@ export async function generateMetadata(
 }
 
 
-export default async function Home({ searchParams }: { searchParams: searchParamsCraftPage }) {
+export default async function Home(props: { searchParams: Promise<searchParamsCraftPage> }) {
+  const searchParams = await props.searchParams;
 
   if (searchParams.section === undefined) {
     return redirect(generateCraftUrl(searchParams.item as string, searchParams.count || 1, CraftSectionEnum.recipe))

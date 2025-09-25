@@ -27,9 +27,12 @@ export function generateMetadata() {
   }
 }
 
-export default function Error500Page({ searchParams }: {
-  searchParams: { [key: string]: string | string[] | undefined }
-}) {
+export default async function Error500Page(
+  props: {
+    searchParams: Promise<{ [key: string]: string | string[] | undefined }>
+  }
+) {
+  const searchParams = await props.searchParams;
   if (Array.isArray(searchParams.username)) {
     return (<Card>
       Pourquoi tu donnes une array en query params ?
