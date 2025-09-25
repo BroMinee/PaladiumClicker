@@ -22,7 +22,7 @@ function base64ToUint8Array(base64String: string): Uint8Array {
 
 export async function encryptAES256(plainText: string, key: string): Promise<string> {
   const enc = new TextEncoder();
-  const keyBuffer = base64ToUint8Array(key);
+  const keyBuffer = Uint8Array.from(base64ToUint8Array(key));
   const data = enc.encode(plainText);
 
   const cryptoKey = await crypto.subtle.importKey(
@@ -50,7 +50,7 @@ export async function encryptAES256(plainText: string, key: string): Promise<str
 }
 
 export async function decryptAES256(encryptedText: string, key: string): Promise<string> {
-  const keyBuffer = base64ToUint8Array(key);
+  const keyBuffer = Uint8Array.from(base64ToUint8Array(key));
 
   const encryptedDataWithIv = Uint8Array.from(atob(encryptedText).split("").map((c) => c.charCodeAt(0)));
 

@@ -9,7 +9,12 @@ import Image from "next/image";
 import { NameTagObject } from "skinview3d";
 import { ErrorBoundary } from "./ErrorProfilErrorBoundary";
 
-const ReactSkinview3d = dynamic(() => import("react-skinview3d"), { ssr: false });
+const ReactSkinview3d = dynamic(() => import("react-skinview3d").then(mod => mod.ReactSkinview3d), {
+  ssr: false,
+  loading: () => <div className="w-full h-full flex items-center justify-center p-4">
+    Chargement du skin...
+  </div>,
+});
 
 
 export function ProfilUsernameInfo() {

@@ -18,7 +18,7 @@ import {
 import { ProfilSectionEnum, RankingResponse, RankingType } from "@/types";
 import { usePlayerInfoStore } from "@/stores/use-player-info-store.ts";
 import { formatPrice, generateProfilUrl, generateRankingUrl } from "@/lib/misc.ts";
-import { Payload } from "recharts/types/component/DefaultLegendContent";
+import { LegendPayload } from "recharts/types/component/DefaultLegendContent";
 import { useRouter, useSearchParams } from "next/navigation";
 import { Input } from "@/components/ui/input.tsx";
 import { FaSearch } from "react-icons/fa";
@@ -186,7 +186,7 @@ export function ZoomableChart({ data: initialData, rankingType, profil }: Zoomab
     return null;
   };
 
-  const handleMouseEnterLegends = (o: Payload) => {
+  const handleMouseEnterLegends = (o: LegendPayload) => {
     const { value } = o;
     // set op to 0.5 for every other key
     const copy_op = { ...opacity };
@@ -208,9 +208,9 @@ export function ZoomableChart({ data: initialData, rankingType, profil }: Zoomab
     setOpacity(copy_op);
   };
 
-  const handleMouseClickLegends = (o: Payload) => {
+  const handleMouseClickLegends = (o: LegendPayload) => {
     const { value } = o;
-    if (value !== "valeur manquante")
+    if (value !== undefined && value !== "valeur manquante")
       router.push(generateProfilUrl(value, ProfilSectionEnum.Classement, rankingType), { scroll: false });
   };
 
@@ -488,16 +488,7 @@ export function ZoomableChart({ data: initialData, rankingType, profil }: Zoomab
                   width={45}
                 />
                 <Tooltip content={<CustomTooltip/>}/>
-                <Legend layout="horizontal" verticalAlign="bottom" align="center" height={45} payload={
-                  uniqueUsernames.map(
-                    (item) => ({
-                      id: item,
-                      type: "line",
-                      value: item,
-                      color: gradientColors[uniqueUsernames.indexOf(item) % gradientColors.length].color2,
-                    })
-                  )
-                }
+                <Legend layout="horizontal" verticalAlign="bottom" align="center" wrapperStyle={{ bottom: -20 }}
                         onMouseEnter={handleMouseEnterLegends} onMouseLeave={handleMouseLeaveLegends}
                         onClick={handleMouseClickLegends}
                 />
