@@ -1,5 +1,7 @@
+"use client";
 import "@/styles/globals.css";
 import { GoogleAnalytics } from "@next/third-parties/google";
+import { usePathname } from "next/navigation";
 
 import React from "react";
 import Navbar from "@/components/NavBar/NavBar.tsx";
@@ -22,6 +24,17 @@ export default function RootLayout({
 }: {
   children: React.ReactNode
 }) {
+  const pathname = usePathname();
+
+  if (pathname.match(/^\/twitch(\/|$)/)) {
+    return <html lang="fr" className={montserrat.className}>
+      <head>
+        <meta name="theme-color" content="#ff5c00"/>
+      </head>
+      <body>{children}</body>
+    </html>;
+  }
+
   return (
     <html lang="fr" className={montserrat.className}>
       <head>

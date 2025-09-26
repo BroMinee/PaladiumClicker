@@ -9,6 +9,7 @@ import { useRouter } from "next/navigation";
 import { searchParamsXpBonusPage } from "@/components/Xp-Calculator/XpCalculator.tsx";
 import { ChangeEvent, useEffect, useMemo, useState } from "react";
 import debounce from "debounce";
+import { cn } from "@/lib/utils";
 
 export function MetierOutline({ metierKey, metierToReach = false }: { metierKey: MetierKey, metierToReach?: boolean }) {
 
@@ -31,11 +32,12 @@ export function MetierOutline({ metierKey, metierToReach = false }: { metierKey:
     }} />;
 }
 
-export function MetierDisplayLvl({ metierKey, lvlToReach, searchParams }:
+export function MetierDisplayLvl({ metierKey, lvlToReach, searchParams, twitch = false }:
   {
     metierKey: MetierKey,
     lvlToReach?: number,
     searchParams?: searchParamsXpBonusPage | undefined
+    twitch?: boolean
   }) {
   const colors = getColorByMetierName(metierKey);
   const { data: playerInfo, decreaseMetierLevel, increaseMetierLevel } = usePlayerInfoStore();
@@ -105,8 +107,10 @@ export function MetierDisplayLvl({ metierKey, lvlToReach, searchParams }:
       min="0"
       step="1"
       max="100"
-      className="text-white text-center rounded-sm font-bold text-sm flex items-center justify-center h-9 w-9 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
-      style={{ backgroundColor: `rgb(${colors.bgColor[0]},${colors.bgColor[1]},${colors.bgColor[2]})` }}
+      className={cn("text-white text-center rounded-sm font-bold text-sm flex items-center justify-center h-9 w-9 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none", twitch && "w-16 h-16 text-5xl rounded-xl -translate-y-16 z-[3] text-black")}
+      style={{ backgroundColor: `rgb(${colors.bgColor[0]},${colors.bgColor[1]},${colors.bgColor[2]})`,
+        boxShadow: twitch ? `0 0 15px 5px rgba(${colors.color[0]},${colors.color[1]},${colors.color[2]},0.75)` : undefined,
+      }}
       onChange={onChangeLevel}
       value={Number(inputValue)}
     />

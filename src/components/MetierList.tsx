@@ -46,12 +46,14 @@ type MetierProps = {
   editable?: boolean;
   minLevel?: number;
   metierKey: MetierKey;
+  twitch?: boolean;
 };
 
 export const MetierComponentWrapper = ({
   editable = false,
   minLevel = 1,
-  metierKey
+  metierKey,
+  twitch = false,
 }: MetierProps) => {
 
   const metierName = structuredClone(metierJson[metierKey].name as MetierKey);
@@ -74,7 +76,7 @@ export const MetierComponentWrapper = ({
       </div>
       <div className="flex items-center justify-center gap-2">
         {editable && <MetierDecrease minLevel={minLevel ?? 1} metierKey={metierKey}/>}
-        <MetierDisplayLvl metierKey={metierKey}/>
+        <MetierDisplayLvl metierKey={metierKey} twitch={twitch}/>
         {editable && <MetierIncrease metierKey={metierKey}/>}
       </div>
     </>
