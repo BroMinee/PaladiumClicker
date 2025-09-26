@@ -21,7 +21,7 @@ export default function TwitchOverlay() {
 
   const REFRESH_INTERVAL = 6 * 60;
   const PUB_DISPLAY_TIME = 15;
-    
+
   const fetchApiData = useCallback(async (playerInfo: PlayerInfo) => {
     try {
       const data = await getPlayerInfoAction(playerInfo.username);
@@ -30,13 +30,13 @@ export default function TwitchOverlay() {
       console.error("Erreur lors de la récupération des données:", error);
     }
   }, [setPlayerInfo]);
-    
+
   useEffect(() => {
     if (!playerInfo) {
       return;
     }
     fetchApiData(playerInfo);
-        
+
     const animationInterval = setInterval(() => {
       setNbSeconds(prev => prev + 1);
     }, 1000);
@@ -44,7 +44,7 @@ export default function TwitchOverlay() {
     return () => clearInterval(animationInterval);
     // eslint-disable-next-line react-hooks/exhaustive-deps -- playerInfo is set in fetchApiData
   }, [fetchApiData]);
-    
+
   useEffect(() => {
     if (!playerInfo) {
       return;
@@ -53,7 +53,7 @@ export default function TwitchOverlay() {
     if(nbSeconds === REFRESH_INTERVAL) {
       setIsVisible(false);
       fetchApiData(playerInfo);
-            
+
       setTimeout(() => {
         setShowSitePromo(true);
         setIsVisible(true);
@@ -62,7 +62,7 @@ export default function TwitchOverlay() {
     }
     if(nbSeconds >= REFRESH_INTERVAL + PUB_DISPLAY_TIME) {
       setIsVisible(false);
-            
+
       setTimeout(() => {
         setShowSitePromo(false);
         setIsVisible(true);
@@ -92,20 +92,20 @@ export default function TwitchOverlay() {
     <div className="fixed w-[900px] h-[250px] bg-gray-900 text-white p-4 rounded-xl border border-purple-500/30 shadow-2xl overflow-hidden">
       <div className={`relative z-10 transition-opacity duration-500 h-full flex flex-col justify-center ${isVisible ? "opacity-100" : "opacity-0"}`}>
         {!showSitePromo ? (
-          <div className="h-full flex">            
+          <div className="h-full flex">
             <div className="grid grid-cols-4 gap-2 w-full">
               <div className="bg-gradient-to-r from-red-600/20 to-pink-600/20 p-3 rounded-lg border border-red-500 h-[220px]">
                 <MetierComponentWrapper metierKey="miner" twitch/>
               </div>
-            
+
               <div className="bg-gradient-to-r from-yellow-600/20 to-orange-600/20 p-3 rounded-lg border border-yellow-500 h-[220px]">
                 <MetierComponentWrapper metierKey="farmer" twitch/>
               </div>
-            
+
               <div className="bg-gradient-to-r from-blue-600/20 to-cyan-600/20 p-3 rounded-lg border border-blue-500 h-[220px]">
                 <MetierComponentWrapper metierKey="hunter" twitch/>
               </div>
-            
+
               <div className="bg-gradient-to-r from-pink-600/20 to-purple-600/20 p-3 rounded-lg border border-pink-500 h-[220px]">
                 <MetierComponentWrapper metierKey="alchemist" twitch/>
               </div>

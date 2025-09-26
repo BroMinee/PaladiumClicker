@@ -5,6 +5,6 @@ export default async function TwitchLayoutHome(props: { params: Promise<{ userna
   const username = await props.params.then(p => p.username);
   return <ProfileFetcherWrapper username={username}>
     <TwitchOverlay/>;
-  </ProfileFetcherWrapper>; 
-  
+  </ProfileFetcherWrapper>;
+
 };

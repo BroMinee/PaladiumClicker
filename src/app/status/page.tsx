@@ -18,7 +18,7 @@ export async function generateMetadata() {
   const apiImportProfil = await getPlayerInfo("BroMine__").then(() => {
     return false;
   }).catch(() => {
-    return true; 
+    return true;
   });
   let description = `${await getPlayerOnlineCount()} joueurs connectés sur Paladium.\n\n`;
 

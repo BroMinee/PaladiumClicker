@@ -30,7 +30,7 @@ export async function getPlayerInfoAction(username: string) {
 
 export async function registerPlayerAction(uuid: string, username: string) {
   return await fetchWithHeader(`${API_PALATRACKER}/v1/user/register/${uuid}/${username}`, 5 * 60).catch((e) => {
-    console.error(e); 
+    console.error(e);
   });
 }
 

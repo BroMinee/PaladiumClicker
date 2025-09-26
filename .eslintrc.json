@@ -26,7 +26,8 @@
       "argsIgnorePattern": "^_",
       "caughtErrors": "all",
       "caughtErrorsIgnorePattern": "^_"
-    }]
+    }],
+    "no-trailing-spaces": "error"
     // ,
     // "@typescript-eslint/type-annotation-spacing": "error"
   }

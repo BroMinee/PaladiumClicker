@@ -85,7 +85,7 @@ export function PlayerSkin() {
   const pseudo = playerInfo?.username ?? "Notch";
   const skinUrl = `https://mineskin.eu/skin/${pseudo}`;
   const capeUrl = `https://crafatar.com/capes/${playerInfo?.uuid}`;
-  return <ErrorBoundary fallback={<SkinFallback/>}> 
+  return <ErrorBoundary fallback={<SkinFallback/>}>
     <ReactSkinview3d className="!w-full !h-full rounded-md"
       skinUrl={skinUrl}
       capeUrl={capeUrl}

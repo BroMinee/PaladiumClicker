@@ -37,7 +37,7 @@ export function CraftingInformationClient({ root }: { root: Tree<NodeType> }) {
     }, [] as Tree<NodeType>[]);
 
     const newLeaves = groupedLeaves.map((el) => {
-      return getValueTree<NodeType>(el); 
+      return getValueTree<NodeType>(el);
     }).filter((el) => el.count > 0);
     setLeavesList(newLeaves);
 

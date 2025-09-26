@@ -64,7 +64,7 @@ export const getPlayerOnlineCount = async (): Promise<number> => {
       }
     }
   }>(`${PALADIUM_API_URL}/v1/status`, 0).catch(() => {
-    return { java: { global: { players: -1 } } }; 
+    return { java: { global: { players: -1 } } };
   });
   return response.java.global.players;
 };

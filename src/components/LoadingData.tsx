@@ -16,6 +16,6 @@ export default function LoadingData({ username }: { username: string | undefined
         </CardHeader>
       </Card>
     </div>
-    
+
   );
 };

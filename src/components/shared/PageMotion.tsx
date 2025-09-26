@@ -1,6 +1,6 @@
 "use client";
 import * as React from "react";
-import { motion, useReducedMotion, easeOut } from "framer-motion"; 
+import { motion, useReducedMotion, easeOut } from "framer-motion";
 
 export function PageMotion({
   children,
