@@ -31,7 +31,7 @@ test('Test Body page', async ({ page }) => {
         - text: ": Recevez une alerte en cas de changement de statut des serveurs Paladium."
       - listitem:
         - strong: Vote
-        - text: ": Recevez une alerte lorsque vous pouvez voter pour Paladium sur l'un de site partenaire."
+        - text: ": Recevez une alerte lorsque vous pouvez voter pour Paladium sur l'un des sites partenaires."
     - heading "Comment configurer vos alertes ?" [level=2]
     - list:
       - listitem: Connectez-vous avec Discord pour accéder à la configuration des alertes.

@@ -1,38 +1,93 @@
 ![CI Status](https://github.com/BroMineCorp/PaladiumClickerNextJS/actions/workflows/ci.yml/badge.svg)
 
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# https://palatracker.bromine.fr
 
-## Getting Started
+Site web développé majoritairement par **BroMine__** pour optimiser le [Clicker de Paladium.](https://wiki.paladium-pvp.fr/gameplay/le-clicker)
 
-First, run the development server:
+## Fonctionnalités
+### Profil
+- Consulte le profil Paladium via un pseudo
+- Consulte son évolution, ses succès, sa faction et bien d'autres encore
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+### Clicker
+- Importer son profil Paladium via son pseudo Minecraft
+- Conseils en fonction de l'avancement du joueur sur l'achat du prochain bâtiment ou prochaine amélioration
+- Calcule approximativement le temps pour atteindre la prochaine amélioration
+
+### Métiers
+- Calcule le nombre de ressources à collecter pour passer à un certain niveau.
+
+### Market et Admin-shop
+- Analyse l'historique du prix de vente des items pour vendre au bon prix au bon moment.
+
+### Classement
+- Consulte les classements quotidiens
+
+### PalaAnimation
+- Espace d'entraînement aux PalaAnimations
+- Plus de 200 PalaAnimations à découvrir
+
+### Craft
+- Calcule rapidement le nombre de ressources nécessaires à un craft.
+- Obtiens la liste des crafts les plus rentables à faire du moment.
+
+### Alertes
+Configure des alertes Discord pour:
+- Les quêtes de faction : Recevez une notification dès qu'une nouvelle quête de faction est disponible.
+- Suivi des prix : Soyez informé des variations de prix dans l'admin shop et le market.
+- Événements spéciaux : Notification pour les événements PVP ou "On Your Marks".
+- Statut des serveurs : Recevez une alerte en cas de changement de statut des serveurs Paladium.
+- Vote : Recevez une alerte lorsque vous pouvez voter pour Paladium sur l'un des sites partenaires.
+
+
+## Informations
+### Comment sont importés les profils Paladium ?
+- Les profils Paladium sont importés via l'[API de Paladium](https://api.paladium.games/docs).
+
+### Comment est calculé le temps pour atteindre la prochaine amélioration ?
+- Le temps est calculé en fonction de la production actuelle du joueur par seconde divisé par le coût d'achat de l'amélioration, multiplié par 1.33 car les ClicCoins sont actualisés toutes les 1.33 seconde
+
+### Comment sont calculés les conseils d'achat ?
+- Le site proposera toujours d'acheter le bâtiment ou l'amélioration qui rapportera le plus de ClicCoins par seconde par rapport à son coût d'achat, en prenant en compte les améliorations déjà achetées qui offrent un bonus.
+
+
+### Est-ce que je prévois d'ajouter d'autres fonctionnalités ?
+- Dans l'immédiat, non. Cependant, si vous avez des idées d'améliorations, n'hésitez pas à me les proposer ou à ouvrir des [pull requests](https://github.com/BroMineCorp/PaladiumClickerNextJS/pulls).
+
+
+## Comment développer
+Aujourd'hui seul le frontend est open-source donc certains fonctionnalités du site ne marcheront pas, tel que l'authentification via Discord, les classements, les crafts ...
+
+En revanche, il est possible de charger les profils, de calculer l'xp, d'optimiser le clicker, etc.
+Pour cela définissez les variables d'environnements dans le fichier `.env` à la racine comme le fichier `.env.example` le fait. Pour obtenir une clé d'API auprès de Paladium, il faudra suivre les étapes indiquées dans l'[API de Paladium](https://api.paladium.games/docs).
+
+## Technologies utilisées
+- [Next.JS 15](https://nextjs.org/docs)
+- [TailwindCSS](https://tailwindcss.com/)
+
+# Installer les dépendances
+```shell
+npm ci --legacy-peer-deps
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+# Lancer en mode dev
+```shell
+npm run dev
+```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+# Faire un build de production et le lancer
+```shell
+npm run build
+npm run start
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+# Lancer les tests
+```shell
+npm run test:playwright # lancement des tests E2E
+npm run test:jest # lancement des tests unitaires
+```
 
-## Learn More
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## Autres
+- [Signaler un bug sur le site](https://github.com/BroMineCorp/PaladiumClickerNextJS/issues/new)
+- Le site n'a pas forcément été pensé pour téléphone, il est donc déconseillé sur mobile mais reste tout de même fonctionnel.

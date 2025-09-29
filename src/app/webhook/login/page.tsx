@@ -39,7 +39,7 @@ export default function WebHooksPage() {
               <li>{textFormatting("°**Suivi des prix**°")} : Soyez informé des variations de prix dans l'admin shop et le market.</li>
               <li>{textFormatting("°**Événements spéciaux**°")} : Notification pour les événements PVP ou "On Your Marks".</li>
               <li>{textFormatting("°**Statut des serveurs**°")} : Recevez une alerte en cas de changement de statut des serveurs Paladium.</li>
-              <li>{textFormatting("°**Vote**°")} : Recevez une alerte lorsque vous pouvez voter pour Paladium sur l'un de site partenaire.</li>
+              <li>{textFormatting("°**Vote**°")} : Recevez une alerte lorsque vous pouvez voter pour Paladium sur l'un des sites partenaires.</li>
             </ul>
           </span>
         </div>
