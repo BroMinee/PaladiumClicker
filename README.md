@@ -67,7 +67,7 @@ Pour cela définissez les variables d'environnements dans le fichier `.env` à l
 
 # Installer les dépendances
 ```shell
-npm ci --legacy-peer-deps
+npm ci
 ```
 
 # Lancer en mode dev

@@ -28,7 +28,7 @@ jobs:
             ${{ runner.os }}-node-
 
       - name: Install dependencies
-        run: npm ci --legacy-peer-deps
+        run: npm ci
 
   build:
     name: Build Project
@@ -50,7 +50,7 @@ jobs:
             ${{ runner.os }}-node-
 
       - name: Install dependencies
-        run: npm ci --legacy-peer-deps
+        run: npm ci
 
       - name: Set environment variables
         run: |
@@ -129,7 +129,7 @@ jobs:
             ${{ runner.os }}-node-
 
       - name: Install dependencies
-        run: npm ci --legacy-peer-deps
+        run: npm ci
 
       - name: Restore build output (.next)
         uses: actions/cache@v4

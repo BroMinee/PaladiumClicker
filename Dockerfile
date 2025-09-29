@@ -4,7 +4,7 @@ LABEL org.opencontainers.image.source=https://github.com/BroMineCorp/PaladiumCli
 WORKDIR /app
 
 COPY . .
-RUN npm ci --legacy-peer-deps
+RUN npm ci
 
 
 RUN npm run build

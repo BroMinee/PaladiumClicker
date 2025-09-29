@@ -149,36 +149,25 @@ test('Test compute element', async ({ page }) => {
       - img "tile-paladium-block"
     - text: 1 1x Paladium Block 1x Bloc de paladium
     `);
+
   await expect(page.getByRole('main')).toMatchAriaSnapshot(`
       - heading "Arbre de craft" [level=3]
       - paragraph: Coche les ressources que tu possèdes déjà pour mettre à jour les ressources en temps réel.
-      - list:
-        - listitem:
-          - button "Toggle":
-            - img
-          - checkbox:
-            - img
-          - img "Node 1"
-          - text: 1x Compressed Paladium
-          - list:
-            - listitem:
-              - button "Toggle":
-                - img
-              - checkbox:
-                - img
-              - img "Node 1"
-              - text: 8x Paladium Block
-              - list:
-                - listitem:
-                  - checkbox:
-                    - img
-                  - img "Node 1"
-                  - text: 72x Paladium Ingot
-            - listitem:
-              - checkbox:
-                - img
-              - img "Node 1"
-              - text: 1x Paladium Ingot
+      - tree:
+        - treeitem "Compressed Paladium 1x Compressed Paladium" [expanded]:
+          - img
+          - img "Compressed Paladium"
+          - group:
+            - treeitem "Paladium Block 8x Paladium Block" [expanded]:
+              - img
+              - img "Paladium Block"
+              - group:
+                - treeitem "Paladium Ingot 72x Paladium Ingot":
+                  - img "Paladium Ingot"
+                  - group
+            - treeitem "Paladium Ingot 1x Paladium Ingot":
+              - img "Paladium Ingot"
+              - group
       `);
 
 
@@ -235,67 +224,42 @@ test('Test checkbox', async ({ page }) => {
   await expect(page.getByRole('main')).toMatchAriaSnapshot(`
     - heading "Arbre de craft" [level=3]
     - paragraph: Coche les ressources que tu possèdes déjà pour mettre à jour les ressources en temps réel.
-    - list:
-      - listitem:
-        - button "Toggle":
-          - img
-        - checkbox:
-          - img
-        - img "Node 1"
-        - text: 1x Compressed Paladium
-        - list:
-          - listitem:
-            - button "Toggle":
-              - img
-            - checkbox:
-              - img
-            - img "Node 1"
-            - text: 8x Paladium Block
-            - list:
-              - listitem:
-                - checkbox:
-                  - img
-                - img "Node 1"
-                - text: 72x Paladium Ingot
-          - listitem:
-            - checkbox:
-              - img
-            - img "Node 1"
-            - text: 1x Paladium Ingot
-  `);
+    - tree:
+      - treeitem "Compressed Paladium 1x Compressed Paladium" [expanded]:
+        - img
+        - img "Compressed Paladium"
+        - group:
+          - treeitem "Paladium Block 8x Paladium Block" [expanded]:
+            - img
+            - img "Paladium Block"
+            - group:
+              - treeitem "Paladium Ingot 72x Paladium Ingot":
+                - img "Paladium Ingot"
+                - group
+          - treeitem "Paladium Ingot 1x Paladium Ingot":
+            - img "Paladium Ingot"
+            - group
+    `);
 
-  await page.locator('label').filter({ hasText: '72x Paladium Ingot' }).getByRole('checkbox').click();
+
+  await page.getByRole('treeitem', { name: 'Paladium Ingot 72x Paladium' }).locator('input[type="checkbox"]').check();
 
 
   await expect(page.getByRole('main')).toMatchAriaSnapshot(`
-    - list:
-      - listitem:
-        - button "Toggle":
-          - img
-        - checkbox:
-          - img
-        - img "Node 1"
-        - text: 1x Compressed Paladium
-        - list:
-          - listitem:
-            - button "Toggle":
-              - img
-            - checkbox [checked]:
-              - img
-            - img "Node 1"
-            - text: 8x Paladium Block
-            - list:
-              - listitem:
-                - checkbox [checked]:
-                  - img
-                - img "Node 1"
-                - text: 72x Paladium Ingot
-          - listitem:
-            - checkbox:
-              - img
-            - img "Node 1"
-            - text: 1x Paladium Ingot
-  `);
+    - heading "Arbre de craft" [level=3]
+    - paragraph: Coche les ressources que tu possèdes déjà pour mettre à jour les ressources en temps réel.
+    - tree:
+      - treeitem "Compressed Paladium 1x Compressed Paladium" [expanded]:
+        - img
+        - img "Compressed Paladium"
+        - group:
+          - treeitem "Paladium Block 8x Paladium Block" [selected]:
+            - img
+            - img "Paladium Block"
+          - treeitem "Paladium Ingot 1x Paladium Ingot":
+            - img "Paladium Ingot"
+            - group
+    `);
 
   await expect(page.getByRole('main')).toMatchAriaSnapshot(`
         - link "selected paladium-ingot":
@@ -306,7 +270,7 @@ test('Test checkbox', async ({ page }) => {
         `);
   await page.getByText(/1Paladium IngotTotal de .* \$/).click();
 
-  await page.locator('label').filter({ hasText: '1x Compressed Paladium' }).getByRole('checkbox').click();
+  await page.locator('input[type="checkbox"]').first().check();
 
   await expect(page.getByRole('main')).toContainText('Plus besoin de ressources vous pouvez désormais passer au craft');
   await page.getByText('Génial vous n\'avez rien à dépenser').click();
@@ -321,4 +285,455 @@ test('Test optimizer', async ({ page }) => {
   
   await page.locator('main').getByRole('link').first().click();
   await expect(page).toHaveURL(new RegExp(`&count=1&section=recipe`));
+});
+
+
+test('Test auto select parent/children', async ({ page }) => {
+  await page.goto('http://localhost:3000/craft?section=recipe&count=1&item=hunter-backpack-endium');
+
+
+  await expect(page.getByRole('main')).toMatchAriaSnapshot(`
+    - link "selected paladium-ingot":
+      - /url: /craft?item=paladium-ingot
+      - img "selected"
+      - img "paladium-ingot"
+    - text: /\\d+ x300 Paladium Ingot 4 stacks et \\d+/
+    `);
+
+  await page.getByRole('treeitem', { name: 'Compressed Paladium 4x' }).locator('input[type="checkbox"]').first().check();
+  await expect(page.getByRole('main')).toMatchAriaSnapshot(`
+      - treeitem "Compressed Paladium 4x Compressed Paladium" [selected]:
+        - img
+        - img "Compressed Paladium"
+    `);
+
+  // check auto collapse children
+  await page.getByRole('treeitem', { name: 'Compressed Paladium 4x' }).getByRole('img').first().click();
+
+  await expect(page.getByRole('main')).toMatchAriaSnapshot(`
+    - tree:
+      - treeitem "Endium Backpack 1x Endium Backpack" [expanded]:
+        - img
+        - img "Endium Backpack"
+        - group:
+          - treeitem "Paladium Ingot 4x Paladium Ingot":
+            - img "Paladium Ingot"
+            - group
+          - treeitem "Paladium Chest 1x Paladium Chest" [expanded]:
+            - img
+            - img "Paladium Chest"
+            - group:
+              - treeitem "Paladium Ingot 4x Paladium Ingot":
+                - img "Paladium Ingot"
+                - group
+              - treeitem "Compressed Paladium 4x Compressed Paladium" [selected]:
+                - img
+                - img "Compressed Paladium"
+              - treeitem "Titane Chest 1x Titane Chest" [expanded]:
+                - img
+                - img "Titane Chest"
+                - group:
+                  - treeitem "Titane Ingot 4x Titane Ingot":
+                    - img "Titane Ingot"
+                    - group
+                  - treeitem "Compressed Titane 4x Compressed Titane" [expanded]:
+                    - img
+                    - img "Compressed Titane"
+                    - group:
+                      - treeitem "Titane Block 32x Titane Block" [expanded]:
+                        - img
+                        - img "Titane Block"
+                        - group:
+                          - treeitem "Titane Ingot 288x Titane Ingot":
+                            - img "Titane Ingot"
+                            - group
+                      - treeitem "Titane Ingot 4x Titane Ingot":
+                        - img "Titane Ingot"
+                        - group
+                  - treeitem "Amethyst Chest 1x Amethyst Chest" [expanded]:
+                    - img
+                    - img "Amethyst Chest"
+                    - group:
+                      - treeitem "Amethyst Ingot 4x Amethyst Ingot":
+                        - img "Amethyst Ingot"
+                        - group
+                      - treeitem "Compressed Amethyst 4x Compressed Amethyst" [expanded]:
+                        - img
+                        - img "Compressed Amethyst"
+                        - group:
+                          - treeitem "Amethyst Block 32x Amethyst Block" [expanded]:
+                            - img
+                            - img "Amethyst Block"
+                            - group:
+                              - treeitem "Amethyst Ingot 288x Amethyst Ingot":
+                                - img "Amethyst Ingot"
+                                - group
+                          - treeitem "Amethyst Ingot 4x Amethyst Ingot":
+                            - img "Amethyst Ingot"
+                            - group
+                      - treeitem "Chest 1x Chest" [expanded]:
+                        - img
+                        - img "Chest"
+                        - group:
+                          - treeitem "Oak Wood Planks 8x Oak Wood Planks" [expanded]:
+                            - img
+                            - img "Oak Wood Planks"
+                            - group:
+                              - treeitem "Oak Wood 2x Oak Wood":
+                                - img "Oak Wood"
+                                - group
+          - treeitem "Hopper 1x Hopper" [expanded]:
+            - img
+            - img "Hopper"
+            - group:
+              - treeitem "Iron Ingot 5x Iron Ingot":
+                - img "Iron Ingot"
+                - group
+              - treeitem "Chest 1x Chest" [expanded]:
+                - img
+                - img "Chest"
+                - group:
+                  - treeitem "Oak Wood Planks 8x Oak Wood Planks" [expanded]:
+                    - img
+                    - img "Oak Wood Planks"
+                    - group:
+                      - treeitem "Oak Wood 2x Oak Wood":
+                        - img "Oak Wood"
+                        - group
+          - treeitem "Leather 2x Leather":
+            - img "Leather"
+            - group
+          - treeitem "Endium Nugget 1x Endium Nugget" [expanded]:
+            - img
+            - img "Endium Nugget"
+            - group:
+              - treeitem "Endium Fragment 9x Endium Fragment":
+                - img "Endium Fragment"
+                - group
+    `);
+
+  // check deselect parent when uncheck children
+  await page.getByRole('treeitem', { name: 'Paladium Block 32x Paladium' }).locator('input[type="checkbox"]').first().uncheck();
+  
+  await expect(page.getByRole('main')).toMatchAriaSnapshot(`
+    - tree:
+      - treeitem "Endium Backpack 1x Endium Backpack" [expanded]:
+        - img
+        - img "Endium Backpack"
+        - group:
+          - treeitem "Paladium Ingot 4x Paladium Ingot":
+            - img "Paladium Ingot"
+            - group
+          - treeitem "Paladium Chest 1x Paladium Chest" [expanded]:
+            - img
+            - img "Paladium Chest"
+            - group:
+              - treeitem "Paladium Ingot 4x Paladium Ingot":
+                - img "Paladium Ingot"
+                - group
+              - treeitem "Compressed Paladium 4x Compressed Paladium" [expanded]:
+                - img
+                - img "Compressed Paladium"
+                - group:
+                  - treeitem "Paladium Block 32x Paladium Block" [expanded]:
+                    - img
+                    - img "Paladium Block"
+                    - group:
+                      - treeitem "Paladium Ingot 288x Paladium Ingot":
+                        - img "Paladium Ingot"
+                        - group
+                  - treeitem "Paladium Ingot 4x Paladium Ingot" [selected]:
+                    - img "Paladium Ingot"
+              - treeitem "Titane Chest 1x Titane Chest" [expanded]:
+                - img
+                - img "Titane Chest"
+                - group:
+                  - treeitem "Titane Ingot 4x Titane Ingot":
+                    - img "Titane Ingot"
+                    - group
+                  - treeitem "Compressed Titane 4x Compressed Titane" [expanded]:
+                    - img
+                    - img "Compressed Titane"
+                    - group:
+                      - treeitem "Titane Block 32x Titane Block" [expanded]:
+                        - img
+                        - img "Titane Block"
+                        - group:
+                          - treeitem "Titane Ingot 288x Titane Ingot":
+                            - img "Titane Ingot"
+                            - group
+                      - treeitem "Titane Ingot 4x Titane Ingot":
+                        - img "Titane Ingot"
+                        - group
+                  - treeitem "Amethyst Chest 1x Amethyst Chest" [expanded]:
+                    - img
+                    - img "Amethyst Chest"
+                    - group:
+                      - treeitem "Amethyst Ingot 4x Amethyst Ingot":
+                        - img "Amethyst Ingot"
+                        - group
+                      - treeitem "Compressed Amethyst 4x Compressed Amethyst" [expanded]:
+                        - img
+                        - img "Compressed Amethyst"
+                        - group:
+                          - treeitem "Amethyst Block 32x Amethyst Block" [expanded]:
+                            - img
+                            - img "Amethyst Block"
+                            - group:
+                              - treeitem "Amethyst Ingot 288x Amethyst Ingot":
+                                - img "Amethyst Ingot"
+                                - group
+                          - treeitem "Amethyst Ingot 4x Amethyst Ingot":
+                            - img "Amethyst Ingot"
+                            - group
+                      - treeitem "Chest 1x Chest" [expanded]:
+                        - img
+                        - img "Chest"
+                        - group:
+                          - treeitem "Oak Wood Planks 8x Oak Wood Planks" [expanded]:
+                            - img
+                            - img "Oak Wood Planks"
+                            - group:
+                              - treeitem "Oak Wood 2x Oak Wood":
+                                - img "Oak Wood"
+                                - group
+          - treeitem "Hopper 1x Hopper" [expanded]:
+            - img
+            - img "Hopper"
+            - group:
+              - treeitem "Iron Ingot 5x Iron Ingot":
+                - img "Iron Ingot"
+                - group
+              - treeitem "Chest 1x Chest" [expanded]:
+                - img
+                - img "Chest"
+                - group:
+                  - treeitem "Oak Wood Planks 8x Oak Wood Planks" [expanded]:
+                    - img
+                    - img "Oak Wood Planks"
+                    - group:
+                      - treeitem "Oak Wood 2x Oak Wood":
+                        - img "Oak Wood"
+                        - group
+          - treeitem "Leather 2x Leather":
+            - img "Leather"
+            - group
+          - treeitem "Endium Nugget 1x Endium Nugget" [expanded]:
+            - img
+            - img "Endium Nugget"
+            - group:
+              - treeitem "Endium Fragment 9x Endium Fragment":
+                - img "Endium Fragment"
+                - group
+    `);
+
+  // check crafting summary is correct
+  await expect(page.getByRole('main')).toMatchAriaSnapshot(`
+    - link "selected paladium-ingot":
+      - /url: /craft?item=paladium-ingot
+      - img "selected"
+      - img "paladium-ingot"
+    - text: /\\d+ x296 Paladium Ingot 4 stacks et \\d+/
+    `);
+
+    
+  await page.getByRole('treeitem', { name: 'Paladium Block 32x Paladium' }).locator('input[type="checkbox"]').first().check();
+  
+  await expect(page.getByRole('main')).toMatchAriaSnapshot(`
+    - tree:
+      - treeitem "Endium Backpack 1x Endium Backpack" [expanded]:
+        - img
+        - img "Endium Backpack"
+        - group:
+          - treeitem "Paladium Ingot 4x Paladium Ingot":
+            - img "Paladium Ingot"
+            - group
+          - treeitem "Paladium Chest 1x Paladium Chest" [expanded]:
+            - img
+            - img "Paladium Chest"
+            - group:
+              - treeitem "Paladium Ingot 4x Paladium Ingot":
+                - img "Paladium Ingot"
+                - group
+              - treeitem "Compressed Paladium 4x Compressed Paladium" [selected]:
+                - img
+                - img "Compressed Paladium"
+              - treeitem "Titane Chest 1x Titane Chest" [expanded]:
+                - img
+                - img "Titane Chest"
+                - group:
+                  - treeitem "Titane Ingot 4x Titane Ingot":
+                    - img "Titane Ingot"
+                    - group
+                  - treeitem "Compressed Titane 4x Compressed Titane" [expanded]:
+                    - img
+                    - img "Compressed Titane"
+                    - group:
+                      - treeitem "Titane Block 32x Titane Block" [expanded]:
+                        - img
+                        - img "Titane Block"
+                        - group:
+                          - treeitem "Titane Ingot 288x Titane Ingot":
+                            - img "Titane Ingot"
+                            - group
+                      - treeitem "Titane Ingot 4x Titane Ingot":
+                        - img "Titane Ingot"
+                        - group
+                  - treeitem "Amethyst Chest 1x Amethyst Chest" [expanded]:
+                    - img
+                    - img "Amethyst Chest"
+                    - group:
+                      - treeitem "Amethyst Ingot 4x Amethyst Ingot":
+                        - img "Amethyst Ingot"
+                        - group
+                      - treeitem "Compressed Amethyst 4x Compressed Amethyst" [expanded]:
+                        - img
+                        - img "Compressed Amethyst"
+                        - group:
+                          - treeitem "Amethyst Block 32x Amethyst Block" [expanded]:
+                            - img
+                            - img "Amethyst Block"
+                            - group:
+                              - treeitem "Amethyst Ingot 288x Amethyst Ingot":
+                                - img "Amethyst Ingot"
+                                - group
+                          - treeitem "Amethyst Ingot 4x Amethyst Ingot":
+                            - img "Amethyst Ingot"
+                            - group
+                      - treeitem "Chest 1x Chest" [expanded]:
+                        - img
+                        - img "Chest"
+                        - group:
+                          - treeitem "Oak Wood Planks 8x Oak Wood Planks" [expanded]:
+                            - img
+                            - img "Oak Wood Planks"
+                            - group:
+                              - treeitem "Oak Wood 2x Oak Wood":
+                                - img "Oak Wood"
+                                - group
+          - treeitem "Hopper 1x Hopper" [expanded]:
+            - img
+            - img "Hopper"
+            - group:
+              - treeitem "Iron Ingot 5x Iron Ingot":
+                - img "Iron Ingot"
+                - group
+              - treeitem "Chest 1x Chest" [expanded]:
+                - img
+                - img "Chest"
+                - group:
+                  - treeitem "Oak Wood Planks 8x Oak Wood Planks" [expanded]:
+                    - img
+                    - img "Oak Wood Planks"
+                    - group:
+                      - treeitem "Oak Wood 2x Oak Wood":
+                        - img "Oak Wood"
+                        - group
+          - treeitem "Leather 2x Leather":
+            - img "Leather"
+            - group
+          - treeitem "Endium Nugget 1x Endium Nugget" [expanded]:
+            - img
+            - img "Endium Nugget"
+            - group:
+              - treeitem "Endium Fragment 9x Endium Fragment":
+                - img "Endium Fragment"
+                - group
+    `);
+
+    
+  await page.locator('#mui-tree-view-1-tile-titane-chest-2--1-2 > div > .MuiButtonBase-root > .PrivateSwitchBase-input').check();
+  await page.locator('#mui-tree-view-1-paladium-ingot-2--1-0 input[type="checkbox"]').check();
+
+  // check auto collapse parent
+  await expect(page.getByRole('main')).toMatchAriaSnapshot(`
+    - tree:
+      - treeitem "Endium Backpack 1x Endium Backpack" [expanded]:
+        - img
+        - img "Endium Backpack"
+        - group:
+          - treeitem "Paladium Ingot 4x Paladium Ingot":
+            - img "Paladium Ingot"
+            - group
+          - treeitem "Paladium Chest 1x Paladium Chest" [selected]:
+            - img
+            - img "Paladium Chest"
+          - treeitem "Hopper 1x Hopper" [expanded]:
+            - img
+            - img "Hopper"
+            - group:
+              - treeitem "Iron Ingot 5x Iron Ingot":
+                - img "Iron Ingot"
+                - group
+              - treeitem "Chest 1x Chest" [expanded]:
+                - img
+                - img "Chest"
+                - group:
+                  - treeitem "Oak Wood Planks 8x Oak Wood Planks" [expanded]:
+                    - img
+                    - img "Oak Wood Planks"
+                    - group:
+                      - treeitem "Oak Wood 2x Oak Wood":
+                        - img "Oak Wood"
+                        - group
+          - treeitem "Leather 2x Leather":
+            - img "Leather"
+            - group
+          - treeitem "Endium Nugget 1x Endium Nugget" [expanded]:
+            - img
+            - img "Endium Nugget"
+            - group:
+              - treeitem "Endium Fragment 9x Endium Fragment":
+                - img "Endium Fragment"
+                - group
+    `);
+
+
+  await page.getByRole('treeitem', { name: 'Hopper 1x Hopper' }).locator('input[type="checkbox"]').first().check();
+  await expect(page.getByRole('main')).toMatchAriaSnapshot(`
+    - tree:
+      - treeitem "Endium Backpack 1x Endium Backpack" [expanded]:
+        - img
+        - img "Endium Backpack"
+        - group:
+          - treeitem "Paladium Ingot 4x Paladium Ingot":
+            - img "Paladium Ingot"
+            - group
+          - treeitem "Paladium Chest 1x Paladium Chest" [selected]:
+            - img
+            - img "Paladium Chest"
+          - treeitem "Hopper 1x Hopper" [selected]:
+            - img
+            - img "Hopper"
+          - treeitem "Leather 2x Leather":
+            - img "Leather"
+            - group
+          - treeitem "Endium Nugget 1x Endium Nugget" [expanded]:
+            - img
+            - img "Endium Nugget"
+            - group:
+              - treeitem "Endium Fragment 9x Endium Fragment":
+                - img "Endium Fragment"
+                - group
+    `);
+          
+  await expect(page.getByRole('main')).toMatchAriaSnapshot(`
+    - heading "Ressources nécessaires" [level=3]
+    - link "selected paladium-ingot":
+      - /url: /craft?item=paladium-ingot
+      - img "selected"
+      - img "paladium-ingot"
+    - text: 4 x4 Paladium Ingot 0 stack et 4
+    - link "selected leather":
+      - /url: /craft?item=leather
+      - img "selected"
+      - img "leather"
+    - text: 2 x2 Leather 0 stack et 2
+    - link "selected endium-fragment":
+      - /url: /craft?item=endium-fragment
+      - img "selected"
+      - img "endium-fragment"
+    - text: 9 x9 Endium Fragment 0 stack et 9
+    `);
+
 });
