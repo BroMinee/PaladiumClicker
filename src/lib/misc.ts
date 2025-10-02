@@ -315,6 +315,8 @@ export function getRankImg(rank: string) {
     return safeJoinPaths(constants.imgPathProfile,"trixium+.png");
   } else if (rank === "Youtuber") {
     return safeJoinPaths(constants.imgPathProfile,"youtuber.png");
+  } else if(rank === "Streamer") {
+    return safeJoinPaths(constants.imgPathProfile,"streamer.png");
   } else if (rank === "Heros") {
     return safeJoinPaths(constants.imgPathProfile,"heros.png");
   }else if (rank === "Divinity") {

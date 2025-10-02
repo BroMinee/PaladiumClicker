@@ -96,7 +96,7 @@ export type MetiersPossiblyUndefined = {
   miner?: Metier,
 }
 
-export type PlayerRank = "default" | "titan" | "paladin" | "endium" | "trixium" | "trixium+"|  "youtuber" | "heros" | "divinity" | "legend"| "premium" | "rusher";
+export type PlayerRank = "default" | "titan" | "paladin" | "endium" | "trixium" | "trixium+"|  "youtuber" | "heros" | "divinity" | "legend"| "premium" | "rusher" | "streamer";
 
 export type PlayerInfo = {
   metier: Metiers
