@@ -9,7 +9,7 @@ import { safeJoinPaths } from "@/lib/misc";
 import { useRouter } from "next/navigation";
 import { PlayerInfo } from "@/types";
 
-export default function TwitchOverlay() {
+export default function TwitchOverlay({preview} : {preview?: boolean}) {
   const { data: playerInfo, setPlayerInfo } = usePlayerInfoStore();
   const viewportWidth = window.innerWidth;
   const viewportHeight = window.innerHeight;
@@ -23,13 +23,18 @@ export default function TwitchOverlay() {
   const PUB_DISPLAY_TIME = 15;
 
   const fetchApiData = useCallback(async (playerInfo: PlayerInfo) => {
+    // don't fetch when layout is a demo
+    if(preview) {
+      return;
+    }
+
     try {
       const data = await getPlayerInfoAction(playerInfo.username);
       setPlayerInfo(data);
     } catch (error) {
       console.error("Erreur lors de la récupération des données:", error);
     }
-  }, [setPlayerInfo]);
+  }, [setPlayerInfo, preview]);
 
   useEffect(() => {
     if (!playerInfo) {
@@ -39,7 +44,7 @@ export default function TwitchOverlay() {
 
     const animationInterval = setInterval(() => {
       setNbSeconds(prev => prev + 1);
-    }, 1000);
+    }, preview ? 100 : 1000);
 
     return () => clearInterval(animationInterval);
     // eslint-disable-next-line react-hooks/exhaustive-deps -- playerInfo is set in fetchApiData
@@ -89,7 +94,7 @@ export default function TwitchOverlay() {
         }
       `}
     </style>
-    <div className="fixed w-[900px] h-[250px] bg-gray-900 text-white p-4 rounded-xl border border-purple-500/30 shadow-2xl overflow-hidden">
+    <div className="w-[900px] h-[250px] bg-gray-900 text-white p-4 rounded-xl border border-purple-500/30 shadow-2xl overflow-hidden">
       <div className={`relative z-10 transition-opacity duration-500 h-full flex flex-col justify-center ${isVisible ? "opacity-100" : "opacity-0"}`}>
         {!showSitePromo ? (
           <div className="h-full flex">

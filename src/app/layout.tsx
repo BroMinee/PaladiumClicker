@@ -26,7 +26,7 @@ export default function RootLayout({
 }) {
   const pathname = usePathname();
 
-  if (pathname.match(/^\/twitch(\/|$)/)) {
+  if (pathname.match(/^\/twitch(?:\/(?!setup$)[^/]*)?$/)) {
     return <html lang="fr" className={montserrat.className}>
       <head>
         <meta name="theme-color" content="#ff5c00"/>

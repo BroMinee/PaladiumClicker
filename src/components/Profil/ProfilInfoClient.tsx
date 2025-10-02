@@ -8,6 +8,7 @@ import constants from "@/lib/constants.ts";
 import Image from "next/image";
 import { NameTagObject } from "skinview3d";
 import { ErrorBoundary } from "./ErrorProfilErrorBoundary";
+import { Button } from "../ui/button";
 
 const ReactSkinview3d = dynamic(() => import("react-skinview3d").then(mod => mod.ReactSkinview3d), {
   ssr: false,
@@ -117,7 +118,20 @@ export function PlayerRank() {
 
   return <SmallCardInfo title="Rang en jeu" value={rank} img={getRankImg(rank)}
     imgClassName="w-fit"
-    unoptimized/>;
+    unoptimized>
+    <Button className="text-xs">
+      <a
+        href={`/twitch/${playerInfo?.username}/setup`}
+        target="_blank"
+        rel="noopener noreferrer"
+        className=""
+      >
+            Obtenir un overlay de Stream
+      </a>
+
+    </Button>
+
+  </SmallCardInfo>;
 }
 
 export function PlayerTimePlayed() {
