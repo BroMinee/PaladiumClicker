@@ -234,11 +234,11 @@ export type PaladiumClickerData = {
   upgrades: string[]
 }
 
-type PaladiumEmblem = {
+export type PaladiumEmblem = {
   backgroundColor: number,
   backgroundId: number,
   borderColor: number,
-  forcedTexture: string,
+  forcedTexture?: string,
   foregroundColor: number,
   foregroundId: number,
   iconBorderColor: number,

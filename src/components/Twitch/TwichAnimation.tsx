@@ -10,6 +10,7 @@ import { useRouter } from "next/navigation";
 import { OverlayTwitchEnum } from "@/types";
 import { AvailableElements, SelectedElementConfig } from "./TwitchOverlayConfig";
 import { usePlayerExtraInfoTwitch, useTwitchStore, useTwitchTimeStore } from "@/stores/use-twitch-store";
+import { Emblem } from "@/components/Faction/Emblem";
 
 function configTypeToOverlayTwitchEnum(type: keyof AvailableElements | "autoPromo") : OverlayTwitchEnum {
   switch(type) {
@@ -219,8 +220,7 @@ function FactionOverlay() {
   return <div className="flex flex-row">
     <div className="flex-shrink-0 mr-8">
       <div className="flex flex-col gap-2 relative">
-        <Image src={"TODO"} alt={`${playerInfo.faction.name} icon`} width={48} height={48} unoptimized={true}
-          className="h-40 w-40 pixelated mr-2 rounded-xl object-cover border-4 border-purple-500/50 shadow-lg"/>
+        <Emblem emblem={playerInfo.faction.emblem} className="h-fit w-40 mr-2 rounded-xl object-cover border-4 border-purple-500/50 shadow-lg"/>
         <div className="bg-gradient-to-r from-yellow-400 to-orange-500 text-white px-5 py-2 rounded-full font-black text-xl shadow-lg border-2 border-yellow-300 text-center">
               TOP #{factionIndex}
         </div>

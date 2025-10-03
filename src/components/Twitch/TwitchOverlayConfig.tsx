@@ -49,36 +49,36 @@ const formatOptionLabel = ({ value } : {value: Exclude<RankingType, "vote">}) =>
 const animatedComponents = makeAnimated();
 
 enum Direction {
- "up",
- "down"
+  "up",
+  "down"
 }
 
 type SubOption = {
- value: Exclude<RankingType, "vote">;
- label: string;
+  value: Exclude<RankingType, "vote">;
+  label: string;
 };
 
 type AvailableElementBase = {
- id: string;
- label: string;
- icon: string;
- hasSubOptions: boolean;
+  id: string;
+  label: string;
+  icon: string;
+  hasSubOptions: boolean;
 };
 
 type AvailableElementWithSubOptions = AvailableElementBase & {
- hasSubOptions: true;
- subOptions: SubOption[];
+  hasSubOptions: true;
+  subOptions: SubOption[];
 };
 
 type AvailableElementWithoutSubOptions = AvailableElementBase & {
- hasSubOptions: false;
+  hasSubOptions: false;
 };
 
 export type AvailableElements = {
- metiers: AvailableElementWithoutSubOptions;
- classement: AvailableElementWithSubOptions;
- faction: AvailableElementWithoutSubOptions;
- money: AvailableElementWithoutSubOptions;
+  metiers: AvailableElementWithoutSubOptions;
+  classement: AvailableElementWithSubOptions;
+  faction: AvailableElementWithoutSubOptions;
+  money: AvailableElementWithoutSubOptions;
 };
 
 const AVAILABLE_ELEMENTS : AvailableElements = {
@@ -121,14 +121,28 @@ const AVAILABLE_ELEMENTS : AvailableElements = {
   }
 };
 
+const AUTOPROMO_ELEMENT: AvailableElementWithoutSubOptions = {
+  id: "auto-promo",
+  label: "Promotion PalaTracker",
+  icon: "📺",
+  hasSubOptions: false
+};
+
+const AUTOPROMO : SelectedElement = {
+  id: "auto-promo",
+  type: constants.AUTOPROMO_CONFIG.type,
+  duration: constants.AUTOPROMO_CONFIG.duration,
+  subOption: constants.AUTOPROMO_CONFIG.subOption
+};
+
 export type SelectedElementConfig = {
   type: keyof AvailableElements | "autoPromo";
- duration: number;
- subOption: Exclude<RankingType, "vote"> | null;
+  duration: number;
+  subOption: Exclude<RankingType, "vote"> | null;
 }
 
 export type SelectedElement = {
- id: string;
+  id: string;
 } & SelectedElementConfig;
 
 export const TwitchOverlayConfig = ({username}: {username: string}) => {
@@ -286,22 +300,25 @@ export const TwitchOverlayConfig = ({username}: {username: string}) => {
               </div>
             ) : (
               <div className="space-y-3">
-                {selectedElements.map((element, index) => {
-                  const elementData = AVAILABLE_ELEMENTS[element.type as keyof AvailableElements];
+                {selectedElements.concat([AUTOPROMO]).map((element, index) => {
+                  let elementData = AVAILABLE_ELEMENTS[element.type as keyof AvailableElements];
+                  if (elementData === undefined) {
+                    elementData = AUTOPROMO_ELEMENT;
+                  }
                   return (
                     <div key={element.id} className="rounded-lg p-4 border border-gray-200">
                       <div className="flex items-center gap-4">
                         <div className="flex flex-col gap-1">
                           <button
                             onClick={() => moveElement(index, Direction.up)}
-                            disabled={index === 0}
+                            disabled={index === 0 || elementData.id === AUTOPROMO_ELEMENT.id}
                             className="p-1 hover:bg-gray-200 rounded disabled:opacity-30 disabled:cursor-not-allowed"
                           >
                             <ChevronUp className="w-4 h-4" />
                           </button>
                           <button
                             onClick={() => moveElement(index, Direction.down)}
-                            disabled={index === selectedElements.length - 1}
+                            disabled={index === selectedElements.length - 1 || elementData.id === AUTOPROMO_ELEMENT.id}
                             className="p-1 hover:bg-gray-200 rounded disabled:opacity-30 disabled:cursor-not-allowed"
                           >
                             <ChevronDown className="w-4 h-4" />
@@ -330,6 +347,7 @@ export const TwitchOverlayConfig = ({username}: {username: string}) => {
 
                         <div className="flex items-center gap-2">
                           <input
+                            disabled={elementData.id === AUTOPROMO_ELEMENT.id}
                             type="number"
                             min="1"
                             value={element.duration}
@@ -342,6 +360,7 @@ export const TwitchOverlayConfig = ({username}: {username: string}) => {
                         <button
                           onClick={() => removeElement(element.id)}
                           className="p-2 hover:bg-red-100 rounded-lg text-red-600 transition-colors"
+                          disabled={elementData.id === AUTOPROMO_ELEMENT.id}
                         >
                           <Trash2 className="w-5 h-5" />
                         </button>
@@ -401,10 +420,6 @@ export const TwitchOverlayConfig = ({username}: {username: string}) => {
                 </div>
               </div>
             )}
-
-            {/* <div className=" text-gray-100 p-4 rounded-lg font-mono text-sm overflow-x-auto mb-3">
-                {API_PALATRACKER}/twitch/{username}
-              </div> */}
             <p className="text-sm mt-2">Le pseudo <span className="bg-yellow-100 px-2 py-0.5 rounded font-medium text-black">{username}</span> sera utilisé.</p>
           </div>
 
@@ -466,24 +481,16 @@ export const TwitchOverlayConfig = ({username}: {username: string}) => {
             <ul className="space-y-3">
               <li className="flex items-start">
                 <span className="text-primary font-bold mr-3 mt-0.5">✓</span>
-                <span><strong>6 minutes</strong> → Affichage des 4 métiers</span>
-              </li>
-              <li className="flex items-start">
-                <span className="text-primary font-bold mr-3 mt-0.5">✓</span>
-                <span><strong>0.5 seconde</strong> → Transition en fondu</span>
+                <span><strong>0.5 seconde</strong> → Transition en fondu entre chaque overlay</span>
               </li>
               <li className="flex items-start">
                 <span className="text-primary font-bold mr-3 mt-0.5">✓</span>
                 <div>
-                  <strong>15 secondes</strong> → Auto-promotion et actualisation des métiers.
+                  <strong>15 secondes</strong> → Auto-promotion et actualisation des données.
                   <ul className="ml-6 mt-2 space-y-1 ">
                     <li>• Affichage du texte &quot;Palatracker&quot; pendant l&apos;actualisation</li>
                   </ul>
                 </div>
-              </li>
-              <li className="flex items-start">
-                <span className="text-primary font-bold mr-3 mt-0.5">✓</span>
-                <span><strong>0.5 seconde</strong> → Transition en fondu</span>
               </li>
               <li className="flex items-start">
                 <span className="text-primary font-bold mr-3 mt-0.5">✓</span>
@@ -509,7 +516,7 @@ export const TwitchOverlayConfig = ({username}: {username: string}) => {
             <div className="bg-card rounded-xl p-6 border border-gray-200">
               <h3 className="text-lg font-bold text-primary mb-3">L&apos;overlay ne s&apos;affiche pas</h3>
               <ul className="ml-6 space-y-2 list-disc ">
-                <li>Vérifiez que l&apos;URL est correcte et accessible dans votre navigateur : <a href="https://palatracker.bromine.fr/twitch/Tytouine" rel="noopener noreferrer" target="_blank"
+                <li>Vérifiez que l&apos;URL est correcte et accessible dans votre navigateur : <a href={previewUrl} rel="noopener noreferrer" target="_blank"
                   className="text-primary hover:text-orange-700 transform transition-transform ease-in-out duration-500 hover:scale-[1.15] active:scale-95">clique ici pour tester</a></li>
                 <li>Assurez-vous que les dimensions (900x250) sont bien configurées</li>
                 <li>Essayez d&apos;actualiser la source en allant dans ses paramètres et en cliquant sur &quot;Rafraîchir le cache de cette page&quot;</li>
@@ -519,7 +526,7 @@ export const TwitchOverlayConfig = ({username}: {username: string}) => {
             <div className="bg-card rounded-xl p-6 border border-gray-200">
               <h3 className="text-lg font-bold text-primary mb-3">Les données ne se mettent pas à jour</h3>
               <ul className="ml-6 space-y-2 list-disc ">
-                <li>La donnée se mettent à jour automatiquement toutes les 6 minutes.</li>
+                <li>La donnée se mettent à jour automatiquement à chaque fin de cycle.</li>
                 <li>Les changements de niveau peuvent mettre du temps pour nous parvenir, il faut parfois attendre plusieurs heures.</li>
               </ul>
             </div>
