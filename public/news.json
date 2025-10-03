@@ -1,15 +1,17 @@
 [
   {
-    "date": "02/10/2025",
+    "date": "03/10/2025",
     "changes": {
       "additions": [
-        "**Beta**: Ajout d'un overlay Twitch affichant les 4 métiers, avec rafraîchissement automatique, compatible OBS/Streamlabs. Disponible dans le [profil](https://palatracker.bromine.fr/profil/BroMine__)."
+        "**Beta**: Ajout d'un overlay personnalisable pour Twitch permettant d'afficher les 4 métiers, sa position dans tous les classements, sa faction et son argent en jeu, le tout avec un rafraîchissement automatique. Compatible OBS/Streamlabs. Disponible dans le [profil](https://palatracker.bromine.fr/profil/BroMine__).",
+        "Ajout des emblems de faction dans le profil"
       ],
       "corrections": [
         "Amélioration du système de checkbox et du déroulement d'une section dans l'[optimiseur de craft](https://palatracker.bromine.fr/craft?section=recipe&count=1&item=hunter-backpack-endium)",
         "Correction d'un bug dans le système de cache nécessitant une double actualisation du profil pour voir les changements",
         "Correction des graphiques de l'[admin-shop](https://palatracker.bromine.fr/admin-shop?item=bone&periode=season) qui ne s'actualisaient plus",
-        "Correction d'un crash des animations de transition provoqué lorsqu'une redirection était effectuée avant la fin de l'animation"
+        "Correction d'un crash des animations de transition provoqué lorsqu'une redirection était effectuée avant la fin de l'animation",
+        "Correction de la description de faction qui était le nom de faction au lieu de la description"
       ],
       "techniques": [
         "Passage de Next.js 14 à 15",
