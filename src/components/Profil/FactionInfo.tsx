@@ -64,6 +64,7 @@ export default function FactionInfo() {
 
 async function FactionClassement() {
   const factionLeaderboard = await getFactionLeaderboard();
+  console.log(factionLeaderboard);
 
   return <>
     <FactionClassementClient factionLeaderboard={factionLeaderboard}/>

@@ -1,3 +1,4 @@
+import { SelectedElementConfig } from "@/components/Twitch/TwitchOverlayConfig";
 import { MetierKey, NavBarCategory } from "@/types";
 
 const version = 0;
@@ -659,6 +660,9 @@ const imgPathClicker = "/img/Clicker/";
 const imgPathCraft = "/img/Craft/";
 const imgPathError = "/img/Error/";
 
+const PUB_DISPLAY_TIME = 15;
+export const AUTOPROMO_CONFIG : SelectedElementConfig = { type: "autoPromo",  duration: PUB_DISPLAY_TIME, subOption: null};
+
 const constants = {
   defaultUsername,
   version,
@@ -695,6 +699,7 @@ const constants = {
   imgPathClicker,
   imgPathCraft,
   imgPathError,
+  AUTOPROMO_CONFIG,
 };
 
 export default constants;

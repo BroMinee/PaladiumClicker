@@ -13,6 +13,9 @@ import {
   PaladiumAhHistory,
   PaladiumAhItemStat,
   PaladiumAhItemStatResponse,
+  PaladiumFactionLeaderboard,
+  PlayerCountHistory,
+  RankingPositionResponse,
   Role,
   WebHookCreate,
   WebHookType
@@ -423,3 +426,47 @@ export async function editRoleSubmit(discord_id: string, role: Role): Promise<{
     role: role,
   }), 0);
 }
+
+export async function getPlayerCountHistoryPaladiumAction() {
+  return await fetchWithHeader<PlayerCountHistory>(`${API_PALATRACKER}/v1/status-history/paladium/player/count-history`, 0);
+}
+
+export async function getPlayerPositionAction(uuid: string) : Promise<RankingPositionResponse> {
+  return await fetchWithHeader<{
+    boss: number;
+    money: number;
+    alliance: number;
+    "job-farmer": number;
+    "job-miner": number;
+    end: number;
+    koth: number;
+    chorus: number;
+    "job-hunter": number;
+    egghunt: number;
+    "job-alchemist": number;
+    clicker: number;
+  }>(`${API_PALATRACKER}/v1/paladium/ranking/position/${uuid}`, 0).then(data => {
+    const converted: RankingPositionResponse = {
+      boss: data.boss,
+      money: data.money,
+      alliance: data.alliance,
+      "job.farmer": data["job-farmer"],
+      "job.miner": data["job-miner"],
+      "job.hunter": data["job-hunter"],
+      "job.alchemist": data["job-alchemist"],
+      egghunt: data.egghunt,
+      koth: data.koth,
+      clicker: data.clicker,
+      // end: data.end,
+      // chorus: data.chorus,
+    };
+    return converted;
+  });
+}
+
+export const getFactionLeaderboardAction = async (): Promise<PaladiumFactionLeaderboard> => {
+  return await fetchWithHeader<PaladiumFactionLeaderboard>(`${PALADIUM_API_URL}/v1/paladium/faction/leaderboard`).catch((e) => {
+    console.error(e);
+    return [];
+  });
+};

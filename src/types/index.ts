@@ -899,3 +899,15 @@ export interface ChangeLogs {
 export interface ChangeLogsChanges {
   [key: string]: Array<string> | undefined;
 }
+
+export enum OverlayTwitchEnum {
+  Money,
+  Faction,
+  Jobs,
+  Classement,
+  AutoPromo
+}
+
+export type RankingPositionResponse = {
+  [K in Exclude<RankingType, "vote">]: number;
+};
