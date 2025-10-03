@@ -12,6 +12,7 @@ import { Suspense } from "react";
 import constants from "@/lib/constants.ts";
 
 import Image from "next/image";
+import { Emblem } from "../Faction/Emblem";
 
 export function FactionNameInfo() {
   const { data: playerInfo } = usePlayerInfoStore();
@@ -28,7 +29,7 @@ export function FactionInfoDescription() {
     return null;
   }
 
-  return <>{playerInfo.faction.name}</>;
+  return <>{playerInfo.faction.description}</>;
 }
 
 export function FactionInfoMembersInfo() {
@@ -116,4 +117,12 @@ export function FactionClassementClient({ factionLeaderboard }: { factionLeaderb
       {factionIndex}
     </>
   );
+}
+
+export function FactionEmblemClient() {
+  const { data: playerInfo } = usePlayerInfoStore();
+  if(!playerInfo) {
+    return <Suspense fallback={<LoadingData username={undefined}/>}/>;
+  }
+  return <Emblem emblem={playerInfo?.faction.emblem} className="h-16 w-16 rounded-xl object-cover shadow-lg"/>;
 }
