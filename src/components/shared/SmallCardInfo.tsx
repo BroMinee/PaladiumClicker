@@ -8,7 +8,7 @@ import React from "react";
 type SmallCardInfoProps = {
   className?: string;
   title: string;
-  value?: string;
+  value?: React.ReactNode;
   img: string;
   unoptimized?: boolean;
   imgClassName?: string;
