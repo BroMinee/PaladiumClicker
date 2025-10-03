@@ -119,17 +119,16 @@ export function PlayerRank() {
   return <SmallCardInfo title="Rang en jeu" value={rank} img={getRankImg(rank)}
     imgClassName="w-fit"
     unoptimized>
-    <Button className="text-xs">
-      <a
-        href={`/twitch/${playerInfo?.username}/setup`}
-        target="_blank"
-        rel="noopener noreferrer"
-        className=""
-      >
-            Obtenir un overlay de Stream
-      </a>
-
-    </Button>
+    <a
+      href={`/twitch/${playerInfo?.username}/setup`}
+      target="_blank"
+      rel="noopener noreferrer"
+      className=""
+    >
+      <Button className="text-xs">
+          Obtenir un overlay de Stream
+      </Button>
+    </a>
 
   </SmallCardInfo>;
 }

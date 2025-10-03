@@ -428,7 +428,7 @@ export async function editRoleSubmit(discord_id: string, role: Role): Promise<{
 }
 
 export async function getPlayerCountHistoryPaladiumAction() {
-  return await fetchWithHeader<PlayerCountHistory>(`${API_PALATRACKER}/v1/status-history/paladium/player/count-history`, 0);
+  return await fetchWithHeader<PlayerCountHistory>(`${API_PALATRACKER}/v1/status-history/paladium/player/count-history`, 5*60);
 }
 
 export async function getPlayerPositionAction(uuid: string) : Promise<RankingPositionResponse> {
@@ -445,7 +445,7 @@ export async function getPlayerPositionAction(uuid: string) : Promise<RankingPos
     egghunt: number;
     "job-alchemist": number;
     clicker: number;
-  }>(`${API_PALATRACKER}/v1/paladium/ranking/position/${uuid}`, 0).then(data => {
+  }>(`${API_PALATRACKER}/v1/paladium/ranking/position/${uuid}`, 5*60).then(data => {
     const converted: RankingPositionResponse = {
       boss: data.boss,
       money: data.money,

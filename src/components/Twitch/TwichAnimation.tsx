@@ -41,6 +41,58 @@ export default function TwitchOverlay({preview, selectedElements} : {preview?: b
   const [totalAnimationTime, setTotalAnimationTime] = useState<number>(100);
   const router = useRouter();
 
+  const fetchApiData = useCallback(async () => {
+    // don't fetch when layout is a demo
+    if(preview || !playerInfo) {
+      setRanking({
+        boss: Math.round(Math.random() * 10000),
+        money: Math.round(Math.random() * 10000),
+        alliance: Math.round(Math.random() * 10000),
+        "job.farmer": Math.round(Math.random() * 10000),
+        "job.miner": Math.round(Math.random() * 10000),
+        "job.hunter": Math.round(Math.random() * 10000),
+        "job.alchemist": Math.round(Math.random() * 10000),
+        egghunt: Math.round(Math.random() * 10000),
+        koth: Math.round(Math.random() * 10000),
+        clicker: Math.round(Math.random() * 10000),
+      // end: data.end,
+      // chorus: data.chorus,
+      });
+      setLeaderboardFaction([
+        {
+          diff: 0,
+          elo: 10,
+          emblem: {backgroundColor:-13573626,backgroundId:0,borderColor:-11623171,foregroundColor:-8110515,foregroundId:0,iconBorderColor:-4447779,iconColor:-4705924,iconId:0, forcedTexture: "none"},
+          name: playerInfo?.faction.name ?? "Wilderness",
+          position: 1,
+          trend: ""
+        },{
+          diff: 0,
+          elo: 10,
+          emblem: {backgroundColor:-13573626,backgroundId:0,borderColor:-11623171,foregroundColor:-8110515,foregroundId:0,iconBorderColor:-4447779,iconColor:-4705924,iconId:0, forcedTexture: "none"},
+          name: "BroMineFac",
+          position: 1,
+          trend: ""
+        }]);
+      return;
+    }
+
+    try {
+      const data = await getPlayerInfoAction(playerInfo.username);
+      setRanking(await getPlayerPositionAction(playerInfo.uuid));
+      setLeaderboardFaction(await getFactionLeaderboardAction());
+
+      setPlayerInfo(data);
+    } catch (error) {
+      console.error("Erreur lors de la récupération des données:", error);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- playerInfo is modified in setPlayerInfo
+  }, [setPlayerInfo, setLeaderboardFaction,preview, setRanking]);
+
+  useEffect(() => {
+    fetchApiData();
+  }, [fetchApiData]);
+
   useEffect(() => {
     setConfig(selectedElements);
 
@@ -52,6 +104,8 @@ export default function TwitchOverlay({preview, selectedElements} : {preview?: b
       }).catch(e =>
         console.error(e)
       );
+    } else {
+      setTotalPlayer(10000);
     }
 
   }, [selectedElements, setConfig, setTotalPlayer, preview]);
@@ -68,25 +122,7 @@ export default function TwitchOverlay({preview, selectedElements} : {preview?: b
     } else {
       console.error(".duration is NaN and should not", totalTimeInSeconds, config);
     }
-  }, [totalAnimationTime, config, setNbSeconds]);
-
-  const fetchApiData = useCallback(async () => {
-    // don't fetch when layout is a demo
-    if(preview || !playerInfo) {
-      return;
-    }
-
-    try {
-      const data = await getPlayerInfoAction(playerInfo.username);
-      setRanking(await getPlayerPositionAction(playerInfo.uuid));
-      setLeaderboardFaction(await getFactionLeaderboardAction());
-
-      setPlayerInfo(data);
-    } catch (error) {
-      console.error("Erreur lors de la récupération des données:", error);
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps -- playerInfo is modified in setPlayerInfo
-  }, [setPlayerInfo, setLeaderboardFaction,preview, setRanking]);
+  }, [totalAnimationTime, config, setNbSeconds, fetchApiData]);
 
   useEffect(() => {
     const animationInterval = setInterval(() => {
@@ -216,7 +252,7 @@ function FactionOverlay() {
           <div className="w-full bg-gray-700/50 h-2 rounded-full overflow-hidden">
             <div
               className="h-full bg-gradient-to-r from-purple-500 via-pink-500 to-orange-500 rounded-full animate-pulse"
-              style={{ width: `${100 - factionIndex * 100 / leaderboardFaction.length}%` }}
+              style={{ width: `${100 - (factionIndex-1) * 100 / leaderboardFaction.length}%` }}
             ></div>
           </div>
         </div>
@@ -281,7 +317,7 @@ function ClassementOverlay() {
     return <div>Erreur</div>;
   }
 
-  const pourcentage = 100 - Math.min(100, ranking[currentConfig.subOption!] * 100 / totalPlayer);
+  const pourcentage = 100 - Math.min(100, ranking[currentConfig.subOption] * 100 / totalPlayer);
 
   return <div className="flex flex-row">
     <div className="flex-shrink-0 mr-8">
@@ -299,7 +335,7 @@ function ClassementOverlay() {
 
       <div className="flex items-baseline gap-3">
         <span className="text-6xl font-black bg-gradient-to-r from-yellow-400 via-orange-400 to-red-500 bg-clip-text text-transparent">
-              #{ranking[currentConfig.subOption!].toLocaleString("fr-FR")}
+              #{ranking[currentConfig.subOption].toLocaleString("fr-FR")}
         </span>
         <span className="text-2xl text-gray-400 font-medium">TOP</span>
       </div>
@@ -308,7 +344,7 @@ function ClassementOverlay() {
         <div className="flex-1">
           <div className="flex items-center justify-between text-sm text-gray-400 mb-2">
             <span>Classement</span>
-            <span className="font-bold text-yellow-400">#{ranking[currentConfig.subOption!]}/{totalPlayer}</span>
+            <span className="font-bold text-yellow-400">#{ranking[currentConfig.subOption]}/{totalPlayer}</span>
           </div>
           <div className="w-full bg-gray-700/50 h-2 rounded-full overflow-hidden">
             <div
