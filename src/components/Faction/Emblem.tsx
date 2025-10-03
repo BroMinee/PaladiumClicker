@@ -4,7 +4,7 @@ import Image from "next/image";
 export function Emblem({emblem, className}: {emblem: PaladiumEmblem, className?: string}) {
 
   if (emblem.forcedTexture !== undefined) {
-    return <Image src={`/img/faction/defaults/${emblem.forcedTexture}.png`} alt={"faction icon"}
+    return <Image src={`/img/Faction/defaults/${emblem.forcedTexture}.png`} alt={"faction icon"}
       width={0} height={0} unoptimized={true}
       className={className}/>;
   }
