@@ -118,19 +118,7 @@ export function PlayerRank() {
 
   return <SmallCardInfo title="Rang en jeu" value={rank} img={getRankImg(rank)}
     imgClassName="w-fit"
-    unoptimized>
-    <a
-      href={`/twitch/${playerInfo?.username}/setup`}
-      target="_blank"
-      rel="noopener noreferrer"
-      className=""
-    >
-      <Button className="text-xs">
-          Obtenir un overlay de Stream
-      </Button>
-    </a>
-
-  </SmallCardInfo>;
+    unoptimized/>;
 }
 
 export function PlayerTimePlayed() {
@@ -194,4 +182,22 @@ function SkinFallback() {
       Erreur lors du rendu du skin.
     </div>
   );
+}
+
+export function OverlayTwitchButton() {
+  const { data: playerInfo } = usePlayerInfoStore();
+  if (!playerInfo) {
+    return null;
+  }
+
+  return <a
+    href={`/twitch/${playerInfo?.username}/setup`}
+    target="_blank"
+    rel="noopener noreferrer"
+    className=""
+  >
+    <Button>
+          Obtenir un overlay de Stream
+    </Button>
+  </a>;
 }

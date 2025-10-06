@@ -3,6 +3,7 @@ import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area.tsx";
 import GradientText from "@/components/shared/GradientText.tsx";
 import { FaEye, FaHeart } from "react-icons/fa";
 import {
+  OverlayTwitchButton,
   PlayerFirstConnection,
   PlayerFriends,
   PlayerFriendsCount,
@@ -35,6 +36,7 @@ export default function ProfilInfo() {
               <FactionNameInfo/>
             </GradientText>
           </h1>
+          <OverlayTwitchButton/>
         </div>
 
         <div className="flex flex-row gap-2 items-center mt-1.5">
