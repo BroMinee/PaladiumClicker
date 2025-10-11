@@ -467,7 +467,7 @@ export const TwitchOverlayConfig = ({username}: {username: string}) => {
               <span className="bg-primary text-white w-8 h-8 rounded-full flex items-center justify-center text-sm">4</span>
                             Redimensionner l&apos;overlay
             </h3>
-            <p className="mb-3">Il est fortement conseiller de redimensionner l&apos;overlay sur la scène pour correspondre à tes besoins, mais ne modifie pas la largeur et hauteur dans les options de l&apos;élément.</p>
+            <p className="mb-3">Il est fortement conseillé de redimensionner l&apos;overlay sur la scène pour correspondre à tes besoins, mais ne modifie pas la largeur et hauteur dans les options de l&apos;élément.</p>
           </div>
         </div>
 
