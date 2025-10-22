@@ -228,7 +228,7 @@ export const getPlayerInfo = async (pseudo: string): Promise<PlayerInfo> => {
   function getTotalXPForLevel(level: number) {
 
     if (level - 1 >= constants.metier_palier.length) {
-      return constants.metier_palier[99] + (level - constants.metier_palier.length) * constants.metier_xp[constants.metier_xp.length -1];
+      return constants.metier_palier[19] + (level - constants.metier_palier.length) * constants.metier_xp[constants.metier_xp.length -1];
     }
 
     return constants.metier_palier[level - 1];
@@ -237,7 +237,7 @@ export const getPlayerInfo = async (pseudo: string): Promise<PlayerInfo> => {
   initialPlayerInfo.metier = metiers;
   const keys: Array<keyof Metiers> = ["farmer", "hunter", "miner", "alchemist"];
   for (const key of keys) {
-    if(initialPlayerInfo.metier[key].xp > getTotalXPForLevel(100)) {
+    if(initialPlayerInfo.metier[key].xp > getTotalXPForLevel(20)) {
       for(let i = 100; i < 2048; i++){
         const xp = getTotalXPForLevel(i);
         if(xp < initialPlayerInfo.metier[key].xp) {

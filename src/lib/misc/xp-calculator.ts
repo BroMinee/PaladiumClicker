@@ -15,8 +15,8 @@ export function getXpCoef(level: number, currentXp: number) {
   if (currentXp === 0) {
     return 0;
   }
-  if(level >= 100) {
-    return (currentXp - constants.metier_palier[99] - constants.metier_xp[99] * (level - 100)) / constants.metier_xp[99];
+  if(level >= 20) {
+    return (currentXp - constants.metier_palier[19] - constants.metier_xp[19] * (level - 20)) / constants.metier_xp[19];
   }
   return (currentXp - constants.metier_palier[level - 1]) / constants.metier_xp[level];
 }
@@ -75,7 +75,7 @@ export function getXpDiff(playerInfo: PlayerInfo | null, searchParams: searchPar
 export function getTotalXPForLevel(level: number) {
 
   if (level - 1 >= constants.metier_palier.length) {
-    return constants.metier_palier[99] + (level - constants.metier_palier.length) * constants.metier_xp[constants.metier_xp.length - 1];
+    return constants.metier_palier[19] + (level - constants.metier_palier.length) * constants.metier_xp[constants.metier_xp.length - 1];
   }
 
   return constants.metier_palier[level - 1];
