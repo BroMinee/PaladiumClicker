@@ -4,15 +4,13 @@ import Image from "next/image";
 import EditRole from "@/components/Admin-Panel/AdminPanelRoleEdition.tsx";
 import { Role } from "@/types";
 import React from "react";
-import { ClickerOptimizerDebug } from "@/components/Clicker-Optimizer-Debug/page.tsx";
 
 const mapPermission = new Map<Role, React.FC[]>(
   [
-    ["Admin", [EditRolePanel, PalaAnimationPanel, ReportBugPanel, AccessBetaPanel, PalatimePanel]],
+    ["Admin", [EditRolePanel, PalaAnimationPanel, ReportBugPanel, AccessBetaPanel]],
     ["Moderator", [PalaAnimationPanel]],
     ["Bug Hunter", [ReportBugPanel]],
     ["Beta Tester", [AccessBetaPanel]],
-    ["Palatime", [PalatimePanel]],
     ["Classic", [NotPermissionPanel]]
   ]);
 
@@ -90,23 +88,6 @@ function AccessBetaPanel() {
         <p>Link to the beta url</p>
       </CardContent>
     </Card>
-  );
-}
-
-function PalatimePanel() {
-  return (
-    <>
-      <ClickerOptimizerDebug params={{username: "0livierMinecraft"}}/>
-      <Card>
-        <CardHeader>
-          <p>Palatime</p>
-        </CardHeader>
-        <CardContent>
-          <p>Edit palatime : Pas encore implem</p>
-        </CardContent>
-      </Card>
-    </>
-
   );
 }
 
