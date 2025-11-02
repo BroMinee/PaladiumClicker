@@ -16,7 +16,7 @@ import {
   getNotificationWebSite
 } from "@/lib/api/apiServerAction.ts";
 import { PopupCurrentEvent } from "@/components/Events/PopupCurrentEvent.tsx";
-import { Event } from "@/types/db_types.ts";
+import { Event } from "@/types";
 import { PopupRewardEvent } from "@/components/Events/PopupRewardEvent.tsx";
 import { PopupNoRewardEvent } from "@/components/Events/PopupNoRewardEvent.tsx";
 import { NavBarCategory, NotificationWebSiteResponse } from "@/types";

@@ -1,7 +1,7 @@
 "use client";
-import { getItemFromName, WebHookAlert, WebhookDiscord, WebHookType } from "@/types";
+import { WebHookAlert, WebhookDiscord, WebHookType } from "@/types";
 import "./WebHookMsg.css";
-import { getIconNameFromEventType, getTextFromWebHookType } from "@/lib/misc.ts";
+import { getIconNameFromEventType, getItemFromName, getTextFromWebHookType } from "@/lib/misc.ts";
 import { Button } from "@/components/ui/button.tsx";
 import { FiEdit } from "react-icons/fi";
 import React, { useState } from "react";

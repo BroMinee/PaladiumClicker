@@ -20,7 +20,7 @@ import {
   WebHookCreate,
   WebHookType
 } from "@/types";
-import { Event } from "@/types/db_types.ts";
+import { Event } from "@/types";
 import { cookies } from "next/headers";
 import { API_PALATRACKER } from "@/lib/constants.ts";
 import { redirect } from "next/navigation";

@@ -2,14 +2,15 @@ import { redirect } from "next/navigation";
 import { Card, CardContent, CardDescription, CardHeader, CardTitleH1 } from "@/components/ui/card.tsx";
 import GradientText from "@/components/shared/GradientText.tsx";
 import { FaHeart } from "react-icons/fa";
-import { AdminShopItem, adminShopItemsAvailable, AdminShopPeriode, isShopItem } from "@/types";
-import { adminShopItemToUserFriendlyText, generateAdminShopUrl, getImagePathFromAdminShopType } from "@/lib/misc.ts";
+import { AdminShopItem, AdminShopPeriode } from "@/types";
+import { adminShopItemToUserFriendlyText, generateAdminShopUrl, getImagePathFromAdminShopType, isShopItem } from "@/lib/misc.ts";
 import { Suspense } from "react";
 import {
   AdminShopSelectorClientItem,
   AdminShopSelectorClientPeriode
 } from "@/components/AdminShop/AdminShopSelectorClientItem.tsx";
 import GraphAdminShop, { GraphAdminShopFallback } from "@/components/AdminShop/GraphAdminShop.tsx";
+import constants from "@/lib/constants.ts";
 
 export type searchParamsAdminShopPage = {
   item: string,
@@ -87,7 +88,7 @@ export default async function Home(
         </CardDescription>
       </CardHeader>
       <CardContent className="grid grid-cols-6 sm:grid-cols-16 lg:grid-cols-23 items-center justify-between gap-2 pb-2" id="admin-selector">
-        {adminShopItemsAvailable.map((value: AdminShopItem, index: number) => {
+        {constants.adminShopItemsAvailable.map((value: AdminShopItem, index: number) => {
           return <AdminShopSelectorClientItem key={value + index} item={value} periode={periodeEnum}
             adminShopPage={true}/>;
         })}

@@ -1,11 +1,12 @@
 import React from "react";
 import { useWebhookStore } from "@/stores/use-webhook-store.ts";
-import { AdminShopItem, adminShopItemsAvailable, EventType, WebHookThresholdCondition, WebHookType } from "@/types";
+import { AdminShopItem, EventType, WebHookThresholdCondition, WebHookType } from "@/types";
 import { AdminShopSelectorClientItem } from "@/components/AdminShop/AdminShopSelectorClientItem.tsx";
 import { ThresholdSelector } from "@/components/WebHooks/WebHookThresholdSelector.tsx";
 import { Button } from "@/components/ui/button.tsx";
 import { cn } from "@/lib/utils.ts";
 import { Input } from "@/components/ui/input.tsx";
+import constants from "@/lib/constants.ts";
 
 export function ThreshConditionSelector() {
 
@@ -62,7 +63,7 @@ export function AdminShopInput() {
         Choisissez un item de l&apos;admin shop
       </span>
       <div className="grid grid-cols-6 sm:grid-cols-16 lg:grid-cols-8 items-center justify-between gap-2 pb-2 mt-0">
-        {adminShopItemsAvailable.map((value: AdminShopItem, index: number) => {
+        {constants.adminShopItemsAvailable.map((value: AdminShopItem, index: number) => {
           return <AdminShopSelectorClientItem key={value + index} item={value} periode={"day"}
                                               adminShopPage={false}/>;
         })}

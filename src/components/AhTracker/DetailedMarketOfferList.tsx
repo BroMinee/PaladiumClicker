@@ -1,4 +1,4 @@
-import { MarketItemOffer, MarketListedItem, OptionType } from "@/types";
+import { MarketItemOffer, OptionType } from "@/types";
 import { formatPrice, formatPriceWithUnit, safeJoinPaths } from "@/lib/misc.ts";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area.tsx";
 import React, { ReactNode } from "react";
@@ -9,7 +9,7 @@ import HoverText from "@/components/ui/hovertext.tsx";
 import constants from "@/lib/constants.ts";
 
 export default async function DetailedMarketOfferList({ listing, item }: {
-  listing: MarketListedItem,
+  listing: MarketItemOffer[],
   item: OptionType
 }) {
   if (listing.length === 0) {

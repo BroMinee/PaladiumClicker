@@ -8,7 +8,9 @@
     "start": "next start",
     "test:playwright": "npx playwright test",
     "test:report": "npx playwright show-report",
-    "test:jest": "npx jest"
+    "test:jest": "npx jest",
+    "lint": "next lint",
+    "lint:fix": "next lint --fix"
   },
   "dependencies": {
     "@emotion/react": "^11.14.0",

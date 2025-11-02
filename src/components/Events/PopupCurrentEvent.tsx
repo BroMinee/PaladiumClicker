@@ -6,7 +6,7 @@ import { renderer } from "@/components/ui/countdown.tsx";
 import { Button } from "@/components/ui/button.tsx";
 import { ScrollArea } from "@/components/ui/scroll-area.tsx";
 import React, { useState } from "react";
-import { Event } from "@/types/db_types.ts";
+import { Event } from "@/types";
 import { usePlayerInfoStore } from "@/stores/use-player-info-store.ts";
 import { toast } from "sonner";
 import { Input } from "@/components/ui/input.tsx";

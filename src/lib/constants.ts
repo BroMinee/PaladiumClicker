@@ -1,5 +1,5 @@
 import { SelectedElementConfig } from "@/components/Twitch/TwitchOverlayConfig";
-import { MetierKey, NavBarCategory } from "@/types";
+import { AdminShopItem, MetierKey, NavBarCategory } from "@/types";
 
 const version = 0;
 
@@ -663,6 +663,15 @@ const imgPathError = "/img/Error/";
 const PUB_DISPLAY_TIME = 15;
 export const AUTOPROMO_CONFIG : SelectedElementConfig = { type: "autoPromo",  duration: PUB_DISPLAY_TIME, subOption: null};
 
+export const adminShopItemsAvailable: AdminShopItem[] = [
+  "feather", "wool", "paladium-ingot", "ender-pearl", "egg", "string", "log", "red-mushroom", "soul-sand",
+  "glowstone-dust", "findium", "titane-ingot", "apple", "cobblestone", "reeds", "ghast-tear", "potato",
+  "passive-wither-head", "cactus", "melon", "obsidian", "slime-ball", "spider-eye", "dirt",
+  "quartz", "bone", "nether-wart", "wheat-seeds", "gunpowder", "iron-ingot", "fermented-spider-eye", "leather",
+  "sand", "dye", "diamond", "gold-ingot", "flint", "coal", "redstone", "emerald", "brown-mushroom", "blaze-rod",
+  "amethyst-ingot", "carrot", "cooked-beef"
+];
+
 const constants = {
   defaultUsername,
   version,
@@ -700,6 +709,7 @@ const constants = {
   imgPathCraft,
   imgPathError,
   AUTOPROMO_CONFIG,
+  adminShopItemsAvailable,
 };
 
 export default constants;
