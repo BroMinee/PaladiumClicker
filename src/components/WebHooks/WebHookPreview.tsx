@@ -66,7 +66,7 @@ export function WebHookPreviewPage({
   );
 }
 
-export function WebHookPreview({ webHookAlert, groups, setGroups }: {
+function WebHookPreview({ webHookAlert, groups, setGroups }: {
   webHookAlert: WebHookAlert,
   groups: groupsType,
   setGroups: (groups: groupsType) => void
@@ -212,7 +212,7 @@ export function WebHookPreview({ webHookAlert, groups, setGroups }: {
   );
 }
 
-export function CreateNewWebHookButtonKnowingUrl({ webhookDiscord, text }: {
+function CreateNewWebHookButtonKnowingUrl({ webhookDiscord, text }: {
   webhookDiscord: WebhookDiscord | undefined
   text: string,
 }) {
@@ -236,7 +236,7 @@ export function CreateNewWebHookButtonKnowingUrl({ webhookDiscord, text }: {
   );
 }
 
-export function CreateNewWebHookButtonWithoutKnowing() {
+function CreateNewWebHookButtonWithoutKnowing() {
   return (
     <div className="alert-container w-full flex flex-col !border-0 justify-center items-center">
       <a href={`${API_PALATRACKER}/v1/auth/webhook/create`}>

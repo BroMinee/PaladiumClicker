@@ -4,7 +4,7 @@ import LoadingSpinner from "@/components/ui/loading-spinner.tsx";
 import PlotStatusChart from "@/components/Status/PlotStatusChart.tsx";
 import { getStatusPaladium } from "@/lib/api/apiPalaTracker.ts";
 
-export type GraphStatusProps = {
+type GraphStatusProps = {
   periode: StatusPeriod,
 }
 

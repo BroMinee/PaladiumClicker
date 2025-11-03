@@ -11,8 +11,7 @@ import { useWebhookStore } from "@/stores/use-webhook-store.ts";
 import React from "react";
 import Image from "next/image";
 
-export function GenerateEmbedPreview(footer: string) {
-
+function GenerateEmbedPreview(footer: string) {
   const {
     title,
     titleUrl,
@@ -261,7 +260,7 @@ oldPrice += 1;
   );
 }
 
-export function parseUrlFormatting(
+function parseUrlFormatting(
   url: string,
   itemSelected: OptionType | null,
   event: EventType,

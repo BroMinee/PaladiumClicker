@@ -141,7 +141,7 @@ export async function getAllItemsServerAction() : Promise<OptionType[]> {
   });
 }
 
-export async function getCurrentNotification(): Promise<NotificationWebSiteResponse | null> {
+async function getCurrentNotification(): Promise<NotificationWebSiteResponse | null> {
   return await fetchWithHeader<NotificationWebSiteResponse>(`${API_PALATRACKER}/v1/notification/website`, 5 * 60);
 }
 

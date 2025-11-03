@@ -7,3 +7,4 @@ export * from "./misc/profil";
 export * from "./misc/ranking";
 export * from "./misc/webhook";
 export * from "./misc/xp-calculator";
+export * from "./misc/patchnote";

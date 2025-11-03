@@ -19,7 +19,6 @@ import {
   PaladiumRanking,
   PetInfo,
   PlayerInfo,
-  Role,
 } from "@/types";
 
 import translate_building_json from "@/assets/translate_building.json";
@@ -31,8 +30,7 @@ import { fetchWithHeader } from "@/lib/api/misc.ts";
 import { redirect } from "next/navigation";
 import { getInitialPlayerInfo } from "@/lib/misc.ts";
 import { registerPlayerAction } from "@/lib/api/apiServerAction.ts";
-// import { toast } from "sonner";
-import { constants,  API_PALATRACKER } from "@/lib/constants.ts";
+import { constants } from "@/lib/constants.ts";
 
 export const PALADIUM_API_URL = process.env.PALADIUM_API_URL || "https://api.paladium.games";
 
@@ -69,13 +67,13 @@ export const getPlayerOnlineCount = async (): Promise<number> => {
   return response.java.global.players;
 };
 
-export const getPaladiumProfileByPseudo = async (pseudo: string): Promise<PaladiumPlayerInfo> => {
+const getPaladiumProfileByPseudo = async (pseudo: string): Promise<PaladiumPlayerInfo> => {
   return await fetchWithHeader<PaladiumPlayerInfo>(`${PALADIUM_API_URL}/v1/paladium/player/profile/${pseudo}`, 10, pseudo).catch((error: Error) => {
     return redirect(`/error?message=Impossible de récupérer les données de ${pseudo}, vérifie que tu as bien écrit ton pseudo.&detail=${error.message}&username=${pseudo}`);
   });
 };
 
-export const getPaladiumLeaderboardPositionByUUID = async (uuid: string, username: string): Promise<string> => {
+const getPaladiumLeaderboardPositionByUUID = async (uuid: string, username: string): Promise<string> => {
   const response = await fetchWithHeader<PaladiumRanking>(`${PALADIUM_API_URL}/v1/paladium/ranking/position/clicker/${uuid}`).catch((e: Error) => {
     const message = e.message;
     return redirect(`/error?message=Impossible de récupérer ta position dans le classement. : ${message}&username=${username}`);
@@ -90,7 +88,7 @@ const getPaladiumClickerDataByUUID = async (uuid: string, username: string): Pro
   });
 };
 
-export const getFactionInfo = async (factionName: string): Promise<PaladiumFactionInfo> => {
+const getFactionInfo = async (factionName: string): Promise<PaladiumFactionInfo> => {
   if (factionName === "") {
     factionName = "Wilderness";
   }
@@ -127,7 +125,7 @@ export const getFactionLeaderboard = async (): Promise<PaladiumFactionLeaderboar
   });
 };
 
-export const getAuctionHouseInfo = async (uuid: string, username: string): Promise<AhType> => {
+const getAuctionHouseInfo = async (uuid: string, username: string): Promise<AhType> => {
 
   const response = await fetchWithHeader<AhType>(`${PALADIUM_API_URL}/v1/paladium/shop/market/players/${uuid}/items`).catch((error: Error) => {
     const message = error.message;
@@ -138,7 +136,7 @@ export const getAuctionHouseInfo = async (uuid: string, username: string): Promi
   return response;
 };
 
-export const getFriendsList = async (uuid: string): Promise<PaladiumFriendInfo> => {
+const getFriendsList = async (uuid: string): Promise<PaladiumFriendInfo> => {
   try {
     return await fetchWithHeader<PaladiumFriendInfo>(`${PALADIUM_API_URL}/v1/paladium/player/profile/${uuid}/friends`);
   } catch (_) {
@@ -307,7 +305,7 @@ export const getPaladiumAhItemStats = async (itemId: string): Promise<PaladiumAh
   return await fetchWithHeader<PaladiumAhItemStat>(`${PALADIUM_API_URL}/v1/paladium/shop/market/items/${itemId}`);
 };
 
-export const getJobsFromUUID = async (uuid: string, username: string): Promise<Metiers> => {
+const getJobsFromUUID = async (uuid: string, username: string): Promise<Metiers> => {
   const response = await fetchWithHeader<MetiersPossiblyUndefined>(`${PALADIUM_API_URL}/v1/paladium/player/profile/${uuid}/jobs`, 0).catch((e: Error) => {
     const message = e.message;
     return redirect(`/error?message=Impossible de récupérer tes données de métiers, vérifie que tu ne les as pas désactivées sur ton profil Paladium via la commande /profil.&detail=${message}&username=${username}`);
@@ -338,7 +336,7 @@ export const getJobsFromUUID = async (uuid: string, username: string): Promise<M
   return initialMetierJson;
 };
 
-export const getPlayerAchievements = async (uuid: string): Promise<Achievement[]> => {
+const getPlayerAchievements = async (uuid: string): Promise<Achievement[]> => {
   type AchievementResponse = {
     totalCount: number,
     data: { id: string, progress: number, completed: boolean }[]
@@ -470,7 +468,7 @@ const getAllAchievements = async (): Promise<AllAchievementResponse> => {
 }
 */
 
-export const getPlayerMount = async (uuid: string): Promise<MountInfo | null> => {
+const getPlayerMount = async (uuid: string): Promise<MountInfo | null> => {
   return await fetchWithHeader<MountInfo>(`${PALADIUM_API_URL}/v1/paladium/player/profile/${uuid}/mount`).then((mount) => {
     if (mount.mountType === 0) {
       return null;
@@ -481,12 +479,8 @@ export const getPlayerMount = async (uuid: string): Promise<MountInfo | null> =>
   });
 };
 
-export const getPlayerPet = async (uuid: string): Promise<PetInfo | null> => {
+const getPlayerPet = async (uuid: string): Promise<PetInfo | null> => {
   return await fetchWithHeader<PetInfo>(`${PALADIUM_API_URL}/v1/paladium/player/profile/${uuid}/pet`).catch(() => {
     return null;
   });
 };
-
-export async function getPlayerRole(): Promise<Role> {
-  return await fetchWithHeader<Role>(`${API_PALATRACKER}/v1/role/getRole`, 5 * 60).catch(() => "Classic");
-}

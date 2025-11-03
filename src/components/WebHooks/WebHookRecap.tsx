@@ -3,7 +3,7 @@
 import { parseTextFormatting } from "@/components/WebHooks/WebHookMsg.tsx";
 import { useWebhookStore } from "@/stores/use-webhook-store.ts";
 
-export function RecapTemplate({ messages }: { messages: string[] }) {
+function RecapTemplate({ messages }: { messages: string[] }) {
 
   const {
     itemSelected,

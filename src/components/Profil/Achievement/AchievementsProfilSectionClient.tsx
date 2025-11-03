@@ -13,7 +13,7 @@ import Image from "next/image";
 import { AchievementInfo, DisplayCategoryCard } from "@/components/Profil/Achievement/DisplayAchievement.tsx";
 import { constants } from "@/lib/constants.ts";
 
-export function DisplayProgressionCategory({ category }: { category: CategoryEnum }) {
+function DisplayProgressionCategory({ category }: { category: CategoryEnum }) {
   const { data: playerInfo } = usePlayerInfoStore();
 
   if (!playerInfo) {
@@ -36,7 +36,7 @@ export function DisplayProgressionCategory({ category }: { category: CategoryEnu
   );
 }
 
-export function AchievementsGlobalProgressBar({ value, showText = true }: { value: number, showText?: boolean }) {
+function AchievementsGlobalProgressBar({ value, showText = true }: { value: number, showText?: boolean }) {
   const textRef = useRef<SVGTextElement>(null);
   const [viewBoxState] = useState({ width: 0, height: 0 });
   if (value === 0) {
@@ -211,7 +211,7 @@ export function AchievementBody({ itemList }: { itemList: { img: string, value: 
   </>;
 }
 
-export function DisplayAllAchievementInCategory({ category, itemList }: {
+function DisplayAllAchievementInCategory({ category, itemList }: {
   category: CategoryEnum,
   itemList: { img: string, value: string }[]
 }) {
@@ -281,7 +281,7 @@ function DetailAchievement({ achievement, itemList }: {
 
 }
 
-export function DisplayProgressionAchievement({ achievementProgress, amount, value }: {
+function DisplayProgressionAchievement({ achievementProgress, amount, value }: {
   achievementProgress: number,
   amount: number,
   value: number

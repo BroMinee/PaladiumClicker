@@ -1,7 +1,7 @@
 "use client";
-import { formatPrice, generateXpCalculatorUrl, getColorByMetierName, safeJoinPaths } from "@/lib/misc.ts";
+import { formatPrice, generateXpCalculatorUrl, getColorByMetierName, getXpDiff, safeJoinPaths } from "@/lib/misc.ts";
 import { cn } from "@/lib/utils.ts";
-import { MetierKey, PlayerInfo, PlayerRank } from "@/types";
+import { MetierKey, PlayerRank } from "@/types";
 import { useRouter } from "next/navigation";
 import { usePlayerInfoStore } from "@/stores/use-player-info-store.ts";
 import metierJson from "@/assets/metier.json";
@@ -248,27 +248,6 @@ export function DisplayXpBonus() {
   return <>{bonusXpRank}%</>;
 }
 
-function getXpDiff(playerInfo: PlayerInfo | null, searchParams: searchParamsXpBonusPage) {
-  if (!playerInfo || !playerInfo?.metier || searchParams.level === undefined || !searchParams.metier) {
-    return 0;
-  }
-  const higherLevel = searchParams.level;
-  const res = getTotalXPForLevel(higherLevel) - playerInfo.metier[searchParams.metier as MetierKey].xp;
-  if (res < 0) {
-    return playerInfo.metier[searchParams.metier as MetierKey].level === 100 ? 0 : 0;
-  }
-  return res;
-}
-
-export function getTotalXPForLevel(level: number) {
-
-  if (level - 1 >= constants.metier_palier.length) {
-    return constants.metier_palier[99] + (level - constants.metier_palier.length) * constants.metier_xp[constants.metier_xp.length - 1];
-  }
-
-  return constants.metier_palier[level - 1];
-}
-
 export function DisplayXpNeeded({ searchParams }: { searchParams: searchParamsXpBonusPage }) {
   const { data: playerInfo } = usePlayerInfoStore();
   const xpNeeded = getXpDiff(playerInfo, searchParams);
@@ -309,7 +288,7 @@ export function DisplayItem({ searchParams, item, index }: { searchParams: searc
     </div>);
 }
 
-export function DisplayXpNeededWithDouble({ searchParams, xp, element }: {
+function DisplayXpNeededWithDouble({ searchParams, xp, element }: {
   searchParams: searchParamsXpBonusPage,
   xp: number,
   element: HowToXpElement

@@ -312,7 +312,7 @@ function AdaptEditorFooter() {
   return null;
 }
 
-export function Recap() {
+function Recap() {
   const { currentWebHookType } = useWebhookStore();
   switch (currentWebHookType) {
   case WebHookType.QDF:
@@ -332,7 +332,7 @@ export function Recap() {
   }
 }
 
-export function AdminShopGraphClient() {
+function AdminShopGraphClient() {
   const { adminShopItemSelected } = useWebhookStore();
   const [data, setData] = React.useState<AdminShopItemDetail[]>([]);
 
@@ -356,7 +356,7 @@ export function AdminShopGraphClient() {
   );
 }
 
-export function MarketGraphClient() {
+function MarketGraphClient() {
   const { itemSelected } = useWebhookStore();
   const [data, setData] = React.useState<AhItemHistory[]>([]);
 

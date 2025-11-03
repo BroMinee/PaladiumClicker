@@ -17,7 +17,7 @@ export async function generateMetadata(props: { params: Promise<{ username: stri
   };
 }
 
-export type searchParamsProfilPage = {
+type searchParamsProfilPage = {
   section?: string,
 }
 

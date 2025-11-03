@@ -141,7 +141,7 @@ export type SelectedElementConfig = {
   subOption: Exclude<RankingType, "vote"> | null;
 }
 
-export type SelectedElement = {
+type SelectedElement = {
   id: string;
 } & SelectedElementConfig;
 

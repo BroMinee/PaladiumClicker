@@ -1,5 +1,6 @@
+import { searchParamsXpBonusPage } from "@/components/Xp-Calculator/XpCalculator";
 import { constants } from "@/lib/constants.ts";
-import { MetierKey } from "@/types";
+import { MetierKey, PlayerInfo } from "@/types";
 
 export function getXpCoef(level: number, currentXp: number) {
   // if (level === 100)
@@ -37,3 +38,24 @@ export const getColorByMetierName = (name: MetierKey) => {
 
   return { color, bgColor };
 };
+
+export function getXpDiff(playerInfo: PlayerInfo | null, searchParams: searchParamsXpBonusPage) {
+  if (!playerInfo || !playerInfo?.metier || searchParams.level === undefined || !searchParams.metier) {
+    return 0;
+  }
+  const higherLevel = searchParams.level;
+  const res = getTotalXPForLevel(higherLevel) - playerInfo.metier[searchParams.metier as MetierKey].xp;
+  if (res < 0) {
+    return playerInfo.metier[searchParams.metier as MetierKey].level === 100 ? 0 : 0;
+  }
+  return res;
+}
+
+export function getTotalXPForLevel(level: number) {
+
+  if (level - 1 >= constants.metier_palier.length) {
+    return constants.metier_palier[99] + (level - constants.metier_palier.length) * constants.metier_xp[constants.metier_xp.length - 1];
+  }
+
+  return constants.metier_palier[level - 1];
+}

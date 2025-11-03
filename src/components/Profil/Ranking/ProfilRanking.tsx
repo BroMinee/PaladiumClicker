@@ -28,7 +28,7 @@ export function ProfilRankingSection({ searchParams }: { searchParams: searchPar
   );
 }
 
-export function ProfilRankingSectionFallBack() {
+function ProfilRankingSectionFallBack() {
   return (<Card>
     <CardHeader>
       <CardTitle className="flex flex-row gap-2">
