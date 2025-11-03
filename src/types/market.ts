@@ -128,8 +128,8 @@ export type AdminShopItem =
   | "carrot"
   | "cooked-beef";
 
-export type AdminShopPeriode = "day" | "week" | "month" | "season";
-export type StatusPeriode = "day" | "week" | "month" | "season";
+export type AdminShopPeriod = "day" | "week" | "month" | "season";
+export type StatusPeriod = "day" | "week" | "month" | "season";
 
 export type AdminShopItemDetail = {
   date: number

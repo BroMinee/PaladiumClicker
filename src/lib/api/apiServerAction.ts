@@ -4,7 +4,7 @@ import { fetchPostWithHeader, fetchWithHeader } from "@/lib/api/misc.ts";
 import {
   AdminShopItem,
   AdminShopItemDetail,
-  AdminShopPeriode,
+  AdminShopPeriod,
   AhItemHistory,
   AllPalaAnimationStats,
   DiscordUser,
@@ -372,7 +372,7 @@ export async function editWebhookGuildNameServerAction(guild_id: string, channel
   return { succeeded: r.succeeded, msg: r.msg };
 }
 
-export async function getAdminShopHistoryServerAction(item: AdminShopItem, periode: AdminShopPeriode): Promise<AdminShopItemDetail[]> {
+export async function getAdminShopHistoryServerAction(item: AdminShopItem, periode: AdminShopPeriod): Promise<AdminShopItemDetail[]> {
   return await fetchWithHeader<AdminShopItemDetail[]>(`${API_PALATRACKER}/v1/admin-shop/${item}/${periode}`, 0);
 }
 

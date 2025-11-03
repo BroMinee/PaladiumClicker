@@ -1,6 +1,6 @@
 "use client";
 
-import { AdminShopPeriode, } from "@/types";
+import { AdminShopPeriod, } from "@/types";
 import { useRouter, useSearchParams } from "next/navigation";
 import { generateStatusUrl, } from "@/lib/misc.ts";
 import { cn } from "@/lib/utils.ts";
@@ -8,7 +8,7 @@ import { buttonVariants } from "@/components/ui/button.tsx";
 import { Card } from "@/components/ui/card.tsx";
 
 export function StatusSelectorClientPeriode({ periode }: {
-  periode: AdminShopPeriode,
+  periode: AdminShopPeriod,
 }) {
   const router = useRouter();
   const searchParams = useSearchParams();

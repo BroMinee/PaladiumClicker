@@ -1,6 +1,6 @@
 "use client";
 
-import { AdminShopItem, AdminShopPeriode } from "@/types";
+import { AdminShopItem, AdminShopPeriod } from "@/types";
 import { useRouter, useSearchParams } from "next/navigation";
 import { adminShopItemToUserFriendlyText, generateAdminShopUrl, getImagePathFromAdminShopType, } from "@/lib/misc.ts";
 import { cn } from "@/lib/utils.ts";
@@ -13,7 +13,7 @@ import { useWebhookStore } from "@/stores/use-webhook-store.ts";
 
 export function AdminShopSelectorClientItem({ item, periode, adminShopPage }: {
   item: AdminShopItem,
-  periode: AdminShopPeriode,
+  periode: AdminShopPeriod,
   adminShopPage: boolean
 }) {
   const router = useRouter();
@@ -50,7 +50,7 @@ export function AdminShopSelectorClientItem({ item, periode, adminShopPage }: {
 
 export function AdminShopSelectorClientPeriode({ item, periode }: {
   item: AdminShopItem,
-  periode: AdminShopPeriode,
+  periode: AdminShopPeriod,
 }) {
   const router = useRouter();
   const searchParams = useSearchParams();

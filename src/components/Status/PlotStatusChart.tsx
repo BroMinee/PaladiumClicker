@@ -1,6 +1,6 @@
 "use client";
 import dynamic from "next/dynamic";
-import { ServerPaladiumStatusResponse, StatusPeriode } from "@/types";
+import { ServerPaladiumStatusResponse, StatusPeriod } from "@/types";
 import { Area, Legend, ReferenceLine, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
 import React from "react";
 
@@ -27,7 +27,7 @@ const CustomTooltip = ({ active, payload, label }: any) => {
   }
 };
 
-const PlotStatusChart = ({ data, periode }: { data: ServerPaladiumStatusResponse[], periode: StatusPeriode }) => {
+const PlotStatusChart = ({ data, periode }: { data: ServerPaladiumStatusResponse[], periode: StatusPeriod }) => {
   // TODO: zoomable chart
   // TODO: daily price and not 15min delta
   // TODO: add a line for the average price
@@ -43,7 +43,7 @@ const PlotStatusChart = ({ data, periode }: { data: ServerPaladiumStatusResponse
     };
   });
 
-  const convert = (periode: StatusPeriode) => {
+  const convert = (periode: StatusPeriod) => {
     switch (periode) {
     case "day":
       return "du jour";

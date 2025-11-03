@@ -1,7 +1,7 @@
 import "server-only";
 import {
   AdminShopItemDetail,
-  AdminShopPeriode,
+  AdminShopPeriod,
   CraftingRecipeType,
   DiscordUser,
   Item,
@@ -16,7 +16,7 @@ import {
   RoleResponse,
   ServerPaladiumStatusResponse,
   ServerStatusResponse,
-  StatusPeriode,
+  StatusPeriod,
   Tree,
   WebHookAlert,
   WebhookDiscord
@@ -73,15 +73,15 @@ export async function getRankingLeaderboardPlayerUsername(username: string, rank
   return await fetchWithHeader<RankingResponse>(`${API_PALATRACKER}/v1/ranking/${rankingType}/username/${username}`, 60*60);
 }
 
-export async function getStatusPaladium(periode: StatusPeriode): Promise<ServerPaladiumStatusResponse[]> {
+export async function getStatusPaladium(periode: StatusPeriod): Promise<ServerPaladiumStatusResponse[]> {
   return await fetchWithHeader<ServerPaladiumStatusResponse[]>(`${API_PALATRACKER}/v1/status-history/paladium/${periode}`, 0);
 }
 
-export async function getStatusFaction(periode: StatusPeriode): Promise<ServerStatusResponse[]> {
+export async function getStatusFaction(periode: StatusPeriod): Promise<ServerStatusResponse[]> {
   return await fetchWithHeader<ServerStatusResponse[]>(`${API_PALATRACKER}/v1/status-history/faction/${periode}`, 0);
 }
 
-export async function getStatusLauncher(periode: StatusPeriode): Promise<ServerStatusResponse[]> {
+export async function getStatusLauncher(periode: StatusPeriod): Promise<ServerStatusResponse[]> {
   return await fetchWithHeader<ServerStatusResponse[]>(`${API_PALATRACKER}/v1/status-history/launcher/${periode}`, 0);
 }
 
@@ -113,7 +113,7 @@ export async function getCraft(item_name: string): Promise<CraftingRecipeType> {
   return craft;
 }
 
-export async function getAdminShopHistory(item: string, periode: AdminShopPeriode): Promise<AdminShopItemDetail[]> {
+export async function getAdminShopHistory(item: string, periode: AdminShopPeriod): Promise<AdminShopItemDetail[]> {
   return await fetchWithHeader<AdminShopItemDetail[]>(`${API_PALATRACKER}/v1/admin-shop/${item}/${periode}`, 0);
 };
 

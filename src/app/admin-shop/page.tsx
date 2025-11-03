@@ -2,7 +2,7 @@ import { redirect } from "next/navigation";
 import { Card, CardContent, CardDescription, CardHeader, CardTitleH1 } from "@/components/ui/card.tsx";
 import GradientText from "@/components/shared/GradientText.tsx";
 import { FaHeart } from "react-icons/fa";
-import { AdminShopItem, AdminShopPeriode } from "@/types";
+import { AdminShopItem, AdminShopPeriod } from "@/types";
 import { adminShopItemToUserFriendlyText, generateAdminShopUrl, getImagePathFromAdminShopType, isShopItem } from "@/lib/misc.ts";
 import { Suspense } from "react";
 import {
@@ -60,7 +60,7 @@ export default async function Home(
     redirect(generateAdminShopUrl("paladium-ingot"));
   }
   let periode = searchParams.periode;
-  let periodeEnum = searchParams.periode as AdminShopPeriode;
+  let periodeEnum = searchParams.periode as AdminShopPeriod;
 
   if (periode === undefined) {
     periode = "day";
@@ -70,7 +70,7 @@ export default async function Home(
     redirect(generateAdminShopUrl(searchParams.item, "day"));
     return null;
   } else {
-    periodeEnum = periode as AdminShopPeriode;
+    periodeEnum = periode as AdminShopPeriod;
   }
 
   const adminShopItem = searchParams.item as AdminShopItem;

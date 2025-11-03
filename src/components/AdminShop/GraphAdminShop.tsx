@@ -1,4 +1,4 @@
-import { AdminShopItem, AdminShopItemDetail, AdminShopPeriode } from "@/types";
+import { AdminShopItem, AdminShopItemDetail, AdminShopPeriod } from "@/types";
 import LoadingSpinner from "@/components/ui/loading-spinner.tsx";
 import PlotAdminShopChart from "@/components/AdminShop/PlotAdminShopChart.tsx";
 
@@ -7,7 +7,7 @@ import { getAdminShopHistory } from "@/lib/api/apiPalaTracker.ts";
 
 export type GraphAdminShopProps = {
   item: AdminShopItem,
-  periode: AdminShopPeriode,
+  periode: AdminShopPeriod,
 }
 
 export default async function GraphAdminShop({ item, periode }: GraphAdminShopProps) {

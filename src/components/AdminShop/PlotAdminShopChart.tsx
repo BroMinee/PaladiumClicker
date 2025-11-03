@@ -1,6 +1,6 @@
 "use client";
 import dynamic from "next/dynamic";
-import { AdminShopItemDetail, AdminShopPeriode } from "@/types";
+import { AdminShopItemDetail, AdminShopPeriod } from "@/types";
 import { Area, Legend, ReferenceLine, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
 import React from "react";
 import { useWebhookStore } from "@/stores/use-webhook-store.ts";
@@ -31,7 +31,7 @@ const CustomTooltip = ({ active, payload, label }: any) => {
 const PlotAdminShopChart = ({ data, periode, webhook = false }: {
   data: AdminShopItemDetail[],
   webhook?: boolean,
-  periode: AdminShopPeriode
+  periode: AdminShopPeriod
 }) => {
   // TODO: zoomable chart
   // TODO: daily price and not 15min delta

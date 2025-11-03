@@ -8,7 +8,7 @@ import { getPlayerInfo, getPlayerOnlineCount, isApiDown } from "@/lib/api/apiPal
 import { StatusSelectorClientPeriode } from "@/components/Status/StatusSelectorClient.tsx";
 import { redirect } from "next/navigation";
 import { generateStatusUrl } from "@/lib/misc.ts";
-import { AdminShopPeriode } from "@/types";
+import { AdminShopPeriod } from "@/types";
 import GraphPlayerCount from "@/components/Status/GraphPlayerCount.tsx";
 
 export async function generateMetadata() {
@@ -73,7 +73,7 @@ export default async function Home(
 ) {
   const searchParams = await props.searchParams;
   let periode = searchParams.periode;
-  let periodeEnum = searchParams.periode as AdminShopPeriode;
+  let periodeEnum = searchParams.periode as AdminShopPeriod;
 
   if (periode === undefined) {
     periode = "day";
@@ -83,7 +83,7 @@ export default async function Home(
     redirect(generateStatusUrl("day"));
     return null;
   } else {
-    periodeEnum = periode as AdminShopPeriode;
+    periodeEnum = periode as AdminShopPeriod;
   }
 
   return (
