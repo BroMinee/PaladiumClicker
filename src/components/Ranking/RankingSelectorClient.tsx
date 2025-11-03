@@ -11,9 +11,15 @@ import {
 import { cn } from "@/lib/utils.ts";
 import Image from "next/image";
 import React, { ReactNode } from "react";
-import HoverText from "@/components/ui/hovertext.tsx";
+import { HoverText } from "@/components/ui/hovertext.tsx";
 import { usePlayerInfoStore } from "@/stores/use-player-info-store.ts";
 
+/**
+ * Interactive ranking selector button for a specific ranking type on either the main ranking page or a profile.
+ *
+ * @param rankingType The ranking type represented by this button.
+ * @param rankingPage True if used on the main ranking page, false if on a profile page.
+ */
 export function RankingSelectorClient({ rankingType, rankingPage }: {
   rankingType: RankingType,
   rankingPage: boolean

@@ -8,6 +8,12 @@ import { getInternalNode } from "@/lib/misc.ts";
 import { CraftItemRecipe } from "@/components/Craft/CraftItemRecipe.tsx";
 import { Card, CardHeader, CardTitle } from "@/components/ui/card.tsx";
 
+/**
+ * Wrapper that fetch the craft of the given item and display the recipe tree and a summary of the material needed.
+ * @param item - The item the user wants to craft
+ * @param options - The list of available items
+ * @param count - The number of `item` the user want to craft.
+ */
 export async function CraftingInformationFetcher({ item, options, count }: {
   item: OptionType,
   options: OptionType[],

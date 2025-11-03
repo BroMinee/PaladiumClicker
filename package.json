@@ -76,6 +76,7 @@
     "editorconfig-checker": "^6.1.0",
     "eslint": "^9",
     "eslint-config-next": "15.5.4",
+    "eslint-plugin-jsdoc": "^61.1.12",
     "eslint-plugin-react-hooks": "^5.2.0",
     "eslint-plugin-react-refresh": "^0.4.21",
     "jest": "^30.1.3",

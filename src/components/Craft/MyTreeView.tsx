@@ -5,19 +5,11 @@ import { TreeItem, TreeItemProps } from "@mui/x-tree-view/TreeItem";
 import { FaChevronDown, FaChevronRight } from "react-icons/fa";
 import Image from "next/image";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card.tsx";
-import { NodeType, Tree } from "@/types";
-import { getValueTree } from "@/lib/misc.ts";
+import { MyTreeNode, NodeType, Tree } from "@/types";
 
-import GradientText from "@/components/shared/GradientText.tsx";
-import LoadingSpinner from "@/components/ui/loading-spinner.tsx";
-
-type MyTreeNode = {
-  id: string;
-  label: string;
-  nodeData: NodeType;
-  parent?: MyTreeNode;
-  children: MyTreeNode[];
-}
+import { GradientText } from "@/components/shared/GradientText\.tsx";
+import { LoadingSpinner } from "@/components/ui/loading-spinner.tsx";
+import { createNode, getAllIds, isSameTree } from "@/lib/misc";
 
 type MyTreeViewProps = {
   root: Tree<NodeType>;
@@ -70,7 +62,22 @@ const CustomLabel = ({ children, itemId, ...other }: any) => {
 
 const TreeDataContext = React.createContext<MyTreeNode[]>([]);
 
-const MyTreeView = ({ root, setRoot }: MyTreeViewProps) => {
+/**
+ * Displays an interactive crafting tree allowing users to mark which resources they already own.
+ * Provides multi-selection with automatic parent/child propagation and real-time synchronization
+ * with the underlying root tree state.
+ *
+ * Features:
+ * - Checkbox tree with multi-select
+ * - Automatically selects/deselects child nodes
+ * - Parent selection logic: auto-select only if all children are selected
+ * - Updates the original root tree `checked` values to reflect current selections
+ * - Keeps nodes expanded when appropriate or collapse them we needed
+ *
+ * @param root - The root of the crafting tree to display. This object is mutated with updated `checked` values.
+ * @param setRoot - State setter used to update the root tree after selection changes.
+ */
+export const MyTreeView = ({ root, setRoot }: MyTreeViewProps) => {
 
   const [node, setNode] = useState<MyTreeNode | null>(null);
   const [selectedItems, setSelectedItems] = useState<string[]>([]);
@@ -221,68 +228,6 @@ const MyTreeView = ({ root, setRoot }: MyTreeViewProps) => {
     </Card>
   );
 };
-
-export function createNode(root: Tree<NodeType>, depth = 0, childSuffix = "", parent?: MyTreeNode): MyTreeNode {
-  const nodeValue = getValueTree(root);
-
-  if (root.children.length === 0) {
-    return {
-      id: root.value.value + "-" + depth + "-" + childSuffix,
-      label: nodeValue.label,
-      nodeData: nodeValue,
-      children: [],
-      parent: parent,
-    };
-  }
-
-  const node: MyTreeNode = {
-    id: root.value.value + "-" + depth + "-" + childSuffix,
-    label: nodeValue.label,
-    nodeData: nodeValue,
-    children: [],
-    parent: parent,
-  };
-
-  node.children = root.children.map((el, index) => createNode(el, depth + 1, childSuffix + "-" + index, node));
-
-  return node;
-}
-
-export function isSameTree(node1: MyTreeNode, node2: Tree<NodeType>): boolean {
-  if (node1.id !== node2.value.value) {
-    return false;
-  }
-  if (node1.children === undefined && node2.children.length === 0) {
-    return true;
-  }
-  if (node1.children === undefined && node2.children.length !== 0) {
-    return false;
-  }
-  if (node1.children !== undefined && node2.children.length === 0) {
-    return false;
-  }
-  if (node1.children !== undefined && node2.children.length !== 0) {
-    if (node1.children.length !== node2.children.length) {
-      return false;
-    }
-    for (let i = 0; i < node1.children.length; i++) {
-      if (!isSameTree(node1.children[i], node2.children[i])) {
-        return false;
-      }
-    }
-  }
-  return true;
-}
-
-function getAllIds(node: MyTreeNode) {
-  let ids = [node.id];
-  if (node.children) {
-    for (const child of node.children) {
-      ids = [...ids, ...getAllIds(child)];
-    }
-  }
-  return ids;
-}
 
 function MyTreeWaiting() {
   return (

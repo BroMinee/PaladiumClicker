@@ -6,13 +6,22 @@ import { ProfileNavBar } from "@/components/NavBar/ProfileNavBar.tsx";
 import { API_PALATRACKER } from "@/lib/constants.ts";
 import { SmallLoginButton } from "@/components/Login/LoginButton.tsx";
 
+/**
+ * Wrapper around the small login button.
+ * Used at the bottom of the navbar.
+ */
 export const LoginDiscord = () => {
   return <div>
     <SmallLoginButton href={`${API_PALATRACKER}/v1/auth/login/discord`} redirectUrl={"/account"}/>
   </div>;
 };
 
-export const LogoutDiscord = () => {
+/**
+ * Displays the profile navigation bar and a logout button that redirects to the logout endpoint.
+ *
+ * @returns A UI component with a profile section and a Discord logout button.
+ */
+export const NavBarProfileInfo = () => {
   return (
     <div className="flex flex-row gap-1 justify-between px-2">
       <ProfileNavBar/>

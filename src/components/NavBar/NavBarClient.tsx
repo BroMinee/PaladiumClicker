@@ -8,7 +8,7 @@ import { usePathname, useRouter } from "next/navigation";
 import { constants, PathValid } from "@/lib/constants.ts";
 import { FaAngleDown } from "react-icons/fa";
 import { useNotificationStore } from "@/stores/use-notifications-store.ts";
-import HoverText from "@/components/ui/hovertext.tsx";
+import { HoverText } from "@/components/ui/hovertext.tsx";
 import {
   getCurrentEvent,
   getCurrentEventNotRegistered,
@@ -22,6 +22,20 @@ import { PopupNoRewardEvent } from "@/components/Events/PopupNoRewardEvent.tsx";
 import { NavBarCategory, NotificationWebSiteResponse } from "@/types";
 import { useNavbarStore } from "@/stores/use-navbar-store.ts";
 
+/**
+ * Renders a client-side navigation link with optional notifications and user-specific routing.
+ *
+ * Features:
+ * - Highlights the link if it matches the current path, meaning we are already on this page
+ * - Optionally appends the player's username to the path if `requiredPseudo` is true
+ * - Displays a notification indicator and hover text if there are new notifications for this link
+ * - Automatically closes the mobile sheet when clicked.
+ *
+ * @param path - The destination path of the link.
+ * @param children - React nodes to render inside the link.
+ *
+ * Note : Notification system is deprecated.
+ */
 export default function LinkClient({ path, children }: {
   path: PathValid,
   children: React.ReactNode
@@ -122,7 +136,19 @@ export default function LinkClient({ path, children }: {
   );
 }
 
-export function CategorieDisplay({ name, children }: {
+/**
+ * Displays a collapsible navbar category in the sidebar with optional notification badges.
+ *
+ * Features:
+ * - Shows the category name and an expand/collapse toggle
+ * - Displays the number of new notifications for the category when collapsed
+ *
+ * @param name - The name of the navigation category to display.
+ * @param children - The nested links or sub-components within this category.
+ *
+ * Note : Notification system is deprecated.
+ */
+export function NavbarCategoryDisplay({ name, children }: {
   name: NavBarCategory,
   children: React.ReactNode,
 }) {
@@ -241,6 +267,12 @@ function hasNewNotification(last_visited: { [T in PathValid]: number }, path: Pa
   return [false, ""];
 }
 
+/**
+ * Renders a navbar element for the giveaway link that shows different popups based on the user's event status.
+ *
+ * Attempt to do something smart but only managed to prove that I am not smart
+ * TODO to deprecated
+ */
 export function GiveawayFakeLink({ children }: {
   children: React.ReactNode
 }) {
@@ -324,6 +356,12 @@ export function GiveawayFakeLink({ children }: {
   }
 }
 
+/**
+ * Renders a clickable giveaway event element with an optional notification badge.
+ *
+ * @param newNotification - Whether to show a notification badge for the event.
+ * @param children - The content to display inside the giveaway element (e.g., icon or avatar).
+ */
 export function RenderEvent({ newNotification, children }: { newNotification: boolean, children: React.ReactNode }) {
   return <div
     className="font-medium flex justify-start items-center space-x-6 focus:bg-gray-700 focus:text-white hover:bg-accent text-card-foreground rounded px-3 py-2 w-56">
@@ -340,6 +378,14 @@ export function RenderEvent({ newNotification, children }: { newNotification: bo
   </div>;
 }
 
+/**
+ * Displays a website notification banner with expandable content on hover, like Discord does above the account info.
+ *
+ * - Fetches the latest notification from the server on mount
+ * - Expands the notification to show full content when hovered
+ * - Collapses to a single-line banner when not hovered
+ * - Navigates to the notification's URL when clicked if any link is given.
+ */
 export function NotificationWebSite() {
   const [notif, setNotif] = useState<NotificationWebSiteResponse | null>(null);
   const [isHovered, setIsHovered] = useState(false);

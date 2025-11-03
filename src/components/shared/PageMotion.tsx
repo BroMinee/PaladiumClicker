@@ -2,6 +2,12 @@
 import * as React from "react";
 import { motion, useReducedMotion, easeOut } from "framer-motion";
 
+/**
+ * PageMotion component, provides a smooth fade and slide animation for page transitions.
+ *
+ * @param children The React nodes to render inside the animated container.
+ * @param routeKey A unique key for the current route, used to trigger animations on route change.
+ */
 export function PageMotion({
   children,
   routeKey,
@@ -28,5 +34,3 @@ export function PageMotion({
     </motion.div>
   );
 }
-
-export default PageMotion;

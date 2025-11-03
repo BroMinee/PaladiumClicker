@@ -3,6 +3,9 @@ import React, { useEffect } from "react";
 import { useWebhookStore } from "@/stores/use-webhook-store.ts";
 import { ThreshConditionSelector } from "@/components/WebHooks/WebHookAdminShop/WebHookClient.tsx";
 
+/**
+ * Display component to edit the threshold value in the webhook configuration
+ */
 export const ThresholdSelector = () => {
   return (<>
     <ThreshConditionSelector/>

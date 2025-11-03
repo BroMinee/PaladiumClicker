@@ -1,11 +1,15 @@
 import React, { Suspense } from "react";
 import { Card, CardHeader, CardTitle } from "@/components/ui/card.tsx";
-import LoadingSpinner from "@/components/ui/loading-spinner.tsx";
+import { LoadingSpinner } from "@/components/ui/loading-spinner.tsx";
 import { ProfilRankingSectionServer } from "@/components/Profil/Ranking/ProfilRankingSectionServer.tsx";
 import { RankingSelectorCard } from "@/components/Ranking/RankingSelector.tsx";
-import { RankingType } from "@/types";
-import { searchParamsProfilPage } from "@/components/Profil/ProfilSelectorDisplay.tsx";
+import { RankingType, searchParamsProfilPage } from "@/types";
 
+/**
+ * Displays the profile ranking section with a ranking selector and the rankings list.
+ *
+ * @param searchParams Profil search Params
+ */
 export function ProfilRankingSection({ searchParams }: { searchParams: searchParamsProfilPage }) {
   let rankingType: RankingType | undefined = RankingType.money;
   if (searchParams.category !== undefined) {

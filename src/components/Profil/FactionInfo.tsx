@@ -1,5 +1,5 @@
 import { Card, CardContent } from "@/components/ui/card.tsx";
-import GradientText from "@/components/shared/GradientText.tsx";
+import { GradientText } from "@/components/shared/GradientText\.tsx";
 import {
   FactionClassementClient,
   FactionDetails,
@@ -11,10 +11,13 @@ import {
 import { FaMedal, FaTachometerAlt } from "react-icons/fa";
 import { getFactionLeaderboard } from "@/lib/api/apiPala.ts";
 
+/**
+ * Displays an overview of the player's faction, including:
+ * - Faction emblem, name and description
+ * - Member count
+ * - Faction ranking
+ */
 export default function FactionInfo() {
-  // const factionLeaderboard = await getFactionLeaderboard();
-  // const factionIndex = factionLeaderboard.findIndex((faction) => faction["name"] === name) + 1;
-
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
       <Card className="md:row-span-2">

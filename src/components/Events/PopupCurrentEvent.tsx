@@ -10,7 +10,7 @@ import { Event } from "@/types";
 import { usePlayerInfoStore } from "@/stores/use-player-info-store.ts";
 import { toast } from "sonner";
 import { Input } from "@/components/ui/input.tsx";
-import SmallCardInfo from "@/components/shared/SmallCardInfo.tsx";
+import { SmallCardInfo } from "@/components/shared/SmallCardInfo.tsx";
 import { adaptPlurial } from "@/lib/misc.ts";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card.tsx";
 import Discord from "@/components/Discord.tsx";
@@ -18,6 +18,16 @@ import { RenderEvent } from "@/components/NavBar/NavBarClient.tsx";
 import { cn } from "@/lib/utils.ts";
 import { registerUserToEvent } from "@/lib/api/apiServerAction.ts";
 
+/**
+ * Displays a modal popup for the currently active event (giveaway) allowing the user to register.
+ * Shows event information, rewards, rules, and a countdown until the registration deadline.
+ *
+ * @param event - The active event data containing name, description, end date, participants, and rewards.
+ * @param alreadyRegistered - Whether the current user is already registered for the event.
+ * @param children - The trigger element that opens the popup (e.g., a button or card).
+ *
+ * @returns A dialog component enabling the user to view event details and join the giveaway.
+ */
 export const PopupCurrentEvent = ({ event, alreadyRegistered, children }: {
   event: Event,
   alreadyRegistered: boolean,

@@ -39,6 +39,9 @@ function MarketSelectorClient() {
   );
 }
 
+/**
+ * Display the list of item available for configuration in the market webhook
+ */
 export function MarketInput() {
   return (
     <>

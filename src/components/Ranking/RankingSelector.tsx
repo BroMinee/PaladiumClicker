@@ -1,5 +1,5 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitleH1 } from "@/components/ui/card.tsx";
-import GradientText from "@/components/shared/GradientText.tsx";
+import { GradientText } from "@/components/shared/GradientText\.tsx";
 import { rankingTypeToUserFriendlyText } from "@/lib/misc.ts";
 import { FaHeart } from "react-icons/fa";
 import { RankingType } from "@/types";
@@ -12,6 +12,11 @@ export type searchParamsRankingPage = {
   noUsernames?: string,
 }
 
+/**
+ * Card displaying the ranking selector UI with title, author note and buttons to switch ranking type.
+ * @param rankingType - The current ranking type selected
+ * @param rankingPage - boolean true if it's the rankingPage, otherwise it's the profile page
+ */
 export function RankingSelectorCard({ rankingType, rankingPage }: { rankingType: RankingType, rankingPage: boolean }) {
   return <Card className={cn("flex flex-col gap-4", !rankingPage && "rounded-b-xl rounded-t-none")}>
     <CardHeader className="flex flex-row items-center justify-between">

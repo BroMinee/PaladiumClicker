@@ -13,8 +13,16 @@ import { FaTrashCan } from "react-icons/fa6";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog.tsx";
 import { ScrollArea } from "@/components/ui/scroll-area.tsx";
 import { IoIosWarning } from "react-icons/io";
-import HoverText from "@/components/ui/hovertext.tsx";
+import { HoverText } from "@/components/ui/hovertext.tsx";
 
+/**
+ * Displays a server box for managing a webhook's associated server.
+ *
+ * - @param guildId ID of the server.
+ * - @param channelId ID of the channel associated with the webhook.
+ * - @param guildIdToServerName Mapping from guild IDs to their server names.
+ * - @param children Any additional elements to render inside the box.
+ */
 export function DisplayServerBox({ guildId, channelId, guildIdToServerName, children }:
                                    {
                                      guildId: string,
@@ -113,6 +121,14 @@ export function DisplayServerBox({ guildId, channelId, guildIdToServerName, chil
   </div>);
 }
 
+/**
+ * Displays a channel box for managing a webhook's associated channel.
+ *
+ * - @param guildId ID of the server.
+ * - @param channelId ID of the channel associated with the webhook.
+ * - @param channelIdToChannelName Mapping from channel IDs to their names.
+ * - @param children Any additional elements to render inside the box.
+ */
 export function DisplayChannelBox({ channelId, channelIdToChannelName, guildId, children }: {
   channelId: string,
   guildId: string,

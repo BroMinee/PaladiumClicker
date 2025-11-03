@@ -6,6 +6,12 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card.t
 import { RenderEvent } from "@/components/NavBar/NavBarClient.tsx";
 import Discord from "@/components/Discord.tsx";
 
+/**
+ * Displays a modal popup notifying the user that they have won a prize that has not yet been claimed.
+ *
+ * @param winningPrice - The name or description of the prize the user has won.
+ * @param children - The trigger element that opens the popup (e.g., a button or card).
+ */
 export const PopupRewardEvent = ({ winningPrice, children }: { winningPrice: string, children: React.ReactNode }) => {
   return <Dialog>
     <DialogTrigger>

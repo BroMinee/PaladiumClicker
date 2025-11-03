@@ -16,7 +16,11 @@ import { useSettingsStore } from "@/stores/use-settings-store";
 import { usePlayerInfoStore } from "@/stores/use-player-info-store.ts";
 import { useEffect } from "react";
 
-export default function Setting() {
+/**
+ * Renders the settings dropdown menu allowing the user to toggle visual and profile options.
+ * Includes controls for enabling/disabling falling images and using an empty default profile.
+ */
+export function Setting() {
 
   const { settings, setFallingImage, setDefaultProfile } = useSettingsStore();
   const { setDefaultProfile: setDefaultProfileLocal, data: playerInfo } = usePlayerInfoStore();

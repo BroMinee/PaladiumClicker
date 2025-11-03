@@ -1,4 +1,4 @@
-import GradientText from "@/components/shared/GradientText.tsx";
+import { GradientText } from "@/components/shared/GradientText\.tsx";
 import { CardContent } from "@/components/ui/card.tsx";
 import { cn } from "@/lib/utils.ts";
 import { safeJoinPaths } from "@/lib/misc.ts";
@@ -16,7 +16,20 @@ type SmallCardInfoProps = {
   children?: React.ReactNode;
 }
 
-const SmallCardInfo = ({ className, title, value, img, unoptimized, count, children, imgClassName }: SmallCardInfoProps) => {
+/**
+ * Displays a compact information card featuring an image, title, and highlighted value.
+ * Optionally shows a count badge and supports nested child elements for extra details.
+ *
+ * @param className - Additional class names for the card layout.
+ * @param title - The main label or title displayed beside the image.
+ * @param value - The primary numeric or textual value to highlight.
+ * @param img - Path or URL of the image to display.
+ * @param unoptimized - Whether to disable Next.js image optimization.
+ * @param count - Optional badge number displayed on the image.
+ * @param children - Optional additional JSX content rendered next to the value.
+ * @param imgClassName - Additional class names for customizing the image.
+ */
+export const SmallCardInfo = ({ className, title, value, img, unoptimized, count, children, imgClassName }: SmallCardInfoProps) => {
   return (
     <CardContent className={cn("h-full pt-6 flex items-center gap-4", className)}>
       <div className="relative inline-block">
@@ -37,4 +50,3 @@ const SmallCardInfo = ({ className, title, value, img, unoptimized, count, child
       </div>
     </CardContent>);
 };
-export default SmallCardInfo;

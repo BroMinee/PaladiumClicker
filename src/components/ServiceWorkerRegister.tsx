@@ -1,7 +1,9 @@
 "use client";
-// components/ServiceWorkerRegister.js
 import { useEffect } from "react";
 
+/**
+ * Service Worker init
+ */
 export default function ServiceWorkerRegister() {
   useEffect(() => {
     if ("serviceWorker" in navigator) {

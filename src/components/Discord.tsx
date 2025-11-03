@@ -7,6 +7,10 @@ type DiscordProps = {
   className?: string
 }
 
+/**
+ * Displays the discord element
+ * @param className - optional Card className
+ */
 const Discord = ({ className = "" }: DiscordProps) => {
   return (
     <Card className={cn("md:col-span-2 lg:col-span-1 hover:scale-105 duration-300", className)}>

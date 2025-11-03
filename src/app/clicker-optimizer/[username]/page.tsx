@@ -1,20 +1,24 @@
 import { UpgradeKey } from "@/types";
 import ProfileFetcherWrapper from "@/components/ProfileFetcher.tsx";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card.tsx";
-import GradientText from "@/components/shared/GradientText.tsx";
+import { GradientText } from "@/components/shared/GradientText\.tsx";
 import { FaHeart } from "react-icons/fa";
-import Tuto from "@/components/Tuto.tsx";
-import ImportProfil from "@/components/shared/ImportProfil.tsx";
+import { Tuto } from "@/components/Tuto.tsx";
+import { ImportProfil } from "@/components/shared/ImportProfil.tsx";
 import HeadingSection from "@/components/shared/HeadingSection.tsx";
-import RPS from "@/components/Clicker-Optimizer/RPS.tsx";
+import { RPS } from "@/components/Clicker-Optimizer/RPS.tsx";
 import { MetierComponentWrapper } from "@/components/MetierList.tsx";
-import Stats from "@/components/Clicker-Optimizer/Stats.tsx";
-import BuildingList from "@/components/Clicker-Optimizer/BuildingList.tsx";
-import ClickList from "@/components/Clicker-Optimizer/ClickList.tsx";
-import UpgradeList from "@/components/Clicker-Optimizer/UpgradeList.tsx";
-import FallingClickImage from "@/components/Clicker-Optimizer/FallingClick.tsx";
+import { Stats } from "@/components/Clicker-Optimizer/Stats.tsx";
+import { BuildingList } from "@/components/Clicker-Optimizer/BuildingList.tsx";
+import { ClickList } from "@/components/Clicker-Optimizer/ClickList.tsx";
+import { UpgradeList } from "@/components/Clicker-Optimizer/UpgradeList.tsx";
+import { FallingClickImage } from "@/components/Clicker-Optimizer/FallingClick.tsx";
 import { PlayerSkin } from "@/components/Profil/ProfilInfoClient.tsx";
 
+/**
+ * Generate Metadata
+ * @param props.params - Username parameter
+ */
 export async function generateMetadata(props: { params: Promise<{ username: string }> }) {
   const params = await props.params;
   return {
@@ -27,6 +31,10 @@ export async function generateMetadata(props: { params: Promise<{ username: stri
   };
 }
 
+/**
+ * [Clicker Page](https://palatracker.bromine.fr/clicker-optimizer/BroMine__)
+ * @param props.params - Username parameter
+ */
 export default async function Home(props: { params: Promise<{ username: string }> }) {
   const params = await props.params;
 

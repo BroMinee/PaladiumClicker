@@ -1,5 +1,5 @@
 // 'use client';
-import GradientText from "@/components/shared/GradientText.tsx";
+import { GradientText } from "@/components/shared/GradientText\.tsx";
 import { Card, CardDescription, CardFooter, CardHeader, CardTitleH1 } from "@/components/ui/card.tsx";
 import { FaHeart } from "react-icons/fa";
 
@@ -13,6 +13,9 @@ import SessionProvider from "@/components/Pala-Animation/SessionContextProvider.
 import { constants } from "@/lib/constants.ts";
 import { AuthForceWrapper } from "@/components/Auth/AuthForceWrapper.tsx";
 
+/**
+ * Generate Metadata
+ */
 export async function generateMetadata() {
   const title = "PalaTracker | PalaAnimation Trainer";
 
@@ -27,6 +30,9 @@ export async function generateMetadata() {
   };
 }
 
+/**
+ * [Pala-animation page](https://palatracker.bromine.fr/pala-animation)
+ */
 export default function PalaAnimationPage() {
   return (
     <>

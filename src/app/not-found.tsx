@@ -2,6 +2,9 @@ import { safeJoinPaths } from "@/lib/misc.ts";
 import { Card, CardHeader } from "@/components/ui/card.tsx";
 import Image from "next/image";
 
+/**
+ * Page 404
+ */
 export default function NotFound() {
 
   return (

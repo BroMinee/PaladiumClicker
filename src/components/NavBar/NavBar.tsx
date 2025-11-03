@@ -4,7 +4,7 @@ import { FaBars, FaCalculator, FaClipboardList, FaKey, FaRegUser, FaShoppingBask
 import { constants } from "@/lib/constants.ts";
 import { LogoClient } from "@/components/ui/logoClient.tsx";
 import LinkClient, {
-  CategorieDisplay,
+  NavbarCategoryDisplay,
   GiveawayFakeLink,
   NotificationWebSite
 } from "@/components/NavBar/NavBarClient.tsx";
@@ -14,12 +14,19 @@ import { PiRankingBold } from "react-icons/pi";
 import { GiPayMoney, GiStoneCrafting } from "react-icons/gi";
 import { IoMdInformationCircleOutline, IoMdStopwatch } from "react-icons/io";
 import React from "react";
-import ImportProfil from "@/components/shared/ImportProfil.tsx";
+import { ImportProfil } from "@/components/shared/ImportProfil.tsx";
 import { HiOutlineStatusOnline } from "react-icons/hi";
-import GradientText from "@/components/shared/GradientText.tsx";
+import { GradientText } from "@/components/shared/GradientText\.tsx";
 import { NavBarProfilInfo } from "@/components/NavBar/NavBarProfilInfo.tsx";
 import { MdOutlineWebhook } from "react-icons/md";
 
+/**
+ * Renders the application's vertical navbar, supporting both desktop and mobile layouts.
+ *
+ * Behavior:
+ * - On large screens, displays a vertical sidebar navigation (`NavBarContent`).
+ * - On smaller screens, displays a compact, fixed mobile navigation (`MobileNav`).
+ */
 const Navbar = () => {
   return (
     <>
@@ -40,11 +47,11 @@ function NavBarContent() {
     <>
       <nav className="flex-grow">
         {/*<MobileNav/>*/}
-        <LogoClient menu={true}/>
+        <LogoClient/>
         <div className="flex justify-center w-full border-gray-600 border-b space-y-3 pb-5 ">
           <ImportProfil showResetButton navBar/>
         </div>
-        <CategorieDisplay name={"Statistiques et données"}>
+        <NavbarCategoryDisplay name={"Statistiques et données"}>
           <LinkClient path={constants.profilPath}>
             <FaRegUser size={24}/>
           </LinkClient>
@@ -57,8 +64,8 @@ function NavBarContent() {
           <LinkClient path={constants.moneyRanking}>
             <PiRankingBold size={24}/>
           </LinkClient>
-        </CategorieDisplay>
-        <CategorieDisplay name={"Outils"}>
+        </NavbarCategoryDisplay>
+        <NavbarCategoryDisplay name={"Outils"}>
           <LinkClient path={constants.optimizerClickerPath}>
             <GrOptimize size={24}/>
           </LinkClient>
@@ -74,8 +81,8 @@ function NavBarContent() {
           <LinkClient path={constants.webhooksPath}>
             <MdOutlineWebhook size={24}/>
           </LinkClient>
-        </CategorieDisplay>
-        <CategorieDisplay name={"Informations et gestion"}>
+        </NavbarCategoryDisplay>
+        <NavbarCategoryDisplay name={"Informations et gestion"}>
           <LinkClient path={constants.statusPath}>
             <HiOutlineStatusOnline size={24}/>
           </LinkClient>
@@ -91,7 +98,7 @@ function NavBarContent() {
           <LinkClient path={constants.aboutPath}>
             <IoMdInformationCircleOutline size={24}/>
           </LinkClient>
-        </CategorieDisplay>
+        </NavbarCategoryDisplay>
       </nav>
       <footer>
         <NotificationWebSite/>

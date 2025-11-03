@@ -9,7 +9,10 @@ import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover
 import { Button } from "@/components/ui/button.tsx";
 import { FaInfoCircle } from "react-icons/fa";
 
-export default function ImportOfflineProfil() {
+/**
+ * Popover content to switch to a offline profile
+ */
+export function ImportOfflineProfil() {
 
   const handleCheckChange = (checked: boolean) => {
     setDefaultProfile(checked);

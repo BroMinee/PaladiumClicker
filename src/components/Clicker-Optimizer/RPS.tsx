@@ -1,19 +1,19 @@
 "use client";
 import {
-  checkCondition,
-  computePrice,
+  buyBuilding,
   computeProgression,
   computeRPS,
+  computeXBuildingAhead,
   formatPrice,
   reverseDDHHMMSSOnlyClicker,
   safeJoinPaths
 } from "@/lib/misc";
-import { buyBuilding, computeXBuildingAhead, DisplayCoinsDormants, Stat } from "./Stats";
-import { bestBuildingInfo, bestPurchaseInfoDetailed, bestUpgradeInfo, buildingPathType, PlayerInfo } from "@/types";
+import { DisplayCoinsDormants, Stat } from "./Stats";
+import {  bestPurchaseInfoDetailed } from "@/types";
 import { usePlayerInfoStore } from "@/stores/use-player-info-store";
 import React, { useEffect, useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import GradientText from "@/components/shared/GradientText";
+import { GradientText } from "@/components/shared/GradientText";
 import { Button } from "@/components/ui/button";
 import { useRpsStore } from "@/stores/use-rps-store";
 import { FaBed, FaCoins, FaInfoCircle, FaMedal, FaRandom, FaTachometerAlt } from "react-icons/fa";
@@ -23,7 +23,12 @@ import { GiProgression } from "react-icons/gi";
 import DelayedNotificationButton from "@/components/Clicker-Optimizer/NotificationButton.tsx";
 import { constants } from "@/lib/constants.ts";
 
-const RPS = () => {
+/**
+ * Component that displays many clicker stats such as the current RPS, the best most profitable upgrade/building,
+ * the total coins spent, the current coins amount in stock.
+ * Compute as well the current RPS of the player using the playerInfo store information.
+ */
+export const RPS = () => {
   const { data: playerInfo, setPlayerInfo } = usePlayerInfoStore();
   const { rps, setRPS } = useRpsStore();
   const [estimatedRPS, setEstimatedRPS] = useState(3);
@@ -226,98 +231,3 @@ const RPS = () => {
   );
 };
 
-export function computeBestBuildingUpgrade(playerInfo: PlayerInfo): bestBuildingInfo {
-  let buildingOwned = playerInfo.building.filter((building) => Number(building.own) > 0).length;
-  if (buildingOwned !== playerInfo.building.length && Number(playerInfo.building[buildingOwned]["name"]) !== -1) {
-    buildingOwned += 1;
-  }
-  const currentRPS = computeRPS(playerInfo);
-  let bestCoef = 0;
-  let bestBuildingIndex = -1;
-  for (let index = 0; index < buildingOwned; index++) {
-    const copy = structuredClone(playerInfo);
-    const building = copy.building[index];
-    if (building.own === 99) {
-      continue;
-    }
-
-    building.own += 1;
-
-    const coef = (computeRPS(copy) - currentRPS) / (computePrice(copy.building[index].price, Number(copy.building[index].own) - 1));
-    if (coef > bestCoef) {
-      bestCoef = coef;
-      bestBuildingIndex = index;
-    }
-  }
-
-  return {
-    bestCoef: bestCoef,
-    bestUpgradeIndex: bestBuildingIndex,
-    bestListName: "building"
-  };
-}
-
-export function findBestUpgrade(playerInfo: PlayerInfo, date: Date): bestUpgradeInfo {
-
-  // building_upgrade
-  // category_upgrade
-  // global_upgrade
-  // many_upgrade
-  // terrain_upgrade
-
-  const bestUpgradeRes: bestUpgradeInfo = {
-    bestCoef: 0,
-    bestUpgradeIndex: -1,
-    bestListName: "building_upgrade"
-  };
-
-  const buildingUpgradeUnlockable = playerInfo["building_upgrade"].filter((building) => !building["own"] && checkCondition(playerInfo, building["condition"], date).unlockable);
-  const categoryUpgradeUnlockable = playerInfo["category_upgrade"].filter((building) => !building["own"] && checkCondition(playerInfo, building["condition"], date).unlockable);
-  const globalUpgradeUnlockable = playerInfo["global_upgrade"].filter((building) => !building["own"] && checkCondition(playerInfo, building["condition"], date).unlockable);
-  const manyUpgradeUnlockable = playerInfo["many_upgrade"].filter((building) => !building["own"] && checkCondition(playerInfo, building["condition"], date).unlockable);
-  const terrainUpgradeUnlockable = playerInfo["terrain_upgrade"].filter((building) => !building["own"] && checkCondition(playerInfo, building["condition"], date).unlockable);
-  const posteriorUpgradeUnlockable = playerInfo["posterior_upgrade"].filter((building) => !building["own"] && checkCondition(playerInfo, building["condition"], date).unlockable);
-
-  const currentRPS = computeRPS(playerInfo);
-
-  type typeListTmp =
-    typeof buildingUpgradeUnlockable
-    | typeof categoryUpgradeUnlockable
-    | typeof globalUpgradeUnlockable
-    | typeof manyUpgradeUnlockable
-    | typeof terrainUpgradeUnlockable
-    | typeof posteriorUpgradeUnlockable;
-
-  function getBestIndex(list: typeListTmp, nameList: buildingPathType) {
-    for (let index = 0; index < list.length; index++) {
-      const copy = structuredClone(playerInfo);
-      const name = list[index]["name"];
-
-      if (!Object.keys(playerInfo).includes(nameList)) {
-        return;
-      }
-
-      const indexInBuilding = playerInfo[nameList].findIndex((building) => building["name"] === name);
-      copy[nameList][indexInBuilding]["own"] = true;
-
-      const coef = (computeRPS(copy) - currentRPS) / (copy[nameList][indexInBuilding]["price"]);
-
-      if (coef > bestUpgradeRes.bestCoef) {
-        bestUpgradeRes.bestCoef = coef;
-        bestUpgradeRes.bestUpgradeIndex = indexInBuilding;
-        bestUpgradeRes.bestListName = nameList;
-      }
-    }
-  }
-
-  getBestIndex(buildingUpgradeUnlockable, "building_upgrade");
-  getBestIndex(categoryUpgradeUnlockable, "category_upgrade");
-  getBestIndex(globalUpgradeUnlockable, "global_upgrade");
-  getBestIndex(manyUpgradeUnlockable, "many_upgrade");
-  getBestIndex(terrainUpgradeUnlockable, "terrain_upgrade");
-  getBestIndex(posteriorUpgradeUnlockable, "posterior_upgrade");
-
-  return bestUpgradeRes;
-}
-
-export default RPS;

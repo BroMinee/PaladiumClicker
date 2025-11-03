@@ -1,11 +1,14 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitleH1 } from "@/components/ui/card.tsx";
-import GradientText from "@/components/shared/GradientText.tsx";
+import { GradientText } from "@/components/shared/GradientText\.tsx";
 import { FaHeart } from "react-icons/fa";
 import Discord from "@/components/Discord.tsx";
 import newsJson from "@/public/news.json";
 import { News } from "@/components/News.tsx";
 import { ChangeLogs } from "@/types";
 
+/**
+ * Generate Metadata
+ */
 export async function generateMetadata() {
 
   const title = "PalaTracker | Patchnotes";
@@ -21,6 +24,9 @@ export async function generateMetadata() {
 
 }
 
+/**
+ * [Patchnote page](https://palatracker.bromine.fr/patchnote)
+ */
 export default function Home() {
   const json : ChangeLogs[] = newsJson;
 

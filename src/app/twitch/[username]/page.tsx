@@ -1,9 +1,14 @@
 import ProfileFetcherWrapper from "@/components/ProfileFetcher";
-import TwitchOverlay from "@/components/Twitch/TwichAnimation";
+import { TwitchOverlay } from "@/components/Twitch/TwichAnimation";
 import { AvailableElements } from "@/components/Twitch/TwitchOverlayConfig";
 import { RankingType } from "@/types";
 import { redirect } from "next/navigation";
 
+/**
+ * [Twitch layout page](https://palatracker.bromine.fr/twitch/BroMine__)
+ * @param props.params - Username
+ * @param props.searchParams - SearchParams
+ */
 export default async function TwitchLayoutHome(props: { params: Promise<{ username: string}>, searchParams: Promise<{config: string}> }) {
 
   const parsedElements = await props.searchParams.then(p => p.config.split(",").map(item => {

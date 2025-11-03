@@ -74,6 +74,7 @@ const SheetContent = React.forwardRef<
 ));
 SheetContent.displayName = SheetPrimitive.Content.displayName;
 
+// eslint-disable-next-line jsdoc/require-jsdoc
 const SheetHeader = ({
   className,
   ...props
@@ -88,6 +89,7 @@ const SheetHeader = ({
 );
 SheetHeader.displayName = "SheetHeader";
 
+// eslint-disable-next-line jsdoc/require-jsdoc
 const SheetFooter = ({
   className,
   ...props

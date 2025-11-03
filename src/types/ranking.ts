@@ -36,3 +36,5 @@ export type PaladiumRanking = {
   position: number,
   ranked: boolean
 }
+
+export type searchParamsProfilPage = { section?: string, category?: string, usernames?: string }

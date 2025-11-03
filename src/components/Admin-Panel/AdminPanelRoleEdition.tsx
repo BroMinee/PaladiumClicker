@@ -5,9 +5,14 @@ import { FormEvent, useState } from "react";
 import { getRoleColor } from "@/lib/misc.ts";
 import { editRoleSubmit } from "@/lib/api/apiServerAction.ts";
 import { toast } from "sonner";
-import LoadingSpinner from "@/components/ui/loading-spinner.tsx";
+import { LoadingSpinner } from "@/components/ui/loading-spinner.tsx";
 
-export default function EditRole({ defaultValue, discord_id }: { defaultValue: Role, discord_id: string }) {
+/**
+ * Component to edit a user role.
+ * @param defaultValue - Current user role.
+ * @param discord_id - Discord user id.
+ */
+export function EditRole({ defaultValue, discord_id }: { defaultValue: Role, discord_id: string }) {
 
   const [role, setRole] = useState<Role>(defaultValue);
   const [isPending, setIsPending] = useState(false);

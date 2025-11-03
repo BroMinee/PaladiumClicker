@@ -7,6 +7,11 @@ import { checkCondition } from "@/lib/misc.ts";
 import { Card } from "@/components/ui/card.tsx";
 import { ReactNode } from "react";
 
+/**
+ * Wrapper component around the click IMG, used to buy/sell the CPS.
+ * @param index - index of the CPS in the playerInfo.CPS list
+ * @param children - the click IMG.
+ */
 export function ButtonCPS({ index, children }: { index: number, children: ReactNode }) {
   const { data: playerInfo, selectCPS } = usePlayerInfoStore();
   const cps = playerInfo?.CPS[index];

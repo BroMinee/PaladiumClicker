@@ -17,6 +17,16 @@ import { groupsType } from "@/app/webhook/page.tsx";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog.tsx";
 import { ScrollArea } from "@/components/ui/scroll-area.tsx";
 
+/**
+ * Renders a preview interface for Discord webhooks grouped by guild and channel.
+ * Displays servers (guilds) and their channels, along with existing webhooks,
+ * and buttons to create new webhook alerts.
+ *
+ * @param groupsArg Initial grouped webhooks by guildId and channelId
+ * @param webHookDiscord List of all Discord webhooks
+ * @param guildIdToServerName Mapping of guild IDs to server names
+ * @param channelIdToChannelName Mapping of channel IDs to channel names
+ */
 export function WebHookPreviewPage({
   groupsArg,
   webHookDiscord,

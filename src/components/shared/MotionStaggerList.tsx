@@ -8,7 +8,14 @@ type Props = {
   gap?: number;
 };
 
-export default function MotionStaggerList({ children, className, gap = 0.06 }: Props) {
+/**
+ * MotionStaggerList component, sequentially animates a list of child elements with a staggered fade-in and upward motion.
+ *
+ * @param children The React nodes to animate in sequence.
+ * @param className Optional CSS class names for styling the container.
+ * @param gap The delay (in seconds) between each child’s animation start. Defaults to 0.06.
+ */
+export function MotionStaggerList({ children, className, gap = 0.06 }: Props) {
   const reduce = useReducedMotion();
   const items = React.Children.toArray(children);
   return (

@@ -6,6 +6,11 @@ import React from "react";
 import { CardContent } from "@/components/ui/card.tsx";
 import { DisplayItem, DisplayItemProduce } from "@/components/Craft/CraftingDisplayItem.tsx";
 
+/**
+ * Display the crafting table with the corresponding item in each slot.
+ * @param item - The item we want to craft.
+ * @param options - A list of all available craft.
+ */
 export async function CraftItemRecipe({ item, options }: { item: OptionType, options: OptionType[] }) {
 
   const craft_recipe = await getCraft(item.value);
@@ -83,7 +88,7 @@ function ShowCraft({ item, craft_recipe, slotItemInfo }: {
           </div>
           <div className="flex flex-row gap-4 items-center w-full">
             <CraftingArrow/>
-            <DisplayItemProduce slot={item} title={craft_recipe.count + "x " + item.label} value={craft_recipe.count + "x " + item.label2} count={craft_recipe.count}/>
+            <DisplayItemProduce item={item} title={craft_recipe.count + "x " + item.label} value={craft_recipe.count + "x " + item.label2} count={craft_recipe.count}/>
             {/*<SmallCardInfo title={craft_recipe.count + "x " + item.label} value={craft_recipe.count + "x " + item.label2}*/}
             {/*               img={`/AH_img/${item.img}`} unoptimized count={craft_recipe.count}/>*/}
           </div>
@@ -102,7 +107,7 @@ function ShowCraftingTable({ slotItemInfo }: {
       className="grid grid-cols-3 grid-rows-3 w-fit gap-1">
       {slotItemInfo.map((slot, index) => {
         return (
-          <DisplayItem key={slot.value + index + "-craft"} slot={slot}/>
+          <DisplayItem key={slot.value + index + "-craft"} item={slot}/>
         );
       })}
     </div>
@@ -115,19 +120,19 @@ function ShowPalamachine({ slotItemInfo }: {
   return (
     <div className="relative w-[12.5rem] h-[12.5rem] mx-auto">
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-fit h-fit">
-        <DisplayItem slot={slotItemInfo[0]}/>
+        <DisplayItem item={slotItemInfo[0]}/>
       </div>
       <div className="absolute left-0 top-1/2 -translate-y-1/2 w-fit h-fit">
-        <DisplayItem slot={slotItemInfo[1]}/>
+        <DisplayItem item={slotItemInfo[1]}/>
       </div>
       <div className="absolute right-0 top-1/2 -translate-y-1/2 w-fit h-fit">
-        <DisplayItem slot={slotItemInfo[2]}/>
+        <DisplayItem item={slotItemInfo[2]}/>
       </div>
       <div className="absolute bottom-0 left-[15%] w-fit h-fit">
-        <DisplayItem slot={slotItemInfo[3]}/>
+        <DisplayItem item={slotItemInfo[3]}/>
       </div>
       <div className="absolute bottom-0 right-[15%] w-fit h-fit">
-        <DisplayItem slot={slotItemInfo[4]}/>
+        <DisplayItem item={slotItemInfo[4]}/>
       </div>
     </div>
 
@@ -140,7 +145,7 @@ function ShowFurnace({ slotItemInfo }: {
   return (
     <div className="w-[12.5rem] h-fit mx-auto">
       <div className="w-fit h-fit">
-        <DisplayItem slot={slotItemInfo[0]}/>
+        <DisplayItem item={slotItemInfo[0]}/>
       </div>
     </div>
 
@@ -153,10 +158,10 @@ function ShowGrinder({ slotItemInfo }: {
   return (
     <div className="flex flex-col w-[12.5rem] h-fit mx-auto gap-1">
       <div className="w-fit h-fit">
-        <DisplayItem slot={slotItemInfo[0]}/>
+        <DisplayItem item={slotItemInfo[0]}/>
       </div>
       <div className="w-fit h-fit">
-        <DisplayItem slot={slotItemInfo[1]}/>
+        <DisplayItem item={slotItemInfo[1]}/>
       </div>
     </div>
 
@@ -169,10 +174,10 @@ function ShowCauldron({ slotItemInfo }: {
   return (
     <div className="flex flex-row w-[12.5rem] h-fit mx-auto gap-1">
       <div className="w-fit h-fit">
-        <DisplayItem slot={slotItemInfo[0]}/>
+        <DisplayItem item={slotItemInfo[0]}/>
       </div>
       <div className="w-fit h-fit">
-        <DisplayItem slot={slotItemInfo[1]}/>
+        <DisplayItem item={slotItemInfo[1]}/>
       </div>
     </div>
 
@@ -185,10 +190,10 @@ function ShowAlchemyCreator({ slotItemInfo }: {
   return (
     <div
       className="grid grid-cols-3 w-fit h-fit gap-1">
-      <DisplayItem slot={slotItemInfo[0]}/>
-      <DisplayItem slot={slotItemInfo[1]}/>
-      <DisplayItem slot={slotItemInfo[2]}/>
-      <DisplayItem slot={slotItemInfo[3]} className="col-start-2"/>
+      <DisplayItem item={slotItemInfo[0]}/>
+      <DisplayItem item={slotItemInfo[1]}/>
+      <DisplayItem item={slotItemInfo[2]}/>
+      <DisplayItem item={slotItemInfo[3]} className="col-start-2"/>
     </div>
   );
 }

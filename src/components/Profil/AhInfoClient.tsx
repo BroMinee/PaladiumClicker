@@ -8,6 +8,9 @@ import { toast } from "sonner";
 import { constants } from "@/lib/constants.ts";
 import Image from "next/image";
 
+/**
+ * Displays the number of active Auction House (AH) listings for the current player.
+ */
 export function AhInfoTitleClient() {
   const { data: playerInfo } = usePlayerInfoStore();
 
@@ -25,6 +28,12 @@ export function AhInfoTitleClient() {
   </>;
 }
 
+/**
+ * Calculates and displays the total potential profit from the player's active AH listings.
+ *
+ * Notes:
+ * - Excludes `"tile-luckydrawer"` from the total profit.
+ */
 export function AhInfoGetTotalBenefice() {
   const { data: playerInfo } = usePlayerInfoStore();
 
@@ -38,6 +47,11 @@ export function AhInfoGetTotalBenefice() {
   </span>;
 }
 
+/**
+ * Renders the list of all Auction House items currently being sold by the player.
+ *
+ * @param allItemsInfo - Array of all item know in the DB.
+ */
 export function AhItemClient({ allItemsInfo }: { allItemsInfo: OptionType[] }) {
   const { data: playerInfo } = usePlayerInfoStore();
 

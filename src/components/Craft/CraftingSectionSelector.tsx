@@ -5,6 +5,9 @@ import { cn } from "@/lib/utils.ts";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area.tsx";
 import { CraftSectionEnum } from "@/types";
 
+/**
+ * Displays a horizontal selector for crafting sections and updates the URL when a section is chosen.
+ */
 export function CraftingSectionSelector() {
 
   const searchParams = useSearchParams();

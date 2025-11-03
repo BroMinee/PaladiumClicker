@@ -5,7 +5,10 @@ import { safeJoinPaths } from "@/lib/misc.ts";
 
 import { constants } from "@/lib/constants.ts";
 
-const Contributors = () => {
+/**
+ * Component that displays the list of contributors.
+ */
+export const Contributors = () => {
   const contributeurs = [
     {
       pseudo: "BroMine__",
@@ -72,5 +75,3 @@ const Contributors = () => {
   </div>;
 
 };
-
-export default Contributors;

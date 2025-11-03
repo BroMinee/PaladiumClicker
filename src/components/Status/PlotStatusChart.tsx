@@ -27,7 +27,16 @@ const CustomTooltip = ({ active, payload, label }: any) => {
   }
 };
 
-const PlotStatusChart = ({ data, periode }: { data: ServerPaladiumStatusResponse[], periode: StatusPeriod }) => {
+/**
+ * Displays the average player counts on the server.
+ *
+ * @param data Array of server status objects, each with `date` and `players`.
+ * @param periode The period for the chart, one of "day", "week", "month", or "season".
+ *
+ * The chart shows the number of players over time and includes a reference line
+ * representing the average player count for the selected period.
+ */
+export const PlotStatusChart = ({ data, periode }: { data: ServerPaladiumStatusResponse[], periode: StatusPeriod }) => {
   // TODO: zoomable chart
   // TODO: daily price and not 15min delta
   // TODO: add a line for the average price
@@ -80,4 +89,3 @@ const PlotStatusChart = ({ data, periode }: { data: ServerPaladiumStatusResponse
     </ResponsiveContainer>
   );
 };
-export default PlotStatusChart;

@@ -1,5 +1,9 @@
 import { Role } from "@/types";
 
+/**
+ * Returns the hex color associated with a given user role.
+ * @param role The role to get the color for.
+ */
 export function getRoleColor(role: Role) {
   switch (role) {
   case "Admin":
@@ -19,6 +23,11 @@ export function getRoleColor(role: Role) {
   }
 }
 
+/**
+ * Returns the plural form of a word if the count is 2 or more.
+ * @param word The word to potentially pluralize.
+ * @param count The number determining pluralization.
+ */
 export function adaptPlurial(word: string, count: number) {
   return count >= 2 ? word + "s" : word;
 }

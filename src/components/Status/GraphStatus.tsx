@@ -1,14 +1,17 @@
 import { ServerPaladiumStatusResponse, StatusPeriod } from "@/types";
 import { redirect } from "next/navigation";
-import LoadingSpinner from "@/components/ui/loading-spinner.tsx";
-import PlotStatusChart from "@/components/Status/PlotStatusChart.tsx";
+import { LoadingSpinner } from "@/components/ui/loading-spinner.tsx";
+import { PlotStatusChart } from "@/components/Status/PlotStatusChart.tsx";
 import { getStatusPaladium } from "@/lib/api/apiPalaTracker.ts";
 
 type GraphStatusProps = {
   periode: StatusPeriod,
 }
 
-export default async function GraphStatus({ periode: periode }: GraphStatusProps) {
+/**
+ * Fetches the average player on the server for a given period and renders it as a line-plot chart.
+ */
+export async function GraphStatus({ periode }: GraphStatusProps) {
   let data = [] as ServerPaladiumStatusResponse[];
   try {
     switch (periode) {
@@ -30,6 +33,9 @@ export default async function GraphStatus({ periode: periode }: GraphStatusProps
   );
 }
 
+/**
+ * Fallback UI displayed while the server status chart is loading.
+ */
 export function GraphStatusFallback() {
   return <div className="flex flex-row gap-2 m-4 w-96 items-center">
     <LoadingSpinner size={4}/>

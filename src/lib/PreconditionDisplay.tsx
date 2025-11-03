@@ -6,6 +6,12 @@ import { checkCondition, formatPrice } from "@/lib/misc.ts";
 import { usePlayerInfoStore } from "@/stores/use-player-info-store.ts";
 import { UpgradeKey } from "@/types";
 
+/**
+ * Displays the preconditions required for a given upgrade.
+ *
+ * @param index The index of the upgrade in the player's upgrade array
+ * @param upgradeType The type of upgrade
+ */
 export function PreconditionDisplay({ index, upgradeType }: { index: number, upgradeType: UpgradeKey | "CPS" }) {
   const { data: playerInfo } = usePlayerInfoStore();
   if (!playerInfo) {

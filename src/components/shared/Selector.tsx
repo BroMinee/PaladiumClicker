@@ -5,7 +5,7 @@ import React, { useEffect, useState } from "react";
 
 import Image from "next/image";
 import { OptionType } from "@/types";
-import LoadingSpinner from "@/components/ui/loading-spinner.tsx";
+import { LoadingSpinner } from "@/components/ui/loading-spinner.tsx";
 
 const customStyles: StylesConfig<OptionType, false> = {
   control: (provided, state) => ({
@@ -42,7 +42,16 @@ const IndicatorSeparator = () => null;
 
 const animatedComponents = makeAnimated();
 
-const Selector = ({ options, defaultValue, setInputValue }: SelectorProps) => {
+/**
+ * Displays an searchable dropdown (selector) for choosing among provided options.
+ * The menu opens only after the user types at least three characters.
+ * Each option shows an image, a primary label, and a secondary label. Mainly the item image, the french and english name
+ *
+ * @param options The list of selectable items, each containing `label`, `label2`, and `img`.
+ * @param defaultValue The pre-selected option displayed when the selector loads.
+ * @param setInputValue A callback triggered when the user selects or clears a value.
+ */
+export const Selector = ({ options, defaultValue, setInputValue }: SelectorProps) => {
   const [menuIsOpen, setMenuIsOpen] = useState<boolean>(false);
   const [isMounted, setIsMounted] = useState<boolean>(false);
 
@@ -101,5 +110,3 @@ const Selector = ({ options, defaultValue, setInputValue }: SelectorProps) => {
   />;
 
 };
-
-export default Selector;

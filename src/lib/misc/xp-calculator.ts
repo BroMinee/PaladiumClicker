@@ -2,6 +2,13 @@ import { searchParamsXpBonusPage } from "@/components/Xp-Calculator/XpCalculator
 import { constants } from "@/lib/constants.ts";
 import { MetierKey, PlayerInfo } from "@/types";
 
+/**
+ * Calculates the experience coefficient for a given level and current XP.
+ * Used for svg.
+ *
+ * @param level The current level of the player/job.
+ * @param currentXp The total experience points the player currently has.
+ */
 export function getXpCoef(level: number, currentXp: number) {
   // if (level === 100)
   //   return 1;
@@ -14,6 +21,11 @@ export function getXpCoef(level: number, currentXp: number) {
   return (currentXp - constants.metier_palier[level - 1]) / constants.metier_xp[level];
 }
 
+/**
+ * Returns the primary and background RGB colors associated with a given job name.
+ *
+ * @param name The job key.
+ */
 export const getColorByMetierName = (name: MetierKey) => {
   let color = [0, 150, 0];
   let bgColor = [0, 0, 0];
@@ -39,6 +51,11 @@ export const getColorByMetierName = (name: MetierKey) => {
   return { color, bgColor };
 };
 
+/**
+ * Calculates the XP needed for a player to reach a target level in a specific job.
+ * @param playerInfo The player's information containing current XP and levels.
+ * @param searchParams The search parameters specifying the target job and level.
+ */
 export function getXpDiff(playerInfo: PlayerInfo | null, searchParams: searchParamsXpBonusPage) {
   if (!playerInfo || !playerInfo?.metier || searchParams.level === undefined || !searchParams.metier) {
     return 0;
@@ -51,6 +68,10 @@ export function getXpDiff(playerInfo: PlayerInfo | null, searchParams: searchPar
   return res;
 }
 
+/**
+ * Returns the total cumulative XP required to reach a given level.
+ * @param level The target level.
+ */
 export function getTotalXPForLevel(level: number) {
 
   if (level - 1 >= constants.metier_palier.length) {

@@ -3,6 +3,9 @@ import React from "react";
 import { API_PALATRACKER } from "@/lib/constants.ts";
 import { LoginButton } from "@/components/Login/LoginButton.tsx";
 
+/**
+ * [Admin login page](https://palatracker.bromine.fr/admin-panel/login)
+ */
 export default function WebHooksPage() {
   return (
     <Card>

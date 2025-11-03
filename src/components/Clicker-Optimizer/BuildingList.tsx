@@ -7,7 +7,11 @@ import { BuildingInput, BuildingPrice, BuildingRPS } from "@/components/Clicker-
 import Image from "next/image";
 import React from "react";
 import { constants } from "@/lib/constants.ts";
-const BuildingList = () => {
+
+/**
+ * Component that displays the list of building on the clicker.
+ */
+export const BuildingList = () => {
   function getImgPath(index: number, price: number) {
     if (price === -1) {
       return "/unknown.png";
@@ -63,5 +67,3 @@ const Building = ({ imgPath, index }: BuildingProps) => {
     </Card>
   );
 };
-
-export default BuildingList;

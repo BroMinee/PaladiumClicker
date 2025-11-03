@@ -1,6 +1,6 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card.tsx";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area.tsx";
-import GradientText from "@/components/shared/GradientText.tsx";
+import { GradientText } from "@/components/shared/GradientText\.tsx";
 import { FaEye, FaHeart } from "react-icons/fa";
 import {
   OverlayTwitchButton,
@@ -17,10 +17,12 @@ import {
   ProfilUsernameInfo
 } from "@/components/Profil/ProfilInfoClient.tsx";
 import { FactionNameInfo } from "@/components/Profil/FactionInfoClient.tsx";
-import ImportProfil from "@/components/shared/ImportProfil.tsx";
+import { ImportProfil } from "@/components/shared/ImportProfil.tsx";
 
-export default function ProfilInfo() {
-
+/**
+ * [Profil page](https://palatracker.bromine.fr/profil/BroMine__)
+ */
+export function ProfilInfo() {
   return (<><Card className="rounded-b-xl rounded-t-none">
     <CardHeader className="flex flex-row items-center justify-between">
       <CardTitle className="lg:text-xl">

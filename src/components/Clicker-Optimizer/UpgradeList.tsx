@@ -6,7 +6,7 @@ import { redirect } from "next/navigation";
 import { ButtonUpgrade } from "@/components/Clicker-Optimizer/UpgradeListClient.tsx";
 import Image from "next/image";
 import { ReactNode } from "react";
-import HoverText from "@/components/ui/hovertext.tsx";
+import { HoverText } from "@/components/ui/hovertext.tsx";
 import { PreconditionDisplay } from "@/lib/PreconditionDisplay.tsx";
 import { constants } from "@/lib/constants.ts";
 
@@ -14,7 +14,11 @@ type UpgradeListProps = {
   upgradeType: UpgradeKey;
 }
 
-const UpgradeList = ({ upgradeType }: UpgradeListProps) => {
+/**
+ * Component that display a list of upgrade, could be `global_upgrade`, `posterior_upgrade`, ...
+ * @param upgradeType - the list of upgrade type we want to display.
+ */
+export const UpgradeList = ({ upgradeType }: UpgradeListProps) => {
   function getImgPath(index: number, name: string) {
     const majUpgradeName = upgradeType[0].toUpperCase() + upgradeType.slice(1);
     const nameShort = majUpgradeName.split("_")[0];
@@ -82,5 +86,3 @@ function Upgrade({ upgradeType, index, imgPath, jsonToUse }: UpgradeProps) {
     </HoverText>
   );
 }
-
-export default UpgradeList;

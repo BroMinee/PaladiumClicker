@@ -14,8 +14,8 @@ import { toast } from "sonner";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog.tsx";
 import { PlayerInfo } from "@/types";
 import { ScrollArea } from "@/components/ui/scroll-area.tsx";
-import SmallCardInfo from "@/components/shared/SmallCardInfo.tsx";
-import LoadingSpinner from "@/components/ui/loading-spinner.tsx";
+import { SmallCardInfo } from "@/components/shared/SmallCardInfo.tsx";
+import { LoadingSpinner } from "@/components/ui/loading-spinner.tsx";
 
 type ImportProfilProps = {
   showResetButton?: boolean,
@@ -24,7 +24,15 @@ type ImportProfilProps = {
   navBar?: boolean
 }
 
-export default function ImportProfil({
+/**
+ * ImportProfil button, handles player profile import, update, and reset logic.
+ *
+ * @param showResetButton Whether to show the reset or update profile button.
+ * @param withBackground Whether the input should have a background style.
+ * @param navBar Whether the component is displayed inside a navigation bar.
+ * @param classNameInput Additional classes applied to the input element.
+ */
+export function ImportProfil({
   showResetButton = false,
   withBackground = true,
   navBar = false,

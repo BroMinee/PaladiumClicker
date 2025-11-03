@@ -7,60 +7,12 @@ import { cn } from "@/lib/utils.ts";
 import React from "react";
 import { Card } from "@/components/ui/card.tsx";
 
-// export function PreconditionDisplay({ index, upgradeType }: { index: number, upgradeType: UpgradeKey }) {
-//   const { data: playerInfo } = usePlayerInfoStore();
-//
-//   if (!playerInfo) {
-//     return null;
-//   }
-//
-//   const {
-//     unlockable,
-//     coinsCondition,
-//     totalCoins,
-//     dayCondition,
-//     daySinceStart,
-//     buildingIndex,
-//     buildingNeed,
-//     buildingCount
-//   } = checkCondition(playerInfo, playerInfo[upgradeType][index].condition, new Date());
-//
-//   const texts = [];
-//   if (!unlockable) {
-//     texts.push("Précondition non remplie :");
-//     if (dayCondition !== -1 && daySinceStart < dayCondition)
-//       texts.push(`${formatPrice(dayCondition)} days`);
-//     if (coinsCondition !== -1 && totalCoins < coinsCondition)
-//       texts.push(`${formatPrice(coinsCondition)} coins`);
-//     if (buildingIndex !== -1 && buildingCount < buildingNeed)
-//       texts.push(`${buildingNeed - buildingCount} ${playerInfo?.["building"][buildingIndex]["name"]} manquant`);
-//     if (texts.length !== 2)
-//       texts[0] = "Préconditions non remplies :";
-//   }
-//
-//   if (!unlockable) {
-//     return (
-//       // <Popover>
-//       //   <PopoverTrigger asChild onClick={(e) => e.stopPropagation()}>
-//       //     <Button variant="outline" size="icon">
-//       //       <FaInfoCircle className="inline-block h-4 w-4"/>
-//       //     </Button>
-//       //   </PopoverTrigger>
-//       //   <PopoverContent className="w-80">
-//       <div>
-//         {texts.map((text, index) => (
-//           <p key={index}>{text}</p>
-//         ))}
-//       </div>
-//
-//       // </PopoverContent>
-//
-//       // </Popover>
-//     );
-//   }
-//   return null;
-// }
-
+/**
+ * Button wrapper around the upgrade IMG.
+ * @param index - index in the list of upgrade to which the button is bind.
+ * @param upgradeType - The upgrade type, used to iterate over the correctly list.
+ * @param children - IMG of the upgrade
+ */
 export function ButtonUpgrade({ index, upgradeType, children }: {
   index: number,
   upgradeType: UpgradeKey,

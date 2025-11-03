@@ -2,6 +2,9 @@ import { useProfileStore } from "@/stores/use-profile-store.ts";
 import Image from "next/image";
 import { Button } from "@/components/ui/button.tsx";
 
+/**
+ * Displays the logged-in user's profile information in the navbar such as the image, the username...
+ */
 export function ProfileNavBar() {
   const { profileInfo } = useProfileStore();
   if (!profileInfo) {

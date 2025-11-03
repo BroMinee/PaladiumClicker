@@ -1,10 +1,14 @@
 "use client";
 import { NodeType, Tree } from "@/types";
 import React, { useEffect, useState } from "react";
-import MyTreeView from "@/components/Craft/MyTreeView.tsx";
+import { MyTreeView } from "@/components/Craft/MyTreeView.tsx";
 import { CraftResourceList } from "@/components/Craft/CraftResourceList.tsx";
 import { createTreeNode, getAllLeaves, getValueTree } from "@/lib/misc.ts";
 
+/**
+ * Display the tree representing the craft, and the summary of material needed.
+ * @param root - A tree representing the craft
+ */
 export function CraftingInformationClient({ root }: { root: Tree<NodeType> }) {
 
   const [tree, setTree] = useState<Tree<NodeType>>(root);

@@ -12,6 +12,10 @@ type MetierListProps = {
   editable?: boolean;
 };
 
+/**
+ * Component that display the 4 Jobs components
+ * @param editable - boolean, if true the component can edit playerInfo.metier[key].level
+ */
 const MetierList = ({ editable = true }: MetierListProps) => {
   return (
     <div className="w-full grid grid-cols-2 lg:grid-cols-4 items-center gap-4">
@@ -49,6 +53,13 @@ type MetierProps = {
   twitch?: boolean;
 };
 
+/**
+ * A component that display the PlayerInfo Jobs with the job image, outline progression, and level display.
+ * @param editable - Enables level editing controls (increase/decrease).
+ * @param minLevel - Minimum level allowed when decreasing the métier level.
+ * @param metierKey - The job key used to to display corresponding data (image, outline, level).
+ * @param twitch - Whether to display the UI in Twitch mode (affects level display styling or behavior).
+ */
 export const MetierComponentWrapper = ({
   editable = false,
   minLevel = 1,

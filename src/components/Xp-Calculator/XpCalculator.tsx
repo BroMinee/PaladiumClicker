@@ -1,7 +1,7 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card.tsx";
 import { FaInfoCircle, FaPercentage, FaTachometerAlt } from "react-icons/fa";
 import { Button } from "@/components/ui/button.tsx";
-import GradientText from "@/components/shared/GradientText.tsx";
+import { GradientText } from "@/components/shared/GradientText\.tsx";
 import {
   ButtonTakeDoubleXp,
   ButtonUseF2,
@@ -28,6 +28,14 @@ export type searchParamsXpBonusPage = {
   f3: boolean | undefined
 }
 
+/**
+ * Displays the XP bonus section for a player, including double XP, daily bonus, and hammer bonuses.
+ * Provides interactive buttons to toggle double XP and hammer usage.
+ * Also shows the total XP bonus with a popover breakdown of all contributing bonuses.
+ *
+ * @param params Object containing the username of the player
+ * @param searchParams Current search parameters of the page
+ */
 export function XpBonus({ params, searchParams }: {
   params: { username: string },
   searchParams: searchParamsXpBonusPage
@@ -117,6 +125,12 @@ export function XpBonus({ params, searchParams }: {
     </div>);
 }
 
+/**
+ * Displays a the list of ways available to gain the XP needed.
+ * Shows the number of job bottles to consume and the XP provided per item/action.
+ *
+ * @param searchParams Current search parameters of the page
+ */
 export function HowToXp({ searchParams }: {
   searchParams: searchParamsXpBonusPage
 }) {

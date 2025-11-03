@@ -1,6 +1,6 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card.tsx";
 import { FaHeart } from "react-icons/fa";
-import GradientText from "@/components/shared/GradientText.tsx";
+import { GradientText } from "@/components/shared/GradientText\.tsx";
 import React from "react";
 
 import { getAllItems } from "@/lib/api/apiPalaTracker.ts";
@@ -11,6 +11,10 @@ import { CraftingSectionSelector } from "@/components/Craft/CraftingSectionSelec
 import { CraftRecipeDisplay } from "@/components/Craft/CraftRecipeDisplay.tsx";
 import { CraftOptimizerDisplay } from "@/components/Craft/CraftOptimizerDisplay.tsx";
 
+/**
+ * Generate Metadata
+ * @param props.searchParams - Craft search params
+ */
 export async function generateMetadata(props: { searchParams: Promise<searchParamsCraftPage> }) {
   const searchParams = await props.searchParams;
 
@@ -50,6 +54,10 @@ export async function generateMetadata(props: { searchParams: Promise<searchPara
   };
 }
 
+/**
+ * [Craft page](https://palatracker.bromine.fr/craft)
+ * @param props.searchParams - Craft search params
+ */
 export default async function Home(props: { searchParams: Promise<searchParamsCraftPage> }) {
   const searchParams = await props.searchParams;
 

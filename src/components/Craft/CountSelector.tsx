@@ -7,6 +7,12 @@ import { useEffect, useMemo, useState } from "react";
 import { generateCraftUrl } from "@/lib/misc.ts";
 import debounce from "debounce";
 
+/**
+ * A controlled number input that updates the URL with the selected count value.
+ * Debounces URL 250ms after updates to avoid excessive router pushes.
+ * @param item - The selected option item. If provided, its value is used to generate the craft URL.
+ * @param count - The initial count value to display in the input. Defaults to 1 if undefined.
+ */
 export function CountSelector({ item, count }: { item: OptionType | undefined, count: number | undefined }) {
   const router = useRouter();
   const [inputValue, setInputValue] = useState(String(count ?? 1));

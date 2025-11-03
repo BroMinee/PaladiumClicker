@@ -3,6 +3,9 @@ import React from "react";
 import { API_PALATRACKER } from "@/lib/constants.ts";
 import { LoginButton } from "@/components/Login/LoginButton.tsx";
 
+/**
+ * Generate Metadata
+ */
 export async function generateMetadata() {
   const title = "PalaTracker | PalaAnimation Trainer | Login";
 
@@ -17,6 +20,9 @@ export async function generateMetadata() {
   };
 }
 
+/**
+ * [Pala-animation login page](https://palatracker.bromine.fr/pala-animation/login)
+ */
 export default function WebHooksPage() {
   return (
     <Card>

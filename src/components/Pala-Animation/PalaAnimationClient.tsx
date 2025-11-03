@@ -18,7 +18,7 @@ import {
   getLeaderboardPalaAnimation
 } from "@/components/Pala-Animation/PalaAnimationActions.tsx";
 import { AxiosError } from "axios";
-import CanvasWithText from "@/components/ui/canvas.tsx";
+import { CanvasWithText } from "@/components/ui/canvas.tsx";
 import { Input } from "@/components/ui/input.tsx";
 import { cn } from "@/lib/utils.ts";
 import { useSessionContext } from "@/components/Pala-Animation/SessionContextProvider.tsx";
@@ -27,6 +27,9 @@ import { checkAnswerPalaAnimation, getNewQuestionPalaAnimation } from "@/lib/cyp
 import { useRouter } from "next/navigation";
 import { useProfileStore } from "@/stores/use-profile-store.ts";
 
+/**
+ * Detects if the current user is using a bot using @fingerprintjs/botd and redirect if it's the case.
+ */
 export function TestBot() {
   const [bot, setBot] = useState(false);
   const router = useRouter();
@@ -44,6 +47,9 @@ export function TestBot() {
   return null;
 }
 
+/**
+ * Component that fetch a question, listen for the answer and check the user response.
+ */
 export function PalaAnimationBody() {
 
   const { sessionUuid, question, setQuestion, setSessionUuid } = useSessionContext();
@@ -263,6 +269,9 @@ export function PalaAnimationBody() {
   );
 }
 
+/**
+ * Fetch and display the leaderboard of the current question
+ */
 export function PalaAnimationClassement() {
   const { profileInfo } = useProfileStore();
 
@@ -321,6 +330,9 @@ export function PalaAnimationClassement() {
     </Card>);
 }
 
+/**
+ * Fetch and display the global leaderboard
+ */
 export function PalaAnimationClassementGlobal() {
   const { profileInfo } = useProfileStore();
 

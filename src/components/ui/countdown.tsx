@@ -16,7 +16,19 @@ type renderType = {
   completed: boolean
 }
 
-// Renderer callback with condition
+/**
+ * Custom renderer function for a countdown component.
+ * Converts days, hours, minutes, and seconds into a string formatted as HH:MM:SS.
+ * - If the countdown is completed, it renders the Completionist component.
+ * - Otherwise, it displays the remaining time in HH:MM:SS format,
+ *   adding days into hours (days * 24 + hours).
+ *
+ * @param days Number of days remaining
+ * @param hour Number of hours remaining
+ * @param minutes Number of minutes remaining
+ * @param seconds Number of seconds remaining
+ * @param completed Boolean flag indicating if the countdown is finished
+ */
 export const renderer = ({ days, hours, minutes, seconds, completed }: renderType) => {
   if (completed) {
     // Render a completed state

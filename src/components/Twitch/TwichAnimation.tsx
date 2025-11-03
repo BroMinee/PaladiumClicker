@@ -29,7 +29,12 @@ function configTypeToOverlayTwitchEnum(type: keyof AvailableElements | "autoProm
 
 // TODO gerer le cas ou le cycle est de moins de 6 minutes
 
-export default function TwitchOverlay({preview, selectedElements} : {preview?: boolean, selectedElements: SelectedElementConfig[]}) {
+/**
+ * Render the twitch overlay according to the user configuration.
+ * @param preview - boolean if it's in the preview page.
+ * @param selectedElements - The configuration made by the user.
+ */
+export function TwitchOverlay({preview, selectedElements} : {preview?: boolean, selectedElements: SelectedElementConfig[]}) {
   const { data: playerInfo, setPlayerInfo } = usePlayerInfoStore();
   const { setRanking , setLeaderboardFaction} = usePlayerExtraInfoTwitch();
   const {nbSeconds, setNbSeconds, increaseNbSeconds} = useTwitchTimeStore();

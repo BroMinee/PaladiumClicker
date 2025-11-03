@@ -1,7 +1,7 @@
 import { Card, CardContent, CardHeader } from "@/components/ui/card.tsx";
 import { getAllUsersLinked, getRole } from "@/lib/api/apiPalaTracker.ts";
 import Image from "next/image";
-import EditRole from "@/components/Admin-Panel/AdminPanelRoleEdition.tsx";
+import { EditRole } from "@/components/Admin-Panel/AdminPanelRoleEdition.tsx";
 import { Role } from "@/types";
 import React from "react";
 
@@ -14,6 +14,15 @@ const mapPermission = new Map<Role, React.FC[]>(
     ["Classic", [NotPermissionPanel]]
   ]);
 
+/**
+  * Renders the appropriate admin panel sections based on the current user's role.
+  *
+  * This function retrieves the user's role, determines which admin panel components
+  * they are authorized to access, and displays them. If the role does not match any
+  * known permissions, a fallback "no permission" panel is shown.
+  *
+  * Obviously to anyone wandering they are backend verification on every request :)
+  */
 export async function AdminPanelRoleDispatch() {
   const role = await getRole();
 

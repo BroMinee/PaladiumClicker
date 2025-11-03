@@ -27,16 +27,28 @@ import { redirect } from "next/navigation";
 
 /* The content of this file is not sent to the client*/
 
+/**
+ * Fetches the player profile info for a given username.
+ * @param username The Minecraft username of the player.
+ */
 export async function getPlayerInfoAction(username: string) {
   return await getPlayerInfo(username);
 }
 
+/**
+ * Registers a view for a player with their UUID and username.
+ * @param uuid The UUID of the player.
+ * @param username The Minecraft username of the player.
+ */
 export async function registerPlayerAction(uuid: string, username: string) {
   return await fetchWithHeader(`${API_PALATRACKER}/v1/user/register/${uuid}/${username}`, 5 * 60).catch((e) => {
     console.error(e);
   });
 }
 
+/**
+ * Retrieves Paladium AH item statistics for all items.
+ */
 export async function getPaladiumAhItemStatsOfAllItemsAction(): Promise<PaladiumAhItemStat[]> {
   "use server";
   const response = await fetchWithHeader<PaladiumAhItemStatResponse>(`${PALADIUM_API_URL}/v1/paladium/shop/market/items?limit=100&offset=0`, 5 * 60);
@@ -56,6 +68,9 @@ export async function getPaladiumAhItemStatsOfAllItemsAction(): Promise<Paladium
   return data;
 }
 
+/**
+ * Fetches the current active event.
+ */
 export async function getCurrentEvent() {
   try {
     const event = await getNotCloseEvent();
@@ -71,6 +86,10 @@ export async function getCurrentEvent() {
   }
 }
 
+/**
+ * Returns the current event for which the player with given UUID is not registered.
+ * @param uuid The UUID of the player.
+ */
 export async function getCurrentEventNotRegistered(uuid: string): Promise<Event | null> {
   const event: Event | null = await getCurrentEvent();
 
@@ -94,6 +113,10 @@ export async function getCurrentEventNotRegistered(uuid: string): Promise<Event 
   return null;
 }
 
+/**
+ * Returns the event that the player has won but not yet claimed.
+ * @param uuid The UUID of the player.
+ */
 export async function getEventNotClaimed(uuid: string) {
   try {
     const event = await getClosedEventStillClaimable();
@@ -112,6 +135,9 @@ export async function getEventNotClaimed(uuid: string) {
   }
 }
 
+/**
+ * Fetches the current website notification.
+ */
 export async function getNotificationWebSite() {
   try {
     return await getCurrentNotification();
@@ -121,6 +147,9 @@ export async function getNotificationWebSite() {
   }
 }
 
+/**
+ * Fetches all items from the server as options.
+ */
 export async function getAllItemsServerAction() : Promise<OptionType[]> {
   return await fetchWithHeader<{
     item_name: string,
@@ -145,6 +174,9 @@ async function getCurrentNotification(): Promise<NotificationWebSiteResponse | n
   return await fetchWithHeader<NotificationWebSiteResponse>(`${API_PALATRACKER}/v1/notification/website`, 5 * 60);
 }
 
+/**
+ * Fetches the current active event.
+ */
 export async function getNotCloseEvent(): Promise<Event | null> {
   return await fetchWithHeader<Event | null>(`${API_PALATRACKER}/v1/events/getCurrent`, 60);
 }
@@ -155,6 +187,9 @@ async function isRegisteredToEvent(uuid: string, event_id: number) {
   }>(`${API_PALATRACKER}/v1/events/isRegistered?uuid=${uuid}&event_id=${event_id}`, 0);
 }
 
+/**
+ * Fetches the closed event that is still claimable.
+ */
 export async function getClosedEventStillClaimable() {
   return await fetchWithHeader<Event | null>(`${API_PALATRACKER}/v1/events/getClosedEventStillClaimable`, 60);
 }
@@ -165,6 +200,11 @@ async function isWinnerNotClaim(event_id: number, uuid: string) {
   }>(`${API_PALATRACKER}/v1/events/hasWonAndNotClaim?uuid=${uuid}&event_id=${event_id}`, 0);
 }
 
+/**
+ * Registers a user to an event.
+ * @param uuid The UUID of the player.
+ * @param discord_name The Discord name of the player (optional).
+ */
 export async function registerUserToEvent(uuid: string, discord_name: string | undefined): Promise<{
   succeeded: boolean
 }> {
@@ -176,6 +216,9 @@ export async function registerUserToEvent(uuid: string, discord_name: string | u
   }), 0);
 }
 
+/**
+ * Checks if the current user is authenticated.
+ */
 export async function isAuthenticate(): Promise<DiscordUser | null> {
   const cookieStore = await cookies();
   const allCookies = cookieStore.getAll();
@@ -200,6 +243,11 @@ export async function isAuthenticate(): Promise<DiscordUser | null> {
   return null;
 }
 
+/**
+ * Creates a webhook on the server.
+ *
+ * @param body The webhook creation details.
+ */
 export async function createWebHookServerAction(body: WebHookCreate): Promise<{ succeeded: boolean, msg: string }> {
   if (!(await isAuthenticate())) {
     return { succeeded: false, msg: "Not authenticated" };
@@ -233,6 +281,10 @@ export async function createWebHookServerAction(body: WebHookCreate): Promise<{ 
   return { succeeded: r.succeeded, msg: r.msg };
 }
 
+/**
+ * Edits a webhook on the server.
+ * @param body The webhook update details.
+ */
 export async function editWebHookServerAction(body: WebHookCreate): Promise<{ succeeded: boolean, msg: string }> {
   if (!(await isAuthenticate())) {
     return { succeeded: false, msg: "Not authenticated" };
@@ -264,6 +316,10 @@ export async function editWebHookServerAction(body: WebHookCreate): Promise<{ su
   return { succeeded: r.succeeded, msg: r.msg };
 }
 
+/**
+ * Deletes a webhook by its ID.
+ * @param webHookAlertId The ID of the webhook to delete.
+ */
 export async function deleteWebhookServerAction(webHookAlertId: number): Promise<{ succeeded: boolean, msg: string }> {
   if (!(await isAuthenticate())) {
     return { succeeded: false, msg: "Not authenticated" };
@@ -278,6 +334,10 @@ export async function deleteWebhookServerAction(webHookAlertId: number): Promise
   return { succeeded: r.succeeded, msg: r.msg };
 }
 
+/**
+ * Deletes a webhook for a specific guild.
+ * @param guildId The ID of the guild.
+ */
 export async function deleteWebhookGuildServerAction(guildId: string): Promise<{ succeeded: boolean, msg: string }> {
   if (!(await isAuthenticate())) {
     return { succeeded: false, msg: "Not authenticated" };
@@ -292,6 +352,11 @@ export async function deleteWebhookGuildServerAction(guildId: string): Promise<{
   return { succeeded: r.succeeded, msg: r.msg };
 }
 
+/**
+ * Deletes a webhook for a specific channel in a guild.
+ * @param guildId The ID of the guild.
+ * @param channelId The ID of the channel.
+ */
 export async function deleteWebhookChannelServerAction(guildId: string, channelId: string): Promise<{
   succeeded: boolean,
   msg: string
@@ -319,6 +384,12 @@ type WebHookEditChannelName =
     channel_name: string,
   }
 
+/**
+ * Edits the name of a webhook channel.
+ * @param guild_id The ID of the guild.
+ * @param channel_id The ID of the channel.
+ * @param channel_name The new name for the channel.
+ */
 export async function editWebhookChannelNameServerAction(guild_id: string, channel_id: string, channel_name: string): Promise<{
   succeeded: boolean,
   msg: string
@@ -349,6 +420,12 @@ type WebHookEditGuildName =
     guild_name: string,
   }
 
+/**
+ * Edits the name of a webhook guild.
+ * @param guild_id The ID of the guild.
+ * @param channel_id The ID of the channel.
+ * @param guild_name The new name for the guild.
+ */
 export async function editWebhookGuildNameServerAction(guild_id: string, channel_id: string, guild_name: string): Promise<{
   succeeded: boolean,
   msg: string
@@ -372,10 +449,19 @@ export async function editWebhookGuildNameServerAction(guild_id: string, channel
   return { succeeded: r.succeeded, msg: r.msg };
 }
 
+/**
+ * Fetches admin shop history for a specific item and period.
+ * @param item The admin shop item.
+ * @param periode The period to fetch history for.
+ */
 export async function getAdminShopHistoryServerAction(item: AdminShopItem, periode: AdminShopPeriod): Promise<AdminShopItemDetail[]> {
   return await fetchWithHeader<AdminShopItemDetail[]>(`${API_PALATRACKER}/v1/admin-shop/${item}/${periode}`, 0);
 }
 
+/**
+ * Fetches the market history of an item by its ID.
+ * @param itemId The ID of the item.
+ */
 export const getMarketHistoryServerAction = async (itemId: string): Promise<AhItemHistory[]> => {
   const response = await fetchWithHeader<PaladiumAhHistory>(`${PALADIUM_API_URL}/v1/paladium/shop/market/items/${itemId}/history?limit=100&offset=0`);
   const totalCount = response.totalCount;
@@ -397,6 +483,12 @@ export const getMarketHistoryServerAction = async (itemId: string): Promise<AhIt
   return data;
 };
 
+/**
+ * Sets a cookie.
+ * @param name The name of the cookie.
+ * @param value The value to store in the cookie.
+ * @param maxAge The maximum age of the cookie in seconds.
+ */
 export async function setCookies(name: string, value: string, maxAge: number = 60 * 60 * 24 * 30) {
   const cookieStore = await cookies();
   cookieStore.set(name as any, value as any, {
@@ -404,10 +496,19 @@ export async function setCookies(name: string, value: string, maxAge: number = 6
   } as any);
 }
 
+/**
+ * Fetches all Paladium animation time statistics.
+ */
 export async function getAllPalaAnimationTime() {
   return await fetchWithHeader<AllPalaAnimationStats>(`${API_PALATRACKER}/v1/pala-animation/my-time/getAll`, 5 * 60).catch(() => []);
 }
 
+/**
+ * Updates the role of a Discord user.
+ *
+ * @param discord_id The Discord ID of the user.
+ * @param role The role to assign to the user.
+ */
 export async function editRoleSubmit(discord_id: string, role: Role): Promise<{
   succeeded: boolean
 }> {
@@ -427,10 +528,17 @@ export async function editRoleSubmit(discord_id: string, role: Role): Promise<{
   }), 0);
 }
 
+/**
+ * Fetches the Paladium player count history.
+ */
 export async function getPlayerCountHistoryPaladiumAction() {
   return await fetchWithHeader<PlayerCountHistory>(`${API_PALATRACKER}/v1/status-history/paladium/player/count-history`, 5*60);
 }
 
+/**
+ * Fetches the ranking positions of a player.
+ * @param uuid The UUID of the player.
+ */
 export async function getPlayerPositionAction(uuid: string) : Promise<RankingPositionResponse> {
   return await fetchWithHeader<{
     boss: number;
@@ -464,6 +572,9 @@ export async function getPlayerPositionAction(uuid: string) : Promise<RankingPos
   });
 }
 
+/**
+ * Fetches the faction leaderboard from the Paladium API.
+ */
 export const getFactionLeaderboardAction = async (): Promise<PaladiumFactionLeaderboard> => {
   return await fetchWithHeader<PaladiumFactionLeaderboard>(`${PALADIUM_API_URL}/v1/paladium/faction/leaderboard`).catch((e) => {
     console.error(e);

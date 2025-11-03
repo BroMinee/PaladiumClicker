@@ -6,7 +6,11 @@ import { useSettingsStore } from "@/stores/use-settings-store";
 import { safeJoinPaths } from "@/lib/misc.ts";
 import { constants } from "@/lib/constants.ts";
 
-const FallingClickImage = () => {
+/**
+ * Component that displays the current CPS image falling and rotating on itself in the background page.
+ * Make a falling image every 2 seconds and the image is falling for 3 seconds before getting deleted.
+ */
+export const FallingClickImage = () => {
 
   const { data: playerInfo, selectedCPS } = usePlayerInfoStore();
   const containerRef = useRef<HTMLDivElement>(null);
@@ -68,5 +72,3 @@ const FallingClickImage = () => {
 
   return (<div ref={containerRef} className="fixed inset-0 z-[-1]"/>);
 };
-
-export default FallingClickImage;

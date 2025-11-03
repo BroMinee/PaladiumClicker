@@ -5,7 +5,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Image from "next/image";
 import confetti from "canvas-confetti";
 import { cn } from "@/lib/utils.ts";
-import { textFormatting } from "@/components/News.tsx";
+import { textFormatting } from "@/lib/misc";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -56,6 +56,10 @@ const timelineData = [
       "Merci encore, et longue vie à PalaTracker ! ❤️\nUn grand °merci°, BroMine__", image: undefined, className: "" },
 ];
 
+/**
+ * Custom scrollbar using coin.png
+ * Use for [rewind page](https://palatracker.bromine.fr/rewind)
+ */
 const Timeline = () => {
   const containerRef = useRef(null);
   const [currentIndex, setCurrentIndex] = useState(0);

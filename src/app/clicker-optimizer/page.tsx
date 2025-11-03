@@ -1,5 +1,8 @@
 import { NoPseudoPage } from "@/components/NoPseudoPage.tsx";
 
+/**
+ * Gemerate Metadata
+ */
 export function generateMetadata() {
   return {
     title: "PalaTracker | Clicker Optimizer",
@@ -11,6 +14,9 @@ export function generateMetadata() {
   };
 }
 
+/**
+ * [Clicker page](https://palatracker.bromine.fr/clicker-optimizer)
+ */
 export default function HomeProfilWithoutUsername() {
   return <NoPseudoPage texth1="Optimise ton °PalaClicker° pour gagner un maximum de °ClicCoins° et battre tes amis" texth2="Commence par saisir ton pseudo °Minecraft°"/>;
 }

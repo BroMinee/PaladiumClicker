@@ -34,6 +34,9 @@ import { constants } from "@/lib/constants.ts";
 
 export const PALADIUM_API_URL = process.env.PALADIUM_API_URL || "https://api.paladium.games";
 
+/**
+ * Test if the paladium api is down.
+ */
 export const isApiDown = async (): Promise<boolean> => {
   let response = null;
 
@@ -54,6 +57,9 @@ export const isApiDown = async (): Promise<boolean> => {
   return false;
 };
 
+/**
+ * Get the total player online right now.
+ */
 export const getPlayerOnlineCount = async (): Promise<number> => {
   const response = await fetchWithHeader<{
     java: {
@@ -118,6 +124,9 @@ const getFactionInfo = async (factionName: string): Promise<PaladiumFactionInfo>
   });
 };
 
+/**
+ * Get the current faction leaderboard.
+ */
 export const getFactionLeaderboard = async (): Promise<PaladiumFactionLeaderboard> => {
   return await fetchWithHeader<PaladiumFactionLeaderboard>(`${PALADIUM_API_URL}/v1/paladium/faction/leaderboard`).catch((e) => {
     console.error(e);
@@ -148,6 +157,10 @@ const getFriendsList = async (uuid: string): Promise<PaladiumFriendInfo> => {
   }
 };
 
+/**
+ *
+ * @param pseudo
+ */
 export const getPlayerInfo = async (pseudo: string): Promise<PlayerInfo> => {
   let error = "";
   if (pseudo === "") {
@@ -176,7 +189,7 @@ export const getPlayerInfo = async (pseudo: string): Promise<PlayerInfo> => {
   const p4 = getJobsFromUUID(paladiumProfil.uuid, paladiumProfil.username);
   const p5 = getPaladiumLeaderboardPositionByUUID(paladiumProfil.uuid, paladiumProfil.username);
   const p6 = getFactionInfo(paladiumProfil.faction === "" ? "Wilderness" : paladiumProfil.faction);
-  const p7 = getViewsFromUUID(paladiumProfil.uuid, paladiumProfil.username);
+  const p7 = getViewsFromUUID(paladiumProfil.uuid);
   const p8 = getPlayerAchievements(paladiumProfil.uuid);
   const p9 = getPlayerMount(paladiumProfil.uuid);
   const p10 = getPlayerPet(paladiumProfil.uuid);
@@ -280,6 +293,10 @@ export const getPlayerInfo = async (pseudo: string): Promise<PlayerInfo> => {
 // }
 //
 
+/**
+ *
+ * @param itemId
+ */
 export const getPaladiumAhItemFullHistory = async (itemId: string): Promise<AhItemHistory[]> => {
   const response = await fetchWithHeader<PaladiumAhHistory>(`${PALADIUM_API_URL}/v1/paladium/shop/market/items/${itemId}/history?limit=100&offset=0`);
   const totalCount = response.totalCount;
@@ -301,6 +318,10 @@ export const getPaladiumAhItemFullHistory = async (itemId: string): Promise<AhIt
   return data;
 };
 
+/**
+ *
+ * @param itemId
+ */
 export const getPaladiumAhItemStats = async (itemId: string): Promise<PaladiumAhItemStat> => {
   return await fetchWithHeader<PaladiumAhItemStat>(`${PALADIUM_API_URL}/v1/paladium/shop/market/items/${itemId}`);
 };

@@ -1,9 +1,9 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle, CardTitleH1 } from "@/components/ui/card.tsx";
 import { FaHeart } from "react-icons/fa";
-import GradientText from "@/components/shared/GradientText.tsx";
+import { GradientText } from "@/components/shared/GradientText\.tsx";
 import React, { Suspense } from "react";
 
-import LoadingSpinner from "@/components/ui/loading-spinner.tsx";
+import { LoadingSpinner } from "@/components/ui/loading-spinner.tsx";
 import MarketSelector from "@/components/AhTracker/MarketSelector.tsx";
 import { getAllItems } from "@/lib/api/apiPalaTracker.ts";
 import { OptionType } from "@/types";
@@ -11,6 +11,10 @@ import { constants } from "@/lib/constants";
 import { MarketServerFetcher } from "@/components/AhTracker/MarketServerFetcher.tsx";
 import { redirect } from "next/navigation";
 
+/**
+ * Generate Metadata
+ * @param props.searchParams - Search Params of ah
+ */
 export async function generateMetadata(props: { searchParams: Promise<{ item: string | undefined }> }) {
   const searchParams = await props.searchParams;
 
@@ -50,6 +54,10 @@ export async function generateMetadata(props: { searchParams: Promise<{ item: st
   };
 }
 
+/**
+ * [Market Home page](https://palatracker.bromine.fr/ah)
+ * @param props.searchParams
+ */
 export default async function AhTrackerPage(props: { searchParams: Promise<{ item: string | undefined }> }) {
   const searchParams = await props.searchParams;
   const options = await getAllItems().catch(() => {

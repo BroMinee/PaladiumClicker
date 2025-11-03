@@ -4,6 +4,10 @@ import { useTheme } from "next-themes";
 
 type ToasterProps = React.ComponentProps<typeof Sonner>
 
+/**
+ *
+ * @param root0
+ */
 const Toaster = ({ ...props }: ToasterProps) => {
   const { theme } = useTheme();
 

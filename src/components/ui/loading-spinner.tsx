@@ -1,6 +1,11 @@
 import { cn } from "@/lib/utils.ts";
 
-const LoadingSpinner = ({ size = 10 }) => {
+/**
+ * A simple spinning loader component.
+ *
+ * @param size - The size of the spinner in Tailwind units (default: 10).
+ */
+export const LoadingSpinner = ({ size = 10 }) => {
   const className = `w-${size} h-${size}`;
   return (
     <div className="text-center">
@@ -19,5 +24,3 @@ const LoadingSpinner = ({ size = 10 }) => {
     </div>
   );
 };
-
-export default LoadingSpinner;

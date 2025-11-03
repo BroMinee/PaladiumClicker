@@ -25,6 +25,13 @@ const CustomTooltip = ({ active, payload, label }: any) => {
   }
 };
 
+/**
+ * Renders a single-value line plot chart using the given data.
+ *
+ * @param data Array of objects with `date` and `value` representing the time series.
+ * @param labelName Label displayed for the dataset in the chart legend.
+ * @param className Optional CSS classes applied to the chart container.
+ */
 export const PlotSingleValueChart = ({ data, labelName, className }: { data: ValueHistory, labelName: string, className?: string }) => {
   const data_clean = data.map((item) => {
     return {

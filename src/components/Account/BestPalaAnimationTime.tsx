@@ -5,6 +5,9 @@ import { getAllPalaAnimationTime } from "@/lib/api/apiServerAction.ts";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card.tsx";
 import { adaptPlurial } from "@/lib/misc.ts";
 
+/**
+ * Component that display that display your current best time in all pala-animation, as well as your average time.
+ */
 export function BestPalaAnimationTime() {
   const [bestPalaAnimationTime, setBestPalaAnimationTime] = useState<AllPalaAnimationStats>([]);
 

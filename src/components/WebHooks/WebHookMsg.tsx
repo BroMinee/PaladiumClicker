@@ -56,6 +56,26 @@ function GenerateEmbedPreview(footer: string) {
   );
 }
 
+/**
+ * Parses a string with placeholders and markdown-like formatting
+ * into React JSX elements, replacing placeholders with dynamic content.
+ *
+ * Supports:
+ * - Markdown styles: **bold**, *italic*, __underline__, ~~strikethrough~~
+ * - Mentions: {here}, <@user>, <@&role>
+ * - Webhook placeholders: {item}, {itemFr}, {itemUs}, {event}, {price}, {previousPrice},
+ *   {quantityAvailable}, {quantity}, {earningXp}, {earningMoney}, {seller}, {start},
+ *   {end}, {startRelative}, {rewardElo}, {servers}, {server}, {goal}, {thresholdCondition}, {TODO}, {username}
+ * - Nested formatting is supported
+ *
+ * @param text - The text containing placeholders and formatting
+ * @param itemSelected - Currently selected item (for market/QDF/EventPvp)
+ * @param eventSelected - Current event type
+ * @param currentWebHookType - Current webhook type
+ * @param adminShopItemSelected - Selected admin shop item
+ * @param threshold - Threshold value used for price placeholders
+ * @param thresholdCondition - Condition used for threshold placeholders
+ */
 export function parseTextFormatting(
   text: string,
   itemSelected: OptionType | null,
@@ -343,6 +363,9 @@ function GenerateEmbedDescription(footer: string): React.JSX.Element {
   );
 }
 
+/**
+ *
+ */
 export function GenerateWebHookContent() {
   const {
     content,

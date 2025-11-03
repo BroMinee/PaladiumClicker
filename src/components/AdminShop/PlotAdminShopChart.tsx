@@ -28,6 +28,12 @@ const CustomTooltip = ({ active, payload, label }: any) => {
   }
 };
 
+/**
+ * Component that display the admin-shop price history
+ * @param data - The admin-shop price history
+ * @param webhook - Boolean, if true display a horizontal line corresponding to the webhook alert price.
+ * @param periode - The current period used in the graph display.
+ */
 const PlotAdminShopChart = ({ data, periode, webhook = false }: {
   data: AdminShopItemDetail[],
   webhook?: boolean,

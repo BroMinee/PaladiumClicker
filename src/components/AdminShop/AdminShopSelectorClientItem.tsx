@@ -5,12 +5,18 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { adminShopItemToUserFriendlyText, generateAdminShopUrl, getImagePathFromAdminShopType, } from "@/lib/misc.ts";
 import { cn } from "@/lib/utils.ts";
 import Image from "next/image";
-import HoverText from "@/components/ui/hovertext.tsx";
+import { HoverText } from "@/components/ui/hovertext.tsx";
 import { ReactNode } from "react";
 import { buttonVariants } from "@/components/ui/button.tsx";
 import { Card } from "@/components/ui/card.tsx";
 import { useWebhookStore } from "@/stores/use-webhook-store.ts";
 
+/**
+ * Component that displays an admin-shop item that handle click to change the item selection
+ * @param item - the Item we want to display.
+ * @param periode - The current period used in the graph display.
+ * @param adminShopPage - boolean, true if it's in the adminShopPage, otherwise it's used in the webhook alert page.
+ */
 export function AdminShopSelectorClientItem({ item, periode, adminShopPage }: {
   item: AdminShopItem,
   periode: AdminShopPeriod,
@@ -48,6 +54,11 @@ export function AdminShopSelectorClientItem({ item, periode, adminShopPage }: {
   );
 }
 
+/**
+ * Component that displays a button clickable to switch the period used in the graph.
+ * @param item - the Item we want to display.
+ * @param periode - The current period used in the graph display.
+ */
 export function AdminShopSelectorClientPeriode({ item, periode }: {
   item: AdminShopItem,
   periode: AdminShopPeriod,
@@ -87,13 +98,6 @@ export function AdminShopSelectorClientPeriode({ item, periode }: {
       onClick={() => router.push(generateAdminShopUrl(item, periode), { scroll: false })}
     >
       {converter(periode)}
-      {/*  {children}*/}
-      {/*</Card>*/}
-      {/*<button*/}
-      {/*  className={cn("w-16 h-16 hover:scale-125 duration-300 cursor-pointer hover:bg-secondary-foreground p-4 rounded-2xl hover:grayscale-0 text-center", selected && "bg-secondary-foreground text-primary")}*/}
-      {/*  onClick={() => router.push(generateAdminShopUrl(item, periode), { scroll: false })}>*/}
-      {/*  {converter(periode)}*/}
-      {/*</button>*/}
     </Card>
 
   );

@@ -7,6 +7,14 @@ import { cn } from "@/lib/utils.ts";
 import { buttonVariants } from "@/components/ui/button.tsx";
 import { Card } from "@/components/ui/card.tsx";
 
+/**
+ * A selectable card representing a specific period for viewing server status data.
+ *
+ * @param periode The period to select, e.g., "day", "week", "month", or "season".
+ *
+ * This component highlights itself if it matches the current period in the URL search params.
+ * Clicking the card updates the URL to reflect the selected period without scrolling the page.
+ */
 export function StatusSelectorClientPeriode({ periode }: {
   periode: AdminShopPeriod,
 }) {

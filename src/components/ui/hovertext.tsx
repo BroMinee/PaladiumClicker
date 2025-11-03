@@ -2,7 +2,11 @@
 
 import React, { useState } from "react";
 
-export default function HoverText({ text, children, className }: {
+/**
+ * A simple tooltip-like component that displays `text` when hovering over the `children` element.
+ * @param className Optional CSS classes for the container wrapping `children`
+ */
+export function HoverText({ text, children, className }: {
   text: React.ReactNode,
   children: React.ReactNode,
   className?: string

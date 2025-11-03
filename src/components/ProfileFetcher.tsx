@@ -8,6 +8,11 @@ import { reloadProfilNeeded } from "@/lib/misc.ts";
 import { toast } from "sonner";
 import { navigate } from "@/components/actions.ts";
 
+/**
+ * Component that wrap the entire page and display it only when the username in the localstorage is up to date and equal as requested.
+ * @param username - Username for the profil we want to display
+ * @param children - Children element
+ */
 export default function ProfileFetcherWrapper({ username, children }: {
   username: string,
   children: React.ReactNode

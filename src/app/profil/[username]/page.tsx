@@ -5,6 +5,10 @@ import { ProfilSectionEnum } from "@/types";
 import { redirect } from "next/navigation";
 import ProfilSelectorDisplay from "@/components/Profil/ProfilSelectorDisplay.tsx";
 
+/**
+ * Generate Metadata
+ * @param props.params - Search parameter
+ */
 export async function generateMetadata(props: { params: Promise<{ username: string }> }) {
   const params = await props.params;
   return {
@@ -21,6 +25,11 @@ type searchParamsProfilPage = {
   section?: string,
 }
 
+/**
+ * [Profil page](https://palatracker.bromine.fr/profil/BroMine__)
+ * @param props.params - Username
+ * @param props.searchParams - Search parameter
+ */
 export default async function Home(
   props: {
     params: Promise<{ username: string }>,

@@ -1,11 +1,16 @@
-import GradientText from "@/components/shared/GradientText";
+import { GradientText } from "@/components/shared/GradientText";
 import { Card, CardContent, CardDescription } from "@/components/ui/card";
 import { FaHeart } from "react-icons/fa";
-import Contributors from "@/components/Contributors.tsx";
+import { Contributors } from "@/components/Contributors.tsx";
 import Discord from "@/components/Discord.tsx";
-import { textFormatting } from "@/components/News.tsx";
-import ImportProfilPretty from "@/components/shared/ImportProfilPretty.tsx";
+import { ImportProfilPretty } from "@/components/shared/ImportProfilPretty.tsx";
+import { textFormatting } from "@/lib/misc";
 
+/**
+ * Component that displays a Home Page Card. Used when username is not present in the URL but required.
+ * @param texth1 - Main title text
+ * @param texth2 - Subtitle text
+ */
 export function NoPseudoPage({ texth1, texth2 }: { texth1: string, texth2: string }) {
   return (
     <div className="flex flex-col gap-4">

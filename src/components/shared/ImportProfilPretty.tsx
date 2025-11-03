@@ -13,8 +13,8 @@ import { toast } from "sonner";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog.tsx";
 import { PlayerInfo } from "@/types";
 import { ScrollArea } from "@/components/ui/scroll-area.tsx";
-import SmallCardInfo from "@/components/shared/SmallCardInfo.tsx";
-import LoadingSpinner from "@/components/ui/loading-spinner.tsx";
+import { SmallCardInfo } from "@/components/shared/SmallCardInfo.tsx";
+import { LoadingSpinner } from "@/components/ui/loading-spinner.tsx";
 import Image from "next/image";
 
 type ImportProfilProps = {
@@ -22,7 +22,12 @@ type ImportProfilProps = {
   navBar?: boolean
 }
 
-export default function ImportProfilPretty({
+/**
+ * New Import profile component, used in home pages.
+ * @param showResetButton
+ * @param navBar
+ */
+export function ImportProfilPretty({
   showResetButton = false,
   navBar = false,
 }: ImportProfilProps) {

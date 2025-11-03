@@ -4,7 +4,10 @@ import { useTheme } from "next-themes";
 import { FaMoon, FaSun } from "react-icons/fa";
 import { useEffect, useState } from "react";
 
-export default function ToggleTheme() {
+/**
+ * Button that toggles between dark and light themes.
+ */
+export function ToggleTheme() {
   const [mounted, setMounted] = useState(false);
 
   const { setTheme, resolvedTheme } = useTheme();

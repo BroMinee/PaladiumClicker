@@ -1,24 +1,34 @@
-import ProfilInfo from "@/components/Profil/ProfilInfo.tsx";
+import { ProfilInfo } from "@/components/Profil/ProfilInfo.tsx";
 import MetierList from "@/components/MetierList.tsx";
 import HeadingSection from "@/components/shared/HeadingSection.tsx";
 import FactionInfo from "@/components/Profil/FactionInfo.tsx";
 import { redirect } from "next/navigation";
 import { generateProfilUrl, isProfilSection } from "@/lib/misc.ts";
-import { ProfilSectionEnum } from "@/types";
+import { ProfilSectionEnum, searchParamsProfilPage } from "@/types";
 import {
   AchievementsProfilSection,
   AchievementsProfilSectionFallBack,
   MarketProfilSectionFallBack
 } from "@/components/Profil/Achievement/AchievementsProfilSection.tsx";
-import { PetCanvas } from "@/components/Profil/Pet/PetMontureCanvas.tsx";
+import { PetOrMountCanvas } from "@/components/Profil/Pet/PetMontureCanvas.tsx";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card.tsx";
 import React, { Suspense } from "react";
 import { ProfilRankingSection } from "@/components/Profil/Ranking/ProfilRanking.tsx";
-import AhInfo from "@/components/Profil/AhInfo.tsx";
+import { AhInfo } from "@/components/Profil/AhInfo.tsx";
 import { ErrorBoundary } from "@/components/Profil/ErrorProfilErrorBoundary";
 
-export type searchParamsProfilPage = { section?: string, category?: string, usernames?: string }
-
+/**
+ * Renders the correct profile section page based on the URL search parameters.
+ *
+ * Behavior:
+ * - Defaults to the "Home" section if no section is provided.
+ * - Redirects to the Home section if the provided section is invalid.
+ *
+ * @param params.username – The username of the profile being viewed
+ * @param searchParams.section – The selected section of the profile (optional)
+ * @param searchParams.category – Optional category filter for certain sections
+ * @param searchParams.usernames – Optional for multi-profile comparison only used by ranking
+ */
 export function ProfilSelectorDisplay({ params, searchParams }: {
   params: { username: string },
   searchParams: searchParamsProfilPage
@@ -73,12 +83,12 @@ function PetMontureProfilSection() {
       <CardContent className="flex flex-grow flex-col lg:flex-row justify-between">
         <div className="w-full lg:w-1/2">
           <ErrorBoundary fallback={<PetCanvasFallback/>} >
-            <PetCanvas/>
+            <PetOrMountCanvas/>
           </ErrorBoundary>
         </div>
         <div className="w-full lg:w-1/2">
           <ErrorBoundary fallback={<MontureCanvasFallback/>} >
-            <PetCanvas monture/>
+            <PetOrMountCanvas mount/>
           </ErrorBoundary>
         </div>
       </CardContent>

@@ -10,13 +10,17 @@ import { ThemeProviders } from "@/components/shared/ThemeProvider.tsx";
 import { Toaster } from "@/components/ui/sonner.tsx";
 import ServiceWorkerRegister from "@/components/ServiceWorkerRegister.tsx";
 import { AuthGetWrapper } from "@/components/Auth/AuthGetWrapper.tsx";
-import PageTransition from "@/components/shared/PageTransition.tsx";
+import { PageTransition } from "@/components/shared/PageTransition.tsx";
 
 const montserrat = Montserrat({
   subsets: ["latin"],  // specify subsets according to your needs
   variable: "--font-montserrat", // optional variable to use in CSS
 });
 
+/**
+ * Default application Layout
+ * @param children - Element that will be rendered
+ */
 export default function RootLayout({
   // Layouts must accept a children prop.
   // This will be populated with nested layouts or pages

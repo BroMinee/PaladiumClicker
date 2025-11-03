@@ -3,6 +3,9 @@ import { useEffect } from "react";
 import { useProfileStore } from "@/stores/use-profile-store.ts";
 import { isAuthenticate } from "@/lib/api/apiServerAction.ts";
 
+/**
+ * Client component that get and set the profile if the user is logging. Otherwise does nothing.
+ */
 export function AuthGetWrapper() {
   const { setProfileInfo } = useProfileStore();
   useEffect(() => {

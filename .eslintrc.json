@@ -4,7 +4,10 @@
     "project": "./tsconfig.json",
     "sourceType": "module"
   },
-  "plugins": ["@typescript-eslint"],
+  "plugins": [
+    "@typescript-eslint",
+    "jsdoc"
+  ],
   "extends": [
     "next/core-web-vitals",
     "plugin:react-hooks/recommended",
@@ -27,7 +30,19 @@
       "caughtErrors": "all",
       "caughtErrorsIgnorePattern": "^_"
     }],
-    "no-trailing-spaces": "error"
+    "no-trailing-spaces": "error",
+    "jsdoc/require-jsdoc": [
+      "error",
+      {
+        "publicOnly": true,
+        "require": {
+          "FunctionDeclaration": true,
+          "MethodDefinition": true,
+          "ArrowFunctionExpression": true,
+          "ClassDeclaration": true
+        }
+      }
+    ]
     // ,
     // "@typescript-eslint/type-annotation-spacing": "error"
   }

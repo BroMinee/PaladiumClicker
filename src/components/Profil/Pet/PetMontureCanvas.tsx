@@ -69,7 +69,11 @@ function convertPetSkinToModelName(petSkin: string): ModelName {
   }
 }
 
-export function PetCanvas({ monture = false }: { monture?: boolean }) {
+/**
+ * Render the player pet or mount
+ * @param mount - boolean, true if we are displaying a mount otherwise it's a pet
+ */
+export function PetOrMountCanvas({ mount = false }: { mount?: boolean }) {
   const { data: playerInfo } = usePlayerInfoStore();
 
   let modelName: ModelName = "arty";
@@ -79,14 +83,14 @@ export function PetCanvas({ monture = false }: { monture?: boolean }) {
   let petCoef: number = 0;
   let xpNeeded: number = 0;
 
-  if (playerInfo && monture && playerInfo.mount) {
+  if (playerInfo && mount && playerInfo.mount) {
     modelName = convertMontureTypeIdToModelName(playerInfo.mount.mountType);
     petName = playerInfo.mount.name;
     petXp = playerInfo.mount.xp;
     petLevel = montureGetLevelFromXp(playerInfo.mount.xp);
     petCoef = montureGetCoef(playerInfo.mount.xp, petLevel);
     xpNeeded = mountureGetNeededXpForLevel(petLevel);
-  } else if (playerInfo && !monture && playerInfo.pet) {
+  } else if (playerInfo && !mount && playerInfo.pet) {
     modelName = convertPetSkinToModelName(playerInfo.pet.currentSkin);
     petName = playerInfo.pet.currentSkin.replaceAll("pet_", "").split("_").join(" ").replace(/\b\w/g, l => l.toUpperCase());
     petLevel = petGetLevelFromXp(playerInfo.pet.experience);
@@ -185,7 +189,7 @@ export function PetCanvas({ monture = false }: { monture?: boolean }) {
           const scene = new THREE.Scene();
           const camera = new THREE.PerspectiveCamera(70, window.innerWidth / window.innerHeight, 0.01, 20);
 
-          if (monture) {
+          if (mount) {
             myModel.scene.scale.set(0.1, 0.1, 0.1);
           } else {
             myModel.scene.scale.set(0.2, 0.2, 0.2);
@@ -235,11 +239,11 @@ export function PetCanvas({ monture = false }: { monture?: boolean }) {
     return null;
   }
 
-  if (monture && !playerInfo.mount) {
+  if (mount && !playerInfo.mount) {
     return <DisplayEmptyCanvas text="Aucune monture équipée"/>;
   }
 
-  if (!monture && !playerInfo.pet) {
+  if (!mount && !playerInfo.pet) {
     return <DisplayEmptyCanvas text="Aucun pet équipé"/>;
   }
 
@@ -266,7 +270,7 @@ export function PetCanvas({ monture = false }: { monture?: boolean }) {
       </div>
 
       <Canvas style={{ height: "500px", width: "100%" }}>
-        <primitive object={myModel.scene} rotation={[0, Math.PI * 3 / 4, 0]} scale={monture ? [1, 1, 1] : [2, 2, 2]}/>
+        <primitive object={myModel.scene} rotation={[0, Math.PI * 3 / 4, 0]} scale={mount ? [1, 1, 1] : [2, 2, 2]}/>
         <OrbitControls enableDamping={true} target={myModel.scene.position}/>
       </Canvas>
 

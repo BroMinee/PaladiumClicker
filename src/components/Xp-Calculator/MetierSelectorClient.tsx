@@ -11,9 +11,17 @@ import { Button } from "@/components/ui/button.tsx";
 import { Input } from "@/components/ui/input.tsx";
 import { searchParamsXpBonusPage } from "@/components/Xp-Calculator/XpCalculator.tsx";
 import { constants,  HowToXpElement } from "@/lib/constants.ts";
-import GradientText from "../shared/GradientText";
+import { GradientText } from "@/components/shared/GradientText.tsx";
 import { useEffect } from "react";
 
+/**
+ * Updates the URL to reflect the next level for a selected jobs.
+ * TODO: This shouldn't be a component maybe
+ *
+ * @param selected The selected MetierKey
+ * @param params Route params, must include username
+ * @param searchParams Current search parameters
+ */
 export function SetLevelInUrl({ selected, params, searchParams }: {
   selected: MetierKey,
   params: { username: string },
@@ -52,6 +60,15 @@ export function SetLevelInUrl({ selected, params, searchParams }: {
   return null;
 }
 
+/**
+ * Renders an icon for a specific job and allows selecting it.
+ * Clicking the icon navigates to the XP calculator page for the chosen job.
+ *
+ * @param username The username of the player
+ * @param metier The job key (e.g., "miner", "farmer", etc.)
+ * @param selected Whether this job is currently selected
+ * @param searchParams Current search parameters for XP calculation (e.g., double, dailyBonus, f2, f3)
+ */
 export function MetierSelectorClient({ username, metier, selected, searchParams }: {
   username: string,
   metier: MetierKey,
@@ -92,6 +109,13 @@ type MetierProps = {
   searchParams: searchParamsXpBonusPage;
 };
 
+/**
+ * Displays a job image with a progress bar and level controls inside an SVG.
+ * Includes buttons to increase or decrease the target level and shows the current level to reach.
+ *
+ * @param metierKey The key of the job
+ * @param searchParams Current search parameters containing the target level
+ */
 export const MetierToReachWrapper = ({
   metierKey,
   searchParams,
@@ -131,6 +155,15 @@ export const MetierToReachWrapper = ({
   );
 };
 
+/**
+ * Button to toggle double XP.
+ * Updates the URL with double XP enabled or disabled depending on the current state.
+ *
+ * @param params Object containing the username
+ * @param searchParams Current search parameters of the page
+ * @param doubleXp Current double XP state (0 or 100)
+ * @param children Children inside the button
+ */
 export function ButtonTakeDoubleXp({ params, searchParams, doubleXp, children }: {
   params: { username: string },
   searchParams: searchParamsXpBonusPage,
@@ -152,6 +185,15 @@ export function ButtonTakeDoubleXp({ params, searchParams, doubleXp, children }:
   </Button>;
 }
 
+/**
+ * Button to toggle Fortune 2 usage.
+ * Updates the URL with F2 enabled or disabled depending on the current state.
+ *
+ * @param params Object containing the username
+ * @param searchParams Current search parameters of the page
+ * @param F2 Boolean. Current Fortune 2 state
+ * @param children Children inside the button
+ */
 export function ButtonUseF2({ params, searchParams, F2, children }: {
   params: { username: string },
   searchParams: searchParamsXpBonusPage,
@@ -173,6 +215,15 @@ export function ButtonUseF2({ params, searchParams, F2, children }: {
   </Button>;
 }
 
+/**
+ * Button to toggle Fortune 3 usage.
+ * Updates the URL with F3 enabled or disabled depending on the current state.
+ *
+ * @param params Object containing the username
+ * @param searchParams Current search parameters of the page
+ * @param F3 Boolean. Current Fortune 3 state
+ * @param children Children inside the button
+ */
 export function ButtonUseF3({ params, searchParams, F3, children }: {
   params: { username: string },
   searchParams: searchParamsXpBonusPage,
@@ -194,6 +245,13 @@ export function ButtonUseF3({ params, searchParams, F3, children }: {
   </Button>;
 }
 
+/**
+ * Input field to set the daily bonus percentage for a specific job.
+ * Updates the URL when the value changes.
+ *
+ * @param params Object containing the username
+ * @param searchParams Current search parameters of the page
+ */
 export function InputDailyBonus({ params, searchParams }: {
   params: { username: string },
   searchParams: searchParamsXpBonusPage,
@@ -233,6 +291,13 @@ function getBonusRank(playerRank: PlayerRank | undefined) {
 
 }
 
+/**
+ * Displays the total XP bonus percentage for the player.
+ * It sums daily bonus, double XP, rank bonus, and seasonal bonus.
+ *
+ * @param dailyBonus The daily bonus percentage
+ * @param doubleXp The double XP bonus percentage
+ */
 export function DisplayDailyDoubleRank({ dailyBonus, doubleXp }: { dailyBonus: number, doubleXp: number }) {
   const { data: playerInfo } = usePlayerInfoStore();
 
@@ -241,6 +306,9 @@ export function DisplayDailyDoubleRank({ dailyBonus, doubleXp }: { dailyBonus: n
   return <>{dailyBonus + doubleXp + bonusXpRank + bonusSummerRush}%</>;
 }
 
+/**
+ * Display the bonus xp given by the rank
+ */
 export function DisplayXpBonus() {
   const { data: playerInfo } = usePlayerInfoStore();
 
@@ -248,12 +316,23 @@ export function DisplayXpBonus() {
   return <>{bonusXpRank}%</>;
 }
 
+/**
+ * Display the total xp needed to reach the targeted level
+ * @param searchParams Current search parameters of the page
+ */
 export function DisplayXpNeeded({ searchParams }: { searchParams: searchParamsXpBonusPage }) {
   const { data: playerInfo } = usePlayerInfoStore();
   const xpNeeded = getXpDiff(playerInfo, searchParams);
   return <>{formatPrice(Math.ceil(xpNeeded))} xp</>;
 }
 
+/**
+ * Displays a single item with its image, action, XP needed, type, and level if higher than the player's current level.
+ *
+ * @param searchParams Current search parameters of the page
+ * @param item The item data to display, including image, action, XP, type, and level
+ * @param index The index of the item in the list (used as key)
+ */
 export function DisplayItem({ searchParams, item, index }: { searchParams: searchParamsXpBonusPage, item: HowToXpElement, index: number }) {
 
   const { data: playerInfo } = usePlayerInfoStore();
@@ -311,6 +390,13 @@ function DisplayXpNeededWithDouble({ searchParams, xp, element }: {
   return <>{fortuneBonus !== 1 && "~ "}{formatPrice(Math.ceil(xpNeededWithDoubleXP / xp))} fois</>;
 }
 
+/**
+ * Calculates and displays the number of 1000 xp bottle needed to reach the target XP,
+ * taking into account the player's rank bonus, summer rush bonus, and daily bonus, but excluding double XP,
+ * since job bottle are not affected by double XP potion.
+ *
+ * @param searchParams Current search parameters of the page
+ */
 export function DisplayXpNeededWithBottle({ searchParams }: { searchParams: searchParamsXpBonusPage }) {
   const { data: playerInfo } = usePlayerInfoStore();
   const xpNeeded = getXpDiff(playerInfo, searchParams);

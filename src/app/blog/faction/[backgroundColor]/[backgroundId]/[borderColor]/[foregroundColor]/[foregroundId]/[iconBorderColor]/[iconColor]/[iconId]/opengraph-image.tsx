@@ -22,6 +22,10 @@ function intToHex(color: number): string {
   return `#${hex.slice(2)}`;
 }
 
+/**
+ * Generator of faction emblem
+ * @param params - object that represent the faction emblem
+ */
 export default async function ImageGen( { params }: { params: any}) {
   try {
     const emblem: EmblemConfig = {

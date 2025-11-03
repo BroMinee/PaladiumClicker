@@ -3,7 +3,10 @@ import React from "react";
 import { API_PALATRACKER } from "@/lib/constants.ts";
 import { LoginButton } from "@/components/Login/LoginButton.tsx";
 
-export default function WebHooksPage() {
+/**
+ * [Account login page](https://palatracker.bromine.fr/account/login)
+ */
+export default function AccountLoginPage() {
   return (
     <Card>
       <CardHeader className="flex flex-col gap-4">

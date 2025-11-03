@@ -1,12 +1,20 @@
 import { RankingResponse, RankingType } from "@/types";
 import { redirect } from "next/navigation";
 import { getRankingLeaderboard, getRankingLeaderboardPlayerUsername, } from "@/lib/api/apiPalaTracker.ts";
-import LoadingSpinner from "@/components/ui/loading-spinner.tsx";
+import { LoadingSpinner } from "@/components/ui/loading-spinner.tsx";
 import React from "react";
 import { ZoomableChart } from "@/components/Ranking/zoomable-graph.tsx";
 import { searchParamsRankingPage } from "@/components/Ranking/RankingSelector.tsx";
 import { addMissingDate } from "@/lib/misc.ts";
 
+/**
+ * Server component that loads the top 10 ranking data (and optionally additional
+ * usernames to compare), applies exclusions, fills missing dates, and renders
+ * the zoomable ranking chart.
+ *
+ * @param rankingType Ranking category to display
+ * @param searchParams Query params controlling included/excluded usernames
+ */
 export default async function GraphRanking({ rankingType, searchParams }: {
   rankingType: RankingType,
   searchParams: searchParamsRankingPage
@@ -37,6 +45,9 @@ export default async function GraphRanking({ rankingType, searchParams }: {
   );
 }
 
+/**
+ * Fallback UI displayed while the ranking graph is loading.
+ */
 export function GraphRankingFallback() {
   return <div className="flex flex-row gap-2 m-4 w-96 items-center">
     <LoadingSpinner size={4}/>

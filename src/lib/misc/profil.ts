@@ -1,6 +1,10 @@
 import { safeJoinPaths } from "./navbar";
 import { constants } from "@/lib/constants.ts";
 
+/**
+ * Returns the image path corresponding to a given rank.
+ * @param rank The rank name.
+ */
 export function getRankImg(rank: string) {
   if (rank === "Default") {
     return safeJoinPaths(constants.imgPathProfile,"dirt.png");
@@ -33,6 +37,10 @@ export function getRankImg(rank: string) {
   }
 }
 
+/**
+ * Converts a total time in minutes into a human-readable string with days, hours, and minutes.
+ * @param timeInMinutes The total time played in minutes.
+ */
 export function computeTimePlayed(timeInMinutes: number) {
   if (timeInMinutes === -1) {
     return "Indisponible";
@@ -53,6 +61,10 @@ export function computeTimePlayed(timeInMinutes: number) {
   return res;
 }
 
+/**
+ * Converts an epoch timestamp (in milliseconds) to a UTC date string.
+ * @param epoch The epoch time in milliseconds.
+ */
 export function convertEpochToDateUTC2(epoch: number | undefined) {
   if (!epoch) {
     return "Error";
@@ -62,6 +74,10 @@ export function convertEpochToDateUTC2(epoch: number | undefined) {
   return date.toLocaleString();
 }
 
+/**
+ * Calculates the total XP needed for a mount to reach a specific level.
+ * @param level The target level.
+ */
 export function mountureGetNeededXpForLevel(level: number) {
   let sum = 0;
   for (let i = 2; i <= level; i++) {
@@ -70,6 +86,10 @@ export function mountureGetNeededXpForLevel(level: number) {
   return sum;
 }
 
+/**
+ * Returns the mount's level based on the given XP.
+ * @param xp The current XP of the mount.
+ */
 export function montureGetLevelFromXp(xp: number) {
   for (let lvl = 0; lvl <= 100; lvl++) {
     const needed = mountureGetNeededXpForLevel(lvl);
@@ -80,11 +100,20 @@ export function montureGetLevelFromXp(xp: number) {
   return 100;
 }
 
+/**
+ * Computes the pourcentage/100 of XP progress relative to the current level for a mount.
+ * @param xp The current XP.
+ * @param curLevel The current level.
+ */
 export function montureGetCoef(xp: number, curLevel: number) {
   const needed = mountureGetNeededXpForLevel(curLevel);
   return xp / needed;
 }
 
+/**
+ * Calculates the total XP needed for a pet to reach a specific level.
+ * @param level The target level.
+ */
 export function petGetNeededXpForLevel(level: number): number {
   if (level === 0) {
     return 0;
@@ -92,6 +121,10 @@ export function petGetNeededXpForLevel(level: number): number {
   return (level * level - 1) * (90 / level) + 300 + petGetNeededXpForLevel(level - 1);
 }
 
+/**
+ * Returns the pet's level based on the given XP.
+ * @param xp The current XP of the pet.
+ */
 export function petGetLevelFromXp(xp: number) {
   for (let lvl = 0; lvl <= 100; lvl++) {
     const needed = petGetNeededXpForLevel(lvl);
@@ -102,6 +135,11 @@ export function petGetLevelFromXp(xp: number) {
   return 100;
 }
 
+/**
+ * Computes the pourcentage/100 of XP progress relative to the required XP for a pet.
+ * @param xp The current XP.
+ * @param xpNeeded The XP required for the target level.
+ */
 export function petGetCoef(xp: number, xpNeeded: number) {
   return xp / xpNeeded;
 }

@@ -4,6 +4,9 @@ import { redirect, useParams, useRouter, useSearchParams } from "next/navigation
 import { cn } from "@/lib/utils.ts";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area.tsx";
 
+/**
+ * Displays a horizontal selector for profile sections and updates the URL when a section is chosen.
+ */
 export default function ProfilSelector() {
 
   const searchParams = useSearchParams();

@@ -8,6 +8,13 @@ import { cn } from "@/lib/utils.ts";
 import { Input } from "@/components/ui/input.tsx";
 import { constants } from "@/lib/constants.ts";
 
+/**
+ * Renders a set of buttons for selecting the threshold condition
+ * for webhook alerts.
+ *
+ * - Uses `currentWebHookType` to determine valid conditions.
+ * - Updates `thresholdCondition` in the store when a button is clicked.
+ */
 export function ThreshConditionSelector() {
 
   const { setThresholdCondition, thresholdCondition, currentWebHookType } = useWebhookStore();
@@ -56,6 +63,9 @@ export function ThreshConditionSelector() {
   );
 }
 
+/**
+ * Display the list of item inside the admin shop that can be configured
+ */
 export function AdminShopInput() {
   return (
     <>
@@ -115,6 +125,9 @@ function EventSelector() {
   );
 }
 
+/**
+ * Display the event type that can be configured
+ */
 export function EventInput() {
   return (
     <>
@@ -126,6 +139,9 @@ export function EventInput() {
   );
 }
 
+/**
+ * Display an input to configure the username used for the webhook
+ */
 export function VoteInput() {
   const { username, setUsername } = useWebhookStore();
 

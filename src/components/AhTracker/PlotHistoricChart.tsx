@@ -28,6 +28,11 @@ const CustomTooltip = ({ active, payload, label }: any) => {
   }
 };
 
+/**
+ * Plot the item market history sell count and price average
+ * @param data - The item market history
+ * @param webhook - Boolean, if true display a horizontal line corresponding to the webhook alert price.
+ */
 export const PlotHistoricChart = ({ data, webhook = false }: { data: AhItemHistory[], webhook?: boolean }) => {
   const data_clean = data.length !== 0 ? data.map((item) => {
     return {

@@ -2,7 +2,10 @@ import { PlayerCountHistory, ValueHistory } from "@/types";
 import { getPlayerCountHistoryPaladium } from "@/lib/api/apiPalaTracker.ts";
 import { PlotSingleValueChart } from "@/components/Status/PlotSingleValueChart.tsx";
 
-export default async function GraphPlayerCount() {
+/**
+ * Fetches the player count history and renders it in a chart.
+ */
+export async function GraphPlayerCount() {
 
   let data = [] as PlayerCountHistory;
   try {

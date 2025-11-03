@@ -6,6 +6,9 @@ import { useEffect, useState } from "react";
 import { safeJoinPaths } from "@/lib/misc.ts";
 import { constants } from "@/lib/constants.ts";
 
+/**
+ * Renders a crafting arrow image that adapts to the current theme.
+ */
 export function CraftingArrow() {
   const { theme } = useTheme();
 

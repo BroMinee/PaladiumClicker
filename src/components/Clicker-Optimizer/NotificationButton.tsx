@@ -6,6 +6,12 @@ import { Button } from "@/components/ui/button.tsx";
 import { toast } from "sonner";
 import { useState } from "react";
 
+/**
+ * Component that uses ServiceWorker to send a notification when the `dateOfNotification` is reach.
+ * @param title - Title of the notification
+ * @param dateOfNotification - Date of notification
+ * @param username - Username of the currently loaded profile.
+ */
 export default function DelayedNotificationButton({ title, dateOfNotification, username }: {
   title: string,
   dateOfNotification: Date,

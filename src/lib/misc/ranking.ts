@@ -2,6 +2,11 @@
 import { constants } from "@/lib/constants.ts";
 import { RankingResponse, RankingType } from "@/types";
 import { safeJoinPaths } from "./navbar";
+
+/**
+ * Returns the path to the image corresponding to a given ranking type.
+ * @param rankingType The type of ranking.
+ */
 export function getImagePathFromRankingType(rankingType: string): string {
   let imgPath: string;
   switch (rankingType) {
@@ -51,6 +56,10 @@ export function getImagePathFromRankingType(rankingType: string): string {
   return imgPath;
 }
 
+/**
+ * Converts a RankingType to a human-readable text.
+ * @param rankingType The type of ranking.
+ */
 export function rankingTypeToUserFriendlyText(rankingType: RankingType): string {
   switch (rankingType) {
   case RankingType.money:
@@ -84,6 +93,10 @@ export function rankingTypeToUserFriendlyText(rankingType: RankingType): string 
   }
 }
 
+/**
+ * Fills missing dates in a ranking dataset by duplicating the previous entry for any missing days.
+ * @param data The original ranking data.
+ */
 export function addMissingDate(data: RankingResponse) {
   const filledData: RankingResponse = [];
   const groupedByUser: Record<string, RankingResponse> = {};

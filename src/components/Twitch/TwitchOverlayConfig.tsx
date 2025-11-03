@@ -8,7 +8,7 @@ import Select, { StylesConfig } from "react-select";
 import makeAnimated from "react-select/animated";
 import Image from "next/image";
 import { getImagePathFromRankingType, rankingTypeToUserFriendlyText } from "@/lib/misc";
-import TwitchOverlay from "./TwichAnimation";
+import { TwitchOverlay } from "@/components/Twitch/TwichAnimation";
 import { constants,  API_PALATRACKER } from "@/lib/constants";
 
 const customStyles: StylesConfig<SubOption, false> = {
@@ -145,6 +145,15 @@ type SelectedElement = {
   id: string;
 } & SelectedElementConfig;
 
+/**
+ * TwitchOverlayConfig Component
+ *
+ * Provides a full interface for configuring a Twitch overlay.
+ * Users can select which elements to display, adjust
+ * their durations, reorder elements, and preview the overlay.
+ *
+ * @param username - The player's username, used to generate the overlay preview URL
+ */
 export const TwitchOverlayConfig = ({username}: {username: string}) => {
   const {data: playerInfo} = usePlayerInfoStore();
 
@@ -556,5 +565,3 @@ export const TwitchOverlayConfig = ({username}: {username: string}) => {
     </div>
   );
 };
-
-export default TwitchOverlayConfig;

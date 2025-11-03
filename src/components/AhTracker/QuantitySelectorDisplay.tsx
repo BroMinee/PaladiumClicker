@@ -1,6 +1,10 @@
 import { PaladiumAhItemStat } from "@/types";
 import { formatPrice } from "@/lib/misc.ts";
 
+/**
+ * Display current sell of the given item as well as it's average price in the market.
+ * @param itemInfo - The market item information
+ */
 export default async function QuantitySelectorDisplay({ itemInfo }: { itemInfo: PaladiumAhItemStat | null }) {
   return (
     <div className="flex flex-col lg:flex-row justify-evenly gap-3 pb-4 pt-3 py-2 pl-4 lg:pl-0">

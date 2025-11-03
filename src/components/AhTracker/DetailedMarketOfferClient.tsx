@@ -1,9 +1,13 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import LoadingSpinner from "@/components/ui/loading-spinner.tsx";
+import { LoadingSpinner } from "@/components/ui/loading-spinner.tsx";
 import { getPlayerUsernameFromUUID } from "@/lib/api/apiClient.ts";
 
-export function SellNameMarket({ uuid }: { uuid: string }) {
+/**
+ * Displays the username of the seller based on his uuid.
+ * @param uuid - Uuid of seller
+ */
+export function SellerNameMarket({ uuid }: { uuid: string }) {
   const [username, setUsername] = useState<string>("");
   useEffect(() => {
     getPlayerUsernameFromUUID(uuid).then((username) => setUsername(username)).catch(() => {

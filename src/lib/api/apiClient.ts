@@ -1,6 +1,10 @@
 "use client";
 import { PlayerDBApiReponse } from "@/types";
 
+/**
+ * Get the username from the given uuid.
+ * @param uuid - string
+ */
 export async function getPlayerUsernameFromUUID(uuid: string): Promise<string> {
   let pseudo = "";
   try {

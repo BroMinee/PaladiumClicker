@@ -3,7 +3,23 @@ import { addChildrenToTree, createNodeType, createTreeNode } from "@/lib/misc.ts
 import { redirect } from "next/navigation";
 import { getCraft } from "@/lib/api/apiPalaTracker.ts";
 
-export async function BuildTreeRecursively(el: NodeType, options: OptionType[], valueToRes: Map<string, CraftingRecipeType>, depth: number, testCompilation: boolean): Promise<Tree<NodeType>> {
+/**
+ * Builds a crafting tree structure recursively for a given item node.
+ * Fetches or retrieves from cache the recipe of the item, determines required child nodes,
+ * and constructs a tree representing all necessary crafting components.
+ *
+ * Recursion stops and redirects to an error page if:
+ * - The tree exceeds a depth of 10 (too complex to render probably due to infinite recursion in the crafting recipe)
+ * - A recipe or item reference is missing from the database
+ *
+ * @param el - The current item node being processed (with value and count).
+ * @param options - The list of all available items/options used to resolve child nodes.
+ * @param valueToRes - A cache storing already-fetched crafting recipes to avoid redundant calls.
+ * @param depth - Current recursion depth, used to prevent infinite or excessively deep trees.
+ *
+ * @returns A Promise resolving to the root of the constructed crafting tree for the given node.
+ */
+export async function buildTreeRecursively(el: NodeType, options: OptionType[], valueToRes: Map<string, CraftingRecipeType>, depth: number): Promise<Tree<NodeType>> {
 
   const root = createTreeNode(el, el.count);
   await new Promise(resolve => setTimeout(resolve, 250));
@@ -28,9 +44,6 @@ export async function BuildTreeRecursively(el: NodeType, options: OptionType[], 
     }
     const t = options.find((option) => option.value === itemAtSlot.item_name);
     if (t === undefined) {
-      if (testCompilation) {
-        return null;
-      }
       redirect(`/error?message=Le craft de ${el.value} n'existe pas dans la base de donnée. Il sera ajouté prochainement.`);
     }
     return t;
@@ -47,23 +60,8 @@ export async function BuildTreeRecursively(el: NodeType, options: OptionType[], 
   });
 
   for (const child of uniqueChildrenMap) {
-    const childNode = await BuildTreeRecursively(createNodeType(child[0], child[1] * countChildrenResource), options, valueToRes, depth + 1, testCompilation);
+    const childNode = await buildTreeRecursively(createNodeType(child[0], child[1] * countChildrenResource), options, valueToRes, depth + 1);
     addChildrenToTree(root, childNode);
   }
   return root;
 }
-
-// NOTE: this function is not 100% completed and normally this should not be used since the DB is always correct (if not the build failed)
-// function testIfLoopingTree(father: Tree<NodeType> | null, el: CraftingRecipeType) {
-//   if (father === null)
-//     return false;
-//
-//   const e = [el.item_name_slot1, el.item_name_slot2, el.item_name_slot3, el.item_name_slot4, el.item_name_slot5, el.item_name_slot6, el.item_name_slot7, el.item_name_slot8, el.item_name_slot9].filter((el) => el !== 'air')
-//
-//   if (e.length !== 1)
-//     return false;
-//
-//   const [onlyChild] = e;
-//
-//   return father.value.value === onlyChild;
-// }

@@ -1,7 +1,10 @@
 import { Card, CardContent, CardHeader, CardTitleH1 } from "@/components/ui/card.tsx";
-import Contributors from "@/components/Contributors.tsx";
+import { Contributors } from "@/components/Contributors.tsx";
 import Discord from "@/components/Discord.tsx";
 
+/**
+ * Generate Metadata
+ */
 export async function generateMetadata() {
   const title = "PalaTracker | A propos";
   const description = "Le site qui te permet de suivre ton profil Paladium, d'optimiser ton PalaClicker, de suivre les historiques de vente de l'AH et bien plus encore !";
@@ -16,6 +19,9 @@ export async function generateMetadata() {
   };
 }
 
+/**
+ * [About Page](https://palatracker.bromine.fr/about)
+ */
 const AboutPage = () => {
   return (
     <div className="flex flex-col gap-4 ">

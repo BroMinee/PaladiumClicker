@@ -1,6 +1,6 @@
 import { redirect } from "next/navigation";
 import { Card, CardContent, CardDescription, CardHeader, CardTitleH1 } from "@/components/ui/card.tsx";
-import GradientText from "@/components/shared/GradientText.tsx";
+import { GradientText } from "@/components/shared/GradientText\.tsx";
 import { FaHeart } from "react-icons/fa";
 import { AdminShopItem, AdminShopPeriod } from "@/types";
 import { adminShopItemToUserFriendlyText, generateAdminShopUrl, getImagePathFromAdminShopType, isShopItem } from "@/lib/misc.ts";
@@ -17,6 +17,10 @@ export type searchParamsAdminShopPage = {
   periode: string,
 }
 
+/**
+ * Generate Metadata
+ * @param props.searchParams - Admin-shop search params
+ */
 export async function generateMetadata(props: { searchParams: Promise<searchParamsAdminShopPage> }) {
   const searchParams = await props.searchParams;
 
@@ -47,9 +51,12 @@ export async function generateMetadata(props: { searchParams: Promise<searchPara
   };
 }
 
+/**
+ * [Admin-shop page](https://palatracker.bromine.fr/admin-shop)
+ * @param props.searchParams - Admin-shop search params
+ */
 export default async function Home(
   props: {
-    params: Promise<{ username: string }>,
     searchParams: Promise<searchParamsAdminShopPage>
   }
 ) {

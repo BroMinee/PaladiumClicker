@@ -20,7 +20,7 @@ import {
   RecapEvent,
   RecapMarket,
   RecapQDF,
-  RecapServeurStatus,
+  RecapServerStatus,
   RecapVote
 } from "@/components/WebHooks/WebHookRecap.tsx";
 import { MarketInput } from "@/components/WebHooks/WebHookMarket/WebHookClient.tsx";
@@ -38,6 +38,16 @@ import { constants } from "@/lib/constants.ts";
 import PlotAdminShopChart from "@/components/AdminShop/PlotAdminShopChart.tsx";
 import { PlotHistoricChart } from "@/components/AhTracker/PlotHistoricChart.tsx";
 
+/**
+ * Handles the setup or configuration of a webhook.
+ *
+ * Features:
+ * - Updates default webhook fields (title, content, embed, image, URL) when type changes.
+ * - Sets specific default items for Market, AdminShop, and QDF webhook types.
+ * - Adjusts threshold conditions depending on webhook type.
+ * - Handles special defaults for EventPvp when a specific event is selected.
+ * - Renders the editor and controls for generating webhook content.
+ */
 export function WebHookInputClientItem() {
 
   const {
@@ -324,7 +334,7 @@ function Recap() {
   case WebHookType.EventPvp:
     return <RecapEvent/>;
   case WebHookType.statusServer:
-    return <RecapServeurStatus/>;
+    return <RecapServerStatus/>;
   case WebHookType.vote:
     return <RecapVote/>;
   default:

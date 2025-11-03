@@ -49,6 +49,14 @@ const gradientColors = [
   { "color": "#ff0000", "color2": "#c90000" },
   { "color": "#00d4ff", "color2": "#0657ad" }];
 
+/**
+ * Displays a zoomable, pannable, multi-user ranking chart with tooltip, legend
+ * interactions, username management, and optional profile mode.
+ *
+ * @param data - the data to display
+ * @param rankingType Ranking category being visualized.
+ * @param profil If true, links/actions adapt to the profile ranking view.
+ */
 export function ZoomableChart({ data: initialData, rankingType, profil }: ZoomableChartProps) {
   const router = useRouter();
   const searchParams = useSearchParams();

@@ -19,6 +19,20 @@ type CraftPriceWithComputed = CraftPrice & {
   score: number,
 }
 
+/**
+ * [Craft optimizer page](https://palatracker.bromine.fr/craft?section=optimizer)
+ * Displays and updates a live list of the most profitable craftable items.
+ * Connects to a WebSocket to receive real-time price updates, sorts items based on a selected metric,
+ * and animates card rendering for smooth UI transitions.
+ *
+ * Features:
+ * - Real-time data updates via WebSocket
+ * - Sorting modes for profitability analysis
+ * - Animated item cards on update
+ * - Visual connection status indicator and last update timestamp
+ *
+ * @returns A UI component showing the top craftable items with sorting and live updates.
+ */
 export function CraftOptimizerDisplay() {
   const { craftingList, setCraftingList } = useCraftStore();
   const [topCraft, setTopCraft] = useState<Array<CraftPriceWithComputed>>([]);

@@ -1,8 +1,11 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle, CardTitleH1 } from "@/components/ui/card.tsx";
-import GradientText from "@/components/shared/GradientText.tsx";
+import { GradientText } from "@/components/shared/GradientText\.tsx";
 import { constants } from "@/lib/constants.ts";
 import React from "react";
 
+/**
+ * Generate Metadata
+ */
 export async function generateMetadata() {
 
   const title = "PalaTracker | Politique de confidentialité";
@@ -18,6 +21,9 @@ export async function generateMetadata() {
 
 }
 
+/**
+ * [Politique de confidentialité](https://palatracker.bromine.fr/politique-de-confidentialite)
+ */
 export default function Home() {
 
   return (

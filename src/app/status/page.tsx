@@ -1,16 +1,19 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitleH1 } from "@/components/ui/card.tsx";
-import GradientText from "@/components/shared/GradientText.tsx";
+import { GradientText } from "@/components/shared/GradientText\.tsx";
 import { FaHeart } from "react-icons/fa";
 import { Suspense } from "react";
-import GraphStatus, { GraphStatusFallback } from "@/components/Status/GraphStatus.tsx";
+import { GraphStatus, GraphStatusFallback } from "@/components/Status/GraphStatus.tsx";
 import { isMyApiDown } from "@/lib/api/apiPalaTracker.ts";
 import { getPlayerInfo, getPlayerOnlineCount, isApiDown } from "@/lib/api/apiPala.ts";
 import { StatusSelectorClientPeriode } from "@/components/Status/StatusSelectorClient.tsx";
 import { redirect } from "next/navigation";
 import { generateStatusUrl } from "@/lib/misc.ts";
 import { AdminShopPeriod } from "@/types";
-import GraphPlayerCount from "@/components/Status/GraphPlayerCount.tsx";
+import { GraphPlayerCount } from "@/components/Status/GraphPlayerCount.tsx";
 
+/**
+ * Generate Metadata
+ */
 export async function generateMetadata() {
   const title = "PalaTracker | Statut";
   const apiDownPaladium = await isApiDown();
@@ -66,6 +69,10 @@ export type searchParamsStatusPage = {
   periode: string,
 }
 
+/**
+ * [Status page](https://palatracker.bromine.fr/status)
+ * @param props.searchParams - Status Search params
+ */
 export default async function Home(
   props: {
     searchParams: Promise<searchParamsStatusPage>

@@ -2,9 +2,18 @@
 import React, { Suspense } from "react";
 import { getProfileFromCookies } from "@/lib/api/apiPalaTracker.ts";
 import { Card, CardHeader } from "@/components/ui/card.tsx";
-import LoadingSpinner from "@/components/ui/loading-spinner.tsx";
+import { LoadingSpinner } from "@/components/ui/loading-spinner.tsx";
 import { AuthRedirectClient, AuthSaveClient } from "@/components/Auth/AuthSaveClient.tsx";
 
+/**
+ * Component that force the user to login using discord.
+ * If he is logged:
+ *    - Displays the page.
+ * If he is not logged:
+ *    - Don't displays the page and redirect to the given URL (normally login page)
+ * @param children - The page we want to display if the user is logged.
+ * @param url - Url uses to redirect the user in case he is not logged.
+ */
 export async function AuthForceWrapper({ children, url }: {
   children: React.ReactNode,
   url: string

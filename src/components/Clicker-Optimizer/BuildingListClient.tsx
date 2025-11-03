@@ -3,6 +3,10 @@ import { computePrice, formatPrice, scaleCurrentProduction } from "@/lib/misc.ts
 import { usePlayerInfoStore } from "@/stores/use-player-info-store.ts";
 import React, { ChangeEvent } from "react";
 
+/**
+ * Display the building RPS
+ * @param index - index of the building in the playerInfo.building list
+ */
 export function BuildingRPS({ index }: { index: number }) {
   const { data: playerInfo } = usePlayerInfoStore();
   if (!playerInfo) {
@@ -14,6 +18,10 @@ export function BuildingRPS({ index }: { index: number }) {
   </>;
 }
 
+/**
+ * Display the building price
+ * @param index - index of the building in the playerInfo.building list
+ */
 export function BuildingPrice({ index }: { index: number }) {
   const { data: playerInfo } = usePlayerInfoStore();
 
@@ -25,6 +33,10 @@ export function BuildingPrice({ index }: { index: number }) {
   </div>;
 }
 
+/**
+ * Display the building level as text
+ * @param index - index of the building in the playerInfo.building list
+ */
 export function BuildingLvl({ index }: { index: number }) {
   const { data: playerInfo } = usePlayerInfoStore();
   if (!playerInfo) {
@@ -34,6 +46,10 @@ export function BuildingLvl({ index }: { index: number }) {
   return <>Level: {playerInfo.building[index].own}</>;
 }
 
+/**
+ * Display the building level as an editable input
+ * @param index - index of the building in the playerInfo.building list
+ */
 export function BuildingInput({ index }: { index: number }) {
   const { data: playerInfo, setBuildingOwn } = usePlayerInfoStore();
   const count = !playerInfo ? 0 : playerInfo.building[index].own;

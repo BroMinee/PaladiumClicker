@@ -33,6 +33,9 @@ function RecapTemplate({ messages }: { messages: string[] }) {
   );
 }
 
+/**
+ * Summary for QDF webhooks configuration.
+ */
 export function RecapQDF() {
   return (
     <RecapTemplate
@@ -40,6 +43,9 @@ export function RecapQDF() {
   );
 }
 
+/**
+ * Summary for Market configuration.
+ */
 export function RecapMarket() {
   return (
     <RecapTemplate
@@ -47,6 +53,9 @@ export function RecapMarket() {
   );
 }
 
+/**
+ * Summary for Admin shop configuration.
+ */
 export function RecapAdminShop() {
   return (
     <RecapTemplate
@@ -54,6 +63,9 @@ export function RecapAdminShop() {
   );
 }
 
+/**
+ * Summary for pvp Event configuration.
+ */
 export function RecapEvent() {
   return (
     <RecapTemplate
@@ -61,13 +73,19 @@ export function RecapEvent() {
   );
 }
 
-export function RecapServeurStatus() {
+/**
+ * Summary for server status configuration.
+ */
+export function RecapServerStatus() {
   return (
     <RecapTemplate
       messages={["Vous allez recevoir un message quand un serveur **à un soucis** ET quand il **revient à la normale**. (+/- 1 minutes)", "Ce qui fait une moyenne de **{TODO}** message par semaine."]}/>
   );
 }
 
+/**
+ * Summary for vote configuration.
+ */
 export function RecapVote() {
   return (
     <RecapTemplate

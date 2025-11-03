@@ -1,6 +1,10 @@
 import { AdminShopItem, AhItemType, MarketItemOffer } from "@/types";
 import { constants } from "@/lib/constants.ts";
 
+/**
+ * Converts an admin shop item key to a human-readable display name.
+ * @param item The AdminShopItem key.
+ */
 export function adminShopItemToUserFriendlyText(item: AdminShopItem): string {
   switch (item) {
   case "passive-wither-head":
@@ -16,6 +20,10 @@ export function adminShopItemToUserFriendlyText(item: AdminShopItem): string {
     .join(" ");
 }
 
+/**
+ * Returns the image path for a given admin shop item.
+ * @param item The AdminShopItem key.
+ */
 export function getImagePathFromAdminShopType(item: AdminShopItem): string {
   const translateTable: Record<string, string> = {
     "wool": "wool_colored_white",
@@ -37,6 +45,11 @@ export function getImagePathFromAdminShopType(item: AdminShopItem): string {
   return `/AH_img/${item.replaceAll("-", "_")}.webp`;
 }
 
+/**
+ * Converts an AhItemType object to a MarketItemOffer object for display in the market.
+ * @param item The AhItemType object.
+ * @param seller The UUID of the seller.
+ */
 export function convertAhItemTypeToMarketItemOffer(item: AhItemType, seller: string): MarketItemOffer {
   return {
     seller: seller, // uuid of the seller
@@ -53,10 +66,18 @@ export function convertAhItemTypeToMarketItemOffer(item: AhItemType, seller: str
   };
 }
 
+/**
+ * Checks if a string corresponds to a valid admin shop item.
+ * @param item The item name to check.
+ */
 export function isShopItem(item: string): item is AdminShopItem {
   return constants.adminShopItemsAvailable.includes(item as AdminShopItem);
 }
 
+/**
+ * Maps a generic item name to its corresponding AdminShopItem key.
+ * @param itemName The name of the item to map.
+ */
 export const getItemFromName = (itemName: string) => {
   switch (itemName) {
   case "amethyst-ingot":

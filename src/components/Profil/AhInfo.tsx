@@ -6,7 +6,17 @@ import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover
 import { Button } from "@/components/ui/button.tsx";
 import { FaInfoCircle } from "react-icons/fa";
 
-export default async function AhInfo() {
+/**
+ * Server component that displays the market of the player.
+ *
+ * Fetches all items currently listed for sale and renders:
+ * - The Auction House title with the player’s name.
+ * - The total potential profit if all listed items were sold (excluding lucky drawers).
+ * - A scrollable list of all items with their details.
+ *
+ * [Market profil page](https://palatracker.bromine.fr/profil/BroMine__?section=Market)
+ */
+export async function AhInfo() {
   const allItemsInfo = await getAllItems();
 
   return (

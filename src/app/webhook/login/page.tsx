@@ -4,8 +4,11 @@ import { Card, CardContent, CardHeader } from "@/components/ui/card.tsx";
 import React from "react";
 import { LoginButton } from "@/components/Login/LoginButton.tsx";
 import { API_PALATRACKER } from "@/lib/constants.ts";
-import { textFormatting } from "@/components/News.tsx";
+import { textFormatting } from "@/lib/misc";
 
+/**
+ * Generate Metadata
+ */
 export async function generateMetadata() {
   const title = "PalaTracker | Webhook | Login";
   const description = "Définissez des webhooks discord pour recevoir des notifications en temps réel sur Paladium.";
@@ -20,6 +23,9 @@ export async function generateMetadata() {
   };
 }
 
+/**
+ * [Webhook login page](https://palatracker.bromine.fr/webhook/login)
+ */
 export default function WebHooksPage() {
   return (
     <Card>

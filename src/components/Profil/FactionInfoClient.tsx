@@ -1,10 +1,10 @@
 "use client";
 import { usePlayerInfoStore } from "@/stores/use-player-info-store.ts";
-import GradientText from "@/components/shared/GradientText.tsx";
+import { GradientText } from "@/components/shared/GradientText\.tsx";
 import { convertEpochToDateUTC2, formatPrice, safeJoinPaths } from "@/lib/misc.ts";
 import { Card, CardContent } from "@/components/ui/card.tsx";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area.tsx";
-import SmallCardInfo from "@/components/shared/SmallCardInfo.tsx";
+import { SmallCardInfo } from "@/components/shared/SmallCardInfo.tsx";
 import { FaPercentage } from "react-icons/fa";
 import { PaladiumFactionLeaderboard } from "@/types";
 import LoadingData from "@/components/LoadingData.tsx";
@@ -14,6 +14,9 @@ import { constants } from "@/lib/constants.ts";
 import Image from "next/image";
 import { Emblem } from "../Faction/Emblem";
 
+/**
+ * Display the player's faction name
+ */
 export function FactionNameInfo() {
   const { data: playerInfo } = usePlayerInfoStore();
   if (playerInfo === null) {
@@ -23,6 +26,9 @@ export function FactionNameInfo() {
   return <>{playerInfo.faction.name}</>;
 }
 
+/**
+ * Display the player's faction description
+ */
 export function FactionInfoDescription() {
   const { data: playerInfo } = usePlayerInfoStore();
   if (playerInfo === null) {
@@ -32,6 +38,9 @@ export function FactionInfoDescription() {
   return <>{playerInfo.faction.description}</>;
 }
 
+/**
+ * Display the player's faction members
+ */
 export function FactionInfoMembersInfo() {
   const { data: playerInfo } = usePlayerInfoStore();
   const playerList = playerInfo ? playerInfo.faction.players : [];
@@ -45,6 +54,9 @@ export function FactionInfoMembersInfo() {
     </>);
 }
 
+/**
+ *
+ */
 export function FactionDetails() {
   const { data: playerInfo } = usePlayerInfoStore();
 
@@ -105,6 +117,10 @@ export function FactionDetails() {
     </>);
 }
 
+/**
+ * Display the player's faction rank
+ * @param factionLeaderboard - The faction leaderboard
+ */
 export function FactionClassementClient({ factionLeaderboard }: { factionLeaderboard: PaladiumFactionLeaderboard }) {
   const { data: playerInfo } = usePlayerInfoStore();
   let factionIndex = -1;
@@ -119,6 +135,9 @@ export function FactionClassementClient({ factionLeaderboard }: { factionLeaderb
   );
 }
 
+/**
+ * Display the player's faction emblem
+ */
 export function FactionEmblemClient() {
   const { data: playerInfo } = usePlayerInfoStore();
   if(!playerInfo) {

@@ -1,3 +1,11 @@
+/**
+ * Formats a string with custom markup into React elements.
+ * Supports bold (**text**), italic (*text*), underline (__text__),
+ * strikethrough (~~text~~), colored text (°text°), links ([text](url)),
+ * and newlines (\n).
+ *
+ * @param text The input string to format.
+ */
 export function textFormatting(
   text: string): React.JSX.Element {
   const parts = text.split(

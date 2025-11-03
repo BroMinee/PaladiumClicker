@@ -54,3 +54,11 @@ export interface CraftPrice {
   averagePrice: number,
   totalSold: number,
 }
+
+export type MyTreeNode = {
+  id: string;
+  label: string;
+  nodeData: NodeType;
+  parent?: MyTreeNode;
+  children: MyTreeNode[];
+}

@@ -1,43 +1,17 @@
 import "server-only";
-import { redirect } from "next/navigation";
 import { PlayerDBApiReponse } from "@/types";
 import { cookies } from "next/headers";
 
 const apiPala = process.env.NEXT_PUBLIC_PALACLICKER_API_URL ?? "https://palatracker.bromine.fr";
 
-export const fetchWithoutHeader = async <T>(url: string, cache_duration = 15 * 60, username = ""): Promise<T> | never => {
-  alert("Refacto like fetchWithHeader");
-  let response = null;
-  let json = null;
-  try {
-    response = await fetch(url,
-      {
-        next: { revalidate: cache_duration },
-        signal: AbortSignal.timeout(4000)
-      });
-    json = await response.json();
-
-    if (!response.ok) {
-      throw new Error(json.message);
-    }
-    return json;
-  } catch (error) {
-    console.error(error);
-  }
-
-  if (json) {
-    if (username !== "") {
-      return redirect(`/error?message=${json.message}&username=${username}`);
-    } else {
-      return redirect(`/error?message=${json.message}`);
-    }
-  } else if (username !== "") {
-    return redirect(`/error?message=Impossible de récupérer les données actuelles de ${url}&username=${username}`);
-  } else {
-    return redirect(`/error?message=Impossible de récupérer les données actuelles de ${url}`);
-  }
-};
-
+/**
+ * Performs a GET request with authorization and cookies, and optional caching it.
+ *
+ * @param url The endpoint URL to fetch data from.
+ * @param cache_duration_in_sec Duration in seconds for caching the response, defaults to 15 minutes.
+ * @param username Optional Minecraft username to use for fallback UUID lookup if the initial request fails.
+ * @param timeout Optional request timeout in milliseconds, defaults to 4000ms.
+ */
 export const fetchWithHeader = async <T>(url: string, cache_duration_in_sec = 15 * 60, username = "", timeout = 4000): Promise<T> => {
   let response: Response | null = null;
   let json = null;
@@ -112,6 +86,13 @@ export const fetchWithHeader = async <T>(url: string, cache_duration_in_sec = 15
   }
 };
 
+/**
+ * Performs a POST request with authorization and cookie headers, and optional caching it.
+ *
+ * @param url The endpoint URL to send the request to.
+ * @param body The JSON string body to send with the POST request.
+ * @param cache_duration_in_sec The duration (in seconds) to cache the response, defaults to 15 minutes.
+ */
 export const fetchPostWithHeader = async <T>(url: string, body: string, cache_duration_in_sec = 15 * 60): Promise<T> => {
   let response: Response | null = null;
   let json = null;

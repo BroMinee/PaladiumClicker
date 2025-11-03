@@ -98,6 +98,9 @@ function AchievementsGlobalProgressBar({ value, showText = true }: { value: numb
   );
 }
 
+/**
+ * Shows the user's global achievement progression with a progress bar.
+ */
 export function DisplayProgressionGlobal() {
   const { data: playerInfo } = usePlayerInfoStore();
 
@@ -181,6 +184,10 @@ function AchievementSelectorCategory({ category, selectedCategory, setSelectedCa
   </button>;
 }
 
+/**
+ * Renders the achievements UI: category list (left) + achievements of selected category (right).
+ * @param itemList - the list of know item in the DB.
+ */
 export function AchievementBody({ itemList }: { itemList: { img: string, value: string }[] }) {
 
   const [selectedCategory, setSelectedCategory] = useState<CategoryEnum>(CategoryEnum.HOW_TO_START);
@@ -266,7 +273,6 @@ function DetailAchievement({ achievement, itemList }: {
     <AchievementInfo title={achievement.name}
       img={achievement.completed ? safeJoinPaths(constants.imgPathProfile,"completed.png") : `/AH_img/${closestItemName}`}
       value={achievement.description}
-      unoptimized
       arrowPath={arrowPath}
 
     >

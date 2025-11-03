@@ -8,6 +8,14 @@ import { useRouter } from "next/navigation";
 import { IoMdArrowRoundBack } from "react-icons/io";
 import { constants } from "@/lib/constants.ts";
 
+/**
+ * Renders a selector for different webhook types.
+ *
+ * - Provides a button to return to the webhook list.
+ * - Displays buttons for valid webhook types.
+ * - Clicking a button sets the current webhook type in the store.
+ * - Disables the button for the currently selected webhook type.
+ */
 export function WebHookSelectorClientItem() {
   const router = useRouter();
   const validWebHookType = [WebHookType.QDF, WebHookType.adminShop, WebHookType.market, WebHookType.EventPvp, WebHookType.statusServer, WebHookType.vote];

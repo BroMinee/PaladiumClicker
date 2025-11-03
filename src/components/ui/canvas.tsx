@@ -8,8 +8,17 @@ interface CanvasWithTextProps {
   width?: number;
 }
 
-// Thanks ChatGPT <3
-const CanvasWithText: React.FC<CanvasWithTextProps> = ({ text, className, height, width }) => {
+/**
+ * Renders a <canvas> element that automatically draws and centers a text,
+ * dynamically adjusting font size to fit the canvas width. Supports multi-line
+ * wrapping if the text is too long, and adapts to theme changes (dark/light mode).
+ *
+ * @param text The string to display inside the canvas
+ * @param className Optional CSS classes for the canvas
+ * @param height  Optional canvas height; defaults to parent height if not provided
+ * @param width Optional canvas width; defaults to parent width if not provided
+ */
+export const CanvasWithText: React.FC<CanvasWithTextProps> = ({ text, className, height, width }) => {
   const { theme } = useTheme();
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
@@ -99,5 +108,3 @@ const CanvasWithText: React.FC<CanvasWithTextProps> = ({ text, className, height
     />
   );
 };
-
-export default CanvasWithText;

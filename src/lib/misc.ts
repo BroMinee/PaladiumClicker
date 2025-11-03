@@ -2,6 +2,7 @@ export * from "./misc/admin-shop";
 export * from "./misc/clicker";
 export * from "./misc/craft";
 export * from "./misc/internal";
+export * from "./misc/market";
 export * from "./misc/navbar";
 export * from "./misc/profil";
 export * from "./misc/ranking";

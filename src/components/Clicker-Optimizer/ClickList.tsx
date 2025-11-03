@@ -4,12 +4,15 @@ import { formatPrice, safeJoinPaths } from "@/lib/misc";
 import CPSJson from "@/assets/CPS.json";
 import { ButtonCPS } from "@/components/Clicker-Optimizer/ClickListClient.tsx";
 import Image from "next/image";
-import HoverText from "@/components/ui/hovertext.tsx";
+import { HoverText } from "@/components/ui/hovertext.tsx";
 import { ReactNode } from "react";
 import { PreconditionDisplay } from "@/lib/PreconditionDisplay.tsx";
 import { constants } from "@/lib/constants.ts";
 
-const ClickList = () => {
+/**
+ * Component that displays the list of Click Upgrade on the clicker.
+ */
+export const ClickList = () => {
   function getImgPath(index: number, price: string) {
     if (Number(price) === -1) {
       return "/unknown.png";
@@ -63,4 +66,3 @@ const CPS = ({ index, imgPath }: CPSProps) => {
   );
 };
 
-export default ClickList;

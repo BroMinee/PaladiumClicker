@@ -6,6 +6,9 @@ import { WebHookPreviewPage } from "@/components/WebHooks/WebHookPreview.tsx";
 import { WebHookAlert } from "@/types";
 import { constants } from "@/lib/constants.ts";
 
+/**
+ * Generate Metadata
+ */
 export async function generateMetadata() {
   const title = "PalaTracker | Webhook";
   const description = "Définissez des webhooks discord pour recevoir des notifications en temps réel sur Paladium.";
@@ -24,6 +27,9 @@ export type subGroupsType = Record<string, WebHookAlert[]>;
 
 export type groupsType = Record<string, subGroupsType>;
 
+/**
+ * [Webhook page](https://palatracker.bromine.fr/webhook)
+ */
 export default async function WebHooksMainPage() {
   return (
     <AuthForceWrapper url={`${constants.webhooksPath}/login`}>
@@ -39,6 +45,9 @@ export default async function WebHooksMainPage() {
   );
 };
 
+/**
+ * Component that displays the user webhook
+ */
 export async function WebHooksPage() {
   const webHookAlerts = await getWebHookFromCookies();
   const webHookDiscord = await getWebHookDiscordFromCookies();

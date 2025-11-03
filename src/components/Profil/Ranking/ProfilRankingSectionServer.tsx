@@ -1,12 +1,18 @@
 import "server-only";
 import React from "react";
 import { getRankingLeaderboardPlayerUsername, getRankingLeaderboardPlayerUUID } from "@/lib/api/apiPalaTracker.ts";
-import { RankingResponse, RankingType } from "@/types";
+import { RankingResponse, RankingType, searchParamsProfilPage } from "@/types";
 import { cookies } from "next/headers";
 import { ZoomableChart } from "@/components/Ranking/zoomable-graph.tsx";
-import { searchParamsProfilPage } from "@/components/Profil/ProfilSelectorDisplay.tsx";
 import { addMissingDate } from "@/lib/misc.ts";
 
+/**
+ * Server component that fetches and displays ranking data for the current user
+ * (and optionally additional usernames) in a zoomable chart.
+ *
+ * @param rankingType Type of ranking to display
+ * @param searchParams Query parameters that may include usernames to compare
+ */
 export async function ProfilRankingSectionServer({ rankingType, searchParams }: {
   rankingType: RankingType,
   searchParams: searchParamsProfilPage

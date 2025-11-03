@@ -1,13 +1,17 @@
 import { MarketItemOffer, OptionType } from "@/types";
-import { formatPrice, formatPriceWithUnit, safeJoinPaths } from "@/lib/misc.ts";
+import { formatPrice, formatPriceWithUnit, safeJoinPaths, textFormatting } from "@/lib/misc.ts";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area.tsx";
 import React, { ReactNode } from "react";
 import Image from "next/image";
-import { SellNameMarket } from "@/components/AhTracker/DetailedMarketOfferClient.tsx";
-import { textFormatting } from "@/components/News.tsx";
-import HoverText from "@/components/ui/hovertext.tsx";
+import { SellerNameMarket } from "@/components/AhTracker/DetailedMarketOfferClient.tsx";
+import { HoverText } from "@/components/ui/hovertext.tsx";
 import { constants } from "@/lib/constants.ts";
 
+/**
+ * Diplays all the current sells of the given item.
+ * @param listing - list of current sells of item
+ * @param item - the item
+ */
 export default async function DetailedMarketOfferList({ listing, item }: {
   listing: MarketItemOffer[],
   item: OptionType
@@ -31,6 +35,11 @@ export default async function DetailedMarketOfferList({ listing, item }: {
   );
 }
 
+/**
+ * Displays the item sell detail info
+ * @param itemSelected - the current item info
+ * @param offer - The offer detail info
+ */
 export function DetailedMarketOffer({ itemSelected, offer }: { itemSelected: OptionType, offer: MarketItemOffer }) {
 
   const hoverElementPricePb: ReactNode = (
@@ -85,7 +94,7 @@ export function DetailedMarketOffer({ itemSelected, offer }: { itemSelected: Opt
         alt={"Skin"} width={0} height={0}
         unoptimized={true}
       />
-      <SellNameMarket uuid={offer.seller}/>
+      <SellerNameMarket uuid={offer.seller}/>
     </div>
     <div className="flex flex-col xl:flex-row gap-4 w-full md:w-[35%]">
 

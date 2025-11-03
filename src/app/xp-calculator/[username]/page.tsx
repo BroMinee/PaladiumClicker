@@ -1,7 +1,7 @@
 import ProfileFetcherWrapper from "@/components/ProfileFetcher.tsx";
 import { MetierComponentWrapper } from "@/components/MetierList.tsx";
 import { Card, CardContent, CardDescription, CardHeader, CardTitleH1 } from "@/components/ui/card.tsx";
-import GradientText from "@/components/shared/GradientText.tsx";
+import { GradientText } from "@/components/shared/GradientText\.tsx";
 import { FaHeart } from "react-icons/fa";
 import {
   MetierSelectorClient,
@@ -13,6 +13,11 @@ import { HowToXp, searchParamsXpBonusPage, XpBonus } from "@/components/Xp-Calcu
 import { constants } from "@/lib/constants.ts";
 import { safeJoinPaths } from "@/lib/misc.ts";
 
+/**
+ * Generate Metadata
+ * @param props.params - Username
+ * @param props.searchParams - Search Params
+ */
 export async function generateMetadata(
   props: { params: Promise<{ username: string }>, searchParams: Promise<searchParamsXpBonusPage> }
 ) {
@@ -59,6 +64,11 @@ export async function generateMetadata(
   };
 }
 
+/**
+ * [Xp-calculator Page](https://palatracker.bromine.fr/xp-calculator/BroMine__)
+ * @param props.params - Username
+ * @param props.searchParams - Search params
+ */
 export default async function Home(
   props: {
     params: Promise<{ username: string }>,

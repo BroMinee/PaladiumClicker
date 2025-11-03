@@ -13,10 +13,14 @@ import category_upgrade_json from "@/assets/category_upgrade.json";
 import metier_json from "@/assets/metier.json";
 import building_json from "@/assets/building.json";
 import CPS_json from "@/assets/CPS.json";
-import { AnyCondition, Building, BuildingUpgrade, CategoryUpgrade, GlobalUpgrade, ManyUpgrade, Metiers, PlayerInfo, PosteriorUpgrade, TerrainUpgrade, UpgradeKey, CPS } from "@/types";
+import { AnyCondition, Building, BuildingUpgrade, CategoryUpgrade, GlobalUpgrade, ManyUpgrade, Metiers, PlayerInfo, PosteriorUpgrade, TerrainUpgrade, UpgradeKey, CPS, buildingPathType, bestUpgradeInfo, bestBuildingInfo, bestPurchaseInfoDetailed, bestPurchaseInfo } from "@/types";
 import { constants } from "@/lib/constants.ts";
 import { safeJoinPaths } from "./navbar";
 
+/**
+ * Formats a number as a price string using French locale formatting.
+ * @param price The price to format.
+ */
 export function formatPrice(price: number | undefined) {
   if (price === undefined) {
     return "Error";
@@ -25,17 +29,10 @@ export function formatPrice(price: number | undefined) {
   return numberFormatter.format(price);
 }
 
-export function formatPriceWithUnit(price: number): string {
-  if (price < 1000) {
-    return price.toString();
-  }
-  if (price < 1000000) {
-    return (price / 1000).toFixed(1) + "k";
-  }
-
-  return (price / 1000000).toFixed(1) + "M";
-}
-
+/**
+ * Get the total coin spend
+ * @param playerInfo The information of the player.
+ */
 export function getTotalSpend(playerInfo: PlayerInfo) {
   let total = 0;
   const validKeys = [
@@ -105,7 +102,13 @@ function getDayCondition(conditions: AnyCondition | undefined) {
   return r ? r.day : -1;
 }
 
-// unlockable, coins, totalCoins, day, daySinceStart, buildingIndex, buildingNeed, buildingCount
+/**
+ * Checks if a player meets the requirement conditions.
+ *
+ * @param playerInfo The information of the player.
+ * @param conditions The conditions to check.
+ * @param date The current date for the calculation.
+ */
 export function checkCondition(playerInfo: PlayerInfo, conditions: AnyCondition, date: Date) {
   const coinsCondition = getCoinsCondition(conditions);
   const dayCondition = getDayCondition(conditions);
@@ -132,10 +135,20 @@ export function checkCondition(playerInfo: PlayerInfo, conditions: AnyCondition,
   };
 }
 
+/**
+ * Computes the price of an item based on its base price and level.
+ * @param priceLevel0 The base price at level 0.
+ * @param level The level of the item.
+ */
 export function computePrice(priceLevel0: number, level: number) {
   return Math.round(priceLevel0 * Math.pow(1.100000023841858, level));
 }
 
+/**
+ * Returns the image path for a specific upgrade or building in the clicker game.
+ * @param bestListName The category of the upgrade or building.
+ * @param bestUpgradeIndex The index of the upgrade or building.
+ */
 export function getPathImg(bestListName: string, bestUpgradeIndex: number) {
   switch (bestListName) {
   case "building":
@@ -158,6 +171,10 @@ export function getPathImg(bestListName: string, bestUpgradeIndex: number) {
   }
 }
 
+/**
+ * Formats a Date into a DD/MM/YYYY à HH:MM:SS string for the clicker game.
+ * @param d The date to format.
+ */
 export function getDDHHMMSSOnlyClicker(d: Date) {
   if (new Date() > d) {
     return "Maintenant";
@@ -167,6 +184,10 @@ export function getDDHHMMSSOnlyClicker(d: Date) {
   return `${padL(d.getDate())}/${padL(d.getMonth() + 1)}/${d.getFullYear()} à ${padL(d.getHours())}:${padL(d.getMinutes())}:${padL(d.getSeconds())}`;
 }
 
+/**
+ * Converts a DD/MM/YYYY à HH:MM:SS string back into a Date object.
+ * @param d The formatted date string.
+ */
 export function reverseDDHHMMSSOnlyClicker(d: string) {
   // get the date out of the string (format : DD/MM/YYYY à HH:MM:SS)
   const date = d.split(" à ")[0];
@@ -180,24 +201,42 @@ export function reverseDDHHMMSSOnlyClicker(d: string) {
   return new Date(Number(year), Number(month) - 1, Number(day), Number(hour), Number(minute), Number(second));
 }
 
+/**
+ * Formats a Date into a full DD/MM/YYYY à HH:MM:SS string.
+ * @param d The date to format.
+ */
 export function getDDHHMMSS(d: Date) {
   const padL = (num: number, chr = "0") => `${num}`.padStart(2, chr);
 
   return `${padL(d.getDate())}/${padL(d.getMonth() + 1)}/${d.getFullYear()} à ${padL(d.getHours())}:${padL(d.getMinutes())}:${padL(d.getSeconds())}`;
 }
 
+/**
+ * Formats a Date into a HH:MM:SS string.
+ * @param d The date to format.
+ */
 export function getHHMMSS(d: Date) {
   const padL = (num: number, chr = "0") => `${num}`.padStart(2, chr);
 
   return `${padL(d.getHours())}:${padL(d.getMinutes())}:${padL(d.getSeconds())}`;
 }
 
+/**
+ * Formats a Date into a HH:MM string.
+ * @param d The date to format.
+ */
 export function getHHMM(d: Date) {
   const padL = (num: number, chr = "0") => `${num}`.padStart(2, chr);
 
   return `${padL(d.getHours())}:${padL(d.getMinutes())}`;
 }
 
+/**
+ * Scales the current production of a building for a player based on its level.
+ * @param playerInfo The information of the player.
+ * @param buildingIndex The index of the building.
+ * @param level The level of the building.
+ */
 export function scaleCurrentProduction(playerInfo: PlayerInfo, buildingIndex: number, level: number) {
   if (level === 0 || level === -1) {
     return 0;
@@ -305,6 +344,10 @@ function convertToFloat(str: string | number) {
   return parseFloat(str.replace(/,/g, "."));
 }
 
+/**
+ * Get the current production of the playerInfo
+ * @param playerInfo The information of the player.
+ */
 export function computeRPS(playerInfo: PlayerInfo) {
   let rps = 0.5;
   playerInfo.building.forEach((building, index) => {
@@ -316,6 +359,10 @@ export function computeRPS(playerInfo: PlayerInfo) {
   return rps;
 }
 
+/**
+ * Returns the corresponding JSON data object for a given upgrade type.
+ * @param upgradeType The type of upgrade to get the JSON for.
+ */
 export function getJsonToUseForUpgrade(upgradeType: UpgradeKey) {
   const jsonToUse = null;
   if (upgradeType === "global_upgrade") {
@@ -335,6 +382,9 @@ export function getJsonToUseForUpgrade(upgradeType: UpgradeKey) {
   return jsonToUse;
 }
 
+/**
+ * Get an empty playerInfo
+ */
 export const getInitialPlayerInfo = (): PlayerInfo => {
 
   const metiers = structuredClone(metier_json) as Metiers;
@@ -395,6 +445,10 @@ export const getInitialPlayerInfo = (): PlayerInfo => {
   };
 };
 
+/**
+ * Compute the clicker progression so far from a playerInfo
+ * @param playerInfo The information of the player.
+ */
 export function computeProgression(playerInfo: PlayerInfo | null) {
   if (!playerInfo) {
     return 0;
@@ -418,4 +472,268 @@ export function computeProgression(playerInfo: PlayerInfo | null) {
     + playerInfo.posterior_upgrade.reduce((acc, posterior) => acc + (posterior.own ? 1 : 0), 0);
 
   return currentUpgrade * 100 / maxUpgrade;
+}
+
+/**
+ * Compute the best building from a playerInfo state.
+ * @param playerInfo The information of the player.
+ */
+export function computeBestBuildingUpgrade(playerInfo: PlayerInfo): bestBuildingInfo {
+  let buildingOwned = playerInfo.building.filter((building) => Number(building.own) > 0).length;
+  if (buildingOwned !== playerInfo.building.length && Number(playerInfo.building[buildingOwned]["name"]) !== -1) {
+    buildingOwned += 1;
+  }
+  const currentRPS = computeRPS(playerInfo);
+  let bestCoef = 0;
+  let bestBuildingIndex = -1;
+  for (let index = 0; index < buildingOwned; index++) {
+    const copy = structuredClone(playerInfo);
+    const building = copy.building[index];
+    if (building.own === 99) {
+      continue;
+    }
+
+    building.own += 1;
+
+    const coef = (computeRPS(copy) - currentRPS) / (computePrice(copy.building[index].price, Number(copy.building[index].own) - 1));
+    if (coef > bestCoef) {
+      bestCoef = coef;
+      bestBuildingIndex = index;
+    }
+  }
+
+  return {
+    bestCoef: bestCoef,
+    bestUpgradeIndex: bestBuildingIndex,
+    bestListName: "building"
+  };
+}
+
+/**
+ * Compute the best upgrade from a playerInfo state.
+ * @param playerInfo The information of the player.
+ * @param date The date used in the simulation
+ */
+export function findBestUpgrade(playerInfo: PlayerInfo, date: Date): bestUpgradeInfo {
+
+  // building_upgrade
+  // category_upgrade
+  // global_upgrade
+  // many_upgrade
+  // terrain_upgrade
+
+  const bestUpgradeRes: bestUpgradeInfo = {
+    bestCoef: 0,
+    bestUpgradeIndex: -1,
+    bestListName: "building_upgrade"
+  };
+
+  const buildingUpgradeUnlockable = playerInfo["building_upgrade"].filter((building) => !building["own"] && checkCondition(playerInfo, building["condition"], date).unlockable);
+  const categoryUpgradeUnlockable = playerInfo["category_upgrade"].filter((building) => !building["own"] && checkCondition(playerInfo, building["condition"], date).unlockable);
+  const globalUpgradeUnlockable = playerInfo["global_upgrade"].filter((building) => !building["own"] && checkCondition(playerInfo, building["condition"], date).unlockable);
+  const manyUpgradeUnlockable = playerInfo["many_upgrade"].filter((building) => !building["own"] && checkCondition(playerInfo, building["condition"], date).unlockable);
+  const terrainUpgradeUnlockable = playerInfo["terrain_upgrade"].filter((building) => !building["own"] && checkCondition(playerInfo, building["condition"], date).unlockable);
+  const posteriorUpgradeUnlockable = playerInfo["posterior_upgrade"].filter((building) => !building["own"] && checkCondition(playerInfo, building["condition"], date).unlockable);
+
+  const currentRPS = computeRPS(playerInfo);
+
+  type typeListTmp =
+    typeof buildingUpgradeUnlockable
+    | typeof categoryUpgradeUnlockable
+    | typeof globalUpgradeUnlockable
+    | typeof manyUpgradeUnlockable
+    | typeof terrainUpgradeUnlockable
+    | typeof posteriorUpgradeUnlockable;
+
+  function getBestIndex(list: typeListTmp, nameList: buildingPathType) {
+    for (let index = 0; index < list.length; index++) {
+      const copy = structuredClone(playerInfo);
+      const name = list[index]["name"];
+
+      if (!Object.keys(playerInfo).includes(nameList)) {
+        return;
+      }
+
+      const indexInBuilding = playerInfo[nameList].findIndex((building) => building["name"] === name);
+      copy[nameList][indexInBuilding]["own"] = true;
+
+      const coef = (computeRPS(copy) - currentRPS) / (copy[nameList][indexInBuilding]["price"]);
+
+      if (coef > bestUpgradeRes.bestCoef) {
+        bestUpgradeRes.bestCoef = coef;
+        bestUpgradeRes.bestUpgradeIndex = indexInBuilding;
+        bestUpgradeRes.bestListName = nameList;
+      }
+    }
+  }
+
+  getBestIndex(buildingUpgradeUnlockable, "building_upgrade");
+  getBestIndex(categoryUpgradeUnlockable, "category_upgrade");
+  getBestIndex(globalUpgradeUnlockable, "global_upgrade");
+  getBestIndex(manyUpgradeUnlockable, "many_upgrade");
+  getBestIndex(terrainUpgradeUnlockable, "terrain_upgrade");
+  getBestIndex(posteriorUpgradeUnlockable, "posterior_upgrade");
+
+  return bestUpgradeRes;
+}
+
+/**
+ * Get the best building or upgrade to buy. And by it
+ * @param copyPlayerInfo the playerInfo state used for the simulation
+ * @param date The date used in the simulation
+ */
+function getBestUpgrade(copyPlayerInfo: PlayerInfo, date: Date): bestPurchaseInfo {
+  const bestBuildingInfo = computeBestBuildingUpgrade(structuredClone(copyPlayerInfo));
+  const bestUpgradeInfo = findBestUpgrade(structuredClone(copyPlayerInfo), date);
+
+  let bestPurchase = {} as (bestUpgradeInfo | bestBuildingInfo);
+  if (bestBuildingInfo.bestUpgradeIndex === -1 && bestUpgradeInfo.bestUpgradeIndex === -1) {
+    return {
+      path: "building",
+      index: -1,
+      own: -1,
+      pathImg: "",
+    };
+  } else if (bestBuildingInfo.bestUpgradeIndex === -1) {
+    bestPurchase = bestUpgradeInfo;
+  } else if (bestUpgradeInfo.bestUpgradeIndex === -1) {
+    bestPurchase = bestBuildingInfo;
+  } else {
+    bestPurchase = bestBuildingInfo.bestCoef > bestUpgradeInfo.bestCoef ? bestBuildingInfo : bestUpgradeInfo;
+  }
+
+  const own = copyPlayerInfo[bestPurchase.bestListName][bestPurchase.bestUpgradeIndex].own;
+  if (typeof own === "boolean" && own === true) {
+    alert("Error in getBestUpgrade true");
+  } else if (typeof own === "boolean" && own === false) {
+    copyPlayerInfo[bestPurchase.bestListName][bestPurchase.bestUpgradeIndex].own = true;
+  } else if (typeof own === "number") {
+    copyPlayerInfo[bestPurchase.bestListName][bestPurchase.bestUpgradeIndex].own = own + 1;
+  } else {
+    alert("Error in getBestUpgrade");
+  }
+
+  return {
+    path: bestPurchase.bestListName,
+    index: bestPurchase.bestUpgradeIndex,
+    own: copyPlayerInfo[bestPurchase.bestListName][bestPurchase.bestUpgradeIndex].own,
+    pathImg: getPathImg(bestPurchase.bestListName, bestPurchase.bestUpgradeIndex),
+  };
+}
+
+/**
+ * This algorithm is the original one. It has been copied many times, but none have ever matched its quality. :)
+ * @param playerInfo the playerInfo state used for the simulation
+ * @param achatCount The number of upgrade to simulate
+ * @param rps the current RPS
+ */
+export function computeXBuildingAhead(playerInfo: PlayerInfo, achatCount: number, rps: number) {
+  // Path, index, own, timeToBuy (string), pathImg, newRps, price
+
+  let copyRps = rps;
+  let date = new Date();
+  const copy = structuredClone(playerInfo);
+  let currentCoins = Math.max(playerInfo["production"] - getTotalSpend(copy), 0);
+  const buildingBuyPaths: bestPurchaseInfoDetailed[] = [];
+  for (let i = 0; i < achatCount; i++) {
+
+    const bestPurchase: bestPurchaseInfo = getBestUpgrade(copy, date);
+    // own already updated
+    if (bestPurchase.index === -1) {
+      break;
+    }
+
+    //let [path, index, own, pathImg] = getBestUpgrade(copy);
+
+    if (bestPurchase.index !== -1) {
+      let price = copy[bestPurchase.path][bestPurchase.index].price;
+      const {
+        timeToBuy: timeToBuy,
+        newCoins: newCoins
+      } = computeTimeToBuy(price, bestPurchase.own, currentCoins, copyRps, date);
+      currentCoins = Math.max(newCoins, 0);
+      date = timeToBuy;
+      const own = copy[bestPurchase.path][bestPurchase.index].own;
+
+      if (typeof own === "number") {
+        price = computePrice(copy[bestPurchase.path][bestPurchase.index]["price"], own - 1);
+      }
+
+      copyRps = computeRPS(copy);
+
+      buildingBuyPaths.push(
+        {
+          path: bestPurchase.path,
+          index: bestPurchase.index,
+          own: copy[bestPurchase.path][bestPurchase.index].own,
+          timeToBuy: getDDHHMMSSOnlyClicker(timeToBuy),
+          pathImg: bestPurchase.pathImg,
+          newRps: copyRps,
+          price: price
+        }
+      );
+    }
+  }
+  return buildingBuyPaths;
+}
+
+/**
+ * Updates the player's state after purchasing all the given upgrades.
+ * @param playerInfo The current player information.
+ * @param setPlayerInfo Function to update the player information state.
+ * @param buildingPaths Array of buildings and their paths to be purchased.
+ */
+export function buyBuilding(playerInfo: PlayerInfo | null, setPlayerInfo: (arg0: PlayerInfo) => (void), buildingPaths: bestPurchaseInfoDetailed[]) {
+  if (!playerInfo) {
+    return;
+  }
+  for (let i = 0; i < buildingPaths.length; i++) {
+    const bestUpgradeIndex = buildingPaths[i].index;
+    const bestListName = buildingPaths[i].path;
+    if (bestUpgradeIndex === -1) {
+      return;
+    }
+    const own = playerInfo[bestListName][bestUpgradeIndex]["own"];
+    if (typeof own === "boolean") {
+      playerInfo[bestListName][bestUpgradeIndex]["own"] = true;
+    } else {
+      playerInfo[bestListName][bestUpgradeIndex]["own"] = Math.min(own + 1, 99);
+    }
+  }
+  setPlayerInfo({ ...playerInfo });
+}
+
+/**
+ * Computes the estimated time to afford a building and the remaining coins.
+ *
+ * @param price The base price of the building.
+ * @param own Whether the player owns the building or the current quantity owned.
+ * @param coinsDormants The current coins available to spend.
+ * @param rps Coins generated per second (rate of production).
+ * @param curTime The current date and time.
+ */
+export function computeTimeToBuy(price: number, own: boolean | number, coinsDormants: number, rps: number, curTime: Date) {
+  let priceToBuy = -1;
+  if (typeof own === "boolean" && own === true) {
+    priceToBuy = price;
+  } else if (typeof own === "boolean" && own === false) {
+    alert("Error in computeTimeToBuy false");
+  } else {
+    priceToBuy = computePrice(price, own - 1);
+  }
+
+  const factorLagServer = 1.33;
+  if (coinsDormants >= priceToBuy) {
+    return {
+      timeToBuy: curTime,
+      newCoins: coinsDormants - priceToBuy
+    };
+  }
+
+  const nbSec = (priceToBuy - coinsDormants) * factorLagServer / rps;
+
+  return {
+    timeToBuy: new Date(curTime.getTime() + nbSec * 1000),
+    newCoins: 0
+  };
 }

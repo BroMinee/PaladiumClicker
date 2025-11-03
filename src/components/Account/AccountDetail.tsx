@@ -3,6 +3,9 @@ import { useProfileStore } from "@/stores/use-profile-store.ts";
 import Image from "next/image";
 import { Card, CardContent } from "@/components/ui/card.tsx";
 
+/**
+ * Component used in the bottom navbar to display the current discord account information.
+ */
 export function AccountDetail() {
   const { profileInfo } = useProfileStore();
   if (!profileInfo) {

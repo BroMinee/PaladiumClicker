@@ -5,6 +5,9 @@ import React from "react";
 import { AuthForceWrapper } from "@/components/Auth/AuthForceWrapper.tsx";
 import { constants } from "@/lib/constants.ts";
 
+/**
+ * Generate Metadata
+ */
 export async function generateMetadata() {
   const title = "PalaTracker | Webhook | Create";
   const description = "Définissez des webhooks discord pour recevoir des notifications en temps réel sur Paladium.";
@@ -19,6 +22,9 @@ export async function generateMetadata() {
   };
 }
 
+/**
+ * [Webhook login page](https://palatracker.bromine.fr/webhook/login)
+ */
 export default async function WebHooksPage() {
   return (
     <AuthForceWrapper url={`${constants.webhooksPath}/login`}>

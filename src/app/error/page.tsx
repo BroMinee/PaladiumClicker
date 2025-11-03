@@ -11,9 +11,12 @@ import {
   TestMyApiFetching
 } from "@/components/ui/TestApiOnError.tsx";
 import { Suspense } from "react";
-import ImportProfilPretty from "@/components/shared/ImportProfilPretty.tsx";
-import ImportOfflineProfil from "@/components/shared/ImportOfflineProfil.tsx";
+import { ImportProfilPretty } from "@/components/shared/ImportProfilPretty.tsx";
+import { ImportOfflineProfil } from "@/components/shared/ImportOfflineProfil.tsx";
 
+/**
+ * Generate Metadata
+ */
 export function generateMetadata() {
   const title = "PalaTracker | Erreur";
   const description = "PalaTracker : boostez votre progression et votre clicker sur Paladium comme jamais auparavant !";
@@ -27,6 +30,10 @@ export function generateMetadata() {
   };
 }
 
+/**
+ * [Error page](https://palatracker.bromine.fr/error)
+ * @param props.searchParams - Error search params
+ */
 export default async function Error500Page(
   props: {
     searchParams: Promise<{ [key: string]: string | string[] | undefined }>

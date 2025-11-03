@@ -11,6 +11,11 @@ import { ChangeEvent, useEffect, useMemo, useState } from "react";
 import debounce from "debounce";
 import { cn } from "@/lib/utils";
 
+/**
+ * Display an svg outline representing the player current level progression.
+ * @param metierKey - The job key used to to display corresponding data
+ * @param metierToReach - boolean, if true then the SVG outline is fully filled
+ */
 export function MetierOutline({ metierKey, metierToReach = false }: { metierKey: MetierKey, metierToReach?: boolean }) {
 
   const { data: playerInfo } = usePlayerInfoStore();
@@ -32,6 +37,13 @@ export function MetierOutline({ metierKey, metierToReach = false }: { metierKey:
     }} />;
 }
 
+/**
+ * Component that display the current level using an input.
+ * @param metierKey- The job key used to to display corresponding data
+ * @param lvlToReach - I don't remember that that does but it seem important :)
+ * @param searchParams - SearchParams
+ * @param twitch - Whether to display the UI in Twitch mode (affects level display styling or behavior).
+ */
 export function MetierDisplayLvl({ metierKey, lvlToReach, searchParams, twitch = false }:
   {
     metierKey: MetierKey,
@@ -117,6 +129,13 @@ export function MetierDisplayLvl({ metierKey, lvlToReach, searchParams, twitch =
   );
 }
 
+/**
+ * Button to decrease the displayed job level by 1
+ * @param minLevel - Minimum job level
+ * @param metierKey - The job key used to to display corresponding data
+ * @param searchParams - SearchParams
+ * @param username - Username used
+ */
 export function MetierDecrease({ minLevel, metierKey, searchParams, username }: {
   minLevel: number,
   metierKey: MetierKey,
@@ -143,6 +162,12 @@ export function MetierDecrease({ minLevel, metierKey, searchParams, username }: 
   </Button>;
 }
 
+/**
+ * Button to increase the displayed job level by 1
+ * @param metierKey - The job key used to to display corresponding data
+ * @param searchParams - SearchParams
+ * @param username - Username used
+ */
 export function MetierIncrease({ metierKey, searchParams, username }: {
   metierKey: MetierKey,
   searchParams?: searchParamsXpBonusPage | undefined,

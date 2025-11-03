@@ -4,12 +4,24 @@ import { NodeType, PaladiumAhItemStat } from "@/types";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card.tsx";
 import React, { useEffect, useState } from "react";
 import { adaptPlurial, formatPrice } from "@/lib/misc.ts";
-import LoadingSpinner from "@/components/ui/loading-spinner.tsx";
-import GradientText from "@/components/shared/GradientText.tsx";
+import { LoadingSpinner } from "@/components/ui/loading-spinner.tsx";
+import { GradientText } from "@/components/shared/GradientText\.tsx";
 import { getPaladiumAhItemStatsOfAllItemsAction } from "@/lib/api/apiServerAction.ts";
 import { redirect } from "next/navigation";
 import { DisplayItemProduce } from "@/components/Craft/CraftingDisplayItem.tsx";
 
+/**
+ * Displays the list of resources required to craft an item, along with their total cost based on
+ * current market offers. Fetches market data for all needed resources, computes subtotal
+ * and total prices, and shows loading placeholders during data retrieval.
+ *
+ * Behavior:
+ * - Calculates required quantities and prices for each resource based on the cheapest available listings
+ * - Shows warnings when a resource is missing or insufficiently available on the market
+ * - Displays loading states while fetching data
+ *
+ * @param list - The list of resource nodes, each containing the item, label, and required count.
+ */
 export function CraftResourceList({ list }: { list: NodeType[] }) {
   const [listState, setListState] = useState<NodeType[] | null>(null);
   const [mounted, setMounted] = useState(false);
@@ -89,7 +101,7 @@ export function CraftResourceList({ list }: { list: NodeType[] }) {
           {listState !== null && listState.length > 0 && listState.map((slot, index) =>
             <DisplayItemProduce key={slot.value + index + "-needed"} title={"x" + slot.count + " " + slot.label}
                            value={`${Math.floor(slot.count / 64)} ${adaptPlurial("stack", Math.floor(slot.count / 64))} et ${slot.count - Math.floor(slot.count / 64) * 64}`}
-                           count={slot.count} slot={slot}/>
+                           count={slot.count} item={slot}/>
           )}
           {listState !== null && listState.length === 0 &&
             <span
@@ -110,19 +122,19 @@ export function CraftResourceList({ list }: { list: NodeType[] }) {
                 console.error(`Item ${slot.value} not found in ahItems`, ahItems);
                 return <DisplayItemProduce key={slot.value + index + "-needed-dollar"} title={"⚠️ " + slot.label}
                                       value={"Pas en vente actuellement au market"}
-                                      count={slot.count} slot={slot}/>;
+                                      count={slot.count} item={slot}/>;
               }
 
               if (found.quantityAvailable < slot.count) {
                 return <DisplayItemProduce key={slot.value + index + "-needed-dollar"}
                                       title={"⚠️ " + slot.label + ` - Quantité insuffisante au market il en manquera ${slot.count - found.quantityAvailable}`}
                                       value={`Total de : ${formatPrice(subTotalPrice[index])} $`}
-                                      count={slot.count} slot={slot}/>;
+                                      count={slot.count} item={slot}/>;
               }
 
               return <DisplayItemProduce key={slot.value + index + "-needed-dollar"} title={slot.label}
                                     value={`Total de : ${formatPrice(subTotalPrice[index])} $`}
-                                    count={slot.count} slot={slot}/>;
+                                    count={slot.count} item={slot}/>;
             }
           )}
           {listState !== null && listState.length === 0 &&

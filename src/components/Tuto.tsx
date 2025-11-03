@@ -5,7 +5,10 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import ReactAudioPlayer from "react-audio-player";
 import { safeJoinPaths } from "@/lib/misc.ts";
 
-const Tuto = () => {
+/**
+ * Component that display a small tutorial on how to use the clicker-optimizer
+ */
+export const Tuto = () => {
   return (<Dialog>
     <DialogTrigger asChild>
       <Button variant="outline">
@@ -72,5 +75,3 @@ const Tuto = () => {
     </DialogContent>
   </Dialog>);
 };
-
-export default Tuto;

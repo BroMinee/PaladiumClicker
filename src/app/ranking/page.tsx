@@ -6,6 +6,10 @@ import { generateRankingUrl, getImagePathFromRankingType, rankingTypeToUserFrien
 import { Suspense } from "react";
 import GraphRanking, { GraphRankingFallback } from "@/components/Ranking/GraphRanking.tsx";
 
+/**
+ * Generate Metadata
+ * @param props.searchParams - Search params
+ */
 export async function generateMetadata(props: { searchParams: Promise<searchParamsRankingPage> }) {
   const searchParams = await props.searchParams;
 
@@ -36,9 +40,12 @@ export async function generateMetadata(props: { searchParams: Promise<searchPara
   };
 }
 
+/**
+ * [Ranking page](https://palatracker.bromine.fr/ranking)
+ * @param props.searchParams - Search params
+ */
 export default async function Home(
   props: {
-    params: Promise<{ username: string }>,
     searchParams: Promise<searchParamsRankingPage>
   }
 ) {

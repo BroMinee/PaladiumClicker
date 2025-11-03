@@ -52,6 +52,7 @@ const DialogContent = React.forwardRef<
 ));
 DialogContent.displayName = DialogPrimitive.Content.displayName;
 
+// eslint-disable-next-line jsdoc/require-jsdoc
 const DialogHeader = ({
   className,
   ...props
@@ -66,6 +67,7 @@ const DialogHeader = ({
 );
 DialogHeader.displayName = "DialogHeader";
 
+// eslint-disable-next-line jsdoc/require-jsdoc
 const DialogFooter = ({
   className,
   ...props

@@ -167,6 +167,7 @@ const DropdownMenuSeparator = React.forwardRef<
 ));
 DropdownMenuSeparator.displayName = DropdownMenuPrimitive.Separator.displayName;
 
+// eslint-disable-next-line jsdoc/require-jsdoc
 const DropdownMenuShortcut = ({
   className,
   ...props

@@ -57,6 +57,10 @@ interface NewsProps {
   update: ChangeLogs,
 }
 
+/**
+ * Component used in the patchnote to display a single patchnote
+ * @param update - Patchnote Information
+ */
 export const News = ({ update }: NewsProps) => {
   return (
     <Update

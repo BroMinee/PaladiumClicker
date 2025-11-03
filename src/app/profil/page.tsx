@@ -1,5 +1,8 @@
 import { NoPseudoPage } from "@/components/NoPseudoPage.tsx";
 
+/**
+ * Generate Metadata
+ */
 export function generateMetadata() {
   return {
     title: "PalaTracker | Profil",
@@ -11,6 +14,9 @@ export function generateMetadata() {
   };
 }
 
+/**
+ * [Profil page](https://palatracker.bromine.fr/profil)
+ */
 export default function HomeProfilWithoutUsername() {
   return <NoPseudoPage texth1="Consulte tes °métiers°, ton °market°, tes °succès° et surtout ton °évolution°" texth2="Commence par saisir ton pseudo °Minecraft°"/>;
 }

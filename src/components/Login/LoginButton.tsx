@@ -6,6 +6,14 @@ import { setCookies } from "@/lib/api/apiServerAction.ts";
 import { toast } from "sonner";
 import { TbLogin2 } from "react-icons/tb";
 
+/**
+ * Renders a button that initiates login via Discord and stores the login cookies.
+ *
+ * @param href - The URL to redirect the user for authentication.
+ * @param redirectUrl - The URL to redirect back to after successful login.
+ *
+ * @returns A styled button to login via Discord.
+ */
 export function LoginButton({href, redirectUrl }: {href: string, redirectUrl: string }) {
   function handleLogin() {
     setCookies("redirectUrl", redirectUrl, 60 * 10).then(() => {
@@ -26,6 +34,14 @@ export function LoginButton({href, redirectUrl }: {href: string, redirectUrl: st
   </Button>;
 }
 
+/**
+ * Renders a smaller, icon-only button that initiates login via Discord and stores a redirect URL in cookies.
+ *
+ * @param href - The URL to redirect the user for authentication.
+ * @param redirectUrl - The URL to redirect back to after successful login.
+ *
+ * @returns A compact icon button for login via Discord.
+ */
 export function SmallLoginButton({href, redirectUrl }: {href: string, redirectUrl: string }) {
   function handleLogin() {
     setCookies("redirectUrl", redirectUrl, 60 * 10).then(() => {

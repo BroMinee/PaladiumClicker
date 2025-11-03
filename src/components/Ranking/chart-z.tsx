@@ -68,6 +68,7 @@ const ChartContainer = React.forwardRef<
 });
 ChartContainer.displayName = "Chart";
 
+// eslint-disable-next-line jsdoc/require-jsdoc
 const ChartStyle = ({ id, config }: { id: string; config: ChartConfig }) => {
   const colorConfig = Object.entries(config).filter(
     ([_, config]) => config.theme ?? config.color
@@ -101,6 +102,7 @@ ${colorConfig
 
 const ChartTooltip = RechartsPrimitive.Tooltip;
 
+// eslint-disable-next-line jsdoc/require-jsdoc
 function ChartTooltipContent({
   active,
   className,
@@ -251,6 +253,7 @@ ChartTooltipContent.displayName = "ChartTooltip";
 
 const ChartLegend = RechartsPrimitive.Legend;
 
+// eslint-disable-next-line jsdoc/require-jsdoc
 function ChartLegendContent({
   className,
   hideIcon = false,

@@ -9,9 +9,23 @@ import MarketSelector from "@/components/AhTracker/MarketSelector.tsx";
 import { constants } from "@/lib/constants.ts";
 import React, { Suspense } from "react";
 import { CraftingInformationFetcher } from "@/components/Craft/CraftingInformationFetcher.tsx";
-import LoadingSpinner from "@/components/ui/loading-spinner.tsx";
-import GradientText from "@/components/shared/GradientText.tsx";
+import { LoadingSpinner } from "@/components/ui/loading-spinner.tsx";
+import { GradientText } from "@/components/shared/GradientText\.tsx";
 
+/**
+ * Server component for displaying the crafting recipe page.
+ * Loads all items, validates the selected item from URL search params,
+ * handles automatic redirection on alias name item, and renders the UI to
+ * select an item and view its crafting recipe.
+ *
+ * Redirects when:
+ * - The selected item does not exist but an alias is found (redirects to alias)
+ *
+ * Shows an error card when:
+ * - The selected item does not exist and no alias is available in the DB.
+ *
+ * @param searchParams - Search params of the crafting page
+ */
 export async function CraftRecipeDisplay({ searchParams }: { searchParams: searchParamsCraftPage }) {
   const options = await getAllItems();
 
@@ -61,7 +75,11 @@ export async function CraftRecipeDisplay({ searchParams }: { searchParams: searc
     </div>);
 }
 
-export function MarketSelectFallback() {
+/**
+ * Fallback UI displayed while the market item selector is loading.
+ * Shows a loading spinner.
+ */
+function MarketSelectFallback() {
   return <div className="flex flex-row gap-2 m-4 w-96 items-center">
     <LoadingSpinner size={4}/>
     <h2 className="font-bold">Chargement des items...</h2>

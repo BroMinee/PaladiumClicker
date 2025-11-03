@@ -4,6 +4,10 @@ import { WebHookInputClientItem } from "@/components/WebHooks/WebHookInputClient
 import React from "react";
 import { getProfileFromCookies } from "@/lib/api/apiPalaTracker.ts";
 
+/**
+ * [Login callback page](https://palatracker.bromine.fr/login/callback)
+ * Is this still used ??
+ */
 export default async function WebHooksPage() {
 
   const discordUser = await getProfileFromCookies();

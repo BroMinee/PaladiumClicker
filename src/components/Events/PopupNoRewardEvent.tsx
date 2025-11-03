@@ -5,6 +5,10 @@ import React from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card.tsx";
 import { RenderEvent } from "@/components/NavBar/NavBarClient.tsx";
 
+/**
+ * Displays a modal popup notifying the user that they did not win a prize in the event.
+ * @param children - The trigger element that opens the popup (e.g., a button or card).
+ */
 export const PopupNoRewardEvent = ({ children }: { children: React.ReactNode }) => {
   return <Dialog>
     <DialogTrigger>

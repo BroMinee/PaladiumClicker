@@ -1,6 +1,6 @@
 "use client";
 import { usePlayerInfoStore } from "@/stores/use-player-info-store.ts";
-import SmallCardInfo from "@/components/shared/SmallCardInfo.tsx";
+import { SmallCardInfo } from "@/components/shared/SmallCardInfo.tsx";
 import { computeTimePlayed, convertEpochToDateUTC2, formatPrice, getRankImg, safeJoinPaths } from "@/lib/misc.ts";
 import dynamic from "next/dynamic";
 import { Card, CardContent } from "@/components/ui/card.tsx";
@@ -17,6 +17,9 @@ const ReactSkinview3d = dynamic(() => import("react-skinview3d").then(mod => mod
   </div>,
 });
 
+/**
+ * Display the player's username
+ */
 export function ProfilUsernameInfo() {
   const { data: playerInfo } = usePlayerInfoStore();
 
@@ -25,6 +28,11 @@ export function ProfilUsernameInfo() {
   </>;
 }
 
+/**
+ * Renders the player's profile description and banner image.
+ * If the player has no description, displays a default message.
+ * If the player has a current banner, it renders the banner image.
+ */
 export function ProfilDescriptionAndBanner() {
   const { data: playerInfo } = usePlayerInfoStore();
 
@@ -47,6 +55,9 @@ export function ProfilDescriptionAndBanner() {
   </>;
 }
 
+/**
+ * Display the player's alignment icon
+ */
 export function ProfilAlliance() {
   const { data: playerInfo } = usePlayerInfoStore();
 
@@ -65,6 +76,9 @@ export function ProfilAlliance() {
 
 }
 
+/**
+ * Display the player's view count
+ */
 export function PlayerViewCount() {
   const { data: playerInfo } = usePlayerInfoStore();
   return <>
@@ -72,6 +86,9 @@ export function PlayerViewCount() {
   </>;
 }
 
+/**
+ * Display the player's money
+ */
 export function PlayerMoney() {
   const { data: playerInfo } = usePlayerInfoStore();
   return <>
@@ -80,6 +97,9 @@ export function PlayerMoney() {
   </>;
 }
 
+/**
+ * Display the player's skin using ReactSkinview3D
+ */
 export function PlayerSkin() {
   const { data: playerInfo } = usePlayerInfoStore();
 
@@ -102,6 +122,9 @@ export function PlayerSkin() {
   </ErrorBoundary>;
 }
 
+/**
+ * Display the player's rank
+ */
 export function PlayerRank() {
   const { data: playerInfo } = usePlayerInfoStore();
   let rank = "Default";
@@ -121,18 +144,27 @@ export function PlayerRank() {
     unoptimized/>;
 }
 
+/**
+ * Display the player's time played
+ */
 export function PlayerTimePlayed() {
   const { data: playerInfo } = usePlayerInfoStore();
   return <SmallCardInfo title="Temps de jeu" value={computeTimePlayed(playerInfo?.timePlayed ?? 0)}
     img={safeJoinPaths(constants.imgPathProfile,"clock.gif")} unoptimized/>;
 }
 
+/**
+ * Display the player first connection date
+ */
 export function PlayerFirstConnection() {
   const { data: playerInfo } = usePlayerInfoStore();
   return <SmallCardInfo title="Première connexion" value={convertEpochToDateUTC2(playerInfo?.firstSeen ?? 1)}
     img={safeJoinPaths(constants.imgPathProfile,"clock.gif")} unoptimized/>;
 }
 
+/**
+ * Display the player's friend count
+ */
 export function PlayerFriendsCount() {
   const { data: playerInfo } = usePlayerInfoStore();
   let friendCount = -1;
@@ -145,6 +177,9 @@ export function PlayerFriendsCount() {
   </>;
 }
 
+/**
+ * Display the player's friends list
+ */
 export function PlayerFriends() {
   const { data: playerInfo } = usePlayerInfoStore();
   if (!playerInfo) {
@@ -184,6 +219,9 @@ function SkinFallback() {
   );
 }
 
+/**
+ * Display the overlay twitch button
+ */
 export function OverlayTwitchButton() {
   const { data: playerInfo } = usePlayerInfoStore();
   if (!playerInfo) {

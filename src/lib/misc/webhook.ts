@@ -1,5 +1,9 @@
 import { EventType, WebHookType } from "@/types";
 
+/**
+ * Returns a human-readable text for a given WebHookType.
+ * @param webHookType The type of the webhook.
+ */
 export function getTextFromWebHookType(webHookType: WebHookType) {
   switch (webHookType) {
   case WebHookType.QDF:
@@ -19,6 +23,10 @@ export function getTextFromWebHookType(webHookType: WebHookType) {
   }
 }
 
+/**
+ * Returns the path to the icon image corresponding to a given EventType.
+ * @param eventType The type of the event.
+ */
 export function getIconNameFromEventType(eventType: EventType) {
   switch (eventType) {
   case "A VOS MARQUES":

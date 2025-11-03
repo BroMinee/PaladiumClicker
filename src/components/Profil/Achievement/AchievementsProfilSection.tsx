@@ -7,8 +7,12 @@ import {
 import React from "react";
 import { getAllItems } from "@/lib/api/apiPalaTracker.ts";
 import { OptionType } from "@/types";
-import LoadingSpinner from "@/components/ui/loading-spinner.tsx";
+import { LoadingSpinner } from "@/components/ui/loading-spinner.tsx";
 
+/**
+ * Loads all item images required for achievement display and renders the Achievements section.
+ * Fetches items, maps them to minimal data (value, img) and displays progression and the achievement list.
+ */
 export async function AchievementsProfilSection() {
 
   const itemList = await getAllItems().catch(() => {
@@ -34,6 +38,10 @@ export async function AchievementsProfilSection() {
   </>;
 }
 
+/**
+ * Fallback UI shown while achievement data and images are loading.
+ * Displays a spinner.
+ */
 export function AchievementsProfilSectionFallBack() {
   return (<Card>
     <CardHeader>
@@ -45,6 +53,10 @@ export function AchievementsProfilSectionFallBack() {
   </Card>);
 }
 
+/**
+ * Fallback UI shown while market data and images are loading.
+ * Displays a spinner.
+ */
 export function MarketProfilSectionFallBack() {
   return (<Card>
     <CardHeader>
