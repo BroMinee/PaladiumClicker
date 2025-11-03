@@ -34,7 +34,7 @@ import {
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 
-import constants from "@/lib/constants.ts";
+import { constants } from "@/lib/constants.ts";
 import PlotAdminShopChart from "@/components/AdminShop/PlotAdminShopChart.tsx";
 import { PlotHistoricChart } from "@/components/AhTracker/PlotHistoricChart.tsx";
 

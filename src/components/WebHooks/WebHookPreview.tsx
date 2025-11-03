@@ -11,7 +11,7 @@ import { useWebhookStore } from "@/stores/use-webhook-store.ts";
 import { useRouter } from "next/navigation";
 import { deleteWebhookServerAction } from "@/lib/api/apiServerAction.ts";
 import { toast } from "sonner";
-import constants, { API_PALATRACKER } from "@/lib/constants.ts";
+import { constants,  API_PALATRACKER } from "@/lib/constants.ts";
 import { DisplayChannelBox, DisplayServerBox } from "@/components/WebHooks/WebHookDisplayServerInfo.tsx";
 import { groupsType } from "@/app/webhook/page.tsx";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog.tsx";

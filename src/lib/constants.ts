@@ -672,7 +672,7 @@ export const adminShopItemsAvailable: AdminShopItem[] = [
   "amethyst-ingot", "carrot", "cooked-beef"
 ];
 
-const constants = {
+export const constants = {
   defaultUsername,
   version,
   discord,
@@ -711,5 +711,3 @@ const constants = {
   AUTOPROMO_CONFIG,
   adminShopItemsAvailable,
 };
-
-export default constants;

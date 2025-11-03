@@ -5,7 +5,7 @@ import { cn } from "@/lib/utils";
 import { usePlayerInfoStore } from "@/stores/use-player-info-store";
 import React, { FormEvent, useEffect, useState } from "react";
 import { FaSearch } from "react-icons/fa";
-import constants from "@/lib/constants.ts";
+import { constants } from "@/lib/constants.ts";
 import { getInitialPlayerInfo, getLinkFromUrl, safeJoinPaths } from "@/lib/misc.ts";
 import { navigate } from "@/components/actions";
 import { useSettingsStore } from "@/stores/use-settings-store.ts";

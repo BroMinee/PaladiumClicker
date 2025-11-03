@@ -6,7 +6,7 @@ import Image from "next/image";
 import { SellNameMarket } from "@/components/AhTracker/DetailedMarketOfferClient.tsx";
 import { textFormatting } from "@/components/News.tsx";
 import HoverText from "@/components/ui/hovertext.tsx";
-import constants from "@/lib/constants.ts";
+import { constants } from "@/lib/constants.ts";
 
 export default async function DetailedMarketOfferList({ listing, item }: {
   listing: MarketItemOffer[],

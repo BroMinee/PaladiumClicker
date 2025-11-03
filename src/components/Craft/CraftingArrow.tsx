@@ -4,7 +4,7 @@ import Image from "next/image";
 import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
 import { safeJoinPaths } from "@/lib/misc.ts";
-import constants from "@/lib/constants.ts";
+import { constants } from "@/lib/constants.ts";
 
 export function CraftingArrow() {
   const { theme } = useTheme();

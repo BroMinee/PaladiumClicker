@@ -3,7 +3,7 @@ import { Card, CardContent } from "@/components/ui/card.tsx";
 import Image from "next/image";
 import { safeJoinPaths } from "@/lib/misc.ts";
 
-import constants from "@/lib/constants.ts";
+import { constants } from "@/lib/constants.ts";
 
 const Contributors = () => {
   const contributeurs = [

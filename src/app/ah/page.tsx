@@ -7,7 +7,7 @@ import LoadingSpinner from "@/components/ui/loading-spinner.tsx";
 import MarketSelector from "@/components/AhTracker/MarketSelector.tsx";
 import { getAllItems } from "@/lib/api/apiPalaTracker.ts";
 import { OptionType } from "@/types";
-import constants from "@/lib/constants";
+import { constants } from "@/lib/constants";
 import { MarketServerFetcher } from "@/components/AhTracker/MarketServerFetcher.tsx";
 import { redirect } from "next/navigation";
 

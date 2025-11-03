@@ -1,5 +1,5 @@
 import React from "react";
-import constants from "@/lib/constants.ts";
+import { constants } from "@/lib/constants.ts";
 import { AuthForceWrapper } from "@/components/Auth/AuthForceWrapper.tsx";
 import { AdminPanelRoleDispatch } from "@/components/Admin-Panel/AdminPanelRoleDispatch.tsx";
 

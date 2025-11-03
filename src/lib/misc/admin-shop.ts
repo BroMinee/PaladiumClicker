@@ -1,5 +1,5 @@
 import { AdminShopItem, AhItemType, MarketItemOffer } from "@/types";
-import constants from "@/lib/constants.ts";
+import { constants } from "@/lib/constants.ts";
 
 export function adminShopItemToUserFriendlyText(item: AdminShopItem): string {
   switch (item) {

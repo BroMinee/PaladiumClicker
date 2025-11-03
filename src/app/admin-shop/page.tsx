@@ -10,7 +10,7 @@ import {
   AdminShopSelectorClientPeriode
 } from "@/components/AdminShop/AdminShopSelectorClientItem.tsx";
 import GraphAdminShop, { GraphAdminShopFallback } from "@/components/AdminShop/GraphAdminShop.tsx";
-import constants from "@/lib/constants.ts";
+import { constants } from "@/lib/constants.ts";
 
 export type searchParamsAdminShopPage = {
   item: string,

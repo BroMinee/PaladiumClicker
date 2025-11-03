@@ -9,7 +9,7 @@ import makeAnimated from "react-select/animated";
 import Image from "next/image";
 import { getImagePathFromRankingType, rankingTypeToUserFriendlyText } from "@/lib/misc";
 import TwitchOverlay from "./TwichAnimation";
-import constants, { API_PALATRACKER } from "@/lib/constants";
+import { constants,  API_PALATRACKER } from "@/lib/constants";
 
 const customStyles: StylesConfig<SubOption, false> = {
   control: (provided, state) => ({

@@ -1,4 +1,4 @@
-import constants from "@/lib/constants.ts";
+import { constants } from "@/lib/constants.ts";
 import { MetierKey } from "@/types";
 
 export function getXpCoef(level: number, currentXp: number) {

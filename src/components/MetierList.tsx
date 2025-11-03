@@ -7,7 +7,7 @@ import Image from "next/image";
 import { safeJoinPaths } from "@/lib/misc.ts";
 
 import metierJson from "@/assets/metier.json";
-import constants from "@/lib/constants.ts";
+import { constants } from "@/lib/constants.ts";
 type MetierListProps = {
   editable?: boolean;
 };

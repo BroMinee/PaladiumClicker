@@ -7,7 +7,7 @@ import Image from "next/image";
 import HoverText from "@/components/ui/hovertext.tsx";
 import { ReactNode } from "react";
 import { PreconditionDisplay } from "@/lib/PreconditionDisplay.tsx";
-import constants from "@/lib/constants.ts";
+import { constants } from "@/lib/constants.ts";
 
 const ClickList = () => {
   function getImgPath(index: number, price: string) {

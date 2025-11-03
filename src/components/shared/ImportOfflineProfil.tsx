@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import constants from "@/lib/constants.ts";
+import { constants } from "@/lib/constants.ts";
 import { safeJoinPaths } from "@/lib/misc.ts";
 import { navigate } from "@/components/actions";
 import { useSettingsStore } from "@/stores/use-settings-store.ts";

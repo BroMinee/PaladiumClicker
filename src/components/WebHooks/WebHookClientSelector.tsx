@@ -6,7 +6,7 @@ import { useWebhookStore } from "@/stores/use-webhook-store.ts";
 import { getTextFromWebHookType } from "@/lib/misc.ts";
 import { useRouter } from "next/navigation";
 import { IoMdArrowRoundBack } from "react-icons/io";
-import constants from "@/lib/constants.ts";
+import { constants } from "@/lib/constants.ts";
 
 export function WebHookSelectorClientItem() {
   const router = useRouter();

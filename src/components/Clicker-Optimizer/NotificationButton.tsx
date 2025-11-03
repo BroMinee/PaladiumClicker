@@ -1,5 +1,5 @@
 "use client";
-import constants from "@/lib/constants.ts";
+import { constants } from "@/lib/constants.ts";
 
 import { safeJoinPaths } from "@/lib/misc.ts";
 import { Button } from "@/components/ui/button.tsx";

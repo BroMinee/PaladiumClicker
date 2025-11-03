@@ -4,7 +4,7 @@ import { WebHookInputClientItem } from "@/components/WebHooks/WebHookInputClient
 import React from "react";
 import { AuthForceWrapper } from "@/components/Auth/AuthForceWrapper.tsx";
 
-import constants from "@/lib/constants.ts";
+import { constants } from "@/lib/constants.ts";
 
 export async function generateMetadata() {
   const title = "PalaTracker | Webhook | Edit";

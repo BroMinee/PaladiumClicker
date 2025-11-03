@@ -21,7 +21,7 @@ import Image from "next/image";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover.tsx";
 import { GiProgression } from "react-icons/gi";
 import DelayedNotificationButton from "@/components/Clicker-Optimizer/NotificationButton.tsx";
-import constants from "@/lib/constants.ts";
+import { constants } from "@/lib/constants.ts";
 
 const RPS = () => {
   const { data: playerInfo, setPlayerInfo } = usePlayerInfoStore();

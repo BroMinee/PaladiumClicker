@@ -10,7 +10,7 @@ import {
   TestBot
 } from "@/components/Pala-Animation/PalaAnimationClient.tsx";
 import SessionProvider from "@/components/Pala-Animation/SessionContextProvider.tsx";
-import constants from "@/lib/constants.ts";
+import { constants } from "@/lib/constants.ts";
 import { AuthForceWrapper } from "@/components/Auth/AuthForceWrapper.tsx";
 
 export async function generateMetadata() {

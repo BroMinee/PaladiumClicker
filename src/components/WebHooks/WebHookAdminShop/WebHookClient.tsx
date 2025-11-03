@@ -6,7 +6,7 @@ import { ThresholdSelector } from "@/components/WebHooks/WebHookThresholdSelecto
 import { Button } from "@/components/ui/button.tsx";
 import { cn } from "@/lib/utils.ts";
 import { Input } from "@/components/ui/input.tsx";
-import constants from "@/lib/constants.ts";
+import { constants } from "@/lib/constants.ts";
 
 export function ThreshConditionSelector() {
 

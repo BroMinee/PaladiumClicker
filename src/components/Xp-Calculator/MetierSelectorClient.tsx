@@ -10,7 +10,7 @@ import { MetierDecrease, MetierDisplayLvl, MetierIncrease, MetierOutline } from 
 import { Button } from "@/components/ui/button.tsx";
 import { Input } from "@/components/ui/input.tsx";
 import { searchParamsXpBonusPage } from "@/components/Xp-Calculator/XpCalculator.tsx";
-import constants, { HowToXpElement } from "@/lib/constants.ts";
+import { constants,  HowToXpElement } from "@/lib/constants.ts";
 import GradientText from "../shared/GradientText";
 import { useEffect } from "react";
 

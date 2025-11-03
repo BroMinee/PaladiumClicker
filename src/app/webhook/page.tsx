@@ -4,7 +4,7 @@ import { AuthForceWrapper } from "@/components/Auth/AuthForceWrapper.tsx";
 import { getWebHookDiscordFromCookies, getWebHookFromCookies } from "@/lib/api/apiPalaTracker.ts";
 import { WebHookPreviewPage } from "@/components/WebHooks/WebHookPreview.tsx";
 import { WebHookAlert } from "@/types";
-import constants from "@/lib/constants.ts";
+import { constants } from "@/lib/constants.ts";
 
 export async function generateMetadata() {
   const title = "PalaTracker | Webhook";

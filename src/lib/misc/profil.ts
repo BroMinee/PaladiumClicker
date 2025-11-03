@@ -1,5 +1,5 @@
 import { safeJoinPaths } from "./navbar";
-import constants from "@/lib/constants.ts";
+import { constants } from "@/lib/constants.ts";
 
 export function getRankImg(rank: string) {
   if (rank === "Default") {

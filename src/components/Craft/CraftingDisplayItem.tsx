@@ -1,7 +1,7 @@
 "use client";
 import Image from "next/image";
 import { safeJoinPaths } from "@/lib/misc.ts";
-import constants from "@/lib/constants.ts";
+import { constants } from "@/lib/constants.ts";
 import React, { useState } from "react";
 import { OptionType } from "@/types";
 import { CardContent } from "@/components/ui/card.tsx";

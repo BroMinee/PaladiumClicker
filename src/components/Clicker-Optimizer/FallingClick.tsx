@@ -4,7 +4,7 @@ import { useEffect, useRef } from "react";
 import { usePlayerInfoStore } from "@/stores/use-player-info-store";
 import { useSettingsStore } from "@/stores/use-settings-store";
 import { safeJoinPaths } from "@/lib/misc.ts";
-import constants from "@/lib/constants.ts";
+import { constants } from "@/lib/constants.ts";
 
 const FallingClickImage = () => {
 

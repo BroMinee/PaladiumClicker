@@ -5,7 +5,7 @@ import AhItem from "@/components/Profil/AhItem.tsx";
 import { OptionType } from "@/types";
 import { adaptPlurial, formatPrice, safeJoinPaths } from "@/lib/misc.ts";
 import { toast } from "sonner";
-import constants from "@/lib/constants.ts";
+import { constants } from "@/lib/constants.ts";
 import Image from "next/image";
 
 export function AhInfoTitleClient() {

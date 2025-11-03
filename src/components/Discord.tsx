@@ -1,6 +1,6 @@
 import { Card, CardContent } from "@/components/ui/card.tsx";
 import { FaDiscord } from "react-icons/fa";
-import constants from "@/lib/constants.ts";
+import { constants } from "@/lib/constants.ts";
 import { cn } from "@/lib/utils.ts";
 
 type DiscordProps = {

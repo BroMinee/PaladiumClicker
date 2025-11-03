@@ -2,7 +2,7 @@
 import Image from "next/image";
 import { Card, CardContent, CardHeader } from "@/components/ui/card.tsx";
 import { safeJoinPaths } from "@/lib/misc.ts";
-import constants from "@/lib/constants.ts";
+import { constants } from "@/lib/constants.ts";
 import MotionFadeIn from "@/components/shared/MotionFadeIn.tsx";
 import MotionStaggerList from "@/components/shared/MotionStaggerList.tsx";
 

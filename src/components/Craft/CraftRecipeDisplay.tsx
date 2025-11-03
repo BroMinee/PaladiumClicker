@@ -6,7 +6,7 @@ import { CraftSectionEnum, searchParamsCraftPage } from "@/types";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card.tsx";
 import { CountSelector } from "@/components/Craft/CountSelector.tsx";
 import MarketSelector from "@/components/AhTracker/MarketSelector.tsx";
-import constants from "@/lib/constants.ts";
+import { constants } from "@/lib/constants.ts";
 import React, { Suspense } from "react";
 import { CraftingInformationFetcher } from "@/components/Craft/CraftingInformationFetcher.tsx";
 import LoadingSpinner from "@/components/ui/loading-spinner.tsx";

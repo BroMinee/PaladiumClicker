@@ -8,7 +8,7 @@ import Image from "next/image";
 import { ReactNode } from "react";
 import HoverText from "@/components/ui/hovertext.tsx";
 import { PreconditionDisplay } from "@/lib/PreconditionDisplay.tsx";
-import constants from "@/lib/constants.ts";
+import { constants } from "@/lib/constants.ts";
 
 type UpgradeListProps = {
   upgradeType: UpgradeKey;

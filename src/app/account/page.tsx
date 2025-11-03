@@ -1,6 +1,6 @@
 import React from "react";
 import { AuthForceWrapper } from "@/components/Auth/AuthForceWrapper.tsx";
-import constants from "@/lib/constants.ts";
+import { constants } from "@/lib/constants.ts";
 import { WebHooksPage } from "@/app/webhook/page.tsx";
 import { Card } from "@/components/ui/card.tsx";
 import { AccountDetail } from "@/components/Account/AccountDetail.tsx";

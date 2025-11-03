@@ -14,7 +14,7 @@ import {
   InputDailyBonus
 } from "@/components/Xp-Calculator/MetierSelectorClient.tsx";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover.tsx";
-import constants from "@/lib/constants.ts";
+import { constants } from "@/lib/constants.ts";
 import { safeJoinPaths } from "@/lib/misc.ts";
 import { MetierKey } from "@/types";
 import Image from "next/image";

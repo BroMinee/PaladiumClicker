@@ -9,7 +9,7 @@ import { FaPercentage } from "react-icons/fa";
 import { PaladiumFactionLeaderboard } from "@/types";
 import LoadingData from "@/components/LoadingData.tsx";
 import { Suspense } from "react";
-import constants from "@/lib/constants.ts";
+import { constants } from "@/lib/constants.ts";
 
 import Image from "next/image";
 import { Emblem } from "../Faction/Emblem";

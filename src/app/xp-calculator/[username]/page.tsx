@@ -10,7 +10,7 @@ import {
 } from "@/components/Xp-Calculator/MetierSelectorClient.tsx";
 import { MetierKey } from "@/types";
 import { HowToXp, searchParamsXpBonusPage, XpBonus } from "@/components/Xp-Calculator/XpCalculator.tsx";
-import constants from "@/lib/constants.ts";
+import { constants } from "@/lib/constants.ts";
 import { safeJoinPaths } from "@/lib/misc.ts";
 
 export async function generateMetadata(

@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button.tsx";
 import { Sheet, SheetContent, SheetHeader, SheetTrigger } from "@/components/ui/sheet.tsx";
 import { FaBars, FaCalculator, FaClipboardList, FaKey, FaRegUser, FaShoppingBasket } from "react-icons/fa";
-import constants from "@/lib/constants.ts";
+import { constants } from "@/lib/constants.ts";
 import { LogoClient } from "@/components/ui/logoClient.tsx";
 import LinkClient, {
   CategorieDisplay,

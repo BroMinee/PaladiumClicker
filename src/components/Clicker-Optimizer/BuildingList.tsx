@@ -6,7 +6,7 @@ import BuildingJson from "@/assets/building.json";
 import { BuildingInput, BuildingPrice, BuildingRPS } from "@/components/Clicker-Optimizer/BuildingListClient.tsx";
 import Image from "next/image";
 import React from "react";
-import constants from "@/lib/constants.ts";
+import { constants } from "@/lib/constants.ts";
 const BuildingList = () => {
   function getImgPath(index: number, price: number) {
     if (price === -1) {

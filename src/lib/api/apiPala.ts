@@ -32,7 +32,7 @@ import { redirect } from "next/navigation";
 import { getInitialPlayerInfo } from "@/lib/misc.ts";
 import { registerPlayerAction } from "@/lib/api/apiServerAction.ts";
 // import { toast } from "sonner";
-import constants, { API_PALATRACKER } from "@/lib/constants.ts";
+import { constants,  API_PALATRACKER } from "@/lib/constants.ts";
 
 export const PALADIUM_API_URL = process.env.PALADIUM_API_URL || "https://api.paladium.games";
 

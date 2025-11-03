@@ -4,7 +4,7 @@ import SmallCardInfo from "@/components/shared/SmallCardInfo.tsx";
 import { computeTimePlayed, convertEpochToDateUTC2, formatPrice, getRankImg, safeJoinPaths } from "@/lib/misc.ts";
 import dynamic from "next/dynamic";
 import { Card, CardContent } from "@/components/ui/card.tsx";
-import constants from "@/lib/constants.ts";
+import { constants } from "@/lib/constants.ts";
 import Image from "next/image";
 import { NameTagObject } from "skinview3d";
 import { ErrorBoundary } from "./ErrorProfilErrorBoundary";

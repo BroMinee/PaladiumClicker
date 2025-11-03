@@ -11,7 +11,7 @@ import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area.tsx";
 
 import Image from "next/image";
 import { AchievementInfo, DisplayCategoryCard } from "@/components/Profil/Achievement/DisplayAchievement.tsx";
-import constants from "@/lib/constants.ts";
+import { constants } from "@/lib/constants.ts";
 
 export function DisplayProgressionCategory({ category }: { category: CategoryEnum }) {
   const { data: playerInfo } = usePlayerInfoStore();
