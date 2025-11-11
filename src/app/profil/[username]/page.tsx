@@ -1,9 +1,9 @@
-import ProfileFetcherWrapper from "@/components/ProfileFetcher.tsx";
-import { generateProfilUrl, isProfilSection } from "@/lib/misc.ts";
-import ProfilSelector from "@/components/Profil/ProfilSelector.tsx";
+import ProfileFetcherWrapper from "@/components/ProfileFetcher";
+import { generateProfilUrl, isProfilSection } from "@/lib/misc";
+import ProfilSelector from "@/components/Profil/ProfilSelector";
 import { ProfilSectionEnum } from "@/types";
 import { redirect } from "next/navigation";
-import ProfilSelectorDisplay from "@/components/Profil/ProfilSelectorDisplay.tsx";
+import ProfilSelectorDisplay from "@/components/Profil/ProfilSelectorDisplay";
 
 /**
  * Generate Metadata

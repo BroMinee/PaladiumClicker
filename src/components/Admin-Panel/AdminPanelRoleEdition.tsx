@@ -1,11 +1,11 @@
 "use client";
 import { Role } from "@/types";
-import { Button } from "@/components/ui/button.tsx";
+import { Button } from "@/components/ui/button";
 import { FormEvent, useState } from "react";
-import { getRoleColor } from "@/lib/misc.ts";
-import { editRoleSubmit } from "@/lib/api/apiServerAction.ts";
+import { getRoleColor } from "@/lib/misc";
+import { editRoleSubmit } from "@/lib/api/apiServerAction";
 import { toast } from "sonner";
-import { LoadingSpinner } from "@/components/ui/loading-spinner.tsx";
+import { LoadingSpinner } from "@/components/ui/loading-spinner";
 
 /**
  * Component to edit a user role.

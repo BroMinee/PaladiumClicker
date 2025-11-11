@@ -1,11 +1,11 @@
 import { RankingResponse, RankingType } from "@/types";
 import { redirect } from "next/navigation";
-import { getRankingLeaderboard, getRankingLeaderboardPlayerUsername, } from "@/lib/api/apiPalaTracker.ts";
-import { LoadingSpinner } from "@/components/ui/loading-spinner.tsx";
+import { getRankingLeaderboard, getRankingLeaderboardPlayerUsername, } from "@/lib/api/apiPalaTracker";
+import { LoadingSpinner } from "@/components/ui/loading-spinner";
 import React from "react";
-import { ZoomableChart } from "@/components/Ranking/zoomable-graph.tsx";
-import { searchParamsRankingPage } from "@/components/Ranking/RankingSelector.tsx";
-import { addMissingDate } from "@/lib/misc.ts";
+import { ZoomableChart } from "@/components/Ranking/zoomable-graph";
+import { searchParamsRankingPage } from "@/components/Ranking/RankingSelector";
+import { addMissingDate } from "@/lib/misc";
 
 /**
  * Server component that loads the top 10 ranking data (and optionally additional

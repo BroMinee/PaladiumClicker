@@ -1,7 +1,7 @@
-import { GradientText } from "@/components/shared/GradientText\.tsx";
-import { CardContent } from "@/components/ui/card.tsx";
-import { cn } from "@/lib/utils.ts";
-import { safeJoinPaths } from "@/lib/misc.ts";
+import { GradientText } from "@/components/shared/GradientText";
+import { CardContent } from "@/components/ui/card";
+import { cn } from "@/lib/utils";
+import { safeJoinPaths } from "@/lib/misc";
 import Image from "next/image";
 import React from "react";
 

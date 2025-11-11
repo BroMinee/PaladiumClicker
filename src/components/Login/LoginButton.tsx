@@ -1,8 +1,8 @@
 "use client";
 import { FaDiscord } from "react-icons/fa";
-import { Button } from "@/components/ui/button.tsx";
+import { Button } from "@/components/ui/button";
 import React from "react";
-import { setCookies } from "@/lib/api/apiServerAction.ts";
+import { setCookies } from "@/lib/api/apiServerAction";
 import { toast } from "sonner";
 import { TbLogin2 } from "react-icons/tb";
 

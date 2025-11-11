@@ -1,6 +1,6 @@
-import { NoPseudoPage } from "@/components/NoPseudoPage.tsx";
-import { safeJoinPaths } from "@/lib/misc.ts";
-import { constants } from "@/lib/constants.ts";
+import { NoPseudoPage } from "@/components/NoPseudoPage";
+import { safeJoinPaths } from "@/lib/misc";
+import { constants } from "@/lib/constants";
 
 /**
  * Generate Metadata

@@ -5,7 +5,7 @@ import React, { useEffect, useState } from "react";
 
 import Image from "next/image";
 import { OptionType } from "@/types";
-import { LoadingSpinner } from "@/components/ui/loading-spinner.tsx";
+import { LoadingSpinner } from "@/components/ui/loading-spinner";
 
 const customStyles: StylesConfig<OptionType, false> = {
   control: (provided, state) => ({

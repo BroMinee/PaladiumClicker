@@ -1,7 +1,7 @@
 "use client";
 import { usePathname } from "next/navigation";
 import { AnimatePresence } from "framer-motion";
-import { PageMotion } from "@/components/shared/PageMotion.tsx";
+import { PageMotion } from "@/components/shared/PageMotion";
 
 /**
  * Wraps pages with an animated transition that reacts to route changes.

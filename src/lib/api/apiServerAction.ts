@@ -1,6 +1,6 @@
 "use server";
-import { getPlayerInfo, PALADIUM_API_URL } from "@/lib/api/apiPala.ts";
-import { fetchPostWithHeader, fetchWithHeader } from "@/lib/api/misc.ts";
+import { getPlayerInfo, PALADIUM_API_URL } from "@/lib/api/apiPala";
+import { fetchPostWithHeader, fetchWithHeader } from "@/lib/api/misc";
 import {
   AdminShopItem,
   AdminShopItemDetail,
@@ -22,7 +22,7 @@ import {
 } from "@/types";
 import { Event } from "@/types";
 import { cookies } from "next/headers";
-import { API_PALATRACKER } from "@/lib/constants.ts";
+import { API_PALATRACKER } from "@/lib/constants";
 import { redirect } from "next/navigation";
 
 /* The content of this file is not sent to the client*/

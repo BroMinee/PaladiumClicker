@@ -1,7 +1,7 @@
 "use client";
 import { useEffect } from "react";
-import { useProfileStore } from "@/stores/use-profile-store.ts";
-import { isAuthenticate } from "@/lib/api/apiServerAction.ts";
+import { useProfileStore } from "@/stores/use-profile-store";
+import { isAuthenticate } from "@/lib/api/apiServerAction";
 
 /**
  * Client component that get and set the profile if the user is logging. Otherwise does nothing.

@@ -1,26 +1,26 @@
 "use client";
 import Link from "next/link";
-import { getLinkFromUrl, safeJoinPaths } from "@/lib/misc.ts";
-import { cn } from "@/lib/utils.ts";
-import { usePlayerInfoStore } from "@/stores/use-player-info-store.ts";
+import { getLinkFromUrl, safeJoinPaths } from "@/lib/misc";
+import { cn } from "@/lib/utils";
+import { usePlayerInfoStore } from "@/stores/use-player-info-store";
 import React, { ReactNode, useEffect, useMemo, useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
-import { constants, PathValid } from "@/lib/constants.ts";
+import { constants, PathValid } from "@/lib/constants";
 import { FaAngleDown } from "react-icons/fa";
-import { useNotificationStore } from "@/stores/use-notifications-store.ts";
-import { HoverText } from "@/components/ui/hovertext.tsx";
+import { useNotificationStore } from "@/stores/use-notifications-store";
+import { HoverText } from "@/components/ui/hovertext";
 import {
   getCurrentEvent,
   getCurrentEventNotRegistered,
   getEventNotClaimed,
   getNotificationWebSite
-} from "@/lib/api/apiServerAction.ts";
-import { PopupCurrentEvent } from "@/components/Events/PopupCurrentEvent.tsx";
+} from "@/lib/api/apiServerAction";
+import { PopupCurrentEvent } from "@/components/Events/PopupCurrentEvent";
 import { Event } from "@/types";
-import { PopupRewardEvent } from "@/components/Events/PopupRewardEvent.tsx";
-import { PopupNoRewardEvent } from "@/components/Events/PopupNoRewardEvent.tsx";
+import { PopupRewardEvent } from "@/components/Events/PopupRewardEvent";
+import { PopupNoRewardEvent } from "@/components/Events/PopupNoRewardEvent";
 import { NavBarCategory, NotificationWebSiteResponse } from "@/types";
-import { useNavbarStore } from "@/stores/use-navbar-store.ts";
+import { useNavbarStore } from "@/stores/use-navbar-store";
 
 /**
  * Renders a client-side navigation link with optional notifications and user-specific routing.

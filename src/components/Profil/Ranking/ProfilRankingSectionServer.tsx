@@ -1,10 +1,10 @@
 import "server-only";
 import React from "react";
-import { getRankingLeaderboardPlayerUsername, getRankingLeaderboardPlayerUUID } from "@/lib/api/apiPalaTracker.ts";
+import { getRankingLeaderboardPlayerUsername, getRankingLeaderboardPlayerUUID } from "@/lib/api/apiPalaTracker";
 import { RankingResponse, RankingType, searchParamsProfilPage } from "@/types";
 import { cookies } from "next/headers";
-import { ZoomableChart } from "@/components/Ranking/zoomable-graph.tsx";
-import { addMissingDate } from "@/lib/misc.ts";
+import { ZoomableChart } from "@/components/Ranking/zoomable-graph";
+import { addMissingDate } from "@/lib/misc";
 
 /**
  * Server component that fetches and displays ranking data for the current user

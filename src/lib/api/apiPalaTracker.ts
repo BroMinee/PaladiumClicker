@@ -19,9 +19,9 @@ import {
   WebHookAlert,
   WebhookDiscord
 } from "@/types";
-import { fetchWithHeader } from "@/lib/api/misc.ts";
+import { fetchWithHeader } from "@/lib/api/misc";
 import { redirect } from "next/navigation";
-import { API_PALATRACKER } from "@/lib/constants.ts";
+import { API_PALATRACKER } from "@/lib/constants";
 // import { toast } from "sonner";
 
 /**

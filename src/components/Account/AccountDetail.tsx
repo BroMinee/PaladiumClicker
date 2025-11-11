@@ -1,7 +1,7 @@
 "use client";
-import { useProfileStore } from "@/stores/use-profile-store.ts";
+import { useProfileStore } from "@/stores/use-profile-store";
 import Image from "next/image";
-import { Card, CardContent } from "@/components/ui/card.tsx";
+import { Card, CardContent } from "@/components/ui/card";
 
 /**
  * Component used in the bottom navbar to display the current discord account information.

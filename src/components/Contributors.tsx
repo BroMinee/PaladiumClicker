@@ -1,9 +1,9 @@
-import { Card, CardContent } from "@/components/ui/card.tsx";
+import { Card, CardContent } from "@/components/ui/card";
 
 import Image from "next/image";
-import { safeJoinPaths } from "@/lib/misc.ts";
+import { safeJoinPaths } from "@/lib/misc";
 
-import { constants } from "@/lib/constants.ts";
+import { constants } from "@/lib/constants";
 
 /**
  * Component that displays the list of contributors.

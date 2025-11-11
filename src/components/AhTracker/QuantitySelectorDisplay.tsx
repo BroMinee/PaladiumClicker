@@ -1,5 +1,5 @@
 import { PaladiumAhItemStat } from "@/types";
-import { formatPrice } from "@/lib/misc.ts";
+import { formatPrice } from "@/lib/misc";
 
 /**
  * Display current sell of the given item as well as it's average price in the market.

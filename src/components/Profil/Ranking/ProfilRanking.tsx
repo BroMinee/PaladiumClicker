@@ -1,8 +1,8 @@
 import React, { Suspense } from "react";
-import { Card, CardHeader, CardTitle } from "@/components/ui/card.tsx";
-import { LoadingSpinner } from "@/components/ui/loading-spinner.tsx";
-import { ProfilRankingSectionServer } from "@/components/Profil/Ranking/ProfilRankingSectionServer.tsx";
-import { RankingSelectorCard } from "@/components/Ranking/RankingSelector.tsx";
+import { Card, CardHeader, CardTitle } from "@/components/ui/card";
+import { LoadingSpinner } from "@/components/ui/loading-spinner";
+import { ProfilRankingSectionServer } from "@/components/Profil/Ranking/ProfilRankingSectionServer";
+import { RankingSelectorCard } from "@/components/Ranking/RankingSelector";
 import { RankingType, searchParamsProfilPage } from "@/types";
 
 /**

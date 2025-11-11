@@ -1,6 +1,6 @@
 "use client";
 import { getFactionLeaderboardAction, getPlayerCountHistoryPaladiumAction, getPlayerInfoAction, getPlayerPositionAction } from "@/lib/api/apiServerAction";
-import { constants,  AUTOPROMO_CONFIG } from "@/lib/constants.ts";
+import { constants,  AUTOPROMO_CONFIG } from "@/lib/constants";
 import { usePlayerInfoStore } from "@/stores/use-player-info-store";
 import React, { useState, useEffect, useCallback } from "react";
 import { MetierComponentWrapper } from "../MetierList";

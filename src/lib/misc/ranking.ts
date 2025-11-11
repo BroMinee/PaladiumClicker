@@ -1,5 +1,5 @@
 
-import { constants } from "@/lib/constants.ts";
+import { constants } from "@/lib/constants";
 import { RankingResponse, RankingType } from "@/types";
 import { safeJoinPaths } from "./navbar";
 

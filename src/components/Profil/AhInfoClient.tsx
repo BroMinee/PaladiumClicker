@@ -1,11 +1,11 @@
 "use client";
 
-import { usePlayerInfoStore } from "@/stores/use-player-info-store.ts";
-import AhItem from "@/components/Profil/AhItem.tsx";
+import { usePlayerInfoStore } from "@/stores/use-player-info-store";
+import AhItem from "@/components/Profil/AhItem";
 import { OptionType } from "@/types";
-import { adaptPlurial, formatPrice, safeJoinPaths } from "@/lib/misc.ts";
+import { adaptPlurial, formatPrice, safeJoinPaths } from "@/lib/misc";
 import { toast } from "sonner";
-import { constants } from "@/lib/constants.ts";
+import { constants } from "@/lib/constants";
 import Image from "next/image";
 
 /**

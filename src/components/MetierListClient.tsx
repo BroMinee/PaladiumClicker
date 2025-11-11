@@ -1,12 +1,12 @@
 "use client";
 
-import { generateXpCalculatorUrl, getColorByMetierName, getXpCoef } from "@/lib/misc.ts";
+import { generateXpCalculatorUrl, getColorByMetierName, getXpCoef } from "@/lib/misc";
 import { MetierKey } from "@/types";
-import { usePlayerInfoStore } from "@/stores/use-player-info-store.ts";
+import { usePlayerInfoStore } from "@/stores/use-player-info-store";
 import { FaArrowDown, FaArrowUp } from "react-icons/fa";
-import { Button } from "@/components/ui/button.tsx";
+import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
-import { searchParamsXpBonusPage } from "@/components/Xp-Calculator/XpCalculator.tsx";
+import { searchParamsXpBonusPage } from "@/components/Xp-Calculator/XpCalculator";
 import { ChangeEvent, useEffect, useMemo, useState } from "react";
 import debounce from "debounce";
 import { cn } from "@/lib/utils";

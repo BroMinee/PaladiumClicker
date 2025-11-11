@@ -1,17 +1,17 @@
 "use client";
-import { formatPrice, generateXpCalculatorUrl, getColorByMetierName, getXpDiff, safeJoinPaths } from "@/lib/misc.ts";
-import { cn } from "@/lib/utils.ts";
+import { formatPrice, generateXpCalculatorUrl, getColorByMetierName, getXpDiff, safeJoinPaths } from "@/lib/misc";
+import { cn } from "@/lib/utils";
 import { MetierKey, PlayerRank } from "@/types";
 import { useRouter } from "next/navigation";
-import { usePlayerInfoStore } from "@/stores/use-player-info-store.ts";
+import { usePlayerInfoStore } from "@/stores/use-player-info-store";
 import metierJson from "@/assets/metier.json";
 import Image from "next/image";
-import { MetierDecrease, MetierDisplayLvl, MetierIncrease, MetierOutline } from "@/components/MetierListClient.tsx";
-import { Button } from "@/components/ui/button.tsx";
-import { Input } from "@/components/ui/input.tsx";
-import { searchParamsXpBonusPage } from "@/components/Xp-Calculator/XpCalculator.tsx";
-import { constants,  HowToXpElement } from "@/lib/constants.ts";
-import { GradientText } from "@/components/shared/GradientText.tsx";
+import { MetierDecrease, MetierDisplayLvl, MetierIncrease, MetierOutline } from "@/components/MetierListClient";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { searchParamsXpBonusPage } from "@/components/Xp-Calculator/XpCalculator";
+import { constants,  HowToXpElement } from "@/lib/constants";
+import { GradientText } from "@/components/shared/GradientText";
 import { useEffect } from "react";
 
 /**

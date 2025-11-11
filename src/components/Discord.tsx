@@ -1,7 +1,7 @@
-import { Card, CardContent } from "@/components/ui/card.tsx";
+import { Card, CardContent } from "@/components/ui/card";
 import { FaDiscord } from "react-icons/fa";
-import { constants } from "@/lib/constants.ts";
-import { cn } from "@/lib/utils.ts";
+import { constants } from "@/lib/constants";
+import { cn } from "@/lib/utils";
 
 type DiscordProps = {
   className?: string

@@ -3,7 +3,7 @@ import dynamic from "next/dynamic";
 import { AdminShopItemDetail, AdminShopPeriod } from "@/types";
 import { Area, Legend, ReferenceLine, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
 import React from "react";
-import { useWebhookStore } from "@/stores/use-webhook-store.ts";
+import { useWebhookStore } from "@/stores/use-webhook-store";
 
 const AreaChart = dynamic(() => import("recharts").then((mod) => mod.AreaChart), { ssr: false });
 

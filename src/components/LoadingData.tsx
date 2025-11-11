@@ -1,5 +1,5 @@
-import { Card, CardHeader } from "@/components/ui/card.tsx";
-import { LoadingSpinner } from "@/components/ui/loading-spinner.tsx";
+import { Card, CardHeader } from "@/components/ui/card";
+import { LoadingSpinner } from "@/components/ui/loading-spinner";
 
 /**
  * Loading component used for profile login

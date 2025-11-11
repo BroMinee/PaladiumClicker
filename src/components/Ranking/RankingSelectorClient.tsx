@@ -7,12 +7,12 @@ import {
   generateRankingUrl,
   getImagePathFromRankingType,
   rankingTypeToUserFriendlyText
-} from "@/lib/misc.ts";
-import { cn } from "@/lib/utils.ts";
+} from "@/lib/misc";
+import { cn } from "@/lib/utils";
 import Image from "next/image";
 import React, { ReactNode } from "react";
-import { HoverText } from "@/components/ui/hovertext.tsx";
-import { usePlayerInfoStore } from "@/stores/use-player-info-store.ts";
+import { HoverText } from "@/components/ui/hovertext";
+import { usePlayerInfoStore } from "@/stores/use-player-info-store";
 
 /**
  * Interactive ranking selector button for a specific ranking type on either the main ranking page or a profile.

@@ -1,10 +1,10 @@
 "use client";
 
-import { ToggleTheme } from "@/components/shared/ToggleTheme.tsx";
-import { Setting } from "@/components/shared/Setting.tsx";
+import { ToggleTheme } from "@/components/shared/ToggleTheme";
+import { Setting } from "@/components/shared/Setting";
 import React from "react";
-import { useProfileStore } from "@/stores/use-profile-store.ts";
-import { LoginDiscord, NavBarProfileInfo } from "@/components/NavBar/LoginLogoutDiscord.tsx";
+import { useProfileStore } from "@/stores/use-profile-store";
+import { LoginDiscord, NavBarProfileInfo } from "@/components/NavBar/LoginLogoutDiscord";
 
 /**
  * Displays the user's profile information in the bottom navbar, or login options if not logged in.

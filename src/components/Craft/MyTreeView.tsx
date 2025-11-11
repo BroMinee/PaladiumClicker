@@ -4,11 +4,11 @@ import { RichTreeView } from "@mui/x-tree-view/RichTreeView";
 import { TreeItem, TreeItemProps } from "@mui/x-tree-view/TreeItem";
 import { FaChevronDown, FaChevronRight } from "react-icons/fa";
 import Image from "next/image";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card.tsx";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { MyTreeNode, NodeType, Tree } from "@/types";
 
-import { GradientText } from "@/components/shared/GradientText\.tsx";
-import { LoadingSpinner } from "@/components/ui/loading-spinner.tsx";
+import { GradientText } from "@/components/shared/GradientText";
+import { LoadingSpinner } from "@/components/ui/loading-spinner";
 import { createNode, getAllIds, isSameTree } from "@/lib/misc";
 
 type MyTreeViewProps = {

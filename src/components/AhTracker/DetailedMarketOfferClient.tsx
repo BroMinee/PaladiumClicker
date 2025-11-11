@@ -1,7 +1,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import { LoadingSpinner } from "@/components/ui/loading-spinner.tsx";
-import { getPlayerUsernameFromUUID } from "@/lib/api/apiClient.ts";
+import { LoadingSpinner } from "@/components/ui/loading-spinner";
+import { getPlayerUsernameFromUUID } from "@/lib/api/apiClient";
 
 /**
  * Displays the username of the seller based on his uuid.

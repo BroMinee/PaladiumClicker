@@ -1,21 +1,21 @@
 "use client";
 import { WebHookAlert, WebhookDiscord, WebHookType } from "@/types";
 import "./WebHookMsg.css";
-import { getIconNameFromEventType, getItemFromName, getTextFromWebHookType } from "@/lib/misc.ts";
-import { Button } from "@/components/ui/button.tsx";
+import { getIconNameFromEventType, getItemFromName, getTextFromWebHookType } from "@/lib/misc";
+import { Button } from "@/components/ui/button";
 import { FiEdit } from "react-icons/fi";
 import React, { useState } from "react";
 import Image from "next/image";
 import { FaTrashCan } from "react-icons/fa6";
-import { useWebhookStore } from "@/stores/use-webhook-store.ts";
+import { useWebhookStore } from "@/stores/use-webhook-store";
 import { useRouter } from "next/navigation";
-import { deleteWebhookServerAction } from "@/lib/api/apiServerAction.ts";
+import { deleteWebhookServerAction } from "@/lib/api/apiServerAction";
 import { toast } from "sonner";
-import { constants,  API_PALATRACKER } from "@/lib/constants.ts";
-import { DisplayChannelBox, DisplayServerBox } from "@/components/WebHooks/WebHookDisplayServerInfo.tsx";
-import { groupsType } from "@/app/webhook/page.tsx";
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog.tsx";
-import { ScrollArea } from "@/components/ui/scroll-area.tsx";
+import { constants,  API_PALATRACKER } from "@/lib/constants";
+import { DisplayChannelBox, DisplayServerBox } from "@/components/WebHooks/WebHookDisplayServerInfo";
+import { groupsType } from "@/app/webhook/page";
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import { ScrollArea } from "@/components/ui/scroll-area";
 
 /**
  * Renders a preview interface for Discord webhooks grouped by guild and channel.

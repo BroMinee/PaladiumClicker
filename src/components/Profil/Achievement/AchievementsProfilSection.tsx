@@ -1,13 +1,13 @@
 import "server-only";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card.tsx";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {
   AchievementBody,
   DisplayProgressionGlobal
-} from "@/components/Profil/Achievement/AchievementsProfilSectionClient.tsx";
+} from "@/components/Profil/Achievement/AchievementsProfilSectionClient";
 import React from "react";
-import { getAllItems } from "@/lib/api/apiPalaTracker.ts";
+import { getAllItems } from "@/lib/api/apiPalaTracker";
 import { OptionType } from "@/types";
-import { LoadingSpinner } from "@/components/ui/loading-spinner.tsx";
+import { LoadingSpinner } from "@/components/ui/loading-spinner";
 
 /**
  * Loads all item images required for achievement display and renders the Achievements section.

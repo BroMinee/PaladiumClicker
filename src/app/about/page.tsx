@@ -1,6 +1,6 @@
-import { Card, CardContent, CardHeader, CardTitleH1 } from "@/components/ui/card.tsx";
-import { Contributors } from "@/components/Contributors.tsx";
-import Discord from "@/components/Discord.tsx";
+import { Card, CardContent, CardHeader, CardTitleH1 } from "@/components/ui/card";
+import { Contributors } from "@/components/Contributors";
+import Discord from "@/components/Discord";
 
 /**
  * Generate Metadata

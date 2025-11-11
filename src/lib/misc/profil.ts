@@ -1,5 +1,5 @@
 import { safeJoinPaths } from "./navbar";
-import { constants } from "@/lib/constants.ts";
+import { constants } from "@/lib/constants";
 
 /**
  * Returns the image path corresponding to a given rank.

@@ -1,5 +1,5 @@
-import { Card, CardContent } from "@/components/ui/card.tsx";
-import { GradientText } from "@/components/shared/GradientText\.tsx";
+import { Card, CardContent } from "@/components/ui/card";
+import { GradientText } from "@/components/shared/GradientText";
 import {
   FactionClassementClient,
   FactionDetails,
@@ -7,9 +7,9 @@ import {
   FactionInfoDescription,
   FactionInfoMembersInfo,
   FactionNameInfo
-} from "@/components/Profil/FactionInfoClient.tsx";
+} from "@/components/Profil/FactionInfoClient";
 import { FaMedal, FaTachometerAlt } from "react-icons/fa";
-import { getFactionLeaderboard } from "@/lib/api/apiPala.ts";
+import { getFactionLeaderboard } from "@/lib/api/apiPala";
 
 /**
  * Displays an overview of the player's faction, including:

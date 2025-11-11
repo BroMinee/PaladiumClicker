@@ -1,11 +1,11 @@
 "use client";
 import Image from "next/image";
-import { safeJoinPaths } from "@/lib/misc.ts";
-import { constants } from "@/lib/constants.ts";
+import { safeJoinPaths } from "@/lib/misc";
+import { constants } from "@/lib/constants";
 import React, { useState } from "react";
 import { OptionType } from "@/types";
-import { CardContent } from "@/components/ui/card.tsx";
-import { GradientText } from "@/components/shared/GradientText\.tsx";
+import { CardContent } from "@/components/ui/card";
+import { GradientText } from "@/components/shared/GradientText";
 
 /**
  * Display an item in his crafing slot, clickable element that redirect to the item crafting recipe.

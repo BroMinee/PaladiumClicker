@@ -1,11 +1,11 @@
 "use client";
-import { usePlayerInfoStore } from "@/stores/use-player-info-store.ts";
-import { checkCondition } from "@/lib/misc.ts";
+import { usePlayerInfoStore } from "@/stores/use-player-info-store";
+import { checkCondition } from "@/lib/misc";
 import { BuildingUpgrade, CategoryUpgrade, GlobalUpgrade, TerrainUpgrade, UpgradeKey } from "@/types";
-import { buttonVariants } from "@/components/ui/button.tsx";
-import { cn } from "@/lib/utils.ts";
+import { buttonVariants } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
 import React from "react";
-import { Card } from "@/components/ui/card.tsx";
+import { Card } from "@/components/ui/card";
 
 /**
  * Button wrapper around the upgrade IMG.

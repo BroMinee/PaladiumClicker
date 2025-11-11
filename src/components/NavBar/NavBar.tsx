@@ -1,23 +1,23 @@
-import { Button } from "@/components/ui/button.tsx";
-import { Sheet, SheetContent, SheetHeader, SheetTrigger } from "@/components/ui/sheet.tsx";
+import { Button } from "@/components/ui/button";
+import { Sheet, SheetContent, SheetHeader, SheetTrigger } from "@/components/ui/sheet";
 import { FaBars, FaCalculator, FaClipboardList, FaKey, FaRegUser, FaShoppingBasket } from "react-icons/fa";
-import { constants } from "@/lib/constants.ts";
-import { LogoClient } from "@/components/ui/logoClient.tsx";
+import { constants } from "@/lib/constants";
+import { LogoClient } from "@/components/ui/logoClient";
 import LinkClient, {
   NavbarCategoryDisplay,
   GiveawayFakeLink,
   NotificationWebSite
-} from "@/components/NavBar/NavBarClient.tsx";
+} from "@/components/NavBar/NavBarClient";
 import { GrOptimize } from "react-icons/gr";
 import { LuShoppingCart } from "react-icons/lu";
 import { PiRankingBold } from "react-icons/pi";
 import { GiPayMoney, GiStoneCrafting } from "react-icons/gi";
 import { IoMdInformationCircleOutline, IoMdStopwatch } from "react-icons/io";
 import React from "react";
-import { ImportProfil } from "@/components/shared/ImportProfil.tsx";
+import { ImportProfil } from "@/components/shared/ImportProfil";
 import { HiOutlineStatusOnline } from "react-icons/hi";
-import { GradientText } from "@/components/shared/GradientText\.tsx";
-import { NavBarProfilInfo } from "@/components/NavBar/NavBarProfilInfo.tsx";
+import { GradientText } from "@/components/shared/GradientText";
+import { NavBarProfilInfo } from "@/components/NavBar/NavBarProfilInfo";
 import { MdOutlineWebhook } from "react-icons/md";
 
 /**

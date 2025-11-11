@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import ReactAudioPlayer from "react-audio-player";
-import { safeJoinPaths } from "@/lib/misc.ts";
+import { safeJoinPaths } from "@/lib/misc";
 
 /**
  * Component that display a small tutorial on how to use the clicker-optimizer

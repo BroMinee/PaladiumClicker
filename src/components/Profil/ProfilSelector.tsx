@@ -1,8 +1,8 @@
 "use client";
-import { generateProfilUrl, ProfilSectionValid } from "@/lib/misc.ts";
+import { generateProfilUrl, ProfilSectionValid } from "@/lib/misc";
 import { redirect, useParams, useRouter, useSearchParams } from "next/navigation";
-import { cn } from "@/lib/utils.ts";
-import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area.tsx";
+import { cn } from "@/lib/utils";
+import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 
 /**
  * Displays a horizontal selector for profile sections and updates the URL when a section is chosen.

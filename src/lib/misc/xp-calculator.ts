@@ -1,5 +1,5 @@
 import { searchParamsXpBonusPage } from "@/components/Xp-Calculator/XpCalculator";
-import { constants } from "@/lib/constants.ts";
+import { constants } from "@/lib/constants";
 import { MetierKey, PlayerInfo } from "@/types";
 
 /**

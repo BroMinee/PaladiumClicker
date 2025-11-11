@@ -3,8 +3,8 @@
 import { useEffect, useRef } from "react";
 import { usePlayerInfoStore } from "@/stores/use-player-info-store";
 import { useSettingsStore } from "@/stores/use-settings-store";
-import { safeJoinPaths } from "@/lib/misc.ts";
-import { constants } from "@/lib/constants.ts";
+import { safeJoinPaths } from "@/lib/misc";
+import { constants } from "@/lib/constants";
 
 /**
  * Component that displays the current CPS image falling and rotating on itself in the background page.

@@ -1,9 +1,9 @@
 "use server";
 import "server-only";
 import { checkAnswerPalaAnimationType, KeyDownTimestampType } from "@/types";
-import { fetchPostWithHeader, fetchWithHeader } from "@/lib/api/misc.ts";
-import { API_PALATRACKER } from "@/lib/constants.ts";
-import { isAuthenticate } from "@/lib/api/apiServerAction.ts";
+import { fetchPostWithHeader, fetchWithHeader } from "@/lib/api/misc";
+import { API_PALATRACKER } from "@/lib/constants";
+import { isAuthenticate } from "@/lib/api/apiServerAction";
 
 /**
  * Fetches a new Pala-Animation question from the API.

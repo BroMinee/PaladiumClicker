@@ -5,17 +5,17 @@ import { cn } from "@/lib/utils";
 import { usePlayerInfoStore } from "@/stores/use-player-info-store";
 import React, { FormEvent, useEffect, useState } from "react";
 import { FaSearch } from "react-icons/fa";
-import { constants } from "@/lib/constants.ts";
-import { getInitialPlayerInfo, getLinkFromUrl, safeJoinPaths } from "@/lib/misc.ts";
+import { constants } from "@/lib/constants";
+import { getInitialPlayerInfo, getLinkFromUrl, safeJoinPaths } from "@/lib/misc";
 import { navigate } from "@/components/actions";
-import { useSettingsStore } from "@/stores/use-settings-store.ts";
-import { getPlayerInfoAction, registerPlayerAction } from "@/lib/api/apiServerAction.ts";
+import { useSettingsStore } from "@/stores/use-settings-store";
+import { getPlayerInfoAction, registerPlayerAction } from "@/lib/api/apiServerAction";
 import { toast } from "sonner";
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog.tsx";
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { PlayerInfo } from "@/types";
-import { ScrollArea } from "@/components/ui/scroll-area.tsx";
-import { SmallCardInfo } from "@/components/shared/SmallCardInfo.tsx";
-import { LoadingSpinner } from "@/components/ui/loading-spinner.tsx";
+import { ScrollArea } from "@/components/ui/scroll-area";
+import { SmallCardInfo } from "@/components/shared/SmallCardInfo";
+import { LoadingSpinner } from "@/components/ui/loading-spinner";
 
 type ImportProfilProps = {
   showResetButton?: boolean,

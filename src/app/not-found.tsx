@@ -1,5 +1,5 @@
-import { safeJoinPaths } from "@/lib/misc.ts";
-import { Card, CardHeader } from "@/components/ui/card.tsx";
+import { safeJoinPaths } from "@/lib/misc";
+import { Card, CardHeader } from "@/components/ui/card";
 import Image from "next/image";
 
 /**

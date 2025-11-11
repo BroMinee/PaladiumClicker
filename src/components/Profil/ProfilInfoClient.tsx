@@ -1,10 +1,10 @@
 "use client";
-import { usePlayerInfoStore } from "@/stores/use-player-info-store.ts";
-import { SmallCardInfo } from "@/components/shared/SmallCardInfo.tsx";
-import { computeTimePlayed, convertEpochToDateUTC2, formatPrice, getRankImg, safeJoinPaths } from "@/lib/misc.ts";
+import { usePlayerInfoStore } from "@/stores/use-player-info-store";
+import { SmallCardInfo } from "@/components/shared/SmallCardInfo";
+import { computeTimePlayed, convertEpochToDateUTC2, formatPrice, getRankImg, safeJoinPaths } from "@/lib/misc";
 import dynamic from "next/dynamic";
-import { Card, CardContent } from "@/components/ui/card.tsx";
-import { constants } from "@/lib/constants.ts";
+import { Card, CardContent } from "@/components/ui/card";
+import { constants } from "@/lib/constants";
 import Image from "next/image";
 import { NameTagObject } from "skinview3d";
 import { ErrorBoundary } from "./ErrorProfilErrorBoundary";

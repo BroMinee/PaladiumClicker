@@ -2,10 +2,10 @@
 
 import { AdminShopPeriod, } from "@/types";
 import { useRouter, useSearchParams } from "next/navigation";
-import { generateStatusUrl, } from "@/lib/misc.ts";
-import { cn } from "@/lib/utils.ts";
-import { buttonVariants } from "@/components/ui/button.tsx";
-import { Card } from "@/components/ui/card.tsx";
+import { generateStatusUrl, } from "@/lib/misc";
+import { cn } from "@/lib/utils";
+import { buttonVariants } from "@/components/ui/button";
+import { Card } from "@/components/ui/card";
 
 /**
  * A selectable card representing a specific period for viewing server status data.

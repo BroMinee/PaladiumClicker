@@ -1,15 +1,15 @@
 "use client";
-import { usePlayerInfoStore } from "@/stores/use-player-info-store.ts";
-import { GradientText } from "@/components/shared/GradientText\.tsx";
-import { convertEpochToDateUTC2, formatPrice, safeJoinPaths } from "@/lib/misc.ts";
-import { Card, CardContent } from "@/components/ui/card.tsx";
-import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area.tsx";
-import { SmallCardInfo } from "@/components/shared/SmallCardInfo.tsx";
+import { usePlayerInfoStore } from "@/stores/use-player-info-store";
+import { GradientText } from "@/components/shared/GradientText";
+import { convertEpochToDateUTC2, formatPrice, safeJoinPaths } from "@/lib/misc";
+import { Card, CardContent } from "@/components/ui/card";
+import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
+import { SmallCardInfo } from "@/components/shared/SmallCardInfo";
 import { FaPercentage } from "react-icons/fa";
 import { PaladiumFactionLeaderboard } from "@/types";
-import LoadingData from "@/components/LoadingData.tsx";
+import LoadingData from "@/components/LoadingData";
 import { Suspense } from "react";
-import { constants } from "@/lib/constants.ts";
+import { constants } from "@/lib/constants";
 
 import Image from "next/image";
 import { Emblem } from "../Faction/Emblem";

@@ -1,19 +1,19 @@
 "use client";
 import React, { ReactNode, useEffect, useState } from "react";
-import { Button } from "@/components/ui/button.tsx";
+import { Button } from "@/components/ui/button";
 import { FaSave } from "react-icons/fa";
 import {
   deleteWebhookChannelServerAction,
   deleteWebhookGuildServerAction,
   editWebhookChannelNameServerAction,
   editWebhookGuildNameServerAction
-} from "@/lib/api/apiServerAction.ts";
+} from "@/lib/api/apiServerAction";
 import { toast } from "sonner";
 import { FaTrashCan } from "react-icons/fa6";
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog.tsx";
-import { ScrollArea } from "@/components/ui/scroll-area.tsx";
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import { ScrollArea } from "@/components/ui/scroll-area";
 import { IoIosWarning } from "react-icons/io";
-import { HoverText } from "@/components/ui/hovertext.tsx";
+import { HoverText } from "@/components/ui/hovertext";
 
 /**
  * Displays a server box for managing a webhook's associated server.

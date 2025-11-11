@@ -1,7 +1,7 @@
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card.tsx";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { FaInfoCircle, FaPercentage, FaTachometerAlt } from "react-icons/fa";
-import { Button } from "@/components/ui/button.tsx";
-import { GradientText } from "@/components/shared/GradientText\.tsx";
+import { Button } from "@/components/ui/button";
+import { GradientText } from "@/components/shared/GradientText";
 import {
   ButtonTakeDoubleXp,
   ButtonUseF2,
@@ -12,10 +12,10 @@ import {
   DisplayXpNeeded,
   DisplayXpNeededWithBottle,
   InputDailyBonus
-} from "@/components/Xp-Calculator/MetierSelectorClient.tsx";
-import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover.tsx";
-import { constants } from "@/lib/constants.ts";
-import { safeJoinPaths } from "@/lib/misc.ts";
+} from "@/components/Xp-Calculator/MetierSelectorClient";
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
+import { constants } from "@/lib/constants";
+import { safeJoinPaths } from "@/lib/misc";
 import { MetierKey } from "@/types";
 import Image from "next/image";
 

@@ -8,7 +8,7 @@ import { bestPurchaseInfoDetailed } from "@/types";
 import React, { useEffect, useState } from "react";
 import { useRpsStore } from "@/stores/use-rps-store";
 import Image from "next/image";
-import { Checkbox } from "@/components/ui/checkbox.tsx";
+import { Checkbox } from "@/components/ui/checkbox";
 
 const PROCHAIN_ACHAT_COUNT = 21;
 

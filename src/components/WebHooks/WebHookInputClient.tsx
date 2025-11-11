@@ -8,12 +8,12 @@ import {
   defaultWebHookTitleFromType,
   defaultWebhookTitleUrlFromType,
   defaultWebhookValidFormatFromType
-} from "@/components/WebHooks/WebHookConstant.ts";
-import { GenerateWebHookContent } from "@/components/WebHooks/WebHookMsg.tsx";
-import { useWebhookStore } from "@/stores/use-webhook-store.ts";
-import { Button } from "@/components/ui/button.tsx";
-import { cn } from "@/lib/utils.ts";
-import { Checkbox } from "@/components/ui/checkbox.tsx";
+} from "@/components/WebHooks/WebHookConstant";
+import { GenerateWebHookContent } from "@/components/WebHooks/WebHookMsg";
+import { useWebhookStore } from "@/stores/use-webhook-store";
+import { Button } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
+import { Checkbox } from "@/components/ui/checkbox";
 import { AdminShopItemDetail, AhItemHistory, WebHookCreate, WebHookType } from "@/types";
 import {
   RecapAdminShop,
@@ -22,21 +22,21 @@ import {
   RecapQDF,
   RecapServerStatus,
   RecapVote
-} from "@/components/WebHooks/WebHookRecap.tsx";
-import { MarketInput } from "@/components/WebHooks/WebHookMarket/WebHookClient.tsx";
-import { AdminShopInput, EventInput, VoteInput } from "@/components/WebHooks/WebHookAdminShop/WebHookClient.tsx";
+} from "@/components/WebHooks/WebHookRecap";
+import { MarketInput } from "@/components/WebHooks/WebHookMarket/WebHookClient";
+import { AdminShopInput, EventInput, VoteInput } from "@/components/WebHooks/WebHookAdminShop/WebHookClient";
 import {
   createWebHookServerAction,
   editWebHookServerAction,
   getAdminShopHistoryServerAction,
   getMarketHistoryServerAction
-} from "@/lib/api/apiServerAction.ts";
+} from "@/lib/api/apiServerAction";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 
-import { constants } from "@/lib/constants.ts";
-import PlotAdminShopChart from "@/components/AdminShop/PlotAdminShopChart.tsx";
-import { PlotHistoricChart } from "@/components/AhTracker/PlotHistoricChart.tsx";
+import { constants } from "@/lib/constants";
+import PlotAdminShopChart from "@/components/AdminShop/PlotAdminShopChart";
+import { PlotHistoricChart } from "@/components/AhTracker/PlotHistoricChart";
 
 /**
  * Handles the setup or configuration of a webhook.

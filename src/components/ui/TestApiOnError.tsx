@@ -1,7 +1,7 @@
 import "server-only";
-import { getPlayerInfo, isApiDown } from "@/lib/api/apiPala.ts";
-import { LoadingSpinner } from "@/components/ui/loading-spinner.tsx";
-import { isMyApiDown } from "@/lib/api/apiPalaTracker.ts";
+import { getPlayerInfo, isApiDown } from "@/lib/api/apiPala";
+import { LoadingSpinner } from "@/components/ui/loading-spinner";
+import { isMyApiDown } from "@/lib/api/apiPalaTracker";
 import { MdError } from "react-icons/md";
 import { FaCheck } from "react-icons/fa";
 import { AxiosError } from "axios";

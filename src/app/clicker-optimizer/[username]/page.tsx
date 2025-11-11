@@ -1,19 +1,19 @@
 import { UpgradeKey } from "@/types";
-import ProfileFetcherWrapper from "@/components/ProfileFetcher.tsx";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card.tsx";
-import { GradientText } from "@/components/shared/GradientText\.tsx";
+import ProfileFetcherWrapper from "@/components/ProfileFetcher";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { GradientText } from "@/components/shared/GradientText";
 import { FaHeart } from "react-icons/fa";
-import { Tuto } from "@/components/Tuto.tsx";
-import { ImportProfil } from "@/components/shared/ImportProfil.tsx";
-import HeadingSection from "@/components/shared/HeadingSection.tsx";
-import { RPS } from "@/components/Clicker-Optimizer/RPS.tsx";
-import { MetierComponentWrapper } from "@/components/MetierList.tsx";
-import { Stats } from "@/components/Clicker-Optimizer/Stats.tsx";
-import { BuildingList } from "@/components/Clicker-Optimizer/BuildingList.tsx";
-import { ClickList } from "@/components/Clicker-Optimizer/ClickList.tsx";
-import { UpgradeList } from "@/components/Clicker-Optimizer/UpgradeList.tsx";
-import { FallingClickImage } from "@/components/Clicker-Optimizer/FallingClick.tsx";
-import { PlayerSkin } from "@/components/Profil/ProfilInfoClient.tsx";
+import { Tuto } from "@/components/Tuto";
+import { ImportProfil } from "@/components/shared/ImportProfil";
+import HeadingSection from "@/components/shared/HeadingSection";
+import { RPS } from "@/components/Clicker-Optimizer/RPS";
+import { MetierComponentWrapper } from "@/components/MetierList";
+import { Stats } from "@/components/Clicker-Optimizer/Stats";
+import { BuildingList } from "@/components/Clicker-Optimizer/BuildingList";
+import { ClickList } from "@/components/Clicker-Optimizer/ClickList";
+import { UpgradeList } from "@/components/Clicker-Optimizer/UpgradeList";
+import { FallingClickImage } from "@/components/Clicker-Optimizer/FallingClick";
+import { PlayerSkin } from "@/components/Profil/ProfilInfoClient";
 
 /**
  * Generate Metadata

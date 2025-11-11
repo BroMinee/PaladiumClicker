@@ -2,12 +2,12 @@ import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 import { formatPrice, safeJoinPaths } from "@/lib/misc";
 
 import CPSJson from "@/assets/CPS.json";
-import { ButtonCPS } from "@/components/Clicker-Optimizer/ClickListClient.tsx";
+import { ButtonCPS } from "@/components/Clicker-Optimizer/ClickListClient";
 import Image from "next/image";
-import { HoverText } from "@/components/ui/hovertext.tsx";
+import { HoverText } from "@/components/ui/hovertext";
 import { ReactNode } from "react";
-import { PreconditionDisplay } from "@/lib/PreconditionDisplay.tsx";
-import { constants } from "@/lib/constants.ts";
+import { PreconditionDisplay } from "@/lib/PreconditionDisplay";
+import { constants } from "@/lib/constants";
 
 /**
  * Component that displays the list of Click Upgrade on the clicker.

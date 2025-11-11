@@ -2,12 +2,12 @@ import { MetierKey } from "@/types";
 import { Card, CardContent } from "./ui/card";
 
 import "./MetierList.css";
-import { MetierDecrease, MetierDisplayLvl, MetierIncrease, MetierOutline } from "@/components/MetierListClient.tsx";
+import { MetierDecrease, MetierDisplayLvl, MetierIncrease, MetierOutline } from "@/components/MetierListClient";
 import Image from "next/image";
-import { safeJoinPaths } from "@/lib/misc.ts";
+import { safeJoinPaths } from "@/lib/misc";
 
 import metierJson from "@/assets/metier.json";
-import { constants } from "@/lib/constants.ts";
+import { constants } from "@/lib/constants";
 type MetierListProps = {
   editable?: boolean;
 };

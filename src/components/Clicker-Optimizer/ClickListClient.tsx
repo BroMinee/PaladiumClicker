@@ -1,10 +1,10 @@
 "use client";
-import { cn } from "@/lib/utils.ts";
-import { buttonVariants } from "@/components/ui/button.tsx";
-import { usePlayerInfoStore } from "@/stores/use-player-info-store.ts";
+import { cn } from "@/lib/utils";
+import { buttonVariants } from "@/components/ui/button";
+import { usePlayerInfoStore } from "@/stores/use-player-info-store";
 
-import { checkCondition } from "@/lib/misc.ts";
-import { Card } from "@/components/ui/card.tsx";
+import { checkCondition } from "@/lib/misc";
+import { Card } from "@/components/ui/card";
 import { ReactNode } from "react";
 
 /**

@@ -1,6 +1,6 @@
-import { useProfileStore } from "@/stores/use-profile-store.ts";
+import { useProfileStore } from "@/stores/use-profile-store";
 import Image from "next/image";
-import { Button } from "@/components/ui/button.tsx";
+import { Button } from "@/components/ui/button";
 
 /**
  * Displays the logged-in user's profile information in the navbar such as the image, the username...

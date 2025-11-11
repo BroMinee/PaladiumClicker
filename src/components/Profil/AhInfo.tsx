@@ -1,9 +1,9 @@
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card.tsx";
-import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area.tsx";
-import { AhInfoGetTotalBenefice, AhInfoTitleClient, AhItemClient } from "@/components/Profil/AhInfoClient.tsx";
-import { getAllItems } from "@/lib/api/apiPalaTracker.ts";
-import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover.tsx";
-import { Button } from "@/components/ui/button.tsx";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
+import { AhInfoGetTotalBenefice, AhInfoTitleClient, AhItemClient } from "@/components/Profil/AhInfoClient";
+import { getAllItems } from "@/lib/api/apiPalaTracker";
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
+import { Button } from "@/components/ui/button";
 import { FaInfoCircle } from "react-icons/fa";
 
 /**

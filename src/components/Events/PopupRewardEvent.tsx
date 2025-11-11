@@ -1,10 +1,10 @@
 "use client";
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog.tsx";
-import { ScrollArea } from "@/components/ui/scroll-area.tsx";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
+import { ScrollArea } from "@/components/ui/scroll-area";
 import React from "react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card.tsx";
-import { RenderEvent } from "@/components/NavBar/NavBarClient.tsx";
-import Discord from "@/components/Discord.tsx";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { RenderEvent } from "@/components/NavBar/NavBarClient";
+import Discord from "@/components/Discord";
 
 /**
  * Displays a modal popup notifying the user that they have won a prize that has not yet been claimed.

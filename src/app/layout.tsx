@@ -4,13 +4,13 @@ import { GoogleAnalytics } from "@next/third-parties/google";
 import { usePathname } from "next/navigation";
 
 import React from "react";
-import Navbar from "@/components/NavBar/NavBar.tsx";
+import Navbar from "@/components/NavBar/NavBar";
 import { Montserrat } from "next/font/google";
-import { ThemeProviders } from "@/components/shared/ThemeProvider.tsx";
-import { Toaster } from "@/components/ui/sonner.tsx";
-import ServiceWorkerRegister from "@/components/ServiceWorkerRegister.tsx";
-import { AuthGetWrapper } from "@/components/Auth/AuthGetWrapper.tsx";
-import { PageTransition } from "@/components/shared/PageTransition.tsx";
+import { ThemeProviders } from "@/components/shared/ThemeProvider";
+import { Toaster } from "@/components/ui/sonner";
+import ServiceWorkerRegister from "@/components/ServiceWorkerRegister";
+import { AuthGetWrapper } from "@/components/Auth/AuthGetWrapper";
+import { PageTransition } from "@/components/shared/PageTransition";
 
 const montserrat = Montserrat({
   subsets: ["latin"],  // specify subsets according to your needs

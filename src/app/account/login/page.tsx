@@ -1,7 +1,7 @@
-import { Card, CardContent, CardHeader } from "@/components/ui/card.tsx";
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import React from "react";
-import { API_PALATRACKER } from "@/lib/constants.ts";
-import { LoginButton } from "@/components/Login/LoginButton.tsx";
+import { API_PALATRACKER } from "@/lib/constants";
+import { LoginButton } from "@/components/Login/LoginButton";
 
 /**
  * [Account login page](https://palatracker.bromine.fr/account/login)

@@ -1,8 +1,8 @@
 "use client";
-import { constants } from "@/lib/constants.ts";
+import { constants } from "@/lib/constants";
 
-import { safeJoinPaths } from "@/lib/misc.ts";
-import { Button } from "@/components/ui/button.tsx";
+import { safeJoinPaths } from "@/lib/misc";
+import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 import { useState } from "react";
 

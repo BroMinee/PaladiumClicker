@@ -25,12 +25,12 @@ import translate_building_json from "@/assets/translate_building.json";
 import translate_upgrade_json from "@/assets/translate_upgrade.json";
 import metier_json from "@/assets/metier.json";
 import default_achievements_default from "@/assets/achievements/defaultAchievements.json";
-import { getViewsFromUUID } from "@/lib/api/apiPalaTracker.ts";
-import { fetchWithHeader } from "@/lib/api/misc.ts";
+import { getViewsFromUUID } from "@/lib/api/apiPalaTracker";
+import { fetchWithHeader } from "@/lib/api/misc";
 import { redirect } from "next/navigation";
-import { getInitialPlayerInfo } from "@/lib/misc.ts";
-import { registerPlayerAction } from "@/lib/api/apiServerAction.ts";
-import { constants } from "@/lib/constants.ts";
+import { getInitialPlayerInfo } from "@/lib/misc";
+import { registerPlayerAction } from "@/lib/api/apiServerAction";
+import { constants } from "@/lib/constants";
 
 export const PALADIUM_API_URL = process.env.PALADIUM_API_URL || "https://api.paladium.games";
 

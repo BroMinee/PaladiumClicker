@@ -1,10 +1,10 @@
 import { CraftingRecipeKey, CraftingRecipeType, OptionType } from "@/types";
-import { getCraft } from "@/lib/api/apiPalaTracker.ts";
+import { getCraft } from "@/lib/api/apiPalaTracker";
 import { redirect } from "next/navigation";
-import { CraftingArrow } from "@/components/Craft/CraftingArrow.tsx";
+import { CraftingArrow } from "@/components/Craft/CraftingArrow";
 import React from "react";
-import { CardContent } from "@/components/ui/card.tsx";
-import { DisplayItem, DisplayItemProduce } from "@/components/Craft/CraftingDisplayItem.tsx";
+import { CardContent } from "@/components/ui/card";
+import { DisplayItem, DisplayItemProduce } from "@/components/Craft/CraftingDisplayItem";
 
 /**
  * Display the crafting table with the corresponding item in each slot.

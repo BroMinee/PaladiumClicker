@@ -1,10 +1,10 @@
 "use client";
 import React from "react";
 import { TbLogout2 } from "react-icons/tb";
-import { Button } from "@/components/ui/button.tsx";
-import { ProfileNavBar } from "@/components/NavBar/ProfileNavBar.tsx";
-import { API_PALATRACKER } from "@/lib/constants.ts";
-import { SmallLoginButton } from "@/components/Login/LoginButton.tsx";
+import { Button } from "@/components/ui/button";
+import { ProfileNavBar } from "@/components/NavBar/ProfileNavBar";
+import { API_PALATRACKER } from "@/lib/constants";
+import { SmallLoginButton } from "@/components/Login/LoginButton";
 
 /**
  * Wrapper around the small login button.

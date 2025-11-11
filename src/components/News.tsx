@@ -1,5 +1,5 @@
 import React from "react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card.tsx";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { ChangeLogs, ChangeLogsChanges } from "@/types";
 import { textFormatting } from "@/lib/misc";
 

@@ -9,23 +9,23 @@ import {
   PalaAnimationScore,
   userAnswerType
 } from "@/types";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card.tsx";
-import { adaptPlurial } from "@/lib/misc.ts";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { adaptPlurial } from "@/lib/misc";
 import { toast } from "sonner";
 import {
   getAnswerPalaAnimation,
   getGlobalLeaderboard,
   getLeaderboardPalaAnimation
-} from "@/components/Pala-Animation/PalaAnimationActions.tsx";
+} from "@/components/Pala-Animation/PalaAnimationActions";
 import { AxiosError } from "axios";
-import { CanvasWithText } from "@/components/ui/canvas.tsx";
-import { Input } from "@/components/ui/input.tsx";
-import { cn } from "@/lib/utils.ts";
-import { useSessionContext } from "@/components/Pala-Animation/SessionContextProvider.tsx";
-import { Button } from "@/components/ui/button.tsx";
-import { checkAnswerPalaAnimation, getNewQuestionPalaAnimation } from "@/lib/cypher.ts";
+import { CanvasWithText } from "@/components/ui/canvas";
+import { Input } from "@/components/ui/input";
+import { cn } from "@/lib/utils";
+import { useSessionContext } from "@/components/Pala-Animation/SessionContextProvider";
+import { Button } from "@/components/ui/button";
+import { checkAnswerPalaAnimation, getNewQuestionPalaAnimation } from "@/lib/cypher";
 import { useRouter } from "next/navigation";
-import { useProfileStore } from "@/stores/use-profile-store.ts";
+import { useProfileStore } from "@/stores/use-profile-store";
 
 /**
  * Detects if the current user is using a bot using @fingerprintjs/botd and redirect if it's the case.

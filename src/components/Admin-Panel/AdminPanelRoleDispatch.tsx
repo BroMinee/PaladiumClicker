@@ -1,7 +1,7 @@
-import { Card, CardContent, CardHeader } from "@/components/ui/card.tsx";
-import { getAllUsersLinked, getRole } from "@/lib/api/apiPalaTracker.ts";
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
+import { getAllUsersLinked, getRole } from "@/lib/api/apiPalaTracker";
 import Image from "next/image";
-import { EditRole } from "@/components/Admin-Panel/AdminPanelRoleEdition.tsx";
+import { EditRole } from "@/components/Admin-Panel/AdminPanelRoleEdition";
 import { Role } from "@/types";
 import React from "react";
 

@@ -6,13 +6,21 @@
   },
   "plugins": [
     "@typescript-eslint",
-    "jsdoc"
+    "jsdoc",
+    "import"
   ],
   "extends": [
     "next/core-web-vitals",
     "plugin:react-hooks/recommended",
     "plugin:@typescript-eslint/recommended"
   ],
+  "settings": {
+    "import/resolver": {
+      "typescript": {
+        "project": "./tsconfig.json"
+      }
+    }
+  },
   "rules": {
     "react-hooks/exhaustive-deps": "error",
     "semi-style": ["error", "last"],
@@ -41,6 +49,16 @@
           "ArrowFunctionExpression": true,
           "ClassDeclaration": true
         }
+      }
+    ],
+    "import/extensions": [
+      "error",
+      "ignorePackages",
+      {
+        "ts": "never",
+        "tsx": "never",
+        "js": "never",
+        "jsx": "never"
       }
     ]
     // ,

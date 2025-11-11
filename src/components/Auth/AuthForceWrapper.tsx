@@ -1,9 +1,9 @@
 "use server";
 import React, { Suspense } from "react";
-import { getProfileFromCookies } from "@/lib/api/apiPalaTracker.ts";
-import { Card, CardHeader } from "@/components/ui/card.tsx";
-import { LoadingSpinner } from "@/components/ui/loading-spinner.tsx";
-import { AuthRedirectClient, AuthSaveClient } from "@/components/Auth/AuthSaveClient.tsx";
+import { getProfileFromCookies } from "@/lib/api/apiPalaTracker";
+import { Card, CardHeader } from "@/components/ui/card";
+import { LoadingSpinner } from "@/components/ui/loading-spinner";
+import { AuthRedirectClient, AuthSaveClient } from "@/components/Auth/AuthSaveClient";
 
 /**
  * Component that force the user to login using discord.

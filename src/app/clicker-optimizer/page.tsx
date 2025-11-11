@@ -1,4 +1,4 @@
-import { NoPseudoPage } from "@/components/NoPseudoPage.tsx";
+import { NoPseudoPage } from "@/components/NoPseudoPage";
 
 /**
  * Gemerate Metadata

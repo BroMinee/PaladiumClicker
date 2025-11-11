@@ -1,8 +1,8 @@
-import { convertAhItemTypeToMarketItemOffer, generateAhShopUrl } from "@/lib/misc.ts";
+import { convertAhItemTypeToMarketItemOffer, generateAhShopUrl } from "@/lib/misc";
 import { AhItemType, OptionType } from "@/types";
-import LoadingData from "@/components/LoadingData.tsx";
+import LoadingData from "@/components/LoadingData";
 import Link from "next/link";
-import { DetailedMarketOffer } from "@/components/AhTracker/DetailedMarketOfferList.tsx";
+import { DetailedMarketOffer } from "@/components/AhTracker/DetailedMarketOfferList";
 
 type AhItemsProps = {
   item: AhItemType,

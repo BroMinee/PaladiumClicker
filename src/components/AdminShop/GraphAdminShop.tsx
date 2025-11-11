@@ -1,9 +1,9 @@
 import { AdminShopItem, AdminShopItemDetail, AdminShopPeriod } from "@/types";
-import { LoadingSpinner } from "@/components/ui/loading-spinner.tsx";
-import PlotAdminShopChart from "@/components/AdminShop/PlotAdminShopChart.tsx";
+import { LoadingSpinner } from "@/components/ui/loading-spinner";
+import PlotAdminShopChart from "@/components/AdminShop/PlotAdminShopChart";
 
 import { redirect } from "next/navigation";
-import { getAdminShopHistory } from "@/lib/api/apiPalaTracker.ts";
+import { getAdminShopHistory } from "@/lib/api/apiPalaTracker";
 
 export type GraphAdminShopProps = {
   item: AdminShopItem,

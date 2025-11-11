@@ -1,7 +1,7 @@
 import React from "react";
-import { constants } from "@/lib/constants.ts";
-import { AuthForceWrapper } from "@/components/Auth/AuthForceWrapper.tsx";
-import { AdminPanelRoleDispatch } from "@/components/Admin-Panel/AdminPanelRoleDispatch.tsx";
+import { constants } from "@/lib/constants";
+import { AuthForceWrapper } from "@/components/Auth/AuthForceWrapper";
+import { AdminPanelRoleDispatch } from "@/components/Admin-Panel/AdminPanelRoleDispatch";
 
 /**
  * Generate Metadata

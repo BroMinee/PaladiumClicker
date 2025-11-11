@@ -2,14 +2,14 @@
 
 import { AdminShopItem, AdminShopPeriod } from "@/types";
 import { useRouter, useSearchParams } from "next/navigation";
-import { adminShopItemToUserFriendlyText, generateAdminShopUrl, getImagePathFromAdminShopType, } from "@/lib/misc.ts";
-import { cn } from "@/lib/utils.ts";
+import { adminShopItemToUserFriendlyText, generateAdminShopUrl, getImagePathFromAdminShopType, } from "@/lib/misc";
+import { cn } from "@/lib/utils";
 import Image from "next/image";
-import { HoverText } from "@/components/ui/hovertext.tsx";
+import { HoverText } from "@/components/ui/hovertext";
 import { ReactNode } from "react";
-import { buttonVariants } from "@/components/ui/button.tsx";
-import { Card } from "@/components/ui/card.tsx";
-import { useWebhookStore } from "@/stores/use-webhook-store.ts";
+import { buttonVariants } from "@/components/ui/button";
+import { Card } from "@/components/ui/card";
+import { useWebhookStore } from "@/stores/use-webhook-store";
 
 /**
  * Component that displays an admin-shop item that handle click to change the item selection

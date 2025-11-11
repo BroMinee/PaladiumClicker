@@ -18,10 +18,10 @@ import { Button } from "@/components/ui/button";
 import { useRpsStore } from "@/stores/use-rps-store";
 import { FaBed, FaCoins, FaInfoCircle, FaMedal, FaRandom, FaTachometerAlt } from "react-icons/fa";
 import Image from "next/image";
-import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover.tsx";
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { GiProgression } from "react-icons/gi";
-import DelayedNotificationButton from "@/components/Clicker-Optimizer/NotificationButton.tsx";
-import { constants } from "@/lib/constants.ts";
+import DelayedNotificationButton from "@/components/Clicker-Optimizer/NotificationButton";
+import { constants } from "@/lib/constants";
 
 /**
  * Component that displays many clicker stats such as the current RPS, the best most profitable upgrade/building,

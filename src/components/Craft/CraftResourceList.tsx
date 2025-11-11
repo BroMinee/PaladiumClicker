@@ -1,14 +1,14 @@
 "use client";
 
 import { NodeType, PaladiumAhItemStat } from "@/types";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card.tsx";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import React, { useEffect, useState } from "react";
-import { adaptPlurial, formatPrice } from "@/lib/misc.ts";
-import { LoadingSpinner } from "@/components/ui/loading-spinner.tsx";
-import { GradientText } from "@/components/shared/GradientText\.tsx";
-import { getPaladiumAhItemStatsOfAllItemsAction } from "@/lib/api/apiServerAction.ts";
+import { adaptPlurial, formatPrice } from "@/lib/misc";
+import { LoadingSpinner } from "@/components/ui/loading-spinner";
+import { GradientText } from "@/components/shared/GradientText";
+import { getPaladiumAhItemStatsOfAllItemsAction } from "@/lib/api/apiServerAction";
 import { redirect } from "next/navigation";
-import { DisplayItemProduce } from "@/components/Craft/CraftingDisplayItem.tsx";
+import { DisplayItemProduce } from "@/components/Craft/CraftingDisplayItem";
 
 /**
  * Displays the list of resources required to craft an item, along with their total cost based on

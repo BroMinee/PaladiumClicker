@@ -1,9 +1,9 @@
 import { GradientText } from "@/components/shared/GradientText";
 import { Card, CardContent, CardDescription } from "@/components/ui/card";
 import { FaHeart } from "react-icons/fa";
-import { Contributors } from "@/components/Contributors.tsx";
-import Discord from "@/components/Discord.tsx";
-import { ImportProfilPretty } from "@/components/shared/ImportProfilPretty.tsx";
+import { Contributors } from "@/components/Contributors";
+import Discord from "@/components/Discord";
+import { ImportProfilPretty } from "@/components/shared/ImportProfilPretty";
 import { textFormatting } from "@/lib/misc";
 
 /**

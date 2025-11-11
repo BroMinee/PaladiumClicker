@@ -4,7 +4,7 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Image from "next/image";
 import confetti from "canvas-confetti";
-import { cn } from "@/lib/utils.ts";
+import { cn } from "@/lib/utils";
 import { textFormatting } from "@/lib/misc";
 
 gsap.registerPlugin(ScrollTrigger);

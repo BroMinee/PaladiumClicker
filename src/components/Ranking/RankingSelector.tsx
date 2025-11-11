@@ -1,10 +1,10 @@
-import { Card, CardContent, CardDescription, CardHeader, CardTitleH1 } from "@/components/ui/card.tsx";
-import { GradientText } from "@/components/shared/GradientText\.tsx";
-import { rankingTypeToUserFriendlyText } from "@/lib/misc.ts";
+import { Card, CardContent, CardDescription, CardHeader, CardTitleH1 } from "@/components/ui/card";
+import { GradientText } from "@/components/shared/GradientText";
+import { rankingTypeToUserFriendlyText } from "@/lib/misc";
 import { FaHeart } from "react-icons/fa";
 import { RankingType } from "@/types";
-import { RankingSelectorClient } from "@/components/Ranking/RankingSelectorClient.tsx";
-import { cn } from "@/lib/utils.ts";
+import { RankingSelectorClient } from "@/components/Ranking/RankingSelectorClient";
+import { cn } from "@/lib/utils";
 
 export type searchParamsRankingPage = {
   category: string,

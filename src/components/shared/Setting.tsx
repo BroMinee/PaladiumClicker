@@ -1,6 +1,6 @@
 "use client";
 import { IoSettings } from "react-icons/io5";
-import { constants } from "@/lib/constants.ts";
+import { constants } from "@/lib/constants";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -13,7 +13,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Switch } from "@/components/ui/switch";
 import { useSettingsStore } from "@/stores/use-settings-store";
-import { usePlayerInfoStore } from "@/stores/use-player-info-store.ts";
+import { usePlayerInfoStore } from "@/stores/use-player-info-store";
 import { useEffect } from "react";
 
 /**

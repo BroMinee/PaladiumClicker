@@ -1,12 +1,12 @@
 "use client";
 import React, { useEffect } from "react";
-import { usePlayerInfoStore } from "@/stores/use-player-info-store.ts";
-import { getPlayerInfoAction } from "@/lib/api/apiServerAction.ts";
-import LoadingData from "@/components/LoadingData.tsx";
-import { useSettingsStore } from "@/stores/use-settings-store.ts";
-import { reloadProfilNeeded } from "@/lib/misc.ts";
+import { usePlayerInfoStore } from "@/stores/use-player-info-store";
+import { getPlayerInfoAction } from "@/lib/api/apiServerAction";
+import LoadingData from "@/components/LoadingData";
+import { useSettingsStore } from "@/stores/use-settings-store";
+import { reloadProfilNeeded } from "@/lib/misc";
 import { toast } from "sonner";
-import { navigate } from "@/components/actions.ts";
+import { navigate } from "@/components/actions";
 
 /**
  * Component that wrap the entire page and display it only when the username in the localstorage is up to date and equal as requested.

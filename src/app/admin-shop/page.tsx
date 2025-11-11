@@ -1,16 +1,16 @@
 import { redirect } from "next/navigation";
-import { Card, CardContent, CardDescription, CardHeader, CardTitleH1 } from "@/components/ui/card.tsx";
-import { GradientText } from "@/components/shared/GradientText\.tsx";
+import { Card, CardContent, CardDescription, CardHeader, CardTitleH1 } from "@/components/ui/card";
+import { GradientText } from "@/components/shared/GradientText";
 import { FaHeart } from "react-icons/fa";
 import { AdminShopItem, AdminShopPeriod } from "@/types";
-import { adminShopItemToUserFriendlyText, generateAdminShopUrl, getImagePathFromAdminShopType, isShopItem } from "@/lib/misc.ts";
+import { adminShopItemToUserFriendlyText, generateAdminShopUrl, getImagePathFromAdminShopType, isShopItem } from "@/lib/misc";
 import { Suspense } from "react";
 import {
   AdminShopSelectorClientItem,
   AdminShopSelectorClientPeriode
-} from "@/components/AdminShop/AdminShopSelectorClientItem.tsx";
-import GraphAdminShop, { GraphAdminShopFallback } from "@/components/AdminShop/GraphAdminShop.tsx";
-import { constants } from "@/lib/constants.ts";
+} from "@/components/AdminShop/AdminShopSelectorClientItem";
+import GraphAdminShop, { GraphAdminShopFallback } from "@/components/AdminShop/GraphAdminShop";
+import { constants } from "@/lib/constants";
 
 export type searchParamsAdminShopPage = {
   item: string,

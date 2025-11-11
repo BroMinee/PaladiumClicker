@@ -1,16 +1,16 @@
 import "server-only";
-import { getAllItems, getItemAlias } from "@/lib/api/apiPalaTracker.ts";
+import { getAllItems, getItemAlias } from "@/lib/api/apiPalaTracker";
 import { redirect } from "next/navigation";
-import { generateCraftUrl } from "@/lib/misc.ts";
+import { generateCraftUrl } from "@/lib/misc";
 import { CraftSectionEnum, searchParamsCraftPage } from "@/types";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card.tsx";
-import { CountSelector } from "@/components/Craft/CountSelector.tsx";
-import MarketSelector from "@/components/AhTracker/MarketSelector.tsx";
-import { constants } from "@/lib/constants.ts";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { CountSelector } from "@/components/Craft/CountSelector";
+import MarketSelector from "@/components/AhTracker/MarketSelector";
+import { constants } from "@/lib/constants";
 import React, { Suspense } from "react";
-import { CraftingInformationFetcher } from "@/components/Craft/CraftingInformationFetcher.tsx";
-import { LoadingSpinner } from "@/components/ui/loading-spinner.tsx";
-import { GradientText } from "@/components/shared/GradientText\.tsx";
+import { CraftingInformationFetcher } from "@/components/Craft/CraftingInformationFetcher";
+import { LoadingSpinner } from "@/components/ui/loading-spinner";
+import { GradientText } from "@/components/shared/GradientText";
 
 /**
  * Server component for displaying the crafting recipe page.

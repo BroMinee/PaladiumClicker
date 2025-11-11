@@ -1,6 +1,6 @@
 "use client";
 import { useRouter } from "next/navigation";
-import { Selector } from "@/components/shared/Selector.tsx";
+import { Selector } from "@/components/shared/Selector";
 import { OptionType } from "@/types";
 
 /**

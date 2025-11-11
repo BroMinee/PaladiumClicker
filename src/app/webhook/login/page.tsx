@@ -1,9 +1,9 @@
 /* eslint-disable react/no-unescaped-entities */
 
-import { Card, CardContent, CardHeader } from "@/components/ui/card.tsx";
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import React from "react";
-import { LoginButton } from "@/components/Login/LoginButton.tsx";
-import { API_PALATRACKER } from "@/lib/constants.ts";
+import { LoginButton } from "@/components/Login/LoginButton";
+import { API_PALATRACKER } from "@/lib/constants";
 import { textFormatting } from "@/lib/misc";
 
 /**

@@ -1,9 +1,9 @@
-import { SelectorItemClient } from "@/components/Items/SelectorItemClient.tsx";
+import { SelectorItemClient } from "@/components/Items/SelectorItemClient";
 import React, { useEffect, useState } from "react";
-import { useWebhookStore } from "@/stores/use-webhook-store.ts";
+import { useWebhookStore } from "@/stores/use-webhook-store";
 import { OptionType } from "@/types";
-import { getAllItemsServerAction } from "@/lib/api/apiServerAction.ts";
-import { ThresholdSelector } from "@/components/WebHooks/WebHookThresholdSelector.tsx";
+import { getAllItemsServerAction } from "@/lib/api/apiServerAction";
+import { ThresholdSelector } from "@/components/WebHooks/WebHookThresholdSelector";
 
 function WebHookMarketClient({ options }: {
   options: OptionType[]

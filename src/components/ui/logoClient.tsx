@@ -1,7 +1,7 @@
 "use client";
-import { safeJoinPaths } from "@/lib/misc.ts";
+import { safeJoinPaths } from "@/lib/misc";
 import Image from "next/image";
-import { navigate } from "@/components/actions.ts";
+import { navigate } from "@/components/actions";
 import React from "react";
 
 /**

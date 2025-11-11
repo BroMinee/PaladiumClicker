@@ -1,20 +1,20 @@
-import { ProfilInfo } from "@/components/Profil/ProfilInfo.tsx";
-import MetierList from "@/components/MetierList.tsx";
-import HeadingSection from "@/components/shared/HeadingSection.tsx";
-import FactionInfo from "@/components/Profil/FactionInfo.tsx";
+import { ProfilInfo } from "@/components/Profil/ProfilInfo";
+import MetierList from "@/components/MetierList";
+import HeadingSection from "@/components/shared/HeadingSection";
+import FactionInfo from "@/components/Profil/FactionInfo";
 import { redirect } from "next/navigation";
-import { generateProfilUrl, isProfilSection } from "@/lib/misc.ts";
+import { generateProfilUrl, isProfilSection } from "@/lib/misc";
 import { ProfilSectionEnum, searchParamsProfilPage } from "@/types";
 import {
   AchievementsProfilSection,
   AchievementsProfilSectionFallBack,
   MarketProfilSectionFallBack
-} from "@/components/Profil/Achievement/AchievementsProfilSection.tsx";
-import { PetOrMountCanvas } from "@/components/Profil/Pet/PetMontureCanvas.tsx";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card.tsx";
+} from "@/components/Profil/Achievement/AchievementsProfilSection";
+import { PetOrMountCanvas } from "@/components/Profil/Pet/PetMontureCanvas";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import React, { Suspense } from "react";
-import { ProfilRankingSection } from "@/components/Profil/Ranking/ProfilRanking.tsx";
-import { AhInfo } from "@/components/Profil/AhInfo.tsx";
+import { ProfilRankingSection } from "@/components/Profil/Ranking/ProfilRanking";
+import { AhInfo } from "@/components/Profil/AhInfo";
 import { ErrorBoundary } from "@/components/Profil/ErrorProfilErrorBoundary";
 
 /**

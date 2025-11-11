@@ -1,15 +1,15 @@
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card.tsx";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { FaHeart } from "react-icons/fa";
-import { GradientText } from "@/components/shared/GradientText\.tsx";
+import { GradientText } from "@/components/shared/GradientText";
 import React from "react";
 
-import { getAllItems } from "@/lib/api/apiPalaTracker.ts";
+import { getAllItems } from "@/lib/api/apiPalaTracker";
 import { CraftSectionEnum, OptionType, searchParamsCraftPage } from "@/types";
-import { generateCraftUrl } from "@/lib/misc.ts";
+import { generateCraftUrl } from "@/lib/misc";
 import { redirect } from "next/navigation";
-import { CraftingSectionSelector } from "@/components/Craft/CraftingSectionSelector.tsx";
-import { CraftRecipeDisplay } from "@/components/Craft/CraftRecipeDisplay.tsx";
-import { CraftOptimizerDisplay } from "@/components/Craft/CraftOptimizerDisplay.tsx";
+import { CraftingSectionSelector } from "@/components/Craft/CraftingSectionSelector";
+import { CraftRecipeDisplay } from "@/components/Craft/CraftRecipeDisplay";
+import { CraftOptimizerDisplay } from "@/components/Craft/CraftOptimizerDisplay";
 
 /**
  * Generate Metadata

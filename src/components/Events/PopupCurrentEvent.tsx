@@ -1,22 +1,22 @@
 "use client";
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog.tsx";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 
 import Countdown from "react-countdown";
-import { renderer } from "@/components/ui/countdown.tsx";
-import { Button } from "@/components/ui/button.tsx";
-import { ScrollArea } from "@/components/ui/scroll-area.tsx";
+import { renderer } from "@/components/ui/countdown";
+import { Button } from "@/components/ui/button";
+import { ScrollArea } from "@/components/ui/scroll-area";
 import React, { useState } from "react";
 import { Event } from "@/types";
-import { usePlayerInfoStore } from "@/stores/use-player-info-store.ts";
+import { usePlayerInfoStore } from "@/stores/use-player-info-store";
 import { toast } from "sonner";
-import { Input } from "@/components/ui/input.tsx";
-import { SmallCardInfo } from "@/components/shared/SmallCardInfo.tsx";
-import { adaptPlurial } from "@/lib/misc.ts";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card.tsx";
-import Discord from "@/components/Discord.tsx";
-import { RenderEvent } from "@/components/NavBar/NavBarClient.tsx";
-import { cn } from "@/lib/utils.ts";
-import { registerUserToEvent } from "@/lib/api/apiServerAction.ts";
+import { Input } from "@/components/ui/input";
+import { SmallCardInfo } from "@/components/shared/SmallCardInfo";
+import { adaptPlurial } from "@/lib/misc";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import Discord from "@/components/Discord";
+import { RenderEvent } from "@/components/NavBar/NavBarClient";
+import { cn } from "@/lib/utils";
+import { registerUserToEvent } from "@/lib/api/apiServerAction";
 
 /**
  * Displays a modal popup for the currently active event (giveaway) allowing the user to register.

@@ -2,11 +2,11 @@
 
 import { NodeType, OptionType, } from "@/types";
 import React from "react";
-import { getCraftRecipe } from "@/lib/api/apiPalaTracker.ts";
-import { CraftingInformationClient } from "@/components/Craft/CraftingInformation.tsx";
-import { getInternalNode } from "@/lib/misc.ts";
-import { CraftItemRecipe } from "@/components/Craft/CraftItemRecipe.tsx";
-import { Card, CardHeader, CardTitle } from "@/components/ui/card.tsx";
+import { getCraftRecipe } from "@/lib/api/apiPalaTracker";
+import { CraftingInformationClient } from "@/components/Craft/CraftingInformation";
+import { getInternalNode } from "@/lib/misc";
+import { CraftItemRecipe } from "@/components/Craft/CraftItemRecipe";
+import { Card, CardHeader, CardTitle } from "@/components/ui/card";
 
 /**
  * Wrapper that fetch the craft of the given item and display the recipe tree and a summary of the material needed.

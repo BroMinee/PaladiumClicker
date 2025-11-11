@@ -1,12 +1,12 @@
 "use client";
 
 import { WebHookType, } from "@/types";
-import { Button } from "@/components/ui/button.tsx";
-import { useWebhookStore } from "@/stores/use-webhook-store.ts";
-import { getTextFromWebHookType } from "@/lib/misc.ts";
+import { Button } from "@/components/ui/button";
+import { useWebhookStore } from "@/stores/use-webhook-store";
+import { getTextFromWebHookType } from "@/lib/misc";
 import { useRouter } from "next/navigation";
 import { IoMdArrowRoundBack } from "react-icons/io";
-import { constants } from "@/lib/constants.ts";
+import { constants } from "@/lib/constants";
 
 /**
  * Renders a selector for different webhook types.

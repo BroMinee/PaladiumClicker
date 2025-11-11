@@ -1,5 +1,5 @@
 import { AdminShopItem, AhItemType, MarketItemOffer } from "@/types";
-import { constants } from "@/lib/constants.ts";
+import { constants } from "@/lib/constants";
 
 /**
  * Converts an admin shop item key to a human-readable display name.

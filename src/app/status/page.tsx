@@ -1,15 +1,15 @@
-import { Card, CardContent, CardDescription, CardHeader, CardTitleH1 } from "@/components/ui/card.tsx";
-import { GradientText } from "@/components/shared/GradientText\.tsx";
+import { Card, CardContent, CardDescription, CardHeader, CardTitleH1 } from "@/components/ui/card";
+import { GradientText } from "@/components/shared/GradientText";
 import { FaHeart } from "react-icons/fa";
 import { Suspense } from "react";
-import { GraphStatus, GraphStatusFallback } from "@/components/Status/GraphStatus.tsx";
-import { isMyApiDown } from "@/lib/api/apiPalaTracker.ts";
-import { getPlayerInfo, getPlayerOnlineCount, isApiDown } from "@/lib/api/apiPala.ts";
-import { StatusSelectorClientPeriode } from "@/components/Status/StatusSelectorClient.tsx";
+import { GraphStatus, GraphStatusFallback } from "@/components/Status/GraphStatus";
+import { isMyApiDown } from "@/lib/api/apiPalaTracker";
+import { getPlayerInfo, getPlayerOnlineCount, isApiDown } from "@/lib/api/apiPala";
+import { StatusSelectorClientPeriode } from "@/components/Status/StatusSelectorClient";
 import { redirect } from "next/navigation";
-import { generateStatusUrl } from "@/lib/misc.ts";
+import { generateStatusUrl } from "@/lib/misc";
 import { AdminShopPeriod } from "@/types";
-import { GraphPlayerCount } from "@/components/Status/GraphPlayerCount.tsx";
+import { GraphPlayerCount } from "@/components/Status/GraphPlayerCount";
 
 /**
  * Generate Metadata

@@ -1,14 +1,14 @@
-import { Card, CardContent, CardDescription, CardHeader, CardTitle, CardTitleH1 } from "@/components/ui/card.tsx";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle, CardTitleH1 } from "@/components/ui/card";
 import { FaHeart } from "react-icons/fa";
-import { GradientText } from "@/components/shared/GradientText\.tsx";
+import { GradientText } from "@/components/shared/GradientText";
 import React, { Suspense } from "react";
 
-import { LoadingSpinner } from "@/components/ui/loading-spinner.tsx";
-import MarketSelector from "@/components/AhTracker/MarketSelector.tsx";
-import { getAllItems } from "@/lib/api/apiPalaTracker.ts";
+import { LoadingSpinner } from "@/components/ui/loading-spinner";
+import MarketSelector from "@/components/AhTracker/MarketSelector";
+import { getAllItems } from "@/lib/api/apiPalaTracker";
 import { OptionType } from "@/types";
 import { constants } from "@/lib/constants";
-import { MarketServerFetcher } from "@/components/AhTracker/MarketServerFetcher.tsx";
+import { MarketServerFetcher } from "@/components/AhTracker/MarketServerFetcher";
 import { redirect } from "next/navigation";
 
 /**

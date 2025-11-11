@@ -1,8 +1,8 @@
-import { CardContent } from "@/components/ui/card.tsx";
-import { cn } from "@/lib/utils.ts";
+import { CardContent } from "@/components/ui/card";
+import { cn } from "@/lib/utils";
 import Image from "next/image";
-import { safeJoinPaths } from "@/lib/misc.ts";
-import { GradientText } from "@/components/shared/GradientText\.tsx";
+import { safeJoinPaths } from "@/lib/misc";
+import { GradientText } from "@/components/shared/GradientText";
 import React from "react";
 
 type AchievementInfoProps = {

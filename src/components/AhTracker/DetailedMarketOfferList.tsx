@@ -1,11 +1,11 @@
 import { MarketItemOffer, OptionType } from "@/types";
-import { formatPrice, formatPriceWithUnit, safeJoinPaths, textFormatting } from "@/lib/misc.ts";
-import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area.tsx";
+import { formatPrice, formatPriceWithUnit, safeJoinPaths, textFormatting } from "@/lib/misc";
+import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 import React, { ReactNode } from "react";
 import Image from "next/image";
-import { SellerNameMarket } from "@/components/AhTracker/DetailedMarketOfferClient.tsx";
-import { HoverText } from "@/components/ui/hovertext.tsx";
-import { constants } from "@/lib/constants.ts";
+import { SellerNameMarket } from "@/components/AhTracker/DetailedMarketOfferClient";
+import { HoverText } from "@/components/ui/hovertext";
+import { constants } from "@/lib/constants";
 
 /**
  * Diplays all the current sells of the given item.

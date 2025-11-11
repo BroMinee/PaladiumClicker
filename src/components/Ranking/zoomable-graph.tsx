@@ -1,9 +1,9 @@
 "use client";
 
 import React, { FormEvent, useEffect, useMemo, useRef, useState } from "react";
-import { Card, CardContent, CardHeader } from "@/components/ui/card.tsx";
-import { ChartConfig, ChartContainer, ChartLegend, ChartLegendContent } from "@/components/Ranking/chart-z.tsx";
-import { Button } from "@/components/ui/button.tsx";
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
+import { ChartConfig, ChartContainer, ChartLegend, ChartLegendContent } from "@/components/Ranking/chart-z";
+import { Button } from "@/components/ui/button";
 import {
   Area,
   AreaChart,
@@ -16,13 +16,13 @@ import {
   YAxis
 } from "recharts";
 import { ProfilSectionEnum, RankingResponse, RankingType } from "@/types";
-import { usePlayerInfoStore } from "@/stores/use-player-info-store.ts";
-import { formatPrice, generateProfilUrl, generateRankingUrl } from "@/lib/misc.ts";
+import { usePlayerInfoStore } from "@/stores/use-player-info-store";
+import { formatPrice, generateProfilUrl, generateRankingUrl } from "@/lib/misc";
 import { LegendPayload } from "recharts/types/component/DefaultLegendContent";
 import { useRouter, useSearchParams } from "next/navigation";
-import { Input } from "@/components/ui/input.tsx";
+import { Input } from "@/components/ui/input";
 import { FaSearch } from "react-icons/fa";
-import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area.tsx";
+import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 
 type ZoomableChartProps = {
   data: RankingResponse;

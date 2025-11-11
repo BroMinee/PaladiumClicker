@@ -1,9 +1,9 @@
 "use client";
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog.tsx";
-import { ScrollArea } from "@/components/ui/scroll-area.tsx";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
+import { ScrollArea } from "@/components/ui/scroll-area";
 import React from "react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card.tsx";
-import { RenderEvent } from "@/components/NavBar/NavBarClient.tsx";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { RenderEvent } from "@/components/NavBar/NavBarClient";
 
 /**
  * Displays a modal popup notifying the user that they did not win a prize in the event.

@@ -1,12 +1,12 @@
 import React from "react";
-import { useWebhookStore } from "@/stores/use-webhook-store.ts";
+import { useWebhookStore } from "@/stores/use-webhook-store";
 import { AdminShopItem, EventType, WebHookThresholdCondition, WebHookType } from "@/types";
-import { AdminShopSelectorClientItem } from "@/components/AdminShop/AdminShopSelectorClientItem.tsx";
-import { ThresholdSelector } from "@/components/WebHooks/WebHookThresholdSelector.tsx";
-import { Button } from "@/components/ui/button.tsx";
-import { cn } from "@/lib/utils.ts";
-import { Input } from "@/components/ui/input.tsx";
-import { constants } from "@/lib/constants.ts";
+import { AdminShopSelectorClientItem } from "@/components/AdminShop/AdminShopSelectorClientItem";
+import { ThresholdSelector } from "@/components/WebHooks/WebHookThresholdSelector";
+import { Button } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
+import { Input } from "@/components/ui/input";
+import { constants } from "@/lib/constants";
 
 /**
  * Renders a set of buttons for selecting the threshold condition

@@ -1,7 +1,7 @@
 "use client";
 
-import { parseTextFormatting } from "@/components/WebHooks/WebHookMsg.tsx";
-import { useWebhookStore } from "@/stores/use-webhook-store.ts";
+import { parseTextFormatting } from "@/components/WebHooks/WebHookMsg";
+import { useWebhookStore } from "@/stores/use-webhook-store";
 
 function RecapTemplate({ messages }: { messages: string[] }) {
 

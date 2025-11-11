@@ -1,5 +1,5 @@
 
-import { constants, PathValid } from "@/lib/constants.ts";
+import { constants, PathValid } from "@/lib/constants";
 import { AdminShopItem, AdminShopPeriod, CraftSectionEnum, OptionType, PlayerInfo, ProfilSectionEnum, RankingType, StatusPeriod } from "@/types";
 import { redirect } from "next/navigation";
 

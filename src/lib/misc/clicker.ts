@@ -14,7 +14,7 @@ import metier_json from "@/assets/metier.json";
 import building_json from "@/assets/building.json";
 import CPS_json from "@/assets/CPS.json";
 import { AnyCondition, Building, BuildingUpgrade, CategoryUpgrade, GlobalUpgrade, ManyUpgrade, Metiers, PlayerInfo, PosteriorUpgrade, TerrainUpgrade, UpgradeKey, CPS, buildingPathType, bestUpgradeInfo, bestBuildingInfo, bestPurchaseInfoDetailed, bestPurchaseInfo } from "@/types";
-import { constants } from "@/lib/constants.ts";
+import { constants } from "@/lib/constants";
 import { safeJoinPaths } from "./navbar";
 
 /**

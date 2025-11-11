@@ -1,12 +1,12 @@
 import "server-only";
 
 import { AhItemHistory, OptionType, PaladiumAhItemStat } from "@/types";
-import { getPaladiumAhItemFullHistory, getPaladiumAhItemStats } from "@/lib/api/apiPala.ts";
-import { Card } from "@/components/ui/card.tsx";
-import { PlotHistoricChart } from "@/components/AhTracker/PlotHistoricChart.tsx";
-import DetailedMarketOfferList from "@/components/AhTracker/DetailedMarketOfferList.tsx";
+import { getPaladiumAhItemFullHistory, getPaladiumAhItemStats } from "@/lib/api/apiPala";
+import { Card } from "@/components/ui/card";
+import { PlotHistoricChart } from "@/components/AhTracker/PlotHistoricChart";
+import DetailedMarketOfferList from "@/components/AhTracker/DetailedMarketOfferList";
 import React from "react";
-import QuantitySelectorDisplay from "@/components/AhTracker/QuantitySelectorDisplay.tsx";
+import QuantitySelectorDisplay from "@/components/AhTracker/QuantitySelectorDisplay";
 
 /**
  * Fetcher of item market history

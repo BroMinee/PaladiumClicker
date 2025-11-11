@@ -3,8 +3,8 @@
 import Image from "next/image";
 import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
-import { safeJoinPaths } from "@/lib/misc.ts";
-import { constants } from "@/lib/constants.ts";
+import { safeJoinPaths } from "@/lib/misc";
+import { constants } from "@/lib/constants";
 
 /**
  * Renders a crafting arrow image that adapts to the current theme.

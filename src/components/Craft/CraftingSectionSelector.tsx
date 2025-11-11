@@ -1,8 +1,8 @@
 "use client";
-import { CraftSectionValid, generateCraftUrl } from "@/lib/misc.ts";
+import { CraftSectionValid, generateCraftUrl } from "@/lib/misc";
 import { useRouter, useSearchParams } from "next/navigation";
-import { cn } from "@/lib/utils.ts";
-import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area.tsx";
+import { cn } from "@/lib/utils";
+import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 import { CraftSectionEnum } from "@/types";
 
 /**

@@ -2,7 +2,7 @@
 import { ValueHistory } from "@/types";
 import { Area, AreaChart, Legend, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
 import React from "react";
-import { formatPrice } from "@/lib/misc.ts";
+import { formatPrice } from "@/lib/misc";
 
 const CustomTooltip = ({ active, payload, label }: any) => {
 

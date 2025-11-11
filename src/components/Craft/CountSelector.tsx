@@ -2,9 +2,9 @@
 
 import { CraftSectionEnum, OptionType } from "@/types";
 import { useRouter } from "next/navigation";
-import { Input } from "@/components/ui/input.tsx";
+import { Input } from "@/components/ui/input";
 import { useEffect, useMemo, useState } from "react";
-import { generateCraftUrl } from "@/lib/misc.ts";
+import { generateCraftUrl } from "@/lib/misc";
 import debounce from "debounce";
 
 /**

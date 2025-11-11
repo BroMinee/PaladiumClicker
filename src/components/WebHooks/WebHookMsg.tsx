@@ -1,13 +1,13 @@
 import "./WebHookMsg.css";
 import { AdminShopItem, EventType, OptionType, WebHookThresholdCondition, WebHookType } from "@/types";
-import { defaultWebhookFooterFromType } from "@/components/WebHooks/WebHookConstant.ts";
+import { defaultWebhookFooterFromType } from "@/components/WebHooks/WebHookConstant";
 import {
   adminShopItemToUserFriendlyText,
   formatPrice,
   getIconNameFromEventType,
   getImagePathFromAdminShopType
-} from "@/lib/misc.ts";
-import { useWebhookStore } from "@/stores/use-webhook-store.ts";
+} from "@/lib/misc";
+import { useWebhookStore } from "@/stores/use-webhook-store";
 import React from "react";
 import Image from "next/image";
 

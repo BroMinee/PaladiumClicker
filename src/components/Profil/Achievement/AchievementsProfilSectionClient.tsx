@@ -1,17 +1,17 @@
 "use client";
 import { Bar, BarChart, LabelList, ResponsiveContainer, XAxis, YAxis } from "recharts";
 import { useEffect, useRef, useState } from "react";
-import { usePlayerInfoStore } from "@/stores/use-player-info-store.ts";
-import { CardTitle } from "@/components/ui/card.tsx";
-import { formatPrice, safeJoinPaths } from "@/lib/misc.ts";
+import { usePlayerInfoStore } from "@/stores/use-player-info-store";
+import { CardTitle } from "@/components/ui/card";
+import { formatPrice, safeJoinPaths } from "@/lib/misc";
 import { useTheme } from "next-themes";
 import { Achievement, CategoryEnum } from "@/types";
-import { cn } from "@/lib/utils.ts";
-import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area.tsx";
+import { cn } from "@/lib/utils";
+import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 
 import Image from "next/image";
-import { AchievementInfo, DisplayCategoryCard } from "@/components/Profil/Achievement/DisplayAchievement.tsx";
-import { constants } from "@/lib/constants.ts";
+import { AchievementInfo, DisplayCategoryCard } from "@/components/Profil/Achievement/DisplayAchievement";
+import { constants } from "@/lib/constants";
 
 function DisplayProgressionCategory({ category }: { category: CategoryEnum }) {
   const { data: playerInfo } = usePlayerInfoStore();

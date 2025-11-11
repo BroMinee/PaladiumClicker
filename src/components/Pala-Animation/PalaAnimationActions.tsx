@@ -1,8 +1,8 @@
 "use server";
 import "server-only";
 import { PalaAnimationLeaderboard, PalaAnimationLeaderboardGlobal } from "@/types";
-import { fetchWithHeader } from "@/lib/api/misc.ts";
-import { API_PALATRACKER } from "@/lib/constants.ts";
+import { fetchWithHeader } from "@/lib/api/misc";
+import { API_PALATRACKER } from "@/lib/constants";
 
 /**
  * Fetches the leaderboard for a Pala-Animation session.

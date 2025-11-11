@@ -2,8 +2,8 @@
 import React, { ReactNode } from "react";
 import { FaCheck } from "react-icons/fa";
 import { RiCloseLargeLine } from "react-icons/ri";
-import { checkCondition, formatPrice } from "@/lib/misc.ts";
-import { usePlayerInfoStore } from "@/stores/use-player-info-store.ts";
+import { checkCondition, formatPrice } from "@/lib/misc";
+import { usePlayerInfoStore } from "@/stores/use-player-info-store";
 import { UpgradeKey } from "@/types";
 
 /**

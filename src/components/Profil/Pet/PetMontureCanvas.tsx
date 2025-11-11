@@ -4,10 +4,10 @@ import * as THREE from "three";
 import { Mesh } from "three";
 import { OrbitControls, Text } from "@react-three/drei";
 import { Canvas, useLoader } from "@react-three/fiber";
-import { Button } from "@/components/ui/button.tsx";
+import { Button } from "@/components/ui/button";
 import { GLTF, GLTFLoader } from "three-stdlib";
 import { ModelName } from "@/types";
-import { usePlayerInfoStore } from "@/stores/use-player-info-store.ts";
+import { usePlayerInfoStore } from "@/stores/use-player-info-store";
 import {
   formatPrice,
   montureGetCoef,
@@ -16,8 +16,8 @@ import {
   petGetCoef,
   petGetLevelFromXp,
   petGetNeededXpForLevel
-} from "@/lib/misc.ts";
-import { cn } from "@/lib/utils.ts";
+} from "@/lib/misc";
+import { cn } from "@/lib/utils";
 
 function convertMontureTypeIdToModelName(montureTypeId: number): ModelName {
   switch (montureTypeId) {

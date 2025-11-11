@@ -1,9 +1,9 @@
-import { Card, CardContent, CardDescription, CardHeader, CardTitleH1 } from "@/components/ui/card.tsx";
-import { GradientText } from "@/components/shared/GradientText\.tsx";
+import { Card, CardContent, CardDescription, CardHeader, CardTitleH1 } from "@/components/ui/card";
+import { GradientText } from "@/components/shared/GradientText";
 import { FaHeart } from "react-icons/fa";
-import Discord from "@/components/Discord.tsx";
+import Discord from "@/components/Discord";
 import newsJson from "@/public/news.json";
-import { News } from "@/components/News.tsx";
+import { News } from "@/components/News";
 import { ChangeLogs } from "@/types";
 
 /**

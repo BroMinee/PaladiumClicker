@@ -1,12 +1,12 @@
 "use client";
 import React from "react";
-import { constants } from "@/lib/constants.ts";
-import { safeJoinPaths } from "@/lib/misc.ts";
+import { constants } from "@/lib/constants";
+import { safeJoinPaths } from "@/lib/misc";
 import { navigate } from "@/components/actions";
-import { useSettingsStore } from "@/stores/use-settings-store.ts";
-import { Switch } from "@/components/ui/switch.tsx";
-import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover.tsx";
-import { Button } from "@/components/ui/button.tsx";
+import { useSettingsStore } from "@/stores/use-settings-store";
+import { Switch } from "@/components/ui/switch";
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
+import { Button } from "@/components/ui/button";
 import { FaInfoCircle } from "react-icons/fa";
 
 /**

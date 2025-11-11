@@ -1,7 +1,7 @@
 import { CraftingRecipeKey, CraftingRecipeType, NodeType, OptionType, Tree } from "@/types";
-import { addChildrenToTree, createNodeType, createTreeNode } from "@/lib/misc.ts";
+import { addChildrenToTree, createNodeType, createTreeNode } from "@/lib/misc";
 import { redirect } from "next/navigation";
-import { getCraft } from "@/lib/api/apiPalaTracker.ts";
+import { getCraft } from "@/lib/api/apiPalaTracker";
 
 /**
  * Builds a crafting tree structure recursively for a given item node.

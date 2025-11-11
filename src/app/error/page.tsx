@@ -1,4 +1,4 @@
-import { Card, CardContent, CardHeader } from "@/components/ui/card.tsx";
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { IoHourglassOutline } from "react-icons/io5";
 import { TbClockHour5 } from "react-icons/tb";
 import { FaPen } from "react-icons/fa";
@@ -9,10 +9,10 @@ import {
   TestImportProfileFetching,
   TestMyApi,
   TestMyApiFetching
-} from "@/components/ui/TestApiOnError.tsx";
+} from "@/components/ui/TestApiOnError";
 import { Suspense } from "react";
-import { ImportProfilPretty } from "@/components/shared/ImportProfilPretty.tsx";
-import { ImportOfflineProfil } from "@/components/shared/ImportOfflineProfil.tsx";
+import { ImportProfilPretty } from "@/components/shared/ImportProfilPretty";
+import { ImportOfflineProfil } from "@/components/shared/ImportOfflineProfil";
 
 /**
  * Generate Metadata

@@ -1,6 +1,6 @@
-import { Card, CardContent, CardDescription, CardHeader, CardTitle, CardTitleH1 } from "@/components/ui/card.tsx";
-import { GradientText } from "@/components/shared/GradientText\.tsx";
-import { constants } from "@/lib/constants.ts";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle, CardTitleH1 } from "@/components/ui/card";
+import { GradientText } from "@/components/shared/GradientText";
+import { constants } from "@/lib/constants";
 import React from "react";
 
 /**

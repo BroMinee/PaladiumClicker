@@ -1,8 +1,8 @@
 import { ServerPaladiumStatusResponse, StatusPeriod } from "@/types";
 import { redirect } from "next/navigation";
-import { LoadingSpinner } from "@/components/ui/loading-spinner.tsx";
-import { PlotStatusChart } from "@/components/Status/PlotStatusChart.tsx";
-import { getStatusPaladium } from "@/lib/api/apiPalaTracker.ts";
+import { LoadingSpinner } from "@/components/ui/loading-spinner";
+import { PlotStatusChart } from "@/components/Status/PlotStatusChart";
+import { getStatusPaladium } from "@/lib/api/apiPalaTracker";
 
 type GraphStatusProps = {
   periode: StatusPeriod,

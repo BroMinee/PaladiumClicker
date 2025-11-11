@@ -1,17 +1,17 @@
-import ProfileFetcherWrapper from "@/components/ProfileFetcher.tsx";
-import { MetierComponentWrapper } from "@/components/MetierList.tsx";
-import { Card, CardContent, CardDescription, CardHeader, CardTitleH1 } from "@/components/ui/card.tsx";
-import { GradientText } from "@/components/shared/GradientText\.tsx";
+import ProfileFetcherWrapper from "@/components/ProfileFetcher";
+import { MetierComponentWrapper } from "@/components/MetierList";
+import { Card, CardContent, CardDescription, CardHeader, CardTitleH1 } from "@/components/ui/card";
+import { GradientText } from "@/components/shared/GradientText";
 import { FaHeart } from "react-icons/fa";
 import {
   MetierSelectorClient,
   MetierToReachWrapper,
   SetLevelInUrl
-} from "@/components/Xp-Calculator/MetierSelectorClient.tsx";
+} from "@/components/Xp-Calculator/MetierSelectorClient";
 import { MetierKey } from "@/types";
-import { HowToXp, searchParamsXpBonusPage, XpBonus } from "@/components/Xp-Calculator/XpCalculator.tsx";
-import { constants } from "@/lib/constants.ts";
-import { safeJoinPaths } from "@/lib/misc.ts";
+import { HowToXp, searchParamsXpBonusPage, XpBonus } from "@/components/Xp-Calculator/XpCalculator";
+import { constants } from "@/lib/constants";
+import { safeJoinPaths } from "@/lib/misc";
 
 /**
  * Generate Metadata

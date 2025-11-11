@@ -3,12 +3,12 @@ import { formatPrice, getJsonToUseForUpgrade, safeJoinPaths } from "@/lib/misc";
 import type { UpgradeKey } from "@/types";
 
 import { redirect } from "next/navigation";
-import { ButtonUpgrade } from "@/components/Clicker-Optimizer/UpgradeListClient.tsx";
+import { ButtonUpgrade } from "@/components/Clicker-Optimizer/UpgradeListClient";
 import Image from "next/image";
 import { ReactNode } from "react";
-import { HoverText } from "@/components/ui/hovertext.tsx";
-import { PreconditionDisplay } from "@/lib/PreconditionDisplay.tsx";
-import { constants } from "@/lib/constants.ts";
+import { HoverText } from "@/components/ui/hovertext";
+import { PreconditionDisplay } from "@/lib/PreconditionDisplay";
+import { constants } from "@/lib/constants";
 
 type UpgradeListProps = {
   upgradeType: UpgradeKey;

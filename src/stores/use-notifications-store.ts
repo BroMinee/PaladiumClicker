@@ -1,6 +1,6 @@
 import { create } from "zustand";
 import { createJSONStorage, persist } from "zustand/middleware";
-import { PathValid } from "@/lib/constants.ts";
+import { PathValid } from "@/lib/constants";
 
 type State = {
   last_visited: { [T in PathValid]: number }

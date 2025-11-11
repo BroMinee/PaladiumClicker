@@ -1,9 +1,9 @@
 "use client";
 import { AllPalaAnimationStats } from "@/types";
 import { useEffect, useState } from "react";
-import { getAllPalaAnimationTime } from "@/lib/api/apiServerAction.ts";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card.tsx";
-import { adaptPlurial } from "@/lib/misc.ts";
+import { getAllPalaAnimationTime } from "@/lib/api/apiServerAction";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { adaptPlurial } from "@/lib/misc";
 
 /**
  * Component that display that display your current best time in all pala-animation, as well as your average time.

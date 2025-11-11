@@ -1,6 +1,6 @@
 import { PlayerCountHistory, ValueHistory } from "@/types";
-import { getPlayerCountHistoryPaladium } from "@/lib/api/apiPalaTracker.ts";
-import { PlotSingleValueChart } from "@/components/Status/PlotSingleValueChart.tsx";
+import { getPlayerCountHistoryPaladium } from "@/lib/api/apiPalaTracker";
+import { PlotSingleValueChart } from "@/components/Status/PlotSingleValueChart";
 
 /**
  * Fetches the player count history and renders it in a chart.

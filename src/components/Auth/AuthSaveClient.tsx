@@ -1,6 +1,6 @@
 "use client";
 import { DiscordUser } from "@/types";
-import { useProfileStore } from "@/stores/use-profile-store.ts";
+import { useProfileStore } from "@/stores/use-profile-store";
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 

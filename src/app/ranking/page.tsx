@@ -1,10 +1,10 @@
 import { redirect } from "next/navigation";
-import { Card } from "@/components/ui/card.tsx";
+import { Card } from "@/components/ui/card";
 import { RankingType } from "@/types";
-import { RankingSelectorCard, searchParamsRankingPage } from "@/components/Ranking/RankingSelector.tsx";
-import { generateRankingUrl, getImagePathFromRankingType, rankingTypeToUserFriendlyText } from "@/lib/misc.ts";
+import { RankingSelectorCard, searchParamsRankingPage } from "@/components/Ranking/RankingSelector";
+import { generateRankingUrl, getImagePathFromRankingType, rankingTypeToUserFriendlyText } from "@/lib/misc";
 import { Suspense } from "react";
-import GraphRanking, { GraphRankingFallback } from "@/components/Ranking/GraphRanking.tsx";
+import GraphRanking, { GraphRankingFallback } from "@/components/Ranking/GraphRanking";
 
 /**
  * Generate Metadata

@@ -3,10 +3,10 @@ import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 import { safeJoinPaths } from "@/lib/misc";
 
 import BuildingJson from "@/assets/building.json";
-import { BuildingInput, BuildingPrice, BuildingRPS } from "@/components/Clicker-Optimizer/BuildingListClient.tsx";
+import { BuildingInput, BuildingPrice, BuildingRPS } from "@/components/Clicker-Optimizer/BuildingListClient";
 import Image from "next/image";
 import React from "react";
-import { constants } from "@/lib/constants.ts";
+import { constants } from "@/lib/constants";
 
 /**
  * Component that displays the list of building on the clicker.

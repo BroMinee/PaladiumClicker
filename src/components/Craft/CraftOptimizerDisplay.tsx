@@ -6,9 +6,9 @@ import { useCraftStore } from "@/stores/use-craft-store";
 import Image from "next/image";
 import { CraftPrice, CraftSectionEnum } from "@/types";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { formatPrice, generateCraftUrl, getDDHHMMSS, parseMessageCraftPrice } from "@/lib/misc.ts";
+import { formatPrice, generateCraftUrl, getDDHHMMSS, parseMessageCraftPrice } from "@/lib/misc";
 import gsap from "gsap";
-import { API_PALATRACKER_WS } from "@/lib/constants.ts";
+import { API_PALATRACKER_WS } from "@/lib/constants";
 import { toast } from "sonner";
 
 type SortMode = "profit" | "margin" | "speed" | "score";

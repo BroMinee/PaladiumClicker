@@ -1,10 +1,10 @@
-import { Card, CardContent, CardHeader, CardTitleH1 } from "@/components/ui/card.tsx";
+import { Card, CardContent, CardHeader, CardTitleH1 } from "@/components/ui/card";
 import React from "react";
-import { AuthForceWrapper } from "@/components/Auth/AuthForceWrapper.tsx";
-import { getWebHookDiscordFromCookies, getWebHookFromCookies } from "@/lib/api/apiPalaTracker.ts";
-import { WebHookPreviewPage } from "@/components/WebHooks/WebHookPreview.tsx";
+import { AuthForceWrapper } from "@/components/Auth/AuthForceWrapper";
+import { getWebHookDiscordFromCookies, getWebHookFromCookies } from "@/lib/api/apiPalaTracker";
+import { WebHookPreviewPage } from "@/components/WebHooks/WebHookPreview";
 import { WebHookAlert } from "@/types";
-import { constants } from "@/lib/constants.ts";
+import { constants } from "@/lib/constants";
 
 /**
  * Generate Metadata
