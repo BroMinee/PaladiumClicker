@@ -23,7 +23,7 @@ import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
 import { useSessionContext } from "@/components/Pala-Animation/SessionContextProvider";
 import { Button } from "@/components/ui/button";
-import { checkAnswerPalaAnimation, getNewQuestionPalaAnimation } from "@/lib/cypher";
+import { checkAnswerPalaAnimation, getNewQuestionPalaAnimation } from "@/lib/misc";
 import { useRouter } from "next/navigation";
 import { useProfileStore } from "@/stores/use-profile-store";
 
