@@ -161,7 +161,7 @@ export const RPS = () => {
                   </Button>
                 </PopoverTrigger>
                 <PopoverContent className="w-80">
-                        Coins que vous avez sur votre clicker in-game, mais que vous n&apos;avez pas encore dépensés.
+                  Coins que vous avez sur votre clicker in-game, mais que vous n&apos;avez pas encore dépensés.
                 </PopoverContent>
               </Popover></span>
             <div className="flex gap-2 items-center">
@@ -186,7 +186,7 @@ export const RPS = () => {
                   </Button>
                 </PopoverTrigger>
                 <PopoverContent className="w-80">
-                        Ne prends pas en compte la production des cliques manuels.
+                  Ne prends pas en compte la production des cliques manuels.
                 </PopoverContent>
               </Popover>
             </span>

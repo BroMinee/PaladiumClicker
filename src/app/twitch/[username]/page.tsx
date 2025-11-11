@@ -9,7 +9,7 @@ import { redirect } from "next/navigation";
  * @param props.params - Username
  * @param props.searchParams - SearchParams
  */
-export default async function TwitchLayoutHome(props: { params: Promise<{ username: string}>, searchParams: Promise<{config: string}> }) {
+export default async function TwitchLayoutHome(props: { params: Promise<{ username: string }>, searchParams: Promise<{ config: string }> }) {
 
   const parsedElements = await props.searchParams.then(p => p.config.split(",").map(item => {
     const parts = item.split(":");

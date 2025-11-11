@@ -35,7 +35,7 @@ const customStyles: StylesConfig<SubOption, false> = {
   }),
 };
 
-const formatOptionLabel = ({ value } : {value: Exclude<RankingType, "vote">}) => (
+const formatOptionLabel = ({ value }: { value: Exclude<RankingType, "vote"> }) => (
   <div className="flex items-center">
     <Image src={getImagePathFromRankingType(value)} alt="label" width={48} height={48} unoptimized={true}
       className="h-8 w-8 pixelated mr-2 rounded-md"/>
@@ -81,7 +81,7 @@ export type AvailableElements = {
   money: AvailableElementWithoutSubOptions;
 };
 
-const AVAILABLE_ELEMENTS : AvailableElements = {
+const AVAILABLE_ELEMENTS: AvailableElements = {
   metiers: {
     id: "metiers",
     label: "Métiers",
@@ -98,12 +98,12 @@ const AVAILABLE_ELEMENTS : AvailableElements = {
       { value: RankingType["job.farmer"], label: "Farmer" },
       { value: RankingType["job.hunter"], label: "Hunter" },
       { value: RankingType["job.miner"], label: "Miner" },
-      { value: RankingType["job.alchemist"], label: "Alchemist"},
+      { value: RankingType["job.alchemist"], label: "Alchemist" },
       { value: RankingType.boss, label: "Boss" },
       { value: RankingType.egghunt, label: "Egghunt" },
       { value: RankingType.koth, label: "Koth" },
-      { value: RankingType.clicker, label: "Clicker"},
-      { value: RankingType.alliance, label: "Alignement"},
+      { value: RankingType.clicker, label: "Clicker" },
+      { value: RankingType.alliance, label: "Alignement" },
 
     ]
   },
@@ -128,7 +128,7 @@ const AUTOPROMO_ELEMENT: AvailableElementWithoutSubOptions = {
   hasSubOptions: false
 };
 
-const AUTOPROMO : SelectedElement = {
+const AUTOPROMO: SelectedElement = {
   id: "auto-promo",
   type: constants.AUTOPROMO_CONFIG.type,
   duration: constants.AUTOPROMO_CONFIG.duration,
@@ -154,8 +154,8 @@ type SelectedElement = {
  *
  * @param username - The player's username, used to generate the overlay preview URL
  */
-export const TwitchOverlayConfig = ({username}: {username: string}) => {
-  const {data: playerInfo} = usePlayerInfoStore();
+export const TwitchOverlayConfig = ({ username}: { username: string }) => {
+  const { data: playerInfo } = usePlayerInfoStore();
 
   const [selectedElements, setSelectedElements] = useState<SelectedElement[]>([
     { id: "metiers", type: "metiers", duration: 2 * 60, subOption: null }
@@ -174,11 +174,11 @@ export const TwitchOverlayConfig = ({username}: {username: string}) => {
     setSelectedElements([...selectedElements, newElement]);
   };
 
-  const removeElement = (id : string) => {
+  const removeElement = (id: string) => {
     setSelectedElements(selectedElements.filter((el: { id: string; }) => el.id !== id));
   };
 
-  const moveElement = (index: number, direction : Direction) => {
+  const moveElement = (index: number, direction: Direction) => {
     const newElements = [...selectedElements];
     const targetIndex = direction === Direction.up ? index - 1 : index + 1;
 
@@ -188,13 +188,13 @@ export const TwitchOverlayConfig = ({username}: {username: string}) => {
     }
   };
 
-  const updateDuration = (id : string, duration: string) => {
+  const updateDuration = (id: string, duration: string) => {
     setSelectedElements(selectedElements.map(el =>
       el.id === id ? { ...el, duration: parseInt(duration) ?? 0 } : el
     ));
   };
 
-  const updateSubOption = (id : string, subOption : any) => {
+  const updateSubOption = (id: string, subOption: any) => {
     setSelectedElements(selectedElements.map(el =>
       el.id === id ? { ...el, subOption } : el
     ));
@@ -346,7 +346,7 @@ export const TwitchOverlayConfig = ({username}: {username: string}) => {
                                 onChange={(option) => updateSubOption(element.id, option?.value ?? null)}
                                 options={elementData.subOptions}
                                 isClearable={false}
-                                components={{ ...animatedComponents}}
+                                components={{ ...animatedComponents }}
                                 styles={customStyles}
                               />
                             )}
@@ -390,7 +390,7 @@ export const TwitchOverlayConfig = ({username}: {username: string}) => {
 
         <div className="mb-12">
           <h2 className="text-3xl font-bold text-primary-dark mb-6 pb-3 border-b-4 border-primary" id="obs">
-                        Installation
+            Installation
           </h2>
 
           <div className="bg-green-50 border-l-4 border-green-500 rounded-lg p-5 mt-6 mb-6">
@@ -401,7 +401,7 @@ export const TwitchOverlayConfig = ({username}: {username: string}) => {
           <div className="bg-card rounded-xl p-6 mb-6 border border-gray-200">
             <h3 className="text-xl font-bold text-primary mb-4 flex items-center gap-3">
               <span className="bg-primary text-white w-8 h-8 rounded-full flex items-center justify-center text-sm">1</span>
-                            Ajouter une source &quot;Navigateur&quot;
+              Ajouter une source &quot;Navigateur&quot;
             </h3>
             <p className="mb-3">Dans OBS Studio / Streamlabs :</p>
             <ul className="ml-6 space-y-2 list-disc ">
@@ -414,7 +414,7 @@ export const TwitchOverlayConfig = ({username}: {username: string}) => {
           <div className="bg-card rounded-xl p-6 mb-6 border border-gray-200">
             <h3 className="text-xl font-bold text-primary mb-4 flex items-center gap-3">
               <span className="bg-primary text-white w-8 h-8 rounded-full flex items-center justify-center text-sm">2</span>
-                            Configurer l&apos;URL
+              Configurer l&apos;URL
             </h3>
             <p className="mb-3">Dans le champ URL, entrez l&apos;adresse suivante :</p>
             {previewUrl && (
@@ -424,7 +424,7 @@ export const TwitchOverlayConfig = ({username}: {username: string}) => {
                     <code className="text-gray-500 text-sm break-all">{previewUrl}</code>
                   </div>
                   <Button onClick={() => navigator.clipboard.writeText(previewUrl)}>
-                      Copier
+                    Copier
                   </Button>
                 </div>
               </div>
@@ -435,7 +435,7 @@ export const TwitchOverlayConfig = ({username}: {username: string}) => {
           <div className="bg-card rounded-xl p-6 mb-6 border border-gray-200">
             <h3 className="text-xl font-bold text-primary mb-4 flex items-center gap-3">
               <span className="bg-primary text-white w-8 h-8 rounded-full flex items-center justify-center text-sm">3</span>
-                            Paramètres recommandés
+              Paramètres recommandés
             </h3>
             <div className="overflow-x-auto">
               <table className="w-full bg-white rounded-lg overflow-hidden shadow-sm">
@@ -474,7 +474,7 @@ export const TwitchOverlayConfig = ({username}: {username: string}) => {
           <div className="bg-card rounded-xl p-6 mb-6 border border-gray-200">
             <h3 className="text-xl font-bold text-primary mb-4 flex items-center gap-3">
               <span className="bg-primary text-white w-8 h-8 rounded-full flex items-center justify-center text-sm">4</span>
-                            Redimensionner l&apos;overlay
+              Redimensionner l&apos;overlay
             </h3>
             <p className="mb-3">Il est fortement conseillé de redimensionner l&apos;overlay sur la scène pour correspondre à tes besoins, mais ne modifie pas la largeur et hauteur dans les options de l&apos;élément.</p>
           </div>
@@ -482,7 +482,7 @@ export const TwitchOverlayConfig = ({username}: {username: string}) => {
 
         <div className="mb-12">
           <h2 className="text-3xl font-bold text-primary-dark mb-6 pb-3 border-b-4 border-primary">
-                        Comportement de l&apos;overlay
+            Comportement de l&apos;overlay
           </h2>
 
           <div className="bg-card border-l-4 border-primary rounded-lg p-6">
@@ -517,7 +517,7 @@ export const TwitchOverlayConfig = ({username}: {username: string}) => {
 
         <div className="mb-8">
           <h2 className="text-3xl font-bold text-primary-dark mb-6 pb-3 border-b-4 border-primary" id="depannage">
-                        🐛 Dépannage
+            🐛 Dépannage
           </h2>
 
           <div className="space-y-6">
@@ -559,7 +559,7 @@ export const TwitchOverlayConfig = ({username}: {username: string}) => {
           rel="noopener noreferrer"
           className="text-primary hover:text-orange-700 transition-colors duration-300"
         >
-            discord
+          discord
         </a>.</p>
       </div>
     </div>

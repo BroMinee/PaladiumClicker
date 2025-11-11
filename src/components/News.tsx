@@ -6,7 +6,7 @@ import { textFormatting } from "@/lib/misc";
 type ChangeCategoryProps = {
   title: string,
   changes?: Array<string>,
-  events? : Array<string>
+  events?: Array<string>
 }
 
 function ChangeCategory({ title, changes, events }: ChangeCategoryProps) {

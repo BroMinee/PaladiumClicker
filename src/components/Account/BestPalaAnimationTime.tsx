@@ -48,7 +48,7 @@ export function BestPalaAnimationTime() {
                   {" "}{entry.question}{" "}
                 </span>
                 <span className="text-blue-400">
-                top {entry.rank_completion_time} / {entry.total_players}
+                  top {entry.rank_completion_time} / {entry.total_players}
                 </span>
               </p>;
             })}

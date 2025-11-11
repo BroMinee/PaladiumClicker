@@ -260,12 +260,12 @@ oldPrice += 1;
         }
         if (part.startsWith("<@&") && part.endsWith(">")) {
           return <span key={index} className="mention-here">
-              @role
+            @role
             </span>;
         }
         if (part.startsWith("<@") && part.endsWith(">")) {
           return <span key={index} className="mention-here">
-              @user
+            @user
             </span>;
         }
         if (part === "{TODO}") {

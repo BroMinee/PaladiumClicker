@@ -12,7 +12,7 @@ import { AvailableElements, SelectedElementConfig } from "./TwitchOverlayConfig"
 import { usePlayerExtraInfoTwitch, useTwitchStore, useTwitchTimeStore } from "@/stores/use-twitch-store";
 import { Emblem } from "@/components/Faction/Emblem";
 
-function configTypeToOverlayTwitchEnum(type: keyof AvailableElements | "autoPromo") : OverlayTwitchEnum {
+function configTypeToOverlayTwitchEnum(type: keyof AvailableElements | "autoPromo"): OverlayTwitchEnum {
   switch(type) {
   case "money":
     return OverlayTwitchEnum.Money;
@@ -34,12 +34,12 @@ function configTypeToOverlayTwitchEnum(type: keyof AvailableElements | "autoProm
  * @param preview - boolean if it's in the preview page.
  * @param selectedElements - The configuration made by the user.
  */
-export function TwitchOverlay({preview, selectedElements} : {preview?: boolean, selectedElements: SelectedElementConfig[]}) {
+export function TwitchOverlay({ preview, selectedElements}: { preview?: boolean, selectedElements: SelectedElementConfig[] }) {
   const { data: playerInfo, setPlayerInfo } = usePlayerInfoStore();
-  const { setRanking , setLeaderboardFaction} = usePlayerExtraInfoTwitch();
-  const {nbSeconds, setNbSeconds, increaseNbSeconds} = useTwitchTimeStore();
+  const { setRanking , setLeaderboardFaction } = usePlayerExtraInfoTwitch();
+  const { nbSeconds, setNbSeconds, increaseNbSeconds } = useTwitchTimeStore();
 
-  const {currentConfig, setCurrentConfig, isVisible, setIsVisible, setTotalPlayer, config ,setConfig} = useTwitchStore();
+  const { currentConfig, setCurrentConfig, isVisible, setIsVisible, setTotalPlayer, config ,setConfig } = useTwitchStore();
 
   const viewportWidth = window.innerWidth;
   const viewportHeight = window.innerHeight;
@@ -68,14 +68,14 @@ export function TwitchOverlay({preview, selectedElements} : {preview?: boolean, 
         {
           diff: 0,
           elo: 10,
-          emblem: {backgroundColor:-13573626,backgroundId:0,borderColor:-11623171,foregroundColor:-8110515,foregroundId:0,iconBorderColor:-4447779,iconColor:-4705924,iconId:0, forcedTexture: "none"},
+          emblem: { backgroundColor:-13573626,backgroundId:0,borderColor:-11623171,foregroundColor:-8110515,foregroundId:0,iconBorderColor:-4447779,iconColor:-4705924,iconId:0, forcedTexture: "none" },
           name: playerInfo?.faction.name ?? "Wilderness",
           position: 1,
           trend: ""
         },{
           diff: 0,
           elo: 10,
-          emblem: {backgroundColor:-13573626,backgroundId:0,borderColor:-11623171,foregroundColor:-8110515,foregroundId:0,iconBorderColor:-4447779,iconColor:-4705924,iconId:0, forcedTexture: "none"},
+          emblem: { backgroundColor:-13573626,backgroundId:0,borderColor:-11623171,foregroundColor:-8110515,foregroundId:0,iconBorderColor:-4447779,iconColor:-4705924,iconId:0, forcedTexture: "none" },
           name: "BroMineFac",
           position: 1,
           trend: ""
@@ -210,8 +210,8 @@ export function TwitchOverlay({preview, selectedElements} : {preview?: boolean, 
 };
 
 function FactionOverlay() {
-  const {data: playerInfo} = usePlayerInfoStore();
-  const {leaderboardFaction} = usePlayerExtraInfoTwitch();
+  const { data: playerInfo } = usePlayerInfoStore();
+  const { leaderboardFaction } = usePlayerExtraInfoTwitch();
 
   let factionIndex = -1;
   if (playerInfo && leaderboardFaction.length > 0) {
@@ -227,7 +227,7 @@ function FactionOverlay() {
       <div className="flex flex-col gap-2 relative">
         <Emblem emblem={playerInfo.faction.emblem} className="h-fit w-40 mr-2 rounded-xl object-cover border-4 border-purple-500/50 shadow-lg"/>
         <div className="bg-gradient-to-r from-yellow-400 to-orange-500 text-white px-5 py-2 rounded-full font-black text-xl shadow-lg border-2 border-yellow-300 text-center">
-              TOP #{factionIndex}
+          TOP #{factionIndex}
         </div>
       </div>
     </div>
@@ -236,7 +236,7 @@ function FactionOverlay() {
 
       <div>
         <div className="text-sm text-purple-300 font-semibold uppercase tracking-wider mb-1">
-              Faction
+          Faction
         </div>
         <h2 className="text-4xl font-black bg-gradient-to-r from-purple-400 via-pink-400 to-blue-400 bg-clip-text text-transparent mb-2">
           {playerInfo.faction.name}
@@ -340,7 +340,7 @@ function ClassementOverlay() {
 
       <div className="flex items-baseline gap-3">
         <span className="text-6xl font-black bg-gradient-to-r from-yellow-400 via-orange-400 to-red-500 bg-clip-text text-transparent">
-              #{ranking[currentConfig.subOption].toLocaleString("fr-FR")}
+          #{ranking[currentConfig.subOption].toLocaleString("fr-FR")}
         </span>
         <span className="text-2xl text-gray-400 font-medium">TOP</span>
       </div>
@@ -364,8 +364,8 @@ function ClassementOverlay() {
 }
 
 function AutoPromoOverlay() {
-  const {config} = useTwitchStore();
-  const {nbSeconds} = useTwitchTimeStore();
+  const { config } = useTwitchStore();
+  const { nbSeconds } = useTwitchTimeStore();
   const [pourcentage, setPourcentage] = useState<number>(0);
 
   useEffect(() => {

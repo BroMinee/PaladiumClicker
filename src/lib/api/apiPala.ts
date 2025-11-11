@@ -235,7 +235,7 @@ export const getPlayerInfo = async (pseudo: string): Promise<PlayerInfo> => {
   }
 
   initialPlayerInfo.metier = metiers;
-  const keys : Array<keyof Metiers> = ["farmer", "hunter", "miner", "alchemist"];
+  const keys: Array<keyof Metiers> = ["farmer", "hunter", "miner", "alchemist"];
   for (const key of keys) {
     if(initialPlayerInfo.metier[key].xp > getTotalXPForLevel(100)) {
       for(let i = 100; i < 2048; i++){

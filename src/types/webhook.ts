@@ -29,45 +29,45 @@ export type WebHookThresholdCondition =
   | "aboveQuantity"
 
 export type WebhookDiscord = {
-    url: string,
-    guild_id: string,
-    channel_id: string,
-    failedConsecutive: number,
-    server_name: string,
-    channel_name: string,
-  }
+  url: string,
+  guild_id: string,
+  channel_id: string,
+  failedConsecutive: number,
+  server_name: string,
+  channel_name: string,
+}
 
 export type WebHookAlert = {
-    id: number;
-    webhook: WebhookDiscord;
-    content: string | null;
-    embed: string | null;
-    title: string | null;
-    type: WebHookType;
-    alreadySatisfied: boolean | null;
-    endDate: number | null;
-    enumEvent: EventType | null;
-    item: Item | null;
-    threshold: number | null;
-    thresholdCondition:
+  id: number;
+  webhook: WebhookDiscord;
+  content: string | null;
+  embed: string | null;
+  title: string | null;
+  type: WebHookType;
+  alreadySatisfied: boolean | null;
+  endDate: number | null;
+  enumEvent: EventType | null;
+  item: Item | null;
+  threshold: number | null;
+  thresholdCondition:
       WebHookThresholdCondition
       | null;
-    username: string | null,
-  }
+  username: string | null,
+}
 
 export type WebHookCreate = {
-    id: number | null;
-    url: string,
-    content: string | null;
-    embed: string | null;
-    title: string | null;
-    type: WebHookType;
-    enumEvent: EventType | null;
-    itemName: string | null;
-    threshold: number | null;
-    thresholdCondition:
+  id: number | null;
+  url: string,
+  content: string | null;
+  embed: string | null;
+  title: string | null;
+  type: WebHookType;
+  enumEvent: EventType | null;
+  itemName: string | null;
+  threshold: number | null;
+  thresholdCondition:
       WebHookThresholdCondition
       | null;
-    username: string;
-  }
+  username: string;
+}
 

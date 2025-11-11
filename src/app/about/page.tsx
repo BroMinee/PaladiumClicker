@@ -49,8 +49,8 @@ const AboutPage = () => {
               rel="noopener noreferrer"
               className="text-primary hover:text-orange-700 transition-colors duration-300"
             >
-            cette
-            addresse
+              cette
+              addresse
             </a>.
             Si vous souhaitez contribuer au projet, vous trouverez davantage d&apos;informations <a
               href="https://github.com/BroMineCorp"
@@ -58,7 +58,7 @@ const AboutPage = () => {
               rel="noopener noreferrer"
               className="text-primary hover:text-orange-700 transition-colors duration-300"
             >
-            ici
+              ici
             </a> ou sur le discord ci-dessous.
 
           </p>

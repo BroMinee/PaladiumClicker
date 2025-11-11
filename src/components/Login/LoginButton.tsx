@@ -14,7 +14,7 @@ import { TbLogin2 } from "react-icons/tb";
  *
  * @returns A styled button to login via Discord.
  */
-export function LoginButton({href, redirectUrl }: {href: string, redirectUrl: string }) {
+export function LoginButton({ href, redirectUrl }: { href: string, redirectUrl: string }) {
   function handleLogin() {
     setCookies("redirectUrl", redirectUrl, 60 * 10).then(() => {
       window.location.href = href;
@@ -42,7 +42,7 @@ export function LoginButton({href, redirectUrl }: {href: string, redirectUrl: st
  *
  * @returns A compact icon button for login via Discord.
  */
-export function SmallLoginButton({href, redirectUrl }: {href: string, redirectUrl: string }) {
+export function SmallLoginButton({ href, redirectUrl }: { href: string, redirectUrl: string }) {
   function handleLogin() {
     setCookies("redirectUrl", redirectUrl, 60 * 10).then(() => {
       window.location.href = href;

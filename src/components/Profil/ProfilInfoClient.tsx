@@ -235,7 +235,7 @@ export function OverlayTwitchButton() {
     className=""
   >
     <Button>
-          Obtenir un overlay de Stream
+      Obtenir un overlay de Stream
     </Button>
   </a>;
 }

@@ -21,7 +21,7 @@ export function generateMetadata() {
  * [Twitch layout page](https://palatracker.bromine.fr/twitch/BroMine__/setup)
  * @param props.params - Username
  */
-export default async function TwitchLayoutConfigPage(props: { params: Promise<{ username: string }>}) {
+export default async function TwitchLayoutConfigPage(props: { params: Promise<{ username: string }> }) {
   const username = await props.params.then(p => p.username);
   return (
     <ProfileFetcherWrapper username={username}>

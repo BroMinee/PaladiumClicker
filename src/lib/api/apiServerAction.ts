@@ -150,7 +150,7 @@ export async function getNotificationWebSite() {
 /**
  * Fetches all items from the server as options.
  */
-export async function getAllItemsServerAction() : Promise<OptionType[]> {
+export async function getAllItemsServerAction(): Promise<OptionType[]> {
   return await fetchWithHeader<{
     item_name: string,
     us_trad: string,
@@ -539,7 +539,7 @@ export async function getPlayerCountHistoryPaladiumAction() {
  * Fetches the ranking positions of a player.
  * @param uuid The UUID of the player.
  */
-export async function getPlayerPositionAction(uuid: string) : Promise<RankingPositionResponse> {
+export async function getPlayerPositionAction(uuid: string): Promise<RankingPositionResponse> {
   return await fetchWithHeader<{
     boss: number;
     money: number;

@@ -31,13 +31,13 @@ export const useTwitchStore = create<State & Actions>(
       set({ currentConfig });
     },
     setIsVisible: (isVisible) => {
-      set({isVisible});
+      set({ isVisible });
     },
     setTotalPlayer(totalPlayer) {
-      set({totalPlayer});
+      set({ totalPlayer });
     },
     setConfig(config) {
-      set({config});
+      set({ config });
     },
 
   })
@@ -60,7 +60,7 @@ export const useTwitchTimeStore = create<StateTime & ActionsTime>(
   (set) => ({
     ...initialStateTime,
     setNbSeconds(nbSeconds) {
-      set({nbSeconds});
+      set({ nbSeconds });
     },
     increaseNbSeconds: (count: number) => set((state) => {
       return {
@@ -101,10 +101,10 @@ export const usePlayerExtraInfoTwitch = create<StateExtra & ActionsExtra>(
   (set) => ({
     ...initialStateExtra,
     setRanking(ranking) {
-      set({ranking});
+      set({ ranking });
     },
     setLeaderboardFaction(leaderboardFaction) {
-      set({leaderboardFaction});
+      set({ leaderboardFaction });
     },
   })
 );

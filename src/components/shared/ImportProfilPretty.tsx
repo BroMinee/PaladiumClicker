@@ -120,7 +120,7 @@ export function ImportProfilPretty({
     }
   }, [newPlayerInfo, setPlayerInfo, update]);
 
-  const handleBlur = (event : any) => {
+  const handleBlur = (event: any) => {
     if (event.relatedTarget !== buttonSubmitRef.current) {
       setIsEditing(false);
     }

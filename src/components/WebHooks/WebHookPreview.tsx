@@ -33,12 +33,12 @@ export function WebHookPreviewPage({
   guildIdToServerName,
   channelIdToChannelName,
 }:
-                                     {
-                                       groupsArg: groupsType,
-                                       webHookDiscord: WebhookDiscord[],
-                                       guildIdToServerName: Record<string, string>,
-                                       channelIdToChannelName: Record<string, string>,
-                                     }) {
+{
+  groupsArg: groupsType,
+  webHookDiscord: WebhookDiscord[],
+  guildIdToServerName: Record<string, string>,
+  channelIdToChannelName: Record<string, string>,
+}) {
 
   const [groups, setGroups] = useState(groupsArg);
 

@@ -32,7 +32,7 @@ export default function WebHooksPage() {
             Pourquoi se connecter avec Discord pour accéder à cette page?
           </h2>
           <span>
-          - {"Ca permet d'associer les temps à un utilisateur en particulier, ce qui te permet de t'assurer que tu es le seul à jouer sur ce compte et que personne d'autre ne peut pourrir tes statistiques."}
+            - {"Ca permet d'associer les temps à un utilisateur en particulier, ce qui te permet de t'assurer que tu es le seul à jouer sur ce compte et que personne d'autre ne peut pourrir tes statistiques."}
           </span>
 
         </div>

@@ -28,7 +28,7 @@ export async function generateMetadata() {
  * [Patchnote page](https://palatracker.bromine.fr/patchnote)
  */
 export default function Home() {
-  const json : ChangeLogs[] = newsJson;
+  const json: ChangeLogs[] = newsJson;
 
   return (
     <div className="flex flex-col gap-4">

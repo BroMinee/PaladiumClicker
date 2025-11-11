@@ -29,7 +29,7 @@ export const PopupRewardEvent = ({ winningPrice, children }: { winningPrice: str
             <CardHeader className="flex flex-row items-center justify-between">
               <CardTitle className="flex flex-col gap-4 font-mc">
                 <span>
-                Félicitations ! Vous remportez
+                  Félicitations ! Vous remportez
                 </span>
                 <span className="font-bold text-primary">
                   {winningPrice}

@@ -24,12 +24,12 @@ import { HoverText } from "@/components/ui/hovertext";
  * - @param children Any additional elements to render inside the box.
  */
 export function DisplayServerBox({ guildId, channelId, guildIdToServerName, children }:
-                                   {
-                                     guildId: string,
-                                     channelId: string,
-                                     guildIdToServerName: Record<string, string>,
-                                     children: React.ReactNode
-                                   }) {
+{
+  guildId: string,
+  channelId: string,
+  guildIdToServerName: Record<string, string>,
+  children: React.ReactNode
+}) {
 
   const [defaultName, setDefaultName] = React.useState<string>("");
   const [guildName, setGuildName] = React.useState<string>("");

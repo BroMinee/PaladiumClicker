@@ -15,7 +15,7 @@ export default function WebHooksPage() {
             Pourquoi se connecter avec Discord pour accéder à cette page?
           </h2>
           <span>
-          - {"Pour pouvoir accéder au pannel admin il te faut te connecter avec discord."}
+            - {"Pour pouvoir accéder au pannel admin il te faut te connecter avec discord."}
           </span>
 
         </div>

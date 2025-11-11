@@ -66,7 +66,7 @@ export const CraftSectionValid = Object.values(CraftSectionEnum) as string[];
  * Parses a WebSocket message to extract CraftPrice update data.
  * @param message The WebSocket message to parse.
  */
-export function parseMessageCraftPrice(message: any) : {type: "update" | "other", data: CraftPrice[]} {
+export function parseMessageCraftPrice(message: any): { type: "update" | "other", data: CraftPrice[] } {
 
   function isCraftPrice(item: any): boolean {
     return (
@@ -84,7 +84,7 @@ export function parseMessageCraftPrice(message: any) : {type: "update" | "other"
   try {
     const json = JSON.parse(message);
     if (json.type === "update" && Array.isArray(json.data)) {
-      const r : CraftPrice[] = json.data.map((item: any) => {
+      const r: CraftPrice[] = json.data.map((item: any) => {
         if(isCraftPrice(item)) {
           return {
             created_at: item.created_at,
@@ -103,13 +103,13 @@ export function parseMessageCraftPrice(message: any) : {type: "update" | "other"
           throw new Error(`Invalid item format: ${JSON.stringify(item)}`);
         }
       });
-      return {type: "update", data: r};
+      return { type: "update", data: r };
     }
   } catch (error) {
     console.error("Error parsing JSON:", error);
-    return {type: "other", data: []};
+    return { type: "other", data: [] };
   }
-  return {type: "other", data: []};
+  return { type: "other", data: [] };
 }
 
 /**

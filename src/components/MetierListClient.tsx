@@ -45,12 +45,12 @@ export function MetierOutline({ metierKey, metierToReach = false }: { metierKey:
  * @param twitch - Whether to display the UI in Twitch mode (affects level display styling or behavior).
  */
 export function MetierDisplayLvl({ metierKey, lvlToReach, searchParams, twitch = false }:
-  {
-    metierKey: MetierKey,
-    lvlToReach?: number,
-    searchParams?: searchParamsXpBonusPage | undefined
-    twitch?: boolean
-  }) {
+{
+  metierKey: MetierKey,
+  lvlToReach?: number,
+  searchParams?: searchParamsXpBonusPage | undefined
+  twitch?: boolean
+}) {
   const colors = getColorByMetierName(metierKey);
   const { data: playerInfo, decreaseMetierLevel, increaseMetierLevel } = usePlayerInfoStore();
   const router = useRouter();

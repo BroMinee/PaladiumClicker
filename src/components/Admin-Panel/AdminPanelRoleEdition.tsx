@@ -19,7 +19,7 @@ export function EditRole({ defaultValue, discord_id }: { defaultValue: Role, dis
   function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const formData = new FormData(event.target as HTMLFormElement);
-    const role : Role = String(formData.get("role")) as Role;
+    const role: Role = String(formData.get("role")) as Role;
 
     setIsPending(true);
 
@@ -38,7 +38,7 @@ export function EditRole({ defaultValue, discord_id }: { defaultValue: Role, dis
       defaultValue={defaultValue}
       onChange={(event) => setRole(event.target.value as Role)}
       className={"bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"}
-      style={{ backgroundColor:  getRoleColor(role)}}
+      style={{ backgroundColor:  getRoleColor(role) }}
     >
       {
         ["Admin", "Bug Hunter", "Beta Tester", "Palatime", "Classic"].map((role, index) => {

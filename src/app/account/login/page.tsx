@@ -15,7 +15,7 @@ export default function AccountLoginPage() {
             Pourquoi se connecter avec Discord pour accéder à cette page?
           </h2>
           <span>
-          - {"Pour pouvoir accéder à ta page account il te faut te connecter avec discord."}
+            - {"Pour pouvoir accéder à ta page account il te faut te connecter avec discord."}
           </span>
 
         </div>

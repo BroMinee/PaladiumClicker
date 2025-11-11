@@ -5,7 +5,7 @@ import Image from "next/image";
  * Display the faction emblem using for following URL : https://palatracker.bromine.fr/blog/faction/.../opengraph-image
  * In case the emblem any texture use it instead of the given emblem. (Wilderness, Warzone case)
  */
-export function Emblem({emblem, className}: {emblem: PaladiumEmblem, className?: string}) {
+export function Emblem({ emblem, className}: { emblem: PaladiumEmblem, className?: string }) {
 
   if (emblem.forcedTexture !== undefined) {
     return <Image src={`/img/Faction/defaults/${emblem.forcedTexture}.png`} alt={"faction icon"}

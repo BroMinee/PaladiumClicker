@@ -61,7 +61,7 @@ export default function Home() {
             rel="noopener noreferrer"
             className="text-primary hover:text-orange-700 transition-colors duration-300"
           >
-          API de Paladium
+            API de Paladium
           </a>, conformément
           à <a
             href="https://paladium-pvp.fr/pages/tos"
@@ -69,7 +69,7 @@ export default function Home() {
             rel="noopener noreferrer"
             className="text-primary hover:text-orange-700 transition-colors duration-300"
           >
-          leur politique de confidentialité.
+            leur politique de confidentialité.
           </a> Les données collectées incluent des informations telles que la faction,
           les niveaux de métiers, la place dans les différents classements, etc. Ces données sont
           stockées une fois
@@ -102,7 +102,7 @@ export default function Home() {
             rel="noopener noreferrer"
             className="text-primary hover:text-orange-700 transition-colors duration-300"
           >
-          discord
+            discord
           </a>.
         </CardContent>
       </Card>
@@ -131,7 +131,7 @@ export default function Home() {
             rel="noopener noreferrer"
             className="text-primary hover:text-orange-700 transition-colors duration-300"
           >
-          discord
+            discord
           </a>.<br/><br/>
           Merci de votre confiance.<br/>
           L&apos;équipe de PalaTracker.

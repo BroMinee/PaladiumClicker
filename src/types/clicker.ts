@@ -144,11 +144,11 @@ export type buildingPathType =
   | "posterior_upgrade";
 
 export type PaladiumClickerData = {
-    uuid: string,
-    buildings: Array<{
-      name: string,
-      production: number,
-      quantity: number
-    }>,
-    upgrades: string[]
-  }
+  uuid: string,
+  buildings: Array<{
+    name: string,
+    production: number,
+    quantity: number
+  }>,
+  upgrades: string[]
+}

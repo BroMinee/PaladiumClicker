@@ -367,7 +367,7 @@ const how_to_xp: HowToXp = {
     { type: "Bread", "action": CRAFT, "xp": 1, imgPath: "bread.webp" },
     { type: "Seed", "action": BREAK, "xp": 1.5, imgPath: "seeds_wheat.webp" },
     { type: "Baked Potato", "action": SMELT, "xp": 1, imgPath: "potato_baked.webp", level: 5 },
-    { type: "Potatoes", "action": BREAK, "xp": 2, imgPath: "potato.webp", level: 5},
+    { type: "Potatoes", "action": BREAK, "xp": 2, imgPath: "potato.webp", level: 5 },
     { type: "Carrots", "action": BREAK, "xp": 2.5, imgPath: "carrot.webp", level: 10 },
     { type: "Melon", "action": BREAK, "xp": 4, imgPath: "melon.webp", level: 15 },
     { type: "Pumpkin", "action": BREAK, "xp": 5, imgPath: "pumpkin.webp", level: 30 },
@@ -661,7 +661,7 @@ const imgPathCraft = "/img/Craft/";
 const imgPathError = "/img/Error/";
 
 const PUB_DISPLAY_TIME = 15;
-export const AUTOPROMO_CONFIG : SelectedElementConfig = { type: "autoPromo",  duration: PUB_DISPLAY_TIME, subOption: null};
+export const AUTOPROMO_CONFIG: SelectedElementConfig = { type: "autoPromo",  duration: PUB_DISPLAY_TIME, subOption: null };
 
 export const adminShopItemsAvailable: AdminShopItem[] = [
   "feather", "wool", "paladium-ingot", "ender-pearl", "egg", "string", "log", "red-mushroom", "soul-sand",

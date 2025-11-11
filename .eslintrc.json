@@ -7,7 +7,8 @@
   "plugins": [
     "@typescript-eslint",
     "jsdoc",
-    "import"
+    "import",
+    "@stylistic"
   ],
   "extends": [
     "next/core-web-vitals",
@@ -22,23 +23,93 @@
     }
   },
   "rules": {
-    "react-hooks/exhaustive-deps": "error",
-    "semi-style": ["error", "last"],
-    "semi": ["error", "always"],
-    "no-multiple-empty-lines": ["error", { "max": 1, "maxEOF": 1 }],
-    "curly": ["error", "all"],
-    "brace-style": ["error", "1tbs", { "allowSingleLine": false }],
-    "indent": ["error", 2, {
-      "ignoredNodes": ["JSXFragment", "JSXFragment *"]
-    }],
-    "quotes": ["error", "double"],
-    "@typescript-eslint/no-explicit-any": "off",
-    "@typescript-eslint/no-unused-vars": ["error", {
-      "argsIgnorePattern": "^_",
-      "caughtErrors": "all",
-      "caughtErrorsIgnorePattern": "^_"
-    }],
+    "semi-style": [
+      "error",
+      "last"
+    ],
+    "semi": [
+      "error",
+      "always"
+    ],
+    "no-multiple-empty-lines": [
+      "error",
+      {
+        "max": 1,
+        "maxEOF": 1
+      }
+    ],
+    "curly": [
+      "error",
+      "all"
+    ],
+    "brace-style": [
+      "error",
+      "1tbs",
+      {
+        "allowSingleLine": false
+      }
+    ],
+    "indent": [
+      "error",
+      2,
+      {
+        "ignoredNodes": [
+          "JSXFragment",
+          "JSXFragment *"
+        ]
+      }
+    ],
+    "quotes": [
+      "error",
+      "double"
+    ],
     "no-trailing-spaces": "error",
+    // https://typescript-eslint.io/rules/no-explicit-any/
+    "@typescript-eslint/no-explicit-any": "off",
+    "@typescript-eslint/no-unused-vars": [
+      "error",
+      {
+        "argsIgnorePattern": "^_",
+        "caughtErrors": "all",
+        "caughtErrorsIgnorePattern": "^_"
+      }
+    ],
+    // https://eslint.style/
+    "@stylistic/object-curly-spacing": [
+      "error",
+      "always",
+      {
+        "emptyObjects": "never"
+      }
+    ],
+    "@stylistic/indent": [
+      "error",
+      2,
+      {
+        "ignoredNodes": [
+          "JSXFragment",
+          "JSXFragment *"
+        ]
+      }
+    ],
+    "@stylistic/type-annotation-spacing": [
+      "error",
+      {
+        "before": false,
+        "after": true,
+        "overrides": {
+          "colon": {
+            "before": false,
+            "after": true
+          },
+          "arrow": {
+            "before": true,
+            "after": true
+          }
+        }
+      }
+    ],
+    "react-hooks/exhaustive-deps": "error",
     "jsdoc/require-jsdoc": [
       "error",
       {
@@ -61,7 +132,5 @@
         "jsx": "never"
       }
     ]
-    // ,
-    // "@typescript-eslint/type-annotation-spacing": "error"
   }
 }

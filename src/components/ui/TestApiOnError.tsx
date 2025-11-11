@@ -26,7 +26,7 @@ export async function TestApi() {
     return (
       <li className="flex items-center gap-2">
         <FaCheck className="text-green-400"/>
-      L&apos;API de Paladium est fonctionnelle
+        L&apos;API de Paladium est fonctionnelle
       </li>
     );
   }
@@ -59,7 +59,7 @@ export async function TestMyApi() {
     return (
       <li className="flex items-center gap-2">
         <FaCheck className="text-green-400"/>
-      Notre API est fonctionnelle
+        Notre API est fonctionnelle
       </li>
     );
   }
@@ -106,7 +106,7 @@ export async function TestImportProfile({ pseudoParams = "BroMine__" }: {
     return (
       <li className="flex items-center gap-2">
         <FaCheck className="text-green-400"/>
-      L&apos;importation de profil est fonctionnelle
+        L&apos;importation de profil est fonctionnelle
       </li>
     );
   }
