@@ -1,0 +1,61 @@
+import React, { ReactNode } from "react";
+import { BestBuyCard, StatRPS, StatSleepingCoin, StatTotalProd } from "@/components/clicker/statistics.client";
+import { BuildingInputCard, UpgradeSectionClient } from "@/components/clicker/inputs.client";
+
+/**
+ * [Clicker Page](https://palatracker.bromine.fr/clicker-optimizer/BroMine__)
+ * @param props.params - Username parameter
+ */
+export function ClickerPage() {
+  return (
+    <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+
+      <div className="lg:col-span-2 space-y-10">
+        <BuildingInputCard/>
+        <UpgradeSectionClient/>
+      </div>
+
+      <div className="space-y-6 sticky top-8 h-fit">
+        <BestBuyCard/>
+        <div className="bg-gray-800 p-4 rounded-lg shadow-lg flex space-x-2">
+          <button className="flex-1 bg-primary hover:bg-primary-darker text-white font-bold py-2 px-4 rounded transition-colors">
+            Mettre à jour les données
+          </button>
+          <button className="flex-1 bg-gray-600 hover:bg-gray-700 text-white font-semibold py-2 px-4 rounded transition-colors">
+            Simuler l&apos;achat
+          </button>
+        </div>
+
+        <div className="bg-gray-800 p-6 rounded-lg shadow-lg">
+          <h3 className="text-xl font-semibold mb-4">Statistiques Actuelles</h3>
+          <div className="space-y-3">
+            <StatRPS/>
+            <StatSleepingCoin/>
+            <StatTotalProd/>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+interface StatItemProps { icon: ReactNode; label: string; value: string; }
+/**
+ * A single statistic item component.
+ * Used the full width of its container.
+ *
+ * @param icon the element used as an icon
+ * @param label the label of the statistic
+ * @param value the value of the statistic
+ */
+export function StatItem({ icon, label, value }: StatItemProps) {
+  return (
+    <div className="flex items-center justify-between">
+      <div className="flex items-center space-x-3">
+        <div className="text-primary">{icon}</div>
+        <span className="text-gray-300">{label}</span>
+      </div>
+      <span className="font-bold text-white">{value}</span>
+    </div>
+  );
+}

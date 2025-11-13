@@ -166,7 +166,7 @@ export function getPathImg(bestListName: string, bestUpgradeIndex: number) {
     return safeJoinPaths(constants.imgPathClicker,"/TerrainIcon/", `${bestUpgradeIndex}.png`);
   case "posterior_upgrade":
     return safeJoinPaths(constants.imgPathClicker,"/PosteriorIcon/0.png");
-  case 'CPS':
+  case "CPS":
     if (bestUpgradeIndex === 24) {
       return safeJoinPaths(constants.imgPathClicker,`/CPSIcon/${bestUpgradeIndex}.webp`);
     } else {
