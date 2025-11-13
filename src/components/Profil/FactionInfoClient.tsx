@@ -7,7 +7,7 @@ import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 import { SmallCardInfo } from "@/components/shared/SmallCardInfo";
 import { FaPercentage } from "react-icons/fa";
 import { PaladiumFactionLeaderboard } from "@/types";
-import LoadingData from "@/components/LoadingData";
+import { LoadingData } from "@/components/LoadingData";
 import { Suspense } from "react";
 import { constants } from "@/lib/constants";
 

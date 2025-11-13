@@ -149,6 +149,7 @@ export function computePrice(priceLevel0: number, level: number) {
  * @param bestListName The category of the upgrade or building.
  * @param bestUpgradeIndex The index of the upgrade or building.
  */
+// TODO fix type of bestListName
 export function getPathImg(bestListName: string, bestUpgradeIndex: number) {
   switch (bestListName) {
   case "building":
@@ -165,8 +166,14 @@ export function getPathImg(bestListName: string, bestUpgradeIndex: number) {
     return safeJoinPaths(constants.imgPathClicker,"/TerrainIcon/", `${bestUpgradeIndex}.png`);
   case "posterior_upgrade":
     return safeJoinPaths(constants.imgPathClicker,"/PosteriorIcon/0.png");
+  case 'CPS':
+    if (bestUpgradeIndex === 24) {
+      return safeJoinPaths(constants.imgPathClicker,`/CPSIcon/${bestUpgradeIndex}.webp`);
+    } else {
+      return safeJoinPaths(constants.imgPathClicker,`/CPSIcon/${bestUpgradeIndex}.png`);
+    }
   default:
-    alert("Error in bestListName");
+    alert(`Error in bestListName ${bestListName}`);
     return safeJoinPaths(constants.imgPathClicker,"/BuildingUpgradeIcon/0.png");
   }
 }

@@ -5,7 +5,7 @@ import { LoadingSpinner } from "@/components/ui/loading-spinner";
  * Loading component used for profile login
  * @param username -  The name of the user whose profile is being loaded.
  */
-export default function LoadingData({ username }: { username: string | undefined }) {
+export function LoadingData({ username }: { username: string | undefined }) {
   return (
     <div className="flex justify-center items-center" style={{ height: "70vh" }}>
       <Card className="flex flex-col gap-4 font-bold center items-center transition-all duration-300 ease-out motion-reduce:transition-none">

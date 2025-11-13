@@ -1,6 +1,6 @@
 import { convertAhItemTypeToMarketItemOffer, generateAhShopUrl } from "@/lib/misc";
 import { AhItemType, OptionType } from "@/types";
-import LoadingData from "@/components/LoadingData";
+import { LoadingData } from "@/components/LoadingData";
 import Link from "next/link";
 import { DetailedMarketOffer } from "@/components/AhTracker/DetailedMarketOfferList";
 
