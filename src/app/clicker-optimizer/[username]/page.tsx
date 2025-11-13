@@ -1,5 +1,5 @@
 import { UpgradeKey } from "@/types";
-import ProfileFetcherWrapper from "@/components/ProfileFetcher";
+import ProfileFetcherWrapper from "@/components/ProfileFetcher.client";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { GradientText } from "@/components/shared/GradientText";
 import { FaHeart } from "react-icons/fa";

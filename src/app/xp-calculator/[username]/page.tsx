@@ -1,4 +1,4 @@
-import ProfileFetcherWrapper from "@/components/ProfileFetcher";
+import ProfileFetcherWrapper from "@/components/ProfileFetcher.client";
 import { MetierComponentWrapper } from "@/components/MetierList";
 import { Card, CardContent, CardDescription, CardHeader, CardTitleH1 } from "@/components/ui/card";
 import { GradientText } from "@/components/shared/GradientText";

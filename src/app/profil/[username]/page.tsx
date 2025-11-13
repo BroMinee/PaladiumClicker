@@ -1,4 +1,4 @@
-import ProfileFetcherWrapper from "@/components/ProfileFetcher";
+import ProfileFetcherWrapper from "@/components/ProfileFetcher.client";
 import { generateProfilUrl, isProfilSection } from "@/lib/misc";
 import ProfilSelector from "@/components/Profil/ProfilSelector";
 import { ProfilSectionEnum } from "@/types";

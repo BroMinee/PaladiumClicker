@@ -1,5 +1,5 @@
 import React from "react";
-import ProfileFetcherWrapper from "@/components/ProfileFetcher";
+import ProfileFetcherWrapper from "@/components/ProfileFetcher.client";
 import { TwitchOverlayConfig } from "@/components/Twitch/TwitchOverlayConfig";
 
 /**

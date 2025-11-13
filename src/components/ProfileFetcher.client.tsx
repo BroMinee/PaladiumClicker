@@ -2,7 +2,7 @@
 import React, { useEffect } from "react";
 import { usePlayerInfoStore } from "@/stores/use-player-info-store";
 import { getPlayerInfoAction } from "@/lib/api/apiServerAction";
-import LoadingData from "@/components/LoadingData";
+import { LoadingData } from "@/components/LoadingData";
 import { useSettingsStore } from "@/stores/use-settings-store";
 import { reloadProfilNeeded } from "@/lib/misc";
 import { toast } from "sonner";
