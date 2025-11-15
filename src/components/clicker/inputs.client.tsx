@@ -7,8 +7,7 @@ import { getPathImg } from "@/lib/misc";
 import Image from "next/image";
 import { GenericSectionTabs, TabData } from "@/components/shared/section.client";
 import { LoadingSpinner } from "../ui/loading-spinner";
-
-const IconCheck = () => <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5"><path strokeLinecap="round" strokeLinejoin="round" d="m4.5 12.75 6 6 9-13.5" /></svg>;
+import { ToggleCardButton } from "../shared/toggle-button.client";
 
 /**
  * Display the list of building input.
@@ -94,29 +93,22 @@ function UpgradeToggleCard({ index, upgradeKey }: UpgradeToggleCardProps) {
     }
   };
 
-  return (
-    <button
-      onClick={handleToggle}
-      title={playerInfo ? playerInfo[upgradeKey][index].name : "Loading"}
-      className={`relative group p-3 rounded-lg flex flex-col items-center justify-center text-center aspect-square transition-all duration-150
-                ${playerInfo && playerInfo[upgradeKey][index].own
-      ? "bg-indigo-500/30 border border-indigo-500 text-white"
-      : "bg-gray-800 border border-gray-700 text-gray-400 hover:bg-gray-700"
-    }
-            `}
-    >
-      {playerInfo && playerInfo[upgradeKey][index].own && (
-        <div className="absolute top-1 right-1 bg-indigo-500 rounded-full p-0.5">
-          <IconCheck/>
-        </div>
-      )}
+  const name = playerInfo ? playerInfo[upgradeKey][index].name : "Loading";
+  const children = (
+    <>
       <div className="text-3xl mb-1">
         <Image src={getPathImg(upgradeKey, index)} height={48} width={48} className="object-cover pixelated" alt="image" unoptimized />
       </div>
-      <span className="absolute bottom-full mb-2 w-full py-1 bg-black text-white text-xs rounded opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-10 text-center ">
-        {playerInfo && playerInfo[upgradeKey][index].name}
+    </>
+  );
+
+  return (
+    <div className='relative group'>
+      <ToggleCardButton children={children} isToggled={playerInfo !== null && playerInfo[upgradeKey][index].own} onToggle={handleToggle} />
+      <span className="absolute bottom-full mb-2 w-full py-1 px-2 bg-black text-white text-xs rounded opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-20 text-center whitespace-nowrap">
+        {name}
       </span>
-    </button>
+    </div>
   );
 }
 
