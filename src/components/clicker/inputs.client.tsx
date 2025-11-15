@@ -1,10 +1,12 @@
 "use client";
 
-import React, { useState, useCallback } from "react";
+import React, { useState, useCallback, JSX } from "react";
 import { UpgradeKey } from "@/types";
 import { usePlayerInfoStore } from "@/stores/use-player-info-store";
 import { getPathImg } from "@/lib/misc";
 import Image from "next/image";
+import { GenericSectionTabs, TabData } from "@/components/shared/section.client";
+import { LoadingSpinner } from "../ui/loading-spinner";
 
 const IconCheck = () => <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5"><path strokeLinecap="round" strokeLinejoin="round" d="m4.5 12.75 6 6 9-13.5" /></svg>;
 
@@ -75,7 +77,7 @@ function BuildingInputCardItem({ index }: BuildingInputCardItemProps) {
 
 interface UpgradeToggleCardProps {
   index: number;
-  upgradeKey: keyof typeof upgradeTabs;
+  upgradeKey: UpgradeKey | "CPS";
 }
 
 function UpgradeToggleCard({ index, upgradeKey }: UpgradeToggleCardProps) {
@@ -118,74 +120,40 @@ function UpgradeToggleCard({ index, upgradeKey }: UpgradeToggleCardProps) {
   );
 }
 
-interface TabButtonProps {
-  label: string;
-  isActive: boolean;
-  onClick: (key: string) => void;
-  tabKey: string;
-}
-function TabButton({ label, isActive, onClick, tabKey }: TabButtonProps) {
-  return (
-    <button
-      onClick={() => onClick(tabKey)}
-      className={`px-3 py-2 font-medium text-sm rounded-t-lg transition-colors whitespace-nowrap
-                ${isActive
-      ? "border-b-2 border-indigo-500 text-indigo-400"
-      : "text-gray-400 hover:text-white border-b-2 border-transparent"
-    }
-            `}
-    >
-      {label}
-    </button>
-  );
-}
-
-const upgradeTabs: Record<UpgradeKey | "CPS", string> = {
-  building_upgrade: "Bâtiments",
-  CPS: "Click",
-  posterior_upgrade: "Posterior",
-  many_upgrade: "Many",
-  category_upgrade: "Catégorie",
-  global_upgrade: "Globale",
-  terrain_upgrade: "Terrain",
-};
-
 /**
  * Display the upgrade section with tabs and upgrade toggles.
  */
 export function UpgradeSectionClient() {
-  const [activeTab, setActiveTab] = useState<keyof typeof upgradeTabs>("building_upgrade");
+  const tabs: TabData<UpgradeKey | "CPS">[] = [
+    { key: "building_upgrade", label: "Bâtiments", content: GenerateContent },
+    { key: "CPS", label: "Click", content: GenerateContent },
+    { key: "posterior_upgrade", label: "Posterior", content: GenerateContent },
+    { key: "many_upgrade", label: "Many", content: GenerateContent },
+    { key: "category_upgrade", label: "Catégorie", content: GenerateContent },
+    { key: "global_upgrade", label: "Globale", content: GenerateContent },
+    { key: "terrain_upgrade", label: "Terrain", content: GenerateContent },
+  ];
 
-  const { data: playerInfo } = usePlayerInfoStore();
+  function GenerateContent(key: UpgradeKey | "CPS"): JSX.Element {
+    const { data: playerInfo } = usePlayerInfoStore();
+    if (!playerInfo) {
+      return <LoadingSpinner />;
+    }
 
-  const currentUpgradesList = playerInfo ? playerInfo[activeTab] : [];
-
-  return (
-    <div>
-      <h2 className="text-2xl font-semibold mb-4">Mes Améliorations (114)</h2>
-      <div className="border-b border-gray-700 mb-6 overflow-x-auto">
-        <nav className="flex space-x-2 -mb-px">
-          {Object.entries(upgradeTabs).map(([key, value]) => (
-            <TabButton
-              key={key}
-              tabKey={key}
-              label={`${value}`}
-              isActive={activeTab === key}
-              onClick={() => setActiveTab(key as any)}
-            />
-          ))}
-        </nav>
-      </div>
-
+    return (
       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-8 gap-3">
-        {currentUpgradesList.map((upgrade, index) => (
+        {playerInfo[key].map((upgrade, index) => (
           <UpgradeToggleCard
             key={upgrade.name}
-            upgradeKey={activeTab}
+            upgradeKey={key}
             index={index}
           />
         ))}
       </div>
-    </div>
+    );
+  }
+
+  return (
+    <GenericSectionTabs tabs={tabs} title="Mes Améliorations" />
   );
 }
