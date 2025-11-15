@@ -8,6 +8,7 @@ import Image from "next/image";
 import { GenericSectionTabs, TabData } from "@/components/shared/section.client";
 import { LoadingSpinner } from "../ui/loading-spinner";
 import { ToggleCardButton } from "../shared/toggle-button.client";
+import { GroupedSpanContainer } from "../shared/group-span-container";
 
 /**
  * Display the list of building input.
@@ -50,13 +51,15 @@ function BuildingInputCardItem({ index }: BuildingInputCardItemProps) {
 
   return (
     <div className="bg-gray-800 p-4 relative rounded-lg shadow flex flex-col">
-      <div className="flex items-center group mb-3 items-center justify-center gap-3">
+      <GroupedSpanContainer group={playerInfo && playerInfo.building[index].name} className="mb-3 gap-3">
         <Image src={getPathImg("building", index)} height={48} width={48} className="object-cover text-indigo-400 pixelated" alt="image" unoptimized />
         <h4 className="font-semibold truncate ">{playerInfo?.building[index].name}</h4>
+      </GroupedSpanContainer>
+      {/* <div className="flex items-center group mb-3 items-center justify-center gap-3">
         <span className="absolute bottom-full mb-2 w-full py-1 bg-black text-white text-xs rounded opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-10 text-center ">
-          {playerInfo && playerInfo.building[index].name}
+
         </span>
-      </div>
+      </div> */}
       <div className="flex items-center space-x-2">
         <label htmlFor={`building-${index}`} className="text-sm text-gray-400">Niv.</label>
         <input
@@ -93,22 +96,14 @@ function UpgradeToggleCard({ index, upgradeKey }: UpgradeToggleCardProps) {
     }
   };
 
-  const name = playerInfo ? playerInfo[upgradeKey][index].name : "Loading";
-  const children = (
-    <>
-      <div className="text-3xl mb-1">
-        <Image src={getPathImg(upgradeKey, index)} height={48} width={48} className="object-cover pixelated" alt="image" unoptimized />
-      </div>
-    </>
-  );
-
   return (
-    <div className='relative group'>
-      <ToggleCardButton children={children} isToggled={playerInfo !== null && playerInfo[upgradeKey][index].own} onToggle={handleToggle} />
-      <span className="absolute bottom-full mb-2 w-full py-1 px-2 bg-black text-white text-xs rounded opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-20 text-center whitespace-nowrap">
-        {name}
-      </span>
-    </div>
+    <GroupedSpanContainer group={playerInfo ? playerInfo[upgradeKey][index].name : "Loading"}>
+      <ToggleCardButton isToggled={playerInfo !== null && playerInfo[upgradeKey][index].own} onToggle={handleToggle}>
+        <div className="text-3xl mb-1">
+          <Image src={getPathImg(upgradeKey, index)} height={48} width={48} className="object-cover pixelated" alt="image" unoptimized />
+        </div>
+      </ToggleCardButton>
+    </GroupedSpanContainer>
   );
 }
 
