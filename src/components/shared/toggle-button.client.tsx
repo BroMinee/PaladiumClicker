@@ -1,5 +1,6 @@
 "use client";
 import React, { ReactNode } from "react";
+import { Button } from "../ui/button-v2";
 
 const IconCheck = () => <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5"><path strokeLinecap="round" strokeLinejoin="round" d="m4.5 12.75 6 6 9-13.5" /></svg>;
 
@@ -28,7 +29,7 @@ export function ToggleCardButton({
     : "bg-gray-800 border border-gray-700 text-gray-400 hover:bg-gray-700";
 
   return (
-    <button
+    <Button
       onClick={onToggle}
       className={`relative p-3 rounded-lg flex flex-col items-center justify-center text-center transition-all duration-150 ${toggleClasses} ${className}`}
     >
@@ -38,6 +39,6 @@ export function ToggleCardButton({
         </div>
       )}
       {children}
-    </button>
+    </Button>
   );
 }

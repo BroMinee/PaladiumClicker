@@ -9,6 +9,7 @@ import { LoadingSpinner } from "@/components/ui/loading-spinner";
 import { ImageCoin } from "@/components/shared/ImageCoin";
 import { StatItem } from "./clicker-page";
 import { MdOutlineStarPurple500 } from "react-icons/md";
+import { Button } from "../ui/button-v2";
 
 /**
  * Recommended purchase card component.
@@ -106,3 +107,17 @@ export function StatTotalProd() {
   />;
 }
 
+/**
+ * Display Update profil and Simulate purchase button
+ */
+export function StatButton() {
+  const onClick = () => alert("todo");
+  return (<>
+    <Button variant="primary" className="text-white font-bold py-2 px-4 rounded" onClick={onClick}>
+      Mettre à jour les données
+    </Button>
+    <Button variant='secondary' className="flex-1 text-white font-semibold py-2 px-4 rounded transition-colors" onClick={onClick}>
+      Simuler l&apos;achat
+    </Button>
+  </>);
+}
