@@ -6,7 +6,7 @@ import { buyBuilding, computeXBuildingAhead, formatPrice, getTotalSpend, } from 
 import { usePlayerInfoStore } from "@/stores/use-player-info-store";
 import { bestPurchaseInfoDetailed } from "@/types";
 import React, { useEffect, useState } from "react";
-import { useRpsStore } from "@/stores/use-rps-store";
+import { useClickerStore } from "@/stores/use-clicker-store";
 import Image from "next/image";
 import { Checkbox } from "@/components/ui/checkbox";
 
@@ -19,7 +19,7 @@ const PROCHAIN_ACHAT_COUNT = 21;
  */
 export const Stats = () => {
   const { data: playerInfo, setPlayerInfo } = usePlayerInfoStore();
-  const { rps } = useRpsStore();
+  const { rps } = useClickerStore();
   const [isNextBuildingVisible, setIsNextBuildingVisible] = useState(false);
   const [buildingBuyPaths, setBuildingBuyPaths] = useState([] as bestPurchaseInfoDetailed[]);
 

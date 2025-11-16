@@ -1,9 +1,8 @@
 "use client";
-import { computeRPS, computeXBuildingAhead, formatPrice, getPathImg, getTotalSpend } from "@/lib/misc";
+import { buyBuilding, computeRPS, computeXBuildingAhead, formatPrice, getPathImg, getTotalSpend } from "@/lib/misc";
 import { usePlayerInfoStore } from "@/stores/use-player-info-store";
-import { useRpsStore } from "@/stores/use-rps-store";
-import { bestPurchaseInfoDetailed } from "@/types";
-import React, { useEffect, useState } from "react";
+import { useClickerStore } from "@/stores/use-clicker-store";
+import React, { useEffect } from "react";
 import Image from "next/image";
 import { LoadingSpinner } from "@/components/ui/loading-spinner";
 import { ImageCoin } from "@/components/shared/ImageCoin";
@@ -16,9 +15,7 @@ import { Button } from "../ui/button-v2";
  */
 export function BestBuyCard() {
   const { data: playerInfo } = usePlayerInfoStore();
-  const [buildingBuyPaths, setBuildingBuyPaths] = useState([] as bestPurchaseInfoDetailed[]);
-
-  const { rps, setRPS } = useRpsStore();
+  const { rps, setRPS, buildingBuyPaths, setBuildingBuyPaths } = useClickerStore();
 
   useEffect(() => {
     if (playerInfo) {
@@ -32,7 +29,7 @@ export function BestBuyCard() {
     if (rps !== 0) {
       setBuildingBuyPaths(computeXBuildingAhead(playerInfo, 1, rps));
     }
-  }, [playerInfo, rps]);
+  }, [playerInfo, rps, setBuildingBuyPaths]);
   return (
     <div className="bg-gradient-to-br from-orange-500 to-orange-800 p-6 rounded-lg shadow-2xl border border-indigo-500">
       <div className="flex items-center space-x-3 mb-3">
@@ -64,7 +61,7 @@ export function BestBuyCard() {
  * Display the RPS statistic.
  */
 export function StatRPS() {
-  const { rps } = useRpsStore();
+  const { rps } = useClickerStore();
   return <StatItem
     icon={<ImageCoin />}
     label="Revenu par seconde"
@@ -112,11 +109,15 @@ export function StatTotalProd() {
  */
 export function StatButton() {
   const onClick = () => alert("todo");
+  const { data: playerInfo, setPlayerInfo } = usePlayerInfoStore();
+  const { buildingBuyPaths } = useClickerStore();
+  const handleBuyButton = () => buyBuilding(playerInfo, setPlayerInfo, buildingBuyPaths);
+
   return (<>
     <Button variant="primary" className="text-white font-bold py-2 px-4 rounded" onClick={onClick}>
       Mettre à jour les données
     </Button>
-    <Button variant='secondary' className="flex-1 text-white font-semibold py-2 px-4 rounded transition-colors" onClick={onClick}>
+    <Button variant='secondary' className="flex-1 text-white font-semibold py-2 px-4 rounded transition-colors" onClick={handleBuyButton}>
       Simuler l&apos;achat
     </Button>
   </>);

@@ -15,7 +15,7 @@ import React, { useEffect, useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { GradientText } from "@/components/shared/GradientText";
 import { Button } from "@/components/ui/button";
-import { useRpsStore } from "@/stores/use-rps-store";
+import { useClickerStore } from "@/stores/use-clicker-store";
 import { FaBed, FaCoins, FaInfoCircle, FaMedal, FaRandom, FaTachometerAlt } from "react-icons/fa";
 import Image from "next/image";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
@@ -30,7 +30,7 @@ import { constants } from "@/lib/constants";
  */
 export const RPS = () => {
   const { data: playerInfo, setPlayerInfo } = usePlayerInfoStore();
-  const { rps, setRPS } = useRpsStore();
+  const { rps, setRPS } = useClickerStore();
   const [estimatedRPS, setEstimatedRPS] = useState(3);
 
   const [buildingBuyPaths, setBuildingBuyPaths] = useState([] as bestPurchaseInfoDetailed[]);
