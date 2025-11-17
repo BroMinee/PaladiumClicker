@@ -1,7 +1,7 @@
 import { CraftingRecipeKey, CraftingRecipeType, OptionType } from "@/types";
 import { getCraft } from "@/lib/api/apiPalaTracker";
 import { redirect } from "next/navigation";
-import { CraftingArrow } from "@/components/Craft/CraftingArrow";
+import { CraftingArrow } from "@/components/shared/CraftingArrow.client";
 import React from "react";
 import { CardContent } from "@/components/ui/card";
 import { DisplayItem, DisplayItemProduce } from "@/components/Craft/CraftingDisplayItem";

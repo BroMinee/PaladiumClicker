@@ -8,7 +8,7 @@ import { CraftPrice, CraftSectionEnum, MyTreeNode, NodeType, OptionType, Tree } 
  */
 export function createTreeNode(item: OptionType, count: number, checked = false): Tree<NodeType> {
   const node: NodeType = createNodeType(item, count, checked);
-  return { value: node, children: [] };
+  return { value: node, children: [], recipe: [] };
 }
 
 /**

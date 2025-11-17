@@ -33,6 +33,7 @@ export type NodeType = OptionType & { count: number } & { checked: boolean }
 export type Tree<T> = {
   value: T;
   children: Tree<T>[];
+  recipe: T[];
 }
 
 export enum CraftSectionEnum {

@@ -2,7 +2,7 @@
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import React, { MutableRefObject, useEffect, useRef, useState } from "react";
-import { useCraftStore } from "@/stores/use-craft-store";
+import { useCraftOptimizerStore } from "@/stores/use-craft-store";
 import Image from "next/image";
 import { CraftPrice, CraftSectionEnum } from "@/types";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
@@ -34,7 +34,7 @@ type CraftPriceWithComputed = CraftPrice & {
  * @returns A UI component showing the top craftable items with sorting and live updates.
  */
 export function CraftOptimizerDisplay() {
-  const { craftingList, setCraftingList } = useCraftStore();
+  const { craftingList, setCraftingList } = useCraftOptimizerStore();
   const [topCraft, setTopCraft] = useState<Array<CraftPriceWithComputed>>([]);
   const [sortMode, setSortMode] = useState<SortMode>("score");
   const [lastUpdate, setLastUpdate] = useState<Date>(new Date("1970-01-01T00:00:00Z"));
