@@ -1,3 +1,4 @@
+import { intToHex } from "@/lib/misc";
 import { ImageResponse } from "next/og";
 
 interface EmblemConfig {
@@ -9,17 +10,6 @@ interface EmblemConfig {
   iconBorderColor: number;
   iconColor: number;
   iconId: number;
-}
-
-function intToHex(color: number): string {
-  if (color === -1) {
-    return "#FFFFFF";
-  }
-
-  const unsigned = color >>> 0;
-  const hex = unsigned.toString(16).padStart(8, "0");
-
-  return `#${hex.slice(2)}`;
 }
 
 /**

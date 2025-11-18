@@ -1,3 +1,4 @@
+import { MetierKey } from "@/types";
 import { safeJoinPaths } from "./navbar";
 import { constants } from "@/lib/constants";
 
@@ -142,4 +143,39 @@ export function petGetLevelFromXp(xp: number) {
  */
 export function petGetCoef(xp: number, xpNeeded: number) {
   return xp / xpNeeded;
+}
+
+/**
+ * Converts a signed 32-bit integer color value into a 6-digit hex color string.
+ *
+ * @param color - The integer color value to convert.
+ * @returns A standard 6-digit hex color string (e.g. "#1a2b3c").
+ */
+export function intToHex(color: number): string {
+  if (color === -1) {
+    return "#FFFFFF";
+  }
+
+  const unsigned = color >>> 0;
+  const hex = unsigned.toString(16).padStart(8, "0");
+
+  return `#${hex.slice(2)}`;
+}
+
+/**
+ * Returns a pretty (human-readable) name for a given job key.
+ */
+export function prettyJobName(jobName: MetierKey) {
+  switch (jobName) {
+  case "alchemist":
+    return "Alchimiste";
+  case "farmer":
+    return "Farmeur";
+  case "hunter":
+    return "Hunter";
+  case "miner":
+    return "Mineur";
+  default:
+    return "Inconnu";
+  }
 }

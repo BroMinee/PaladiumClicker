@@ -9,6 +9,7 @@ import { GenericSectionTabs, TabData } from "@/components/shared/section.client"
 import { LoadingSpinner } from "../ui/loading-spinner";
 import { ToggleCardButton } from "../shared/toggle-button.client";
 import { GroupedSpanContainer } from "../shared/group-span-container";
+import { Card } from "@/components/ui/card-v2";
 
 /**
  * Display the list of building input.
@@ -50,7 +51,7 @@ function BuildingInputCardItem({ index }: BuildingInputCardItemProps) {
   };
 
   return (
-    <div className="bg-gray-800 p-4 relative rounded-lg shadow flex flex-col">
+    <Card className="relative flex flex-col">
       <GroupedSpanContainer group={playerInfo && playerInfo.building[index].name} className="mb-3 gap-3">
         <Image src={getPathImg("building", index)} height={48} width={48} className="object-cover text-indigo-400 pixelated" alt="image" unoptimized />
         <h4 className="font-semibold truncate ">{playerInfo?.building[index].name}</h4>
@@ -73,7 +74,7 @@ function BuildingInputCardItem({ index }: BuildingInputCardItemProps) {
           style={{ MozAppearance: "textfield" }}
         />
       </div>
-    </div>
+    </Card>
   );
 }
 

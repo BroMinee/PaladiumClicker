@@ -118,7 +118,11 @@ const config: Config = {
         "blink-orange": {
           '0%, 100%': { color: 'hsl(var(--primary))' },
           '50%': { color: "hsl(var(--secondary-foreground))" },
-        }
+        },
+        backgroundPan: {
+          '0%': { 'background-position': '0% center' },
+          '100%': { 'background-position': '-200% center' },
+        },
 
       },
       animation: {
@@ -128,7 +132,8 @@ const config: Config = {
         'fade-in': 'fadeIn 0.3s ease-in-out',
         'fade-out': 'fadeOut 0.3s ease-in-out',
         blink: 'blink 1s infinite',
-        "blink-orange": 'blink-orange 1s infinite'
+        "blink-orange": 'blink-orange 1s infinite',
+        'pan-gradient': 'backgroundPan 3s linear infinite'
       },
       addUtilities: {
         '.pixelated': {

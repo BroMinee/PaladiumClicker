@@ -33,19 +33,19 @@ export const getColorByMetierName = (name: MetierKey) => {
   switch (name) {
   case "miner":
     color = [255, 47, 47];
-    bgColor = [255, 47, 47];
+    bgColor = [156, 29, 29];
     break;
   case "farmer":
     color = [199, 169, 33];
-    bgColor = [255, 209, 1];
+    bgColor = [117, 100, 19];
     break;
   case "hunter":
     color = [47, 103, 255];
-    bgColor = [47, 103, 255];
+    bgColor = [21, 46, 115];
     break;
   case "alchemist":
     color = [255, 100, 201];
-    bgColor = [255, 100, 201];
+    bgColor = [181, 71, 143];
   }
 
   return { color, bgColor };

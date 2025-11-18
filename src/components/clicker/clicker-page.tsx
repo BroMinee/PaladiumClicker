@@ -1,6 +1,7 @@
 import React, { ReactNode } from "react";
 import { BestBuyCard, StatButton, StatRPS, StatSleepingCoin, StatTotalProd } from "@/components/clicker/statistics.client";
 import { BuildingInputCard, UpgradeSectionClient } from "@/components/clicker/inputs.client";
+import { Card } from "@/components/ui/card-v2";
 
 /**
  * [Clicker Page](https://palatracker.bromine.fr/clicker-optimizer/BroMine__)
@@ -17,18 +18,18 @@ export function ClickerPage() {
 
       <div className="space-y-6 sticky top-8 h-fit">
         <BestBuyCard/>
-        <div className="bg-gray-800 p-4 rounded-lg shadow-lg flex space-x-2">
+        <Card className="flex space-x-2">
           <StatButton/>
-        </div>
+        </Card>
 
-        <div className="bg-gray-800 p-6 rounded-lg shadow-lg">
+        <Card className="p-6">
           <h3 className="text-xl font-semibold mb-4">Statistiques Actuelles</h3>
           <div className="space-y-3">
             <StatRPS/>
             <StatSleepingCoin/>
             <StatTotalProd/>
           </div>
-        </div>
+        </Card>
       </div>
     </div>
   );

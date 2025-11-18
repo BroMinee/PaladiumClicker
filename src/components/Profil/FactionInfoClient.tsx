@@ -13,6 +13,7 @@ import { constants } from "@/lib/constants";
 
 import Image from "next/image";
 import { Emblem } from "../Faction/Emblem";
+import { cn } from "@/lib/utils";
 
 /**
  * Display the player's faction name
@@ -61,7 +62,7 @@ export function FactionDetails() {
   const { data: playerInfo } = usePlayerInfoStore();
 
   if (!playerInfo) {
-    return <Suspense fallback={<LoadingData username={undefined}/>}/>;
+    return <Suspense fallback={<LoadingData username={undefined} />} />;
   }
 
   const createdAt = playerInfo.faction.createdAt;
@@ -73,10 +74,10 @@ export function FactionDetails() {
     <>
       <Card>
         <SmallCardInfo title="Niveau - [xp]" value={`${level} - [${formatPrice(xp)}]`}
-                       img={safeJoinPaths(constants.imgPathProfile, "ExperienceOrb.webp")} unoptimized/>
+          img={safeJoinPaths(constants.imgPathProfile, "ExperienceOrb.webp")} unoptimized />
       </Card>
       <Card>
-        <SmallCardInfo title="Date de création" value={convertEpochToDateUTC2(createdAt)} img={safeJoinPaths(constants.imgPathProfile, "clock.gif")} unoptimized/>
+        <SmallCardInfo title="Date de création" value={convertEpochToDateUTC2(createdAt)} img={safeJoinPaths(constants.imgPathProfile, "clock.gif")} unoptimized />
       </Card>
       <ScrollArea className="md:col-span-3">
         <div className="flex gap-4 pb-3">
@@ -96,13 +97,13 @@ export function FactionDetails() {
                     </div>
                     <div className="space-y-2">
                       <div className="text-sm">
-                        <FaPercentage className="h-4 w-4 mr-2 inline-block"/>
+                        <FaPercentage className="h-4 w-4 mr-2 inline-block" />
                         Rôle: {player.group}
                       </div>
                       <div className="text-sm">
-                        <Image src={safeJoinPaths(constants.imgPathProfile,"clock.gif")} alt="Icône"
-                               width={16} height={16}
-                               className="object-cover inline-block pixelated mr-2" unoptimized/>
+                        <Image src={safeJoinPaths(constants.imgPathProfile, "clock.gif")} alt="Icône"
+                          width={16} height={16}
+                          className="object-cover inline-block pixelated mr-2" unoptimized />
                         Rejoint le: {convertEpochToDateUTC2(player.joinedAt)}
                       </div>
                     </div>
@@ -112,7 +113,7 @@ export function FactionDetails() {
             ))
           }
         </div>
-        <ScrollBar orientation="horizontal"/>
+        <ScrollBar orientation="horizontal" />
       </ScrollArea>
     </>);
 }
@@ -137,11 +138,12 @@ export function FactionClassementClient({ factionLeaderboard }: { factionLeaderb
 
 /**
  * Display the player's faction emblem
+ * @param className - optional className
  */
-export function FactionEmblemClient() {
+export function FactionEmblemClient({ className }: { className?: string }) {
   const { data: playerInfo } = usePlayerInfoStore();
-  if(!playerInfo) {
-    return <Suspense fallback={<LoadingData username={undefined}/>}/>;
+  if (!playerInfo) {
+    return <Suspense fallback={<LoadingData username={undefined} />} />;
   }
-  return <Emblem emblem={playerInfo?.faction.emblem} className="h-16 w-16 rounded-xl object-cover shadow-lg"/>;
+  return <Emblem emblem={playerInfo?.faction.emblem} className={cn("h-16 w-16 rounded-xl object-cover shadow-lg", className)} />;
 }

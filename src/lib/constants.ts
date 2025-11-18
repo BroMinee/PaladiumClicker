@@ -112,6 +112,8 @@ const CRAFT_IN_PORTAL = "Craft in Portal";
 const CRAFT_IN_A_CAULDRON = "Craft in a Cauldron";
 const CRUSH = "Crush";
 
+const METIER_KEY: MetierKey[] = ["miner", "farmer", "hunter", "alchemist"];
+
 const metier_xp = [
   22123,
   40390,
@@ -550,4 +552,5 @@ export const constants = {
   imgPathError,
   AUTOPROMO_CONFIG,
   adminShopItemsAvailable,
+  METIER_KEY,
 };

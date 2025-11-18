@@ -1,5 +1,6 @@
 "use client";
-import React, { useState, ReactNode } from "react";
+import React, { useState, JSX } from "react";
+import { Card } from "../ui/card-v2";
 
 /**
  * Tab section info
@@ -10,7 +11,7 @@ import React, { useState, ReactNode } from "react";
 export interface TabData<T extends string> {
   key: T;
   label: string;
-  content: ReactNode | ((key: T) => ReactNode);
+  content: ((key: T) => JSX.Element);
 }
 
 interface TabButtonProps {
@@ -63,7 +64,7 @@ export function GenericSectionTabs<T extends string>({ tabs, title }: GenericSec
   }
 
   return (
-    <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-xl">
+    <Card className="p-6">
       {title && (
         <h2 className="text-2xl font-semibold mb-4 text-gray-900 dark:text-white">
           {title}
@@ -87,6 +88,6 @@ export function GenericSectionTabs<T extends string>({ tabs, title }: GenericSec
       <div className="pt-4" role="tabpanel" aria-labelledby={activeTabKey}>
         {typeof activeTabContent === "function" ? activeTabContent(activeTabKey) : activeTabContent}
       </div>
-    </div>
+    </Card>
   );
 }

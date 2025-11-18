@@ -9,9 +9,11 @@ import { generateCraftUrl } from "@/lib/misc";
 import { useCraftRecipeStore } from "@/stores/use-craft-store";
 import { useRouter } from "next/navigation";
 import { cn } from "@/lib/utils";
+import { Card } from "@/components/ui/card-v2";
+import { ClickableLink } from "../ui/clickable-link";
 
 const IconSearch = () => <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5"><path strokeLinecap="round" strokeLinejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" /></svg>;
-const IconChevronDown = ({ className}: { className: string }) => <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className={cn("w-4 h-4", className)}><path strokeLinecap="round" strokeLinejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" /></svg>;
+const IconChevronDown = ({ className }: { className: string }) => <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className={cn("w-4 h-4", className)}><path strokeLinecap="round" strokeLinejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" /></svg>;
 
 /**
  * Main crafting helper page component.
@@ -130,7 +132,7 @@ function LanguageToggle() {
 function SearchBar({ searchTerm, setSearchTerm, isSearchFocused, setIsSearchFocused, filteredItems, onSelectItem }: { searchTerm: string; setSearchTerm: React.Dispatch<React.SetStateAction<string>>; isSearchFocused: boolean; setIsSearchFocused: React.Dispatch<React.SetStateAction<boolean>>; filteredItems: OptionType[]; onSelectItem: (item: OptionType) => void }) {
   const { language, selectedItem } = useCraftRecipeStore();
   return (
-    <div className="bg-gray-800 p-6 rounded-lg shadow-lg">
+    <Card>
       <label htmlFor="item-search" className="block text-sm font-medium text-gray-300 mb-2">
         Rechercher un item
       </label>
@@ -145,11 +147,11 @@ function SearchBar({ searchTerm, setSearchTerm, isSearchFocused, setIsSearchFocu
           onChange={(e) => setSearchTerm(e.target.value)}
           onFocus={() => setIsSearchFocused(true)}
           onBlur={() => setTimeout(() => setIsSearchFocused(false), 150)}
-          placeholder={selectedItem ? (language === "fr" ? selectedItem.label : selectedItem.label2): (language === "fr" ? "Pioche en Diamant..." : "Diamond Pickaxe...")}
+          placeholder={selectedItem ? (language === "fr" ? selectedItem.label : selectedItem.label2) : (language === "fr" ? "Pioche en Diamant..." : "Diamond Pickaxe...")}
           className="w-full bg-gray-900 border border-gray-700 rounded-lg py-2 pl-10 pr-4 text-white placeholder-gray-500 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
         />
         {isSearchFocused && filteredItems.length > 0 && (
-          <div className="absolute z-10 w-full mt-1 bg-gray-700 border border-gray-600 rounded-lg shadow-xl max-h-60 overflow-y-auto">
+          <div className="absolute z-10 w-full mt-1 bg-gray-700 border border-gray-600 rounded-lg max-h-60 overflow-y-auto">
             <ul className="py-1">
               {filteredItems.map(item => (
                 <li
@@ -170,7 +172,7 @@ function SearchBar({ searchTerm, setSearchTerm, isSearchFocused, setIsSearchFocu
           </div>
         )}
       </div>
-    </div>
+    </Card>
   );
 }
 
@@ -183,7 +185,7 @@ function QuantityInput() {
     router.push(generateCraftUrl(selectedItem?.value ?? "", newQuantity, CraftSectionEnum.recipe));
   };
   return (
-    <div className="bg-gray-800 p-6 rounded-lg shadow-lg">
+    <Card>
       <label htmlFor="item-quantity" className="block text-sm font-medium text-gray-300 mb-2">
         Quantité désirée
       </label>
@@ -195,7 +197,7 @@ function QuantityInput() {
         min="1"
         className="w-full bg-gray-900 border border-gray-700 rounded-lg py-2 px-4 text-white font-bold text-center"
       />
-    </div>
+    </Card>
   );
 }
 
@@ -204,7 +206,7 @@ function ResourceList() {
   const resourceArray = Array.from(flatResources.entries());
 
   return (
-    <div className="bg-gray-800 p-6 rounded-lg shadow-lg">
+    <Card>
       <h3 className="text-xl font-semibold mb-4 text-blue-300">
         Liste des Ressources
       </h3>
@@ -236,7 +238,7 @@ function ResourceList() {
           })}
         </ul>
       )}
-    </div>
+    </Card>
   );
 }
 
@@ -247,7 +249,7 @@ function SelectedItemCard() {
   }
 
   return (
-    <div className="bg-gray-800 p-6 rounded-lg shadow-lg">
+    <Card>
       <div className="flex items-center justify-between">
         <div className="flex items-center space-x-4">
           <div className="w-16 h-16 p-2 bg-gray-900 rounded-lg">
@@ -281,7 +283,7 @@ function SelectedItemCard() {
         </div>
       )
       }
-    </div>
+    </Card>
   );
 }
 
@@ -289,11 +291,11 @@ function CraftingTreeDisplay({ onToggleChecked }: { onToggleChecked: (itemValue:
   const { root } = useCraftRecipeStore();
 
   if (!root) {
-    return <LoadingSpinner/>;
+    return <LoadingSpinner />;
   }
 
   return (
-    <div className="bg-gray-800 p-6 rounded-lg shadow-lg">
+    <Card>
       <h3 className="text-xl font-semibold mb-4 text-blue-300">
         Arbre de Fabrication
       </h3>
@@ -304,7 +306,7 @@ function CraftingTreeDisplay({ onToggleChecked }: { onToggleChecked: (itemValue:
           isRoot={true}
         />
       </ul>
-    </div>
+    </Card>
   );
 }
 
@@ -410,10 +412,14 @@ function DisplayItem({ index, slot, count }: { index: number; slot: OptionType |
       className="w-12 aspect-square bg-gray-700 border border-gray-600 rounded-sm p-1 flex items-center justify-center"
     >
       <div className="w-full h-full text-blue-300 relative">
-        {slot && slot.value !== "air" && <Image src={`/AH_img/${slot.img}`} alt={slot.value}
-          className="w-full h-full object-contain pixelated rounded-sm hover:scale-125 duration-300"
-          width={48} height={48}
-          unoptimized={true} />}
+        {slot && slot.value !== "air" &&
+          <ClickableLink href={generateCraftUrl(slot.value, 1, CraftSectionEnum.recipe)}>
+            <Image src={`/AH_img/${slot.img}`} alt={slot.value}
+              className="w-full h-full object-contain pixelated rounded-sm"
+              width={48} height={48}
+              unoptimized={true} />
+          </ClickableLink>
+        }
         <span className="top-6 left-9 pr-2 pb-0 absolute text-xl font-bold drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)]">{count}</span>
       </div>
     </div>
