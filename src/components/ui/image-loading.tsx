@@ -8,6 +8,8 @@ type ImageLoadingProps = Omit<ImageProps, "placeholder" | "blurDataURL"> & {
 
 type ImageNextNeedProps = {
   alt: string;
+  width: number;
+  height: number;
 }
 
 const ImageLoading = React.forwardRef<HTMLImageElement, ImageLoadingProps & ImageNextNeedProps>(
