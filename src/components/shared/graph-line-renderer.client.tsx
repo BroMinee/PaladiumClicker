@@ -138,7 +138,7 @@ export const LineGrad = <TX extends AxisDomain, TY extends number>({
           <React.Fragment key={dataset.id}>
             <defs>
               <linearGradient id={gradientId} x1="0" y1="0" x2="0" y2="1">
-                <stop offset="5%" stopColor={dataset.color} stopOpacity={0.4} />
+                <stop offset="5%" stopColor={dataset.color} stopOpacity={0.5} />
                 <stop offset="100%" stopColor={dataset.color} stopOpacity={0} />
               </linearGradient>
             </defs>
@@ -154,7 +154,7 @@ export const LineGrad = <TX extends AxisDomain, TY extends number>({
               d={lineGenerator(dataset.stats) || ""}
               fill="none"
               stroke={dataset.color}
-              strokeWidth={2}
+              strokeWidth={3}
               style={{ transition: "d 0.2s ease" }}
             />
           </React.Fragment>

@@ -4,6 +4,8 @@ import { Dataset, AxisConfig, ChartRendererProps, AnyScale, AxisDomain, TooltipD
 import React, { useEffect, useRef, useMemo, useState, useCallback, RefObject } from "react";
 import * as d3 from "d3";
 
+import './graph.css';
+
 /**
  * Render the tooltip
  */
@@ -20,7 +22,7 @@ export const Tooltip = ({ tooltipData }: { tooltipData: TooltipData | null }) =>
         top: 0,
         left: 0,
         pointerEvents: "none",
-        transform: `translate(${tooltipData.x + 15}px, ${tooltipData.y}px)`, // Décalage pour pas être sous la souris
+        transform: `translate(${tooltipData.x + 15}px, ${tooltipData.y}px)`,
         border: "1px solid #ccc",
         borderRadius: "4px",
         padding: "8px",
@@ -82,12 +84,11 @@ interface ChartContainerProps<TX extends AxisDomain, TY extends AxisDomain> {
   margin?: Margin;
 }
 
-const createScale = (type: "date" | "number" | "category", range: [number, number]) => {
+const createScale = (type: "date" | "number", range: [number, number]) => {
   switch (type) {
-  case "date": return d3.scaleTime().range(range);
-  case "number": return d3.scaleLinear().range(range);
-  case "category": return d3.scaleBand().range(range).padding(0.1);
-  default: return d3.scaleLinear().range(range);
+    case "date": return d3.scaleTime().range(range);
+    case "number": return d3.scaleLinear().range(range);
+    default: return d3.scaleLinear().range(range);
   }
 };
 
@@ -141,13 +142,9 @@ export const ChartContainer = <TX extends AxisDomain, TY extends AxisDomain>({
     const result: Record<string, any[]> = {};
     axisConfigs.forEach(cfg => {
       const values = domainsMap[cfg.id];
-      if (cfg.type === "category") {
-        result[cfg.id] = Array.from(new Set(values));
-      } else {
-        const extent = d3.extent(values as number[]);
-        result[cfg.id] = cfg.position === "bottom" || cfg.position === "top"
-          ? extent : [0, extent[1] || 100];
-      }
+      const extent = d3.extent(values as number[]);
+      result[cfg.id] = cfg.position === "bottom" || cfg.position === "top"
+        ? extent : [0, extent[1] || 100];
     });
     return result;
   }, [data, axisConfigs]);
@@ -160,7 +157,7 @@ export const ChartContainer = <TX extends AxisDomain, TY extends AxisDomain>({
     axisConfigs.forEach((cfg) => {
       const range: [number, number] = (cfg.position === "left" || cfg.position === "right") ? [height, 0] : [0, width];
       const scale = createScale(cfg.type, range).domain(domains[cfg.id] as any);
-      newScales[cfg.id] = scale;
+      newScales[cfg.id] = scale as any;
     });
     return newScales;
   }, [width, height, axisConfigs, domains]);
@@ -179,8 +176,8 @@ export const ChartContainer = <TX extends AxisDomain, TY extends AxisDomain>({
 
   const finalScales = useMemo(() => ({ ...scales }), [scales]);
   const xAxisConfig = axisConfigs.find(c => c.position === "bottom");
-  if (xAxisConfig && finalScales[xAxisConfig.id] && xAxisConfig.type !== "category") {
-    if("rescaleX" in zoomTransform) {
+  if (xAxisConfig && finalScales[xAxisConfig.id]) {
+    if ("rescaleX" in zoomTransform) {
       finalScales[xAxisConfig.id] = zoomTransform.rescaleX(scales[xAxisConfig.id] as any);
     }
   }
@@ -308,29 +305,71 @@ const Axis = ({ config, scale, width, height }: { config: AxisConfig, scale: Any
   const ref = useRef<SVGGElement>(null);
 
   useEffect(() => {
-    if (!ref.current || !scale) {
-      return;
-    }
+    if (!ref.current || !scale) return;
+
+    const format = d3.timeFormat("%Hh%M %m-%d");
 
     let axisGenerator;
     switch (config.position) {
-    case "left": axisGenerator = d3.axisLeft(scale as any); break;
-    case "right": axisGenerator = d3.axisRight(scale as any); break;
-    case "bottom": axisGenerator = d3.axisBottom(scale as any); break;
-    case "top": axisGenerator = d3.axisTop(scale as any); break;
+      case "left": axisGenerator = d3.axisLeft(scale as any); break;
+      case "right": axisGenerator = d3.axisRight(scale as any); break;
+      case "bottom":
+        axisGenerator = d3.axisBottom(scale as any)
+          .tickFormat(config.type === "date" ? (format as any) : null);
+        break;
+      case "top": axisGenerator = d3.axisTop(scale as any); break;
     }
 
-    // Customisation couleur
     const group = d3.select(ref.current);
     group.call(axisGenerator as any);
+
+    if (config.position === "bottom" || config.position === "top") {
+      const ticks = group.selectAll<SVGGElement, unknown>(".tick").nodes();
+
+      const overlaps = ticks.map(() => false);
+
+      let lastRight = -Infinity;
+
+      ticks.forEach((tick, i) => {
+        const text = tick.querySelector("text");
+        if (!text) return;
+
+        const bbox = text.getBBox();
+        const tickLeft = bbox.x;
+        const tickRight = bbox.x + bbox.width;
+
+        if (tickLeft < lastRight) {
+          overlaps[i] = true;
+          overlaps[i - 1] = true;
+        }
+
+        lastRight = Math.max(lastRight, tickRight);
+      });
+
+      let remove = true;
+
+      overlaps.forEach((isOverlap, i) => {
+        if (!isOverlap) {
+          remove = true;
+          return;
+        }
+
+        if (remove) {
+          ticks[i].remove();
+        }
+
+        remove = !remove;
+      });
+
+    }
 
     if (config.color) {
       group.selectAll("line").attr("stroke", config.color);
       group.selectAll("text").attr("fill", config.color);
       group.selectAll("path").attr("stroke", config.color);
     }
-
   }, [scale, config]);
+
 
   let transform = "";
   if (config.position === "bottom") {

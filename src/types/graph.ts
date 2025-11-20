@@ -2,12 +2,10 @@ import * as d3 from "d3";
 
 export type AxisDomain = number | Date | string;
 
-export type AxisPosition = "left" | "right" | "bottom" | "top";
-
 export interface AxisConfig {
   id: string;
-  position: AxisPosition;
-  type: "date" | "number" | "category";
+  position: "left" | "right" | "bottom" | "top";
+  type: "date" | "number";
   label?: string;
   color?: string;
 }
