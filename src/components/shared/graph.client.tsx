@@ -1,0 +1,344 @@
+"use client";
+
+import { Dataset, AxisConfig, ChartRendererProps, AnyScale, AxisDomain, TooltipData } from "@/types";
+import React, { useEffect, useRef, useMemo, useState, useCallback, RefObject } from "react";
+import * as d3 from "d3";
+
+/**
+ * Render the tooltip
+ */
+export const Tooltip = ({ tooltipData }: { tooltipData: TooltipData | null }) => {
+  if (!tooltipData || !tooltipData.content) {
+    return null;
+  }
+
+  return (
+    <div
+      className="bg-gray-900"
+      style={{
+        position: "absolute",
+        top: 0,
+        left: 0,
+        pointerEvents: "none",
+        transform: `translate(${tooltipData.x + 15}px, ${tooltipData.y}px)`, // Décalage pour pas être sous la souris
+        border: "1px solid #ccc",
+        borderRadius: "4px",
+        padding: "8px",
+        boxShadow: "0 2px 5px rgba(0,0,0,0.2)",
+        zIndex: 10,
+        fontSize: "12px",
+        minWidth: "150px",
+      }}
+    >
+      <div style={{ fontWeight: "bold", marginBottom: "5px", borderBottom: "1px solid #eee", paddingBottom: "3px" }}>
+        {tooltipData.content.label}
+      </div>
+      {tooltipData.content.values.map((v, i) => (
+        <div key={i} style={{ display: "flex", alignItems: "center", marginBottom: "3px" }}>
+          <span style={{ width: "8px", height: "8px", borderRadius: "50%", backgroundColor: v.color, marginRight: "6px" }}></span>
+          <span style={{ flex: 1 }}>{v.name}:</span>
+          <strong>{v.value}</strong>
+        </div>
+      ))}
+    </div>
+  );
+};
+
+/**
+ * Listen for window resize
+ */
+export const useResizeObserver = (ref: RefObject<HTMLElement | null>): DOMRectReadOnly | null => {
+  const [dimensions, setDimensions] = useState<DOMRectReadOnly | null>(null);
+
+  useEffect(() => {
+    const observeTarget = ref.current;
+    if (!observeTarget) {
+      return;
+    }
+
+    const resizeObserver = new ResizeObserver((entries) => {
+      entries.forEach((entry) => {
+        setDimensions(entry.contentRect);
+      });
+    });
+
+    resizeObserver.observe(observeTarget);
+    return () => resizeObserver.disconnect();
+  }, [ref]);
+
+  return dimensions;
+};
+
+interface Margin {
+  top: number;
+  right: number;
+  bottom: number;
+  left: number;
+}
+
+interface ChartContainerProps<TX extends AxisDomain, TY extends AxisDomain> {
+  data: Dataset<TX, TY>[];
+  renderContent: (props: ChartRendererProps<TX, TY>) => React.ReactNode;
+  margin?: Margin;
+}
+
+const createScale = (type: "date" | "number" | "category", range: [number, number]) => {
+  switch (type) {
+  case "date": return d3.scaleTime().range(range);
+  case "number": return d3.scaleLinear().range(range);
+  case "category": return d3.scaleBand().range(range).padding(0.1);
+  default: return d3.scaleLinear().range(range);
+  }
+};
+
+interface ChartContainerProps<TX extends AxisDomain, TY extends AxisDomain> {
+  data: Dataset<TX, TY>[];
+  axisConfigs: AxisConfig[]; // On passe la config des axes ici
+  renderContent: (props: ChartRendererProps<TX, TY>) => React.ReactNode;
+  margin?: { top: number; right: number; bottom: number; left: number };
+}
+
+const bisectDate = d3.bisector((d: any) => d.x).left;
+
+/**
+ * Display a graph using d3 library
+ * Listen for zoom event
+ * Listen for mouse hover for tooltip content
+ */
+export const ChartContainer = <TX extends AxisDomain, TY extends AxisDomain>({
+  data,
+  axisConfigs,
+  renderContent,
+  margin = { top: 20, right: 60, bottom: 30, left: 60 },
+}: ChartContainerProps<TX, TY>) => {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const svgRef = useRef<SVGSVGElement>(null);
+  const dimensions = useResizeObserver(containerRef);
+  const [zoomTransform, setZoomTransform] = useState<d3.ZoomTransform>(d3.zoomIdentity);
+
+  const [tooltip, setTooltip] = useState<TooltipData | null>(null);
+
+  useEffect(() => {
+    setZoomTransform(d3.zoomIdentity);
+  }, [data]);
+
+  const width = dimensions ? dimensions.width - margin.left - margin.right : 0;
+  const height = dimensions ? dimensions.height - margin.top - margin.bottom : 0;
+
+  const domains = useMemo(() => {
+    const domainsMap: Record<string, any[]> = {};
+    axisConfigs.forEach(cfg => domainsMap[cfg.id] = []);
+    data.filter(d => d.visibility).forEach(dataset => {
+      const xValues = dataset.stats.map(s => s.x);
+      const yValues = dataset.stats.map(s => s.y);
+      if (domainsMap[dataset.yAxisId]) {
+        domainsMap[dataset.yAxisId].push(...yValues);
+      }
+      if (domainsMap["x-axis"]) {
+        domainsMap["x-axis"].push(...xValues);
+      }
+    });
+    const result: Record<string, any[]> = {};
+    axisConfigs.forEach(cfg => {
+      const values = domainsMap[cfg.id];
+      if (cfg.type === "category") {
+        result[cfg.id] = Array.from(new Set(values));
+      } else {
+        const extent = d3.extent(values as number[]);
+        result[cfg.id] = cfg.position === "bottom" || cfg.position === "top"
+          ? extent : [0, extent[1] || 100];
+      }
+    });
+    return result;
+  }, [data, axisConfigs]);
+
+  const scales = useMemo(() => {
+    if (!width || !height) {
+      return {};
+    }
+    const newScales: Record<string, AnyScale> = {};
+    axisConfigs.forEach((cfg) => {
+      const range: [number, number] = (cfg.position === "left" || cfg.position === "right") ? [height, 0] : [0, width];
+      const scale = createScale(cfg.type, range).domain(domains[cfg.id] as any);
+      newScales[cfg.id] = scale;
+    });
+    return newScales;
+  }, [width, height, axisConfigs, domains]);
+
+  useEffect(() => {
+    if (!svgRef.current || !width || !height) {
+      return;
+    }
+    const zoom = d3.zoom<SVGSVGElement, unknown>()
+      .scaleExtent([1, 10])
+      .translateExtent([[0, 0], [width, height]])
+      .extent([[0, 0], [width, height]])
+      .on("zoom", (e) => setZoomTransform(e.transform));
+    d3.select(svgRef.current).call(zoom);
+  }, [width, height]);
+
+  const finalScales = useMemo(() => ({ ...scales }), [scales]);
+  const xAxisConfig = axisConfigs.find(c => c.position === "bottom");
+  if (xAxisConfig && finalScales[xAxisConfig.id] && xAxisConfig.type !== "category") {
+    if("rescaleX" in zoomTransform) {
+      finalScales[xAxisConfig.id] = zoomTransform.rescaleX(scales[xAxisConfig.id] as any);
+    }
+  }
+
+  const handleMouseMove = useCallback((event: React.MouseEvent<SVGRectElement>) => {
+    const xScale = finalScales["x-axis"];
+    if (!xScale || !width || !height) {
+      return;
+    }
+
+    const [mouseX] = d3.pointer(event);
+
+    let hoveredXValue: any;
+    if ("invert" in xScale) {
+      hoveredXValue = (xScale as any).invert(mouseX);
+    } else {
+      return;
+    }
+
+    const tooltipValues: { name: string; value: string; color: string; }[] = [];
+    let label = "";
+
+    const visibleData = data.filter(d => d.visibility);
+
+    visibleData.forEach(dataset => {
+      const idx = bisectDate(dataset.stats, hoveredXValue, 1);
+      const d0 = dataset.stats[idx - 1];
+      const d1 = dataset.stats[idx];
+
+      let point = d0;
+      if (d1 && d0) {
+        point = (hoveredXValue as any) - (d0.x as any) > (d1.x as any) - (hoveredXValue as any) ? d1 : d0;
+      } else if (d1) {
+        point = d1;
+      }
+
+      if (point) {
+        if (!label) {
+          label = point.x instanceof Date
+            ? `${point.x.toLocaleDateString()} - ${point.x.toLocaleTimeString()}`
+            : String(point.x);
+        }
+
+        tooltipValues.push({
+          name: dataset.name,
+          value: typeof point.y === "number" ? point.y.toFixed(2) : String(point.y),
+          color: dataset.color
+        });
+      }
+    });
+
+    if (tooltipValues.length > 0) {
+      setTooltip({
+        x: event.nativeEvent.offsetX,
+        y: event.nativeEvent.offsetY,
+        content: {
+          label,
+          values: tooltipValues
+        }
+      });
+    }
+  }, [data, finalScales, width, height]);
+
+  const handleMouseLeave = () => setTooltip(null);
+
+  if (!dimensions) {
+    return <div ref={containerRef} style={{ width: "100%", height: "100%" }} />;
+  }
+
+  return (
+    <div ref={containerRef} style={{ width: "100%", height: "500px", position: "relative" }}>
+
+      <Tooltip tooltipData={tooltip} />
+
+      <svg ref={svgRef} width={dimensions.width} height={dimensions.height}>
+        <g transform={`translate(${margin.left}, ${margin.top})`}>
+
+          {axisConfigs.map(config => (
+            <Axis key={config.id} config={config} scale={finalScales[config.id]} width={width} height={height} />
+          ))}
+
+          <defs>
+            <clipPath id="chart-clip">
+              <rect x={0} y={0} width={width} height={height} />
+            </clipPath>
+          </defs>
+
+          <g clipPath="url(#chart-clip)">
+            {renderContent({
+              data: data.filter(d => d.visibility),
+              scales: finalScales,
+              width,
+              height
+            })}
+          </g>
+
+          <rect
+            width={width}
+            height={height}
+            fill="transparent"
+            onMouseMove={handleMouseMove}
+            onMouseLeave={handleMouseLeave}
+            style={{ cursor: "crosshair" }}
+          />
+
+          {tooltip && (
+            <line
+              x1={tooltip.x - margin.left}
+              x2={tooltip.x - margin.left}
+              y1={0}
+              y2={height}
+              stroke="#ccc"
+              strokeDasharray="4 4"
+              pointerEvents="none"
+            />
+          )}
+
+        </g>
+      </svg>
+    </div>
+  );
+};
+
+const Axis = ({ config, scale, width, height }: { config: AxisConfig, scale: AnyScale, width: number, height: number }) => {
+  const ref = useRef<SVGGElement>(null);
+
+  useEffect(() => {
+    if (!ref.current || !scale) {
+      return;
+    }
+
+    let axisGenerator;
+    switch (config.position) {
+    case "left": axisGenerator = d3.axisLeft(scale as any); break;
+    case "right": axisGenerator = d3.axisRight(scale as any); break;
+    case "bottom": axisGenerator = d3.axisBottom(scale as any); break;
+    case "top": axisGenerator = d3.axisTop(scale as any); break;
+    }
+
+    // Customisation couleur
+    const group = d3.select(ref.current);
+    group.call(axisGenerator as any);
+
+    if (config.color) {
+      group.selectAll("line").attr("stroke", config.color);
+      group.selectAll("text").attr("fill", config.color);
+      group.selectAll("path").attr("stroke", config.color);
+    }
+
+  }, [scale, config]);
+
+  let transform = "";
+  if (config.position === "bottom") {
+    transform = `translate(0, ${height})`;
+  }
+  if (config.position === "right") {
+    transform = `translate(${width}, 0)`;
+  }
+
+  return <g ref={ref} transform={transform} />;
+};
