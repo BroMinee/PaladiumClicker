@@ -1,6 +1,6 @@
 "use client";
 import { getFactionLeaderboardAction, getPlayerCountHistoryPaladiumAction, getPlayerInfoAction, getPlayerPositionAction } from "@/lib/api/apiServerAction";
-import { constants,  AUTOPROMO_CONFIG } from "@/lib/constants";
+import { AUTOPROMO_CONFIG } from "@/lib/constants";
 import { usePlayerInfoStore } from "@/stores/use-player-info-store";
 import React, { useState, useEffect, useCallback } from "react";
 import { MetierComponentWrapper } from "../MetierList";
@@ -367,6 +367,7 @@ function AutoPromoOverlay() {
   const { config } = useTwitchStore();
   const { nbSeconds } = useTwitchTimeStore();
   const [pourcentage, setPourcentage] = useState<number>(0);
+  const { data: playerInfo } = usePlayerInfoStore();
 
   useEffect(() => {
     const totalTimeInSeconds = config.reduce((res, cur) => {
@@ -383,7 +384,7 @@ function AutoPromoOverlay() {
     <div className="text-center">
       <div className="mb-2">
         <div className="text-8xl font-bold bg-gradient-to-r from-primary via-primary-darker to-primary bg-clip-text text-transparent animate-pulse">
-          {constants.discord.name}
+          {playerInfo?.username}
         </div>
       </div>
       <div className="relative overflow-hidden h-16">

@@ -123,8 +123,8 @@ const AVAILABLE_ELEMENTS: AvailableElements = {
 
 const AUTOPROMO_ELEMENT: AvailableElementWithoutSubOptions = {
   id: "auto-promo",
-  label: "Promotion PalaTracker",
-  icon: "📺",
+  label: "Chargement des données",
+  icon: "🔄",
   hasSubOptions: false
 };
 
@@ -250,7 +250,7 @@ export const TwitchOverlayConfig = ({ username}: { username: string }) => {
             </li>
             <li className="flex items-start">
               <span className="text-primary font-bold mr-3 mt-0.5">✓</span>
-              <span>Auto-promotion du site pendant <strong>15 secondes</strong> à la fin d&apos;un cycle</span>
+              <span>Rechargement des données pendant <strong>15 secondes</strong> à la fin d&apos;un cycle</span>
             </li>
             <li className="flex items-start">
               <span className="text-primary font-bold mr-3 mt-0.5">✓</span>
@@ -495,7 +495,7 @@ export const TwitchOverlayConfig = ({ username}: { username: string }) => {
               <li className="flex items-start">
                 <span className="text-primary font-bold mr-3 mt-0.5">✓</span>
                 <div>
-                  <strong>15 secondes</strong> → Auto-promotion et actualisation des données.
+                  <strong>15 secondes</strong> → Actualisation des données.
                   <ul className="ml-6 mt-2 space-y-1 ">
                     <li>• Affichage du texte &quot;Palatracker&quot; pendant l&apos;actualisation</li>
                   </ul>
