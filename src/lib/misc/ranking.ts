@@ -43,9 +43,9 @@ export function getImagePathFromRankingType(rankingType: string): string {
   case RankingType.clicker:
     imgPath = safeJoinPaths(constants.imgPathRanking, "clicker.png");
     break;
-  case RankingType.alliance:
-    imgPath = safeJoinPaths(constants.imgPathRanking, "alliance.png");
-    break;
+  // case RankingType.alliance:
+  //   imgPath = safeJoinPaths(constants.imgPathRanking, "alliance.png");
+  //   break;
   case RankingType.vote:
     imgPath = safeJoinPaths(constants.imgPathRanking, "vote.png");
     break;
@@ -84,8 +84,8 @@ export function rankingTypeToUserFriendlyText(rankingType: RankingType): string 
     return "KOTH";
   case RankingType.clicker:
     return "Clicker";
-  case RankingType.alliance:
-    return "Alignement";
+  // case RankingType.alliance:
+  //   return "Alignement";
   case RankingType.vote:
     return "Vote";
   default:

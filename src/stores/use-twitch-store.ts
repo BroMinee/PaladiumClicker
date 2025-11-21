@@ -92,7 +92,7 @@ const initialStateExtra: StateExtra = {
     [RankingType["egghunt"]]: 0,
     [RankingType["koth"]]: 0,
     [RankingType["clicker"]]: 0,
-    [RankingType["alliance"]]: 0,
+    // [RankingType["alliance"]]: 0,
   },
   leaderboardFaction: [],
 };

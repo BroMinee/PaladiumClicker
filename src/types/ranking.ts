@@ -11,7 +11,7 @@ export enum RankingType {
   // "chorus" = "chorus",
   "koth" = "koth",
   "clicker" = "clicker",
-  "alliance" = "alliance",
+  // "alliance" = "alliance",
   "vote" = "vote",
 }
 

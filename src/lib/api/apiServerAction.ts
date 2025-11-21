@@ -543,7 +543,7 @@ export async function getPlayerPositionAction(uuid: string): Promise<RankingPosi
   return await fetchWithHeader<{
     boss: number;
     money: number;
-    alliance: number;
+    // alliance: number;
     "job-farmer": number;
     "job-miner": number;
     end: number;
@@ -557,7 +557,7 @@ export async function getPlayerPositionAction(uuid: string): Promise<RankingPosi
     const converted: RankingPositionResponse = {
       boss: data.boss,
       money: data.money,
-      alliance: data.alliance,
+      // alliance: data.alliance,
       "job.farmer": data["job-farmer"],
       "job.miner": data["job-miner"],
       "job.hunter": data["job-hunter"],

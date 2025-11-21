@@ -53,7 +53,7 @@ export function TwitchOverlay({ preview, selectedElements}: { preview?: boolean,
       setRanking({
         boss: Math.round(Math.random() * 10000),
         money: Math.round(Math.random() * 10000),
-        alliance: Math.round(Math.random() * 10000),
+        // alliance: Math.round(Math.random() * 10000),
         "job.farmer": Math.round(Math.random() * 10000),
         "job.miner": Math.round(Math.random() * 10000),
         "job.hunter": Math.round(Math.random() * 10000),

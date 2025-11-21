@@ -103,7 +103,7 @@ const AVAILABLE_ELEMENTS: AvailableElements = {
       { value: RankingType.egghunt, label: "Egghunt" },
       { value: RankingType.koth, label: "Koth" },
       { value: RankingType.clicker, label: "Clicker" },
-      { value: RankingType.alliance, label: "Alignement" },
+      // { value: RankingType.alliance, label: "Alignement" },
 
     ]
   },
