@@ -80,3 +80,16 @@ export function getTotalXPForLevel(level: number) {
 
   return constants.metier_palier[level - 1];
 }
+
+/**
+ * Return the level from the xp amount
+ * @param xp the current xp
+ */
+export function getLevelFromXp(xp: number) {
+  for (let i = 0; i < constants.metier_palier.length; i++) {
+    if (xp < constants.metier_palier[i]) {
+      return i;
+    }
+  }
+  return -1;
+}
