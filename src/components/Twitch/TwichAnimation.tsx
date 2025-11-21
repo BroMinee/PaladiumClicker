@@ -238,7 +238,7 @@ function FactionOverlay() {
         <div className="text-sm text-purple-300 font-semibold uppercase tracking-wider mb-1">
           Faction
         </div>
-        <h2 className="text-4xl font-black bg-gradient-to-r from-purple-400 via-pink-400 to-blue-400 bg-clip-text text-transparent mb-2">
+        <h2 className="text-4xl font-black text-primary mb-2">
           {playerInfo.faction.name}
         </h2>
         <div className="h-1 w-48 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full"></div>
@@ -284,7 +284,7 @@ function MoneyOverlay() {
       </div>
 
       <div className="flex items-baseline gap-3">
-        <span className="text-6xl font-black bg-gradient-to-r from-yellow-400 via-orange-400 to-red-500 bg-clip-text text-transparent">
+        <span className="text-6xl font-black text-primary">
           {playerInfo?.money.toLocaleString("fr-FR")} $
         </span>
       </div>
@@ -339,7 +339,7 @@ function ClassementOverlay() {
       </div>
 
       <div className="flex items-baseline gap-3">
-        <span className="text-6xl font-black bg-gradient-to-r from-yellow-400 via-orange-400 to-red-500 bg-clip-text text-transparent">
+        <span className="text-6xl font-black text-primary">
           #{ranking[currentConfig.subOption].toLocaleString("fr-FR")}
         </span>
         <span className="text-2xl text-gray-400 font-medium">TOP</span>
@@ -383,7 +383,7 @@ function AutoPromoOverlay() {
   return <div className="flex items-center justify-center">
     <div className="text-center">
       <div className="mb-2">
-        <div className="text-8xl font-bold bg-gradient-to-r from-primary via-primary-darker to-primary bg-clip-text text-transparent animate-pulse">
+        <div className="text-8xl font-bold text-primary animate-pulse">
           {playerInfo?.username}
         </div>
       </div>
