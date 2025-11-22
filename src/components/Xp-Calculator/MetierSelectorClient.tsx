@@ -302,8 +302,7 @@ export function DisplayDailyDoubleRank({ dailyBonus, doubleXp }: { dailyBonus: n
   const { data: playerInfo } = usePlayerInfoStore();
 
   const bonusXpRank = getBonusRank(playerInfo?.rank);
-  const bonusSummerRush = 300;
-  return <>{dailyBonus + doubleXp + bonusXpRank + bonusSummerRush}%</>;
+  return <>{dailyBonus + doubleXp + bonusXpRank}%</>;
 }
 
 /**
@@ -382,8 +381,7 @@ function DisplayXpNeededWithDouble({ searchParams, xp, element }: {
   }
 
   const bonusXpRank = getBonusRank(playerInfo?.rank);
-  const bonusSummerRush = 300;
-  const bonusXpWithoutDouble = bonusSummerRush + bonusXpRank + (searchParams.dailyBonus ?? 0);
+  const bonusXpWithoutDouble = bonusXpRank + (searchParams.dailyBonus ?? 0);
   const bonusXpDouble = bonusXpWithoutDouble + (searchParams.double ? 100 : 0);
   const xpNeededWithDoubleXP = (xpNeeded / fortuneBonus) / ((100 + bonusXpDouble) / 100);
 
@@ -392,7 +390,7 @@ function DisplayXpNeededWithDouble({ searchParams, xp, element }: {
 
 /**
  * Calculates and displays the number of 1000 xp bottle needed to reach the target XP,
- * taking into account the player's rank bonus, summer rush bonus, and daily bonus, but excluding double XP,
+ * taking into account the player's rank bonus and daily bonus, but excluding double XP,
  * since job bottle are not affected by double XP potion.
  *
  * @param searchParams Current search parameters of the page
@@ -402,8 +400,7 @@ export function DisplayXpNeededWithBottle({ searchParams }: { searchParams: sear
   const xpNeeded = getXpDiff(playerInfo, searchParams);
 
   const bonusXpRank = getBonusRank(playerInfo?.rank);
-  const bonusSummerRush = 300;
-  const bonusXpWithoutDouble = bonusSummerRush + bonusXpRank + (searchParams.dailyBonus ?? 0);
+  const bonusXpWithoutDouble = bonusXpRank + (searchParams.dailyBonus ?? 0);
   const xpNeededWithoutDoubleXP = xpNeeded / ((100 + bonusXpWithoutDouble) / 100);
   return <>{formatPrice(Math.ceil(xpNeededWithoutDoubleXP / 1000))} fois</>;
 }

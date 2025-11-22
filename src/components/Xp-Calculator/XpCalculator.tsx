@@ -108,8 +108,6 @@ export function XpBonus({ params, searchParams }: {
                   </Button>
                 </PopoverTrigger>
                 <PopoverContent className="w-80">
-                  Summer Rush: 300%
-                  <br/>
                   Double XP: {doubleXp}%
                   <br/>
                   Bonus Grade: <DisplayXpBonus/>
