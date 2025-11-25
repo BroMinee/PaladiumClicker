@@ -200,5 +200,5 @@ export function getHeadUrl(uuid: string | undefined) {
   if(!uuid || uuid === "") {
     return "/img/palatracker_head.png";
   } // palatracker skin
-  return `https://crafatar.com/avatars/${uuid}?size=8&overlay`;
+  return `https://mineskin.eu/helm/${uuid}`;
 }

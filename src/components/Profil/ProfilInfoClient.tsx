@@ -104,11 +104,11 @@ export function PlayerSkin() {
   const { data: playerInfo } = usePlayerInfoStore();
 
   const skinUrl = `https://mineskin.eu/skin/${playerInfo?.uuid ?? "fhjueisfh"}`;
-  const capeUrl = `https://crafatar.com/capes/${playerInfo?.uuid}`;
+  // const capeUrl = `https://crafatar.com/capes/${playerInfo?.uuid}`;
   return <ErrorBoundary fallback={<SkinFallback/>}>
     <ReactSkinview3d className="!w-full !h-full rounded-md"
       skinUrl={skinUrl}
-      capeUrl={capeUrl}
+      capeUrl={undefined}
       height="400"
       width="400"
       options={{
@@ -194,7 +194,7 @@ export function PlayerFriends() {
             <Card className="hover:scale-105 duration-300 mt-4 ml-1.5 mr-1.5 cursor-pointer">
               <CardContent className="md:pt-6 space-y-2">
                 <div className="flex flex-col items-center justify-center gap-2">
-                  <Image src={`https://crafatar.com/avatars/${player.uuid}?size=8&overlay`}
+                  <Image src={`https://mineskin.eu/helm/${player.uuid}`}
                          alt="Icône"
                          width={48} height={48}
                          unoptimized={true}

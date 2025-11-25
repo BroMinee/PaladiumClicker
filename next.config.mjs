@@ -5,7 +5,7 @@ const nextConfig = {
         remotePatterns: [
             {
                 protocol: 'https',
-                hostname: 'crafatar.com',
+                hostname: 'mineskin.eu',
                 pathname: '/**',
             },
             {

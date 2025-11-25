@@ -89,7 +89,7 @@ export function DetailedMarketOffer({ itemSelected, offer }: { itemSelected: Opt
       </div>
     </div>
     <div className="md:ml-4 flex md:w-[35%] flex-col xl:flex-row items-center gap-4">
-      <Image src={`https://crafatar.com/avatars/${offer.seller}?size=8&overlay`}
+      <Image src={`https://mineskin.eu/helm/${offer.seller}`}
         className="w-12 h-12 pixelated rounded-md"
         alt={"Skin"} width={0} height={0}
         unoptimized={true}
