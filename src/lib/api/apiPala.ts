@@ -79,10 +79,14 @@ const getPaladiumProfileByPseudo = async (pseudo: string): Promise<PaladiumPlaye
   });
 };
 
-const getPaladiumLeaderboardPositionByUUID = async (uuid: string, username: string): Promise<string> => {
-  const response = await fetchWithHeader<PaladiumRanking>(`${PALADIUM_API_URL}/v1/paladium/ranking/position/clicker/${uuid}`).catch((e: Error) => {
-    const message = e.message;
-    return redirect(`/error?message=Impossible de récupérer ta position dans le classement. : ${message}&username=${username}`);
+const getPaladiumLeaderboardPositionByUUID = async (uuid: string): Promise<string> => {
+  const response = await fetchWithHeader<PaladiumRanking>(`${PALADIUM_API_URL}/v1/paladium/ranking/position/clicker/${uuid}`).catch(() => {
+    return {
+      uuid: uuid,
+      leaderboard: "clicker",
+      position: -1,
+      ranked: false,
+    };
   });
   return response.ranked ? response.position.toString() : "Unranked";
 };
@@ -187,7 +191,7 @@ export const getPlayerInfo = async (pseudo: string): Promise<PlayerInfo> => {
   const p2 = getAuctionHouseInfo(paladiumProfil.uuid, paladiumProfil.username);
   const p3 = getFriendsList(paladiumProfil.uuid);
   const p4 = getJobsFromUUID(paladiumProfil.uuid, paladiumProfil.username);
-  const p5 = getPaladiumLeaderboardPositionByUUID(paladiumProfil.uuid, paladiumProfil.username);
+  const p5 = getPaladiumLeaderboardPositionByUUID(paladiumProfil.uuid);
   const p6 = getFactionInfo(paladiumProfil.faction === "" ? "Wilderness" : paladiumProfil.faction);
   const p7 = getViewsFromUUID(paladiumProfil.uuid);
   const p8 = getPlayerAchievements(paladiumProfil.uuid);
