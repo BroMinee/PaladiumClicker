@@ -56,8 +56,8 @@ export function AchievementSection() {
                 <DisplayProgressionAchievement deno={achievements.length} num={achievements.filter(a => isCompleted(a)).length} height="h-3" />
               </h4>
               <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 gap-3">
-                {achievements.map((ach) => (
-                  <DetailAchievement key={ach.name} achievement={ach} itemList={itemList} />
+                {achievements.map((ach, index) => (
+                  <DetailAchievement key={ach.name + index} achievement={ach} itemList={itemList} />
                 ))}
               </div>
             </div>
@@ -134,10 +134,6 @@ function DetailAchievement({ achievement, itemList }: {
   let closestItemName = itemList.find((item) => item.value === constants.dictAchievementIdToIcon.get(achievement.icon))?.img ?? "unknown.webp";
   if (closestItemName === "barriere.webp" || closestItemName === "unknown.webp") {
     closestItemName = "unknown.webp";
-  }
-
-  if (achievement.name === "Achievements I") {
-    console.log(achievement);
   }
 
   const cardClasses = isCompleted(achievement)
