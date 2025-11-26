@@ -14,7 +14,7 @@ export function PlayerSkin() {
   }
 
   return <Image
-    src={`https://mineskin.eu/avatar/${playerInfo.uuid}/16`}
+    src={`https://mineskin.eu/helm/${playerInfo.uuid}/16`}
     alt="Skin du joueur"
     className="w-full h-full object-cover pixelated"
     width={0}

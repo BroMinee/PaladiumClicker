@@ -22,7 +22,7 @@ export function FactionMembersList() {
         <ClickableLink href={`${constants.profilPath}/${player.username}`} key={player.uuid} className="hover:scale-105">
           <div className="pt-6 space-y-2 whitespace-nowrap text-sm font-medium ease-out motion-reduce:transition-none focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 relative p-3 rounded-lg flex flex-col items-center justify-center text-center transition-all duration-150 bg-gray-800 border border-gray-700 text-gray-400 hover:bg-gray-700">
             <div className="flex flex-col items-center justify-center gap-2">
-              <UnOptimizedImage src={`https://crafatar.com/avatars/${player.uuid}?size=8&overlay`}
+              <UnOptimizedImage src={`https://mineskin.eu/helm/${player.uuid}?size=8&overlay`}
                 alt="Icône"
                 width={48} height={48}
                 unoptimized={true}

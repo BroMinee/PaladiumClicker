@@ -27,7 +27,7 @@ export function FriendsSection() {
           className="flex flex-col items-center text-center"
         >
           <Image
-            src={`https://mineskin.eu/avatar/${friend.uuid}/16`}
+            src={`https://mineskin.eu/helm/${friend.uuid}/16`}
             alt={friend.name}
             width={0}
             height={0}
