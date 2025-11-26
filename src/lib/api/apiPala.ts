@@ -241,7 +241,7 @@ export const getPlayerInfo = async (pseudo: string): Promise<PlayerInfo> => {
   initialPlayerInfo.leaderboard = leaderboardPosition;
   initialPlayerInfo.faction = paladiumFactionInfo;
   initialPlayerInfo.view_count = viewCount;
-  initialPlayerInfo.achievements = achievements;
+  initialPlayerInfo.achievements = achievements.filter(achievement => achievement.icon);
   initialPlayerInfo.alliance = paladiumProfil.alliance;
   initialPlayerInfo.currentBanner = paladiumProfil.currentBanner;
   initialPlayerInfo.description = paladiumProfil.description;

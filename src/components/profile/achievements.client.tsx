@@ -2,61 +2,185 @@
 
 import { usePlayerInfoStore } from "@/stores/use-player-info-store";
 import { LoadingSpinner } from "@/components/ui/loading-spinner";
+import { Achievement, OptionType } from "@/types";
+import { CategoryEnum, getCategoryInfo, groupAndSortAchievements, isCompleted, orderBy, romanToInt, safeJoinPaths } from "@/lib/misc";
+import { constants } from "@/lib/constants";
+import { cn } from "@/lib/utils";
+import { TooltipProvider } from "@/components/shared/tooltip";
+import { HoverCard, HoverCardContent, HoverCardTrigger } from "@/components/shared/hover";
 
-const IconCheckBadge = () => (
-  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-8 h-8 text-yellow-400">
-    <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12c0 1.268-.6 2.39-1.5 3.055M12 21c-4.97 0-9-4.03-9-9s4.03-9 9-9 9 4.03 9 9c0 .194 0 .385-.022.572M21 12a9 9 0 0 0-9-9M3.055 15A9 9 0 0 1 3 12m0 0a9 9 0 0 1 9-9" />
-  </svg>
-);
+import { FaCheck, FaLock } from "react-icons/fa";
+import { ReactNode, useEffect, useMemo, useState } from "react";
+import { getAllItemsServerAction } from "@/lib/api/apiServerAction";
+import { UnOptimizedImage } from "../ui/image-loading";
 
 /**
- * component TODO anyway
+ * Display all the achievement vertically, sorted by completion and order by category.
  */
 export function AchievementSection() {
   const { data: playerInfo } = usePlayerInfoStore();
+  const [itemList, setItemList] = useState<OptionType[]>([]);
+
+  useEffect(() => {
+    getAllItemsServerAction().then(setItemList);
+  }, [setItemList]);
+
+  const groupedAchievements = useMemo(() => {
+    if (!playerInfo) {
+      return {} as Record<CategoryEnum, Achievement[]>;
+    }
+    return groupAndSortAchievements(playerInfo.achievements);
+  }, [playerInfo]);
+
   if (!playerInfo) {
     return <LoadingSpinner />;
   }
+
   return (
-    <div>
-      <h3 className="text-xl font-semibold mb-4">
-        Succès Débloqués
-      </h3>
-      <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8 gap-3">
-        {playerInfo.achievements.map((ach) => (
-          <AchievementCard
-            key={ach.name}
-            name={ach.name}
-          />
-        ))}
+    <TooltipProvider delayDuration={100}>
+      <div>
+        <div className="font-bold">
+          <h3 className="text-xl font-semibold mb-4">Succès Débloqués</h3>
+          <DisplayProgressionAchievement deno={playerInfo.achievements.length} num={playerInfo.achievements.filter(a => isCompleted(a)).length} height="h-3" />
+        </div>
+        {Object.values(CategoryEnum).map((category) => {
+          const achievements = groupedAchievements[category];
+          if (!achievements || achievements.length === 0) {
+            return null;
+          }
+
+          return (
+            <div key={category} className="mb-8">
+              <h4 className="text-lg mb-3 mt-4 border-b border-gray-700 pb-1">
+                {getCategoryInfo(category).displayText}
+                <DisplayProgressionAchievement deno={achievements.length} num={achievements.filter(a => isCompleted(a)).length} height="h-3" />
+              </h4>
+              <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 gap-3">
+                {achievements.map((ach) => (
+                  <DetailAchievement key={ach.name} achievement={ach} itemList={itemList} />
+                ))}
+              </div>
+            </div>
+          );
+        })}
       </div>
-    </div>
+    </TooltipProvider>
   );
 }
 
-function AchievementCard({ name }: { name: string }) {
-  const unlocked = true;
+const AchievementInfo = ({ title, img, value, children }: { title: string, img: string, value: string, children: ReactNode }) => {
   return (
-    <div
-      className={`flex flex-col items-center justify-center text-center p-3 rounded-lg aspect-square
-        ${
-    unlocked
-      ? "bg-yellow-600/30 border border-yellow-500"
-      : "bg-gray-700 border border-gray-600 grayscale opacity-60"
-    }
-      `}
-      title={name}
-    >
-      {unlocked ? (
-        <IconCheckBadge/>
-      ) : (
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-8 h-8 text-gray-400">
-          <path strokeLinecap="round" strokeLinejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 1 0-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 0 0 2.25-2.25v-6.75a2.25 2.25 0 0 0-2.25-2.25H6.75a2.25 2.25 0 0 0-2.25 2.25v6.75a2.25 2.25 0 0 0 2.25 2.25Z" />
-        </svg>
-      )}
-      <span className="text-xs mt-2 truncate w-full">
-        {name}
-      </span>
+    <div className="flex items-center space-x-3 p-2 w-full">
+      <div className="flex-shrink-0 w-10 h-10">
+        <UnOptimizedImage src={img} alt={title} width={0} height={0} className="w-full h-full object-contain pixelated" />
+      </div>
+      <div className="flex-grow min-w-0">
+        <h3 className="text-sm font-semibold truncate text-white">{title}</h3>
+        <p className="text-xs truncate">{value}</p>
+        {children}
+      </div>
     </div>
+  );
+};
+
+const DisplayProgressionAchievement = ({ num, deno, className, height = "h-1" }: { num: number, deno: number, className?: string, height?: string }) => {
+  const value = deno === 0 ? 100 : num * 100 / deno;
+  const progressPercent = Math.min(100, Math.max(0, value));
+  return (
+    <div className={cn("mt-1 w-full", className)}>
+      <div className={cn("bg-gray-600 rounded-full w-full", height)}>
+        <div
+          className={cn("rounded-full transition-all duration-500", height)}
+          style={{ width: `${progressPercent}%`, backgroundColor: progressPercent === 100 ? "#F59E0B" : "#6B7280" }}
+        />
+      </div>
+      <div className="flex justify-between items-center w-full text-xs text-gray-400 mt-1">
+        <p>{(num * 100 / deno).toFixed(2)}%</p>
+        <p>{num} / {deno}</p>
+      </div>
+    </div>
+  );
+};
+
+const SubAchievementDisplay = ({ subAchievement }: { subAchievement: Achievement }) => {
+  const subUnlocked = isCompleted(subAchievement);
+  const cardClasses = subUnlocked
+    ? "bg-green-400/50 border border-[#26E251] text-white"
+    : "bg-gray-700/50 border-gray-600 text-gray-400 grayscale opacity-80";
+
+  return (
+    <div className={cn("flex items-center text-xs p-2 rounded-md mt-1 border transition-colors hover:bg-gray-700 cursor-help", cardClasses)}>
+      <div className="flex-grow truncate mr-2">{subAchievement.name}: {subAchievement.description}</div>
+      {subUnlocked ? <FaCheck className="w-4 h-4 text-[#26E251] flex-shrink-0" /> : <FaLock className="w-4 h-4 text-gray-500 flex-shrink-0" />}
+    </div>
+  );
+};
+
+function DetailAchievement({ achievement, itemList }: {
+  achievement: Achievement,
+  itemList: OptionType[]
+}) {
+  let achievementProgress;
+  if (isCompleted(achievement)) {
+    achievementProgress = achievement.subAchievements.length === 0 ? achievement.amount : achievement.subAchievements.length;
+  } else if (achievement.subAchievements.length > 0) {
+    achievementProgress = achievement.subAchievements.reduce((acc, curr) => acc + (isCompleted(curr) ? 1 : 0), 0);
+  } else {
+    achievementProgress = achievement.progress;
+  }
+
+  const amount = achievement.amount === -1 ? achievement.subAchievements.length : achievement.amount;
+
+  let closestItemName = itemList.find((item) => item.value === constants.dictAchievementIdToIcon.get(achievement.icon))?.img ?? "unknown.webp";
+  if (closestItemName === "barriere.webp" || closestItemName === "unknown.webp") {
+    closestItemName = "unknown.webp";
+  }
+
+  if (achievement.name === "Achievements I") {
+    console.log(achievement);
+  }
+
+  const cardClasses = isCompleted(achievement)
+    ? "bg-green-400/50 hover:bg-green-500/50 border border-[#26E251]"
+    : "bg-gray-700/50 border border-gray-600 hover:bg-gray-700/70";
+
+  const CardContent = (
+    <div className={cn("rounded-lg my-2 transition-all shadow-md w-full", cardClasses)}>
+      <AchievementInfo
+        title={achievement.name}
+        img={isCompleted(achievement) ? safeJoinPaths(constants.imgPathProfile, "completed.png") : `/AH_img/${closestItemName}`}
+        value={achievement.description}
+      >
+        <DisplayProgressionAchievement num={achievementProgress} deno={amount} />
+      </AchievementInfo>
+    </div>
+  );
+
+  return (
+    <HoverCard openDelay={200} closeDelay={150}>
+      <HoverCardTrigger asChild>
+        <div className="cursor-pointer">
+          {CardContent}
+        </div>
+      </HoverCardTrigger>
+
+      <HoverCardContent className="w-fit overflow-y-auto p-2 shadow-xl">
+        <div className="space-y-1">
+          <h4 className="text-xl font-bold text-gray-300 mb-2 px-1 pb-1">
+            {achievement.name} ({achievementProgress === -1 ? 0 : achievementProgress}/{amount})
+          </h4>
+          <div className="text-sm font-bold text-gray-300 pb-1 px-1 pb-2">
+            {achievement.description}
+          </div>
+          {orderBy(achievement.subAchievements, (e) => {
+            const match = e.name.match(/\b[IVXLCDM]+\b/);
+            const roman = match ? match[0] : "";
+            return romanToInt(roman);
+          }).map((a) => (
+            <SubAchievementDisplay key={a.id} subAchievement={a} />
+          ))}
+        </div>
+      </HoverCardContent>
+    </HoverCard>
   );
 }

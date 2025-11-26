@@ -31,3 +31,48 @@ export function getRoleColor(role: Role) {
 export function adaptPlurial(word: string, count: number) {
   return count >= 2 ? word + "s" : word;
 }
+
+type Key = string | number | symbol;
+
+/**
+ * groupBy using the lambda.
+ */
+export function groupBy<T, K extends Key>(
+  data: T[],
+  fn: (item: T) => K
+): Record<K, T[]> {
+  return data.reduce((acc, item) => {
+    const key = fn(item);
+
+    if (!acc[key]) {
+      acc[key] = [];
+    }
+
+    acc[key].push(item);
+    return acc;
+  }, {} as Record<K, T[]>);
+}
+
+type Order = "asc" | "desc";
+
+/**
+ * orderB using the lambda
+ */
+export function orderBy<T>(
+  data: T[],
+  selector: (item: T) => any,
+  order: Order = "asc"
+): T[] {
+  return [...data].sort((a, b) => {
+    const aValue = selector(a);
+    const bValue = selector(b);
+
+    if (aValue < bValue) {
+      return order === "asc" ? -1 : 1;
+    }
+    if (aValue > bValue) {
+      return order === "asc" ? 1 : -1;
+    }
+    return 0;
+  });
+}

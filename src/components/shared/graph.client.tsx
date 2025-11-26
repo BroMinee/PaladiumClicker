@@ -4,7 +4,7 @@ import { Dataset, AxisConfig, ChartRendererProps, AnyScale, AxisDomain, TooltipD
 import React, { useEffect, useRef, useMemo, useState, useCallback, RefObject } from "react";
 import * as d3 from "d3";
 
-import './graph.css';
+import "./graph.css";
 
 /**
  * Render the tooltip
@@ -86,9 +86,9 @@ interface ChartContainerProps<TX extends AxisDomain, TY extends AxisDomain> {
 
 const createScale = (type: "date" | "number", range: [number, number]) => {
   switch (type) {
-    case "date": return d3.scaleTime().range(range);
-    case "number": return d3.scaleLinear().range(range);
-    default: return d3.scaleLinear().range(range);
+  case "date": return d3.scaleTime().range(range);
+  case "number": return d3.scaleLinear().range(range);
+  default: return d3.scaleLinear().range(range);
   }
 };
 
@@ -305,19 +305,21 @@ const Axis = ({ config, scale, width, height }: { config: AxisConfig, scale: Any
   const ref = useRef<SVGGElement>(null);
 
   useEffect(() => {
-    if (!ref.current || !scale) return;
+    if (!ref.current || !scale) {
+      return;
+    }
 
     const format = d3.timeFormat("%Hh%M %m-%d");
 
     let axisGenerator;
     switch (config.position) {
-      case "left": axisGenerator = d3.axisLeft(scale as any); break;
-      case "right": axisGenerator = d3.axisRight(scale as any); break;
-      case "bottom":
-        axisGenerator = d3.axisBottom(scale as any)
-          .tickFormat(config.type === "date" ? (format as any) : null);
-        break;
-      case "top": axisGenerator = d3.axisTop(scale as any); break;
+    case "left": axisGenerator = d3.axisLeft(scale as any); break;
+    case "right": axisGenerator = d3.axisRight(scale as any); break;
+    case "bottom":
+      axisGenerator = d3.axisBottom(scale as any)
+        .tickFormat(config.type === "date" ? (format as any) : null);
+      break;
+    case "top": axisGenerator = d3.axisTop(scale as any); break;
     }
 
     const group = d3.select(ref.current);
@@ -332,7 +334,9 @@ const Axis = ({ config, scale, width, height }: { config: AxisConfig, scale: Any
 
       ticks.forEach((tick, i) => {
         const text = tick.querySelector("text");
-        if (!text) return;
+        if (!text) {
+          return;
+        }
 
         const bbox = text.getBBox();
         const tickLeft = bbox.x;
@@ -369,7 +373,6 @@ const Axis = ({ config, scale, width, height }: { config: AxisConfig, scale: Any
       group.selectAll("path").attr("stroke", config.color);
     }
   }, [scale, config]);
-
 
   let transform = "";
   if (config.position === "bottom") {

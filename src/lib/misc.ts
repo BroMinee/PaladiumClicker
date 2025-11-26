@@ -1,3 +1,4 @@
+export * from "./misc/achievements";
 export * from "./misc/admin-shop";
 export * from "./misc/clicker";
 export * from "./misc/craft";
