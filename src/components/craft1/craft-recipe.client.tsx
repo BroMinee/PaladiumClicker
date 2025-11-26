@@ -346,7 +346,7 @@ function TreeNode({ root, onToggleChecked, isRoot = false }: { root: Tree<NodeTy
             onClick={() => setShowRecipe(!showRecipe)}
             className="text-xs text-gray-400 hover:text-white px-2 py-1 bg-gray-800 hover:bg-gray-600 rounded-full flex items-center transition-colors"
           >
-            Composants
+            Ressources
             <IconChevronDown className={`ml-1 transition-transform ${showRecipe ? "rotate-180" : ""}`} />
           </button>
         )}
