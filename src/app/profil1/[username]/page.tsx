@@ -10,8 +10,7 @@ import { PlayerUsername } from "@/components/profile/player-username.client";
 import { PlayerRank } from "@/components/profile/player-rank.client";
 import { PlayerFactionName } from "@/components/profile/player-faction.client";
 import { FactionEmblemClient } from "@/components/Profil/FactionInfoClient";
-import { constants } from "@/lib/constants";
-import { JobCard } from "@/components/profile/player-jobs";
+import { JobsCard } from "@/components/profile/player-jobs";
 
 type searchParamsProfilPage = {
   section?: string,
@@ -69,17 +68,7 @@ export default async function ProfilePage(
         </div>
 
         <PlayerStats/>
-
-        <div className="mb-8">
-          <h2 className="text-2xl font-semibold mb-4">Métiers</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-            {constants.METIER_KEY.map(e => {
-              return <JobCard jobName={e} key={e}/>;
-            })}
-
-          </div>
-        </div>
-
+        <JobsCard/>
         <ProfileSectionSelector />
       </div>
     </div>

@@ -2,6 +2,7 @@ import { Card } from "../ui/card-v2";
 import { MetierKey } from "@/types";
 import { JobLevel, JobProgressbar } from "./player-jobs.client";
 import { prettyJobName } from "@/lib/misc";
+import { constants } from "@/lib/constants";
 
 /**
  * Display the job card
@@ -21,4 +22,17 @@ export function JobCard({ jobName }: { jobName: MetierKey }) {
       </div>
     </Card>
   );
+}
+
+export function JobsCard() {
+  return (
+  <div className="mb-8">
+    <h2 className="text-2xl font-semibold mb-4">Métiers</h2>
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+      {constants.METIER_KEY.map(e => {
+        return <JobCard jobName={e} key={e}/>;
+      })}
+
+    </div>
+  </div>)
 }

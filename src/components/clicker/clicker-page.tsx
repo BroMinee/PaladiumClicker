@@ -2,6 +2,7 @@ import React, { ReactNode } from "react";
 import { BestBuyCard, StatButton, StatRPS, StatSleepingCoin, StatTotalProd } from "@/components/clicker/statistics.client";
 import { BuildingInputCard, UpgradeSectionClient } from "@/components/clicker/inputs.client";
 import { Card } from "@/components/ui/card-v2";
+import { JobsCard } from "@/components/profile/player-jobs";
 
 /**
  * [Clicker Page](https://palatracker.bromine.fr/clicker-optimizer/BroMine__)
@@ -12,6 +13,7 @@ export function ClickerPage() {
     <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
 
       <div className="lg:col-span-2 space-y-10">
+        <JobsCard/>
         <BuildingInputCard/>
         <UpgradeSectionClient/>
       </div>
