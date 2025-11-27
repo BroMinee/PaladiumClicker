@@ -37,14 +37,14 @@ export type AnyScale =
   | d3.ScaleLinear<number, number>
   | d3.ScaleBand<string>;
 
-export interface TooltipData {
+export interface TooltipData<TY extends AxisDomain> {
   x: number;
   y: number;
   content: {
     label: string;
     values: {
       name: string;
-      value: string | number;
+      value: TY;
       color: string
     }[];
   } | null;

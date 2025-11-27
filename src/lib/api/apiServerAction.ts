@@ -16,7 +16,11 @@ import {
   PaladiumFactionLeaderboard,
   PlayerCountHistory,
   RankingPositionResponse,
+  RankingResponse,
+  rankingResponseSubType,
+  RankingType,
   Role,
+  User,
   WebHookCreate,
   WebHookType
 } from "@/types";
@@ -581,3 +585,39 @@ export const getFactionLeaderboardAction = async (): Promise<PaladiumFactionLead
     return [];
   });
 };
+
+/**
+ * Fetches the leaderboard for a given ranking type.
+ * @param rankingType The type of ranking to fetch.
+ * @param limit Number of entries to retrieve (default: 10).
+ * @param offset Number of entries to skip for pagination (default: 0).
+ */
+export async function getRankingLeaderboardAction(rankingType: RankingType, limit = 10, offset = 0): Promise<Array<{ [x: string]: rankingResponseSubType[] }>> {
+  return await fetchWithHeader<Array<{ [x: string]: rankingResponseSubType[] }>>(`${API_PALATRACKER}/v1/ranking/${rankingType}/all?limit=${limit}&offset=${offset}`, 60*60, "", 10000);
+}
+
+/**
+ * Fetches the leaderboard data for a specific player by UUID and ranking type.
+ * @param uuid The UUID of the player.
+ * @param rankingType The type of ranking to fetch.
+ */
+export async function getRankingLeaderboardPlayerUUIDAction(uuid: string, rankingType: RankingType): Promise<RankingResponse> {
+  return await fetchWithHeader<RankingResponse>(`${API_PALATRACKER}/v1/ranking/${rankingType}/${uuid}`, 60*60);
+}
+
+/**
+ * Fetches the ranking leaderboard for a specific player by username.
+ * @param username The player's username.
+ * @param rankingType The type of ranking to fetch.
+ */
+export async function getRankingLeaderboardPlayerUsernameAction(username: string, rankingType: RankingType): Promise<RankingResponse> {
+  return await fetchWithHeader<RankingResponse>(`${API_PALATRACKER}/v1/ranking/${rankingType}/username/${username}`, 60*60);
+}
+
+/**
+ * Fetches username that are match the given username using %username% pattern
+ * @param partialUsername part of a username
+ */
+export async function getSimilareUsernames(partialUsername: string): Promise<User[]> {
+  return await fetchWithHeader<User[]>(`${API_PALATRACKER}/v1/user/getUsers/${partialUsername}`, 60*60);
+}

@@ -10,6 +10,7 @@ import {
   PlayerCountHistory,
   ProfilViewType,
   RankingResponse,
+  rankingResponseSubType,
   RankingType,
   Role,
   RoleResponse,
@@ -70,8 +71,8 @@ export const getViewsFromUUID = async (uuid: string): Promise<ProfilViewType> =>
  * @param limit Number of entries to retrieve (default: 10).
  * @param offset Number of entries to skip for pagination (default: 0).
  */
-export async function getRankingLeaderboard(rankingType: RankingType, limit = 10, offset = 0): Promise<RankingResponse> {
-  return await fetchWithHeader<RankingResponse>(`${API_PALATRACKER}/v1/ranking/${rankingType}/all?limit=${limit}&offset=${offset}`, 60*60, "", 10000);
+export async function getRankingLeaderboard(rankingType: RankingType, limit = 10, offset = 0): Promise<Array<{ [x: string]: rankingResponseSubType[] }>> {
+  return await fetchWithHeader<Array<{ [x: string]: rankingResponseSubType[] }>>(`${API_PALATRACKER}/v1/ranking/${rankingType}/all?limit=${limit}&offset=${offset}`, 60*60, "", 10000);
 }
 
 /**

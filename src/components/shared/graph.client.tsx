@@ -5,11 +5,12 @@ import React, { useEffect, useRef, useMemo, useState, useCallback, RefObject } f
 import * as d3 from "d3";
 
 import "./graph.css";
+import { formatPrice, orderBy } from "@/lib/misc";
 
 /**
  * Render the tooltip
  */
-export const Tooltip = ({ tooltipData }: { tooltipData: TooltipData | null }) => {
+export const Tooltip = <TY extends AxisDomain> ({ tooltipData }: { tooltipData: TooltipData<TY> | null }) => {
   if (!tooltipData || !tooltipData.content) {
     return null;
   }
@@ -39,7 +40,7 @@ export const Tooltip = ({ tooltipData }: { tooltipData: TooltipData | null }) =>
         <div key={i} style={{ display: "flex", alignItems: "center", marginBottom: "3px" }}>
           <span style={{ width: "8px", height: "8px", borderRadius: "50%", backgroundColor: v.color, marginRight: "6px" }}></span>
           <span style={{ flex: 1 }}>{v.name}:</span>
-          <strong>{v.value}</strong>
+          <strong>{typeof v.value === "number" ? formatPrice(v.value) : (v.value instanceof Date ? v.value.toLocaleDateString() : v.value)}</strong>
         </div>
       ))}
     </div>
@@ -71,19 +72,6 @@ export const useResizeObserver = (ref: RefObject<HTMLElement | null>): DOMRectRe
   return dimensions;
 };
 
-interface Margin {
-  top: number;
-  right: number;
-  bottom: number;
-  left: number;
-}
-
-interface ChartContainerProps<TX extends AxisDomain, TY extends AxisDomain> {
-  data: Dataset<TX, TY>[];
-  renderContent: (props: ChartRendererProps<TX, TY>) => React.ReactNode;
-  margin?: Margin;
-}
-
 const createScale = (type: "date" | "number", range: [number, number]) => {
   switch (type) {
   case "date": return d3.scaleTime().range(range);
@@ -94,7 +82,7 @@ const createScale = (type: "date" | "number", range: [number, number]) => {
 
 interface ChartContainerProps<TX extends AxisDomain, TY extends AxisDomain> {
   data: Dataset<TX, TY>[];
-  axisConfigs: AxisConfig[]; // On passe la config des axes ici
+  axisConfigs: AxisConfig[];
   renderContent: (props: ChartRendererProps<TX, TY>) => React.ReactNode;
   margin?: { top: number; right: number; bottom: number; left: number };
 }
@@ -117,7 +105,7 @@ export const ChartContainer = <TX extends AxisDomain, TY extends AxisDomain>({
   const dimensions = useResizeObserver(containerRef);
   const [zoomTransform, setZoomTransform] = useState<d3.ZoomTransform>(d3.zoomIdentity);
 
-  const [tooltip, setTooltip] = useState<TooltipData | null>(null);
+  const [tooltip, setTooltip] = useState<TooltipData<TY> | null>(null);
 
   useEffect(() => {
     setZoomTransform(d3.zoomIdentity);
@@ -197,7 +185,7 @@ export const ChartContainer = <TX extends AxisDomain, TY extends AxisDomain>({
       return;
     }
 
-    const tooltipValues: { name: string; value: string; color: string; }[] = [];
+    const tooltipValues: { name: string; value: TY; color: string; }[] = [];
     let label = "";
 
     const visibleData = data.filter(d => d.visibility);
@@ -223,7 +211,7 @@ export const ChartContainer = <TX extends AxisDomain, TY extends AxisDomain>({
 
         tooltipValues.push({
           name: dataset.name,
-          value: typeof point.y === "number" ? point.y.toFixed(2) : String(point.y),
+          value: point.y,
           color: dataset.color
         });
       }
@@ -235,7 +223,7 @@ export const ChartContainer = <TX extends AxisDomain, TY extends AxisDomain>({
         y: event.nativeEvent.offsetY,
         content: {
           label,
-          values: tooltipValues
+          values: orderBy(tooltipValues, (e) =>  e.value, "desc")
         }
       });
     }

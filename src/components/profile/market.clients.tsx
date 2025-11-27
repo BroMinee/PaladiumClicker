@@ -72,13 +72,16 @@ export function MarketSection() {
 
 function SaleCard({ sale, itemList }: { sale: AhItemType, itemList: OptionType[] }) {
   const { data: playerInfo } = usePlayerInfoStore();
-  if (!playerInfo) {
-    return <LoadingSpinner />;
-  }
   const [item, setItem] = useState<OptionType | undefined>(undefined);
+
   useEffect(() => {
     setItem(itemList.find(e => e.value === sale.item.name));
   }, [itemList, setItem, sale]);
+
+  if (!playerInfo) {
+    return <LoadingSpinner />;
+  }
+
   const itemImageUrl = `/AH_img/${item?.img ?? "unknown.webp"}`;
   const sellerHeadUrl = `https://mineskin.eu/helm/${playerInfo?.uuid}`;
 
@@ -112,7 +115,7 @@ function SaleCard({ sale, itemList }: { sale: AhItemType, itemList: OptionType[]
         <div className="px-3 pb-1">
           <h4 className="text-sm font-semibold text-gray-200 truncate text-center">
             <span>
-              {item?.label} { sale.renamed ? " (" + sale.name + ")" : ""}
+              {item?.label} {sale.renamed ? " (" + sale.name + ")" : ""}
             </span>
           </h4>
         </div>
@@ -133,7 +136,7 @@ function SaleCard({ sale, itemList }: { sale: AhItemType, itemList: OptionType[]
             <span className="text-gray-400">$</span>
             <div className="flex items-center gap-1 text-green-400 font-bold">
               {sale.price.toLocaleString()}
-              <UnOptimizedImage src={safeJoinPaths(constants.imgPathMarket,"money_icon.png")}
+              <UnOptimizedImage src={safeJoinPaths(constants.imgPathMarket, "money_icon.png")}
                 className="w-fit h-4 pixelated"
                 alt={"money_icon"} width={0} height={0}
               />

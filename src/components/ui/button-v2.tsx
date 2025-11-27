@@ -16,7 +16,7 @@ const buttonVariants = cva(
         ghost: "hover:bg-accent hover:text-accent-foreground",
       },
       size: {
-        none: "border border-input bg-background shadow-sm hover:bg-accent hover:text-accent-foreground",
+        none: "border border-input shadow-sm hover:bg-accent hover:text-accent-foreground",
         default: "h-9 px-4 py-2 rounded-lg",
         sm: "h-8 rounded-md px-3 text-xs",
         lg: "h-10 rounded-md px-8",
@@ -35,11 +35,10 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement>, Var
   className?: string;
   variant?: "none" | "primary" | "secondary" | "default" | "ghost" | "outline";
   size?: "none" | "default" | "sm" | "lg" | "icon" | "card";
-  onClick: () => void;
 }
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ className, variant, size, children, onClick, ...props }, ref) => {
+  ({ className, variant, size, children, ...props }, ref) => {
 
     const baseClasses = cn(
       buttonVariants({ variant, size, className })
@@ -47,7 +46,6 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
 
     return (
       <button
-        onClick={onClick}
         className={baseClasses}
         ref={ref}
         {...props}

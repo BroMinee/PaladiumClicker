@@ -27,7 +27,7 @@ export const LineRenderer = <TX extends AxisDomain, TY extends number>({
           d={lineGenerator(dataset.stats) || ""}
           fill="none"
           stroke={dataset.color}
-          strokeWidth={2}
+          strokeWidth={5}
         />
       ))}
     </>

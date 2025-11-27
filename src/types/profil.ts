@@ -1,3 +1,5 @@
+import { User } from "./internal_db";
+
 export type FriendInfo = {
   uuid: string,
   name: string,
@@ -36,11 +38,7 @@ export type MetiersPossiblyUndefined = {
   miner?: Metier,
 }
 
-export type ProfilViewType =
-  {
-    uuid: string,
-    count: number,
-  }
+export type ProfilViewType = Omit<User, "username">;
 
 export type MountInfo = {
   name: string,

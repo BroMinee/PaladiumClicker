@@ -21,7 +21,7 @@ export default async function GraphRanking({ rankingType, searchParams }: {
 }) {
   let data = [] as RankingResponse;
   try {
-    data = await getRankingLeaderboard(rankingType);
+    data = await getRankingLeaderboard(rankingType) as any;
   } catch (_) {
     redirect("/error?message=Impossible de récupérer les données du classement sélectionné");
   }

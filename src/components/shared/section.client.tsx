@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, JSX } from "react";
+import React, { useState, JSX, ReactNode } from "react";
 import { Card } from "../ui/card-v2";
 
 /**
@@ -10,13 +10,13 @@ import { Card } from "../ui/card-v2";
  */
 export interface TabData<T extends string> {
   key: T;
-  label: string;
+  label: ReactNode;
   content: ((key: T) => JSX.Element);
 }
 
 interface TabButtonProps {
   tabKey: string;
-  label: string;
+  label: ReactNode;
   isActive: boolean;
   onClick: () => void;
 }

@@ -38,3 +38,9 @@ export type RoleResponse =
     role: Role,
     avatar: string,
   }
+
+export type User = {
+  uuid: string,
+  username: string,
+  count: number,
+}
