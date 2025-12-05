@@ -86,10 +86,15 @@ export function getTotalXPForLevel(level: number) {
  * @param xp the current xp
  */
 export function getLevelFromXp(xp: number) {
-  for (let i = 0; i < constants.metier_palier.length; i++) {
+  let i = 0;
+  for (i = 0; i < constants.metier_palier.length; i++) {
     if (xp < constants.metier_palier[i]) {
       return i;
     }
   }
-  return -1;
+  const xpAfterLast = xp - constants.metier_palier[constants.metier_palier.length - 1];
+
+  const extraLevels = Math.floor(xpAfterLast / constants.metier_xp[constants.metier_xp.length-1]);
+
+  return i + extraLevels;
 }
