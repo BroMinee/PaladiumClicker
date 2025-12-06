@@ -2,9 +2,9 @@ name: Tests Pipeline
 
 on:
   push:
-    branches: ["*"]
+    branches: [ toto ]
   pull_request:
-    branches: ["*"]
+    branches: [ toto ]
 
 jobs:
   tests:
