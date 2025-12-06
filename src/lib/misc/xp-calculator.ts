@@ -1,6 +1,6 @@
 import { searchParamsXpBonusPage } from "@/components/Xp-Calculator/XpCalculator";
 import { constants } from "@/lib/constants";
-import { MetierKey, PlayerInfo } from "@/types";
+import { MetierKey, PlayerInfo, PlayerRank } from "@/types";
 
 /**
  * Calculates the experience coefficient for a given level and current XP.
@@ -10,15 +10,13 @@ import { MetierKey, PlayerInfo } from "@/types";
  * @param currentXp The total experience points the player currently has.
  */
 export function getXpCoef(level: number, currentXp: number) {
-  // if (level === 100)
-  //   return 1;
   if (currentXp === 0) {
     return 0;
   }
   if(level >= 20) {
     return (currentXp - constants.metier_palier[19] - constants.metier_xp[19] * (level - 20)) / constants.metier_xp[19];
   }
-  return (currentXp - constants.metier_palier[level - 1]) / constants.metier_xp[level];
+  return (currentXp - constants.metier_palier[level - 1]) / constants.metier_xp[level - 1];
 }
 
 /**
@@ -98,3 +96,44 @@ export function getLevelFromXp(xp: number) {
 
   return i + extraLevels;
 }
+
+/**
+ * Return the bonus rank percentage
+ * @param playerRank the player rank
+ */
+export function getBonusRank(playerRank: PlayerRank | undefined) {
+  if (!playerRank) {
+    return 0;
+  }
+
+  switch (playerRank) {
+  case "titan":
+  case "heros":
+    return 5;
+  case "paladin":
+  case "legend":
+    return 10;
+  case "endium":
+  case "trixium":
+  case "trixium+":
+  case "divinity":
+  case "rusher":
+    return 15;
+  case "premium": // premium add 5% (don't know how it's represented in the API) always place the condition at the end
+    return 5;
+  default:
+    return 0;
+  }
+
+}
+
+/**
+ * Get the xp needed to reach the requested level base minus the currentXp
+ * @param higherLevel
+ * @param currentXP
+ * @returns
+ */
+export const calculateXpNeeded = (higherLevel: number, currentXP: number): number => {
+  const res = getTotalXPForLevel(higherLevel) - currentXP;
+  return Math.ceil(res);
+};

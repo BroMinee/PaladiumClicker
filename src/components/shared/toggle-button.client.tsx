@@ -25,7 +25,7 @@ export function ToggleCardButton({
   className = "",
 }: ToggleCardButtonProps) {
   const toggleClasses = isToggled
-    ? "bg-indigo-500/30 border border-indigo-500 text-white"
+    ? "bg-indigo-500/30 border border-indigo-500 text-white hover:bg-indigo-700"
     : "bg-gray-800 border border-gray-700 text-gray-400 hover:bg-gray-700";
 
   return (

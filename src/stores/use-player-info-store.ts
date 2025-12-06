@@ -55,12 +55,12 @@ export const usePlayerInfoStore = create<State & Actions, [["zustand/persist", S
       }
 
       const newMetier = { ...state.data.metier };
-      // in case targettedMetier.level + value - 1 exceeds the length of constants.metier_palier repete the last level of the exceeded level
+      // in case targettedMetier.level + value exceeds the length of constants.metier_palier repete the last level of the exceeded level
 
       newMetier[metierKey] = {
         ...targettedMetier,
         level: targettedMetier.level + value,
-        xp: constants.metier_palier[Math.min(constants.metier_xp.length -1,targettedMetier.level + value - 1)],
+        xp: constants.metier_palier[Math.min(constants.metier_xp.length, targettedMetier.level + value - 1)],
       };
       if (targettedMetier.level + value - 1 >= constants.metier_palier.length) {
         newMetier[metierKey].xp += (targettedMetier.level + value - constants.metier_palier.length) * constants.metier_xp[constants.metier_xp.length -1];

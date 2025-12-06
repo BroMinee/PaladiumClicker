@@ -1,5 +1,5 @@
 import { SelectedElementConfig } from "@/components/Twitch/TwitchOverlayConfig";
-import { AdminShopItem, MetierKey, NavBarCategory } from "@/types";
+import { AdminShopItem, LevelPreconditions, MetierKey, NavBarCategory } from "@/types";
 
 const version = 0;
 
@@ -115,48 +115,48 @@ const CRUSH = "Crush";
 const METIER_KEY: MetierKey[] = ["miner", "farmer", "hunter", "alchemist"];
 
 const metier_xp = [
-  22123,
-  40390,
-  73751,
-  118886,
-  176611,
-  247616,
-  332507,
-  431826,
-  546062,
-  675669,
-  821062,
-  982632,
-  1160743,
-  1355741,
-  1567953,
-  1797690,
-  2045248,
-  2310912,
-  2594953,
+  22123, // level 1 -> 2
+  40390, // level 2 -> 3
+  73751, // level 3 -> 4
+  118886, // level 4 -> 5
+  176611, // level 5 -> 6
+  247616, // level 6 -> 7
+  332507, // level 7 -> 8
+  431826, // level 8 -> 9
+  546062, // level 9 -> 10
+  675669, // level 10 -> 11
+  821062, // level 11 -> 12
+  982632, // level 12 -> 13
+  1160743, // level 13 -> 14
+  1355741, // level 14 -> 15
+  1567953, // level 15 -> 16
+  1797690, // level 16 -> 17
+  2045248, // level 17 -> 18
+  2310912, // level 18 -> 19
+  2594953, // level 19 -> 20
 ];
 
 const metier_palier = [
-  0,
-  22123,
-  62513,
-  136264,
-  255150,
-  431761,
-  679377,
-  1011884,
-  1443710,
-  1989772,
-  2665441,
-  3486503,
-  4469135,
-  5629878,
-  6985619,
-  8553572,
-  10351262,
-  12396510,
-  14707422,
-  17302375
+  0, // level 1
+  22123, // level 2
+  62513, // level 3
+  136264, // level 4
+  255150, // level 5
+  431761, // level 6
+  679377, // level 7
+  1011884, // level 8
+  1443710, // level 9
+  1989772, // level 10
+  2665441, // level 11
+  3486503, // level 12
+  4469135, // level 13
+  5629878, // level 14
+  6985619, // level 15
+  8553572, // level 16
+  10351262, // level 17
+  12396510, // level 18
+  14707422, // level 19
+  17302375, // level 20
 ];
 
 export type HowToXpElement = {
@@ -165,14 +165,112 @@ export type HowToXpElement = {
   xp: number;
   imgPath: string;
   level?: number;
+  ignorePotionBonus?: boolean;
 };
 
 type HowToXp = {
   [K in MetierKey]: HowToXpElement[]
 }
 
+const POTION_DOUBLE_BONUS = 1;
+const POTION_X10_BONUS = 9;
+
+const FORTUNE_II_BONUS = 0.50;
+const FORTUNE_III_BONUS = 0.65;
+
+const LEVEL_PRECONDITIONS: LevelPreconditions = {
+  farmer: {
+    2: "Récolter **2 949** blés",
+    3: "Récolter **3 231** carottes",
+    4: "Casser **3 687** pastèques",
+    5: "Casser **5 944** pastèques",
+    6: "Casser **8 830** pastèques",
+    7: "Casser **12 380** pastèques",
+    8: "Casser **6 650** eggplants",
+    9: "Casser **8 636** eggplants",
+    10: "Casser **10 921** eggplants",
+    11: "Casser **13 513** eggplants",
+    12: "Casser **16 421** eggplants",
+    13: "Casser **9 826** chervils",
+    14: "Casser **11 607** chervils",
+    15: "Casser **13 557** chervils",
+    16: "Casser **15 679** chervils",
+    17: "Casser **7 190** kiwanos",
+    18: "Casser **8 180** kiwanos",
+    19: "Casser **9 243** kiwanos",
+    20: "Casser **10 379** kiwanos",
+  },
+
+  hunter: {
+    2: "Tuer **442** animaux",
+    3: "Tuer **807** animaux",
+    4: "Tuer **1 475** animaux",
+    5: "Pêcher **951** poissons",
+    6: "Pêcher **1 412** poissons",
+    7: "Pêcher **1 980** poissons",
+    8: "Pêcher **2 660** poissons",
+    9: "Tuer **5 757** zombies",
+    10: "Tuer **7 580** zombies",
+    11: "Tuer **9 008** zombies",
+    12: "Tuer **8 210** squelettes",
+    13: "Tuer **9 826** squelettes",
+    14: "Tuer **11 607** squelettes",
+    15: "Tuer **7 747** sorcières",
+    16: "Tuer **8 959** sorcières",
+    17: "Tuer **10 272** sorcières",
+    18: "Tuer **11 687** sorcières",
+    19: "Tuer **13 205** sorcières",
+    20: "Tuer **14 828** sorcières",
+  },
+
+  miner: {
+    2: "Casser **8 849** roches",
+    3: "Casser **16 156** roches",
+    4: "Casser **29 500** roches",
+    5: "Casser **47 554** roches",
+    6: "Casser **70 644** roches",
+    7: "Casser **99 046** roches",
+    8: "Casser **133 003** roches",
+    9: "Casser **822** minerais d'améthyste",
+    10: "Casser **1 040** minerais d'améthyste",
+    11: "Casser **1 286** minerais d'améthyste",
+    12: "Casser **1 563** minerais d'améthyste",
+    13: "Casser **1 310** minerais de titane",
+    14: "Casser **1 547** minerais de titane",
+    15: "Casser **1 807** minerais de titane",
+    16: "Casser **2 090** minerais de titane",
+    17: "Casser **798** minerais de paladium",
+    18: "Casser **908** minerais de paladium",
+    19: "Casser **1 027** minerais de paladium",
+    20: "Casser **1 153** minerais de paladium",
+  },
+
+  alchemist: {
+    2: "Casser **442** bûches moddés",
+    3: "Casser **807** bûches moddés",
+    4: "Extraire sève de bûche de jacaranda **983** fois",
+    5: "Extraire sève de bûche de jacaranda **1 585** fois",
+    6: "Extraire sève de bûche de jacaranda **2 354** fois",
+    7: "Extraire sève de bûche de judeecercis **1 238** fois",
+    8: "Extraire sève de bûche de judeecercis **1 662** fois",
+    9: "Jeter **86 365** fleurs dans le chaudron",
+    10: "Jeter **109 212** fleurs dans le chaudron",
+    11: "Jeter **135 133** fleurs dans le chaudron",
+    12: "Jeter **164 212** fleurs dans le chaudron",
+    13: "Extraire sève de bûche d'érable **2 456** fois",
+    14: "Extraire sève de bûche d'érable **2 901** fois",
+    15: "Extraire sève de bûche d'érable **3 389** fois",
+    16: "Extraire sève de bûche d'érable **3 919** fois",
+    17: "Extraire sève de bûche d'érable **4 494** fois",
+    18: "Fabriquer via portail **10 226** lingots de paladium",
+    19: "Fabriquer via portail **11 554** lingots de paladium",
+    20: "Fabriquer via portail **12 974** lingots de paladium",
+  }
+};
+
 const how_to_xp: HowToXp = {
   "miner": [
+    { type: "Bottle XP", action: "Utiliser", xp: 1000, imgPath: "exp_miner.webp", ignorePotionBonus: true },
     { type: "Bonbon Jaune", "action": EAT, "xp": 50000, imgPath: "candy_YELLOW.webp" },
     { type: "Bonbon Multicolor", "action": EAT, "xp": 50000, imgPath: "candy_RAINBOW.webp" },
     { type: "Nether brick", "action": SMELT, "xp": 0.1, imgPath: "nether_brick.webp" },
@@ -204,6 +302,7 @@ const how_to_xp: HowToXp = {
     { type: "Paladium Green Ingot", "action": SMELT, "xp": 200, imgPath: "paladium_green_ingot.webp", level: 12 },
   ],
   "farmer": [
+    { type: "Bottle XP", action: "Utiliser", xp: 1000, imgPath: "exp_farmer.webp", ignorePotionBonus: true },
     { type: "Bonbon Vert", "action": EAT, "xp": 50000, imgPath: "candy_GREEN.webp" },
     { type: "Bonbon Multicolor", "action": EAT, "xp": 50000, imgPath: "candy_RAINBOW.webp" },
     { type: "Bread", "action": CRAFT, "xp": 1, imgPath: "bread.webp" },
@@ -223,6 +322,7 @@ const how_to_xp: HowToXp = {
     { type: "Kiwano", "action": BREAK, "xp": 50, imgPath: "kiwano.webp", level: 16 },
   ],
   "hunter": [
+    { type: "Bottle XP", action: "Utiliser", xp: 1000, imgPath: "exp_hunter.webp", ignorePotionBonus: true },
     { type: "Bonbon Bleu", "action": EAT, "xp": 50000, imgPath: "candy_BLUE.webp" },
     { type: "Bonbon Multicolor", "action": EAT, "xp": 50000, imgPath: "candy_RAINBOW.webp" },
     { type: "Snow Golem", "action": KILL, "xp": 1, imgPath: "snow_golem_hunter.webp" },
@@ -272,6 +372,7 @@ const how_to_xp: HowToXp = {
     { type: "Jelly Fish", "action": KILL, "xp": 150, imgPath: "jelly_fish.webp", level: 18 },
   ],
   "alchemist": [
+    { type: "Bottle XP", action: "Utiliser", xp: 1000, imgPath: "exp_alchemist.webp", ignorePotionBonus: true },
     { type: "Bonbon Mauve", "action": EAT, "xp": 50000, imgPath: "candy_PINK.webp" },
     { type: "Bonbon Multicolor", "action": EAT, "xp": 50000, imgPath: "candy_RAINBOW.webp" },
     { type: "Empty Flask", "action": CRAFT, "xp": 0.2, imgPath: "empty_flask.webp" },
@@ -503,7 +604,7 @@ const imgPathCraft = "/img/Craft/";
 const imgPathError = "/img/Error/";
 
 const PUB_DISPLAY_TIME = 15;
-export const AUTOPROMO_CONFIG: SelectedElementConfig = { type: "autoPromo",  duration: PUB_DISPLAY_TIME, subOption: null };
+export const AUTOPROMO_CONFIG: SelectedElementConfig = { type: "autoPromo", duration: PUB_DISPLAY_TIME, subOption: null };
 
 export const adminShopItemsAvailable: AdminShopItem[] = [
   "feather", "wool", "paladium-ingot", "ender-pearl", "egg", "string", "log", "red-mushroom", "soul-sand",
@@ -553,4 +654,10 @@ export const constants = {
   AUTOPROMO_CONFIG,
   adminShopItemsAvailable,
   METIER_KEY,
+  POTION_DOUBLE_BONUS,
+  POTION_X10_BONUS,
+  FORTUNE_II_BONUS,
+  FORTUNE_III_BONUS,
+  LEVEL_PRECONDITIONS,
 };
+
