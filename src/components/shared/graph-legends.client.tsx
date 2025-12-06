@@ -1,5 +1,5 @@
 "use client";
-import { Dataset } from "@/types";
+import { AxisDomain, Dataset } from "@/types";
 import { Button } from "../ui/button-v2";
 
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
@@ -10,7 +10,7 @@ import { cn } from "@/lib/utils";
  * - Handle double click to highlight a curve
  * - Handle simple click to show/hide a curve
  */
-export function RankingGraphLegends({ data, toggleVisibility, handleHighlight, className}: { data: Dataset<Date, number>[], toggleVisibility: (plt: Dataset<Date, number>) => void, handleHighlight: (plt: Dataset<Date, number>) => void, className?: string })  {
+export function GraphLegends<Key extends AxisDomain,Value extends AxisDomain>({ data, toggleVisibility, handleHighlight, className}: { data: Dataset<Key, Value>[], toggleVisibility: (plt: Dataset<Key, Value>) => void, handleHighlight: (plt: Dataset<Key, Value>) => void, className?: string })  {
   return (<div className={cn("w-full bg-gray-800 p-4 rounded-lg", className)}>
     <h3 className="text-lg font-semibold mb-2">Légende</h3>
     <ul className="space-y-2 max-h-[300px] overflow-y-auto">

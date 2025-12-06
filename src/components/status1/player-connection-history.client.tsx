@@ -1,13 +1,13 @@
 "use client";
 
 import { AdminShopPeriod, AxisConfig, DataPoint, Dataset } from "@/types";
-import { RankingGraphLegends } from "../ranking1/graph-legends.client";
 import { LineGrad } from "../shared/graph-line-renderer.client";
 import { ChartContainer } from "../shared/graph.client";
 import { TimeSelection } from "../shared/time-selection.client";
 import { Card } from "../ui/card-v2";
 import { getStatusPaladiumAction, getStatusPaladiumBedrockAction } from "@/lib/api/apiServerAction";
 import { useEffect, useState } from "react";
+import { GraphLegends } from "../shared/graph-legends.client";
 
 const timeRanges: { key: AdminShopPeriod, label: string }[] = [
   { key: "day", label: "24 heures" },
@@ -115,7 +115,7 @@ export function PlayerConnectionHistory() {
           axisConfigs={axes}
           renderContent={(props) => <LineGrad {...props} />}
         />
-        <RankingGraphLegends data={data} toggleVisibility={toggleVisibility} handleHighlight={handleHighlight} className="w-fit" />
+        <GraphLegends data={data} toggleVisibility={toggleVisibility} handleHighlight={handleHighlight} className="w-fit" />
       </div>
     </Card>
   );

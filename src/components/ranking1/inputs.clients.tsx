@@ -5,12 +5,12 @@ import { getRankingLeaderboardAction } from "@/lib/api/apiServerAction";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { getImagePathFromRankingType, rankingTypeToUserFriendlyText } from "@/lib/misc";
-import { RankingGraphLegends } from "./graph-legends.client";
 import { RankingAddPlayerInput } from "./graph-add-player.client";
 import { LineRenderer } from "../shared/graph-line-renderer.client";
 import { ChartContainer } from "../shared/graph.client";
 import { LoadingSpinner } from "../ui/loading-spinner";
 import { UnOptimizedImage } from "../ui/image-loading";
+import { GraphLegends } from "../shared/graph-legends.client";
 
 /**
  * Display the ranking section tabs and tabs content.
@@ -134,7 +134,7 @@ function FetchLeaderboardData({ rankingType }: { rankingType: RankingType }) {
     <div className="mt-6 grid grid-cols-1 lg:grid-cols-3 gap-6">
       <RankingAddPlayerInput />
 
-      <RankingGraphLegends data={data} toggleVisibility={toggleVisibility} handleHighlight={handleHighlight} className="lg:col-span-2" />
+      <GraphLegends data={data} toggleVisibility={toggleVisibility} handleHighlight={handleHighlight} className="lg:col-span-2" />
     </div>
 
   </>);
