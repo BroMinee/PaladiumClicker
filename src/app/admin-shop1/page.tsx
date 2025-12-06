@@ -51,67 +51,65 @@ export default function AdminShopHistoryPage() {
   }, [currentItem, currentTimeRange]);
 
   return (
-    <div className="bg-gray-900 text-white min-h-screen p-4 md:p-8">
-      <div className="max-w-6xl mx-auto">
+    <>
 
-        <h1 className="text-4xl font-bold mb-4">
-          Historique de l&apos;Admin-Shop
-        </h1>
+      <h1 className="text-4xl font-bold mb-4">
+        Historique de l&apos;Admin-Shop
+      </h1>
 
-        <div className="mb-4">
-          <label className="block text-sm font-medium text-gray-300 mb-2">
-            Choisir un item
-          </label>
-          <div className="grid grid-cols-6 sm:grid-cols-16 lg:grid-cols-16 gap-6">
-            {constants.adminShopItemsAvailable.map((value: AdminShopItem) => (
-              <GroupedSpanContainer group={adminShopItemToUserFriendlyText(value)} className="w-16 h-16 p-1" key={value + "-groupSpanContainer"}>
-                <Button
-                  variant="primary"
-                  key={value + "-button"}
-                  onClick={() => setCurrentItem(value)}
-                  className={cn("w-full h-full p-2 text-sm font-semibold rounded transition-colors",
-                    currentItem === value
-                      ? "bg-primary text-white"
-                      : "bg-gray-700 text-gray-300 hover:bg-[#282a2c]")}
-                >
-                  <UnOptimizedImage src={getImagePathFromAdminShopType(value)} alt={value} width={0} height={0} className="w-full h-full pixelated"/>
-                </Button>
-              </GroupedSpanContainer>
-            ))}
-          </div>
-        </div>
-
-        <div className="mb-6">
-          <label className="block text-sm font-medium text-gray-300 mb-2">
-            Plage de temps
-          </label>
-          <div className="flex flex-wrap gap-2 rounded-lg bg-gray-900 p-2 max-w-md">
-            {timeRanges.map(range => (
+      <div className="mb-4">
+        <label className="block text-sm font-medium text-gray-300 mb-2">
+          Choisir un item
+        </label>
+        <div className="grid grid-cols-6 sm:grid-cols-16 lg:grid-cols-16 gap-6">
+          {constants.adminShopItemsAvailable.map((value: AdminShopItem) => (
+            <GroupedSpanContainer group={adminShopItemToUserFriendlyText(value)} className="w-16 h-16 p-1" key={value + "-groupSpanContainer"}>
               <Button
-                key={range.key}
-                onClick={() => setCurrentTimeRange(range.key)}
-                variant="primary" className={cn("text-white font-bold py-2 px-4 rounded transition-colors", currentTimeRange === range.key ? "bg-primary text-white" : "bg-gray-700")}
+                variant="primary"
+                key={value + "-button"}
+                onClick={() => setCurrentItem(value)}
+                className={cn("w-full h-full p-2 text-sm font-semibold rounded transition-colors",
+                  currentItem === value
+                    ? "bg-primary text-white"
+                    : "bg-gray-700 text-gray-300 hover:bg-[#282a2c]")}
               >
-                {range.label}
+                <UnOptimizedImage src={getImagePathFromAdminShopType(value)} alt={value} width={0} height={0} className="w-full h-full pixelated"/>
               </Button>
-            ))}
-          </div>
+            </GroupedSpanContainer>
+          ))}
         </div>
-
-        <div className="bg-gray-900 p-4 md:p-6 rounded-lg shadow-xl relative">
-          <h2 className="text-2xl font-semibold mb-4">
-            Prix de vente de: <span className="text-primary">{adminShopItemToUserFriendlyText(currentItem)}</span>
-          </h2>
-          <div className="w-full h-[500px]">
-            <ChartContainer
-              data={datasets}
-              axisConfigs={axes}
-              renderContent={(props) => <LineGrad {...props} />}
-            />
-          </div>
-        </div>
-
       </div>
-    </div>
+
+      <div className="mb-6">
+        <label className="block text-sm font-medium text-gray-300 mb-2">
+          Plage de temps
+        </label>
+        <div className="flex flex-wrap gap-2 rounded-lg bg-gray-900 p-2 max-w-md">
+          {timeRanges.map(range => (
+            <Button
+              key={range.key}
+              onClick={() => setCurrentTimeRange(range.key)}
+              variant="primary" className={cn("text-white font-bold py-2 px-4 rounded transition-colors", currentTimeRange === range.key ? "bg-primary text-white" : "bg-gray-700")}
+            >
+              {range.label}
+            </Button>
+          ))}
+        </div>
+      </div>
+
+      <div className="bg-gray-900 p-4 md:p-6 rounded-lg shadow-xl relative">
+        <h2 className="text-2xl font-semibold mb-4">
+          Prix de vente de: <span className="text-primary">{adminShopItemToUserFriendlyText(currentItem)}</span>
+        </h2>
+        <div className="w-full h-[500px]">
+          <ChartContainer
+            data={datasets}
+            axisConfigs={axes}
+            renderContent={(props) => <LineGrad {...props} />}
+          />
+        </div>
+      </div>
+
+    </>
   );
 }

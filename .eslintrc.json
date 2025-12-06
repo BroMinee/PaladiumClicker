@@ -87,8 +87,7 @@
       2,
       {
         "ignoredNodes": [
-          "JSXFragment",
-          "JSXFragment *"
+          "TemplateLiteral"
         ]
       }
     ],

@@ -23,27 +23,27 @@ export function RankingGraphLegends({ data, toggleVisibility, handleHighlight}: 
             key={plt.id}
             onClick={() => toggleVisibility(plt)} onDoubleClick={() => handleHighlight(plt)}
           >
-                  <>
-                    <div
-                      className="w-4 h-4 rounded-full mr-3 flex-shrink-0"
-                      style={{ backgroundColor: plt.color, opacity: isHidden ? 0.2 : 1 }}
-                    />
-                    <div className="flex flex-row justify-between items-center w-full">
-                      <span>
-                        {plt.name}
-                      </span>
-                      <Button
-                        className="p-1 bg-gray-700"
-                        variant="outline"
-                        onClick={(e) => {
-                          e.stopPropagation(); toggleVisibility(plt);
-                        }}
-                        title={isHidden ? "Afficher la courbe" : "Cacher la courbe"}
-                      >
-                        {isHidden ? <FaRegEyeSlash /> : <FaRegEye />}
-                      </Button>
-                    </div>
-                  </>
+            <>
+              <div
+                className="w-4 h-4 rounded-full mr-3 flex-shrink-0"
+                style={{ backgroundColor: plt.color, opacity: isHidden ? 0.2 : 1 }}
+              />
+              <div className="flex flex-row justify-between items-center w-full">
+                <span>
+                  {plt.name}
+                </span>
+                <Button
+                  className="p-1 bg-gray-700"
+                  variant="outline"
+                  onClick={(e) => {
+                    e.stopPropagation(); toggleVisibility(plt);
+                  }}
+                  title={isHidden ? "Afficher la courbe" : "Cacher la courbe"}
+                >
+                  {isHidden ? <FaRegEyeSlash /> : <FaRegEye />}
+                </Button>
+              </div>
+            </>
 
           </Button>
         );

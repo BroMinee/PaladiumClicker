@@ -66,49 +66,47 @@ export function CraftingHelperPage() {
   };
 
   return (
-    <div className="bg-gray-900 text-white min-h-screen p-4 md:p-8">
-      <div className="max-w-7xl mx-auto">
-        <h1 className="text-4xl font-bold mb-8">Aide au Craft</h1>
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          <aside className="lg:col-span-1 space-y-6 lg:sticky lg:top-8 self-start">
-            <LanguageToggle />
-            <SearchBar
-              searchTerm={searchTerm}
-              setSearchTerm={setSearchTerm}
-              isSearchFocused={isSearchFocused}
-              setIsSearchFocused={setIsSearchFocused}
-              onSelectItem={handleSelectItem}
-              filteredItems={filteredItems}
-            />
-            {selectedItem && (
-              <QuantityInput />
-            )}
-            {selectedItem && (
-              <ResourceList />
-            )}
-          </aside>
+    <>
+      <h1 className="text-4xl font-bold mb-8">Aide au Craft</h1>
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <aside className="lg:col-span-1 space-y-6 lg:sticky lg:top-8 self-start">
+          <LanguageToggle />
+          <SearchBar
+            searchTerm={searchTerm}
+            setSearchTerm={setSearchTerm}
+            isSearchFocused={isSearchFocused}
+            setIsSearchFocused={setIsSearchFocused}
+            onSelectItem={handleSelectItem}
+            filteredItems={filteredItems}
+          />
+          {selectedItem && (
+            <QuantityInput />
+          )}
+          {selectedItem && (
+            <ResourceList />
+          )}
+        </aside>
 
-          <main className="lg:col-span-2 space-y-8">
-            {!selectedItem ? (
-              <div className="bg-gray-800 rounded-lg p-8 flex flex-col items-center justify-center min-h-[400px]">
-                <IconSearch />
-                <h2 className="text-2xl font-semibold text-gray-400 mt-4">
-                  {language === "fr" ? "Recherchez un item" : "Search for an item"}
-                </h2>
-                <p className="text-gray-500">
-                  {language === "fr" ? "Sélectionnez un item pour voir sa recette." : "Select an item to see its recipe."}
-                </p>
-              </div>
-            ) : (
-              <>
-                <SelectedItemCard />
-                <CraftingTreeDisplay onToggleChecked={handleToggleChecked} />
-              </>
-            )}
-          </main>
-        </div>
+        <main className="lg:col-span-2 space-y-8">
+          {!selectedItem ? (
+            <div className="bg-gray-800 rounded-lg p-8 flex flex-col items-center justify-center min-h-[400px]">
+              <IconSearch />
+              <h2 className="text-2xl font-semibold text-gray-400 mt-4">
+                {language === "fr" ? "Recherchez un item" : "Search for an item"}
+              </h2>
+              <p className="text-gray-500">
+                {language === "fr" ? "Sélectionnez un item pour voir sa recette." : "Select an item to see its recipe."}
+              </p>
+            </div>
+          ) : (
+            <>
+              <SelectedItemCard />
+              <CraftingTreeDisplay onToggleChecked={handleToggleChecked} />
+            </>
+          )}
+        </main>
       </div>
-    </div>
+    </>
   );
 }
 
