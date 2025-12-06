@@ -1,4 +1,4 @@
-import { Card, CardContent, CardDescription, CardHeader, CardTitleH1 } from "@/components/ui/card";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle, CardTitleH1 } from "@/components/ui/card";
 import { GradientText } from "@/components/shared/GradientText";
 import { FaHeart } from "react-icons/fa";
 import { Suspense } from "react";
@@ -107,8 +107,17 @@ export default async function Home(
           </CardDescription>
         </CardHeader>
         <CardContent className="flex flex-col items-center justify-between gap-2 h-[calc(100vh-30vh)]">
+          <CardTitle>
+            Paladium Java
+          </CardTitle>
           <Suspense fallback={<GraphStatusFallback/>}>
             <GraphStatus periode={periodeEnum}/>
+          </Suspense>
+          <CardTitle>
+            Paladium Bedrock
+          </CardTitle>
+          <Suspense fallback={<GraphStatusFallback />}>
+            <GraphStatus periode={periodeEnum} isBedrock={true} />
           </Suspense>
         </CardContent>
         <CardHeader className='w-full flex flex-col sm:flex-row gap-2 justify-center items-center p-0 mb-2'>

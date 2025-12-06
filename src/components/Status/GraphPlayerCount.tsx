@@ -22,6 +22,6 @@ export async function GraphPlayerCount() {
   });
 
   return (
-    <PlotSingleValueChart data={d} labelName={"Joueurs uniques"} className={"h-[calc(100vh-80vh)] min-h-[calc(100vh-60vh)]"}/>
+    <PlotSingleValueChart data={d} labelName={"Joueurs uniques - Java"} className={"h-[calc(100vh-80vh)] min-h-[calc(100vh-60vh)]"}/>
   );
 }

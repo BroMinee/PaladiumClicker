@@ -100,6 +100,14 @@ export async function getStatusPaladium(periode: StatusPeriod): Promise<ServerPa
   return await fetchWithHeader<ServerPaladiumStatusResponse[]>(`${API_PALATRACKER}/v1/status-history/paladium/${periode}`, 0);
 }
 
+/**
+ * Fetches Paladium Bedrock server status history for a given period.
+ * @param periode The period for which to fetch status.
+ */
+export async function getStatusPaladiumBedrock(periode: StatusPeriod): Promise<ServerPaladiumStatusResponse[]> {
+  return await fetchWithHeader<ServerPaladiumStatusResponse[]>(`${API_PALATRACKER}/v1/status-history/paladium-bedrock/${periode}`, 0);
+}
+
 // export async function getStatusFaction(periode: StatusPeriod): Promise<ServerStatusResponse[]> {
 //   return await fetchWithHeader<ServerStatusResponse[]>(`${API_PALATRACKER}/v1/status-history/faction/${periode}`, 0);
 // }

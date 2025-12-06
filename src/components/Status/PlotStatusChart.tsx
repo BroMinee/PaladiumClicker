@@ -7,16 +7,19 @@ import React from "react";
 const AreaChart = dynamic(() => import("recharts").then((mod) => mod.AreaChart), { ssr: false });
 
 const CustomTooltip = ({ active, payload, label }: any) => {
-
   if (!payload || payload.length === 0) {
     return null;
   }
 
+  const dataPoint = payload[0]?.payload;
+  const readableDate = dataPoint ? dataPoint.dateLabel : new Date(label).toLocaleDateString() + " - " + new Date(label).toLocaleTimeString();
+
   if (active && payload && payload.length) {
     return (
       <div className="recharts-tooltip-wrapper bg-secondary rounded-md p-2 ">
-        <p className="recharts-tooltip-label text-card-foreground">{`${label}`}</p>
+        <p className="recharts-tooltip-label text-card-foreground">{`${readableDate}`}</p>
         <ul>
+
           {payload.map((entry: any, index: number) => {
             return <li key={index} style={{ color: entry.color }}>
               {entry.name}: {entry.value}
@@ -44,13 +47,18 @@ export const PlotStatusChart = ({ data, periode }: { data: ServerPaladiumStatusR
   const average = data.reduce((acc, item) => acc + item.players, 0) / data.length;
 
   const data_clean = data.map((item) => {
+    const dateObj = new Date(item.date);
     return {
-      date: new Date(item.date).toLocaleDateString() + " - " + new Date(item.date).toLocaleTimeString(),
+      dateValue: dateObj.getTime(),
+      dateLabel: dateObj.toLocaleDateString() + " - " + dateObj.toLocaleTimeString(),
       players: item.players,
       average: average
-
     };
   });
+
+  const dateFormatter = (tick: number) => {
+    return new Date(tick).toLocaleDateString() + " - " + new Date(tick).toLocaleTimeString();
+  };
 
   const convert = (periode: StatusPeriod) => {
     switch (periode) {
@@ -65,6 +73,8 @@ export const PlotStatusChart = ({ data, periode }: { data: ServerPaladiumStatusR
     }
   };
   const moyenneText = convert(periode);
+  const minDate = Math.min(...data_clean.map(d => d.dateValue));
+  const maxDate = Math.max(...data_clean.map(d => d.dateValue));
 
   return (
     <ResponsiveContainer width="100%" height="100%" id="graph-status-plot">
@@ -77,7 +87,12 @@ export const PlotStatusChart = ({ data, periode }: { data: ServerPaladiumStatusR
           </linearGradient>
         </defs>
         <Legend layout="horizontal" verticalAlign="top" align="center"/>
-        <XAxis dataKey="date"/>
+        <XAxis
+          dataKey="dateValue"
+          type="number"
+          tickFormatter={dateFormatter}
+          domain={[minDate, maxDate]}
+        />
         <YAxis yAxisId="left" domain={[0, (dataMax: number) => Math.round(dataMax * 1.1)]}/>
         <Tooltip content={<CustomTooltip/>}/>
         <Area yAxisId="left" type="monotone" dataKey="players" stroke="#fe6212" fillOpacity={1}

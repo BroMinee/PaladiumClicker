@@ -2,16 +2,17 @@ import { ServerPaladiumStatusResponse, StatusPeriod } from "@/types";
 import { redirect } from "next/navigation";
 import { LoadingSpinner } from "@/components/ui/loading-spinner";
 import { PlotStatusChart } from "@/components/Status/PlotStatusChart";
-import { getStatusPaladium } from "@/lib/api/apiPalaTracker";
+import { getStatusPaladium, getStatusPaladiumBedrock } from "@/lib/api/apiPalaTracker";
 
 type GraphStatusProps = {
   periode: StatusPeriod,
+  isBedrock?: boolean,
 }
 
 /**
  * Fetches the average player on the server for a given period and renders it as a line-plot chart.
  */
-export async function GraphStatus({ periode }: GraphStatusProps) {
+export async function GraphStatus({ periode, isBedrock = false }: GraphStatusProps) {
   let data = [] as ServerPaladiumStatusResponse[];
   try {
     switch (periode) {
@@ -19,7 +20,7 @@ export async function GraphStatus({ periode }: GraphStatusProps) {
     case "week":
     case "month":
     case "season":
-      data = await getStatusPaladium(periode);
+      data = !isBedrock ? await getStatusPaladium(periode) : await getStatusPaladiumBedrock(periode);
       break;
     default:
       data = [];
