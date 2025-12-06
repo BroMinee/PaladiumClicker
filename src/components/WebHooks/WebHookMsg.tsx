@@ -212,8 +212,8 @@ export function parseTextFormatting(
           if (thresholdCondition === "increasing" || thresholdCondition === "increasingAboveThreshold" || thresholdCondition === "aboveThreshold") {
             oldPrice -= 1;
           } else {
-oldPrice += 1;
-}
+            oldPrice += 1;
+          }
           return <span key={index}>{formatPrice(oldPrice)}</span>;
         }
         if (part === "{quantityAvailable}") {
@@ -261,12 +261,12 @@ oldPrice += 1;
         if (part.startsWith("<@&") && part.endsWith(">")) {
           return <span key={index} className="mention-here">
             @role
-            </span>;
+          </span>;
         }
         if (part.startsWith("<@") && part.endsWith(">")) {
           return <span key={index} className="mention-here">
             @user
-            </span>;
+          </span>;
         }
         if (part === "{TODO}") {
           return <span key={index}>{getTodoCount()}</span>;

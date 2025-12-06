@@ -59,7 +59,7 @@ export default async function Home(props: { params: Promise<{ username: string }
               </CardTitle>
               <CardDescription>
                 Made with <FaHeart
-                className="text-primary inline-block"/> by <GradientText>BroMine__</GradientText>
+                  className="text-primary inline-block"/> by <GradientText>BroMine__</GradientText>
               </CardDescription>
             </CardHeader>
             <CardContent className="flex flex-col gap-2">

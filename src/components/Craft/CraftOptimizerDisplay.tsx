@@ -225,9 +225,9 @@ function CraftPriceCard({ data, index, cardRefs, sortMode }: {
         <p>Prix actuel : <span className="text-blue-400">{currentPrice <= 0
           ? "Pas en vente"
           : (
-              <>
-                {formatPrice(Math.max(0, currentPrice))} $
-              </>
+            <>
+              {formatPrice(Math.max(0, currentPrice))} $
+            </>
           )
         }
         </span>

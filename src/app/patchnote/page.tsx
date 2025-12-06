@@ -1,10 +1,11 @@
-import { Card, CardContent, CardDescription, CardHeader, CardTitleH1 } from "@/components/ui/card";
 import { GradientText } from "@/components/shared/GradientText";
 import { FaHeart } from "react-icons/fa";
 import Discord from "@/components/Discord";
 import newsJson from "@/public/news.json";
 import { News } from "@/components/News";
 import { ChangeLogs } from "@/types";
+import { Card } from "@/components/ui/card-v2";
+import { CardContent, CardDescription, CardHeader, CardTitleH1 } from "@/components/ui/card";
 
 /**
  * Generate Metadata

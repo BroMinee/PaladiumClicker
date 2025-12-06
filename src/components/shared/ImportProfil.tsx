@@ -241,111 +241,111 @@ function DisplayDifference({ oldPlayerInfo, newPlayerInfo }: displayDifferencePr
 
       {oldPlayerInfo.metier.farmer.level > newPlayerInfo.metier.farmer.level &&
         <SmallCardInfo title={"Metier de farmer"}
-                       value={oldPlayerInfo.metier.farmer.level + " -> " + newPlayerInfo.metier.farmer.level}
-                       img={safeJoinPaths(constants.imgPathProfile, "/JobsIcon/Fermier.webp")} unoptimized/>
+          value={oldPlayerInfo.metier.farmer.level + " -> " + newPlayerInfo.metier.farmer.level}
+          img={safeJoinPaths(constants.imgPathProfile, "/JobsIcon/Fermier.webp")} unoptimized/>
       }
 
       {oldPlayerInfo.metier.miner.level > newPlayerInfo.metier.miner.level &&
         <SmallCardInfo title={"Metier de mineur"}
-                       value={oldPlayerInfo.metier.miner.level + " -> " + newPlayerInfo.metier.miner.level}
-                       img={safeJoinPaths(constants.imgPathProfile, "/JobsIcon/Mineur.webp")} unoptimized/>
+          value={oldPlayerInfo.metier.miner.level + " -> " + newPlayerInfo.metier.miner.level}
+          img={safeJoinPaths(constants.imgPathProfile, "/JobsIcon/Mineur.webp")} unoptimized/>
       }
 
       {oldPlayerInfo.metier.hunter.level > newPlayerInfo.metier.hunter.level &&
         <SmallCardInfo title={"Metier de chasseur"}
-                       value={oldPlayerInfo.metier.hunter.level + " -> " + newPlayerInfo.metier.hunter.level}
-                       img={safeJoinPaths(constants.imgPathProfile, "/JobsIcon/Chasseur.webp")} unoptimized/>
+          value={oldPlayerInfo.metier.hunter.level + " -> " + newPlayerInfo.metier.hunter.level}
+          img={safeJoinPaths(constants.imgPathProfile, "/JobsIcon/Chasseur.webp")} unoptimized/>
       }
 
       {oldPlayerInfo.metier.alchemist.level > newPlayerInfo.metier.alchemist.level &&
         <SmallCardInfo title={"Metier d'alchimiste"}
-                       value={oldPlayerInfo.metier.alchemist.level + " -> " + newPlayerInfo.metier.alchemist.level}
-                       img={safeJoinPaths(constants.imgPathProfile, "/JobsIcon/Alchimiste.webp")} unoptimized/>
+          value={oldPlayerInfo.metier.alchemist.level + " -> " + newPlayerInfo.metier.alchemist.level}
+          img={safeJoinPaths(constants.imgPathProfile, "/JobsIcon/Alchimiste.webp")} unoptimized/>
       }
 
       {
         oldPlayerInfo.building.filter((e, index) => e.own > newPlayerInfo.building[index].own).map((b) => {
           return <SmallCardInfo title={b.name} key={"building" + b.index}
-                                value={"lvl: " + oldPlayerInfo.building[b.index].own + " -> lvl: " + newPlayerInfo.building[b.index].own}
-                                img={safeJoinPaths(constants.imgPathClicker, `/BuildingIcon/${b.index}.png`)} unoptimized/>;
+            value={"lvl: " + oldPlayerInfo.building[b.index].own + " -> lvl: " + newPlayerInfo.building[b.index].own}
+            img={safeJoinPaths(constants.imgPathClicker, `/BuildingIcon/${b.index}.png`)} unoptimized/>;
         })
       }
 
       {
         oldPlayerInfo.global_upgrade.map((b, index) => {
           if (b.own && !newPlayerInfo.global_upgrade[index].own) {
-return <SmallCardInfo title={b.name}
-                                  key={"global" + index}
-                                  value={"✔️ -> ❌"}
-                                  img={safeJoinPaths(constants.imgPathClicker, `/GlobalIcon/${index}.png`)} unoptimized/>;
-} else {
-return null;
-}
+            return <SmallCardInfo title={b.name}
+              key={"global" + index}
+              value={"✔️ -> ❌"}
+              img={safeJoinPaths(constants.imgPathClicker, `/GlobalIcon/${index}.png`)} unoptimized/>;
+          } else {
+            return null;
+          }
         })
       }
 
       {
         oldPlayerInfo.terrain_upgrade.map((b, index) => {
           if (b.own && !newPlayerInfo.terrain_upgrade[index].own) {
-return <SmallCardInfo title={b.name}
-                                  key={"terrain" + index}
-                                  value={"✔️ -> ❌"}
-                                  img={safeJoinPaths(constants.imgPathClicker, `/TerrainIcon/${index}.png`)} unoptimized/>;
-} else {
-return null;
-}
+            return <SmallCardInfo title={b.name}
+              key={"terrain" + index}
+              value={"✔️ -> ❌"}
+              img={safeJoinPaths(constants.imgPathClicker, `/TerrainIcon/${index}.png`)} unoptimized/>;
+          } else {
+            return null;
+          }
         })
       }
 
       {
         oldPlayerInfo.building_upgrade.map((b, index) => {
           if (b.own && !newPlayerInfo.building_upgrade[index].own) {
-return <SmallCardInfo title={b.name}
-                                  key={"building_upgrade" + index}
-                                  value={"✔️ -> ❌"}
-                                  img={safeJoinPaths(constants.imgPathClicker, `/BuildingUpgradeIcon/${index <= 15 ? 0 : 1}.png`)} unoptimized/>;
-} else {
-return null;
-}
+            return <SmallCardInfo title={b.name}
+              key={"building_upgrade" + index}
+              value={"✔️ -> ❌"}
+              img={safeJoinPaths(constants.imgPathClicker, `/BuildingUpgradeIcon/${index <= 15 ? 0 : 1}.png`)} unoptimized/>;
+          } else {
+            return null;
+          }
         })
       }
 
       {
         oldPlayerInfo.many_upgrade.map((b, index) => {
           if (b.own && !newPlayerInfo.many_upgrade[index].own) {
-return <SmallCardInfo title={b.name}
-                                  key={"many" + index}
-                                  value={"✔️ -> ❌"}
-                                  img={safeJoinPaths(constants.imgPathClicker, "/ManyIcon/0.png")} unoptimized/>;
-} else {
-return null;
-}
+            return <SmallCardInfo title={b.name}
+              key={"many" + index}
+              value={"✔️ -> ❌"}
+              img={safeJoinPaths(constants.imgPathClicker, "/ManyIcon/0.png")} unoptimized/>;
+          } else {
+            return null;
+          }
         })
       }
 
       {
         oldPlayerInfo.posterior_upgrade.map((b, index) => {
           if (b.own && !newPlayerInfo.posterior_upgrade[index].own) {
-return <SmallCardInfo title={b.name}
-                                  key={"posterior" + index}
-                                  value={"✔️ -> ❌"}
-                                  img={safeJoinPaths(constants.imgPathClicker, "/PosteriorIcon/0.png")} unoptimized/>;
-} else {
-return null;
-}
+            return <SmallCardInfo title={b.name}
+              key={"posterior" + index}
+              value={"✔️ -> ❌"}
+              img={safeJoinPaths(constants.imgPathClicker, "/PosteriorIcon/0.png")} unoptimized/>;
+          } else {
+            return null;
+          }
         })
       }
 
       {
         oldPlayerInfo.category_upgrade.map((b, index) => {
           if (b.own && !newPlayerInfo.category_upgrade[index].own) {
-return <SmallCardInfo title={b.name}
-                                  key={"category" + index}
-                                  value={"✔️ -> ❌"}
-                                  img={safeJoinPaths(constants.imgPathClicker, `/CategoryIcon/${index}.png`)} unoptimized/>;
-} else {
-return null;
-}
+            return <SmallCardInfo title={b.name}
+              key={"category" + index}
+              value={"✔️ -> ❌"}
+              img={safeJoinPaths(constants.imgPathClicker, `/CategoryIcon/${index}.png`)} unoptimized/>;
+          } else {
+            return null;
+          }
         })
       }
     </div>

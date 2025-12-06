@@ -33,17 +33,17 @@ export async function CraftingInformationFetcher({ item, options, count }: {
 
   return (
     <>
-        <Card className="row-start-3">
-          <CardHeader>
-            <CardTitle>
-              Aide à la fabrication
-            </CardTitle>
-          </CardHeader>
+      <Card className="row-start-3">
+        <CardHeader>
+          <CardTitle>
+            Aide à la fabrication
+          </CardTitle>
+        </CardHeader>
 
-          {internalNodeNameUnique.map((el, index) => {
-            return <CraftItemRecipe key={el.value + index + "-craft"} item={el} options={options}/>;
-          })}
-        </Card>
+        {internalNodeNameUnique.map((el, index) => {
+          return <CraftItemRecipe key={el.value + index + "-craft"} item={el} options={options}/>;
+        })}
+      </Card>
 
       <CraftingInformationClient
         root={root}>

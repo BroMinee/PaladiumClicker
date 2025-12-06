@@ -27,9 +27,9 @@ export const FortuneSelector = ({ fortuneBonus, setFortuneBonus }: FortuneSelect
             key={multiplier}
             onClick={() => setFortuneBonus(multiplier)}
             className={`inline flex-1 py-2 px-3 rounded-lg font-semibold text-sm transition-all duration-200 whitespace-normal
-                            ${fortuneBonus === multiplier
-            ? "text-white shadow-lg  bg-green-400/50 hover:bg-green-500/50 border border-[#26E251]"
-            : "bg-gray-700 text-gray-300 hover:bg-gray-600"
+                ${fortuneBonus === multiplier
+              ? "text-white shadow-lg  bg-green-400/50 hover:bg-green-500/50 border border-[#26E251]"
+              : "bg-gray-700 text-gray-300 hover:bg-gray-600"
           }`}
             title={label}
           >

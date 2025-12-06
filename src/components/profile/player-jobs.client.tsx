@@ -16,8 +16,8 @@ export function JobLevel({ jobName }: { jobName: MetierKey }) {
   }
 
   return <>
-        Niv. {playerInfo.metier[jobName].level}
-    </>;
+    Niv. {playerInfo.metier[jobName].level}
+  </>;
 }
 
 /**

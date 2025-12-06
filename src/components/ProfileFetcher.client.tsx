@@ -52,7 +52,7 @@ export default function ProfileFetcherWrapper({ username, children }: {
   }
 
   return (<>
-      {children}
-    </>
+    {children}
+  </>
   );
 }

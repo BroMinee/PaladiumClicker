@@ -107,15 +107,15 @@ function NavBarContent() {
           L&apos;application est{" "}
           <span className="font-bold">ni affiliée ni approuvée</span>{" "}
           par <GradientText>
-          <a
-            href="https://paladium-pvp.fr/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-primary hover:text-orange-700 transition-colors duration-300"
-          >
-            Paladium Games
-          </a>
-        </GradientText>.
+            <a
+              href="https://paladium-pvp.fr/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-primary hover:text-orange-700 transition-colors duration-300"
+            >
+              Paladium Games
+            </a>
+          </GradientText>.
         </div>
       </footer>
     </>

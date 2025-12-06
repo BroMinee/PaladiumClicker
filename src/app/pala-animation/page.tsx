@@ -48,7 +48,7 @@ export default function PalaAnimationPage() {
                 </CardTitleH1>
                 <CardDescription>
                   Made with <FaHeart
-                  className="text-primary inline-block"/> by <GradientText>BroMine__</GradientText>
+                    className="text-primary inline-block"/> by <GradientText>BroMine__</GradientText>
                 </CardDescription>
               </CardHeader>
               <CardFooter className="flex flex-col gap-2 items-start">

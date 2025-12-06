@@ -188,23 +188,23 @@ export function TwitchOverlay({ preview, selectedElements}: { preview?: boolean,
 
   return (
     <>
-    <style>
-      {`
+      <style>
+        {`
         body {
           background-image: url("undefined") !important;
         }
       `}
-    </style>
-    <div className="w-[900px] h-[250px] bg-gray-900 text-white p-4 rounded-xl border border-purple-500/30 shadow-2xl overflow-hidden">
-      <div className={`relative z-10 transition-opacity duration-500 h-full flex flex-col justify-center ${isVisible ? "opacity-100" : "opacity-0"}`}>
-        {currentConfig && configTypeToOverlayTwitchEnum(currentConfig.type) === OverlayTwitchEnum.Money && <MoneyOverlay/>}
-        {currentConfig && configTypeToOverlayTwitchEnum(currentConfig.type) === OverlayTwitchEnum.Jobs && <JobsOverlay/>}
-        {currentConfig && configTypeToOverlayTwitchEnum(currentConfig.type) === OverlayTwitchEnum.Classement && <ClassementOverlay/>}
-        {currentConfig && configTypeToOverlayTwitchEnum(currentConfig.type) === OverlayTwitchEnum.Faction && <FactionOverlay/>}
-        {currentConfig && configTypeToOverlayTwitchEnum(currentConfig.type) === OverlayTwitchEnum.AutoPromo && <AutoPromoOverlay/>}
+      </style>
+      <div className="w-[900px] h-[250px] bg-gray-900 text-white p-4 rounded-xl border border-purple-500/30 shadow-2xl overflow-hidden">
+        <div className={`relative z-10 transition-opacity duration-500 h-full flex flex-col justify-center ${isVisible ? "opacity-100" : "opacity-0"}`}>
+          {currentConfig && configTypeToOverlayTwitchEnum(currentConfig.type) === OverlayTwitchEnum.Money && <MoneyOverlay/>}
+          {currentConfig && configTypeToOverlayTwitchEnum(currentConfig.type) === OverlayTwitchEnum.Jobs && <JobsOverlay/>}
+          {currentConfig && configTypeToOverlayTwitchEnum(currentConfig.type) === OverlayTwitchEnum.Classement && <ClassementOverlay/>}
+          {currentConfig && configTypeToOverlayTwitchEnum(currentConfig.type) === OverlayTwitchEnum.Faction && <FactionOverlay/>}
+          {currentConfig && configTypeToOverlayTwitchEnum(currentConfig.type) === OverlayTwitchEnum.AutoPromo && <AutoPromoOverlay/>}
 
+        </div>
       </div>
-    </div>
     </>
   );
 };

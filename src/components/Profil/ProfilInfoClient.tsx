@@ -93,7 +93,7 @@ export function PlayerMoney() {
   const { data: playerInfo } = usePlayerInfoStore();
   return <>
     <SmallCardInfo title="Argent actuel" value={`${formatPrice(Math.round(playerInfo?.money ?? 0))} $`}
-                   img={safeJoinPaths(constants.imgPathProfile,"dollar.png")} unoptimized/>
+      img={safeJoinPaths(constants.imgPathProfile,"dollar.png")} unoptimized/>
   </>;
 }
 
@@ -195,10 +195,10 @@ export function PlayerFriends() {
               <CardContent className="md:pt-6 space-y-2">
                 <div className="flex flex-col items-center justify-center gap-2">
                   <Image src={`https://mineskin.eu/helm/${player.uuid}`}
-                         alt="Icône"
-                         width={48} height={48}
-                         unoptimized={true}
-                         className="object-cover pixelated rounded-md"/>
+                    alt="Icône"
+                    width={48} height={48}
+                    unoptimized={true}
+                    className="object-cover pixelated rounded-md"/>
                   <div
                     className="text-primary font-bold text-center w-36">{player.name}</div>
                 </div>

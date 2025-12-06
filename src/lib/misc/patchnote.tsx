@@ -42,9 +42,9 @@ export function textFormatting(
           const [, linkText, linkUrl] = linkMatch;
           return (
             <strong key={index + "strong"}><a key={index + "href"} href={linkUrl}
-                                              target="_blank"
-                                              rel="noopener noreferrer"
-               className="text-primary hover:text-orange-700 transition-colors duration-300"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-primary hover:text-orange-700 transition-colors duration-300"
             >
               {linkText}
             </a>

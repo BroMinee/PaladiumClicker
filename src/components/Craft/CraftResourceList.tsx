@@ -100,8 +100,8 @@ export function CraftResourceList({ list }: { list: NodeType[] }) {
         <CardContent className="pt-2 gap-1 grid grid-cols-3">
           {listState !== null && listState.length > 0 && listState.map((slot, index) =>
             <DisplayItemProduce key={slot.value + index + "-needed"} title={"x" + slot.count + " " + slot.label}
-                           value={`${Math.floor(slot.count / 64)} ${adaptPlurial("stack", Math.floor(slot.count / 64))} et ${slot.count - Math.floor(slot.count / 64) * 64}`}
-                           count={slot.count} item={slot}/>
+              value={`${Math.floor(slot.count / 64)} ${adaptPlurial("stack", Math.floor(slot.count / 64))} et ${slot.count - Math.floor(slot.count / 64) * 64}`}
+              count={slot.count} item={slot}/>
           )}
           {listState !== null && listState.length === 0 &&
             <span
@@ -117,25 +117,25 @@ export function CraftResourceList({ list }: { list: NodeType[] }) {
         </CardHeader>
         <CardContent className="pt-2 gap-1 grid grid-cols-3">
           {listState !== null && listState.length > 0 && listState.map((slot, index) => {
-              const found = ahItems.find((el) => el.name === slot.value);
-              if (found === undefined) {
-                console.error(`Item ${slot.value} not found in ahItems`, ahItems);
-                return <DisplayItemProduce key={slot.value + index + "-needed-dollar"} title={"⚠️ " + slot.label}
-                                      value={"Pas en vente actuellement au market"}
-                                      count={slot.count} item={slot}/>;
-              }
-
-              if (found.quantityAvailable < slot.count) {
-                return <DisplayItemProduce key={slot.value + index + "-needed-dollar"}
-                                      title={"⚠️ " + slot.label + ` - Quantité insuffisante au market il en manquera ${slot.count - found.quantityAvailable}`}
-                                      value={`Total de : ${formatPrice(subTotalPrice[index])} $`}
-                                      count={slot.count} item={slot}/>;
-              }
-
-              return <DisplayItemProduce key={slot.value + index + "-needed-dollar"} title={slot.label}
-                                    value={`Total de : ${formatPrice(subTotalPrice[index])} $`}
-                                    count={slot.count} item={slot}/>;
+            const found = ahItems.find((el) => el.name === slot.value);
+            if (found === undefined) {
+              console.error(`Item ${slot.value} not found in ahItems`, ahItems);
+              return <DisplayItemProduce key={slot.value + index + "-needed-dollar"} title={"⚠️ " + slot.label}
+                value={"Pas en vente actuellement au market"}
+                count={slot.count} item={slot}/>;
             }
+
+            if (found.quantityAvailable < slot.count) {
+              return <DisplayItemProduce key={slot.value + index + "-needed-dollar"}
+                title={"⚠️ " + slot.label + ` - Quantité insuffisante au market il en manquera ${slot.count - found.quantityAvailable}`}
+                value={`Total de : ${formatPrice(subTotalPrice[index])} $`}
+                count={slot.count} item={slot}/>;
+            }
+
+            return <DisplayItemProduce key={slot.value + index + "-needed-dollar"} title={slot.label}
+              value={`Total de : ${formatPrice(subTotalPrice[index])} $`}
+              count={slot.count} item={slot}/>;
+          }
           )}
           {listState !== null && listState.length === 0 &&
             <span

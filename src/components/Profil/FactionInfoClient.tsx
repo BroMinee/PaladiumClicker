@@ -89,10 +89,10 @@ export function FactionDetails() {
                   <CardContent className="pt-6 space-y-2">
                     <div className="flex flex-col items-center justify-center gap-2">
                       <Image src={`https://mineskin.eu/helm/${player.uuid}`}
-                             alt="Icône"
-                             width={48} height={48}
-                             unoptimized={true}
-                             className="object-cover pixelated rounded-md"/>
+                        alt="Icône"
+                        width={48} height={48}
+                        unoptimized={true}
+                        className="object-cover pixelated rounded-md"/>
                       <div className="text-primary font-bold text-center w-36">{player.username}</div>
                     </div>
                     <div className="space-y-2">

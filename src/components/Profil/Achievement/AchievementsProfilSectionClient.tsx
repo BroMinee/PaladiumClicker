@@ -200,9 +200,9 @@ export function AchievementBody({ itemList }: { itemList: { img: string, value: 
         <div className="flex flex-col gap-1">
           {Object.keys(CategoryEnum).map((category, index) => {
             return <AchievementSelectorCategory key={category + index}
-                                                category={Object.keys(CategoryEnum).find((c) => c === category) as CategoryEnum}
-                                                selectedCategory={selectedCategory}
-                                                setSelectedCategory={setSelectedCategory}/>;
+              category={Object.keys(CategoryEnum).find((c) => c === category) as CategoryEnum}
+              selectedCategory={selectedCategory}
+              setSelectedCategory={setSelectedCategory}/>;
           })}
         </div>
 

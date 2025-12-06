@@ -75,7 +75,7 @@ export function AdminShopInput() {
       <div className="grid grid-cols-6 sm:grid-cols-16 lg:grid-cols-8 items-center justify-between gap-2 pb-2 mt-0">
         {constants.adminShopItemsAvailable.map((value: AdminShopItem, index: number) => {
           return <AdminShopSelectorClientItem key={value + index} item={value} periode={"day"}
-                                              adminShopPage={false}/>;
+            adminShopPage={false}/>;
         })}
       </div>
       <ThresholdSelector/>
