@@ -6,6 +6,7 @@ import * as d3 from "d3";
 
 import "./graph.css";
 import { formatPrice, orderBy } from "@/lib/misc";
+import { cn } from "@/lib/utils";
 
 /**
  * Render the tooltip
@@ -40,7 +41,7 @@ export const Tooltip = <TY extends AxisDomain> ({ tooltipData }: { tooltipData: 
         <div key={i} style={{ display: "flex", alignItems: "center", marginBottom: "3px" }}>
           <span style={{ width: "8px", height: "8px", borderRadius: "50%", backgroundColor: v.color, marginRight: "6px" }}></span>
           <span style={{ flex: 1 }}>{v.name}:</span>
-          <strong>{typeof v.value === "number" ? formatPrice(v.value) : (v.value instanceof Date ? v.value.toLocaleDateString() : v.value)}</strong>
+          <strong className="pl-2">{typeof v.value === "number" ? formatPrice(v.value) : (v.value instanceof Date ? v.value.toLocaleDateString() : v.value)}</strong>
         </div>
       ))}
     </div>
@@ -85,6 +86,7 @@ interface ChartContainerProps<TX extends AxisDomain, TY extends AxisDomain> {
   axisConfigs: AxisConfig[];
   renderContent: (props: ChartRendererProps<TX, TY>) => React.ReactNode;
   margin?: { top: number; right: number; bottom: number; left: number };
+  className?: string;
 }
 
 const bisectDate = d3.bisector((d: any) => d.x).left;
@@ -99,6 +101,7 @@ export const ChartContainer = <TX extends AxisDomain, TY extends AxisDomain>({
   axisConfigs,
   renderContent,
   margin = { top: 20, right: 60, bottom: 30, left: 60 },
+  className,
 }: ChartContainerProps<TX, TY>) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const svgRef = useRef<SVGSVGElement>(null);
@@ -106,6 +109,7 @@ export const ChartContainer = <TX extends AxisDomain, TY extends AxisDomain>({
   const [zoomTransform, setZoomTransform] = useState<d3.ZoomTransform>(d3.zoomIdentity);
 
   const [tooltip, setTooltip] = useState<TooltipData<TY> | null>(null);
+  const clipPathId = useMemo(() => `chart-clip-${Math.random().toString(36)}`, []);
 
   useEffect(() => {
     setZoomTransform(d3.zoomIdentity);
@@ -232,12 +236,11 @@ export const ChartContainer = <TX extends AxisDomain, TY extends AxisDomain>({
   const handleMouseLeave = () => setTooltip(null);
 
   if (!dimensions) {
-    return <div ref={containerRef} style={{ width: "100%", height: "100%" }} />;
+    return <div ref={containerRef} className={cn("w-full h-full", className)}/>;
   }
 
   return (
-    <div ref={containerRef} style={{ width: "100%", height: "500px", position: "relative" }}>
-
+    <div ref={containerRef} className={cn("w-full h-fit", className)} style={{  position: "relative" }}>
       <Tooltip tooltipData={tooltip} />
 
       <svg ref={svgRef} width={dimensions.width} height={dimensions.height}>
@@ -248,12 +251,12 @@ export const ChartContainer = <TX extends AxisDomain, TY extends AxisDomain>({
           ))}
 
           <defs>
-            <clipPath id="chart-clip">
+            <clipPath id={clipPathId}>
               <rect x={0} y={0} width={width} height={height} />
             </clipPath>
           </defs>
 
-          <g clipPath="url(#chart-clip)">
+          <g clipPath={`url(#${clipPathId})`}>
             {renderContent({
               data: data.filter(d => d.visibility),
               scales: finalScales,

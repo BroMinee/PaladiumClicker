@@ -10,6 +10,8 @@ import { UnOptimizedImage } from "@/components/ui/image-loading";
 import { adminShopItemToUserFriendlyText, getImagePathFromAdminShopType } from "@/lib/misc";
 import { constants } from "@/lib/constants";
 import { getAdminShopHistoryServerAction } from "@/lib/api/apiServerAction";
+import { TimeSelection } from "@/components/shared/time-selection.client";
+import { Card } from "@/components/ui/card-v2";
 
 const timeRanges: { key: AdminShopPeriod, label: string }[] = [
   { key: "day", label: "24 heures" },
@@ -23,7 +25,7 @@ const timeRanges: { key: AdminShopPeriod, label: string }[] = [
  */
 export default function AdminShopHistoryPage() {
   const [currentItem, setCurrentItem] = useState<AdminShopItem>(constants.adminShopItemsAvailable[0]);
-  const [currentTimeRange, setCurrentTimeRange] = useState<AdminShopPeriod>("season");
+  const [currentTimeRange, setCurrentTimeRange] = useState<AdminShopPeriod>("month");
   const axes: AxisConfig[] = [
     { id: "x-axis", position: "bottom", type: "date" },
     { id: "y-axis", position: "left", type: "number" },
@@ -61,7 +63,7 @@ export default function AdminShopHistoryPage() {
         <label className="block text-sm font-medium text-gray-300 mb-2">
           Choisir un item
         </label>
-        <div className="grid grid-cols-6 sm:grid-cols-16 lg:grid-cols-16 gap-6">
+        <div className="flex flex-wrap">
           {constants.adminShopItemsAvailable.map((value: AdminShopItem) => (
             <GroupedSpanContainer group={adminShopItemToUserFriendlyText(value)} className="w-16 h-16 p-1" key={value + "-groupSpanContainer"}>
               <Button
@@ -80,27 +82,11 @@ export default function AdminShopHistoryPage() {
         </div>
       </div>
 
-      <div className="mb-6">
-        <label className="block text-sm font-medium text-gray-300 mb-2">
-          Plage de temps
-        </label>
-        <div className="flex flex-wrap gap-2 rounded-lg bg-gray-900 p-2 max-w-md">
-          {timeRanges.map(range => (
-            <Button
-              key={range.key}
-              onClick={() => setCurrentTimeRange(range.key)}
-              variant="primary" className={cn("text-white font-bold py-2 px-4 rounded transition-colors", currentTimeRange === range.key ? "bg-primary text-white" : "bg-gray-700")}
-            >
-              {range.label}
-            </Button>
-          ))}
-        </div>
-      </div>
-
-      <div className="bg-gray-900 p-4 md:p-6 rounded-lg shadow-xl relative">
+      <Card className="flex flex-col items-center gap-2">
         <h2 className="text-2xl font-semibold mb-4">
           Prix de vente de: <span className="text-primary">{adminShopItemToUserFriendlyText(currentItem)}</span>
         </h2>
+        <TimeSelection selected={currentTimeRange} callback={setCurrentTimeRange} timeRanges={timeRanges}/>
         <div className="w-full h-[500px]">
           <ChartContainer
             data={datasets}
@@ -108,7 +94,7 @@ export default function AdminShopHistoryPage() {
             renderContent={(props) => <LineGrad {...props} />}
           />
         </div>
-      </div>
+      </Card>
 
     </>
   );

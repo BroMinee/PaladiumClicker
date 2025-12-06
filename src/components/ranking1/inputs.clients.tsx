@@ -134,7 +134,7 @@ function FetchLeaderboardData({ rankingType }: { rankingType: RankingType }) {
     <div className="mt-6 grid grid-cols-1 lg:grid-cols-3 gap-6">
       <RankingAddPlayerInput />
 
-      <RankingGraphLegends data={data} toggleVisibility={toggleVisibility} handleHighlight={handleHighlight} />
+      <RankingGraphLegends data={data} toggleVisibility={toggleVisibility} handleHighlight={handleHighlight} className="lg:col-span-2" />
     </div>
 
   </>);

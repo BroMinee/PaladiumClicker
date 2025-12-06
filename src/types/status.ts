@@ -35,7 +35,8 @@ export type ServerName =
   | "Neolith"
   | "Untaa"
   | "Launcher"
-  | "Paladium";
+  | "Paladium"
+  | "PaladiumBedrock";
 
 export type ServerPaladiumStatusResponse = ServerStatusResponse & {
   players: number

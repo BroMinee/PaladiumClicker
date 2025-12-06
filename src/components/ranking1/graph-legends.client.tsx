@@ -3,14 +3,15 @@ import { Dataset } from "@/types";
 import { Button } from "../ui/button-v2";
 
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
+import { cn } from "@/lib/utils";
 
 /**
  * Component that display a legends to the ranking graph.
  * - Handle double click to highlight a curve
  * - Handle simple click to show/hide a curve
  */
-export function RankingGraphLegends({ data, toggleVisibility, handleHighlight}: { data: Dataset<Date, number>[], toggleVisibility: (plt: Dataset<Date, number>) => void, handleHighlight: (plt: Dataset<Date, number>) => void })  {
-  return (<div className="lg:col-span-2 bg-gray-800 p-4 rounded-lg">
+export function RankingGraphLegends({ data, toggleVisibility, handleHighlight, className}: { data: Dataset<Date, number>[], toggleVisibility: (plt: Dataset<Date, number>) => void, handleHighlight: (plt: Dataset<Date, number>) => void, className?: string })  {
+  return (<div className={cn("w-full bg-gray-800 p-4 rounded-lg", className)}>
     <h3 className="text-lg font-semibold mb-2">Légende</h3>
     <ul className="space-y-2 max-h-[300px] overflow-y-auto">
       {data.map(plt => {

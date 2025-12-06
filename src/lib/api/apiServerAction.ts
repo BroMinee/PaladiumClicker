@@ -20,6 +20,8 @@ import {
   rankingResponseSubType,
   RankingType,
   Role,
+  ServerPaladiumStatusResponse,
+  StatusPeriod,
   User,
   WebHookCreate,
   WebHookType
@@ -530,6 +532,22 @@ export async function editRoleSubmit(discord_id: string, role: Role): Promise<{
     discord_user_id: discord_id,
     role: role,
   }), 0);
+}
+
+/**
+ * Fetches Paladium server status history for a given period.
+ * @param periode The period for which to fetch status.
+ */
+export async function getStatusPaladiumAction(periode: StatusPeriod): Promise<ServerPaladiumStatusResponse[]> {
+  return await fetchWithHeader<ServerPaladiumStatusResponse[]>(`${API_PALATRACKER}/v1/status-history/paladium/${periode}`, 0);
+}
+
+/**
+ * Fetches Paladium Bedrock server status history for a given period.
+ * @param periode The period for which to fetch status.
+ */
+export async function getStatusPaladiumBedrockAction(periode: StatusPeriod): Promise<ServerPaladiumStatusResponse[]> {
+  return await fetchWithHeader<ServerPaladiumStatusResponse[]>(`${API_PALATRACKER}/v1/status-history/paladium-bedrock/${periode}`, 0);
 }
 
 /**
