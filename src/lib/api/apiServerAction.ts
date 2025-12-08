@@ -70,7 +70,6 @@ export async function getPaladiumAhItemStatsOfAllItemsAction(): Promise<Paladium
     c++;
   }
 
-  console.assert(data.length === totalCount, "Data length is not equal to totalCount");
   return data;
 }
 

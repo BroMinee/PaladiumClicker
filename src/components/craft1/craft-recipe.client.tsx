@@ -11,6 +11,7 @@ import { useRouter } from "next/navigation";
 import { cn } from "@/lib/utils";
 import { Card } from "@/components/ui/card-v2";
 import { ClickableLink } from "../ui/clickable-link";
+import { useItemsStore } from "@/stores/use-items-store";
 
 const IconSearch = () => <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5"><path strokeLinecap="round" strokeLinejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" /></svg>;
 const IconChevronDown = ({ className }: { className: string }) => <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className={cn("w-4 h-4", className)}><path strokeLinecap="round" strokeLinejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" /></svg>;
@@ -23,7 +24,8 @@ const IconChevronDown = ({ className }: { className: string }) => <svg xmlns="ht
  */
 export function CraftingHelperPage() {
   const router = useRouter();
-  const { language, selectedItem, setSelectedItem, checkedItems, setCheckedItems, allItems, quantity } = useCraftRecipeStore();
+  const { language, checkedItems, setCheckedItems, quantity } = useCraftRecipeStore();
+  const { allItems, selectedItem, setSelectedItem } = useItemsStore();
 
   const [searchTerm, setSearchTerm] = useState("");
   const [isSearchFocused, setIsSearchFocused] = useState(false);
@@ -127,8 +129,13 @@ function LanguageToggle() {
   );
 }
 
-function SearchBar({ searchTerm, setSearchTerm, isSearchFocused, setIsSearchFocused, filteredItems, onSelectItem }: { searchTerm: string; setSearchTerm: React.Dispatch<React.SetStateAction<string>>; isSearchFocused: boolean; setIsSearchFocused: React.Dispatch<React.SetStateAction<boolean>>; filteredItems: OptionType[]; onSelectItem: (item: OptionType) => void }) {
-  const { language, selectedItem } = useCraftRecipeStore();
+/**
+ * Search bar component for selecting items to craft.
+ * Displays a dropdown of filtered items based on user input.
+ */
+export function SearchBar({ searchTerm, setSearchTerm, isSearchFocused, setIsSearchFocused, filteredItems, onSelectItem }: { searchTerm: string; setSearchTerm: React.Dispatch<React.SetStateAction<string>>; isSearchFocused: boolean; setIsSearchFocused: React.Dispatch<React.SetStateAction<boolean>>; filteredItems: OptionType[]; onSelectItem: (item: OptionType) => void }) {
+  const { language } = useCraftRecipeStore();
+  const { selectedItem } = useItemsStore();
   return (
     <Card>
       <label htmlFor="item-search" className="block text-sm font-medium text-gray-300 mb-2">
@@ -176,7 +183,8 @@ function SearchBar({ searchTerm, setSearchTerm, isSearchFocused, setIsSearchFocu
 
 function QuantityInput() {
   const router = useRouter();
-  const { quantity, selectedItem } = useCraftRecipeStore();
+  const { quantity } = useCraftRecipeStore();
+  const { selectedItem } = useItemsStore();
 
   const handleQuantityChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newQuantity = Math.max(1, Number(e.target.value));
@@ -386,7 +394,7 @@ function MiniCraftingGrid({ recipe, output }: { recipe: NodeType[], output: Node
 }
 
 function DisplayCraftingGrid({ recipe }: { recipe: OptionType[] }) {
-  const { allItems } = useCraftRecipeStore();
+  const { allItems } = useItemsStore();
 
   return (
     <div className="w-40 grid grid-cols-3 gap-1 p-1 bg-gray-900 rounded-md">

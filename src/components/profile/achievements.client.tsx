@@ -2,7 +2,7 @@
 
 import { usePlayerInfoStore } from "@/stores/use-player-info-store";
 import { LoadingSpinner } from "@/components/ui/loading-spinner";
-import { Achievement, OptionType } from "@/types";
+import { Achievement } from "@/types";
 import { CategoryEnum, getCategoryInfo, groupAndSortAchievements, isCompleted, orderBy, romanToInt, safeJoinPaths } from "@/lib/misc";
 import { constants } from "@/lib/constants";
 import { cn } from "@/lib/utils";
@@ -10,20 +10,15 @@ import { TooltipProvider } from "@/components/shared/tooltip";
 import { HoverCard, HoverCardContent, HoverCardTrigger } from "@/components/shared/hover";
 
 import { FaCheck, FaLock } from "react-icons/fa";
-import { ReactNode, useEffect, useMemo, useState } from "react";
-import { getAllItemsServerAction } from "@/lib/api/apiServerAction";
+import { ReactNode, useMemo } from "react";
 import { UnOptimizedImage } from "../ui/image-loading";
+import { useItemsStore } from "@/stores/use-items-store";
 
 /**
  * Display all the achievement vertically, sorted by completion and order by category.
  */
 export function AchievementSection() {
   const { data: playerInfo } = usePlayerInfoStore();
-  const [itemList, setItemList] = useState<OptionType[]>([]);
-
-  useEffect(() => {
-    getAllItemsServerAction().then(setItemList);
-  }, [setItemList]);
 
   const groupedAchievements = useMemo(() => {
     if (!playerInfo) {
@@ -57,7 +52,7 @@ export function AchievementSection() {
               </h4>
               <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 gap-3">
                 {achievements.map((ach, index) => (
-                  <DetailAchievement key={ach.name + index} achievement={ach} itemList={itemList} />
+                  <DetailAchievement key={ach.name + index} achievement={ach} />
                 ))}
               </div>
             </div>
@@ -116,10 +111,11 @@ const SubAchievementDisplay = ({ subAchievement }: { subAchievement: Achievement
   );
 };
 
-function DetailAchievement({ achievement, itemList }: {
+function DetailAchievement({ achievement }: {
   achievement: Achievement,
-  itemList: OptionType[]
 }) {
+  const { allItems } = useItemsStore();;
+
   let achievementProgress;
   if (isCompleted(achievement)) {
     achievementProgress = achievement.subAchievements.length === 0 ? achievement.amount : achievement.subAchievements.length;
@@ -131,7 +127,7 @@ function DetailAchievement({ achievement, itemList }: {
 
   const amount = achievement.amount === -1 ? achievement.subAchievements.length : achievement.amount;
 
-  let closestItemName = itemList.find((item) => item.value === constants.dictAchievementIdToIcon.get(achievement.icon))?.img ?? "unknown.webp";
+  let closestItemName = allItems.find((item) => item.value === constants.dictAchievementIdToIcon.get(achievement.icon))?.img ?? "unknown.webp";
   if (closestItemName === "barriere.webp" || closestItemName === "unknown.webp") {
     closestItemName = "unknown.webp";
   }

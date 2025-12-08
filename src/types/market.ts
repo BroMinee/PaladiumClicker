@@ -135,3 +135,7 @@ export type AdminShopItemDetail = {
   date: number
   sellPrice: number,
 }
+
+export interface searchParamsAhPage {
+  item?: string,
+}

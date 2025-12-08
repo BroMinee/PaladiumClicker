@@ -11,10 +11,17 @@ import { cn } from "@/lib/utils";
 /**
  * Render the tooltip
  */
-export const Tooltip = <TY extends AxisDomain> ({ tooltipData }: { tooltipData: TooltipData<TY> | null }) => {
+export const Tooltip = <TY extends AxisDomain>({ tooltipData, containerWidth }: { tooltipData: TooltipData<TY> | null, containerWidth: number }) => {
   if (!tooltipData || !tooltipData.content) {
     return null;
   }
+
+  // Seuil arbitraire
+  const isRightSide = tooltipData.x > (containerWidth * 0.6);
+
+  const xPosition = isRightSide ? tooltipData.x - 15 : tooltipData.x + 15;
+
+  const transformStyle = `translate(${xPosition}px, ${tooltipData.y}px) ${isRightSide ? "translateX(-100%)" : ""}`;
 
   return (
     <div
@@ -24,7 +31,7 @@ export const Tooltip = <TY extends AxisDomain> ({ tooltipData }: { tooltipData: 
         top: 0,
         left: 0,
         pointerEvents: "none",
-        transform: `translate(${tooltipData.x + 15}px, ${tooltipData.y}px)`,
+        transform: transformStyle,
         border: "1px solid #ccc",
         borderRadius: "4px",
         padding: "8px",
@@ -32,6 +39,7 @@ export const Tooltip = <TY extends AxisDomain> ({ tooltipData }: { tooltipData: 
         zIndex: 10,
         fontSize: "12px",
         minWidth: "150px",
+        transition: "transform 0.1s ease-out"
       }}
     >
       <div style={{ fontWeight: "bold", marginBottom: "5px", borderBottom: "1px solid #eee", paddingBottom: "3px" }}>
@@ -110,6 +118,7 @@ export const ChartContainer = <TX extends AxisDomain, TY extends AxisDomain>({
 
   const [tooltip, setTooltip] = useState<TooltipData<TY> | null>(null);
   const clipPathId = useMemo(() => `chart-clip-${Math.random().toString(36)}`, []);
+  const [activeXValue, setActiveXValue] = useState<any | null>(null);
 
   useEffect(() => {
     setZoomTransform(d3.zoomIdentity);
@@ -182,37 +191,48 @@ export const ChartContainer = <TX extends AxisDomain, TY extends AxisDomain>({
 
     const [mouseX] = d3.pointer(event);
 
-    let hoveredXValue: any;
+    let rawXValue: any;
     if ("invert" in xScale) {
-      hoveredXValue = (xScale as any).invert(mouseX);
+      rawXValue = (xScale as any).invert(mouseX);
     } else {
       return;
     }
 
-    const tooltipValues: { name: string; value: TY; color: string; }[] = [];
-    let label = "";
-
     const visibleData = data.filter(d => d.visibility);
+    if (visibleData.length === 0) {
+      return;
+    }
+
+    const refDataset = visibleData[0];
+    const idx = bisectDate(refDataset.stats, rawXValue, 1);
+    const d0 = refDataset.stats[idx - 1];
+    const d1 = refDataset.stats[idx];
+
+    let closestPoint = d0;
+    if (d1 && d0) {
+      closestPoint = (rawXValue as any) - (d0.x as any) > (d1.x as any) - (rawXValue as any) ? d1 : d0;
+    } else if (d1) {
+      closestPoint = d1;
+    }
+
+    if (!closestPoint) {
+      setTooltip(null);
+      setActiveXValue(null);
+      return;
+    }
+
+    const snappedXValue = closestPoint.x;
+    const tooltipValues: { name: string; value: TY; color: string; }[] = [];
 
     visibleData.forEach(dataset => {
-      const idx = bisectDate(dataset.stats, hoveredXValue, 1);
-      const d0 = dataset.stats[idx - 1];
-      const d1 = dataset.stats[idx];
-
-      let point = d0;
-      if (d1 && d0) {
-        point = (hoveredXValue as any) - (d0.x as any) > (d1.x as any) - (hoveredXValue as any) ? d1 : d0;
-      } else if (d1) {
-        point = d1;
-      }
+      const point = dataset.stats.find(s => {
+        if (s.x instanceof Date && snappedXValue instanceof Date) {
+          return s.x.getTime() === snappedXValue.getTime();
+        }
+        return s.x === snappedXValue;
+      });
 
       if (point) {
-        if (!label) {
-          label = point.x instanceof Date
-            ? `${point.x.toLocaleDateString()} - ${point.x.toLocaleTimeString()}`
-            : String(point.x);
-        }
-
         tooltipValues.push({
           name: dataset.name,
           value: point.y,
@@ -221,29 +241,39 @@ export const ChartContainer = <TX extends AxisDomain, TY extends AxisDomain>({
       }
     });
 
-    if (tooltipValues.length > 0) {
-      setTooltip({
-        x: event.nativeEvent.offsetX,
-        y: event.nativeEvent.offsetY,
-        content: {
-          label,
-          values: orderBy(tooltipValues, (e) =>  e.value, "desc")
-        }
-      });
-    }
-  }, [data, finalScales, width, height]);
+    const xScreenPosition = (xScale as any)(snappedXValue);
 
-  const handleMouseLeave = () => setTooltip(null);
+    const label = snappedXValue instanceof Date
+      ? `${snappedXValue.toLocaleDateString()} - ${snappedXValue.toLocaleTimeString()}`
+      : String(snappedXValue);
+
+    setTooltip({
+      x: xScreenPosition + margin.left,
+      y: event.nativeEvent.offsetY,
+      content: {
+        label,
+        values: orderBy(tooltipValues, (e) => e.value, "desc")
+      }
+    });
+
+    setActiveXValue(snappedXValue);
+
+  }, [data, finalScales, width, height, margin.left]);
+
+  const handleMouseLeave = () => {
+    setTooltip(null);
+    setActiveXValue(null);
+  };
 
   if (!dimensions) {
     return <div ref={containerRef} className={cn("w-full h-full", className)}/>;
   }
 
   return (
-    <div ref={containerRef} className={cn("w-full h-fit", className)} style={{  position: "relative" }}>
-      <Tooltip tooltipData={tooltip} />
+    <div ref={containerRef} className={cn("w-full h-fit", className)} style={{ position: "relative" }} >
+      <Tooltip tooltipData={tooltip} containerWidth={width} />
 
-      <svg ref={svgRef} width={dimensions.width} height={dimensions.height}>
+      <svg ref={svgRef} width={dimensions.width} height={dimensions.height} className="overflow-visible">
         <g transform={`translate(${margin.left}, ${margin.top})`}>
 
           {axisConfigs.map(config => (
@@ -285,6 +315,65 @@ export const ChartContainer = <TX extends AxisDomain, TY extends AxisDomain>({
               pointerEvents="none"
             />
           )}
+
+          {activeXValue && (() => {
+            const xScale = finalScales["x-axis"];
+            const xScreen = (xScale as any)(activeXValue);
+
+            return (
+              <>
+                <line
+                  x1={xScreen}
+                  x2={xScreen}
+                  y1={0}
+                  y2={height}
+                  stroke="#ccc"
+                  strokeDasharray="4 4"
+                  pointerEvents="none"
+                />
+
+                {data.filter(d => d.visibility).map(dataset => {
+                  const point = dataset.stats.find(s => {
+                    if (s.x instanceof Date && activeXValue instanceof Date) {
+                      return s.x.getTime() === activeXValue.getTime();
+                    }
+                    return s.x === activeXValue;
+                  });
+
+                  if (point) {
+                    const yScale = finalScales[dataset.yAxisId] as any;
+                    const yScreen = yScale(point.y);
+
+                    return (
+                      <g key={dataset.name}>
+                        <line
+                          x1={0}
+                          x2={width}
+                          y1={yScreen}
+                          y2={yScreen}
+                          stroke={dataset.color}
+                          strokeWidth={1}
+                          strokeDasharray="2 2"
+                          opacity={0.6}
+                          pointerEvents="none"
+                        />
+                        <circle
+                          cx={xScreen}
+                          cy={yScreen}
+                          r={5}
+                          fill={dataset.color}
+                          stroke="white"
+                          strokeWidth={2}
+                          pointerEvents="none"
+                        />
+                      </g>
+                    );
+                  }
+                  return null;
+                })}
+              </>
+            );
+          })()}
 
         </g>
       </svg>

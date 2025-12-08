@@ -300,6 +300,7 @@ export const getPaladiumAhItemFullHistory = async (itemId: string): Promise<AhIt
 /**
  *
  * @param itemId
+ * @deprecated use listing in /items?limit=100&offset=...
  */
 export const getPaladiumAhItemStats = async (itemId: string): Promise<PaladiumAhItemStat> => {
   return await fetchWithHeader<PaladiumAhItemStat>(`${PALADIUM_API_URL}/v1/paladium/shop/market/items/${itemId}`);
