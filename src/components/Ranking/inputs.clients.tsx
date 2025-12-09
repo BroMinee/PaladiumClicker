@@ -118,7 +118,7 @@ function FetchLeaderboardData({ rankingType }: { rankingType: RankingType }) {
   ];
 
   return (<>
-    <div className="w-full p-4 md:p-6 rounded-lg shadow-xl relative">
+    <div className="w-full p-4 md:p-6 rounded-lg relative">
       <h2 className="text-2xl font-semibold mb-4">
         Classement - {rankingTypeToUserFriendlyText(rankingType)}
       </h2>
@@ -134,7 +134,7 @@ function FetchLeaderboardData({ rankingType }: { rankingType: RankingType }) {
     <div className="mt-6 grid grid-cols-1 lg:grid-cols-3 gap-6">
       <RankingAddPlayerInput />
 
-      <GraphLegends data={data} toggleVisibility={toggleVisibility} handleHighlight={handleHighlight} className="lg:col-span-2" />
+      <GraphLegends data={data} toggleVisibility={toggleVisibility} handleHighlight={handleHighlight} className="lg:col-span-2"/>
     </div>
 
   </>);

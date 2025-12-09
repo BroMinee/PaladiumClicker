@@ -1,4 +1,4 @@
-import { Card } from "../ui/card-v2";
+import { Card } from "../ui/card";
 import { MetierKey } from "@/types";
 import { JobLevel, JobProgressbar } from "./player-jobs.client";
 import { prettyJobName } from "@/lib/misc";

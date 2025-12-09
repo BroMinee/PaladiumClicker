@@ -3,7 +3,7 @@
 import { AxisConfig, DataPoint, Dataset } from "@/types";
 import { LineGrad } from "../shared/graph-line-renderer.client";
 import { ChartContainer } from "../shared/graph.client";
-import { Card } from "../ui/card-v2";
+import { Card } from "../ui/card";
 import { getPlayerCountHistoryPaladiumAction } from "@/lib/api/apiServerAction";
 import { useEffect, useState } from "react";
 
@@ -49,7 +49,7 @@ export function PlayerCountHistory() {
   return (
     <Card className="flex flex-col items-center gap-2">
       <h2 className="text-2xl font-semibold mb-4">
-        Historique de connexion
+        Nombre de joueurs total
       </h2>
       <div className="flex flex-row gap-2 w-full h-[500px]">
         <ChartContainer

@@ -11,7 +11,7 @@ import { adminShopItemToUserFriendlyText, getImagePathFromAdminShopType } from "
 import { constants } from "@/lib/constants";
 import { getAdminShopHistoryServerAction } from "@/lib/api/apiServerAction";
 import { TimeSelection } from "@/components/shared/time-selection.client";
-import { Card } from "@/components/ui/card-v2";
+import { Card } from "@/components/ui/card";
 
 const timeRanges: { key: AdminShopPeriod, label: string }[] = [
   { key: "day", label: "24 heures" },
@@ -23,7 +23,7 @@ const timeRanges: { key: AdminShopPeriod, label: string }[] = [
 /**
  * [Admin-shop page](http://palatracker.bromine.fr/admin-shop)
  */
-export default function AdminShopHistoryPage() {
+export function AdminShopHistoryPage() {
   const [currentItem, setCurrentItem] = useState<AdminShopItem>(constants.adminShopItemsAvailable[0]);
   const [currentTimeRange, setCurrentTimeRange] = useState<AdminShopPeriod>("month");
   const axes: AxisConfig[] = [
@@ -87,8 +87,9 @@ export default function AdminShopHistoryPage() {
           Prix de vente de: <span className="text-primary">{adminShopItemToUserFriendlyText(currentItem)}</span>
         </h2>
         <TimeSelection selected={currentTimeRange} callback={setCurrentTimeRange} timeRanges={timeRanges}/>
-        <div className="w-full h-[500px]">
+        <div className="w-full h-[425px]">
           <ChartContainer
+            className="h-[425px]"
             data={datasets}
             axisConfigs={axes}
             renderContent={(props) => <LineGrad {...props} />}

@@ -3,7 +3,7 @@ import { GradientText } from "@/components/shared/GradientText";
 import { rankingTypeToUserFriendlyText } from "@/lib/misc";
 import { FaHeart } from "react-icons/fa";
 import { RankingType } from "@/types";
-import { RankingSelectorClient } from "@/components/Ranking/RankingSelectorClient";
+import { RankingSelectorClient } from "@/components/ranking/RankingSelectorClient";
 import { cn } from "@/lib/utils";
 
 export type searchParamsRankingPage = {

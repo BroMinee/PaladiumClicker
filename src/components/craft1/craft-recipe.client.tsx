@@ -9,7 +9,7 @@ import { generateCraftUrl } from "@/lib/misc";
 import { useCraftRecipeStore } from "@/stores/use-craft-store";
 import { useRouter } from "next/navigation";
 import { cn } from "@/lib/utils";
-import { Card } from "@/components/ui/card-v2";
+import { Card } from "@/components/ui/card";
 import { ClickableLink } from "../ui/clickable-link";
 import { useItemsStore } from "@/stores/use-items-store";
 

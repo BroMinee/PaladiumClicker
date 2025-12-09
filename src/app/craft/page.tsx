@@ -1,15 +1,9 @@
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { FaHeart } from "react-icons/fa";
-import { GradientText } from "@/components/shared/GradientText";
-import React from "react";
-
-import { getAllItems } from "@/lib/api/apiPalaTracker";
-import { CraftSectionEnum, OptionType, searchParamsCraftPage } from "@/types";
-import { generateCraftUrl } from "@/lib/misc";
-import { redirect } from "next/navigation";
-import { CraftingSectionSelector } from "@/components/Craft/CraftingSectionSelector";
-import { CraftRecipeDisplay } from "@/components/Craft/CraftRecipeDisplay";
-import { CraftOptimizerDisplay } from "@/components/Craft/CraftOptimizerDisplay";
+import "server-only";
+import { CraftingHelperPage } from "@/components/craft1/craft-recipe.client";
+import { getAllItems, getCraftRecipe } from "@/lib/api/apiPalaTracker";
+import { OptionType, searchParamsCraftPage } from "@/types";
+import { SetCraftingState } from "@/components/craft1/set-crafting-state";
+import { SetItemsStats } from "@/components/shared/set-items-state.client";
 
 /**
  * Generate Metadata
@@ -55,51 +49,19 @@ export async function generateMetadata(props: { searchParams: Promise<searchPara
 }
 
 /**
- * [Craft page](https://palatracker.bromine.fr/craft)
- * @param props.searchParams - Craft search params
+ * [Crafting recipe page](https://palatracker.bromine.fr/craft)
  */
-export default async function Home(props: { searchParams: Promise<searchParamsCraftPage> }) {
+export default async function CraftRecipeDisplay(props: { searchParams: Promise<searchParamsCraftPage> }) {
   const searchParams = await props.searchParams;
+  const options = await getAllItems();
+  const item = searchParams === undefined ? undefined : options.find(item => item.value === (searchParams.item ?? ""));
+  const craftingTree = item ? await getCraftRecipe(item.value, searchParams.count ?? 1) : undefined;
 
-  if (searchParams.section === undefined) {
-    return redirect(generateCraftUrl(searchParams.item as string, searchParams.count ?? 1, CraftSectionEnum.recipe));
-  }
-
-  switch (searchParams.section) {
-  case CraftSectionEnum.recipe:
-    return <BodyPage><CraftRecipeDisplay searchParams={searchParams}/></BodyPage>;
-  case CraftSectionEnum.optimizer:
-    return <BodyPage><CraftOptimizerDisplay/></BodyPage>;
-  default:
-    return redirect(generateCraftUrl(searchParams.item as string, searchParams.count ?? 1, CraftSectionEnum.recipe));
-  }
-}
-
-function BodyPage({ children }: { children: React.ReactNode }) {
   return (
-    <>
-      <Card>
-        <CardHeader className="flex flex-row items-center justify-between">
-          <CardTitle>
-            Bienvenue sur{" "}
-            <GradientText className="font-extrabold">l&apos;optimiseur de Craft</GradientText>
-          </CardTitle>
-          <CardDescription>
-            Made with <FaHeart className="text-primary inline-block"/> by <GradientText>BroMine__</GradientText>
-          </CardDescription>
-        </CardHeader>
-        <CardContent>
-          <h1>
-            Cet outil permet de lister les ressources nécessaires pour fabriquer un item en fonction de la quantité.
-            <br/>
-            Il permet également d&apos;avoir une indication du prix de fabrication de l&apos;item.
-            <br/>
-            Mais également de lister les craft les plus rentables du moment pour optimiser vos crafts.
-          </h1>
-        </CardContent>
-      </Card>
-      <CraftingSectionSelector/>
-      {children}
-    </>
+    <SetItemsStats allItems={options}>
+      <SetCraftingState root={craftingTree}>
+        <CraftingHelperPage />
+      </SetCraftingState>
+    </SetItemsStats>
   );
 }

@@ -1,5 +1,4 @@
 "use client";
-import { FactionEmblemClient } from "@/components/Profil/FactionInfoClient";
 import { PlayerFactionName } from "../player-faction.client";
 import { useEffect, useState } from "react";
 import { PaladiumFactionLeaderboard } from "@/types";
@@ -8,6 +7,7 @@ import { usePlayerInfoStore } from "@/stores/use-player-info-store";
 import { LoadingSpinner } from "../../ui/loading-spinner";
 import { intToHex } from "@/lib/misc";
 import { FactionMembersList } from "./faction-members-lists.client";
+import { FactionEmblemClient } from "./faction-emblem.client";
 
 /**
  * Display the player's faction info

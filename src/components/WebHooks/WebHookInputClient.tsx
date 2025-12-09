@@ -35,7 +35,7 @@ import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 
 import { constants } from "@/lib/constants";
-import PlotAdminShopChart from "@/components/AdminShop/PlotAdminShopChart";
+// import PlotAdminShopChart from "@/components/AdminShop/PlotAdminShopChart";
 import { PlotHistoricChart } from "@/components/AhTracker/PlotHistoricChart";
 
 /**
@@ -361,7 +361,8 @@ function AdminShopGraphClient() {
 
   return (
     <div className="h-[100vh] pb-0">
-      <PlotAdminShopChart data={data} periode={"month"} webhook/>
+      TODO{data.length}
+      {/* <PlotAdminShopChart data={data} periode={"month"} webhook/> */}
     </div>
   );
 }

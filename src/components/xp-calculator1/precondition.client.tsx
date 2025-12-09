@@ -4,7 +4,7 @@ import { constants } from "@/lib/constants";
 import { prettyJobName, textFormatting } from "@/lib/misc";
 import { MetierKey } from "@/types";
 import { useMemo } from "react";
-import { Card } from "@/components/ui/card-v2";
+import { Card } from "@/components/ui/card";
 
 interface PreconditionsDisplayProps {
   startLevel: number;

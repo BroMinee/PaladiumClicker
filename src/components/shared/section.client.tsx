@@ -1,6 +1,6 @@
 "use client";
 import React, { useState, JSX, ReactNode } from "react";
-import { Card } from "../ui/card-v2";
+import { Card } from "../ui/card";
 
 /**
  * Tab section info

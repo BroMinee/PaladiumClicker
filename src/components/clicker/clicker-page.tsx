@@ -1,7 +1,7 @@
 import React, { ReactNode } from "react";
 import { BestBuyCard, StatButton, StatRPS, StatSleepingCoin, StatTotalProd } from "@/components/clicker/statistics.client";
 import { BuildingInputCard, UpgradeSectionClient } from "@/components/clicker/inputs.client";
-import { Card } from "@/components/ui/card-v2";
+import { Card } from "@/components/ui/card";
 import { JobsCard } from "@/components/profile/player-jobs";
 
 /**

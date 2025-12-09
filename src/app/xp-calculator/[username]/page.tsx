@@ -1,17 +1,9 @@
 import ProfileFetcherWrapper from "@/components/ProfileFetcher.client";
-import { MetierComponentWrapper } from "@/components/MetierList";
-import { Card, CardContent, CardDescription, CardHeader, CardTitleH1 } from "@/components/ui/card";
-import { GradientText } from "@/components/shared/GradientText";
-import { FaHeart } from "react-icons/fa";
-import {
-  MetierSelectorClient,
-  MetierToReachWrapper,
-  SetLevelInUrl
-} from "@/components/Xp-Calculator/MetierSelectorClient";
-import { MetierKey } from "@/types";
-import { HowToXp, searchParamsXpBonusPage, XpBonus } from "@/components/Xp-Calculator/XpCalculator";
+import { searchParamsXpBonusPage } from "@/components/Xp-Calculator/XpCalculator";
+import { XPCalculator } from "@/components/xp-calculator1/calculator.client";
 import { constants } from "@/lib/constants";
 import { safeJoinPaths } from "@/lib/misc";
+import React from "react";
 
 /**
  * Generate Metadata
@@ -65,77 +57,15 @@ export async function generateMetadata(
 }
 
 /**
- * [Xp-calculator Page](https://palatracker.bromine.fr/xp-calculator/BroMine__)
- * @param props.params - Username
- * @param props.searchParams - Search params
+ * [xp-calculator page](https://palatracker.bromine.fr/xp-calculator/BroMine__)
  */
-export default async function Home(
-  props: {
-    params: Promise<{ username: string }>,
-    searchParams: Promise<searchParamsXpBonusPage>
-  }
+export default async function XpCaclulatorPage(props: {
+  params: Promise<{ username: string }>,
+}
 ) {
-  const searchParams = await props.searchParams;
   const params = await props.params;
-  const metierAvailable: MetierKey[] = ["miner", "farmer", "hunter", "alchemist"];
-  if (searchParams.metier === undefined || !metierAvailable.includes(searchParams.metier as MetierKey)) {
-    return <SetLevelInUrl selected="miner" searchParams={searchParams} params={params} />;
-  }
-  searchParams.metier = searchParams.metier?.toLowerCase();
-  searchParams.dailyBonus = searchParams.dailyBonus !== undefined ? Number(searchParams.dailyBonus) : undefined;
-  searchParams.level = searchParams.level !== undefined ? Number(searchParams.level) : undefined;
 
-  const metierSelected = searchParams.metier as MetierKey;
-
-  return (
-    <ProfileFetcherWrapper username={params.username}>
-      <div className="flex flex-col gap-4">
-        <Card>
-          <CardHeader className="flex flex-row items-center justify-between">
-            <CardTitleH1>
-              Bienvenue sur le calculateur{" "}
-              <GradientText className="font-extrabold">d&apos;xp de métier</GradientText>
-            </CardTitleH1>
-            <CardDescription>
-              Made with <FaHeart
-                className="text-primary inline-block" /> by <GradientText>BroMine__</GradientText>
-            </CardDescription>
-          </CardHeader>
-          <CardContent className="flex justify-evenly">
-            <SetLevelInUrl selected={metierSelected} searchParams={searchParams} params={params} />
-            <div className="grid-cols-2 grid sm:grid-cols-4">
-              {metierAvailable.map((e, index) => {
-                return (
-                  <MetierSelectorClient key={index} metier={e} username={params.username}
-                    selected={searchParams.metier === e} searchParams={searchParams} />
-                );
-              })
-              }
-            </div>
-          </CardContent>
-        </Card>
-        <div className="grid grid-cols-2 grid-rows-1 gap-4">
-          <Card className="pt-6 flex flex-col items-center justify-center gap-2">
-            <CardHeader>
-              <h3>Niveau actuel</h3>
-            </CardHeader>
-            <CardContent id="metier-current-level">
-              <MetierComponentWrapper editable={false} metierKey={metierSelected} />
-            </CardContent>
-          </Card>
-
-          <Card className="pt-6 flex flex-col items-center justify-center gap-2">
-            <CardHeader>
-              <h3>Niveau à atteindre</h3>
-            </CardHeader>
-            <CardContent id="metier-target-level">
-              <MetierToReachWrapper metierKey={metierSelected} searchParams={searchParams} />
-            </CardContent>
-          </Card>
-        </div>
-        <XpBonus params={params} searchParams={searchParams} />
-        <HowToXp searchParams={searchParams} />
-      </div>
-    </ProfileFetcherWrapper>
-  );
+  return (<ProfileFetcherWrapper username={params.username}>
+    <XPCalculator/>
+  </ProfileFetcherWrapper>);
 }

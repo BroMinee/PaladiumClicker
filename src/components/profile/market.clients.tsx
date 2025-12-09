@@ -3,10 +3,10 @@
 import { LoadingSpinner } from "@/components/ui/loading-spinner";
 import { FaTag, FaInfoCircle } from "react-icons/fa";
 import { usePlayerInfoStore } from "@/stores/use-player-info-store";
-import { AhInfoGetTotalBenefice } from "@/components/Profil/AhInfoClient";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { Button } from "@/components/ui/button-v2";
 import { ProfileSaleCard } from "../shared/market-sell-cart.client";
+import { AhInfoGetTotalBenefice } from "../ah/market-total-benefice.client";
 
 /**
  * Display the player's market

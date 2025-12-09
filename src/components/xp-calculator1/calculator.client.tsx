@@ -5,7 +5,7 @@ import { calculateXpNeeded, getBonusRank, getTotalXPForLevel, prettyJobName } fr
 import React, { useState, useMemo, useEffect } from "react";
 import { usePlayerInfoStore } from "@/stores/use-player-info-store";
 import { LoadingSpinner } from "@/components/ui/loading-spinner";
-import { Card } from "@/components/ui/card-v2";
+import { Card } from "@/components/ui/card";
 
 import { MetierKey } from "@/types";
 import { InputDebounce } from "@/components/shared/input-debounce.client";

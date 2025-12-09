@@ -27,14 +27,15 @@ import { UnOptimizedImage } from "@/components/ui/image-loading";
 import { SearchBar } from "@/components/craft1/craft-recipe.client";
 import { useItemsStore } from "@/stores/use-items-store";
 import { useMarketStore } from "@/stores/use-market-store";
-import { Card } from "../ui/card-v2";
+import { Card } from "../ui/card";
 import { MarketOfferCard } from "../shared/market-sell-cart.client";
 import { RenderPressure, RenderPriceVolume } from "../shared/graph-line-renderer.client";
 import { GiStoneCrafting } from "react-icons/gi";
+import { safeJoinPaths } from "@/lib/misc";
 
 const PLACEHOLDER_ITEM: OptionType = {
   value: "placeholder",
-  label: "Sélectionnez un objet",
+  label: "",
   label2: "Aperçu du marché",
   img: "unknown.webp"
 };
@@ -136,7 +137,7 @@ export default function MarketPage() {
     <>
 
       <h1 className="text-4xl font-bold mb-4">
-        Historique de vente de {selectedItem?.label}
+        Historique de vente{selectedItem ? ` de ${selectedItem.label}` : ""}
       </h1>
       <Card>
         <>
@@ -149,7 +150,7 @@ export default function MarketPage() {
                     title={"Changer d'objet"}
                   >
                     <UnOptimizedImage
-                      src={`AH_img/${displayItem.img}`}
+                      src={safeJoinPaths("AH_img", displayItem.img)}
                       alt={displayItem.label}
                       className={"w-20 h-20 pixelated transform group-hover:scale-110 transition-transform duration-300"}
                       width={0} height={0}
@@ -215,7 +216,6 @@ export default function MarketPage() {
               </Link>
             </div>
 
-            {/* Graphiques Droite */}
             <div className="lg:col-span-2 space-y-6">
               <div className="bg-gray-900/50 border border-gray-800 rounded-xl p-4 relative overflow-hidden">
                 <h3 className="text-sm font-semibold text-gray-300 mb-4 flex items-center gap-2">

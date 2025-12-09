@@ -1,10 +1,9 @@
-import { redirect } from "next/navigation";
-import { Card } from "@/components/ui/card";
+import React from "react";
+
+import { RankingSectionSelector } from "@/components/ranking/inputs.clients";
+import { searchParamsRankingPage } from "@/components/ranking/RankingSelector";
 import { RankingType } from "@/types";
-import { RankingSelectorCard, searchParamsRankingPage } from "@/components/Ranking/RankingSelector";
-import { generateRankingUrl, getImagePathFromRankingType, rankingTypeToUserFriendlyText } from "@/lib/misc";
-import { Suspense } from "react";
-import GraphRanking, { GraphRankingFallback } from "@/components/Ranking/GraphRanking";
+import { getImagePathFromRankingType, rankingTypeToUserFriendlyText } from "@/lib/misc";
 
 /**
  * Generate Metadata
@@ -41,31 +40,13 @@ export async function generateMetadata(props: { searchParams: Promise<searchPara
 }
 
 /**
- * [Ranking page](https://palatracker.bromine.fr/ranking)
- * @param props.searchParams - Search params
+ * [LeaderboardPage](https://palatracker.bromine.fr/ranking)
  */
-export default async function Home(
-  props: {
-    searchParams: Promise<searchParamsRankingPage>
-  }
-) {
-  const searchParams = await props.searchParams;
-
-  // test if the searchParams.category is a RankingType
-  if (!Object.values(RankingType).includes(searchParams.category as RankingType)) {
-    redirect(generateRankingUrl(RankingType.money));
-  }
-
-  const rankingType = searchParams.category as RankingType;
-
+export default function LeaderboardPage() {
   return (
-    <div className="flex flex-col gap-4">
-      <RankingSelectorCard rankingType={rankingType} rankingPage={true}/>
-      <Card className="w-full h-[calc(100vh-30vh)]">
-        <Suspense fallback={<GraphRankingFallback/>}>
-          <GraphRanking rankingType={rankingType} searchParams={searchParams}/>
-        </Suspense>
-      </Card>
-    </div>
+    <>
+      <h1 className="text-4xl font-bold mb-4">Classements</h1>
+      <RankingSectionSelector/>
+    </>
   );
 }

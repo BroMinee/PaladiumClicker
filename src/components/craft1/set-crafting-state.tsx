@@ -1,11 +1,10 @@
 "use client";
 
 import { useCraftRecipeStore } from "@/stores/use-craft-store";
-import { CraftSectionEnum, NodeType, Tree } from "@/types";
+import { NodeType, Tree } from "@/types";
 import { useEffect } from "react";
 import { LoadingSpinner } from "../ui/loading-spinner";
-import { redirect, useSearchParams } from "next/navigation";
-import { generateCraftUrl } from "@/lib/misc";
+import { useSearchParams } from "next/navigation";
 import { useItemsStore } from "@/stores/use-items-store";
 
 function calculateFlatResources(tree: Tree<NodeType> | undefined, checkedItems: Set<NodeType>) {
@@ -57,7 +56,8 @@ export function SetCraftingState({ root: rootServer, children }: { root: Tree<No
     if (itemSelected) {
       setSelectedItem(itemSelected);
     } else if(selectedItem === "") {
-      redirect(generateCraftUrl(null, 1, CraftSectionEnum.recipe));
+      console.log("No item selected, redirecting to craft main page TODO");
+      // redirect(generateCraftUrl(null, 1, CraftSectionEnum.recipe));
     }
 
   }, [quantity, setQuantity, allItems, selectedItem, setSelectedItem]);

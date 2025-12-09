@@ -4,7 +4,7 @@ import { AdminShopPeriod, AxisConfig, DataPoint, Dataset } from "@/types";
 import { LineGrad } from "../shared/graph-line-renderer.client";
 import { ChartContainer } from "../shared/graph.client";
 import { TimeSelection } from "../shared/time-selection.client";
-import { Card } from "../ui/card-v2";
+import { Card } from "../ui/card";
 import { getStatusPaladiumAction, getStatusPaladiumBedrockAction } from "@/lib/api/apiServerAction";
 import { useEffect, useState } from "react";
 import { GraphLegends } from "../shared/graph-legends.client";

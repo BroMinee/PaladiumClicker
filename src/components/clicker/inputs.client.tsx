@@ -9,7 +9,7 @@ import { GenericSectionTabs, TabData } from "@/components/shared/section.client"
 import { LoadingSpinner } from "../ui/loading-spinner";
 import { ToggleCardButton } from "../shared/toggle-button.client";
 import { GroupedSpanContainer } from "../shared/group-span-container";
-import { Card } from "@/components/ui/card-v2";
+import { Card } from "@/components/ui/card";
 
 /**
  * Display the list of building input.

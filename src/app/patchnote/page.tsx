@@ -4,7 +4,7 @@ import Discord from "@/components/Discord";
 import newsJson from "@/public/news.json";
 import { News } from "@/components/News";
 import { ChangeLogs } from "@/types";
-import { Card } from "@/components/ui/card-v2";
+import { Card } from "@/components/ui/card";
 import { CardContent, CardDescription, CardHeader, CardTitleH1 } from "@/components/ui/card";
 
 /**
