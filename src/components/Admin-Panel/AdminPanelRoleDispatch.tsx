@@ -1,9 +1,9 @@
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { getAllUsersLinked, getRole } from "@/lib/api/apiPalaTracker";
-import Image from "next/image";
 import { EditRole } from "@/components/Admin-Panel/AdminPanelRoleEdition";
 import { Role } from "@/types";
 import React from "react";
+import { DiscordProfilPicture } from "../Account/discord-profil-picture.client";
 
 const mapPermission = new Map<Role, React.FC[]>(
   [
@@ -44,8 +44,7 @@ async function EditRolePanel() {
         {allUsers.map((user, i) => {
           return (
             <div key={`user-${i}`} className="flex justify-center items-center space-x-2 w-grow">
-              <Image src={user.avatar} alt="profile picture" width={32} height={32} className="rounded-full"
-                unoptimized/>
+              <DiscordProfilPicture/>
               <div className="flex justify-start flex-row items-start gap-2">
                 <p className="text-sm leading-5">{user.global_name ?? user.username}</p>
                 {/*  <p style={{ backgroundColor:  getRoleColor(user.role)}}>{user.role}</p>*/}
