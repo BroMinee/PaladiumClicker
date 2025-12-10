@@ -1,7 +1,7 @@
 import React from "react";
 import { AuthForceWrapper } from "@/components/Auth/AuthForceWrapper";
 import { constants } from "@/lib/constants";
-import { WebHooksPage } from "@/app/webhook/page";
+import { PageWeb } from "@/app/webhook/page";
 import { Card } from "@/components/ui/card";
 import { AccountDetail } from "@/components/Account/AccountDetail";
 import { BestPalaAnimationTime } from "@/components/Account/BestPalaAnimationTime";
@@ -32,7 +32,7 @@ export default async function AccountPage() {
       <div className="flex flex-col gap-2">
         <AccountDetail/>
         <Card className="pt-2">
-          <WebHooksPage/>
+          <PageWeb/>
         </Card>
         <BestPalaAnimationTime/>
       </div>

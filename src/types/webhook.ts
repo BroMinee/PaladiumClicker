@@ -71,3 +71,15 @@ export type WebHookCreate = {
   username: string;
 }
 
+export interface GroupedChannel {
+  channelId: string;
+  channelName: string;
+  discordData?: WebhookDiscord;
+  alerts: WebHookAlert[];
+}
+
+export interface GroupedServer {
+  serverId: string;
+  serverName: string;
+  channels: GroupedChannel[];
+}

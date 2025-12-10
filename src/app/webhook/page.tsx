@@ -1,10 +1,9 @@
-import { Card, CardContent, CardHeader, CardTitleH1 } from "@/components/ui/card";
 import React from "react";
 import { AuthForceWrapper } from "@/components/Auth/AuthForceWrapper";
 import { getWebHookDiscordFromCookies, getWebHookFromCookies } from "@/lib/api/apiPalaTracker";
-import { WebHookPreviewPage } from "@/components/WebHooks/WebHookPreview";
-import { WebHookAlert } from "@/types";
 import { constants } from "@/lib/constants";
+import { SetWebhookStore } from "@/components/webhook1/set-webhook-store.client";
+import { DashboardRefonteMultipleChannels } from "@/components/webhook1/dashboard.client";
 
 /**
  * Generate Metadata
@@ -23,67 +22,27 @@ export async function generateMetadata() {
   };
 }
 
-export type subGroupsType = Record<string, WebHookAlert[]>;
-
-export type groupsType = Record<string, subGroupsType>;
-
 /**
- * [Webhook page](https://palatracker.bromine.fr/webhook)
+ * [Webhook page](https://palatracker.bromine.fr/webhooks)
  */
-export default async function WebHooksMainPage() {
+export default async function Page() {
   return (
     <AuthForceWrapper url={`${constants.webhooksPath}/login`}>
-      <Card>
-        <CardHeader>
-          <CardTitleH1>
-            Définissez des webhooks discord pour recevoir des notifications en temps réel sur Paladium.
-          </CardTitleH1>
-        </CardHeader>
-        <WebHooksPage/>
-      </Card>
+      <PageWeb/>
     </AuthForceWrapper>
   );
-};
+}
 
 /**
- * Component that displays the user webhook
+ * Webhook Page Content - Dashboard
  */
-export async function WebHooksPage() {
-  const webHookAlerts = await getWebHookFromCookies();
-  const webHookDiscord = await getWebHookDiscordFromCookies();
-  const guildIdToServerName: Record<string, string> = {};
-  const channelIdToChannelName: Record<string, string> = {};
-
-  const groups: groupsType = webHookDiscord.reduce((acc, webhook) => {
-    guildIdToServerName[webhook.guild_id] = webhook.server_name;
-    channelIdToChannelName[webhook.channel_id] = webhook.channel_name;
-
-    if (!acc[webhook.guild_id]) {
-      acc[webhook.guild_id] = {} as subGroupsType;
-    }
-
-    if (!acc[webhook.guild_id][webhook.channel_id]) {
-      acc[webhook.guild_id][webhook.channel_id] = [];
-    }
-    return acc;
-  }, {} as groupsType);
-
-  webHookAlerts.forEach((webhook) => {
-    if (groups[webhook.webhook.guild_id] && groups[webhook.webhook.guild_id][webhook.webhook.channel_id]) {
-      groups[webhook.webhook.guild_id][webhook.webhook.channel_id].push(webhook);
-    } else {
-      throw new Error(`Webhook not found in groups ${webhook.webhook} ${groups}`);
-    }
-  });
+export async function PageWeb() {
+  const alerts = await getWebHookFromCookies();
+  const discords = await getWebHookDiscordFromCookies();
 
   return (
-    <CardContent className="flex flex-col justify-left gap-2">
-      {webHookAlerts.length === 0 &&
-          <CardTitleH1>Vous n&apos;avez pas de webhooks définis. Créez-en un dès maintenant !
-          </CardTitleH1>
-      }
-      <WebHookPreviewPage webHookDiscord={webHookDiscord} channelIdToChannelName={channelIdToChannelName}
-        guildIdToServerName={guildIdToServerName} groupsArg={groups}/>
-    </CardContent>
+    <SetWebhookStore alerts={alerts} discords={discords}>
+      <DashboardRefonteMultipleChannels/>
+    </SetWebhookStore>
   );
 }
