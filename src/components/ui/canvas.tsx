@@ -15,7 +15,7 @@ interface CanvasWithTextProps {
  *
  * @param text The string to display inside the canvas
  * @param className Optional CSS classes for the canvas
- * @param height  Optional canvas height; defaults to parent height if not provided
+ * @param height Optional canvas height; defaults to parent height if not provided
  * @param width Optional canvas width; defaults to parent width if not provided
  */
 export const CanvasWithText: React.FC<CanvasWithTextProps> = ({ text, className, height, width }) => {

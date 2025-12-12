@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { ChevronUp, ChevronDown, Trash2 } from "lucide-react";
 import { RankingType } from "@/types";
 import { usePlayerInfoStore } from "@/stores/use-player-info-store";
-import { Button } from "../ui/button";
+import { Button } from "@/components/ui/button";
 import Select, { StylesConfig } from "react-select";
 import makeAnimated from "react-select/animated";
 import Image from "next/image";
@@ -229,13 +229,13 @@ export const TwitchOverlayConfig = ({ username}: { username: string }) => {
   };
 
   return (
-    <div className="max-w-5xl mx-auto bg-white rounded-2xl shadow-2xl overflow-hidden">
-      <div className="bg-gradient-to-r from-primary to-white text-white p-8 md:p-12 text-center">
+    <div className="max-w-5xl mx-auto bg-white rounded-2xl overflow-hidden">
+      <div className="bg-gradient-to-r from-primary to-white p-8 md:p-12 text-center">
         <h1 className="text-4xl md:text-5xl font-bold text-black mb-3">Guide d&apos;installation</h1>
         <p className="text-lg md:text-xl opacity-90 text-black">Overlay Twitch avec statistiques en temps réel</p>
       </div>
 
-      <div className="p-6 md:p-10 bg-card/80">
+      <div className="p-6 md:p-10 bg-card/90">
 
         <div className="bg-card border-l-4 border-primary rounded-lg p-6 mb-8">
           <h3 className="text-xl font-bold text-primary mb-4">Fonctionnalités de l&apos;overlay</h3>
@@ -263,7 +263,7 @@ export const TwitchOverlayConfig = ({ username}: { username: string }) => {
           </ul>
         </div>
         <div className="mb-10 space-y-6">
-          <div className="bg-gradient-to-r from-primary to-white rounded-xl p-6 shadow-lg text-black">
+          <div className="bg-gradient-to-r from-primary to-white rounded-xl p-6 text-black">
             <h2 className="text-3xl font-bold mb-2">⚙️ Configuration de l&apos;Overlay</h2>
             <p>Personnalise les éléments affichés et leur durée d&apos;affichage</p>
           </div>
@@ -283,14 +283,14 @@ export const TwitchOverlayConfig = ({ username}: { username: string }) => {
             <div className="text-2xl font-bold text-blue-600">{formatTime(getTotalCycleTime())}</div>
           </div>
 
-          <div className="bg-card rounded-xl p-6 shadow-lg">
+          <div className="bg-card rounded-xl p-6 ">
             <h3 className="text-xl text-primary font-bold mb-4">Ajouter un élément</h3>
             <div className="grid grid-cols-3 gap-3">
               {Object.values(AVAILABLE_ELEMENTS).map((element) => (
                 <button
                   key={element.id}
                   onClick={() => addElement(element.id as keyof AvailableElements)}
-                  className="flex items-center gap-2 p-4 border-2 border-gray-200 rounded-lg hover:border-primary hover:bg-primary/20 transition-all duration-200 group"
+                  className="flex items-center gap-2 p-4 border-2 border-secondary-foreground rounded-lg hover:border-primary hover:bg-primary/20 transition-all duration-200 group"
                 >
                   <span className="text-2xl">{element.icon}</span>
                   <span className="font-medium group-hover:text-primary">{element.label}</span>
@@ -299,7 +299,7 @@ export const TwitchOverlayConfig = ({ username}: { username: string }) => {
             </div>
           </div>
 
-          <div className="bg-card rounded-xl p-6 shadow-lg">
+          <div className="bg-card rounded-xl p-6 ">
             <h3 className="text-xl font-bold mb-4 text-primary">Éléments configurés</h3>
 
             {selectedElements.length === 0 ? (
@@ -315,20 +315,20 @@ export const TwitchOverlayConfig = ({ username}: { username: string }) => {
                     elementData = AUTOPROMO_ELEMENT;
                   }
                   return (
-                    <div key={element.id} className="rounded-lg p-4 border border-gray-200">
+                    <div key={element.id} className="rounded-lg p-4 border border-secondary-foreground">
                       <div className="flex items-center gap-4">
                         <div className="flex flex-col gap-1">
                           <button
                             onClick={() => moveElement(index, Direction.up)}
                             disabled={index === 0 || elementData.id === AUTOPROMO_ELEMENT.id}
-                            className="p-1 hover:bg-gray-200 rounded disabled:opacity-30 disabled:cursor-not-allowed"
+                            className="p-1 hover:bg-secondary-foreground rounded disabled:opacity-30 disabled:cursor-not-allowed"
                           >
                             <ChevronUp className="w-4 h-4" />
                           </button>
                           <button
                             onClick={() => moveElement(index, Direction.down)}
                             disabled={index === selectedElements.length - 1 || elementData.id === AUTOPROMO_ELEMENT.id}
-                            className="p-1 hover:bg-gray-200 rounded disabled:opacity-30 disabled:cursor-not-allowed"
+                            className="p-1 hover:bg-secondary-foreground rounded disabled:opacity-30 disabled:cursor-not-allowed"
                           >
                             <ChevronDown className="w-4 h-4" />
                           </button>
@@ -361,7 +361,7 @@ export const TwitchOverlayConfig = ({ username}: { username: string }) => {
                             min="1"
                             value={element.duration}
                             onChange={(e) => updateDuration(element.id, e.target.value)}
-                            className="w-20 px-3 py-2 border border-gray-300 rounded-lg text-center font-medium"
+                            className="w-20 px-3 py-2 border border-secondary-foreground rounded-lg text-center font-medium"
                           />
                           <span className="text-sm w-8">sec</span>
                         </div>
@@ -398,9 +398,9 @@ export const TwitchOverlayConfig = ({ username}: { username: string }) => {
               <strong className="font-bold">💡 Note :</strong> Que ça soit dans OBS ou Streamlabs l&apos;installation est identique.</p>
           </div>
 
-          <div className="bg-card rounded-xl p-6 mb-6 border border-gray-200">
+          <div className="bg-card rounded-xl p-6 mb-6 border border-secondary-foreground">
             <h3 className="text-xl font-bold text-primary mb-4 flex items-center gap-3">
-              <span className="bg-primary text-white w-8 h-8 rounded-full flex items-center justify-center text-sm">1</span>
+              <span className="bg-primary w-8 h-8 rounded-full flex items-center justify-center text-sm">1</span>
               Ajouter une source &quot;Navigateur&quot;
             </h3>
             <p className="mb-3">Dans OBS Studio / Streamlabs :</p>
@@ -411,14 +411,14 @@ export const TwitchOverlayConfig = ({ username}: { username: string }) => {
             </ul>
           </div>
 
-          <div className="bg-card rounded-xl p-6 mb-6 border border-gray-200">
+          <div className="bg-card rounded-xl p-6 mb-6 border border-secondary-foreground">
             <h3 className="text-xl font-bold text-primary mb-4 flex items-center gap-3">
-              <span className="bg-primary text-white w-8 h-8 rounded-full flex items-center justify-center text-sm">2</span>
+              <span className="bg-primary w-8 h-8 rounded-full flex items-center justify-center text-sm">2</span>
               Configurer l&apos;URL
             </h3>
             <p className="mb-3">Dans le champ URL, entrez l&apos;adresse suivante :</p>
             {previewUrl && (
-              <div className="bg-gray-900 rounded-lg p-4 border border-green-300">
+              <div className="bg-background rounded-lg p-4 border border-green-300">
                 <div className="flex gap-3 items-center justify-center">
                   <div className="flex-1 overflow-x-auto">
                     <code className="text-gray-500 text-sm break-all">{previewUrl}</code>
@@ -432,20 +432,20 @@ export const TwitchOverlayConfig = ({ username}: { username: string }) => {
             <p className="text-sm mt-2">Le pseudo <span className="bg-yellow-100 px-2 py-0.5 rounded font-medium text-black">{username}</span> sera utilisé.</p>
           </div>
 
-          <div className="bg-card rounded-xl p-6 mb-6 border border-gray-200">
+          <div className="bg-card rounded-xl p-6 mb-6 border border-secondary-foreground">
             <h3 className="text-xl font-bold text-primary mb-4 flex items-center gap-3">
-              <span className="bg-primary text-white w-8 h-8 rounded-full flex items-center justify-center text-sm">3</span>
+              <span className="bg-primary w-8 h-8 rounded-full flex items-center justify-center text-sm">3</span>
               Paramètres recommandés
             </h3>
             <div className="overflow-x-auto">
-              <table className="w-full bg-white rounded-lg overflow-hidden shadow-sm">
-                <thead className="bg-primary text-white">
+              <table className="w-full bg-white rounded-lg overflow-hidden">
+                <thead className="bg-primary ">
                   <tr>
                     <th className="px-6 py-3 text-left font-semibold">Paramètre</th>
                     <th className="px-6 py-3 text-left font-semibold">Valeur</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-gray-200">
+                <tbody className="divide-y divide-secondary-foreground">
                   <tr className="hover:bg-card/80 bg-card">
                     <td className="px-6 py-3 font-medium">Largeur</td>
                     <td className="px-6 py-3">900 (minimum)</td>
@@ -471,9 +471,9 @@ export const TwitchOverlayConfig = ({ username}: { username: string }) => {
             </div>
           </div>
 
-          <div className="bg-card rounded-xl p-6 mb-6 border border-gray-200">
+          <div className="bg-card rounded-xl p-6 mb-6 border border-secondary-foreground">
             <h3 className="text-xl font-bold text-primary mb-4 flex items-center gap-3">
-              <span className="bg-primary text-white w-8 h-8 rounded-full flex items-center justify-center text-sm">4</span>
+              <span className="bg-primary w-8 h-8 rounded-full flex items-center justify-center text-sm">4</span>
               Redimensionner l&apos;overlay
             </h3>
             <p className="mb-3">Il est fortement conseillé de redimensionner l&apos;overlay sur la scène pour correspondre à tes besoins, mais ne modifie pas la largeur et hauteur dans les options de l&apos;élément.</p>
@@ -522,7 +522,7 @@ export const TwitchOverlayConfig = ({ username}: { username: string }) => {
 
           <div className="space-y-6">
 
-            <div className="bg-card rounded-xl p-6 border border-gray-200">
+            <div className="bg-card rounded-xl p-6 border border-secondary-foreground">
               <h3 className="text-lg font-bold text-primary mb-3">L&apos;overlay ne s&apos;affiche pas</h3>
               <ul className="ml-6 space-y-2 list-disc ">
                 <li>Vérifiez que l&apos;URL est correcte et accessible dans votre navigateur : <a href={previewUrl} rel="noopener noreferrer" target="_blank"
@@ -532,7 +532,7 @@ export const TwitchOverlayConfig = ({ username}: { username: string }) => {
               </ul>
             </div>
 
-            <div className="bg-card rounded-xl p-6 border border-gray-200">
+            <div className="bg-card rounded-xl p-6 border border-secondary-foreground">
               <h3 className="text-lg font-bold text-primary mb-3">Les données ne se mettent pas à jour</h3>
               <ul className="ml-6 space-y-2 list-disc ">
                 <li>La donnée se mettent à jour automatiquement à chaque fin de cycle.</li>
@@ -540,7 +540,7 @@ export const TwitchOverlayConfig = ({ username}: { username: string }) => {
               </ul>
             </div>
 
-            <div className="bg-card rounded-xl p-6 border border-gray-200">
+            <div className="bg-card rounded-xl p-6 border border-secondary-foreground">
               <h3 className="text-lg font-bold text-primary mb-3">L&apos;overlay cause des ralentissements</h3>
               <ul className="ml-6 space-y-2 list-disc ">
                 <li>Activez &quot;Désactiver la source quand elle n&apos;est pas visible&quot;</li>
@@ -552,7 +552,7 @@ export const TwitchOverlayConfig = ({ username}: { username: string }) => {
         </div>
       </div>
 
-      <div className="bg-card px-6 py-8 md:px-10 text-center text-gray-600 border-t border-gray-200">
+      <div className="bg-card px-6 py-8 md:px-10 text-center text-gray-600 border-t border-secondary-foreground">
         <p className="text-sm mt-2">Besoin d&apos;aide ? Contacte moi sur <a
           href={constants.discord.url}
           target="_blank"

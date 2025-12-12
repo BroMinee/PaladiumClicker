@@ -103,7 +103,7 @@ function NavBarContent() {
       <footer>
         <NotificationWebSite/>
         <NavBarProfilInfo/>
-        <div className="p-4 bg-accent text-center w-full border">
+        <div className="p-4 bg-secondary text-center w-full">
           L&apos;application est{" "}
           <span className="font-bold">ni affiliée ni approuvée</span>{" "}
           par <GradientText>

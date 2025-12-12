@@ -6,7 +6,7 @@ import { usePlayerInfoStore } from "@/stores/use-player-info-store";
 import { getPathImg } from "@/lib/misc";
 import Image from "next/image";
 import { GenericSectionTabs, TabData } from "@/components/shared/section.client";
-import { LoadingSpinner } from "../ui/loading-spinner";
+import { LoadingSpinner } from "@/components/ui/loading-spinner";
 import { ToggleCardButton } from "../shared/toggle-button.client";
 import { GroupedSpanContainer } from "../shared/group-span-container";
 import { Card } from "@/components/ui/card";
@@ -57,12 +57,12 @@ function BuildingInputCardItem({ index }: BuildingInputCardItemProps) {
         <h4 className="font-semibold truncate ">{playerInfo?.building[index].name}</h4>
       </GroupedSpanContainer>
       {/* <div className="flex items-center group mb-3 items-center justify-center gap-3">
-        <span className="absolute bottom-full mb-2 w-full py-1 bg-black text-white text-xs rounded opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-10 text-center ">
+        <span className="absolute bottom-full mb-2 w-full py-1 bg-black text-xs rounded opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-10 text-center ">
 
         </span>
       </div> */}
       <div className="flex items-center space-x-2">
-        <label htmlFor={`building-${index}`} className="text-sm text-gray-400">Niv.</label>
+        <label htmlFor={`building-${index}`} className="text-sm text-card-foreground">Niv.</label>
         <input
           type="number"
           id={`building-${index}`}
@@ -70,7 +70,7 @@ function BuildingInputCardItem({ index }: BuildingInputCardItemProps) {
           onChange={handleLocalChange}
           min="0"
           max="100"
-          className="w-full bg-gray-900 border border-gray-700 rounded px-2 py-1 text-white font-bold text-center appearance-none focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500"
+          className="w-full bg-background border border-secondary rounded px-2 py-1 font-bold text-center appearance-none focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500"
           style={{ MozAppearance: "textfield" }}
         />
       </div>

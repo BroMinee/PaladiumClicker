@@ -3,7 +3,7 @@
 import { AxisConfig, DataPoint, Dataset } from "@/types";
 import { LineGrad } from "../shared/graph-line-renderer.client";
 import { ChartContainer } from "../shared/graph.client";
-import { Card } from "../ui/card";
+import { Card } from "@/components/ui/card";
 import { getPlayerCountHistoryPaladiumAction } from "@/lib/api/apiServerAction";
 import { useEffect, useState } from "react";
 

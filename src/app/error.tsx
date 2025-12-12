@@ -27,7 +27,7 @@ export default function ErrorBoundary({ error }: { error: Error }) {
               <Image src={safeJoinPaths(constants.imgPathError, "/arty_decu_left.webp")} alt="arty" width={128} height={92}/>
             </div>
             <p className="mb-4 text-2xl tracking-tight font-bold md:text-4xl text-red-500">{error.message}</p>
-            <p className="mb-4 text-lg font-light text-gray-400">Si le problème persiste merci d&apos;envoyer une capture
+            <p className="mb-4 text-lg font-light text-card-foreground">Si le problème persiste merci d&apos;envoyer une capture
               d&apos;écran de cette page à un développeur</p>
           </div>
         </div>

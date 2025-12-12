@@ -2,9 +2,9 @@ import { useItemsStore } from "@/stores/use-items-store";
 import { usePlayerInfoStore } from "@/stores/use-player-info-store";
 import { AhItemType, MarketItemOffer, OptionType, ProfilSectionEnum } from "@/types";
 import { useState, useEffect } from "react";
-import { ClickableLink } from "../ui/clickable-link";
-import { LoadingSpinner } from "../ui/loading-spinner";
-import { UnOptimizedImage } from "../ui/image-loading";
+import { ClickableLink } from "@/components/ui/clickable-link";
+import { LoadingSpinner } from "@/components/ui/loading-spinner";
+import { UnOptimizedImage } from "@/components/ui/image-loading";
 import { generateAhShopUrl, generateProfilUrl, safeJoinPaths } from "@/lib/misc";
 import { constants } from "@/lib/constants";
 import { getPlayerUsernameFromUUID } from "@/lib/api/apiClient";
@@ -50,10 +50,10 @@ function BaseSaleCard({
 
   return (
     <ClickableLink
-      className="hover:scale-105"
+      className="hover:scale-105 hover:text-card-foreground"
       href={url}
     >
-      <div className="relative flex flex-col hover:bg-gray-700/80 border border-gray-700 hover:border-gray-500 rounded-lg transition-all duration-200 overflow-hidden">
+      <div className="relative flex flex-col hover:bg-secondary/80 border border-secondary hover:border-gray-500 rounded-lg transition-all duration-200 overflow-hidden">
 
         <div className="absolute top-1 right-1 z-10">
           <span className="bg-black text-white text-sm font-bold px-1.5 py-0.5 rounded">
@@ -61,7 +61,7 @@ function BaseSaleCard({
           </span>
         </div>
 
-        <div className="p-3 flex items-center justify-center bg-gray-900/30 mb-2">
+        <div className="p-3 flex items-center justify-center bg-background/30 mb-2">
           <div className="w-12 h-12 relative transition-transform duration-300 group-hover:scale-110">
             <UnOptimizedImage
               blurDataURL={"`/AH_img/unknown.webp"}
@@ -76,14 +76,14 @@ function BaseSaleCard({
         </div>
 
         <div className="px-3 pb-1">
-          <h4 className="text-sm font-semibold text-gray-200 truncate text-center">
+          <h4 className="text-sm font-semibold truncate text-center">
             {displayLabel}
           </h4>
         </div>
 
         <div className="px-3 pb-2 space-y-1 mt-auto">
-          <div className="flex items-center justify-between text-xs bg-gray-900/40 rounded px-1.5 py-1 border border-yellow-500/20">
-            <span className="text-gray-400">PB</span>
+          <div className="flex items-center justify-between text-xs bg-background/40 rounded px-1.5 py-1 border border-yellow-500/20">
+            <span className="text-card-foreground">PB</span>
             <div className="flex items-center gap-1 text-yellow-400 font-bold">
               {pricePb}
               <UnOptimizedImage
@@ -94,8 +94,8 @@ function BaseSaleCard({
             </div>
           </div>
 
-          <div className="flex items-center justify-between text-xs bg-gray-900/40 rounded px-1.5 py-1 border border-green-500/20">
-            <span className="text-gray-400">$</span>
+          <div className="flex items-center justify-between text-xs bg-background/40 rounded px-1.5 py-1 border border-green-500/20">
+            <span className="text-card-foreground">$</span>
             <div className="flex items-center gap-1 text-green-400 font-bold">
               {priceMoney.toLocaleString()}
               <UnOptimizedImage
@@ -107,7 +107,7 @@ function BaseSaleCard({
           </div>
         </div>
 
-        <div className="flex items-center gap-2 bg-gray-900/80 p-2 border-t border-gray-700">
+        <div className="flex items-center gap-2 bg-background/80 p-2 border-t border-secondary">
           <div className="w-8 h-8 rounded-sm overflow-hidden border border-gray-600 flex-shrink-0">
             <UnOptimizedImage
               src={sellerHeadUrl}
@@ -118,8 +118,8 @@ function BaseSaleCard({
             />
           </div>
           <div className="min-w-0 flex flex-col">
-            <span className="text-[9px] text-gray-500 uppercase leading-none">Vendeur</span>
-            <span className="text-[10px] text-gray-300 truncate" title={sellerName}>
+            <span className="text-[9px] uppercase leading-none">Vendeur</span>
+            <span className="text-[10px] truncate" title={sellerName}>
               {sellerName}
             </span>
           </div>

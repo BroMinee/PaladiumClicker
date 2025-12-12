@@ -67,7 +67,7 @@ export const Tuto = () => {
                 src={safeJoinPaths("/Presentation_site.mp3")}
                 controls
               />
-              <p className="text-muted-foreground">Musique générée avec suno.ai</p>
+              <p className="">Musique générée avec suno.ai</p>
             </div>
           </div>
         </div>

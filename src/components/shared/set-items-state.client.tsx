@@ -3,7 +3,7 @@
 import { ReactNode, useEffect } from "react";
 import { useItemsStore } from "@/stores/use-items-store";
 import { OptionType } from "@/types";
-import { LoadingSpinner } from "../ui/loading-spinner";
+import { LoadingSpinner } from "@/components/ui/loading-spinner";
 
 /**
  * Component that set the zustand allItems recipe state given the searchParams

@@ -15,7 +15,7 @@ export function ProfileSection() {
     <div className="lg:col-span-2 space-y-6">
       <div>
         <h3 className="text-xl font-semibold mb-2">Description</h3>
-        <p className="text-gray-300">{playerInfo.description}</p>
+        <p className="">{playerInfo.description}</p>
       </div>
       <div>
         <h3 className="text-xl font-semibold mb-2">Classements</h3>
@@ -24,9 +24,9 @@ export function ProfileSection() {
           {/* {playerInfo.rankings.map((rank) => (
                         <li
                             key={rank.name}
-                            className="flex justify-between p-3 bg-gray-700 rounded"
+                            className="flex justify-between p-3 bg-secondary rounded"
                         >
-                            <span className="text-gray-300">{rank.name}</span>
+                            <span className="">{rank.name}</span>
                             <span className="font-bold">{rank.rank}</span>
                         </li>
                     ))} */}

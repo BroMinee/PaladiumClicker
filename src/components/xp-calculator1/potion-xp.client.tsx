@@ -45,15 +45,15 @@ export const PotionSelector = ({
           src={fullPath}
           alt={label}
           className="w-10 h-10 object-contain pixelated" width={0} height={0} />
-        <span className="text-xs font-semibold mt-1 text-center text-white">{label}</span>
-        <span className={`text-xs ${active ? "text-green-300" : "text-gray-400"}`}>{bonusPercent}</span>
+        <span className="text-xs font-semibold mt-1 text-center ">{label}</span>
+        <span className={`text-xs ${active ? "text-green-300" : "text-card-foreground"}`}>{bonusPercent}</span>
       </ToggleCardButton>
     );
   };
 
   return (
     <div className="space-y-2">
-      <label className="block text-sm font-medium text-gray-300">Potions d&apos;XP actives</label>
+      <label className="block text-sm font-medium ">Potions d&apos;XP actives</label>
       <div className="flex space-x-4">
         {POTION_OPTIONS.filter(p => p.bonus !== 0).map((potion) => (
           <PotionButton

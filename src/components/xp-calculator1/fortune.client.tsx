@@ -20,7 +20,7 @@ const FORTUNE_OPTIONS = [
 export const FortuneSelector = ({ fortuneBonus, setFortuneBonus }: FortuneSelectorProps) => {
   return (
     <div className="space-y-2">
-      <label className="block text-sm font-medium text-gray-300">Bonus de Minage (Fortune)</label>
+      <label className="block text-sm font-medium ">Bonus de Minage (Fortune)</label>
       <div className="flex space-x-2">
         {FORTUNE_OPTIONS.map(({ label, multiplier, percent }) => (
           <Button
@@ -28,8 +28,8 @@ export const FortuneSelector = ({ fortuneBonus, setFortuneBonus }: FortuneSelect
             onClick={() => setFortuneBonus(multiplier)}
             className={`inline flex-1 py-2 px-3 rounded-lg font-semibold text-sm transition-all duration-200 whitespace-normal
                 ${fortuneBonus === multiplier
-              ? "text-white shadow-lg  bg-green-400/50 hover:bg-green-500/50 border border-[#26E251]"
-              : "bg-gray-700 text-gray-300 hover:bg-gray-600"
+              ? "   bg-green-400/50 hover:bg-green-500/50 border border-[#26E251]"
+              : "bg-secondary hover:bg-gray-600"
           }`}
             title={label}
           >

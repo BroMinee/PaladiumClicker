@@ -9,7 +9,7 @@ import {  API_PALATRACKER } from "@/lib/constants";
 import { useWebhookAlertStore } from "@/stores/use-webhook-alert-store";
 import { DiscordProfilPicture } from "../Account/discord-profil-picture.client";
 import { WebhookServerSection } from "./webhook-server.client";
-import { Button } from "../ui/button-v2";
+import { Button } from "@/components/ui/button-v2";
 
 /**
  * Dashboard component for managing webhook alert.
@@ -19,17 +19,19 @@ export function DashboardRefonteMultipleChannels() {
 
   return (
     <Card>
-      <header className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 bg-[#1a1d24] p-6 rounded-2xl border border-gray-800 shadow-xl">
+      <header className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 bg-[#1a1d24] p-6 rounded-2xl border border-gray-800 ">
         <div className="flex items-center gap-4">
           <DiscordProfilPicture className="w-16 h-16 border-2 border-green-500 shadow-[0_0_15px_rgba(33,194,93,0.7)]" />
           <div>
-            <h1 className="text-2xl font-bold text-white">Bonjour, <span className="text-blue-400">BroMine</span></h1>
-            <p className="text-gray-400 text-sm">Gérez vos alertes discord</p>
+            <h1 className="text-2xl font-bold ">Bonjour, <span className="text-primary">BroMine</span></h1>
+            <p className="text-card-foreground text-sm">Gérez vos alertes discord</p>
           </div>
         </div>
 
         <a href={`${API_PALATRACKER}/v1/auth/webhook/create`} className="w-full md:w-auto">
-          <Button className="w-full md:w-auto flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-500 text-white font-medium px-6 py-3 rounded-xl transition-all shadow-lg shadow-indigo-500/20 active:scale-95">
+          <Button
+            variant="primary"
+            className="w-full md:w-auto flex px-6 py-3 rounded-xl">
             <Plus size={20} />
             Nouvelle alerte
           </Button>
@@ -38,7 +40,7 @@ export function DashboardRefonteMultipleChannels() {
 
       <div className="lg:col-span-2 space-y-8 mt-8">
         <div className="flex items-center gap-2 mb-2">
-          <h2 className="text-xl font-bold text-white">Liste de vos alertes</h2>
+          <h2 className="text-xl font-bold ">Liste de vos alertes</h2>
         </div>
 
         {groupedServer.length === 0 ? (

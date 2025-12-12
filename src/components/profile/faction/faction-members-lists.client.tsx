@@ -1,3 +1,4 @@
+import { Card } from "@/components/ui/card";
 import { ClickableLink } from "@/components/ui/clickable-link";
 import { UnOptimizedImage } from "@/components/ui/image-loading";
 import { LoadingSpinner } from "@/components/ui/loading-spinner";
@@ -20,7 +21,7 @@ export function FactionMembersList() {
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
       {playerInfo.faction.players.map((player) => (
         <ClickableLink href={`${constants.profilPath}/${player.username}`} key={player.uuid} className="hover:scale-105">
-          <div className="pt-6 space-y-2 whitespace-nowrap text-sm font-medium ease-out motion-reduce:transition-none focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 relative p-3 rounded-lg flex flex-col items-center justify-center text-center transition-all duration-150 bg-gray-800 border border-gray-700 text-gray-400 hover:bg-gray-700">
+          <Card className="flex flex-col items-center justify-center hover:bg-secondary border">
             <div className="flex flex-col items-center justify-center gap-2">
               <UnOptimizedImage src={`https://mineskin.eu/helm/${player.uuid}`}
                 alt="Icône"
@@ -41,7 +42,7 @@ export function FactionMembersList() {
                 Rejoint le: {convertEpochToDateUTC2(player.joinedAt)}
               </div>
             </div>
-          </div>
+          </Card>
         </ClickableLink>))}
     </div>
   </div>);

@@ -54,7 +54,7 @@ export default function RootLayout({
               </header>
               <main className="flex-1 mx-auto overflow-x-hidden">
                 <AuthGetWrapper/>
-                <div className="relative bg-gray-900 text-white min-h-screen p-4 md:p-8">
+                <div className="relative bg-background min-h-screen p-4 md:p-8">
                   <div className="max-w-7xl mx-auto">
                     <PageTransition>
                       {children}

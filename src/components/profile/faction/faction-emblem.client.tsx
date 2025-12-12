@@ -14,5 +14,5 @@ export function FactionEmblemClient({ className }: { className?: string }) {
   if (!playerInfo) {
     return <Suspense fallback={<LoadingData username={undefined} />} />;
   }
-  return <Emblem emblem={playerInfo?.faction.emblem} className={cn("h-16 w-16 rounded-xl object-cover shadow-lg", className)} />;
+  return <Emblem emblem={playerInfo?.faction.emblem} className={cn("h-16 w-16 rounded-xl object-cover ", className)} />;
 }

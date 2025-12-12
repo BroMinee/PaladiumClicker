@@ -8,8 +8,8 @@ import { getImagePathFromRankingType, rankingTypeToUserFriendlyText } from "@/li
 import { RankingAddPlayerInput } from "./graph-add-player.client";
 import { LineRenderer } from "../shared/graph-line-renderer.client";
 import { ChartContainer } from "../shared/graph.client";
-import { LoadingSpinner } from "../ui/loading-spinner";
-import { UnOptimizedImage } from "../ui/image-loading";
+import { LoadingSpinner } from "@/components/ui/loading-spinner";
+import { UnOptimizedImage } from "@/components/ui/image-loading";
 import { GraphLegends } from "../shared/graph-legends.client";
 
 /**

@@ -20,7 +20,7 @@ export function RankingAddPlayerInput() {
   };
 
   return (
-    <div className="lg:col-span-1 bg-gray-800 p-4 rounded-lg relative">
+    <div className="lg:col-span-1 bg-card p-4 rounded-lg relative">
       <h3 className="text-lg font-semibold mb-2 flex items-center gap-2">
         <IoMdSearch className="w-5 h-5" />
         Ajouter un joueur

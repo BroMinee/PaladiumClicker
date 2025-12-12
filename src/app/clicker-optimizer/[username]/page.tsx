@@ -25,7 +25,7 @@ export default async function ClickerOptimizerPage(props: { params: Promise<{ us
   const params = await props.params;
   return (
     <>
-      <h1 className="text-4xl font-bold mb-2 text-white">Optimiseur de Clicker</h1>
+      <h1 className="text-4xl font-bold mb-2 ">Optimiseur de Clicker</h1>
       <ProfileFetcherWrapper username={params.username}>
         <ClickerPage/>
       </ProfileFetcherWrapper>

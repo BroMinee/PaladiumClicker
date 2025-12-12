@@ -130,7 +130,7 @@ export function ImportProfilPretty({
     <div className={cn("flex gap-2 w-full justify-center", navBar ? "flex-col" : "")}>
       <form
         onSubmit={onSubmit}
-        className="relative w-full max-w-sm flex items-center sm:px-6 sm:py-3 bg-card/70 text-white rounded-xl shadow-lg transition-all backdrop-blur-md hover:bg-card/80 gap-8"
+        className="relative w-full max-w-sm flex items-center sm:px-6 sm:py-3 bg-card/70 rounded-xl transition-all backdrop-blur-md hover:bg-card/80 gap-8"
         id="submit-pseudo"
       >
         <Image
@@ -147,7 +147,7 @@ export function ImportProfilPretty({
           type="text"
           placeholder="Entre un pseudo"
           className={cn(
-            "px-4 py-2 rounded-lg text-white text-base sm:text-lg font-semibold bg-transparent border-none focus:outline-none focus:ring-0 focus:border-none",
+            "px-4 py-2 rounded-lg text-base sm:text-lg font-semibold bg-transparent border-none focus:outline-none focus:ring-0 focus:border-none",
             isEditing ? "visible" : "invisible absolute"
           )}
           id="pseudo-input"
@@ -175,7 +175,7 @@ export function ImportProfilPretty({
           ref={buttonSubmitRef}
           variant="ghost"
           className={cn(
-            "absolute right-0 top-0 h-full rounded-l-none rounded-r-lg border-none shadow-none text-foreground",
+            "absolute right-0 top-0 h-full rounded-l-none rounded-r-lg border-none text-foreground",
             isEditing ? "visible" : "invisible absolute"
           )}
         >

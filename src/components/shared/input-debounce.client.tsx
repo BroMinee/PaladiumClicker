@@ -149,11 +149,11 @@ export const InputDebounce = ({
 
   return (
     <div>
-      <label className="block text-sm font-medium text-gray-300 mb-1">
+      <label className="block text-sm font-medium mb-1">
         {label}
       </label>
       <div className="relative flex items-center w-full gap-2">
-        <Button onClick={handleDecrement} disabled={value <= min} className="flex items-center justify-center h-12 w-12 rounded-xl border border-gray-700 bg-gray-900 text-white shadow-md hover:bg-gray-800 hover:scale-105 active:scale-95 transition-all duration-200 disabled:opacity-40 disabled:cursor-not-allowed">
+        <Button onClick={handleDecrement} disabled={value <= min} className="flex items-center justify-center h-12 w-12 rounded-xl border border-secondary bg-background hover:bg-card hover:scale-105 active:scale-95 transition-all duration-200 disabled:opacity-40 disabled:cursor-not-allowed">
           <IconMinus />
         </Button>
 
@@ -163,11 +163,11 @@ export const InputDebounce = ({
             inputMode="decimal"
             value={localValue}
             onChange={handleInput}
-            className={`w-full h-12 rounded-xl bg-gray-900 border text-white text-center font-semibold shadow-inner transition-all focus:ring-2 focus:ring-indigo-500/40 appearance-none ${error ? "border-red-500 focus:border-red-500" : "border-gray-700 focus:border-indigo-500"}`}
+            className={`w-full h-12 rounded-xl bg-background border text-center font-semibold transition-all focus:ring-2 focus:ring-indigo-500/40 appearance-none ${error ? "border-red-500 focus:border-red-500" : "border-secondary focus:border-indigo-500"}`}
           />
         </div>
 
-        <Button onClick={handleIncrement} className="flex items-center justify-center h-12 w-12 rounded-xl border border-gray-700 bg-gray-900 text-white shadow-md hover:bg-gray-800 hover:scale-105 active:scale-95 transition-all duration-200">
+        <Button onClick={handleIncrement} className="flex items-center justify-center h-12 w-12 rounded-xl border border-secondary bg-background hover:bg-card hover:scale-105 active:scale-95 transition-all duration-200">
           <IconPlus />
         </Button>
       </div>

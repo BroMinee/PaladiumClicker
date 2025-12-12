@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { PaladiumFactionLeaderboard } from "@/types";
 import { getFactionLeaderboardAction } from "@/lib/api/apiServerAction";
 import { usePlayerInfoStore } from "@/stores/use-player-info-store";
-import { LoadingSpinner } from "../../ui/loading-spinner";
+import { LoadingSpinner } from "@/components/ui/loading-spinner";
 import { intToHex } from "@/lib/misc";
 import { FactionMembersList } from "./faction-members-lists.client";
 import { FactionEmblemClient } from "./faction-emblem.client";
@@ -61,12 +61,12 @@ function FactionMainInformation() {
       <div className="flex-shrink-0 mr-8">
         <div className="flex flex-col gap-2 relative">
           <div
-            className="max-w-40 relative p-1 rounded-xl w-fit mr-2 animate-pan-gradient overflow-hidden"
+            className="max-w-40 relative p-1 rounded-xl w-fit mr-2 animate-pan-gradient duration-5000 overflow-hidden"
             style={{ backgroundSize: "200%", backgroundImage: gradientStyle }}
           >
-            <FactionEmblemClient className="h-fit w-full  rounded-xl object-cover bg-gray-800 p-2" />
+            <FactionEmblemClient className="h-fit w-full rounded-xl object-cover bg-card p-2" />
           </div>
-          <span className=" bg-clip-text px-5 py-2 rounded-full font-black text-xl text-center animate-pan-gradient rounded drop-shadow-xl text-transparent" style={{ backgroundImage: gradientStyle, backgroundSize: "200%" }}>
+          <span className=" bg-clip-text px-5 py-2 rounded-full font-black text-xl text-center animate-pan-gradient duration-5000 rounded drop- text-transparent" style={{ backgroundImage: gradientStyle, backgroundSize: "200%" }}>
             TOP #{factionIndex}
           </span>
         </div>
@@ -77,24 +77,24 @@ function FactionMainInformation() {
           <div className="text-sm font-semibold uppercase tracking-wider mb-1">
             Faction
           </div>
-          <h2 className="text-4xl font-black bg-gradient-to-r from-purple-400 via-pink-400 to-blue-400 bg-clip-text text-transparent mb-2 w-fit">
+          <h2 className="text-4xl mb-2">
             <PlayerFactionName />
-            <div className="h-1 w-full rounded-full mt-2 animate-pan-gradient" style={{ backgroundImage: gradientStyle, backgroundSize: "200%" }} />
+            <div className="h-1 w-full rounded-full mt-2 animate-pan-gradient duration-5000" style={{ backgroundImage: gradientStyle, backgroundSize: "200%" }} />
           </h2>
         </div>
 
-        <p className="text-lg text-gray-300 leading-relaxed line-clamp-2">
+        <p className="text-lg leading-relaxed line-clamp-2">
           {playerInfo.faction.description}
         </p>
 
         <div className="flex items-center gap-4">
           <div className="flex-1">
-            <div className="flex items-center justify-between text-sm text-gray-400 mb-2">
+            <div className="flex items-center justify-between text-sm text-card-foreground mb-2">
               <span>Classement</span>
               <span className="font-bold text-yellow-400">#{factionIndex}/{leaderboardFaction.length}</span>
             </div>
-            <div className="w-full bg-gray-700/50 h-2 rounded-full overflow-hidden">
-              <div className="h-1 w-48 rounded-full animate-pan-gradient" style={{
+            <div className="w-full bg-secondary/50 h-2 rounded-full overflow-hidden">
+              <div className="h-1 w-48 rounded-full animate-pan-gradient duration-5000" style={{
                 backgroundImage: gradientStyle,
                 backgroundSize: "200%",
                 width: `${100 - (factionIndex - 1) * 100 / leaderboardFaction.length}%`

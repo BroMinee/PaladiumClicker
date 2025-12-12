@@ -1,4 +1,3 @@
-// @ts-nocheck - A RETIRER APRES AVOIR CORRIGE LE FICHIER
 import type { Config } from "tailwindcss";
 
 const config: Config = {
@@ -28,18 +27,11 @@ const config: Config = {
         '16': 'repeat(16, minmax(0, 1fr))',
         '23': 'repeat(23, minmax(0, 1fr))',
       },
-      backgroundImage: {
-        'light': "url('/img/background_light.webp')",
-        'dark': "url('/img/background_dark.webp')",
-      },
       fontFamily: {
         sans: ["Montserrat", "sans-serif"],
         mc: ["Pixel NES", "sans-serif"],
       },
       colors: {
-        dynamic: 'var(--dynamic-color)',
-        chaos: '#93fb37',
-        order: '#FAEC55',
         discord: "#5865f2",
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
@@ -61,10 +53,6 @@ const config: Config = {
         destructive: {
           DEFAULT: "hsl(var(--destructive))",
           foreground: "hsl(var(--destructive-foreground))",
-        },
-        muted: {
-          DEFAULT: "hsl(var(--muted))",
-          foreground: "hsl(var(--muted-foreground))",
         },
         accent: {
           DEFAULT: "hsl(var(--accent))",
@@ -104,20 +92,20 @@ const config: Config = {
           to: { height: "0" },
         },
         fadeIn: {
-          '0%': { opacity: 0 },
-          '100%': { opacity: 1 },
+          '0%': { opacity: "0" },
+          '100%': { opacity: "1" },
         },
         fadeOut: {
-          '0%': { opacity: 1 },
-          '100%': { opacity: 0 },
+          '0%': { opacity: "1" },
+          '100%': { opacity: "0" },
         },
         blink: {
           '0%, 100%': { color: '#f87171' },
           '50%': { color: '#ffffff' },
         },
         "blink-orange": {
-          '0%, 100%': { color: 'hsl(var(--primary))' },
-          '50%': { color: "hsl(var(--secondary-foreground))" },
+          '0%, 100%': { color: 'var(--primary)' },
+          '50%': { color: "var(--secondary-foreground)" },
         },
         backgroundPan: {
           '0%': { 'background-position': '0% center' },
@@ -143,7 +131,7 @@ const config: Config = {
     },
   },
   plugins: [require("tailwindcss-animate"),
-    function ({ addUtilities }) {
+    function ({ addUtilities }: any) {
       addUtilities({
         '.pixelated': {
           'image-rendering': 'pixelated',

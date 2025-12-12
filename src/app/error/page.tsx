@@ -47,17 +47,17 @@ export default async function Error500Page(
   }
 
   return (
-    <Card className="flex flex-col gap-4 font-bold center bg-no-repeat bg-center bg-cover text-white bg-card/90">
+    <Card className="flex flex-col gap-4 font-bold center bg-no-repeat bg-center bg-cover bg-card/90">
       <CardHeader className="flex flex-row gap-2 ">
         <div className="py-8 px-4 mx-auto max-w-screen-xl lg:py-16 lg:px-6">
           <div className="mx-auto max-w-screen-sm text-center">
-            <h1 className="mb-4 text-3xl tracking-tight font-bold md:text-4xl text-white">Une erreur
+            <h1 className="mb-4 text-3xl tracking-tight font-bold md:text-4xl ">Une erreur
               est survenue.</h1>
             <p className="text-primary flex flex-col pb-5 gap-2 animate-blink">
               {searchParams.message}
               {searchParams.detail && <span className="text-red-400"> {searchParams.detail}</span>}
             </p>
-            <p className="mb-4 text-lg font-light text-gray-400">Si le problème persiste merci de
+            <p className="mb-4 text-lg font-light text-card-foreground">Si le problème persiste merci de
               contacter un développeur</p>
           </div>
           <div className="flex flex-col gap-2 items-center justify-center">
@@ -68,8 +68,8 @@ export default async function Error500Page(
       </CardHeader>
       <div className="flex md:flex-row justify-evenly flex-col">
         <CardContent className="flex flex-col ml-4">
-          <h2 className="mb-2 text-lg font-semibold text-white">Détection du soucis</h2>
-          <ul className="max-w-md space-y-2 list-inside text-gray-400 ml-4">
+          <h2 className="mb-2 text-lg font-semibold ">Détection du soucis</h2>
+          <ul className="max-w-md space-y-2 list-inside text-card-foreground ml-4">
             <Suspense fallback={<TestMyApiFetching/>}>
               <TestMyApi/>
             </Suspense>
@@ -82,8 +82,8 @@ export default async function Error500Page(
           </ul>
         </CardContent>
         <CardContent className="flex flex-col ml-4">
-          <h2 className="mb-2 text-lg font-semibold text-white">Erreurs fréquentes</h2>
-          <ul className="max-w-md space-y-2 list-inside text-gray-400 ml-4">
+          <h2 className="mb-2 text-lg font-semibold ">Erreurs fréquentes</h2>
+          <ul className="max-w-md space-y-2 list-inside text-card-foreground ml-4">
             <li className="flex items-center gap-2">
               <div>
                 <FaPen className="text-red-500"/>

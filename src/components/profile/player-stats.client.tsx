@@ -1,8 +1,8 @@
 "use client";
 import { usePlayerInfoStore } from "@/stores/use-player-info-store";
-import { LoadingSpinner } from "../ui/loading-spinner";
+import { LoadingSpinner } from "@/components/ui/loading-spinner";
 import { computeTimePlayed, convertEpochToDateUTC2, formatPrice } from "@/lib/misc";
-import { Card } from "../ui/card";
+import { Card } from "@/components/ui/card";
 
 const IconMoney = () => (
   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6 mr-2">
@@ -57,9 +57,9 @@ export function PlayerStats() {
 function StatCard({ icon, label, value }: { icon: React.JSX.Element, label: string, value: number | string }) {
   return (
     <Card className="flex items-center shadow">
-      <div className="text-blue-400">{icon}</div>
+      <div className="text-primary">{icon}</div>
       <div>
-        <div className="text-sm text-gray-400">{label}</div>
+        <div className="text-sm text-card-foreground">{label}</div>
         <div className="text-xl font-bold">{value}</div>
       </div>
     </Card>

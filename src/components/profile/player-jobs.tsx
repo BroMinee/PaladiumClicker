@@ -1,4 +1,4 @@
-import { Card } from "../ui/card";
+import { Card } from "@/components/ui/card";
 import { MetierKey } from "@/types";
 import { JobLevel, JobProgressbar } from "./player-jobs.client";
 import { prettyJobName } from "@/lib/misc";
@@ -13,11 +13,11 @@ export function JobCard({ jobName }: { jobName: MetierKey }) {
     <Card>
       <div className="flex justify-between items-baseline mb-2">
         <h3 className="text-lg font-semibold">{prettyJobName(jobName)}</h3>
-        <span className="text-sm font-bold text-gray-300">
+        <span className="text-sm font-bold">
           <JobLevel jobName={jobName}/>
         </span>
       </div>
-      <div className="w-full bg-gray-700 rounded-full h-2.5">
+      <div className="w-full bg-secondary rounded-full h-2.5">
         <JobProgressbar jobName={jobName}/>
       </div>
     </Card>

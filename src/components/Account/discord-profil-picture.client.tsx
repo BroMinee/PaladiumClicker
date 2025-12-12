@@ -1,8 +1,8 @@
 "use client";
 
 import { useProfileStore } from "@/stores/use-profile-store";
-import { UnOptimizedImage } from "../ui/image-loading";
-import { LoadingSpinner } from "../ui/loading-spinner";
+import { UnOptimizedImage } from "@/components/ui/image-loading";
+import { LoadingSpinner } from "@/components/ui/loading-spinner";
 import { cn } from "@/lib/utils";
 
 /**

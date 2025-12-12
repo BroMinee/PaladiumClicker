@@ -3,7 +3,7 @@
 import { useCraftRecipeStore } from "@/stores/use-craft-store";
 import { NodeType, Tree } from "@/types";
 import { useEffect } from "react";
-import { LoadingSpinner } from "../ui/loading-spinner";
+import { LoadingSpinner } from "@/components/ui/loading-spinner";
 import { useSearchParams } from "next/navigation";
 import { useItemsStore } from "@/stores/use-items-store";
 

@@ -8,7 +8,7 @@ import { LoadingSpinner } from "@/components/ui/loading-spinner";
 import { ImageCoin } from "@/components/shared/ImageCoin";
 import { StatItem } from "./clicker-page";
 import { MdOutlineStarPurple500 } from "react-icons/md";
-import { Button } from "../ui/button-v2";
+import { Button } from "@/components/ui/button-v2";
 
 /**
  * Recommended purchase card component.
@@ -34,7 +34,7 @@ export function BestBuyCard() {
     <div className="bg-gradient-to-br from-orange-500 to-orange-800 p-6 rounded-lg shadow-2xl border border-indigo-500">
       <div className="flex items-center space-x-3 mb-3">
         <MdOutlineStarPurple500 className="w-8 h-8 text-yellow-300" />
-        <h2 className="text-2xl font-bold text-white">Achat Recommandé</h2>
+        <h2 className="text-2xl font-bold ">Achat Recommandé</h2>
       </div>
       <div className="bg-black/60 p-4 rounded-lg flex items-center space-x-4">
         {buildingBuyPaths.length !== 0 ? <Image src={getPathImg(buildingBuyPaths[0].path, buildingBuyPaths[0].index)} height={48} width={48} className="object-cover pixelated text-indigo-300 text-4xl" alt="image" unoptimized /> : <LoadingSpinner />}
@@ -42,13 +42,13 @@ export function BestBuyCard() {
       </div>
       <div className="mt-4 grid grid-cols-2 gap-4">
         <div>
-          <div className="text-sm text-gray-200">Coût</div>
+          <div className="text-sm ">Coût</div>
           <div className='flex flex-row gap-2 items-center'>
-            <div className="text-lg font-bold text-white">{buildingBuyPaths.length !== 0 ? formatPrice(buildingBuyPaths[0].price) : <LoadingSpinner />}</div>
+            <div className="text-lg font-bold ">{buildingBuyPaths.length !== 0 ? formatPrice(buildingBuyPaths[0].price) : <LoadingSpinner />}</div>
             <ImageCoin />
           </div>
         </div>
-        <div className={buildingBuyPaths.length !== 0 && buildingBuyPaths[0].timeToBuy !== "Maintenant" ? "text-white" : "text-yellow-400"}>
+        <div className={buildingBuyPaths.length !== 0 && buildingBuyPaths[0].timeToBuy !== "Maintenant" ? "" : "text-yellow-400"}>
           <div className='text-sm'>Achetable {buildingBuyPaths.length !== 0 && buildingBuyPaths[0].timeToBuy !== "Maintenant" && "le"} </div>
           <div className="text-lg font-bold">{buildingBuyPaths.length !== 0 && buildingBuyPaths[0].timeToBuy}</div>
         </div>
@@ -114,10 +114,10 @@ export function StatButton() {
   const handleBuyButton = () => buyBuilding(playerInfo, setPlayerInfo, buildingBuyPaths);
 
   return (<>
-    <Button variant="primary" className="text-white font-bold py-2 px-4 rounded" onClick={onClick}>
+    <Button variant="primary" className=" font-bold py-2 px-4 rounded" onClick={onClick}>
       Mettre à jour les données
     </Button>
-    <Button variant='secondary' className="flex-1 text-white font-semibold py-2 px-4 rounded transition-colors" onClick={handleBuyButton}>
+    <Button variant='secondary' className="flex-1 font-semibold py-2 px-4 rounded transition-colors" onClick={handleBuyButton}>
       Simuler l&apos;achat
     </Button>
   </>);

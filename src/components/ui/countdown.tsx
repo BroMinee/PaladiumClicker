@@ -1,5 +1,5 @@
 const Completionist = () =>
-  <span className="text-secondary-foreground">00:00:00</span>;
+  <span className="">00:00:00</span>;
 
 function print2digits(time: number) {
   if (time < 10) {
@@ -36,6 +36,6 @@ export const renderer = ({ days, hours, minutes, seconds, completed }: renderTyp
   } else {
     // Render a countdown
     return <span
-      className="text-secondary-foreground">{print2digits(hours + days * 24)}:{print2digits(minutes)}:{print2digits(seconds)}</span>;
+      className="">{print2digits(hours + days * 24)}:{print2digits(minutes)}:{print2digits(seconds)}</span>;
   }
 };

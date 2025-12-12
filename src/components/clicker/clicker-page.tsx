@@ -51,9 +51,9 @@ export function StatItem({ icon, label, value }: StatItemProps) {
     <div className="flex items-center justify-between">
       <div className="flex items-center space-x-3">
         <div className="text-primary">{icon}</div>
-        <span className="text-gray-300">{label}</span>
+        <span className="">{label}</span>
       </div>
-      <span className="font-bold text-white">{value}</span>
+      <span className="font-bold ">{value}</span>
     </div>
   );
 }

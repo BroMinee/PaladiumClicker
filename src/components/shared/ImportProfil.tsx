@@ -130,7 +130,7 @@ export function ImportProfil({
           <Button
             id="pseudo-submit"
             type="submit"
-            className="absolute right-0 top-0 text-foreground rounded-l-none border-none shadow-none"
+            className="absolute right-0 top-0 text-foreground rounded-l-none border-none"
             variant="ghost"
             size="icon"
           >

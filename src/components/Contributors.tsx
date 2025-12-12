@@ -55,7 +55,7 @@ export const Contributors = () => {
               />
             </div>
             <div className="flex flex-col gap-2">
-              <div className="font-bold  text-primary">
+              <div className="font-bold text-primary">
                 {contributeur.pseudo}
               </div>
               <span className="font-semibold">

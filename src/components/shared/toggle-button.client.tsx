@@ -1,6 +1,6 @@
 "use client";
 import React, { ReactNode } from "react";
-import { Button } from "../ui/button-v2";
+import { Button } from "@/components/ui/button-v2";
 
 const IconCheck = () => <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5"><path strokeLinecap="round" strokeLinejoin="round" d="m4.5 12.75 6 6 9-13.5" /></svg>;
 
@@ -25,8 +25,8 @@ export function ToggleCardButton({
   className = "",
 }: ToggleCardButtonProps) {
   const toggleClasses = isToggled
-    ? "bg-indigo-500/30 border border-indigo-500 text-white hover:bg-indigo-700"
-    : "bg-gray-800 border border-gray-700 text-gray-400 hover:bg-gray-700";
+    ? "bg-indigo-500/30 border border-indigo-500 hover:bg-indigo-700"
+    : "bg-card border border-secondary text-card-foreground hover:bg-secondary";
 
   return (
     <Button

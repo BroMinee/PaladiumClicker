@@ -2,7 +2,7 @@
 
 import { usePlayerInfoStore } from "@/stores/use-player-info-store";
 import Image from "next/image";
-import { LoadingSpinner } from "../ui/loading-spinner";
+import { LoadingSpinner } from "@/components/ui/loading-spinner";
 import { constants } from "@/lib/constants";
 import { safeJoinPaths } from "@/lib/misc";
 

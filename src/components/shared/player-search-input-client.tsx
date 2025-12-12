@@ -8,6 +8,7 @@ import { UnOptimizedImage } from "@/components/ui/image-loading";
 import { levenshteinDistance } from "@/lib/misc";
 import { IoMdSearch } from "react-icons/io";
 import { Popover, PopoverAnchor, PopoverContent } from "@/components/ui/popover";
+import { Button } from "@/components/ui/button-v2";
 
 /**
  * Input to search a player by his username.
@@ -86,22 +87,21 @@ export const PlayerSearchInput = ({ onClick }: { onClick: (user: User | string) 
                 }
               }
             }}
-            className="w-full bg-gray-700 border border-gray-600 rounded-lg py-2 pl-3 pr-10 text-white placeholder-gray-500 focus:outline-none focus:border-blue-500"
+            className="w-full bg-secondary border border-gray-600 rounded-lg py-2 pl-3 pr-10 placeholder-gray-500 focus:outline-none focus:border-primary"
           />
 
-          <button
-            type="button"
+          <Button
             onClick={() => handleAddPlayer(searchTerm)}
-            className="absolute right-2 top-1/2 -translate-y-1/2 p-1 text-gray-400 hover:text-white transition-colors"
+            className="absolute right-2 top-1/2 -translate-y-1/2 p-1 border-none"
             aria-label="Rechercher"
           >
             <IoMdSearch className="w-5 h-5" />
-          </button>
+          </Button>
         </div>
       </PopoverAnchor>
 
       <PopoverContent
-        className="z-50 w-[var(--radix-popover-trigger-width)] bg-gray-700 border border-gray-600 rounded-lg shadow-xl max-h-60 overflow-y-auto mt-1 p-0"
+        className="z-50 w-[var(--radix-popover-trigger-width)] bg-secondary border border-gray-600 rounded-lg max-h-60 overflow-y-auto mt-1 p-0"
         align="start"
         sideOffset={5}
         onOpenAutoFocus={(e) => e.preventDefault()}
@@ -111,7 +111,7 @@ export const PlayerSearchInput = ({ onClick }: { onClick: (user: User | string) 
             <li
               key={player.uuid}
               onClick={() => handleAddPlayer(player)}
-              className="flex items-center px-4 py-2 text-white hover:bg-blue-600 cursor-pointer transition-colors gap-3 rounded-lg"
+              className="flex items-center px-4 py-2 hover:bg-primary cursor-pointer transition-colors gap-3 rounded-lg"
             >
               <UnOptimizedImage
                 src={`https://mineskin.eu/helm/${player.uuid}`}
@@ -124,12 +124,12 @@ export const PlayerSearchInput = ({ onClick }: { onClick: (user: User | string) 
               </span>
             </li>
           ))}
-          {searchResults.length === 0 && <div className="p-3 text-center text-gray-300">
+          {searchResults.length === 0 && <div className="p-3 text-center ">
             <span>Le profil de </span>
             <span className="text-sm font-medium text-primary">{searchTerm}</span>
             <span> n&apos;a jamais été chargé</span>
-            <p className="text-xs text-gray-400 mt-1">
-              Appuyez sur <span className="font-bold text-white border border-gray-500 rounded px-1">Entrée</span> ou la loupe pour charger le pseudo tout de même.
+            <p className="text-xs text-card-foreground mt-1">
+              Appuyez sur <span className="font-bold border border-gray-500 rounded px-1">Entrée</span> ou la loupe pour charger le pseudo tout de même.
             </p>
           </div>}
         </ul>

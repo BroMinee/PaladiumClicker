@@ -105,7 +105,7 @@ export function CraftOptimizerDisplay() {
       <Card className="rounded-b-xl rounded-t-none">
         <CardHeader className="flex flex-col md:flex-row md:justify-between md:items-center gap-4">
           <CardTitle>Voici la liste des items les plus rentables</CardTitle>
-          <div className="flex items-center gap-2 text-gray-400 text-sm">
+          <div className="flex items-center gap-2 text-card-foreground text-sm">
             <span
               className={`w-3 h-3 min-w-3 min-h-3 rounded-full ${isConnected ? "bg-green-500" : "bg-red-500"}`}
               title={isConnected ? "Actualisation automatique" : "N'actualise plus automatiquement"}
@@ -191,7 +191,7 @@ function CraftPriceCard({ data, index, cardRefs, sortMode }: {
 
   return (
     <a
-      className="text-card-foreground dark:bg-gray-800 duration-300 dark:hover:bg-gray-700 bg-gray-200 hover:bg-gray-300 rounded-2xl shadow-lg p-4 flex flex-col items-center text-white  transition flex-1"
+      className="text-card-foreground dark:bg-card duration-300 dark:hover:bg-secondary bg-secondary-foreground hover:bg-secondary-foreground rounded-2xl p-4 flex flex-col items-center  transition flex-1"
       ref={el => cardRefs.current[index] = (el ?? undefined as any)}
       href={generateCraftUrl(data.item.item_name, 1, CraftSectionEnum.recipe)}
     >
@@ -214,7 +214,7 @@ function CraftPriceCard({ data, index, cardRefs, sortMode }: {
 
       <div className="flex flex-wrap justify-center gap-1 mt-2">
         {getBadges().map((b, i) => (
-          <span key={i} className={`text-xs text-center text-white px-2 py-0.5 rounded-full ${b.color}`}>
+          <span key={i} className={`text-xs text-center px-2 py-0.5 rounded-full ${b.color}`}>
             {b.label}
           </span>
         ))}

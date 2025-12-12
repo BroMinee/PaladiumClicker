@@ -1,6 +1,6 @@
 "use client";
 import { AxisDomain, Dataset } from "@/types";
-import { Button } from "../ui/button-v2";
+import { Button } from "@/components/ui/button-v2";
 
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
 import { cn } from "@/lib/utils";
@@ -11,7 +11,7 @@ import { cn } from "@/lib/utils";
  * - Handle simple click to show/hide a curve
  */
 export function GraphLegends<Key extends AxisDomain,Value extends AxisDomain>({ data, toggleVisibility, handleHighlight, className}: { data: Dataset<Key, Value>[], toggleVisibility: (plt: Dataset<Key, Value>) => void, handleHighlight: (plt: Dataset<Key, Value>) => void, className?: string })  {
-  return (<div className={cn("w-full bg-gray-800 p-4 rounded-lg", className)}>
+  return (<div className={cn("w-full bg-card p-4 rounded-lg", className)}>
     <h3 className="text-lg font-semibold mb-2">Légende</h3>
     <ul className="space-y-2 max-h-[300px] overflow-y-auto">
       {data.map(plt => {
@@ -20,7 +20,7 @@ export function GraphLegends<Key extends AxisDomain,Value extends AxisDomain>({ 
         return (
           <Button
             variant="none"
-            className="flex justify-start text-left items-center overflow-hidden py-2 px-2 w-full h-full bg-gray-700 rounded-xl"
+            className="flex justify-start text-left items-center overflow-hidden py-2 px-2 w-full h-full bg-secondary rounded-xl"
             key={plt.id}
             onClick={() => toggleVisibility(plt)} onDoubleClick={() => handleHighlight(plt)}
           >
@@ -34,7 +34,7 @@ export function GraphLegends<Key extends AxisDomain,Value extends AxisDomain>({ 
                   {plt.name}
                 </span>
                 <Button
-                  className="p-1 bg-gray-700"
+                  className="p-1 bg-secondary"
                   variant="outline"
                   onClick={(e) => {
                     e.stopPropagation(); toggleVisibility(plt);

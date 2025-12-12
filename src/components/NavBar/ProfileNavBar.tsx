@@ -21,7 +21,7 @@ export function ProfileNavBar() {
         <DiscordProfilPicture className="w-8 h-8"/>
         <div className="flex justify-start flex-col items-start">
           <p className="text-sm leading-5">{profileInfo.global_name ?? profileInfo.username}</p>
-          <p className="text-xs leading-3 text-gray-300">{randomQuote}</p>
+          <p className="text-xs leading-3 ">{randomQuote}</p>
         </div>
       </Button>
     </a>

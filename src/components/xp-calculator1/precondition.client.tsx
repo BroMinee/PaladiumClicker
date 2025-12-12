@@ -31,19 +31,19 @@ export const PreconditionsDisplay = ({ startLevel, endLevel, metier }: Precondit
 
   return (
     <div className="space-y-4">
-      <h3 className="text-xl font-semibold text-white border-b border-gray-700 pb-2">
+      <h3 className="text-xl font-semibold border-b border-secondary pb-2">
         Préconditions pour le Niveau
       </h3>
 
       {levelsToDisplay.length === 0 ? (
-        <Card className="border border-gray-700">
-          <p className="text-gray-400">
+        <Card className="border border-secondary">
+          <p className="text-card-foreground">
             {textFormatting(`Aucune précondition spécifique trouvée pour le métier **${prettyJobName(metier)}** entre le niveau ${startLevel} et ${endLevel}.`)}
           </p>
         </Card>
       ) : (
         levelsToDisplay.map(level => (
-          <Card key={level.targetLevel} className="border border-gray-700">
+          <Card key={level.targetLevel} className="border border-secondary">
             <div className="flex justify-between items-center mb-2">
               <span className="font-bold text-lg text-primary">
                 Prérequis Niv. {level.targetLevel}

@@ -1,7 +1,7 @@
 "use client";
 
 import { usePlayerInfoStore } from "@/stores/use-player-info-store";
-import { LoadingSpinner } from "../ui/loading-spinner";
+import { LoadingSpinner } from "@/components/ui/loading-spinner";
 import { intToHex } from "@/lib/misc";
 
 /**
@@ -23,7 +23,7 @@ export function PlayerFactionName() {
 
   const gradientStyle = `linear-gradient(to right, ${color1}, ${color2}, ${color1})`;
 
-  return <span className="font-extrabold tracking-tight animate-pan-gradient bg-clip-text text-transparent" style={{
+  return <span className="font-extrabold tracking-tight animate-pan-gradient duration-5000 bg-clip-text text-transparent" style={{
     backgroundImage: gradientStyle,
     backgroundSize: "200% auto",
   }}>{playerInfo.faction.name}</span>;

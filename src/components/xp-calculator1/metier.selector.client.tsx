@@ -25,13 +25,13 @@ export const MetierSelector = ({ metier, setMetier }: MetierSelectorProps) => (
             key={key}
             onClick={() => setMetier(key as MetierKey)}
             className={cn("flex flex-col group relative w-full h-auto p-2 rounded-xl transition-all duration-300 cursor-pointer",
-              isSelected ? "bg-indigo-500/30 border border-indigo-500 text-white hover:bg-indigo-700"
-                : "bg-gray-800 border border-gray-700 text-gray-400 hover:bg-gray-700")}
+              isSelected ? "bg-indigo-500/30 border border-indigo-500 hover:bg-indigo-700"
+                : "bg-card border border-secondary text-card-foreground hover:bg-secondary")}
             title={prettyJobName(key)}
           >
             <MetierComponentWrapper metierKey={key as MetierKey} />
             <p className={`text-xs font-semibold mt-1 text-center truncate 
-                            ${isSelected ? "text-white" : "text-gray-400 group-hover:text-white"}`}>{prettyJobName(key)}</p>
+                            ${isSelected ? "" : "text-card-foreground group-hover:"}`}>{prettyJobName(key)}</p>
           </Button>
         );
       })}

@@ -89,7 +89,7 @@ export function XPCalculator() {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-10">
 
         <Card className="lg:col-span-1 space-y-4">
-          <h2 className="text-xl font-semibold mb-4 text-white border-b border-gray-700 pb-2">Paramètres de Progression</h2>
+          <h2 className="text-xl font-semibold mb-4 border-b border-secondary pb-2">Paramètres de Progression</h2>
           <MetierSelector metier={metier} setMetier={setMetier} />
           <InputDebounce
             label="Niveau de Départ"
@@ -142,49 +142,50 @@ export function XPCalculator() {
 
         <Card className="lg:col-span-2 flex flex-col justify-between">
           <div>
-            <h2 className="text-xl font-semibold mb-4 text-white border-b border-gray-700 pb-2">Objectif XP</h2>
+            <h2 className="text-xl font-semibold mb-4 border-b border-secondary pb-2 text-primary">Objectif XP</h2>
             <div className="space-y-3">
-              <BonusStats label="XP actuelle du niveau" value={formatter.format((playerInfo?.metier[metier].xp ?? 0) - getTotalXPForLevel(startLevel)) + " / " + formatter.format(getTotalXPForLevel(startLevel+1) - getTotalXPForLevel(startLevel)) + " XP"} color="text-primary" />
-              <BonusStats label="XP Totale nécessaire" value={formatter.format(requiredXp) + " XP"} color="text-primary" />
+              <BonusStats label="XP actuelle du niveau" value={formatter.format((playerInfo?.metier[metier].xp ?? 0) - getTotalXPForLevel(startLevel)) + " / " + formatter.format(getTotalXPForLevel(startLevel+1) - getTotalXPForLevel(startLevel)) + " XP"} classNameValue="text-primary" />
+              <BonusStats label="XP Totale nécessaire" value={formatter.format(requiredXp) + " XP"} classNameValue="text-primary" />
 
-              <div className="border-t border-gray-700 pt-4 mt-4">
-                <h3 className="text-lg font-semibold text-indigo-400 mb-2">Détail des Multiplicateurs</h3>
-                <BonusStats label="Bonus Grade" value={`${gradeBonus * 100}%`} color="text-gray-400" />
+              <div className="border-t border-secondary pt-4 mt-4">
+                <h3 className="text-lg font-semibold text-primary mb-2">Détail des Multiplicateurs</h3>
+                <BonusStats label="Bonus Grade" value={`${gradeBonus * 100}%`} classNameValue="text-card-foreground" />
                 <BonusStats
                   label="Bonus des quêtes quotidiennes"
                   value={`${dailyBonus.toFixed(1)}%`}
-                  color={dailyBonus >= 0 ? "text-green-400" : "text-red-400"}
+                  classNameValue={dailyBonus >= 0 ? "text-green-400" : "text-red-400"}
                 />
                 <BonusStats
                   label="Potion Double XP"
                   value={activePotionBonus === constants.POTION_DOUBLE_BONUS ? "+100%" : "0%"}
-                  color={activePotionBonus === constants.POTION_DOUBLE_BONUS ? "text-green-400" : "text-gray-500"}
+                  classNameValue={activePotionBonus === constants.POTION_DOUBLE_BONUS ? "text-green-400" : "text-gray-500"}
                 />
                 <BonusStats
                   label="Potion x10 XP"
                   value={activePotionBonus === constants.POTION_X10_BONUS ? "+900%" : "0%"}
-                  color={activePotionBonus === constants.POTION_X10_BONUS ? "text-green-400" : "text-gray-500"}
+                  classNameValue={activePotionBonus === constants.POTION_X10_BONUS ? "text-green-400" : "text-gray-500"}
                 />
                 {metier === "miner" && (
                   <BonusStats
                     label="Bonus Fortune (applicable sur les minéraux uniquement)"
                     value={fortuneBonus > 0 ? `+${(fortuneBonus * 100).toFixed(0)}%` : "0%"}
-                    color={fortuneBonus > 0 ? "text-yellow-400" : "text-gray-500"}
+                    classNameValue={fortuneBonus > 0 ? "text-yellow-400" : "text-gray-500"}
                   />
                 )}
               </div>
 
-              <div className="border-t border-gray-700 pt-4 mt-4">
+              <div className="border-t border-secondary pt-4 mt-4">
                 <BonusStats
                   label={"Multiplicateur total"}
                   value={`x${totalBonusMultiplier.toFixed(3)}`}
-                  color="text-green-400 font-extrabold text-2xl"
+                  classNameValue="text-green-400 font-extrabold text-2xl"
+                  classNameLabel="text-xl font-extrabold text-primary"
                 />
               </div>
             </div>
           </div>
-          <div className="mt-6 border-t border-gray-700 pt-4">
-            <BonusStats label="XP nécessaire après bonus" value={formatter.format(finalRequiredXp) + " XP"} color="text-primary font-extrabold text-3xl" />
+          <div className="mt-6 border-t border-secondary pt-4">
+            <BonusStats label="XP nécessaire après bonus" value={formatter.format(finalRequiredXp) + " XP"} classNameValue="text-primary font-extrabold text-3xl" />
           </div>
         </Card>
 
@@ -193,11 +194,11 @@ export function XPCalculator() {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
 
         <Card className="lg:col-span-2 h-fit order-2 lg:order-1">
-          <h2 className="text-xl font-semibold mb-4 text-white border-b border-gray-700 pb-2">
+          <h2 className="text-xl font-semibold mb-4 border-b border-secondary pb-2">
             Méthode d&apos;xp pour le métier de {prettyJobName(metier)}
           </h2>
 
-          <div className="hidden md:grid grid-cols-[3.5fr_2fr_2fr] gap-4 p-3 mb-2 font-bold text-gray-400 border-b border-gray-700">
+          <div className="hidden md:grid grid-cols-[3.5fr_2fr_2fr] gap-4 p-3 mb-2 font-bold text-card-foreground border-b border-secondary">
             <span>Action</span>
             <span>XP par unité</span>
             <span>Unités à farm</span>

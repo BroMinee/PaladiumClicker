@@ -60,7 +60,7 @@ export function AdminShopHistoryPage() {
       </h1>
 
       <div className="mb-4">
-        <label className="block text-sm font-medium text-gray-300 mb-2">
+        <label className="block text-sm font-medium mb-2">
           Choisir un item
         </label>
         <div className="flex flex-wrap">
@@ -72,8 +72,8 @@ export function AdminShopHistoryPage() {
                 onClick={() => setCurrentItem(value)}
                 className={cn("w-full h-full p-2 text-sm font-semibold rounded transition-colors",
                   currentItem === value
-                    ? "bg-primary text-white"
-                    : "bg-gray-700 text-gray-300 hover:bg-[#282a2c]")}
+                    ? "bg-primary "
+                    : "bg-secondary hover:bg-[#282a2c]")}
               >
                 <UnOptimizedImage src={getImagePathFromAdminShopType(value)} alt={value} width={0} height={0} className="w-full h-full pixelated"/>
               </Button>

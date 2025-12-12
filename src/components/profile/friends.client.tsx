@@ -3,7 +3,7 @@
 import { usePlayerInfoStore } from "@/stores/use-player-info-store";
 import { LoadingSpinner } from "@/components/ui/loading-spinner";
 import Image from "next/image";
-import { ClickableLink } from "../ui/clickable-link";
+import { ClickableLink } from "@/components/ui/clickable-link";
 import { generateProfilUrl } from "@/lib/misc";
 import { ProfilSectionEnum } from "@/types";
 
@@ -32,9 +32,9 @@ export function FriendsSection() {
             width={0}
             height={0}
             unoptimized
-            className="w-16 h-16 rounded-lg border-2 border-gray-700 mb-2 pixelated"
+            className="w-16 h-16 rounded-lg border-2 border-secondary mb-2 pixelated"
           />
-          <span className="text-xs text-gray-300 truncate w-full">
+          <span className="text-xs truncate w-full">
             {friend.name}
           </span>
         </ClickableLink>

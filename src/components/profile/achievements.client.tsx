@@ -11,7 +11,7 @@ import { HoverCard, HoverCardContent, HoverCardTrigger } from "@/components/shar
 
 import { FaCheck, FaLock } from "react-icons/fa";
 import { ReactNode, useMemo } from "react";
-import { UnOptimizedImage } from "../ui/image-loading";
+import { UnOptimizedImage } from "@/components/ui/image-loading";
 import { useItemsStore } from "@/stores/use-items-store";
 
 /**
@@ -46,7 +46,7 @@ export function AchievementSection() {
 
           return (
             <div key={category} className="mb-8">
-              <h4 className="text-lg mb-3 mt-4 border-b border-gray-700 pb-1">
+              <h4 className="text-lg mb-3 mt-4 border-b border-secondary pb-1">
                 {getCategoryInfo(category).displayText}
                 <DisplayProgressionAchievement deno={achievements.length} num={achievements.filter(a => isCompleted(a)).length} height="h-3" />
               </h4>
@@ -70,7 +70,7 @@ const AchievementInfo = ({ title, img, value, children }: { title: string, img: 
         <UnOptimizedImage src={img} alt={title} width={0} height={0} className="w-full h-full object-contain pixelated" />
       </div>
       <div className="flex-grow min-w-0">
-        <h3 className="text-sm font-semibold truncate text-white">{title}</h3>
+        <h3 className="text-sm font-semibold truncate">{title}</h3>
         <p className="text-xs truncate">{value}</p>
         {children}
       </div>
@@ -89,7 +89,7 @@ const DisplayProgressionAchievement = ({ num, deno, className, height = "h-1" }:
           style={{ width: `${progressPercent}%`, backgroundColor: progressPercent === 100 ? "#F59E0B" : "#6B7280" }}
         />
       </div>
-      <div className="flex justify-between items-center w-full text-xs text-gray-400 mt-1">
+      <div className="flex justify-between items-center w-full text-xs text-card-foreground mt-1">
         <p>{(num * 100 / deno).toFixed(2)}%</p>
         <p>{num} / {deno}</p>
       </div>
@@ -100,11 +100,11 @@ const DisplayProgressionAchievement = ({ num, deno, className, height = "h-1" }:
 const SubAchievementDisplay = ({ subAchievement }: { subAchievement: Achievement }) => {
   const subUnlocked = isCompleted(subAchievement);
   const cardClasses = subUnlocked
-    ? "bg-green-400/50 border border-[#26E251] text-white"
-    : "bg-gray-700/50 border-gray-600 text-gray-400 grayscale opacity-80";
+    ? "bg-green-400/50 border border-[#26E251] "
+    : "bg-secondary/50 border-gray-600 text-card-foreground grayscale opacity-80";
 
   return (
-    <div className={cn("flex items-center text-xs p-2 rounded-md mt-1 border transition-colors hover:bg-gray-700 cursor-help", cardClasses)}>
+    <div className={cn("flex items-center text-xs p-2 rounded-md mt-1 border transition-colors hover:bg-secondary cursor-help", cardClasses)}>
       <div className="flex-grow truncate mr-2">{subAchievement.name}: {subAchievement.description}</div>
       {subUnlocked ? <FaCheck className="w-4 h-4 text-[#26E251] flex-shrink-0" /> : <FaLock className="w-4 h-4 text-gray-500 flex-shrink-0" />}
     </div>
@@ -134,10 +134,10 @@ function DetailAchievement({ achievement }: {
 
   const cardClasses = isCompleted(achievement)
     ? "bg-green-400/50 hover:bg-green-500/50 border border-[#26E251]"
-    : "bg-gray-700/50 border border-gray-600 hover:bg-gray-700/70";
+    : "bg-secondary border border-gray-600 hover:bg-card";
 
   const CardContent = (
-    <div className={cn("rounded-lg my-2 transition-all shadow-md w-full", cardClasses)}>
+    <div className={cn("rounded-lg my-2 transition-all w-full", cardClasses)}>
       <AchievementInfo
         title={achievement.name}
         img={isCompleted(achievement) ? safeJoinPaths(constants.imgPathProfile, "completed.png") : `/AH_img/${closestItemName}`}
@@ -156,12 +156,12 @@ function DetailAchievement({ achievement }: {
         </div>
       </HoverCardTrigger>
 
-      <HoverCardContent className="w-fit overflow-y-auto p-2 shadow-xl">
+      <HoverCardContent className="w-fit overflow-y-auto p-2 ">
         <div className="space-y-1">
-          <h4 className="text-xl font-bold text-gray-300 mb-2 px-1 pb-1">
+          <h4 className="text-xl font-bold mb-2 px-1 pb-1">
             {achievement.name} ({achievementProgress === -1 ? 0 : achievementProgress}/{amount})
           </h4>
-          <div className="text-sm font-bold text-gray-300 pb-1 px-1 pb-2">
+          <div className="text-sm font-bold pb-1 px-1 pb-2">
             {achievement.description}
           </div>
           {orderBy(achievement.subAchievements, (e) => {

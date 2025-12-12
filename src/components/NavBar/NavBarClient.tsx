@@ -87,7 +87,7 @@ export default function LinkClient({ path, children }: {
 
   if (!mounted) {
     return <Link
-      className="font-medium flex justify-start items-center space-x-6 focus:bg-gray-700 focus:text-white hover:bg-accent text-card-foreground rounded px-3 py-2 w-56"
+      className="font-medium flex justify-start items-center space-x-6 focus:bg-secondary focus: hover:bg-secondary text-card-foreground rounded px-3 py-2 w-56"
       href={path}>
       {children}
       <p className="text-base leading-4 text-left">{label}</p>
@@ -103,7 +103,7 @@ export default function LinkClient({ path, children }: {
     return <HoverText text={hoverElement}>
       <Link
         onClick={handleClick}
-        className={cn("font-medium flex justify-start items-center space-x-6 focus:bg-gray-700 focus:text-white hover:bg-accent text-card-foreground rounded px-3 py-2 w-56 transition-colors duration-300 ease-out motion-reduce:transition-none", isActive && "underline bg-accent")}
+        className={cn("font-medium flex justify-start items-center space-x-6 focus:bg-secondary focus: hover:bg-secondary text-card-foreground rounded px-3 py-2 w-56 transition-colors duration-300 ease-out motion-reduce:transition-none", isActive && "underline bg-secondary")}
         href={href}>
         {children}
         <p className="text-base leading-4 flex-grow text-left">{label}</p>
@@ -112,7 +112,7 @@ export default function LinkClient({ path, children }: {
             <span className="animate-ping absolute right-0 w-6 h-6 bg-red-400 opacity-75 rounded-md"
               style={{ top: "-18px", right: "-10px" }}></span>
             <span
-              className="absolute right-0 w-6 h-6 text-white bg-red-500  rounded-md text-center"
+              className="absolute right-0 w-6 h-6 bg-red-500 rounded-md text-center"
               style={{ top: "-18px", right: "-10px" }}>1</span>
           </div>}
       </Link>
@@ -122,14 +122,14 @@ export default function LinkClient({ path, children }: {
   return (
     <Link
       onClick={handleClick}
-      className={cn("font-medium flex justify-start items-center space-x-6 focus:bg-gray-700 focus:text-white hover:bg-accent text-card-foreground rounded px-3 py-2 w-56 transition-colors duration-300 ease-out motion-reduce:transition-none", isActive && "underline bg-accent")}
+      className={cn("font-medium flex justify-start items-center space-x-6 focus:bg-secondary focus: hover:bg-secondary text-card-foreground rounded px-3 py-2 w-56 transition-colors duration-300 ease-out motion-reduce:transition-none", isActive && "underline bg-secondary")}
       href={href}>
       {children}
       <p className="text-base leading-4 flex-grow text-left">{label}</p>
       {newNotification &&
         <div className="relative inline-block bg-green-400">
           <span
-            className="absolute right-0 w-6 h-6 text-white bg-red-500  rounded-md text-center"
+            className="absolute right-0 w-6 h-6 bg-red-500 rounded-md text-center"
             style={{ top: "-18px", right: "-10px" }}>1</span>
         </div>}
     </Link>
@@ -239,7 +239,7 @@ export function NavbarCategoryDisplay({ name, children }: {
       <span className="animate-ping absolute right-0 w-6 h-6 bg-red-400 opacity-75 rounded-md"
         style={{ bottom: "35px", left: "100px" }}></span>
       <span
-        className=" absolute right-0 w-6 h-6 text-white bg-red-500 rounded-md text-center"
+        className=" absolute right-0 w-6 h-6 bg-red-500 rounded-md text-center"
         style={{ bottom: "35px", left: "100px" }}>{newNotification}</span>
     </div>}
     <div
@@ -364,7 +364,7 @@ export function GiveawayFakeLink({ children }: {
  */
 export function RenderEvent({ newNotification, children }: { newNotification: boolean, children: React.ReactNode }) {
   return <div
-    className="font-medium flex justify-start items-center space-x-6 focus:bg-gray-700 focus:text-white hover:bg-accent text-card-foreground rounded px-3 py-2 w-56">
+    className="font-medium flex justify-start items-center space-x-6 focus:bg-secondary focus: hover:bg-secondary text-card-foreground rounded px-3 py-2 w-56">
     {children}
     <p className="text-base leading-4 flex-grow text-left">GiveAway</p>
     {newNotification &&
@@ -372,7 +372,7 @@ export function RenderEvent({ newNotification, children }: { newNotification: bo
         <span className="animate-ping absolute right-0 w-6 h-6 bg-red-400 opacity-75 rounded-md"
           style={{ top: "-18px", right: "-10px" }}></span>
         <span
-          className="absolute right-0 w-6 h-6 text-white bg-red-500  rounded-md text-center"
+          className="absolute right-0 w-6 h-6 bg-red-500 rounded-md text-center"
           style={{ top: "-18px", right: "-10px" }}>1</span>
       </div>}
   </div>;
@@ -423,9 +423,9 @@ export function NotificationWebSite() {
           maxHeight: isHovered ? "200px" : "28px",
         }}
       >
-        <p className="text-white text-lg font-bold">{notif.title}</p>
+        <p className=" text-lg font-bold">{notif.title}</p>
         <p
-          className={cn("text-white text-base transition-opacity duration-500 pb-2",
+          className={cn(" text-base transition-opacity duration-500 pb-2",
             isHovered ? "opacity-100 mx-2" : "opacity-0")
           }
         >

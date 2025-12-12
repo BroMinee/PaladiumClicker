@@ -8,7 +8,7 @@ import { Card } from "@/components/ui/card";
 import { AlertTriangle, ChevronDown, Edit2, Save, Server, Trash2 } from "lucide-react";
 import { WebhookChannelCard } from "./webhook-channel.client";
 import { ConfirmDeleteModal } from "./input.client";
-import { Button } from "../ui/button-v2";
+import { Button } from "@/components/ui/button-v2";
 
 /**
  * Displays a server section with its channels and alerts.
@@ -67,13 +67,13 @@ export function WebhookServerSection({ server }: { server: GroupedServer }) {
   }
 
   return (
-    <Card className="space-y-4 dark:bg-[#1a1d24]">
+    <Card className="space-y-4 bg-[#a8a8a8] dark:bg-[#1a1d24]">
       <div className="flex items-center justify-between pr-2">
         <div
           onClick={() => !isEditing && setIsOpen(!isOpen)}
-          className="flex items-center gap-3 text-xl font-bold text-blue-400 cursor-pointer select-none group flex-1"
+          className="flex items-center gap-3 text-xl font-bold text-primary cursor-pointer select-none group flex-1"
         >
-          <div className="p-1 rounded-md bg-blue-500/10">
+          <div className="p-1 rounded-md bg-[#7d7979] dark:bg-[#232730]">
             <ChevronDown size={20} className={`transition-transform duration-300 ${isOpen ? "rotate-0" : "-rotate-90"}`}/>
           </div>
 
@@ -87,7 +87,7 @@ export function WebhookServerSection({ server }: { server: GroupedServer }) {
                   onClick={(e) => e.stopPropagation()}
                   onChange={(e) => setServerName(e.target.value)}
                   onKeyDown={handleKeyDown}
-                  className="bg-gray-800 text-white px-2 py-1 rounded border border-indigo-500 outline-none text-base w-full md:w-auto"
+                  className="bg-card px-2 py-1 rounded border border-indigo-500 outline-none text-base w-full md:w-auto"
                 />
               ) : (
                 <h3>{serverName}</h3>
@@ -99,7 +99,7 @@ export function WebhookServerSection({ server }: { server: GroupedServer }) {
                 </div>
               )}
             </div>
-            <span className="text-[10px] text-gray-600 font-mono">
+            <span className="text-[10px] text-card-foreground font-mono">
               Serveur id: {server.serverId}
             </span>
           </div>
@@ -107,15 +107,22 @@ export function WebhookServerSection({ server }: { server: GroupedServer }) {
 
         <div className="flex items-center gap-2">
           {isEditing ? (
-            <Button onClick={handleSaveName} className="p-2 bg-green-600/20 text-green-400 rounded hover:bg-green-600/30 transition-colors">
+            <Button onClick={handleSaveName} className="p-2 bg-green-600/20 text-green-400 rounded hover:bg-green-600/30 transition-colors"
+              variant="none"
+              size="icon">
               <Save size={18} />
             </Button>
           ) : (
-            <Button onClick={() => setIsEditing(true)} className="p-2 hover:bg-gray-800 text-gray-400 rounded transition-colors">
+            <Button onClick={() => setIsEditing(true)} className="p-2 text-card-foreground rounded transition-colors hover:bg-primary"
+              variant="none"
+              size="icon"
+            >
               <Edit2 size={16} />
             </Button>
           )}
-          <Button onClick={() => setShowDeleteConfirm(true)} className="p-2 hover:bg-red-900/20 text-gray-400 hover:text-red-400 rounded transition-colors">
+          <Button onClick={() => setShowDeleteConfirm(true)} className="p-2 hover:bg-red-900/20 text-card-foreground hover:text-red-400 rounded transition-colors"
+            variant="none"
+            size="icon">
             <Trash2 size={16} />
           </Button>
         </div>

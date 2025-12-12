@@ -120,7 +120,7 @@ export function PalaAnimationBody() {
       });
     } else {
       newEntryOldAnswer = userAnswer.split("").map((c) => {
-        return { c, color: "text-gray-400" };
+        return { c, color: "text-card-foreground" };
       });
     }
 
@@ -241,8 +241,8 @@ export function PalaAnimationBody() {
                   return <span key={i2} className="text-green-700">{e.c}</span>;
                 } else if (e.color === "text-red-700") {
                   return <span key={i2} className="text-red-700">{e.c}</span>;
-                } else if (e.color === "text-gray-400") {
-                  return <span key={i2} className="text-gray-400">{e.c}</span>;
+                } else if (e.color === "text-card-foreground") {
+                  return <span key={i2} className="text-card-foreground">{e.c}</span>;
                 } else {
                   return <span key={i2} className={e.color.toString()}>{e.c}</span>;
                 }

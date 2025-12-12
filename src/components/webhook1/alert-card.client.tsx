@@ -11,9 +11,10 @@ import { constants } from "@/lib/constants";
 import { getIconNameFromEventType, getTextFromWebHookType, getItemFromName } from "@/lib/misc";
 
 import {  deleteWebhookServerAction } from "@/lib/api/apiServerAction";
-import { UnOptimizedImage } from "../ui/image-loading";
+import { UnOptimizedImage } from "@/components/ui/image-loading";
 import { ConfirmDeleteModal } from "./input.client";
-import { Button } from "../ui/button-v2";
+import { Button } from "@/components/ui/button-v2";
+import { Card } from "../ui/card";
 
 const AlertStyles = {
   [WebHookType.QDF]: { color: "bg-purple-500/10 text-purple-400 border-purple-500/20" },
@@ -121,9 +122,9 @@ export function AlertItem({ alert }: { alert: WebHookAlert }) {
   }
 
   return (
-    <div className="group relative flex flex-col sm:flex-row gap-3 bg-[#13151b] p-3 rounded-xl border border-gray-800 hover:border-gray-600 transition-all">
-      <div className="flex-shrink-0 relative">
-        <div className="w-12 h-12 rounded-lg bg-gray-800 overflow-hidden border border-gray-700 flex items-center justify-center">
+    <Card className="group relative flex flex-col sm:flex-row gap-3 bg-[#7d7979] dark:bg-[#232730] p-3 rounded-xl border transition-all">
+      <div className="flex-shrink-0 relative items-center flex">
+        <div className="w-12 h-12 rounded-lg bg-card overflow-hidden border border-secondary flex items-center justify-center">
           <UnOptimizedImage
             src={displayImage}
             alt={displayTitle}
@@ -142,16 +143,24 @@ export function AlertItem({ alert }: { alert: WebHookAlert }) {
             {displayTitle}
           </span>
         </div>
-        <p className="text-xs text-gray-400 line-clamp-2 leading-tight">
+        <p className="text-xs text-card-foreground line-clamp-2 leading-tight">
           {alert.title}
         </p>
       </div>
 
       <div className="flex sm:flex-col gap-1 sm:opacity-0 group-hover:opacity-100 transition-opacity justify-center sm:border-l sm:border-gray-800 sm:pl-2">
-        <Button onClick={handleEditAlert} className="p-1.5 rounded bg-gray-800 hover:bg-blue-600 text-gray-400 hover:text-white transition-colors">
+        <Button onClick={handleEditAlert} className="p-1.5 rounded bg-card hover:bg-primary text-card-foreground hover: transition-colors"
+          variant="primary"
+          size="icon"
+        >
           <Edit2 size={14} />
         </Button>
-        <Button onClick={() => setShowDeleteConfirm(true)} className="p-1.5 rounded bg-gray-800 hover:bg-red-600 text-gray-400 hover:text-white transition-colors">
+        <Button
+          variant="none"
+          size="icon"
+          onClick={() => setShowDeleteConfirm(true)}
+          className="p-1.5 rounded bg-card hover:bg-red-600 text-card-foreground hover: transition-colors"
+        >
           <Trash2 size={14} />
         </Button>
       </div>
@@ -163,6 +172,6 @@ export function AlertItem({ alert }: { alert: WebHookAlert }) {
         title="Supprimer l'alerte ?"
         desc="Cette action est irréversible."
       />
-    </div>
+    </Card>
   );
 }

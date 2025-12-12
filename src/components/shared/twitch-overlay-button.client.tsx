@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
-import { ClickableLink } from "../ui/clickable-link";
-import { Button } from "../ui/button-v2";
+import { ClickableLink } from "@/components/ui/clickable-link";
+import { Button } from "@/components/ui/button-v2";
 import { usePlayerInfoStore } from "@/stores/use-player-info-store";
 
 /**
@@ -21,7 +21,7 @@ export function TwitchOverlayButton() {
 
   return (
     <div className="w-full mx-auto mb-6 animate-in fade-in slide-in-from-top-4 duration-500">
-      <div className="relative overflow-hidden rounded-lg border border-purple-500/30 bg-gray-900 shadow-lg group">
+      <div className="relative overflow-hidden rounded-lg border border-purple-500/30 bg-background group">
         <div className="absolute inset-0 bg-gradient-to-r from-purple-900/80 via-purple-900/50 z-0 pointer-events-none" />
         <div className="relative z-10 flex flex-col sm:flex-row items-center justify-between gap-4 p-4">
           <div className="flex items-center gap-4">
@@ -32,18 +32,18 @@ export function TwitchOverlayButton() {
             </div>
 
             <div className="text-center sm:text-left">
-              <h3 className="text-white font-bold text-lg leading-tight">
+              <h3 className=" font-bold text-lg leading-tight">
                 Streamer sur Twitch ?
               </h3>
-              <p className="text-gray-300 text-sm">
+              <p className=" text-sm">
                 Affiche tes stats en temps réel sur ton live !
               </p>
             </div>
           </div>
 
           <div className="flex items-center gap-3">
-            <ClickableLink href={`/twitch/${playerInfo.username}/setup`} className="hover:scale-105 relative inline-flex items-center justify-center px-6 py-2 overflow-hidden font-bold text-white transition-all duration-300 bg-purple-600 rounded-md hover:text-white">
-              <span className="mr-2">Configurer mon Overlay</span>
+            <ClickableLink href={`/twitch/${playerInfo.username}/setup`} className="hover:scale-105 relative inline-flex items-center justify-center px-6 py-2 overflow-hidden font-bold transition-all duration-300 bg-purple-600 rounded-md hover:text-white">
+              <span className="mr-2">Configurer mon overlay de stream</span>
               <svg className="w-4 h-4 transition-transform duration-300 group-hover/btn:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
               </svg>
@@ -51,7 +51,7 @@ export function TwitchOverlayButton() {
 
             <Button
               onClick={() => setIsVisible(false)}
-              className="p-2 text-gray-500 transition-colors rounded-full hover:bg-gray-800 hover:text-gray-300"
+              className="p-2 text-gray-500 transition-colors rounded-full hover:bg-card hover:"
               aria-label="Fermer"
             >
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">

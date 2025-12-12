@@ -22,7 +22,9 @@ import {
 } from "@/lib/api/apiServerAction";
 import { AlertItem } from "./alert-card.client";
 import { ConfirmDeleteModal } from "./input.client";
-import { Button } from "../ui/button-v2";
+import { Button } from "@/components/ui/button-v2";
+import { Card } from "../ui/card";
+import { cn } from "@/lib/utils";
 
 /**
  * Displays all webhook associated to a channel.
@@ -93,11 +95,10 @@ export function WebhookChannelCard({ channel, serverId }: { channel: GroupedChan
   }
 
   return (
-    <div className="bg-[#1a1d24] rounded-2xl border border-gray-800 overflow-hidden shadow-lg transition-all hover:border-gray-700">
-
+    <Card className="overflow-hidden bg-transparent">
       <div
         onClick={() => !isEditing && setIsOpen(!isOpen)}
-        className="bg-[#232730] p-4 flex flex-col md:flex-row gap-4 items-start md:items-center justify-between border-b border-gray-800 cursor-pointer hover:bg-[#2a2e38] transition-colors select-none"
+        className={cn("bg-[#7d7979] dark:bg-[#232730] rounded-t-xl p-4 flex flex-col md:flex-row gap-4 items-start md:items-center justify-between cursor-pointer hover:bg-[#8f8d8d] dark:hover:bg-[#2a2e38] transition-colors", isOpen ? "rounded-b-none" : "rounded-b-xl")}
       >
         <div className="flex items-center gap-3 w-full md:w-auto flex-1">
           <ChevronDown
@@ -105,8 +106,8 @@ export function WebhookChannelCard({ channel, serverId }: { channel: GroupedChan
             className={`text-gray-500 transition-transform duration-300 ${isOpen ? "rotate-0" : "-rotate-90"}`}
           />
 
-          <div className="flex items-center gap-2 text-white font-semibold text-lg">
-            <Hash size={18} className="text-blue-400 flex-shrink-0" />
+          <div className="flex items-center gap-2 font-semibold text-lg">
+            <Hash size={18} className="text-primary flex-shrink-0" />
 
             {isEditing ? (
               <input
@@ -115,7 +116,7 @@ export function WebhookChannelCard({ channel, serverId }: { channel: GroupedChan
                 onClick={stopProp}
                 onChange={(e) => setChannelName(e.target.value)}
                 onKeyDown={handleKeyDown}
-                className="bg-gray-800 text-white px-2 py-1 rounded border border-indigo-500 outline-none text-base w-full md:w-64"
+                className="bg-card px-2 py-1 rounded border border-indigo-500 outline-none text-base w-full md:w-64"
               />
             ) : (
               <span>{channelName}</span>
@@ -132,33 +133,46 @@ export function WebhookChannelCard({ channel, serverId }: { channel: GroupedChan
         <div className="flex flex-row items-center gap-4 ml-auto md:ml-0">
           <div className="flex items-center gap-1" onClick={stopProp}>
             {isEditing ? (
-              <Button onClick={handleSaveName} className="p-1.5 bg-green-600/20 text-green-400 rounded hover:bg-green-600/30 transition-colors">
+              <Button
+                onClick={handleSaveName}
+                className="p-1.5 bg-green-600/20 text-green-400 rounded hover:bg-green-600/30 transition-colors"
+                variant="none"
+                size="icon">
                 <Save size={16} />
               </Button>
             ) : (
-              <Button onClick={() => setIsEditing(true)} className="p-1.5 hover:bg-gray-700 text-gray-400 rounded transition-colors">
+
+              <Button
+                onClick={() => setIsEditing(true)}
+                className="p-1.5 text-card-foreground rounded transition-colors hover:bg-primary"
+                variant="none"
+                size="icon"
+              >
                 <Edit2 size={14} />
               </Button>
             )}
             <Button
+              variant="none"
+              size="icon"
               onClick={() => setShowDeleteConfirm(true)}
-              className="p-1.5 hover:bg-red-900/20 text-gray-400 hover:text-red-400 rounded transition-colors"
+              className="p-1.5 hover:bg-red-900/20 text-card-foreground hover:text-red-400 rounded transition-colors"
             >
               <Trash2 size={14} />
             </Button>
           </div>
 
-          <div className="h-4 w-px bg-gray-700 mx-1 hidden md:block"></div>
+          <div className="h-4 w-px bg-secondary mx-1 hidden md:block"></div>
 
           <div className="flex flex-col items-end gap-1">
             <Button
+              variant="primary"
               onClick={handleCreateAlert}
-              className="flex items-center gap-2 bg-blue-600/10 hover:bg-blue-600/20 text-blue-400 text-xs font-bold px-3 py-1.5 rounded-lg border border-indigo-500/20 transition-all"
+              className="flex items-center gap-2 font-bold px-3 py-1.5 border-none rounded-lg "
             >
               <Plus size={14} />
               Ajouter
             </Button>
-            <div className="text-[10px] text-gray-600 font-mono  md:block">
+            <div className="text-[10px] md:block">
               {isOpen ? `Channel id: ${channel.channelId}` : `${channel.alerts.length} alertes`}
             </div>
           </div>
@@ -167,7 +181,7 @@ export function WebhookChannelCard({ channel, serverId }: { channel: GroupedChan
 
       <div className={`grid transition-[grid-template-rows] duration-300 ease-in-out ${isOpen ? "grid-rows-[1fr]" : "grid-rows-[0fr]"}`}>
         <div className="overflow-hidden">
-          <div className="p-4 grid grid-cols-1 md:grid-cols-2 gap-3 bg-[#16181d]">
+          <div className="p-4 grid grid-cols-1 md:grid-cols-2 gap-3 bg-[#6b6a6a] dark:bg-[#16181d] rounded-b-xl">
             {channel.alerts.sort((a, b) => a.type.localeCompare(b.type)).map((alert) => (
               <AlertItem key={alert.id} alert={alert} />
             ))}
@@ -182,6 +196,6 @@ export function WebhookChannelCard({ channel, serverId }: { channel: GroupedChan
         title="Supprimer le canal ?"
         desc="Toutes les alertes associées à ce canal seront définitivement supprimées."
       />
-    </div>
+    </Card>
   );
 }

@@ -54,7 +54,7 @@ export function DisplayItemProduce({ item, title, value, count }: {
     <CardContent className="h-full p-2 flex items-center gap-4">
       <div className="relative inline-block">
         <DisplayItem item={item}/>
-        <span className="bottom-0 right-0 pr-2 pb-0 absolute text-xl font-bold drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)]">{count}</span>
+        <span className="bottom-0 right-0 pr-2 pb-0 absolute text-xl font-bold">{count}</span>
       </div>
       <div className="flex flex-col gap-2">
         <span className="font-semibold">{title}</span>

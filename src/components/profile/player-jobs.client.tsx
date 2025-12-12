@@ -1,7 +1,7 @@
 "use client";
 
 import { usePlayerInfoStore } from "@/stores/use-player-info-store";
-import { LoadingSpinner } from "../ui/loading-spinner";
+import { LoadingSpinner } from "@/components/ui/loading-spinner";
 import { MetierKey } from "@/types";
 import { getColorByMetierName, getXpCoef } from "@/lib/misc";
 
@@ -40,7 +40,7 @@ export function JobProgressbar({ jobName }: { jobName: MetierKey }) {
   const gradientStyle = `linear-gradient(to right, ${convertToString(colors.color)}, ${convertToString(colors.bgColor)}, ${convertToString(colors.color)})`;
   return (
     <div
-      className={"h-2.5 rounded-full animate-pan-gradient"}
+      className={"h-2.5 rounded-full animate-pan-gradient duration-5000"}
       style={{
         backgroundImage: gradientStyle,
         backgroundSize: "200% auto",

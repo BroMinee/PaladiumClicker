@@ -379,7 +379,7 @@ export function GenerateWebHookContent() {
   const embedNode = GenerateEmbedPreview(defaultWebhookFooterFromType[currentWebHookType]);
   return (
     <div>
-      <div className="alert-container  !border-0">
+      <div className="alert-container !border-0">
         <div className="alert-header">
           <Image className="avatar"
             height={40}

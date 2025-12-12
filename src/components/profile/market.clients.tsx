@@ -20,13 +20,13 @@ export function MarketSection() {
 
   return (
     <div className="w-full space-y-4">
-      <div className="flex items-center justify-between border-b border-gray-700 pb-2 mb-4">
+      <div className="flex items-center justify-between border-b border-secondary pb-2 mb-4">
         <h3 className="text-xl font-semibold flex items-center gap-2">
           <FaTag className="text-primary" />
           Hôtel des Ventes
         </h3>
         <div className='flex gap-2'>
-          <span className="text-sm text-gray-500 bg-gray-900 px-3 py-1 rounded border border-gray-800">
+          <span className="text-sm text-card-foreground bg-background px-3 py-1 rounded border">
             {playerInfo.ah.data.length} items
           </span>
         </div>

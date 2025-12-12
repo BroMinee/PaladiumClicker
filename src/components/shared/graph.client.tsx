@@ -25,7 +25,7 @@ export const Tooltip = <TY extends AxisDomain>({ tooltipData, containerWidth }: 
 
   return (
     <div
-      className="bg-gray-900"
+      className="bg-background"
       style={{
         position: "absolute",
         top: 0,

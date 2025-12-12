@@ -275,8 +275,6 @@ export async function createWebHookServerAction(body: WebHookCreate): Promise<{ 
     return { succeeded: false, msg: "Type de WebHook inconnu" };
   }
 
-  console.log("Creating WebHook", body);
-
   const r = await fetchPostWithHeader<{
     succeeded: boolean,
     msg: string

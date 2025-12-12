@@ -140,8 +140,6 @@ export function TwitchOverlay({ preview, selectedElements}: { preview?: boolean,
   }, [increaseNbSeconds, preview]);
 
   useEffect(() => {
-    console.log(nbSeconds, totalAnimationTime);
-
     let sumTime = 0;
     config.forEach((config) => {
       if (nbSeconds === sumTime) {
@@ -195,7 +193,7 @@ export function TwitchOverlay({ preview, selectedElements}: { preview?: boolean,
         }
       `}
       </style>
-      <div className="w-[900px] h-[250px] bg-gray-900 text-white p-4 rounded-xl border border-purple-500/30 shadow-2xl overflow-hidden">
+      <div className="w-[900px] h-[250px] bg-background p-4 rounded-xl border border-purple-500/30 shadow-2xl overflow-hidden">
         <div className={`relative z-10 transition-opacity duration-500 h-full flex flex-col justify-center ${isVisible ? "opacity-100" : "opacity-0"}`}>
           {currentConfig && configTypeToOverlayTwitchEnum(currentConfig.type) === OverlayTwitchEnum.Money && <MoneyOverlay/>}
           {currentConfig && configTypeToOverlayTwitchEnum(currentConfig.type) === OverlayTwitchEnum.Jobs && <JobsOverlay/>}
@@ -225,8 +223,8 @@ function FactionOverlay() {
   return <div className="flex flex-row">
     <div className="flex-shrink-0 mr-8">
       <div className="flex flex-col gap-2 relative">
-        <Emblem emblem={playerInfo.faction.emblem} className="h-fit w-40 mr-2 rounded-xl object-cover border-4 border-purple-500/50 shadow-lg"/>
-        <div className="bg-gradient-to-r from-yellow-400 to-orange-500 text-white px-5 py-2 rounded-full font-black text-xl shadow-lg border-2 border-yellow-300 text-center">
+        <Emblem emblem={playerInfo.faction.emblem} className="h-fit w-40 mr-2 rounded-xl object-cover border-4 border-purple-500/50 " />
+        <div className="bg-gradient-to-r from-yellow-400 to-orange-500 px-5 py-2 rounded-full font-black text-xl border-2 border-yellow-300 text-center">
           TOP #{factionIndex}
         </div>
       </div>
@@ -244,17 +242,17 @@ function FactionOverlay() {
         </h2>
       </div>
 
-      <p className="text-lg text-gray-300 leading-relaxed line-clamp-2">
+      <p className="text-lg leading-relaxed line-clamp-2">
         {playerInfo.faction.description}
       </p>
 
       <div className="flex items-center gap-4">
         <div className="flex-1">
-          <div className="flex items-center justify-between text-sm text-gray-400 mb-2">
+          <div className="flex items-center justify-between text-sm text-card-foreground mb-2">
             <span>Classement</span>
             <span className="font-bold text-yellow-400">#{factionIndex}/{leaderboardFaction.length}</span>
           </div>
-          <div className="w-full bg-gray-700/50 h-2 rounded-full overflow-hidden">
+          <div className="w-full bg-secondary/50 h-2 rounded-full overflow-hidden">
             <div
               className="h-full bg-gradient-to-r from-purple-500 via-pink-500 to-orange-500 rounded-full animate-pulse"
               style={{ width: `${100 - (factionIndex-1) * 100 / leaderboardFaction.length}%` }}
@@ -273,7 +271,7 @@ function MoneyOverlay() {
     <div className="flex-shrink-0 mr-8">
       <div className="relative">
         <Image src={getImagePathFromRankingType("money")} alt={"money icon"} width={48} height={48} unoptimized={true}
-          className="h-48 w-48 pixelated mr-2 rounded-xl object-cover border-4 border-purple-500/50 shadow-lg"/>
+          className="h-48 w-48 pixelated mr-2 rounded-xl object-cover border-4 border-purple-500/50 " />
       </div>
     </div>
 
@@ -328,7 +326,7 @@ function ClassementOverlay() {
     <div className="flex-shrink-0 mr-8">
       <div className="relative">
         <Image src={getImagePathFromRankingType(currentConfig.subOption)} alt={`${currentConfig.subOption} icon`} width={48} height={48} unoptimized={true}
-          className="h-48 w-48 pixelated mr-2 rounded-xl object-cover border-4 border-purple-500/50 shadow-lg"/>
+          className="h-48 w-48 pixelated mr-2 rounded-xl object-cover border-4 border-purple-500/50 " />
       </div>
     </div>
 
@@ -342,16 +340,16 @@ function ClassementOverlay() {
         <span className="text-6xl font-black text-primary">
           #{ranking[currentConfig.subOption].toLocaleString("fr-FR")}
         </span>
-        <span className="text-2xl text-gray-400 font-medium">TOP</span>
+        <span className="text-2xl text-card-foreground font-medium">TOP</span>
       </div>
 
       <div className="flex items-center gap-4 mt-4">
         <div className="flex-1">
-          <div className="flex items-center justify-between text-sm text-gray-400 mb-2">
+          <div className="flex items-center justify-between text-sm text-card-foreground mb-2">
             <span>Classement</span>
             <span className="font-bold text-yellow-400">#{ranking[currentConfig.subOption]}/{totalPlayer}</span>
           </div>
-          <div className="w-full bg-gray-700/50 h-2 rounded-full overflow-hidden">
+          <div className="w-full bg-secondary/50 h-2 rounded-full overflow-hidden">
             <div
               className="h-full bg-gradient-to-r from-purple-500 via-pink-500 to-orange-500 rounded-full animate-pulse"
               style={{ width: `${pourcentage}%` }}
@@ -374,22 +372,22 @@ function AutoPromoOverlay() {
       return res + cur.duration;
     }, 0);
     if (!isNaN(totalTimeInSeconds)) {
-      setPourcentage(100 - (totalTimeInSeconds  + AUTOPROMO_CONFIG.duration - nbSeconds) * 100 / AUTOPROMO_CONFIG.duration);
+      setPourcentage(100 - (totalTimeInSeconds + AUTOPROMO_CONFIG.duration - nbSeconds) * 100 / AUTOPROMO_CONFIG.duration);
     } else {
       console.error(".duration is NaN and should not", totalTimeInSeconds, config);
     }
   }, [nbSeconds, config]);
 
-  return <div className="flex items-center justify-center">
+  return <div className="flex items-center justify-center w-full">
     <div className="text-center">
       <div className="mb-2">
         <div className="text-8xl font-bold text-primary animate-pulse">
           {playerInfo?.username}
         </div>
       </div>
-      <div className="relative overflow-hidden h-16">
-        <div className="absolute inset-0 flex items-center justify-center">
-          <div className="flex space-x-2">
+      <div className="relative overflow-hidden h-[75px] flex justify-center">
+        <div className="flex items-center justify-center px-4">
+          <div className="flex space-x-2 items-center justify-center px-4">
             {[...Array(10)].map((_, i) => (
               <Image
                 key={"image-coin" + i}
@@ -408,8 +406,7 @@ function AutoPromoOverlay() {
           </div>
         </div>
       </div>
-
-      <div className="mt-6 w-full bg-gray-700/50 h-3 rounded-full overflow-hidden">
+      <div className="mt-6 w-full bg-secondary/50 h-3 rounded-full overflow-hidden">
         <div
           className="h-full bg-gradient-to-r from-purple-500 via-pink-500 to-orange-500 rounded-full animate-pulse"
           style={{ width: `${pourcentage}%` }}
