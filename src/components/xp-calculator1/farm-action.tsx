@@ -59,7 +59,7 @@ export const FarmActionItem = ({ item,metier, finalRequiredXp, gradeBonus, total
         <UnOptimizedImage
           src={imagePath}
           alt={item.type}
-          className="w-10 h-10 rounded-md bg-secondary p-1 object-contain pixalated ring-1 ring-gray-600 group-hover:ring-gray-500 transition-all"
+          className="w-10 h-10 rounded-md bg-secondary p-1 object-contain pixelated ring-1 ring-gray-600 group-hover:ring-gray-500 transition-all"
           width={0}
           height={0}
         />
