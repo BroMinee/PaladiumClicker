@@ -5,6 +5,7 @@ export type Building = {
   index: number,
   price: number,
   base_production: string,
+  production: number,
   own: number,
 }
 

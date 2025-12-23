@@ -395,7 +395,7 @@ export function getJsonToUseForUpgrade(upgradeType: UpgradeKey) {
 export const getInitialPlayerInfo = (): PlayerInfo => {
 
   const metiers = structuredClone(metier_json) as Metiers;
-  const buildings = structuredClone(building_json) as Building[];
+  const buildings = structuredClone(building_json) as Array<Omit<Building, "production">>;
   for (let i = 0; i < buildings.length; i++) {
     buildings[i].base_production = String(0.10000000149011612 * Math.pow(1.7999999523162842, i));
   }
@@ -410,7 +410,7 @@ export const getInitialPlayerInfo = (): PlayerInfo => {
     metier: metiers,
     achievements: [],
     alliance: "NEUTRAL",
-    building: buildings,
+    building: buildings.map(e => ({ production: 0, ...e })),
     building_upgrade: buildingUpgrade,
     category_upgrade: categoryUpgrade,
     CPS: CPS,

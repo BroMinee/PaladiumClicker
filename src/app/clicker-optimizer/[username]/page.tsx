@@ -1,5 +1,5 @@
 import { ClickerPage } from "@/components/clicker/clicker-page";
-import ProfileFetcherWrapper from "@/components/ProfileFetcher.client";
+import { ProfileFetcherWrapper } from "@/components/profile-fetcher.client";
 
 /**
  * Generate Metadata

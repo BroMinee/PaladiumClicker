@@ -1,5 +1,5 @@
 import React, { ReactNode } from "react";
-import { BestBuyCard, StatButton, StatRPS, StatSleepingCoin, StatTotalProd } from "@/components/clicker/statistics.client";
+import { BatchPurchase, BestBuyCard, StatButton, StatRPS, StatSleepingCoin, StatTotalProd } from "@/components/clicker/statistics.client";
 import { BuildingInputCard, UpgradeSectionClient } from "@/components/clicker/inputs.client";
 import { Card } from "@/components/ui/card";
 import { JobsCard } from "@/components/profile/player-jobs";
@@ -15,6 +15,7 @@ export function ClickerPage() {
       <div className="lg:col-span-2 space-y-10">
         <JobsCard/>
         <BuildingInputCard/>
+        <BatchPurchase/>
         <UpgradeSectionClient/>
       </div>
 
@@ -48,7 +49,7 @@ interface StatItemProps { icon: ReactNode; label: string; value: string; }
  */
 export function StatItem({ icon, label, value }: StatItemProps) {
   return (
-    <div className="flex items-center justify-between">
+    <div className="flex items-center justify-between w-full">
       <div className="flex items-center space-x-3">
         <div className="text-primary">{icon}</div>
         <span className="">{label}</span>

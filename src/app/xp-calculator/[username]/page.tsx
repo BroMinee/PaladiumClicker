@@ -1,4 +1,4 @@
-import ProfileFetcherWrapper from "@/components/ProfileFetcher.client";
+import { ProfileFetcherWrapper } from "@/components/profile-fetcher.client";
 import { searchParamsXpBonusPage } from "@/components/Xp-Calculator/XpCalculator";
 import { XPCalculator } from "@/components/xp-calculator1/calculator.client";
 import { constants } from "@/lib/constants";

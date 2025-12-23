@@ -1,12 +1,14 @@
 import { SelectedElementConfig } from "@/components/Twitch/TwitchOverlayConfig";
 import { AdminShopItem, LevelPreconditions, MetierKey, NavBarCategory } from "@/types";
 
-const version = 0;
+const version = 1;
 
 const discord = {
   url: "https://discord.gg/WGXUKHcZ3P",
   name: "PalaTracker"
 };
+
+const githubUrl = "https://github.com/BroMineCorp/PaladiumClickerNextJS";
 
 export const API_PALATRACKER = process.env.NEXT_PUBLIC_PALACLICKER_API_URL || "https://palatracker.bromine.fr";
 export const API_PALATRACKER_WS = process.env.NEXT_PUBLIC_PALACLICKER_API_WS || "wss://palatracker.bromine.fr";
@@ -619,6 +621,7 @@ export const constants = {
   defaultUsername,
   version,
   discord,
+  githubUrl,
   metier_xp,
   metier_palier,
   how_to_xp,

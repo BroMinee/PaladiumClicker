@@ -17,6 +17,16 @@ const nextConfig = {
                 protocol: 'https',
                 hostname: 'discord.com',
                 pathname: '/**',
+            },
+            {
+                protocol: 'https',
+                hostname: 'github.com',
+                pathname: '/**',
+            },
+            {
+                protocol: 'https',
+                hostname: 'avatars.githubusercontent.com',
+                pathname: '/**',
             }
         ],
     },

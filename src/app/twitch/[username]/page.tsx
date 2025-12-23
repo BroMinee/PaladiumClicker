@@ -1,4 +1,4 @@
-import ProfileFetcherWrapper from "@/components/ProfileFetcher.client";
+import { ProfileFetcherWrapper } from "@/components/profile-fetcher.client";
 import { TwitchOverlay } from "@/components/Twitch/TwichAnimation";
 import { AvailableElements } from "@/components/Twitch/TwitchOverlayConfig";
 import { RankingType } from "@/types";

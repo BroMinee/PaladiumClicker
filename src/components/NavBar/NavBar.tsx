@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetHeader, SheetTrigger } from "@/components/ui/sheet";
-import { FaBars, FaCalculator, FaClipboardList, FaKey, FaRegUser, FaShoppingBasket } from "react-icons/fa";
+import { FaBars, FaCalculator, FaClipboardList, FaKey, FaShoppingBasket } from "react-icons/fa";
 import { constants } from "@/lib/constants";
 import { LogoClient } from "@/components/ui/logoClient";
 import LinkClient, {
@@ -8,17 +8,17 @@ import LinkClient, {
   GiveawayFakeLink,
   NotificationWebSite
 } from "@/components/NavBar/NavBarClient";
-import { GrOptimize } from "react-icons/gr";
 import { LuShoppingCart } from "react-icons/lu";
 import { PiRankingBold } from "react-icons/pi";
-import { GiPayMoney, GiStoneCrafting } from "react-icons/gi";
+import { GiPayMoney } from "react-icons/gi";
 import { IoMdInformationCircleOutline, IoMdStopwatch } from "react-icons/io";
 import React from "react";
-import { ImportProfil } from "@/components/shared/ImportProfil";
 import { HiOutlineStatusOnline } from "react-icons/hi";
 import { GradientText } from "@/components/shared/GradientText";
 import { NavBarProfilInfo } from "@/components/NavBar/NavBarProfilInfo";
 import { MdOutlineWebhook } from "react-icons/md";
+import { Hammer, MousePointer2, User } from "lucide-react";
+import { SearchPlayerInput } from "../home/search-player.client";
 
 /**
  * Renders the application's vertical navbar, supporting both desktop and mobile layouts.
@@ -49,11 +49,12 @@ function NavBarContent() {
         {/*<MobileNav/>*/}
         <LogoClient/>
         <div className="flex justify-center w-full border-gray-600 border-b space-y-3 pb-5 ">
-          <ImportProfil showResetButton navBar/>
+          <SearchPlayerInput variant="navbar"/>
+          {/* <ImportProfil showResetButton navBar/> */}
         </div>
         <NavbarCategoryDisplay name={"Statistiques et données"}>
           <LinkClient path={constants.profilPath}>
-            <FaRegUser size={24}/>
+            <User size={24}/>
           </LinkClient>
           <LinkClient path={constants.ahPath}>
             <FaShoppingBasket size={24}/>
@@ -67,7 +68,7 @@ function NavBarContent() {
         </NavbarCategoryDisplay>
         <NavbarCategoryDisplay name={"Outils"}>
           <LinkClient path={constants.optimizerClickerPath}>
-            <GrOptimize size={24}/>
+            <MousePointer2 size={24}/>
           </LinkClient>
           <LinkClient path={constants.calculatorXpPath}>
             <FaCalculator size={24}/>
@@ -76,7 +77,7 @@ function NavBarContent() {
             <IoMdStopwatch size={32}/>
           </LinkClient>
           <LinkClient path={constants.craftPath}>
-            <GiStoneCrafting size={24}/>
+            <Hammer size={24}/>
           </LinkClient>
           <LinkClient path={constants.webhooksPath}>
             <MdOutlineWebhook size={24}/>

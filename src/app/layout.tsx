@@ -52,7 +52,7 @@ export default function RootLayout({
               <header className="h-fit sticky top-0 z-[100]">
                 <Navbar/>
               </header>
-              <main className="flex-1 mx-auto overflow-x-hidden">
+              <main className="flex-1 mx-auto overflow-clip">
                 <AuthGetWrapper/>
                 <div className="relative bg-background min-h-screen p-4 md:p-8">
                   <div className="max-w-7xl mx-auto">

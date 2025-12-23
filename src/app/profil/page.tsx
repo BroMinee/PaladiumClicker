@@ -1,4 +1,4 @@
-import { NoPseudoPage } from "@/components/NoPseudoPage";
+import { NoPseudoPage } from "@/components/home/no-pseudo-page.server";
 
 /**
  * Generate Metadata

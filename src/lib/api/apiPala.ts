@@ -6,6 +6,7 @@ import {
   AhItemHistory,
   AhType,
   CategoryEnum,
+  GithubContributor,
   Metiers,
   MetiersPossiblyUndefined,
   MountInfo,
@@ -211,8 +212,9 @@ export const getPlayerInfo = async (pseudo: string): Promise<PlayerInfo> => {
     if (buildingIndex === undefined) {
       throw `Unknown building name : '${building["name"]}', please contact the developer to fix it`;
     }
-    initialPlayerInfo["building"][buildingIndex].own = building["quantity"];
-    initialPlayerInfo["production"] += building["production"];
+    initialPlayerInfo.building[buildingIndex].own = building.quantity;
+    initialPlayerInfo.building[buildingIndex].production = building.production;
+    initialPlayerInfo.production += building.production;
   });
   clickerData.upgrades.forEach((upgrade) => {
     const pathToFollow = translateBuildingUpgradeName[upgrade];
@@ -485,3 +487,59 @@ const getPlayerPet = async (uuid: string): Promise<PetInfo | null> => {
     return null;
   });
 };
+
+/**
+ * Get the list of contributors from the two GitHub repositories.
+ * @warning This function could be rate-limited by GitHub API inside Github Actions. I probably need to inject a github secret token later. For now, it's not a big deal since it's only used at build time and should be fine.
+ */
+export async function getGithubContributors(): Promise<GithubContributor[]> {
+  const repos = [
+    "https://api.github.com/repos/BroMinee/PaladiumClicker/contributors",
+    "https://api.github.com/repos/BroMineCorp/PaladiumClickerNextJS/contributors",
+  ];
+
+  // Optionnel : Utiliser un token pour éviter le rate-limit du CI/CD (Vercel/Github Actions)
+  try {
+    const results = await Promise.all(
+      repos.map(async (url) => {
+        try {
+          // Par défaut, fetch dans un Server Component est "force-cache" (Statique)
+          const res = await fetch(url);
+
+          if (!res.ok) {
+            console.warn(`[Build] Failed to fetch contributors from ${url}: ${res.status}`);
+            return [];
+          }
+
+          return (await res.json()) as GithubContributor[];
+        } catch (error) {
+          console.warn(`[Build] Error fetching ${url}`, error);
+          return [];
+        }
+      })
+    );
+
+    const contributorsMap = new Map<string, GithubContributor>();
+
+    results.flat().forEach((contributor) => {
+      // Filtrer les bots (souvent dependabot[bot])
+      if (contributor.login.includes("[bot]")) {
+        return;
+      }
+
+      if (contributorsMap.has(contributor.login)) {
+        const existing = contributorsMap.get(contributor.login)!;
+        existing.contributions += contributor.contributions;
+      } else {
+        contributorsMap.set(contributor.login, { ...contributor });
+      }
+    });
+
+    return Array.from(contributorsMap.values()).sort(
+      (a, b) => b.contributions - a.contributions
+    );
+  } catch (error) {
+    console.error("Critical error merging contributors", error);
+    return [];
+  }
+}

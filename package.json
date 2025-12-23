@@ -44,6 +44,8 @@
     "d3": "^7.9.0",
     "debounce": "^2.2.0",
     "dotenv": "^17.2.2",
+    "embla-carousel-auto-scroll": "^8.6.0",
+    "embla-carousel-react": "^8.6.0",
     "framer-motion": "^12.23.22",
     "gsap": "^3.13.0",
     "lodash": "^4.17.21",

@@ -14,15 +14,9 @@ import { UpgradeKey } from "@/types";
  */
 export function PreconditionDisplay({ index, upgradeType }: { index: number, upgradeType: UpgradeKey | "CPS" }) {
   const { data: playerInfo } = usePlayerInfoStore();
+
   if (!playerInfo) {
     return null;
-  }
-
-  function GetConditionText(msg: string, condition: boolean): ReactNode {
-    return (
-      <span className="flex flex-row items-center gap-1">{condition ? <FaCheck color="green"/> :
-        <RiCloseLargeLine color="red"/>}{msg}</span>
-    );
   }
 
   const {
@@ -35,39 +29,79 @@ export function PreconditionDisplay({ index, upgradeType }: { index: number, upg
     buildingCount
   } = checkCondition(playerInfo, playerInfo[upgradeType][index].condition, new Date());
 
-  const texts: ReactNode[] = ["Précondition:"];
-  if (Number(playerInfo[upgradeType][index].name) === -1) {
-    texts[0] = "Précondition:";
-  }
+  const conditionsList: ReactNode[] = [];
+
+  const renderCondition = (label: string, current: string, isMet: boolean) => (
+    <div className="flex flex-col">
+      <div className="flex flex-row items-center gap-2">
+        {isMet ? (
+          <FaCheck size={14} color="green"/>
+        ) : (
+          <RiCloseLargeLine size={14} color="red" />
+        )}
+        <span className="leading-none">{label}</span>
+      </div>
+      <span className="ml-6 text-xs text-muted-foreground block mt-1">
+        {current}
+      </span>
+    </div>
+  );
 
   if (coinsCondition !== -1) {
-    texts.push(GetConditionText(`Avoir récolté ${formatPrice(coinsCondition)} coins. Actuellement : ${formatPrice(totalCoins)}`, totalCoins >= coinsCondition));
+    conditionsList.push(
+      renderCondition(
+        `Avoir récolté ${formatPrice(coinsCondition)} coins`,
+        `Actuellement : ${formatPrice(totalCoins)}`,
+        totalCoins >= coinsCondition
+      )
+    );
   }
+
   if (dayCondition !== -1) {
-    texts.push(GetConditionText(`Saison démarrée depuis ${formatPrice(dayCondition)} jours. Actuellement : ${formatPrice(Math.floor(daySinceStart))} jours`, daySinceStart >= dayCondition));
+    conditionsList.push(
+      renderCondition(
+        `Saison démarrée depuis ${formatPrice(dayCondition)} jours`,
+        `Actuellement : ${formatPrice(Math.floor(daySinceStart))} jours`,
+        daySinceStart >= dayCondition
+      )
+    );
   }
+
   if (buildingIndex !== -1) {
-    texts.push(GetConditionText(`Posséder ${buildingNeed} ${playerInfo?.["building"][buildingIndex]["name"]}. Actuellement : ${buildingCount}`, buildingCount >= buildingNeed));
+    conditionsList.push(
+      renderCondition(
+        `Posséder ${buildingNeed} ${playerInfo.building[buildingIndex].name}`,
+        `Actuellement : ${buildingCount}`,
+        buildingCount >= buildingNeed
+      )
+    );
   }
 
   if (upgradeType === "CPS" && index !== 0) {
-    texts.push(GetConditionText(`Posséder l'amélioration ${playerInfo.CPS[index - 1].name}`, playerInfo.CPS[index - 1].own));
+    const isPreviousOwned = playerInfo.CPS[index - 1].own;
+    conditionsList.push(
+      renderCondition(
+        `Posséder l'amélioration ${playerInfo.CPS[index - 1].name}`,
+        `Statut : ${isPreviousOwned ? "Possédé" : "Non possédé"}`,
+        isPreviousOwned
+      )
+    );
   }
 
-  if (texts.length !== 2) {
-    texts[0] = "Préconditions:";
-  }
-
-  if (texts.length === 1) {
+  if (conditionsList.length === 0) {
     return null;
   }
 
   return (
-    <div>
-      {texts.map((text, index) => (
-        <p key={index} className={index !== 0 ? "ml-2" : ""}>{text}</p>
-      ))}
+    <div className="flex flex-col gap-2">
+      <p className="font-semibold underline">
+        {conditionsList.length > 1 ? "Préconditions :" : "Précondition :"}
+      </p>
+      <div className="flex flex-col gap-3">
+        {conditionsList.map((item, i) => (
+          <div key={i}>{item}</div>
+        ))}
+      </div>
     </div>
   );
-
 }

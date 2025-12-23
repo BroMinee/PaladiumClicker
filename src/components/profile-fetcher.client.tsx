@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { usePlayerInfoStore } from "@/stores/use-player-info-store";
 import { getPlayerInfoAction } from "@/lib/api/apiServerAction";
 import { LoadingData } from "@/components/LoadingData";
@@ -13,7 +13,7 @@ import { navigate } from "@/components/actions";
  * @param username - Username for the profil we want to display
  * @param children - Children element
  */
-export default function ProfileFetcherWrapper({ username, children }: {
+export function ProfileFetcherWrapper({ username, children }: {
   username: string,
   children: React.ReactNode
 }) {
@@ -21,7 +21,9 @@ export default function ProfileFetcherWrapper({ username, children }: {
   const { data: playerInfo, setPlayerInfo } = usePlayerInfoStore();
   const { settings } = useSettingsStore();
 
-  const [isFirstRender, setIsFirstRender] = React.useState(true);
+  const [isFirstRender, setIsFirstRender] = useState(true);
+  const [alreadyCheckedProfile, setAlreadyCheckedProfile] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     if (isFirstRender) {
@@ -29,8 +31,16 @@ export default function ProfileFetcherWrapper({ username, children }: {
       return;
     }
 
+    if(alreadyCheckedProfile) {
+      return;
+    }
+
+    setAlreadyCheckedProfile(true);
+
     if (reloadProfilNeeded(playerInfo, username, settings.defaultProfile)) {
+      setIsLoading(true);
       getPlayerInfoAction(username).then((data) => {
+        setIsLoading(false);
         if (!data) {
           return;
         }
@@ -45,9 +55,9 @@ export default function ProfileFetcherWrapper({ username, children }: {
       });
     }
 
-  }, [username, setPlayerInfo, settings, playerInfo, isFirstRender]);
+  }, [username, setPlayerInfo, settings, playerInfo, isFirstRender, alreadyCheckedProfile]);
 
-  if (reloadProfilNeeded(playerInfo, username, settings.defaultProfile)) {
+  if (isLoading) {
     return <LoadingData username={username}/>;
   }
 
