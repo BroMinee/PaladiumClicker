@@ -3,7 +3,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from 
 import { ScrollArea } from "@/components/ui/scroll-area";
 import React from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { RenderEvent } from "@/components/NavBar/NavBarClient";
+import { RenderEvent } from "@/components/navbar/navbar.client";
 
 /**
  * Displays a modal popup notifying the user that they did not win a prize in the event.

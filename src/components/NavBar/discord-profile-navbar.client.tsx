@@ -1,3 +1,5 @@
+"use client";
+
 import { useProfileStore } from "@/stores/use-profile-store";
 import { Button } from "@/components/ui/button";
 import { DiscordProfilPicture } from "../Account/discord-profil-picture.client";
@@ -11,7 +13,6 @@ export function ProfileNavBar() {
     return null;
   }
 
-  // , "Un clic bien placé vaut mieux que mille hésitants."
   const randomQuotes = ["Hello there!", "Don't be a bot, be a optimizer", "Moins de blabla, CLIQUES!", "Optimize or die trying!", "Farm harder, not smarter!", "Paladium are for peasants", "Click plus vite", "Pas d'AFK, pas de gain."];
   const randomQuote = randomQuotes[Math.floor(Math.random() * randomQuotes.length)];
 

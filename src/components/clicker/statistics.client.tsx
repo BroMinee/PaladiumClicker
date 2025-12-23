@@ -133,7 +133,6 @@ export function StatButton() {
   </>);
 }
 
-
 /**
  * Display multiple building best purchase list
  */

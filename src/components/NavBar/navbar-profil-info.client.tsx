@@ -4,7 +4,7 @@ import { ToggleTheme } from "@/components/shared/ToggleTheme";
 import { Setting } from "@/components/shared/Setting";
 import React from "react";
 import { useProfileStore } from "@/stores/use-profile-store";
-import { LoginDiscord, NavBarProfileInfo } from "@/components/NavBar/LoginLogoutDiscord";
+import { LoginDiscord, NavBarProfileInfo } from "@/components/navbar/login-logout-discord.client";
 
 /**
  * Displays the user's profile information in the bottom navbar, or login options if not logged in.

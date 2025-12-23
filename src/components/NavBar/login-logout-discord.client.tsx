@@ -2,7 +2,7 @@
 import React from "react";
 import { TbLogout2 } from "react-icons/tb";
 import { Button } from "@/components/ui/button";
-import { ProfileNavBar } from "@/components/NavBar/ProfileNavBar";
+import { ProfileNavBar } from "@/components/navbar/discord-profile-navbar.client";
 import { API_PALATRACKER } from "@/lib/constants";
 import { SmallLoginButton } from "@/components/Login/LoginButton";
 

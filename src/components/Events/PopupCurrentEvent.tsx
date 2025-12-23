@@ -14,7 +14,7 @@ import { SmallCardInfo } from "@/components/shared/SmallCardInfo";
 import { adaptPlurial } from "@/lib/misc";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import Discord from "@/components/Discord";
-import { RenderEvent } from "@/components/NavBar/NavBarClient";
+import { RenderEvent } from "@/components/navbar/navbar.client";
 import { cn } from "@/lib/utils";
 import { registerUserToEvent } from "@/lib/api/apiServerAction";
 

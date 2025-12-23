@@ -4,7 +4,7 @@ import { GoogleAnalytics } from "@next/third-parties/google";
 import { usePathname } from "next/navigation";
 
 import React from "react";
-import Navbar from "@/components/NavBar/NavBar";
+import { Navbar } from "@/components/navbar/navbar";
 import { Montserrat } from "next/font/google";
 import { ThemeProviders } from "@/components/shared/ThemeProvider";
 import { Toaster } from "@/components/ui/sonner";

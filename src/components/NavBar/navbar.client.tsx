@@ -271,7 +271,7 @@ function hasNewNotification(last_visited: { [T in PathValid]: number }, path: Pa
  * Renders a navbar element for the giveaway link that shows different popups based on the user's event status.
  *
  * Attempt to do something smart but only managed to prove that I am not smart
- * TODO to deprecated
+ * @deprecated Not working properly probably needs changes in the future
  */
 export function GiveawayFakeLink({ children }: {
   children: React.ReactNode

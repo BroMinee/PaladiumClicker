@@ -5,17 +5,15 @@ import { constants } from "@/lib/constants";
 import { LogoClient } from "@/components/ui/logoClient";
 import LinkClient, {
   NavbarCategoryDisplay,
-  GiveawayFakeLink,
   NotificationWebSite
-} from "@/components/NavBar/NavBarClient";
+} from "@/components/navbar/navbar.client";
 import { LuShoppingCart } from "react-icons/lu";
 import { PiRankingBold } from "react-icons/pi";
-import { GiPayMoney } from "react-icons/gi";
 import { IoMdInformationCircleOutline, IoMdStopwatch } from "react-icons/io";
 import React from "react";
 import { HiOutlineStatusOnline } from "react-icons/hi";
 import { GradientText } from "@/components/shared/GradientText";
-import { NavBarProfilInfo } from "@/components/NavBar/NavBarProfilInfo";
+import { NavBarProfilInfo } from "@/components/navbar/navbar-profil-info.client";
 import { MdOutlineWebhook } from "react-icons/md";
 import { Hammer, MousePointer2, User } from "lucide-react";
 import { SearchPlayerInput } from "../home/search-player.client";
@@ -27,7 +25,7 @@ import { SearchPlayerInput } from "../home/search-player.client";
  * - On large screens, displays a vertical sidebar navigation (`NavBarContent`).
  * - On smaller screens, displays a compact, fixed mobile navigation (`MobileNav`).
  */
-const Navbar = () => {
+export const Navbar = () => {
   return (
     <>
       <div
@@ -38,7 +36,6 @@ const Navbar = () => {
       <div className="fixed top-0 left-0 p-1 m-2 bg-primary rounded-md lg:hidden">
         <MobileNav/>
       </div>
-
     </>);
 };
 
@@ -90,9 +87,9 @@ function NavBarContent() {
           <LinkClient path={constants.patchnotePath}>
             <FaClipboardList size={24}/>
           </LinkClient>
-          <GiveawayFakeLink>
+          {/* <GiveawayFakeLink>
             <GiPayMoney size={24}/>
-          </GiveawayFakeLink>
+          </GiveawayFakeLink> */}
           <LinkClient path={constants.politiqueDeConfidentialitePath}>
             <FaKey size={24}/>
           </LinkClient>
@@ -122,8 +119,6 @@ function NavBarContent() {
     </>
   );
 }
-
-export default Navbar;
 
 const MobileNav = () => {
   return (
