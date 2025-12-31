@@ -72,7 +72,7 @@ export function GenericSectionTabs<T extends string>({ tabs, title }: GenericSec
       )}
 
       <div className="border-b border-secondary-foreground dark:border-secondary mb-6">
-        <nav className="flex space-x-2 -mb-px" role="tablist">
+        <nav className="flex space-x-2 -mb-px flex-wrap" role="tablist">
           {tabs.map((tab) => (
             <TabButton
               key={tab.key}

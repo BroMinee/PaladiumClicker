@@ -38,7 +38,7 @@ export function AdminShopHistoryPage() {
       setDatasets([{
         id: currentItem,
         name: currentItem,
-        color: "#ff5e00ff",
+        color: "#ff5e00",
         visibility: true,
         stats: res.map((e) => {
           return {
