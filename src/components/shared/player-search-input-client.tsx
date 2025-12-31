@@ -115,11 +115,7 @@ export const PlayerSearchInput = ({
 
   const handleFormSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (searchResults.length > 0) {
-      handleSelectPlayer(searchResults[0]);
-    } else {
-      handleSelectPlayer(searchTerm);
-    }
+    handleSelectPlayer(searchTerm);
   };
 
   const PopoverResults = () => (
