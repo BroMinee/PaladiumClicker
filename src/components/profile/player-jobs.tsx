@@ -1,6 +1,6 @@
 import { Card } from "@/components/ui/card";
 import { MetierKey } from "@/types";
-import { JobLevel, JobProgressbar } from "./player-jobs.client";
+import { JobLevel, JobProgressbar, JobXpCount } from "./player-jobs.client";
 import { prettyJobName } from "@/lib/misc";
 import { constants } from "@/lib/constants";
 
@@ -20,6 +20,7 @@ export function JobCard({ jobName }: { jobName: MetierKey }) {
       <div className="w-full bg-secondary rounded-full h-2.5">
         <JobProgressbar jobName={jobName}/>
       </div>
+      <JobXpCount jobName={jobName}/>
     </Card>
   );
 }

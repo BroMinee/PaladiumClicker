@@ -3,7 +3,7 @@
 import { usePlayerInfoStore } from "@/stores/use-player-info-store";
 import { LoadingSpinner } from "@/components/ui/loading-spinner";
 import { MetierKey } from "@/types";
-import { getColorByMetierName, getXpCoef } from "@/lib/misc";
+import { getColorByMetierName, getTotalXPForLevel, getXpCoef } from "@/lib/misc";
 
 /**
  * Display the player job level
@@ -49,5 +49,30 @@ export function JobProgressbar({ jobName }: { jobName: MetierKey }) {
       }}
 
     ></div>
+  );
+}
+
+
+/**
+ * Display the player job xp percentage, current xp and next level xp
+ * @param jobName - The job name we are displaying
+ */
+export function JobXpCount({ jobName }: { jobName: MetierKey }) {
+  const { data: playerInfo } = usePlayerInfoStore();
+  if (!playerInfo) {
+    return <LoadingSpinner/>;
+  }
+  const formatter = new Intl.NumberFormat('fr-FR');
+  const startLevel = playerInfo.metier[jobName].level;
+  const currentXp = (playerInfo?.metier[jobName].xp ?? 0) - getTotalXPForLevel(startLevel);
+  const nextLevelXp = getTotalXPForLevel(playerInfo?.metier[jobName].level + 1) - getTotalXPForLevel(startLevel);
+
+
+
+  return (
+    <div className="flex justify-between items-center w-full text-xs text-card-foreground mt-1">
+        <p>{(currentXp * 100 / nextLevelXp).toFixed(2)}%</p>
+        <p>{formatter.format(Math.floor(currentXp))} / {formatter.format(nextLevelXp)}xp</p>
+      </div>
   );
 }
