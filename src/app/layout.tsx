@@ -40,7 +40,7 @@ export default function RootLayout({
   }
 
   return (
-    <html lang="fr" className={montserrat.className}>
+    <html lang="fr" className={montserrat.className} suppressHydrationWarning>
       <head>
         <meta name="theme-color" content="#ff5c00"/>
       </head>
