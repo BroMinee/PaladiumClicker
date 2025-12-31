@@ -40,8 +40,6 @@ export function SearchPlayerInput({ variant }: { variant: "homepage" | "navbar" 
         } else {
           await navigate(safeJoinPaths(constants.profilPath, newPlayerInfo.username));
         }
-      } else if(newPlayerInfo === null) {
-        console.error("newPlayerInfo is null");
       }
     };
 
