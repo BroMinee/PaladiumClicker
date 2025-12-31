@@ -202,7 +202,7 @@ export function BatchPurchase() {
                 <GroupedSpanContainer group={playerInfo[building.path][building.index].name} className="gap-3" key={building.path + "-" + building.index + "-" + building.own}>
                   <Card
                     key={playerInfo[building.path][building.index].name + "-" + building.own}
-                    className="rounded-xl overflow-hidden hover:border-primary/50 transition-colors"
+                    className="rounded-xl overflow-hidden hover:border-primary/50 transition-colors w-full h-full"
                   >
                     <div className="flex flex-col gap-2 items-center">
                       <div className="flex flex-col items-center p-4 w-full gap-2">
