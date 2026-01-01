@@ -1,11 +1,12 @@
 "use client";
 
 import { useCraftRecipeStore } from "@/stores/use-craft-store";
-import { NodeType, Tree } from "@/types";
+import { CraftSectionEnum, NodeType, Tree } from "@/types";
 import { useEffect } from "react";
 import { LoadingSpinner } from "@/components/ui/loading-spinner";
-import { useSearchParams } from "next/navigation";
+import { redirect, useSearchParams } from "next/navigation";
 import { useItemsStore } from "@/stores/use-items-store";
+import { generateCraftUrl } from "@/lib/misc";
 
 function calculateFlatResources(tree: Tree<NodeType> | undefined, checkedItems: Set<NodeType>) {
   const resourceMap = new Map<string, [NodeType, number]>();
@@ -46,9 +47,12 @@ export function SetCraftingState({ root: rootServer, children }: { root: Tree<No
   const selectedItem = searchParams.get("item") ?? "";
 
   const { root, setRoot, setFlatResources, checkedItems, setQuantity } = useCraftRecipeStore();
-  const { allItems, setSelectedItem } = useItemsStore();
+  const { allItems, setSelectedItem, selectedItem: selectedItemStore } = useItemsStore();
 
   useEffect(() => {
+    if(selectedItem === "" && selectedItemStore) {
+      redirect(generateCraftUrl(selectedItemStore.value, 1, CraftSectionEnum.recipe));
+    }
     if (!isNaN(quantity) && quantity > 0) {
       setQuantity(quantity);
     }
