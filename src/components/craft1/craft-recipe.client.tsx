@@ -5,7 +5,7 @@ import Image from "next/image";
 import { CraftingArrow } from "@/components/shared/CraftingArrow.client";
 import { LoadingSpinner } from "@/components/ui/loading-spinner";
 
-import { generateCraftUrl } from "@/lib/misc";
+import { adaptPlurial, generateCraftUrl } from "@/lib/misc";
 import { useCraftRecipeStore } from "@/stores/use-craft-store";
 import { useRouter } from "next/navigation";
 import { cn } from "@/lib/utils";
@@ -17,6 +17,16 @@ import { Button } from "@/components/ui/button-v2";
 const IconSearch = () => <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5"><path strokeLinecap="round" strokeLinejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" /></svg>;
 const IconChevronDown = ({ className }: { className: string }) => <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className={cn("w-4 h-4", className)}><path strokeLinecap="round" strokeLinejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" /></svg>;
 
+const formatStack = (count: number) => {
+  if (count <= 64) {
+    return `${count}`;
+  }
+  const stacks = Math.floor(count / 64);
+  const remainder = count % 64;
+  const remainderStr = remainder > 0 ? ` + ${remainder}` : "";
+  return `${count} (${stacks} ${adaptPlurial("stack", stacks)} ${remainderStr})`;
+};
+
 /**
  * Main crafting helper page component.
  * Renders the entire crafting helper UI including item search,
@@ -25,7 +35,7 @@ const IconChevronDown = ({ className }: { className: string }) => <svg xmlns="ht
  */
 export function CraftingHelperPage() {
   const router = useRouter();
-  const { language, checkedItems, setCheckedItems, quantity } = useCraftRecipeStore();
+  const { checkedItems, setCheckedItems, quantity, root } = useCraftRecipeStore();
   const { allItems, selectedItem, setSelectedItem } = useItemsStore();
 
   const [searchTerm, setSearchTerm] = useState("");
@@ -52,19 +62,91 @@ export function CraftingHelperPage() {
 
   const handleToggleChecked = (itemValue: Tree<NodeType>) => {
     const newCheckedItems = new Set(checkedItems);
-    const isCurrentlyChecked = newCheckedItems.has(itemValue.value);
+    const willCheck = !newCheckedItems.has(itemValue.value);
 
-    function toggleNodeAndChildren(node: Tree<NodeType>) {
-      if (isCurrentlyChecked) {
-        newCheckedItems.delete(node.value);
-      } else {
+    const toggleSubtree = (node: Tree<NodeType>, check: boolean) => {
+      if (check) {
         newCheckedItems.add(node.value);
+      } else {
+        newCheckedItems.delete(node.value);
       }
+      node.children.forEach(child => toggleSubtree(child, check));
+    };
 
-      node.children.forEach(child => toggleNodeAndChildren(child));
+    toggleSubtree(itemValue, willCheck);
+
+    if (root) {
+      const reevaluateTreeState = (node: Tree<NodeType>): boolean => {
+        if (node.children.length === 0) {
+          return newCheckedItems.has(node.value);
+        }
+
+        const areChildrenChecked = node.children
+          .map(child => reevaluateTreeState(child))
+          .every(Boolean);
+
+        if (areChildrenChecked) {
+          newCheckedItems.add(node.value);
+          return true;
+        } else {
+          newCheckedItems.delete(node.value);
+          return false;
+        }
+      };
+
+      reevaluateTreeState(root);
     }
 
-    toggleNodeAndChildren(itemValue);
+    setCheckedItems(newCheckedItems);
+  };
+
+  const handleToggleFromSummary = (targetValue: string, check: boolean, isLeafOnly: boolean) => {
+    const newCheckedItems = new Set(checkedItems);
+
+    const toggleSubtree = (node: Tree<NodeType>, shouldCheck: boolean) => {
+      if (shouldCheck) {
+        newCheckedItems.add(node.value);
+      } else {
+        newCheckedItems.delete(node.value);
+      }
+      node.children.forEach(child => toggleSubtree(child, shouldCheck));
+    };
+
+    const findAndToggleMatchingNodes = (node: Tree<NodeType>) => {
+      const isTarget = node.value.value === targetValue;
+      const matchesType = isLeafOnly ? node.children.length === 0 : node.children.length > 0;
+
+      if (isTarget && matchesType) {
+        toggleSubtree(node, check);
+      }
+
+      node.children.forEach(findAndToggleMatchingNodes);
+    };
+
+    if (root) {
+      findAndToggleMatchingNodes(root);
+
+      const reevaluateTreeState = (node: Tree<NodeType>): boolean => {
+        if (node.children.length === 0) {
+          return newCheckedItems.has(node.value);
+        }
+
+        const areChildrenChecked = node.children
+          .map(child => reevaluateTreeState(child))
+          .every(Boolean);
+
+        if (areChildrenChecked) {
+          newCheckedItems.add(node.value);
+          return true;
+        } else {
+          newCheckedItems.delete(node.value);
+          return false;
+        }
+      };
+
+      reevaluateTreeState(root);
+    }
+
     setCheckedItems(newCheckedItems);
   };
 
@@ -86,7 +168,18 @@ export function CraftingHelperPage() {
             <QuantityInput />
           )}
           {selectedItem && (
-            <ResourceList />
+            <>
+              <SummaryList
+                title={"Ressources nécessaires"}
+                onToggleItem={(val, check) => handleToggleFromSummary(val, check, true)}
+                filterMode="leaf"
+              />
+              <SummaryList
+                title={"Sous-crafts à faire"}
+                onToggleItem={(val, check) => handleToggleFromSummary(val, check, false)}
+                filterMode="intermediate"
+              />
+            </>
           )}
         </aside>
 
@@ -95,16 +188,17 @@ export function CraftingHelperPage() {
             <div className="bg-card rounded-lg p-8 flex flex-col items-center justify-center min-h-[400px]">
               <IconSearch />
               <h2 className="text-2xl font-semibold text-card-foreground mt-4">
-                {language === "fr" ? "Recherchez un item" : "Search for an item"}
+                Recherchez un item
               </h2>
               <p className="text-gray-500">
-                {language === "fr" ? "Sélectionnez un item pour voir sa recette." : "Select an item to see its recipe."}
+                {"Sélectionnez un item pour voir sa recette."}
               </p>
             </div>
           ) : (
             <>
               <SelectedItemCard />
               <CraftingTreeDisplay onToggleChecked={handleToggleChecked} />
+              <SubCraftRecipesDisplay />
             </>
           )}
         </main>
@@ -209,43 +303,110 @@ function QuantityInput() {
   );
 }
 
-function ResourceList() {
-  const { flatResources, language } = useCraftRecipeStore();
-  const resourceArray = Array.from(flatResources.entries());
+interface SummaryListProps {
+  title: string;
+  onToggleItem: (resourceValue: string, check: boolean) => void;
+  filterMode: "leaf" | "intermediate";
+}
+
+function SummaryList({ title, onToggleItem, filterMode }: SummaryListProps) {
+  const { language, checkedItems, root } = useCraftRecipeStore();
+
+  const itemsData = useMemo(() => {
+    const map = new Map<string, { item: OptionType; total: number; remaining: number }>();
+    if (!root) {
+      return [];
+    }
+
+    const traverse = (node: Tree<NodeType>, isRoot: boolean) => {
+      const isLeaf = node.children.length === 0;
+      const isEligible = filterMode === "leaf" ? isLeaf : (!isLeaf && !isRoot);
+
+      if (isEligible) {
+        const val = node.value.value;
+        const count = node.value.count;
+        const isChecked = checkedItems.has(node.value);
+
+        if (!map.has(val)) {
+          map.set(val, { item: node.value, total: 0, remaining: 0 });
+        }
+
+        const entry = map.get(val)!;
+        entry.total += count;
+        if (!isChecked) {
+          entry.remaining += count;
+        }
+      }
+
+      node.children.forEach(child => traverse(child, false));
+    };
+
+    traverse(root, true);
+
+    return Array.from(map.values()).sort((a, b) =>
+      a.item.label.localeCompare(b.item.label)
+    );
+  }, [root, checkedItems, filterMode]);
+
+  if (itemsData.length === 0) {
+    return null;
+  }
 
   return (
     <Card>
       <h3 className="text-xl font-semibold mb-4 text-blue-300">
-        Liste des Ressources
+        {title}
       </h3>
-      {resourceArray.length === 0 ? (
-        <p className="text-card-foreground">
-          Vous possédez tous les composants nécessaires !
-        </p>
-      ) : (
-        <ul className="space-y-3">
-          {resourceArray.map(([_, [item, count]]) => {
-            return (
-              <li key={item.value + item.count} className="p-3 rounded-md bg-secondary">
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center space-x-3">
-                    <div className="w-8 h-8 p-1 bg-card rounded-md flex-shrink-0">
-                      <Image src={`/AH_img/${item.img}`} alt={item.value}
-                        className="h-full w-full pixelated rounded-sm hover:scale-125 duration-300"
-                        width={48} height={48}
-                        unoptimized={true} />
-                    </div>
-                    <span className=" font-semibold">
-                      {language === "fr" ? item.label2 : item.label}
-                    </span>
+      <ul className="space-y-3">
+        {itemsData.map(({ item, remaining }) => {
+          const isCompleted = remaining === 0;
+
+          return (
+            <li
+              key={item.value}
+              className={cn(
+                "p-3 rounded-md transition-all duration-300 border border-transparent",
+                isCompleted
+                  ? "bg-green-900/20 border-green-800/50 opacity-70"
+                  : "bg-secondary"
+              )}
+            >
+              <div className="flex items-center justify-between">
+                <div className="flex items-center space-x-3">
+                  <input
+                    type="checkbox"
+                    checked={isCompleted}
+                    onChange={(e) => onToggleItem(item.value, e.target.checked)}
+                    className="w-5 h-5 bg-background border-gray-600 rounded text-blue-500 focus:ring-blue-600 cursor-pointer flex-shrink-0"
+                  />
+                  <div className="w-8 h-8 p-1 bg-card rounded-md flex-shrink-0 relative">
+                    <Image src={`/AH_img/${item.img}`} alt={item.value}
+                      className={cn(
+                        "h-full w-full pixelated rounded-sm hover:scale-125 duration-300",
+                        isCompleted && "grayscale-[0.5]"
+                      )}
+                      width={48} height={48}
+                      unoptimized={true} />
                   </div>
-                  <span className="font-bold text-lg">x{count}</span>
+                  <span className={cn(
+                    "font-semibold transition-all",
+                    isCompleted ? "text-green-400 line-through decoration-2" : ""
+                  )}>
+                    {language === "fr" ? item.label2 : item.label}
+                  </span>
                 </div>
-              </li>
-            );
-          })}
-        </ul>
-      )}
+
+                <span className={cn(
+                  "font-bold text-sm min-w-[2ch] text-right whitespace-nowrap ml-2",
+                  isCompleted ? "text-green-500" : "text-card-foreground"
+                )}>
+                  {isCompleted ? "✔" : formatStack(remaining)}
+                </span>
+              </div>
+            </li>
+          );
+        })}
+      </ul>
     </Card>
   );
 }
@@ -318,19 +479,109 @@ function CraftingTreeDisplay({ onToggleChecked }: { onToggleChecked: (itemValue:
   );
 }
 
+function SubCraftRecipesDisplay() {
+  const { root, language } = useCraftRecipeStore();
+
+  const uniqueRecipes = useMemo(() => {
+    if (!root) {
+      return [];
+    }
+    const map = new Map<string, Tree<NodeType>>();
+
+    const traverse = (node: Tree<NodeType>, isRoot: boolean) => {
+      const hasRecipe = node.children.length > 0;
+
+      if (hasRecipe && !isRoot) {
+        if (!map.has(node.value.value)) {
+          map.set(node.value.value, node);
+        }
+      }
+
+      node.children.forEach(child => traverse(child, false));
+    };
+
+    traverse(root, true);
+
+    return Array.from(map.values()).sort((a, b) =>
+      a.value.label.localeCompare(b.value.label)
+    );
+  }, [root]);
+
+  if (uniqueRecipes.length === 0) {
+    return null;
+  }
+
+  return (
+    <Card>
+      <h3 className="text-xl font-semibold mb-6 text-blue-300">
+        Recettes des sous-crafts
+      </h3>
+      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-2 gap-6">
+        {uniqueRecipes.map((node) => (
+          <div key={node.value.value} className="bg-secondary p-4 rounded-lg flex flex-col items-center">
+            <div className="flex items-center gap-2 mb-4">
+              <div className="w-8 h-8 relative">
+                <Image src={`/AH_img/${node.value.img}`} alt={node.value.value}
+                  className="object-contain pixelated"
+                  fill
+                  unoptimized={true} />
+              </div>
+              <span className="font-semibold text-lg">
+                {language === "fr" ? node.value.label2 : node.value.label}
+              </span>
+            </div>
+            <MiniCraftingGrid recipe={node.recipe} output={node.value} />
+          </div>
+        ))}
+      </div>
+    </Card>
+  );
+}
+
 function TreeNode({ root, onToggleChecked, isRoot = false }: { root: Tree<NodeType>; onToggleChecked: (itemValue: Tree<NodeType>) => void; isRoot?: boolean }) {
   const { checkedItems, language } = useCraftRecipeStore();
   const [showRecipe, setShowRecipe] = useState(false);
+  const [isOpen, setIsOpen] = useState(true);
 
   const isChecked = useMemo(() => checkedItems.has(root.value), [checkedItems, root.value]);
   const hasChildren = useMemo(() => root.children && root.children.length > 0, [root.children]);
 
+  const handleToggleOpen = (e: React.MouseEvent) => {
+    if ((e.target as HTMLElement).closest("button, input")) {
+      return;
+    }
+    if (hasChildren) {
+      setIsOpen(!isOpen);
+    }
+  };
+
   return (
     <li className={`relative ${!isRoot ? "ml-6 pl-4 border-l border-secondary" : ""}`}>
-      <div className={`flex items-center space-x-2 p-2 rounded-md ${isChecked ? "bg-green-800/30" : "bg-secondary"}`}>
+      <div
+        onClick={handleToggleOpen}
+        className={cn(
+          "flex items-center space-x-2 p-2 rounded-md cursor-pointer transition-colors",
+          isChecked ? "bg-green-800/30" : "bg-secondary hover:bg-secondary/80"
+        )}
+      >
+        {hasChildren ? (
+          <button
+            onClick={(e) => {
+              e.stopPropagation();
+              setIsOpen(!isOpen);
+            }}
+            className="p-1 hover:bg-background rounded-full transition-colors"
+          >
+            <IconChevronDown className={`transition-transform duration-200 ${isOpen ? "" : "-rotate-90"}`} />
+          </button>
+        ) : (
+          <div className="w-6" />
+        )}
+
         <input
           type="checkbox"
           checked={isChecked}
+          onClick={(e) => e.stopPropagation()}
           onChange={() => onToggleChecked(root)}
           className="w-5 h-5 bg-background border-gray-600 rounded text-blue-500 focus:ring-blue-600 cursor-pointer flex-shrink-0"
         />
@@ -351,7 +602,10 @@ function TreeNode({ root, onToggleChecked, isRoot = false }: { root: Tree<NodeTy
 
         {hasChildren && (
           <Button
-            onClick={() => setShowRecipe(!showRecipe)}
+            onClick={(e) => {
+              e.stopPropagation();
+              setShowRecipe(!showRecipe);
+            }}
             className="px-2 py-1 bg-card rounded"
           >
             Craft
@@ -362,18 +616,15 @@ function TreeNode({ root, onToggleChecked, isRoot = false }: { root: Tree<NodeTy
 
       {hasChildren && showRecipe && (
         <div className="mt-2 ml-4 p-4 bg-background/50 rounded-lg border border-secondary">
-          <p className="text-sm mb-2">
-            Recette pour 1x {language === "fr" ? root.value.label2 : root.value.label}
-          </p>
           <MiniCraftingGrid recipe={root.recipe} output={root.value} />
         </div>
       )}
 
-      {hasChildren && (
+      {hasChildren && isOpen && (
         <ul className="mt-2 space-y-2">
-          {root.children.map((child: Tree<NodeType>, index: any) => (
+          {root.children.map((child: Tree<NodeType>, index: number) => (
             <TreeNode
-              key={`${child.value}-${index}`}
+              key={`${child.value.value}-${index}`}
               root={child}
               onToggleChecked={onToggleChecked}
               isRoot={false}
@@ -423,12 +674,12 @@ function DisplayItem({ index, slot, count }: { index: number; slot: OptionType |
         {slot && slot.value !== "air" &&
           <ClickableLink href={generateCraftUrl(slot.value, 1, CraftSectionEnum.recipe)}>
             <Image src={`/AH_img/${slot.img}`} alt={slot.value}
-              className="w-full h-full object-contain pixelated rounded-sm"
+              className="w-full h-full object-contain pixelated rounded-sm transition-transform duration-300 hover:scale-125"
               width={48} height={48}
               unoptimized={true} />
           </ClickableLink>
         }
-        <span className="top-6 left-9 pr-2 pb-0 absolute text-xl font-bold">{count}</span>
+        <span className="top-6 left-9 pr-2 pb-0 absolute text-xl font-bold pointer-events-none">{count}</span>
       </div>
     </div>
   );

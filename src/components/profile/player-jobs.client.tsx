@@ -52,7 +52,6 @@ export function JobProgressbar({ jobName }: { jobName: MetierKey }) {
   );
 }
 
-
 /**
  * Display the player job xp percentage, current xp and next level xp
  * @param jobName - The job name we are displaying
@@ -62,17 +61,15 @@ export function JobXpCount({ jobName }: { jobName: MetierKey }) {
   if (!playerInfo) {
     return <LoadingSpinner/>;
   }
-  const formatter = new Intl.NumberFormat('fr-FR');
+  const formatter = new Intl.NumberFormat("fr-FR");
   const startLevel = playerInfo.metier[jobName].level;
   const currentXp = (playerInfo?.metier[jobName].xp ?? 0) - getTotalXPForLevel(startLevel);
   const nextLevelXp = getTotalXPForLevel(playerInfo?.metier[jobName].level + 1) - getTotalXPForLevel(startLevel);
 
-
-
   return (
     <div className="flex justify-between items-center w-full text-xs text-card-foreground mt-1">
-        <p>{(currentXp * 100 / nextLevelXp).toFixed(2)}%</p>
-        <p>{formatter.format(Math.floor(currentXp))} / {formatter.format(nextLevelXp)}xp</p>
-      </div>
+      <p>{(currentXp * 100 / nextLevelXp).toFixed(2)}%</p>
+      <p>{formatter.format(Math.floor(currentXp))} / {formatter.format(nextLevelXp)}xp</p>
+    </div>
   );
 }

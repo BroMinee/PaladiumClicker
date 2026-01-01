@@ -64,7 +64,7 @@ export function SetCraftingState({ root: rootServer, children }: { root: Tree<No
       // redirect(generateCraftUrl(null, 1, CraftSectionEnum.recipe));
     }
 
-  }, [quantity, setQuantity, allItems, selectedItem, setSelectedItem]);
+  }, [quantity, setQuantity, allItems, selectedItem, setSelectedItem, selectedItemStore]);
 
   useEffect(() => {
     setRoot(rootServer);
