@@ -164,7 +164,6 @@ export function CraftingHelperPage() {
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         <aside className="lg:col-span-1 space-y-6 lg:sticky lg:top-8 self-start">
-          <LanguageToggle />
           <SearchBar
             searchTerm={searchTerm}
             setSearchTerm={setSearchTerm}
@@ -243,8 +242,9 @@ export function SearchBar({ searchTerm, setSearchTerm, isSearchFocused, setIsSea
   const { selectedItem } = useItemsStore();
   return (
     <Card>
-      <label htmlFor="item-search" className="block text-sm font-medium mb-2">
-        Rechercher un item
+      <label htmlFor="item-search" className="flex flex-row justify-between items-center text-sm font-medium mb-2">
+        <span>Rechercher un item</span>
+        <LanguageToggle />
       </label>
       <div className="relative">
         <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
