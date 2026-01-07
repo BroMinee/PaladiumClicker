@@ -60,7 +60,7 @@ export async function CraftRecipeDisplay({ searchParams }: { searchParams: searc
           <CountSelector item={item} count={count}/>
           <div className="flex-grow">
             <Suspense fallback={<MarketSelectFallback/>}>
-              <MarketSelector url={`${constants.craftPath}?section=recipe&count=${count ?? 1}&item=`} item={item ?? null}/>
+              <MarketSelector url={`${constants.craftingCalculatorPath}?section=recipe&count=${count ?? 1}&item=`} item={item ?? null}/>
             </Suspense>
           </div>
         </CardContent>

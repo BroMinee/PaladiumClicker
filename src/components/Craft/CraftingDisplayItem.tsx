@@ -15,7 +15,7 @@ import { GradientText } from "@/components/shared/GradientText";
 export function DisplayItem({ item, className }: { item: OptionType, className?: string }) {
   const [isHovered, setIsHovered] = useState(false);
   return (
-    <a href={constants.craftPath + `?item=${item.value}`} className={className}
+    <a href={constants.craftingCalculatorPath + `?item=${item.value}`} className={className}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}>
       <div className="flex relative min-w-16 w-16 h-16 items-center justify-center">

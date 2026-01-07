@@ -85,14 +85,11 @@ export function generateCraftUrl(item: string | null, count: number | null, sect
   {
     const argItem = item ? `item=${item}` : "";
     const argCount = count ? `count=${count}` : "";
-    const argSection = `section=${section}`;
-    const args = [argItem, argCount, argSection].filter((e) => e).join("&");
-    return safeJoinPaths(constants.craftPath, `?${args}`);
+    const args = [argItem, argCount].filter((e) => e).join("&");
+    return safeJoinPaths(constants.craftingCalculatorPath, `?${args}`);
   }
   case CraftSectionEnum.optimizer:
-    const argSection = `section=${section}`;
-    const args = [argSection].filter((e) => e).join("&");
-    return safeJoinPaths(constants.craftPath, `?${args}`);
+    return safeJoinPaths(constants.craftingOptimizerPath);
   default:
     return redirect("/error?message=Section inconnu");
   }

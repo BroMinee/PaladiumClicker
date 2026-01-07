@@ -25,6 +25,7 @@ export type PathValid =
   | "/clicker-optimizer"
   | "/pala-animation"
   | "/craft"
+  | "/craft-optimizer"
   | "/about"
   | "/ranking?category=money"
   | "/admin-shop"
@@ -43,6 +44,7 @@ export type LabelValid =
   | "Palatime"
   | "PalaAnimation Trainer"
   | "Craft Optimizer"
+  | "Calculateur de Craft"
   | "A propos"
   | "Classement"
   | "Métiers"
@@ -63,7 +65,8 @@ const ahPath: PathValid = "/ah";
 const calculatorXpPath: PathValid = "/xp-calculator";
 const optimizerClickerPath: PathValid = "/clicker-optimizer";
 const palaAnimationPath: PathValid = "/pala-animation";
-const craftPath: PathValid = "/craft";
+const craftingCalculatorPath: PathValid = "/craft";
+const craftingOptimizerPath: PathValid = "/craft-optimizer";
 const moneyRanking: PathValid = "/ranking?category=money";
 const adminShopPath: PathValid = "/admin-shop";
 const statusPath: PathValid = "/status";
@@ -89,7 +92,8 @@ const links: LinkList = {
   "/xp-calculator": { label: "Calculateur d'xp", requiredPseudo: true },
   "/clicker-optimizer": { label: "PalaClicker Optimizer", requiredPseudo: true },
   "/pala-animation": { label: "PalaAnimation Trainer", requiredPseudo: false },
-  "/craft": { label: "Craft Optimizer", requiredPseudo: false },
+  "/craft": { label: "Calculateur de Craft", requiredPseudo: false },
+  "/craft-optimizer": { label: "Craft Optimizer", requiredPseudo: false },
   "/about": { label: "A propos", requiredPseudo: false },
   "/ranking?category=money": { label: "Classement", requiredPseudo: false },
   "/admin-shop": { label: "Admin Shop", requiredPseudo: false },
@@ -429,7 +433,7 @@ const notificationPath: Map<PathValid, [number, string]> = new Map<PathValid, [n
 
 const menuPaths: Map<NavBarCategory, PathValid[]> = new Map<NavBarCategory, PathValid[]>([
   ["Statistiques et données", ["/profil", "/ah", "/admin-shop", "/ranking?category=money"]],
-  ["Outils", ["/clicker-optimizer", "/xp-calculator", "/pala-animation", "/craft", "/webhook"]],
+  ["Outils", ["/clicker-optimizer", "/xp-calculator", "/pala-animation", "/craft", "/craft-optimizer", "/webhook"]],
   ["Informations et gestion", ["/status", "/patchnote", "/politique-de-confidentialite", "/about"]],
 ]);
 
@@ -631,7 +635,8 @@ export const constants = {
   ahPath,
   optimizerClickerPath,
   palaAnimationPath,
-  craftPath,
+  craftingCalculatorPath,
+  craftingOptimizerPath,
   moneyRanking,
   adminShopPath,
   statusPath,
