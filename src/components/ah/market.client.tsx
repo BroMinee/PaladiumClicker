@@ -146,7 +146,7 @@ export default function MarketPage() {
       </PageHeader>
 
       <h1 className="text-4xl font-bold mb-4">
-        
+
       </h1>
       <Card>
         <>

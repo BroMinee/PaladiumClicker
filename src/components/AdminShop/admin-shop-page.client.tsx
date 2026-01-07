@@ -55,7 +55,7 @@ export function AdminShopHistoryPage() {
 
   return (
     <>
-    <PageHeader>
+      <PageHeader>
         <PageHeaderHeading>
           {textFormatting(`Historique de vente à l'Admin-Shop ${currentItem ? ` de °${adminShopItemToUserFriendlyText(currentItem)}°` : ""}`)}
         </PageHeaderHeading>

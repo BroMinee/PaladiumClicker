@@ -46,9 +46,9 @@ export async function generateMetadata(props: { searchParams: Promise<searchPara
 export default function LeaderboardPage() {
   return (
     <>
-    <PageHeader>
+      <PageHeader>
         <PageHeaderHeading>
-          {textFormatting('°Classements°')}
+          {textFormatting("°Classements°")}
         </PageHeaderHeading>
         <PageHeaderDescription>
           {"Consultez les classements des meilleurs joueurs Paladium depuis le début de la saison."}

@@ -86,7 +86,7 @@ export function XPCalculator() {
   return (
     <>
 
-<PageHeader>
+      <PageHeader>
         <PageHeaderHeading>
           {textFormatting("Calculateur d'°XP°")}
         </PageHeaderHeading>
@@ -94,7 +94,7 @@ export function XPCalculator() {
           {"Calculez l'xp nécessaire pour atteindre le niveau souhaité."}
         </PageHeaderDescription>
       </PageHeader>
-      
+
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-10">
 
         <Card className="lg:col-span-1 space-y-4">

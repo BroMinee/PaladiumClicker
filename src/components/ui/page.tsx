@@ -1,5 +1,5 @@
-import * as React from "react"
-import { cn } from "@/lib/utils"
+import * as React from "react";
+import { cn } from "@/lib/utils";
 
 const PageHeader = React.forwardRef<
   HTMLDivElement,
@@ -10,8 +10,8 @@ const PageHeader = React.forwardRef<
     className={cn("flex flex-col items-center text-center space-y-4 mb-4", className)}
     {...props}
   />
-))
-PageHeader.displayName = "PageHeader"
+));
+PageHeader.displayName = "PageHeader";
 
 const PageHeaderHeading = React.forwardRef<
   HTMLHeadingElement,
@@ -25,8 +25,8 @@ const PageHeaderHeading = React.forwardRef<
     )}
     {...props}
   />
-))
-PageHeaderHeading.displayName = "PageHeaderHeading"
+));
+PageHeaderHeading.displayName = "PageHeaderHeading";
 
 const PageHeaderDescription = React.forwardRef<
   HTMLParagraphElement,
@@ -40,7 +40,7 @@ const PageHeaderDescription = React.forwardRef<
     )}
     {...props}
   />
-))
-PageHeaderDescription.displayName = "PageHeaderDescription"
+));
+PageHeaderDescription.displayName = "PageHeaderDescription";
 
-export { PageHeader, PageHeaderHeading, PageHeaderDescription }
+export { PageHeader, PageHeaderHeading, PageHeaderDescription };
