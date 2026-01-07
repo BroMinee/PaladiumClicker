@@ -1,6 +1,6 @@
 import { ProfileFetcherWrapper } from "@/components/profile-fetcher.client";
-import { TwitchOverlay } from "@/components/Twitch/TwichAnimation";
-import { AvailableElements } from "@/components/Twitch/TwitchOverlayConfig";
+import { TwitchOverlay } from "@/components/twitch/twich-animation.client";
+import { AvailableElements } from "@/components/twitch/twitch-overlay-config.client";
 import { RankingType } from "@/types";
 import { redirect } from "next/navigation";
 

@@ -1,6 +1,6 @@
 
 import { constants } from "@/lib/constants";
-import { RankingResponse, RankingType } from "@/types";
+import { RankingType } from "@/types";
 import { safeJoinPaths } from "./navbar";
 
 /**
@@ -91,53 +91,4 @@ export function rankingTypeToUserFriendlyText(rankingType: RankingType): string 
   default:
     return "Inconnu";
   }
-}
-
-/**
- * Fills missing dates in a ranking dataset by duplicating the previous entry for any missing days.
- * @param data The original ranking data.
- */
-export function addMissingDate(data: RankingResponse) {
-  const filledData: RankingResponse = [];
-  const groupedByUser: Record<string, RankingResponse> = {};
-
-  data.forEach((entry) => {
-    if (!groupedByUser[entry.username]) {
-      groupedByUser[entry.username] = [];
-    }
-    groupedByUser[entry.username].push(entry);
-  });
-
-  Object.values(groupedByUser).forEach((userEntries) => {
-    userEntries.sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
-
-    for (let i = 0; i < userEntries.length; i++) {
-      filledData.push(userEntries[i]);
-
-      if (i > 0) {
-        const prevEntry = userEntries[i - 1];
-        const currEntry = userEntries[i];
-
-        const prevDate = new Date(prevEntry.date);
-        const currDate = new Date(currEntry.date);
-        const nextDate = new Date(prevDate);
-        nextDate.setDate(prevDate.getDate() + 1);
-
-        while (nextDate < currDate) {
-          filledData.push({
-            uuid: prevEntry.uuid,
-            username: prevEntry.username,
-            date: nextDate.toISOString().split("T")[0],
-            value: prevEntry.value,
-            position: prevEntry.position,
-          });
-
-          nextDate.setDate(nextDate.getDate() + 1);
-        }
-      }
-    }
-  });
-
-  return filledData.sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
-
 }

@@ -5,7 +5,7 @@ import { redirect, useSearchParams } from "next/navigation";
 import { generateAhShopUrl } from "@/lib/misc";
 import { useItemsStore } from "@/stores/use-items-store";
 import { useMarketStore } from "@/stores/use-market-store";
-import { getMarketHistoryServerAction, getPaladiumAhItemStatsOfAllItemsAction } from "@/lib/api/apiServerAction";
+import { getMarketHistoryServerAction, getPaladiumAhItemStatsOfAllItemsAction } from "@/lib/api/api-server-action.server";
 
 /**
  * Component that set the zustand market state using the searchParams

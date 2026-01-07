@@ -1,5 +1,5 @@
 // 'use client';
-import { GradientText } from "@/components/shared/GradientText";
+import { GradientText } from "@/components/shared/gradient-text";
 import { Card, CardDescription, CardFooter, CardHeader, CardTitleH1 } from "@/components/ui/card";
 import { FaHeart } from "react-icons/fa";
 
@@ -8,10 +8,10 @@ import {
   PalaAnimationClassement,
   PalaAnimationClassementGlobal,
   TestBot
-} from "@/components/Pala-Animation/PalaAnimationClient";
-import SessionProvider from "@/components/Pala-Animation/SessionContextProvider";
+} from "@/components/pala-animation/pala-animation.client";
+import SessionProvider from "@/components/pala-animation/session-context-provider.client";
 import { constants } from "@/lib/constants";
-import { AuthForceWrapper } from "@/components/Auth/AuthForceWrapper";
+import { AuthForceWrapper } from "@/components/auth/auth-force-wrapper.server";
 
 /**
  * Generate Metadata

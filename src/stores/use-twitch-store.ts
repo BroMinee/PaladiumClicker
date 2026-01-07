@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import { SelectedElementConfig } from "@/components/Twitch/TwitchOverlayConfig";
+import { SelectedElementConfig } from "@/components/twitch/twitch-overlay-config.client";
 import { AUTOPROMO_CONFIG } from "@/lib/constants";
 import { PaladiumFactionLeaderboard, RankingPositionResponse, RankingType } from "@/types";
 

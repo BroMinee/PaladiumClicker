@@ -1,8 +1,8 @@
 import React from "react";
 import { PlayerConnectionHistory } from "@/components/status/player-connection-history.client";
 import { PlayerCountHistory } from "@/components/status/player-count-history.client";
-import { getPlayerInfo, getPlayerOnlineCount, isApiDown } from "@/lib/api/apiPala";
-import { isMyApiDown } from "@/lib/api/apiPalaTracker";
+import { getPlayerInfo, getPlayerOnlineCount, isApiDown } from "@/lib/api/api-pala.server";
+import { isMyApiDown } from "@/lib/api/api-pala-tracker.server";
 import { PageHeader, PageHeaderDescription, PageHeaderHeading } from "@/components/ui/page";
 import { textFormatting } from "@/lib/misc";
 

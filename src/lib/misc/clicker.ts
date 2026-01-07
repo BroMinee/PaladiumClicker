@@ -1,19 +1,13 @@
-import globalUpgradeJson from "@/assets/global_upgrade.json";
 import global_upgrade_json from "@/assets/global_upgrade.json";
-import terrainUpgradeJson from "@/assets/terrain_upgrade.json";
 import terrain_upgrade_json from "@/assets/terrain_upgrade.json";
-import buildingUpgradeJson from "@/assets/building_upgrade.json";
 import building_upgrade_json from "@/assets/building_upgrade.json";
-import manyUpgradeJson from "@/assets/many_upgrade.json";
 import many_upgrade_json from "@/assets/many_upgrade.json";
-import posteriorUpgradeJson from "@/assets/posterior_upgrade.json";
 import posterior_upgrade_json from "@/assets/posterior_upgrade.json";
-import categoryUpgradeJson from "@/assets/category_upgrade.json";
 import category_upgrade_json from "@/assets/category_upgrade.json";
 import metier_json from "@/assets/metier.json";
 import building_json from "@/assets/building.json";
 import CPS_json from "@/assets/CPS.json";
-import { AnyCondition, Building, BuildingUpgrade, CategoryUpgrade, GlobalUpgrade, ManyUpgrade, Metiers, PlayerInfo, PosteriorUpgrade, TerrainUpgrade, UpgradeKey, CPS, buildingPathType, bestUpgradeInfo, bestBuildingInfo, bestPurchaseInfoDetailed, bestPurchaseInfo } from "@/types";
+import { AnyCondition, Building, BuildingUpgrade, CategoryUpgrade, GlobalUpgrade, ManyUpgrade, Metiers, PlayerInfo, PosteriorUpgrade, TerrainUpgrade, CPS, buildingPathType, bestUpgradeInfo, bestBuildingInfo, bestPurchaseInfoDetailed, bestPurchaseInfo } from "@/types";
 import { constants } from "@/lib/constants";
 import { safeJoinPaths } from "./navbar";
 
@@ -192,53 +186,6 @@ export function getDDHHMMSSOnlyClicker(d: Date) {
 }
 
 /**
- * Converts a DD/MM/YYYY à HH:MM:SS string back into a Date object.
- * @param d The formatted date string.
- */
-export function reverseDDHHMMSSOnlyClicker(d: string) {
-  // get the date out of the string (format : DD/MM/YYYY à HH:MM:SS)
-  const date = d.split(" à ")[0];
-  const time = d.split(" à ")[1];
-  const day = date.split("/")[0];
-  const month = date.split("/")[1];
-  const year = date.split("/")[2];
-  const hour = time.split(":")[0];
-  const minute = time.split(":")[1];
-  const second = time.split(":")[2];
-  return new Date(Number(year), Number(month) - 1, Number(day), Number(hour), Number(minute), Number(second));
-}
-
-/**
- * Formats a Date into a full DD/MM/YYYY à HH:MM:SS string.
- * @param d The date to format.
- */
-export function getDDHHMMSS(d: Date) {
-  const padL = (num: number, chr = "0") => `${num}`.padStart(2, chr);
-
-  return `${padL(d.getDate())}/${padL(d.getMonth() + 1)}/${d.getFullYear()} à ${padL(d.getHours())}:${padL(d.getMinutes())}:${padL(d.getSeconds())}`;
-}
-
-/**
- * Formats a Date into a HH:MM:SS string.
- * @param d The date to format.
- */
-export function getHHMMSS(d: Date) {
-  const padL = (num: number, chr = "0") => `${num}`.padStart(2, chr);
-
-  return `${padL(d.getHours())}:${padL(d.getMinutes())}:${padL(d.getSeconds())}`;
-}
-
-/**
- * Formats a Date into a HH:MM string.
- * @param d The date to format.
- */
-export function getHHMM(d: Date) {
-  const padL = (num: number, chr = "0") => `${num}`.padStart(2, chr);
-
-  return `${padL(d.getHours())}:${padL(d.getMinutes())}`;
-}
-
-/**
  * Scales the current production of a building for a player based on its level.
  * @param playerInfo The information of the player.
  * @param buildingIndex The index of the building.
@@ -367,29 +314,6 @@ export function computeRPS(playerInfo: PlayerInfo) {
 }
 
 /**
- * Returns the corresponding JSON data object for a given upgrade type.
- * @param upgradeType The type of upgrade to get the JSON for.
- */
-export function getJsonToUseForUpgrade(upgradeType: UpgradeKey) {
-  const jsonToUse = null;
-  if (upgradeType === "global_upgrade") {
-    return globalUpgradeJson;
-  } else if (upgradeType === "building_upgrade") {
-    return buildingUpgradeJson;
-  } else if (upgradeType === "category_upgrade") {
-    return categoryUpgradeJson;
-  } else if (upgradeType === "many_upgrade") {
-    return manyUpgradeJson;
-  } else if (upgradeType === "posterior_upgrade") {
-    return posteriorUpgradeJson;
-  } else if (upgradeType === "terrain_upgrade") {
-    return terrainUpgradeJson;
-  }
-
-  return jsonToUse;
-}
-
-/**
  * Get an empty playerInfo
  */
 export const getInitialPlayerInfo = (): PlayerInfo => {
@@ -451,35 +375,6 @@ export const getInitialPlayerInfo = (): PlayerInfo => {
     edited: false,
   };
 };
-
-/**
- * Compute the clicker progression so far from a playerInfo
- * @param playerInfo The information of the player.
- */
-export function computeProgression(playerInfo: PlayerInfo | null) {
-  if (!playerInfo) {
-    return 0;
-  }
-
-  const maxUpgrade =
-    playerInfo.building.length * 99
-    + playerInfo.CPS.length
-    + playerInfo.global_upgrade.length
-    + playerInfo.terrain_upgrade.length
-    + playerInfo.building_upgrade.length
-    + playerInfo.many_upgrade.length
-    + playerInfo.posterior_upgrade.length;
-
-  const currentUpgrade = playerInfo.building.reduce((acc, building) => acc + building.own, 0)
-    + playerInfo.CPS.reduce((acc, cps) => acc + (cps.own ? 1 : 0), 0)
-    + playerInfo.global_upgrade.reduce((acc, global) => acc + (global.own ? 1 : 0), 0)
-    + playerInfo.terrain_upgrade.reduce((acc, terrain) => acc + (terrain.own ? 1 : 0), 0)
-    + playerInfo.building_upgrade.reduce((acc, building) => acc + (building.own ? 1 : 0), 0)
-    + playerInfo.many_upgrade.reduce((acc, many) => acc + (many.own ? 1 : 0), 0)
-    + playerInfo.posterior_upgrade.reduce((acc, posterior) => acc + (posterior.own ? 1 : 0), 0);
-
-  return currentUpgrade * 100 / maxUpgrade;
-}
 
 /**
  * Compute the best building from a playerInfo state.

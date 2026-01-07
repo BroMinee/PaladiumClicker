@@ -1,0 +1,93 @@
+"use client";
+
+// TODO: Pretty sure we don't need this file anymore
+
+import dynamic from "next/dynamic";
+import { AhItemHistory } from "@/types";
+import { Area, Legend, ReferenceLine, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
+import React from "react";
+import { useWebhookStore } from "@/stores/use-webhook-store";
+
+const AreaChart = dynamic(() => import("recharts").then((mod) => mod.AreaChart), { ssr: false });
+
+const CustomTooltip = ({ active, payload, label }: any) => {
+
+  if (!payload || payload.length === 0) {
+    return null;
+  }
+
+  if (active && payload && payload.length) {
+    return (
+      <div className="recharts-tooltip-wrapper bg-secondary rounded-md p-2 ">
+        <p className="recharts-tooltip-label text-card-foreground">{`${label}`}</p>
+        <ul>
+          {payload.map((entry: any, index: number) => {
+            return <li key={index} style={{ color: entry.color }}>
+              {entry.name}: {Math.round(entry.value)}
+            </li>;
+          })}
+        </ul>
+      </div>);
+  }
+};
+
+/**
+ * Plot the item market history sell count and price average
+ * @param data - The item market history
+ * @param webhook - Boolean, if true display a horizontal line corresponding to the webhook alert price.
+ */
+export const PlotHistoricChart = ({ data, webhook = false }: { data: AhItemHistory[], webhook?: boolean }) => {
+  const data_clean = data.length !== 0 ? data.map((item) => {
+    return {
+      date: item.date,
+      price: item.price / item.sells,
+      quantity: item.quantity
+    };
+  }) : [{ date: "Cette item n'a pas encore été vendu de la saison", price: 0, quantity: 0 }];
+  const { threshold, thresholdCondition } = useWebhookStore();
+  return (
+    <ResponsiveContainer width="100%" height="100%" id="graph-historic-plot">
+      <AreaChart data={data_clean}
+        margin={{ top: 30, right: 30, left: 30, bottom: 10 }}>
+        <defs>
+          <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="5%" stopColor="#8884d8" stopOpacity={0.8}/>
+            <stop offset="95%" stopColor="#8884d8" stopOpacity={0}/>
+          </linearGradient>
+          <linearGradient id="colorPv" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="5%" stopColor="#82ca9d" stopOpacity={0.8}/>
+            <stop offset="95%" stopColor="#82ca9d" stopOpacity={0}/>
+          </linearGradient>
+        </defs>
+        <Legend layout="horizontal" verticalAlign="top" align="center"/>
+        <XAxis dataKey="date"/>
+        <YAxis yAxisId="left"
+          domain={[(dataMin: number) => Math.round(dataMin * 0.9), (dataMax: number) => Math.round(dataMax * 1.1)]}/>
+        <YAxis yAxisId="right" orientation={(!webhook || thresholdCondition !== "aboveQuantity") ? "right" : "left"}
+          domain={[(dataMin: number) => Math.round(dataMin * 0.9), (dataMax: number) => Math.round(dataMax * 1.1)]}/>
+        <Tooltip content={<CustomTooltip/>}/>
+        {(!webhook || thresholdCondition !== "aboveQuantity") &&
+          <Area yAxisId="left" type="monotone" dataKey="price" stroke="#8884d8" fillOpacity={1} fill="url(#colorUv)" id="curve-price"/>}
+        {(!webhook || thresholdCondition === "aboveQuantity") &&
+          <Area yAxisId="right" type="monotone" dataKey="quantity" stroke="#82ca9d" fillOpacity={1}
+            id="curve-quantity"
+            fill="url(#colorPv)"/>}
+        {
+          webhook && <ReferenceLine
+            id="line-threshold"
+            y={threshold}
+            yAxisId={thresholdCondition === "aboveQuantity" ? "right" : "left"}
+            stroke="red"
+            strokeWidth={2}
+            strokeDasharray="3 3"
+            label={{
+              value: "Alerte",
+              position: "left",
+              fill: "red",
+            }}
+          />
+        }
+      </AreaChart>
+    </ResponsiveContainer>
+  );
+};

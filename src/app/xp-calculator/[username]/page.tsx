@@ -1,8 +1,8 @@
 import { ProfileFetcherWrapper } from "@/components/profile-fetcher.client";
-import { searchParamsXpBonusPage } from "@/components/Xp-Calculator/XpCalculator";
-import { XPCalculator } from "@/components/xp-calculator1/calculator.client";
+import { XPCalculator } from "@/components/xp-calculator/calculator.client";
 import { constants } from "@/lib/constants";
 import { safeJoinPaths } from "@/lib/misc";
+import { searchParamsXpBonusPage } from "@/types";
 import React from "react";
 
 /**

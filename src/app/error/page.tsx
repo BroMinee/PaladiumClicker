@@ -9,10 +9,10 @@ import {
   TestImportProfileFetching,
   TestMyApi,
   TestMyApiFetching
-} from "@/components/ui/TestApiOnError";
+} from "@/components/ui/test-api-on-error.server";
 import { Suspense } from "react";
-import { ImportProfilPretty } from "@/components/shared/ImportProfilPretty";
-import { ImportOfflineProfil } from "@/components/shared/ImportOfflineProfil";
+import { ImportOfflineProfil } from "@/components/shared/import-offline-profil.client";
+import { SearchPlayerInput } from "@/components/home/search-player.client";
 
 /**
  * Generate Metadata
@@ -61,7 +61,9 @@ export default async function Error500Page(
               contacter un développeur</p>
           </div>
           <div className="flex flex-col gap-2 items-center justify-center">
-            <ImportProfilPretty/>
+            <div className="w-full max-w-md mx-auto">
+              <SearchPlayerInput variant="homepage" />
+            </div>
             <ImportOfflineProfil/>
           </div>
         </div>

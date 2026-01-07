@@ -5,7 +5,7 @@ import { LineGrad } from "../shared/graph-line-renderer.client";
 import { ChartContainer } from "../shared/graph.client";
 import { TimeSelection } from "../shared/time-selection.client";
 import { Card } from "@/components/ui/card";
-import { getStatusPaladiumAction, getStatusPaladiumBedrockAction } from "@/lib/api/apiServerAction";
+import { getStatusPaladiumAction, getStatusPaladiumBedrockAction } from "@/lib/api/api-server-action.server";
 import { useEffect, useState } from "react";
 import { GraphLegends } from "../shared/graph-legends.client";
 

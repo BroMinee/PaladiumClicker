@@ -4,13 +4,13 @@ import { PlayerSearchInput } from "../shared/player-search-input-client";
 import { PlayerInfo, User } from "@/types";
 import { getLinkFromUrl, safeJoinPaths } from "@/lib/misc";
 import { usePlayerInfoStore } from "@/stores/use-player-info-store";
-import { getPlayerInfoAction, registerPlayerAction } from "@/lib/api/apiServerAction";
+import { getPlayerInfoAction, registerPlayerAction } from "@/lib/api/api-server-action.server";
 import { toast } from "sonner";
 import { navigate } from "../actions";
 import { constants } from "@/lib/constants";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { ScrollArea } from "@radix-ui/react-scroll-area";
-import { SmallCardInfo } from "../shared/SmallCardInfo";
+import { SmallCardInfo } from "../shared/small-card-info.client";
 import { Button } from "../ui/button-v2";
 
 /**

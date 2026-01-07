@@ -5,7 +5,7 @@ import { useClickerStore } from "@/stores/use-clicker-store";
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import { LoadingSpinner } from "@/components/ui/loading-spinner";
-import { ImageCoin } from "@/components/shared/ImageCoin";
+import { ImageCoin } from "@/components/shared/image-coin";
 import { StatItem } from "./clicker-page";
 import { MdOutlineStarPurple500 } from "react-icons/md";
 import { Button } from "@/components/ui/button-v2";

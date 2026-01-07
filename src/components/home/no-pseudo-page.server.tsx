@@ -1,4 +1,4 @@
-import { getGithubContributors } from "@/lib/api/apiPala";
+import { getGithubContributors } from "@/lib/api/api-pala.server";
 import { NoPseudoPageWithContributeur } from "./no-pseudo-page.client";
 
 export const dynamic = "force-static"; // Static generation

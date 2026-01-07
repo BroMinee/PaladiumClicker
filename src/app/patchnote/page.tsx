@@ -1,8 +1,8 @@
-import { GradientText } from "@/components/shared/GradientText";
+import { GradientText } from "@/components/shared/gradient-text";
 import { FaHeart } from "react-icons/fa";
-import Discord from "@/components/Discord";
+import Discord from "@/components/discord";
 import newsJson from "@/public/news.json";
-import { News } from "@/components/News";
+import { News } from "@/components/news";
 import { ChangeLogs } from "@/types";
 import { Card } from "@/components/ui/card";
 import { CardContent, CardDescription, CardHeader, CardTitleH1 } from "@/components/ui/card";

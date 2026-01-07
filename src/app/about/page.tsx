@@ -1,6 +1,6 @@
 import { Card, CardContent, CardHeader, CardTitleH1 } from "@/components/ui/card";
-import { Contributors } from "@/components/Contributors";
-import Discord from "@/components/Discord";
+import { Contributors } from "@/components/contributors";
+import Discord from "@/components/discord";
 
 /**
  * Generate Metadata

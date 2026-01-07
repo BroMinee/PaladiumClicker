@@ -6,11 +6,11 @@ import { usePathname } from "next/navigation";
 import React from "react";
 import { Navbar } from "@/components/navbar/navbar";
 import { Montserrat } from "next/font/google";
-import { ThemeProviders } from "@/components/shared/ThemeProvider";
+import { ThemeProviders } from "@/components/shared/theme-provider.client";
 import { Toaster } from "@/components/ui/sonner";
-import ServiceWorkerRegister from "@/components/ServiceWorkerRegister";
-import { AuthGetWrapper } from "@/components/Auth/AuthGetWrapper";
-import { PageTransition } from "@/components/shared/PageTransition";
+import { ServiceWorkerRegister } from "@/components/service-worker-register.client";
+import { AuthGetWrapper } from "@/components/auth/auth-get-wrapper.client";
+import { PageTransition } from "@/components/shared/page-transition.client";
 
 const montserrat = Montserrat({
   subsets: ["latin"],  // specify subsets according to your needs

@@ -4,7 +4,7 @@ import { TbLogout2 } from "react-icons/tb";
 import { Button } from "@/components/ui/button";
 import { ProfileNavBar } from "@/components/navbar/discord-profile-navbar.client";
 import { API_PALATRACKER } from "@/lib/constants";
-import { SmallLoginButton } from "@/components/Login/LoginButton";
+import { SmallLoginButton } from "@/components/login/login-button.client";
 
 /**
  * Wrapper around the small login button.

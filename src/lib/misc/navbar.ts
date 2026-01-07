@@ -1,6 +1,6 @@
 
 import { constants, PathValid } from "@/lib/constants";
-import { AdminShopItem, AdminShopPeriod, CraftSectionEnum, OptionType, PlayerInfo, ProfilSectionEnum, RankingType, StatusPeriod } from "@/types";
+import { CraftSectionEnum, OptionType, PlayerInfo, RankingType } from "@/types";
 import { redirect } from "next/navigation";
 
 /**
@@ -28,20 +28,6 @@ export function generateXpCalculatorUrl(username: string, metier: string | undef
 }
 
 /**
- * Generates a URL for a ranking page with optional category and usernames.
- * @param category The ranking category.
- * @param usernames An array of usernames to include.
- * @param noUsernames An array of usernames to exclude.
- */
-export function generateRankingUrl(category: string | undefined, usernames?: string[] | undefined, noUsernames?: string[] | undefined) {
-  const argCategory = category ? `category=${category}` : "";
-  const argUsernames = usernames ? `usernames=${usernames}` : "";
-  const argNoUsernames = noUsernames ? `noUsernames=${noUsernames}` : "";
-  const args = [argCategory, argUsernames, argNoUsernames].filter((e) => e).join("&");
-  return safeJoinPaths("/ranking", `?${args}`);
-}
-
-/**
  * Generates a URL for the AH (Auction House) shop page.
  * @param item The item to generate the URL for.
  */
@@ -49,28 +35,6 @@ export function generateAhShopUrl(item: OptionType | undefined) {
   const argItem = item ? `item=${item.value}` : "";
   const args = [argItem].filter((e) => e).join("&");
   return safeJoinPaths(constants.ahPath, `?${args}`);
-}
-
-/**
- * Generates a URL for the Admin Shop page with optional period.
- * @param item The AdminShopItem to generate the URL for.
- * @param periode Optional period filter.
- */
-export function generateAdminShopUrl(item: AdminShopItem, periode?: AdminShopPeriod) {
-  const argItem = item ? `item=${item}` : "";
-  const argPeriode = periode ? `periode=${periode}` : "";
-  const args = [argItem, argPeriode].filter((e) => e).join("&");
-  return safeJoinPaths(constants.adminShopPath, `?${args}`);
-}
-
-/**
- * Generates a URL for the status page with optional period.
- * @param periode Optional status period.
- */
-export function generateStatusUrl(periode?: StatusPeriod) {
-  const argPeriode = periode ? `periode=${periode}` : "";
-  const args = [argPeriode].filter((e) => e).join("&");
-  return safeJoinPaths(constants.statusPath, `?${args}`);
 }
 
 /**
@@ -158,44 +122,15 @@ export function reloadProfilNeeded(playerInfoLocal: PlayerInfo | null, username:
   return false;
 }
 
-export const ProfilSectionValid = Object.values(ProfilSectionEnum) as string[];
-
-/**
- * Checks if a section is a valid profile section.
- * @param section The section string to validate.
- */
-export function isProfilSection(section?: string): boolean {
-  if (section === undefined) {
-    return true;
-  }
-  return ProfilSectionValid.includes(section);
-}
-
 /**
  * Generates a URL for a player profile with optional ranking and usernames.
  * @param username The username of the player.
- * @param item The profile section or item.
  * @param ranking Optional ranking category.
  * @param usernames Optional array of usernames to include in the URL.
  */
-export function generateProfilUrl(username: string, item: ProfilSectionEnum | string, ranking?: RankingType, usernames?: string[]) {
-  if (!isProfilSection(item)) {
-    throw new Error(`Invalid section given in generateProfilUrl ${item}`);
-  }
-  const argItem = item ? `section=${item}` : "";
+export function generateProfilUrl(username: string, ranking?: RankingType, usernames?: string[]) {
   const argUsername = usernames && usernames.length != 0 ? `usernames=${usernames}` : "";
   const argRanking = ranking ? `category=${ranking}` : "";
-  const args = [argItem, argRanking, argUsername].filter((e) => e).join("&");
+  const args = [argRanking, argUsername].filter((e) => e).join("&");
   return safeJoinPaths(constants.profilPath, username, `?${args}`);
-}
-
-/**
- * Returns the avatar URL for a player given their UUID.
- * @param uuid The UUID of the player.
- */
-export function getHeadUrl(uuid: string | undefined) {
-  if(!uuid || uuid === "") {
-    return "/img/palatracker_head.png";
-  } // palatracker skin
-  return `https://mineskin.eu/helm/${uuid}`;
 }

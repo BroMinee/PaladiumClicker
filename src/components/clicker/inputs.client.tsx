@@ -12,8 +12,8 @@ import { GroupedSpanContainer } from "../shared/group-span-container";
 import { Card } from "@/components/ui/card";
 import { HoverCard, HoverCardContent, HoverCardTrigger } from "../shared/hover";
 import { StatItem } from "./clicker-page";
-import { ImageCoin } from "../shared/ImageCoin";
-import { PreconditionDisplay } from "@/lib/PreconditionDisplay";
+import { ImageCoin } from "../shared/image-coin";
+import { PreconditionDisplay } from "@/lib/precondition-display.client";
 
 /**
  * Display the list of building input.

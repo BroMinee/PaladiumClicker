@@ -2,7 +2,7 @@
 
 import React, { useState, useMemo, useId } from "react";
 import debounce from "debounce";
-import { getSimilareUsernames } from "@/lib/api/apiServerAction";
+import { getSimilareUsernames } from "@/lib/api/api-server-action.server";
 import { User } from "@/types";
 import { UnOptimizedImage } from "@/components/ui/image-loading";
 import { levenshteinDistance } from "@/lib/misc";

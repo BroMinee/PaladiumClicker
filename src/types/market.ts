@@ -33,11 +33,6 @@ export type AhItemType = {
   type: string,
 }
 
-export type AhPaladium = {
-  value: string,
-  label: string,
-}
-
 export type AhItemHistory = {
   date: string,
   price: number,

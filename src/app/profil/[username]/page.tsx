@@ -1,9 +1,6 @@
 import { ProfileFetcherWrapper } from "@/components/profile-fetcher.client";
-import { generateProfilUrl, isProfilSection } from "@/lib/misc";
-import { ProfilSectionEnum } from "@/types";
-import { redirect } from "next/navigation";
 import { Banner } from "@/components/profile/banner.client";
-import { ProfileSectionSelector } from "@/components/profile/inputs.clients";
+import { ProfileSectionSelector } from "@/components/profile/inputs.client";
 import { PlayerStats } from "@/components/profile/player-stats.client";
 import { PlayerSkin } from "@/components/profile/player-skin.client";
 import { PlayerUsername } from "@/components/profile/player-username.client";
@@ -12,10 +9,6 @@ import { PlayerFactionName } from "@/components/profile/player-faction.client";
 import { JobsCard } from "@/components/profile/player-jobs";
 import { FactionEmblemClient } from "@/components/profile/faction/faction-emblem.client";
 import { TwitchOverlayButton } from "@/components/shared/twitch-overlay-button.client";
-
-type searchParamsProfilPage = {
-  section?: string,
-}
 
 /**
  * Generate Metadata
@@ -39,15 +32,9 @@ export async function generateMetadata(props: { params: Promise<{ username: stri
 export default async function ProfilePage(
   props: {
     params: Promise<{ username: string }>,
-    searchParams: Promise<searchParamsProfilPage>
   }
 ) {
-
-  const searchParams = await props.searchParams;
   const params = await props.params;
-  if (!isProfilSection(searchParams.section)) {
-    redirect(generateProfilUrl(params.username, ProfilSectionEnum.Home));
-  }
 
   return (<ProfileFetcherWrapper username={params.username}>
     <TwitchOverlayButton/>

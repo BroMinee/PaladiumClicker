@@ -4,7 +4,7 @@ import { AxisConfig, DataPoint, Dataset } from "@/types";
 import { LineGrad } from "../shared/graph-line-renderer.client";
 import { ChartContainer } from "../shared/graph.client";
 import { Card } from "@/components/ui/card";
-import { getPlayerCountHistoryPaladiumAction } from "@/lib/api/apiServerAction";
+import { getPlayerCountHistoryPaladiumAction } from "@/lib/api/api-server-action.server";
 import { useEffect, useState } from "react";
 
 /**

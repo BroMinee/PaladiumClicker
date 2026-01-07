@@ -3,8 +3,8 @@ import Image from "next/image";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { safeJoinPaths } from "@/lib/misc";
 import { constants } from "@/lib/constants";
-import { MotionFadeIn } from "@/components/shared/MotionFadeIn";
-import { MotionStaggerList } from "@/components/shared/MotionStaggerList";
+import { MotionFadeIn } from "@/components/shared/motion-fade-in.client";
+import { MotionStaggerList } from "@/components/shared/motion-stagger-list.client";
 
 /**
  * Component ErrorBoundary

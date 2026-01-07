@@ -1,7 +1,7 @@
 import React from "react";
 
-import { RankingSectionSelector } from "@/components/ranking/inputs.clients";
-import { searchParamsRankingPage } from "@/components/ranking/RankingSelector";
+import { RankingSectionSelector } from "@/components/ranking/inputs.client";
+import { searchParamsRankingPage } from "@/types";
 import { RankingType } from "@/types";
 import { getImagePathFromRankingType, rankingTypeToUserFriendlyText, textFormatting } from "@/lib/misc";
 import { PageHeader, PageHeaderDescription, PageHeaderHeading } from "@/components/ui/page";

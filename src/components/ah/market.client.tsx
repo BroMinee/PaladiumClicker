@@ -24,7 +24,7 @@ import {
 import { Dataset, AxisConfig, OptionType } from "@/types";
 import { ChartContainer } from "@/components/shared/graph.client";
 import { UnOptimizedImage } from "@/components/ui/image-loading";
-import { SearchBar } from "@/components/craft1/craft-recipe.client";
+import { SearchBar } from "@/components/craft/craft-recipe.client";
 import { useItemsStore } from "@/stores/use-items-store";
 import { useMarketStore } from "@/stores/use-market-store";
 import { Card } from "@/components/ui/card";

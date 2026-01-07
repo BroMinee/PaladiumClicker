@@ -1,5 +1,5 @@
 import { adminShopItemToUserFriendlyText, getImagePathFromAdminShopType, isShopItem } from "@/lib/misc";
-import { AdminShopHistoryPage } from "@/components/AdminShop/admin-shop-page.client";
+import { AdminShopHistoryPage } from "@/components/admin-shop/admin-shop-page.client";
 
 interface searchParamsAdminShopPage {
   item: string,

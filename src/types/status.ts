@@ -1,17 +1,7 @@
 
-export type ValueHistory = {
-  date: string,
-  value: number
-}[]
-
 export type PlayerCountHistory = {
   date: string,
   player_count: number
-}[]
-
-export type MoneySumHistory = {
-  date: string,
-  money_sum: number
 }[]
 
 export type ServerStatusResponse =

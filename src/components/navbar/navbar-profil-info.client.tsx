@@ -1,7 +1,7 @@
 "use client";
 
-import { ToggleTheme } from "@/components/shared/ToggleTheme";
-import { Setting } from "@/components/shared/Setting";
+import { ToggleTheme } from "@/components/shared/toggle-theme.client";
+import { Setting } from "@/components/shared/setting.client";
 import React from "react";
 import { useProfileStore } from "@/stores/use-profile-store";
 import { LoginDiscord, NavBarProfileInfo } from "@/components/navbar/login-logout-discord.client";

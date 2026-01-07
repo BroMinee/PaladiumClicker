@@ -3,7 +3,7 @@ import "server-only";
 import { checkAnswerPalaAnimationType, KeyDownTimestampType } from "@/types";
 import { fetchPostWithHeader, fetchWithHeader } from "@/lib/api/misc";
 import { API_PALATRACKER } from "@/lib/constants";
-import { isAuthenticate } from "@/lib/api/apiServerAction";
+import { isAuthenticate } from "@/lib/api/api-server-action.server";
 
 /**
  * Fetches a new Pala-Animation question from the API.

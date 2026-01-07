@@ -1,8 +1,8 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import { usePlayerInfoStore } from "@/stores/use-player-info-store";
-import { getPlayerInfoAction } from "@/lib/api/apiServerAction";
-import { LoadingData } from "@/components/LoadingData";
+import { getPlayerInfoAction } from "@/lib/api/api-server-action.server";
+import { LoadingData } from "@/components/loading-data";
 import { useSettingsStore } from "@/stores/use-settings-store";
 import { reloadProfilNeeded } from "@/lib/misc";
 import { toast } from "sonner";

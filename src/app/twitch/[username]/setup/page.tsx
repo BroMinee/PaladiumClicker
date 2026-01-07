@@ -1,6 +1,6 @@
 import React from "react";
 import { ProfileFetcherWrapper } from "@/components/profile-fetcher.client";
-import { TwitchOverlayConfig } from "@/components/Twitch/TwitchOverlayConfig";
+import { TwitchOverlayConfig } from "@/components/twitch/twitch-overlay-config.client";
 
 /**
  * Generate Metadata

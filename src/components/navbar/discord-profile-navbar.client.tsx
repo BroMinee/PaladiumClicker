@@ -2,7 +2,7 @@
 
 import { useProfileStore } from "@/stores/use-profile-store";
 import { Button } from "@/components/ui/button";
-import { DiscordProfilPicture } from "../Account/discord-profil-picture.client";
+import { DiscordProfilPicture } from "../account/discord-profil-picture.client";
 
 /**
  * Displays the logged-in user's profile information in the navbar such as the image, the username...

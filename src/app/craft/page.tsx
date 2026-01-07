@@ -1,8 +1,8 @@
 import "server-only";
-import { CraftingHelperPage } from "@/components/craft1/craft-recipe.client";
-import { getAllItems, getCraftRecipe } from "@/lib/api/apiPalaTracker";
+import { CraftingHelperPage } from "@/components/craft/craft-recipe.client";
+import { getAllItems, getCraftRecipe } from "@/lib/api/api-pala-tracker.server";
 import { OptionType, searchParamsCraftPage } from "@/types";
-import { SetCraftingState } from "@/components/craft1/set-crafting-state";
+import { SetCraftingState } from "@/components/craft/set-crafting-state";
 import { SetItemsStats } from "@/components/shared/set-items-state.client";
 
 /**

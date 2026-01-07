@@ -1,5 +1,5 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle, CardTitleH1 } from "@/components/ui/card";
-import { GradientText } from "@/components/shared/GradientText";
+import { GradientText } from "@/components/shared/gradient-text";
 import { constants } from "@/lib/constants";
 import React from "react";
 

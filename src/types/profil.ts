@@ -1,4 +1,4 @@
-import { User } from "./internal_db";
+import { User } from "./internal-db";
 
 export type FriendInfo = {
   uuid: string,
@@ -60,14 +60,6 @@ type PetSkillInfo = {
   id: string,
   lastChange: number,
   nextUse: number,
-}
-
-export enum ProfilSectionEnum {
-  "Home" = "Home",
-  "Classement" = "Classement",
-  "Market" = "Market",
-  "Pet/Monture" = "Pet/Monture",
-  "Achievements" = "Achievements",
 }
 
 export type ModelName =

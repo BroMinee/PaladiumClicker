@@ -1,4 +1,4 @@
-import { SelectedElementConfig } from "@/components/Twitch/TwitchOverlayConfig";
+import { SelectedElementConfig } from "@/components/twitch/twitch-overlay-config.client";
 import { AdminShopItem, LevelPreconditions, MetierKey, NavBarCategory } from "@/types";
 
 const version = 1;

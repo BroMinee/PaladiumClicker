@@ -3,7 +3,7 @@ export * from "./clicker";
 export * from "./craft";
 export * from "./faction";
 export * from "./giveaway";
-export * from "./internal_db";
+export * from "./internal-db";
 export * from "./market";
 export * from "./navbar";
 export * from "./pala-animation";

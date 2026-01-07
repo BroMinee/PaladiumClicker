@@ -2,7 +2,7 @@ export type Achievement = {
   id: string,
   progress: number,
   completed: boolean,
-  category: CategoryEnum,
+  category: AchievementCategory,
   name: string,
   description: string,
   amount: number,
@@ -11,12 +11,10 @@ export type Achievement = {
   subAchievements: Achievement[]
 }
 
-export enum CategoryEnum {
-  "HOW_TO_START" = "HOW_TO_START",
-  "JOBS" = "JOBS",
-  "FACTION" = "FACTION",
-  "ATTACK_DEFENSE" = "ATTACK_DEFENSE",
-  "ECONOMY" = "ECONOMY",
-  "ALLIANCE" = "ALLIANCE",
-  "OTHERS" = "OTHERS",
-}
+export type AchievementCategory = "HOW_TO_START" |
+  "JOBS" |
+  "FACTION" |
+  "ATTACK_DEFENSE" |
+  "ECONOMY" |
+  "ALLIANCE" |
+  "OTHERS";

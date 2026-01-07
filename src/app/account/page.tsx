@@ -1,10 +1,10 @@
 import React from "react";
-import { AuthForceWrapper } from "@/components/Auth/AuthForceWrapper";
+import { AuthForceWrapper } from "@/components/auth/auth-force-wrapper.server";
 import { constants } from "@/lib/constants";
 import { PageWeb } from "@/app/webhook/page";
 import { Card } from "@/components/ui/card";
-import { AccountDetail } from "@/components/Account/AccountDetail";
-import { BestPalaAnimationTime } from "@/components/Account/BestPalaAnimationTime";
+import { AccountDetail } from "@/components/account/account-detail.client";
+import { BestPalaAnimationTime } from "@/components/account/best-pala-animation-time.client";
 
 /**
  * Generate Metadata

@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetHeader, SheetTrigger } from "@/components/ui/sheet";
 import { FaBars, FaCalculator, FaClipboardList, FaKey, FaShoppingBasket } from "react-icons/fa";
 import { constants } from "@/lib/constants";
-import { LogoClient } from "@/components/ui/logoClient";
+import { LogoClient } from "@/components/ui/logo-client.client";
 import LinkClient, {
   NavbarCategoryDisplay,
   NotificationWebSite
@@ -12,7 +12,7 @@ import { PiRankingBold } from "react-icons/pi";
 import { IoMdInformationCircleOutline, IoMdStopwatch } from "react-icons/io";
 import React from "react";
 import { HiOutlineStatusOnline } from "react-icons/hi";
-import { GradientText } from "@/components/shared/GradientText";
+import { GradientText } from "@/components/shared/gradient-text";
 import { NavBarProfilInfo } from "@/components/navbar/navbar-profil-info.client";
 import { MdOutlineWebhook } from "react-icons/md";
 import { Hammer, ListChevronsUpDown, MousePointer2, User } from "lucide-react";

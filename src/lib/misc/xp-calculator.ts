@@ -1,6 +1,5 @@
-import { searchParamsXpBonusPage } from "@/components/Xp-Calculator/XpCalculator";
 import { constants } from "@/lib/constants";
-import { MetierKey, PlayerInfo, PlayerRank } from "@/types";
+import { MetierKey, PlayerRank } from "@/types";
 
 /**
  * Calculates the experience coefficient for a given level and current XP.
@@ -48,23 +47,6 @@ export const getColorByMetierName = (name: MetierKey) => {
 
   return { color, bgColor };
 };
-
-/**
- * Calculates the XP needed for a player to reach a target level in a specific job.
- * @param playerInfo The player's information containing current XP and levels.
- * @param searchParams The search parameters specifying the target job and level.
- */
-export function getXpDiff(playerInfo: PlayerInfo | null, searchParams: searchParamsXpBonusPage) {
-  if (!playerInfo || !playerInfo?.metier || searchParams.level === undefined || !searchParams.metier) {
-    return 0;
-  }
-  const higherLevel = searchParams.level;
-  const res = getTotalXPForLevel(higherLevel) - playerInfo.metier[searchParams.metier as MetierKey].xp;
-  if (res < 0) {
-    return playerInfo.metier[searchParams.metier as MetierKey].level === 100 ? 0 : 0;
-  }
-  return res;
-}
 
 /**
  * Returns the total cumulative XP required to reach a given level.

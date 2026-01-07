@@ -5,7 +5,6 @@ import { LoadingSpinner } from "@/components/ui/loading-spinner";
 import Image from "next/image";
 import { ClickableLink } from "@/components/ui/clickable-link";
 import { generateProfilUrl } from "@/lib/misc";
-import { ProfilSectionEnum } from "@/types";
 
 /**
  * Display the player friend list
@@ -22,7 +21,7 @@ export function FriendsSection() {
     <div className="grid grid-cols-4 sm:grid-cols-6 lg:grid-cols-8 gap-4">
       {playerInfo.friends.data.map((friend) => (
         <ClickableLink
-          href={generateProfilUrl(friend.name, ProfilSectionEnum.Home)}
+          href={generateProfilUrl(friend.name)}
           key={friend.name}
           className="flex flex-col items-center text-center"
         >

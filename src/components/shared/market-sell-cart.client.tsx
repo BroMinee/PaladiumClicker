@@ -1,13 +1,13 @@
 import { useItemsStore } from "@/stores/use-items-store";
 import { usePlayerInfoStore } from "@/stores/use-player-info-store";
-import { AhItemType, MarketItemOffer, OptionType, ProfilSectionEnum } from "@/types";
+import { AhItemType, MarketItemOffer, OptionType } from "@/types";
 import { useState, useEffect } from "react";
 import { ClickableLink } from "@/components/ui/clickable-link";
 import { LoadingSpinner } from "@/components/ui/loading-spinner";
 import { UnOptimizedImage } from "@/components/ui/image-loading";
 import { generateAhShopUrl, generateProfilUrl, safeJoinPaths } from "@/lib/misc";
 import { constants } from "@/lib/constants";
-import { getPlayerUsernameFromUUID } from "@/lib/api/apiClient";
+import { getPlayerUsernameFromUUID } from "@/lib/api/api-cient.client";
 
 interface BaseSaleCardProps {
   item?: OptionType;
@@ -192,7 +192,7 @@ export function MarketOfferCard({ offer, itemName }: { offer: MarketItemOffer, i
       itemName={offer.name}
       isRenamed={offer.renamed}
       isLoading={false}
-      url={generateProfilUrl(username, ProfilSectionEnum.Home)}
+      url={generateProfilUrl(username)}
     />
   );
 }

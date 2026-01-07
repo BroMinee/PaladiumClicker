@@ -16,18 +16,6 @@ export type CraftingRecipeType =
     count: number
   }
 
-export type CraftingRecipeKey = keyof Pick<CraftingRecipeType,
-  "slot1" |
-  "slot2" |
-  "slot3" |
-  "slot4" |
-  "slot5" |
-  "slot6" |
-  "slot7" |
-  "slot8" |
-  "slot9"
->;
-
 export type NodeType = OptionType & { count: number } & { checked: boolean }
 
 export type Tree<T> = {

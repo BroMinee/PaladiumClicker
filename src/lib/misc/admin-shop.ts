@@ -1,4 +1,4 @@
-import { AdminShopItem, AhItemType, MarketItemOffer } from "@/types";
+import { AdminShopItem } from "@/types";
 import { constants } from "@/lib/constants";
 
 /**
@@ -43,27 +43,6 @@ export function getImagePathFromAdminShopType(item: AdminShopItem): string {
   }
 
   return `/AH_img/${item.replaceAll("-", "_")}.webp`;
-}
-
-/**
- * Converts an AhItemType object to a MarketItemOffer object for display in the market.
- * @param item The AhItemType object.
- * @param seller The UUID of the seller.
- */
-export function convertAhItemTypeToMarketItemOffer(item: AhItemType, seller: string): MarketItemOffer {
-  return {
-    seller: seller, // uuid of the seller
-    name: item.name, // Display name of the item
-    renamed: item.renamed,
-    quantity: item.item.quantity, // The remaining quantity of the item currenlty listed
-    price: item.price, // The price of the item in ($)
-    pricePb: item.pricePb, // The price of the item in pb
-    durability: item.durability, // Durability of the item
-    skin: item.skin, // Skin ID of the item
-    slot: item.slot, // Slot of the item in the market
-    createdAt: item.createdAt, // Date of the listing
-    expireAt: item.expireAt, // Date of the expiration of the listing
-  };
 }
 
 /**

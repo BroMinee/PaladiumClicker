@@ -12,14 +12,6 @@ export type EventDB =
     event_description: string,
     participants: number,
   }
-export type UserTable = {
-  id: number,
-  uuid: string,
-  username: string,
-  last_updated: string,
-  created_at: string,
-  count: number,
-}
 
 export type Reward = {
   description: string,

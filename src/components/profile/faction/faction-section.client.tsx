@@ -2,7 +2,7 @@
 import { PlayerFactionName } from "../player-faction.client";
 import { useEffect, useState } from "react";
 import { PaladiumFactionLeaderboard } from "@/types";
-import { getFactionLeaderboardAction } from "@/lib/api/apiServerAction";
+import { getFactionLeaderboardAction } from "@/lib/api/api-server-action.server";
 import { usePlayerInfoStore } from "@/stores/use-player-info-store";
 import { LoadingSpinner } from "@/components/ui/loading-spinner";
 import { intToHex } from "@/lib/misc";

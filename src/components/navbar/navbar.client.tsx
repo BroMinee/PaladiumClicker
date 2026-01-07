@@ -9,16 +9,8 @@ import { constants, PathValid } from "@/lib/constants";
 import { FaAngleDown } from "react-icons/fa";
 import { useNotificationStore } from "@/stores/use-notifications-store";
 import { HoverText } from "@/components/ui/hovertext";
-import {
-  getCurrentEvent,
-  getCurrentEventNotRegistered,
-  getEventNotClaimed,
-  getNotificationWebSite
-} from "@/lib/api/apiServerAction";
-import { PopupCurrentEvent } from "@/components/Events/PopupCurrentEvent";
-import { Event } from "@/types";
-import { PopupRewardEvent } from "@/components/Events/PopupRewardEvent";
-import { PopupNoRewardEvent } from "@/components/Events/PopupNoRewardEvent";
+
+import { getNotificationWebSite } from "@/lib/api/api-server-action.server";
 import { NavBarCategory, NotificationWebSiteResponse } from "@/types";
 import { useNavbarStore } from "@/stores/use-navbar-store";
 
@@ -190,16 +182,6 @@ export function NavbarCategoryDisplay({ name, children }: {
       }, 0);
 
       setNewNotification(newNotification);
-
-      if (name === "Informations et gestion" && playerInfo) {
-        getCurrentEventNotRegistered(playerInfo.uuid).then((event) => {
-          if (event) {
-            setNewNotification(newNotification + 1);
-          }
-        }).catch((e) => {
-          console.error(e);
-        });
-      }
     }
   }, [mounted, playerInfo, last_visited, name, subLinks]);
 
@@ -265,117 +247,6 @@ function hasNewNotification(last_visited: { [T in PathValid]: number }, path: Pa
     return [true, constants.notificationPath.get(path)![1]];
   }
   return [false, ""];
-}
-
-/**
- * Renders a navbar element for the giveaway link that shows different popups based on the user's event status.
- *
- * Attempt to do something smart but only managed to prove that I am not smart
- * @deprecated Not working properly probably needs changes in the future
- */
-export function GiveawayFakeLink({ children }: {
-  children: React.ReactNode
-}) {
-  const { data: playerInfo } = usePlayerInfoStore();
-  const [mounted, setMounted] = useState(false);
-  const [newNotification, setNewNotification] = useState(false);
-  const [newNotificationText, setNewNotificationText] = useState("");
-  const [event, setEvent] = useState<Event | null>(null);
-  /*
-   *   event !== null -> PopUpCurrentEvent (could be already registered)
-   *   event === null && description !== "" -> PopUpRewardEvent (because has win)
-   *   event === null && description === "" -> PopUpRewardEvent (not win recently)
-   * */
-
-  useEffect(() => {
-    if (!playerInfo) {
-      return;
-    }
-
-    try {
-      getCurrentEvent().then((event_0) => {
-        if (event_0) {
-          setEvent(event_0);
-        }
-        getCurrentEventNotRegistered(playerInfo.uuid).then((event) => {
-          if (event) {
-            setNewNotification(true);
-            setNewNotificationText(event.event_name);
-            setEvent(event);
-          } else if (event_0 === null) {
-            // No event opened to register
-            // check for rewards
-            getEventNotClaimed(playerInfo.uuid).then(description => {
-              if (description === "Not winner") {
-                setNewNotification(false);
-                setNewNotificationText(description);
-              } else {
-                setNewNotification(true);
-                setNewNotificationText(description);
-              }
-            });
-          }
-        });
-      });
-    } catch (e) {
-      console.error(e);
-    }
-    setMounted(true);
-  }, [playerInfo]);
-
-  if (!mounted) {
-    return (
-      <RenderEvent newNotification={false}>
-        {children}
-      </RenderEvent>
-    );
-  }
-
-  const hoverElement: ReactNode = (
-    <div className="bg-primary rounded-md p-2 font-bold">{newNotificationText}</div>
-  );
-
-  if (event) {
-    // there is an event and the player is not registered
-    if (newNotificationText === "") {
-      return <PopupCurrentEvent event={event} alreadyRegistered={!newNotification}>{children}</PopupCurrentEvent>;
-    }
-    return <HoverText text={hoverElement}>
-      <PopupCurrentEvent event={event} alreadyRegistered={!newNotification}>{children}</PopupCurrentEvent>
-    </HoverText>;
-  } else {
-    if (newNotificationText !== "Not winner" && newNotificationText !== "") {
-      // You have won a prize
-      return <HoverText text={hoverElement}>
-        <PopupRewardEvent winningPrice={newNotificationText}>{children}</PopupRewardEvent>
-      </HoverText>;
-    } else {
-      // You have NOT won a prize
-      return <PopupNoRewardEvent>{children}</PopupNoRewardEvent>;
-    }
-  }
-}
-
-/**
- * Renders a clickable giveaway event element with an optional notification badge.
- *
- * @param newNotification - Whether to show a notification badge for the event.
- * @param children - The content to display inside the giveaway element (e.g., icon or avatar).
- */
-export function RenderEvent({ newNotification, children }: { newNotification: boolean, children: React.ReactNode }) {
-  return <div
-    className="font-medium flex justify-start items-center space-x-6 focus:bg-secondary focus: hover:bg-secondary text-card-foreground rounded px-3 py-2 w-56">
-    {children}
-    <p className="text-base leading-4 flex-grow text-left">GiveAway</p>
-    {newNotification &&
-      <div className="relative inline-block bg-green-400">
-        <span className="animate-ping absolute right-0 w-6 h-6 bg-red-400 opacity-75 rounded-md"
-          style={{ top: "-18px", right: "-10px" }}></span>
-        <span
-          className="absolute right-0 w-6 h-6 bg-red-500 rounded-md text-center"
-          style={{ top: "-18px", right: "-10px" }}>1</span>
-      </div>}
-  </div>;
 }
 
 /**

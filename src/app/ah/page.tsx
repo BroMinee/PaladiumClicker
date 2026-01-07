@@ -3,7 +3,7 @@
 import MarketPage from "@/components/ah/market.client";
 import { SetMarketState } from "@/components/ah/set-market-state";
 import { SetItemsStats } from "@/components/shared/set-items-state.client";
-import { getAllItems } from "@/lib/api/apiPalaTracker";
+import { getAllItems } from "@/lib/api/api-pala-tracker.server";
 import { OptionType, searchParamsAhPage } from "@/types";
 
 /**

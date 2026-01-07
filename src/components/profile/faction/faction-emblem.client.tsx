@@ -1,6 +1,6 @@
 "use client";
-import { Emblem } from "@/components/Faction/Emblem";
-import { LoadingData } from "@/components/LoadingData";
+import { Emblem } from "@/components/faction/emblem";
+import { LoadingData } from "@/components/loading-data";
 import { cn } from "@/lib/utils";
 import { usePlayerInfoStore } from "@/stores/use-player-info-store";
 import { Suspense } from "react";

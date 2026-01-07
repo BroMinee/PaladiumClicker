@@ -128,14 +128,6 @@ export type bestPurchaseInfoDetailed =
     price: number
   }
 
-export type bestPurchaseInfoDetailedDebug =
-  bestPurchaseInfo &
-  {
-    timeToBuy: number,
-    newRps: number,
-    price: number
-  }
-
 export type buildingPathType =
   "building_upgrade"
   | "category_upgrade"

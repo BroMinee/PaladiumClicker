@@ -1,8 +1,8 @@
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
-import { WebHookSelectorClientItem } from "@/components/WebHooks/WebHookClientSelector";
-import { WebHookInputClientItem } from "@/components/WebHooks/WebHookInputClient";
+import { WebHookSelectorClientItem } from "@/components/webHooks/webhook-client-selector.client";
+import { WebHookInputClientItem } from "@/components/webHooks/webhook-input.client";
 import React from "react";
-import { getProfileFromCookies } from "@/lib/api/apiPalaTracker";
+import { getProfileFromCookies } from "@/lib/api/api-pala-tracker.server";
 
 /**
  * [Login callback page](https://palatracker.bromine.fr/login/callback)

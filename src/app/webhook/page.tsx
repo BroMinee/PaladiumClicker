@@ -1,9 +1,9 @@
 import React from "react";
-import { AuthForceWrapper } from "@/components/Auth/AuthForceWrapper";
-import { getWebHookDiscordFromCookies, getWebHookFromCookies } from "@/lib/api/apiPalaTracker";
+import { AuthForceWrapper } from "@/components/auth/auth-force-wrapper.server";
+import { getWebHookDiscordFromCookies, getWebHookFromCookies } from "@/lib/api/api-pala-tracker.server";
 import { constants } from "@/lib/constants";
-import { SetWebhookStore } from "@/components/webhook1/set-webhook-store.client";
-import { DashboardRefonteMultipleChannels } from "@/components/webhook1/dashboard.client";
+import { SetWebhookStore } from "@/components/webhook/set-webhook-store.client";
+import { DashboardRefonteMultipleChannels } from "@/components/webhook/dashboard.client";
 import { PageHeader, PageHeaderDescription, PageHeaderHeading } from "@/components/ui/page";
 import { textFormatting } from "@/lib/misc";
 
