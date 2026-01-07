@@ -1,7 +1,7 @@
 "use client";
 
 import { constants } from "@/lib/constants";
-import { calculateXpNeeded, getBonusRank, getTotalXPForLevel, prettyJobName } from "@/lib/misc";
+import { calculateXpNeeded, getBonusRank, getTotalXPForLevel, prettyJobName, textFormatting } from "@/lib/misc";
 import React, { useState, useMemo, useEffect } from "react";
 import { usePlayerInfoStore } from "@/stores/use-player-info-store";
 import { LoadingSpinner } from "@/components/ui/loading-spinner";
@@ -14,8 +14,8 @@ import { FortuneSelector } from "./fortune.client";
 import { PreconditionsDisplay } from "./precondition.client";
 import { FarmActionItem } from "./farm-action";
 import { BonusStats } from "./bonus-stats";
-import { XpCalculatorTitlePage } from "./xp-title-page";
 import { MetierSelector } from "./metier.selector.client";
+import { PageHeader, PageHeaderDescription, PageHeaderHeading } from "../ui/page";
 
 const MAX_LEVEL = 9999;
 
@@ -84,8 +84,17 @@ export function XPCalculator() {
   }
 
   return (
-    <XpCalculatorTitlePage>
+    <>
 
+<PageHeader>
+        <PageHeaderHeading>
+          {textFormatting("Calculateur d'°XP°")}
+        </PageHeaderHeading>
+        <PageHeaderDescription>
+          {"Calculez l'xp nécessaire pour atteindre le niveau souhaité."}
+        </PageHeaderDescription>
+      </PageHeader>
+      
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-10">
 
         <Card className="lg:col-span-1 space-y-4">
@@ -231,6 +240,6 @@ export function XPCalculator() {
           />
         </div>
       </div>
-    </XpCalculatorTitlePage>
+    </>
   );
 }

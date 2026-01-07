@@ -1,5 +1,7 @@
 import { ClickerPage } from "@/components/clicker/clicker-page";
 import { ProfileFetcherWrapper } from "@/components/profile-fetcher.client";
+import { PageHeader, PageHeaderDescription, PageHeaderHeading } from "@/components/ui/page";
+import { textFormatting } from "@/lib/misc";
 
 /**
  * Generate Metadata
@@ -25,7 +27,14 @@ export default async function ClickerOptimizerPage(props: { params: Promise<{ us
   const params = await props.params;
   return (
     <>
-      <h1 className="text-4xl font-bold mb-2 ">Optimiseur de Clicker</h1>
+      <PageHeader>
+        <PageHeaderHeading>
+          {textFormatting("Optimiseur du °Clicker°")}
+        </PageHeaderHeading>
+        <PageHeaderDescription>
+          {"Optimisez vos achats dans le PalaClicker en fonction de vos métiers, améliorations et bâtiments."}
+        </PageHeaderDescription>
+      </PageHeader>
       <ProfileFetcherWrapper username={params.username}>
         <ClickerPage/>
       </ProfileFetcherWrapper>

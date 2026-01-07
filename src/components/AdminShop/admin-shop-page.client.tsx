@@ -7,11 +7,12 @@ import { Button } from "@/components/ui/button-v2";
 import { cn } from "@/lib/utils";
 import { GroupedSpanContainer } from "@/components/shared/group-span-container";
 import { UnOptimizedImage } from "@/components/ui/image-loading";
-import { adminShopItemToUserFriendlyText, getImagePathFromAdminShopType } from "@/lib/misc";
+import { adminShopItemToUserFriendlyText, getImagePathFromAdminShopType, textFormatting } from "@/lib/misc";
 import { constants } from "@/lib/constants";
 import { getAdminShopHistoryServerAction } from "@/lib/api/apiServerAction";
 import { TimeSelection } from "@/components/shared/time-selection.client";
 import { Card } from "@/components/ui/card";
+import { PageHeader, PageHeaderDescription, PageHeaderHeading } from "../ui/page";
 
 const timeRanges: { key: AdminShopPeriod, label: string }[] = [
   { key: "day", label: "24 heures" },
@@ -54,10 +55,14 @@ export function AdminShopHistoryPage() {
 
   return (
     <>
-
-      <h1 className="text-4xl font-bold mb-4">
-        Historique de l&apos;Admin-Shop
-      </h1>
+    <PageHeader>
+        <PageHeaderHeading>
+          {textFormatting(`Historique de vente à l'Admin-Shop ${currentItem ? ` de °${adminShopItemToUserFriendlyText(currentItem)}°` : ""}`)}
+        </PageHeaderHeading>
+        <PageHeaderDescription>
+          {"Consultez l'historique des prix de vente pour les différents items de l'Admin-Shop."}
+        </PageHeaderDescription>
+      </PageHeader>
 
       <div className="mb-4">
         <label className="block text-sm font-medium mb-2">

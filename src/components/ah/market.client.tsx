@@ -31,7 +31,8 @@ import { Card } from "@/components/ui/card";
 import { MarketOfferCard } from "../shared/market-sell-cart.client";
 import { RenderPressure, RenderPriceVolume } from "../shared/graph-line-renderer.client";
 import { GiStoneCrafting } from "react-icons/gi";
-import { safeJoinPaths } from "@/lib/misc";
+import { safeJoinPaths, textFormatting } from "@/lib/misc";
+import { PageHeader, PageHeaderDescription, PageHeaderHeading } from "../ui/page";
 
 const PLACEHOLDER_ITEM: OptionType = {
   value: "placeholder",
@@ -135,9 +136,17 @@ export default function MarketPage() {
 
   return (
     <>
+      <PageHeader>
+        <PageHeaderHeading>
+          {textFormatting(`Historique de vente au market ${selectedItem ? ` de °${selectedItem.label}°` : ""}`)}
+        </PageHeaderHeading>
+        <PageHeaderDescription>
+          {"Consultez l'historique des prix et des ventes, ainsi que les offres en cours pour n'importe quel objet."}
+        </PageHeaderDescription>
+      </PageHeader>
 
       <h1 className="text-4xl font-bold mb-4">
-        Historique de vente{selectedItem ? ` de ${selectedItem.label}` : ""}
+        
       </h1>
       <Card>
         <>

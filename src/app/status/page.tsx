@@ -3,6 +3,8 @@ import { PlayerConnectionHistory } from "@/components/status/player-connection-h
 import { PlayerCountHistory } from "@/components/status/player-count-history.client";
 import { getPlayerInfo, getPlayerOnlineCount, isApiDown } from "@/lib/api/apiPala";
 import { isMyApiDown } from "@/lib/api/apiPalaTracker";
+import { PageHeader, PageHeaderDescription, PageHeaderHeading } from "@/components/ui/page";
+import { textFormatting } from "@/lib/misc";
 
 /**
  * Generate Metadata
@@ -64,9 +66,14 @@ export async function generateMetadata() {
 export default function StatusPage() {
   return (
     <div className="flex flex-col gap-10">
-      <h1 className="text-4xl font-bold mb-4">
-        Historique du serveur
-      </h1>
+      <PageHeader>
+        <PageHeaderHeading>
+          {textFormatting("Statut des °Services°")}
+        </PageHeaderHeading>
+        <PageHeaderDescription>
+          {"Consultez l'historique du nombre de joueurs connectés sur Paladium."}
+        </PageHeaderDescription>
+      </PageHeader>
 
       <PlayerConnectionHistory/>
       <PlayerCountHistory/>

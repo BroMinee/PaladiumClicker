@@ -4,6 +4,8 @@ import { getWebHookDiscordFromCookies, getWebHookFromCookies } from "@/lib/api/a
 import { constants } from "@/lib/constants";
 import { SetWebhookStore } from "@/components/webhook1/set-webhook-store.client";
 import { DashboardRefonteMultipleChannels } from "@/components/webhook1/dashboard.client";
+import { PageHeader, PageHeaderDescription, PageHeaderHeading } from "@/components/ui/page";
+import { textFormatting } from "@/lib/misc";
 
 /**
  * Generate Metadata
@@ -28,6 +30,14 @@ export async function generateMetadata() {
 export default async function Page() {
   return (
     <AuthForceWrapper url={`${constants.webhooksPath}/login`}>
+      <PageHeader>
+        <PageHeaderHeading>
+          {textFormatting("Alertes Webhook °Discord°")}
+        </PageHeaderHeading>
+        <PageHeaderDescription>
+          {"Définissez des alertes pour recevoir des notifications Discord en temps réel."}
+        </PageHeaderDescription>
+      </PageHeader>
       <PageWeb/>
     </AuthForceWrapper>
   );

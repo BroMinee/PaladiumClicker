@@ -5,10 +5,11 @@ import Link from "next/link";
 import gsap from "gsap";
 import { useCraftOptimizerStore } from "@/stores/use-craft-store";
 import { CraftPrice, CraftSectionEnum } from "@/types";
-import { formatPrice, generateCraftUrl, parseMessageCraftPrice } from "@/lib/misc";
+import { formatPrice, generateCraftUrl, parseMessageCraftPrice, textFormatting } from "@/lib/misc";
 import { API_PALATRACKER_WS } from "@/lib/constants";
 import { UnOptimizedImage } from "@/components/ui/image-loading";
 import { Card } from "@/components/ui/card";
+import { PageHeader, PageHeaderDescription, PageHeaderHeading } from "@/components/ui/page";
 
 type SortMode = "profit" | "margin" | "speed" | "score";
 
@@ -257,14 +258,15 @@ export default function CraftOptimizerDisplay() {
 
   return (
       <>
-        <div className="flex flex-col items-center text-center space-y-4 mb-12">
-          <h1 className="text-4xl md:text-5xl font-extrabold text-foreground tracking-tight">
-            Optimiseur de <span className="bg-clip-text text-transparent bg-gradient-to-tr from-primary to-primary-darker">Craft</span>
-          </h1>
-          <p className="text-secondary-foreground max-w-2xl text-lg leading-relaxed">
-            Analysez la rentabilité en temps semi-réel. Données mises à jour régulièrement.
-          </p>
-        </div>
+      <PageHeader>
+        <PageHeaderHeading>
+          {textFormatting("Optimiseur de °Craft°")}
+        </PageHeaderHeading>
+        <PageHeaderDescription>
+          Analysez la rentabilité en temps semi-réel. Données mises à jour régulièrement.
+        </PageHeaderDescription>
+      </PageHeader>
+
 
         <div className="sticky top-20 z-40 mb-8 -mx-4 px-4 md:mx-0 md:px-0">
           <Card className="mx-auto max-w-4xl p-2 backdrop-blur-xl border-border bg-card/80 flex flex-col md:flex-row gap-2">

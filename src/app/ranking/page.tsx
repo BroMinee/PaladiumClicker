@@ -3,7 +3,8 @@ import React from "react";
 import { RankingSectionSelector } from "@/components/ranking/inputs.clients";
 import { searchParamsRankingPage } from "@/components/ranking/RankingSelector";
 import { RankingType } from "@/types";
-import { getImagePathFromRankingType, rankingTypeToUserFriendlyText } from "@/lib/misc";
+import { getImagePathFromRankingType, rankingTypeToUserFriendlyText, textFormatting } from "@/lib/misc";
+import { PageHeader, PageHeaderDescription, PageHeaderHeading } from "@/components/ui/page";
 
 /**
  * Generate Metadata
@@ -45,7 +46,14 @@ export async function generateMetadata(props: { searchParams: Promise<searchPara
 export default function LeaderboardPage() {
   return (
     <>
-      <h1 className="text-4xl font-bold mb-4">Classements</h1>
+    <PageHeader>
+        <PageHeaderHeading>
+          {textFormatting('°Classements°')}
+        </PageHeaderHeading>
+        <PageHeaderDescription>
+          {"Consultez les classements des meilleurs joueurs Paladium depuis le début de la saison."}
+        </PageHeaderDescription>
+      </PageHeader>
       <RankingSectionSelector/>
     </>
   );

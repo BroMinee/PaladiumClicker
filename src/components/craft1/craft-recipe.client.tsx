@@ -5,7 +5,7 @@ import Image from "next/image";
 import { CraftingArrow } from "@/components/shared/CraftingArrow.client";
 import { LoadingSpinner } from "@/components/ui/loading-spinner";
 
-import { adaptPlurial, generateCraftUrl } from "@/lib/misc";
+import { adaptPlurial, generateCraftUrl, textFormatting } from "@/lib/misc";
 import { useCraftRecipeStore } from "@/stores/use-craft-store";
 import { useRouter } from "next/navigation";
 import { cn } from "@/lib/utils";
@@ -13,6 +13,7 @@ import { Card } from "@/components/ui/card";
 import { ClickableLink } from "@/components/ui/clickable-link";
 import { useItemsStore } from "@/stores/use-items-store";
 import { Button } from "@/components/ui/button-v2";
+import { PageHeader, PageHeaderDescription, PageHeaderHeading } from "../ui/page";
 
 const IconSearch = () => <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5"><path strokeLinecap="round" strokeLinejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" /></svg>;
 const IconChevronDown = ({ className }: { className: string }) => <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className={cn("w-4 h-4", className)}><path strokeLinecap="round" strokeLinejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" /></svg>;
@@ -152,7 +153,15 @@ export function CraftingHelperPage() {
 
   return (
     <>
-      <h1 className="text-4xl font-bold mb-8">Aide au Craft</h1>
+      <PageHeader>
+        <PageHeaderHeading>
+          {textFormatting("Calculateur de °Craft°")}
+        </PageHeaderHeading>
+        <PageHeaderDescription>
+          {"Calcul les ressources nécessaires et génère l'arbre de fabrication."}
+        </PageHeaderDescription>
+      </PageHeader>
+
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         <aside className="lg:col-span-1 space-y-6 lg:sticky lg:top-8 self-start">
           <LanguageToggle />
