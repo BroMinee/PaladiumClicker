@@ -35,7 +35,11 @@ export default function RootLayout({
       <head>
         <meta name="theme-color" content="#ff5c00"/>
       </head>
-      <body>{children}</body>
+      <body>
+        <ThemeProviders>
+          {children}
+        </ThemeProviders>
+      </body>
     </html>;
   }
 
