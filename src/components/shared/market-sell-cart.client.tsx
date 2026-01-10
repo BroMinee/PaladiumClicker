@@ -44,7 +44,7 @@ function BaseSaleCard({
 
   const displayLabel = (
     <span>
-      {item?.label} {isRenamed ? ` (${itemName})` : ""}
+      {item?.label ?? itemName} {isRenamed ? ` (${itemName})` : ""}
     </span>
   );
 
