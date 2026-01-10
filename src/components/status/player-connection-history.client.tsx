@@ -107,9 +107,9 @@ export function PlayerConnectionHistory() {
         Historique de connexion
       </h2>
       <TimeSelection selected={currentTimeRangePlayerCount} callback={setCurrentTimeRangePlayerCount} timeRanges={timeRanges}/>
-      <div className="flex flex-row gap-2 w-full h-[500px]">
+      <div className="flex flex-col-reverse md:flex-row gap-2 w-full h-[500px] items-center md:items-start">
         <ChartContainer
-          className="w-[75%]"
+          className="w-full md:w-[75%]"
           data={data}
           margin={{ top: 10, right: 0, bottom: 20, left: 50 }}
           axisConfigs={axes}

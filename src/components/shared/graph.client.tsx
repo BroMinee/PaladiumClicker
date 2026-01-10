@@ -273,7 +273,7 @@ export const ChartContainer = <TX extends AxisDomain, TY extends AxisDomain>({
     <div ref={containerRef} className={cn("w-full h-fit", className)} style={{ position: "relative" }} >
       <Tooltip tooltipData={tooltip} containerWidth={width} />
 
-      <svg ref={svgRef} width={dimensions.width} height={dimensions.height} className="overflow-visible">
+      <svg ref={svgRef} width={dimensions.width} height={dimensions.height} className="overflow-visible w-full">
         <g transform={`translate(${margin.left}, ${margin.top})`}>
 
           {axisConfigs.map(config => (

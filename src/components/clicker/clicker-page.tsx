@@ -21,7 +21,7 @@ export function ClickerPage() {
 
       <div className="space-y-6 sticky top-8 h-fit">
         <BestBuyCard/>
-        <Card className="flex space-x-2">
+        <Card className="flex flex-col gap-3">
           <StatButton/>
         </Card>
 

@@ -19,7 +19,8 @@ export function DashboardRefonteMultipleChannels() {
 
   return (
     <Card>
-      <header className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 bg-[#1a1d24] p-6 rounded-2xl border border-gray-800 ">
+
+      <header className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 bg-[#a8a8a8] dark:bg-[#1a1d24] p-6 rounded-2xl border border-gray-800 ">
         <div className="flex items-center gap-4">
           <DiscordProfilPicture className="w-16 h-16 border-2 border-green-500 shadow-[0_0_15px_rgba(33,194,93,0.7)]" />
           <div>

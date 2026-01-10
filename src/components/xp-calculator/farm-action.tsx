@@ -69,12 +69,12 @@ export const FarmActionItem = ({ item,metier, finalRequiredXp, gradeBonus, total
         </div>
       </div>
 
-      <div className="flex flex-col justify-center">
+      <div className="flex flex-col items-center md:items-start justify-center">
         <span className="text-lg font-medium ">{isFortunable && "~ "}{displayXpItem}</span>
         <span className="text-xs text-gray-500 md:hidden">XP/unité</span>
       </div>
 
-      <div className="flex flex-col justify-center md:pr-10">
+      <div className="flex flex-col items-center md:items-start justify-center md:pr-10">
         <span className="text-lg font-bold text-yellow-300">
           {item.action === constants.SMELT && fortuneBonus !== 0 && "~ "}{displayUnits}
         </span>

@@ -153,7 +153,7 @@ export function XPCalculator() {
           <div>
             <h2 className="text-xl font-semibold mb-4 border-b border-secondary pb-2 text-primary">Objectif XP</h2>
             <div className="space-y-3">
-              <BonusStats label="XP actuelle du niveau" value={formatter.format((playerInfo?.metier[metier].xp ?? 0) - getTotalXPForLevel(startLevel)) + " / " + formatter.format(getTotalXPForLevel(startLevel+1) - getTotalXPForLevel(startLevel)) + " XP"} classNameValue="text-primary" />
+              <BonusStats label="XP actuelle du niveau" value={formatter.format((playerInfo?.metier[metier].xp ?? 0) - getTotalXPForLevel(startLevel)) + " / " + formatter.format(getTotalXPForLevel(startLevel+1) - getTotalXPForLevel(startLevel)) + " XP"} classNameValue="text-primary whitespace-nowrap" />
               <BonusStats label="XP Totale nécessaire" value={formatter.format(requiredXp) + " XP"} classNameValue="text-primary" />
 
               <div className="border-t border-secondary pt-4 mt-4">
@@ -187,14 +187,14 @@ export function XPCalculator() {
                 <BonusStats
                   label={"Multiplicateur total"}
                   value={`x${totalBonusMultiplier.toFixed(3)}`}
-                  classNameValue="text-green-400 font-extrabold text-2xl"
+                  classNameValue="text-green-400 font-extrabold text-xl md:text-2xl"
                   classNameLabel="text-xl font-extrabold text-primary"
                 />
               </div>
             </div>
           </div>
           <div className="mt-6 border-t border-secondary pt-4">
-            <BonusStats label="XP nécessaire après bonus" value={formatter.format(finalRequiredXp) + " XP"} classNameValue="text-primary font-extrabold text-3xl" />
+            <BonusStats label="XP nécessaire après bonus" value={formatter.format(finalRequiredXp) + " XP"} classNameValue="text-primary font-extrabold text-xl sm:text-3xl" />
           </div>
         </Card>
 

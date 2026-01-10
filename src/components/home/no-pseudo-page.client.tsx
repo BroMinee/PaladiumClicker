@@ -1,9 +1,8 @@
 "use client";
 
 import { ReactNode } from "react";
-import { ExternalLink, MousePointer2, Hammer, ChevronRight, User } from "lucide-react";
+import { ExternalLink, MousePointer2, Hammer, ChevronRight, User, ListChevronsUpDown } from "lucide-react";
 import Link from "next/link";
-import { GrOptimize } from "react-icons/gr";
 import Image from "next/image";
 import useEmblaCarousel from "embla-carousel-react";
 import AutoScroll from "embla-carousel-auto-scroll";
@@ -17,6 +16,7 @@ import { SearchPlayerInput } from "@/components/home/search-player.client";
 import { textFormatting } from "@/lib/misc";
 import { Card } from "../ui/card";
 import { UnOptimizedImage } from "../ui/image-loading";
+import { IoMdStopwatch } from "react-icons/io";
 
 export interface Contributor {
   login: string;
@@ -34,16 +34,17 @@ export interface FeatureItem {
 }
 
 const FEATURES: FeatureItem[] = [
-  { id: "clicker", title: constants.links[constants.optimizerClickerPath].label, desc: "Maximisez vos clics coins.", icon: <MousePointer2 size={20} />, image: "/img/Profile/default.png", href: constants.optimizerClickerPath },
-  { id: "profil", title: constants.links[constants.profilPath].label, desc: "Stats & infos joueurs.", icon: <User size={20} />, image: "/img/Profile/default.png", href: constants.profilPath },
+  { id: "clicker", title: constants.links[constants.optimizerClickerPath].label, desc: "Maximisez vos clics coins.", icon: <MousePointer2 size={20} />, image: "/img/Home/clicker-optimizer.jpg", href: constants.optimizerClickerPath },
+  { id: "profil", title: constants.links[constants.profilPath].label, desc: "Stats & infos joueurs.", icon: <User size={20} />, image: "/img/Home/profil.jpg", href: constants.profilPath },
   { id: "market", title: constants.links[constants.ahPath].label, desc: "Prix HDV en temps réel et historique de vente.", icon: <FaShoppingBasket size={20} />, image: "/img/Home/market.jpg", href: constants.ahPath },
-  { id: "adminshop", title: constants.links[constants.adminShopPath].label, desc: "Historique des prix de vente de l'admin shop.", icon: <LuShoppingCart size={20} />, image: "/img/Profile/default.png", href: constants.adminShopPath },
-  { id: "leaderboard", title: constants.links[constants.moneyRanking].label, desc: "Classements Paladium quotidien.", icon: <PiRankingBold size={20} />, image: "/img/Profile/default.png", href: constants.moneyRanking },
-  { id: "crafts-1", title: "Crafts", desc: "Toutes les recettes.", icon: <Hammer size={20} />, image: "/img/Profile/default.png", href: "/craft" },
-  { id: "crafts-2", title: constants.links[constants.craftingCalculatorPath].label, desc: "Optimisation des coûts.", icon: <GrOptimize size={20} />, image: "/img/Profile/default.png", href: constants.craftingCalculatorPath },
-  { id: "calculator", title: constants.links[constants.calculatorXpPath].label, desc: "Calcul d'xp métier nécessaire.", icon: <FaCalculator size={20} />, image: "/img/Profile/default.png", href: constants.calculatorXpPath },
-  { id: "webhook", title: constants.links[constants.webhooksPath].label, desc: "Notifications discord en direct.", icon: <MdOutlineWebhook size={20} />, image: "/img/Profile/default.png", href: constants.webhooksPath },
-  { id: "status", title: constants.links[constants.statusPath].label, desc: "Graphiques de l'historique de joueurs en ligne.", icon: <HiOutlineStatusOnline size={20} />, image: "/img/Profile/default.png", href: constants.statusPath },
+  { id: "adminshop", title: constants.links[constants.adminShopPath].label, desc: "Historique des prix de vente de l'admin shop.", icon: <LuShoppingCart size={20} />, image: "/img/Home/admin-shop.jpg", href: constants.adminShopPath },
+  { id: "leaderboard", title: constants.links[constants.moneyRanking].label, desc: "Classements Paladium quotidien.", icon: <PiRankingBold size={20} />, image: "/img/Home/ranking.jpg", href: constants.moneyRanking },
+  { id: "crafts-1", title: constants.links[constants.craftingCalculatorPath].label, desc: "Calcul les ressouces nécessaires pour un craft.", icon: <Hammer size={20} />, image: "/img/Home/craft-calculator.jpg", href: constants.craftingCalculatorPath },
+  { id: "crafts-2", title: constants.links[constants.craftingOptimizerPath].label, desc: "Optimise les crafts les plus rentables.", icon: <ListChevronsUpDown size={20} />, image: "/img/Home/craft-optimizer.jpg", href: constants.craftingOptimizerPath },
+  { id: "calculator", title: constants.links[constants.calculatorXpPath].label, desc: "Calcul d'xp métier nécessaire.", icon: <FaCalculator size={20} />, image: "/img/Home/xp-calculator.jpg", href: constants.calculatorXpPath },
+  { id: "webhook", title: constants.links[constants.webhooksPath].label, desc: "Notifications discord en temps semi-réel.", icon: <MdOutlineWebhook size={20} />, image: "/img/Home/webhook.jpg", href: constants.webhooksPath },
+  { id: "pala-animation", title: constants.links[constants.palaAnimationPath].label, desc: "Entraînement aux Pala-Animations", icon: <IoMdStopwatch size={20} />, image: "/img/Home/pala-animation.jpg", href: constants.palaAnimationPath },
+  { id: "status", title: constants.links[constants.statusPath].label, desc: "Graphiques de l'historique des joueurs en ligne.", icon: <HiOutlineStatusOnline size={20} />, image: "/img/Home/status.jpg", href: constants.statusPath },
   { id: "discord", title: "Nous Rejoindre", desc: "Communauté, Support & Actualités.", icon: <FaDiscord size={20} />, image: "/img/Profile/default.png", href: constants.discord.url },
 ];
 

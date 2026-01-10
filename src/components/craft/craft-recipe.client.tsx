@@ -243,7 +243,7 @@ export function SearchBar({ searchTerm, setSearchTerm, isSearchFocused, setIsSea
 
   return (
     <Card>
-      <label htmlFor="item-search" className="flex flex-row justify-between items-center text-sm font-medium mb-2">
+      <label htmlFor="item-search" className="flex flex-row justify-between items-center text-sm font-medium mb-2 gap-2 md:gap-0">
         <span>Rechercher un item</span>
         <LanguageToggle />
       </label>
@@ -407,7 +407,7 @@ function SummaryList({ title, onToggleItem, filterMode }: SummaryListProps) {
                 </div>
 
                 <span className={cn(
-                  "font-bold text-sm min-w-[2ch] text-right whitespace-nowrap ml-2",
+                  "font-bold text-sm text-right ml-2",
                   isCompleted ? "text-green-500" : "text-card-foreground"
                 )}>
                   {isCompleted ? "✔" : formatStack(remaining)}

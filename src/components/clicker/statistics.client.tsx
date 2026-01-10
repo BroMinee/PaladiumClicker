@@ -155,7 +155,7 @@ export function BatchPurchase() {
     <section className="w-full mb-6">
       <Card
         onClick={() => setIsOpen(!isOpen)}
-        className="cursor-pointer flex justify-between items-center transition-all duration-200 group"
+        className="cursor-pointer flex flex-col md:flex-row justify-between items-center transition-all duration-200 group gap-4"
       >
         <div className="flex items-center gap-3">
           <div className="p-2 bg-primary/10 text-primary rounded-lg group-hover:scale-110 transition-transform">

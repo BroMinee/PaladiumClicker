@@ -154,7 +154,7 @@ export const LineGrad = <TX extends AxisDomain, TY extends number>({
               d={lineGenerator(dataset.stats) || ""}
               fill="none"
               stroke={dataset.color}
-              strokeWidth={3}
+              strokeWidth={1}
               style={{ transition: "d 0.2s ease" }}
             />
           </React.Fragment>

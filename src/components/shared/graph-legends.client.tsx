@@ -29,20 +29,19 @@ export function GraphLegends<Key extends AxisDomain,Value extends AxisDomain>({ 
                 className="w-4 h-4 rounded-full mr-3 flex-shrink-0"
                 style={{ backgroundColor: plt.color, opacity: isHidden ? 0.2 : 1 }}
               />
-              <div className="flex flex-row justify-between items-center w-full">
+              <div className="flex flex-row justify-between items-center w-full mouse-pointer">
                 <span>
                   {plt.name}
                 </span>
-                <Button
+                <div
                   className="p-1 bg-secondary"
-                  variant="outline"
                   onClick={(e) => {
                     e.stopPropagation(); toggleVisibility(plt);
                   }}
                   title={isHidden ? "Afficher la courbe" : "Cacher la courbe"}
                 >
                   {isHidden ? <FaRegEyeSlash /> : <FaRegEye />}
-                </Button>
+                </div>
               </div>
             </>
 

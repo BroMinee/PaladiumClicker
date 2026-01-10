@@ -31,11 +31,11 @@ export function PlayerRank() {
     return <Image src={safeJoinPaths(constants.imgPathProfile, "blackhole.png")} alt={"blackhole.png"}
       width={0}
       height={0}
-      className="h-12 w-fit pixelated rounded-md pixelated" unoptimized />;
+      className="h-12 w-fit rounded-md pixelated" unoptimized />;
   }
 
   return <Image src={imgSrc} alt={rank}
     width={0}
     height={0}
-    className="h-12 w-fit pixelated rounded-md pixelated" unoptimized onError={handleImageError} />;
+    className="h-12 w-fit rounded-md pixelated" unoptimized onError={handleImageError} />;
 }

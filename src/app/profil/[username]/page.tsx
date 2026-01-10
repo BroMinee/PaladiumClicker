@@ -43,14 +43,14 @@ export default async function ProfilePage(
       <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-black/20"></div>
 
       <div className="absolute bottom-0 left-0 p-4 md:p-6 flex items-end space-x-4">
-        <div className="w-24 h-24 md:w-32 md:h-32 rounded-lg bg-secondary overflow-hidden border-4 border-gray-800 ">
+        <div className="shrink-0 w-24 h-24 md:w-32 md:h-32 rounded-lg bg-secondary overflow-hidden border-4 border-gray-800 ">
           <PlayerSkin/>
         </div>
         <div>
           <h1 className="text-3xl md:text-5xl font-bold backdrop-blur-sm rounded drop- px-2 text-left">
             <PlayerUsername/>
           </h1>
-          <div className="flex items-center mt-2 gap-2">
+          <div className="flex md:items-center mt-2 gap-2 flex-col md:flex-row">
             <span
               className="text-xl font-bold backdrop-blur-sm rounded drop- text-center p-1"
             >

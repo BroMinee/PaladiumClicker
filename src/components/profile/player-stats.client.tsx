@@ -60,7 +60,7 @@ function StatCard({ icon, label, value }: { icon: React.JSX.Element, label: stri
       <div className="text-primary">{icon}</div>
       <div>
         <div className="text-sm text-card-foreground">{label}</div>
-        <div className="text-xl font-bold">{value}</div>
+        <div className="text-l md:text-xl font-bold">{value}</div>
       </div>
     </Card>
   );
