@@ -61,7 +61,7 @@ export function SearchPlayerInput({ variant }: { variant: "homepage" | "navbar" 
       const data = await getPlayerInfoAction(username);
       setNewPlayerInfo(data);
       setFetching(false);
-      if (playerInfo?.edited === true && hasDifference(playerInfo, data)) {
+      if (playerInfo !== null && data.username.toLowerCase() === playerInfo.username.toLowerCase() && hasDifference(playerInfo, data)) {
         setIsPopupOpen(true);
       } else {
         handleConfirmReplacement();
