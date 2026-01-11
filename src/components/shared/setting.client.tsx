@@ -22,7 +22,7 @@ import { useEffect } from "react";
  */
 export function Setting() {
 
-  const { settings, setFallingImage, setDefaultProfile } = useSettingsStore();
+  const { settings, setDefaultProfile } = useSettingsStore();
   const { setDefaultProfile: setDefaultProfileLocal, data: playerInfo } = usePlayerInfoStore();
 
   useEffect(() => {
@@ -38,16 +38,9 @@ export function Setting() {
           <IoSettings/>
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent align="end" className="w-56 z-[101]">
+      <DropdownMenuContent align="end" className="w-56 z-[101]" side="top">
         <DropdownMenuLabel>Paramètres</DropdownMenuLabel>
         <DropdownMenuSeparator/>
-        <DropdownMenuItem
-          onSelect={(event) => event.preventDefault()}
-          className="flex items-center justify-between"
-        >
-          <span>Images tombantes</span>
-          <Switch checked={settings.fallingImage} onCheckedChange={setFallingImage}/>
-        </DropdownMenuItem>
         <DropdownMenuItem
           onSelect={(event) => event.preventDefault()}
           className="flex items-center justify-between"
