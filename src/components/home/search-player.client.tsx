@@ -89,7 +89,7 @@ export function SearchPlayerInput({ variant }: { variant: "homepage" | "navbar" 
           <DialogHeader className="px-6">
             <DialogTitle className="text-primary">Confirmer la mise à jour du profil</DialogTitle>
           </DialogHeader>
-          <ScrollArea className="h-[80dvh] px-6 border-t">
+          <ScrollArea className="h-fit max-h-[80dvh] overflow-y-auto px-6 border-t">
             {newPlayerInfo && playerInfo && DisplayDifference({
               oldPlayerInfo: playerInfo,
               newPlayerInfo: newPlayerInfo
