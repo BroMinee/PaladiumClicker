@@ -5,13 +5,14 @@ import { MetierKey, searchParamsXpBonusPage } from "@/types";
 import { usePlayerInfoStore } from "@/stores/use-player-info-store";
 import { useRouter } from "next/navigation";
 import { ChangeEvent, useEffect, useMemo, useState } from "react";
-import debounce from "debounce";
+import { debounce } from "lodash";
 import { cn } from "@/lib/utils";
 
 /**
  * Display an svg outline representing the player current level progression.
  * @param metierKey - The job key used to to display corresponding data
  * @param metierToReach - boolean, if true then the SVG outline is fully filled
+ * @deprecated shouldn't be used elsewhere from twitch layout
  */
 export function MetierOutline({ metierKey, metierToReach = false }: { metierKey: MetierKey, metierToReach?: boolean }) {
 
@@ -40,6 +41,7 @@ export function MetierOutline({ metierKey, metierToReach = false }: { metierKey:
  * @param lvlToReach - I don't remember that that does but it seem important :)
  * @param searchParams - SearchParams
  * @param twitch - Whether to display the UI in Twitch mode (affects level display styling or behavior).
+ * @deprecated shouldn't be used elsewhere from twitch layout
  */
 export function MetierDisplayLvl({ metierKey, lvlToReach, searchParams, twitch = false }:
 {
@@ -95,12 +97,6 @@ export function MetierDisplayLvl({ metierKey, lvlToReach, searchParams, twitch =
     },
     [metierKey, lvlToReach, playerInfo, searchParams, router, decreaseMetierLevel, increaseMetierLevel]
   );
-
-  useEffect(() => {
-    return () => {
-      debouncedRedirect.clear();
-    };
-  }, [debouncedRedirect]);
 
   function onChangeLevel(event: ChangeEvent<HTMLInputElement>) {
     const value = Number(event.target.value);

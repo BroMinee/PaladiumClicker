@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useMemo, useId } from "react";
-import debounce from "debounce";
+import { debounce } from "lodash";
 import { getSimilareUsernames } from "@/lib/api/api-server-action.server";
 import { User } from "@/types";
 import { UnOptimizedImage } from "@/components/ui/image-loading";
