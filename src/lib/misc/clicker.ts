@@ -350,7 +350,7 @@ export const getInitialPlayerInfo = (): PlayerInfo => {
         backgroundColor: -1,
         backgroundId: 0,
         borderColor: -1,
-        forcedTexture: "Wilderness",
+        forcedTexture: "wilderness",
         foregroundColor: -1,
         foregroundId: 0,
         iconBorderColor: -1,
