@@ -1,5 +1,6 @@
 import { cn } from "@/lib/utils";
 import { ReactNode } from "react";
+import Link from "next/link";
 
 /**
  * <a> wrapper that handle hover transition
@@ -8,10 +9,10 @@ import { ReactNode } from "react";
  * @param children children
  */
 export function ClickableLink({ href, className, children }: { href: string,className?: string, children: ReactNode }) {
-  return <a href={href}
+  return <Link href={href}
     rel="noopener noreferrer"
     className={cn("hover:text-orange-700 transform transition-transform ease-in-out hover:scale-125 duration-300", className)}
   >
     {children}
-  </a>;
+  </Link>;
 }
