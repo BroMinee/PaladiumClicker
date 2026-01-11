@@ -208,13 +208,13 @@ export const PlayerSearchInput = ({
             </form>
           </PopoverAnchor>
 
-          <button
-            className="items-center justify-center whitespace-nowrap text-sm font-medium transition-colors duration-300 ease-out motion-reduce:transition-none rounded-sm focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground shadow hover:bg-primary/90 h-9 px-4 py-2 flex flex-row gap-2"
-            type="submit"
-            form={formId}
+          <Button
+            variant="primary"
+            className="items-center justify-center whitespace-nowrap h-9 px-4 py-2 flex flex-row gap-2"
+            onClick={() => onClick(playerInfo?.username ?? "")}
           >
             <span>{submitLabel}</span>
-          </button>
+          </Button>
         </div>
       )}
 
