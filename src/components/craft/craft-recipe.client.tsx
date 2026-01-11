@@ -14,6 +14,7 @@ import { ClickableLink } from "@/components/ui/clickable-link";
 import { useItemsStore } from "@/stores/use-items-store";
 import { Button } from "@/components/ui/button-v2";
 import { PageHeader, PageHeaderDescription, PageHeaderHeading } from "../ui/page";
+import { InputDebounce } from "../shared/input-debounce.client";
 
 const IconSearch = () => <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5"><path strokeLinecap="round" strokeLinejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" /></svg>;
 const IconChevronDown = ({ className }: { className: string }) => <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className={cn("w-4 h-4", className)}><path strokeLinecap="round" strokeLinejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" /></svg>;
@@ -292,22 +293,18 @@ function QuantityInput() {
   const { quantity } = useCraftRecipeStore();
   const { selectedItem } = useItemsStore();
 
-  const handleQuantityChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const newQuantity = Math.max(1, Number(e.target.value));
+  const handleQuantityChange = (e: number) => {
+    const newQuantity = Math.max(1, e);
     router.push(generateCraftUrl(selectedItem?.value ?? "", newQuantity, CraftSectionEnum.recipe));
   };
   return (
     <Card>
-      <label htmlFor="item-quantity" className="block text-sm font-medium mb-2">
-        Quantité désirée
-      </label>
-      <input
-        type="number"
-        id="item-quantity"
+      <InputDebounce
+        label="Quantité désirée"
         value={quantity}
         onChange={handleQuantityChange}
-        min="1"
-        className="w-full bg-background border border-secondary rounded-lg py-2 px-4 font-bold text-center"
+        min={1}
+        debounceTimeInMs={250}
       />
     </Card>
   );
