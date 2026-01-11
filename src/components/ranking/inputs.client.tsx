@@ -1,7 +1,7 @@
 "use client";
 import { AxisConfig, Dataset, RankingType } from "@/types";
 import { GenericSectionTabs, TabData } from "../shared/section.client";
-import { getRankingLeaderboardAction } from "@/lib/api/api-server-action.server";
+import { getRankingLeaderboardAction, getRankingLeaderboardPlayerUsernameAction } from "@/lib/api/api-server-action.server";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { getImagePathFromRankingType, rankingTypeToUserFriendlyText } from "@/lib/misc";
@@ -58,6 +58,7 @@ const color = [
 function FetchLeaderboardData({ rankingType }: { rankingType: RankingType }) {
   const router = useRouter();
   const [data, setData] = useState<Dataset<Date, number>[]>([]);
+  const [addedPlayerUsername, setAddedPlayerUsername] = useState<Set<string>>(new Set());
 
   useEffect(() => {
     setData([]);
@@ -107,10 +108,36 @@ function FetchLeaderboardData({ rankingType }: { rankingType: RankingType }) {
           })
         };
       }));
-    }).catch(() => {
+
+      const topUsernameLowerCase = new Set<string>(e.map(entry => Object.keys(entry)[0].toLocaleLowerCase()));
+      const addedPlayerUsernameLowerCase = new Set<string>(Array.from(addedPlayerUsername).map(e => e.toLocaleLowerCase()));
+
+      Array.from(addedPlayerUsernameLowerCase.difference(topUsernameLowerCase)).forEach((username, index) => {
+        getRankingLeaderboardPlayerUsernameAction(username, rankingType).then(userData => {
+          setData(prevData => {
+            prevData.push({
+              id: userData.at(0)?.username ?? `${Math.random()}`,
+              name: userData.at(0)?.username ?? username,
+              color: color[(prevData.length + index) % color.length],
+              visibility: true,
+              yAxisId: "y-axis",
+              stats: userData.map(e => {
+                return {
+                  x: new Date(e.date),
+                  y: e.value,
+                };
+              })
+            });
+            return [...prevData];
+          });
+        });
+      });
+    }).catch((e) => {
+      console.error(e);
       router.push(`/error?message=${encodeURIComponent("Impossible de récupérer les données du classement sélectionné")}`);
     });
-  }, [rankingType, router]);
+
+  }, [rankingType, router, addedPlayerUsername]);
 
   const axes: AxisConfig[] = [
     { id: "x-axis", position: "bottom", type: "date" },
@@ -132,7 +159,7 @@ function FetchLeaderboardData({ rankingType }: { rankingType: RankingType }) {
       </div>
     </div>
     <div className="mt-6 grid grid-cols-1 lg:grid-cols-3 gap-6">
-      <RankingAddPlayerInput />
+      <RankingAddPlayerInput handleAddPlayer={(username) => setAddedPlayerUsername(prev => new Set(prev).add(username))}/>
 
       <GraphLegends data={data} toggleVisibility={toggleVisibility} handleHighlight={handleHighlight} className="lg:col-span-2"/>
     </div>

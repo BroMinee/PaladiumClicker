@@ -1,23 +1,12 @@
 "use client";
 import { User } from "@/types";
-import { useEffect, useState } from "react";
 import { IoMdSearch } from "react-icons/io";
 import { PlayerSearchInput } from "@/components/shared/player-search-input-client";
 
 /**
  * Component that allows the user to add player to the ranking graph.
  */
-export function RankingAddPlayerInput() {
-  const [addedPlayerUsername, setAddedPlayerUsername] = useState<Set<string>>(new Set());
-
-  useEffect(() => {
-    console.log(addedPlayerUsername);
-  }, [addedPlayerUsername]);
-
-  const handleAddPlayer = (username: string) => {
-    alert("handleAddPlayer is not handle yet");
-    setAddedPlayerUsername(prev => new Set(prev).add(username));
-  };
+export function RankingAddPlayerInput({ handleAddPlayer}: { handleAddPlayer: (username: string) => void }) {
 
   return (
     <div className="lg:col-span-1 bg-card p-4 rounded-lg relative">

@@ -16,7 +16,6 @@ import { LoadingSpinner } from "../ui/loading-spinner";
 
 interface PlayerSearchInputProps {
   onClick: (user: User | string) => void;
-  // Renommage des variantes
   variant?: "default" | "homepage" | "navbar";
   className?: string;
   placeholder?: string;
