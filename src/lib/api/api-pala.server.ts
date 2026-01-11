@@ -495,15 +495,12 @@ const getPlayerPet = async (uuid: string): Promise<PetInfo | null> => {
 export async function getGithubContributors(): Promise<GithubContributor[]> {
   const repos = [
     "https://api.github.com/repos/BroMinee/PaladiumClicker/contributors",
-    "https://api.github.com/repos/BroMineCorp/PaladiumClickerNextJS/contributors",
   ];
 
-  // Optionnel : Utiliser un token pour éviter le rate-limit du CI/CD (Vercel/Github Actions)
   try {
     const results = await Promise.all(
       repos.map(async (url) => {
         try {
-          // Par défaut, fetch dans un Server Component est "force-cache" (Statique)
           const res = await fetch(url);
 
           if (!res.ok) {
@@ -522,11 +519,6 @@ export async function getGithubContributors(): Promise<GithubContributor[]> {
     const contributorsMap = new Map<string, GithubContributor>();
 
     results.flat().forEach((contributor) => {
-      // Filtrer les bots (souvent dependabot[bot])
-      if (contributor.login.includes("[bot]")) {
-        return;
-      }
-
       if (contributorsMap.has(contributor.login)) {
         const existing = contributorsMap.get(contributor.login)!;
         existing.contributions += contributor.contributions;
