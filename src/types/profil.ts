@@ -82,3 +82,9 @@ export type ModelName =
   | "pet_reindeer"
   | "pet_chameleon"
   | "mohiras"; // BOSS DRAGON
+
+export type ProfilSection = "Default" | "Faction" | "Amis" | "Succès" | "Market";
+
+export interface ProfilSearchParams {
+  section?: ProfilSection;
+}

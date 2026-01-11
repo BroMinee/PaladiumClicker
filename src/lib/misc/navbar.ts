@@ -1,6 +1,6 @@
 
 import { constants, PathValid } from "@/lib/constants";
-import { CraftSectionEnum, OptionType, PlayerInfo, RankingType } from "@/types";
+import { CraftSectionEnum, OptionType, PlayerInfo, ProfilSection } from "@/types";
 import { redirect } from "next/navigation";
 
 /**
@@ -125,12 +125,10 @@ export function reloadProfilNeeded(playerInfoLocal: PlayerInfo | null, username:
 /**
  * Generates a URL for a player profile with optional ranking and usernames.
  * @param username The username of the player.
- * @param ranking Optional ranking category.
- * @param usernames Optional array of usernames to include in the URL.
+ * @param section Optional default section.
  */
-export function generateProfilUrl(username: string, ranking?: RankingType, usernames?: string[]) {
-  const argUsername = usernames && usernames.length != 0 ? `usernames=${usernames}` : "";
-  const argRanking = ranking ? `category=${ranking}` : "";
-  const args = [argRanking, argUsername].filter((e) => e).join("&");
+export function generateProfilUrl(username: string, section?: ProfilSection) {
+  const argSection = section ? `section=${section}` : "";
+  const args = [argSection].filter((e) => e).join("&");
   return safeJoinPaths(constants.profilPath, username, `?${args}`);
 }

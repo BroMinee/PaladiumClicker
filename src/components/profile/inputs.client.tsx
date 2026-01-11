@@ -7,29 +7,29 @@ import { ProfileSection } from "./profile-section.client";
 import { FactionSection } from "./faction/faction-section.client";
 import { getAllItemsServerAction } from "@/lib/api/api-server-action.server";
 import { useEffect, useState } from "react";
-import { OptionType } from "@/types";
+import { OptionType, ProfilSection } from "@/types";
 import { SetItemsStats } from "../shared/set-items-state.client";
 
 /**
  * Display the profile section tabs and tabs content.
  */
-export function ProfileSectionSelector() {
+export function ProfileSectionSelector({ defaultSection}: { defaultSection?: ProfilSection }) {
   const [allItems, setAllItems] = useState<OptionType[]>([]);
 
   useEffect(() => {
     getAllItemsServerAction().then(setAllItems);
   }, []);
 
-  const tabs: TabData<"Profil" | "Faction" | "Amis" | "Succès" | "Hôtel de Vente">[] = [
-    { key: "Profil", label: "Profil", content: () => <ProfileSection/> },
+  const tabs: TabData<ProfilSection>[] = [
+    { key: "Default", label: "Profil", content: () => <ProfileSection/> },
     { key: "Faction", label: "Faction", content: () => <FactionSection/> },
     { key: "Amis", label: "Amis", content: () => <FriendsSection/> },
     { key: "Succès", label: "Succès", content: () => <SetItemsStats allItems={allItems}><AchievementSection/></SetItemsStats> },
-    { key: "Hôtel de Vente", label: "Hôtel de Vente", content: () => <SetItemsStats allItems={allItems}><MarketSection/></SetItemsStats> },
+    { key: "Market", label: "Hôtel de Vente", content: () => <SetItemsStats allItems={allItems}><MarketSection/></SetItemsStats> },
   ];
 
   return (
-    <GenericSectionTabs tabs={tabs}/>
+    <GenericSectionTabs tabs={tabs} defaultTab={defaultSection}/>
   );
 }
 

@@ -21,7 +21,7 @@ export function FriendsSection() {
     <div className="grid grid-cols-4 sm:grid-cols-6 lg:grid-cols-8 gap-4">
       {playerInfo.friends.data.map((friend) => (
         <ClickableLink
-          href={generateProfilUrl(friend.name)}
+          href={generateProfilUrl(friend.name, "Amis")}
           key={friend.name}
           className="flex flex-col items-center text-center"
         >

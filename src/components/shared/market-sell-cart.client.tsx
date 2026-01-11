@@ -192,7 +192,7 @@ export function MarketOfferCard({ offer, itemName }: { offer: MarketItemOffer, i
       itemName={offer.name}
       isRenamed={offer.renamed}
       isLoading={false}
-      url={generateProfilUrl(username)}
+      url={generateProfilUrl(username, "Market")}
     />
   );
 }

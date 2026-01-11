@@ -9,6 +9,7 @@ import { PlayerFactionName } from "@/components/profile/player-faction.client";
 import { JobsCard } from "@/components/profile/player-jobs";
 import { FactionEmblemClient } from "@/components/profile/faction/faction-emblem.client";
 import { TwitchOverlayButton } from "@/components/shared/twitch-overlay-button.client";
+import { ProfilSearchParams } from "@/types";
 
 /**
  * Generate Metadata
@@ -32,9 +33,11 @@ export async function generateMetadata(props: { params: Promise<{ username: stri
 export default async function ProfilePage(
   props: {
     params: Promise<{ username: string }>,
+    searchParams: Promise<ProfilSearchParams>
   }
 ) {
   const params = await props.params;
+  const defaultSection = (await props.searchParams).section;
 
   return (<ProfileFetcherWrapper username={params.username}>
     <TwitchOverlayButton/>
@@ -71,7 +74,7 @@ export default async function ProfilePage(
 
     <PlayerStats/>
     <JobsCard/>
-    <ProfileSectionSelector />
+    <ProfileSectionSelector defaultSection={defaultSection}/>
 
   </ProfileFetcherWrapper>);
 }
