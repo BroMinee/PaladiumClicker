@@ -222,7 +222,7 @@ export const PlayerSearchInput = ({
         <div className={cn("flex gap-2 flex-col", className)}>
           <PopoverAnchor asChild>
             <Button
-              variant="primary"
+              variant="secondary"
               className="items-center justify-center whitespace-nowrap h-9 px-4 py-2 flex flex-row gap-2"
               onClick={() => onClick(playerInfo?.username ?? "")}
             >

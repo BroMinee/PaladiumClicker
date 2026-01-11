@@ -27,7 +27,6 @@ const IconCalendar = () => (
 export function BestBuyCard() {
   const { data: playerInfo } = usePlayerInfoStore();
   const { rps, setRPS, buildingBuyPaths, setBuildingBuyPaths } = useClickerStore();
-
   useEffect(() => {
     if (playerInfo) {
       setRPS(computeRPS(playerInfo));
@@ -42,7 +41,12 @@ export function BestBuyCard() {
     }
   }, [playerInfo, rps, setBuildingBuyPaths]);
   return (
-    <div className="bg-gradient-to-br from-orange-500 to-orange-800 p-6 rounded-lg">
+    <div className="bg-gradient-to-br from-orange-500 to-orange-800 p-6 rounded-lg relative">
+      { buildingBuyPaths.length !== 0 && (typeof buildingBuyPaths[0].own === "number") && (
+        <div className="absolute -top-2 -right-2 bg-yellow-400 text-black font-bold px-3 py-1 rounded-full text-sm shadow-lg border-2 border-yellow-300">
+          Niv. {buildingBuyPaths[0].own}
+        </div>
+      )}
       <div className="flex items-center space-x-3 mb-3">
         <MdOutlineStarPurple500 className="w-8 h-8 text-yellow-300" />
         <h2 className="text-2xl font-bold ">Achat Recommandé</h2>
@@ -125,7 +129,7 @@ export function StatButton() {
 
   return (<>
     <SearchPlayerInput variant={"clicker"} />
-    <Button variant='secondary' className="flex-1 font-semibold py-2 px-4 rounded transition-colors" onClick={handleBuyButton}>
+    <Button variant='primary' className="flex-1 font-semibold py-2 px-4 rounded transition-colors" onClick={handleBuyButton}>
       Simuler l&apos;achat
     </Button>
   </>);
@@ -213,23 +217,32 @@ export function BatchPurchase() {
                 <GroupedSpanContainer group={playerInfo[building.path][building.index].name} className="gap-3" key={building.path + "-" + building.index + "-" + building.own}>
                   <Card
                     key={playerInfo[building.path][building.index].name + "-" + building.own}
-                    className="rounded-xl overflow-hidden hover:border-primary/50 transition-colors w-full h-full"
+                    className="rounded-xl overflow-hidden hover:border-primary/50 transition-colors w-full h-full relative flex flex-col"
                   >
-                    <div className="flex flex-col gap-2 items-center">
-                      <div className="flex flex-col items-center p-4 w-full gap-2">
-                        <Image src={getPathImg(building.path, building.index)} height={48} width={48} className="object-cover text-indigo-400 pixelated" alt="image" unoptimized />
+                    {(typeof building.own === "number") && (
+                      <div className="absolute top-2 right-2 bg-primary text-primary-foreground px-2 py-1 rounded-full font-bold text-sm shadow-md z-10">
+                        Niv. {building.own}
+                      </div>
+                    )}
+
+                    <div className="flex flex-col items-center p-4 w-full gap-2">
+                      <Image src={getPathImg(building.path, building.index)} height={48} width={48} className="object-cover text-indigo-400 pixelated" alt="image" unoptimized />
+                      <div className="min-h-[3rem] flex items-center justify-center w-full">
                         <h4 className="font-semibold text-center w-full">{playerInfo[building.path][building.index].name}</h4>
                       </div>
+                    </div>
 
-                      <div className="gap-3 flex items-center justify-around w-full">
+                    <div className="mt-auto flex flex-col gap-3 pb-4 px-4">
+                      <div className="flex items-center justify-around w-full">
                         <div className="flex flex-col items-center text-center">
                           <IconCalendar />
-                          <span className="font-semibold">Heure d&apos;achat</span>
+                          <span className="font-semibold text-xs">Heure d&apos;achat</span>
                         </div>
                         <p className="text-sm text-muted-foreground">{building.timeToBuy}</p>
                       </div>
 
-                      <div className="w-full h-px bg-border mt-2"></div>
+                      <div className="w-full h-px bg-border"></div>
+
                       <StatItem
                         icon={<ImageCoin />}
                         label="Prix"
@@ -245,11 +258,10 @@ export function BatchPurchase() {
                         variant='secondary'
                         size="sm"
                         onClick={() => handleSimulate(index + 1)}
-                        className="font-semibold text-xs mt-1 h-8"
+                        className="font-semibold text-xs h-8 w-full"
                       >
                         Simuler jusqu&apos;ici
                       </Button>
-
                     </div>
                   </Card>
                 </GroupedSpanContainer>
