@@ -38,7 +38,7 @@ export function BestBuyCard() {
       return;
     }
     if (rps !== 0) {
-      setBuildingBuyPaths(computeXBuildingAhead(playerInfo, 24, rps));
+      setBuildingBuyPaths(computeXBuildingAhead(playerInfo, 1, rps));
     }
   }, [playerInfo, rps, setBuildingBuyPaths]);
   return (
@@ -135,10 +135,21 @@ export function StatButton() {
  * Display multiple building best purchase list
  */
 export function BatchPurchase() {
+  const BATCH_PURCHASE_COUNT = 24;
   const [isOpen, setIsOpen] = useState(false);
 
   const { data: playerInfo, setPlayerInfo } = usePlayerInfoStore();
-  const { buildingBuyPaths } = useClickerStore();
+  const { buildingBuyPaths, setBuildingBuyPaths } = useClickerStore();
+  const { rps } = useClickerStore();
+
+  useEffect(() => {
+    if (!playerInfo) {
+      return;
+    }
+    if (rps !== 0 && isOpen && buildingBuyPaths.length !== BATCH_PURCHASE_COUNT) {
+      setBuildingBuyPaths(computeXBuildingAhead(playerInfo, 24, rps));
+    }
+  }, [playerInfo, rps, setBuildingBuyPaths, buildingBuyPaths, isOpen]);
 
   const formatMoney = (amount: number) =>
     new Intl.NumberFormat("fr-FR").format(amount) + " $";
@@ -163,9 +174,11 @@ export function BatchPurchase() {
             <h2 className="text-lg font-bold flex items-center gap-2">
               Planificateur d&apos;Achats
             </h2>
-            <p className="text-sm text-muted-foreground">
-              Coût total estimé : <span className="font-bold text-primary">{formatMoney(totalGlobalCost)}</span>
-            </p>
+            { buildingBuyPaths.length === BATCH_PURCHASE_COUNT &&
+              <p className="text-sm text-muted-foreground">
+                Coût total estimé : <span className="font-bold text-primary">{formatMoney(totalGlobalCost)}</span>
+              </p>
+            }
           </div>
         </div>
 
