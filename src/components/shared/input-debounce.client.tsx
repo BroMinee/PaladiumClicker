@@ -2,15 +2,20 @@
 import { debounce } from "lodash";
 import { ChangeEvent, useEffect, useMemo, useRef, useState } from "react";
 import { Button } from "@/components/ui/button-v2";
+import { cn } from "@/lib/utils";
 
 interface InputProps {
   label: string;
   value: number;
   onChange: (newValue: number) => void;
   min: number;
+  max?: number;
   step?: number;
   allowNegative?: boolean;
   debounceTimeInMs: number;
+  increaseButton?: boolean;
+  decreaseButton?: boolean;
+  inputClassName?: string;
 }
 
 const IconMinus = () => <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-5 h-5"><path strokeLinecap="round" strokeLinejoin="round" d="M5 12h14" /></svg>;
@@ -28,7 +33,11 @@ export const InputDebounce = ({
   debounceTimeInMs,
   onChange,
   min,
+  max,
   step = 1,
+  inputClassName = "",
+  decreaseButton = true,
+  increaseButton = true,
   allowNegative = false,
 }: InputProps) => {
   const fixedStep = parseFloat(step.toFixed(2));
@@ -52,6 +61,10 @@ export const InputDebounce = ({
     }
     if (parsedVal < min) {
       setError(`Minimum requis : ${min}`);
+      return;
+    }
+    if (max !== undefined && max < parsedVal) {
+      setError(`Maximum atteint : ${max}`);
       return;
     }
 
@@ -86,6 +99,10 @@ export const InputDebounce = ({
       }
       if (parsedVal < min) {
         setError(`Minimum requis : ${min}`);
+        return;
+      }
+      if (max !== undefined && max < parsedVal) {
+        setError(`Maximum atteint : ${max}`);
         return;
       }
 
@@ -135,7 +152,10 @@ export const InputDebounce = ({
   };
 
   const handleIncrement = () => {
-    const newVal = roundToStep(value + fixedStep);
+    let newVal = roundToStep(value + fixedStep);
+    if (max !== undefined && max < newVal) {
+      newVal = max;
+    }
     onChange(newVal);
   };
 
@@ -153,9 +173,10 @@ export const InputDebounce = ({
         {label}
       </label>
       <div className="relative flex items-center w-full gap-2">
-        <Button onClick={handleDecrement} disabled={value <= min} className="flex items-center justify-center h-12 w-12 rounded-xl border border-secondary bg-background hover:bg-card hover:scale-105 active:scale-95 transition-all duration-200 disabled:opacity-40 disabled:cursor-not-allowed">
+        {decreaseButton && <Button onClick={handleDecrement} disabled={value <= min} className="flex items-center justify-center h-12 w-12 rounded-xl border border-secondary bg-background hover:bg-card hover:scale-105 active:scale-95 transition-all duration-200 disabled:opacity-40 disabled:cursor-not-allowed">
           <IconMinus />
         </Button>
+        }
 
         <div className="relative flex-1">
           <input
@@ -163,13 +184,14 @@ export const InputDebounce = ({
             inputMode="decimal"
             value={localValue}
             onChange={handleInput}
-            className={`w-full h-12 rounded-xl bg-background border text-center font-semibold transition-all focus:ring-2 focus:ring-indigo-500/40 appearance-none ${error ? "border-red-500 focus:border-red-500" : "border-secondary focus:border-indigo-500"}`}
+            className={cn(`w-full h-12 rounded-xl bg-background border text-center font-semibold transition-all  focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 appearance-none ${error ? "border-red-500 focus:border-red-500" : "border-secondary focus:border-indigo-500"}`, inputClassName)}
           />
         </div>
 
-        <Button onClick={handleIncrement} className="flex items-center justify-center h-12 w-12 rounded-xl border border-secondary bg-background hover:bg-card hover:scale-105 active:scale-95 transition-all duration-200">
+        {increaseButton && <Button onClick={handleIncrement} disabled={max !== undefined && value >= max} className="flex items-center justify-center h-12 w-12 rounded-xl border border-secondary bg-background hover:bg-card hover:scale-105 active:scale-95 transition-all duration-200">
           <IconPlus />
         </Button>
+        }
       </div>
       {error && <p className="text-xs text-red-400 mt-1 animate-pulse">{error}</p>}
     </div>

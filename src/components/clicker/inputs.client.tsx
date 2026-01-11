@@ -14,6 +14,7 @@ import { HoverCard, HoverCardContent, HoverCardTrigger } from "../shared/hover";
 import { StatItem } from "./clicker-page";
 import { ImageCoin } from "../shared/image-coin";
 import { PreconditionDisplay } from "@/lib/precondition-display.client";
+import { InputDebounce } from "../shared/input-debounce.client";
 
 /**
  * Display the list of building input.
@@ -48,8 +49,8 @@ function BuildingInputCardItem({ index }: BuildingInputCardItemProps) {
     setBuildingOwn(playerInfo.building[index].name, newLevel);
   }, [index, playerInfo, setBuildingOwn]);
 
-  const handleLocalChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const newLevel = Math.max(0, Math.min(100, Number(e.target.value)));
+  const handleLocalChange = (e: number) => {
+    const newLevel = Math.max(0, Math.min(100, e));
     setLevel(newLevel);
     onLevelChange(newLevel);
   };
@@ -70,15 +71,16 @@ function BuildingInputCardItem({ index }: BuildingInputCardItemProps) {
               </GroupedSpanContainer>
               <div className="flex items-center space-x-2">
                 <label htmlFor={`building-${index}`} className="text-sm text-card-foreground">Niv.</label>
-                <input
-                  type="number"
-                  id={`building-${index}`}
+                <InputDebounce
                   value={level}
                   onChange={handleLocalChange}
-                  min="0"
-                  max="100"
-                  className="w-full bg-background border border-secondary rounded px-2 py-1 font-bold text-center appearance-none focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500"
-                  style={{ MozAppearance: "textfield" }}
+                  min={0}
+                  max={99}
+                  label={""}
+                  increaseButton={false}
+                  decreaseButton={false}
+                  debounceTimeInMs={250}
+                  inputClassName="w-full h-fit  rounded py-1"
                 />
               </div>
             </Card>
