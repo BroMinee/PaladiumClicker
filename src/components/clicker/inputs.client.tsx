@@ -26,7 +26,7 @@ export function BuildingInputCard() {
     <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
       {playerInfo?.building.map((building, i) => (
         <BuildingInputCardItem
-          key={building.name + building.own}
+          key={building.name}
           index={i}
         />
       ))}
