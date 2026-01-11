@@ -143,7 +143,11 @@ export const ChartContainer = <TX extends AxisDomain, TY extends AxisDomain>({
     const result: Record<string, any[]> = {};
     axisConfigs.forEach(cfg => {
       const values = domainsMap[cfg.id];
-      const extent = d3.extent(values as number[]);
+      const extent = d3.extent(values);
+      // Add 2% on top to avoid clipping the graph curve
+      if(typeof extent[1] === "number" && cfg.position === "left" || cfg.position === "right") {
+        extent[1] += (extent[1] - extent[0])*0.02;
+      }
       result[cfg.id] = cfg.position === "bottom" || cfg.position === "top"
         ? extent : [0, extent[1] || 100];
     });
@@ -157,7 +161,7 @@ export const ChartContainer = <TX extends AxisDomain, TY extends AxisDomain>({
     const newScales: Record<string, AnyScale> = {};
     axisConfigs.forEach((cfg) => {
       const range: [number, number] = (cfg.position === "left" || cfg.position === "right") ? [height, 0] : [0, width];
-      const scale = createScale(cfg.type, range).domain(domains[cfg.id] as any);
+      const scale = createScale(cfg.type, range).domain(domains[cfg.id]);
       newScales[cfg.id] = scale as any;
     });
     return newScales;
