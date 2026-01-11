@@ -45,7 +45,7 @@ const FEATURES: FeatureItem[] = [
   { id: "webhook", title: constants.links[constants.webhooksPath].label, desc: "Notifications discord en temps semi-réel.", icon: <MdOutlineWebhook size={20} />, image: "/img/Home/webhook.jpg", href: constants.webhooksPath },
   { id: "pala-animation", title: constants.links[constants.palaAnimationPath].label, desc: "Entraînement aux Pala-Animations", icon: <IoMdStopwatch size={20} />, image: "/img/Home/pala-animation.jpg", href: constants.palaAnimationPath },
   { id: "status", title: constants.links[constants.statusPath].label, desc: "Graphiques de l'historique des joueurs en ligne.", icon: <HiOutlineStatusOnline size={20} />, image: "/img/Home/status.jpg", href: constants.statusPath },
-  { id: "discord", title: "Nous Rejoindre", desc: "Communauté, Support & Actualités.", icon: <FaDiscord size={20} />, image: "/img/Profile/default.png", href: constants.discord.url },
+  { id: "discord", title: "Nous Rejoindre", desc: "Communauté, Support & Actualités.", icon: <FaDiscord size={20} />, image: "/img/Home/discord-logo.png", href: constants.discord.url },
 ];
 
 interface NoPseudoPageProps {
