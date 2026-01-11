@@ -24,6 +24,7 @@ interface TabButtonProps {
 interface GenericSectionTabsProps<T extends string> {
   tabs: TabData<T>[];
   title?: string;
+  defaultTab?: T;
 }
 
 const TabButton: React.FC<TabButtonProps> = ({
@@ -49,9 +50,10 @@ const TabButton: React.FC<TabButtonProps> = ({
  * Generic component to display clickable tabs, handle the content switch accordingly.
  * @params - the tabs information
  * @params - optional title
+ * @params - optional default tab id
  */
-export function GenericSectionTabs<T extends string>({ tabs, title }: GenericSectionTabsProps<T>) {
-  const [activeTabKey, setActiveTabKey] = useState(tabs[0]?.key);
+export function GenericSectionTabs<T extends string>({ tabs, title, defaultTab }: GenericSectionTabsProps<T>) {
+  const [activeTabKey, setActiveTabKey] = useState<T>(defaultTab ? (tabs.find((tab => defaultTab === tab.key))?.key ?? tabs[0]?.key ): tabs[0]?.key);
 
   const activeTabContent = tabs.find((tab) => tab.key === activeTabKey)?.content;
 
