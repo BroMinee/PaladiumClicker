@@ -21,7 +21,7 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 
-import { Dataset, AxisConfig, OptionType } from "@/types";
+import { Dataset, AxisConfig, OptionType, CraftSectionEnum } from "@/types";
 import { ChartContainer } from "@/components/shared/graph.client";
 import { UnOptimizedImage } from "@/components/ui/image-loading";
 import { SearchBar } from "@/components/craft/craft-recipe.client";
@@ -31,7 +31,7 @@ import { Card } from "@/components/ui/card";
 import { MarketOfferCard } from "../shared/market-sell-cart.client";
 import { RenderPressure, RenderPriceVolume } from "../shared/graph-line-renderer.client";
 import { GiStoneCrafting } from "react-icons/gi";
-import { safeJoinPaths, textFormatting } from "@/lib/misc";
+import { generateCraftUrl, safeJoinPaths, textFormatting } from "@/lib/misc";
 import { PageHeader, PageHeaderDescription, PageHeaderHeading } from "../ui/page";
 
 const PLACEHOLDER_ITEM: OptionType = {
@@ -217,7 +217,7 @@ export default function MarketPage() {
               )}
 
               <Link
-                href={`/craft1?item=${displayItem.value}`}
+                href={generateCraftUrl(displayItem.value,1, CraftSectionEnum.recipe)}
                 className={"w-full mt-4 flex items-center justify-center gap-2 bg-primary hover:bg-primary-darker py-2.5 rounded-lg font-semibold transition-all shadow-md shadow-indigo-900/20 active:scale-95 group/btn"}
               >
                 <GiStoneCrafting size={24} className="group-hover/btn:rotate-12 transition-transform"/>
