@@ -13,10 +13,11 @@ import { cn } from "@/lib/utils";
 import { toast } from "sonner";
 import { useSettingsStore } from "@/stores/use-settings-store";
 import { LoadingSpinner } from "../ui/loading-spinner";
+import { usePlayerInfoStore } from "@/stores/use-player-info-store";
 
 interface PlayerSearchInputProps {
   onClick: (user: User | string) => void;
-  variant?: "default" | "homepage" | "navbar";
+  variant?: "default" | "homepage" | "navbar" | "clicker";
   className?: string;
   placeholder?: string;
   submitLabel?: string;
@@ -45,6 +46,8 @@ export const PlayerSearchInput = ({
   const [searchResults, setSearchResults] = useState<User[]>([]);
   const [isOpen, setIsOpen] = useState(false);
   const { settings } = useSettingsStore();
+
+  const { data: playerInfo } = usePlayerInfoStore();
 
   const formId = useId();
 
@@ -154,7 +157,7 @@ export const PlayerSearchInput = ({
   return (
     <Popover open={isOpen} onOpenChange={setIsOpen}>
 
-      {variant === "homepage" && (
+      { variant === "homepage" && (
         <PopoverAnchor asChild>
           <div className={cn("w-full max-w-xl relative group pointer-events-auto", className)}>
             <div className="absolute -inset-1 bg-gradient-to-r from-primary to-orange-600 blur opacity-25 group-hover:opacity-75 transition duration-1000 group-hover:duration-200"></div>
@@ -181,7 +184,7 @@ export const PlayerSearchInput = ({
         </PopoverAnchor>
       )}
 
-      {variant === "navbar" && (
+      { variant === "navbar" && (
         <div className={cn("flex gap-2 flex-col", className)}>
           <PopoverAnchor asChild>
             <form id={formId} onSubmit={handleFormSubmit}>
@@ -215,8 +218,21 @@ export const PlayerSearchInput = ({
         </div>
       )}
 
-      {/* 3. Variante DEFAULT */}
-      {variant === "default" && (
+      { variant === "clicker" && (
+        <div className={cn("flex gap-2 flex-col", className)}>
+          <PopoverAnchor asChild>
+            <Button
+              variant="primary"
+              className="items-center justify-center whitespace-nowrap h-9 px-4 py-2 flex flex-row gap-2"
+              onClick={() => onClick(playerInfo?.username ?? "")}
+            >
+              <span>{submitLabel}</span>
+            </Button>
+          </PopoverAnchor>
+        </div>
+      )}
+
+      { variant === "default" && (
         <PopoverAnchor asChild>
           <div className={cn("relative w-full", className)}>
             <input

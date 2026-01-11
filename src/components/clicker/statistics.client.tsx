@@ -13,6 +13,7 @@ import { ShoppingCart, Calculator } from "lucide-react";
 import { GroupedSpanContainer } from "../shared/group-span-container";
 import { Card } from "@/components/ui/card";
 import { ChevronDown, ChevronUp } from "lucide-react";
+import { SearchPlayerInput } from "../home/search-player.client";
 
 const IconCalendar = () => (
   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
@@ -118,15 +119,12 @@ export function StatTotalProd() {
  * Display Update profil and Simulate purchase button
  */
 export function StatButton() {
-  const onClick = () => alert("todo");
   const { data: playerInfo, setPlayerInfo } = usePlayerInfoStore();
   const { buildingBuyPaths } = useClickerStore();
   const handleBuyButton = () => buyBuilding(playerInfo, setPlayerInfo, buildingBuyPaths);
 
   return (<>
-    <Button variant="primary" className="font-bold py-2 px-4 rounded" onClick={onClick}>
-      Mettre à jour les données
-    </Button>
+    <SearchPlayerInput variant={"clicker"} />
     <Button variant='secondary' className="flex-1 font-semibold py-2 px-4 rounded transition-colors" onClick={handleBuyButton}>
       Simuler l&apos;achat
     </Button>

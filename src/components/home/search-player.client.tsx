@@ -17,7 +17,7 @@ import { Button } from "../ui/button-v2";
  * Search player input, handles player profile import, update, and reset logic.
  * @param variant - The variant of the search input, either "homepage" or "navbar".
  */
-export function SearchPlayerInput({ variant }: { variant: "homepage" | "navbar" }) {
+export function SearchPlayerInput({ variant }: { variant: "homepage" | "navbar" | "clicker" }) {
   const { data: playerInfo, setPlayerInfo } = usePlayerInfoStore();
   const [confirmUpdate, setConfirmUpdate] = useState<boolean>(false);
   const [isPopupOpen, setIsPopupOpen] = useState(false);
@@ -82,6 +82,7 @@ export function SearchPlayerInput({ variant }: { variant: "homepage" | "navbar" 
         onClick={function (user: User | string): void {
           handleOnClick(typeof user === "string" ? user : user.username);
         }}
+        submitLabel={variant === "clicker" ? "Mettre à jour les données" : undefined}
       />
       <Dialog open={isPopupOpen} onOpenChange={handleCancelReplacement}>
         <DialogContent className="px-0 pb-0 max-w-4xl justify-items-center">
