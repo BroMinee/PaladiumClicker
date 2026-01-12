@@ -1,5 +1,34 @@
 [
   {
+    "date": "14/01/2025",
+    "changes": {
+      "open source": [
+        "**Majeur** : Le projet redevient officiellement Open Source ! Le code est désormais accessible publiquement sur le dépôt [GitHub](https://github.com/BroMinee/PaladiumClicker)."
+      ],
+      "redesigns": [
+        "**Modernisation Visuelle** : Refonte intégrale des interfaces utilisateur. Plus de 500 fichiers ont été retravaillés pour rompre définitivement avec l'ancien design.",
+        "Modernisation complète de l'expérience utilisateur avec une navigation repensée, un responsive optimisé et de nouvelles animations fluides."
+      ],
+      "techniques": [
+        "**Dette technique** : Réécriture et modernisation massive de la base de code pour supporter la nouvelle architecture.",
+        "Mise en place d'un linter strict et documentation systématique des fonctions exportées pour un code plus propre.",
+        "Mise à jour de sécurité sur l'ensemble des dépendances du projet."
+      ],
+      "additions": [
+        "Ajout des nouveaux items et crafts de la v11 dans l'outil de [craft](https://palatracker.bromine.fr/craft?item=key-nimbria&count=64) et dans le [market](https://palatracker.bromine.fr/ah?item=key-nimbria)."
+      ],
+      "corrections": [
+        "Correction d'un bug provoquant une utilisation excessive du CPU sur la page du [pala animation](https://palatracker.bromine.fr/pala-animation)."
+      ],
+      "suppressions": [
+        "Suppression du nombre de vues sur le profil, car peu pertinent.",
+        "Retrait temporaire des pets et montures et du classement personnel sur la page de profil (le temps de finaliser leur intégration au nouveau design dans les prochaines majs).",
+        "Retrait temporaire du prix nécessaire pour réaliser un craft.",
+        "Suppression de la catégorie 'Giveaway'. Ils se déroulent désormais sur le [Discord](https://discord.gg/WGXUKHcZ3P), pour simplifier leur organisation."
+      ]
+    }
+  },
+  {
     "date": "03/10/2025",
     "changes": {
       "additions": [
