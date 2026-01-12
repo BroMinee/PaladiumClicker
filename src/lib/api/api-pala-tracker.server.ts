@@ -225,21 +225,6 @@ export async function isAdmin() {
 }
 
 /**
- * Fetches the alias for a specific item.
- * @param item_name The item name to fetch the alias for.
- */
-export async function getItemAlias(item_name: string | undefined): Promise<string | null> {
-  if (item_name === undefined) {
-    return null;
-  }
-
-  return await fetchWithHeader<string | null>(`${API_PALATRACKER}/v1/item/getAlias/${item_name}`, 30 * 60).catch(() => {
-    console.error("Impossible de charger récupérer l'alias de l'item");
-    return null;
-  });
-}
-
-/**
  * Fetches the crafting recipe tree for a specific item and quantity.
  * @param item_name The item to fetch the craft recipe for.
  * @param count The quantity to calculate the recipe for.

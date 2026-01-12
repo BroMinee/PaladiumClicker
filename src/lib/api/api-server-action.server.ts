@@ -526,3 +526,28 @@ export async function getRankingLeaderboardPlayerUsernameAction(username: string
 export async function getSimilareUsernames(partialUsername: string): Promise<User[]> {
   return await fetchWithHeader<User[]>(`${API_PALATRACKER}/v1/user/getUsers/${partialUsername}`, 60*60);
 }
+
+/**
+ * Fetches the alias for a specific item.
+ * @param item_name The item name to fetch the alias for.
+ */
+export async function getItemAlias(item_name: string | undefined): Promise<string | null> {
+  if (item_name === undefined) {
+    return null;
+  }
+
+  return await fetchWithHeader<string | null>(`${API_PALATRACKER}/v1/item/getAlias/${item_name}`, 30 * 60).catch(() => {
+    console.error("Impossible de charger récupérer l'alias de l'item");
+    return null;
+  });
+}
+
+/**
+ * Retrieves all item aliases from the API.
+ */
+export async function getAllItemAliases(): Promise<Array<[string,string]>> {
+  return await fetchWithHeader<Array<[string,string]>>(`${API_PALATRACKER}/v1/item/getAlias/all`, 30 * 60).catch(() => {
+    console.error("Impossible de charger récupérer les alias des items");
+    return [];
+  });
+}
