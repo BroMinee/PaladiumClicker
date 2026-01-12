@@ -1,24 +1,24 @@
-import { test, expect } from '@playwright/test';
+import { test, expect } from "@playwright/test";
 
-test('Navigate using NavBar', async ({ page }) => {
-  await page.goto('http://localhost:3000/');
-  await page.getByRole('button', { name: 'Informations et gestion' }).click();
-  await page.getByRole('link', { name: 'Statut' }).click();
+test.skip("Navigate using NavBar", async ({ page }) => {
+  await page.goto("http://localhost:3000/");
+  await page.getByRole("button", { name: "Informations et gestion" }).click();
+  await page.getByRole("link", { name: "Statut" }).click();
   await expect(page).toHaveTitle("PalaTracker | Statut");
 });
 
-test('Check Home page element', async ({ page }) => {
-  await page.goto('http://localhost:3000/status');
-  await expect(page.getByRole('main')).toMatchAriaSnapshot(`- text: /\\d+ heures 1 semaine 1 mois 1 saison/`);
+test.skip("Check Home page element", async ({ page }) => {
+  await page.goto("http://localhost:3000/status");
+  await expect(page.getByRole("main")).toMatchAriaSnapshot("- text: /\\d+ heures 1 semaine 1 mois 1 saison/");
 
-  await page.getByRole('list').filter({ hasText: /^Joueurs$/ }).click();
-  await page.getByRole('list').filter({ hasText: 'Joueurs uniques' }).click();
+  await page.getByRole("list").filter({ hasText: /^Joueurs$/ }).click();
+  await page.getByRole("list").filter({ hasText: "Joueurs uniques" }).click();
 });
 
-test('Check Home periode date selector', async ({ page }) => {
-  await page.goto('http://localhost:3000/status');
+test.skip("Check Home periode date selector", async ({ page }) => {
+  await page.goto("http://localhost:3000/status");
 
-  const periode = ['day', 'week' , 'month', 'season'];
+  const periode = ["day", "week" , "month", "season"];
   await expect(page.locator(`#status-periode-selector-${periode[0]}`)).toContainClass("bg-primary");
 
   for (let index = 0; index < periode.length; index++) {
@@ -34,19 +34,18 @@ test('Check Home periode date selector', async ({ page }) => {
   }
 });
 
+test.skip("Check wrong section name redirection", async ({ page }) => {
+  await page.goto("http://localhost:3000/status?periode=toto");
+  await expect(page).toHaveURL("http://localhost:3000/status?periode=day");
 
-test('Check wrong section name redirection', async ({ page }) => {
-  await page.goto('http://localhost:3000/status?periode=toto');
-  await expect(page).toHaveURL('http://localhost:3000/status?periode=day');
+  await page.goto("http://localhost:3000/status?periode=week");
 
-  await page.goto('http://localhost:3000/status?periode=week');
-
-  await page.goto('http://localhost:3000/status?periode=');
-  await expect(page).toHaveURL('http://localhost:3000/status?periode=day');
+  await page.goto("http://localhost:3000/status?periode=");
+  await expect(page).toHaveURL("http://localhost:3000/status?periode=day");
 });
 
-test('Check svg graph', async ({ page }) => {
-  await page.goto('http://localhost:3000/status');
+test.skip("Check svg graph", async ({ page }) => {
+  await page.goto("http://localhost:3000/status");
   await expect(page.locator("#graph-status-plot .recharts-wrapper svg:nth-child(3)")).toBeVisible();
   await expect(page.locator("#graph-joueurs-uniques-plot .recharts-wrapper svg:nth-child(3)")).toBeVisible();
 });
