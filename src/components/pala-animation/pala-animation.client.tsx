@@ -189,22 +189,26 @@ export function PalaAnimationBody() {
   }, []);
 
   useEffect(() => {
-
-    const lastChar = inputValue.slice(-1);
-    // reminder: keyPressTimestamp[0] is " " corresponding to the time at which the timer started
-    if (inputValue.length === 0) {
-      if (keyPressTimestamp.length !== 0) {
-        setKeyPressTimestamp([keyPressTimestamp[0]]);
+    setKeyPressTimestamp((prev) => {
+      if (inputValue.length === 0) {
+        if (prev.length > 1) {
+          return [prev[0]];
+        }
+        return prev;
       }
-      return;
-    }
 
-    if (keyPressTimestamp.length - 1 > inputValue.length) {
-      setKeyPressTimestamp(keyPressTimestamp.slice(0, inputValue.length + 1));
-    } else {
-      setKeyPressTimestamp([...keyPressTimestamp, { key: lastChar, timestamp: new Date().getTime() }]);
-    }
-  }, [inputValue, setKeyPressTimestamp, keyPressTimestamp]);
+      if (prev.length - 1 > inputValue.length) {
+        return prev.slice(0, inputValue.length + 1);
+      }
+
+      if (prev.length - 1 < inputValue.length) {
+        const lastChar = inputValue.slice(-1);
+        return [...prev, { key: lastChar, timestamp: new Date().getTime() }];
+      }
+
+      return prev;
+    });
+  }, [inputValue, setKeyPressTimestamp]);
 
   return (
     <div className="flex flex-col gap-2 items-center">
