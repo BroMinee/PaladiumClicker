@@ -8,7 +8,7 @@ const discord = {
   name: "PalaTracker"
 };
 
-const githubUrl = "https://github.com/BroMineCorp/PaladiumClickerNextJS";
+const githubUrl = "https://github.com/BroMinee/PaladiumClicker";
 
 export const API_PALATRACKER = process.env.NEXT_PUBLIC_PALACLICKER_API_URL || "https://palatracker.bromine.fr";
 export const API_PALATRACKER_WS = process.env.NEXT_PUBLIC_PALACLICKER_API_WS || "wss://palatracker.bromine.fr";
