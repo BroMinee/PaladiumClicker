@@ -14,7 +14,7 @@ import { useWebhookStore } from "@/stores/use-webhook-store";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { Checkbox } from "@/components/ui/checkbox";
-import { AdminShopItemDetail, AhItemHistory, WebHookCreate, WebHookType } from "@/types";
+import { AhItemHistory, WebHookCreate, WebHookType } from "@/types";
 import {
   RecapAdminShop,
   RecapEvent,
@@ -28,7 +28,6 @@ import { AdminShopInput, EventInput, VoteInput } from "@/components/webHooks/adm
 import {
   createWebHookServerAction,
   editWebHookServerAction,
-  getAdminShopHistoryServerAction,
   getMarketHistoryServerAction
 } from "@/lib/api/api-server-action.server";
 import { toast } from "sonner";
@@ -37,6 +36,7 @@ import { useRouter } from "next/navigation";
 import { constants } from "@/lib/constants";
 // import PlotAdminShopChart from "@/components/AdminShop/PlotAdminShopChart";
 import { PlotHistoricChart } from "@/components/ah/plot-historic-chart.client";
+import { AdminShopGraph } from "../admin-shop/admin-shop-page.client";
 
 /**
  * Handles the setup or configuration of a webhook.
@@ -107,7 +107,7 @@ export function WebHookInputClientItem() {
   }, [currentWebHookType, edit, setEmbed, setContent, setTitle, setItemSelected, setAdminShopItemSelected, setFields, setTitleUrl, setEmbedImg]);
 
   return (
-    <div className="flex flex-col xl:flex-row gap-2 justify-between">
+    <div className="grid grid-cols-2 xl:flex-row gap-2 justify-between">
       <WebHookEditor/>
       {/*<WebHookRender content={content} embed={embed} currentWebHookType={currentWebHookType}/>*/}
       <div className="flex flex-col gap-2 h-full">
@@ -309,7 +309,7 @@ function AdaptEditorFooter() {
   }
 
   if (currentWebHookType === WebHookType.adminShop && adminShopItemSelected) {
-    return <AdminShopGraphClient/>;
+    return <AdminShopGraph currentItem={adminShopItemSelected}/>;
   }
 
   if (currentWebHookType === WebHookType.market && itemSelected) {
@@ -340,31 +340,6 @@ function Recap() {
   default:
     return null;
   }
-}
-
-function AdminShopGraphClient() {
-  const { adminShopItemSelected } = useWebhookStore();
-  const [data, setData] = React.useState<AdminShopItemDetail[]>([]);
-
-  useEffect(() => {
-    if (!adminShopItemSelected) {
-      return;
-    }
-    try {
-      getAdminShopHistoryServerAction(adminShopItemSelected, "month").then((res) => {
-        setData(res);
-      });
-    } catch (error) {
-      console.error(error);
-    }
-  }, [adminShopItemSelected]);
-
-  return (
-    <div className="h-[100vh] pb-0">
-      TODO{data.length}
-      {/* <PlotAdminShopChart data={data} periode={"month"} webhook/> */}
-    </div>
-  );
 }
 
 function MarketGraphClient() {

@@ -1,12 +1,12 @@
 import React from "react";
 import { useWebhookStore } from "@/stores/use-webhook-store";
-import { AdminShopItem, EventType, WebHookThresholdCondition, WebHookType } from "@/types";
-// import { AdminShopSelectorClientItem } from "@/components/AdminShop/AdminShopSelectorClientItem";
+import { EventType, WebHookThresholdCondition, WebHookType } from "@/types";
 import { ThresholdSelector } from "@/components/webHooks/webhook-threshold-selector.client";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { Input } from "@/components/ui/input";
 import { constants } from "@/lib/constants";
+import { AdminShopSelector } from "@/components/admin-shop/admin-shop-page.client";
 
 /**
  * Renders a set of buttons for selecting the threshold condition
@@ -67,18 +67,10 @@ export function ThreshConditionSelector() {
  * Display the list of item inside the admin shop that can be configured
  */
 export function AdminShopInput() {
+  const { adminShopItemSelected, setAdminShopItemSelected } = useWebhookStore();
   return (
     <>
-      <span>
-        Choisissez un item de l&apos;admin shop
-      </span>
-      <div className="grid grid-cols-6 sm:grid-cols-16 lg:grid-cols-8 items-center justify-between gap-2 pb-2 mt-0">
-        {constants.adminShopItemsAvailable.map((value: AdminShopItem, index: number) => {
-          return <div key={value + index}>TODO {value}{index}</div>;
-          // return <AdminShopSelectorClientItem key={value + index} item={value} periode={"day"}
-          // adminShopPage={false}/>;
-        })}
-      </div>
+      <AdminShopSelector currentItem={adminShopItemSelected ?? constants.adminShopItemsAvailable[0]} setCurrentItem={setAdminShopItemSelected}/>
       <ThresholdSelector/>
     </>
   );
@@ -110,7 +102,7 @@ function EventSelector() {
   const validEvents: EventType[] = ["BOSS", "A VOS MARQUES", "TOTEM", "EGGHUNT", "KOTH", "BLACKMARKET"];
 
   return (
-    <div className="flex flex-row justify-between">
+    <div className="flex flex-wrap gap-2">
       {validEvents.map((event, index) => (
         <Button
           key={event + index}

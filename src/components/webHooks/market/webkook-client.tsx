@@ -4,6 +4,7 @@ import { useWebhookStore } from "@/stores/use-webhook-store";
 import { OptionType } from "@/types";
 import { getAllItemsServerAction } from "@/lib/api/api-server-action.server";
 import { ThresholdSelector } from "@/components/webHooks/webhook-threshold-selector.client";
+import { LoadingSpinner } from "@/components/ui/loading-spinner";
 
 function WebHookMarketClient({ options }: {
   options: OptionType[]
@@ -31,7 +32,7 @@ function MarketSelectorClient() {
   }, []);
 
   if (options.length === 0) {
-    return <div>Loading...</div>;
+    return <LoadingSpinner/>;
   }
 
   return (
