@@ -26,6 +26,66 @@ const timeRanges: { key: AdminShopPeriod, label: string }[] = [
  */
 export function AdminShopHistoryPage() {
   const [currentItem, setCurrentItem] = useState<AdminShopItem>(constants.adminShopItemsAvailable[0]);
+
+  return (
+    <>
+      <PageHeader>
+        <PageHeaderHeading>
+          {textFormatting(`Historique de vente à l'Admin-Shop ${currentItem ? ` de °${adminShopItemToUserFriendlyText(currentItem)}°` : ""}`)}
+        </PageHeaderHeading>
+        <PageHeaderDescription>
+          {"Consultez l'historique des prix de vente pour les différents items de l'Admin-Shop."}
+        </PageHeaderDescription>
+      </PageHeader>
+
+      <AdminShopSelector currentItem={currentItem} setCurrentItem={setCurrentItem} />
+
+      <AdminShopGraph currentItem={currentItem} />
+
+    </>
+  );
+}
+
+/**
+ * Admin shop item selector component.
+ * @param props.currentItem - Current selected item
+ * @param props.setCurrentItem - Set current selected item
+ */
+export function AdminShopSelector({ currentItem, setCurrentItem }: {
+  currentItem: AdminShopItem,
+  setCurrentItem: (item: AdminShopItem) => void,
+}) {
+  return (
+    <div className="mb-4">
+      <label className="block text-sm font-medium mb-2">
+        Choisir un item
+      </label>
+      <div className="flex flex-wrap">
+        {constants.adminShopItemsAvailable.map((value: AdminShopItem) => (
+          <GroupedSpanContainer group={adminShopItemToUserFriendlyText(value)} className="w-16 h-16 p-1" key={value + "-groupSpanContainer"}>
+            <Button
+              variant="primary"
+              key={value + "-button"}
+              onClick={() => setCurrentItem(value)}
+              className={cn("w-full h-full p-2 text-sm font-semibold rounded transition-colors",
+                currentItem === value
+                  ? "bg-primary "
+                  : "bg-secondary hover:bg-[#282a2c]")}
+            >
+              <UnOptimizedImage src={getImagePathFromAdminShopType(value)} alt={value} width={0} height={0} className="w-full h-full pixelated" />
+            </Button>
+          </GroupedSpanContainer>
+        ))}
+      </div>
+    </div>
+  );
+};
+
+/**
+ * Admin shop graph component.
+ * @param props.currentItem - Current selected item
+ */
+export function AdminShopGraph({ currentItem }: { currentItem: AdminShopItem }) {
   const [currentTimeRange, setCurrentTimeRange] = useState<AdminShopPeriod>("month");
   const axes: AxisConfig[] = [
     { id: "x-axis", position: "bottom", type: "date" },
@@ -49,59 +109,23 @@ export function AdminShopHistoryPage() {
         }),
         yAxisId: "y-axis"
       }]);
-
     });
   }, [currentItem, currentTimeRange]);
 
   return (
-    <>
-      <PageHeader>
-        <PageHeaderHeading>
-          {textFormatting(`Historique de vente à l'Admin-Shop ${currentItem ? ` de °${adminShopItemToUserFriendlyText(currentItem)}°` : ""}`)}
-        </PageHeaderHeading>
-        <PageHeaderDescription>
-          {"Consultez l'historique des prix de vente pour les différents items de l'Admin-Shop."}
-        </PageHeaderDescription>
-      </PageHeader>
-
-      <div className="mb-4">
-        <label className="block text-sm font-medium mb-2">
-          Choisir un item
-        </label>
-        <div className="flex flex-wrap">
-          {constants.adminShopItemsAvailable.map((value: AdminShopItem) => (
-            <GroupedSpanContainer group={adminShopItemToUserFriendlyText(value)} className="w-16 h-16 p-1" key={value + "-groupSpanContainer"}>
-              <Button
-                variant="primary"
-                key={value + "-button"}
-                onClick={() => setCurrentItem(value)}
-                className={cn("w-full h-full p-2 text-sm font-semibold rounded transition-colors",
-                  currentItem === value
-                    ? "bg-primary "
-                    : "bg-secondary hover:bg-[#282a2c]")}
-              >
-                <UnOptimizedImage src={getImagePathFromAdminShopType(value)} alt={value} width={0} height={0} className="w-full h-full pixelated"/>
-              </Button>
-            </GroupedSpanContainer>
-          ))}
-        </div>
+    <Card className="flex flex-col items-center gap-2">
+      <h2 className="text-2xl font-semibold mb-4">
+        Prix de vente de: <span className="text-primary">{adminShopItemToUserFriendlyText(currentItem)}</span>
+      </h2>
+      <TimeSelection selected={currentTimeRange} callback={setCurrentTimeRange} timeRanges={timeRanges}/>
+      <div className="w-full h-[425px]">
+        <ChartContainer
+          className="h-[425px]"
+          data={datasets}
+          axisConfigs={axes}
+          renderContent={(props) => <LineGrad {...props} />}
+        />
       </div>
-
-      <Card className="flex flex-col items-center gap-2">
-        <h2 className="text-2xl font-semibold mb-4">
-          Prix de vente de: <span className="text-primary">{adminShopItemToUserFriendlyText(currentItem)}</span>
-        </h2>
-        <TimeSelection selected={currentTimeRange} callback={setCurrentTimeRange} timeRanges={timeRanges}/>
-        <div className="w-full h-[425px]">
-          <ChartContainer
-            className="h-[425px]"
-            data={datasets}
-            axisConfigs={axes}
-            renderContent={(props) => <LineGrad {...props} />}
-          />
-        </div>
-      </Card>
-
-    </>
+    </Card>
   );
 }
