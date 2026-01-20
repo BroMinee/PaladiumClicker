@@ -10,12 +10,14 @@ import { useWebhookAlertStore } from "@/stores/use-webhook-alert-store";
 import { DiscordProfilPicture } from "../account/discord-profil-picture.client";
 import { WebhookServerSection } from "./webhook-server.client";
 import { Button } from "@/components/ui/button-v2";
+import { useProfileStore } from "@/stores/use-profile-store";
 
 /**
  * Dashboard component for managing webhook alert.
  */
 export function DashboardRefonteMultipleChannels() {
   const { groupedServer } = useWebhookAlertStore();
+  const { profileInfo } = useProfileStore();
 
   return (
     <Card>
@@ -24,7 +26,7 @@ export function DashboardRefonteMultipleChannels() {
         <div className="flex items-center gap-4">
           <DiscordProfilPicture className="w-16 h-16 border-2 border-green-500 shadow-[0_0_15px_rgba(33,194,93,0.7)]" />
           <div>
-            <h1 className="text-2xl font-bold ">Bonjour, <span className="text-primary">BroMine</span></h1>
+            <h1 className="text-2xl font-bold ">Bonjour, <span className="text-primary">{profileInfo?.global_name}</span></h1>
             <p className="text-card-foreground text-sm">Gérez vos alertes discord</p>
           </div>
         </div>
