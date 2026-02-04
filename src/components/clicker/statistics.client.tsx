@@ -125,7 +125,7 @@ export function StatTotalProd() {
 export function StatButton() {
   const { data: playerInfo, setPlayerInfo } = usePlayerInfoStore();
   const { buildingBuyPaths } = useClickerStore();
-  const handleBuyButton = () => buyBuilding(playerInfo, setPlayerInfo, buildingBuyPaths);
+  const handleBuyButton = () => buyBuilding(playerInfo, setPlayerInfo, buildingBuyPaths.length === 0 ? [] : [buildingBuyPaths[0]]);
 
   return (<>
     <SearchPlayerInput variant={"clicker"} />
