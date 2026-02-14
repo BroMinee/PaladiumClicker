@@ -5,6 +5,19 @@ import { Button } from "@/components/ui/button-v2";
 import { usePlayerInfoStore } from "@/stores/use-player-info-store";
 
 /**
+ * Twitch Logo Component
+ */
+export function TwitchLogo() {
+  return (
+    <div className="relative flex-shrink-0 flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 bg-purple-600 rounded-full shadow-[0_0_15px_rgba(147,51,234,0.5)]">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" fill="white" className="w-6 h-6 sm:w-8 sm:h-8">
+        <path d="M455.4 167.5L416.8 167.5L416.8 277.2L455.4 277.2L455.4 167.5zM349.2 167L310.6 167L310.6 276.8L349.2 276.8L349.2 167zM185 64L88.5 155.4L88.5 484.6L204.3 484.6L204.3 576L300.8 484.6L378.1 484.6L551.9 320L551.9 64L185 64zM513.3 301.8L436.1 374.9L358.9 374.9L291.3 438.9L291.3 374.9L204.4 374.9L204.4 100.6L513.3 100.6L513.3 301.8z" />
+      </svg>
+    </div>
+  );
+}
+
+/**
  * Twitch Overlay Button Component
  */
 export function TwitchOverlayButton() {
@@ -25,12 +38,7 @@ export function TwitchOverlayButton() {
         <div className="absolute inset-0 bg-gradient-to-r from-purple-900/80 via-purple-900/50 z-0 pointer-events-none" />
         <div className="relative z-10 flex flex-col sm:flex-row items-center justify-between gap-3 p-3 sm:p-4">
           <div className="flex items-center gap-3 sm:gap-4 w-full sm:w-auto">
-            <div className="relative flex-shrink-0 flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 bg-purple-600 rounded-full shadow-[0_0_15px_rgba(147,51,234,0.5)]">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" fill="white" className="w-6 h-6 sm:w-8 sm:h-8">
-                <path d="M455.4 167.5L416.8 167.5L416.8 277.2L455.4 277.2L455.4 167.5zM349.2 167L310.6 167L310.6 276.8L349.2 276.8L349.2 167zM185 64L88.5 155.4L88.5 484.6L204.3 484.6L204.3 576L300.8 484.6L378.1 484.6L551.9 320L551.9 64L185 64zM513.3 301.8L436.1 374.9L358.9 374.9L291.3 438.9L291.3 374.9L204.4 374.9L204.4 100.6L513.3 100.6L513.3 301.8z"/>
-              </svg>
-            </div>
-
+            <TwitchLogo />
             <div className="text-left flex-1 sm:flex-none">
               <h3 className="font-bold text-base sm:text-lg leading-tight">
                 Streamer sur Twitch ?
