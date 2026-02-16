@@ -10,7 +10,7 @@ jobs:
   docker-release:
     name: Build Docker image and publish it
     runs-on: ubuntu-latest
-    if: github.event_name != 'pull_request'
+    if: github.repository == 'BroMineCorp/PaladiumClickerNextJS' && github.event_name != 'pull_request'
     steps:
       - uses: actions/checkout@v4
 
@@ -35,3 +35,20 @@ jobs:
             echo "Unsupported branch: ${{ github.ref }}"
             exit 1
           fi
+
+  build:
+    name: Build application
+    runs-on: ubuntu-latest
+    if: github.repository == 'BroMinee/PaladiumClicker'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - run: npm ci
+      - run: npm run build
+        env:
+          PALADIUM_API_KEY: "dummy-api-key"
+          NEXT_PUBLIC_PALACLICKER_API_URL: "https://palatracker.bromine.fr"
+          NEXT_PUBLIC_PALACLICKER_API_WS: "wss://palatracker.bromine.fr"
+          PALADIUM_API_URL: "https://palatracker.bromine.fr"
