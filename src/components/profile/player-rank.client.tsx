@@ -5,7 +5,7 @@ import Image from "next/image";
 import { LoadingSpinner } from "@/components/ui/loading-spinner";
 import { constants } from "@/lib/constants";
 import { getRankImg, safeJoinPaths } from "@/lib/misc";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 /**
  * Display the player's rank
@@ -16,6 +16,10 @@ export function PlayerRank() {
   const [imgSrc, setImgSrc] = useState(getRankImg(rank));
 
   const fallbackSrc = getRankImg("Default");
+
+  useEffect(() => {
+    setImgSrc(getRankImg(rank));
+  }, [rank]);
 
   const handleImageError = () => {
     if (imgSrc !== fallbackSrc) {
