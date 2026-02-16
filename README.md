@@ -1,4 +1,4 @@
-![CI Status](https://github.com/BroMineCorp/PaladiumClickerNextJS/actions/workflows/ci.yml/badge.svg)
+![CI Status](https://github.com/BroMinee/PaladiumClicker/actions/workflows/ci.yml/badge.svg)
 
 # https://palatracker.bromine.fr
 
