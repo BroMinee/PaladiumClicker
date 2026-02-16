@@ -15,7 +15,7 @@ import { GraphLegends } from "../shared/graph-legends.client";
 /**
  * Display the ranking section tabs and tabs content.
  */
-export function RankingSectionSelector() {
+export function RankingSectionSelector({ username }: { username?: string }) {
   const GenerateLabel = (rankingType: RankingType) => {
     return <UnOptimizedImage src={getImagePathFromRankingType(rankingType)} alt={rankingType} width={48} height={48} unoptimized={true}
       className="h-8 w-8 pixelated rounded-md mx-2"/>;
@@ -23,16 +23,16 @@ export function RankingSectionSelector() {
 
   const tabs: TabData<RankingType>[] =
     [
-      { key: RankingType.money, label: GenerateLabel(RankingType.money), content: () => <FetchLeaderboardData rankingType={RankingType.money} /> },
-      { key: RankingType["job.alchemist"], label: GenerateLabel(RankingType["job.alchemist"]), content: () => <FetchLeaderboardData rankingType={RankingType["job.alchemist"]} /> },
-      { key: RankingType["job.hunter"], label: GenerateLabel(RankingType["job.hunter"]), content: () => <FetchLeaderboardData rankingType={RankingType["job.hunter"]} /> },
-      { key: RankingType["job.miner"], label: GenerateLabel(RankingType["job.miner"]), content: () => <FetchLeaderboardData rankingType={RankingType["job.miner"]} /> },
-      { key: RankingType["job.farmer"], label: GenerateLabel(RankingType["job.farmer"]), content: () => <FetchLeaderboardData rankingType={RankingType["job.farmer"]} /> },
-      { key: RankingType.boss, label: GenerateLabel(RankingType.boss), content: () => <FetchLeaderboardData rankingType={RankingType.boss} /> },
-      { key: RankingType.egghunt, label: GenerateLabel(RankingType.egghunt), content: () => <FetchLeaderboardData rankingType={RankingType.egghunt} /> },
-      { key: RankingType.koth, label: GenerateLabel(RankingType.koth), content: () => <FetchLeaderboardData rankingType={RankingType.koth} /> },
-      { key: RankingType.clicker, label: GenerateLabel(RankingType.clicker), content: () => <FetchLeaderboardData rankingType={RankingType.clicker} /> },
-      { key: RankingType.vote, label: GenerateLabel(RankingType.vote), content: () => <FetchLeaderboardData rankingType={RankingType.vote} /> },
+      { key: RankingType.money, label: GenerateLabel(RankingType.money), content: () => <FetchLeaderboardData rankingType={RankingType.money} username={username} /> },
+      { key: RankingType["job.alchemist"], label: GenerateLabel(RankingType["job.alchemist"]), content: () => <FetchLeaderboardData rankingType={RankingType["job.alchemist"]} username={username} /> },
+      { key: RankingType["job.hunter"], label: GenerateLabel(RankingType["job.hunter"]), content: () => <FetchLeaderboardData rankingType={RankingType["job.hunter"]} username={username} /> },
+      { key: RankingType["job.miner"], label: GenerateLabel(RankingType["job.miner"]), content: () => <FetchLeaderboardData rankingType={RankingType["job.miner"]} username={username} /> },
+      { key: RankingType["job.farmer"], label: GenerateLabel(RankingType["job.farmer"]), content: () => <FetchLeaderboardData rankingType={RankingType["job.farmer"]} username={username} /> },
+      { key: RankingType.boss, label: GenerateLabel(RankingType.boss), content: () => <FetchLeaderboardData rankingType={RankingType.boss} username={username} /> },
+      { key: RankingType.egghunt, label: GenerateLabel(RankingType.egghunt), content: () => <FetchLeaderboardData rankingType={RankingType.egghunt} username={username} /> },
+      { key: RankingType.koth, label: GenerateLabel(RankingType.koth), content: () => <FetchLeaderboardData rankingType={RankingType.koth} username={username} /> },
+      { key: RankingType.clicker, label: GenerateLabel(RankingType.clicker), content: () => <FetchLeaderboardData rankingType={RankingType.clicker} username={username} /> },
+      { key: RankingType.vote, label: GenerateLabel(RankingType.vote), content: () => <FetchLeaderboardData rankingType={RankingType.vote} username={username} /> },
     ];
 
   return (
@@ -55,7 +55,7 @@ const color = [
 /**
  * Fetch the ranking data and display the page
  */
-function FetchLeaderboardData({ rankingType }: { rankingType: RankingType }) {
+function FetchLeaderboardData({ rankingType, username }: { rankingType: RankingType, username?: string }) {
   const router = useRouter();
   const [data, setData] = useState<Dataset<Date, number>[]>([]);
   const [addedPlayerUsername, setAddedPlayerUsername] = useState<Set<string>>(new Set());
@@ -91,6 +91,45 @@ function FetchLeaderboardData({ rankingType }: { rankingType: RankingType }) {
     );
   }
   useEffect(() => {
+    if (username) {
+      const fetchData = async () => {
+        const datasets: Dataset<Date, number>[] = [];
+        try {
+          const userData = await getRankingLeaderboardPlayerUsernameAction(username, rankingType);
+          datasets.push({
+            id: userData.at(0)?.username ?? username,
+            name: userData.at(0)?.username ?? username,
+            color: color[0],
+            visibility: true,
+            yAxisId: "y-axis",
+            stats: userData.map(e => ({ x: new Date(e.date), y: e.value }))
+          });
+        } catch (e) {
+          console.error(e);
+        }
+
+        const addedUsers = Array.from(addedPlayerUsername).filter(u => u.toLowerCase() !== username.toLowerCase());
+        for (let i = 0; i < addedUsers.length; i++) {
+          try {
+            const u = addedUsers[i];
+            const userData = await getRankingLeaderboardPlayerUsernameAction(u, rankingType);
+            datasets.push({
+              id: userData.at(0)?.username ?? u,
+              name: userData.at(0)?.username ?? u,
+              color: color[(i + 1) % color.length],
+              visibility: true,
+              yAxisId: "y-axis",
+              stats: userData.map(e => ({ x: new Date(e.date), y: e.value }))
+            });
+          } catch (e) {
+            console.error(e);
+          }
+        }
+        setData(datasets);
+      };
+      fetchData();
+      return;
+    }
 
     getRankingLeaderboardAction(rankingType).then(e => {
       setData(e.map((plt, index) => {
@@ -137,7 +176,7 @@ function FetchLeaderboardData({ rankingType }: { rankingType: RankingType }) {
       router.push(`/error?message=${encodeURIComponent("Impossible de récupérer les données du classement sélectionné")}`);
     });
 
-  }, [rankingType, router, addedPlayerUsername]);
+  }, [rankingType, router, addedPlayerUsername, username]);
 
   const axes: AxisConfig[] = [
     { id: "x-axis", position: "bottom", type: "date" },
@@ -163,6 +202,5 @@ function FetchLeaderboardData({ rankingType }: { rankingType: RankingType }) {
 
       <GraphLegends data={data} toggleVisibility={toggleVisibility} handleHighlight={handleHighlight} className="lg:col-span-2"/>
     </div>
-
   </>);
 }
