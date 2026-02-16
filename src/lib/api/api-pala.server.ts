@@ -309,9 +309,9 @@ export const getPaladiumAhItemStats = async (itemId: string): Promise<PaladiumAh
 };
 
 const getJobsFromUUID = async (uuid: string, username: string): Promise<Metiers> => {
-  const response = await fetchWithHeader<MetiersPossiblyUndefined>(`${PALADIUM_API_URL}/v1/paladium/player/profile/${uuid}/jobs`, 0).catch((e: Error) => {
-    const message = e.message;
-    return redirect(`/error?message=Impossible de récupérer tes données de métiers, vérifie que tu ne les as pas désactivées sur ton profil Paladium via la commande /profil.&detail=${message}&username=${username}`);
+  const response = await fetchWithHeader<MetiersPossiblyUndefined>(`${PALADIUM_API_URL}/v1/paladium/player/profile/${uuid}/jobs`, 0).catch((_e: Error) => {
+    console.error("Erreur lors de la récupération des données de métiers de ", username);
+    return {} as MetiersPossiblyUndefined;
   });
 
   // NOTE we take the original JSON to have name easily modifiable (for example response.farmer.name witch is not in the response JSON)
