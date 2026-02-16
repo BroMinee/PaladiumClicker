@@ -1,4 +1,4 @@
-import { MetierKey } from "@/types";
+import { MetierKey, ModelName } from "@/types";
 import { safeJoinPaths } from "./navbar";
 import { constants } from "@/lib/constants";
 
@@ -210,3 +210,61 @@ export const levenshteinDistance = (a: string, b: string): number => {
   }
   return matrix[b.length][a.length];
 };
+
+/**
+ * Converts a mount type ID to its corresponding model name.
+ */
+export function convertMontureTypeIdToModelName(montureTypeId: number): ModelName {
+  switch (montureTypeId) {
+  case 1:
+    return "dancarok";
+  case 2:
+    return "ravirok";
+  case 3:
+    return "tedarok";
+  default:
+    return "dancarok";
+  }
+}
+
+/**
+ * Converts a pet skin name to its corresponding model name.
+ * @param petSkin The name of the pet skin.
+ * @returns The corresponding model name.
+ */
+export function convertPetSkinToModelName(petSkin: string): ModelName {
+  switch (petSkin) {
+  case "arty":
+    return "arty";
+  case "cat":
+    return "cat";
+  case "dog":
+    return "dog";
+  case "dragon":
+    return "dragon";
+  case "feng_uang":
+    return "feng_uang";
+  case "kapio_koi":
+    return "kapio_koi";
+  case "pet_blobfish":
+    return "pet_blobfish";
+  case "pet_mini_golem":
+    return "pet_mini_golem";
+  case "pet_penguin":
+    return "pet_penguin";
+  case "pet_ufo":
+    return "pet_ufo";
+  case "pet_zombie_hand":
+    return "pet_zombie_hand";
+  case "rabbit":
+    return "rabbit";
+  case "pet_ender_dragon":
+    return "pet_ender_dragon";
+  case "pet_reindeer":
+    return "pet_reindeer";
+  case "pet_chameleon":
+    return "pet_chameleon";
+  default:
+    return "arty";
+  }
+}

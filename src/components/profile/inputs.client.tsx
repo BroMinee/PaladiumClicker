@@ -9,6 +9,7 @@ import { getAllItemsServerAction } from "@/lib/api/api-server-action.server";
 import { useEffect, useState } from "react";
 import { OptionType, ProfilSection } from "@/types";
 import { SetItemsStats } from "../shared/set-items-state.client";
+import { PetMountSection } from "./pets-mount.client";
 
 /**
  * Display the profile section tabs and tabs content.
@@ -26,6 +27,7 @@ export function ProfileSectionSelector({ defaultSection}: { defaultSection?: Pro
     { key: "Amis", label: "Amis", content: () => <FriendsSection/> },
     { key: "Succès", label: "Succès", content: () => <SetItemsStats allItems={allItems}><AchievementSection/></SetItemsStats> },
     { key: "Market", label: "Hôtel de Vente", content: () => <SetItemsStats allItems={allItems}><MarketSection/></SetItemsStats> },
+    { key: "Pets/Monture", label: "Pet/Monture", content: () => <PetMountSection/> },
   ];
 
   return (
