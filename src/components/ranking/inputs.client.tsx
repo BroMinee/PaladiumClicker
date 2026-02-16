@@ -200,7 +200,11 @@ function FetchLeaderboardData({ rankingType, username }: { rankingType: RankingT
     <div className="mt-6 grid grid-cols-1 lg:grid-cols-3 gap-6">
       <RankingAddPlayerInput handleAddPlayer={(username) => setAddedPlayerUsername(prev => new Set(prev).add(username))}/>
 
-      <GraphLegends data={data} toggleVisibility={toggleVisibility} handleHighlight={handleHighlight} className="lg:col-span-2"/>
+      <GraphLegends data={data.toSorted((a, b) => {
+        const lastA = a.stats[a.stats.length - 1]?.y ?? 0;
+        const lastB = b.stats[b.stats.length - 1]?.y ?? 0;
+        return lastB - lastA;
+      })} toggleVisibility={toggleVisibility} handleHighlight={handleHighlight} className="lg:col-span-2"/>
     </div>
   </>);
 }
