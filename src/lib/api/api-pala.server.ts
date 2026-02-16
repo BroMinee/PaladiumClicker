@@ -496,6 +496,7 @@ export async function getGithubContributors(): Promise<GithubContributor[]> {
   const repos = [
     "https://api.github.com/repos/BroMinee/PaladiumClicker/contributors",
   ];
+  const bannedLogins = new Set(["dependabot[bot]"]);
 
   try {
     const results = await Promise.all(
@@ -518,7 +519,7 @@ export async function getGithubContributors(): Promise<GithubContributor[]> {
 
     const contributorsMap = new Map<string, GithubContributor>();
 
-    results.flat().forEach((contributor) => {
+    results.flat().filter((contributor) => !bannedLogins.has(contributor.login)).forEach((contributor) => {
       if (contributorsMap.has(contributor.login)) {
         const existing = contributorsMap.get(contributor.login)!;
         existing.contributions += contributor.contributions;
