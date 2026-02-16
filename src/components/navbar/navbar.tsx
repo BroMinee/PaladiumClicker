@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { Sheet, SheetContent, SheetHeader, SheetTrigger } from "@/components/ui/sheet";
+import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { FaBars, FaCalculator, FaClipboardList, FaKey, FaShoppingBasket } from "react-icons/fa";
 import { constants } from "@/lib/constants";
 import { LogoClient } from "@/components/ui/logo-client.client";
@@ -29,7 +29,7 @@ export const Navbar = () => {
   return (
     <>
       <div
-        className="h-screen overflow-auto no-scrollbar bg-card hidden lg:flex flex-col w-64 border-r border-gray-600">
+        className="h-screen overflow-hidden no-scrollbar bg-card hidden lg:flex flex-col w-64 border-r border-gray-600">
         <NavBarContent/>
       </div>
 
@@ -42,64 +42,71 @@ export const Navbar = () => {
 function NavBarContent() {
   return (
     <>
-      <nav className="flex-grow">
+      <nav className="flex-grow flex flex-col min-h-0">
         {/*<MobileNav/>*/}
         <LogoClient/>
         <div className="flex justify-center w-full border-gray-600 border-b space-y-3 pb-5 ">
           <SearchPlayerInput variant="navbar"/>
           {/* <ImportProfil showResetButton navBar/> */}
         </div>
-        <NavbarCategoryDisplay name={"Statistiques et données"}>
-          <LinkClient path={constants.profilPath}>
-            <User size={24}/>
-          </LinkClient>
-          <LinkClient path={constants.ahPath}>
-            <FaShoppingBasket size={24}/>
-          </LinkClient>
-          <LinkClient path={constants.adminShopPath}>
-            <LuShoppingCart size={24}/>
-          </LinkClient>
-          <LinkClient path={constants.moneyRanking}>
-            <PiRankingBold size={24}/>
-          </LinkClient>
-        </NavbarCategoryDisplay>
-        <NavbarCategoryDisplay name={"Outils"}>
-          <LinkClient path={constants.optimizerClickerPath}>
-            <MousePointer2 size={24}/>
-          </LinkClient>
-          <LinkClient path={constants.calculatorXpPath}>
-            <FaCalculator size={24}/>
-          </LinkClient>
-          <LinkClient path={constants.palaAnimationPath}>
-            <IoMdStopwatch size={32}/>
-          </LinkClient>
-          <LinkClient path={constants.craftingCalculatorPath}>
-            <Hammer size={24}/>
-          </LinkClient>
-          <LinkClient path={constants.craftingOptimizerPath}>
-            <ListChevronsUpDown size={24}/>
-          </LinkClient>
-          <LinkClient path={constants.webhooksPath}>
-            <MdOutlineWebhook size={24}/>
-          </LinkClient>
-        </NavbarCategoryDisplay>
-        <NavbarCategoryDisplay name={"Informations et gestion"}>
-          <LinkClient path={constants.statusPath}>
-            <HiOutlineStatusOnline size={24}/>
-          </LinkClient>
-          <LinkClient path={constants.patchnotePath}>
-            <FaClipboardList size={24}/>
-          </LinkClient>
-          {/* <GiveawayFakeLink>
-            <GiPayMoney size={24}/>
-          </GiveawayFakeLink> */}
-          <LinkClient path={constants.politiqueDeConfidentialitePath}>
-            <FaKey size={24}/>
-          </LinkClient>
-          <LinkClient path={constants.aboutPath}>
-            <IoMdInformationCircleOutline size={24}/>
-          </LinkClient>
-        </NavbarCategoryDisplay>
+        <div className="relative flex-grow min-h-0 flex flex-col">
+          <div className="flex-grow overflow-y-auto no-scrollbar">
+            <NavbarCategoryDisplay name={"Statistiques et données"}>
+              <LinkClient path={constants.profilPath}>
+                <User size={24}/>
+              </LinkClient>
+              <LinkClient path={constants.ahPath}>
+                <FaShoppingBasket size={24}/>
+              </LinkClient>
+              <LinkClient path={constants.adminShopPath}>
+                <LuShoppingCart size={24}/>
+              </LinkClient>
+              <LinkClient path={constants.moneyRanking}>
+                <PiRankingBold size={24}/>
+              </LinkClient>
+            </NavbarCategoryDisplay>
+            <NavbarCategoryDisplay name={"Outils"}>
+              <LinkClient path={constants.optimizerClickerPath}>
+                <MousePointer2 size={24}/>
+              </LinkClient>
+              <LinkClient path={constants.calculatorXpPath}>
+                <FaCalculator size={24}/>
+              </LinkClient>
+              <LinkClient path={constants.palaAnimationPath}>
+                <IoMdStopwatch size={32}/>
+              </LinkClient>
+              <LinkClient path={constants.craftingCalculatorPath}>
+                <Hammer size={24}/>
+              </LinkClient>
+              <LinkClient path={constants.craftingOptimizerPath}>
+                <ListChevronsUpDown size={24}/>
+              </LinkClient>
+              <LinkClient path={constants.webhooksPath}>
+                <MdOutlineWebhook size={24}/>
+              </LinkClient>
+            </NavbarCategoryDisplay>
+            <NavbarCategoryDisplay name={"Informations et gestion"}>
+              <LinkClient path={constants.statusPath}>
+                <HiOutlineStatusOnline size={24}/>
+              </LinkClient>
+              <LinkClient path={constants.patchnotePath}>
+                <FaClipboardList size={24}/>
+              </LinkClient>
+              {/* <GiveawayFakeLink>
+                <GiPayMoney size={24}/>
+              </GiveawayFakeLink> */}
+              <LinkClient path={constants.politiqueDeConfidentialitePath}>
+                <FaKey size={24}/>
+              </LinkClient>
+              <LinkClient path={constants.aboutPath}>
+                <IoMdInformationCircleOutline size={24}/>
+              </LinkClient>
+            </NavbarCategoryDisplay>
+          </div>
+          <div className="absolute top-0 left-0 w-full h-6 bg-gradient-to-b from-card to-transparent pointer-events-none"/>
+          <div className="absolute bottom-0 left-0 w-full h-6 bg-gradient-to-t from-card to-transparent pointer-events-none"/>
+        </div>
+
       </nav>
       <footer>
         <NotificationWebSite/>
@@ -131,10 +138,8 @@ const MobileNav = () => {
           <FaBars className="h-4 w-4"/>
         </Button>
       </SheetTrigger>
-      <SheetContent side="left" className="w-72 overflow-auto no-scrollbar z-[101]" id="mobile-sheet-content">
-        <SheetHeader>
-          <NavBarContent/>
-        </SheetHeader>
+      <SheetContent side="left" className="w-72 flex flex-col h-full p-0 gap-0 z-[101]" id="mobile-sheet-content">
+        <NavBarContent/>
       </SheetContent>
     </Sheet>
   );

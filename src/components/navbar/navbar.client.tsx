@@ -209,10 +209,10 @@ export function NavbarCategoryDisplay({ name, children }: {
 
   return (<div className="flex flex-col justify-start items-center px-6 border-b border-gray-600 w-full">
     <button onClick={toggleOpen}
-      className="focus:outline-none focus:text-indigo-400 text-card-foreground flex justify-between items-center w-full py-5 space-x-14 transition-colors duration-200">
+      className="focus:outline-none focus:text-indigo-400 text-card-foreground flex justify-between items-center w-full py-5 transition-colors duration-200">
       <p className="text-sm text-left leading-5 uppercase">{name}</p>
       <FaAngleDown size={24} className={cn(
-        "transition-transform duration-300 ease-in-out transform-gpu",
+        "transition-transform duration-300 ease-in-out transform-gpu shrink-0",
         open ? "rotate-180" : "rotate-0"
       )} />
 
@@ -228,10 +228,12 @@ export function NavbarCategoryDisplay({ name, children }: {
       ref={contentRef}
       style={{ maxHeight: maxHeight, opacity: open ? 1 : 0 }}
       className={cn(
-        "flex justify-start flex-col items-start pb-5 gap-1 overflow-hidden transition-all duration-300 ease-in-out"
+        "flex justify-start flex-col items-start gap-1 overflow-hidden transition-all duration-300 ease-in-out", !open && "pointer-events-none"
       )}
     >
-      {children}
+      <div className="flex justify-start flex-col items-start pb-5 gap-1">
+        {children}
+      </div>
     </div>
   </div>);
 }
