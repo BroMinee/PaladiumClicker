@@ -120,6 +120,10 @@ export const ChartContainer = <TX extends AxisDomain, TY extends AxisDomain>({
   const clipPathId = useMemo(() => `chart-clip-${Math.random().toString(36)}`, []);
   const [activeXValue, setActiveXValue] = useState<any | null>(null);
 
+  const hasVisibleData = useMemo(() => {
+    return data.some(d => d.visibility && d.stats.length > 0);
+  }, [data]);
+
   useEffect(() => {
     setZoomTransform(d3.zoomIdentity);
   }, [data]);
@@ -271,6 +275,14 @@ export const ChartContainer = <TX extends AxisDomain, TY extends AxisDomain>({
 
   if (!dimensions) {
     return <div ref={containerRef} className={cn("w-full h-full", className)}/>;
+  }
+
+  if (!hasVisibleData) {
+    return (
+      <div ref={containerRef} className={cn("w-full h-full flex items-center justify-center", className)}>
+        <p className="text-muted-foreground font-semibold text-lg">Aucune donnée à afficher</p>
+      </div>
+    );
   }
 
   return (
