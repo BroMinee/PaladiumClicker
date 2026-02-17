@@ -1,5 +1,30 @@
 [
   {
+    "date": "17/02/2026",
+    "changes": {
+      "additions": [
+        "Retour du classement du joueur sur la page de [profil](https://palatracker.bromine.fr/profil/BroMine__?section=Classement).",
+        "Retour de la section dédiée aux Pets et Montures sur le [profil](https://palatracker.bromine.fr/profil/BroMine__?section=Pet/Monture)."
+      ],
+      "améliorations": [
+        "Le classement n'affiche désormais que le top 5 par défaut pour plus de clarté.",
+        "La légende des graphiques est maintenant triée selon le classement des joueurs.",
+        "Amélioration de l'affichage des graphiques lorsqu'aucune donnée n'est disponible.",
+        "Amélioration de la barre de navigation, pour toujours afficher les notifications en cas de panne d'API."
+      ],
+      "corrections": [
+        "Correction de nombreux bugs sur les graphiques : courbes invisibles, taille des histogrammes, chevauchement du texte et précision du zoom.",
+        "Correction d'un bug dans le clicker où le bouton d'achat pouvait acheter plusieurs bâtiments d'un coup.",
+        "Correction de l'image du rang du joueur qui était incorrecte après un rechargement de la page.",
+        "Gestion améliorée des erreurs lorsque l'API ne répond pas les métiers (fallback niveau 0)."
+      ],
+      "techniques": [
+        "Mise à jour des dépendances",
+        "Correction de la CI sur le repo public"
+      ]
+    }
+  },
+  {
     "date": "14/01/2026",
     "changes": {
       "open source": [
