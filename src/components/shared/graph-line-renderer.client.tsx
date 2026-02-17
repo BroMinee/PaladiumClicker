@@ -181,15 +181,25 @@ export const RenderPriceVolume = (props: ChartRendererProps<Date, number>) => {
 
   const volumeStats = data.find(d => d.id === "volume")?.stats || [];
 
-  let barWidth = 6;
+  let minDiff = Number.MAX_VALUE;
   if (volumeStats.length > 1) {
-    const x0 = xScale(volumeStats[0].x);
-    const x1 = xScale(volumeStats[1].x);
-    barWidth = Math.min(Math.abs(x1 - x0), 100);
+    for (let i = 1; i < volumeStats.length; i++) {
+      const x0 = xScale(volumeStats[i - 1].x);
+      const x1 = xScale(volumeStats[i].x);
+      const diff = Math.abs(x1 - x0);
+      if (diff < minDiff) {
+        minDiff = diff;
+      }
+    }
   }
 
-  const gap = 1;
-  const finalWidth = Math.max(1, barWidth - gap);
+  if (minDiff === Number.MAX_VALUE) {
+    minDiff = 50;
+  }
+  minDiff = Math.min(minDiff, 100);
+
+  const gap = Math.max(1, minDiff * 0.1);
+  const finalWidth = Math.max(1, minDiff - gap);
 
   return (
     <>
