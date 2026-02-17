@@ -114,6 +114,7 @@ export const ChartContainer = <TX extends AxisDomain, TY extends AxisDomain>({
   const containerRef = useRef<HTMLDivElement>(null);
   const svgRef = useRef<SVGSVGElement>(null);
   const dimensions = useResizeObserver(containerRef);
+  const zoomRectRef = useRef<SVGRectElement>(null);
   const [zoomTransform, setZoomTransform] = useState<d3.ZoomTransform>(d3.zoomIdentity);
 
   const [tooltip, setTooltip] = useState<TooltipData<TY> | null>(null);
@@ -172,16 +173,18 @@ export const ChartContainer = <TX extends AxisDomain, TY extends AxisDomain>({
   }, [width, height, axisConfigs, domains]);
 
   useEffect(() => {
-    if (!svgRef.current || !width || !height) {
+    if (!zoomRectRef.current || !width || !height || data.length === 0) {
       return;
     }
-    const zoom = d3.zoom<SVGSVGElement, unknown>()
+    const zoom = d3.zoom<SVGRectElement, unknown>()
       .scaleExtent([1, 10])
       .translateExtent([[0, 0], [width, height]])
       .extent([[0, 0], [width, height]])
       .on("zoom", (e) => setZoomTransform(e.transform));
-    d3.select(svgRef.current).call(zoom);
-  }, [width, height]);
+    // Remove previous zoom handlers to avoid multiple bindings, it doesn't seem to be the case in the navigator but it's safer
+    d3.select(zoomRectRef.current).on(".zoom", null);
+    d3.select(zoomRectRef.current).call(zoom);
+  }, [width, height, data]);
 
   const finalScales = useMemo(() => ({ ...scales }), [scales]);
   const xAxisConfig = axisConfigs.find(c => c.position === "bottom");
@@ -312,6 +315,7 @@ export const ChartContainer = <TX extends AxisDomain, TY extends AxisDomain>({
           </g>
 
           <rect
+            ref={zoomRectRef}
             width={width}
             height={height}
             fill="transparent"
