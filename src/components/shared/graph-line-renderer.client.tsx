@@ -15,6 +15,7 @@ export const LineRenderer = <TX extends AxisDomain, TY extends number>({
   const yScale = scales["y-axis"];
 
   const lineGenerator = d3.line<DataPoint<TX, TY>>()
+    .defined((d) => !isNaN(d.y) && d.y !== null)
     .x((d) => (xScale as any)(d.x))
     .y((d) => (yScale as any)(d.y))
     .curve(d3.curveMonotoneX);
@@ -82,6 +83,7 @@ export const MultiAxisLineRenderer = <TX extends AxisDomain, TY extends number>(
         }
 
         const lineGenerator = d3.line<DataPoint<TX, TY>>()
+          .defined((d) => !isNaN(d.y) && d.y !== null)
           .x((d) => (xScale as any)(d.x))
           .y((d) => (yScale as any)(d.y))
           .curve(d3.curveMonotoneX);
@@ -122,11 +124,13 @@ export const LineGrad = <TX extends AxisDomain, TY extends number>({
         }
 
         const lineGenerator = d3.line<DataPoint<TX, TY>>()
+          .defined((d) => !isNaN(d.y) && d.y !== null)
           .x((d) => (xScale as any)(d.x))
           .y((d) => (yScale as any)(d.y))
           .curve(d3.curveMonotoneX);
 
         const areaGenerator = d3.area<DataPoint<TX, TY>>()
+          .defined((d) => !isNaN(d.y) && d.y !== null)
           .x((d) => (xScale as any)(d.x))
           .y0(yScale.range()[0])
           .y1((d) => (yScale as any)(d.y))
@@ -174,6 +178,7 @@ export const RenderPriceVolume = (props: ChartRendererProps<Date, number>) => {
   const yScaleVol = scales["right"] as d3.ScaleLinear<number, number>;
 
   const areaGenerator = d3.area<DataPoint<Date, number>>()
+    .defined((d) => !isNaN(d.y) && d.y !== null)
     .x(d => xScale(d.x))
     .y0(height)
     .y1(d => yScalePrice(d.y))
@@ -247,7 +252,11 @@ export const RenderPressure = (props: ChartRendererProps<Date, number>) => {
   const { data, scales } = props;
   const xScale = scales["x-axis"] as d3.ScaleTime<number, number>;
   const yScale = scales["left"] as d3.ScaleLinear<number, number>;
-  const lineGenerator = d3.line<DataPoint<Date, number>>().x(d => xScale(d.x)).y(d => yScale(d.y)).curve(d3.curveMonotoneX);
+  const lineGenerator = d3.line<DataPoint<Date, number>>()
+    .defined((d) => !isNaN(d.y) && d.y !== null)
+    .x(d => xScale(d.x))
+    .y(d => yScale(d.y))
+    .curve(d3.curveMonotoneX);
   const stats = data.find(d => d.id === "pressure")?.stats;
   if (!stats) {
     return null;
