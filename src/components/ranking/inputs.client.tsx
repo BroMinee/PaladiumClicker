@@ -146,6 +146,12 @@ function FetchLeaderboardData({ rankingType, username }: { rankingType: RankingT
             };
           })
         };
+      }).sort((a, b) => {
+        const lastA = a.stats[a.stats.length - 1]?.y ?? 0;
+        const lastB = b.stats[b.stats.length - 1]?.y ?? 0;
+        return lastB - lastA;
+      }).map((e, index) => {
+        return { ...e, visibility: index < 5 };
       }));
 
       const topUsernameLowerCase = new Set<string>(e.map(entry => Object.keys(entry)[0].toLocaleLowerCase()));
