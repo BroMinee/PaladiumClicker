@@ -425,47 +425,39 @@ const Axis = ({ config, scale, width, height }: { config: AxisConfig, scale: Any
     const group = d3.select(ref.current);
     group.call(axisGenerator as any);
 
-    if (config.position === "bottom" || config.position === "top") {
-      const ticks = group.selectAll<SVGGElement, unknown>(".tick").nodes();
+    const ticks = group.selectAll<SVGGElement, unknown>(".tick");
+    const isHorizontal = config.position === "bottom" || config.position === "top";
 
-      const overlaps = ticks.map(() => false);
+    const textsNode = ticks.nodes().map(tick => {
+      const text = tick.querySelector("text");
+      if (!text) {
+        return null;
+      }
+      return {
+        tick,
+        rect: text.getBoundingClientRect()
+      };
+    }).filter((item) => item !== null && item.rect.width !== 0 && item.rect.height !== 0) as Array<{ tick: SVGGElement; rect: DOMRect }>;
 
-      let lastRight = -Infinity;
+    textsNode.sort((a, b) => {
+      return isHorizontal
+        ? a.rect.left - b.rect.left
+        : a.rect.top - b.rect.top;
+    });
 
-      ticks.forEach((tick, i) => {
-        const text = tick.querySelector("text");
-        if (!text) {
-          return;
-        }
+    let lastEnd = -Infinity;
+    const padding = (textsNode.at(0)?.rect.width ?? 0) * 0.1;
 
-        const bbox = text.getBBox();
-        const tickLeft = bbox.x;
-        const tickRight = bbox.x + bbox.width;
+    textsNode.forEach(({ tick, rect }) => {
+      const start = isHorizontal ? rect.left : rect.top;
+      const end = isHorizontal ? rect.right : rect.bottom;
 
-        if (tickLeft < lastRight) {
-          overlaps[i] = true;
-          overlaps[i - 1] = true;
-        }
-
-        lastRight = Math.max(lastRight, tickRight);
-      });
-
-      let remove = true;
-
-      overlaps.forEach((isOverlap, i) => {
-        if (!isOverlap) {
-          remove = true;
-          return;
-        }
-
-        if (remove) {
-          ticks[i].remove();
-        }
-
-        remove = !remove;
-      });
-
-    }
+      if (start < lastEnd + padding) {
+        tick.remove();
+      } else {
+        lastEnd = end;
+      }
+    });
 
     if (config.color) {
       group.selectAll("line").attr("stroke", config.color);
