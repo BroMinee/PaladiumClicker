@@ -52,7 +52,7 @@ Configure des alertes Discord pour:
 
 
 ### Est-ce que je prévois d'ajouter d'autres fonctionnalités ?
-- Dans l'immédiat, non. Cependant, si vous avez des idées d'améliorations, n'hésitez pas à me les proposer ou à ouvrir des [pull requests](https://github.com/BroMineCorp/PaladiumClickerNextJS/pulls).
+- Dans l'immédiat, non. Cependant, si vous avez des idées d'améliorations, n'hésitez pas à me les proposer ou à ouvrir des [pull requests](https://github.com/BroMinee/PaladiumClicker/pulls).
 
 
 ## Comment développer
@@ -89,5 +89,5 @@ npm run test:jest # lancement des tests unitaires
 
 
 ## Autres
-- [Signaler un bug sur le site](https://github.com/BroMineCorp/PaladiumClickerNextJS/issues/new)
+- [Signaler un bug sur le site](https://github.com/BroMinee/PaladiumClicker/issues/new?title=Menteur%20il%20n%27y%20pas%20de%20bug%20sur%20mon%20site%20%F0%9F%98%A2)
 - Le site n'a pas forcément été pensé pour téléphone, il est donc déconseillé sur mobile mais reste tout de même fonctionnel.
