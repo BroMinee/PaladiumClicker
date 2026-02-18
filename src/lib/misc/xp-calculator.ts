@@ -91,18 +91,18 @@ export function getBonusRank(playerRank: PlayerRank | undefined) {
   switch (playerRank) {
   case "titan":
   case "heros":
-    return 5;
+    return 0.05;
   case "paladin":
   case "legend":
-    return 10;
+    return 0.1;
   case "endium":
   case "trixium":
   case "trixium+":
   case "divinity":
   case "rusher":
-    return 15;
+    return 0.15;
   case "premium": // premium add 5% (don't know how it's represented in the API) always place the condition at the end
-    return 5;
+    return 0.5;
   default:
     return 0;
   }
