@@ -161,7 +161,7 @@ export default function MarketPage() {
                     <UnOptimizedImage
                       src={safeJoinPaths("AH_img", displayItem.img)}
                       alt={displayItem.label}
-                      className={"w-20 h-20 pixelated transform group-hover-tween transition-transform duration-300"}
+                      className={"w-20 h-20 pixelated transform transition-transform duration-300 group-hover:scale-110"}
                       width={0} height={0}
                     />
                     <div className={`absolute inset-0 bg-black/40 ${"opacity-0 group-hover:opacity-100"} flex items-center justify-center transition-opacity`}>
