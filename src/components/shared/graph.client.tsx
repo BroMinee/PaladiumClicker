@@ -97,6 +97,16 @@ interface ChartContainerProps<TX extends AxisDomain, TY extends AxisDomain> {
   className?: string;
 }
 
+type InterpolatedSegment = {
+  id: string;
+  name: string;
+  color: string;
+  x0: number;
+  x1: number;
+  y0: number;
+  y1: number;
+};
+
 const bisectDate = d3.bisector((d: any) => d.x).left;
 
 /**
@@ -122,7 +132,7 @@ export const ChartContainer = <TX extends AxisDomain, TY extends AxisDomain>({
   const clipPathId = useMemo(() => `chart-clip-${Math.random().toString(36)}`, []);
   const [activeScreenX, setActiveScreenX] = useState<number | null>(null);
   const [activePoints, setActivePoints] = useState<Array<{name: string; color: string; x: number; y: number;}>>([]);
-  const animRef = useRef<{ id: number | null; start: number; from: number; to: number; duration: number; segments: any[] } | null>(null);
+  const animRef = useRef<{ id: number | null; start: number; from: number; to: number; duration: number; segments: InterpolatedSegment[] } | null>(null);
 
   const hasVisibleData = useMemo(() => {
     return data.some(d => d.visibility && d.stats.length > 0);
@@ -210,7 +220,7 @@ export const ChartContainer = <TX extends AxisDomain, TY extends AxisDomain>({
   useEffect(() => {
     if (!tooltip || activeScreenX == null) return;
     setTooltip(prev => prev ? { ...prev, x: activeScreenX + margin.left } : prev);
-  }, [activeScreenX]);
+  }, [activeScreenX, margin.left]);
 
   const finalScales = useMemo(() => ({ ...scales }), [scales]);
   const xAxisConfig = axisConfigs.find(c => c.position === "bottom");
@@ -219,6 +229,15 @@ export const ChartContainer = <TX extends AxisDomain, TY extends AxisDomain>({
       finalScales[xAxisConfig.id] = zoomTransform.rescaleX(scales[xAxisConfig.id] as any);
     }
   }
+
+  useEffect(() => {
+    return () => {
+      if (animRef.current && animRef.current.id !== null) {
+        cancelAnimationFrame(animRef.current.id);
+        animRef.current = null;
+      }
+    };
+  }, [data, finalScales, width, height, margin.left]);
 
   const handleMouseMove = useCallback((event: React.MouseEvent<SVGRectElement>) => {
     const xScale = finalScales["x-axis"];
@@ -292,7 +311,7 @@ export const ChartContainer = <TX extends AxisDomain, TY extends AxisDomain>({
       }
     });
 
-    const segments: any[] = visibleData.map(dataset => {
+    const segments: InterpolatedSegment[] = visibleData.map(dataset => {
       const idx2 = bisectDate(dataset.stats, snappedXValue, 1);
       const p0 = dataset.stats[idx2 - 1] || dataset.stats[0];
       const p1 = dataset.stats[idx2] || dataset.stats[dataset.stats.length - 1];

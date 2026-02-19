@@ -363,7 +363,10 @@ const AnimatedPath = (props: AnimatedPathProps) => {
           path.style.transition = `opacity 420ms ease ${0}ms`;
           path.style.opacity = String(fillOpacityTarget);
         }
-      } catch {
+      } catch (error) {
+        if (process.env.NODE_ENV !== "production") {
+          console.error("AnimatedPath animation error:", error);
+        }
       }
     }, delay);
 
