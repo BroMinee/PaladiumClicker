@@ -3,3 +3,24 @@
     font-family: 'Montserrat';
     font-weight: bold;
 }
+
+.chart-appear {
+    opacity: 0;
+    transform: translateY(6px);
+    transition: opacity 360ms ease, transform 360ms ease;
+}
+.chart-appear[data-appear="1"] {
+    opacity: 1;
+    transform: translateY(0);
+}
+.chart-appear .bar {
+    opacity: 0;
+    transform-origin: center bottom;
+    transform-box: fill-box;
+    transform: scaleY(0.001) translateY(6px);
+    transition: opacity 420ms ease, transform 420ms cubic-bezier(.2,.8,.2,1);
+}
+.chart-appear[data-appear="1"] .bar {
+    opacity: 0.3;
+    transform: scaleY(1) translateY(0);
+}

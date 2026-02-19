@@ -46,7 +46,7 @@ export const Contributors = () => {
   return <div className="grid grid-cols-1 grid-rows-1 md:grid-cols-2 md:grid-rows-2 gap-6">
     {contributeurs.map((contributeur, index) => (
       <a href={contributeur["url"]} key={contributeur.pseudo + contributeur.uuid} className="h-full">
-        <Card key={index} className="hover:scale-105 duration-300 cursor-pointer h-full">
+        <Card key={index} className="hover-tween cursor-pointer h-full">
           <CardContent className="h-full pt-6 flex items-center gap-4">
             <div className="flex flex-col items-center gap-4">
               <Image src={contributeur.urlImg} className="w-16 h-16 object-contain pixelated rounded-md"

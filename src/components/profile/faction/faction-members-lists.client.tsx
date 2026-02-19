@@ -20,7 +20,7 @@ export function FactionMembersList() {
     <h2 className="text-2xl font-semibold mb-4">Membres ({playerInfo.faction.players.length})</h2>
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
       {playerInfo.faction.players.map((player) => (
-        <ClickableLink href={`${constants.profilPath}/${player.username}`} key={player.uuid} className="hover:scale-105">
+        <ClickableLink href={`${constants.profilPath}/${player.username}`} key={player.uuid} className="hover-tween">
           <Card className="flex flex-col items-center justify-center hover:bg-secondary border">
             <div className="flex flex-col items-center justify-center gap-2">
               <UnOptimizedImage src={`https://mineskin.eu/helm/${player.uuid}`}

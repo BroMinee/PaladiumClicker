@@ -50,7 +50,7 @@ function BaseSaleCard({
 
   return (
     <ClickableLink
-      className="hover:scale-105 hover:text-card-foreground"
+      className="hover-tween hover:text-card-foreground"
       href={url}
     >
       <div className="relative flex flex-col hover:bg-secondary/80 border border-secondary hover:border-gray-500 rounded-lg transition-all duration-200 overflow-hidden">

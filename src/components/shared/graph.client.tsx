@@ -116,10 +116,13 @@ export const ChartContainer = <TX extends AxisDomain, TY extends AxisDomain>({
   const dimensions = useResizeObserver(containerRef);
   const zoomRectRef = useRef<SVGRectElement>(null);
   const [zoomTransform, setZoomTransform] = useState<d3.ZoomTransform>(d3.zoomIdentity);
+  const [shouldAnimateContent, setShouldAnimateContent] = useState(true);
 
   const [tooltip, setTooltip] = useState<TooltipData<TY> | null>(null);
   const clipPathId = useMemo(() => `chart-clip-${Math.random().toString(36)}`, []);
-  const [activeXValue, setActiveXValue] = useState<any | null>(null);
+  const [activeScreenX, setActiveScreenX] = useState<number | null>(null);
+  const [activePoints, setActivePoints] = useState<Array<{name: string; color: string; x: number; y: number;}>>([]);
+  const animRef = useRef<{ id: number | null; start: number; from: number; to: number; duration: number; segments: any[] } | null>(null);
 
   const hasVisibleData = useMemo(() => {
     return data.some(d => d.visibility && d.stats.length > 0);
@@ -127,6 +130,14 @@ export const ChartContainer = <TX extends AxisDomain, TY extends AxisDomain>({
 
   useEffect(() => {
     setZoomTransform(d3.zoomIdentity);
+  }, [data]);
+
+  useEffect(() => {
+    setShouldAnimateContent(true);
+    const rafId = requestAnimationFrame(() => {
+      setShouldAnimateContent(false);
+    });
+    return () => cancelAnimationFrame(rafId);
   }, [data]);
 
   const width = dimensions ? dimensions.width - margin.left - margin.right : 0;
@@ -186,6 +197,21 @@ export const ChartContainer = <TX extends AxisDomain, TY extends AxisDomain>({
     d3.select(zoomRectRef.current).call(zoom);
   }, [width, height, data]);
 
+  useEffect(() => {
+    if (!svgRef.current || !dimensions) return;
+    const g = svgRef.current.querySelector('.chart-appear') as SVGGElement | null;
+    if (!g) return;
+    g.removeAttribute('data-appear');
+    requestAnimationFrame(() => {
+      g.setAttribute('data-appear', '1');
+    });
+  }, [dimensions, data]);
+
+  useEffect(() => {
+    if (!tooltip || activeScreenX == null) return;
+    setTooltip(prev => prev ? { ...prev, x: activeScreenX + margin.left } : prev);
+  }, [activeScreenX]);
+
   const finalScales = useMemo(() => ({ ...scales }), [scales]);
   const xAxisConfig = axisConfigs.find(c => c.position === "bottom");
   if (xAxisConfig && finalScales[xAxisConfig.id]) {
@@ -228,7 +254,6 @@ export const ChartContainer = <TX extends AxisDomain, TY extends AxisDomain>({
 
     if (!closestPoint) {
       setTooltip(null);
-      setActiveXValue(null);
       return;
     }
 
@@ -267,13 +292,67 @@ export const ChartContainer = <TX extends AxisDomain, TY extends AxisDomain>({
       }
     });
 
-    setActiveXValue(snappedXValue);
+    const segments: any[] = visibleData.map(dataset => {
+      const idx2 = bisectDate(dataset.stats, snappedXValue, 1);
+      const p0 = dataset.stats[idx2 - 1] || dataset.stats[0];
+      const p1 = dataset.stats[idx2] || dataset.stats[dataset.stats.length - 1];
+      const x0 = (xScale as any)(p0.x);
+      const x1 = (xScale as any)(p1.x);
+      const yScale = finalScales[dataset.yAxisId] as any;
+      const y0 = yScale(p0.y);
+      const y1 = yScale(p1.y);
+      return { id: dataset.id, name: dataset.name, color: dataset.color, x0, x1, y0, y1 };
+    });
+
+    const targetX = xScreenPosition;
+    const fromX = activeScreenX ?? targetX;
+    if (animRef.current && animRef.current.id) {
+      cancelAnimationFrame(animRef.current.id);
+    }
+    const duration = 300;
+    const start = performance.now();
+    animRef.current = { id: null, start, from: fromX, to: targetX, duration, segments };
+
+    const step = (ts: number) => {
+      if (!animRef.current) return;
+      const { start, from, to, duration, segments } = animRef.current;
+      const t = Math.min(1, (ts - start) / duration);
+      const eased = d3.easeCubic(t);
+      const curX = from + (to - from) * eased;
+
+      const pts = segments.map(s => {
+        const { x0, x1, y0, y1 } = s;
+        let localT = 0;
+        if (x1 !== x0) {
+          localT = (curX - x0) / (x1 - x0);
+        }
+        localT = Math.max(0, Math.min(1, localT));
+        const y = y0 + (y1 - y0) * localT;
+        return { name: s.name, color: s.color, x: curX, y };
+      });
+
+      setActiveScreenX(curX);
+      setActivePoints(pts);
+
+      if (t < 1) {
+        animRef.current!.id = requestAnimationFrame(step);
+      } else {
+        animRef.current = null;
+      }
+    };
+
+    animRef.current.id = requestAnimationFrame(step);
 
   }, [data, finalScales, width, height, margin.left]);
 
   const handleMouseLeave = () => {
     setTooltip(null);
-    setActiveXValue(null);
+    setActiveScreenX(null);
+    setActivePoints([]);
+    if (animRef.current && animRef.current.id) {
+      cancelAnimationFrame(animRef.current.id);
+      animRef.current = null;
+    }
   };
 
   if (!dimensions) {
@@ -305,12 +384,13 @@ export const ChartContainer = <TX extends AxisDomain, TY extends AxisDomain>({
             </clipPath>
           </defs>
 
-          <g clipPath={`url(#${clipPathId})`}>
+          <g clipPath={`url(#${clipPathId})`} className="chart-appear">
             {renderContent({
               data: data.filter(d => d.visibility),
               scales: finalScales,
               width,
-              height
+              height,
+              animate: shouldAnimateContent
             })}
           </g>
 
@@ -324,73 +404,60 @@ export const ChartContainer = <TX extends AxisDomain, TY extends AxisDomain>({
             style={{ cursor: "crosshair" }}
           />
 
-          {tooltip && (
-            <line
-              x1={tooltip.x - margin.left}
-              x2={tooltip.x - margin.left}
-              y1={0}
-              y2={height}
-              stroke="#ccc"
-              strokeDasharray="4 4"
-              pointerEvents="none"
-            />
-          )}
+          {/* vertical line is rendered using animated transform (activeScreenX) to avoid duplication */}
 
-          {activeXValue && (() => {
-            const xScale = finalScales["x-axis"];
-            const xScreen = (xScale as any)(activeXValue);
+          {activeScreenX && (() => {
+            const xScreen = activeScreenX;
 
             return (
               <>
                 <line
-                  x1={xScreen}
-                  x2={xScreen}
+                  x1={0}
+                  x2={0}
                   y1={0}
                   y2={height}
                   stroke="#ccc"
                   strokeDasharray="4 4"
                   pointerEvents="none"
+                  style={{
+                    transform: `translateX(${xScreen}px)`,
+                    transition: 'transform 300ms cubic-bezier(.2,.8,.2,1)'
+                  }}
                 />
 
-                {data.filter(d => d.visibility).map(dataset => {
-                  const point = dataset.stats.find(s => {
-                    if (s.x instanceof Date && activeXValue instanceof Date) {
-                      return s.x.getTime() === activeXValue.getTime();
-                    }
-                    return s.x === activeXValue;
-                  });
+                {activePoints.map((pt, idx) => (
+                  <g key={pt.name + idx}>
+                    <line
+                      x1={0}
+                      x2={width}
+                      y1={0}
+                      y2={0}
+                      stroke={pt.color}
+                      strokeWidth={1}
+                      strokeDasharray="2 2"
+                      opacity={0.6}
+                      pointerEvents="none"
+                      style={{
+                        transform: `translateY(${pt.y}px)`,
+                        transition: 'transform 300ms cubic-bezier(.2,.8,.2,1)'
+                      }}
+                    />
 
-                  if (point) {
-                    const yScale = finalScales[dataset.yAxisId] as any;
-                    const yScreen = yScale(point.y);
-
-                    return (
-                      <g key={dataset.name}>
-                        <line
-                          x1={0}
-                          x2={width}
-                          y1={yScreen}
-                          y2={yScreen}
-                          stroke={dataset.color}
-                          strokeWidth={1}
-                          strokeDasharray="2 2"
-                          opacity={0.6}
-                          pointerEvents="none"
-                        />
-                        <circle
-                          cx={xScreen}
-                          cy={yScreen}
-                          r={5}
-                          fill={dataset.color}
-                          stroke="white"
-                          strokeWidth={2}
-                          pointerEvents="none"
-                        />
-                      </g>
-                    );
-                  }
-                  return null;
-                })}
+                    <circle
+                      cx={0}
+                      cy={0}
+                      r={5}
+                      fill={pt.color}
+                      stroke="white"
+                      strokeWidth={2}
+                      pointerEvents="none"
+                      style={{
+                        transform: `translate(${xScreen}px, ${pt.y}px)`,
+                        transition: 'transform 300ms cubic-bezier(.2,.8,.2,1)'
+                      }}
+                    />
+                  </g>
+                ))}
               </>
             );
           })()}

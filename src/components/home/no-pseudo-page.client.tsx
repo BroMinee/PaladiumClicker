@@ -14,6 +14,7 @@ import { HiOutlineStatusOnline } from "react-icons/hi";
 import { constants, PathValid } from "@/lib/constants";
 import { SearchPlayerInput } from "@/components/home/search-player.client";
 import { textFormatting } from "@/lib/misc";
+import { cn } from "@/lib/utils";
 import { Card } from "../ui/card";
 import { UnOptimizedImage } from "../ui/image-loading";
 import { IoMdStopwatch } from "react-icons/io";
@@ -73,7 +74,7 @@ export function NoPseudoPageWithContributeur({ contributors, texth1, texth2 }: N
   return (
     <div className="flex flex-col gap-12 sm:gap-16 w-full max-w-full overflow-hidden">
       <div className="flex flex-col items-center justify-center w-full text-center space-y-8 px-4">
-        <h1 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold md:text-3xl text-center font-extrabold">
+        <h1 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold md:text-3xl text-center">
           {textFormatting(texth1)}
         </h1>
         <h2 className="text-xl md:text-2xl text-center font-bold">
@@ -167,23 +168,30 @@ export function NoPseudoPageWithContributeur({ contributors, texth1, texth2 }: N
                 Merci à nos contributeurs
               </span>
               <div className="flex flex-wrap justify-center lg:justify-end gap-3 w-full max-w-xs sm:max-w-md">
-                {contributors.map((contributor) => (
-                  <a
-                    key={contributor.login}
-                    href={contributor.html_url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="relative w-10 h-10 sm:w-12 sm:h-12 rounded-full border-2 border-[#2a2a2a] overflow-hidden hover:scale-110 hover:border-primary transition-all duration-300 shrink-0"
-                    title={contributor.login}
-                  >
-                    <Image
-                      src={contributor.avatar_url}
-                      alt={contributor.login}
-                      fill
-                      className="object-cover"
-                    />
-                  </a>
-                ))}
+                {contributors.map((contributor) => {
+                  const login = contributor?.login ?? "";
+                  const isVcdf = login.toLowerCase() === "vcdf4497";
+                  const avatar = contributor?.avatar_url ?? "https://avatars.githubusercontent.com/u/583231?v=4";
+                  const href = contributor?.html_url ?? "#";
+                  const key = contributor?.login ?? avatar;
+                  return (
+                    <a
+                      key={key}
+                      href={href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className={cn("relative w-10 h-10 sm:w-12 sm:h-12 rounded-full border-2 border-[#2a2a2a] overflow-hidden transition-all duration-300 shrink-0", isVcdf ? "group hover:border-primary" : "hover:scale-110 hover:border-primary")}
+                      title={login || 'contributeur'}
+                    >
+                      <Image
+                        src={avatar}
+                        alt={login || 'contributeur'}
+                        fill
+                        className={isVcdf ? 'object-cover group-hover:animate-[spin_6s_linear_infinite]' : 'object-cover'}
+                      />
+                    </a>
+                  );
+                })}
               </div>
             </div>
           </div>

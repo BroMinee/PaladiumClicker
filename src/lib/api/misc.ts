@@ -14,7 +14,7 @@ const apiPala = process.env.NEXT_PUBLIC_PALACLICKER_API_URL ?? "https://palatrac
  */
 export const fetchWithHeader = async <T>(url: string, cache_duration_in_sec = 15 * 60, username = "", timeout = 4000): Promise<T> => {
   let response: Response | null = null;
-  let json = null;
+  let json: any = null;
 
   const cookieStore = await cookies();
   const allCookies = cookieStore.getAll();
@@ -35,7 +35,8 @@ export const fetchWithHeader = async <T>(url: string, cache_duration_in_sec = 15
     json = await response.json();
 
     if (!response.ok) {
-      throw new Error(url + json.message);
+      const msg = json && (json.message || json.error) ? (json.message || json.error) : response.statusText || "";
+      throw new Error(`${url} ${response.status ?? ""} ${msg}`);
     }
     return json as T;
   } catch (error) {
@@ -68,7 +69,8 @@ export const fetchWithHeader = async <T>(url: string, cache_duration_in_sec = 15
         json = await response.json();
 
         if (!response.ok) {
-          throw new Error(url + json.message);
+          const msg = json && (json.message || json.error) ? (json.message || json.error) : response.statusText || "";
+          throw new Error(`${url} ${response.status ?? ""} ${msg}`);
         }
         return json as T;
       } catch (error) {
@@ -80,9 +82,9 @@ export const fetchWithHeader = async <T>(url: string, cache_duration_in_sec = 15
   }
 
   if (json) {
-    throw new Error(json.message);
+    throw new Error(json?.message ?? `Erreur ${response?.status ?? "unknown"} lors de la récupération de ${url}`);
   } else {
-    throw new Error(`Impossible de récupérer les données actuelles de ${url}`);
+    throw new Error(`Impossible de récupérer les données actuelles de ${url} (status ${response?.status ?? "unknown"})`);
   }
 };
 
@@ -95,7 +97,7 @@ export const fetchWithHeader = async <T>(url: string, cache_duration_in_sec = 15
  */
 export const fetchPostWithHeader = async <T>(url: string, body: string, cache_duration_in_sec = 15 * 60): Promise<T> => {
   let response: Response | null = null;
-  let json = null;
+  let json: any = null;
 
   const cookieStore = await cookies();
   const allCookies = cookieStore.getAll();
@@ -117,7 +119,8 @@ export const fetchPostWithHeader = async <T>(url: string, body: string, cache_du
     json = await response.json();
 
     if (!response.ok) {
-      throw new Error(url + json.message);
+      const msg = json && (json.message || json.error) ? (json.message || json.error) : response.statusText || "";
+      throw new Error(`${url} ${response.status ?? ""} ${msg}`);
     }
     return json as T;
   } catch (error) {
@@ -125,8 +128,8 @@ export const fetchPostWithHeader = async <T>(url: string, body: string, cache_du
   }
 
   if (json) {
-    throw new Error(json.message);
+    throw new Error(json?.message ?? `Erreur ${response?.status ?? "unknown"} lors de la récupération de ${url}`);
   } else {
-    throw new Error(`Impossible de récupérer les données actuelles de ${url}`);
+    throw new Error(`Impossible de récupérer les données actuelles de ${url} (status ${response?.status ?? "unknown"})`);
   }
 };

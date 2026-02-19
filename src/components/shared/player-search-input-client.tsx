@@ -45,6 +45,7 @@ export const PlayerSearchInput = ({
   const [searchTerm, setSearchTerm] = useState("");
   const [searchResults, setSearchResults] = useState<User[]>([]);
   const [isOpen, setIsOpen] = useState(false);
+  const [submitPressed, setSubmitPressed] = useState(false);
   const { settings } = useSettingsStore();
 
   const { data: playerInfo } = usePlayerInfoStore();
@@ -161,7 +162,7 @@ export const PlayerSearchInput = ({
         <PopoverAnchor asChild>
           <div className={cn("w-full max-w-xl relative group pointer-events-auto", className)}>
             <div className="absolute -inset-1 bg-gradient-to-r from-primary to-orange-600 blur opacity-25 group-hover:opacity-75 transition duration-1000 group-hover:duration-200"></div>
-            <form onSubmit={handleFormSubmit} className="relative flex bg-card p-2 rounded-xl shadow-2xl shadow-[0_0_140px_#ff6f00b3]">
+            <form onSubmit={handleFormSubmit} className="relative flex bg-card p-2 rounded-xl shadow-[0_0_140px_#ff6f00b3]">
               <div className="relative flex-1">
                 <input
                   type="text"
@@ -199,8 +200,16 @@ export const PlayerSearchInput = ({
                   autoComplete="off"
                 />
                 <button
-                  className="inline-flex items-center justify-center whitespace-nowrap text-sm font-medium transition-colors duration-300 ease-out motion-reduce:transition-none rounded-sm focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 hover:bg-secondary hover:text-accent-foreground h-9 w-9 absolute right-0 top-0 text-foreground rounded-l-none border-none"
+                  className={cn(
+                    "inline-flex items-center justify-center whitespace-nowrap text-sm font-medium transition-all motion-reduce:transition-none rounded-sm focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 hover:bg-secondary hover:text-accent-foreground h-9 w-9 absolute right-0 top-0 text-foreground rounded-l-none border-none duration-300 ease-tween",
+                    submitPressed ? "scale-95" : "scale-100"
+                  )}
                   type="submit"
+                  onMouseDown={() => setSubmitPressed(true)}
+                  onMouseUp={() => setSubmitPressed(false)}
+                  onMouseLeave={() => setSubmitPressed(false)}
+                  onTouchStart={() => setSubmitPressed(true)}
+                  onTouchEnd={() => setSubmitPressed(false)}
                 >
                   <IoMdSearch className="w-4 h-4" />
                 </button>
@@ -210,7 +219,7 @@ export const PlayerSearchInput = ({
 
           <Button
             variant="primary"
-            className="items-center justify-center whitespace-nowrap h-9 px-4 py-2 flex flex-row gap-2"
+            className="items-center justify-center whitespace-nowrap h-9 px-4 py-2 flex flex-row gap-2 transition-transform duration-200 ease-out hover:scale-105 hover:shadow-lg hover:shadow-primary/30"
             onClick={() => onClick(playerInfo?.username ?? "")}
           >
             <span>{submitLabel}</span>

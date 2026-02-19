@@ -30,6 +30,7 @@ export interface ChartRendererProps<TX extends AxisDomain, TY extends AxisDomain
   scales: Record<string, AnyScale>;
   width: number;
   height: number;
+  animate?: boolean;
 }
 
 export type AnyScale =

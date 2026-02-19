@@ -123,10 +123,9 @@ const config: Config = {
         "blink-orange": 'blink-orange 1s infinite',
         'pan-gradient': 'backgroundPan 3s linear infinite'
       },
-      addUtilities: {
-        '.pixelated': {
-          'image-rendering': 'pixelated',
-        },
+      transitionTimingFunction: {
+        tween: "cubic-bezier(.2,.8,.2,1)",
+        "tween-fast": "cubic-bezier(.25,1,.5,1)",
       },
     },
   },
@@ -135,6 +134,11 @@ const config: Config = {
       addUtilities({
         '.pixelated': {
           'image-rendering': 'pixelated',
+        },
+        '.hover-tween': {
+          transitionProperty: 'transform, background-color, border-color, color, box-shadow, opacity',
+          transitionDuration: '300ms',
+          transitionTimingFunction: 'cubic-bezier(.2,.8,.2,1)',
         },
       });
     }],

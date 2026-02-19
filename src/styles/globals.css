@@ -56,6 +56,13 @@
     }
 }
 
+/* Smooth theme transition: animate color and background variable changes */
+html, body, #__next {
+    transition: background-color 220ms ease, color 220ms ease;
+    background-color: hsl(var(--background));
+    color: hsl(var(--foreground));
+}
+
 @layer base {
     * {
         @apply border-border;

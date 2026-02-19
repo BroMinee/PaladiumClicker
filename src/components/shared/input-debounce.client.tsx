@@ -173,7 +173,7 @@ export const InputDebounce = ({
         {label}
       </label>
       <div className="relative flex items-center w-full gap-2">
-        {decreaseButton && <Button onClick={handleDecrement} disabled={value <= min} className="flex items-center justify-center h-12 w-12 rounded-xl border border-secondary bg-background hover:bg-card hover:scale-105 active:scale-95 transition-all duration-200 disabled:opacity-40 disabled:cursor-not-allowed">
+        {decreaseButton && <Button onClick={handleDecrement} disabled={value <= min} className="flex items-center justify-center h-12 w-12 rounded-xl border border-secondary bg-background hover:bg-card hover-tween active:scale-95 disabled:opacity-40 disabled:cursor-not-allowed">
           <IconMinus />
         </Button>
         }
@@ -188,7 +188,7 @@ export const InputDebounce = ({
           />
         </div>
 
-        {increaseButton && <Button onClick={handleIncrement} disabled={max !== undefined && value >= max} className="flex items-center justify-center h-12 w-12 rounded-xl border border-secondary bg-background hover:bg-card hover:scale-105 active:scale-95 transition-all duration-200">
+        {increaseButton && <Button onClick={handleIncrement} disabled={max !== undefined && value >= max} className="flex items-center justify-center h-12 w-12 rounded-xl border border-secondary bg-background hover:bg-card hover-tween active:scale-95">
           <IconPlus />
         </Button>
         }
