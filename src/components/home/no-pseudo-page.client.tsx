@@ -168,12 +168,12 @@ export function NoPseudoPageWithContributeur({ contributors, texth1, texth2 }: N
                 Merci à nos contributeurs
               </span>
               <div className="flex flex-wrap justify-center lg:justify-end gap-3 w-full max-w-xs sm:max-w-md">
-                {contributors.map((contributor) => {
+                {contributors.map((contributor, index) => {
                   const login = contributor?.login ?? "";
                   const isVcdf = login.toLowerCase() === "vcdf4497";
                   const avatar = contributor?.avatar_url ?? "https://avatars.githubusercontent.com/u/583231?v=4";
                   const href = contributor?.html_url ?? "#";
-                  const key = contributor?.login ?? avatar;
+                  const key = contributor?.login || `${avatar}-${index}`;
                   return (
                     <a
                       key={key}

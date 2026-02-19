@@ -62,6 +62,13 @@ html, body, #__next {
     background-color: hsl(var(--background));
     color: hsl(var(--foreground));
 }
+
+@media (prefers-reduced-motion: reduce) {
+    html, body, #__next {
+        transition: none;
+    }
+}
+
 @layer base {
     * {
         @apply border-border;

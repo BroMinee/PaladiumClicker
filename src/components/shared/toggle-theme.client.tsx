@@ -25,14 +25,14 @@ export function ToggleTheme() {
 
   if (!mounted) {
     return (
-      <Button variant="ghost" size="icon" aria-hidden className="opacity-0 pointer-events-none">
+      <span aria-hidden className="inline-flex h-9 w-9 items-center justify-center opacity-0 pointer-events-none">
         <FaMoon/>
-      </Button>
+      </span>
     );
   }
 
   return (
-    <Button variant="ghost" size="icon" onClick={() => toggleTheme()} aria-label="Toggle theme">
+    <Button type="button" variant="ghost" size="icon" onClick={() => toggleTheme()} aria-label="Toggle theme">
       <span
         className={cn(
           "inline-block transition-transform duration-300 ease-tween",

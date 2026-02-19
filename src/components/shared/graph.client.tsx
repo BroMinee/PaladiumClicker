@@ -144,10 +144,10 @@ export const ChartContainer = <TX extends AxisDomain, TY extends AxisDomain>({
 
   useEffect(() => {
     setShouldAnimateContent(true);
-    const rafId = requestAnimationFrame(() => {
+    const timeoutId = window.setTimeout(() => {
       setShouldAnimateContent(false);
-    });
-    return () => cancelAnimationFrame(rafId);
+    }, 1800);
+    return () => clearTimeout(timeoutId);
   }, [data]);
 
   const width = dimensions ? dimensions.width - margin.left - margin.right : 0;
@@ -324,8 +324,9 @@ export const ChartContainer = <TX extends AxisDomain, TY extends AxisDomain>({
     });
 
     const targetX = xScreenPosition;
-    const fromX = activeScreenX ?? targetX;
-    if (animRef.current && animRef.current.id) {
+    const previousX = animRef.current ? animRef.current.to : null;
+    const fromX = previousX ?? targetX;
+    if (animRef.current && animRef.current.id !== null) {
       cancelAnimationFrame(animRef.current.id);
     }
     const duration = 300;
@@ -425,7 +426,7 @@ export const ChartContainer = <TX extends AxisDomain, TY extends AxisDomain>({
 
           {/* vertical line is rendered using animated transform (activeScreenX) to avoid duplication */}
 
-          {activeScreenX && (() => {
+          {activeScreenX !== null && (() => {
             const xScreen = activeScreenX;
 
             return (

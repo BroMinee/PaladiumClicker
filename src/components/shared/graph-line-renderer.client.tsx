@@ -35,6 +35,7 @@ export const LineRenderer = <TX extends AxisDomain, TY extends number>({
         }
 
         const lineGenerator = d3.line<DataPoint<TX, TY>>()
+          .defined((d) => d.y != null && !Number.isNaN(d.y as unknown as number))
           .x((d) => (xScale as any)(d.x))
           .y((d) => (yScale as any)(d.y))
           .curve(d3.curveMonotoneX);
