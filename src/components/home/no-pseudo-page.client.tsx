@@ -12,9 +12,9 @@ import { PiRankingBold } from "react-icons/pi";
 import { MdOutlineWebhook } from "react-icons/md";
 import { HiOutlineStatusOnline } from "react-icons/hi";
 import { constants, PathValid } from "@/lib/constants";
+import { cn } from "@/lib/utils";
 import { SearchPlayerInput } from "@/components/home/search-player.client";
 import { textFormatting } from "@/lib/misc";
-import { cn } from "@/lib/utils";
 import { Card } from "../ui/card";
 import { UnOptimizedImage } from "../ui/image-loading";
 import { IoMdStopwatch } from "react-icons/io";
@@ -187,7 +187,7 @@ export function NoPseudoPageWithContributeur({ contributors, texth1, texth2 }: N
                         src={avatar}
                         alt={login || 'contributeur'}
                         fill
-                        className={isVcdf ? 'object-cover group-hover:animate-[spin_6s_linear_infinite]' : 'object-cover'}
+                        className={cn("object-cover", isVcdf && "group-hover:animate-[spin_6s_linear_infinite]")}
                       />
                     </a>
                   );

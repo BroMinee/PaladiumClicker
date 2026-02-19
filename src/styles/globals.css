@@ -62,7 +62,6 @@ html, body, #__next {
     background-color: hsl(var(--background));
     color: hsl(var(--foreground));
 }
-
 @layer base {
     * {
         @apply border-border;
