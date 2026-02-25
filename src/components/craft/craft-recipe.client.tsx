@@ -1,6 +1,6 @@
 "use client";
 import { CraftSectionEnum, NodeType, OptionType, Tree } from "@/types";
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useRef, useEffect } from "react";
 import Image from "next/image";
 import { CraftingArrow } from "@/components/shared/crafting-arrow.client";
 import { LoadingSpinner } from "@/components/ui/loading-spinner";
@@ -241,6 +241,13 @@ function LanguageToggle() {
 export function SearchBar({ searchTerm, setSearchTerm, isSearchFocused, setIsSearchFocused, filteredItems, onSelectItem }: { searchTerm: string; setSearchTerm: React.Dispatch<React.SetStateAction<string>>; isSearchFocused: boolean; setIsSearchFocused: React.Dispatch<React.SetStateAction<boolean>>; filteredItems: OptionType[]; onSelectItem: (item: OptionType) => void }) {
   const { language } = useCraftRecipeStore();
   const { selectedItem } = useItemsStore();
+  const inputRef = useRef<HTMLInputElement | null>(null);
+
+  useEffect(() => {
+    // Focus and select the search input when the component mounts
+    inputRef.current?.focus();
+    inputRef.current?.select();
+  }, []);
 
   return (
     <Card>
@@ -253,6 +260,7 @@ export function SearchBar({ searchTerm, setSearchTerm, isSearchFocused, setIsSea
           <IconSearch />
         </div>
         <input
+          ref={inputRef}
           type="text"
           id="item-search"
           value={searchTerm}
