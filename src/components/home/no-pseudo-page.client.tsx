@@ -125,8 +125,6 @@ export function NoPseudoPageWithContributeur({ contributors, texth1, texth2 }: N
         </div>
 
         <Card className="w-full overflow-hidden">
-          <div className="absolute top-0 right-0 w-64 h-64 bg-primary/5 rounded-full blur-[100px] pointer-events-none"></div>
-
           <div className="flex flex-col lg:flex-row items-center justify-between gap-8 relative z-10">
             <div className="flex-1 text-center lg:text-left space-y-6 w-full">
               <div>
