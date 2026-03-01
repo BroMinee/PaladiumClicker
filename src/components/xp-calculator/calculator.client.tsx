@@ -23,7 +23,7 @@ const MAX_LEVEL = 9999;
  * Component that display the main page component of the XP calculator
  */
 export function XPCalculator() {
-  const { data: playerInfo, decreaseMetierLevel, increaseMetierLevel } = usePlayerInfoStore();
+  const { data: playerInfo, decreaseMetierLevel, increaseMetierLevel, platform } = usePlayerInfoStore();
 
   const [startLevel, setStartLevel] = useState(1);
   const [endLevel, setEndLevel] = useState(startLevel + 1);
@@ -153,7 +153,7 @@ export function XPCalculator() {
           <div>
             <h2 className="text-xl font-semibold mb-4 border-b border-secondary pb-2 text-primary">Objectif XP</h2>
             <div className="space-y-3">
-              <BonusStats label="XP actuelle du niveau" value={formatter.format((playerInfo?.metier[metier].xp ?? 0) - JobXp.totalXp(startLevel)) + " / " + formatter.format(JobXp.totalXp(startLevel+1) - JobXp.totalXp(startLevel)) + " XP"} classNameValue="text-primary whitespace-nowrap" />
+              <BonusStats label="XP actuelle du niveau" value={formatter.format((playerInfo?.metier[metier].xp ?? 0) - JobXp.totalXp(startLevel, platform)) + " / " + formatter.format(JobXp.totalXp(startLevel+1, platform) - JobXp.totalXp(startLevel, platform)) + " XP"} classNameValue="text-primary whitespace-nowrap" />
               <BonusStats label="XP Totale nécessaire" value={formatter.format(requiredXp) + " XP"} classNameValue="text-primary" />
 
               <div className="border-t border-secondary pt-4 mt-4">

@@ -16,7 +16,7 @@ import { cn } from "@/lib/utils";
  */
 export function MetierOutline({ metierKey, metierToReach = false }: { metierKey: MetierKey, metierToReach?: boolean }) {
 
-  const { data: playerInfo } = usePlayerInfoStore();
+  const { data: playerInfo, platform } = usePlayerInfoStore();
 
   const colors = getColorByMetierName(metierKey);
 
@@ -25,7 +25,7 @@ export function MetierOutline({ metierKey, metierToReach = false }: { metierKey:
     coefXp = 1;
   } else if (playerInfo) {
     const metier = playerInfo.metier[metierKey];
-    coefXp = JobXp.xpCoef(metier.level, metier?.xp ?? 0);
+    coefXp = JobXp.xpCoef(metier.level, metier?.xp ?? 0, platform);
   }
 
   return <path className="fill" d="M723 314L543 625.77 183 625.77 3 314 183 2.23 543 2.23 723 314z"

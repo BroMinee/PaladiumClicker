@@ -142,6 +142,29 @@ const metier_xp_java = [
   2594953, // level 19 -> 20
 ];
 
+const metier_xp_bedrock = [
+  22123, // level 0 -> 1
+  18267, // level 1 -> 2
+  33361, // level 2 -> 3
+  45135, // level 3 -> 4
+  57725, // level 4 -> 5
+  71005, // level 5 -> 6
+  84891, // level 6 -> 7
+  99319, // level 7 -> 8
+  114236, // level 8 -> 9
+  129607, // level 9 -> 10
+  145393, // level 10 -> 11
+  161570, // level 11 -> 12
+  178111, // level 12 -> 13
+  194998, // level 13 -> 14
+  212212, // level 14 -> 15
+  229737, // level 15 -> 16
+  247558, // level 16 -> 17
+  265664, // level 17 -> 18
+  0,      // level 18 -> 19 (le niveau 19 n'existe pas en bedrock)
+  284041, // level 18 -> 20
+];
+
 export type HowToXpElement = {
   type: string;
   action: string;
@@ -604,6 +627,7 @@ export const constants = {
   discord,
   githubUrl,
   metier_xp_java,
+  metier_xp_bedrock,
   how_to_xp,
   links,
   calculatorXpPath,

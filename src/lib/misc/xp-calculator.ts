@@ -1,31 +1,64 @@
 import { constants } from "@/lib/constants";
 import { MetierKey, PlayerRank } from "@/types";
 
-const cumulativeXp = constants.metier_xp_java.reduce<number[]>((acc, xp) => {
+export type PlatformVersion = "java" | "bedrock";
+
+const cumulativeXpJava = constants.metier_xp_java.reduce<number[]>((acc, xp) => {
   acc.push(acc[acc.length - 1] + xp);
   return acc;
 }, [0]);
 
-function _xpPerStep(level: number): number {
-  return constants.metier_xp_java[Math.min(level - 1, constants.metier_xp_java.length - 1)];
+const cumulativeXpBedrock = constants.metier_xp_bedrock.reduce<number[]>((acc, xp) => {
+  acc.push(acc[acc.length - 1] + xp);
+  return acc;
+}, [0]);
+
+function _xpPerStep(level: number, version: PlatformVersion): number {
+  if (version === "java") {
+    return constants.metier_xp_java[Math.min(level - 1, constants.metier_xp_java.length - 1)];
+  } else {
+    // Level 18's step covers the 18->20 transition (index 19 = 284041), not the phantom 18->19 (index 18 = 0).
+    const idx = level === 18 ? 19 : Math.min(level, constants.metier_xp_bedrock.length - 1);
+    return constants.metier_xp_bedrock[idx];
+  }
 }
 
 /**
- * Java métier XP calculations derived entirely from `metier_xp`.
+ * Java and Bedrock metier XP calculations.
+ *
+ * - Java  : levels start at 1.
+ * - Bedrock: levels start at 0. Level 19 does not exist:
+ *   totalXp(19, "bedrock") === totalXp(20, "bedrock").
  */
 export const JobXp = {
   /**
    * Returns the total cumulative XP required to reach a given level.
-   * @param level The target level.
+   * @param level The target level (Java: > 1 | Bedrock: > 0).
+   * @param version "java" or "bedrock".
    */
-  totalXp(level: number): number {
-    if (level <= 1) {
-      return 0;
+  totalXp(level: number, version: PlatformVersion): number {
+    if (version === "java") {
+      if (level <= 1) {
+        return 0;
+      }
+      if (level - 1 < cumulativeXpJava.length) {
+        return cumulativeXpJava[level - 1];
+      }
+      return cumulativeXpJava.at(-1)! + (level - cumulativeXpJava.length) * constants.metier_xp_java.at(-1)!;
+    } else {
+      {
+        if (level <= 0) {
+          // Bedrock: starts at level 0.
+          return 0;
+        }
+        // Level 19 doesn't exist — redirect to 20 so totalXp(19) === totalXp(20).
+        const bedrockLevel = level === 19 ? 20 : level;
+        if (bedrockLevel < cumulativeXpBedrock.length) {
+          return cumulativeXpBedrock[bedrockLevel];
+        }
+        return cumulativeXpBedrock.at(-1)! + (bedrockLevel +1 - cumulativeXpBedrock.length) * constants.metier_xp_bedrock.at(-1)!;
+      }
     }
-    if (level - 1 < cumulativeXp.length) {
-      return cumulativeXp[level - 1];
-    }
-    return cumulativeXp.at(-1)! + (level - cumulativeXp.length) * constants.metier_xp_java.at(-1)!;
   },
 
   /**
@@ -33,12 +66,12 @@ export const JobXp = {
    * @param xp the current xp
    */
   levelFromXp(xp: number): number {
-    for (let i = 1; i < cumulativeXp.length; i++) {
-      if (xp < cumulativeXp[i]) {
+    for (let i = 1; i < cumulativeXpJava.length; i++) {
+      if (xp < cumulativeXpJava[i]) {
         return i;
       }
     }
-    return cumulativeXp.length + Math.floor((xp - cumulativeXp.at(-1)!) / constants.metier_xp_java.at(-1)!);
+    return cumulativeXpJava.length + Math.floor((xp - cumulativeXpJava.at(-1)!) / constants.metier_xp_java.at(-1)!);
   },
 
   /**
@@ -47,22 +80,24 @@ export const JobXp = {
    *
    * @param level The current level of the player/job.
    * @param currentXp The total experience points the player currently has.
+   * @param version "java" (default) or "bedrock".
    */
-  xpCoef(level: number, currentXp: number): number {
+  xpCoef(level: number, currentXp: number, version: PlatformVersion): number {
     if (currentXp === 0) {
       return 0;
     }
-    return (currentXp - JobXp.totalXp(level)) / _xpPerStep(level);
+    return (currentXp - JobXp.totalXp(level, version)) / _xpPerStep(level, version);
   },
 
   /**
    * Get the xp needed to reach the requested level base minus the currentXp
    * @param higherLevel the level the player want to reach
    * @param currentXP the current xp of the player
+   * @param version "java" (default) or "bedrock".
    * @returns the xp needed to reach the requested level base minus the currentXp
    */
-  calculateXpNeeded(higherLevel: number, currentXP: number): number {
-    return Math.ceil(JobXp.totalXp(higherLevel) - currentXP);
+  calculateXpNeeded(higherLevel: number, currentXP: number, version: PlatformVersion = "java"): number {
+    return Math.ceil(JobXp.totalXp(higherLevel, version) - currentXP);
   },
 };
 

@@ -3,12 +3,13 @@ import { constants } from "@/lib/constants";
 import { MetierKey, PlayerInfo, UpgradeKey } from "@/types";
 import { create } from "zustand";
 import { createJSONStorage, persist } from "zustand/middleware";
-import { getInitialPlayerInfo, JobXp } from "@/lib/misc";
+import { getInitialPlayerInfo, JobXp, PlatformVersion } from "@/lib/misc";
 
 type State = {
   data: PlayerInfo | null;
   selectedCPS: number;
   version: number;
+  platform: PlatformVersion;
 }
 
 type Actions = {
@@ -29,6 +30,7 @@ const initialState: State = {
   data: null,
   selectedCPS: -1,
   version: constants.version,
+  platform: "java",
 };
 
 export const usePlayerInfoStore = create<State & Actions, [["zustand/persist", State & Actions]]>(persist<State & Actions>(
@@ -59,7 +61,7 @@ export const usePlayerInfoStore = create<State & Actions, [["zustand/persist", S
       newMetier[metierKey] = {
         ...targettedMetier,
         level: targettedMetier.level + value,
-        xp: JobXp.totalXp(targettedMetier.level + value),
+        xp: JobXp.totalXp(targettedMetier.level + value, state.platform),
       };
 
       return {
@@ -84,7 +86,7 @@ export const usePlayerInfoStore = create<State & Actions, [["zustand/persist", S
       newMetier[metierKey] = {
         ...targettedMetier,
         level: targettedMetier.level - value,
-        xp: JobXp.totalXp(targettedMetier.level - value),
+        xp: JobXp.totalXp(targettedMetier.level - value, state.platform),
       };
 
       return {
