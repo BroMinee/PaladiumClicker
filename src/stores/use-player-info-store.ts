@@ -3,7 +3,7 @@ import { constants } from "@/lib/constants";
 import { MetierKey, PlayerInfo, UpgradeKey } from "@/types";
 import { create } from "zustand";
 import { createJSONStorage, persist } from "zustand/middleware";
-import { getInitialPlayerInfo } from "@/lib/misc";
+import { getInitialPlayerInfo, JobXp } from "@/lib/misc";
 
 type State = {
   data: PlayerInfo | null;
@@ -55,16 +55,12 @@ export const usePlayerInfoStore = create<State & Actions, [["zustand/persist", S
       }
 
       const newMetier = { ...state.data.metier };
-      // in case targettedMetier.level + value exceeds the length of constants.metier_palier repete the last level of the exceeded level
 
       newMetier[metierKey] = {
         ...targettedMetier,
         level: targettedMetier.level + value,
-        xp: constants.metier_palier[Math.min(constants.metier_xp.length, targettedMetier.level + value - 1)],
+        xp: JobXp.totalXp(targettedMetier.level + value),
       };
-      if (targettedMetier.level + value - 1 >= constants.metier_palier.length) {
-        newMetier[metierKey].xp += (targettedMetier.level + value - constants.metier_palier.length) * constants.metier_xp[constants.metier_xp.length -1];
-      }
 
       return {
         data: {
@@ -88,11 +84,8 @@ export const usePlayerInfoStore = create<State & Actions, [["zustand/persist", S
       newMetier[metierKey] = {
         ...targettedMetier,
         level: targettedMetier.level - value,
-        xp: constants.metier_palier[Math.min(constants.metier_xp.length -1,targettedMetier.level - value - 1)],
+        xp: JobXp.totalXp(targettedMetier.level - value),
       };
-      if (targettedMetier.level - value - 1 >= constants.metier_palier.length) {
-        newMetier[metierKey].xp += (targettedMetier.level - value - constants.metier_palier.length) * constants.metier_xp[constants.metier_xp.length -1];
-      }
 
       return {
         ...state,

@@ -120,7 +120,7 @@ const CRUSH = "Crush";
 
 const METIER_KEY: MetierKey[] = ["miner", "farmer", "hunter", "alchemist"];
 
-const metier_xp = [
+const metier_xp_java = [
   22123, // level 1 -> 2
   40390, // level 2 -> 3
   73751, // level 3 -> 4
@@ -140,29 +140,6 @@ const metier_xp = [
   2045248, // level 17 -> 18
   2310912, // level 18 -> 19
   2594953, // level 19 -> 20
-];
-
-const metier_palier = [
-  0, // level 1
-  22123, // level 2
-  62513, // level 3
-  136264, // level 4
-  255150, // level 5
-  431761, // level 6
-  679377, // level 7
-  1011884, // level 8
-  1443710, // level 9
-  1989772, // level 10
-  2665441, // level 11
-  3486503, // level 12
-  4469135, // level 13
-  5629878, // level 14
-  6985619, // level 15
-  8553572, // level 16
-  10351262, // level 17
-  12396510, // level 18
-  14707422, // level 19
-  17302375, // level 20
 ];
 
 export type HowToXpElement = {
@@ -626,8 +603,7 @@ export const constants = {
   version,
   discord,
   githubUrl,
-  metier_xp,
-  metier_palier,
+  metier_xp_java,
   how_to_xp,
   links,
   calculatorXpPath,

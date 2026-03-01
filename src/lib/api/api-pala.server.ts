@@ -29,7 +29,7 @@ import default_achievements_default from "@/assets/achievements/defaultAchieveme
 import { getViewsFromUUID } from "@/lib/api/api-pala-tracker.server";
 import { fetchWithHeader } from "@/lib/api/misc";
 import { redirect } from "next/navigation";
-import { getInitialPlayerInfo, getLevelFromXp } from "@/lib/misc";
+import { getInitialPlayerInfo, JobXp } from "@/lib/misc";
 import { registerPlayerAction } from "@/lib/api/api-server-action.server";
 import { constants } from "@/lib/constants";
 
@@ -318,21 +318,21 @@ const getJobsFromUUID = async (uuid: string, username: string): Promise<Metiers>
   const initialMetierJson = structuredClone(metier_json as Metiers);
 
   if (response.farmer) {
-    initialMetierJson.farmer.level = getLevelFromXp(response.farmer.xp);
+    initialMetierJson.farmer.level = JobXp.levelFromXp(response.farmer.xp);
     initialMetierJson.farmer.xp = response.farmer.xp;
   }
 
   if (response.hunter) {
-    initialMetierJson.hunter.level = getLevelFromXp(response.hunter.xp);
+    initialMetierJson.hunter.level = JobXp.levelFromXp(response.hunter.xp);
     initialMetierJson.hunter.xp = response.hunter.xp;
   }
 
   if (response.alchemist) {
-    initialMetierJson.alchemist.level = getLevelFromXp(response.alchemist.xp);
+    initialMetierJson.alchemist.level = JobXp.levelFromXp(response.alchemist.xp);
     initialMetierJson.alchemist.xp = response.alchemist.xp;
   }
   if (response.miner) {
-    initialMetierJson.miner.level = getLevelFromXp(response.miner.xp);
+    initialMetierJson.miner.level = JobXp.levelFromXp(response.miner.xp);
     initialMetierJson.miner.xp = response.miner.xp;
   }
 

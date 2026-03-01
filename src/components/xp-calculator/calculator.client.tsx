@@ -1,7 +1,7 @@
 "use client";
 
 import { constants } from "@/lib/constants";
-import { calculateXpNeeded, getBonusRank, getTotalXPForLevel, prettyJobName, textFormatting } from "@/lib/misc";
+import { getBonusRank, JobXp, prettyJobName, textFormatting } from "@/lib/misc";
 import React, { useState, useMemo, useEffect } from "react";
 import { usePlayerInfoStore } from "@/stores/use-player-info-store";
 import { LoadingSpinner } from "@/components/ui/loading-spinner";
@@ -69,7 +69,7 @@ export function XPCalculator() {
     return totalAdditiveBonus;
   }, [activePotionBonus, gradeBonus, dailyBonusDecimal]);
 
-  const requiredXp = useMemo(() => calculateXpNeeded(endLevel, playerInfo?.metier[metier].xp ?? 0), [endLevel, playerInfo, metier]);
+  const requiredXp = useMemo(() => JobXp.calculateXpNeeded(endLevel, playerInfo?.metier[metier].xp ?? 0), [endLevel, playerInfo, metier]);
 
   const finalRequiredXp = requiredXp / totalBonusMultiplier;
 
@@ -153,7 +153,7 @@ export function XPCalculator() {
           <div>
             <h2 className="text-xl font-semibold mb-4 border-b border-secondary pb-2 text-primary">Objectif XP</h2>
             <div className="space-y-3">
-              <BonusStats label="XP actuelle du niveau" value={formatter.format((playerInfo?.metier[metier].xp ?? 0) - getTotalXPForLevel(startLevel)) + " / " + formatter.format(getTotalXPForLevel(startLevel+1) - getTotalXPForLevel(startLevel)) + " XP"} classNameValue="text-primary whitespace-nowrap" />
+              <BonusStats label="XP actuelle du niveau" value={formatter.format((playerInfo?.metier[metier].xp ?? 0) - JobXp.totalXp(startLevel)) + " / " + formatter.format(JobXp.totalXp(startLevel+1) - JobXp.totalXp(startLevel)) + " XP"} classNameValue="text-primary whitespace-nowrap" />
               <BonusStats label="XP Totale nécessaire" value={formatter.format(requiredXp) + " XP"} classNameValue="text-primary" />
 
               <div className="border-t border-secondary pt-4 mt-4">

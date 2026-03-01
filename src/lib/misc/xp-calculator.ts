@@ -1,22 +1,70 @@
 import { constants } from "@/lib/constants";
 import { MetierKey, PlayerRank } from "@/types";
 
-/**
- * Calculates the experience coefficient for a given level and current XP.
- * Used for svg.
- *
- * @param level The current level of the player/job.
- * @param currentXp The total experience points the player currently has.
- */
-export function getXpCoef(level: number, currentXp: number) {
-  if (currentXp === 0) {
-    return 0;
-  }
-  if(level >= 20) {
-    return (currentXp - constants.metier_palier[19] - constants.metier_xp[19] * (level - 20)) / constants.metier_xp[19];
-  }
-  return (currentXp - constants.metier_palier[level - 1]) / constants.metier_xp[level - 1];
+const cumulativeXp = constants.metier_xp_java.reduce<number[]>((acc, xp) => {
+  acc.push(acc[acc.length - 1] + xp);
+  return acc;
+}, [0]);
+
+function _xpPerStep(level: number): number {
+  return constants.metier_xp_java[Math.min(level - 1, constants.metier_xp_java.length - 1)];
 }
+
+/**
+ * Java métier XP calculations derived entirely from `metier_xp`.
+ */
+export const JobXp = {
+  /**
+   * Returns the total cumulative XP required to reach a given level.
+   * @param level The target level.
+   */
+  totalXp(level: number): number {
+    if (level <= 1) {
+      return 0;
+    }
+    if (level - 1 < cumulativeXp.length) {
+      return cumulativeXp[level - 1];
+    }
+    return cumulativeXp.at(-1)! + (level - cumulativeXp.length) * constants.metier_xp_java.at(-1)!;
+  },
+
+  /**
+   * Return the level from the xp amount
+   * @param xp the current xp
+   */
+  levelFromXp(xp: number): number {
+    for (let i = 1; i < cumulativeXp.length; i++) {
+      if (xp < cumulativeXp[i]) {
+        return i;
+      }
+    }
+    return cumulativeXp.length + Math.floor((xp - cumulativeXp.at(-1)!) / constants.metier_xp_java.at(-1)!);
+  },
+
+  /**
+   * Calculates the experience coefficient for a given level and current XP.
+   * Used for svg.
+   *
+   * @param level The current level of the player/job.
+   * @param currentXp The total experience points the player currently has.
+   */
+  xpCoef(level: number, currentXp: number): number {
+    if (currentXp === 0) {
+      return 0;
+    }
+    return (currentXp - JobXp.totalXp(level)) / _xpPerStep(level);
+  },
+
+  /**
+   * Get the xp needed to reach the requested level base minus the currentXp
+   * @param higherLevel the level the player want to reach
+   * @param currentXP the current xp of the player
+   * @returns the xp needed to reach the requested level base minus the currentXp
+   */
+  calculateXpNeeded(higherLevel: number, currentXP: number): number {
+    return Math.ceil(JobXp.totalXp(higherLevel) - currentXP);
+  },
+};
 
 /**
  * Returns the primary and background RGB colors associated with a given job name.
@@ -49,37 +97,6 @@ export const getColorByMetierName = (name: MetierKey) => {
 };
 
 /**
- * Returns the total cumulative XP required to reach a given level.
- * @param level The target level.
- */
-export function getTotalXPForLevel(level: number) {
-
-  if (level - 1 >= constants.metier_palier.length) {
-    return constants.metier_palier[19] + (level - constants.metier_palier.length) * constants.metier_xp[constants.metier_xp.length - 1];
-  }
-
-  return constants.metier_palier[level - 1];
-}
-
-/**
- * Return the level from the xp amount
- * @param xp the current xp
- */
-export function getLevelFromXp(xp: number) {
-  let i = 0;
-  for (i = 0; i < constants.metier_palier.length; i++) {
-    if (xp < constants.metier_palier[i]) {
-      return i;
-    }
-  }
-  const xpAfterLast = xp - constants.metier_palier[constants.metier_palier.length - 1];
-
-  const extraLevels = Math.floor(xpAfterLast / constants.metier_xp[constants.metier_xp.length-1]);
-
-  return i + extraLevels;
-}
-
-/**
  * Return the bonus rank percentage
  * @param playerRank the player rank
  */
@@ -108,14 +125,3 @@ export function getBonusRank(playerRank: PlayerRank | undefined) {
   }
 
 }
-
-/**
- * Get the xp needed to reach the requested level base minus the currentXp
- * @param higherLevel
- * @param currentXP
- * @returns
- */
-export const calculateXpNeeded = (higherLevel: number, currentXP: number): number => {
-  const res = getTotalXPForLevel(higherLevel) - currentXP;
-  return Math.ceil(res);
-};

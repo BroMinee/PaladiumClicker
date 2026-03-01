@@ -1,6 +1,6 @@
 "use client";
 
-import { generateXpCalculatorUrl, getColorByMetierName, getXpCoef } from "@/lib/misc";
+import { generateXpCalculatorUrl, getColorByMetierName, JobXp } from "@/lib/misc";
 import { MetierKey, searchParamsXpBonusPage } from "@/types";
 import { usePlayerInfoStore } from "@/stores/use-player-info-store";
 import { useRouter } from "next/navigation";
@@ -25,7 +25,7 @@ export function MetierOutline({ metierKey, metierToReach = false }: { metierKey:
     coefXp = 1;
   } else if (playerInfo) {
     const metier = playerInfo.metier[metierKey];
-    coefXp = getXpCoef(metier.level, metier?.xp ?? 0);
+    coefXp = JobXp.xpCoef(metier.level, metier?.xp ?? 0);
   }
 
   return <path className="fill" d="M723 314L543 625.77 183 625.77 3 314 183 2.23 543 2.23 723 314z"

@@ -3,7 +3,7 @@
 import { usePlayerInfoStore } from "@/stores/use-player-info-store";
 import { LoadingSpinner } from "@/components/ui/loading-spinner";
 import { MetierKey } from "@/types";
-import { getColorByMetierName, getTotalXPForLevel, getXpCoef } from "@/lib/misc";
+import { getColorByMetierName, JobXp } from "@/lib/misc";
 
 /**
  * Display the player job level
@@ -31,7 +31,7 @@ export function JobProgressbar({ jobName }: { jobName: MetierKey }) {
   }
 
   const metier = playerInfo.metier[jobName];
-  const coefXp = Math.min(100, Math.round(100 * getXpCoef(metier.level, metier.xp)));
+  const coefXp = Math.min(100, Math.round(100 * JobXp.xpCoef(metier.level, metier.xp)));
 
   const colors = getColorByMetierName(jobName);
   function convertToString(colors: number[]) {
@@ -63,8 +63,8 @@ export function JobXpCount({ jobName }: { jobName: MetierKey }) {
   }
   const formatter = new Intl.NumberFormat("fr-FR");
   const startLevel = playerInfo.metier[jobName].level;
-  const currentXp = (playerInfo?.metier[jobName].xp ?? 0) - getTotalXPForLevel(startLevel);
-  const nextLevelXp = getTotalXPForLevel(playerInfo?.metier[jobName].level + 1) - getTotalXPForLevel(startLevel);
+  const currentXp = (playerInfo?.metier[jobName].xp ?? 0) - JobXp.totalXp(startLevel);
+  const nextLevelXp = JobXp.totalXp(playerInfo?.metier[jobName].level + 1) - JobXp.totalXp(startLevel);
 
   return (
     <div className="flex justify-between items-center w-full text-xs text-card-foreground mt-1">
