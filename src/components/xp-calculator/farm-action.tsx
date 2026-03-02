@@ -1,7 +1,8 @@
 import { constants, HowToXpElement } from "@/lib/constants";
-import { getColorByMetierName, safeJoinPaths } from "@/lib/misc";
+import { getActionXp, getColorByMetierName, safeJoinPaths } from "@/lib/misc";
 import { UnOptimizedImage } from "@/components/ui/image-loading";
 import { MetierKey } from "@/types";
+import { PlatformVersion } from "@/lib/misc/xp-calculator";
 
 interface FarmActionItemProps {
   item: HowToXpElement;
@@ -11,12 +12,13 @@ interface FarmActionItemProps {
   totalBonusMultiplier: number;
   fortuneBonus: number;
   dailyBonusDecimal: number;
+  platform: PlatformVersion;
 }
 
 /**
  * Display the number of item, the usage method, the number of XP it gives and the number of item to farm
  */
-export const FarmActionItem = ({ item,metier, finalRequiredXp, gradeBonus, totalBonusMultiplier, fortuneBonus, dailyBonusDecimal }: FarmActionItemProps) => {
+export const FarmActionItem = ({ item, metier, finalRequiredXp, gradeBonus, totalBonusMultiplier, fortuneBonus, dailyBonusDecimal, platform }: FarmActionItemProps) => {
   const formatter = new Intl.NumberFormat("fr-FR", { maximumFractionDigits: 3 });
 
   let effectiveMultiplier: number;
@@ -27,8 +29,9 @@ export const FarmActionItem = ({ item,metier, finalRequiredXp, gradeBonus, total
     effectiveMultiplier = totalBonusMultiplier;
   }
 
+  const baseXp = getActionXp(item, platform);
   const isFortunable = item.action === constants.SMELT && fortuneBonus !== 0;
-  const xpItem = isFortunable ? item.xp * (1 + fortuneBonus) : item.xp;
+  const xpItem = isFortunable ? baseXp * (1 + fortuneBonus) : baseXp;
   const unitsToFarm = finalRequiredXp / (xpItem * effectiveMultiplier);
 
   const imagePath = safeJoinPaths("AH_img", item.imgPath);
@@ -41,7 +44,7 @@ export const FarmActionItem = ({ item,metier, finalRequiredXp, gradeBonus, total
     ? formatter.format(Math.ceil(unitsToFarm))
     : "Variable";
 
-  const requiredLevel = item.level ?? 1;
+  const requiredLevel = item[platform]?.level ?? 1;
 
   const colors = getColorByMetierName(metier);
 

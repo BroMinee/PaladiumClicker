@@ -2,8 +2,10 @@
 
 import { constants } from "@/lib/constants";
 import { getBonusRank, JobXp, prettyJobName, textFormatting } from "@/lib/misc";
-import React, { useState, useMemo, useEffect } from "react";
+import React, { useState, useMemo, useEffect, useLayoutEffect } from "react";
 import { usePlayerInfoStore } from "@/stores/use-player-info-store";
+import { useXpCalcStore } from "@/stores/use-xp-calc-store";
+import { PlatformVersion } from "@/lib/misc";
 import { LoadingSpinner } from "@/components/ui/loading-spinner";
 import { Card } from "@/components/ui/card";
 
@@ -16,35 +18,65 @@ import { FarmActionItem } from "./farm-action";
 import { BonusStats } from "./bonus-stats";
 import { MetierSelector } from "./metier.selector.client";
 import { PageHeader, PageHeaderDescription, PageHeaderHeading } from "../ui/page";
+import { cn } from "@/lib/utils";
+import { TogglePlatform } from "./toggle-plateform";
+import { CoinSlider } from "@/components/shared/coin-slider.client";
 
 const MAX_LEVEL = 9999;
 
 /**
  * Component that display the main page component of the XP calculator
  */
-export function XPCalculator() {
-  const { data: playerInfo, decreaseMetierLevel, increaseMetierLevel, platform } = usePlayerInfoStore();
+export function XPCalculator({ defaultPlatform }: { defaultPlatform?: PlatformVersion }) {
+  const { data: playerInfo } = usePlayerInfoStore();
+  const {
+    platform,
+    setPlatform,
+    metier: xpCalcMetiers,
+    increaseMetierLevel,
+    decreaseMetierLevel,
+    setMetierXp,
+    syncFromPlayerInfo,
+  } = useXpCalcStore();
 
-  const [startLevel, setStartLevel] = useState(1);
-  const [endLevel, setEndLevel] = useState(startLevel + 1);
-  const [dailyBonus, setDailyBonus] = useState(0);
+  const minStartLevel = platform === "bedrock" ? 0 : 1;
+
   const [metier, setMetier] = useState<MetierKey>("miner");
+  const [endLevel, setEndLevel] = useState(minStartLevel + 1);
+  const [dailyBonus, setDailyBonus] = useState(0);
   const [fortuneBonus, setFortuneBonus] = useState(0);
   const [activePotionBonus, setActivePotionBonus] = useState(0);
 
-  useEffect(() => {
-    if (!playerInfo) {
-      return;
+  // Apply defaultPlatform before first paint to avoid a flash
+  useLayoutEffect(() => {
+    if (defaultPlatform) {
+      setPlatform(defaultPlatform);
     }
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
-    setStartLevel(playerInfo.metier[metier].level);
-  }, [playerInfo, metier]);
+  // startLevel is derived from the XP calc store — no local state needed
+  const xpCalcMetier = xpCalcMetiers[metier];
+  const startLevel = xpCalcMetier.level;
+
+  // Java mode: keep the XP calc store in sync with the fetched player info
+  useEffect(() => {
+    if (platform === "java" && playerInfo) {
+      syncFromPlayerInfo(playerInfo);
+    }
+  }, [playerInfo, platform, syncFromPlayerInfo]);
 
   useEffect(() => {
     if (endLevel <= startLevel) {
       setEndLevel(startLevel + 1);
     }
   }, [startLevel, endLevel]);
+
+  // Alchemist doesn't exist in Bedrock
+  useEffect(() => {
+    if (platform === "bedrock" && metier === "alchemist") {
+      setMetier("miner");
+    }
+  }, [platform, metier]);
 
   useEffect(() => {
     if (metier !== "miner" && fortuneBonus !== 0) {
@@ -58,6 +90,13 @@ export function XPCalculator() {
     }
   }, [endLevel]);
 
+  // Potions don't exist in Bedrock
+  useEffect(() => {
+    if (platform === "bedrock") {
+      setActivePotionBonus(0);
+    }
+  }, [platform]);
+
   const dailyBonusDecimal = dailyBonus / 100;
   const gradeBonus = useMemo(() => getBonusRank(playerInfo?.rank ?? "default"), [playerInfo]);
 
@@ -69,17 +108,25 @@ export function XPCalculator() {
     return totalAdditiveBonus;
   }, [activePotionBonus, gradeBonus, dailyBonusDecimal]);
 
-  const requiredXp = useMemo(() => JobXp.calculateXpNeeded(endLevel, playerInfo?.metier[metier].xp ?? 0), [endLevel, playerInfo, metier]);
+  const requiredXp = useMemo(
+    () => JobXp.calculateXpNeeded(endLevel, xpCalcMetier.xp, platform),
+    [endLevel, xpCalcMetier.xp, platform]
+  );
 
   const finalRequiredXp = requiredXp / totalBonusMultiplier;
 
   const sortedActions = useMemo(() => {
-    return constants.how_to_xp[metier];
-  }, [metier]);
+    return constants.how_to_xp[metier].filter((action) => {
+      return action[platform] !== undefined;
+    }).sort((a, b) => {
+      return (a[platform]?.level ?? 1) - (b[platform]?.level ?? 1);
+    });
+  }, [metier, platform]);
 
   const formatter = new Intl.NumberFormat("fr-FR", { maximumFractionDigits: 0 });
 
-  if (!playerInfo) {
+  // In Java mode, wait for the player profile to load
+  if (platform === "java" && !playerInfo) {
     return <LoadingSpinner />;
   }
 
@@ -99,24 +146,51 @@ export function XPCalculator() {
 
         <Card className="lg:col-span-1 space-y-4">
           <h2 className="text-xl font-semibold mb-4 border-b border-secondary pb-2">Paramètres de Progression</h2>
+
+          <TogglePlatform size={64}/>
+
           <MetierSelector metier={metier} setMetier={setMetier} />
           <InputDebounce
             label="Niveau de Départ"
             value={startLevel}
             onChange={(e) => {
-              if (playerInfo.metier[metier].level !== e) {
-                if (e <= playerInfo.metier[metier].level) {
-                  console.log(playerInfo.metier[metier].level, e);
-                  decreaseMetierLevel(metier, playerInfo.metier[metier].level - e);
-                } else if (e > playerInfo.metier[metier].level) {
-                  increaseMetierLevel(metier, e - playerInfo.metier[metier].level);
+              const delta = e - startLevel;
+              if (delta > 0) {
+                increaseMetierLevel(metier, delta);
+                if (platform === "java") {
+                  usePlayerInfoStore.getState().increaseMetierLevel(metier, delta);
+                }
+              } else if (delta < 0) {
+                decreaseMetierLevel(metier, -delta, minStartLevel);
+                if (platform === "java") {
+                  usePlayerInfoStore.getState().decreaseMetierLevel(metier, -delta, minStartLevel);
                 }
               }
-              setStartLevel(e);
             }}
-            min={1}
+            min={minStartLevel}
             debounceTimeInMs={250}
           />
+          {(() => {
+            const xpAtStart = JobXp.totalXp(startLevel, platform);
+            const xpPerLevel = JobXp.totalXp(startLevel + 1, platform) - xpAtStart;
+            const currentXpInLevel = Math.max(0, Math.min(xpCalcMetier.xp - xpAtStart, xpPerLevel));
+            return (
+              <CoinSlider
+                label="XP actuelle"
+                min={0}
+                max={xpPerLevel}
+                value={currentXpInLevel}
+                formatValue={(v) => formatter.format(v)}
+                onChange={(v) => {
+                  const newXp = xpAtStart + v;
+                  setMetierXp(metier, newXp);
+                  if (platform === "java") {
+                    usePlayerInfoStore.getState().setMetierXp(metier, newXp);
+                  }
+                }}
+              />
+            );
+          })()}
           <InputDebounce
             label="Niveau à atteindre"
             value={endLevel}
@@ -135,10 +209,12 @@ export function XPCalculator() {
             debounceTimeInMs={250}
           />
 
-          <PotionSelector
-            activePotionBonus={activePotionBonus}
-            setActivePotionBonus={setActivePotionBonus}
-          />
+          {platform === "java" && (
+            <PotionSelector
+              activePotionBonus={activePotionBonus}
+              setActivePotionBonus={setActivePotionBonus}
+            />
+          )}
 
           {metier === "miner" && (
             <FortuneSelector
@@ -153,7 +229,7 @@ export function XPCalculator() {
           <div>
             <h2 className="text-xl font-semibold mb-4 border-b border-secondary pb-2 text-primary">Objectif XP</h2>
             <div className="space-y-3">
-              <BonusStats label="XP actuelle du niveau" value={formatter.format((playerInfo?.metier[metier].xp ?? 0) - JobXp.totalXp(startLevel, platform)) + " / " + formatter.format(JobXp.totalXp(startLevel+1, platform) - JobXp.totalXp(startLevel, platform)) + " XP"} classNameValue="text-primary whitespace-nowrap" />
+              <BonusStats label="XP actuelle du niveau" value={formatter.format(xpCalcMetier.xp - JobXp.totalXp(startLevel, platform)) + " / " + formatter.format(JobXp.totalXp(startLevel + 1, platform) - JobXp.totalXp(startLevel, platform)) + " XP"} classNameValue="text-primary whitespace-nowrap" />
               <BonusStats label="XP Totale nécessaire" value={formatter.format(requiredXp) + " XP"} classNameValue="text-primary" />
 
               <div className="border-t border-secondary pt-4 mt-4">
@@ -164,16 +240,20 @@ export function XPCalculator() {
                   value={`${dailyBonus.toFixed(1)}%`}
                   classNameValue={dailyBonus >= 0 ? "text-green-400" : "text-red-400"}
                 />
-                <BonusStats
-                  label="Potion Double XP"
-                  value={activePotionBonus === constants.POTION_DOUBLE_BONUS ? "+100%" : "0%"}
-                  classNameValue={activePotionBonus === constants.POTION_DOUBLE_BONUS ? "text-green-400" : "text-gray-500"}
-                />
-                <BonusStats
-                  label="Potion x10 XP"
-                  value={activePotionBonus === constants.POTION_X10_BONUS ? "+900%" : "0%"}
-                  classNameValue={activePotionBonus === constants.POTION_X10_BONUS ? "text-green-400" : "text-gray-500"}
-                />
+                {platform === "java" && (
+                  <>
+                    <BonusStats
+                      label="Potion Double XP"
+                      value={activePotionBonus === constants.POTION_DOUBLE_BONUS ? "+100%" : "0%"}
+                      classNameValue={activePotionBonus === constants.POTION_DOUBLE_BONUS ? "text-green-400" : "text-gray-500"}
+                    />
+                    <BonusStats
+                      label="Potion x10 XP"
+                      value={activePotionBonus === constants.POTION_X10_BONUS ? "+900%" : "0%"}
+                      classNameValue={activePotionBonus === constants.POTION_X10_BONUS ? "text-green-400" : "text-gray-500"}
+                    />
+                  </>
+                )}
                 {metier === "miner" && (
                   <BonusStats
                     label="Bonus Fortune (applicable sur les minéraux uniquement)"
@@ -202,7 +282,7 @@ export function XPCalculator() {
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
 
-        <Card className="lg:col-span-2 h-fit order-2 lg:order-1">
+        <Card className={cn("lg:col-span-2 h-fit order-2 lg:order-1", platform === "bedrock" && "lg:col-span-3")}>
           <h2 className="text-xl font-semibold mb-4 border-b border-secondary pb-2">
             Méthode d&apos;xp pour le métier de {prettyJobName(metier)}
           </h2>
@@ -216,7 +296,7 @@ export function XPCalculator() {
           <div className="space-y-3">
             {sortedActions.map(item => (
               <FarmActionItem
-                key={item.type + item.action + item.xp}
+                key={item.type + item.action + item[platform]?.xp}
                 metier={metier}
                 item={item}
                 gradeBonus={gradeBonus}
@@ -224,6 +304,7 @@ export function XPCalculator() {
                 totalBonusMultiplier={totalBonusMultiplier}
                 fortuneBonus={fortuneBonus}
                 dailyBonusDecimal={dailyBonusDecimal}
+                platform={platform}
               />
             ))}
             {sortedActions.length === 0 && (
@@ -232,13 +313,15 @@ export function XPCalculator() {
           </div>
         </Card>
 
-        <div className="lg:col-span-1 order-1 lg:order-2">
-          <PreconditionsDisplay
-            startLevel={startLevel}
-            endLevel={endLevel}
-            metier={metier}
-          />
-        </div>
+        {platform === "java" && (
+          <div className="lg:col-span-1 order-1 lg:order-2">
+            <PreconditionsDisplay
+              startLevel={startLevel}
+              endLevel={endLevel}
+              metier={metier}
+            />
+          </div>
+        )}
       </div>
     </>
   );

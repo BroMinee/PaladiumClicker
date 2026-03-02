@@ -1,4 +1,4 @@
-import { constants } from "@/lib/constants";
+import { constants, HowToXpElement } from "@/lib/constants";
 import { MetierKey, PlayerRank } from "@/types";
 
 export type PlatformVersion = "java" | "bedrock";
@@ -80,7 +80,7 @@ export const JobXp = {
    *
    * @param level The current level of the player/job.
    * @param currentXp The total experience points the player currently has.
-   * @param version "java" (default) or "bedrock".
+   * @param version "java" or "bedrock".
    */
   xpCoef(level: number, currentXp: number, version: PlatformVersion): number {
     if (currentXp === 0) {
@@ -96,10 +96,19 @@ export const JobXp = {
    * @param version "java" (default) or "bedrock".
    * @returns the xp needed to reach the requested level base minus the currentXp
    */
-  calculateXpNeeded(higherLevel: number, currentXP: number, version: PlatformVersion = "java"): number {
+  calculateXpNeeded(higherLevel: number, currentXP: number, version: PlatformVersion): number {
     return Math.ceil(JobXp.totalXp(higherLevel, version) - currentXP);
   },
 };
+
+/**
+ * Returns the XP granted by an action for the given platform version.
+ * @param item    The action entry from `how_to_xp`.
+ * @param version "java" or "bedrock".
+ */
+export function getActionXp(item: HowToXpElement, version: PlatformVersion): number {
+  return item[version]!.xp;
+}
 
 /**
  * Returns the primary and background RGB colors associated with a given job name.

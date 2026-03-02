@@ -1,0 +1,48 @@
+.coin-slider {
+        appearance: none;
+        -webkit-appearance: none;
+        height: 6px;
+        border-radius: 9999px;
+        background: hsl(var(--secondary));
+        outline: none;
+        cursor: pointer;
+    }
+
+    .coin-slider::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        appearance: none;
+        width: 32px;
+        height: 32px;
+        background-image: url('/coin.png');
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-color: transparent;
+        border: none;
+        cursor: grab;
+        filter: drop-shadow(0 2px 4px rgba(0,0,0,0.4));
+        transition: transform 0.1s ease, filter 0.1s ease;
+    }
+
+    .coin-slider::-webkit-slider-thumb:active {
+        cursor: grabbing;
+        transform: scale(1.2) rotate(15deg);
+        filter: drop-shadow(0 4px 8px rgba(0,0,0,0.5));
+    }
+
+    .coin-slider::-moz-range-thumb {
+        width: 32px;
+        height: 32px;
+        background-image: url('/coin.png');
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-color: transparent;
+        border: none;
+        cursor: grab;
+        filter: drop-shadow(0 2px 4px rgba(0,0,0,0.4));
+        transition: transform 0.1s ease, filter 0.1s ease;
+    }
+
+    .coin-slider::-moz-range-thumb:active {
+        cursor: grabbing;
+        transform: scale(1.2) rotate(15deg);
+    }

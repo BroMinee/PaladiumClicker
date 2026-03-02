@@ -1,15 +1,14 @@
 "use client";
-import { constants } from "@/lib/constants";
 import { MetierKey, PlayerInfo, UpgradeKey } from "@/types";
+import { constants } from "@/lib/constants";
 import { create } from "zustand";
 import { createJSONStorage, persist } from "zustand/middleware";
-import { getInitialPlayerInfo, JobXp, PlatformVersion } from "@/lib/misc";
+import { getInitialPlayerInfo, JobXp } from "@/lib/misc";
 
 type State = {
   data: PlayerInfo | null;
   selectedCPS: number;
   version: number;
-  platform: PlatformVersion;
 }
 
 type Actions = {
@@ -17,6 +16,7 @@ type Actions = {
   reset: () => void;
   increaseMetierLevel: (name: MetierKey, value: number) => void;
   decreaseMetierLevel: (name: MetierKey, value: number, min?: number) => void;
+  setMetierXp: (name: MetierKey, xp: number) => void;
   setBuildingOwn: (name: string, value: number) => void;
   toggleUpgradeOwn: (type: UpgradeKey, name: string) => void;
   selectCPS: (index: number) => void;
@@ -30,7 +30,6 @@ const initialState: State = {
   data: null,
   selectedCPS: -1,
   version: constants.version,
-  platform: "java",
 };
 
 export const usePlayerInfoStore = create<State & Actions, [["zustand/persist", State & Actions]]>(persist<State & Actions>(
@@ -61,7 +60,7 @@ export const usePlayerInfoStore = create<State & Actions, [["zustand/persist", S
       newMetier[metierKey] = {
         ...targettedMetier,
         level: targettedMetier.level + value,
-        xp: JobXp.totalXp(targettedMetier.level + value, state.platform),
+        xp: JobXp.totalXp(targettedMetier.level + value, "java"),
       };
 
       return {
@@ -86,7 +85,7 @@ export const usePlayerInfoStore = create<State & Actions, [["zustand/persist", S
       newMetier[metierKey] = {
         ...targettedMetier,
         level: targettedMetier.level - value,
-        xp: JobXp.totalXp(targettedMetier.level - value, state.platform),
+        xp: JobXp.totalXp(targettedMetier.level - value, "java"),
       };
 
       return {
@@ -94,6 +93,22 @@ export const usePlayerInfoStore = create<State & Actions, [["zustand/persist", S
         data: {
           ...state.data,
           metier: newMetier,
+          edited: true,
+        },
+      };
+    }),
+    setMetierXp: (metierKey, xp) => set((state) => {
+      if (!state.data) {
+        return state;
+      }
+      const targettedMetier = state.data.metier[metierKey];
+      if (!targettedMetier) {
+        return state;
+      }
+      return {
+        data: {
+          ...state.data,
+          metier: { ...state.data.metier, [metierKey]: { ...targettedMetier, xp } },
           edited: true,
         },
       };
@@ -219,7 +234,7 @@ export const usePlayerInfoStore = create<State & Actions, [["zustand/persist", S
     setDefaultProfile: () => set((state) => {
       state.data = getInitialPlayerInfo();
       return { ...state };
-    })
+    }),
   }),
   {
     name: storageKey,

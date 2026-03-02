@@ -25,13 +25,13 @@ export function JobLevel({ jobName }: { jobName: MetierKey }) {
  * @param jobName - The job name we are displaying
  */
 export function JobProgressbar({ jobName }: { jobName: MetierKey }) {
-  const { data: playerInfo, platform } = usePlayerInfoStore();
+  const { data: playerInfo } = usePlayerInfoStore();
   if (!playerInfo) {
     return <LoadingSpinner/>;
   }
 
   const metier = playerInfo.metier[jobName];
-  const coefXp = Math.min(100, Math.round(100 * JobXp.xpCoef(metier.level, metier.xp, platform)));
+  const coefXp = Math.min(100, Math.round(100 * JobXp.xpCoef(metier.level, metier.xp, "java")));
 
   const colors = getColorByMetierName(jobName);
   function convertToString(colors: number[]) {
@@ -57,14 +57,14 @@ export function JobProgressbar({ jobName }: { jobName: MetierKey }) {
  * @param jobName - The job name we are displaying
  */
 export function JobXpCount({ jobName }: { jobName: MetierKey }) {
-  const { data: playerInfo, platform } = usePlayerInfoStore();
+  const { data: playerInfo } = usePlayerInfoStore();
   if (!playerInfo) {
     return <LoadingSpinner/>;
   }
   const formatter = new Intl.NumberFormat("fr-FR");
   const startLevel = playerInfo.metier[jobName].level;
-  const currentXp = (playerInfo?.metier[jobName].xp ?? 0) - JobXp.totalXp(startLevel, platform);
-  const nextLevelXp = JobXp.totalXp(playerInfo?.metier[jobName].level + 1, platform) - JobXp.totalXp(startLevel, platform);
+  const currentXp = (playerInfo?.metier[jobName].xp ?? 0) - JobXp.totalXp(startLevel, "java");
+  const nextLevelXp = JobXp.totalXp(playerInfo?.metier[jobName].level + 1, "java") - JobXp.totalXp(startLevel, "java");
 
   return (
     <div className="flex justify-between items-center w-full text-xs text-card-foreground mt-1">

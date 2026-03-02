@@ -51,6 +51,8 @@ type MetierProps = {
   minLevel?: number;
   metierKey: MetierKey;
   twitch?: boolean;
+  /** When provided, the SVG outline and level badge reflect these values instead of the main store. */
+  metierData?: { level: number; xp: number };
 };
 
 /**
@@ -59,10 +61,12 @@ type MetierProps = {
  * @param minLevel - Minimum level allowed when decreasing the métier level.
  * @param metierKey - The job key used to to display corresponding data (image, outline, level).
  * @param twitch - Whether to display the UI in Twitch mode (affects level display styling or behavior).
+ * @param metierData - Optional override data (level + xp) from an external store (e.g. XP calc store).
  */
 export const MetierComponentWrapper = ({
   metierKey,
   twitch = false,
+  metierData,
 }: MetierProps) => {
 
   const metierName = structuredClone(metierJson[metierKey].name as MetierKey);
@@ -81,12 +85,12 @@ export const MetierComponentWrapper = ({
           <svg className="progress blue noselect" x="0px" y="0px" viewBox="0 0 776 628">
             <path className="track"
               d="M723 314L543 625.77 183 625.77 3 314 183 2.23 543 2.23 723 314z"></path>
-            <MetierOutline metierKey={metierKey} />
+            <MetierOutline metierKey={metierKey} metierData={metierData} />
           </svg>
         </div>
       </div>
       <div className="flex items-center justify-center gap-2">
-        <MetierDisplayLvl metierKey={metierKey} twitch={twitch} />
+        <MetierDisplayLvl metierKey={metierKey} twitch={twitch} overrideLevel={metierData?.level} />
       </div>
     </>
   );
