@@ -1,5 +1,4 @@
 import { XPCalculator } from "@/components/xp-calculator/calculator.client";
-import { safeJoinPaths } from "@/lib/misc";
 import { constants } from "@/lib/constants";
 
 /**
@@ -8,7 +7,7 @@ import { constants } from "@/lib/constants";
 export async function generateMetadata() {
   const title = "PalaTracker | Calculateur d'xp | Bedrock";
   const description = "Calculez l'xp nécessaire pour atteindre le niveau souhaité sur Paladium Bedrock.";
-  const image = safeJoinPaths("https://palatracker.bromine.fr/", constants.imgPathProfile, "/JobsIcon/Mineur.webp");
+  const image = `https://palatracker.bromine.fr${constants.imgPathProfile}JobsIcon/Mineur.webp`;
   return {
     title,
     description,

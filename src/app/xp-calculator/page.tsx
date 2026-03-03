@@ -1,7 +1,6 @@
 import { NoPseudoPage } from "@/components/home/no-pseudo-page.server";
-import { safeJoinPaths } from "@/lib/misc";
-import { constants } from "@/lib/constants";
 import { XpHomePageWrapper } from "@/components/xp-calculator/xp-calculator-landing.client";
+import { constants } from "@/lib/constants";
 
 /**
  * Generate Metadata
@@ -9,7 +8,7 @@ import { XpHomePageWrapper } from "@/components/xp-calculator/xp-calculator-land
 export async function generateMetadata() {
   const title = "PalaTracker | Calculateur d'xp";
   const description = "Renseignez votre pseudo Paladium et le métier que vous souhaitez xp pour obtenir des quantités à farmer pour atteindre le niveau souhaité.";
-  const image = safeJoinPaths("https://palatracker.bromine.fr/", constants.imgPathProfile, "/JobsIcon/Mineur.webp");
+  const image = `https://palatracker.bromine.fr${constants.imgPathProfile}JobsIcon/Mineur.webp`;
   return {
     title,
     description,

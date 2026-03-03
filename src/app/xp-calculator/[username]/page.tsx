@@ -1,7 +1,6 @@
 import { ProfileFetcherWrapper } from "@/components/profile-fetcher.client";
 import { XPCalculator } from "@/components/xp-calculator/calculator.client";
 import { constants } from "@/lib/constants";
-import { safeJoinPaths } from "@/lib/misc";
 import { searchParamsXpBonusPage } from "@/types";
 import React from "react";
 
@@ -38,7 +37,7 @@ export async function generateMetadata(
       break;
     }
   }
-  const image = safeJoinPaths("https://palatracker.bromine.fr/", constants.imgPathProfile, "/JobsIcon/", imgPath, ".webp");
+  const image = `https://palatracker.bromine.fr${constants.imgPathProfile}JobsIcon/${imgPath}.webp`;
   return {
     title: title,
     description: description,
