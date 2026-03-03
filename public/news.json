@@ -1,5 +1,22 @@
 [
   {
+    "date": "03/03/2026",
+    "changes": {
+      "additions": [
+        "Ajout du [calculateur d'xp Bedrock](https://palatracker.bromine.fr/xp-calculator/bedrock) pour les joueurs de Paladium Bedrock"
+      ],
+      "améliorations": [
+        "**Majeur** : Refonte du système d'alertes Discord, désormais beaucoup plus stables et moins sujettes aux bugs.",
+        "Sélection automatique de l'input dans le [craft](https://palatracker.bromine.fr/craft) et le [market](https://palatracker.bromine.fr/ah) pour une saisie plus rapide."
+      ],
+      "corrections": [
+        "Correction du calcul du bonus d'xp lié au grade du joueur dans le [calculateur d'xp](https://palatracker.bromine.fr/xp-calculator).",
+        "Ajout des images manquantes (minerais deepslate, copper ore, tuff) dans le calculateur d'xp.",
+        "Correction d'un flou d'arrière-plan superflu sur la page d'accueil."
+      ]
+    }
+  },
+  {
     "date": "17/02/2026",
     "changes": {
       "additions": [
