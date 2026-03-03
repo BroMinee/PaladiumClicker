@@ -31,13 +31,13 @@ export function CoinSlider({ label, min, max, value, onChange, formatValue }: Co
           min={min}
           max={max}
           value={value}
-          className="coin-slider flex-1"
+          className="coin-slider w-full"
           style={{
             background: `linear-gradient(to right, hsl(var(--primary)) ${percentage}%, hsl(var(--secondary)) ${percentage}%)`,
           }}
           onChange={(e) => onChange(Number(e.target.value))}
         />
-        <div className="w-36 shrink-0">
+        <div className="w-fit shrink-0">
           <InputDebounce
             label=""
             min={min}
@@ -47,6 +47,7 @@ export function CoinSlider({ label, min, max, value, onChange, formatValue }: Co
             debounceTimeInMs={250}
             decreaseButton={false}
             increaseButton={false}
+            inputClassName="w-24"
           />
         </div>
       </div>

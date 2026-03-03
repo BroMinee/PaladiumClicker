@@ -1,6 +1,6 @@
 "use client";
 
-import { ReactNode } from "react";
+import { ComponentType, ReactNode } from "react";
 import { ExternalLink, MousePointer2, Hammer, ChevronRight, User, ListChevronsUpDown } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
@@ -48,16 +48,19 @@ const FEATURES: FeatureItem[] = [
   { id: "discord", title: "Nous Rejoindre", desc: "Communauté, Support & Actualités.", icon: <FaDiscord size={20} />, image: "/img/Home/discord-logo.png", href: constants.discord.url },
 ];
 
-interface NoPseudoPageProps {
+export interface NoPseudoPageProps {
   contributors: Contributor[];
   texth1: string;
   texth2: string;
+  inputWrapper?: ComponentType<{ children: ReactNode }>;
 }
+
+const defaultInputWrapper: ComponentType<{ children: ReactNode }> = ({ children }) => <div className="w-full max-w-md mx-auto">{children}</div>;
 
 /**
  * [Home page content](https://palatracker.bromine.fr)
  */
-export function NoPseudoPageWithContributeur({ contributors, texth1, texth2 }: NoPseudoPageProps) {
+export function NoPseudoPageWithContributeur({ contributors, texth1, texth2, inputWrapper = defaultInputWrapper }: NoPseudoPageProps) {
   const [emblaRef] = useEmblaCarousel(
     { loop: true, dragFree: true },
     [
@@ -79,12 +82,10 @@ export function NoPseudoPageWithContributeur({ contributors, texth1, texth2 }: N
         <h2 className="text-xl md:text-2xl text-center font-bold">
           {textFormatting(texth2)}
         </h2>
-        {/* <h1 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold text-white drop-shadow-xl break-words max-w-full">
-          Commence par saisir ton pseudo <span className="text-primary block md:inline">Minecraft</span>
-        </h1> */}
-        <div className="w-full max-w-md mx-auto">
-          <SearchPlayerInput variant="homepage" />
-        </div>
+        {(() => {
+          const InputWrapper = inputWrapper;
+          return <InputWrapper><SearchPlayerInput variant="homepage" /></InputWrapper>;
+        })()}
       </div>
 
       <div>

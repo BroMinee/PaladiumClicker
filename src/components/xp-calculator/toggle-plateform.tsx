@@ -45,7 +45,6 @@ export function TogglePlatform({ size = 256 }: TogglePlatformProps) {
 
   return (
     <div className="space-y-3">
-      <p className="text-sm font-medium text-center text-muted-foreground">Version</p>
       <div className="flex justify-center gap-4">
 
         <button
