@@ -409,7 +409,7 @@ function QDFOverlay() {
         <div className="mb-4">
           <h3 className="text-5xl font-black bg-gradient-to-r text-yellow-400 bg-clip-text text-transparent">
             <span>
-              {qdf.item.fr_trad}
+              {qdf.item.us_trad}
             </span>
             <span className="text-5xl font-black text-primary">{" x"}{formatPrice(qdf.quantity)}</span>
           </h3>
