@@ -1,16 +1,18 @@
 "use client";
-import { getFactionLeaderboardAction, getPlayerCountHistoryPaladiumAction, getPlayerInfoAction, getPlayerPositionAction } from "@/lib/api/api-server-action.server";
+import { getCurrentQdf, getFactionLeaderboardAction, getPlayerCountHistoryPaladiumAction, getPlayerInfoAction, getPlayerPositionAction } from "@/lib/api/api-server-action.server";
 import { AUTOPROMO_CONFIG } from "@/lib/constants";
 import { usePlayerInfoStore } from "@/stores/use-player-info-store";
 import React, { useState, useEffect, useCallback } from "react";
 import { MetierComponentWrapper } from "../metier-list";
 import Image from "next/image";
-import { getImagePathFromRankingType, rankingTypeToUserFriendlyText, safeJoinPaths } from "@/lib/misc";
+import { formatPrice, getImagePathFromRankingType, rankingTypeToUserFriendlyText, safeJoinPaths } from "@/lib/misc";
 import { useRouter } from "next/navigation";
 import { OverlayTwitchEnum } from "@/types";
 import { AvailableElements, SelectedElementConfig } from "./twitch-overlay-config.client";
 import { usePlayerExtraInfoTwitch, useTwitchStore, useTwitchTimeStore } from "@/stores/use-twitch-store";
 import { Emblem } from "@/components/faction/emblem";
+import { QDF } from "@/types/qdf";
+import { UnOptimizedImage } from "../ui/image-loading";
 
 function configTypeToOverlayTwitchEnum(type: keyof AvailableElements | "autoPromo"): OverlayTwitchEnum {
   switch(type) {
@@ -22,6 +24,8 @@ function configTypeToOverlayTwitchEnum(type: keyof AvailableElements | "autoProm
     return OverlayTwitchEnum.Faction;
   case "metiers":
     return OverlayTwitchEnum.Jobs;
+  case "qdf":
+    return OverlayTwitchEnum.QDF;
   default:
     return OverlayTwitchEnum.AutoPromo;
   }
@@ -199,8 +203,8 @@ export function TwitchOverlay({ preview, selectedElements}: { preview?: boolean,
           {currentConfig && configTypeToOverlayTwitchEnum(currentConfig.type) === OverlayTwitchEnum.Jobs && <JobsOverlay/>}
           {currentConfig && configTypeToOverlayTwitchEnum(currentConfig.type) === OverlayTwitchEnum.Classement && <ClassementOverlay/>}
           {currentConfig && configTypeToOverlayTwitchEnum(currentConfig.type) === OverlayTwitchEnum.Faction && <FactionOverlay/>}
+          {currentConfig && configTypeToOverlayTwitchEnum(currentConfig.type) === OverlayTwitchEnum.QDF && <QDFOverlay/>}
           {currentConfig && configTypeToOverlayTwitchEnum(currentConfig.type) === OverlayTwitchEnum.AutoPromo && <AutoPromoOverlay/>}
-
         </div>
       </div>
     </>
@@ -359,6 +363,60 @@ function ClassementOverlay() {
       </div>
     </div>
   </div>;
+}
+
+function QDFOverlay() {
+  const [qdf, setQdf] = useState<QDF>({
+    start: 0,
+    end: 0,
+    item: {
+      item_name: "Unknown",
+      us_trad: "Error",
+      fr_trad: "Erreur",
+      img: "barrier.webp"
+    },
+    quantity: 0,
+    earningXp: 0,
+    earningMoney: 0,
+  });
+
+  useEffect(() => {
+    getCurrentQdf().then(data => {
+      setQdf(data);
+    });
+  }, []);
+
+  return (
+    <div className="flex flex-row">
+      <div className="flex-shrink-0 mr-8">
+        <div className="relative">
+          <UnOptimizedImage
+            src={safeJoinPaths(`/AH_img/${qdf.item.img}`)}
+            alt={qdf.item.item_name ?? "itemQdf"}
+            width={0}
+            height={0}
+            className="h-48 w-48 pixelated mr-2 rounded-xl object-cover border-4 border-purple-500/50"
+          />
+        </div>
+      </div>
+
+      <div className="flex-1 flex flex-col justify-center">
+        <div className="mb-3">
+          <h2 className="text-3xl font-bold text-purple-300 mb-2">Quête de Faction</h2>
+          <div className="h-1 w-32 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full"></div>
+        </div>
+
+        <div className="mb-4">
+          <h3 className="text-5xl font-black bg-gradient-to-r text-yellow-400 bg-clip-text text-transparent">
+            <span>
+              {qdf.item.fr_trad}
+            </span>
+            <span className="text-5xl font-black text-primary">{" x"}{formatPrice(qdf.quantity)}</span>
+          </h3>
+        </div>
+      </div>
+    </div>
+  );
 }
 
 function AutoPromoOverlay() {

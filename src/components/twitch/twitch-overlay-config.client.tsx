@@ -79,6 +79,7 @@ export type AvailableElements = {
   classement: AvailableElementWithSubOptions;
   faction: AvailableElementWithoutSubOptions;
   money: AvailableElementWithoutSubOptions;
+  qdf: AvailableElementWithoutSubOptions;
 };
 
 const AVAILABLE_ELEMENTS: AvailableElements = {
@@ -117,6 +118,12 @@ const AVAILABLE_ELEMENTS: AvailableElements = {
     id: "money",
     label: "Argent",
     icon: "💵",
+    hasSubOptions: false,
+  },
+  qdf: {
+    id: "qdf",
+    label: "Quête de faction",
+    icon: "📆",
     hasSubOptions: false,
   }
 };

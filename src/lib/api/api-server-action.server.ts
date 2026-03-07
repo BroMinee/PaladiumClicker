@@ -29,6 +29,7 @@ import {
 import { cookies } from "next/headers";
 import { API_PALATRACKER } from "@/lib/constants";
 import { redirect } from "next/navigation";
+import { QDF } from "@/types/qdf";
 
 /* The content of this file is not sent to the client*/
 
@@ -550,4 +551,11 @@ export async function getAllItemAliases(): Promise<Array<[string,string]>> {
     console.error("Impossible de charger récupérer les alias des items");
     return [];
   });
+}
+
+/**
+ * Get the current QDF
+ */
+export async function getCurrentQdf(): Promise<QDF> {
+  return await fetchWithHeader<QDF>(`${API_PALATRACKER}/v1/qdf/getCurrent`, 0);
 }

@@ -3,5 +3,6 @@ export enum OverlayTwitchEnum {
   Faction,
   Jobs,
   Classement,
+  QDF,
   AutoPromo
 }
