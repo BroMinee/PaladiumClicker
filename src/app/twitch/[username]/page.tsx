@@ -36,6 +36,6 @@ export default async function TwitchLayoutHome(props: { params: Promise<{ userna
 
   const username = await props.params.then(p => p.username);
   return <ProfileFetcherWrapper username={username}>
-    <TwitchOverlay selectedElements={parsedElements}/>;
+    <TwitchOverlay selectedElements={parsedElements}/>
   </ProfileFetcherWrapper>;
 };
