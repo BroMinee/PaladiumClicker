@@ -15,7 +15,7 @@ import { HiOutlineStatusOnline } from "react-icons/hi";
 import { GradientText } from "@/components/shared/gradient-text";
 import { NavBarProfilInfo } from "@/components/navbar/navbar-profil-info.client";
 import { MdOutlineWebhook } from "react-icons/md";
-import { Hammer, ListChevronsUpDown, MousePointer2, User } from "lucide-react";
+import { CalendarDays, Hammer, ListChevronsUpDown, MousePointer2, User } from "lucide-react";
 import { SearchPlayerInput } from "../home/search-player.client";
 
 /**
@@ -63,6 +63,9 @@ function NavBarContent() {
               </LinkClient>
               <LinkClient path={constants.moneyRanking}>
                 <PiRankingBold size={24}/>
+              </LinkClient>
+              <LinkClient path={constants.qdfPath}>
+                <CalendarDays size={24}/>
               </LinkClient>
             </NavbarCategoryDisplay>
             <NavbarCategoryDisplay name={"Outils"}>

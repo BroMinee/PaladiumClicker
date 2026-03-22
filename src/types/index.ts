@@ -16,3 +16,4 @@ export * from "./twitch";
 export * from "./webhook";
 export * from "./graph";
 export * from "./xp-calculator";
+export * from "./qdf";

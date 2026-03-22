@@ -375,6 +375,7 @@ function QDFOverlay() {
       fr_trad: "Erreur",
       img: "barrier.webp"
     },
+    itemName: "Unknown",
     quantity: 0,
     earningXp: 0,
     earningMoney: 0,
@@ -391,8 +392,8 @@ function QDFOverlay() {
       <div className="flex-shrink-0 mr-8">
         <div className="relative">
           <UnOptimizedImage
-            src={safeJoinPaths(`/AH_img/${qdf.item.img}`)}
-            alt={qdf.item.item_name ?? "itemQdf"}
+            src={safeJoinPaths(`/AH_img/${qdf.item?.img}`)}
+            alt={qdf.item?.item_name ?? qdf.itemName}
             width={0}
             height={0}
             className="h-48 w-48 pixelated mr-2 rounded-xl object-cover border-4 border-purple-500/50"
@@ -409,7 +410,7 @@ function QDFOverlay() {
         <div className="mb-4">
           <h3 className="text-5xl font-black bg-gradient-to-r text-yellow-400 bg-clip-text text-transparent">
             <span>
-              {qdf.item.us_trad}
+              {qdf.item?.us_trad ?? qdf.itemName}
             </span>
             <span className="text-5xl font-black text-primary">{" x"}{formatPrice(qdf.quantity)}</span>
           </h3>

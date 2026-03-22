@@ -34,7 +34,8 @@ export type PathValid =
   | "/patchnote"
   | "/webhook"
   | "/account"
-  | "/admin-panel";
+  | "/admin-panel"
+  | "/qdf";
 
 export type LabelValid =
   "Profil"
@@ -58,7 +59,8 @@ export type LabelValid =
   | "Patchnote"
   | "Alertes Discord"
   | "Account"
-  | "Admin Panel";
+  | "Admin Panel"
+  | "QDF";
 
 const profilPath: PathValid = "/profil";
 const ahPath: PathValid = "/ah";
@@ -76,6 +78,7 @@ const aboutPath: PathValid = "/about";
 const webhooksPath: PathValid = "/webhook";
 const accountPath: PathValid = "/account";
 const adminPanelPath: PathValid = "/admin-panel";
+const qdfPath: PathValid = "/qdf";
 
 type LinkInfo = {
   label: LabelValid;
@@ -102,7 +105,8 @@ const links: LinkList = {
   "/patchnote": { label: "Patchnote", requiredPseudo: false },
   "/webhook": { label: "Alertes Discord", requiredPseudo: false },
   "/account": { label: "Account", requiredPseudo: false },
-  "/admin-panel": { label: "Admin Panel", requiredPseudo: false }
+  "/admin-panel": { label: "Admin Panel", requiredPseudo: false },
+  "/qdf": { label: "QDF", requiredPseudo: false }
 };
 
 const SMELT = "Smelt";
@@ -453,7 +457,7 @@ const notificationPath: Map<PathValid, [number, string]> = new Map<PathValid, [n
   ]);
 
 const menuPaths: Map<NavBarCategory, PathValid[]> = new Map<NavBarCategory, PathValid[]>([
-  ["Statistiques et données", ["/profil", "/ah", "/admin-shop", "/ranking?category=money"]],
+  ["Statistiques et données", ["/profil", "/ah", "/admin-shop", "/ranking?category=money", "/qdf"]],
   ["Outils", ["/clicker-optimizer", "/xp-calculator", "/pala-animation", "/craft", "/craft-optimizer", "/webhook"]],
   ["Informations et gestion", ["/status", "/patchnote", "/politique-de-confidentialite", "/about"]],
 ]);
@@ -674,6 +678,7 @@ export const constants = {
   webhooksPath,
   accountPath,
   adminPanelPath,
+  qdfPath,
   imgPathProfile,
   imgPathMarket,
   imgPathRanking,

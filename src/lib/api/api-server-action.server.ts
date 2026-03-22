@@ -559,3 +559,10 @@ export async function getAllItemAliases(): Promise<Array<[string,string]>> {
 export async function getCurrentQdf(): Promise<QDF> {
   return await fetchWithHeader<QDF>(`${API_PALATRACKER}/v1/qdf/getCurrent`, 0);
 }
+
+/**
+ * Get QDF history
+ */
+export async function getQdfHistory(): Promise<QDF[]> {
+  return await fetchWithHeader<QDF[]>(`${API_PALATRACKER}/v1/qdf/getAll`, 0);
+}
