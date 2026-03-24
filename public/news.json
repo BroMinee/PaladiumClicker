@@ -1,5 +1,24 @@
 [
   {
+    "date": "25/03/2026",
+    "changes": {
+      "additions": [
+        "Ajout de la page [QDF](https://palatracker.bromine.fr/qdf), elle affiche la **Quêtes de Faction** actuelle et l'historique des QDFs passées.",
+        "Ajout d'un overlay Twitch dédié au QDF, intégrable directement dans vos streams via la page [overlay](https://palatracker.bromine.fr/twitch/BroMine__/setup)."
+      ],
+      "améliorations": [
+        "Refonte de l'affichage des recettes de [craft](https://palatracker.bromine.fr/craft?item=hyperjumpstick&count=1) pour prendre en compte la machine: Palamachine, Alchemy Creator, Cauldron, Grinder, Four.",
+        "Amélioration de l'affichage des images dans le [market](https://palatracker.bromine.fr/profil/BroMine__) sur la page de profil."
+      ],
+      "corrections": [
+        "Correction de l'alerte Discord de type 'A vos marques', qui ne s'envoyait plus"
+      ],
+      "suppressions": [
+        "Suppression du compteur de joueurs Bedrock sur la page de [statut](https://palatracker.bromine.fr/status) car les données étaient fausses."
+      ]
+    }
+  },
+  {
     "date": "03/03/2026",
     "changes": {
       "additions": [
