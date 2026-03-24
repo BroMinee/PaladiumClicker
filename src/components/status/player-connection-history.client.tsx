@@ -5,7 +5,7 @@ import { LineGrad } from "../shared/graph-line-renderer.client";
 import { ChartContainer } from "../shared/graph.client";
 import { TimeSelection } from "../shared/time-selection.client";
 import { Card } from "@/components/ui/card";
-import { getStatusPaladiumAction, getStatusPaladiumBedrockAction } from "@/lib/api/api-server-action.server";
+import { getStatusPaladiumAction } from "@/lib/api/api-server-action.server";
 import { useEffect, useState } from "react";
 import { GraphLegends } from "../shared/graph-legends.client";
 
@@ -36,17 +36,9 @@ export function PlayerConnectionHistory() {
       stats: [],
       yAxisId: "y-axis"
     },
-    {
-      id: "bedrock-status",
-      name: "Joueurs en ligne bedrock",
-      color: "#ff0000ff",
-      visibility: true,
-      stats: [],
-      yAxisId: "y-axis"
-    }
   ]);
 
-  function updateDataset(id: "java-status" | "bedrock-status", stats: DataPoint<Date, number>[]) {
+  function updateDataset(id: "java-status", stats: DataPoint<Date, number>[]) {
     setData(prev =>
       prev.map(ds =>
         ds.id === id
@@ -65,13 +57,6 @@ export function PlayerConnectionHistory() {
       updateDataset("java-status", newStats);
     });
 
-    getStatusPaladiumBedrockAction(currentTimeRangePlayerCount).then(res => {
-      const newStats = res.map(e => ({
-        x: new Date(e.date),
-        y: e.players,
-      }));
-      updateDataset("bedrock-status", newStats);
-    });
   }, [currentTimeRangePlayerCount]);
 
   function toggleVisibility(plt: Dataset<Date, number>) {
