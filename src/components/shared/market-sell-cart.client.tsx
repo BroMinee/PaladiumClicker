@@ -139,7 +139,14 @@ export function ProfileSaleCard({ sale }: { sale: AhItemType }) {
   const [item, setItem] = useState<OptionType | undefined>(undefined);
 
   useEffect(() => {
-    setItem(allItems.find(e => e.value === sale.item.name));
+    let item = allItems.find(e => e.value === sale.item.name);
+    if (item === undefined) {
+      item = allItems.find(e => e.label.toLocaleLowerCase() === sale.item.name.toLowerCase());
+    }
+    if (item === undefined) {
+      item = allItems.find(e => e.label2.toLocaleLowerCase() === sale.item.name.toLowerCase());
+    }
+    setItem(item);
   }, [allItems, sale.item.name]);
 
   if (!playerInfo) {
