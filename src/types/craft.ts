@@ -1,9 +1,17 @@
 import { Item, OptionType } from "./market";
 
+export type CraftingTableName =
+  "crafting table"
+  | "furnace"
+  | "grinder"
+  | "palamachine"
+  | "cauldron"
+  | "alchemy creator";
+
 export type CraftingRecipeType =
   {
     item: Item,
-    table: "crafting table" | "furnace" | "grinder" | "palamachine" | "cauldron" | "alchemy creator",
+    table: CraftingTableName,
     slot1: Item | null,
     slot2: Item | null,
     slot3: Item | null,
@@ -16,7 +24,7 @@ export type CraftingRecipeType =
     count: number
   }
 
-export type NodeType = OptionType & { count: number } & { checked: boolean }
+export type NodeType = OptionType & { count: number } & { checked: boolean } & { table?: CraftingTableName }
 
 export type Tree<T> = {
   value: T;
