@@ -16,17 +16,28 @@ interface EmblemConfig {
  * Generator of faction emblem
  * @param params - object that represent the faction emblem
  */
-export default async function ImageGen( { params }: { params: any }) {
+export default async function ImageGen( { params }: { params: Promise<any> }) {
+  const {
+    backgroundColor: backgroundColorStr,
+    backgroundId: backgroundIdStr,
+    borderColor: borderColorStr,
+    foregroundColor: foregroundColorStr,
+    foregroundId: foregroundIdStr,
+    iconBorderColor: iconBorderColorStr,
+    iconColor: iconColorStr,
+    iconId: iconIdStr
+  } = await params;
+
   try {
     const emblem: EmblemConfig = {
-      backgroundColor: parseInt(await params.backgroundColor),
-      backgroundId: parseInt(await params.backgroundId),
-      borderColor: parseInt(await params.borderColor),
-      foregroundColor: parseInt(await params.foregroundColor),
-      foregroundId: parseInt(await params.foregroundId),
-      iconBorderColor: parseInt(await params.iconBorderColor),
-      iconColor: parseInt(await params.iconColor),
-      iconId: parseInt(await params.iconId),
+      backgroundColor: parseInt(backgroundColorStr),
+      backgroundId: parseInt(backgroundIdStr),
+      borderColor: parseInt(borderColorStr),
+      foregroundColor: parseInt(foregroundColorStr),
+      foregroundId: parseInt(foregroundIdStr),
+      iconBorderColor: parseInt(iconBorderColorStr),
+      iconColor: parseInt(iconColorStr),
+      iconId: parseInt(iconIdStr),
     };
 
     const bgColor = intToHex(emblem.backgroundColor);
