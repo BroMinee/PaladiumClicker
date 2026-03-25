@@ -13,8 +13,8 @@ import { HiOutlineStatusOnline } from "react-icons/hi";
 import { constants, PathValid } from "@/lib/constants";
 import { SearchPlayerInput } from "@/components/home/search-player.client";
 import { textFormatting } from "@/lib/misc";
-import { Card } from "../ui/card";
-import { UnOptimizedImage } from "../ui/image-loading";
+import { Card } from "@/components/ui/card";
+import { UnOptimizedImage } from "@/components/ui/image-loading";
 import { IoMdStopwatch } from "react-icons/io";
 
 export interface Contributor {

@@ -5,8 +5,8 @@ import { FaTag, FaInfoCircle } from "react-icons/fa";
 import { usePlayerInfoStore } from "@/stores/use-player-info-store";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { Button } from "@/components/ui/button-v2";
-import { ProfileSaleCard } from "../shared/market-sell-cart.client";
-import { AhInfoGetTotalBenefice } from "../ah/market-total-benefice.client";
+import { ProfileSaleCard } from "@/components/shared/market-sell-cart.client";
+import { AhInfoGetTotalBenefice } from "@/components/ah/market-total-benefice.client";
 
 /**
  * Display the player's market

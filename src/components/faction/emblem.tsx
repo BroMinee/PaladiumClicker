@@ -2,7 +2,7 @@ import { PaladiumEmblem } from "@/types";
 import { ImageLoading } from "@/components/ui/image-loading";
 
 /**
- * Display the faction emblem using for following URL : https://palatracker.bromine.fr/blog/faction/.../opengraph-image
+ * Display the faction emblem using for following URL : https://palatracker.bromine.fr/blog/faction/.@/components/opengraph-image
  * In case the emblem any texture use it instead of the given emblem. (Wilderness, Warzone case)
  */
 export function Emblem({ emblem, className }: { emblem: PaladiumEmblem, className?: string }) {

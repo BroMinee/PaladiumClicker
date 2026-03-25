@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { useProfileStore } from "@/stores/use-profile-store";
 import { Button } from "@/components/ui/button";
-import { DiscordProfilPicture } from "../account/discord-profil-picture.client";
+import { DiscordProfilPicture } from "@/components/account/discord-profil-picture.client";
 
 const RANDOM_QUOTES = ["Hello there!", "Don't be a bot, be a optimizer", "Moins de blabla, CLIQUES!", "Optimize or die trying!", "Farm harder, not smarter!", "Paladium are for peasants", "Click plus vite", "Pas d'AFK, pas de gain."];
 

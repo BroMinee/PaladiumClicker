@@ -2,7 +2,7 @@
 
 import { usePlayerInfoStore } from "@/stores/use-player-info-store";
 import { LoadingSpinner } from "@/components/ui/loading-spinner";
-import { RankingSectionSelector } from "../ranking/inputs.client";
+import { RankingSectionSelector } from "@/components/ranking/inputs.client";
 
 /**
  * Display the profile section with description and ranking graph.

@@ -12,7 +12,7 @@ import { constants } from "@/lib/constants";
 import { getAdminShopHistoryServerAction } from "@/lib/api/api-server-action.server";
 import { TimeSelection } from "@/components/shared/time-selection.client";
 import { Card } from "@/components/ui/card";
-import { PageHeader, PageHeaderDescription, PageHeaderHeading } from "../ui/page";
+import { PageHeader, PageHeaderDescription, PageHeaderHeading } from "@/components/ui/page";
 
 const timeRanges: { key: AdminShopPeriod, label: string }[] = [
   { key: "day", label: "24 heures" },

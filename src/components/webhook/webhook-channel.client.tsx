@@ -23,7 +23,7 @@ import {
 import { AlertItem } from "./alert-card.client";
 import { ConfirmDeleteModal } from "./input.client";
 import { Button } from "@/components/ui/button-v2";
-import { Card } from "../ui/card";
+import { Card } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
 
 /**

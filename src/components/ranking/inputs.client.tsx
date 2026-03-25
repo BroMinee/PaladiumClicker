@@ -1,16 +1,16 @@
 "use client";
 import { AxisConfig, Dataset, RankingType } from "@/types";
-import { GenericSectionTabs, TabData } from "../shared/section.client";
+import { GenericSectionTabs, TabData } from "@/components/shared/section.client";
 import { getRankingLeaderboardAction, getRankingLeaderboardPlayerUsernameAction } from "@/lib/api/api-server-action.server";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { getImagePathFromRankingType, rankingTypeToUserFriendlyText } from "@/lib/misc";
 import { RankingAddPlayerInput } from "./graph-add-player.client";
-import { LineRenderer } from "../shared/graph-line-renderer.client";
-import { ChartContainer } from "../shared/graph.client";
+import { LineRenderer } from "@/components/shared/graph-line-renderer.client";
+import { ChartContainer } from "@/components/shared/graph.client";
 import { LoadingSpinner } from "@/components/ui/loading-spinner";
 import { UnOptimizedImage } from "@/components/ui/image-loading";
-import { GraphLegends } from "../shared/graph-legends.client";
+import { GraphLegends } from "@/components/shared/graph-legends.client";
 
 /**
  * Display the ranking section tabs and tabs content.

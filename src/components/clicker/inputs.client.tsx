@@ -7,14 +7,14 @@ import { computePrice, formatPrice, getPathImg, scaleCurrentProduction } from "@
 import Image from "next/image";
 import { GenericSectionTabs, TabData } from "@/components/shared/section.client";
 import { LoadingSpinner } from "@/components/ui/loading-spinner";
-import { ToggleCardButton } from "../shared/toggle-button.client";
-import { GroupedSpanContainer } from "../shared/group-span-container";
+import { ToggleCardButton } from "@/components/shared/toggle-button.client";
+import { GroupedSpanContainer } from "@/components/shared/group-span-container";
 import { Card } from "@/components/ui/card";
-import { HoverCard, HoverCardContent, HoverCardTrigger } from "../shared/hover";
+import { HoverCard, HoverCardContent, HoverCardTrigger } from "@/components/shared/hover";
 import { StatItem } from "./clicker-page";
-import { ImageCoin } from "../shared/image-coin";
+import { ImageCoin } from "@/components/shared/image-coin";
 import { PreconditionDisplay } from "@/lib/precondition-display.client";
-import { InputDebounce } from "../shared/input-debounce.client";
+import { InputDebounce } from "@/components/shared/input-debounce.client";
 
 /**
  * Display the list of building input.

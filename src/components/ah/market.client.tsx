@@ -28,11 +28,11 @@ import { SearchBar } from "@/components/craft/craft-recipe.client";
 import { useItemsStore } from "@/stores/use-items-store";
 import { useMarketStore } from "@/stores/use-market-store";
 import { Card } from "@/components/ui/card";
-import { MarketOfferCard } from "../shared/market-sell-cart.client";
-import { RenderPressure, RenderPriceVolume } from "../shared/graph-line-renderer.client";
+import { MarketOfferCard } from "@/components/shared/market-sell-cart.client";
+import { RenderPressure, RenderPriceVolume } from "@/components/shared/graph-line-renderer.client";
 import { GiStoneCrafting } from "react-icons/gi";
 import { generateCraftUrl, safeJoinPaths, textFormatting } from "@/lib/misc";
-import { PageHeader, PageHeaderDescription, PageHeaderHeading } from "../ui/page";
+import { PageHeader, PageHeaderDescription, PageHeaderHeading } from "@/components/ui/page";
 
 const PLACEHOLDER_ITEM: OptionType = {
   value: "placeholder",

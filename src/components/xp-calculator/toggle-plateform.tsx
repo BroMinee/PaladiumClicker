@@ -7,7 +7,7 @@ import { usePlayerInfoStore } from "@/stores/use-player-info-store";
 import bedrockLogoSvg from "@/assets/bedrock_logo.svg";
 import javaLogoSvg from "@/assets/java_logo.svg";
 import Image from "next/image";
-import { UnOptimizedImage } from "../ui/image-loading";
+import { UnOptimizedImage } from "@/components/ui/image-loading";
 import { cn } from "@/lib/utils";
 
 /** Props for the TogglePlatform component. */

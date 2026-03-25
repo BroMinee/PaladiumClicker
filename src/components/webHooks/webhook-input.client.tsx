@@ -36,7 +36,7 @@ import { useRouter } from "next/navigation";
 import { constants } from "@/lib/constants";
 // import PlotAdminShopChart from "@/components/AdminShop/PlotAdminShopChart";
 import { PlotHistoricChart } from "@/components/ah/plot-historic-chart.client";
-import { AdminShopGraph } from "../admin-shop/admin-shop-page.client";
+import { AdminShopGraph } from "@/components/admin-shop/admin-shop-page.client";
 
 /**
  * Handles the setup or configuration of a webhook.

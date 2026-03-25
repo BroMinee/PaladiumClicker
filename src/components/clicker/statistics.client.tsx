@@ -10,10 +10,10 @@ import { StatItem } from "./clicker-page";
 import { MdOutlineStarPurple500 } from "react-icons/md";
 import { Button } from "@/components/ui/button-v2";
 import { ShoppingCart, Calculator } from "lucide-react";
-import { GroupedSpanContainer } from "../shared/group-span-container";
+import { GroupedSpanContainer } from "@/components/shared/group-span-container";
 import { Card } from "@/components/ui/card";
 import { ChevronDown, ChevronUp } from "lucide-react";
-import { SearchPlayerInput } from "../home/search-player.client";
+import { SearchPlayerInput } from "@/components/home/search-player.client";
 
 const IconCalendar = () => (
   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">

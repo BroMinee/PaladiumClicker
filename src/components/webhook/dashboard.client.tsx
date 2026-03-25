@@ -6,7 +6,7 @@ import { Card } from "@/components/ui/card";
 import {  API_PALATRACKER } from "@/lib/constants";
 
 import { useWebhookAlertStore } from "@/stores/use-webhook-alert-store";
-import { DiscordProfilPicture } from "../account/discord-profil-picture.client";
+import { DiscordProfilPicture } from "@/components/account/discord-profil-picture.client";
 import { WebhookServerSection } from "./webhook-server.client";
 import { Button } from "@/components/ui/button-v2";
 import { useProfileStore } from "@/stores/use-profile-store";

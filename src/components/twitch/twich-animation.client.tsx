@@ -3,7 +3,7 @@ import { getCurrentQdf, getFactionLeaderboardAction, getPlayerCountHistoryPaladi
 import { AUTOPROMO_CONFIG } from "@/lib/constants";
 import { usePlayerInfoStore } from "@/stores/use-player-info-store";
 import { useState, useEffect, useCallback, useMemo } from "react";
-import { MetierComponentWrapper } from "../metier-list";
+import { MetierComponentWrapper } from "@/components/metier-list";
 import Image from "next/image";
 import { formatPrice, getImagePathFromRankingType, rankingTypeToUserFriendlyText, safeJoinPaths } from "@/lib/misc";
 import { useRouter } from "next/navigation";
@@ -12,7 +12,7 @@ import { AvailableElements, SelectedElementConfig } from "./twitch-overlay-confi
 import { usePlayerExtraInfoTwitch, useTwitchStore, useTwitchTimeStore } from "@/stores/use-twitch-store";
 import { Emblem } from "@/components/faction/emblem";
 import { QDF } from "@/types/qdf";
-import { UnOptimizedImage } from "../ui/image-loading";
+import { UnOptimizedImage } from "@/components/ui/image-loading";
 
 function configTypeToOverlayTwitchEnum(type: keyof AvailableElements | "autoPromo"): OverlayTwitchEnum {
   switch(type) {

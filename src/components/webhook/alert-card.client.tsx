@@ -14,7 +14,7 @@ import {  deleteWebhookServerAction } from "@/lib/api/api-server-action.server";
 import { UnOptimizedImage } from "@/components/ui/image-loading";
 import { ConfirmDeleteModal } from "./input.client";
 import { Button } from "@/components/ui/button-v2";
-import { Card } from "../ui/card";
+import { Card } from "@/components/ui/card";
 
 const AlertStyles = {
   [WebHookType.QDF]: { color: "bg-purple-500/10 text-purple-400 border-purple-500/20" },

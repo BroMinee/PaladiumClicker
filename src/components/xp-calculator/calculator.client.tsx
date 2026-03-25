@@ -17,7 +17,7 @@ import { PreconditionsDisplay } from "./precondition.client";
 import { FarmActionItem } from "./farm-action";
 import { BonusStats } from "./bonus-stats";
 import { MetierSelector } from "./metier.selector.client";
-import { PageHeader, PageHeaderDescription, PageHeaderHeading } from "../ui/page";
+import { PageHeader, PageHeaderDescription, PageHeaderHeading } from "@/components/ui/page";
 import { cn } from "@/lib/utils";
 import { TogglePlatform } from "./toggle-plateform";
 import { CoinSlider } from "@/components/shared/coin-slider.client";

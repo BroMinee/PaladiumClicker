@@ -2,8 +2,8 @@
 
 import { usePlayerInfoStore } from "@/stores/use-player-info-store";
 import { LoadingSpinner } from "@/components/ui/loading-spinner";
-import { ClickableLink } from "../ui/clickable-link";
-import { TwitchLogo } from "../shared/twitch-overlay-button.client";
+import { ClickableLink } from "@/components/ui/clickable-link";
+import { TwitchLogo } from "@/components/shared/twitch-overlay-button.client";
 
 /**
  * Display the player username

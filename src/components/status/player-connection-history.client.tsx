@@ -1,13 +1,13 @@
 "use client";
 
 import { AdminShopPeriod, AxisConfig, DataPoint, Dataset } from "@/types";
-import { LineGrad } from "../shared/graph-line-renderer.client";
-import { ChartContainer } from "../shared/graph.client";
-import { TimeSelection } from "../shared/time-selection.client";
+import { LineGrad } from "@/components/shared/graph-line-renderer.client";
+import { ChartContainer } from "@/components/shared/graph.client";
+import { TimeSelection } from "@/components/shared/time-selection.client";
 import { Card } from "@/components/ui/card";
 import { getStatusPaladiumAction } from "@/lib/api/api-server-action.server";
 import { useEffect, useState } from "react";
-import { GraphLegends } from "../shared/graph-legends.client";
+import { GraphLegends } from "@/components/shared/graph-legends.client";
 
 const timeRanges: { key: AdminShopPeriod, label: string }[] = [
   { key: "day", label: "24 heures" },

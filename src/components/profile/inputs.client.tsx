@@ -1,5 +1,5 @@
 "use client";
-import { GenericSectionTabs, TabData } from "../shared/section.client";
+import { GenericSectionTabs, TabData } from "@/components/shared/section.client";
 import { MarketSection } from "./market.client";
 import { AchievementSection } from "./achievements.client";
 import { FriendsSection } from "./friends.client";
@@ -8,7 +8,7 @@ import { FactionSection } from "./faction/faction-section.client";
 import { getAllItemsServerAction } from "@/lib/api/api-server-action.server";
 import { useEffect, useState } from "react";
 import { OptionType, ProfilSection } from "@/types";
-import { SetItemsStats } from "../shared/set-items-state.client";
+import { SetItemsStats } from "@/components/shared/set-items-state.client";
 import { PetMountSection } from "./pets-mount.client";
 
 /**

@@ -3,7 +3,7 @@ import { MetierKey } from "@/types";
 import { Button } from "@/components/ui/button-v2";
 import { prettyJobName } from "@/lib/misc";
 import { cn } from "@/lib/utils";
-import { MetierComponentWrapper } from "../metier-list";
+import { MetierComponentWrapper } from "@/components/metier-list";
 import { useXpCalcStore } from "@/stores/use-xp-calc-store";
 
 const JAVA_METIERS: MetierKey[] = ["miner", "farmer", "hunter", "alchemist"];

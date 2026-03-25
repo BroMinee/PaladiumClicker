@@ -3,7 +3,7 @@ import { getAllUsersLinked, getRole } from "@/lib/api/api-pala-tracker.server";
 import { EditRole } from "@/components/admin-panel/admin-panel-role-edition.client";
 import { Role } from "@/types";
 import React from "react";
-import { DiscordProfilPicture } from "../account/discord-profil-picture.client";
+import { DiscordProfilPicture } from "@/components/account/discord-profil-picture.client";
 
 const mapPermission = new Map<Role, React.FC[]>(
   [

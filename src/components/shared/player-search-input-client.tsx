@@ -12,7 +12,7 @@ import { Button } from "@/components/ui/button-v2";
 import { cn } from "@/lib/utils";
 import { toast } from "sonner";
 import { useSettingsStore } from "@/stores/use-settings-store";
-import { LoadingSpinner } from "../ui/loading-spinner";
+import { LoadingSpinner } from "@/components/ui/loading-spinner";
 import { usePlayerInfoStore } from "@/stores/use-player-info-store";
 
 interface PlayerSearchInputProps {

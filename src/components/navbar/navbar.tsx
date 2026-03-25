@@ -15,7 +15,7 @@ import { GradientText } from "@/components/shared/gradient-text";
 import { NavBarProfilInfo } from "@/components/navbar/navbar-profil-info.client";
 import { MdOutlineWebhook } from "react-icons/md";
 import { CalendarDays, Hammer, ListChevronsUpDown, MousePointer2, User } from "lucide-react";
-import { SearchPlayerInput } from "../home/search-player.client";
+import { SearchPlayerInput } from "@/components/home/search-player.client";
 
 /**
  * Renders the application's vertical navbar, supporting both desktop and mobile layouts.
