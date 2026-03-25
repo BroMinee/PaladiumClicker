@@ -84,7 +84,7 @@ export function PetOrMountCanvas({ mount = false }: { mount?: boolean }) {
   useEffect(() => {
     if (myModel.animations.length > 0) {
       const newMixer = new THREE.AnimationMixer(myModel.scene);
-      setMixer(newMixer);
+      setMixer(newMixer); // eslint-disable-line react-hooks/set-state-in-effect
 
       myModel.scene.traverse((child) => {
         if (child instanceof Mesh) {

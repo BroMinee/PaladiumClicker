@@ -1,6 +1,6 @@
 "use client";
 import { PlayerFactionName } from "../player-faction.client";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import { PaladiumFactionLeaderboard } from "@/types";
 import { getFactionLeaderboardAction } from "@/lib/api/api-server-action.server";
 import { usePlayerInfoStore } from "@/stores/use-player-info-store";
@@ -27,7 +27,15 @@ function FactionMainInformation() {
 
   const [leaderboardFaction, setLeaderboardFaction] = useState<PaladiumFactionLeaderboard>([]);
   const [factionIndex, setFactionIndex] = useState<number>(-1);
-  const [gradientStyle, setGradientStyle] = useState<string>("linear-gradient(to right, white, white, white)");
+  const gradientStyle = useMemo(() => {
+    if (!playerInfo) {
+      return "linear-gradient(to right, white, white, white)";
+    }
+    const emblem = playerInfo.faction.emblem;
+    const color1 = intToHex(emblem.backgroundColor);
+    const color2 = intToHex(emblem.foregroundColor);
+    return `linear-gradient(to right, ${color1}, ${color2}, ${color1})`;
+  }, [playerInfo]);
 
   useEffect(() => {
     getFactionLeaderboardAction().then(e => {
@@ -36,17 +44,6 @@ function FactionMainInformation() {
         setFactionIndex(e.findIndex((faction) => faction.name === playerInfo.faction.name) + 1);
       }
     });
-  }, [playerInfo]);
-
-  useEffect(() => {
-    if (!playerInfo) {
-      return;
-    }
-    const emblem = playerInfo.faction.emblem;
-    const color1 = intToHex(emblem.backgroundColor);
-    const color2 = intToHex(emblem.foregroundColor);
-
-    setGradientStyle(`linear-gradient(to right, ${color1}, ${color2}, ${color1})`);
   }, [playerInfo]);
 
   if (!playerInfo) {

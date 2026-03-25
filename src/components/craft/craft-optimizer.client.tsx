@@ -189,7 +189,6 @@ export function CraftOptimizerDisplay() {
   const [sortMode, setSortMode] = useState<SortMode>("score");
   const [search, setSearch] = useState("");
   const [isConnected, setIsConnected] = useState<boolean>(false);
-  const [lastUpdate, setLastUpdate] = useState<Date | null>(null);
   const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -225,15 +224,12 @@ export function CraftOptimizerDisplay() {
     };
   }, [setCraftingList]);
 
-  useEffect(() => {
-    if (craftingList.length > 0) {
-      const firstItem = craftingList[0] as any;
-      if (firstItem.created_at) {
-        setLastUpdate(new Date(firstItem.created_at));
-      } else {
-        setLastUpdate(new Date());
-      }
+  const lastUpdate = useMemo<Date | null>(() => {
+    if (craftingList.length === 0) {
+      return null;
     }
+    const firstItem = craftingList[0] as any;
+    return firstItem.created_at ? new Date(firstItem.created_at) : new Date();
   }, [craftingList]);
 
   const sortedItemsWithRank = useMemo(() => {

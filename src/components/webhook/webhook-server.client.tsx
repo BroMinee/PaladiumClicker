@@ -22,7 +22,7 @@ export function WebhookServerSection({ server }: { server: GroupedServer }) {
   const [isDeleted, setIsDeleted] = useState(false);
 
   useEffect(() => {
-    setServerName(server.serverName);
+    setServerName(server.serverName); // eslint-disable-line react-hooks/set-state-in-effect
   }, [server.serverName]);
 
   const showWarning = serverName.startsWith("server-");

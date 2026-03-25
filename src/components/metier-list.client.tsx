@@ -67,7 +67,7 @@ export function MetierDisplayLvl({ metierKey, lvlToReach, searchParams, twitch =
   );
 
   useEffect(() => {
-    setInputValue(lvlToReach ? lvlToReach : playerInfo?.metier[metierKey].level);
+    setInputValue(lvlToReach ? lvlToReach : playerInfo?.metier[metierKey].level); // eslint-disable-line react-hooks/set-state-in-effect
   }, [lvlToReach, playerInfo, metierKey]);
 
   const debouncedRedirect = useMemo(

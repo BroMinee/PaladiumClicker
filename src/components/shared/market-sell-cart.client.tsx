@@ -1,7 +1,7 @@
 import { useItemsStore } from "@/stores/use-items-store";
 import { usePlayerInfoStore } from "@/stores/use-player-info-store";
 import { AhItemType, MarketItemOffer, OptionType } from "@/types";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { ClickableLink } from "@/components/ui/clickable-link";
 import { LoadingSpinner } from "@/components/ui/loading-spinner";
 import { UnOptimizedImage } from "@/components/ui/image-loading";
@@ -136,17 +136,11 @@ function BaseSaleCard({
 export function ProfileSaleCard({ sale }: { sale: AhItemType }) {
   const { allItems } = useItemsStore();
   const { data: playerInfo } = usePlayerInfoStore();
-  const [item, setItem] = useState<OptionType | undefined>(undefined);
-
-  useEffect(() => {
-    let item = allItems.find(e => e.value === sale.item.name);
-    if (item === undefined) {
-      item = allItems.find(e => e.label.toLocaleLowerCase() === sale.item.name.toLowerCase());
-    }
-    if (item === undefined) {
-      item = allItems.find(e => e.label2.toLocaleLowerCase() === sale.item.name.toLowerCase());
-    }
-    setItem(item);
+  const item = useMemo<OptionType | undefined>(() => {
+    const name = sale.item.name;
+    return allItems.find(e => e.value === name)
+      ?? allItems.find(e => e.label.toLocaleLowerCase() === name.toLowerCase())
+      ?? allItems.find(e => e.label2.toLocaleLowerCase() === name.toLowerCase());
   }, [allItems, sale.item.name]);
 
   if (!playerInfo) {
@@ -176,17 +170,13 @@ export function ProfileSaleCard({ sale }: { sale: AhItemType }) {
  */
 export function MarketOfferCard({ offer, itemName }: { offer: MarketItemOffer, itemName: string }) {
   const { allItems } = useItemsStore();
-  const [item, setItem] = useState<OptionType | undefined>(undefined);
+  const item = useMemo(() => allItems.find(e => e.value === itemName), [allItems, itemName]);
   const [username, setUsername] = useState<string>("");
   useEffect(() => {
     getPlayerUsernameFromUUID(offer.seller).then((username) => setUsername(username)).catch(() => {
       setUsername("Username not found");
     });
   }, [offer.seller]);
-
-  useEffect(() => {
-    setItem(allItems.find(e => e.value === itemName));
-  }, [allItems, itemName]);
 
   return (
     <BaseSaleCard

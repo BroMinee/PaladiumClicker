@@ -104,6 +104,7 @@ export function QdfCountdown({ endTimestamp }: { endTimestamp: number }) {
     return () => clearInterval(interval);
   }, [endTimestamp]);
 
+  // eslint-disable-next-line react-hooks/refs
   if (remaining === 0 && introRef.current) {
     return (
       <div className="flex flex-col items-center gap-2 py-2">

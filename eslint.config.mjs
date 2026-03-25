@@ -6,7 +6,7 @@ import stylistic from "@stylistic/eslint-plugin";
 import nextConfig from "eslint-config-next/core-web-vitals";
 
 export default defineConfig([
-  { ignores: ["tailwind.config.ts"] },
+  { ignores: ["tailwind.config.ts", "misc-scripts/rendererIsometric.js"] },
   ...nextConfig,
   ...typescriptEslint.configs["flat/recommended"],
   {
@@ -58,7 +58,7 @@ export default defineConfig([
       }],
 
       "@stylistic/type-annotation-spacing": ["error", {
-        before: false,
+        before: true,
         after: true,
 
         overrides: {
@@ -66,12 +66,12 @@ export default defineConfig([
             before: false,
             after: true,
           },
-
-          arrow: {
-            before: true,
-            after: true,
-          },
         },
+      }],
+
+      "@stylistic/arrow-spacing": ["error", {
+        before: true,
+        after: true,
       }],
 
       "react-hooks/exhaustive-deps": "error",

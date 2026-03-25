@@ -59,7 +59,7 @@ export default function LinkClient({ path, children }: {
   }
 
   useEffect(() => {
-    setMounted(true);
+    setMounted(true); // eslint-disable-line react-hooks/set-state-in-effect
     let link: PathValid | undefined;
     if (typeof window !== "undefined") {
       link = getLinkFromUrl(window.location.pathname);
@@ -157,14 +157,14 @@ export function NavbarCategoryDisplay({ name, children }: {
   const [maxHeight, setMaxHeight] = useState<string>("0px");
 
   useEffect(() => {
-    setMounted(true);
+    setMounted(true); // eslint-disable-line react-hooks/set-state-in-effect
   }, []);
 
   useEffect(() => {
     if (!mounted) {
       return;
     }
-    setOpen(opened.includes(name));
+    setOpen(opened.includes(name)); // eslint-disable-line react-hooks/set-state-in-effect
   }, [name, mounted, opened]);
 
   function toggleOpen() {
@@ -181,7 +181,7 @@ export function NavbarCategoryDisplay({ name, children }: {
         return acc;
       }, 0);
 
-      setNewNotification(newNotification);
+      setNewNotification(newNotification); // eslint-disable-line react-hooks/set-state-in-effect
     }
   }, [mounted, playerInfo, last_visited, name, subLinks]);
 

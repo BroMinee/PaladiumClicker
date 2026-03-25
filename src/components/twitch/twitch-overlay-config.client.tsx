@@ -171,6 +171,7 @@ export const TwitchOverlayConfig = ({ username}: { username: string }) => {
 
   const addElement = (elementType: keyof AvailableElements) => {
     const newElement = {
+      // eslint-disable-next-line react-hooks/purity
       id: `${elementType}-${Date.now()}`,
       type: elementType,
       duration: 2 * 60,

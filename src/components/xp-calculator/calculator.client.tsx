@@ -41,11 +41,13 @@ export function XPCalculator({ defaultPlatform }: { defaultPlatform?: PlatformVe
 
   const minStartLevel = platform === "bedrock" ? 0 : 1;
 
-  const [metier, setMetier] = useState<MetierKey>("miner");
-  const [endLevel, setEndLevel] = useState(minStartLevel + 1);
+  const [metierInput, setMetier] = useState<MetierKey>("miner");
+  const [endLevelInput, setEndLevel] = useState(minStartLevel + 1);
   const [dailyBonus, setDailyBonus] = useState(0);
-  const [fortuneBonus, setFortuneBonus] = useState(0);
-  const [activePotionBonus, setActivePotionBonus] = useState(0);
+  const [fortuneBonusInput, setFortuneBonus] = useState(0);
+  const [activePotionBonusInput, setActivePotionBonus] = useState(0);
+
+  const metier: MetierKey = platform === "bedrock" && metierInput === "alchemist" ? "miner" : metierInput;
 
   // Apply defaultPlatform before first paint to avoid a flash
   useLayoutEffect(() => {
@@ -58,44 +60,16 @@ export function XPCalculator({ defaultPlatform }: { defaultPlatform?: PlatformVe
   const xpCalcMetier = xpCalcMetiers[metier];
   const startLevel = xpCalcMetier.level;
 
+  const endLevel = Math.min(Math.max(endLevelInput, startLevel + 1), MAX_LEVEL);
+  const fortuneBonus = metierInput !== "miner" ? 0 : fortuneBonusInput;
+  const activePotionBonus = platform === "bedrock" ? 0 : activePotionBonusInput;
+
   // Java mode: keep the XP calc store in sync with the fetched player info
   useEffect(() => {
     if (platform === "java" && playerInfo) {
       syncFromPlayerInfo(playerInfo);
     }
   }, [playerInfo, platform, syncFromPlayerInfo]);
-
-  useEffect(() => {
-    if (endLevel <= startLevel) {
-      setEndLevel(startLevel + 1);
-    }
-  }, [startLevel, endLevel]);
-
-  // Alchemist doesn't exist in Bedrock
-  useEffect(() => {
-    if (platform === "bedrock" && metier === "alchemist") {
-      setMetier("miner");
-    }
-  }, [platform, metier]);
-
-  useEffect(() => {
-    if (metier !== "miner" && fortuneBonus !== 0) {
-      setFortuneBonus(0);
-    }
-  }, [metier, fortuneBonus]);
-
-  useEffect(() => {
-    if (endLevel > MAX_LEVEL) {
-      setEndLevel(MAX_LEVEL);
-    }
-  }, [endLevel]);
-
-  // Potions don't exist in Bedrock
-  useEffect(() => {
-    if (platform === "bedrock") {
-      setActivePotionBonus(0);
-    }
-  }, [platform]);
 
   const dailyBonusDecimal = dailyBonus / 100;
   const gradeBonus = useMemo(() => getBonusRank(playerInfo?.rank ?? "default"), [playerInfo]);

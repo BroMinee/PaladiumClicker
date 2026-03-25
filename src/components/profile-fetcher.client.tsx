@@ -27,7 +27,7 @@ export function ProfileFetcherWrapper({ username, children }: {
 
   useEffect(() => {
     if (isFirstRender) {
-      setIsFirstRender(false);
+      setIsFirstRender(false); // eslint-disable-line react-hooks/set-state-in-effect
       return;
     }
 

@@ -1,20 +1,22 @@
 "use client";
 
+import { useState } from "react";
 import { useProfileStore } from "@/stores/use-profile-store";
 import { Button } from "@/components/ui/button";
 import { DiscordProfilPicture } from "../account/discord-profil-picture.client";
+
+const RANDOM_QUOTES = ["Hello there!", "Don't be a bot, be a optimizer", "Moins de blabla, CLIQUES!", "Optimize or die trying!", "Farm harder, not smarter!", "Paladium are for peasants", "Click plus vite", "Pas d'AFK, pas de gain."];
 
 /**
  * Displays the logged-in user's profile information in the navbar such as the image, the username...
  */
 export function ProfileNavBar() {
   const { profileInfo } = useProfileStore();
+  const [randomQuote] = useState(() => RANDOM_QUOTES[Math.floor(Math.random() * RANDOM_QUOTES.length)]);
+
   if (!profileInfo) {
     return null;
   }
-
-  const randomQuotes = ["Hello there!", "Don't be a bot, be a optimizer", "Moins de blabla, CLIQUES!", "Optimize or die trying!", "Farm harder, not smarter!", "Paladium are for peasants", "Click plus vite", "Pas d'AFK, pas de gain."];
-  const randomQuote = randomQuotes[Math.floor(Math.random() * randomQuotes.length)];
 
   return (
     <a href="/account" className="w-full max-w-52">

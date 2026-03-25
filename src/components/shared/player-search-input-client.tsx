@@ -120,7 +120,7 @@ export const PlayerSearchInput = ({
     handleSelectPlayer(searchTerm);
   };
 
-  const PopoverResults = () => (
+  const renderPopoverResults = () => (
     <PopoverContent
       className="z-[200] w-[var(--radix-popover-trigger-width)] bg-card border rounded-lg overflow-y-auto mt-1 p-0 max-h-[50vh]"
       align="start"
@@ -255,7 +255,7 @@ export const PlayerSearchInput = ({
         </PopoverAnchor>
       )}
 
-      <PopoverResults />
+      {renderPopoverResults()}
     </Popover>
   );
 };

@@ -61,7 +61,7 @@ function FetchLeaderboardData({ rankingType, username }: { rankingType: RankingT
   const [addedPlayerUsername, setAddedPlayerUsername] = useState<Set<string>>(new Set());
 
   useEffect(() => {
-    setData([]);
+    setData([]); // eslint-disable-line react-hooks/set-state-in-effect
   }, [rankingType]);
 
   function toggleVisibility(plt: Dataset<Date, number>) {

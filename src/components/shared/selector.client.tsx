@@ -56,7 +56,7 @@ export const Selector = ({ options, defaultValue, setInputValue }: SelectorProps
   const [isMounted, setIsMounted] = useState<boolean>(false);
 
   useEffect(() => {
-    setIsMounted(true);
+    setIsMounted(true); // eslint-disable-line react-hooks/set-state-in-effect
   }, []);
 
   const handleInputChange = (value: string) => {

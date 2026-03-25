@@ -2,7 +2,6 @@
 
 import Image from "next/image";
 import { useTheme } from "next-themes";
-import { useEffect, useState } from "react";
 import { safeJoinPaths } from "@/lib/misc";
 import { constants } from "@/lib/constants";
 
@@ -11,12 +10,6 @@ import { constants } from "@/lib/constants";
  */
 export function CraftingArrow() {
   const { theme } = useTheme();
-
-  const [imagePath, setImagePath] = useState<string>(safeJoinPaths(constants.imgPathCraft,"arrow_white.png"));
-
-  useEffect(() => {
-    setImagePath(safeJoinPaths(constants.imgPathCraft, theme === "dark" ? "/arrow_white.png" : "/arrow_dark.png"));
-  }, [theme]);
-
+  const imagePath = safeJoinPaths(constants.imgPathCraft, theme === "dark" ? "/arrow_white.png" : "/arrow_dark.png");
   return <Image src={imagePath} alt="Arrow crafting" width={90} height={58 / 2} className="pixelated"/>;
 }

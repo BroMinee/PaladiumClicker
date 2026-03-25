@@ -1,7 +1,7 @@
 "use client";
 
 import { Dataset, AxisConfig, ChartRendererProps, AnyScale, AxisDomain, TooltipData } from "@/types";
-import React, { useEffect, useRef, useMemo, useState, useCallback, RefObject } from "react";
+import React, { useEffect, useRef, useMemo, useState, useCallback, useId, RefObject } from "react";
 import * as d3 from "d3";
 
 import "./graph.css";
@@ -118,7 +118,8 @@ export const ChartContainer = <TX extends AxisDomain, TY extends AxisDomain>({
   const [zoomTransform, setZoomTransform] = useState<d3.ZoomTransform>(d3.zoomIdentity);
 
   const [tooltip, setTooltip] = useState<TooltipData<TY> | null>(null);
-  const clipPathId = useMemo(() => `chart-clip-${Math.random().toString(36)}`, []);
+  const reactId = useId();
+  const clipPathId = `chart-clip-${reactId.replace(/:/g, "")}`;
   const [activeXValue, setActiveXValue] = useState<any | null>(null);
 
   const hasVisibleData = useMemo(() => {
@@ -126,7 +127,7 @@ export const ChartContainer = <TX extends AxisDomain, TY extends AxisDomain>({
   }, [data]);
 
   useEffect(() => {
-    setZoomTransform(d3.zoomIdentity);
+    setZoomTransform(d3.zoomIdentity); // eslint-disable-line react-hooks/set-state-in-effect
   }, [data]);
 
   const width = dimensions ? dimensions.width - margin.left - margin.right : 0;
@@ -186,13 +187,14 @@ export const ChartContainer = <TX extends AxisDomain, TY extends AxisDomain>({
     d3.select(zoomRectRef.current).call(zoom);
   }, [width, height, data]);
 
-  const finalScales = useMemo(() => ({ ...scales }), [scales]);
-  const xAxisConfig = axisConfigs.find(c => c.position === "bottom");
-  if (xAxisConfig && finalScales[xAxisConfig.id]) {
-    if ("rescaleX" in zoomTransform) {
-      finalScales[xAxisConfig.id] = zoomTransform.rescaleX(scales[xAxisConfig.id] as any);
+  const xAxisConfig = useMemo(() => axisConfigs.find(c => c.position === "bottom"), [axisConfigs]);
+  const finalScales = useMemo(() => {
+    const result = { ...scales };
+    if (xAxisConfig && "rescaleX" in zoomTransform && result[xAxisConfig.id]) {
+      result[xAxisConfig.id] = zoomTransform.rescaleX(scales[xAxisConfig.id] as any);
     }
-  }
+    return result;
+  }, [scales, xAxisConfig, zoomTransform]);
 
   const handleMouseMove = useCallback((event: React.MouseEvent<SVGRectElement>) => {
     const xScale = finalScales["x-axis"];

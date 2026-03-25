@@ -2,7 +2,7 @@
 import { getCurrentQdf, getFactionLeaderboardAction, getPlayerCountHistoryPaladiumAction, getPlayerInfoAction, getPlayerPositionAction } from "@/lib/api/api-server-action.server";
 import { AUTOPROMO_CONFIG } from "@/lib/constants";
 import { usePlayerInfoStore } from "@/stores/use-player-info-store";
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useMemo } from "react";
 import { MetierComponentWrapper } from "../metier-list";
 import Image from "next/image";
 import { formatPrice, getImagePathFromRankingType, rankingTypeToUserFriendlyText, safeJoinPaths } from "@/lib/misc";
@@ -423,18 +423,14 @@ function QDFOverlay() {
 function AutoPromoOverlay() {
   const { config } = useTwitchStore();
   const { nbSeconds } = useTwitchTimeStore();
-  const [pourcentage, setPourcentage] = useState<number>(0);
   const { data: playerInfo } = usePlayerInfoStore();
-
-  useEffect(() => {
-    const totalTimeInSeconds = config.reduce((res, cur) => {
-      return res + cur.duration;
-    }, 0);
-    if (!isNaN(totalTimeInSeconds)) {
-      setPourcentage(100 - (totalTimeInSeconds + AUTOPROMO_CONFIG.duration - nbSeconds) * 100 / AUTOPROMO_CONFIG.duration);
-    } else {
+  const pourcentage = useMemo(() => {
+    const totalTimeInSeconds = config.reduce((res, cur) => res + cur.duration, 0);
+    if (isNaN(totalTimeInSeconds)) {
       console.error(".duration is NaN and should not", totalTimeInSeconds, config);
+      return 0;
     }
+    return 100 - (totalTimeInSeconds + AUTOPROMO_CONFIG.duration - nbSeconds) * 100 / AUTOPROMO_CONFIG.duration;
   }, [nbSeconds, config]);
 
   return <div className="flex items-center justify-center w-full">

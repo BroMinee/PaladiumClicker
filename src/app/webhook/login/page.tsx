@@ -1,5 +1,3 @@
-/* eslint-disable react/no-unescaped-entities */
-
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { LoginButton } from "@/components/login/login-button.client";
 import { API_PALATRACKER } from "@/lib/constants";
@@ -30,7 +28,7 @@ export default function WebHooksPage() {
     <Card>
       <CardHeader className="flex flex-col gap-4">
         <div>
-          <h2 className="font-bold">Qu'est-ce que les alertes Discord ?</h2>
+          <h2 className="font-bold">Qu&apos;est-ce que les alertes Discord ?</h2>
           <span>
             Les alertes Discord vous permettent de recevoir des notifications automatiques sur vos serveurs Discord en fonction de critères spécifiques. Vous pouvez configurer des messages personnalisés pour être informé des événements Paladium sans avoir à tout surveiller manuellement.
           </span>
@@ -40,11 +38,11 @@ export default function WebHooksPage() {
           <h2 className="font-bold">Fonctionnalités des alertes</h2>
           <span>
             <ul className="list-disc pl-5">
-              <li>{textFormatting("°**Alertes sur les quêtes de faction**°")} : Recevez une notification dès qu'une nouvelle quête de faction est disponible.</li>
-              <li>{textFormatting("°**Suivi des prix**°")} : Soyez informé des variations de prix dans l'admin shop et le market.</li>
-              <li>{textFormatting("°**Événements spéciaux**°")} : Notification pour les événements PVP ou "On Your Marks".</li>
+              <li>{textFormatting("°**Alertes sur les quêtes de faction**°")} : Recevez une notification dès qu&apos;une nouvelle quête de faction est disponible.</li>
+              <li>{textFormatting("°**Suivi des prix**°")} : Soyez informé des variations de prix dans l&apos;admin shop et le market.</li>
+              <li>{textFormatting("°**Événements spéciaux**°")} : Notification pour les événements PVP ou &quot;On Your Marks&quot;.</li>
               <li>{textFormatting("°**Statut des serveurs**°")} : Recevez une alerte en cas de changement de statut des serveurs Paladium.</li>
-              <li>{textFormatting("°**Vote**°")} : Recevez une alerte lorsque vous pouvez voter pour Paladium sur l'un des sites partenaires.</li>
+              <li>{textFormatting("°**Vote**°")} : Recevez une alerte lorsque vous pouvez voter pour Paladium sur l&apos;un des sites partenaires.</li>
             </ul>
           </span>
         </div>
@@ -56,7 +54,7 @@ export default function WebHooksPage() {
               <li>Connectez-vous avec Discord pour accéder à la configuration des alertes.</li>
               <li>Choisissez le serveur et le channel où les notifications seront envoyées.</li>
               <li>Créez une alerte personnalisée selon vos critères et personnalisez vos messages avec des emojis et des mentions.</li>
-              <li>Les alertes sont vérifiées à des intervalles variables selon le type d'alerte.</li>
+              <li>Les alertes sont vérifiées à des intervalles variables selon le type d&apos;alerte.</li>
             </ol>
           </span>
         </div>
@@ -64,7 +62,7 @@ export default function WebHooksPage() {
         <div>
           <h2 className="font-bold">Gestion des alertes</h2>
           <span>
-            Une fois authentifié avec Discord, vous pouvez <strong>modifier</strong> ou <strong>supprimer</strong> vos alertes directement depuis l'interface. Vous pouvez configurer des alertes pour plusieurs serveurs et channels Discord.
+            Une fois authentifié avec Discord, vous pouvez <strong>modifier</strong> ou <strong>supprimer</strong> vos alertes directement depuis l&apos;interface. Vous pouvez configurer des alertes pour plusieurs serveurs et channels Discord.
           </span>
         </div>
 
