@@ -1,6 +1,5 @@
 "use client";
 
-import React from "react";
 import { Plus } from "lucide-react";
 import { Card } from "@/components/ui/card";
 

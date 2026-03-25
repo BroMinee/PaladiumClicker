@@ -1,5 +1,5 @@
 import { SelectorItemClient } from "@/components/items/selector-item.client";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useWebhookStore } from "@/stores/use-webhook-store";
 import { OptionType } from "@/types";
 import { getAllItemsServerAction } from "@/lib/api/api-server-action.server";

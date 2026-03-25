@@ -2,7 +2,7 @@
 import { getCurrentQdf, getFactionLeaderboardAction, getPlayerCountHistoryPaladiumAction, getPlayerInfoAction, getPlayerPositionAction } from "@/lib/api/api-server-action.server";
 import { AUTOPROMO_CONFIG } from "@/lib/constants";
 import { usePlayerInfoStore } from "@/stores/use-player-info-store";
-import React, { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { MetierComponentWrapper } from "../metier-list";
 import Image from "next/image";
 import { formatPrice, getImagePathFromRankingType, rankingTypeToUserFriendlyText, safeJoinPaths } from "@/lib/misc";

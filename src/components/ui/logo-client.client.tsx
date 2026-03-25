@@ -2,7 +2,6 @@
 import { safeJoinPaths } from "@/lib/misc";
 import Image from "next/image";
 import { navigate } from "@/components/actions";
-import React from "react";
 
 /**
  * Display the logo and a "Menu" text next to it.

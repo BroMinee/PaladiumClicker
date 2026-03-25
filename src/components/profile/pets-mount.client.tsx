@@ -2,7 +2,7 @@
 
 import { usePlayerInfoStore } from "@/stores/use-player-info-store";
 import { LoadingSpinner } from "@/components/ui/loading-spinner";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import * as THREE from "three";
 import { Mesh } from "three";
 import { OrbitControls, Text } from "@react-three/drei";

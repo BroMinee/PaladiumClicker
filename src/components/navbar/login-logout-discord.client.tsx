@@ -1,5 +1,4 @@
 "use client";
-import React from "react";
 import { TbLogout2 } from "react-icons/tb";
 import { Button } from "@/components/ui/button";
 import { ProfileNavBar } from "@/components/navbar/discord-profile-navbar.client";

@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useRef, useState, useMemo } from "react";
+import { useEffect, useRef, useState, useMemo } from "react";
 import Link from "next/link";
 import gsap from "gsap";
 import { useCraftOptimizerStore } from "@/stores/use-craft-store";

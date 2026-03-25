@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import { useState } from "react";
 import {  Trash2,  Edit2, } from "lucide-react";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";

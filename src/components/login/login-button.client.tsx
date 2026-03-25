@@ -1,7 +1,6 @@
 "use client";
 import { FaDiscord } from "react-icons/fa";
 import { Button } from "@/components/ui/button";
-import React from "react";
 import { setCookies } from "@/lib/api/api-server-action.server";
 import { toast } from "sonner";
 import { TbLogin2 } from "react-icons/tb";

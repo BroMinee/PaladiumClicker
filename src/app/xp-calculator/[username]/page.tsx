@@ -2,7 +2,6 @@ import { ProfileFetcherWrapper } from "@/components/profile-fetcher.client";
 import { XPCalculator } from "@/components/xp-calculator/calculator.client";
 import { constants } from "@/lib/constants";
 import { searchParamsXpBonusPage } from "@/types";
-import React from "react";
 
 /**
  * Generate Metadata

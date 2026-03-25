@@ -1,4 +1,3 @@
-import React from "react";
 import { AuthForceWrapper } from "@/components/auth/auth-force-wrapper.server";
 import { getWebHookDiscordFromCookies, getWebHookFromCookies } from "@/lib/api/api-pala-tracker.server";
 import { constants } from "@/lib/constants";

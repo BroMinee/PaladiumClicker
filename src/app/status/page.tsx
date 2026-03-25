@@ -1,4 +1,3 @@
-import React from "react";
 import { PlayerConnectionHistory } from "@/components/status/player-connection-history.client";
 import { PlayerCountHistory } from "@/components/status/player-count-history.client";
 import { getPlayerInfo, getPlayerOnlineCount, isApiDown } from "@/lib/api/api-pala.server";

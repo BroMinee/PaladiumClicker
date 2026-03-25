@@ -2,7 +2,7 @@
 import { buyBuilding, computeRPS, computeXBuildingAhead, formatPrice, getPathImg, getTotalSpend } from "@/lib/misc";
 import { usePlayerInfoStore } from "@/stores/use-player-info-store";
 import { useClickerStore } from "@/stores/use-clicker-store";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import { LoadingSpinner } from "@/components/ui/loading-spinner";
 import { ImageCoin } from "@/components/shared/image-coin";

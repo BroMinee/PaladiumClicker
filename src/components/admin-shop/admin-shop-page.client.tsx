@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { AdminShopItem, AdminShopPeriod, AxisConfig, Dataset } from "@/types";
 import { ChartContainer } from "@/components/shared/graph.client";
 import { LineGrad } from "@/components/shared/graph-line-renderer.client";

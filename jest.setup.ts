@@ -1,11 +1,11 @@
-import dotenv from 'dotenv';
+import dotenv from "dotenv";
 
 dotenv.config();
 
-jest.mock('next/headers', () => ({
+jest.mock("next/headers", () => ({
   cookies: jest.fn().mockReturnValue({
     getAll: jest.fn().mockReturnValue([
-      { name: 'cookie1', value: 'value1' },
+      { name: "cookie1", value: "value1" },
     ]),
   }),
 }));

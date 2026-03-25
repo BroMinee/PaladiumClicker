@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useCallback, JSX } from "react";
+import { useState, useCallback, JSX } from "react";
 import { UpgradeKey } from "@/types";
 import { usePlayerInfoStore } from "@/stores/use-player-info-store";
 import { computePrice, formatPrice, getPathImg, scaleCurrentProduction } from "@/lib/misc";

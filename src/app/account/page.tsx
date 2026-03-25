@@ -1,4 +1,3 @@
-import React from "react";
 import { AuthForceWrapper } from "@/components/auth/auth-force-wrapper.server";
 import { constants } from "@/lib/constants";
 import { PageWeb } from "@/app/webhook/page";

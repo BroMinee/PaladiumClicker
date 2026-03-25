@@ -2,7 +2,7 @@
 
 import { constants } from "@/lib/constants";
 import { getBonusRank, JobXp, prettyJobName, textFormatting } from "@/lib/misc";
-import React, { useState, useMemo, useEffect, useLayoutEffect } from "react";
+import { useState, useMemo, useEffect, useLayoutEffect } from "react";
 import { usePlayerInfoStore } from "@/stores/use-player-info-store";
 import { useXpCalcStore } from "@/stores/use-xp-calc-store";
 import { PlatformVersion } from "@/lib/misc";

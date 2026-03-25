@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { ChevronUp, ChevronDown, Trash2 } from "lucide-react";
 import { RankingType } from "@/types";
 import { usePlayerInfoStore } from "@/stores/use-player-info-store";

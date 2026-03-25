@@ -10,7 +10,6 @@ import LinkClient, {
 import { LuShoppingCart } from "react-icons/lu";
 import { PiRankingBold } from "react-icons/pi";
 import { IoMdInformationCircleOutline, IoMdStopwatch } from "react-icons/io";
-import React from "react";
 import { HiOutlineStatusOnline } from "react-icons/hi";
 import { GradientText } from "@/components/shared/gradient-text";
 import { NavBarProfilInfo } from "@/components/navbar/navbar-profil-info.client";

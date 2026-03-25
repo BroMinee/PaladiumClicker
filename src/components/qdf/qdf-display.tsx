@@ -1,4 +1,3 @@
-import React from "react";
 import Link from "next/link";
 import { Package } from "lucide-react";
 import { GiStoneCrafting } from "react-icons/gi";

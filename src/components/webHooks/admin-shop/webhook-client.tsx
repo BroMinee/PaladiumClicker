@@ -1,4 +1,3 @@
-import React from "react";
 import { useWebhookStore } from "@/stores/use-webhook-store";
 import { EventType, WebHookThresholdCondition, WebHookType } from "@/types";
 import { ThresholdSelector } from "@/components/webHooks/webhook-threshold-selector.client";

@@ -1,5 +1,4 @@
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
-import React from "react";
 import { API_PALATRACKER } from "@/lib/constants";
 import { LoginButton } from "@/components/login/login-button.client";
 

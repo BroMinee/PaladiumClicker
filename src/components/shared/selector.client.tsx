@@ -1,7 +1,7 @@
 "use client";
 import Select, { StylesConfig } from "react-select";
 import makeAnimated from "react-select/animated";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 import Image from "next/image";
 import { OptionType } from "@/types";

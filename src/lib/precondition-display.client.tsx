@@ -1,5 +1,5 @@
 "use client";
-import React, { ReactNode } from "react";
+import { ReactNode } from "react";
 import { FaCheck } from "react-icons/fa";
 import { RiCloseLargeLine } from "react-icons/ri";
 import { checkCondition, formatPrice } from "@/lib/misc";

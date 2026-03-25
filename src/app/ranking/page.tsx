@@ -1,4 +1,3 @@
-import React from "react";
 
 import { RankingSectionSelector } from "@/components/ranking/inputs.client";
 import { searchParamsRankingPage } from "@/types";

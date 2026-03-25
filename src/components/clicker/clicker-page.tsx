@@ -1,4 +1,4 @@
-import React, { ReactNode } from "react";
+import { ReactNode } from "react";
 import { BatchPurchase, BestBuyCard, StatButton, StatRPS, StatSleepingCoin, StatTotalProd } from "@/components/clicker/statistics.client";
 import { BuildingInputCard, UpgradeSectionClient } from "@/components/clicker/inputs.client";
 import { Card } from "@/components/ui/card";
