@@ -52,3 +52,4 @@ jobs:
           NEXT_PUBLIC_PALACLICKER_API_URL: "https://palatracker.bromine.fr"
           NEXT_PUBLIC_PALACLICKER_API_WS: "wss://palatracker.bromine.fr"
           PALADIUM_API_URL: "https://palatracker.bromine.fr"
+      - run: npm run test:build

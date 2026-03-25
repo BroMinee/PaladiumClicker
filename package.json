@@ -9,6 +9,7 @@
     "test:playwright": "npx playwright test",
     "test:report": "npx playwright show-report",
     "test:jest": "npx jest",
+    "test:build": "npx tsx scripts/check-build-output.ts",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "log-dead-code": "npx knip"
