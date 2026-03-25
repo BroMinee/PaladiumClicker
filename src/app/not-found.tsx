@@ -1,6 +1,6 @@
 import { safeJoinPaths } from "@/lib/misc";
 import { Card, CardHeader } from "@/components/ui/card";
-import Image from "next/image";
+import { UnOptimizedImage } from "@/components/ui/image-loading";
 
 /**
  * Page 404
@@ -19,7 +19,7 @@ export default function NotFound() {
                 className="mb-4 tracking-tight font-extrabold text-9xl text-primary-600 text-primary-500"
               > 4
               </div>
-              <Image width={112} height={112} alt="pedro gif" src={safeJoinPaths("/pedro.gif")} unoptimized/>
+              <UnOptimizedImage width={112} height={112} alt="pedro gif" src={safeJoinPaths("/pedro.gif")}/>
               <div
                 className="mb-4 tracking-tight font-extrabold text-9xl text-primary-600 text-primary-500"
               > 4

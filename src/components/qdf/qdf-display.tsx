@@ -43,9 +43,9 @@ function QdfHistoryCard({ data }: { data: QDF }) {
               <UnOptimizedImage
                 src={`/AH_img/${data.item.img}`}
                 alt={itemName ?? "item"}
-                width={48}
-                height={48}
-                className="object-contain pixelated relative z-10 group-hover:scale-110 transition-transform duration-300"
+                width={0}
+                height={0}
+                className="object-contain pixelated relative z-10 group-hover:scale-110 transition-transform duration-300 w-12 h-12"
               />
             ) : (
               <div className="h-12 w-12 rounded-lg bg-secondary flex items-center justify-center text-secondary-foreground text-[10px] text-center px-1 relative z-10">

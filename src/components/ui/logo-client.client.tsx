@@ -21,6 +21,7 @@ export const LogoClient = () => {
         className="h-12 w-12"
         width={48}
         height={48}
+        loading="eager"
       />
       <span className="text-xl font-bold">Menu</span>
     </div>

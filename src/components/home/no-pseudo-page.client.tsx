@@ -3,7 +3,6 @@
 import { ComponentType, ReactNode } from "react";
 import { ExternalLink, MousePointer2, Hammer, ChevronRight, User, ListChevronsUpDown } from "lucide-react";
 import Link from "next/link";
-import Image from "next/image";
 import useEmblaCarousel from "embla-carousel-react";
 import AutoScroll from "embla-carousel-auto-scroll";
 import { FaCalculator, FaDiscord, FaGithub, FaShoppingBasket } from "react-icons/fa";
@@ -175,7 +174,9 @@ export function NoPseudoPageWithContributeur({ contributors, texth1, texth2, inp
                     className="relative w-10 h-10 sm:w-12 sm:h-12 rounded-full border-2 border-[#2a2a2a] overflow-hidden hover:scale-110 hover:border-primary transition-all duration-300 shrink-0"
                     title={contributor.login}
                   >
-                    <Image
+                    <UnOptimizedImage
+                      width={0}
+                      height={0}
                       src={contributor.avatar_url}
                       alt={contributor.login}
                       fill
@@ -209,6 +210,7 @@ function FeatureCard({ data }: { data: typeof FEATURES[0] }) {
             alt={data.title}
             draggable={false}
             className="w-full h-full object-cover group-hover:scale-110 transition-all duration-500"
+            loading="eager"
           />
         </div>
 
