@@ -1,6 +1,5 @@
 "use client";
 
-import { constants } from "@/lib/constants";
 import { MetierKey, Metiers, PlayerInfo } from "@/types";
 import { create } from "zustand";
 import { JobXp, PlatformVersion } from "@/lib/misc";
@@ -93,6 +92,3 @@ export const useXpCalcStore = create<XpCalcState & XpCalcActions>((set) => ({
     };
   }),
 }));
-
-// Expose METIER_KEY so it's always aligned with the constants.
-export const METIER_KEY = constants.METIER_KEY;

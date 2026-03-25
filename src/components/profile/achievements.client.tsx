@@ -6,7 +6,7 @@ import { Achievement } from "@/types";
 import { CategoryEnum, getCategoryInfo, groupAndSortAchievements, isCompleted, orderBy, romanToInt, safeJoinPaths } from "@/lib/misc";
 import { constants } from "@/lib/constants";
 import { cn } from "@/lib/utils";
-import { TooltipProvider } from "@/components/shared/tooltip";
+import { TooltipProvider } from "@radix-ui/react-tooltip";
 import { HoverCard, HoverCardContent, HoverCardTrigger } from "@/components/shared/hover";
 
 import { FaCheck, FaLock } from "react-icons/fa";
