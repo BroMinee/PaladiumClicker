@@ -49,7 +49,7 @@ export function TogglePlatform({ size = 256 }: TogglePlatformProps) {
 
         <button
           onClick={() => handleSelectPlatform("java")}
-          className="flex flex-col items-center gap-2 focus:outline-none group"
+          className="flex flex-col items-center gap-2 focus:outline-hidden group"
         >
           <div
             className={cn(
@@ -80,7 +80,7 @@ export function TogglePlatform({ size = 256 }: TogglePlatformProps) {
 
         <button
           onClick={() => handleSelectPlatform("bedrock")}
-          className="flex flex-col items-center gap-2 focus:outline-none group"
+          className="flex flex-col items-center gap-2 focus:outline-hidden group"
         >
           <div
             className={cn(

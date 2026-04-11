@@ -69,7 +69,7 @@ const CounterInputWebhook = ({ min = 0, step = 0.01 }) => {
           WebkitAppearance: "none",
         }}
         inputMode="decimal"
-        className="w-20 h-10 input-number text-center text-lg border border-secondary-foreground rounded-lg outline-none"
+        className="w-20 h-10 input-number text-center text-lg border border-secondary-foreground rounded-lg outline-hidden"
       />
 
       <button

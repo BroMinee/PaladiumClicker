@@ -18,8 +18,8 @@ export default function ErrorBoundary({ error }: { error: Error }) {
   return <MotionFadeIn y={12}>
     <Card className="flex flex-col gap-4 font-bold text-white bg-black">
       <CardHeader className="flex flex-row gap-2 ">
-        <div className="py-8 px-4 mx-auto max-w-screen-xl lg:py-16 lg:px-6">
-          <div className="mx-auto max-w-screen-sm text-center">
+        <div className="py-8 px-4 mx-auto max-w-(--breakpoint-xl) lg:py-16 lg:px-6">
+          <div className="mx-auto max-w-(--breakpoint-sm) text-center">
             <div className="flex flex-row items-center justify-center gap-2">
               <UnOptimizedImage src={safeJoinPaths(constants.imgPathError, "/arty_decu_right.webp")} alt="arty" width={128} height={92}/>
               <p className="mb-4 text-3xl tracking-tight font-bold md:text-4xl text-white">Une erreur

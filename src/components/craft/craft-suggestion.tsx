@@ -55,7 +55,7 @@ export function CraftSuggestion({ userInput }: CraftSuggestionProps) {
             href={generateCraftUrl(item.value, quantity, CraftSectionEnum.recipe)}
             className="group relative flex flex-col items-center justify-between overflow-hidden rounded-xl border bg-card p-4 transition-all duration-300 hover:border-primary/50 hover:-translate-y-1 hover:scale-105"
           >
-            <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-transparent opacity-0 transition-opacity group-hover:opacity-100" />
+            <div className="absolute inset-0 bg-linear-to-br from-primary/5 via-transparent to-transparent opacity-0 transition-opacity group-hover:opacity-100" />
 
             <div className="relative z-10 mb-3 flex aspect-square items-center justify-center rounded-lg bg-secondary/30 p-2 ring-1 ring-border group-hover:bg-background transition-colors">
               <UnOptimizedImage

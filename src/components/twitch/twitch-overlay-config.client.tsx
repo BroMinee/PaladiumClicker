@@ -238,7 +238,7 @@ export const TwitchOverlayConfig = ({ username}: { username: string }) => {
 
   return (
     <div className="max-w-5xl mx-auto bg-white rounded-2xl overflow-hidden">
-      <div className="bg-gradient-to-r from-primary to-white p-8 md:p-12 text-center">
+      <div className="bg-linear-to-r from-primary to-white p-8 md:p-12 text-center">
         <h1 className="text-4xl md:text-5xl font-bold text-black mb-3">Guide d&apos;installation</h1>
         <p className="text-lg md:text-xl opacity-90 text-black">Overlay Twitch avec statistiques en temps réel</p>
       </div>
@@ -271,7 +271,7 @@ export const TwitchOverlayConfig = ({ username}: { username: string }) => {
           </ul>
         </div>
         <div className="mb-10 space-y-6">
-          <div className="bg-gradient-to-r from-primary to-white rounded-xl p-6 text-black">
+          <div className="bg-linear-to-r from-primary to-white rounded-xl p-6 text-black">
             <h2 className="text-3xl font-bold mb-2">⚙️ Configuration de l&apos;Overlay</h2>
             <p>Personnalise les éléments affichés et leur durée d&apos;affichage</p>
           </div>
@@ -286,7 +286,7 @@ export const TwitchOverlayConfig = ({ username}: { username: string }) => {
             </ul>
           </div>
 
-          <div className="bg-card rounded-lg p-4 shadow border-l-4 border-primary">
+          <div className="bg-card rounded-lg p-4 shadow-sm border-l-4 border-primary">
             <div className="text-sm ">Durée totale du cycle</div>
             <div className="text-2xl font-bold text-blue-600">{formatTime(getTotalCycleTime())}</div>
           </div>

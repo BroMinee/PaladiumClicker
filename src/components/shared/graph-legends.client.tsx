@@ -26,7 +26,7 @@ export function GraphLegends<Key extends AxisDomain,Value extends AxisDomain>({ 
           >
             <>
               <div
-                className="w-4 h-4 rounded-full mr-3 flex-shrink-0"
+                className="w-4 h-4 rounded-full mr-3 shrink-0"
                 style={{ backgroundColor: plt.color, opacity: isHidden ? 0.2 : 1 }}
               />
               <div className="flex flex-row justify-between items-center w-full mouse-pointer">

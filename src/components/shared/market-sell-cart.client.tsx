@@ -108,7 +108,7 @@ function BaseSaleCard({
         </div>
 
         <div className="flex items-center gap-2 bg-background/80 p-2 border-t border-secondary">
-          <div className="w-8 h-8 rounded-sm overflow-hidden border border-gray-600 flex-shrink-0">
+          <div className="w-8 h-8 rounded-sm overflow-hidden border border-gray-600 shrink-0">
             <UnOptimizedImage
               src={sellerHeadUrl}
               alt="Seller"

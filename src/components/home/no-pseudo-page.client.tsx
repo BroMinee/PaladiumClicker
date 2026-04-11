@@ -97,7 +97,7 @@ export function NoPseudoPageWithContributeur({ contributors, texth1, texth2, inp
 
         <div className="w-full relative group/carousel max-w-full overflow-hidden">
 
-          <div className="absolute left-0 top-0 bottom-0 w-8 sm:w-24 bg-gradient-to-r from-background to-transparent z-10 pointer-events-none" />
+          <div className="absolute left-0 top-0 bottom-0 w-8 sm:w-24 bg-linear-to-r from-background to-transparent z-10 pointer-events-none" />
 
           <div className="w-full overflow-hidden" ref={emblaRef}>
             <div className="grid grid-flow-col auto-cols-[85%] sm:auto-cols-[45%] md:auto-cols-[33.333%] lg:auto-cols-[25%] xl:auto-cols-[20%] touch-pan-y">
@@ -112,7 +112,7 @@ export function NoPseudoPageWithContributeur({ contributors, texth1, texth2, inp
             </div>
           </div>
 
-          <div className="absolute right-0 top-0 bottom-0 w-8 sm:w-24 bg-gradient-to-l from-background to-transparent z-10 pointer-events-none" />
+          <div className="absolute right-0 top-0 bottom-0 w-8 sm:w-24 bg-linear-to-l from-background to-transparent z-10 pointer-events-none" />
         </div>
       </div>
 
@@ -140,7 +140,7 @@ export function NoPseudoPageWithContributeur({ contributors, texth1, texth2, inp
                   href={constants.githubUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-3 px-5 py-3 rounded bg-[#24292e] hover:bg-[#2f363d] text-white font-bold border border-[#444c56] hover:border-gray-400 shadow-lg active:translate-y-[1px] transition-all text-sm sm:text-base"
+                  className="inline-flex items-center gap-3 px-5 py-3 rounded bg-[#24292e] hover:bg-[#2f363d] text-white font-bold border border-[#444c56] hover:border-gray-400 shadow-lg active:translate-y-px transition-all text-sm sm:text-base"
                 >
                   <FaGithub size={20} />
                   <span>Contribuer</span>
@@ -151,7 +151,7 @@ export function NoPseudoPageWithContributeur({ contributors, texth1, texth2, inp
                   href={constants.discord.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-3 px-5 py-3 rounded bg-[#5865F2] hover:bg-[#4752C4] text-white font-bold border border-[#5865F2] hover:border-[#4752C4] shadow-lg active:translate-y-[1px] transition-all text-sm sm:text-base"
+                  className="inline-flex items-center gap-3 px-5 py-3 rounded bg-[#5865F2] hover:bg-[#4752C4] text-white font-bold border border-[#5865F2] hover:border-[#4752C4] shadow-lg active:translate-y-px transition-all text-sm sm:text-base"
                 >
                   <FaDiscord size={20} />
                   <span>Discord</span>
@@ -202,7 +202,7 @@ function FeatureCard({ data }: { data: typeof FEATURES[0] }) {
     >
       <Card className="flex flex-col p-0 relative w-full h-full group-hover:border-primary group-hover:border overflow-hidden  group-hover:-translate-x-1 group-hover:-translate-y-1 transition-transform duration-300">
         <div className="h-[150px] sm:h-[180px] w-full relative overflow-hidden border-b">
-          <div className="absolute inset-0 bg-gradient-to-br z-0"></div>
+          <div className="absolute inset-0 bg-linear-to-br z-0"></div>
           <UnOptimizedImage
             width={0}
             height={0}
@@ -215,7 +215,7 @@ function FeatureCard({ data }: { data: typeof FEATURES[0] }) {
         </div>
 
         <div className="p-4 sm:p-5 flex flex-col flex-1 justify-between relative">
-          <div className="absolute inset-0 bg-gradient-to-b from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none"></div>
+          <div className="absolute inset-0 bg-linear-to-b from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none"></div>
           <div>
             <div className="flex items-center gap-3 mb-2 sm:mb-3">
               <div className="text-primary group-hover:scale-110 transition-transform duration-300 shrink-0">

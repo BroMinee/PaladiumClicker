@@ -41,7 +41,7 @@ export function BestBuyCard() {
     }
   }, [playerInfo, rps, setBuildingBuyPaths]);
   return (
-    <div className="bg-gradient-to-br from-orange-500 to-orange-800 p-6 rounded-lg relative">
+    <div className="bg-linear-to-br from-orange-500 to-orange-800 p-6 rounded-lg relative">
       { buildingBuyPaths.length !== 0 && (typeof buildingBuyPaths[0].own === "number") && (
         <div className="absolute -top-2 -right-2 bg-yellow-400 text-black font-bold px-3 py-1 rounded-full text-sm shadow-lg border-2 border-yellow-300">
           Niv. {buildingBuyPaths[0].own}
@@ -227,7 +227,7 @@ export function BatchPurchase() {
 
                     <div className="flex flex-col items-center p-4 w-full gap-2">
                       <Image src={getPathImg(building.path, building.index)} height={48} width={48} className="object-cover text-indigo-400 pixelated" alt="image" unoptimized />
-                      <div className="min-h-[3rem] flex items-center justify-center w-full">
+                      <div className="min-h-12 flex items-center justify-center w-full">
                         <h4 className="font-semibold text-center w-full">{playerInfo[building.path][building.index].name}</h4>
                       </div>
                     </div>

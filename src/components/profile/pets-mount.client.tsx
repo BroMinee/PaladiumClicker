@@ -217,9 +217,9 @@ export function PetOrMountCanvas({ mount = false }: { mount?: boolean }) {
   }
 
   return (
-    <Card className="flex flex-col overflow-hidden border-secondary bg-card/50 backdrop-blur-sm transition-all hover:border-primary/50 h-full mt-5">
-      <div className="relative w-full h-[400px] bg-gradient-to-b from-background/30 to-background/90 group rounded-lg">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-primary/10 via-transparent to-transparent pointer-events-none" />
+    <Card className="flex flex-col overflow-hidden border-secondary bg-card/50 backdrop-blur-xs transition-all hover:border-primary/50 h-full mt-5">
+      <div className="relative w-full h-[400px] bg-linear-to-b from-background/30 to-background/90 group rounded-lg">
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,var(--tw-gradient-stops))] from-primary/10 via-transparent to-transparent pointer-events-none" />
 
         <div className="absolute top-4 left-4 z-10 flex flex-col gap-2 pointer-events-none">
           <div>
@@ -229,7 +229,7 @@ export function PetOrMountCanvas({ mount = false }: { mount?: boolean }) {
         </div>
 
         <div className="absolute top-4 right-4 z-10 flex flex-col gap-2 pointer-events-none items-end">
-          <div className="flex flex-col gap-1 text-sm font-medium text-muted-foreground bg-background/40 backdrop-blur-md p-2 rounded-md border border-white/5 shadow-sm">
+          <div className="flex flex-col gap-1 text-sm font-medium text-muted-foreground bg-background/40 backdrop-blur-md p-2 rounded-md border border-white/5 shadow-xs">
             <div className="flex items-center justify-between gap-4">
               <span className="text-xs uppercase tracking-wider text-muted-foreground">Niveau</span>
               <span className="text-foreground font-bold font-mono">{petLevel} <span className="text-xs text-primary font-normal">({Math.round(petCoef * 100)}%)</span></span>

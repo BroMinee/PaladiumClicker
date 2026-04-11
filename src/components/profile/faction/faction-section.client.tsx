@@ -52,7 +52,7 @@ function FactionMainInformation() {
 
   return (
     <div className="flex flex-col md:flex-row items-center md:items-start gap-6 md:gap-10 p-4">
-      <div className="flex-shrink-0">
+      <div className="shrink-0">
         <div className="flex flex-col gap-2 items-center">
           <div
             className="w-32 h-32 md:w-40 md:h-40 relative p-1 rounded-2xl animate-pan-gradient duration-5000 overflow-hidden"

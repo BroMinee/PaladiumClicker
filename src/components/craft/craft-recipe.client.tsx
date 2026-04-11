@@ -267,7 +267,7 @@ export function SearchBar({ searchTerm, setSearchTerm, isSearchFocused, setIsSea
           onFocus={() => setIsSearchFocused(true)}
           onBlur={() => setTimeout(() => setIsSearchFocused(false), 150)}
           placeholder={selectedItem ? (language === "fr" ? selectedItem.label : selectedItem.label2) : (language === "fr" ? "Pioche en Diamant..." : "Diamond Pickaxe...")}
-          className="w-full bg-background border border-secondary rounded-lg py-2 pl-10 pr-4 placeholder-gray-500 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
+          className="w-full bg-background border border-secondary rounded-lg py-2 pl-10 pr-4 placeholder-gray-500 focus:outline-hidden focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
         />
         {isSearchFocused && filteredItems.length > 0 && (
           <div className="absolute z-10 w-full mt-1 bg-secondary border border-gray-600 rounded-lg max-h-60 overflow-y-auto">
@@ -278,7 +278,7 @@ export function SearchBar({ searchTerm, setSearchTerm, isSearchFocused, setIsSea
                   onClick={() => onSelectItem(item)}
                   className="flex items-center px-4 py-2 hover:bg-blue-600 cursor-pointer"
                 >
-                  <div className="w-8 h-8 p-1 mr-3 bg-card rounded-md flex-shrink-0">
+                  <div className="w-8 h-8 p-1 mr-3 bg-card rounded-md shrink-0">
                     <Image src={`/AH_img/${item.img}`} alt={item.value}
                       className="w-full h-full object-contain pixelated rounded-sm hover:scale-125 duration-300"
                       width={48} height={48}
@@ -391,9 +391,9 @@ function SummaryList({ title, onToggleItem, filterMode }: SummaryListProps) {
                     type="checkbox"
                     checked={isCompleted}
                     onChange={(e) => onToggleItem(item.value, e.target.checked)}
-                    className="w-5 h-5 bg-background border-gray-600 rounded text-blue-500 focus:ring-blue-600 cursor-pointer flex-shrink-0"
+                    className="w-5 h-5 bg-background border-gray-600 rounded text-blue-500 focus:ring-blue-600 cursor-pointer shrink-0"
                   />
-                  <div className="w-8 h-8 p-1 bg-card rounded-md flex-shrink-0 relative">
+                  <div className="w-8 h-8 p-1 bg-card rounded-md shrink-0 relative">
                     <Image src={`/AH_img/${item.img}`} alt={item.value}
                       className={cn(
                         "h-full w-full pixelated rounded-sm hover:scale-125 duration-300",
@@ -597,15 +597,15 @@ function TreeNode({ root, onToggleChecked, isRoot = false }: { root: Tree<NodeTy
           checked={isChecked}
           onClick={(e) => e.stopPropagation()}
           onChange={() => onToggleChecked(root)}
-          className="w-5 h-5 bg-background border-gray-600 rounded text-blue-500 focus:ring-blue-600 cursor-pointer flex-shrink-0"
+          className="w-5 h-5 bg-background border-gray-600 rounded text-blue-500 focus:ring-blue-600 cursor-pointer shrink-0"
         />
-        <div className="w-8 h-8 p-1 bg-card rounded-md flex-shrink-0">
+        <div className="w-8 h-8 p-1 bg-card rounded-md shrink-0">
           <Image src={`/AH_img/${root.value.img}`} alt={root.value.value}
             className="w-full h-full object-contain pixelated rounded-sm hover:scale-125 duration-300"
             width={48} height={48}
             unoptimized={true} />
         </div>
-        <div className="flex-grow">
+        <div className="grow">
           <span className={`font-semibold ${isChecked ? "text-green-300 line-through" : ""}`}>
             {language === "fr" ? root.value.label2 : root.value.label}
           </span>

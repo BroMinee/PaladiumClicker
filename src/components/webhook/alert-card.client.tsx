@@ -123,7 +123,7 @@ export function AlertItem({ alert }: { alert: WebHookAlert }) {
 
   return (
     <Card className="group relative flex flex-col sm:flex-row gap-3 bg-[#7d7979] dark:bg-[#232730] p-3 rounded-xl border transition-all">
-      <div className="flex-shrink-0 relative items-center flex">
+      <div className="shrink-0 relative items-center flex">
         <div className="w-12 h-12 rounded-lg bg-card overflow-hidden border border-secondary flex items-center justify-center">
           <UnOptimizedImage
             src={displayImage}

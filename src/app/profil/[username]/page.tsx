@@ -43,24 +43,24 @@ export default async function ProfilePage(
     <TwitchOverlayButton/>
     <div className="relative rounded-lg overflow-hidden h-64 md:h-80 mb-8">
       <Banner/>
-      <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-black/20"></div>
+      <div className="absolute inset-0 bg-linear-to-t from-black/70 via-transparent to-black/20"></div>
 
       <div className="absolute bottom-0 left-0 p-4 md:p-6 flex items-end space-x-4">
         <div className="shrink-0 w-24 h-24 md:w-32 md:h-32 rounded-lg bg-secondary overflow-hidden border-4 border-gray-800 ">
           <PlayerSkin/>
         </div>
         <div>
-          <h1 className="text-3xl md:text-5xl font-bold backdrop-blur-sm rounded drop- px-2 text-left">
+          <h1 className="text-3xl md:text-5xl font-bold backdrop-blur-xs rounded drop- px-2 text-left">
             <PlayerUsername/>
           </h1>
           <div className="flex md:items-center mt-2 gap-2 flex-col md:flex-row">
             <span
-              className="text-xl font-bold backdrop-blur-sm rounded drop- text-center p-1"
+              className="text-xl font-bold backdrop-blur-xs rounded drop- text-center p-1"
             >
               <PlayerRank/>
             </span>
             <span
-              className="text-xl font-bold backdrop-blur-sm rounded drop- text-center p-1"
+              className="text-xl font-bold backdrop-blur-xs rounded drop- text-center p-1"
             >
               <span className="flex flex-row items-center gap-2">
                 <FactionEmblemClient className="w-12 h-12"/>

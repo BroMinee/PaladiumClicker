@@ -38,7 +38,7 @@ export function Setting() {
           <IoSettings/>
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent align="end" className="w-56 z-[101]" side="top">
+      <DropdownMenuContent align="end" className="w-56 z-101" side="top">
         <DropdownMenuLabel>Paramètres</DropdownMenuLabel>
         <DropdownMenuSeparator/>
         <DropdownMenuItem

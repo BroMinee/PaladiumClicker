@@ -184,7 +184,7 @@ export const InputDebounce = ({
             inputMode="decimal"
             value={localValue}
             onChange={handleInput}
-            className={cn(`w-full h-12 rounded-xl bg-background border text-center font-semibold transition-all  focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 appearance-none ${error ? "border-red-500 focus:border-red-500" : "border-secondary focus:border-indigo-500"}`, inputClassName)}
+            className={cn(`w-full h-12 rounded-xl bg-background border text-center font-semibold transition-all  focus:outline-hidden focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 appearance-none ${error ? "border-red-500 focus:border-red-500" : "border-secondary focus:border-indigo-500"}`, inputClassName)}
           />
         </div>
 

@@ -107,7 +107,7 @@ export function WebhookChannelCard({ channel, serverId }: { channel: GroupedChan
           />
 
           <div className="flex items-center gap-2 font-semibold text-lg">
-            <Hash size={18} className="text-primary flex-shrink-0" />
+            <Hash size={18} className="text-primary shrink-0" />
 
             {isEditing ? (
               <input
@@ -116,7 +116,7 @@ export function WebhookChannelCard({ channel, serverId }: { channel: GroupedChan
                 onClick={stopProp}
                 onChange={(e) => setChannelName(e.target.value)}
                 onKeyDown={handleKeyDown}
-                className="bg-card px-2 py-1 rounded border border-indigo-500 outline-none text-base w-full md:w-64"
+                className="bg-card px-2 py-1 rounded border border-indigo-500 outline-hidden text-base w-full md:w-64"
               />
             ) : (
               <span>{channelName}</span>

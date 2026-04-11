@@ -122,7 +122,7 @@ export const PlayerSearchInput = ({
 
   const renderPopoverResults = () => (
     <PopoverContent
-      className="z-[200] w-[var(--radix-popover-trigger-width)] bg-card border rounded-lg overflow-y-auto mt-1 p-0 max-h-[50vh]"
+      className="z-200 w-(--radix-popover-trigger-width) bg-card border rounded-lg overflow-y-auto mt-1 p-0 max-h-[50vh]"
       align="start"
       sideOffset={5}
       onOpenAutoFocus={(e) => e.preventDefault()}
@@ -160,7 +160,7 @@ export const PlayerSearchInput = ({
       { variant === "homepage" && (
         <PopoverAnchor asChild>
           <div className={cn("w-full max-w-xl relative group pointer-events-auto", className)}>
-            <div className="absolute -inset-1 bg-gradient-to-r from-primary to-orange-600 blur opacity-25 group-hover:opacity-75 transition duration-1000 group-hover:duration-200"></div>
+            <div className="absolute -inset-1 bg-linear-to-r from-primary to-orange-600 blur-sm opacity-25 group-hover:opacity-75 transition duration-1000 group-hover:duration-200"></div>
             <form onSubmit={handleFormSubmit} className="relative flex bg-card p-2 rounded-xl shadow-2xl shadow-[0_0_140px_#ff6f00b3]">
               <div className="relative flex-1">
                 <input
@@ -169,7 +169,7 @@ export const PlayerSearchInput = ({
                   value={searchTerm}
                   onChange={handleSearchChange}
                   onClick={handleInputClick}
-                  className="w-full h-10 pl-4 pr-4 bg-transparent border-none outline-none text-xl font-minecraft placeholder:text-card-foreground focus:ring-0"
+                  className="w-full h-10 pl-4 pr-4 bg-transparent border-none outline-hidden text-xl font-minecraft placeholder:text-card-foreground focus:ring-0"
                 />
               </div>
               {fetching === true ?
@@ -191,7 +191,7 @@ export const PlayerSearchInput = ({
               <div className="relative">
                 <input
                   type="text"
-                  className="text-card-foreground flex h-9 w-full rounded-sm border border-input px-3 py-1 text-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50 bg-background"
+                  className="text-card-foreground flex h-9 w-full rounded-sm border border-input px-3 py-1 text-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-hidden focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50 bg-background"
                   placeholder={placeholder}
                   value={searchTerm}
                   onChange={handleSearchChange}
@@ -199,7 +199,7 @@ export const PlayerSearchInput = ({
                   autoComplete="off"
                 />
                 <button
-                  className="inline-flex items-center justify-center whitespace-nowrap text-sm font-medium transition-colors duration-300 ease-out motion-reduce:transition-none rounded-sm focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 hover:bg-secondary hover:text-accent-foreground h-9 w-9 absolute right-0 top-0 text-foreground rounded-l-none border-none"
+                  className="inline-flex items-center justify-center whitespace-nowrap text-sm font-medium transition-colors duration-300 ease-out motion-reduce:transition-none rounded-sm focus-visible:outline-hidden focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 hover:bg-secondary hover:text-accent-foreground h-9 w-9 absolute right-0 top-0 text-foreground rounded-l-none border-none"
                   type="submit"
                 >
                   <IoMdSearch className="w-4 h-4" />
@@ -242,7 +242,7 @@ export const PlayerSearchInput = ({
               onClick={handleInputClick}
               placeholder={placeholder}
               onKeyDown={(e) => e.key === "Enter" && handleFormSubmit(e)}
-              className="w-full bg-secondary border border-gray-600 rounded-lg py-2 pl-3 pr-10 placeholder-gray-500 focus:outline-none focus:border-primary"
+              className="w-full bg-secondary border border-gray-600 rounded-lg py-2 pl-3 pr-10 placeholder-gray-500 focus:outline-hidden focus:border-primary"
             />
             <Button
               onClick={() => handleSelectPlayer(searchTerm)}

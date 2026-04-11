@@ -225,10 +225,10 @@ function FactionOverlay() {
   }
 
   return <div className="flex flex-row">
-    <div className="flex-shrink-0 mr-8">
+    <div className="shrink-0 mr-8">
       <div className="flex flex-col gap-2 relative">
         <Emblem emblem={playerInfo.faction.emblem} className="h-fit w-40 mr-2 rounded-xl object-cover border-4 border-purple-500/50 " />
-        <div className="bg-gradient-to-r from-yellow-400 to-orange-500 px-5 py-2 rounded-full font-black text-xl border-2 border-yellow-300 text-center">
+        <div className="bg-linear-to-r from-yellow-400 to-orange-500 px-5 py-2 rounded-full font-black text-xl border-2 border-yellow-300 text-center">
           TOP #{factionIndex}
         </div>
       </div>
@@ -240,9 +240,9 @@ function FactionOverlay() {
         <div className="text-sm text-purple-300 font-semibold uppercase tracking-wider mb-1">
           Faction
         </div>
-        <h2 className="text-4xl font-black bg-gradient-to-r from-purple-400 via-pink-400 to-blue-400 bg-clip-text text-transparent mb-2 w-fit">
+        <h2 className="text-4xl font-black bg-linear-to-r from-purple-400 via-pink-400 to-blue-400 bg-clip-text text-transparent mb-2 w-fit">
           {playerInfo.faction.name}
-          <div className="h-1 w-full mt-2 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full"></div>
+          <div className="h-1 w-full mt-2 bg-linear-to-r from-purple-500 to-pink-500 rounded-full"></div>
         </h2>
       </div>
 
@@ -258,7 +258,7 @@ function FactionOverlay() {
           </div>
           <div className="w-full bg-secondary/50 h-2 rounded-full overflow-hidden">
             <div
-              className="h-full bg-gradient-to-r from-purple-500 via-pink-500 to-orange-500 rounded-full animate-pulse"
+              className="h-full bg-linear-to-r from-purple-500 via-pink-500 to-orange-500 rounded-full animate-pulse"
               style={{ width: `${100 - (factionIndex-1) * 100 / leaderboardFaction.length}%` }}
             ></div>
           </div>
@@ -272,7 +272,7 @@ function FactionOverlay() {
 function MoneyOverlay() {
   const { data: playerInfo } = usePlayerInfoStore();
   return <div className="flex flex-row">
-    <div className="flex-shrink-0 mr-8">
+    <div className="shrink-0 mr-8">
       <div className="relative">
         <Image src={getImagePathFromRankingType("money")} alt={"money icon"} width={48} height={48} unoptimized={true}
           className="h-48 w-48 pixelated mr-2 rounded-xl object-cover border-4 border-purple-500/50 " />
@@ -282,7 +282,7 @@ function MoneyOverlay() {
     <div className="flex-1 flex flex-col justify-center">
       <div className="mb-3">
         <h2 className="text-3xl font-bold text-purple-300 mb-2">Argent</h2>
-        <div className="h-1 w-32 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full"></div>
+        <div className="h-1 w-32 bg-linear-to-r from-purple-500 to-pink-500 rounded-full"></div>
       </div>
 
       <div className="flex items-baseline gap-3">
@@ -297,19 +297,19 @@ function MoneyOverlay() {
 function JobsOverlay() {
   return <div className="h-full flex">
     <div className="grid grid-cols-4 gap-2 w-full">
-      <div className="bg-gradient-to-r from-red-600/20 to-pink-600/20 p-3 rounded-lg border border-red-500 h-[220px]">
+      <div className="bg-linear-to-r from-red-600/20 to-pink-600/20 p-3 rounded-lg border border-red-500 h-[220px]">
         <MetierComponentWrapper metierKey="miner" twitch/>
       </div>
 
-      <div className="bg-gradient-to-r from-yellow-600/20 to-orange-600/20 p-3 rounded-lg border border-yellow-500 h-[220px]">
+      <div className="bg-linear-to-r from-yellow-600/20 to-orange-600/20 p-3 rounded-lg border border-yellow-500 h-[220px]">
         <MetierComponentWrapper metierKey="farmer" twitch/>
       </div>
 
-      <div className="bg-gradient-to-r from-blue-600/20 to-cyan-600/20 p-3 rounded-lg border border-blue-500 h-[220px]">
+      <div className="bg-linear-to-r from-blue-600/20 to-cyan-600/20 p-3 rounded-lg border border-blue-500 h-[220px]">
         <MetierComponentWrapper metierKey="hunter" twitch/>
       </div>
 
-      <div className="bg-gradient-to-r from-pink-600/20 to-purple-600/20 p-3 rounded-lg border border-pink-500 h-[220px]">
+      <div className="bg-linear-to-r from-pink-600/20 to-purple-600/20 p-3 rounded-lg border border-pink-500 h-[220px]">
         <MetierComponentWrapper metierKey="alchemist" twitch/>
       </div>
     </div>
@@ -327,7 +327,7 @@ function ClassementOverlay() {
   const pourcentage = 100 - Math.min(100, ranking[currentConfig.subOption] * 100 / totalPlayer);
 
   return <div className="flex flex-row">
-    <div className="flex-shrink-0 mr-8">
+    <div className="shrink-0 mr-8">
       <div className="relative">
         <Image src={getImagePathFromRankingType(currentConfig.subOption)} alt={`${currentConfig.subOption} icon`} width={48} height={48} unoptimized={true}
           className="h-48 w-48 pixelated mr-2 rounded-xl object-cover border-4 border-purple-500/50 " />
@@ -337,7 +337,7 @@ function ClassementOverlay() {
     <div className="flex-1 flex flex-col justify-center">
       <div className="mb-3">
         <h2 className="text-3xl font-bold text-purple-300 mb-2">{rankingTypeToUserFriendlyText(currentConfig.subOption)}</h2>
-        <div className="h-1 w-32 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full"></div>
+        <div className="h-1 w-32 bg-linear-to-r from-purple-500 to-pink-500 rounded-full"></div>
       </div>
 
       <div className="flex items-baseline gap-3">
@@ -355,7 +355,7 @@ function ClassementOverlay() {
           </div>
           <div className="w-full bg-secondary/50 h-2 rounded-full overflow-hidden">
             <div
-              className="h-full bg-gradient-to-r from-purple-500 via-pink-500 to-orange-500 rounded-full animate-pulse"
+              className="h-full bg-linear-to-r from-purple-500 via-pink-500 to-orange-500 rounded-full animate-pulse"
               style={{ width: `${pourcentage}%` }}
             ></div>
           </div>
@@ -389,7 +389,7 @@ function QDFOverlay() {
 
   return (
     <div className="flex flex-row">
-      <div className="flex-shrink-0 mr-8">
+      <div className="shrink-0 mr-8">
         <div className="relative">
           <UnOptimizedImage
             src={safeJoinPaths(`/AH_img/${qdf.item?.img}`)}
@@ -404,11 +404,11 @@ function QDFOverlay() {
       <div className="flex-1 flex flex-col justify-center">
         <div className="mb-3">
           <h2 className="text-3xl font-bold text-purple-300 mb-2">Quête de Faction</h2>
-          <div className="h-1 w-32 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full"></div>
+          <div className="h-1 w-32 bg-linear-to-r from-purple-500 to-pink-500 rounded-full"></div>
         </div>
 
         <div className="mb-4">
-          <h3 className="text-5xl font-black bg-gradient-to-r text-yellow-400 bg-clip-text text-transparent">
+          <h3 className="text-5xl font-black bg-linear-to-r text-yellow-400 bg-clip-text text-transparent">
             <span>
               {qdf.item?.us_trad ?? qdf.itemName}
             </span>
@@ -463,7 +463,7 @@ function AutoPromoOverlay() {
       </div>
       <div className="mt-6 w-full bg-secondary/50 h-3 rounded-full overflow-hidden">
         <div
-          className="h-full bg-gradient-to-r from-purple-500 via-pink-500 to-orange-500 rounded-full animate-pulse"
+          className="h-full bg-linear-to-r from-purple-500 via-pink-500 to-orange-500 rounded-full animate-pulse"
           style={{ width: `${pourcentage}%` }}
         ></div>
       </div>

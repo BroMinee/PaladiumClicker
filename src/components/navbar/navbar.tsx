@@ -41,15 +41,15 @@ export const Navbar = () => {
 function NavBarContent() {
   return (
     <>
-      <nav className="flex-grow flex flex-col min-h-0">
+      <nav className="grow flex flex-col min-h-0">
         {/*<MobileNav/>*/}
         <LogoClient/>
         <div className="flex justify-center w-full border-gray-600 border-b space-y-3 pb-5 ">
           <SearchPlayerInput variant="navbar"/>
           {/* <ImportProfil showResetButton navBar/> */}
         </div>
-        <div className="relative flex-grow min-h-0 flex flex-col">
-          <div className="flex-grow overflow-y-auto no-scrollbar">
+        <div className="relative grow min-h-0 flex flex-col">
+          <div className="grow overflow-y-auto no-scrollbar">
             <NavbarCategoryDisplay name={"Statistiques et données"}>
               <LinkClient path={constants.profilPath}>
                 <User size={24}/>
@@ -105,8 +105,8 @@ function NavBarContent() {
               </LinkClient>
             </NavbarCategoryDisplay>
           </div>
-          <div className="absolute top-0 left-0 w-full h-6 bg-gradient-to-b from-card to-transparent pointer-events-none"/>
-          <div className="absolute bottom-0 left-0 w-full h-6 bg-gradient-to-t from-card to-transparent pointer-events-none"/>
+          <div className="absolute top-0 left-0 w-full h-6 bg-linear-to-b from-card to-transparent pointer-events-none"/>
+          <div className="absolute bottom-0 left-0 w-full h-6 bg-linear-to-t from-card to-transparent pointer-events-none"/>
         </div>
 
       </nav>
@@ -140,7 +140,7 @@ const MobileNav = () => {
           <FaBars className="h-4 w-4"/>
         </Button>
       </SheetTrigger>
-      <SheetContent side="left" className="w-72 flex flex-col h-full p-0 gap-0 z-[101]" id="mobile-sheet-content">
+      <SheetContent side="left" className="w-72 flex flex-col h-full p-0 gap-0 z-101" id="mobile-sheet-content">
         <NavBarContent/>
       </SheetContent>
     </Sheet>

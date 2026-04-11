@@ -274,7 +274,7 @@ export function CraftOptimizerDisplay() {
 
       <div className="sticky top-20 z-40 mb-8 -mx-4 px-4 md:mx-0 md:px-0">
         <Card className="mx-auto max-w-4xl p-2 backdrop-blur-xl border-border bg-card/80 flex flex-col md:flex-row gap-2">
-          <div className="relative flex-grow">
+          <div className="relative grow">
             <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3 text-secondary-foreground">
               <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
@@ -283,7 +283,7 @@ export function CraftOptimizerDisplay() {
             <input
               type="text"
               placeholder="Rechercher un item..."
-              className="w-full rounded-xl bg-background border py-3 pl-10 pr-4 text-sm text-foreground placeholder-secondary-foreground focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary transition-all"
+              className="w-full rounded-xl bg-background border py-3 pl-10 pr-4 text-sm text-foreground placeholder-secondary-foreground focus:border-primary focus:outline-hidden focus:ring-1 focus:ring-primary transition-all"
               value={search}
               onChange={(e) => setSearch(e.target.value)}
             />
@@ -291,7 +291,7 @@ export function CraftOptimizerDisplay() {
 
           <div className="relative min-w-[240px]">
             <select
-              className="w-full h-full rounded-xl bg-background border py-3 pl-4 pr-10 text-sm text-foreground focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary appearance-none cursor-pointer hover:bg-secondary transition-colors"
+              className="w-full h-full rounded-xl bg-background border py-3 pl-4 pr-10 text-sm text-foreground focus:border-primary focus:outline-hidden focus:ring-1 focus:ring-primary appearance-none cursor-pointer hover:bg-secondary transition-colors"
               value={sortMode}
               onChange={(e) => setSortMode(e.target.value as SortMode)}
             >

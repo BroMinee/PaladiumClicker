@@ -98,7 +98,7 @@ export default function LinkClient({ path, children }: {
         className={cn("font-medium flex justify-start items-center space-x-6 focus:bg-secondary focus: hover:bg-secondary text-card-foreground rounded px-3 py-2 w-56 transition-colors duration-300 ease-out motion-reduce:transition-none", isActive && "underline bg-secondary")}
         href={href}>
         {children}
-        <p className="text-base leading-4 flex-grow text-left">{label}</p>
+        <p className="text-base leading-4 grow text-left">{label}</p>
         {newNotification &&
           <div className="relative inline-block bg-green-400">
             <span className="animate-ping absolute right-0 w-6 h-6 bg-red-400 opacity-75 rounded-md"
@@ -117,7 +117,7 @@ export default function LinkClient({ path, children }: {
       className={cn("font-medium flex justify-start items-center space-x-6 focus:bg-secondary focus: hover:bg-secondary text-card-foreground rounded px-3 py-2 w-56 transition-colors duration-300 ease-out motion-reduce:transition-none", isActive && "underline bg-secondary")}
       href={href}>
       {children}
-      <p className="text-base leading-4 flex-grow text-left">{label}</p>
+      <p className="text-base leading-4 grow text-left">{label}</p>
       {newNotification &&
         <div className="relative inline-block bg-green-400">
           <span
@@ -209,7 +209,7 @@ export function NavbarCategoryDisplay({ name, children }: {
 
   return (<div className="flex flex-col justify-start items-center px-6 border-b border-gray-600 w-full">
     <button onClick={toggleOpen}
-      className="focus:outline-none focus:text-indigo-400 text-card-foreground flex justify-between items-center w-full py-5 transition-colors duration-200">
+      className="focus:outline-hidden focus:text-indigo-400 text-card-foreground flex justify-between items-center w-full py-5 transition-colors duration-200">
       <p className="text-sm text-left leading-5 uppercase">{name}</p>
       <FaAngleDown size={24} className={cn(
         "transition-transform duration-300 ease-in-out transform-gpu shrink-0",

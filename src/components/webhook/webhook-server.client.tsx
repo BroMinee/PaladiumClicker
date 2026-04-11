@@ -87,7 +87,7 @@ export function WebhookServerSection({ server }: { server: GroupedServer }) {
                   onClick={(e) => e.stopPropagation()}
                   onChange={(e) => setServerName(e.target.value)}
                   onKeyDown={handleKeyDown}
-                  className="bg-card px-2 py-1 rounded border border-indigo-500 outline-none text-base w-full md:w-auto"
+                  className="bg-card px-2 py-1 rounded border border-indigo-500 outline-hidden text-base w-full md:w-auto"
                 />
               ) : (
                 <h3>{serverName}</h3>

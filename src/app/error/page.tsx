@@ -49,8 +49,8 @@ export default async function Error500Page(
   return (
     <Card className="flex flex-col gap-4 font-bold center bg-no-repeat bg-center bg-cover bg-card/90">
       <CardHeader className="flex flex-row gap-2 ">
-        <div className="py-8 px-4 mx-auto max-w-screen-xl lg:py-16 lg:px-6">
-          <div className="mx-auto max-w-screen-sm text-center">
+        <div className="py-8 px-4 mx-auto max-w-(--breakpoint-xl) lg:py-16 lg:px-6">
+          <div className="mx-auto max-w-(--breakpoint-sm) text-center">
             <h1 className="mb-4 text-3xl tracking-tight font-bold md:text-4xl ">Une erreur
               est survenue.</h1>
             <p className="text-primary flex flex-col pb-5 gap-2 animate-blink">

@@ -66,10 +66,10 @@ export function AchievementSection() {
 const AchievementInfo = ({ title, img, value, children }: { title: string, img: string, value: string, children: ReactNode }) => {
   return (
     <div className="flex items-center space-x-3 p-2 w-full">
-      <div className="flex-shrink-0 w-10 h-10">
+      <div className="shrink-0 w-10 h-10">
         <UnOptimizedImage src={img} alt={title} width={0} height={0} className="w-full h-full object-contain pixelated" />
       </div>
-      <div className="flex-grow min-w-0">
+      <div className="grow min-w-0">
         <h3 className="text-sm font-semibold truncate">{title}</h3>
         <p className="text-xs truncate">{value}</p>
         {children}
@@ -105,8 +105,8 @@ const SubAchievementDisplay = ({ subAchievement }: { subAchievement: Achievement
 
   return (
     <div className={cn("flex items-center text-xs p-2 rounded-md mt-1 border transition-colors hover:bg-secondary cursor-help", cardClasses)}>
-      <div className="flex-grow truncate mr-2">{subAchievement.name}: {subAchievement.description}</div>
-      {subUnlocked ? <FaCheck className="w-4 h-4 text-[#26E251] flex-shrink-0" /> : <FaLock className="w-4 h-4 text-gray-500 flex-shrink-0" />}
+      <div className="grow truncate mr-2">{subAchievement.name}: {subAchievement.description}</div>
+      {subUnlocked ? <FaCheck className="w-4 h-4 text-[#26E251] shrink-0" /> : <FaLock className="w-4 h-4 text-gray-500 shrink-0" />}
     </div>
   );
 };

@@ -56,7 +56,7 @@ export function PlayerStats() {
 
 function StatCard({ icon, label, value }: { icon: React.JSX.Element, label: string, value: number | string }) {
   return (
-    <Card className="flex items-center shadow">
+    <Card className="flex items-center shadow-sm">
       <div className="text-primary">{icon}</div>
       <div>
         <div className="text-sm text-card-foreground">{label}</div>

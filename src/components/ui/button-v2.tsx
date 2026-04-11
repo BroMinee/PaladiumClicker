@@ -4,7 +4,7 @@ import { cn } from "@/lib/utils"; // Your class merging utility (cn)
 import { cva, VariantProps } from "class-variance-authority";
 
 const buttonVariants = cva(
-  "inline-flex items-center justify-center rounded whitespace-nowrap text-sm font-medium transition-colors duration-150 ease-out motion-reduce:transition-none focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50",
+  "inline-flex items-center justify-center rounded whitespace-nowrap text-sm font-medium transition-colors duration-150 ease-out motion-reduce:transition-none focus-visible:outline-hidden focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50",
   {
     variants: {
       variant: {
@@ -12,7 +12,7 @@ const buttonVariants = cva(
         primary: "bg-primary hover:bg-primary-darker text-white font-bold",
         outline: "border border-gray-600 bg-transparent hover:bg-secondary hover:",
         secondary: "bg-gray-600 hover:bg-secondary font-semibold",
-        default: "bg-indigo-500 shadow hover:bg-indigo-600",
+        default: "bg-indigo-500 shadow-sm hover:bg-indigo-600",
         ghost: "hover:bg-secondary hover:text-accent-foreground",
       },
       size: {

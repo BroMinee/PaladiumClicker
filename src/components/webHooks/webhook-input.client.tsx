@@ -360,7 +360,7 @@ function MarketGraphClient() {
   }, [itemSelected]);
 
   return (
-    <div className="h-[100vh] pb-0">
+    <div className="h-screen pb-0">
       <PlotHistoricChart data={data} webhook/>
     </div>
   );
