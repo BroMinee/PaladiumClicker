@@ -9,18 +9,9 @@ import { UnOptimizedImage } from "@/components/ui/image-loading";
 import { Card } from "@/components/ui/card";
 import { QdfCountdown } from "@/components/qdf/qdf-countdown.client";
 import { QdfHistoryGrid } from "@/components/qdf/qdf-history-grid.client";
+import { QdfDate } from "@/components/qdf/qdf-date.client";
 import { PageHeader, PageHeaderDescription, PageHeaderHeading } from "@/components/ui/page";
 import { textFormatting } from "@/lib/misc";
-
-function formatDate(timestamp: number, withTime = false): string {
-  return new Date(timestamp * 1000).toLocaleDateString("fr-FR", {
-    day: "2-digit",
-    month: "2-digit",
-    year: "numeric",
-    timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone,
-    ...(withTime && { hour: "2-digit", minute: "2-digit" }),
-  });
-}
 
 function getItemName(data: QDF | QDF): string | null {
   return data.item?.item_name ?? ("itemName" in data ? data.itemName : null);
@@ -83,9 +74,9 @@ function QdfHistoryCard({ data }: { data: QDF }) {
             </div>
           </div>
           <div className="flex justify-between text-[10px] text-secondary-foreground">
-            <span>{formatDate(data.start)}</span>
+            <span><QdfDate timestamp={data.start} /></span>
             <span>→</span>
-            <span>{formatDate(data.end)}</span>
+            <span><QdfDate timestamp={data.end} /></span>
           </div>
         </div>
       </div>
@@ -196,11 +187,11 @@ export async function QdfDisplay({
                 <div className="bg-background/50 border border-gray-800 rounded-xl p-4 space-y-2">
                   <div className="flex justify-between items-center">
                     <span className="text-xs text-secondary-foreground">Début</span>
-                    <span className="text-sm font-mono font-semibold text-foreground">{formatDate(current.start, true)}</span>
+                    <span className="text-sm font-mono font-semibold text-foreground"><QdfDate timestamp={current.start} withTime /></span>
                   </div>
                   <div className="flex justify-between items-center">
                     <span className="text-xs text-secondary-foreground">Fin</span>
-                    <span className="text-sm font-mono font-semibold text-foreground">{formatDate(current.end, true)}</span>
+                    <span className="text-sm font-mono font-semibold text-foreground"><QdfDate timestamp={current.end} withTime /></span>
                   </div>
                 </div>
 
