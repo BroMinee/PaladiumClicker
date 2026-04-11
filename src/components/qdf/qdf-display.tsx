@@ -17,6 +17,7 @@ function formatDate(timestamp: number, withTime = false): string {
     day: "2-digit",
     month: "2-digit",
     year: "numeric",
+    timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone,
     ...(withTime && { hour: "2-digit", minute: "2-digit" }),
   });
 }
