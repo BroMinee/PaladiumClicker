@@ -6,6 +6,7 @@ const __dirname = dirname(__filename);
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  output: "standalone",
   distDir: ".next",
   outputFileTracingRoot: __dirname,
   images: {
