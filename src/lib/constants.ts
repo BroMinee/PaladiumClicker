@@ -202,7 +202,7 @@ const LEVEL_PRECONDITIONS: LevelPreconditions = {
     5: "Casser **5 944** pastèques",
     6: "Casser **8 830** pastèques",
     7: "Casser **12 380** pastèques",
-    8: "Casser **6 650** eggplants",
+    8: "Casser **13 300** pastèques",
     9: "Casser **8 636** eggplants",
     10: "Casser **10 921** eggplants",
     11: "Casser **13 513** eggplants",
