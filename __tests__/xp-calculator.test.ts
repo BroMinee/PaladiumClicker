@@ -131,12 +131,12 @@ describe("Java", () => {
 describe("Bedrock", () => {
   const version = "bedrock";
   const XP_LEVEL_0_BEDROCK = JobXp.totalXp(0, version);  // 0
-  const XP_LEVEL_1_BEDROCK = JobXp.totalXp(1, version);  // 22123
-  const XP_LEVEL_2_BEDROCK = JobXp.totalXp(2, version);  // 40390
+  const XP_LEVEL_1_BEDROCK = JobXp.totalXp(1, version);  // 2000
+  const XP_LEVEL_2_BEDROCK = JobXp.totalXp(2, version);  // 5047
   const XP_LEVEL_18_BEDROCK = JobXp.totalXp(18, version);
-  const XP_LEVEL_20_BEDROCK = JobXp.totalXp(20, version); // XP_LEVEL_18 + 284041
-  const XP_18_TO_20_BEDROCK = metier_xp_bedrock[19];        // 284041 - the 18->20 cost
-  const XP_PER_LEVEL_AFTER_20_BEDROCK = metier_xp_bedrock[metier_xp_bedrock.length - 1]; // 284041
+  const XP_LEVEL_19_BEDROCK = JobXp.totalXp(19, version);
+  const XP_LEVEL_20_BEDROCK = JobXp.totalXp(20, version);
+  const XP_PER_LEVEL_AFTER_20_BEDROCK = metier_xp_bedrock[metier_xp_bedrock.length - 1]; // 5945249
 
   describe("MetierXP.totalXp (bedrock)", () => {
     it("returns 0 for level 0 (starting level)", () => {
@@ -144,16 +144,17 @@ describe("Bedrock", () => {
     });
 
     it("returns correct cumulative XP for early levels", () => {
-      expect(XP_LEVEL_1_BEDROCK).toBe(metier_xp_bedrock[0]); // 22123
-      expect(XP_LEVEL_2_BEDROCK).toBe(metier_xp_bedrock[0] + metier_xp_bedrock[1]); // 40390
+      expect(XP_LEVEL_1_BEDROCK).toBe(metier_xp_bedrock[0]); // 2000
+      expect(XP_LEVEL_2_BEDROCK).toBe(metier_xp_bedrock[0] + metier_xp_bedrock[1]); // 5047
     });
 
-    it("level 19 returns the same XP as level 20 (level 19 does not exist)", () => {
-      expect(JobXp.totalXp(19, version)).toBe(XP_LEVEL_20_BEDROCK);
+    it("level 19 exists and is strictly between level 18 and level 20", () => {
+      expect(XP_LEVEL_19_BEDROCK).toBeGreaterThan(XP_LEVEL_18_BEDROCK);
+      expect(XP_LEVEL_19_BEDROCK).toBeLessThan(XP_LEVEL_20_BEDROCK);
     });
 
-    it("level 20 equals level-18 XP + the 18→20 transition cost", () => {
-      expect(XP_LEVEL_20_BEDROCK).toBe(XP_LEVEL_18_BEDROCK + XP_18_TO_20_BEDROCK);
+    it("level 20 equals level-19 XP + the 19→20 transition cost", () => {
+      expect(XP_LEVEL_20_BEDROCK).toBe(XP_LEVEL_19_BEDROCK + metier_xp_bedrock[19]);
     });
 
     it("extrapolates XP linearly beyond level 20", () => {
@@ -161,14 +162,13 @@ describe("Bedrock", () => {
       expect(JobXp.totalXp(25, version)).toBe(XP_LEVEL_20_BEDROCK + 5 * XP_PER_LEVEL_AFTER_20_BEDROCK);
     });
 
-    it("level 19 and level 20 return the same XP, and both are less than level 21 XP", () => {
-      expect(JobXp.totalXp(19, version)).toBe(XP_LEVEL_20_BEDROCK);
-      expect(JobXp.totalXp(20, version)).toBe(XP_LEVEL_20_BEDROCK);
-      expect(JobXp.totalXp(21, version)).toBeGreaterThan(XP_LEVEL_20_BEDROCK);
+    it("level 19, 20, and 21 are strictly increasing", () => {
+      expect(XP_LEVEL_19_BEDROCK).toBeLessThan(XP_LEVEL_20_BEDROCK);
+      expect(XP_LEVEL_20_BEDROCK).toBeLessThan(JobXp.totalXp(21, version));
     });
 
-    it("is monotonically increasing (treating level 19 as level 20)", () => {
-      const levels = [0, 1, 2, 3, 5, 10, 15, 18, 20, 21, 25];
+    it("is monotonically increasing", () => {
+      const levels = [0, 1, 2, 3, 5, 10, 15, 18, 19, 20, 21, 25];
       for (let i = 0; i < levels.length - 1; i++) {
         expect(JobXp.totalXp(levels[i + 1], version)).toBeGreaterThan(JobXp.totalXp(levels[i], version));
       }
@@ -199,9 +199,8 @@ describe("Bedrock", () => {
       expect(JobXp.xpCoef(1, halfwayLevel1, version)).toBeCloseTo(0.5);
     });
 
-    it("returns ~0.5 halfway through level 18 (uses the full 18→20 cost as step)", () => {
-      // Step for level 18 = totalXp(19) - totalXp(18) = totalXp(20) - totalXp(18) = XP_18_TO_20
-      const halfwayLevel18 = XP_LEVEL_18_BEDROCK + XP_18_TO_20_BEDROCK / 2;
+    it("returns ~0.5 halfway through level 18", () => {
+      const halfwayLevel18 = XP_LEVEL_18_BEDROCK + metier_xp_bedrock[18] / 2;
       expect(JobXp.xpCoef(18, halfwayLevel18, version)).toBeCloseTo(0.5);
     });
 

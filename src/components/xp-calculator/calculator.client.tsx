@@ -268,9 +268,9 @@ export function XPCalculator({ defaultPlatform }: { defaultPlatform?: PlatformVe
           </div>
 
           <div className="space-y-3">
-            {sortedActions.map(item => (
+            {sortedActions.map((item, index) => (
               <FarmActionItem
-                key={item.type + item.action + item[platform]?.xp}
+                key={item.type + item.action + item[platform]?.xp + index}
                 metier={metier}
                 item={item}
                 gradeBonus={gradeBonus}

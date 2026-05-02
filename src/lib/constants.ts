@@ -147,26 +147,26 @@ const metier_xp_java = [
 ];
 
 const metier_xp_bedrock = [
-  22123, // level 0 -> 1
-  18267, // level 1 -> 2
-  33361, // level 2 -> 3
-  45135, // level 3 -> 4
-  57725, // level 4 -> 5
-  71005, // level 5 -> 6
-  84891, // level 6 -> 7
-  99319, // level 7 -> 8
-  114236, // level 8 -> 9
-  129607, // level 9 -> 10
-  145393, // level 10 -> 11
-  161570, // level 11 -> 12
-  178111, // level 12 -> 13
-  194998, // level 13 -> 14
-  212212, // level 14 -> 15
-  229737, // level 15 -> 16
-  247558, // level 16 -> 17
-  265664, // level 17 -> 18
-  0,      // level 18 -> 19 (le niveau 19 n'existe pas en bedrock)
-  284041, // level 18 -> 20
+  2000, // level 0 -> 1
+  3047, // level 1 -> 2
+  4641, // level 2 -> 3
+  7070, // level 3 -> 4
+  10770, // level 4 -> 5
+  16406, // level 5 -> 6
+  24993, // level 6 -> 7
+  38072, // level 7 -> 8
+  57997, // level 8 -> 9
+  88349, // level 9 -> 10
+  134586, // level 10 -> 11
+  205020, // level 11 -> 12
+  312314, // level 12 -> 13
+  475761, // level 13 -> 14
+  724746, // level 14 -> 15
+  1104035, // level 15 -> 16
+  1681820, // level 16 -> 17
+  2561984, // level 17 -> 18
+  3902773, // level 18 -> 19
+  5945249 // level 19 -> 20
 ];
 
 export type HowToXpElement = {
@@ -290,30 +290,30 @@ const how_to_xp: HowToXp = {
     { type: "Bonbon Jaune", "action": EAT, java: { xp: 50000 }, imgPath: "candy_YELLOW.webp" },
     { type: "Bonbon Multicolor", "action": EAT, java: { xp: 50000 }, imgPath: "candy_RAINBOW.webp" },
     { type: "Nether brick", "action": SMELT, java: { xp: 0.1 }, imgPath: "nether_brick.webp" },
-    { type: "Stone", "action": BREAK, java: { xp: 0.5 }, bedrock: { xp: 1 }, imgPath: "stone.webp" },
-    { type: "Deepslate", "action": BREAK, bedrock: { xp: 1 }, imgPath: "deepslate.webp" },
+    { type: "Stone", "action": BREAK, java: { xp: 0.5 }, imgPath: "stone.webp" },
     { type: "Charcoal", "action": SMELT, java: { xp: 1 }, bedrock: { xp: 1 }, imgPath: "charcoal.webp" },
-    { type: "Andesite", "action": BREAK, java: { xp: 3 }, bedrock: { xp: 3 }, imgPath: "andesite.webp" },
-    { type: "Granite", "action": BREAK, java: { xp: 3 }, bedrock: { xp: 3 }, imgPath: "granite.webp" },
+    { type: "Andesite", "action": BREAK, java: { xp: 3 }, bedrock: { xp: 1 }, imgPath: "andesite.webp" },
+    { type: "Granite", "action": BREAK, java: { xp: 3 }, bedrock: { xp: 1 }, imgPath: "granite.webp" },
     { type: "Tuff", "action": BREAK, bedrock: { xp: 3 }, imgPath: "tuff.webp" },
-    { type: "Diorite", "action": BREAK, java: { xp: 3 }, bedrock: { xp: 3 }, imgPath: "diorite.webp" },
-    { type: "Coal Ore", "action": BREAK, java: { xp: 4 }, bedrock: { xp: 4 }, imgPath: "coal_ore.webp" },
-    { type: "Deepslate Coal Ore", "action": BREAK, bedrock: { xp: 4 }, imgPath: "deepslate_coal_ore.webp" },
+    { type: "Diorite", "action": BREAK, java: { xp: 3 }, bedrock: { xp: 1 }, imgPath: "diorite.webp" },
+    { type: "Coal Ore", "action": BREAK, java: { xp: 4 }, bedrock: { xp: 1 }, imgPath: "coal_ore.webp" },
+    { type: "Deepslate Coal Ore", "action": BREAK, bedrock: { xp: 2, level: 10 }, imgPath: "deepslate_coal_ore.webp" },
     { type: "Nether Quartz Ore", "action": BREAK, java: { xp: 6 }, bedrock: { xp: 6 }, imgPath: "nether_quartz_ore.webp" },
-    { type: "Copper Ore", "action": BREAK, bedrock: { xp: 4 }, imgPath: "copper_ore.webp" },
-    { type: "Deepslate Copper Ore", "action": BREAK, bedrock: { xp: 4 }, imgPath: "deepslate_copper_ore.webp" },
+    { type: "Copper Ore", "action": BREAK, bedrock: { xp: 2 }, imgPath: "copper_ore.webp" },
+    { type: "Copper Ingot", "action": SMELT, bedrock: { xp: 1, level: 2 }, imgPath: "copper_ingot.webp" },
+    { type: "Deepslate Copper Ore", "action": BREAK, bedrock: { xp: 3, level: 10 }, imgPath: "deepslate_copper_ore.webp" },
     { type: "Obsidian", "action": BREAK, java: { xp: 6 }, bedrock: { xp: 6 }, imgPath: "obsidian.webp" },
-    { type: "Lapis Lazulli Ore", "action": BREAK, java: { xp: 15 }, bedrock: { xp: 15 }, imgPath: "lapis_ore.webp" },
-    { type: "Deepslate Lapis Lazulli Ore", "action": BREAK, bedrock: { xp: 15 }, imgPath: "deepslate_lapis_ore.webp" },
-    { type: "Redstone Ore", "action": BREAK, java: { xp: 15 }, bedrock: { xp: 15 }, imgPath: "redstone_ore.webp" },
-    { type: "Deepslte Redstone Ore", "action": BREAK,  bedrock: { xp: 15 }, imgPath: "deepslate_redstone_ore.webp" },
-    { type: "Emerald Ore", "action": BREAK, java: { xp: 75 }, bedrock: { xp: 75 }, imgPath: "emerald_ore.webp" },
-    { type: "Deepslate Emerald Ore", "action": BREAK, java: { xp: 75 }, bedrock: { xp: 75 }, imgPath: "deepslate_emerald_ore.webp" },
-    { type: "Iron Ingot", "action": SMELT, java: { xp: 8, level: 2 }, bedrock: { xp: 8, level: 2 }, imgPath: "iron_ingot.webp" },
-    { type: "Diamond Ore", "action": BREAK, java: { xp: 25, level: 2 }, bedrock: { xp: 25, level: 2 }, imgPath: "diamond_ore.webp" },
-    { type: "Deepslate Diamond Ore", "action": BREAK, bedrock: { xp: 25 }, imgPath: "deepslate_diamond_ore.webp" },
-    { type: "Gold Ingot", "action": SMELT, java: { xp: 30, level: 3 }, bedrock: { xp: 30, level: 3 }, imgPath: "gold_ingot.webp" },
-    { type: "Amethyst Ingot", "action": SMELT, java: { xp: 35, level: 4 }, imgPath: "amethyst_ingot.webp" },
+    { type: "Lapis Lazuli Ore", "action": BREAK, java: { xp: 15 }, bedrock: { xp: 8 }, imgPath: "lapis_ore.webp" },
+    { type: "Deepslate Lapis Lazuli Ore", "action": BREAK, bedrock: { xp: 12, level: 10 }, imgPath: "deepslate_lapis_ore.webp" },
+    { type: "Redstone Ore", "action": BREAK, java: { xp: 15 }, bedrock: { xp: 6 }, imgPath: "redstone_ore.webp" },
+    { type: "Emerald Ore", "action": BREAK, java: { xp: 75 }, bedrock: { xp: 30 }, imgPath: "emerald_ore.webp" },
+    { type: "Amethyst Ore", "action": BREAK, bedrock: { xp: 18, level: 5 }, imgPath: "amethyst_ore.webp" },
+    { type: "Deepslate Emerald Ore", "action": BREAK, java: { xp: 75 }, bedrock: { xp: 45, level: 10 }, imgPath: "deepslate_emerald_ore.webp" },
+    { type: "Iron Ingot", "action": SMELT, java: { xp: 8, level: 2 }, bedrock: { xp: 2, level: 2 }, imgPath: "iron_ingot.webp" },
+    { type: "Diamond Ore", "action": BREAK, java: { xp: 25, level: 2 }, bedrock: { xp: 20, level: 2 }, imgPath: "diamond_ore.webp" },
+    { type: "Deepslate Diamond Ore", "action": BREAK, bedrock: { xp: 30, level: 10 }, imgPath: "deepslate_diamond_ore.webp" },
+    { type: "Gold Ingot", "action": SMELT, java: { xp: 30, level: 3 }, bedrock: { xp: 3, level: 3 }, imgPath: "gold_ingot.webp" },
+    { type: "Amethyst Ingot", "action": SMELT, java: { xp: 35, level: 4 }, bedrock: { xp: 4, level: 5 }, imgPath: "amethyst_ingot.webp" },
     { type: "Iron Particle", "action": OBTAIN_FROM_COBBLEBREAKER, java: { xp: 2, level: 5 }, imgPath: "iron_particle.webp" },
     { type: "Gold Particle", "action": OBTAIN_FROM_COBBLEBREAKER, java: { xp: 4, level: 5 }, imgPath: "gold_particle.webp" },
     { type: "Diamond Particle", "action": OBTAIN_FROM_COBBLEBREAKER, java: { xp: 8, level: 5 }, imgPath: "diamond_particle.webp" },
@@ -321,33 +321,63 @@ const how_to_xp: HowToXp = {
     { type: "Titane Particle", "action": OBTAIN_FROM_COBBLEBREAKER, java: { xp: 16, level: 5 }, imgPath: "titane_particle.webp" },
     { type: "Paladium Particle", "action": OBTAIN_FROM_COBBLEBREAKER, java: { xp: 20, level: 5 }, imgPath: "paladium_particle.webp" },
     { type: "Titane Ingot", "action": SMELT, java: { xp: 50, level: 6 }, bedrock: { xp: 50, level: 6 }, imgPath: "titane_ingot.webp" },
+    { type: "Titane Ingot", "action": SMELT, java: { xp: 50, level: 6 }, bedrock: { xp: 5, level: 5 }, imgPath: "titane_ingot.webp" },
     { type: "Cavernous Zombie", "action": KILL, java: { xp: NaN, level: 7 }, imgPath: "cavernous_zombie.webp" },
     { type: "Paladium Ingot", "action": SMELT, java: { xp: 150, level: 8 }, bedrock: { xp: 150, level: 8 }, imgPath: "paladium_ingot.webp" },
-    { type: "Findium Ore", "action": BREAK, java: { xp: 110, level: 10 }, bedrock: { xp: 100, level: 15 }, imgPath: "findium_ore.webp" },
+    { type: "Paladium Ingot", "action": SMELT, bedrock: { xp: 6, level: 5 }, imgPath: "paladium_ingot.webp" },
+    { type: "Findium Ore", "action": BREAK, java: { xp: 110, level: 10 }, bedrock: { xp: 100, level: 5 }, imgPath: "findium_ore.webp" },
     { type: "Paladium Green Ingot", "action": SMELT, java: { xp: 200, level: 12 }, bedrock: { xp: 200, level: 12 }, imgPath: "paladium_green_ingot.webp" },
-    { type: "Deepslate Iron Ore", "action": BREAK, bedrock: { xp: 8, level: 10 }, imgPath: "deepslate_diamond_ore.webp" },
-    { type: "Iron Ore", "action": BREAK, bedrock: { xp: 8, level: 10 }, imgPath: "deepslate_iron_ore.webp" },
+    { type: "Paladium Green Ingot", "action": SMELT, bedrock: { xp: 400, level: 15 }, imgPath: "paladium_green_ingot.webp" },
+    { type: "Deepslate Iron Ore", "action": BREAK, bedrock: { xp: 5, level: 10 }, imgPath: "deepslate_iron_ore.webp" },
+    { type: "Iron Ore", "action": BREAK, bedrock: { xp: 3 }, imgPath: "iron_ore.webp" },
+    { type: "Gold Ore", "action": BREAK, bedrock: { xp: 6 }, imgPath: "gold_ore.webp" },
+    { type: "Nugget Paladium", "action": SMELT, bedrock: { xp: 1, level: 5 }, imgPath: "nugget_paladium.webp" },
+    { type: "Nugget Amethyst", "action": SMELT, bedrock: { xp: 1, level: 5 }, imgPath: "nugget_amethyst.webp" },
+    { type: "Nugget Titane", "action": SMELT, bedrock: { xp: 1, level: 5 }, imgPath: "nugget_titane.webp" },
+    { type: "Xp Ore", "action": BREAK, bedrock: { xp: 2, level: 5 }, imgPath: "xp_ore.webp" },
+    { type: "Instable Ore", "action": BREAK, bedrock: { xp: 1000, level: 5 }, imgPath: "instable_ore.webp" },
+    { type: "Nugget Paladium Ore", "action": BREAK, bedrock: { xp: 6, level: 5 }, imgPath: "nugget_paladium_ore.webp" },
+    { type: "Paladium Ore", "action": BREAK, bedrock: { xp: 36, level: 5 }, imgPath: "paladium_ore.webp" },
+    { type: "Nugget Titane Ore", "action": BREAK, bedrock: { xp: 4, level: 5 }, imgPath: "nugget_titane_ore.webp" },
+    { type: "Nugget Amethyst Ore", "action": BREAK, bedrock: { xp: 2, level: 5 }, imgPath: "nugget_amethyst_ore.webp" },
+    { type: "Titane Ore", "action": BREAK, bedrock: { xp: 27, level: 5 }, imgPath: "titane_ore.webp" },
+    { type: "Random Ore", "action": BREAK, bedrock: { xp: 8, level: 5 }, imgPath: "random_ore.webp" },
+    { type: "Deepslate Redstone Ore", "action": BREAK, bedrock: { xp: 15, level: 10 }, imgPath: "deepslate_redstone_ore.webp" },
+    { type: "Nugget Green Paladium", "action": BREAK, bedrock: { xp: 40, level: 15 }, imgPath: "nugget_green_paladium.webp" },
+    { type: "Deepslate Titane Ore", "action": BREAK, bedrock: { xp: 41, level: 15 }, imgPath: "deepslate_titane_ore.webp" },
+    { type: "Deepslate Instable Ore", "action": BREAK, bedrock: { xp: 1500, level: 15 }, imgPath: "deepslate_instable_ore.webp" },
+    { type: "Deepslate Xp Ore", "action": BREAK, bedrock: { xp: 3, level: 15 }, imgPath: "deepslate_xp_ore.webp" },
+    { type: "Deepslate Nugget Titanium Ore", "action": BREAK, bedrock: { xp: 6, level: 15 }, imgPath: "deepslate_nugget_titane_ore.webp" },
+    { type: "Deepslate Paladium Ore", "action": BREAK, bedrock: { xp: 54, level: 15 }, imgPath: "deepslate_paladium_ore.webp" },
+    { type: "Deepslate Nugget Paladium Ore", "action": BREAK, bedrock: { xp: 9, level: 15 }, imgPath: "deepslate_nugget_paladium_ore.webp" },
+    { type: "Deepslate Amethyst Ore", "action": BREAK, bedrock: { xp: 27, level: 15 }, imgPath: "deepslate_amethyst_ore.webp" },
+    { type: "Deepslate Random Ore", "action": BREAK, bedrock: { xp: 12, level: 15 }, imgPath: "deepslate_random_ore.webp" },
+    { type: "Deepslate Nugget Amethyst Ore", "action": BREAK, bedrock: { xp: 3, level: 15 }, imgPath: "deepslate_nugget_amethyst_ore.webp" },
   ],
   "farmer": [
     { type: "Bottle XP", action: "Utiliser", java: { xp: 1000 }, imgPath: "exp_farmer.webp", ignorePotionBonus: true },
     { type: "Bonbon Vert", "action": EAT, java: { xp: 50000 }, imgPath: "candy_GREEN.webp" },
     { type: "Bonbon Multicolor", "action": EAT, java: { xp: 50000 }, imgPath: "candy_RAINBOW.webp" },
-    { type: "Bread", "action": CRAFT, java: { xp: 1 }, bedrock: { xp: 1 }, imgPath: "bread.webp" },
+    { type: "Bread", "action": CRAFT, java: { xp: 1 }, bedrock: { xp: 5, level: 4 }, imgPath: "bread.webp" },
     { type: "Wheat", "action": BREAK, bedrock: { xp: 1 }, imgPath: "wheat.webp" },
     { type: "Seed", "action": BREAK, java: { xp: 1.5 }, imgPath: "seeds_wheat.webp" },
-    { type: "Baked Potato", "action": SMELT, java: { xp: 1, level: 2 }, bedrock: { xp: 1, level: 2 }, imgPath: "potato_baked.webp" },
-    { type: "Potatoes", "action": BREAK, java: { xp: 2, level: 2 }, bedrock: { xp: 1, level: 2 }, imgPath: "potato.webp" },
-    { type: "Carrots", "action": BREAK, java: { xp: 2.5, level: 2 }, bedrock: { xp: 2, level: 2 }, imgPath: "carrot.webp" },
-    { type: "Melon", "action": BREAK, java: { xp: 4 , level: 3 }, bedrock: { xp: 4, level: 3 }, imgPath: "melon.webp" },
-    { type: "Pumpkin", "action": BREAK, java: { xp: 5 , level: 6 }, bedrock: { xp: 5, level: 6 }, imgPath: "pumpkin.webp" },
+    { type: "Baked Potato", "action": SMELT, java: { xp: 1, level: 2 }, bedrock: { xp: 2, level: 2 }, imgPath: "potato_baked.webp" },
+    { type: "Potatoes", "action": BREAK, java: { xp: 2, level: 2 }, bedrock: { xp: 2, level: 1 }, imgPath: "potato.webp" },
+    { type: "Carrots", "action": BREAK, java: { xp: 2.5, level: 2 }, bedrock: { xp: 3, level: 3 }, imgPath: "carrot.webp" },
+    { type: "Melon", "action": BREAK, java: { xp: 4 , level: 3 }, bedrock: { xp: 5, level: 13 }, imgPath: "melon.webp" },
+    { type: "Pumpkin", "action": BREAK, java: { xp: 5 , level: 6 }, bedrock: { xp: 3, level: 11 }, imgPath: "pumpkin.webp" },
     { type: "Farmer Chicken", "action": KILL, java: { xp: NaN, level: 7 }, imgPath: "farmer_chicken.webp" },
     { type: "Amethyst Ingot", "action": CRUSH, java: { xp: 3, level: 8 }, imgPath: "amethyst_ingot.webp" },
-    { type: "Eggplant", "action": BREAK, java: { xp: 10 , level: 8 }, bedrock: { xp: 10, level: 8 }, imgPath: "eggplant.webp" },
-    { type: "Pumpkin Pie", "action": CRAFT, java: { xp: 4, level: 11 }, bedrock: { xp: 2 }, imgPath: "pumpkin_pie.webp" },
+    { type: "Eggplant", "action": BREAK, java: { xp: 10 , level: 8 }, bedrock: { xp: 20, level: 3 }, imgPath: "eggplant.webp" },
+    { type: "Pumpkin Pie", "action": CRAFT, java: { xp: 4, level: 11 }, bedrock: { xp: 2, level: 15 }, imgPath: "pumpkin_pie.webp" },
     { type: "Titane Ingot", "action": CRUSH, java: { xp: 4.5, level: 12 }, imgPath: "titane_ingot.webp" },
-    { type: "Chervil", "action": BREAK, java: { xp: 20, level: 12 }, bedrock: { xp: 20, level: 12 }, imgPath: "chervil.webp" },
+    { type: "Chervil", "action": BREAK, java: { xp: 20, level: 12 }, bedrock: { xp: 40, level: 6 }, imgPath: "chervil.webp" },
     { type: "Paladium Ingot", "action": CRUSH, java: { xp: 6, level: 16 }, imgPath: "paladium_ingot.webp" },
-    { type: "Kiwano", "action": BREAK, java: { xp: 50, level: 16 }, bedrock: { xp: 10, level: 8 }, imgPath: "kiwano.webp" },
+    { type: "Kiwano", "action": BREAK, java: { xp: 50, level: 16 }, bedrock: { xp: 10, level: 14 }, imgPath: "kiwano.webp" },
+    { type: "Beetroot", "action": BREAK, bedrock: { xp: 8, level: 5 }, imgPath: "beetroot.webp" },
+    { type: "Cactus", "action": BREAK, bedrock: { xp: 1, level: 7 }, imgPath: "cactus.webp" },
+    { type: "Reeds", "action": BREAK, bedrock: { xp: 2, level: 9 }, imgPath: "reeds.webp" },
+    { type: "Orange Blue", "action": BREAK, bedrock: { xp: 200, level: 19 }, imgPath: "orangeblue.webp" },
   ],
   "hunter": [
     { type: "Bottle XP", action: "Utiliser", java: { xp: 1000 }, imgPath: "exp_hunter.webp", ignorePotionBonus: true },
@@ -355,22 +385,22 @@ const how_to_xp: HowToXp = {
     { type: "Bonbon Multicolor", "action": EAT, java: { xp: 50000 }, imgPath: "candy_RAINBOW.webp" },
     { type: "Snow Golem", "action": KILL, java: { xp: 1 }, imgPath: "snow_golem_hunter.webp" },
     { type: "Squid", "action": KILL, java: { xp: 10 }, imgPath: "squid.webp" },
-    { type: "Cooked Porkchop", "action": SMELT, java: { xp: 10 }, bedrock: { xp: 10 }, imgPath: "porkchop_cooked.webp" },
-    { type: "Cooked Chicken", "action": SMELT, java: { xp: 10 }, bedrock: { xp: 10 }, imgPath: "chicken_cooked.webp" },
-    { type: "Cooked Mutton", "action": SMELT, java: { xp: 10 }, bedrock: { xp: 10 }, imgPath: "cooked_mutton.webp" },
-    { type: "Cooked Rabbit", "action": SMELT, bedrock: { xp: 15 }, imgPath: "cooked_rabbit.webp" },
-    { type: "Steak", "action": SMELT, java: { xp: 10 }, bedrock: { xp: 10 }, imgPath: "steak.webp" },
-    { type: "Cow", "action": KILL, java: { xp: 14 }, bedrock: { xp: 80 }, imgPath: "cow.webp" },
-    { type: "Pig", "action": KILL, java: { xp: 14 }, bedrock: { xp: 90, level: 3 }, imgPath: "pig.webp" },
+    { type: "Cooked Porkchop", "action": SMELT, java: { xp: 10 }, bedrock: { xp: 55, level: 4 }, imgPath: "porkchop_cooked.webp" },
+    { type: "Cooked Chicken", "action": SMELT, java: { xp: 10 }, bedrock: { xp: 50, level: 3 }, imgPath: "chicken_cooked.webp" },
+    { type: "Cooked Mutton", "action": SMELT, java: { xp: 10 }, bedrock: { xp: 45, level: 2 }, imgPath: "cooked_mutton.webp" },
+    { type: "Cooked Rabbit", "action": SMELT, bedrock: { xp: 55, level: 4 }, imgPath: "cooked_rabbit.webp" },
+    { type: "Steak", "action": SMELT, java: { xp: 10 }, bedrock: { xp: 40, level: 1 }, imgPath: "steak.webp" },
+    { type: "Cow", "action": KILL, java: { xp: 14 }, bedrock: { xp: 80, level: 0 }, imgPath: "cow.webp" },
+    { type: "Pig", "action": KILL, java: { xp: 14 }, bedrock: { xp: 110, level: 3 }, imgPath: "pig.webp" },
     { type: "Horse", "action": KILL, java: { xp: 14 }, imgPath: "horse.webp" },
-    { type: "Sheep", "action": KILL, java: { xp: 14 }, bedrock: { xp: 80 }, imgPath: "sheep.webp" },
+    { type: "Sheep", "action": KILL, java: { xp: 14 }, bedrock: { xp: 90, level: 1 }, imgPath: "sheep.webp" },
     { type: "Rabbit", "action": KILL, java: { xp: 14 }, imgPath: "rabbit.webp" },
-    { type: "Chicken", "action": KILL, java: { xp: 14 }, bedrock: { xp: 90, level: 3 }, imgPath: "chicken.webp" },
+    { type: "Chicken", "action": KILL, java: { xp: 14 }, bedrock: { xp: 100, level: 2 }, imgPath: "chicken.webp" },
     { type: "Cooked Fish", "action": SMELT, java: { xp: 15 }, imgPath: "cooked_fish.webp" },
-    { type: "Cooked Salmon", "action": SMELT, java: { xp: 15 }, bedrock: { xp: 15 }, imgPath: "cooked_salmon.webp" },
+    { type: "Cooked Salmon", "action": SMELT, java: { xp: 15 }, bedrock: { xp: 45, level: 2 }, imgPath: "cooked_salmon.webp" },
     { type: "Raw fish", "action": FISH, java: { xp: 25 }, imgPath: "fish_cod_raw.webp" },
     { type: "Raw Salmon", "action": FISH, java: { xp: 35 }, imgPath: "raw_salmon.webp" },
-    { type: "Creeper", "action": KILL, java: { xp: 40 }, bedrock: { xp: 140, level: 9 }, imgPath: "creeper.webp" },
+    { type: "Creeper", "action": KILL, java: { xp: 40 }, bedrock: { xp: 140, level: 8 }, imgPath: "creeper.webp" },
     { type: "Pufferfish", "action": FISH, java: { xp: 75 }, imgPath: "pufferfish.webp" },
     { type: "Clownfish", "action": FISH, java: { xp: 200 }, imgPath: "clownfish.webp" },
     { type: "Wither", "action": KILL, java: { xp: 1000 }, imgPath: "wither.webp" },
@@ -387,20 +417,24 @@ const how_to_xp: HowToXp = {
     { type: "Kraken", "action": FISH, java: { xp: 15000, level: 4 }, imgPath: "kraken.webp" },
     { type: "Dolphin", "action": KILL, java: { xp: 35, level: 5 }, imgPath: "dolphin.webp" },
     { type: "Mega Creeper", "action": KILL, java: { xp: NaN, level: 7 }, imgPath: "mega_creeper.webp" },
-    { type: "Zombie", "action": KILL, java: { xp: 15, level: 7 }, bedrock: { xp: 100, level: 6 }, imgPath: "zombie.webp" },
+    { type: "Zombie", "action": KILL, java: { xp: 15, level: 7 }, bedrock: { xp: 160, level: 4 }, imgPath: "zombie.webp" },
     { type: "Turtle", "action": KILL, java: { xp: 40, level: 8 }, imgPath: "turtle.webp" },
     { type: "Panda", "action": KILL, java: { xp: 60, level: 9 }, imgPath: "panda.webp" },
-    { type: "Skeleton", "action": KILL, java: { xp: 20, level: 11 }, bedrock: { xp: 110, level: 6 }, imgPath: "skeleton.webp" },
-    { type: "Wither Skeleton", "action": KILL, bedrock: { xp: 100, level: 16 }, imgPath: "wither_skeleton.webp" },
+    { type: "Skeleton", "action": KILL, java: { xp: 20, level: 11 }, bedrock: { xp: 200, level: 6 }, imgPath: "skeleton.webp" },
+    { type: "Wither Skeleton", "action": KILL, bedrock: { xp: 400, level: 14 }, imgPath: "wither_skeleton.webp" },
     { type: "Elephant", "action": KILL, java: { xp: NaN, level: 11 }, imgPath: "elephant.webp" },
     { type: "Crab", "action": KILL, java: { xp: 80, level: 12 }, imgPath: "crab.webp" },
-    { type: "Spider", "action": KILL, java: { xp: 8, level: 13 }, bedrock: { xp: 130, level: 9 }, imgPath: "spider.webp" },
-    { type: "Blaze", "action": KILL, java: { xp: 25, level: 14 }, bedrock: { xp: 70, level: 14 }, imgPath: "blaze.webp" },
+    { type: "Spider", "action": KILL, java: { xp: 8, level: 13 }, bedrock: { xp: 210, level: 8 }, imgPath: "spider.webp" },
+    { type: "Blaze", "action": KILL, java: { xp: 25, level: 14 }, bedrock: { xp: 500, level: 16 }, imgPath: "blaze.webp" },
     { type: "Witch", "action": KILL, java: { xp: 35, level: 14 }, imgPath: "witch.webp" },
     { type: "Snake", "action": KILL, java: { xp: 120, level: 15 }, imgPath: "snake.webp" },
-    { type: "Cave Spider", "action": KILL, java: { xp: 15, level: 18 }, bedrock: { xp: 160, level: 12 }, imgPath: "cave_spider.webp" },
+    { type: "Cave Spider", "action": KILL, java: { xp: 15, level: 18 }, bedrock: { xp: 220, level: 10 }, imgPath: "cave_spider.webp" },
     { type: "Jelly Fish", "action": KILL, java: { xp: 150, level: 18 }, imgPath: "jelly_fish.webp" },
-    { type: "Bat", "action": KILL, bedrock: { xp: 200, level: 12 }, imgPath: "bat.webp" },
+    { type: "Bat", "action": KILL, bedrock: { xp: 300, level: 12 }, imgPath: "bat.webp" },
+    { type: "Paladium Arty", "action": KILL, bedrock: { xp: 1000, level: 0 }, imgPath: "paladium_arty.webp" },
+    { type: "Green Paladium Arty", "action": KILL, bedrock: { xp: 20000, level: 16 }, imgPath: "green_paladium_arty.webp" },
+    { type: "Endium Arty", "action": KILL, bedrock: { xp: 40000, level: 19 }, imgPath: "endium_arty.webp" },
+
   ],
   "alchemist": [
     { type: "Bottle XP", action: "Utiliser", java: { xp: 1000 }, imgPath: "exp_alchemist.webp", ignorePotionBonus: true },

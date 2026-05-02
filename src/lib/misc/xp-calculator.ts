@@ -17,9 +17,7 @@ function _xpPerStep(level: number, version: PlatformVersion): number {
   if (version === "java") {
     return constants.metier_xp_java[Math.min(level - 1, constants.metier_xp_java.length - 1)];
   } else {
-    // Level 18's step covers the 18->20 transition (index 19 = 284041), not the phantom 18->19 (index 18 = 0).
-    const idx = level === 18 ? 19 : Math.min(level, constants.metier_xp_bedrock.length - 1);
-    return constants.metier_xp_bedrock[idx];
+    return constants.metier_xp_bedrock[Math.min(level, constants.metier_xp_bedrock.length - 1)];
   }
 }
 
@@ -27,8 +25,7 @@ function _xpPerStep(level: number, version: PlatformVersion): number {
  * Java and Bedrock metier XP calculations.
  *
  * - Java  : levels start at 1.
- * - Bedrock: levels start at 0. Level 19 does not exist:
- *   totalXp(19, "bedrock") === totalXp(20, "bedrock").
+ * - Bedrock: levels start at 0.
  */
 export const JobXp = {
   /**
@@ -48,15 +45,12 @@ export const JobXp = {
     } else {
       {
         if (level <= 0) {
-          // Bedrock: starts at level 0.
           return 0;
         }
-        // Level 19 doesn't exist — redirect to 20 so totalXp(19) === totalXp(20).
-        const bedrockLevel = level === 19 ? 20 : level;
-        if (bedrockLevel < cumulativeXpBedrock.length) {
-          return cumulativeXpBedrock[bedrockLevel];
+        if (level < cumulativeXpBedrock.length) {
+          return cumulativeXpBedrock[level];
         }
-        return cumulativeXpBedrock.at(-1)! + (bedrockLevel +1 - cumulativeXpBedrock.length) * constants.metier_xp_bedrock.at(-1)!;
+        return cumulativeXpBedrock.at(-1)! + (level + 1 - cumulativeXpBedrock.length) * constants.metier_xp_bedrock.at(-1)!;
       }
     }
   },

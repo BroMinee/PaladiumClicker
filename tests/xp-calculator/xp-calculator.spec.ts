@@ -78,7 +78,7 @@ test.skip("Test Body page", async ({ page }) => {
     - img "obsidian.webp"
     - text: /Break \\d+ fois Obsidian/
     - img "lapis_ore.webp"
-    - text: /Break \\d+ fois Lapis Lazulli Ore/
+    - text: /Break \\d+ fois Lapis Lazuli Ore/
     - img "redstone_ore.webp"
     - text: /Break \\d+ fois Redstone Ore/
     - img "emerald_ore.webp"
