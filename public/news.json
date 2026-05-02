@@ -1,5 +1,25 @@
 [
   {
+    "date": "02/05/2026",
+    "changes": {
+      "améliorations": [
+        "Refonte complète de l'algorithme du [clicker optimizer](https://palatracker.bromine.fr/clicker-optimizer/BroMine__) pour une réduction du temps de calcul d'un facteur 40.",
+        "Refonte du design des pages [À propos](https://palatracker.bromine.fr/about), [Patchnotes](https://palatracker.bromine.fr/patchnote) et [Politique de confidentialité](https://palatracker.bromine.fr/politique-de-confidentialite).",
+        "Changement du style de la barre de défilement sur l'ensemble du site."
+      ],
+      "corrections": [
+        "Mise à jour des valeurs d'XP Bedrock dans le [calculateur d'xp](https://palatracker.bromine.fr/xp-calculator/bedrock) pour correspondre aux valeurs de la v1 Bedrock.",
+        "Correction du prérequis de niveau 8 du [calculateur d'xp](https://palatracker.bromine.fr/xp-calculator) farmer.",
+        "Correction de l'affichage des horaires de la [QDF](https://palatracker.bromine.fr/qdf) qui n'étaient pas affichés dans le fuseau horaire local.",
+        "Correction de la UI du [clicker optimizer](https://palatracker.bromine.fr/clicker-optimizer/BroMine__) qui ne se mettait pas à jour correctement suite à un achat."
+      ],
+      "techniques": [
+        "Mise à jour vers **Tailwind CSS v4**.",
+        "Optimisation de la taille de l'image Docker utilisé pour le déploiement."
+      ]
+    }
+  },
+  {
     "date": "25/03/2026",
     "changes": {
       "additions": [
