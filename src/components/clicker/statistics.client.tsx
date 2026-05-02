@@ -1,5 +1,5 @@
 "use client";
-import { buyBuilding, computeRPS, computeXBuildingAhead, formatPrice, getPathImg, getTotalSpend } from "@/lib/misc";
+import { buyBuilding, formatPrice, getPathImg, getTotalSpend, safeJoinPaths } from "@/lib/misc";
 import { usePlayerInfoStore } from "@/stores/use-player-info-store";
 import { useClickerStore } from "@/stores/use-clicker-store";
 import { useEffect, useState } from "react";
@@ -14,6 +14,9 @@ import { GroupedSpanContainer } from "@/components/shared/group-span-container";
 import { Card } from "@/components/ui/card";
 import { ChevronDown, ChevronUp } from "lucide-react";
 import { SearchPlayerInput } from "@/components/home/search-player.client";
+import { UnOptimizedImage } from "../ui/image-loading";
+
+const BATCH_PURCHASE_COUNT = 24;
 
 const IconCalendar = () => (
   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
@@ -26,20 +29,23 @@ const IconCalendar = () => (
  */
 export function BestBuyCard() {
   const { data: playerInfo } = usePlayerInfoStore();
-  const { rps, setRPS, buildingBuyPaths, setBuildingBuyPaths } = useClickerStore();
+  const { buildingBuyPaths, computed, computeFromPlayerInfo } = useClickerStore();
   useEffect(() => {
     if (playerInfo) {
-      setRPS(computeRPS(playerInfo));
+      computeFromPlayerInfo(playerInfo, BATCH_PURCHASE_COUNT);
     }
-  }, [playerInfo, setRPS]);
-  useEffect(() => {
-    if (!playerInfo) {
-      return;
-    }
-    if (rps !== 0) {
-      setBuildingBuyPaths(computeXBuildingAhead(playerInfo, 1, rps));
-    }
-  }, [playerInfo, rps, setBuildingBuyPaths]);
+  }, [playerInfo, computeFromPlayerInfo]);
+
+  if (computed && buildingBuyPaths.length === 0) {
+    return (
+      <div className="bg-linear-to-br from-orange-500 to-orange-800 p-6 rounded-lg flex flex-col items-center justify-center gap-3 text-center">
+        <UnOptimizedImage width={112} height={112} alt="arty chokbar" src={safeJoinPaths("/img/Error/arty_chocbar.webp")}/>
+        <h2 className="text-2xl font-bold">Félicitations !</h2>
+        <p className="text-sm opacity-90">Tu as tout acheté. Maintenant va prendre une douche et touche de l&apos;herbe.</p>
+      </div>
+    );
+  }
+
   return (
     <div className="bg-linear-to-br from-orange-500 to-orange-800 p-6 rounded-lg relative">
       { buildingBuyPaths.length !== 0 && (typeof buildingBuyPaths[0].own === "number") && (
@@ -139,21 +145,10 @@ export function StatButton() {
  * Display multiple building best purchase list
  */
 export function BatchPurchase() {
-  const BATCH_PURCHASE_COUNT = 24;
   const [isOpen, setIsOpen] = useState(false);
 
   const { data: playerInfo, setPlayerInfo } = usePlayerInfoStore();
-  const { buildingBuyPaths, setBuildingBuyPaths } = useClickerStore();
-  const { rps } = useClickerStore();
-
-  useEffect(() => {
-    if (!playerInfo) {
-      return;
-    }
-    if (rps !== 0 && isOpen && buildingBuyPaths.length !== BATCH_PURCHASE_COUNT) {
-      setBuildingBuyPaths(computeXBuildingAhead(playerInfo, 24, rps));
-    }
-  }, [playerInfo, rps, setBuildingBuyPaths, buildingBuyPaths, isOpen]);
+  const { buildingBuyPaths } = useClickerStore();
 
   const formatMoney = (amount: number) =>
     new Intl.NumberFormat("fr-FR").format(amount) + " $";

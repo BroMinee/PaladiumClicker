@@ -41,6 +41,16 @@ export const METIER_EVENT_MAP: Record<MetierKey, ClickerModelChanges> = {
   miner: ClickerModelChanges.METIER_MINER,
 };
 
+export type ClickerStepResult = {
+  name: string;
+  rps: number;
+  time: number;
+  path: "building" | "building_upgrade" | "many_upgrade" | "posterior_upgrade" | "category_upgrade" | "global_upgrade" | "terrain_upgrade";
+  index: number;
+  own: number | boolean;
+  price: number;
+};
+
 /**
  * Represents the main clicker game state
  */
@@ -285,10 +295,10 @@ export class Clicker extends Model<Clicker, ClickerModelChanges> implements Hash
   /**
    * Computes the best building to buy `achatCount` times
    * @param achatCount The number of buildings to buy
-   * @returns An array of objects containing the name of the building, the new RPS and the time of the purchase
+   * @returns An array of objects containing purchase details
    */
-  public computeXBuildingAhead(achatCount: number) {
-    const result: Array<{ name: string, rps: number, time: number }> = [];
+  public computeXBuildingAhead(achatCount: number): ClickerStepResult[] {
+    const result: ClickerStepResult[] = [];
     for (let i = 0; i < achatCount; i++) {
       const RPSBefore = this.RPS();
       let bestRPSPerDollar = 0;
@@ -354,10 +364,62 @@ export class Clicker extends Model<Clicker, ClickerModelChanges> implements Hash
           e.own = true;
         });
       }
+
+      let path: "building" | "building_upgrade" | "many_upgrade" | "posterior_upgrade" | "category_upgrade" | "global_upgrade" | "terrain_upgrade";
+      let index: number;
+      let own: number | boolean;
+      let price: number;
+
+      if (bestPurchase instanceof Building) {
+        path = "building";
+        index = this.buildings.indexOf(bestPurchase);
+        own = bestPurchase.count;
+        price = bestPurchase.computePrice(bestPurchase.count - 1);
+      } else if (bestPurchase instanceof Upgrade100) {
+        path = "building_upgrade";
+        index = this.upgrade_100.indexOf(bestPurchase);
+        own = true;
+        price = bestPurchase.props.price;
+      } else if (bestPurchase instanceof Upgrade200) {
+        path = "building_upgrade";
+        index = this.upgrade_200.indexOf(bestPurchase) + 16;
+        own = true;
+        price = bestPurchase.props.price;
+      } else if (bestPurchase instanceof UpgradeMany) {
+        path = "many_upgrade";
+        index = this.upgrade_many.indexOf(bestPurchase);
+        own = true;
+        price = bestPurchase.props.price;
+      } else if (bestPurchase instanceof UpgradePosterior) {
+        path = "posterior_upgrade";
+        index = this.upgrade_posterior.indexOf(bestPurchase);
+        own = true;
+        price = bestPurchase.props.price;
+      } else if (bestPurchase instanceof UpgradeCategory) {
+        path = "category_upgrade";
+        index = this.upgrade_category.indexOf(bestPurchase);
+        own = true;
+        price = (bestPurchase as UpgradeCategory).props.price;
+      } else if (bestPurchase instanceof UpgradeGlobal) {
+        path = "global_upgrade";
+        index = this.upgrade_global.indexOf(bestPurchase);
+        own = true;
+        price = (bestPurchase as UpgradeGlobal).props.price;
+      } else {
+        path = "terrain_upgrade";
+        index = this.upgrade_terrain.indexOf(bestPurchase as UpgradeTerrain);
+        own = true;
+        price = (bestPurchase as UpgradeTerrain).props.price;
+      }
+
       result.push({
         name: bestPurchase.props.name,
         rps: this.RPS(),
         time: this.time.currentDate.getTime(),
+        path,
+        index,
+        own,
+        price,
       });
     }
     return result;
