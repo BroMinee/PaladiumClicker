@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useCallback, JSX } from "react";
+import { useCallback, JSX } from "react";
 import { UpgradeKey } from "@/types";
 import { usePlayerInfoStore } from "@/stores/use-player-info-store";
 import { computePrice, formatPrice, getPathImg, scaleCurrentProduction } from "@/lib/misc";
@@ -40,8 +40,6 @@ interface BuildingInputCardItemProps {
 }
 function BuildingInputCardItem({ index }: BuildingInputCardItemProps) {
   const { data: playerInfo, setBuildingOwn } = usePlayerInfoStore();
-  const [level, setLevel] = useState(playerInfo?.building[index].own ?? 0);
-
   const onLevelChange = useCallback((newLevel: number) => {
     if (!playerInfo) {
       throw new Error("playerInfo shouldn't be null");
@@ -50,9 +48,7 @@ function BuildingInputCardItem({ index }: BuildingInputCardItemProps) {
   }, [index, playerInfo, setBuildingOwn]);
 
   const handleLocalChange = (e: number) => {
-    const newLevel = Math.max(0, Math.min(100, e));
-    setLevel(newLevel);
-    onLevelChange(newLevel);
+    onLevelChange(Math.max(0, Math.min(100, e)));
   };
 
   if (playerInfo === null) {
@@ -72,7 +68,7 @@ function BuildingInputCardItem({ index }: BuildingInputCardItemProps) {
               <div className="flex items-center space-x-2">
                 <label htmlFor={`building-${index}`} className="text-sm text-card-foreground">Niv.</label>
                 <InputDebounce
-                  value={level}
+                  value={Number(playerInfo.building[index].own)}
                   onChange={handleLocalChange}
                   min={0}
                   max={99}
