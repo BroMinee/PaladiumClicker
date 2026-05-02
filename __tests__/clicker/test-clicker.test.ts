@@ -31,7 +31,7 @@ describe("add() utility function", () => {
   });
 
   test("Shall throw when setting job to 0", () => {
-    expect(() => clicker.setMetierLevel("miner", 0)).toThrow("[Metier] cannot set miner to 0. Should be greater than 0");
+    expect(() => clicker.setMetierLevel("miner", 0)).toThrow("[Métier] impossible de définir miner au niveau 0. Le niveau doit être supérieur à 0");
   });
 
   describe("TimeModel", () => {
@@ -83,7 +83,7 @@ describe("add() utility function", () => {
       const timeModel = new Time({ startingSeason: new Date() });
       expect(() => timeModel.applyChanges(TimeModelChanges.CURRENT_DATECHANGE, "add 1 hour", (e) => {
         e.currentDate = new Date("toto");
-      })).toThrow("[Time] Cannot set current Date to an invalid date");
+      })).toThrow("[Temps] Impossible de définir une date invalide");
     });
   });
 
@@ -93,7 +93,7 @@ describe("add() utility function", () => {
         clicker.buildings[0].applyChanges(BuildingModelChanges.COUNT, "set -1 building", (e) => {
           e.count = -1;
         });
-      }).toThrow("[Building] Mine abandonnée count cannot be -1. Must be between [0, 99]");
+      }).toThrow("[Batiment] Mine abandonnée : quantite invalide (-1). Doit etre entre [0, 99]");
     });
 
     test("shall throw when setting count over 99", () => {
@@ -101,7 +101,7 @@ describe("add() utility function", () => {
         clicker.buildings[0].applyChanges(BuildingModelChanges.COUNT, "set -1 building", (e) => {
           e.count = 100;
         });
-      }).toThrow("[Building] Mine abandonnée count cannot be 100. Must be between [0, 99]");
+      }).toThrow("[Batiment] Mine abandonnée : quantite invalide (100). Doit etre entre [0, 99]");
     });
 
     test("shall throw when buying a building be previous one has not been bought", () => {
@@ -109,7 +109,7 @@ describe("add() utility function", () => {
         clicker.buildings[1].applyChanges(BuildingModelChanges.COUNT, "add 1 building", (e) => {
           e.count += 1;
         });
-      }).toThrow("Cannot buy building Caverne aux gros cailloux because the previous building Mine abandonnée has not been bought");
+      }).toThrow("Impossible d'acheter Caverne aux gros cailloux car le batiment precedent Mine abandonnée n'a pas encore ete achete");
     });
 
     test("shall throw when selling a building be one after is still bought", () => {
@@ -123,7 +123,7 @@ describe("add() utility function", () => {
         clicker.buildings[0].applyChanges(BuildingModelChanges.COUNT, "set 0 building", (e) => {
           e.count = 0;
         });
-      }).toThrow("Cannot sell building Mine abandonnée because a following building Caverne aux gros cailloux is still bought");
+      }).toThrow("Impossible de vendre Mine abandonnée car le batiment suivant Caverne aux gros cailloux est encore achete");
     });
 
     test("test production without bonus", () => {
@@ -252,7 +252,7 @@ describe("add() utility function", () => {
         clicker.buildings[0].applyChanges(BuildingModelChanges.COUNT, "set 0 buildings", (e) => {
           e.count = 0;
         });
-      }).toThrow("[Upgrade 100%] Lampe frontale owned but not enough buildings to own it");
+      }).toThrow("[Upgrade 100%] Lampe frontale possédée mais pas assez de bâtiments pour la posséder");
     });
 
     test("shall throw when buying but condition is not met", () => {
@@ -261,7 +261,7 @@ describe("add() utility function", () => {
         clicker.upgrade_100[0].applyChanges(UpgradeModelChanges.OWN, "buy upgrade", (e) => {
           e.own = true;
         });
-      }).toThrow("[Upgrade 100%] Lampe frontale owned but not enough buildings to own it");
+      }).toThrow("[Upgrade 100%] Lampe frontale possédée mais pas assez de bâtiments pour la posséder");
     });
 
   });
@@ -315,7 +315,7 @@ describe("add() utility function", () => {
         clicker.buildings[0].applyChanges(BuildingModelChanges.COUNT, "set 4 buildings", (e) => {
           e.count = 4;
         });
-      }).toThrow("[Upgrade 200%] Potion de vision nocturne owned but not enough time to own it");
+      }).toThrow("[Upgrade 200%] Potion de vision nocturne possédée mais pas assez de jours de connexion pour la posséder");
     });
 
     test("shall throw when buying but condition is not met", () => {
@@ -324,7 +324,7 @@ describe("add() utility function", () => {
         clicker.upgrade_200[0].applyChanges(UpgradeModelChanges.OWN, "buy upgrade", (e) => {
           e.own = true;
         });
-      }).toThrow("[Upgrade 200%] Potion de vision nocturne owned but not enough buildings to own it");
+      }).toThrow("[Upgrade 200%] Potion de vision nocturne possédée mais pas assez de bâtiments pour la posséder");
     });
 
   });
@@ -393,7 +393,7 @@ describe("add() utility function", () => {
         clicker.buildings[0].applyChanges(BuildingModelChanges.COUNT, "set 4 buildings", (e) => {
           e.count = 1;
         });
-      }).toThrow("[Upgrade Many] Production nombreuse - Mine abandonnée owned but not enough buildings to own it");
+      }).toThrow("[Upgrade Many] Production nombreuse - Mine abandonnée possédée mais pas assez de bâtiments pour la posséder");
     });
 
     test("shall throw when buying but condition is not met", () => {
@@ -402,7 +402,7 @@ describe("add() utility function", () => {
         clicker.upgrade_many[0].applyChanges(UpgradeModelChanges.OWN, "buy upgrade", (e) => {
           e.own = true;
         });
-      }).toThrow("[Upgrade Many] Production nombreuse - Mine abandonnée owned but not enough buildings to own it");
+      }).toThrow("[Upgrade Many] Production nombreuse - Mine abandonnée possédée mais pas assez de bâtiments pour la posséder");
     });
   });
 
@@ -482,7 +482,7 @@ describe("add() utility function", () => {
         clicker.buildings[1].applyChanges(BuildingModelChanges.COUNT, "set 4 buildings", (e) => {
           e.count = 1;
         });
-      }).toThrow("[Upgrade Posterior] Production postérieure - Caverne aux gros cailloux owned but not enough buildings to own it");
+      }).toThrow("[Upgrade Posterior] Production postérieure - Caverne aux gros cailloux possédée mais pas assez de bâtiments pour la posséder");
     });
 
     test("shall throw when buying but condition is not met", () => {
@@ -491,7 +491,7 @@ describe("add() utility function", () => {
         clicker.upgrade_posterior[0].applyChanges(UpgradeModelChanges.OWN, "buy upgrade", (e) => {
           e.own = true;
         });
-      }).toThrow("[Upgrade Posterior] Production postérieure - Caverne aux gros cailloux owned but not enough buildings to own it");
+      }).toThrow("[Upgrade Posterior] Production postérieure - Caverne aux gros cailloux possédée mais pas assez de bâtiments pour la posséder");
     });
 
   });
@@ -601,7 +601,7 @@ describe("add() utility function", () => {
         clicker.buildings[2].applyChanges(BuildingModelChanges.COUNT, "set 4 buildings", (e) => {
           e.count = 0;
         });
-      }).toThrow("[Upgrade Category] Pioche en Paladium owned but not enough buildings to own it");
+      }).toThrow("[Amélioration Catégorie] Pioche en Paladium possédée mais pas assez de bâtiments pour la posséder");
     });
 
     test("shall throw when buying but condition is not met", () => {
@@ -610,7 +610,7 @@ describe("add() utility function", () => {
         clicker.upgrade_category[0].applyChanges(UpgradeModelChanges.OWN, "buy upgrade", (e) => {
           e.own = true;
         });
-      }).toThrow("[Upgrade Category] Pioche en Paladium owned but not enough buildings to own it");
+      }).toThrow("[Amélioration Catégorie] Pioche en Paladium possédée mais pas assez de bâtiments pour la posséder");
     });
   });
 
@@ -664,7 +664,7 @@ describe("add() utility function", () => {
         clicker.buildings[0].applyChanges(BuildingModelChanges.COUNT, "set 4 buildings", (e) => {
           e.count = 4;
         });
-      }).toThrow("[Upgrade Global] Namuu Ecolier owned but not enough time to own it");
+      }).toThrow("[Upgrade Global] Namuu Ecolier possédée mais pas assez de jours de connexion pour la posséder");
     });
 
     test("shall throw when buying but condition is not met", () => {
@@ -673,7 +673,7 @@ describe("add() utility function", () => {
         clicker.upgrade_global[0].applyChanges(UpgradeModelChanges.OWN, "buy upgrade", (e) => {
           e.own = true;
         });
-      }).toThrow("[Upgrade Global] Namuu Ecolier owned but not spent enough to own it");
+      }).toThrow("[Upgrade Global] Namuu Ecolier possédée mais pas assez de coins dépensés pour la posséder");
     });
 
   });

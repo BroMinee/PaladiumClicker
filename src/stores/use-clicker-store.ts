@@ -3,6 +3,7 @@ import { bestPurchaseInfoDetailed, PlayerInfo } from "@/types";
 import { getDDHHMMSSOnlyClicker, getPathImg } from "@/lib/misc";
 import { type WorkerResult } from "@/lib/clicker/clicker.worker";
 import { create } from "zustand";
+import { toast } from "sonner";
 
 let worker: Worker | null = null;
 let latestRequestId = 0;
@@ -38,6 +39,9 @@ function getWorker(): Worker {
 
   worker.onerror = (err) => {
     console.error("[ClickerWorker] error", err);
+    toast.error("Erreur dans le calcul d'optimisation", {
+      description: err.message ?? "Une erreur inattendue s'est produite dans le worker.",
+    });
   };
 
   return worker;

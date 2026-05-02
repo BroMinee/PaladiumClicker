@@ -102,7 +102,7 @@ export class Upgrade extends Model<Upgrade, UpgradeModelChanges> implements Hash
     } else {
       this.props.clicker.getValue().time.applyChanges(TimeModelChanges.CURRENT_DATECHANGE, `[Upgrade] ${this.props.name} upgrade owned`, (e) => {
         if(this.previousDateStack.length === 0) {
-          throw new Error("[Upgrade] cannot get last time since array is empty");
+          throw new Error("[Amélioration] impossible de récupérer la dernière date car la pile est vide");
         }
         e.currentDate = this.previousDateStack.pop()!;
       });
@@ -121,7 +121,7 @@ export class Upgrade extends Model<Upgrade, UpgradeModelChanges> implements Hash
   protected setupDayConditionSubscription(label: string, getCondition: () => boolean): void {
     this.subscribe(UpgradeModelChanges.DAY_CONDITION, `[${label}] ${this.props.name} day changes`, ({ newValue }) => {
       if (newValue.hasDayCondition === false && newValue.own) {
-        throw new Error(`[${label}] ${this.props.name} owned but not enough time to own it`);
+        throw new Error(`[${label}] ${this.props.name} possédée mais pas assez de jours de connexion pour la posséder`);
       }
       this.applyChanges(UpgradeModelChanges.CAN_BUY, `[${label}] ${this.props.name} can/cannot buy`, (e) => {
         e.canBuy = getCondition() && newValue.hasDayCondition;

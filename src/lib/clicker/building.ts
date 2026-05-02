@@ -163,7 +163,7 @@ export class Building extends Model<Building, BuildingModelChanges> implements H
    */
   set count(count: number) {
     if (count < 0 || count > 99) {
-      throw new Error(`[Building] ${this.props.name} count cannot be ${count}. Must be between [0, 99]`);
+      throw new Error(`[Batiment] ${this.props.name} : quantite invalide (${count}). Doit etre entre [0, 99]`);
     }
 
     if(count > this._count) {
@@ -174,7 +174,7 @@ export class Building extends Model<Building, BuildingModelChanges> implements H
     } else {
       this.props.clicker.getValue().time.applyChanges(TimeModelChanges.CURRENT_DATECHANGE, `[Building] ${this.props.name} upgrade owned`, (e) => {
         if(this.previousDateStack.length === 0) {
-          throw new Error("[Building] cannot get last time since array is empty");
+          throw new Error("[Batiment] impossible de recuperer la derniere date car la pile est vide");
         }
         e.currentDate = this.previousDateStack.pop()!;
       });
@@ -273,13 +273,13 @@ export class Building extends Model<Building, BuildingModelChanges> implements H
         // test that all the following building have count 0
         this.props.clicker.getValue().buildings.slice(this.props.index +1).forEach(building => {
           if(building.count > 0) {
-            throw new Error(`Cannot sell building ${this.props.name} because a following building ${building.props.name} is still bought`);
+            throw new Error(`Impossible de vendre ${this.props.name} car le batiment suivant ${building.props.name} est encore achete`);
           }
         });
       } else if(newValue.count > 0 && this.props.index !== 0) {
         const building = this.props.clicker.getValue().buildings[this.props.index - 1];
         if(this.props.index > 0 && building.count === 0) {
-          throw new Error(`Cannot buy building ${this.props.name} because the previous building ${building.props.name} has not been bought`);
+          throw new Error(`Impossible d'acheter ${this.props.name} car le batiment precedent ${building.props.name} n'a pas encore ete achete`);
         }
       }
       this.updateProduction();

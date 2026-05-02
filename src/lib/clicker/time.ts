@@ -84,7 +84,7 @@ export class Time extends Model<Time, TimeModelChanges> implements Hashable {
     if (typeof newDate === "number") {
       this.currentDate = new Date(newDate);
     } else if (isNaN(newDate.getTime())) {
-      throw new Error("[Time] Cannot set current Date to an invalid date");
+      throw new Error("[Temps] Impossible de définir une date invalide");
     } else {
       this._currentDate = newDate;
     }

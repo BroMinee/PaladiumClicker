@@ -41,7 +41,7 @@ export abstract class UpgradeBuilding extends Upgrade {
                     });
                   }
                   if ((newValue.count < threshold || this.hasDayCondition === false) && this.own) {
-                    throw new Error(`[${label}] ${this.props.name} owned but not enough buildings to own it`);
+                    throw new Error(`[${label}] ${this.props.name} possédée mais pas assez de bâtiments pour la posséder`);
                   }
                 }
       );
@@ -57,7 +57,7 @@ export abstract class UpgradeBuilding extends Upgrade {
     // [OWN] apply the effect on the buildings
     this.subscribe(UpgradeModelChanges.OWN, `[${label}] ${this.props.name} own changes`, ({ newValue }) => {
       if ((this.props.clicker.getValue().buildings[this.props.index].count < threshold || this.hasDayCondition === false) && newValue.own) {
-        throw new Error(`[${label}] ${this.props.name} owned but not enough buildings to own it`);
+        throw new Error(`[${label}] ${this.props.name} possédée mais pas assez de bâtiments pour la posséder`);
       }
       this.props.active_index.forEach(active_index => {
         this.props.clicker.getValue().buildings[active_index].applyChanges(
