@@ -321,7 +321,7 @@ const how_to_xp: HowToXp = {
     { type: "Titane Particle", "action": OBTAIN_FROM_COBBLEBREAKER, java: { xp: 16, level: 5 }, imgPath: "titane_particle.webp" },
     { type: "Paladium Particle", "action": OBTAIN_FROM_COBBLEBREAKER, java: { xp: 20, level: 5 }, imgPath: "paladium_particle.webp" },
     { type: "Titane Ingot", "action": SMELT, java: { xp: 50, level: 6 }, bedrock: { xp: 50, level: 6 }, imgPath: "titane_ingot.webp" },
-    { type: "Titane Ingot", "action": SMELT, java: { xp: 50, level: 6 }, bedrock: { xp: 5, level: 5 }, imgPath: "titane_ingot.webp" },
+    { type: "Titane Ingot", "action": SMELT, bedrock: { xp: 5, level: 5 }, imgPath: "titane_ingot.webp" },
     { type: "Cavernous Zombie", "action": KILL, java: { xp: NaN, level: 7 }, imgPath: "cavernous_zombie.webp" },
     { type: "Paladium Ingot", "action": SMELT, java: { xp: 150, level: 8 }, bedrock: { xp: 150, level: 8 }, imgPath: "paladium_ingot.webp" },
     { type: "Paladium Ingot", "action": SMELT, bedrock: { xp: 6, level: 5 }, imgPath: "paladium_ingot.webp" },
