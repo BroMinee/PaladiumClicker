@@ -10,10 +10,10 @@ import { IoMdSearch } from "react-icons/io";
 import { Popover, PopoverAnchor, PopoverContent } from "@/components/ui/popover";
 import { Button } from "@/components/ui/button-v2";
 import { cn } from "@/lib/utils";
-import { toast } from "sonner";
 import { useSettingsStore } from "@/stores/use-settings-store";
 import { LoadingSpinner } from "@/components/ui/loading-spinner";
 import { usePlayerInfoStore } from "@/stores/use-player-info-store";
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 
 interface PlayerSearchInputProps {
   onClick: (user: User | string) => void;
@@ -45,7 +45,9 @@ export const PlayerSearchInput = ({
   const [searchTerm, setSearchTerm] = useState("");
   const [searchResults, setSearchResults] = useState<User[]>([]);
   const [isOpen, setIsOpen] = useState(false);
-  const { settings } = useSettingsStore();
+  const [isDefaultProfileDialogOpen, setIsDefaultProfileDialogOpen] = useState(false);
+  const [pendingUser, setPendingUser] = useState<User | string | null>(null);
+  const { settings, setDefaultProfile } = useSettingsStore();
 
   const { data: playerInfo } = usePlayerInfoStore();
 
@@ -106,13 +108,29 @@ export const PlayerSearchInput = ({
       return;
     }
     if (settings.defaultProfile) {
-      toast.error("Impossible d'importer un pseudo car vous avez activé dans les paramètres l'option : \"profil vide\".");
-      // TODO popup in case the user want to remove the default profil
+      setPendingUser(user);
+      setIsDefaultProfileDialogOpen(true);
+      setIsOpen(false);
       return;
     }
     onClick(user);
     setIsOpen(false);
     setSearchTerm("");
+  };
+
+  const handleConfirmLoadProfile = () => {
+    setDefaultProfile(false);
+    if (pendingUser !== null) {
+      onClick(pendingUser);
+      setSearchTerm("");
+    }
+    setIsDefaultProfileDialogOpen(false);
+    setPendingUser(null);
+  };
+
+  const handleCancelLoadProfile = () => {
+    setIsDefaultProfileDialogOpen(false);
+    setPendingUser(null);
   };
 
   const handleFormSubmit = (e: React.FormEvent) => {
@@ -155,107 +173,124 @@ export const PlayerSearchInput = ({
   );
 
   return (
-    <Popover open={isOpen} onOpenChange={setIsOpen}>
+    <>
+      <Popover open={isOpen} onOpenChange={setIsOpen}>
 
-      { variant === "homepage" && (
-        <PopoverAnchor asChild>
-          <div className={cn("w-full max-w-xl relative group pointer-events-auto", className)}>
-            <div className="absolute -inset-1 bg-linear-to-r from-primary to-orange-600 blur-sm opacity-25 group-hover:opacity-75 transition duration-1000 group-hover:duration-200"></div>
-            <form onSubmit={handleFormSubmit} className="relative flex bg-card p-2 rounded-xl shadow-2xl shadow-[0_0_140px_#ff6f00b3]">
-              <div className="relative flex-1">
-                <input
-                  type="text"
-                  placeholder={placeholder}
-                  value={searchTerm}
-                  onChange={handleSearchChange}
-                  onClick={handleInputClick}
-                  className="w-full h-10 pl-4 pr-4 bg-transparent border-none outline-hidden text-xl font-minecraft placeholder:text-card-foreground focus:ring-0"
-                />
-              </div>
-              {fetching === true ?
-                <LoadingSpinner />
-                :
-                <Button type="submit" variant="primary" disabled={!searchTerm} className="px-8 rounded-xl transition-all disabled:opacity-50 disabled:cursor-not-allowed">
-                  <IoMdSearch />
-                </Button>
-              }
-            </form>
-          </div>
-        </PopoverAnchor>
-      )}
-
-      { variant === "navbar" && (
-        <div className={cn("flex gap-2 flex-col", className)}>
+        { variant === "homepage" && (
           <PopoverAnchor asChild>
-            <form id={formId} onSubmit={handleFormSubmit}>
-              <div className="relative">
-                <input
-                  type="text"
-                  className="text-card-foreground flex h-9 w-full rounded-sm border border-input px-3 py-1 text-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-hidden focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50 bg-background"
-                  placeholder={placeholder}
-                  value={searchTerm}
-                  onChange={handleSearchChange}
-                  onClick={handleInputClick}
-                  autoComplete="off"
-                />
-                <button
-                  className="inline-flex items-center justify-center whitespace-nowrap text-sm font-medium transition-colors duration-300 ease-out motion-reduce:transition-none rounded-sm focus-visible:outline-hidden focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 hover:bg-secondary hover:text-accent-foreground h-9 w-9 absolute right-0 top-0 text-foreground rounded-l-none border-none"
-                  type="submit"
-                >
-                  <IoMdSearch className="w-4 h-4" />
-                </button>
-              </div>
-            </form>
+            <div className={cn("w-full max-w-xl relative group pointer-events-auto", className)}>
+              <div className="absolute -inset-1 bg-linear-to-r from-primary to-orange-600 blur-sm opacity-25 group-hover:opacity-75 transition duration-1000 group-hover:duration-200"></div>
+              <form onSubmit={handleFormSubmit} className="relative flex bg-card p-2 rounded-xl shadow-2xl shadow-[0_0_140px_#ff6f00b3]">
+                <div className="relative flex-1">
+                  <input
+                    type="text"
+                    placeholder={placeholder}
+                    value={searchTerm}
+                    onChange={handleSearchChange}
+                    onClick={handleInputClick}
+                    className="w-full h-10 pl-4 pr-4 bg-transparent border-none outline-hidden text-xl font-minecraft placeholder:text-card-foreground focus:ring-0"
+                  />
+                </div>
+                {fetching === true ?
+                  <LoadingSpinner />
+                  :
+                  <Button type="submit" variant="primary" disabled={!searchTerm} className="px-8 rounded-xl transition-all disabled:opacity-50 disabled:cursor-not-allowed">
+                    <IoMdSearch />
+                  </Button>
+                }
+              </form>
+            </div>
           </PopoverAnchor>
+        )}
 
-          <Button
-            variant="primary"
-            className="items-center justify-center whitespace-nowrap h-9 px-4 py-2 flex flex-row gap-2"
-            onClick={() => onClick(playerInfo?.username ?? "")}
-          >
-            <span>{submitLabel}</span>
-          </Button>
-        </div>
-      )}
+        { variant === "navbar" && (
+          <div className={cn("flex gap-2 flex-col", className)}>
+            <PopoverAnchor asChild>
+              <form id={formId} onSubmit={handleFormSubmit}>
+                <div className="relative">
+                  <input
+                    type="text"
+                    className="text-card-foreground flex h-9 w-full rounded-sm border border-input px-3 py-1 text-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-hidden focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50 bg-background"
+                    placeholder={placeholder}
+                    value={searchTerm}
+                    onChange={handleSearchChange}
+                    onClick={handleInputClick}
+                    autoComplete="off"
+                  />
+                  <button
+                    className="inline-flex items-center justify-center whitespace-nowrap text-sm font-medium transition-colors duration-300 ease-out motion-reduce:transition-none rounded-sm focus-visible:outline-hidden focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 hover:bg-secondary hover:text-accent-foreground h-9 w-9 absolute right-0 top-0 text-foreground rounded-l-none border-none"
+                    type="submit"
+                  >
+                    <IoMdSearch className="w-4 h-4" />
+                  </button>
+                </div>
+              </form>
+            </PopoverAnchor>
 
-      { variant === "clicker" && (
-        <div className={cn("flex gap-2 flex-col", className)}>
-          <PopoverAnchor asChild>
             <Button
-              variant="secondary"
+              variant="primary"
               className="items-center justify-center whitespace-nowrap h-9 px-4 py-2 flex flex-row gap-2"
               onClick={() => onClick(playerInfo?.username ?? "")}
             >
               <span>{submitLabel}</span>
             </Button>
-          </PopoverAnchor>
-        </div>
-      )}
-
-      { variant === "default" && (
-        <PopoverAnchor asChild>
-          <div className={cn("relative w-full", className)}>
-            <input
-              type="text"
-              value={searchTerm}
-              onChange={handleSearchChange}
-              onClick={handleInputClick}
-              placeholder={placeholder}
-              onKeyDown={(e) => e.key === "Enter" && handleFormSubmit(e)}
-              className="w-full bg-secondary border border-gray-600 rounded-lg py-2 pl-3 pr-10 placeholder-gray-500 focus:outline-hidden focus:border-primary"
-            />
-            <Button
-              onClick={() => handleSelectPlayer(searchTerm)}
-              className="absolute right-2 top-1/2 -translate-y-1/2 p-1 border-none h-auto bg-transparent hover:bg-transparent text-foreground"
-              variant="ghost"
-            >
-              <IoMdSearch className="w-5 h-5" />
-            </Button>
           </div>
-        </PopoverAnchor>
-      )}
+        )}
 
-      {renderPopoverResults()}
-    </Popover>
+        { variant === "clicker" && (
+          <div className={cn("flex gap-2 flex-col", className)}>
+            <PopoverAnchor asChild>
+              <Button
+                variant="secondary"
+                className="items-center justify-center whitespace-nowrap h-9 px-4 py-2 flex flex-row gap-2"
+                onClick={() => onClick(playerInfo?.username ?? "")}
+              >
+                <span>{submitLabel}</span>
+              </Button>
+            </PopoverAnchor>
+          </div>
+        )}
+
+        { variant === "default" && (
+          <PopoverAnchor asChild>
+            <div className={cn("relative w-full", className)}>
+              <input
+                type="text"
+                value={searchTerm}
+                onChange={handleSearchChange}
+                onClick={handleInputClick}
+                placeholder={placeholder}
+                onKeyDown={(e) => e.key === "Enter" && handleFormSubmit(e)}
+                className="w-full bg-secondary border border-gray-600 rounded-lg py-2 pl-3 pr-10 placeholder-gray-500 focus:outline-hidden focus:border-primary"
+              />
+              <Button
+                onClick={() => handleSelectPlayer(searchTerm)}
+                className="absolute right-2 top-1/2 -translate-y-1/2 p-1 border-none h-auto bg-transparent hover:bg-transparent text-foreground"
+                variant="ghost"
+              >
+                <IoMdSearch className="w-5 h-5" />
+              </Button>
+            </div>
+          </PopoverAnchor>
+        )}
+
+        {renderPopoverResults()}
+      </Popover>
+
+      <Dialog open={isDefaultProfileDialogOpen} onOpenChange={setIsDefaultProfileDialogOpen}>
+        <DialogContent className="max-w-md">
+          <DialogHeader>
+            <DialogTitle className="text-primary">Profil vide activé</DialogTitle>
+          </DialogHeader>
+          <p className="text-sm text-foreground">
+            Vous avez activé l&apos;option <span className="font-semibold">«&nbsp;profil vide&nbsp;»</span> dans les paramètres. Voulez-vous quand même charger ce profil ?
+          </p>
+          <div className="flex flex-row gap-2 justify-end pt-2">
+            <Button onClick={handleConfirmLoadProfile} className="bg-green-500 p-1.5">Charger quand même</Button>
+            <Button onClick={handleCancelLoadProfile} className="bg-red-500 p-1.5">Annuler</Button>
+          </div>
+        </DialogContent>
+      </Dialog>
+    </>
   );
 };
