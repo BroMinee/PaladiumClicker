@@ -38,7 +38,7 @@ function configTypeToOverlayTwitchEnum(type: keyof AvailableElements | "autoProm
  * @param preview - boolean if it's in the preview page.
  * @param selectedElements - The configuration made by the user.
  */
-export function TwitchOverlay({ preview, selectedElements}: { preview?: boolean, selectedElements: SelectedElementConfig[] }) {
+export function TwitchOverlay({ preview, selectedElements, creatorCode}: { preview?: boolean, selectedElements: SelectedElementConfig[], creatorCode?: string }) {
   const { data: playerInfo, setPlayerInfo } = usePlayerInfoStore();
   const { setRanking , setLeaderboardFaction } = usePlayerExtraInfoTwitch();
   const { nbSeconds, setNbSeconds, increaseNbSeconds } = useTwitchTimeStore();
@@ -197,7 +197,7 @@ export function TwitchOverlay({ preview, selectedElements}: { preview?: boolean,
         }
       `}
       </style>
-      <div className="w-[900px] h-[250px] bg-background p-4 rounded-xl border border-purple-500/30 shadow-2xl overflow-hidden">
+      <div className="w-[900px] h-[250px] bg-background p-4 rounded-xl border border-purple-500/30 shadow-2xl overflow-hidden relative">
         <div className={`relative z-10 transition-opacity duration-500 h-full flex flex-col justify-center ${isVisible ? "opacity-100" : "opacity-0"}`}>
           {currentConfig && configTypeToOverlayTwitchEnum(currentConfig.type) === OverlayTwitchEnum.Money && <MoneyOverlay/>}
           {currentConfig && configTypeToOverlayTwitchEnum(currentConfig.type) === OverlayTwitchEnum.Jobs && <JobsOverlay/>}
@@ -206,6 +206,11 @@ export function TwitchOverlay({ preview, selectedElements}: { preview?: boolean,
           {currentConfig && configTypeToOverlayTwitchEnum(currentConfig.type) === OverlayTwitchEnum.QDF && <QDFOverlay/>}
           {currentConfig && configTypeToOverlayTwitchEnum(currentConfig.type) === OverlayTwitchEnum.AutoPromo && <AutoPromoOverlay/>}
         </div>
+        {creatorCode && (
+          <div className="absolute top-2 right-3 z-20 text-4xl font-bold text-purple-300 tracking-wide" style={{ textShadow: "0 0 4px #000, 1px 1px 6px #000, -1px -1px 6px #000" }}>
+            Code créateur : <span className="text-primary">{creatorCode}</span>
+          </div>
+        )}
       </div>
     </>
   );

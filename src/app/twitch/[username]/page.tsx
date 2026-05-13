@@ -9,9 +9,10 @@ import { redirect } from "next/navigation";
  * @param props.params - Username
  * @param props.searchParams - SearchParams
  */
-export default async function TwitchLayoutHome(props: { params: Promise<{ username: string }>, searchParams: Promise<{ config: string }> }) {
+export default async function TwitchLayoutHome(props: { params: Promise<{ username: string }>, searchParams: Promise<{ config: string, creator?: string }> }) {
 
-  const parsedElements = await props.searchParams.then(p => p.config.split(",").map(item => {
+  const searchParams = await props.searchParams;
+  const parsedElements = searchParams.config.split(",").map(item => {
     const parts = item.split(":");
     if (parts.length === 3 && !isNaN(Number(parts[2]))) {
       // type:subOption:duration
@@ -31,11 +32,12 @@ export default async function TwitchLayoutHome(props: { params: Promise<{ userna
       };
     }
 
-    redirect(`/error?message=${encodeURIComponent("Configuration invalide")}&detail=${encodeURIComponent(JSON.stringify(p))}`);
-  }));
+    redirect(`/error?message=${encodeURIComponent("Configuration invalide")}&detail=${encodeURIComponent(JSON.stringify(searchParams))}`);
+  });
 
+  const creatorCode = searchParams.creator ?? "";
   const username = await props.params.then(p => p.username);
   return <ProfileFetcherWrapper username={username}>
-    <TwitchOverlay selectedElements={parsedElements}/>
+    <TwitchOverlay selectedElements={parsedElements} creatorCode={creatorCode}/>
   </ProfileFetcherWrapper>;
 };

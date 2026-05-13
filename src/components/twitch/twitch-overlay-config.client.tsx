@@ -167,6 +167,7 @@ export const TwitchOverlayConfig = ({ username}: { username: string }) => {
   const [selectedElements, setSelectedElements] = useState<SelectedElement[]>([
     { id: "metiers", type: "metiers", duration: 2 * 60, subOption: null }
   ]);
+  const [creatorCode, setCreatorCode] = useState("");
   const [previewUrl, setPreviewUrl] = useState("");
 
   const addElement = (elementType: keyof AvailableElements) => {
@@ -221,10 +222,13 @@ export const TwitchOverlayConfig = ({ username}: { username: string }) => {
       return `${el.type}:${el.duration}`;
     }).join(",");
 
-    const url = `${API_PALATRACKER}/twitch/${username}?config=${encodeURIComponent(config)}`;
+    let url = `${API_PALATRACKER}/twitch/${username}?config=${encodeURIComponent(config)}`;
+    if (creatorCode.trim()) {
+      url += `&creator=${encodeURIComponent(creatorCode.trim())}`;
+    }
     setPreviewUrl(url);
   },
-  [selectedElements, playerInfo, setPreviewUrl]);
+  [selectedElements, playerInfo, setPreviewUrl, creatorCode]);
 
   const getTotalCycleTime = () => {
     return selectedElements.reduce((sum, el) => sum + el.duration, 0);
@@ -389,10 +393,22 @@ export const TwitchOverlayConfig = ({ username}: { username: string }) => {
             )}
           </div>
 
+          <div className="bg-card rounded-xl p-6 border border-secondary-foreground">
+            <h3 className="text-xl font-bold text-primary mb-2">Code créateur</h3>
+            <p className="text-sm mb-4">Ton code créateur sera affiché en permanence dans l&apos;overlay.</p>
+            <input
+              type="text"
+              placeholder="Ton code créateur (ex: BroMine)"
+              value={creatorCode}
+              onChange={(e) => setCreatorCode(e.target.value)}
+              className="w-full px-4 py-2 border border-secondary-foreground rounded-lg font-medium focus:outline-none focus:border-primary"
+            />
+          </div>
+
           <div className="bg-card border-l-4 border-primary rounded-lg p-6 mb-8">
             <h3 className="text-xl font-bold text-primary mb-4">Prévisualisation</h3>
             <p className="mb-3">La prévisualisation est 10 fois plus rapide que l&apos;overlay normal.</p>
-            <TwitchOverlay preview selectedElements={selectedElements}/>
+            <TwitchOverlay preview selectedElements={selectedElements} creatorCode={creatorCode}/>
           </div>
         </div>
 
