@@ -44,6 +44,7 @@ export function XPCalculator({ defaultPlatform }: { defaultPlatform?: PlatformVe
   const [metierInput, setMetier] = useState<MetierKey>("miner");
   const [endLevelInput, setEndLevel] = useState(minStartLevel + 1);
   const [dailyBonus, setDailyBonus] = useState(0);
+  const trixiumRushBonus = 3;
   const [fortuneBonusInput, setFortuneBonus] = useState(0);
   const [activePotionBonusInput, setActivePotionBonus] = useState(0);
 
@@ -79,8 +80,11 @@ export function XPCalculator({ defaultPlatform }: { defaultPlatform?: PlatformVe
     totalAdditiveBonus += gradeBonus;
     totalAdditiveBonus += dailyBonusDecimal;
     totalAdditiveBonus += activePotionBonus;
+    if (platform === "java") {
+      totalAdditiveBonus += trixiumRushBonus;
+    }
     return totalAdditiveBonus;
-  }, [activePotionBonus, gradeBonus, dailyBonusDecimal]);
+  }, [activePotionBonus, gradeBonus, dailyBonusDecimal, platform]);
 
   const requiredXp = useMemo(
     () => JobXp.calculateXpNeeded(endLevel, xpCalcMetier.xp, platform),
@@ -208,6 +212,7 @@ export function XPCalculator({ defaultPlatform }: { defaultPlatform?: PlatformVe
 
               <div className="border-t border-secondary pt-4 mt-4">
                 <h3 className="text-lg font-semibold text-primary mb-2">Détail des Multiplicateurs</h3>
+                {platform === "java" && <BonusStats label="Bonus du Trixium Rush" value={`${trixiumRushBonus * 100}%`} classNameValue="bg-gradient-to-r from-violet-400 via-cyan-300 to-violet-400 bg-[length:200%_auto] animate-pan-gradient bg-clip-text text-transparent font-semibold" classNameLabel="bg-gradient-to-r from-violet-400 via-cyan-300 to-violet-400 bg-[length:200%_auto] animate-pan-gradient bg-clip-text text-transparent font-semibold"/>}
                 <BonusStats label="Bonus Grade" value={`${gradeBonus * 100}%`} classNameValue="text-card-foreground" />
                 <BonusStats
                   label="Bonus des quêtes quotidiennes"
