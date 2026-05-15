@@ -13,18 +13,19 @@ interface FarmActionItemProps {
   fortuneBonus: number;
   dailyBonusDecimal: number;
   platform: PlatformVersion;
+  trixiumRushBonus: number;
 }
 
 /**
  * Display the number of item, the usage method, the number of XP it gives and the number of item to farm
  */
-export const FarmActionItem = ({ item, metier, finalRequiredXp, gradeBonus, totalBonusMultiplier, fortuneBonus, dailyBonusDecimal, platform }: FarmActionItemProps) => {
+export const FarmActionItem = ({ item, metier, finalRequiredXp, gradeBonus, totalBonusMultiplier, fortuneBonus, dailyBonusDecimal, platform, trixiumRushBonus }: FarmActionItemProps) => {
   const formatter = new Intl.NumberFormat("fr-FR", { maximumFractionDigits: 3 });
 
   let effectiveMultiplier: number;
 
   if (item.ignorePotionBonus) {
-    effectiveMultiplier = 1 + gradeBonus + dailyBonusDecimal;
+    effectiveMultiplier = 1 + gradeBonus + dailyBonusDecimal + (platform === "java" ? trixiumRushBonus : 0);
   } else {
     effectiveMultiplier = totalBonusMultiplier;
   }

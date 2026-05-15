@@ -283,6 +283,7 @@ export function XPCalculator({ defaultPlatform }: { defaultPlatform?: PlatformVe
                 fortuneBonus={fortuneBonus}
                 dailyBonusDecimal={dailyBonusDecimal}
                 platform={platform}
+                trixiumRushBonus={trixiumRushBonus}
               />
             ))}
             {sortedActions.length === 0 && (
