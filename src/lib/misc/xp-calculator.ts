@@ -157,7 +157,7 @@ export function getBonusRank(playerRank: PlayerRank | undefined) {
   case "rusher":
     return 0.15;
   case "premium": // premium add 5% (don't know how it's represented in the API) always place the condition at the end
-    return 0.5;
+    return 0.05;
   default:
     return 0;
   }
