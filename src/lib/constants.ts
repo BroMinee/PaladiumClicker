@@ -308,7 +308,7 @@ const how_to_xp: HowToXp = {
     { type: "Redstone Ore", "action": BREAK, java: { xp: 15 }, bedrock: { xp: 6 }, imgPath: "redstone_ore.webp" },
     { type: "Emerald Ore", "action": BREAK, java: { xp: 75 }, bedrock: { xp: 30 }, imgPath: "emerald_ore.webp" },
     { type: "Amethyst Ore", "action": BREAK, bedrock: { xp: 18, level: 5 }, imgPath: "amethyst_ore.webp" },
-    { type: "Deepslate Emerald Ore", "action": BREAK, java: { xp: 75 }, bedrock: { xp: 45, level: 10 }, imgPath: "deepslate_emerald_ore.webp" },
+    { type: "Deepslate Emerald Ore", "action": BREAK, bedrock: { xp: 45, level: 10 }, imgPath: "deepslate_emerald_ore.webp" },
     { type: "Iron Ingot", "action": SMELT, java: { xp: 8, level: 2 }, bedrock: { xp: 2, level: 2 }, imgPath: "iron_ingot.webp" },
     { type: "Diamond Ore", "action": BREAK, java: { xp: 25, level: 2 }, bedrock: { xp: 20, level: 2 }, imgPath: "diamond_ore.webp" },
     { type: "Deepslate Diamond Ore", "action": BREAK, bedrock: { xp: 30, level: 10 }, imgPath: "deepslate_diamond_ore.webp" },
