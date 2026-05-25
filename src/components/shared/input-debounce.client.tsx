@@ -49,9 +49,14 @@ export const InputDebounce = ({
   const roundToStep = (num: number) => Math.round(num / fixedStep) * fixedStep;
 
   const runnerRef = useRef((valStr: string) => {
-    const parsedVal = parseFloat(valStr);
+    const trimmed = valStr.trim();
+    if (!/^-?\d+(\.\d+)?$/.test(trimmed)) {
+      setError("Valeur invalide");
+      return;
+    }
+    const parsedVal = parseFloat(trimmed);
 
-    if (isNaN(parsedVal) || valStr.trim() === "") {
+    if (isNaN(parsedVal)) {
       setError("Valeur invalide");
       return;
     }
@@ -87,9 +92,14 @@ export const InputDebounce = ({
 
   useEffect(() => {
     runnerRef.current = (valStr: string) => {
-      const parsedVal = parseFloat(valStr);
+      const trimmed = valStr.trim();
+      if (trimmed === "" || !/^-?\d+(\.\d+)?$/.test(trimmed)) {
+        setError("Valeur invalide");
+        return;
+      }
+      const parsedVal = parseFloat(trimmed);
 
-      if (isNaN(parsedVal) || valStr.trim() === "") {
+      if (isNaN(parsedVal)) {
         setError("Valeur invalide");
         return;
       }
