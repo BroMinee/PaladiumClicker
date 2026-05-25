@@ -69,6 +69,19 @@ export const JobXp = {
   },
 
   /**
+   * Return the level from the xp amount (Bedrock, levels start at 0)
+   * @param xp the current xp
+   */
+  levelFromXpBedrock(xp: number): number {
+    for (let i = 1; i < cumulativeXpBedrock.length; i++) {
+      if (xp < cumulativeXpBedrock[i]) {
+        return i - 1;
+      }
+    }
+    return cumulativeXpBedrock.length - 1 + Math.floor((xp - cumulativeXpBedrock.at(-1)!) / constants.metier_xp_bedrock.at(-1)!);
+  },
+
+  /**
    * Calculates the experience coefficient for a given level and current XP.
    * Used for svg.
    *

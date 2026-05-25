@@ -10,6 +10,23 @@ import { cn } from "@/lib/utils";
 import { useXpCalcStore } from "@/stores/use-xp-calc-store";
 
 /**
+ * Pure stateless SVG fill path — no store access.
+ */
+export function MetierOutlineDisplay({ metierKey, coefXp }: { metierKey: MetierKey; coefXp: number }) {
+  const colors = getColorByMetierName(metierKey);
+  return (
+    <path
+      className="fill"
+      d="M723 314L543 625.77 183 625.77 3 314 183 2.23 543 2.23 723 314z"
+      style={{
+        strokeDashoffset: 2160 * (1 - coefXp),
+        stroke: `rgb(${colors.color[0]},${colors.color[1]},${colors.color[2]})`,
+      }}
+    />
+  );
+}
+
+/**
  * Display an svg outline representing the player current level progression.
  * @param metierKey - The job key used to to display corresponding data
  * @param metierToReach - boolean, if true then the SVG outline is fully filled
@@ -23,8 +40,6 @@ export function MetierOutline({ metierKey, metierToReach = false, metierData }: 
   const { data: playerInfo } = usePlayerInfoStore();
   const { platform } = useXpCalcStore();
 
-  const colors = getColorByMetierName(metierKey);
-
   let coefXp = 0;
   if (metierToReach) {
     coefXp = 1;
@@ -35,11 +50,26 @@ export function MetierOutline({ metierKey, metierToReach = false, metierData }: 
     coefXp = JobXp.xpCoef(metier.level, metier?.xp ?? 0, platform);
   }
 
-  return <path className="fill" d="M723 314L543 625.77 183 625.77 3 314 183 2.23 543 2.23 723 314z"
-    style={{
-      strokeDashoffset: 2160 * (1 - (coefXp)),
-      stroke: `rgb(${colors.color[0]},${colors.color[1]},${colors.color[2]})`,
-    }} />;
+  return <MetierOutlineDisplay metierKey={metierKey} coefXp={coefXp} />;
+}
+
+/**
+ * Pure stateless level badge — no store access.
+ */
+export function MetierLevelBadge({ metierKey, level, twitch = false }: { metierKey: MetierKey; level: number; twitch?: boolean }) {
+  const colors = getColorByMetierName(metierKey);
+  const bgStyle = {
+    backgroundColor: `rgb(${colors.color[0]},${colors.color[1]},${colors.color[2]})`,
+    boxShadow: twitch ? `0 0 15px 5px rgba(${colors.color[0]},${colors.color[1]},${colors.color[2]},0.75)` : undefined,
+  };
+  return (
+    <span
+      className={cn("text-center rounded-sm font-bold text-sm flex items-center justify-center -translate-y-5 z-3 h-4 w-4", twitch && "w-16 h-16 text-5xl rounded-xl -translate-y-16 z-3 text-black")}
+      style={bgStyle}
+    >
+      {level}
+    </span>
+  );
 }
 
 /**
@@ -121,14 +151,7 @@ export function MetierDisplayLvl({ metierKey, lvlToReach, searchParams, twitch =
   };
 
   if (overrideLevel !== undefined) {
-    return (
-      <span
-        className={cn("text-center rounded-sm font-bold text-sm flex items-center justify-center -translate-y-5 z-3 h-4 w-4", twitch && "w-16 h-16 text-5xl rounded-xl -translate-y-16 z-3 text-black")}
-        style={bgStyle}
-      >
-        {overrideLevel}
-      </span>
-    );
+    return <MetierLevelBadge metierKey={metierKey} level={overrideLevel} twitch={twitch} />;
   }
 
   return (

@@ -2,8 +2,9 @@ import { MetierKey } from "@/types";
 import { Card, CardContent } from "./ui/card";
 
 import "./MetierList.css";
-import { MetierDisplayLvl, MetierOutline } from "@/components/metier-list.client";
-import { safeJoinPaths } from "@/lib/misc";
+import { MetierDisplayLvl, MetierLevelBadge, MetierOutline, MetierOutlineDisplay } from "@/components/metier-list.client";
+import { JobXp, safeJoinPaths } from "@/lib/misc";
+import { PlatformVersion } from "@/lib/misc/xp-calculator";
 
 import metierJson from "@/assets/metier.json";
 import { constants } from "@/lib/constants";
@@ -91,6 +92,50 @@ export const MetierComponentWrapper = ({
       </div>
       <div className="flex items-center justify-center gap-2">
         <MetierDisplayLvl metierKey={metierKey} twitch={twitch} overrideLevel={metierData?.level} />
+      </div>
+    </>
+  );
+};
+
+/**
+ * Stateless version of MetierComponentWrapper — no store access.
+ * Accepts level, xp and platform as props instead of reading from stores.
+ */
+export const MetierComponentWrapperControlled = ({
+  metierKey,
+  level,
+  xp,
+  platform,
+  twitch = false,
+}: {
+  metierKey: MetierKey;
+  level: number;
+  xp: number;
+  platform: PlatformVersion;
+  twitch?: boolean;
+}) => {
+  const metierName = structuredClone(metierJson[metierKey].name as MetierKey);
+  const coefXp = JobXp.xpCoef(level, xp, platform);
+
+  return (
+    <>
+      <div className="relative">
+        <UnOptimizedImage
+          src={safeJoinPaths(constants.imgPathProfile, "/JobsIcon/", `${metierName}.webp`)}
+          alt="image"
+          width={256}
+          height={256}
+          style={{ position: "inherit", zIndex: 2 }}
+        />
+        <div className="progress-bar">
+          <svg className="progress blue noselect" x="0px" y="0px" viewBox="0 0 776 628">
+            <path className="track" d="M723 314L543 625.77 183 625.77 3 314 183 2.23 543 2.23 723 314z" />
+            <MetierOutlineDisplay metierKey={metierKey} coefXp={coefXp} />
+          </svg>
+        </div>
+      </div>
+      <div className="flex items-center justify-center gap-2">
+        <MetierLevelBadge metierKey={metierKey} level={level} twitch={twitch} />
       </div>
     </>
   );

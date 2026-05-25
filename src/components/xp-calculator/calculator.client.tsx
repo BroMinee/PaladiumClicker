@@ -1,7 +1,7 @@
 "use client";
 
 import { constants } from "@/lib/constants";
-import { getBonusRank, JobXp, prettyJobName, textFormatting } from "@/lib/misc";
+import { getBonusRank, getActionXp, JobXp, prettyJobName, textFormatting } from "@/lib/misc";
 import { useState, useMemo, useEffect, useLayoutEffect } from "react";
 import { usePlayerInfoStore } from "@/stores/use-player-info-store";
 import { useXpCalcStore } from "@/stores/use-xp-calc-store";
@@ -14,12 +14,14 @@ import { InputDebounce } from "@/components/shared/input-debounce.client";
 import { PotionSelector } from "./potion-xp.client";
 import { FortuneSelector } from "./fortune.client";
 import { FarmActionItem } from "./farm-action";
+import { MetierComponentWrapperControlled } from "@/components/metier-list";
 import { BonusStats } from "./bonus-stats";
 import { MetierSelector } from "./metier.selector.client";
 import { PageHeader, PageHeaderDescription, PageHeaderHeading } from "@/components/ui/page";
 import { cn } from "@/lib/utils";
 import { TogglePlatform } from "./toggle-plateform";
 import { CoinSlider } from "@/components/shared/coin-slider.client";
+import { Button } from "../ui/button-v2";
 
 const MAX_LEVEL = 9999;
 
@@ -47,6 +49,8 @@ export function XPCalculator({ defaultPlatform }: { defaultPlatform?: PlatformVe
   const [fortuneBonusInput, setFortuneBonus] = useState(0);
   const [isDoublePotionActive, setDoublePotionActive] = useState(false);
   const [isX10PotionActive, setX10PotionActive] = useState(false);
+  const [reverseMode, setReverseMode] = useState(false);
+  const [quantities, setQuantities] = useState<Partial<Record<MetierKey, Record<string, number>>>>({});
 
   const metier: MetierKey = platform === "bedrock" && metierInput === "alchemist" ? "miner" : metierInput;
 
@@ -102,7 +106,28 @@ export function XPCalculator({ defaultPlatform }: { defaultPlatform?: PlatformVe
     });
   }, [metier, platform]);
 
+  const totalGainedXp = useMemo(() => {
+    return sortedActions.reduce((sum, item) => {
+      const key = item.type + "_" + item.action;
+      const qty = (quantities[metier] ?? {})[key] ?? 0;
+      if (qty === 0) {
+        return sum;
+      }
+      const effectiveMult = item.ignorePotionBonus ? baseBonusMultiplier : totalBonusMultiplier;
+      const baseXp = getActionXp(item, platform);
+      const isFortunable = item.action === constants.SMELT && fortuneBonus !== 0;
+      const xpItem = isFortunable ? baseXp * (1 + fortuneBonus) : baseXp;
+      return sum + qty * xpItem * effectiveMult;
+    }, 0);
+  }, [quantities, metier, sortedActions, baseBonusMultiplier, totalBonusMultiplier, fortuneBonus, platform]);
+
+  const resultingXp = xpCalcMetier.xp + totalGainedXp;
+  const resultingLevel = platform === "java"
+    ? JobXp.levelFromXp(resultingXp)
+    : JobXp.levelFromXpBedrock(resultingXp);
+
   const formatter = new Intl.NumberFormat("fr-FR", { maximumFractionDigits: 0 });
+  const toggleBtnCls = "relative z-10 flex-1 flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg text-sm font-semibold transition-colors duration-200";
 
   // In Java mode, wait for the player profile to load
   if (platform === "java" && !playerInfo) {
@@ -255,7 +280,25 @@ export function XPCalculator({ defaultPlatform }: { defaultPlatform?: PlatformVe
             </div>
           </div>
           <div className="mt-6 border-t border-secondary pt-4">
-            <BonusStats label="XP Totale nécessaire" value={formatter.format(requiredXp) + " XP"} classNameValue="text-primary font-extrabold text-xl sm:text-3xl" />
+            {reverseMode ? (
+              <div className="space-y-3">
+                <BonusStats label="XP totale gagnée" value={formatter.format(Math.round(totalGainedXp)) + " XP"} classNameValue="text-green-400 font-bold text-lg" />
+                <div className="flex flex-col items-center gap-1 pt-1">
+                  <span className="text-sm text-card-foreground">Niveau atteint</span>
+                  <MetierComponentWrapperControlled
+                    metierKey={metier}
+                    level={resultingLevel}
+                    xp={resultingXp}
+                    platform={platform}
+                  />
+                  <span className="text-xs text-muted-foreground">
+                    {formatter.format(Math.round(resultingXp - JobXp.totalXp(resultingLevel, platform)))} / {formatter.format(JobXp.totalXp(resultingLevel + 1, platform) - JobXp.totalXp(resultingLevel, platform))} XP
+                  </span>
+                </div>
+              </div>
+            ) : (
+              <BonusStats label="XP Totale nécessaire" value={formatter.format(requiredXp) + " XP"} classNameValue="text-primary font-extrabold text-xl sm:text-3xl" />
+            )}
           </div>
         </Card>
 
@@ -264,14 +307,36 @@ export function XPCalculator({ defaultPlatform }: { defaultPlatform?: PlatformVe
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
 
         <Card className={cn("lg:col-span-2 h-fit order-2 lg:order-1", platform === "bedrock" && "lg:col-span-3")}>
-          <h2 className="text-xl font-semibold mb-4 border-b border-secondary pb-2">
-            Méthode d&apos;xp pour le métier de {prettyJobName(metier)}
-          </h2>
+          <div className="flex flex-col gap-4 mb-4 border-b border-secondary pb-4">
+            <h2 className="text-xl font-semibold">
+              Méthode d&apos;xp pour le métier de {prettyJobName(metier)}
+            </h2>
+            <div className="relative flex p-1 bg-secondary rounded-xl w-full">
+              <div
+                className={cn(
+                  "absolute top-1 bottom-1 w-[calc(50%-4px)] rounded-lg bg-background transition-all duration-300 ease-in-out",
+                  reverseMode ? "left-[calc(50%+0px)]" : "left-1"
+                )}
+              />
+              <Button
+                onClick={() => setReverseMode(false)}
+                className={cn(toggleBtnCls, reverseMode ? "hover:text-card-foreground" : "text-primary")}
+              >
+                {"Niveau à atteindre"}
+              </Button>
+              <Button
+                onClick={() => setReverseMode(true)}
+                className={cn(toggleBtnCls, reverseMode ? "text-primary" : "hover:text-card-foreground")}
+              >
+                {"Niveau d'après les ressources"}
+              </Button>
+            </div>
+          </div>
 
           <div className="hidden md:grid grid-cols-[3.5fr_2fr_2fr] gap-4 p-3 mb-2 font-bold text-card-foreground border-b border-secondary">
             <span>Action</span>
             <span>XP par unité</span>
-            <span>Unités à farm</span>
+            <span>{reverseMode ? "Quantité" : "Unités à farm"}</span>
           </div>
 
           <div className="space-y-3">
@@ -285,6 +350,9 @@ export function XPCalculator({ defaultPlatform }: { defaultPlatform?: PlatformVe
                 totalBonusMultiplier={totalBonusMultiplier}
                 fortuneBonus={fortuneBonus}
                 platform={platform}
+                reverseMode={reverseMode}
+                quantity={(quantities[metier] ?? {})[item.type + "_" + item.action] ?? 0}
+                onQuantityChange={(qty) => setQuantities((prev) => ({ ...prev, [metier]: { ...(prev[metier] ?? {}), [item.type + "_" + item.action]: qty } }))}
               />
             ))}
             {sortedActions.length === 0 && (
