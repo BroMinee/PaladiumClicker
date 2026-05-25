@@ -1,5 +1,21 @@
 [
   {
+    "date": "25/05/2026",
+    "changes": {
+      "additions": [
+        "Ajout du calculateur inverse dans le [calculateur d'xp](https://palatracker.bromine.fr/xp-calculator) : il est maintenant possible de renseigner les ressources que vous avez pour s'avoir le niveau que vous allez atteindre."
+      ],
+      "améliorations": [
+        "L'affichage \"XP par unité\" dans le [calculateur d'xp](https://palatracker.bromine.fr/xp-calculator) prend désormais en compte le bonus d'xp."
+      ],
+      "corrections": [
+        "Correction du bonus xp lié au grade premium dans le [calculateur d'xp](https://palatracker.bromine.fr/xp-calculator).",
+        "Correction du bonus de potion x10 dans le [calculateur d'xp](https://palatracker.bromine.fr/xp-calculator).",
+        "Mise à jour de l'xp nécessaire pour passer de niveau dans le [calculateur d'xp Bedrock](https://palatracker.bromine.fr/xp-calculator/bedrock)."
+      ]
+    }
+  },
+  {
     "date": "02/05/2026",
     "changes": {
       "améliorations": [
