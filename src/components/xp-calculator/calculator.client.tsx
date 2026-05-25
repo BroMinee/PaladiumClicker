@@ -45,7 +45,8 @@ export function XPCalculator({ defaultPlatform }: { defaultPlatform?: PlatformVe
   const [dailyBonus, setDailyBonus] = useState(0);
   const trixiumRushBonus = 3;
   const [fortuneBonusInput, setFortuneBonus] = useState(0);
-  const [activePotionBonusInput, setActivePotionBonus] = useState(0);
+  const [isDoublePotionActive, setDoublePotionActive] = useState(false);
+  const [isX10PotionActive, setX10PotionActive] = useState(false);
 
   const metier: MetierKey = platform === "bedrock" && metierInput === "alchemist" ? "miner" : metierInput;
 
@@ -62,7 +63,8 @@ export function XPCalculator({ defaultPlatform }: { defaultPlatform?: PlatformVe
 
   const endLevel = Math.min(Math.max(endLevelInput, startLevel + 1), MAX_LEVEL);
   const fortuneBonus = metierInput !== "miner" ? 0 : fortuneBonusInput;
-  const activePotionBonus = platform === "bedrock" ? 0 : activePotionBonusInput;
+  const doubleActive = platform === "bedrock" ? false : isDoublePotionActive;
+  const x10Active = platform === "bedrock" ? false : isX10PotionActive;
 
   // Java mode: keep the XP calc store in sync with the fetched player info
   useEffect(() => {
@@ -74,23 +76,23 @@ export function XPCalculator({ defaultPlatform }: { defaultPlatform?: PlatformVe
   const dailyBonusDecimal = dailyBonus / 100;
   const gradeBonus = useMemo(() => getBonusRank(playerInfo?.rank ?? "default"), [playerInfo]);
 
-  const totalBonusMultiplier = useMemo(() => {
-    let totalAdditiveBonus = 1;
-    totalAdditiveBonus += gradeBonus;
-    totalAdditiveBonus += dailyBonusDecimal;
-    totalAdditiveBonus += activePotionBonus;
+  const baseBonusMultiplier = useMemo(() => {
+    let total = 1 + gradeBonus + dailyBonusDecimal;
     if (platform === "java") {
-      totalAdditiveBonus += trixiumRushBonus;
+      total += trixiumRushBonus;
     }
-    return totalAdditiveBonus;
-  }, [activePotionBonus, gradeBonus, dailyBonusDecimal, platform]);
+    return total;
+  }, [gradeBonus, dailyBonusDecimal, platform]);
+
+  const totalBonusMultiplier = useMemo(() => {
+    const withDouble = doubleActive ? baseBonusMultiplier + constants.POTION_DOUBLE_BONUS : baseBonusMultiplier;
+    return x10Active ? withDouble * 10 : withDouble;
+  }, [doubleActive, x10Active, baseBonusMultiplier]);
 
   const requiredXp = useMemo(
     () => JobXp.calculateXpNeeded(endLevel, xpCalcMetier.xp, platform),
     [endLevel, xpCalcMetier.xp, platform]
   );
-
-  const finalRequiredXp = requiredXp / totalBonusMultiplier;
 
   const sortedActions = useMemo(() => {
     return constants.how_to_xp[metier].filter((action) => {
@@ -180,7 +182,7 @@ export function XPCalculator({ defaultPlatform }: { defaultPlatform?: PlatformVe
             label="Bonus des quêtes quotidiennes (%)"
             value={dailyBonus}
             onChange={setDailyBonus}
-            min={-100}
+            min={-1000}
             step={0.01}
             allowNegative={true}
             debounceTimeInMs={250}
@@ -188,8 +190,10 @@ export function XPCalculator({ defaultPlatform }: { defaultPlatform?: PlatformVe
 
           {platform === "java" && (
             <PotionSelector
-              activePotionBonus={activePotionBonus}
-              setActivePotionBonus={setActivePotionBonus}
+              doubleActive={doubleActive}
+              x10Active={x10Active}
+              setDoubleActive={setDoublePotionActive}
+              setX10Active={setX10PotionActive}
             />
           )}
 
@@ -207,7 +211,6 @@ export function XPCalculator({ defaultPlatform }: { defaultPlatform?: PlatformVe
             <h2 className="text-xl font-semibold mb-4 border-b border-secondary pb-2 text-primary">Objectif XP</h2>
             <div className="space-y-3">
               <BonusStats label="XP actuelle du niveau" value={formatter.format(xpCalcMetier.xp - JobXp.totalXp(startLevel, platform)) + " / " + formatter.format(JobXp.totalXp(startLevel + 1, platform) - JobXp.totalXp(startLevel, platform)) + " XP"} classNameValue="text-primary whitespace-nowrap" />
-              <BonusStats label="XP Totale nécessaire" value={formatter.format(requiredXp) + " XP"} classNameValue="text-primary" />
 
               <div className="border-t border-secondary pt-4 mt-4">
                 <h3 className="text-lg font-semibold text-primary mb-2">Détail des Multiplicateurs</h3>
@@ -222,13 +225,13 @@ export function XPCalculator({ defaultPlatform }: { defaultPlatform?: PlatformVe
                   <>
                     <BonusStats
                       label="Potion Double XP"
-                      value={activePotionBonus === constants.POTION_DOUBLE_BONUS ? "+100%" : "0%"}
-                      classNameValue={activePotionBonus === constants.POTION_DOUBLE_BONUS ? "text-green-400" : "text-gray-500"}
+                      value={doubleActive ? "+100%" : "0%"}
+                      classNameValue={doubleActive ? "text-green-400" : "text-gray-500"}
                     />
                     <BonusStats
                       label="Potion x10 XP"
-                      value={activePotionBonus === constants.POTION_X10_BONUS ? "+900%" : "0%"}
-                      classNameValue={activePotionBonus === constants.POTION_X10_BONUS ? "text-green-400" : "text-gray-500"}
+                      value={x10Active ? "x10" : "0%"}
+                      classNameValue={x10Active ? "text-green-400" : "text-gray-500"}
                     />
                   </>
                 )}
@@ -252,7 +255,7 @@ export function XPCalculator({ defaultPlatform }: { defaultPlatform?: PlatformVe
             </div>
           </div>
           <div className="mt-6 border-t border-secondary pt-4">
-            <BonusStats label="XP nécessaire après bonus" value={formatter.format(finalRequiredXp) + " XP"} classNameValue="text-primary font-extrabold text-xl sm:text-3xl" />
+            <BonusStats label="XP Totale nécessaire" value={formatter.format(requiredXp) + " XP"} classNameValue="text-primary font-extrabold text-xl sm:text-3xl" />
           </div>
         </Card>
 
@@ -277,13 +280,11 @@ export function XPCalculator({ defaultPlatform }: { defaultPlatform?: PlatformVe
                 key={item.type + item.action + item[platform]?.xp + index}
                 metier={metier}
                 item={item}
-                gradeBonus={gradeBonus}
+                baseBonusMultiplier={baseBonusMultiplier}
                 finalRequiredXp={requiredXp}
                 totalBonusMultiplier={totalBonusMultiplier}
                 fortuneBonus={fortuneBonus}
-                dailyBonusDecimal={dailyBonusDecimal}
                 platform={platform}
-                trixiumRushBonus={trixiumRushBonus}
               />
             ))}
             {sortedActions.length === 0 && (

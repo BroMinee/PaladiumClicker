@@ -7,28 +7,20 @@ import { PlatformVersion } from "@/lib/misc/xp-calculator";
 interface FarmActionItemProps {
   item: HowToXpElement;
   metier: MetierKey;
-  gradeBonus: number;
+  baseBonusMultiplier: number;
   finalRequiredXp: number;
   totalBonusMultiplier: number;
   fortuneBonus: number;
-  dailyBonusDecimal: number;
   platform: PlatformVersion;
-  trixiumRushBonus: number;
 }
 
 /**
  * Display the number of item, the usage method, the number of XP it gives and the number of item to farm
  */
-export const FarmActionItem = ({ item, metier, finalRequiredXp, gradeBonus, totalBonusMultiplier, fortuneBonus, dailyBonusDecimal, platform, trixiumRushBonus }: FarmActionItemProps) => {
+export const FarmActionItem = ({ item, metier, finalRequiredXp, baseBonusMultiplier, totalBonusMultiplier, fortuneBonus, platform }: FarmActionItemProps) => {
   const formatter = new Intl.NumberFormat("fr-FR", { maximumFractionDigits: 3 });
 
-  let effectiveMultiplier: number;
-
-  if (item.ignorePotionBonus) {
-    effectiveMultiplier = 1 + gradeBonus + dailyBonusDecimal + (platform === "java" ? trixiumRushBonus : 0);
-  } else {
-    effectiveMultiplier = totalBonusMultiplier;
-  }
+  const effectiveMultiplier = item.ignorePotionBonus ? baseBonusMultiplier : totalBonusMultiplier;
 
   const baseXp = getActionXp(item, platform);
   const isFortunable = item.action === constants.SMELT && fortuneBonus !== 0;
@@ -38,7 +30,7 @@ export const FarmActionItem = ({ item, metier, finalRequiredXp, gradeBonus, tota
   const imagePath = safeJoinPaths("AH_img", item.imgPath);
 
   const displayXpItem = isFinite(xpItem)
-    ? formatter.format(xpItem)
+    ? formatter.format(xpItem * effectiveMultiplier)
     : "Variable";
 
   const displayUnits = isFinite(xpItem)
