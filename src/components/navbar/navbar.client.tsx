@@ -38,7 +38,7 @@ export default function LinkClient({ path, children }: {
   const { last_visited, setLastVisited } = useNotificationStore();
 
   const label = constants.links[path].label;
-  const requiredPseudo = constants.links[path].requiredPseudo;
+  const requiredPseudo = false; // constants.links[path].requiredPseudo;
 
   const [mounted, setMounted] = useState(false);
   const [isActive, setIsActive] = useState(false);

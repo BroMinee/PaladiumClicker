@@ -11,7 +11,7 @@ import { IoMdInformationCircleOutline, IoMdStopwatch } from "react-icons/io";
 import { GradientText } from "@/components/shared/gradient-text";
 import { NavBarProfilInfo } from "@/components/navbar/navbar-profil-info.client";
 import { Hammer, LetterText, MousePointer2, ScanSearch } from "lucide-react";
-import { SearchPlayerInput } from "@/components/home/search-player.client";
+// import { SearchPlayerInput } from "@/components/home/search-player.client";
 
 /**
  * Renders the application's vertical navbar, supporting both desktop and mobile layouts.
@@ -40,8 +40,8 @@ function NavBarContent() {
       <nav className="grow flex flex-col min-h-0">
         {/*<MobileNav/>*/}
         <LogoClient/>
-        <div className="flex justify-center w-full border-gray-600 border-b space-y-3 pb-5 ">
-          <SearchPlayerInput variant="navbar"/>
+        <div className="flex justify-center w-full border-gray-600 border-b space-y-3 pb-3 ">
+          {/* <SearchPlayerInput variant="navbar"/> */}
           {/* <ImportProfil showResetButton navBar/> */}
         </div>
         <div className="relative grow min-h-0 flex flex-col">

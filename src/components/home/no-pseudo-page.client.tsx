@@ -7,7 +7,7 @@ import useEmblaCarousel from "embla-carousel-react";
 import AutoScroll from "embla-carousel-auto-scroll";
 import { FaCalculator, FaDiscord, FaGithub } from "react-icons/fa";
 import { constants, PathValid } from "@/lib/constants";
-import { SearchPlayerInput } from "@/components/home/search-player.client";
+// import { SearchPlayerInput } from "@/components/home/search-player.client";
 import { textFormatting } from "@/lib/misc";
 import { Card } from "@/components/ui/card";
 import { UnOptimizedImage } from "@/components/ui/image-loading";
@@ -79,7 +79,7 @@ export function NoPseudoPageWithContributeur({ contributors, texth1, texth2, inp
         </h2>
         {(() => {
           const InputWrapper = inputWrapper;
-          return <InputWrapper><SearchPlayerInput variant="homepage" /></InputWrapper>;
+          return <InputWrapper> </InputWrapper>;
         })()}
       </div>
 
