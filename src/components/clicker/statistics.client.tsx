@@ -13,7 +13,7 @@ import { ShoppingCart, Calculator } from "lucide-react";
 import { GroupedSpanContainer } from "@/components/shared/group-span-container";
 import { Card } from "@/components/ui/card";
 import { ChevronDown, ChevronUp } from "lucide-react";
-import { SearchPlayerInput } from "@/components/home/search-player.client";
+// import { SearchPlayerInput } from "@/components/home/search-player.client";
 import { UnOptimizedImage } from "../ui/image-loading";
 
 const BATCH_PURCHASE_COUNT = 24;
@@ -134,7 +134,7 @@ export function StatButton() {
   const handleBuyButton = () => buyBuilding(playerInfo, setPlayerInfo, buildingBuyPaths.length === 0 ? [] : [buildingBuyPaths[0]]);
 
   return (<>
-    <SearchPlayerInput variant={"clicker"} />
+    {/* <SearchPlayerInput variant={"clicker"} /> */}
     <Button variant='primary' className="flex-1 font-semibold py-2 px-4 rounded transition-colors" onClick={handleBuyButton}>
       Simuler l&apos;achat
     </Button>

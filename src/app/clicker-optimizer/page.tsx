@@ -1,22 +1,43 @@
-import { NoPseudoPage } from "@/components/home/no-pseudo-page.server";
+import { ClickerPage } from "@/components/clicker/clicker-page";
+import { ProfileFetcherWrapper } from "@/components/profile-fetcher.client";
+import { PageHeader, PageHeaderDescription, PageHeaderHeading } from "@/components/ui/page";
+import { textFormatting } from "@/lib/misc";
 
 /**
- * Gemerate Metadata
+ * Generate Metadata
+ * @param props.params - Username parameter
  */
-export function generateMetadata() {
+export async function generateMetadata(props: { params: Promise<{ username: string }> }) {
+  const params = await props.params;
   return {
-    title: "PalaTracker | Clicker Optimizer",
-    description: "🚀 Tu cherches à optimiser le PalaClicker ? C'est ici que ça se passe ! 📈 Calcule le meilleur achat en fonction de tes métiers et ton avancement sur Paladium.",
+    title: `PalaTracker | Clicker Optimizer | ${params.username}`,
+    description: "🚀 Tu cherches à optimiser le PalaClicker ? C'est ici que ça se passe !! 📈 Ce site calcule le meilleur achat en fonction de tes métiers, tes améliorations et tes bâtiments.",
     openGraph: {
-      title: "PalaTracker | Clicker Optimizer",
-      description: "🚀 Tu cherches à optimiser le PalaClicker ? C'est ici que ça se passe ! 📈 Calcule le meilleur achat en fonction de tes métiers et ton avancement sur Paladium."
+      title: `PalaTracker | Clicker Optimizer | ${params.username}`,
+      description: "🚀 Tu cherches à optimiser le PalaClicker ? C'est ici que ça se passe !! 📈 Ce site calcule le meilleur achat en fonction de tes métiers, tes améliorations et tes bâtiments."
     },
   };
 }
 
 /**
- * [Clicker page](https://palatracker.bromine.fr/clicker-optimizer)
+ * [Clicker Page](https://palatracker.bromine.fr/clicker-optimizer/BroMine__)
+ * @param props.params - Username parameter
  */
-export default function HomeProfilWithoutUsername() {
-  return <NoPseudoPage  texth1="Optimise ton °PalaClicker° pour gagner un maximum de °ClicCoins° et battre tes amis" texth2="Commence par saisir ton pseudo °Minecraft°"/>;
+export default async function ClickerOptimizerPage(props: { params: Promise<{ username: string }> }) {
+  const params = await props.params;
+  return (
+    <>
+      <PageHeader>
+        <PageHeaderHeading>
+          {textFormatting("Optimiseur du °Clicker°")}
+        </PageHeaderHeading>
+        <PageHeaderDescription>
+          {"Optimisez vos achats dans le PalaClicker en fonction de vos métiers, améliorations et bâtiments."}
+        </PageHeaderDescription>
+      </PageHeader>
+      <ProfileFetcherWrapper username={params.username}>
+        <ClickerPage/>
+      </ProfileFetcherWrapper>
+    </>
+  );
 }
