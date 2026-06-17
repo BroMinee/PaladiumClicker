@@ -1,35 +1,11 @@
-import { create } from "zustand";
-import { createJSONStorage, persist } from "zustand/middleware";
-
-type State = {
+const store = {
   settings: {
-    defaultProfile: boolean
-  }
-}
-
-type Actions = {
-  setDefaultProfile: (value: boolean) => void
-}
-
-const storageKey = "settings";
-
-const initialState: State = {
-  settings: {
-    defaultProfile: false
-  }
+    defaultProfile: true
+  },
+  setDefaultProfile: (_value: boolean) => {},
 };
 
-export const useSettingsStore = create<State & Actions, [["zustand/persist", State & Actions]]>(persist<State & Actions>(
-  (set) => ({
-    ...initialState,
-    settings: { ...initialState.settings },
-    setDefaultProfile: (value) => set((state) => {
-      state.settings.defaultProfile = value;
-      return { ...state };
-    }),
-  }),
-  {
-    name: storageKey,
-    storage: createJSONStorage(() => localStorage)
-  },
-));
+/**
+ * Dummy setting store that replace the use-settings-store.deprecated.ts
+ */
+export const useSettingsStore = () =>  store;
