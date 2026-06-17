@@ -21,7 +21,7 @@ export function generateMetadata(): { title: string; description: string; openGr
  */
 export default function HomePage() {
   return (
-    <NoPseudoPage texth1="Améliore ton °clicker°, consulte les °statistiques° et booste ta °progression° sur Paladium." texth2="Commence par saisir ton pseudo °Minecraft°" />
+    <NoPseudoPage texth1="Améliore ton °clicker°, optimise tes °métiers° et booste ta °progression° sur Paladium." texth2="Commence par choisir selectionner l'°outil° que tu veux" />
   );
 }
 
