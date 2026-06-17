@@ -3,7 +3,6 @@
 import { useXpCalcStore } from "@/stores/use-xp-calc-store";
 import { useRouter } from "next/navigation";
 import { PlatformVersion } from "@/lib/misc";
-import { usePlayerInfoStore } from "@/stores/use-player-info-store";
 import bedrockLogoSvg from "@/assets/bedrock_logo.svg";
 import javaLogoSvg from "@/assets/java_logo.svg";
 import Image from "next/image";
@@ -25,7 +24,6 @@ interface TogglePlatformProps {
 export function TogglePlatform({ size = 256 }: TogglePlatformProps) {
   const { platform, setPlatform } = useXpCalcStore();
   const router = useRouter();
-  const { data: playerInfo } = usePlayerInfoStore();
   const buttonStyle = { width: size, height: size };
 
   function handleSelectPlatform(selected: PlatformVersion) {
@@ -34,8 +32,8 @@ export function TogglePlatform({ size = 256 }: TogglePlatformProps) {
       router.push("/xp-calculator/bedrock");
       return;
     }
-    if (selected === "java" && playerInfo?.username !== undefined) {
-      router.push(`/xp-calculator/${playerInfo.username}`);
+    if (selected === "java") {
+      router.push("/xp-calculator/java");
       return;
     } else {
       router.push("/xp-calculator");

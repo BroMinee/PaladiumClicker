@@ -32,6 +32,7 @@ const EXPECTED_STATIC: string[] = [
   // "/webhook/edit",
   // "/webhook/login",
   "/xp-calculator",
+  "/xp-calculator/java",
   "/xp-calculator/bedrock",
 ];
 

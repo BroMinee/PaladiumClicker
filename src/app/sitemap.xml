@@ -40,7 +40,17 @@
     </url>
     <url>
         <loc>https://palatracker.bromine.fr/xp-calculator</loc>
-        <lastmod>2025-02-24T16:01:52+00:00</lastmod>
+        <lastmod>2026-06-17T16:01:52+00:00</lastmod>
+        <priority>0.80</priority>
+    </url>
+    <url>
+        <loc>https://palatracker.bromine.fr/xp-calculator/java</loc>
+        <lastmod>2026-06-17T16:01:52+00:00</lastmod>
+        <priority>0.80</priority>
+    </url>
+    <url>
+        <loc>https://palatracker.bromine.fr/xp-calculator/bedrock</loc>
+        <lastmod>2026-06-17T16T16:01:52+00:00</lastmod>
         <priority>0.80</priority>
     </url>
     <url>
