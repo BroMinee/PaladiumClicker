@@ -38,6 +38,7 @@ const EXPECTED_STATIC: string[] = [
   "/wordle/train",
   "/wordle/daily",
   "/xp-calculator",
+  "/xp-calculator/java",
   "/xp-calculator/bedrock",
 ];
 
