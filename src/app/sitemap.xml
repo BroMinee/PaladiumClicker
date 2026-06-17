@@ -8,7 +8,7 @@
         <lastmod>2025-02-24T16:01:52+00:00</lastmod>
         <priority>1.00</priority>
     </url>
-    <url>
+    <!-- <url>
         <loc>https://palatracker.bromine.fr/profil</loc>
         <lastmod>2025-02-24T16:01:52+00:00</lastmod>
         <priority>0.80</priority>
@@ -32,7 +32,7 @@
         <loc>https://palatracker.bromine.fr/ranking?category=money</loc>
         <lastmod>2025-02-24T16:01:52+00:00</lastmod>
         <priority>0.80</priority>
-    </url>
+    </url> -->
     <url>
         <loc>https://palatracker.bromine.fr/clicker-optimizer</loc>
         <lastmod>2025-02-24T16:01:52+00:00</lastmod>
@@ -53,7 +53,7 @@
         <lastmod>2025-02-24T16:01:52+00:00</lastmod>
         <priority>0.80</priority>
     </url>
-    <url>
+    <!-- <url>
         <loc>https://palatracker.bromine.fr/webhook</loc>
         <lastmod>2025-02-24T16:01:52+00:00</lastmod>
         <priority>0.80</priority>
@@ -67,7 +67,7 @@
         <loc>https://palatracker.bromine.fr/palatime</loc>
         <lastmod>2025-02-24T16:01:52+00:00</lastmod>
         <priority>0.80</priority>
-    </url>
+    </url> -->
     <url>
         <loc>https://palatracker.bromine.fr/patchnote</loc>
         <lastmod>2025-02-24T16:01:52+00:00</lastmod>
@@ -83,10 +83,10 @@
         <lastmod>2025-02-24T16:01:52+00:00</lastmod>
         <priority>0.80</priority>
     </url>
-    <url>
+    <!-- <url>
         <loc>https://palatracker.bromine.fr/profil/BroMine__</loc>
         <lastmod>2025-02-24T16:01:52+00:00</lastmod>
         <priority>0.64</priority>
-    </url>
+    </url> -->
 
 </urlset>

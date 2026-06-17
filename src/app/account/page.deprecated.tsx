@@ -1,6 +1,6 @@
 import { AuthForceWrapper } from "@/components/auth/auth-force-wrapper.server";
 import { constants } from "@/lib/constants";
-import { PageWeb } from "@/app/webhook/page";
+import { PageWeb } from "@/app/webhook/page.deprecated";
 import { Card } from "@/components/ui/card";
 import { AccountDetail } from "@/components/account/account-detail.client";
 import { BestPalaAnimationTime } from "@/components/account/best-pala-animation-time.client";
