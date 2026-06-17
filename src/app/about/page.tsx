@@ -64,11 +64,17 @@ const AboutPage = async () => {
                   {"Développement de PalaTracker"}
                 </h2>
                 <p className="leading-relaxed text-sm sm:text-base">
-                  {"PalaTracker est un site gratuit, sans publicité, conçu pour la communauté de Paladium."}<br/>
-                  {"Les données affichées proviennent directement de l'API de Paladium et sont fiables dans la grande majorité des cas"}.<br/>
-                  {"Le frontend est open source, n'hésitez pas à y jeter un œil ou à proposer des améliorations."}<br/>
-                  {"Le backend, lui, reste privé afin de protéger certaines informations sensibles et de garder le contrôle sur le projet."}<br/>
-                  {"Un bug, une suggestion ? Rejoignez le Discord ou ouvrez une issue sur GitHub."}
+                  {"PalaTracker est un projet indépendant, gratuit et sans publicité, développé bénévolement pour la communauté de Paladium. Son objectif est de proposer des outils pratiques pour faciliter la progression des joueurs, que ce soit pour optimiser leur clicker, calculer l'expérience nécessaire pour monter en niveau, ou encore suivre leur profil."}<br/><br/>
+                  {"Le code source du frontend est disponible publiquement sur GitHub. Les contributions et suggestions sont les bienvenues."}<br/>
+                  {"Pour signaler un bug ou proposer une amélioration, le Discord ou les issues GitHub sont les canaux privilégiés."}
+                </p>
+              </div>
+
+              <div className="border border-yellow-500/40 bg-yellow-500/10 rounded-lg p-4 space-y-2">
+                <h3 className="font-bold text-yellow-400 text-sm sm:text-base">⚠ Arrêt de l&apos;API Paladium</h3>
+                <p className="text-sm leading-relaxed">
+                  {"Paladium a décidé de couper l'accès à son API publique. La majorité des fonctionnalités reposaient sur ces données en temps réel, ce qui explique leurs disparitions soudaine."}<br/>
+                  {"Malgré cela, plusieurs outils continuent de fonctionner de manière 100% hors-ligne et restent pleinement utilisables."}
                 </p>
               </div>
 
