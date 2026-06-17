@@ -19,74 +19,76 @@ const startSeason = new Date("2026-06-19");
 const defaultUsername = "Profil_vide";
 
 export type PathValid =
-  "/profil"
-  | "/ah"
+// "/profil"
+// | "/ah"
   | "/xp-calculator"
   | "/clicker-optimizer"
   | "/pala-animation"
   | "/craft"
-  | "/craft-optimizer"
+// | "/craft-optimizer"
   | "/about"
-  | "/ranking?category=money"
-  | "/admin-shop"
-  | "/status"
+// | "/ranking?category=money"
+// | "/admin-shop"
+// | "/status"
   | "/politique-de-confidentialite"
   | "/patchnote"
-  | "/webhook"
-  | "/account"
-  | "/admin-panel"
-  | "/qdf"
   | "/wordle"
   | "/craft-finder";
 
 const wordlePath: PathValid = "/wordle";
 const craftFinderPath: PathValid = "/craft-finder";
+// | "/webhook"
+// | "/account"
+// | "/admin-panel"
+// | "/qdf";
 
 export type LabelValid =
-  "Profil"
-  | "Market"
+// "Profil"
+// | "Market"
   | "Calculateur d'xp"
   | "PalaClicker Optimizer"
-  | "Palatime"
+// | "Palatime"
   | "PalaAnimation Trainer"
-  | "Craft Optimizer"
+// | "Craft Optimizer"
   | "Calculateur de Craft"
   | "A propos"
-  | "Classement"
-  | "Métiers"
-  | "Boss"
-  | "Egg Hunt"
-  | "KOTH"
+// | "Classement"
+// | "Métiers"
+// | "Boss"
+// | "Egg Hunt"
+// | "KOTH"
   | "Clicker"
-  | "Admin Shop"
-  | "Statut"
+// | "Admin Shop"
+// | "Statut"
   | "Politique de confidentialité"
   | "Patchnote"
-  | "Alertes Discord"
-  | "Account"
-  | "Admin Panel"
-  | "QDF"
   | "Craft Wordle"
   | "Craft Finder"
   | "Jeux";
+// | "Alertes Discord"
+// | "Account"
+// | "Admin Panel"
+// | "QDF";
 
-const profilPath: PathValid = "/profil";
-const ahPath: PathValid = "/ah";
 const calculatorXpPath: PathValid = "/xp-calculator";
 const optimizerClickerPath: PathValid = "/clicker-optimizer";
 const palaAnimationPath: PathValid = "/pala-animation";
 const craftingCalculatorPath: PathValid = "/craft";
-const craftingOptimizerPath: PathValid = "/craft-optimizer";
-const moneyRanking: PathValid = "/ranking?category=money";
-const adminShopPath: PathValid = "/admin-shop";
-const statusPath: PathValid = "/status";
 const politiqueDeConfidentialitePath: PathValid = "/politique-de-confidentialite";
 const patchnotePath: PathValid = "/patchnote";
 const aboutPath: PathValid = "/about";
-const webhooksPath: PathValid = "/webhook";
-const accountPath: PathValid = "/account";
-const adminPanelPath: PathValid = "/admin-panel";
-const qdfPath: PathValid = "/qdf";
+
+// deprecated variable, still present for retro compatibility in case the API pops back
+const profilPath: string = "/profil";
+const ahPath: string = "/ah";
+const craftingOptimizerPath: string = "/craft-optimizer";
+const moneyRanking: string = "/ranking?category=money";
+const adminShopPath: string = "/admin-shop";
+const statusPath: string = "/status";
+const webhooksPath: string = "/webhook";
+const accountPath: string = "/account";
+const adminPanelPath: string = "/admin-panel";
+const qdfPath: string = "/qdf";
 
 type LinkInfo = {
   label: LabelValid;
@@ -98,23 +100,23 @@ type LinkList = {
 };
 
 const links: LinkList = {
-  "/profil": { label: "Profil", requiredPseudo: true },
-  "/ah": { label: "Market", requiredPseudo: false },
+  // "/profil": { label: "Profil", requiredPseudo: true },
+  // "/ah": { label: "Market", requiredPseudo: false },
   "/xp-calculator": { label: "Calculateur d'xp", requiredPseudo: true },
   "/clicker-optimizer": { label: "PalaClicker Optimizer", requiredPseudo: true },
   "/pala-animation": { label: "PalaAnimation Trainer", requiredPseudo: false },
   "/craft": { label: "Calculateur de Craft", requiredPseudo: false },
-  "/craft-optimizer": { label: "Craft Optimizer", requiredPseudo: false },
+  // "/craft-optimizer": { label: "Craft Optimizer", requiredPseudo: false },
   "/about": { label: "A propos", requiredPseudo: false },
-  "/ranking?category=money": { label: "Classement", requiredPseudo: false },
-  "/admin-shop": { label: "Admin Shop", requiredPseudo: false },
-  "/status": { label: "Statut", requiredPseudo: false },
+  // "/ranking?category=money": { label: "Classement", requiredPseudo: false },
+  // "/admin-shop": { label: "Admin Shop", requiredPseudo: false },
+  // "/status": { label: "Statut", requiredPseudo: false },
   "/politique-de-confidentialite": { label: "Politique de confidentialité", requiredPseudo: false },
   "/patchnote": { label: "Patchnote", requiredPseudo: false },
-  "/webhook": { label: "Alertes Discord", requiredPseudo: false },
-  "/account": { label: "Account", requiredPseudo: false },
-  "/admin-panel": { label: "Admin Panel", requiredPseudo: false },
-  "/qdf": { label: "QDF", requiredPseudo: false },
+  // "/webhook": { label: "Alertes Discord", requiredPseudo: false },
+  // "/account": { label: "Account", requiredPseudo: false },
+  // "/admin-panel": { label: "Admin Panel", requiredPseudo: false },
+  // "/qdf": { label: "QDF", requiredPseudo: false }
   "/wordle": { label: "Craft Wordle", requiredPseudo: false },
   "/craft-finder": { label: "Craft Finder", requiredPseudo: false }
 };
@@ -493,21 +495,21 @@ const how_to_xp: HowToXp = {
 
 const notificationPath: Map<PathValid, [number, string]> = new Map<PathValid, [number, string]>(
   [
-    ["/profil", [new Date("2025-02-22 01:00").getTime(), "Refonte du market du joueur"]],
-    ["/xp-calculator", [new Date("2024-10-16").getTime(), "Ajout des \"fortunes modifiers\" dans les calculs"]],
+    // ["/profil", [new Date("2025-02-22 01:00").getTime(), "Refonte du market du joueur"]],
+    // ["/xp-calculator", [new Date("2024-10-16").getTime(), "Ajout des \"fortunes modifiers\" dans les calculs"]],
     ["/clicker-optimizer", [new Date("2024-11-27 19:00").getTime(), "Refonte de la page"]],
-    ["/ranking?category=money", [new Date("2025-02-22 01:00").getTime(), "Ajout du classement l'alignement"]],
-    ["/ah", [new Date("2025-02-22 01:00").getTime(), "Ajout du détail des offres"]],
+    // ["/ranking?category=money", [new Date("2025-02-22 01:00").getTime(), "Ajout du classement l'alignement"]],
+    // ["/ah", [new Date("2025-02-22 01:00").getTime(), "Ajout du détail des offres"]],
     ["/craft", [new Date("2025-05-11 10:00").getTime(), "Ajout d'un nouvel outil pour faire un max de d'argent"]],
     ["/patchnote", [new Date("2025-05-11 10:00").getTime(), "Nouveau patchnote"]],
     ["/pala-animation", [new Date("2024-12-21 16:15").getTime(), "Ajout de 174 nouvelles questions"]],
-    ["/webhook", [new Date("2025-05-11 10:00").getTime(), "Ajout des alertes de vote"]],
+    // ["/webhook", [new Date("2025-05-11 10:00").getTime(), "Ajout des alertes de vote"]],
   ]);
 
 const menuPaths: Map<NavBarCategory, PathValid[]> = new Map<NavBarCategory, PathValid[]>([
-  ["Statistiques et données", ["/profil", "/ah", "/admin-shop", "/ranking?category=money", "/qdf"]],
-  ["Outils", ["/clicker-optimizer", "/xp-calculator", "/craft", "/craft-optimizer", "/webhook"]],
-  ["Informations et gestion", ["/status", "/patchnote", "/politique-de-confidentialite", "/about"]],
+  // ["Statistiques et données", ["/profil", "/ah", "/admin-shop", "/ranking?category=money", "/qdf"]],
+  ["Outils", ["/clicker-optimizer", "/xp-calculator", "/pala-animation", "/craft"]],
+  ["Informations et gestion", ["/patchnote", "/politique-de-confidentialite", "/about"]],
   ["Jeux", ["/wordle", "/craft-finder", "/pala-animation"]],
 ]);
 

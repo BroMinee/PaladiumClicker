@@ -1,20 +1,16 @@
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import { FaBars, FaCalculator, FaClipboardList, FaKey, FaShoppingBasket } from "react-icons/fa";
+import { FaBars, FaCalculator, FaClipboardList, FaKey } from "react-icons/fa";
 import { constants } from "@/lib/constants";
 import { LogoClient } from "@/components/ui/logo-client.client";
 import LinkClient, {
   NavbarCategoryDisplay,
   NotificationWebSite
 } from "@/components/navbar/navbar.client";
-import { LuShoppingCart } from "react-icons/lu";
-import { PiRankingBold } from "react-icons/pi";
 import { IoMdInformationCircleOutline, IoMdStopwatch } from "react-icons/io";
-import { HiOutlineStatusOnline } from "react-icons/hi";
 import { GradientText } from "@/components/shared/gradient-text";
 import { NavBarProfilInfo } from "@/components/navbar/navbar-profil-info.client";
-import { MdOutlineWebhook } from "react-icons/md";
-import { Hammer, ListChevronsUpDown, MousePointer2, User, LetterText, ScanSearch } from "lucide-react";
+import { Hammer, LetterText, MousePointer2, ScanSearch } from "lucide-react";
 import { SearchPlayerInput } from "@/components/home/search-player.client";
 
 /**
@@ -50,7 +46,7 @@ function NavBarContent() {
         </div>
         <div className="relative grow min-h-0 flex flex-col">
           <div className="grow overflow-y-auto no-scrollbar">
-            <NavbarCategoryDisplay name={"Statistiques et données"}>
+            {/* <NavbarCategoryDisplay name={"Statistiques et données"}>
               <LinkClient path={constants.profilPath}>
                 <User size={24}/>
               </LinkClient>
@@ -65,8 +61,8 @@ function NavBarContent() {
               </LinkClient>
               {/* <LinkClient path={constants.qdfPath}>
                 <CalendarDays size={24}/>
-              </LinkClient> */}
-            </NavbarCategoryDisplay>
+              </LinkClient>
+            </NavbarCategoryDisplay> */}
             <NavbarCategoryDisplay name={"Outils"}>
               <LinkClient path={constants.optimizerClickerPath}>
                 <MousePointer2 size={24}/>
@@ -77,12 +73,12 @@ function NavBarContent() {
               <LinkClient path={constants.craftingCalculatorPath}>
                 <Hammer size={24}/>
               </LinkClient>
-              <LinkClient path={constants.craftingOptimizerPath}>
+              {/* <LinkClient path={constants.craftingOptimizerPath}>
                 <ListChevronsUpDown size={24}/>
               </LinkClient>
               <LinkClient path={constants.webhooksPath}>
                 <MdOutlineWebhook size={24}/>
-              </LinkClient>
+              </LinkClient> */}
             </NavbarCategoryDisplay>
             <NavbarCategoryDisplay name={"Jeux"}>
               <LinkClient path={constants.wordlePath}>
@@ -96,9 +92,9 @@ function NavBarContent() {
               </LinkClient>
             </NavbarCategoryDisplay>
             <NavbarCategoryDisplay name={"Informations et gestion"}>
-              <LinkClient path={constants.statusPath}>
+              {/* <LinkClient path={constants.statusPath}>
                 <HiOutlineStatusOnline size={24}/>
-              </LinkClient>
+              </LinkClient> */}
               <LinkClient path={constants.patchnotePath}>
                 <FaClipboardList size={24}/>
               </LinkClient>
