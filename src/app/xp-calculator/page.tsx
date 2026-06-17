@@ -20,5 +20,5 @@ export async function generateMetadata() {
  * [Xp-calculator Page](https://palatracker.bromine.fr/xp-calculator)
  */
 export default function XpCalculatorEntryPage() {
-  return <NoPseudoPage texth1="Calcule l'xp nécessaire pour °level up° tes métiers" texth2="Commence par saisir ton pseudo °Minecraft°" inputWrapper={XpHomePageWrapper}/>;
+  return <NoPseudoPage texth1="Calcule l'xp nécessaire pour °level up° tes métiers" texth2="Commence par choisir ta °version°" inputWrapper={XpHomePageWrapper}/>;
 }

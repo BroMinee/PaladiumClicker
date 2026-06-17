@@ -11,8 +11,8 @@ import {
   TestMyApiFetching
 } from "@/components/ui/test-api-on-error.server";
 import { Suspense } from "react";
-import { ImportOfflineProfil } from "@/components/shared/import-offline-profil.client";
-import { SearchPlayerInput } from "@/components/home/search-player.client";
+// import { ImportOfflineProfil } from "@/components/shared/import-offline-profil.client";
+// import { SearchPlayerInput } from "@/components/home/search-player.client";
 
 /**
  * Generate Metadata
@@ -60,12 +60,12 @@ export default async function Error500Page(
             <p className="mb-4 text-lg font-light text-card-foreground">Si le problème persiste merci de
               contacter un développeur</p>
           </div>
-          <div className="flex flex-col gap-2 items-center justify-center">
+          {/* <div className="flex flex-col gap-2 items-center justify-center">
             <div className="w-full max-w-md mx-auto">
               <SearchPlayerInput variant="homepage" />
             </div>
             <ImportOfflineProfil/>
-          </div>
+          </div> */}
         </div>
       </CardHeader>
       <div className="flex md:flex-row justify-evenly flex-col">

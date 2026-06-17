@@ -1,7 +1,7 @@
 "use client";
 
 import { ToggleTheme } from "@/components/shared/toggle-theme.client";
-import { Setting } from "@/components/shared/setting.client";
+// import { Setting } from "@/components/shared/setting.client";
 import { useProfileStore } from "@/stores/use-profile-store";
 import { LoginDiscord, NavBarProfileInfo } from "@/components/navbar/login-logout-discord.client";
 
@@ -19,7 +19,7 @@ export function NavBarProfilInfo() {
       <div className="flex justify-between flex-row w-full px-5 py-2">
         <LoginDiscord/>
         <ToggleTheme/>
-        <Setting/>
+        {/* <Setting/> */}
       </div>
     );
   }
@@ -29,7 +29,7 @@ export function NavBarProfilInfo() {
       <NavBarProfileInfo/>
       <div className="px-5 flex flex-row justify-between">
         <ToggleTheme/>
-        <Setting/>
+        {/* <Setting/> */}
       </div>
 
     </div>
