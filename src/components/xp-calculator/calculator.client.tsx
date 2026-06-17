@@ -13,6 +13,7 @@ import { MetierKey } from "@/types";
 import { InputDebounce } from "@/components/shared/input-debounce.client";
 import { PotionSelector } from "./potion-xp.client";
 import { FortuneSelector } from "./fortune.client";
+import { PreconditionsDisplay } from "./precondition.client";
 import { FarmActionItem } from "./farm-action";
 import { MetierComponentWrapperControlled } from "@/components/metier-list";
 import { BonusStats } from "./bonus-stats";
@@ -298,7 +299,7 @@ export function XPCalculator({ defaultPlatform }: { defaultPlatform?: PlatformVe
 
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
 
         <Card className={cn("lg:col-span-2 h-fit order-2 lg:order-1", platform === "bedrock" && "lg:col-span-3")}>
           <div className="flex flex-col gap-4 mb-4 border-b border-secondary pb-4">
@@ -355,7 +356,7 @@ export function XPCalculator({ defaultPlatform }: { defaultPlatform?: PlatformVe
           </div>
         </Card>
 
-        {/* {platform === "java" && (
+        {platform === "java" && (
           <div className="lg:col-span-1 order-1 lg:order-2">
             <PreconditionsDisplay
               startLevel={startLevel}
@@ -363,7 +364,7 @@ export function XPCalculator({ defaultPlatform }: { defaultPlatform?: PlatformVe
               metier={metier}
             />
           </div>
-        )} */}
+        )}
       </div>
     </>
   );
