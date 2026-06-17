@@ -46,7 +46,6 @@ export function XPCalculator({ defaultPlatform }: { defaultPlatform?: PlatformVe
   const [metierInput, setMetier] = useState<MetierKey>("miner");
   const [endLevelInput, setEndLevel] = useState(minStartLevel + 1);
   const [dailyBonus, setDailyBonus] = useState(0);
-  const trixiumRushBonus = 3;
   const [fortuneBonusInput, setFortuneBonus] = useState(0);
   const [isDoublePotionActive, setDoublePotionActive] = useState(false);
   const [isX10PotionActive, setX10PotionActive] = useState(false);
@@ -82,12 +81,8 @@ export function XPCalculator({ defaultPlatform }: { defaultPlatform?: PlatformVe
   const gradeBonus = useMemo(() => getBonusRank(playerInfo?.rank ?? "default"), [playerInfo]);
 
   const baseBonusMultiplier = useMemo(() => {
-    let total = 1 + gradeBonus + dailyBonusDecimal;
-    if (platform === "java") {
-      total += trixiumRushBonus;
-    }
-    return total;
-  }, [gradeBonus, dailyBonusDecimal, platform]);
+    return 1 + gradeBonus + dailyBonusDecimal;
+  }, [gradeBonus, dailyBonusDecimal]);
 
   const totalBonusMultiplier = useMemo(() => {
     const withDouble = doubleActive ? baseBonusMultiplier + constants.POTION_DOUBLE_BONUS : baseBonusMultiplier;
@@ -240,7 +235,6 @@ export function XPCalculator({ defaultPlatform }: { defaultPlatform?: PlatformVe
 
               <div className="border-t border-secondary pt-4 mt-4">
                 <h3 className="text-lg font-semibold text-primary mb-2">Détail des Multiplicateurs</h3>
-                {platform === "java" && <BonusStats label="Bonus du Trixium Rush" value={`${trixiumRushBonus * 100}%`} classNameValue="bg-gradient-to-r from-violet-400 via-cyan-300 to-violet-400 bg-[length:200%_auto] animate-pan-gradient bg-clip-text text-transparent font-semibold" classNameLabel="bg-gradient-to-r from-violet-400 via-cyan-300 to-violet-400 bg-[length:200%_auto] animate-pan-gradient bg-clip-text text-transparent font-semibold"/>}
                 <BonusStats label="Bonus Grade" value={`${gradeBonus * 100}%`} classNameValue="text-card-foreground" />
                 <BonusStats
                   label="Bonus des quêtes quotidiennes"
