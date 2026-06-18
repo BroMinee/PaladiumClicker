@@ -11,7 +11,7 @@ import { SmallLoginButton } from "@/components/login/login-button.client";
  */
 export const LoginDiscord = () => {
   return <div>
-    <SmallLoginButton href={`${API_PALATRACKER}/v1/auth/login/discord`} redirectUrl={"/account"}/>
+    <SmallLoginButton href={`${API_PALATRACKER}/v1/auth/login/discord`} redirectUrl={"/"}/>
   </div>;
 };
 
