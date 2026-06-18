@@ -1,5 +1,21 @@
 [
   {
+    "date": "19/06/2026",
+    "changes": {
+      "suppressions": [
+        "Suite à la décision de Paladium de couper l'accès à son API publique, les pages suivantes ont été retirées du site : Profil joueur, Classement, Market, Admin-Shop, Craft Optimizer, QDF, Alertes Discord, Overlay Twitch, Page de statut"
+      ],
+      "additions": [
+        "Les outils suivants survivent et continuent de fonctionner hors-ligne : [Clicker Optimizer](https://palatracker.bromine.fr/clicker-optimizer), [Calculateur d'XP](https://palatracker.bromine.fr/xp-calculator), [PalaAnimation Trainer](https://palatracker.bromine.fr/pala-animation) et [Calculateur de Craft](https://palatracker.bromine.fr/craft).",
+        "[Une page d'explication](https://palatracker.bromine.fr/api-shutdown) a été ajoutée pour expliquer la situation suite à l'arrêt de l'API et la disparition des fonctionnalités."
+      ],
+      "améliorations": [
+        "Il est maintenant possible de modifier le niveau et l'XP de vos métiers directement depuis la page du [Clicker Optimizer](https://palatracker.bromine.fr/clicker-optimizer) en cliquant sur la carte du métier souhaité.",
+        "La page d'accueil a été retravaillée pour refléter les outils encore disponibles."
+      ]
+    }
+  },
+  {
     "date": "25/05/2026",
     "changes": {
       "additions": [
