@@ -10,7 +10,7 @@ import LinkClient, {
 import { IoMdInformationCircleOutline, IoMdStopwatch } from "react-icons/io";
 import { GradientText } from "@/components/shared/gradient-text";
 import { NavBarProfilInfo } from "@/components/navbar/navbar-profil-info.client";
-import { Hammer, MousePointer2 } from "lucide-react";
+import { Hammer, MousePointer2, CloudOff } from "lucide-react";
 // import { SearchPlayerInput } from "@/components/home/search-player.client";
 
 /**
@@ -84,6 +84,9 @@ function NavBarContent() {
               </LinkClient> */}
             </NavbarCategoryDisplay>
             <NavbarCategoryDisplay name={"Informations et gestion"}>
+              <LinkClient path={constants.apiShutdownPath}>
+                <CloudOff size={24}/>
+              </LinkClient>
               {/* <LinkClient path={constants.statusPath}>
                 <HiOutlineStatusOnline size={24}/>
               </LinkClient> */}
