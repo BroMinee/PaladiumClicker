@@ -1,36 +1,11 @@
-"use client";
-import {  NavBarCategory } from "@/types";
-import { create } from "zustand";
-import { createJSONStorage, persist } from "zustand/middleware";
+import { NavBarCategory } from "@/types";
 
-type State = {
-  opened: NavBarCategory[],
-}
-
-type Actions = {
-  setToggleOpen: (category: NavBarCategory) => void,
-}
-
-const storageKey = "navbar";
-const initialState: State = {
-  opened: ["Statistiques et données", "Outils"],
+const store = {
+  opened: ["Statistiques et données", "Outils", "Informations et gestion"] as NavBarCategory[],
+  setToggleOpen: (_category: NavBarCategory) => {},
 };
 
-export const useNavbarStore = create<State & Actions, [["zustand/persist", State & Actions]]>(persist<State & Actions>(
-  (set) => ({
-    ...initialState,
-
-    setToggleOpen: (category) => set((state) => {
-      if(state.opened.includes(category)) {
-        state.opened = state.opened.filter((c) => c !== category);
-      } else {
-        state.opened.push(category);
-      }
-      return { ...state };
-    }),
-  }),
-  {
-    name: storageKey,
-    storage: createJSONStorage(() => localStorage)
-  },
-));
+/**
+ * Dummy navbar store that replace the use-navbar-store.deprecated.ts
+ */
+export const useNavbarStore = () => store;
