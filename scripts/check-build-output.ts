@@ -4,6 +4,7 @@ import path from "path";
 const EXPECTED_STATIC: string[] = [
   "/",
   "/about",
+  "/api-shutdown",
   "/account",
   "/account/login",
   // "/admin-panel",

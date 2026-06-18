@@ -21,6 +21,7 @@ const defaultUsername = "Profil_vide";
 export type PathValid =
 // "/profil"
 // | "/ah"
+  | "/api-shutdown"
   | "/xp-calculator"
   | "/clicker-optimizer"
   | "/pala-animation"
@@ -45,6 +46,7 @@ const craftFinderPath: PathValid = "/craft-finder";
 export type LabelValid =
 // "Profil"
 // | "Market"
+  | "A propos de l'API"
   | "Calculateur d'xp"
   | "PalaClicker Optimizer"
 // | "Palatime"
@@ -77,6 +79,7 @@ const craftingCalculatorPath: PathValid = "/craft";
 const politiqueDeConfidentialitePath: PathValid = "/politique-de-confidentialite";
 const patchnotePath: PathValid = "/patchnote";
 const aboutPath: PathValid = "/about";
+const apiShutdownPath: PathValid = "/api-shutdown";
 
 // deprecated variable, still present for retro compatibility in case the API pops back
 const profilPath: string = "/profil";
@@ -100,6 +103,7 @@ type LinkList = {
 };
 
 const links: LinkList = {
+  "/api-shutdown": { label: "A propos de l'API", requiredPseudo: false },
   // "/profil": { label: "Profil", requiredPseudo: true },
   // "/ah": { label: "Market", requiredPseudo: false },
   "/xp-calculator": { label: "Calculateur d'xp", requiredPseudo: true },
@@ -746,5 +750,6 @@ export const constants = {
   FORTUNE_II_BONUS,
   FORTUNE_III_BONUS,
   LEVEL_PRECONDITIONS,
+  apiShutdownPath,
 };
 

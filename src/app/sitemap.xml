@@ -93,6 +93,11 @@
         <lastmod>2025-02-24T16:01:52+00:00</lastmod>
         <priority>0.80</priority>
     </url>
+    <url>
+        <loc>https://palatracker.bromine.fr/api-shutdown</loc>
+        <lastmod>2026-06-17T16:01:52+00:00</lastmod>
+        <priority>0.80</priority>
+    </url>
     <!-- <url>
         <loc>https://palatracker.bromine.fr/profil/BroMine__</loc>
         <lastmod>2025-02-24T16:01:52+00:00</lastmod>
