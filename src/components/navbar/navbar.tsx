@@ -14,7 +14,7 @@ import { HiOutlineStatusOnline } from "react-icons/hi";
 import { GradientText } from "@/components/shared/gradient-text";
 import { NavBarProfilInfo } from "@/components/navbar/navbar-profil-info.client";
 import { MdOutlineWebhook } from "react-icons/md";
-import { CalendarDays, Hammer, ListChevronsUpDown, MousePointer2, User } from "lucide-react";
+import { CalendarDays, Hammer, ListChevronsUpDown, MousePointer2, User, LetterText } from "lucide-react";
 import { SearchPlayerInput } from "@/components/home/search-player.client";
 
 /**
@@ -74,9 +74,6 @@ function NavBarContent() {
               <LinkClient path={constants.calculatorXpPath}>
                 <FaCalculator size={24}/>
               </LinkClient>
-              <LinkClient path={constants.palaAnimationPath}>
-                <IoMdStopwatch size={32}/>
-              </LinkClient>
               <LinkClient path={constants.craftingCalculatorPath}>
                 <Hammer size={24}/>
               </LinkClient>
@@ -85,6 +82,14 @@ function NavBarContent() {
               </LinkClient>
               <LinkClient path={constants.webhooksPath}>
                 <MdOutlineWebhook size={24}/>
+              </LinkClient>
+            </NavbarCategoryDisplay>
+            <NavbarCategoryDisplay name={"Jeux"}>
+              <LinkClient path={constants.wordlePath}>
+                <LetterText size={24}/>
+              </LinkClient>
+              <LinkClient path={constants.palaAnimationPath}>
+                <IoMdStopwatch size={32}/>
               </LinkClient>
             </NavbarCategoryDisplay>
             <NavbarCategoryDisplay name={"Informations et gestion"}>
