@@ -4,6 +4,7 @@ import { UnOptimizedImage } from "@/components/ui/image-loading";
 import { InputDebounce } from "@/components/shared/input-debounce.client";
 import { MetierKey } from "@/types";
 import { PlatformVersion } from "@/lib/misc/xp-calculator";
+import { TrendingDown, TrendingUp } from "lucide-react";
 
 interface FarmActionItemProps {
   item: HowToXpElement;
@@ -38,6 +39,7 @@ export const FarmActionItem = ({ item, metier, finalRequiredXp, baseBonusMultipl
     : "Variable";
 
   const requiredLevel = item[platform]?.level ?? 1;
+  const countInRequirement = item.java?.excludeRequirement !== true;
   const colors = getColorByMetierName(metier);
 
   const col3 = reverseMode ? (
@@ -77,6 +79,18 @@ export const FarmActionItem = ({ item, metier, finalRequiredXp, baseBonusMultipl
           Niv {requiredLevel}
         </span>
       </div>
+
+      {platform === "java" && (
+        <div className={`absolute bottom-0 right-0 z-10 px-2 py-1 rounded-tl-xl border-t border-l border-white/10 flex items-center gap-1 ${countInRequirement ? "bg-emerald-900/70" : "bg-red-900/70"}`}>
+          {countInRequirement
+            ? <TrendingUp className="w-3 h-3 text-emerald-400" />
+            : <TrendingDown className="w-3 h-3 text-red-400" />
+          }
+          <span className={`text-[9px] font-bold uppercase tracking-wider leading-none ${countInRequirement ? "text-emerald-400" : "text-red-400"}`}>
+            Prérequis
+          </span>
+        </div>
+      )}
 
       <div className="flex items-center space-x-3 col-span-2 md:col-span-1">
         <UnOptimizedImage
