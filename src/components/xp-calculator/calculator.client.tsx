@@ -361,7 +361,6 @@ export function XPCalculator({ defaultPlatform }: { defaultPlatform?: PlatformVe
             <PreconditionsDisplay
               startLevel={startLevel}
               endLevel={endLevel}
-              metier={metier}
             />
           </div>
         )}

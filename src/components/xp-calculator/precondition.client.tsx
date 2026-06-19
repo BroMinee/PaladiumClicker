@@ -1,33 +1,29 @@
 "use client";
 
-import { constants } from "@/lib/constants";
-import { prettyJobName, textFormatting } from "@/lib/misc";
-import { MetierKey } from "@/types";
+import { JobXp } from "@/lib/misc";
 import { useMemo } from "react";
 import { Card } from "@/components/ui/card";
 
 interface PreconditionsDisplayProps {
   startLevel: number;
   endLevel: number;
-  metier: MetierKey;
 }
 
 /**
- * Displays all the precondition to reach the next level
+ * Displays the XP prerequisite (20% of level XP) for each level to reach
  */
-export const PreconditionsDisplay = ({ startLevel, endLevel, metier }: PreconditionsDisplayProps) => {
+export const PreconditionsDisplay = ({ startLevel, endLevel }: PreconditionsDisplayProps) => {
+  const formatter = new Intl.NumberFormat("fr-FR", { maximumFractionDigits: 0 });
+
   const levelsToDisplay = useMemo(() => {
     const levels = [];
     for (let lvl = startLevel + 1; lvl <= endLevel; lvl++) {
-      if (constants.LEVEL_PRECONDITIONS[metier]?.[lvl] && constants.LEVEL_PRECONDITIONS[metier][lvl].length > 0) {
-        levels.push({
-          targetLevel: lvl,
-          preconditions: constants.LEVEL_PRECONDITIONS[metier]![lvl]
-        });
-      }
+      const xpForLevel = JobXp.totalXp(lvl, "java") - JobXp.totalXp(lvl - 1, "java");
+      const requiredXp = Math.ceil(xpForLevel * 0.2);
+      levels.push({ targetLevel: lvl, requiredXp });
     }
     return levels;
-  }, [startLevel, endLevel, metier]);
+  }, [startLevel, endLevel]);
 
   return (
     <div className="space-y-4">
@@ -35,29 +31,18 @@ export const PreconditionsDisplay = ({ startLevel, endLevel, metier }: Precondit
         Préconditions pour le Niveau
       </h3>
 
-      {levelsToDisplay.length === 0 ? (
-        <Card className="border border-secondary">
-          <p className="text-card-foreground">
-            {textFormatting(`Aucune précondition spécifique trouvée pour le métier **${prettyJobName(metier)}** entre le niveau ${startLevel} et ${endLevel}.`)}
-          </p>
+      {levelsToDisplay.map(level => (
+        <Card key={level.targetLevel} className="border border-secondary">
+          <div className="flex justify-between items-center">
+            <span className="font-bold text-lg text-primary">
+              Prérequis Niv. {level.targetLevel}
+            </span>
+            <span className="text-sm text-card-foreground">
+              {formatter.format(level.requiredXp)} XP
+            </span>
+          </div>
         </Card>
-      ) : (
-        levelsToDisplay.map(level => (
-          <Card key={level.targetLevel} className="border border-secondary">
-            <div className="flex justify-between items-center mb-2">
-              <span className="font-bold text-lg text-primary">
-                Prérequis Niv. {level.targetLevel}
-              </span>
-            </div>
-
-            <div className="mt-2 space-y-1">
-              <div className="text-sm pl-5 space-y-1">
-                {textFormatting(level.preconditions)}
-              </div>
-            </div>
-          </Card>
-        ))
-      )}
+      ))}
     </div>
   );
 };
