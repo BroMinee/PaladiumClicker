@@ -21,7 +21,7 @@ const EXPECTED_STATIC: string[] = [
   "/patchnote",
   "/politique-de-confidentialite",
   "/profil",
-  "/qdf",
+  // "/qdf",
   "/ranking",
   "/rewind",
   "/robots.txt",
