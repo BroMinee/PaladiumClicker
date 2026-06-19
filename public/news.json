@@ -1,5 +1,15 @@
 [
   {
+    "date": "19/06/2026",
+    "changes": {
+      "changements": [
+        "Mise à jour des valeurs d'XP dans le [calculateur d'xp](https://palatracker.bromine.fr/xp-calculator) pour correspondre aux valeurs de la V12.",
+        "Chaque méthode d'XP dans le [calculateur d'xp](https://palatracker.bromine.fr/xp-calculator) affiche désormais un indicateur visuel pour indiquer si elle est prise en compte dans les prérequis.",
+        "Il est maintenant possible de modifier le niveau et l'XP de vos métiers directement depuis la page du [Clicker Optimizer](https://palatracker.bromine.fr/clicker-optimizer) en cliquant sur la carte du métier souhaité."
+      ]
+    }
+  },
+  {
     "date": "25/05/2026",
     "changes": {
       "additions": [
