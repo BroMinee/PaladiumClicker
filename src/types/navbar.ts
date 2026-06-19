@@ -1,4 +1,4 @@
-export type NavBarCategory = "Statistiques et données" | "Outils" | "Informations et gestion";
+export type NavBarCategory = "Statistiques et données" | "Outils" | "Informations et gestion" | "Jeux";
 
 export interface GithubContributor {
   login: string;

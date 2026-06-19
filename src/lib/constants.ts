@@ -35,7 +35,10 @@ export type PathValid =
   | "/webhook"
   | "/account"
   | "/admin-panel"
-  | "/qdf";
+  | "/qdf"
+  | "/wordle";
+
+const wordlePath: PathValid = "/wordle";
 
 export type LabelValid =
   "Profil"
@@ -60,7 +63,9 @@ export type LabelValid =
   | "Alertes Discord"
   | "Account"
   | "Admin Panel"
-  | "QDF";
+  | "QDF"
+  | "Craft Wordle"
+  | "Jeux";
 
 const profilPath: PathValid = "/profil";
 const ahPath: PathValid = "/ah";
@@ -106,7 +111,8 @@ const links: LinkList = {
   "/webhook": { label: "Alertes Discord", requiredPseudo: false },
   "/account": { label: "Account", requiredPseudo: false },
   "/admin-panel": { label: "Admin Panel", requiredPseudo: false },
-  "/qdf": { label: "QDF", requiredPseudo: false }
+  "/qdf": { label: "QDF", requiredPseudo: false },
+  "/wordle": { label: "Craft Wordle", requiredPseudo: false }
 };
 
 const SMELT = "Smelt";
@@ -496,8 +502,9 @@ const notificationPath: Map<PathValid, [number, string]> = new Map<PathValid, [n
 
 const menuPaths: Map<NavBarCategory, PathValid[]> = new Map<NavBarCategory, PathValid[]>([
   ["Statistiques et données", ["/profil", "/ah", "/admin-shop", "/ranking?category=money", "/qdf"]],
-  ["Outils", ["/clicker-optimizer", "/xp-calculator", "/pala-animation", "/craft", "/craft-optimizer", "/webhook"]],
+  ["Outils", ["/clicker-optimizer", "/xp-calculator", "/craft", "/craft-optimizer", "/webhook"]],
   ["Informations et gestion", ["/status", "/patchnote", "/politique-de-confidentialite", "/about"]],
+  ["Jeux", ["/wordle", "/pala-animation"]],
 ]);
 
 const deprecatedIdAchivement = [
@@ -717,6 +724,7 @@ export const constants = {
   accountPath,
   adminPanelPath,
   qdfPath,
+  wordlePath,
   imgPathProfile,
   imgPathMarket,
   imgPathRanking,
