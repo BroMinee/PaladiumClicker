@@ -14,7 +14,7 @@ export const API_PALATRACKER = process.env.NEXT_PUBLIC_PALACLICKER_API_URL || "h
 export const API_PALATRACKER_WS = process.env.NEXT_PUBLIC_PALACLICKER_API_WS || "wss://palatracker.bromine.fr";
 
 // I need to add +1 to the real starting date for some reason
-const startSeason = new Date("2025-11-22");
+const startSeason = new Date("2026-06-19");
 
 const defaultUsername = "Profil_vide";
 
