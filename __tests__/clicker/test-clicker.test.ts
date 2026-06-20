@@ -4,11 +4,13 @@ import { Time } from "@/lib/clicker/time";
 import { BuildingModelChanges } from "@/lib/clicker/building";
 import { UpgradeModelChanges } from "@/lib/clicker/upgrade";
 import { TimeModelChanges } from "@/lib/clicker/time";
+import { errorRegistry } from "@/lib/clicker/error-registry";
 describe("add() utility function", () => {
   let clicker: Clicker;
 
   beforeEach(() => {
     clicker = setupClicker(true);
+    errorRegistry.flush();
   });
 
   test("test initial production setup", () => {
@@ -31,7 +33,8 @@ describe("add() utility function", () => {
   });
 
   test("Shall throw when setting job to 0", () => {
-    expect(() => clicker.setMetierLevel("miner", 0)).toThrow("[Métier] impossible de définir miner au niveau 0. Le niveau doit être supérieur à 0");
+    clicker.setMetierLevel("miner", 0);
+    expect(errorRegistry.flush()).toContain("[Métier] impossible de définir miner au niveau 0. Le niveau doit être supérieur à 0");
   });
 
   describe("TimeModel", () => {
@@ -81,9 +84,10 @@ describe("add() utility function", () => {
 
     test("shall not throw if new date is invalid", () => {
       const timeModel = new Time({ startingSeason: new Date() });
-      expect(() => timeModel.applyChanges(TimeModelChanges.CURRENT_DATECHANGE, "add 1 hour", (e) => {
+      timeModel.applyChanges(TimeModelChanges.CURRENT_DATECHANGE, "add 1 hour", (e) => {
         e.currentDate = new Date("toto");
-      })).toThrow("[Temps] Impossible de définir une date invalide");
+      });
+      expect(errorRegistry.flush()).toContain("[Temps] Impossible de définir une date invalide");
     });
   });
 
@@ -105,11 +109,10 @@ describe("add() utility function", () => {
     });
 
     test("shall throw when buying a building be previous one has not been bought", () => {
-      expect(() => {
-        clicker.buildings[1].applyChanges(BuildingModelChanges.COUNT, "add 1 building", (e) => {
-          e.count += 1;
-        });
-      }).toThrow("Impossible d'acheter Caverne aux gros cailloux car le batiment precedent Mine abandonnée n'a pas encore ete achete");
+      clicker.buildings[1].applyChanges(BuildingModelChanges.COUNT, "add 1 building", (e) => {
+        e.count += 1;
+      });
+      expect(errorRegistry.flush()).toContain("Impossible d'acheter Caverne aux gros cailloux car le batiment precedent Mine abandonnée n'a pas encore ete achete");
     });
 
     test("shall throw when selling a building be one after is still bought", () => {
@@ -119,11 +122,10 @@ describe("add() utility function", () => {
       clicker.buildings[1].applyChanges(BuildingModelChanges.COUNT, "add 1 building", (e) => {
         e.count += 1;
       });
-      expect(() => {
-        clicker.buildings[0].applyChanges(BuildingModelChanges.COUNT, "set 0 building", (e) => {
-          e.count = 0;
-        });
-      }).toThrow("Impossible de vendre Mine abandonnée car le batiment suivant Caverne aux gros cailloux est encore achete");
+      clicker.buildings[0].applyChanges(BuildingModelChanges.COUNT, "set 0 building", (e) => {
+        e.count = 0;
+      });
+      expect(errorRegistry.flush()).toContain("Impossible de vendre Mine abandonnée car le batiment suivant Caverne aux gros cailloux est encore achete");
     });
 
     test("test production without bonus", () => {
@@ -248,20 +250,18 @@ describe("add() utility function", () => {
       });
       expect(clicker.RPS()).toBe(2.5000000298023224);
 
-      expect(() => {
-        clicker.buildings[0].applyChanges(BuildingModelChanges.COUNT, "set 0 buildings", (e) => {
-          e.count = 0;
-        });
-      }).toThrow("[Upgrade 100%] Lampe frontale possédée mais pas assez de bâtiments pour la posséder");
+      clicker.buildings[0].applyChanges(BuildingModelChanges.COUNT, "set 0 buildings", (e) => {
+        e.count = 0;
+      });
+      expect(errorRegistry.flush()).toContain("[Upgrade 100%] Lampe frontale possédée mais pas assez de bâtiments pour la posséder");
     });
 
     test("shall throw when buying but condition is not met", () => {
       expect(clicker.upgrade_100[0].canBuy).toBe(false);
-      expect(() => {
-        clicker.upgrade_100[0].applyChanges(UpgradeModelChanges.OWN, "buy upgrade", (e) => {
-          e.own = true;
-        });
-      }).toThrow("[Upgrade 100%] Lampe frontale possédée mais pas assez de bâtiments pour la posséder");
+      clicker.upgrade_100[0].applyChanges(UpgradeModelChanges.OWN, "buy upgrade", (e) => {
+        e.own = true;
+      });
+      expect(errorRegistry.flush()).toContain("[Upgrade 100%] Lampe frontale possédée mais pas assez de bâtiments pour la posséder");
     });
 
   });
@@ -311,20 +311,18 @@ describe("add() utility function", () => {
       });
       expect(clicker.RPS()).toBe(2.5000000298023224);
 
-      expect(() => {
-        clicker.buildings[0].applyChanges(BuildingModelChanges.COUNT, "set 4 buildings", (e) => {
-          e.count = 4;
-        });
-      }).toThrow("[Upgrade 200%] Potion de vision nocturne possédée mais pas assez de jours de connexion pour la posséder");
+      clicker.buildings[0].applyChanges(BuildingModelChanges.COUNT, "set 4 buildings", (e) => {
+        e.count = 4;
+      });
+      expect(errorRegistry.flush()).toContain("[Upgrade 200%] Potion de vision nocturne possédée mais pas assez de jours de connexion pour la posséder");
     });
 
     test("shall throw when buying but condition is not met", () => {
       expect(clicker.upgrade_200[0].canBuy).toBe(false);
-      expect(() => {
-        clicker.upgrade_200[0].applyChanges(UpgradeModelChanges.OWN, "buy upgrade", (e) => {
-          e.own = true;
-        });
-      }).toThrow("[Upgrade 200%] Potion de vision nocturne possédée mais pas assez de bâtiments pour la posséder");
+      clicker.upgrade_200[0].applyChanges(UpgradeModelChanges.OWN, "buy upgrade", (e) => {
+        e.own = true;
+      });
+      expect(errorRegistry.flush()).toContain("[Upgrade 200%] Potion de vision nocturne possédée mais pas assez de bâtiments pour la posséder");
     });
 
   });
@@ -389,20 +387,18 @@ describe("add() utility function", () => {
       });
       expect(clicker.RPS()).toBe(1.6000000163912773);
 
-      expect(() => {
-        clicker.buildings[0].applyChanges(BuildingModelChanges.COUNT, "set 4 buildings", (e) => {
-          e.count = 1;
-        });
-      }).toThrow("[Upgrade Many] Production nombreuse - Mine abandonnée possédée mais pas assez de bâtiments pour la posséder");
+      clicker.buildings[0].applyChanges(BuildingModelChanges.COUNT, "set 4 buildings", (e) => {
+        e.count = 1;
+      });
+      expect(errorRegistry.flush()).toContain("[Upgrade Many] Production nombreuse - Mine abandonnée possédée mais pas assez de bâtiments pour la posséder");
     });
 
     test("shall throw when buying but condition is not met", () => {
       expect(clicker.upgrade_many[0].canBuy).toBe(false);
-      expect(() => {
-        clicker.upgrade_many[0].applyChanges(UpgradeModelChanges.OWN, "buy upgrade", (e) => {
-          e.own = true;
-        });
-      }).toThrow("[Upgrade Many] Production nombreuse - Mine abandonnée possédée mais pas assez de bâtiments pour la posséder");
+      clicker.upgrade_many[0].applyChanges(UpgradeModelChanges.OWN, "buy upgrade", (e) => {
+        e.own = true;
+      });
+      expect(errorRegistry.flush()).toContain("[Upgrade Many] Production nombreuse - Mine abandonnée possédée mais pas assez de bâtiments pour la posséder");
     });
   });
 
@@ -478,20 +474,18 @@ describe("add() utility function", () => {
       expect(clicker.upgrade_posterior[0].own).toBe(true);
       expect(clicker.RPS()).toBe(2.2920000057220458);
 
-      expect(() => {
-        clicker.buildings[1].applyChanges(BuildingModelChanges.COUNT, "set 4 buildings", (e) => {
-          e.count = 1;
-        });
-      }).toThrow("[Upgrade Posterior] Production postérieure - Caverne aux gros cailloux possédée mais pas assez de bâtiments pour la posséder");
+      clicker.buildings[1].applyChanges(BuildingModelChanges.COUNT, "set 4 buildings", (e) => {
+        e.count = 1;
+      });
+      expect(errorRegistry.flush()).toContain("[Upgrade Posterior] Production postérieure - Caverne aux gros cailloux possédée mais pas assez de bâtiments pour la posséder");
     });
 
     test("shall throw when buying but condition is not met", () => {
       expect(clicker.upgrade_posterior[0].canBuy).toBe(false);
-      expect(() => {
-        clicker.upgrade_posterior[0].applyChanges(UpgradeModelChanges.OWN, "buy upgrade", (e) => {
-          e.own = true;
-        });
-      }).toThrow("[Upgrade Posterior] Production postérieure - Caverne aux gros cailloux possédée mais pas assez de bâtiments pour la posséder");
+      clicker.upgrade_posterior[0].applyChanges(UpgradeModelChanges.OWN, "buy upgrade", (e) => {
+        e.own = true;
+      });
+      expect(errorRegistry.flush()).toContain("[Upgrade Posterior] Production postérieure - Caverne aux gros cailloux possédée mais pas assez de bâtiments pour la posséder");
     });
 
   });
@@ -597,20 +591,18 @@ describe("add() utility function", () => {
       });
       expect(clicker.RPS()).toBe(1.1643999857723712);
 
-      expect(() => {
-        clicker.buildings[2].applyChanges(BuildingModelChanges.COUNT, "set 4 buildings", (e) => {
-          e.count = 0;
-        });
-      }).toThrow("[Amélioration Catégorie] Pioche en Paladium possédée mais pas assez de bâtiments pour la posséder");
+      clicker.buildings[2].applyChanges(BuildingModelChanges.COUNT, "set 4 buildings", (e) => {
+        e.count = 0;
+      });
+      expect(errorRegistry.flush()).toContain("[Amélioration Catégorie] Pioche en Paladium possédée mais pas assez de bâtiments pour la posséder");
     });
 
     test("shall throw when buying but condition is not met", () => {
       expect(clicker.upgrade_category[0].canBuy).toBe(false);
-      expect(() => {
-        clicker.upgrade_category[0].applyChanges(UpgradeModelChanges.OWN, "buy upgrade", (e) => {
-          e.own = true;
-        });
-      }).toThrow("[Amélioration Catégorie] Pioche en Paladium possédée mais pas assez de bâtiments pour la posséder");
+      clicker.upgrade_category[0].applyChanges(UpgradeModelChanges.OWN, "buy upgrade", (e) => {
+        e.own = true;
+      });
+      expect(errorRegistry.flush()).toContain("[Amélioration Catégorie] Pioche en Paladium possédée mais pas assez de bâtiments pour la posséder");
     });
   });
 
@@ -660,20 +652,18 @@ describe("add() utility function", () => {
       });
       expect(clicker.RPS()).toBe(8.970000126212836);
 
-      expect(() => {
-        clicker.buildings[0].applyChanges(BuildingModelChanges.COUNT, "set 4 buildings", (e) => {
-          e.count = 4;
-        });
-      }).toThrow("[Upgrade Global] Namuu Ecolier possédée mais pas assez de jours de connexion pour la posséder");
+      clicker.buildings[0].applyChanges(BuildingModelChanges.COUNT, "set 4 buildings", (e) => {
+        e.count = 4;
+      });
+      expect(errorRegistry.flush()).toContain("[Upgrade Global] Namuu Ecolier possédée mais pas assez de jours de connexion pour la posséder");
     });
 
     test("shall throw when buying but condition is not met", () => {
       expect(clicker.upgrade_global[0].canBuy).toBe(false);
-      expect(() => {
-        clicker.upgrade_global[0].applyChanges(UpgradeModelChanges.OWN, "buy upgrade", (e) => {
-          e.own = true;
-        });
-      }).toThrow("[Upgrade Global] Namuu Ecolier possédée mais pas assez de coins dépensés pour la posséder");
+      clicker.upgrade_global[0].applyChanges(UpgradeModelChanges.OWN, "buy upgrade", (e) => {
+        e.own = true;
+      });
+      expect(errorRegistry.flush()).toContain("[Upgrade Global] Namuu Ecolier possédée mais pas assez de coins dépensés pour la posséder");
     });
 
   });

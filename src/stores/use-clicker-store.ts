@@ -18,7 +18,7 @@ function getWorker(): Worker {
   );
 
   worker.onmessage = (event: MessageEvent<WorkerResult>) => {
-    const { id, rps, raw } = event.data;
+    const { id, rps, raw, errors } = event.data;
 
     if (id !== latestRequestId) {
       return;
@@ -33,6 +33,10 @@ function getWorker(): Worker {
       newRps: item.rps,
       price: item.price,
     }));
+
+    if (errors.length !== 0) {
+      toast.error("Erreur de configuration", { description: errors[0] });
+    }
 
     useClickerStore.setState({ rps, buildingBuyPaths, computed: true });
   };

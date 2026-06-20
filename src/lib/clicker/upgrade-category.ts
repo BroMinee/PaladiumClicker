@@ -1,4 +1,5 @@
 import { BuildingModelChanges } from "./building";
+import { errorRegistry } from "./error-registry";
 import { Upgrade, UpgradeModelChanges, UpgradeProps } from "./upgrade";
 
 export interface UpgradeCategoryProps extends UpgradeProps {
@@ -44,7 +45,7 @@ export class UpgradeCategory extends Upgrade {
         });
       }
       if((this.hasDayCondition === false || newValue.count < condition) && this.own) {
-        throw new Error(`[Amélioration Catégorie] ${this.props.name} possédée mais pas assez de bâtiments pour la posséder`);
+        errorRegistry.push(`[Amélioration Catégorie] ${this.props.name} possédée mais pas assez de bâtiments pour la posséder`);
       }
     });
 
@@ -57,7 +58,7 @@ export class UpgradeCategory extends Upgrade {
     this.subscribe(UpgradeModelChanges.OWN, `[Upgrade Category] ${this.props.name} own changes`, ({ newValue }) => {
       const condition = this.getOwnCondition();
       if ((this.props.clicker.getValue().buildings[this.props.index].count < condition || this.hasDayCondition === false) && newValue.own) {
-        throw new Error(`[Amélioration Catégorie] ${this.props.name} possédée mais pas assez de bâtiments pour la posséder`);
+        errorRegistry.push(`[Amélioration Catégorie] ${this.props.name} possédée mais pas assez de bâtiments pour la posséder`);
       }
       this.props.active_index.forEach(active_index => {
         if(newValue.own) {

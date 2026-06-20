@@ -1,4 +1,5 @@
 import { ClickerModelChanges } from "./clicker";
+import { errorRegistry } from "./error-registry";
 import { Upgrade, UpgradeModelChanges, UpgradeProps } from "./upgrade";
 
 export interface UpgradeGlobalProps extends UpgradeProps {
@@ -39,7 +40,7 @@ export class UpgradeGlobal extends Upgrade {
         });
       }
       if((this.hasDayCondition === false || newValue.total_spend < this.props.coinCondition) && this.own) {
-        throw new Error(`[Upgrade Global] ${this.props.name} possédée mais pas assez de coins dépensés pour la posséder`);
+        errorRegistry.push(`[Upgrade Global] ${this.props.name} possédée mais pas assez de coins dépensés pour la posséder`);
       }
     });
 
@@ -50,7 +51,7 @@ export class UpgradeGlobal extends Upgrade {
     // [OWN] subscribe to own changes to apply the upgrade effects
     this.subscribe(UpgradeModelChanges.OWN, `[Upgrade Global] ${this.props.name} own changes`, ({ newValue }) => {
       if ((this.props.clicker.getValue().total_spend < this.props.coinCondition || this.hasDayCondition === false) && newValue.own) {
-        throw new Error(`[Upgrade Global] ${this.props.name} possédée mais pas assez de coins dépensés pour la posséder`);
+        errorRegistry.push(`[Upgrade Global] ${this.props.name} possédée mais pas assez de coins dépensés pour la posséder`);
       }
 
       if(newValue.own) {

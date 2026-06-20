@@ -1,4 +1,5 @@
 import { Building, BuildingModelChanges } from "./building";
+import { errorRegistry } from "./error-registry";
 import { Upgrade, UpgradeModelChanges, UpgradeProps } from "./upgrade";
 
 export interface UpgradeBuildingConfig {
@@ -41,7 +42,7 @@ export abstract class UpgradeBuilding extends Upgrade {
                     });
                   }
                   if ((newValue.count < threshold || this.hasDayCondition === false) && this.own) {
-                    throw new Error(`[${label}] ${this.props.name} possédée mais pas assez de bâtiments pour la posséder`);
+                    errorRegistry.push(`[${label}] ${this.props.name} possédée mais pas assez de bâtiments pour la posséder`);
                   }
                 }
       );
@@ -57,7 +58,7 @@ export abstract class UpgradeBuilding extends Upgrade {
     // [OWN] apply the effect on the buildings
     this.subscribe(UpgradeModelChanges.OWN, `[${label}] ${this.props.name} own changes`, ({ newValue }) => {
       if ((this.props.clicker.getValue().buildings[this.props.index].count < threshold || this.hasDayCondition === false) && newValue.own) {
-        throw new Error(`[${label}] ${this.props.name} possédée mais pas assez de bâtiments pour la posséder`);
+        errorRegistry.push(`[${label}] ${this.props.name} possédée mais pas assez de bâtiments pour la posséder`);
       }
       this.props.active_index.forEach(active_index => {
         this.props.clicker.getValue().buildings[active_index].applyChanges(

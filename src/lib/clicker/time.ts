@@ -1,3 +1,4 @@
+import { errorRegistry } from "./error-registry";
 import { Hashable } from "./hashable";
 import { Model } from "./model";
 
@@ -84,7 +85,7 @@ export class Time extends Model<Time, TimeModelChanges> implements Hashable {
     if (typeof newDate === "number") {
       this.currentDate = new Date(newDate);
     } else if (isNaN(newDate.getTime())) {
-      throw new Error("[Temps] Impossible de définir une date invalide");
+      errorRegistry.push("[Temps] Impossible de définir une date invalide");
     } else {
       this._currentDate = newDate;
     }

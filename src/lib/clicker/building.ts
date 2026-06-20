@@ -1,5 +1,6 @@
 import { Clicker } from "./clicker";
 import { ClickerModelChanges } from "./clicker";
+import { errorRegistry } from "./error-registry";
 import { Hashable } from "./hashable";
 import { Model } from "./model";
 import { TimeModelChanges } from "./time";
@@ -174,7 +175,7 @@ export class Building extends Model<Building, BuildingModelChanges> implements H
     } else {
       this.props.clicker.getValue().time.applyChanges(TimeModelChanges.CURRENT_DATECHANGE, `[Building] ${this.props.name} upgrade owned`, (e) => {
         if(this.previousDateStack.length === 0) {
-          throw new Error("[Batiment] impossible de recuperer la derniere date car la pile est vide");
+          errorRegistry.push("[Batiment] impossible de recuperer la derniere date car la pile est vide");
         }
         e.currentDate = this.previousDateStack.pop()!;
       });
@@ -273,13 +274,13 @@ export class Building extends Model<Building, BuildingModelChanges> implements H
         // test that all the following building have count 0
         this.props.clicker.getValue().buildings.slice(this.props.index +1).forEach(building => {
           if(building.count > 0) {
-            throw new Error(`Impossible de vendre ${this.props.name} car le batiment suivant ${building.props.name} est encore achete`);
+            errorRegistry.push(`Impossible de vendre ${this.props.name} car le batiment suivant ${building.props.name} est encore achete`);
           }
         });
       } else if(newValue.count > 0 && this.props.index !== 0) {
         const building = this.props.clicker.getValue().buildings[this.props.index - 1];
         if(this.props.index > 0 && building.count === 0) {
-          throw new Error(`Impossible d'acheter ${this.props.name} car le batiment precedent ${building.props.name} n'a pas encore ete achete`);
+          errorRegistry.push(`Impossible d'acheter ${this.props.name} car le batiment precedent ${building.props.name} n'a pas encore ete achete`);
         }
       }
       this.updateProduction();

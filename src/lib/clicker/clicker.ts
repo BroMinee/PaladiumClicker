@@ -1,4 +1,5 @@
 import { MetierKey } from "@/types/profil";
+import { errorRegistry } from "./error-registry";
 import { Building, BuildingModelChanges, BuildingProps } from "./building";
 import { Hashable } from "./hashable";
 import { Model } from "./model";
@@ -285,7 +286,7 @@ export class Clicker extends Model<Clicker, ClickerModelChanges> implements Hash
    */
   public setMetierLevel(metier: MetierKey, level: number): void {
     if (level <= 0) {
-      throw new Error(`[Métier] impossible de définir ${metier} au niveau ${level}. Le niveau doit être supérieur à 0`);
+      errorRegistry.push(`[Métier] impossible de définir ${metier} au niveau ${level}. Le niveau doit être supérieur à 0`);
     }
     this.applyChanges(METIER_EVENT_MAP[metier], `[Clicker] set metier ${metier} to level ${level}`, (e) => {
       e.metier[metier] = level;

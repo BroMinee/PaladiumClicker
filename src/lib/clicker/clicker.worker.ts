@@ -1,4 +1,5 @@
 import { PlayerInfo } from "@/types";
+import { errorRegistry } from "./error-registry";
 import { setupClicker } from "./index";
 import { syncPlayerInfoToClicker } from "./sync";
 
@@ -22,6 +23,7 @@ export type WorkerResult = {
   id: number;
   rps: number;
   raw: WorkerRawItem[];
+  errors: string[];
 };
 
 self.onmessage = (event: MessageEvent<WorkerRequest>) => {
@@ -32,7 +34,8 @@ self.onmessage = (event: MessageEvent<WorkerRequest>) => {
 
   const rps = clicker.RPS();
   const raw: WorkerRawItem[] = clicker.computeXBuildingAhead(count);
+  const errors = errorRegistry.flush();
 
-  const res: WorkerResult = { id, rps, raw };
+  const res: WorkerResult = { id, rps, raw, errors };
   self.postMessage(res);
 };
