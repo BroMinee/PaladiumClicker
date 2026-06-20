@@ -132,4 +132,10 @@ export function syncPlayerInfoToClicker(clicker: Clicker, playerInfo: PlayerInfo
       }
     }
   }
+
+  // Fix time that has been updated
+  // Step 11: advance time to now so all real-time day conditions are immediately met
+  clicker.time.applyChanges(TimeModelChanges.CURRENT_DATECHANGE, "advance to now", (e) => {
+    e.currentDate = new Date();
+  });
 }

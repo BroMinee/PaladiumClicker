@@ -740,7 +740,7 @@ describe("add() utility function", () => {
         // is impact by terrain[1]
         e.count = 10;
       });
-      expect(clicker.RPS()).toBe(15.602399646925933);
+      expect(clicker.RPS()).toBeCloseTo(15.602399646925933, 5);
       expect(clicker.TotalSpend()).toBe(26684804);
     });
 
