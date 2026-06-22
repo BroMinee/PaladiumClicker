@@ -31,6 +31,9 @@ const EXPECTED_STATIC: string[] = [
   "/webhook/create",
   "/webhook/edit",
   "/webhook/login",
+  "/wordle",
+  "/wordle/train",
+  "/wordle/daily",
   "/xp-calculator",
   "/xp-calculator/bedrock",
 ];

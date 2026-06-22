@@ -3,7 +3,7 @@ import { CraftingHelperPage } from "@/components/craft/craft-recipe.client";
 import { getAllItems, getCraftRecipe } from "@/lib/api/api-pala-tracker.server";
 import { OptionType, searchParamsCraftPage } from "@/types";
 import { SetCraftingState } from "@/components/craft/set-crafting-state";
-import { SetItemsStats } from "@/components/shared/set-items-state.client";
+import { SetItemsState } from "@/components/shared/set-items-state.client";
 
 /**
  * Generate Metadata
@@ -58,10 +58,10 @@ export default async function CraftRecipeDisplay(props: { searchParams: Promise<
   const craftingTree = item ? await getCraftRecipe(item.value, searchParams.count ?? 1) : undefined;
 
   return (
-    <SetItemsStats allItems={options}>
+    <SetItemsState allItems={options}>
       <SetCraftingState root={craftingTree}>
         <CraftingHelperPage />
       </SetCraftingState>
-    </SetItemsStats>
+    </SetItemsState>
   );
 }

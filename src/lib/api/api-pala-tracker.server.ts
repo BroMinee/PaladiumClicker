@@ -225,6 +225,36 @@ export async function isAdmin() {
 }
 
 /**
+ * Fetches all crafting recipes.
+ */
+export async function getAllCrafts(): Promise<CraftingRecipeType[]> {
+  return await fetchWithHeader<CraftingRecipeType[]>(`${API_PALATRACKER}/v1/craft/getAll`, 30 * 60).catch(() => {
+    return redirect("/error?message=Impossible de charger la totalité des crafts.");
+  });
+}
+
+/**
+ * Fetch a random craft from wordle training endpoint.
+ */
+export async function getRandomWordleCraftName(): Promise<string | null> {
+  return await fetchWithHeader<string>(`${API_PALATRACKER}/v1/wordle/training`, 0).catch(() => null);
+}
+
+/**
+ * Fetches all crafting recipes for the Wordle debug endpoint.
+ */
+export async function getWordleDebugCrafts(): Promise<CraftingRecipeType[]> {
+  return await fetchWithHeader<CraftingRecipeType[]>(`${API_PALATRACKER}/v1/wordle/debug`, 0).catch(() => []);
+}
+
+/**
+ * Fetches yesterday's daily Wordle craft.
+ */
+export async function getYesterdayWordle(): Promise<{ craft: CraftingRecipeType; date: string } | null> {
+  return await fetchWithHeader<{ craft: CraftingRecipeType; date: string }>(`${API_PALATRACKER}/v1/wordle/yesterday`, 0).catch(() => null);
+}
+
+/**
  * Fetches the crafting recipe tree for a specific item and quantity.
  * @param item_name The item to fetch the craft recipe for.
  * @param count The quantity to calculate the recipe for.
