@@ -8,7 +8,7 @@ import { FactionSection } from "./faction/faction-section.client";
 import { getAllItemsServerAction } from "@/lib/api/api-server-action.server";
 import { useEffect, useState } from "react";
 import { OptionType, ProfilSection } from "@/types";
-import { SetItemsStats } from "@/components/shared/set-items-state.client";
+import { SetItemsState } from "@/components/shared/set-items-state.client";
 import { PetMountSection } from "./pets-mount.client";
 
 /**
@@ -25,8 +25,8 @@ export function ProfileSectionSelector({ defaultSection}: { defaultSection?: Pro
     { key: "Default", label: "Profil", content: () => <ProfileSection/> },
     { key: "Faction", label: "Faction", content: () => <FactionSection/> },
     { key: "Amis", label: "Amis", content: () => <FriendsSection/> },
-    { key: "Succès", label: "Succès", content: () => <SetItemsStats allItems={allItems}><AchievementSection/></SetItemsStats> },
-    { key: "Market", label: "Hôtel de Vente", content: () => <SetItemsStats allItems={allItems}><MarketSection/></SetItemsStats> },
+    { key: "Succès", label: "Succès", content: () => <SetItemsState allItems={allItems}><AchievementSection/></SetItemsState> },
+    { key: "Market", label: "Hôtel de Vente", content: () => <SetItemsState allItems={allItems}><MarketSection/></SetItemsState> },
     { key: "Pets/Monture", label: "Pet/Monture", content: () => <PetMountSection/> },
   ];
 

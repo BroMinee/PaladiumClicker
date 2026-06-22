@@ -6,17 +6,18 @@ import { OptionType } from "@/types";
 import { LoadingSpinner } from "@/components/ui/loading-spinner";
 
 /**
- * Component that set the zustand allItems recipe state given the searchParams
+ * Component that set the zustand allItems recipe state
 
  */
-export function SetItemsStats({ allItems, children }: { allItems: OptionType[], children: ReactNode }) {
-  const { setAllItems } = useItemsStore();
+export function SetItemsState({ allItems, children }: { allItems: OptionType[], children: ReactNode }) {
+  const { setAllItems, allItems: stateAllItems } = useItemsStore();
 
   useEffect(() => {
     setAllItems(allItems);
-  }, [allItems, setAllItems]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [setAllItems]);
 
-  if(allItems.length === 0) {
+  if(stateAllItems.length === 0) {
     return <LoadingSpinner/>;
   }
 

@@ -10,7 +10,7 @@ import { DisplayCauldronGrid } from "./display-cauldron-grid";
 import { DisplayFurnaceGrid } from "./display-furnace-grid";
 import { UnOptimizedImage } from "@/components/ui/image-loading";
 
-const TABLE_ICONS: Record<CraftingTableName, string> = {
+export const TABLE_ICONS: Record<CraftingTableName, string> = {
   "crafting table":  "crafting_table_front.webp",
   "furnace":         "furnace_front_on.webp",
   "grinder":         "grinder_block_front.webp",
@@ -58,7 +58,7 @@ export function DispatchRecipePattern({ recipe, output }: { recipe: NodeType[], 
       )}
       {renderGrid()}
       <CraftingArrow />
-      <DisplayItem index={0} slot={output} count={recipe[0].count} />
+      <DisplayItem index={0} slot={output} count={output.count} />
     </div>
   );
 }
