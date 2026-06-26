@@ -235,15 +235,6 @@ export function WordleDailyGame({ yesterdayCraft }: Props) {
             <PageHeaderHeading>{textFormatting("Craft °Wordle° - Daily")}</PageHeaderHeading>
             <PageHeaderDescription>{todayISO()} · Mode difficile · Tentatives illimitées</PageHeaderDescription>
           </div>
-          <div className="hidden lg:flex flex-col items-end gap-1 shrink-0">
-            <span className={cn("font-mono text-lg font-semibold tabular-nums", isFinished ? "text-green-400" : "text-white")}>
-              {formatElapsed(displayedElapsed)}
-            </span>
-            {isFinished && <span className="text-xs text-green-400">Terminé !</span>}
-            {leaderboard.length > 0 && (
-              <span className="text-xs text-zinc-400">{leaderboard.length} {adaptPlurial("joueur", leaderboard.length)} ont réussi</span>
-            )}
-          </div>
         </div>
       </PageHeader>
 
@@ -252,7 +243,7 @@ export function WordleDailyGame({ yesterdayCraft }: Props) {
         <Card className="shrink-0 flex flex-col lg:flex-row gap-6 items-start">
 
           <div className="flex-1 flex flex-col gap-3 min-w-0 w-full">
-            <div className="flex lg:hidden items-center gap-2">
+            <div className="flex items-center gap-2">
               <span className={cn("font-mono text-lg font-semibold tabular-nums", isFinished ? "text-green-400" : "text-white")}>
                 {formatElapsed(displayedElapsed)}
               </span>

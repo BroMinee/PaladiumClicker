@@ -255,6 +255,13 @@ export async function getYesterdayWordle(): Promise<{ craft: CraftingRecipeType;
 }
 
 /**
+ * Fetches yesterday's daily Craft Finder set.
+ */
+export async function getYesterdayCraftFinder(): Promise<{ items: string[]; crafts: CraftingRecipeType[]; date: string } | null> {
+  return await fetchWithHeader<{ items: string[]; crafts: CraftingRecipeType[]; date: string }>(`${API_PALATRACKER}/v1/craft-finder/yesterday`, 0).catch(() => null);
+}
+
+/**
  * Fetches the crafting recipe tree for a specific item and quantity.
  * @param item_name The item to fetch the craft recipe for.
  * @param count The quantity to calculate the recipe for.
