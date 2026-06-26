@@ -36,9 +36,11 @@ export type PathValid =
   | "/account"
   | "/admin-panel"
   | "/qdf"
-  | "/wordle";
+  | "/wordle"
+  | "/craft-finder";
 
 const wordlePath: PathValid = "/wordle";
+const craftFinderPath: PathValid = "/craft-finder";
 
 export type LabelValid =
   "Profil"
@@ -65,6 +67,7 @@ export type LabelValid =
   | "Admin Panel"
   | "QDF"
   | "Craft Wordle"
+  | "Craft Finder"
   | "Jeux";
 
 const profilPath: PathValid = "/profil";
@@ -112,7 +115,8 @@ const links: LinkList = {
   "/account": { label: "Account", requiredPseudo: false },
   "/admin-panel": { label: "Admin Panel", requiredPseudo: false },
   "/qdf": { label: "QDF", requiredPseudo: false },
-  "/wordle": { label: "Craft Wordle", requiredPseudo: false }
+  "/wordle": { label: "Craft Wordle", requiredPseudo: false },
+  "/craft-finder": { label: "Craft Finder", requiredPseudo: false }
 };
 
 const SMELT = "Smelt";
@@ -504,7 +508,7 @@ const menuPaths: Map<NavBarCategory, PathValid[]> = new Map<NavBarCategory, Path
   ["Statistiques et données", ["/profil", "/ah", "/admin-shop", "/ranking?category=money", "/qdf"]],
   ["Outils", ["/clicker-optimizer", "/xp-calculator", "/craft", "/craft-optimizer", "/webhook"]],
   ["Informations et gestion", ["/status", "/patchnote", "/politique-de-confidentialite", "/about"]],
-  ["Jeux", ["/wordle", "/pala-animation"]],
+  ["Jeux", ["/wordle", "/craft-finder", "/pala-animation"]],
 ]);
 
 const deprecatedIdAchivement = [
@@ -725,6 +729,7 @@ export const constants = {
   adminPanelPath,
   qdfPath,
   wordlePath,
+  craftFinderPath,
   imgPathProfile,
   imgPathMarket,
   imgPathRanking,
