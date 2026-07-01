@@ -4,7 +4,6 @@ import { EditRole } from "@/components/admin-panel/admin-panel-role-edition.clie
 import { Role } from "@/types";
 import React from "react";
 import { DiscordProfilPicture } from "@/components/account/discord-profil-picture.client";
-
 const mapPermission = new Map<Role, React.FC[]>(
   [
     ["Admin", [EditRolePanel, PalaAnimationPanel, ReportBugPanel, AccessBetaPanel]],
