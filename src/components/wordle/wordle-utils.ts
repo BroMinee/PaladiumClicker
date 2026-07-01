@@ -1,4 +1,5 @@
 import { CraftingRecipeType, NodeType, OptionType } from "@/types";
+import { areCraftsEquivalent } from "@/lib/craft-finder-utils";
 
 export type SlotValue = string | null;
 export type TileStatus = "correct" | "present" | "absent";
@@ -33,6 +34,25 @@ function craftSlots(craft: CraftingRecipeType): SlotValue[] {
 /** Returns true if the given 9-slot combination matches any known crafting recipe. */
 export function craftExists(slots: SlotValue[], allCrafts: CraftingRecipeType[]): boolean {
   return allCrafts.some(craft => slots.every((s, i) => s === craftSlots(craft)[i]));
+}
+
+/**
+ * Returns the canonical craft from the DB that is equivalent (by translation or mirror symmetry)
+ * to the given slots, or null if no such craft exists.
+ */
+export function findEquivalentCraft(slots: SlotValue[], allCrafts: CraftingRecipeType[]): CraftingRecipeType | null {
+  const asSlots = slots.map(s => ({
+    item_name: s ?? "air",
+    fr_trad: "",
+    us_trad: "",
+    img: "",
+  }));
+  const inputedCraft = {
+    slot1: asSlots[0], slot2: asSlots[1], slot3: asSlots[2],
+    slot4: asSlots[3], slot5: asSlots[4], slot6: asSlots[5],
+    slot7: asSlots[6], slot8: asSlots[7], slot9: asSlots[8],
+  };
+  return allCrafts.find(craft => areCraftsEquivalent(inputedCraft, craft)) ?? null;
 }
 
 /** Compares a 9-slot guess against the answer, returning per-slot correct/present/absent status. */

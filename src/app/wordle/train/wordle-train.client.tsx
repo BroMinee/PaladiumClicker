@@ -3,7 +3,7 @@
 import { useState, useMemo, useRef, useEffect } from "react";
 import {
   SlotValue,
-  checkGuess, craftExists,
+  checkGuess, craftExists, findEquivalentCraft,
   seededShuffle, craftToSlots, craftRecipeToDispatch,
 } from "@/components/wordle/wordle-utils";
 import {
@@ -78,15 +78,17 @@ export function WordleTrainGame({ initialItemName }: Props) {
   };
 
   const preCheckSubmitCheck = (): [boolean, string] => {
-    if (!allowInvalid && !craftExists(currentSlots, allCrafts)) {
+    if (!allowInvalid && !craftExists(currentSlots, allCrafts) && !findEquivalentCraft(currentSlots, allCrafts)) {
       return [false, "Ce craft n'existe pas dans notre base de donnée. Retente avec une recette valide."];
     }
     return [true, ""];
   };
 
   const handleSubmitCallback = () => {
-    const result = checkGuess(currentSlots, answerSlots);
-    addAttempt({ slots: [...currentSlots], result });
+    const equivalent = findEquivalentCraft(currentSlots, allCrafts);
+    const slotsToCheck = equivalent ? craftToSlots(equivalent) : currentSlots;
+    const result = checkGuess(slotsToCheck, answerSlots);
+    addAttempt({ slots: slotsToCheck, result });
     setCurrentSlots(Array(9).fill(null));
     if (result.every(r => r === "correct")) {
       setWon(-1);

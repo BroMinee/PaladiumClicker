@@ -6,7 +6,7 @@ import { cn } from "@/lib/utils";
 import {
   SlotValue, Attempt, TileStatus,
   craftToSlots, formatElapsed, craftRecipeToDispatch,
-  craftExists,
+  craftExists, findEquivalentCraft,
 } from "@/components/wordle/wordle-utils";
 import { AttemptsHistory } from "@/components/wordle/wordle-ui";
 import { DispatchRecipePattern } from "@/components/craft/display/dispatch-recipe-pattern";
@@ -205,7 +205,7 @@ export function WordleDailyGame({ yesterdayCraft }: Props) {
   const yesterdaySlots = yesterdayCraft ? craftToSlots(yesterdayCraft) : null;
 
   const preCheckSubmitCheck = (): [boolean, string] => {
-    if (!craftExists(currentSlots, allCrafts)) {
+    if (!craftExists(currentSlots, allCrafts) && !findEquivalentCraft(currentSlots, allCrafts)) {
       return [false, "Ce craft n'existe pas dans notre base de donnée, retente avec une recette valide."];
     }
     if (wsRef.current?.readyState !== WebSocket.OPEN) {
@@ -215,7 +215,10 @@ export function WordleDailyGame({ yesterdayCraft }: Props) {
   };
 
   const handleSubmitCallback = () => {
-    wsRef.current!.send(JSON.stringify({ type: "guess", data: currentSlots.map(s => s ?? "air") }));
+    const equivalent = findEquivalentCraft(currentSlots, allCrafts);
+    const slotsToSend = equivalent ? craftToSlots(equivalent) : currentSlots;
+    pendingAttemptRef.current = slotsToSend;
+    wsRef.current!.send(JSON.stringify({ type: "guess", data: slotsToSend.map(s => s ?? "air") }));
   };
 
   if (!hydrated) {
