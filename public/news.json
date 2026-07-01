@@ -1,11 +1,28 @@
 [
   {
+    "date": "01/07/2026",
+    "changes": {
+      "additions": [
+        "Ajout du jeu [Craft Wordle](https://palatracker.bromine.fr/wordle) : devine la recette de craft d'un item Paladium le plus rapidement possible. Disponible en mode **Daily** (un craft commun à tous les joueurs chaque jour) et en mode **Entraînement** (crafts aléatoires à volonté).",
+        "Ajout du jeu [Craft Finder](https://palatracker.bromine.fr/craft-finder) : trouve tous les crafts Paladium possibles à partir d'une liste d'items imposée. Disponible en mode **Daily** (une liste commune à tous les joueurs chaque jour) et en mode **Entraînement**.",
+        "Ajout d'une section **Jeux** dans la barre de navigation regroupant le Craft Wordle et le Craft Finder."
+      ],
+      "corrections": [
+        "Correction de l'estimation à laquelle une amélioration peut être achetée dans le [Clicker Optimizer](https://palatracker.bromine.fr/clicker-optimizer).",
+        "Le [Clicker Optimizer](https://palatracker.bromine.fr/clicker-optimizer) continue désormais ses calculs même si la configuration du clicker est invalide au lieu de se bloquer."
+      ]
+    }
+  },
+  {
     "date": "19/06/2026",
     "changes": {
       "changements": [
         "Mise à jour des valeurs d'XP dans le [calculateur d'xp](https://palatracker.bromine.fr/xp-calculator) pour correspondre aux valeurs de la V12.",
         "Chaque méthode d'XP dans le [calculateur d'xp](https://palatracker.bromine.fr/xp-calculator) affiche désormais un indicateur visuel pour indiquer si elle est prise en compte dans les prérequis.",
         "Il est maintenant possible de modifier le niveau et l'XP de vos métiers directement depuis la page du [Clicker Optimizer](https://palatracker.bromine.fr/clicker-optimizer) en cliquant sur la carte du métier souhaité."
+      ],
+      "suppressions": [
+        "Suppression de la page [QDF](https://palatracker.bromine.fr/qdf)."
       ]
     }
   },
