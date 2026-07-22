@@ -13,23 +13,23 @@ interface AccountTabsProps {
 /**
  * Account tab componant
  */
-export function AccountTabs({ webhooks, palaAnimation, apiKey }: AccountTabsProps) {
+export function AccountTabs({ webhooks: _webhooks, palaAnimation, apiKey: _apiKey }: AccountTabsProps) {
   const tabs: TabData<AccountTab>[] = [
-    {
-      key: "webhooks",
-      label: "Alertes Webhook",
-      content: () => <>{webhooks}</>,
-    },
+    // {
+    //   key: "webhooks",
+    //   label: "Alertes Webhook",
+    //   content: () => <>{webhooks}</>,
+    // },
     {
       key: "pala-animation",
       label: "Meilleurs temps",
       content: () => <>{palaAnimation}</>,
     },
-    {
-      key: "api-key",
-      label: "Clé API Paladium",
-      content: () => <>{apiKey}</>,
-    },
+    // {
+    //   key: "api-key",
+    //   label: "Clé API Paladium",
+    //   content: () => <>{apiKey}</>,
+    // },
   ];
 
   return <GenericSectionTabs tabs={tabs} />;
