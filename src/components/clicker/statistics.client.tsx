@@ -2,7 +2,7 @@
 import { buyBuilding, formatPrice, getPathImg, getTotalSpend, safeJoinPaths } from "@/lib/misc";
 import { usePlayerInfoStore } from "@/stores/use-player-info-store";
 import { useClickerStore } from "@/stores/use-clicker-store";
-import { useEffect, useState } from "react";
+import { type KeyboardEvent, useEffect, useState } from "react";
 import Image from "next/image";
 import { LoadingSpinner } from "@/components/ui/loading-spinner";
 import { ImageCoin } from "@/components/shared/image-coin";
@@ -91,10 +91,13 @@ export function StatRPS() {
 }
 
 /**
- * Display the Sleeping Coin statistic.
+ * Display the Sleeping Coin statistic with an editable input.
  */
 export function StatSleepingCoin() {
-  const { data: playerInfo } = usePlayerInfoStore();
+  const { data: playerInfo, setProduction } = usePlayerInfoStore();
+  const [editing, setEditing] = useState(false);
+  const [inputValue, setInputValue] = useState("");
+
   if (!playerInfo) {
     return <StatItem
       icon={<ImageCoin />}
@@ -102,14 +105,63 @@ export function StatSleepingCoin() {
       value="Chargement..."
     />;
   }
+
   const totalSpend = getTotalSpend(playerInfo);
   const coinsDormants = Math.max(playerInfo.production - totalSpend, 0);
 
-  return <StatItem
-    icon={<ImageCoin />}
-    label="Coins dormants"
-    value={`~${formatPrice(coinsDormants)}`}
-  />;
+  const handleConfirm = () => {
+    const parsed = parseInt(inputValue.replace(/\s/g, ""), 10);
+    if (!isNaN(parsed) && parsed >= 0) {
+      setProduction(totalSpend + parsed);
+    }
+    setEditing(false);
+  };
+
+  const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter") {
+      handleConfirm();
+    }
+    if (e.key === "Escape") {
+      setEditing(false);
+    }
+  };
+
+  if (editing) {
+    return (
+      <div className="flex items-center justify-between w-full">
+        <div className="flex items-center space-x-3">
+          <div className="text-primary"><ImageCoin /></div>
+          <span>Coins dormants</span>
+        </div>
+        <input
+          autoFocus
+          type="number"
+          min={0}
+          className="w-32 text-right font-bold bg-transparent border-b border-primary outline-none text-sm"
+          value={inputValue}
+          onChange={(e) => setInputValue(e.target.value)}
+          onBlur={handleConfirm}
+          onKeyDown={handleKeyDown}
+        />
+      </div>
+    );
+  }
+
+  return (
+    <div
+      className="flex items-center justify-between w-full cursor-pointer group"
+      onClick={() => {
+        setInputValue(String(coinsDormants)); setEditing(true);
+      }}
+      title="Cliquer pour modifier"
+    >
+      <div className="flex items-center space-x-3">
+        <div className="text-primary"><ImageCoin /></div>
+        <span>Coins dormants</span>
+      </div>
+      <span className="font-bold group-hover:text-primary transition-colors">~{formatPrice(coinsDormants)}</span>
+    </div>
+  );
 }
 
 /**
