@@ -6,7 +6,7 @@ import stylistic from "@stylistic/eslint-plugin";
 import nextConfig from "eslint-config-next/core-web-vitals";
 
 export default defineConfig([
-  { ignores: ["tailwind.config.ts", "misc-scripts/rendererIsometric.js"] },
+  { ignores: ["tailwind.config.ts", "misc-scripts/rendererIsometric.js", "**/*.deprecated.*"] },
   ...nextConfig,
   ...typescriptEslint.configs["flat/recommended"],
   {

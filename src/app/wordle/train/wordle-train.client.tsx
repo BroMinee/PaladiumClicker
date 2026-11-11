@@ -11,10 +11,9 @@ import {
   ToggleSwitch, AttemptsHistory,
 } from "@/components/wordle/wordle-ui";
 import { DispatchRecipePattern } from "@/components/craft/display/dispatch-recipe-pattern";
-import { getRandomCraftAction } from "@/lib/api/wordle-actions.server";
+import { getStaticWordleDebugCrafts } from "@/lib/data/static-data";
 import { WordleGame } from "@/components/wordle/wordle-game";
 import { useWordleStore } from "@/stores/use-wordle-store";
-import { toast } from "sonner";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button-v2";
 import { useAllCraftsStore } from "@/stores/use-all-craft-store";
@@ -25,56 +24,67 @@ import { PageHeader, PageHeaderHeading, PageHeaderDescription } from "@/componen
 
 const TILE_ORDER = seededShuffle(100);
 
-interface Props {
-  initialItemName: string;
+function pickRandomEligibleCraft(allCrafts: import("@/types").CraftingRecipeType[], eligible: import("@/types").CraftingRecipeType[]): string {
+  const pool = allCrafts.filter(c => eligible.some(e => e.item.item_name === c.item.item_name));
+  if (pool.length === 0) {
+    return allCrafts[0]?.item.item_name ?? "";
+  }
+  return pool[Math.floor(Math.random() * pool.length)].item.item_name;
 }
 
 /**
  * [Wordle train page](https://palatracker.bromine.fr/wordle/train)
  */
-export function WordleTrainGame({ initialItemName }: Props) {
+export function WordleTrainGame() {
   const { setIsWaiting, attempts, addAttempt, currentSlots, setCurrentSlots, gameState, setWon, setGameState, initDay } = useWordleStore();
   const { allCrafts } = useAllCraftsStore();
   const { allItems } = useItemsStore();
 
-  const [craftItemName, setCraftItemName] = useState(initialItemName);
-  const craft = useMemo(
-    () => allCrafts.find(c => c.item.item_name === craftItemName)!,
-    [craftItemName, allCrafts],
-  );
-
+  const [eligible, setEligible] = useState<import("@/types").CraftingRecipeType[]>([]);
+  const [craftItemName, setCraftItemName] = useState("");
   const [showImage, setShowImage] = useState(true);
   const [allowInvalid, setAllowInvalid] = useState(false);
-  const [loadingCraft, setLoadingCraft] = useState(false);
   const [lightbox, setLightbox] = useState(false);
-
-  useEffect(() => {
-    initDay(craft.table, "train", 0, false);
-  }, [craft, initDay]);
-
-  const answerSlots = useMemo(() => craftToSlots(craft), [craft]);
-  const outputItem = useMemo(() => allItems.find(i => i.value === craft.item.item_name)!, [allItems, craft]);
-  const answerDispatch = useMemo(() => craftRecipeToDispatch(craft, allItems), [craft, allItems]);
-
-  const revealPercent = useMemo(() => gameState !== "playing" ? 100 : Math.min((attempts.length + 1) * 10, 100), [gameState, attempts.length]);
 
   const pendingAttemptRef = useRef<SlotValue[] | null>(null);
 
-  const resetGame = async () => {
-    const newItemName = await getRandomCraftAction();
-    if (newItemName) {
-      setCraftItemName(newItemName);
-      setCurrentSlots(Array(9).fill(null));
-      setGameState("playing");
-    } else {
-      toast.error("Erreur lors du chargement du craft. Retentez.");
+  useEffect(() => {
+    getStaticWordleDebugCrafts().then((debugCrafts) => {
+      setEligible(debugCrafts);
+      setCraftItemName(pickRandomEligibleCraft(allCrafts, debugCrafts));
+    });
+  }, [allCrafts]);
+
+  const craft = useMemo(
+    () => allCrafts.find(c => c.item.item_name === craftItemName),
+    [craftItemName, allCrafts],
+  );
+
+  useEffect(() => {
+    if (craft) {
+      initDay(craft.table, "train", 0, false);
     }
+  }, [craft, initDay]);
+
+  const answerSlots = useMemo(() => craft ? craftToSlots(craft) : [], [craft]);
+  const outputItem = useMemo(() => craft ? allItems.find(i => i.value === craft.item.item_name) : undefined, [allItems, craft]);
+  const answerDispatch = useMemo(() => craft ? craftRecipeToDispatch(craft, allItems) : null, [craft, allItems]);
+
+  const revealPercent = useMemo(() => gameState !== "playing" ? 100 : Math.min((attempts.length + 1) * 10, 100), [gameState, attempts.length]);
+
+  if (!craft || !outputItem || !answerDispatch) {
+    return <p className="text-gray-400 text-sm animate-pulse text-center py-20">Chargement...</p>;
+  }
+
+  const resetGame = () => {
+    const newName = pickRandomEligibleCraft(allCrafts, eligible);
+    setCraftItemName(newName);
+    setCurrentSlots(Array(9).fill(null));
+    setGameState("playing");
   };
 
-  const handleChangeCraft = async () => {
-    setLoadingCraft(true);
-    await resetGame();
-    setLoadingCraft(false);
+  const handleChangeCraft = () => {
+    resetGame();
   };
 
   const preCheckSubmitCheck = (): [boolean, string] => {
@@ -148,8 +158,8 @@ export function WordleTrainGame({ initialItemName }: Props) {
                       Voir la réponse
                     </Button>
                   )}
-                  <Button onClick={handleChangeCraft} disabled={loadingCraft} size="default" variant="primary" className="w-full">
-                    {loadingCraft ? "Chargement…" : "Changer de craft"}
+                  <Button onClick={handleChangeCraft} size="default" variant="primary" className="w-full">
+                    Changer de craft
                   </Button>
                 </div>
               </div>

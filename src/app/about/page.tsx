@@ -3,7 +3,7 @@ import { FaDiscord, FaGithub } from "react-icons/fa";
 import { Card } from "@/components/ui/card";
 import { UnOptimizedImage } from "@/components/ui/image-loading";
 import { constants } from "@/lib/constants";
-import { getGithubContributors } from "@/lib/api/api-pala.server";
+import { getGithubContributors } from "@/lib/api/github";
 import { GithubContributor } from "@/types";
 
 /**

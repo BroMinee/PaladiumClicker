@@ -4,28 +4,24 @@ import { FormEvent, useEffect, useState } from "react";
 import { load } from "@fingerprintjs/botd";
 import {
   KeyDownTimestampType,
-  PalaAnimationLeaderboard,
-  PalaAnimationLeaderboardGlobal,
-  PalaAnimationScore,
   userAnswerType
 } from "@/types";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { adaptPlurial } from "@/lib/misc";
 import { toast } from "sonner";
-import {
-  getAnswerPalaAnimation,
-  getGlobalLeaderboard,
-  getLeaderboardPalaAnimation
-} from "@/components/pala-animation/pala-animation-actions.server";
-import { AxiosError } from "axios";
 import { CanvasWithText } from "@/components/ui/canvas";
 import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
 import { useSessionContext } from "@/components/pala-animation/session-context-provider.client";
 import { Button } from "@/components/ui/button";
-import { checkAnswerPalaAnimation, getNewQuestionPalaAnimation } from "@/lib/misc";
+// TODO(story-5): These functions were server-only and are now stubbed.
+// They will be replaced with local client-side logic in story 5.
+import type { checkAnswerPalaAnimationType } from "@/types";
+const checkAnswerPalaAnimation = async (_answer: string, _session_uuid: string, _keyPressTimestamp: KeyDownTimestampType[], _user_time: number): Promise<checkAnswerPalaAnimationType> => {
+  throw new Error("Backend unavailable");
+};
+const getNewQuestionPalaAnimation = async (_lastQuestion: string | undefined): Promise<{ question: string; session_uuid: string }> => {
+  throw new Error("Backend unavailable");
+};
 import { useRouter } from "next/navigation";
-import { useProfileStore } from "@/stores/use-profile-store";
 
 /**
  * Detects if the current user is using a bot using @fingerprintjs/botd and redirect if it's the case.
@@ -106,11 +102,9 @@ export function PalaAnimationBody() {
       }).catch(
         (error) => {
           console.error(error);
-          const message = error instanceof AxiosError ?
-            error.response?.data.message ?? error.message :
-            typeof error === "string" ?
-              error :
-              "Une erreur est survenue dans l'enregistrement du temps";
+          const message = error instanceof Error ? error.message :
+            typeof error === "string" ? error :
+              "Une erreur est survenue";
           setTimeout(() => {
             setReroll(true);
           }, 500);
@@ -136,20 +130,10 @@ export function PalaAnimationBody() {
   }
 
   function reveal() {
-    if (isChecking || sessionUuid === undefined) {
+    if (isChecking || sessionUuid === undefined || !question) {
       return;
     }
-    setIsChecking(true);
-    document.getElementById("user_answer")?.focus();
-
-    clearUserAnswer();
-    getAnswerPalaAnimation(sessionUuid).then((r) => {
-      checkAnswer(r.answer, false);
-    }).catch((error) => {
-      toast.error("Error while fetching answer", error);
-    }).finally(() => {
-      setIsChecking(false);
-    });
+    checkAnswer(question, false);
   }
 
   useEffect(() => {
@@ -273,113 +257,3 @@ export function PalaAnimationBody() {
   );
 }
 
-/**
- * Fetch and display the leaderboard of the current question
- */
-export function PalaAnimationClassement() {
-  const { profileInfo } = useProfileStore();
-
-  const { sessionUuid } = useSessionContext();
-
-  const [currentLeaderboard, setCurrentLeaderboard] = useState([] as PalaAnimationLeaderboard);
-  const [userScore, setUserScore] = useState({ global_name: "" } as PalaAnimationScore);
-
-  useEffect(() => {
-    if (!profileInfo || sessionUuid === undefined || sessionUuid === "") {
-      return;
-    }
-
-    getLeaderboardPalaAnimation(sessionUuid).then(
-      (data) => {
-        setCurrentLeaderboard(data.slice(0, 10));
-        const userPosInfo = data.find((entry) => {
-          console.log(entry, profileInfo.global_name, profileInfo.username);
-          if (entry.global_name === profileInfo.global_name || entry.global_name === profileInfo.username) {
-            return entry;
-          }
-        });
-        if (userPosInfo) {
-          setUserScore(userPosInfo);
-        } else {
-          setUserScore({ global_name: "" } as PalaAnimationScore);
-        }
-      }
-    ).catch(
-      (error) => {
-        toast.error("Error while updating leaderboard", error);
-      }
-    );
-  }, [sessionUuid, profileInfo, setCurrentLeaderboard, setUserScore]);
-
-  return (
-    <Card className="md:col-span-1 md:col-start-3 col-span-2 col-start-1">
-      <CardHeader className="flex">
-        <CardTitle>Classement de cette question</CardTitle>
-      </CardHeader>
-      <CardContent className="flex gap-2 flex-col">
-        {currentLeaderboard.length === 0 ? "Aucun classement pour le moment" : ""}
-        {currentLeaderboard.length > 0 ?
-          <div>
-            {currentLeaderboard.map((entry, i) => {
-              return <p key={i}
-                className={(entry.global_name === profileInfo?.global_name || entry.global_name === profileInfo?.username) ? "text-blue-400" : ""}>{i + 1}. {entry.global_name} - {entry.completion_time / 1000} {adaptPlurial("seconde", entry.completion_time / 1000)}</p>;
-            })}
-          </div>
-          : ""
-        }
-        {userScore.global_name === "" || userScore.rank_completion_time <= currentLeaderboard.length ? "" :
-          <p
-            className="text-blue-400">{userScore.rank_completion_time}. {profileInfo?.username} - {userScore.completion_time / 1000} {adaptPlurial("seconde", userScore.completion_time / 1000)}</p>}
-      </CardContent>
-    </Card>);
-}
-
-/**
- * Fetch and display the global leaderboard
- */
-export function PalaAnimationClassementGlobal() {
-  const { profileInfo } = useProfileStore();
-
-  const [globalLeaderboard, setGlobalLeaderboard] = useState([] as PalaAnimationLeaderboardGlobal);
-
-  useEffect(() => {
-    getGlobalLeaderboard().then(
-      (data) => {
-        setGlobalLeaderboard(data);
-      }
-    ).catch(
-      (error) => {
-        console.error("Error while fetching global leaderboard", error);
-        toast.error("Erreur lors de la récupération du classement global");
-      }
-    );
-
-  }, [profileInfo]);
-
-  const userPosition = globalLeaderboard.findIndex((entry) => (entry.global_name === profileInfo?.global_name || entry.global_name === profileInfo?.username));
-
-  return (
-    <Card>
-      <CardHeader className="flex">
-        <CardTitle>Classement Général</CardTitle>
-        <CardDescription>Vous devez faire un minimum de 20 réponses différentes ayant un temps inférieur à 10 secondes
-          pour apparaître dans le
-          classement.<br/>
-          Recharge la page pour actualiser le classement.</CardDescription>
-      </CardHeader>
-      <CardContent className="flex gap-2 flex-col">
-        {globalLeaderboard.length === 0 ? "Aucun classement pour le moment" : ""}
-        {globalLeaderboard.length > 0 ?
-          <div>
-            {globalLeaderboard.slice(0, 10).map((entry, i) => {
-              return <p key={i}
-                className={(entry.global_name === profileInfo?.global_name || entry.global_name === profileInfo?.username) ? "text-blue-400" : ""}>{i + 1}. {entry.global_name} - {Math.round(entry.avg_completion_time) / 1000} {adaptPlurial("seconde", Math.round(entry.avg_completion_time) / 1000)}</p>;
-            })}
-          </div>
-          : ""
-        }
-        {userPosition > 10 ? <p
-          className="text-blue-400">{userPosition + 1}. {profileInfo?.global_name ?? profileInfo?.username} - {Math.round(globalLeaderboard[userPosition].avg_completion_time) / 1000} {adaptPlurial("seconde", Math.round(globalLeaderboard[userPosition].avg_completion_time) / 1000)}</p> : ""}
-      </CardContent>
-    </Card>);
-}

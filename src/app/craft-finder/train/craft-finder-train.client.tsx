@@ -7,6 +7,7 @@ import { useItemsStore } from "@/stores/use-items-store";
 import { areSlotEquivalent, isCraftValid, pickRandomItemSetForTrain } from "@/lib/craft-finder-utils";
 import { craftRecipeToDispatch } from "@/components/wordle/wordle-utils";
 import { CraftingRecipeType } from "@/types";
+import { getStaticWordleDebugCrafts } from "@/lib/data/static-data";
 import { CraftFinderGame } from "@/components/craft-finder/craft-finder-game";
 import { CraftFinderCounter, FoundCraftsHistory } from "@/components/craft-finder/craft-finder-ui";
 import { DispatchRecipePattern } from "@/components/craft/display/dispatch-recipe-pattern";
@@ -20,20 +21,21 @@ import { CraftFinderHowToPlay } from "@/components/craft-finder/craft-finder-how
 /**
  * [Craft Finder train page](https://palatracker.bromine.fr/craft-finder/train)
  */
-export function CraftFinderTrainGame({ allCraftCompatible}: { allCraftCompatible: CraftingRecipeType[] }) {
+export function CraftFinderTrainGame() {
   const store = useCraftFinderStore();
   const { allItems } = useItemsStore();
   const { allCrafts } = useAllCraftsStore();
 
+  const [allCraftCompatible, setAllCraftCompatible] = useState<CraftingRecipeType[]>([]);
   const [targetCrafts, setTargetCrafts] = useState<CraftingRecipeType[]>([]);
   const [showAnswer, setShowAnswer] = useState(false);
   const [hydrated, setHydrated] = useState(false);
   const flashTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  const initNewGame = (allCraftCompatible: CraftingRecipeType[]) => {
-    const result = pickRandomItemSetForTrain(allCraftCompatible, allCrafts);
+  const initNewGame = (compatible: CraftingRecipeType[]) => {
+    const result = pickRandomItemSetForTrain(compatible, allCrafts);
     if (!result) {
-      toast.error("Impossible de charger une liste d'items. Réessaie.");
+      toast.error("Impossible de charger une liste d'items. Reessaie.");
       return;
     }
     setTargetCrafts(result.crafts);
@@ -42,13 +44,16 @@ export function CraftFinderTrainGame({ allCraftCompatible}: { allCraftCompatible
   };
 
   useEffect(() => {
-    if (allCraftCompatible.length === 0) {
-      return;
-    }
-    initNewGame(allCraftCompatible);
-    setHydrated(true);
+    getStaticWordleDebugCrafts().then((debugCrafts) => {
+      const compatible = debugCrafts.filter(e => e.table === "crafting table");
+      setAllCraftCompatible(compatible);
+      if (compatible.length > 0) {
+        initNewGame(compatible);
+        setHydrated(true);
+      }
+    });
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [allCraftCompatible]);
+  }, [allCrafts]);
 
   const handleMatch = (slots: typeof store.currentSlots) => {
     if (store.isWaiting) {
@@ -138,7 +143,11 @@ export function CraftFinderTrainGame({ allCraftCompatible}: { allCraftCompatible
             )}
 
             <div className="flex gap-2 flex-wrap pt-2 border-t border-secondary">
-              <Button onClick={() => initNewGame(allCraftCompatible)} variant="primary" size="default">
+              <Button onClick={() => {
+                if (allCraftCompatible.length > 0) {
+                  initNewGame(allCraftCompatible);
+                }
+              }} variant="primary" size="default">
                 Changer de liste d&apos;items
               </Button>
               {store.gameState === "playing" && (

@@ -1,118 +1,19 @@
-import { Card, CardContent, CardHeader } from "@/components/ui/card";
-import { IoHourglassOutline } from "react-icons/io5";
-import { TbClockHour5 } from "react-icons/tb";
-import { FaPen } from "react-icons/fa";
-import {
-  TestApi,
-  TestApiFetching,
-  TestImportProfile,
-  TestImportProfileFetching,
-  TestMyApi,
-  TestMyApiFetching
-} from "@/components/ui/test-api-on-error.server";
 import { Suspense } from "react";
-// import { ImportOfflineProfil } from "@/components/shared/import-offline-profil.client";
-// import { SearchPlayerInput } from "@/components/home/search-player.client";
+import { ErrorContent } from "./error-content.client";
 
-/**
- * Generate Metadata
- */
+/** Generate metadata. */
 export function generateMetadata() {
-  const title = "PalaTracker | Erreur";
-  const description = "PalaTracker : boostez votre progression et votre clicker sur Paladium comme jamais auparavant !";
   return {
-    title: title,
-    description: description,
-    openGraph: {
-      title: title,
-      description: description,
-    },
+    title: "PalaTracker | Erreur",
+    description: "PalaTracker : boostez votre progression et votre clicker sur Paladium comme jamais auparavant !",
   };
 }
 
-/**
- * [Error page](https://palatracker.bromine.fr/error)
- * @param props.searchParams - Error search params
- */
-export default async function Error500Page(
-  props: {
-    searchParams: Promise<{ [key: string]: string | string[] | undefined }>
-  }
-) {
-  const searchParams = await props.searchParams;
-  if (Array.isArray(searchParams.username)) {
-    return (<Card>
-      Pourquoi tu donnes une array en query params ?
-    </Card>);
-  }
-
+/** Error page. */
+export default function Error500Page() {
   return (
-    <Card className="flex flex-col gap-4 font-bold center bg-no-repeat bg-center bg-cover bg-card/90">
-      <CardHeader className="flex flex-row gap-2 ">
-        <div className="py-8 px-4 mx-auto max-w-(--breakpoint-xl) lg:py-16 lg:px-6">
-          <div className="mx-auto max-w-(--breakpoint-sm) text-center">
-            <h1 className="mb-4 text-3xl tracking-tight font-bold md:text-4xl ">Une erreur
-              est survenue.</h1>
-            <p className="text-primary flex flex-col pb-5 gap-2 animate-blink">
-              {searchParams.message}
-              {searchParams.detail && <span className="text-red-400"> {searchParams.detail}</span>}
-            </p>
-            <p className="mb-4 text-lg font-light text-card-foreground">Si le problème persiste merci de
-              contacter un développeur</p>
-          </div>
-          {/* <div className="flex flex-col gap-2 items-center justify-center">
-            <div className="w-full max-w-md mx-auto">
-              <SearchPlayerInput variant="homepage" />
-            </div>
-            <ImportOfflineProfil/>
-          </div> */}
-        </div>
-      </CardHeader>
-      <div className="flex md:flex-row justify-evenly flex-col">
-        <CardContent className="flex flex-col ml-4">
-          <h2 className="mb-2 text-lg font-semibold ">Détection du soucis</h2>
-          <ul className="max-w-md space-y-2 list-inside text-card-foreground ml-4">
-            <Suspense fallback={<TestMyApiFetching/>}>
-              <TestMyApi/>
-            </Suspense>
-            <Suspense fallback={<TestApiFetching/>}>
-              <TestApi/>
-            </Suspense>
-            <Suspense fallback={<TestImportProfileFetching/>}>
-              <TestImportProfile pseudoParams={searchParams.username}/>
-            </Suspense>
-          </ul>
-        </CardContent>
-        <CardContent className="flex flex-col ml-4">
-          <h2 className="mb-2 text-lg font-semibold ">Erreurs fréquentes</h2>
-          <ul className="max-w-md space-y-2 list-inside text-card-foreground ml-4">
-            <li className="flex items-center gap-2">
-              <div>
-                <FaPen className="text-red-500"/>
-              </div>
-              Vérifie que tu as bien rentré ton pseudo minecraft.
-            </li>
-            <li className="flex items-center gap-2">
-              <div>
-                <TbClockHour5 className="text-red-500"/>
-              </div>
-              Si tu viens de commencer le jeu il y a moins de 24h en général ton profile n&apos;est pas encore
-              chargeable, il
-              faut attendre encore un peu.
-            </li>
-            <li className="flex items-center gap-2">
-              <div>
-                <IoHourglassOutline className="text-red-500"/>
-              </div>
-              &quot;Rate limit exceeded for this resource.&quot;, nous sommes actuellements surchargés, merci de
-              réessayer plus
-              tard.
-            </li>
-          </ul>
-        </CardContent>
-      </div>
-
-    </Card>
-
+    <Suspense fallback={<p>Chargement...</p>}>
+      <ErrorContent />
+    </Suspense>
   );
-};
+}

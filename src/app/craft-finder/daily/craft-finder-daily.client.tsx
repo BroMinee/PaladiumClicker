@@ -1,284 +1,254 @@
 "use client";
 
-import { useState, useRef, useEffect } from "react";
-import { CraftingRecipeType, CraftingTableName } from "@/types";
+import { useState, useRef, useEffect, useMemo } from "react";
+import { CraftingRecipeType } from "@/types";
 import { cn } from "@/lib/utils";
-import { SlotValue, formatElapsed, craftRecipeToDispatch } from "@/components/wordle/wordle-utils";
-import { API_PALATRACKER_WS, API_PALATRACKER } from "@/lib/constants";
+import { formatElapsed } from "@/components/wordle/wordle-utils";
 import { CraftFinderGame } from "@/components/craft-finder/craft-finder-game";
 import { CraftFinderCounter, FoundCraftsHistory } from "@/components/craft-finder/craft-finder-ui";
 import { useCraftFinderStore, FoundCraft } from "@/stores/use-craft-finder-store";
 import { useItemsStore } from "@/stores/use-items-store";
-import { useProfileStore } from "@/stores/use-profile-store";
-import { UnOptimizedImage } from "@/components/ui/image-loading";
-import { LoginButton } from "@/components/login/login-button.client";
+import { useAllCraftsStore } from "@/stores/use-all-craft-store";
 import { toast } from "sonner";
 import { Card } from "@/components/ui/card";
-import { adaptPlurial } from "@/lib/misc";
 import { PageHeader, PageHeaderHeading, PageHeaderDescription } from "@/components/ui/page";
 import { textFormatting } from "@/lib/misc/patchnote";
-import { ChevronDown } from "lucide-react";
-import { DispatchRecipePattern } from "@/components/craft/display/dispatch-recipe-pattern";
-import { ItemsBadgeList } from "@/components/craft-finder/craft-finder-ui";
 import { CraftFinderHowToPlay } from "@/components/craft-finder/craft-finder-how-to-play";
+import { isCraftValid, areSlotEquivalent, recomputePossibleCraftFromSetOfItem } from "@/lib/craft-finder-utils";
+import { getStaticWordleDebugCrafts } from "@/lib/data/static-data";
+import { hashString, seededRandom, todayISO } from "@/lib/data/seed-utils";
+import type { CraftingTableName } from "@/types";
 
-const PING_INTERVAL_MS = 30_000;
+const DAILY_STORAGE_KEY = "craft-finder-daily-state";
 
-function todayISO(): string {
-  return new Date().toISOString().slice(0, 10);
+interface DailyState {
+  date: string;
+  foundCrafts: FoundCraft[];
+  won: boolean;
+  elapsedMs: number;
 }
 
-interface WsFoundCraftItem {
-  slots: string[];
-  outputItemName: string;
-  outputItemImg: string;
-  table: CraftingTableName;
+function loadDailyState(date: string): DailyState | null {
+  try {
+    const raw = localStorage.getItem(DAILY_STORAGE_KEY);
+    if (!raw) {
+      return null;
+    }
+    const state = JSON.parse(raw) as DailyState;
+    if (state.date !== date) {
+      return null;
+    }
+    return state;
+  } catch {
+    return null;
+  }
 }
 
-interface LeaderboardEntry {
-  totalTimeMs: number;
-  username: string | null;
-  avatar: string | null;
-  isMe?: boolean;
-}
-
-interface WsHelloData {
-  items: string[];
-  totalToFind: number;
-  completed: boolean;
-  found: WsFoundCraftItem[];
-  totalTimeMs: number;
-  leaderboard: LeaderboardEntry[];
-}
-
-interface WsCraftData {
-  outputItemName: string;
-  outputItemImg: string;
-  table: CraftingTableName;
-  totalFound: number;
-  totalTimeMs?: number;
-  leaderboard?: LeaderboardEntry[];
-}
-
-interface WsMessage {
-  type: "hello" | "found" | "already_found" | "not_a_match" | "complete" | "error" | "pong";
-  data?: WsHelloData & WsCraftData & { message?: string };
+function saveDailyState(state: DailyState) {
+  localStorage.setItem(DAILY_STORAGE_KEY, JSON.stringify(state));
 }
 
 /**
- * [Craft Finder daily page](https://palatracker.bromine.fr/craft-finder/daily)
+ * Seeded version of pickRandomItemSetForTrain.
+ * Uses a deterministic RNG so all users get the same daily.
  */
-interface Props {
-  yesterday: { items: string[]; crafts: CraftingRecipeType[]; date: string } | null;
+function pickDailyItemSet(
+  allWordleCrafts: CraftingRecipeType[],
+  allCrafts: CraftingRecipeType[],
+  seed: number,
+): { items: string[]; crafts: CraftingRecipeType[] } | null {
+  const rng = seededRandom(seed);
+
+  const slotsAccessor = ["slot1", "slot2", "slot3", "slot4", "slot5", "slot6", "slot7", "slot8", "slot9"] as const;
+  const itemDistinct = new Map<string, CraftingRecipeType[]>();
+  allWordleCrafts.forEach(c => {
+    slotsAccessor.forEach(slotAccessor => {
+      const itemName = c[slotAccessor]?.item_name;
+      if (itemName !== undefined && itemName !== "air") {
+        if (!itemDistinct.has(itemName)) {
+          itemDistinct.set(itemName, []);
+        }
+        itemDistinct.get(itemName)!.push(c);
+      }
+    });
+  });
+
+  const pickedItems = new Set<string>();
+  const eligibleItem = Array.from(itemDistinct.keys());
+  let craftToFind = new Set<CraftingRecipeType>();
+  let attempts = 0;
+
+  while ((craftToFind.size < 10 || pickedItems.size < 4) && attempts < 200) {
+    attempts++;
+    const pickedItem = eligibleItem[Math.floor(rng() * eligibleItem.length)];
+    const associatedCraft = itemDistinct.get(pickedItem);
+    if (!associatedCraft || pickedItems.has(pickedItem)) {
+      continue;
+    }
+
+    pickedItems.add(pickedItem);
+
+    // Seeded shuffle: pick up to 3 random crafts
+    const shuffled = [...associatedCraft].sort(() => rng() - 0.5);
+    shuffled.slice(0, 3).forEach(c => {
+      slotsAccessor.forEach(slotAccessor => {
+        const itemName = c[slotAccessor]?.item_name;
+        if (itemName !== undefined && itemName !== "air") {
+          pickedItems.add(itemName);
+        }
+      });
+    });
+
+    craftToFind = recomputePossibleCraftFromSetOfItem(pickedItems, allCrafts);
+  }
+
+  if (craftToFind.size === 0) {
+    return null;
+  }
+
+  return {
+    items: Array.from(pickedItems),
+    crafts: Array.from(craftToFind),
+  };
 }
 
 /**
  *
  */
-export function CraftFinderDailyGame({ yesterday }: Props) {
+export function CraftFinderDailyGame() {
   const store = useCraftFinderStore();
   const { allItems } = useItemsStore();
-  const { profileInfo } = useProfileStore();
+  const { allCrafts } = useAllCraftsStore();
 
-  const { gameState, totalTimeMs, alreadyCompleted, completedAtMs } = store;
-  const isFinished = gameState === "won" || alreadyCompleted;
-
-  const [elapsedMs, setElapsedMs] = useState(0);
   const [hydrated, setHydrated] = useState(false);
-  const [showYesterday, setShowYesterday] = useState(false);
-  const [leaderboard, setLeaderboard] = useState<LeaderboardEntry[]>([]);
-  const [showLeaderboard, setShowLeaderboard] = useState(false);
+  const [targetCrafts, setTargetCrafts] = useState<CraftingRecipeType[]>([]);
+  const [elapsedMs, setElapsedMs] = useState(0);
+  const [completedMs, setCompletedMs] = useState(0);
   const [currentTable, setCurrentTable] = useState<CraftingTableName>("crafting table");
 
-  const wsRef = useRef<WebSocket | null>(null);
-  const connectionStartRef = useRef<number>(0);
+  const today = useMemo(() => todayISO(), []);
   const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
-  const pingRef = useRef<ReturnType<typeof setInterval> | null>(null);
-  const pendingAttemptRef = useRef<SlotValue[] | null>(null);
   const flashTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
+  const { gameState, alreadyCompleted, completedAtMs } = store;
+  const isFinished = gameState === "won" || alreadyCompleted;
+
+  // Init daily game
   useEffect(() => {
-    const today = todayISO();
-    const ws = new WebSocket(`${API_PALATRACKER_WS}/v1/ws/craft-finder`);
-    wsRef.current = ws;
-
-    ws.onopen = () => {
-      connectionStartRef.current = Date.now();
-      pingRef.current = setInterval(() => {
-        if (ws.readyState === WebSocket.OPEN) {
-          ws.send(JSON.stringify({ type: "ping" }));
-        }
-      }, PING_INTERVAL_MS);
-    };
-
-    ws.onmessage = (event: MessageEvent) => {
-      let msg: WsMessage;
-      try {
-        msg = JSON.parse(event.data as string) as WsMessage;
-      } catch {
+    getStaticWordleDebugCrafts().then((debugCrafts) => {
+      const compatible = debugCrafts.filter(e => e.table === "crafting table");
+      const seed = hashString(today + "-craft-finder");
+      const result = pickDailyItemSet(compatible, allCrafts, seed);
+      if (!result) {
         return;
       }
 
-      if (msg.type === "hello" && msg.data) {
-        const { items, totalToFind, completed, found, totalTimeMs, leaderboard } = msg.data as WsHelloData;
-        const foundCrafts: FoundCraft[] = (found ?? []).map(f => ({
-          slots: f.slots.map(s => s === "air" ? null : s),
-          outputItemName: f.outputItemName,
-          outputItemImg: f.outputItemImg,
-          table: f.table,
-        }));
-        if (foundCrafts[0]) {
-          setCurrentTable(foundCrafts[0].table);
+      setTargetCrafts(result.crafts);
+
+      const saved = loadDailyState(today);
+      if (saved) {
+        store.initDay(result.items, result.crafts.length, today, 0, saved.won, saved.foundCrafts);
+        if (saved.won) {
+          setCompletedMs(saved.elapsedMs);
         }
-        useCraftFinderStore.getState().initDay(items, totalToFind, today, totalTimeMs, completed, foundCrafts);
-        const me = useProfileStore.getState().profileInfo;
-        setLeaderboard((leaderboard ?? []).map(e => ({
-          ...e,
-          isMe: me !== null && (e.username === me.global_name || e.username === me.username),
-        })));
-        setHydrated(true);
+        setElapsedMs(saved.elapsedMs);
+      } else {
+        store.initDay(result.items, result.crafts.length, today, 0, false);
       }
 
-      if (msg.type === "found" && msg.data) {
-        const slots = pendingAttemptRef.current;
-        if (!slots) {
-          return;
-        }
-        pendingAttemptRef.current = null;
-        const { outputItemName, outputItemImg, table } = msg.data as WsCraftData;
-        setCurrentTable(table);
-        const store = useCraftFinderStore.getState();
-        store.addFoundCraft({ slots, outputItemName, outputItemImg, table });
-        store.setFlashingItem({ img: outputItemImg, name: outputItemName });
-        store.setIsFlashing(true);
-        if (flashTimerRef.current) {
-          clearTimeout(flashTimerRef.current);
-        }
-        flashTimerRef.current = setTimeout(() => {
-          useCraftFinderStore.getState().setIsFlashing(false);
-          useCraftFinderStore.getState().setFlashingItem(null);
-          useCraftFinderStore.getState().setCurrentSlots(Array(9).fill(null));
-        }, 1000);
-        const item = useItemsStore.getState().allItems.find(i => i.value === outputItemName);
-        if (item) {
-          toast.success(`Trouvé : ${item.label} !`);
-        }
-        store.setIsWaiting(false);
-      }
+      setHydrated(true);
+    });
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [allCrafts, today]);
 
-      if (msg.type === "complete" && msg.data) {
-        const slots = pendingAttemptRef.current;
-        if (!slots) {
-          return;
-        }
-        pendingAttemptRef.current = null;
-        const { outputItemName, outputItemImg, table, totalTimeMs: finalMs, leaderboard: lb } = msg.data as WsCraftData;
-        setCurrentTable(table);
-        const store = useCraftFinderStore.getState();
-        store.addFoundCraft({ slots, outputItemName, outputItemImg, table });
-        store.setFlashingItem({ img: outputItemImg, name: outputItemName });
-        store.setIsFlashing(true);
-        if (flashTimerRef.current) {
-          clearTimeout(flashTimerRef.current);
-        }
-        flashTimerRef.current = setTimeout(() => {
-          useCraftFinderStore.getState().setIsFlashing(false);
-          useCraftFinderStore.getState().setFlashingItem(null);
-          useCraftFinderStore.getState().setCurrentSlots(Array(9).fill(null));
-        }, 1000);
-        const sessionMs = connectionStartRef.current > 0 ? Date.now() - connectionStartRef.current : 0;
-        const resolvedMs = finalMs ?? (store.totalTimeMs + sessionMs);
-        store.setWon(resolvedMs);
-        if (timerRef.current) {
-          clearInterval(timerRef.current);
-        }
-        const p = useProfileStore.getState().profileInfo;
-        if (lb && lb.length > 0) {
-          setLeaderboard(lb.map(e => ({
-            ...e,
-            isMe: p !== null && (e.username === p.global_name || e.username === p.username),
-          })));
-        } else {
-          setLeaderboard(prev => {
-            const next = [...prev, { totalTimeMs: resolvedMs, username: p?.global_name ?? p?.username ?? null, avatar: p?.avatar ?? null, isMe: true }];
-            return next.sort((a, b) => a.totalTimeMs - b.totalTimeMs);
-          });
-        }
-        setShowLeaderboard(true);
-        store.setIsWaiting(false);
-      }
-
-      if (msg.type === "already_found") {
-        pendingAttemptRef.current = null;
-        useCraftFinderStore.getState().setIsWaiting(false);
-        toast("Déjà trouvé !");
-      }
-
-      if (msg.type === "not_a_match") {
-        pendingAttemptRef.current = null;
-        useCraftFinderStore.getState().setIsWaiting(false);
-      }
-
-      if (msg.type === "error") {
-        pendingAttemptRef.current = null;
-        useCraftFinderStore.getState().setIsWaiting(false);
-        toast.error("Erreur serveur. Réessaie.");
-      }
-    };
-
-    ws.onerror = (e) => console.error("[craft-finder/ws] error", e);
-    ws.onclose = (e) => {
-      console.log(`[craft-finder/ws] disconnected - code: ${e.code} ${JSON.stringify(e)}`);
-      if (pingRef.current) {
-        clearInterval(pingRef.current);
-      }
-      connectionStartRef.current = 0;
-    };
-
-    return () => {
-      if (pingRef.current) {
-        clearInterval(pingRef.current);
-      }
-      ws.close();
-    };
-
-  }, []);
-
+  // Timer
   useEffect(() => {
-    if (!hydrated || gameState === "won" || alreadyCompleted) {
+    if (!hydrated || isFinished) {
       return;
     }
-    const tick = () => {
-      const sessionMs = connectionStartRef.current > 0 ? Date.now() - connectionStartRef.current : 0;
-      setElapsedMs(totalTimeMs + sessionMs);
-    };
-    timerRef.current = setInterval(tick, 1000);
-    setTimeout(tick, 0);
+    const saved = loadDailyState(today);
+    const baseMs = saved?.elapsedMs ?? 0;
+    const start = Date.now();
+    timerRef.current = setInterval(() => {
+      setElapsedMs(baseMs + (Date.now() - start));
+    }, 1000);
     return () => {
       if (timerRef.current) {
         clearInterval(timerRef.current);
       }
     };
-  }, [hydrated, gameState, alreadyCompleted, totalTimeMs]);
+  }, [hydrated, isFinished, today]);
 
-  const handleMatch = (slots: SlotValue[]) => {
-    if (wsRef.current?.readyState !== WebSocket.OPEN || store.isWaiting) {
+  const handleMatch = (slots: (string | null)[]) => {
+    if (store.isWaiting) {
       return;
     }
     if (slots.every(s => s === null)) {
       return;
     }
-    pendingAttemptRef.current = slots;
-    store.setIsWaiting(true);
-    wsRef.current.send(JSON.stringify({ type: "guess", data: slots.map(s => s ?? "air") }));
+
+    const already = store.foundCrafts.find(f => areSlotEquivalent(f.slots, slots));
+    if (already) {
+      toast("Deja trouve !");
+      return;
+    }
+
+    const matched = targetCrafts.find(craft => isCraftValid(craft, slots));
+    if (!matched) {
+      return;
+    }
+
+    setCurrentTable(matched.table);
+    store.addFoundCraft({
+      slots,
+      outputItemName: matched.item.item_name,
+      outputItemImg: matched.item.img,
+      table: matched.table,
+    });
+
+    if (flashTimerRef.current) {
+      clearTimeout(flashTimerRef.current);
+    }
+    store.setIsFlashing(true);
+    store.setFlashingItem({ img: matched.item.img, name: matched.item.item_name });
+    flashTimerRef.current = setTimeout(() => {
+      store.setIsFlashing(false);
+      store.setFlashingItem(null);
+      store.setCurrentSlots(Array(9).fill(null));
+    }, 1000);
+
+    const item = allItems.find(i => i.value === matched.item.item_name);
+    if (item) {
+      toast.success(`Trouve : ${item.label} !`);
+    }
+
+    const newFoundCount = store.foundCrafts.length + 1;
+    const currentElapsed = elapsedMs;
+    if (newFoundCount >= targetCrafts.length) {
+      store.setWon(currentElapsed);
+      setCompletedMs(currentElapsed);
+      if (timerRef.current) {
+        clearInterval(timerRef.current);
+      }
+    }
+
+    // Save state
+    const updatedFound = [...useCraftFinderStore.getState().foundCrafts];
+    const won = newFoundCount >= targetCrafts.length;
+    saveDailyState({
+      date: today,
+      foundCrafts: updatedFound,
+      won,
+      elapsedMs: currentElapsed,
+    });
   };
 
-  const displayedElapsed = gameState === "won" ? (completedAtMs ?? 0) : elapsedMs;
+  const displayedElapsed = gameState === "won" ? (completedMs || completedAtMs || 0) : elapsedMs;
 
   if (!hydrated) {
     return (
       <div className="flex items-center justify-center h-[100dvh]">
-        <p className="text-gray-400 text-sm animate-pulse">Connexion…</p>
+        <p className="text-gray-400 text-sm animate-pulse">Chargement...</p>
       </div>
     );
   }
@@ -289,7 +259,7 @@ export function CraftFinderDailyGame({ yesterday }: Props) {
         <div className="flex items-start justify-between gap-4">
           <div>
             <PageHeaderHeading>{textFormatting("Craft °Finder° - Daily")}</PageHeaderHeading>
-            <PageHeaderDescription>{todayISO()} · Trouve tous les crafts du jour</PageHeaderDescription>
+            <PageHeaderDescription>{today} - Trouve tous les crafts du jour</PageHeaderDescription>
           </div>
         </div>
       </PageHeader>
@@ -301,10 +271,7 @@ export function CraftFinderDailyGame({ yesterday }: Props) {
               <span className={cn("font-mono text-lg font-semibold tabular-nums", isFinished ? "text-green-400" : "text-white")}>
                 {formatElapsed(displayedElapsed)}
               </span>
-              {isFinished && <span className="text-xs text-green-400">Terminé !</span>}
-              {leaderboard.length > 0 && (
-                <span className="text-xs text-zinc-400">{leaderboard.length} {adaptPlurial("joueur", leaderboard.length)} ont réussi</span>
-              )}
+              {isFinished && <span className="text-xs text-green-400">Termine !</span>}
             </div>
 
             <div className="flex items-center justify-end">
@@ -319,82 +286,15 @@ export function CraftFinderDailyGame({ yesterday }: Props) {
               <div className="p-4 bg-green-900/30 border border-green-700 rounded-lg">
                 <p className="text-green-400 font-bold text-xl">Bravo !</p>
                 <p className="text-gray-400 mt-1">
-                  Tu as trouvé les {store.foundCrafts.length} crafts en {formatElapsed(completedAtMs ?? 0)}
+                  Tu as trouve les {store.foundCrafts.length} crafts en {formatElapsed(completedMs || completedAtMs || 0)}
                 </p>
               </div>
             )}
 
             {alreadyCompleted && gameState !== "won" && (
               <div className="p-4 bg-zinc-800/60 border border-zinc-600 rounded-lg">
-                <p className="text-zinc-300 font-semibold">Tu as déjà complété le Craft Finder d&apos;aujourd&apos;hui !</p>
+                <p className="text-zinc-300 font-semibold">Tu as deja complete le Craft Finder d&apos;aujourd&apos;hui !</p>
                 <p className="text-zinc-500 text-sm mt-1">Reviens demain pour une nouvelle liste d&apos;items.</p>
-              </div>
-            )}
-
-            {leaderboard.length > 0 && (
-              <div className="border-t border-secondary pt-3">
-                <button
-                  onClick={() => setShowLeaderboard(p => !p)}
-                  className="text-sm text-gray-500 hover:text-gray-300 transition-colors flex items-center gap-1"
-                >
-                  <ChevronDown size={16} className={`transition-transform duration-300 ${showLeaderboard ? "rotate-0" : "-rotate-90"}`} />
-                  Voir le classement du jour
-                </button>
-                {showLeaderboard && (
-                  <div className="mt-3 flex flex-col gap-0.5 ml-4">
-                    {!profileInfo && (
-                      <div className="flex flex-col gap-1 mb-3">
-                        <p className="text-xs text-gray-500">Connecte-toi pour associer ton temps à ton compte Discord.</p>
-                        <LoginButton href={`${API_PALATRACKER}/v1/auth/login/discord`} redirectUrl="/craft-finder/daily" />
-                      </div>
-                    )}
-                    {[...leaderboard]
-                      .sort((a, b) => a.totalTimeMs - b.totalTimeMs)
-                      .map((entry, i) => (
-                        <div key={i} className={cn("flex items-center gap-2 py-0.5 px-1 rounded", entry.isMe && "bg-green-900/30")}>
-                          <span className="text-xs text-gray-500 w-4 shrink-0">#{i + 1}</span>
-                          {entry.avatar
-                            ? <UnOptimizedImage src={entry.avatar} alt={entry.username ?? "?"} width={20} height={20} className="rounded-full w-5 h-5 shrink-0" />
-                            : <div className="w-5 h-5 rounded-full bg-zinc-700 shrink-0" />
-                          }
-                          <span className={cn("text-sm truncate flex-1", entry.isMe ? "text-green-400 font-medium" : "text-gray-400")}>{entry.username ?? "Anonyme"}</span>
-                          <span className={cn("font-mono text-sm tabular-nums shrink-0", i === 0 ? "text-yellow-400" : entry.isMe ? "text-green-400" : "text-gray-300")}>
-                            {formatElapsed(entry.totalTimeMs)}
-                          </span>
-                        </div>
-                      ))}
-                  </div>
-                )}
-              </div>
-            )}
-            {yesterday && (
-              <div className="border-t border-secondary pt-3">
-                <button
-                  onClick={() => setShowYesterday(p => !p)}
-                  className="text-sm text-gray-500 hover:text-gray-300 transition-colors flex items-center gap-1"
-                >
-                  <ChevronDown size={16} className={`transition-transform duration-300 ${showYesterday ? "rotate-0" : "-rotate-90"}`} />
-                  Réponse d&apos;hier
-                </button>
-                {showYesterday && (
-                  <div className="mt-3 flex flex-col gap-3 ml-4">
-                    <ItemsBadgeList items={yesterday.items} allItems={allItems} />
-                    <div className="flex flex-wrap items-start">
-                      {yesterday.crafts.map((craft, i) => {
-                        const d = craftRecipeToDispatch(craft, allItems);
-                        return (
-                          <>
-                            {i > 0 && <div key={`sep-${i}`} className="w-px bg-secondary self-stretch mx-3" />}
-                            <div key={i} className="flex flex-col gap-1">
-                              <span className="text-xs text-gray-500">{craft.item.fr_trad}</span>
-                              <DispatchRecipePattern recipe={d.recipe} output={d.output} />
-                            </div>
-                          </>
-                        );
-                      })}
-                    </div>
-                  </div>
-                )}
               </div>
             )}
           </div>
@@ -406,7 +306,7 @@ export function CraftFinderDailyGame({ yesterday }: Props) {
 
         {store.foundCrafts.length > 0 && (
           <Card>
-            <p className="text-sm text-gray-400 mb-3">Crafts trouvés</p>
+            <p className="text-sm text-gray-400 mb-3">Crafts trouves</p>
             <FoundCraftsHistory foundCrafts={store.foundCrafts} />
           </Card>
         )}

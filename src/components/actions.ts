@@ -1,11 +1,7 @@
-"use server";
-
-import { redirect } from "next/navigation";
-
 /**
- * Redirect to the given URL
+ * Client-side redirect to the given URL.
  * @param url - url
  */
-export async function navigate(url: string) {
-  redirect(url);
+export function navigate(url: string) {
+  window.location.href = url;
 }

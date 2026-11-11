@@ -1,30 +1,25 @@
 import { ClickerPage } from "@/components/clicker/clicker-page";
-import { ProfileFetcherWrapper } from "@/components/profile-fetcher.client";
 import { PageHeader, PageHeaderDescription, PageHeaderHeading } from "@/components/ui/page";
 import { textFormatting } from "@/lib/misc";
 
 /**
- * Generate Metadata
- * @param props.params - Username parameter
+ * Generate Metadata.
  */
-export async function generateMetadata(props: { params: Promise<{ username: string }> }) {
-  const params = await props.params;
+export function generateMetadata() {
   return {
-    title: `PalaTracker | Clicker Optimizer | ${params.username}`,
-    description: "🚀 Tu cherches à optimiser le PalaClicker ? C'est ici que ça se passe !! 📈 Ce site calcule le meilleur achat en fonction de tes métiers, tes améliorations et tes bâtiments.",
+    title: "PalaTracker | Clicker Optimizer",
+    description: "Tu cherches a optimiser le PalaClicker ? C'est ici que ca se passe ! Ce site calcule le meilleur achat en fonction de tes metiers, tes ameliorations et tes batiments.",
     openGraph: {
-      title: `PalaTracker | Clicker Optimizer | ${params.username}`,
-      description: "🚀 Tu cherches à optimiser le PalaClicker ? C'est ici que ça se passe !! 📈 Ce site calcule le meilleur achat en fonction de tes métiers, tes améliorations et tes bâtiments."
+      title: "PalaTracker | Clicker Optimizer",
+      description: "Tu cherches a optimiser le PalaClicker ? C'est ici que ca se passe ! Ce site calcule le meilleur achat en fonction de tes metiers, tes ameliorations et tes batiments.",
     },
   };
 }
 
 /**
- * [Clicker Page](https://palatracker.bromine.fr/clicker-optimizer/BroMine__)
- * @param props.params - Username parameter
+ * Clicker Optimizer page.
  */
-export default async function ClickerOptimizerPage(props: { params: Promise<{ username: string }> }) {
-  const params = await props.params;
+export default function ClickerOptimizerPage() {
   return (
     <>
       <PageHeader>
@@ -35,9 +30,7 @@ export default async function ClickerOptimizerPage(props: { params: Promise<{ us
           {"Optimisez vos achats dans le PalaClicker en fonction de vos métiers, améliorations et bâtiments."}
         </PageHeaderDescription>
       </PageHeader>
-      <ProfileFetcherWrapper username={params.username}>
-        <ClickerPage/>
-      </ProfileFetcherWrapper>
+      <ClickerPage/>
     </>
   );
 }

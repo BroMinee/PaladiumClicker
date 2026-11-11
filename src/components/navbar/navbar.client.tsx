@@ -10,7 +10,6 @@ import { FaAngleDown } from "react-icons/fa";
 import { useNotificationStore } from "@/stores/use-notifications-store";
 import { HoverText } from "@/components/ui/hovertext";
 
-import { getNotificationWebSite } from "@/lib/api/api-server-action.server";
 import { NavBarCategory, NotificationWebSiteResponse } from "@/types";
 import { useNavbarStore } from "@/stores/use-navbar-store";
 
@@ -266,11 +265,17 @@ export function NotificationWebSite() {
   const router = useRouter();
 
   useEffect(() => {
-    getNotificationWebSite().then((msg_) => {
+    // Notifications are no longer available without backend
+    fetch("/data/notification.json").then(r => {
+      if (r.ok) {
+        return r.json();
+      }
+      return null;
+    }).then((msg_) => {
       if (msg_) {
         setNotif(msg_);
       }
-    });
+    }).catch(() => {});
   }, []);
 
   function onClick() {

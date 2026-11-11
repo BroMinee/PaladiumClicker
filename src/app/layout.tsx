@@ -9,7 +9,6 @@ import { Montserrat } from "next/font/google";
 import { ThemeProviders } from "@/components/shared/theme-provider.client";
 import { Toaster } from "@/components/ui/sonner";
 import { ServiceWorkerRegister } from "@/components/service-worker-register.client";
-import { AuthGetWrapper } from "@/components/auth/auth-get-wrapper.client";
 import { PageTransition } from "@/components/shared/page-transition.client";
 
 const montserrat = Montserrat({
@@ -57,7 +56,6 @@ export default function RootLayout({
                 <Navbar/>
               </header>
               <main className="flex-1 mx-auto overflow-clip">
-                <AuthGetWrapper/>
                 <div className="relative bg-background min-h-screen p-4 md:p-8">
                   <div className="max-w-7xl mx-auto">
                     <PageTransition>

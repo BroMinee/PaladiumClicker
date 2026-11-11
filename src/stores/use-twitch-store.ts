@@ -1,7 +1,6 @@
 import { create } from "zustand";
-import { SelectedElementConfig } from "@/components/twitch/twitch-overlay-config.client";
 import { AUTOPROMO_CONFIG } from "@/lib/constants";
-import { PaladiumFactionLeaderboard, RankingPositionResponse, RankingType } from "@/types";
+import { PaladiumFactionLeaderboard, RankingPositionResponse, RankingType, SelectedElementConfig } from "@/types";
 
 type State = {
   currentConfig: SelectedElementConfig | undefined,
