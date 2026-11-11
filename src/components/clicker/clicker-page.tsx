@@ -3,6 +3,7 @@ import { BatchPurchase, BestBuyCard, StatButton, StatRPS, StatSleepingCoin, Stat
 import { BuildingInputCard, UpgradeSectionClient } from "@/components/clicker/inputs.client";
 import { Card } from "@/components/ui/card";
 import { JobsCard } from "@/components/profile/player-jobs";
+import { EnsurePlayerInfo } from "@/components/clicker/ensure-player-info.client";
 
 /**
  * [Clicker Page](https://palatracker.bromine.fr/clicker-optimizer/BroMine__)
@@ -11,6 +12,7 @@ import { JobsCard } from "@/components/profile/player-jobs";
 export function ClickerPage() {
   return (
     <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+      <EnsurePlayerInfo/>
 
       <div className="lg:col-span-2 space-y-10">
         <JobsCard/>
